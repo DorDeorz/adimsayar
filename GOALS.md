@@ -10,15 +10,15 @@ Bir pedometre uygulamasında "performans" CPU benchmark skoru değildir. Kullan�
 
 ## Test cihazları
 
-**Birincil — Redmi Note 12 Pro 4G** — Snapdragon 732G (8 nm), MIUI 13 / Android 12, 5000 mAh.
+**Birincil — Redmi Note 12 Pro 4G** — Snapdragon 732G (8 nm), HyperOS 1 / Android 12, 5000 mAh.
 
 Uygulama bu cihazda geliştirilir ve günlük hayatta kullanılır. Ölçümlerin ana kaynağı budur.
 
-MIUI arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da takılıyor, sadece yeniden başlatınca düzeliyor" raporları yaygındır. Bu bir pil değil **veri doğruluğu** sorunudur ve kabul edilemez.
+HyperOS arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da takılıyor, sadece yeniden başlatınca düzeliyor" raporları yaygındır. Bu bir pil değil **veri doğruluğu** sorunudur ve kabul edilemez.
 
 **İkincil — Galaxy S22** — Snapdragon 8 Gen 1 veya Exynos 2200, Android 16'ya kadar güncelleme alır.
 
-İkincil cihazın amacı tek sayı üretmek değil, **farklı bir arka plan yönetimi ve sensör davranışını test etmek**. MIUI ve One UI ikisi de agresiftir ama farklı yollardan. S22'de Health Connect sistem uygulaması olarak gelir (Android 14+), kurulum gerekmez; Redmi'de Play Store'dan ayrı uygulama olarak kurulmalıdır. Bu fark kodda ele alınmalıdır.
+İkincil cihazın amacı tek sayı üretmek değil, **farklı bir arka plan yönetimi ve sensör davranışını test etmek**. HyperOS ve One UI ikisi de saldırgan ROM'dur ama farklı yollardan. Birinde çalışıyorsa diğerinde de çalışıyor sayılma.
 
 ### Kapsam
 
@@ -26,8 +26,10 @@ Uygulama tüm Android telefonlarda çalışacak şekilde tasarlanır. Test cihaz
 
 | Cihaz | İşlemci | Android | Ana zorluk |
 |---|---|---|---|
-| Redmi Note 12 Pro 4G | Snapdragon 732G | 12 / MIUI 13 | Arka plan öldürme |
+| Redmi Note 12 Pro 4G | Snapdragon 732G | 12 / HyperOS 1 | Arka plan öldürme |
 | Galaxy S22 | SD 8 Gen 1 / Exynos 2200 | 16'ya kadar | Sensör donması |
+
+İki cihaz bilinçli olarak zıt iki uçtur: biri eski Android ve saldırgan ROM, diğeri güncel Android ve katı bildirim/FGS kuralları.
 
 ### Cihaz tespiti
 
@@ -127,7 +129,7 @@ Kullanıcının tek gerçek ihtiyacı atılan adım sayılarını kaybetmemektir
 
 `android:allowBackup="true"` ile açılır. Cihaz çalınsa bile Google hesabı üzerinden geri gelir.
 
-Xiaomi Cloud'a güvenilmez. MIUI üçüncü parti uygulama verisini yedekler ama güvenilirliği düşüktür, kapatılabilir ve geri yüklemesi sorunludur. Birincil yöntem Google Otomatik Yedekleme'dir.
+Xiaomi Cloud'a güvenilmez. HyperOS üçüncü parti uygulama verisini yedekler ama güvenilirliği düşüktür, kapatılabilir ve geri yüklemesi sorunludur. Birincil yöntem Google Otomatik Yedekleme'dir.
 
 ### Gelecek yön
 

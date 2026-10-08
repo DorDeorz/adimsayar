@@ -8,9 +8,9 @@ Hedefler ve ölçüm planı `GOALS.md` içindedir. Orada tanımlı metrikler var
 
 AdımSayar — telefon için adım sayma uygulaması. Tüm Android telefonları hedeflenir.
 
-Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, MIUI 13 / Android 12, birincil) ve **Galaxy S22** (SD 8 Gen 1 / Exynos 2200, Android 16'ya kadar, ikincil).
+Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, HyperOS 1 / Android 12, birincil) ve **Galaxy S22** (SD 8 Gen 1 / Exynos 2200, Android 16'ya kadar, ikincil).
 
-İki cihaz farklı üreticilerin arka plan yönetimini test etmek içindir (MIUI ve One UI). Tek cihazda yapılan test yeterli sayılmaz.
+İki cihaz farklı üreticilerin arka plan yönetimini test etmek içindir (HyperOS ve One UI). Tek cihazda yapılan test yeterli sayılmaz.
 
 ## Durum
 
@@ -57,13 +57,13 @@ Kural: **tek ölçüme güvenme, doğrula.** `TYPE_STEP_DETECTOR` olay üretmeye
 
 Üretici tespiti `Build.MANUFACTURER` ile yapılır. Model adına göre kırpmaya çalışma.
 
-### Xiaomi / MIUI
+### Xiaomi / HyperOS
 
-Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu).
+Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu). API adı `miui` olsa da HyperOS'ta da çalışır.
 
 Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve açıkça seçildiğinde kullanılır. Health Connect yerine geçmez, yalnızca ek bir doğrulama kaynağı olabilir.
 
-MIUI arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
+HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
 
 ### Samsung / One UI
 
@@ -121,7 +121,7 @@ Kurallar:
 
 ### Widget'lar her cihazda
 
-Widget güncelleme davranışı üreticiden bağımsız olmalıdır. MIUI ve One UI widget arka plan güncellemelerini farklı biçimde kısıtlar; ikisinde de `AlarmManager` gün dönümü ve `JobScheduler` periyodik okuma birlikte çalışmalıdır.
+Widget güncelleme davranışı üreticiden bağımsız olmalıdır. HyperOS ve One UI widget arka plan güncellemelerini farklı biçimde kısıtlar; ikisinde de `AlarmManager` gün dönümü ve `JobScheduler` periyodik okuma birlikte çalışmalıdır.
 
 ## Veri
 
@@ -142,5 +142,44 @@ Xiaomi Cloud'a güvenilmez.
 - Yorum satırı yazma; kod kendini açıklasın.
 - Türkçe arayüz metinlerini kullanıcıya sormadan değiştirme.
 - Ağ izni, hesap ekranı, analitik veya reklam SDK'sı ekleme.
-- Üreticiye özgü pil optimizasyonu muafiyeti isteme. Doğru desen zaten gereksiz pil israfı yapmaz. Gerekirse kullanıcıya nedenini açıkla.
 - Kararlaştırılmış bir maddeyi değiştirmek gerekiyorsa önce kullanıcıya sor ve `GOALS.md` ile `CLAUDE.md`'yi birlikte güncelle.
+
+## Pil optimizasyonu yardımı
+
+Saldırgan ROM'larda arka plan öldürme gerçek ve kaçınılmazdır. HyperOS ve One UI bir uygulamayı ekran kapandıktan 1-2 dakika sonra öldürebiliyor. Bu uygulama hatası değildir ama veri kaybına yol açıyorsa kullanıcıya yol gösterilmelidir.
+
+Kural: **muafiyeti zorla isteme, ama yolunu göster.**
+
+- Marka bazlı adımlar kullanıcıya sunulur, uygulama ayarları değiştirmez
+- Yardım kartı marka agresifse ve muafiyet verilmemişse görünür
+- Muafiyet verildiğinde (`onResume`'da okunarak) kart bir daha çıkmaz
+- Stock Android'de yalnızca nötr tek adım gösterilir
+- Kart kapatılabilir olmalı, kullanıcıyı zorlamamalı
+
+## Ölçüm disiplini
+
+Kronometre projesinden alınan ilke: **ölçülmeyen hiçbir şey kabul edilmez.**
+
+- "Hafif", "optimize", "verimli" gibi sıfatlar tek başına geçer; ölçümle desteklenmedikçe kullanılmaz
+- Her trade-off açıkça belgelenir. Belgelenmemiş trade-off, sonradan "optimize etmedin" diye cezalandırılacak gizli maliyettir
+- Öncelik sırası: **doğruluk → güvenilirlik → pil → güzellik → kapsam**
+- Hedef sıfır değil, ölçülebilir taban çizgisi. Boşta kullanımdan ayırt edilemeyen bir taban
+
+## Basitlik kazanır
+
+Kronometre'de uygulanmış ve işe yarayan kural:
+
+- DI kütüphanesi, soyutlama katmanı, generic repository, çok modüllü yapı: gerekçeleri yoksa ekleme
+- Bir şeyi 10 satırda çözebiliyorsan 10 satırda çöz
+- Emin değilsen tahmin etme. Derlemesini bilmediğin bir API'yi kullanma, tahmini sürüm yazma. `TODO` bırakıp sor
+
+## Kronometre projesinden referans
+
+`DorDeorz/Kronometre` bu projenin kardeşidir ve aynı iki cihazda test edilmiştir. Yeniden kullanılabilecek hazır parçalar:
+
+- `data/OemProfile.kt` — 8 marka için hazır tablo (Xiaomi, Huawei, Oppo, Vivo, Samsung, Asus, Transsion, stock). `hyperos` marker'ı zaten içeriyor
+- `ui/oem/BatteryOptimizationHelper.kt` — marka bazlı derin linkler ve fallback zinciri
+- Glance tabanlı widget, Compose + Material3 kurulumu, `minSdk 23` kararı
+- `.github/workflows/android.yml` — CI kurulumu
+
+Bu dosyalar kopyalanmadan önce okunmalı, doğrudan kopyalanmamalıdır.

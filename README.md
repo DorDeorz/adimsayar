@@ -8,7 +8,7 @@ Günlük adım toplamları tek gerçek kaynaktır. Seviyeler ve madalyalar bu ve
 
 Adım verisi yalnızca telefonun kendi sensörlerinden okunur. Health Connect ve giyilebilir cihaz verileri kullanılmaz.
 
-Test cihazları: Redmi Note 12 Pro 4G (birincil) ve Galaxy S22 (ikincil).
+Test cihazları: Redmi Note 12 Pro 4G (HyperOS 1 / Android 12, birincil) ve Galaxy S22 (ikincil).
 
 ## Proje durumu
 
