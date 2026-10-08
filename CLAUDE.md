@@ -6,7 +6,11 @@ Hedefler ve ölçüm planı `GOALS.md` içindedir. Orada tanımlı metrikler var
 
 ## Proje
 
-AdımSayar — telefon için adım sayma uygulaması. Android'de geliştirilir, Redmi Note 12 Pro 4G (Snapdragon 732G, MIUI 13 / Android 12) üzerinde test edilir.
+AdımSayar — telefon için adım sayma uygulaması. Tüm Android telefonları hedeflenir.
+
+Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, MIUI 13 / Android 12, birincil) ve **Galaxy S22** (SD 8 Gen 1 / Exynos 2200, Android 16'ya kadar, ikincil).
+
+İki cihaz farklı üreticilerin arka plan yönetimini test etmek içindir (MIUI ve One UI). Tek cihazda yapılan test yeterli sayılmaz.
 
 ## Durum
 
@@ -21,6 +25,57 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır.
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
+- Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
+
+## Kaynak çokluğu
+
+Tek sensöre güvenilmez. Üç kaynak okunur ve çapraz doğrulanır:
+
+| Kaynak | Güçlü yanı | Zayıf yanı |
+|---|---|---|
+| `TYPE_STEP_DETECTOR` | Her adımda olay, donmaz | Yavaşlatma/hızlanma sırasında hata |
+| `TYPE_STEP_COUNTER` | Genelde en doğru | **Dongelebiliyor** |
+| Health Connect | Samsung Health'ten gelir | Kullanıcı izni + uygulama gerekir |
+
+### Kritik: sensörün null dönmesi veya donması
+
+Bazı cihazlarda `getDefaultSensor(TYPE_STEP_COUNTER)` `null` döner. Cihaz `FEATURE_SENSOR_STEP_COUNTER` bildiriyor olsa bile sensör bulunmayabilir (Galaxy A7 2018 gibi). Bu durumda uygulama çökmemeli, anlaşılır bir mesaj göstermeli ve hangi kaynakların kullanıldığını belirtmelidir.
+
+### Kritik: sayacın donması
+
+`TYPE_STEP_COUNTER` saymayı durdurabilir ve kendiliğinden devam etmeyebilir. Samsung cihazlarda yıllardır raporlanıyor (uygulama 121 adımda takılırken Samsung Health 305 gösterir). One UI güncellemeleri çalışan sensörü bozabilir — Galaxy Z Flip Android 13 geçişinde sensörü kaybettiği raporlanmıştır.
+
+Kural: **tek ölçüme güvenme, doğrula.** Sayaç geçen sürede hiç ilerlemediyse donmuş demektir. Bu durumda diğer kaynağa geç ve kullanıcıya bildir. Kullanıcı cihazı yeniden başlatmak zorunda kalmamalıdır.
+
+### Health Connect platform farkı
+
+- **Android 14+**: sistem uygulaması, kurulum gerekmez, framework modülü
+- **Android 13 ve altı**: Play Store'dan ayrı uygulama, kullanıcı kurmamışsa o kaynak devre dışı
+
+Redmi Note 12 Pro (Android 12) ikinci durumdadır. Galaxy S22 birinci durumdadır. Her iki durum da test edilmelidir.
+
+Ayrıca Samsung Health Health Connect'e ancak 6.22.5 sürümünden itibaren veri aktarır; kullanıcının Samsung Health'i güncel değilse bu kaynak sessizce boş kalır. Kullanıcıya bunu açıkla, yoksa "bağlı ama hep 0" gibi görünür.
+
+## Üreticiye özgü davranış
+
+Üretici tespiti `Build.MANUFACTURER` ile yapılır. Model adına göre kırpmaya çalışma.
+
+### Xiaomi / MIUI
+
+İki adım kaynağı var:
+
+1. `Sensor.TYPE_STEP_COUNTER` — standart Android
+2. Xiaomi'nin kendi adım servisi — `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu).
+
+Kaynak 2 daha güvenilir olabilir ama yalnızca Xiaomi'de çalışır. Bu bir varsayılan yol **değildir**, üretici tespitiyle seçilen isteğe bağlı bir yoldur.
+
+MIUI arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
+
+### Samsung / One UI
+
+`registerListener` başarısız olabilir (`registerListener fail (1) :: 17, SAMSUNG Step Counter Sensor`). Bu izin eksikliğinden kaynaklanır — `ACTIVITY_RECOGNITION` manifest'te tanımlı olmalı ve runtime'da istenmelidir.
+
+## Kurallar
 
 ## Adım sayma
 
@@ -61,25 +116,6 @@ Google'ın önerisi: seyrek okuma yapacaksan aralığı "olabildiğince uzun" tu
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
 - Ağ izni (`INTERNET`) ekleme. Bu uygulama çevrimdışıdır.
 
-## MIUI ve Xiaomi'ye özgü
-
-### Adım verisi kaynakları
-
-İki kaynak var ve doğrulukları farklı:
-
-1. `Sensor.TYPE_STEP_COUNTER` — standart Android, donanım sayacı
-2. Xiaomi'nin kendi adım servisi — `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü edilir, ardından `content://` üzerinden sorgulanır. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu).
-
-Kaynak 2 daha güvenilir olabilir ama cihaz dışına çıkmaz ve MIUI'a bağımlıdır. Hangisinin kullanılacağı **kullanıcıya sor**.
-
-### Arka plan kısıtları
-
-MIUI arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da takılıyor, sadece yeniden başlatınca düzeliyor" raporları yaygındır.
-
-- Yeniden başlatma gerektiren kayıp bir gün, metrikte küçük ama kullanıcıya kabul edilemezdir. `GOALS.md`'de bu ayrı bir metrik olarak tanımlıdır.
-- `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
-- Xiaomi pil optimizasyonu muafiyeti istenmemeli; doğru desen gereksiz pil israfı yapmaz. Eğer gerekirse kullanıcıya nedenini açıkla.
-
 ## Widget'lar
 
 İki widget: günün adımı, ve 7 günlük tablo.
@@ -90,6 +126,10 @@ Kurallar:
 - Gün dönümü `AlarmManager` ile tam 00:00'da tetiklenir. `JobScheduler` bırakılırsa gün dönümü "15:00 civarında" gibi kayabilir.
 - `updatePeriodMillis` en fazla 30 dakikaya kırpılır ve yine de garanti değildir. Kesinlik beklenmemeli.
 - Widget çizimi ana ekrandaki verinin kopyası değil, aynı kaynaktan okunmalıdır.
+
+### Widget'lar her cihazda
+
+Widget güncelleme davranışı üreticiden bağımsız olmalıdır. MIUI ve One UI widget arka plan güncellemelerini farklı biçimde kısıtlar; ikisinde de `AlarmManager` gün dönümü ve `JobScheduler` periyodik okuma birlikte çalışmalıdır.
 
 ## Veri
 
@@ -110,4 +150,5 @@ Xiaomi Cloud'a güvenilmez.
 - Yorum satırı yazma; kod kendini açıklasın.
 - Türkçe arayüz metinlerini kullanıcıya sormadan değiştirme.
 - Ağ izni, hesap ekranı, analitik veya reklam SDK'sı ekleme.
+- Üreticiye özgü pil optimizasyonu muafiyeti isteme. Doğru desen zaten gereksiz pil israfı yapmaz. Gerekirse kullanıcıya nedenini açıkla.
 - Kararlaştırılmış bir maddeyi değiştirmek gerekiyorsa önce kullanıcıya sor ve `GOALS.md` ile `CLAUDE.md`'yi birlikte güncelle.

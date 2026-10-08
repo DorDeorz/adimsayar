@@ -8,13 +8,30 @@ Bu dosya projenin hedeflerini ve ölçüm planını tanımlar. Teknik talimatlar
 
 Bir pedometre uygulamasında "performans" CPU benchmark skoru değildir. Kullanıcı üç şeyi hisseder: sayı yanlış geldiğinde, pil bir günde bittiğinde ve açılışta beklediğinde. Performans burada batarya + doğruluk + açılış hızı demektir.
 
-## Test cihazı
+## Test cihazları
 
-**Redmi Note 12 Pro 4G** — Snapdragon 732G (8 nm), MIUI 13 / Android 12, 5000 mAh.
+**Birincil — Redmi Note 12 Pro 4G** — Snapdragon 732G (8 nm), MIUI 13 / Android 12, 5000 mAh.
 
-Uygulama bu cihazda geliştirilir ve günlük hayatta kullanılır. Ölçümler bu cihazda yapılır.
+Uygulama bu cihazda geliştirilir ve günlük hayatta kullanılır. Ölçümlerin ana kaynağı budur.
 
 MIUI arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da takılıyor, sadece yeniden başlatınca düzeliyor" raporları yaygındır. Bu bir pil değil **veri doğruluğu** sorunudur ve kabul edilemez.
+
+**İkincil — Galaxy S22** — Snapdragon 8 Gen 1 veya Exynos 2200, Android 16'ya kadar güncelleme alır.
+
+İkincil cihazın amacı tek sayı üretmek değil, **farklı bir arka plan yönetimi ve sensör davranışını test etmek**. MIUI ve One UI ikisi de agresiftir ama farklı yollardan. S22'de Health Connect sistem uygulaması olarak gelir (Android 14+), kurulum gerekmez; Redmi'de Play Store'dan ayrı uygulama olarak kurulmalıdır. Bu fark kodda ele alınmalıdır.
+
+### Kapsam
+
+Uygulama tüm Android telefonlarda çalışacak şekilde tasarlanır. Test cihazları bunu doğrulamak için ikisidir, sınırlamak için değil.
+
+| Cihaz | İşlemci | Android | Ana zorluk |
+|---|---|---|---|
+| Redmi Note 12 Pro 4G | Snapdragon 732G | 12 / MIUI 13 | Arka plan öldürme |
+| Galaxy S22 | SD 8 Gen 1 / Exynos 2200 | 16'ya kadar | Sensör donması |
+
+### Cihaz tespiti
+
+Cihazın üreticisine göre davranış değişebilir. Samsung ve Xiaomi'ye özgü yollar varsayım olarak değil, açıkça sınanmalıdır. Üretici tespiti yapılacaksa `Build.MANUFACTURER` kullanılmalı, model adına göre kırpmaya çalışılmamalıdır.
 
 ## Ölçülebilir metrikler
 
@@ -24,10 +41,21 @@ MIUI arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da t
 | Soğuk açılış → sayı görünür | < 700 ms | Uygulama açılıştan sayıyı göstermeye |
 | Widget güncelleme gecikmesi | < 30 dk | Kesinlik beklenmez, hedeftir |
 | Canlı sayaç gecikmesi | < 2 sn | Uygulama açıkken |
-| Doğruluk (vs Mi Fitness) | 5000 adımda ±%3 | Referans olarak sistem pedometresi |
+| Doğruluk (vs Mi Fitness / Samsung Health) | 5000 adımda ±%3 | Referans olarak sistem pedometresi |
 | Kök neden olmayan kayıp | 0'a düşme kabul edilemez | Yeniden başlatma gerektirmemeli |
+| Sensör donması toleransı | Kullanıcı müdahalesi gerekmesin | Bkz. aşağıdaki bölüm |
 | Crash-free oturum | > %99,5 | Temel kalite |
 | APK boyutu | < 20 MB | İndirme eşiği |
+
+### Sensör donması
+
+Bazı cihazlarda `TYPE_STEP_COUNTER` saymayı durdurur ve kendiliğinden tekrar başlamaz. Samsung cihazlarda S4'ten beri raporlanmıştır: uygulama 121 adımda takılı kalırken cihazın kendi sağlık uygulaması 305 gösterir. Bazı Samsung modellerinde sensör hiç bulunmaz, `getDefaultSensor()` `null` döner. One UI güncellemeleri çalışan bir sensörü bozabilir (Galaxy Z Flip, Android 13 geçişinde olduğu gibi).
+
+Bu kabul edilemez bir durumdur: kullanıcı sayaç donduğunda fark etmeli ve uygulama kendini toparlamalı, cihazı yeniden başlatmak zorunda kalmamalı.
+
+Bu nedenle **tek sensöre güvenilmez, doğrulama yapılır.** İki bağımsız ölçüm karşılaştırılır; biri sürekli geride kalıyorsa sensör donmuş demektir ve uygulama bunu kullanıcıya bildirir.
+
+Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi ölçülmelidir. Hedef: fark edilen her donmada kullanıcı müdahalesi gerekmeden toparlanma.
 
 ### Ölçüm nasıl yapılır
 
@@ -36,6 +64,18 @@ MIUI arka plan işlerini agresif öldürür. Topluluklarda "adım sayacı 0'da t
 - Pil tüketimi: uygulama aktifken 24 saat boyunca pil yüzdesi farkı, baz olarak cihazın kendi tüketimiyle karşılaştırılarak.
 - Doğruluk: Mi Fitness (veya benzeri referans uygulama) ile eşzamanlı, en az 3 ayrı günde 5000+ adımlık yürüyüş.
 - Widget gecikmesi: widget'ın gösterdiği değer ile uygulamanın gösterdiği değer arasındaki farkın zaman farkı.
+
+## Veri kaynakları
+
+Tek kaynak varsayımı geçerli değildir. Birden fazla kaynak okunur ve çapraz doğrulanır:
+
+1. `TYPE_STEP_DETECTOR` — her adımda olay üretir, donmaya duyarlı değil
+2. `TYPE_STEP_COUNTER` — kümülatif, genelde daha doğru ama donabiliyor
+3. Health Connect — Samsung Health senkronlar, kullanıcı izni gerektirir
+
+Health Connect kullanımı platforma göre değişir. Android 14 ve üstünde sistem uygulamasıdır, kurulum gerekmez. Android 13 ve altında Play Store'dan ayrı uygulama olarak kurulmalıdır ve kullanıcıda kurulu değilse o kaynak sessizce devre dışı kalır.
+
+Samsung Health'in Health Connect'e veri aktarması 6.22.5 sürümünden itibaren çalışır; kullanıcının Samsung Health'i güncel değilse bu kaynak boş kalır.
 
 ## Widget hedefleri
 
