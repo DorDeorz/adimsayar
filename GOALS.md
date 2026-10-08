@@ -53,7 +53,7 @@ Bazı cihazlarda `TYPE_STEP_COUNTER` saymayı durdurur ve kendiliğinden tekrar 
 
 Bu kabul edilemez bir durumdur: kullanıcı sayaç donduğunda fark etmeli ve uygulama kendini toparlamalı, cihazı yeniden başlatmak zorunda kalmamalı.
 
-Bu nedenle **tek sensöre güvenilmez, doğrulama yapılır.** İki bağımsız ölçüm karşılaştırılır; biri sürekli geride kalıyorsa sensör donmuş demektir ve uygulama bunu kullanıcıya bildirir.
+Bu nedenle **tek sensöre güvenilmez, doğrulama yapılır.** `TYPE_STEP_COUNTER` ve `TYPE_STEP_DETECTOR` birbirini kontrol eder; biri sürekli geride kalıyorsa sensör donmuş demektir ve uygulama bunu kullanıcıya bildirir.
 
 Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi ölçülmelidir. Hedef: fark edilen her donmada kullanıcı müdahalesi gerekmeden toparlanma.
 
@@ -67,15 +67,26 @@ Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi 
 
 ## Veri kaynakları
 
-Tek kaynak varsayımı geçerli değildir. Birden fazla kaynak okunur ve çapraz doğrulanır:
+**Karar: Health Connect kullanılmayacak. Veri yalnızca telefonun kendi sensörlerinden okunur.**
 
-1. `TYPE_STEP_DETECTOR` — her adımda olay üretir, donmaya duyarlı değil
-2. `TYPE_STEP_COUNTER` — kümülatif, genelde daha doğru ama donabiliyor
-3. Health Connect — Samsung Health senkronlar, kullanıcı izni gerektirir
+Bu karar şu gerekçeyle verildi:
 
-Health Connect kullanımı platforma göre değişir. Android 14 ve üstünde sistem uygulamasıdır, kurulum gerekmez. Android 13 ve altında Play Store'dan ayrı uygulama olarak kurulmalıdır ve kullanıcıda kurulu değilse o kaynak sessizce devre dışı kalır.
+Health Connect, telefon ve giyilebilir cihaz verilerini birleştirir. Kullanıcı kolunda saat taşırken telefon da sayıyorsa adım iki kez yazılır. Samsung kullanıcılarında bu yaygın bir şikâyettir. Ayrıca Health Connect'in kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve bu sıra okunabilir bir API ile alınamaz. Sonuç olarak **aynı cihaz, aynı gün, hiçbir veri değişikliği olmadan iki farklı toplam üretilebilir.**
 
-Samsung Health'in Health Connect'e veri aktarması 6.22.5 sürümünden itibaren çalışır; kullanıcının Samsung Health'i güncel değilse bu kaynak boş kalır.
+Bu, uygulamanın temel vaadiyle çelişir. Doğru ama nadiren eksik veri, çoğu zaman doğru ama bazen iki katı olan veriden yeğdir. Üstelik türetilmiş madalyalar geçmişe dönük uygulandığı için, temelindeki sayının değişken olması madalyaların da geriye dönük değişmesine yol açar.
+
+Bu kararın bedeli kabul edilmiştir: Samsung Health aktarımına güvenilerek sensör donmasının kolayca aşılması artık mümkün değildir. Bunun yerine donma kendi tespit edilip kullanıcıya bildirilir.
+
+İleride giyilebilir cihaz desteği istenirse Health Connect eklenebilir, ancak o zaman aralık bazlı deduplikasyon birlikte eklenmelidir. Temel yapıda yer almaz.
+
+### Kullanılacak sensörler
+
+| Sensör | Rol |
+|---|---|
+| `TYPE_STEP_COUNTER` | Birincil kaynak, kümülatif, genelde en doğru. Donabilir |
+| `TYPE_STEP_DETECTOR` | Çapraz doğrulama. Her adımda olay üretir, donmaya duyarlı değil |
+
+Her iki sensör de yoksa uygulama çökmez, anlaşılır bir mesaj gösterir.
 
 ## Widget hedefleri
 

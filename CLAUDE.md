@@ -23,6 +23,7 @@ Repo boş bir iskelettir. Şunlar henüz kararlaştırılmamıştır ve bunları
 Kararlaştırılmış ve değiştirilmemesi gerekenler:
 
 - Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
+- **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır.
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
 - Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
@@ -33,28 +34,24 @@ Tek sensöre güvenilmez. Üç kaynak okunur ve çapraz doğrulanır:
 
 | Kaynak | Güçlü yanı | Zayıf yanı |
 |---|---|---|
-| `TYPE_STEP_DETECTOR` | Her adımda olay, donmaz | Yavaşlatma/hızlanma sırasında hata |
-| `TYPE_STEP_COUNTER` | Genelde en doğru | **Dongelebiliyor** |
-| Health Connect | Samsung Health'ten gelir | Kullanıcı izni + uygulama gerekir |
+| `TYPE_STEP_DETECTOR` | Çapraz doğrulama, donmaya duyarlı değil | Yavaşlatma/hızlanma sırasında hata |
+| `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Dongelebiliyor** |
 
-### Kritik: sensörün null dönmesi veya donması
+**Health Connect kullanılmayacaktır.** Bu karar `GOALS.md` içinde gerekçesiyle tanımlıdır. `androidx.health` bağımlılığı ekleme. Sağlık uygulamalarından veri okumayan tek veri kaynağı telefonun kendi sensörleridir.
 
-Bazı cihazlarda `getDefaultSensor(TYPE_STEP_COUNTER)` `null` döner. Cihaz `FEATURE_SENSOR_STEP_COUNTER` bildiriyor olsa bile sensör bulunmayabilir (Galaxy A7 2018 gibi). Bu durumda uygulama çökmemeli, anlaşılır bir mesaj göstermeli ve hangi kaynakların kullanıldığını belirtmelidir.
+Gerekçenin özeti: Health Connect telefon ve giyilebilir cihaz verisini birleştirir, kolunda saat varken adım iki kez yazılır. Ayrıca kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve okunabilir bir API yoktur, dolayısıyla aynı gün iki farklı toplam üretilebilir. Bu, uygulamanın temel vaadiyle ve türetilmiş veri ilkesiyle çelişir.
+
+Giyilebilir cihaz desteği ileride istenirse Health Connect eklenebilir, ancak aralık bazlı deduplikasyonla birlikte eklenmelidir.
+
+### Kritik: sensörün null dönmesi
+
+Bazı cihazlarda `getDefaultSensor(TYPE_STEP_COUNTER)` `null` döner. Cihaz `FEATURE_SENSOR_STEP_COUNTER` bildiriyor olsa bile sensör bulunmayabilir (Galaxy A7 2018 gibi). Bu durumda uygulama çökmemeli, anlaşılır bir mesaj göstermeli.
 
 ### Kritik: sayacın donması
 
 `TYPE_STEP_COUNTER` saymayı durdurabilir ve kendiliğinden devam etmeyebilir. Samsung cihazlarda yıllardır raporlanıyor (uygulama 121 adımda takılırken Samsung Health 305 gösterir). One UI güncellemeleri çalışan sensörü bozabilir — Galaxy Z Flip Android 13 geçişinde sensörü kaybettiği raporlanmıştır.
 
-Kural: **tek ölçüme güvenme, doğrula.** Sayaç geçen sürede hiç ilerlemediyse donmuş demektir. Bu durumda diğer kaynağa geç ve kullanıcıya bildir. Kullanıcı cihazı yeniden başlatmak zorunda kalmamalıdır.
-
-### Health Connect platform farkı
-
-- **Android 14+**: sistem uygulaması, kurulum gerekmez, framework modülü
-- **Android 13 ve altı**: Play Store'dan ayrı uygulama, kullanıcı kurmamışsa o kaynak devre dışı
-
-Redmi Note 12 Pro (Android 12) ikinci durumdadır. Galaxy S22 birinci durumdadır. Her iki durum da test edilmelidir.
-
-Ayrıca Samsung Health Health Connect'e ancak 6.22.5 sürümünden itibaren veri aktarır; kullanıcının Samsung Health'i güncel değilse bu kaynak sessizce boş kalır. Kullanıcıya bunu açıkla, yoksa "bağlı ama hep 0" gibi görünür.
+Kural: **tek ölçüme güvenme, doğrula.** `TYPE_STEP_DETECTOR` olay üretmeye devam ederken sayaç hiç ilerlemiyorsa donmuş demektir. Bu durumda kullanıcıya bildir ve yeniden kayıt dene. Kullanıcı cihazı yeniden başlatmak zorunda kalmamalıdır.
 
 ## Üreticiye özgü davranış
 
@@ -62,20 +59,15 @@ Ayrıca Samsung Health Health Connect'e ancak 6.22.5 sürümünden itibaren veri
 
 ### Xiaomi / MIUI
 
-İki adım kaynağı var:
+Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu).
 
-1. `Sensor.TYPE_STEP_COUNTER` — standart Android
-2. Xiaomi'nin kendi adım servisi — `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu).
-
-Kaynak 2 daha güvenilir olabilir ama yalnızca Xiaomi'de çalışır. Bu bir varsayılan yol **değildir**, üretici tespitiyle seçilen isteğe bağlı bir yoldur.
+Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve açıkça seçildiğinde kullanılır. Health Connect yerine geçmez, yalnızca ek bir doğrulama kaynağı olabilir.
 
 MIUI arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
 
 ### Samsung / One UI
 
 `registerListener` başarısız olabilir (`registerListener fail (1) :: 17, SAMSUNG Step Counter Sensor`). Bu izin eksikliğinden kaynaklanır — `ACTIVITY_RECOGNITION` manifest'te tanımlı olmalı ve runtime'da istenmelidir.
-
-## Kurallar
 
 ## Adım sayma
 

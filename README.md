@@ -2,11 +2,13 @@
 
 Telefon için adım sayma uygulaması.
 
-Android uygulaması. Tüm veriler cihazda tutulur; hesap, sunucu ve senkronizasyon yoktur.
+Android uygulaması. Tüm veriler cihazda tutulur; hesap, sunucu, senkronizasyon ve ağ izni yoktur.
 
 Günlük adım toplamları tek gerçek kaynaktır. Seviyeler ve madalyalar bu veriden türetilir ve hiçbir yerde saklanmaz.
 
-Test cihazı: Redmi Note 12 Pro 4G (Snapdragon 732G, MIUI 13 / Android 12).
+Adım verisi yalnızca telefonun kendi sensörlerinden okunur. Health Connect ve giyilebilir cihaz verileri kullanılmaz.
+
+Test cihazları: Redmi Note 12 Pro 4G (birincil) ve Galaxy S22 (ikincil).
 
 ## Proje durumu
 
