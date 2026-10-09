@@ -47,18 +47,25 @@ object XiaomiSteps {
             val zone = ZoneId.systemDefault()
             val today = LocalDate.now(zone)
             var todaySteps = 0L
+            val byHour = sortedMapOf<Int, Long>()
             var lastEnd = Long.MIN_VALUE
             var last = ""
             while (it.moveToNext()) {
                 val endMs = it.getLong(end)
                 val count = it.getLong(steps)
-                if (Instant.ofEpochMilli(endMs).atZone(zone).toLocalDate() == today) todaySteps += count
+                val endTime = Instant.ofEpochMilli(endMs).atZone(zone)
+                if (endTime.toLocalDate() == today) {
+                    todaySteps += count
+                    byHour[endTime.hour] = (byHour[endTime.hour] ?: 0L) + count
+                }
                 if (endMs > lastEnd) {
                     lastEnd = endMs
                     val modeText = if (mode >= 0) it.getInt(mode).toString() else "-"
                     last = "${format(it.getLong(begin), zone)}–${format(endMs, zone)} mod $modeText +$count"
                 }
             }
+            val hours = byHour.entries.joinToString(", ") { (hour, count) -> "%02d: %d".format(hour, count) }
+            log.note(ReadSource.Xiaomi, context.getString(R.string.log_xiaomi_hours, hours))
             log.note(ReadSource.Xiaomi, context.getString(R.string.log_xiaomi_summary, it.count, todaySteps, last))
         }
     }

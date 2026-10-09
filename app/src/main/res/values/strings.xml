@@ -50,6 +50,7 @@
     <string name="log_xiaomi_missing">kayıt bulunamadı</string>
     <string name="log_xiaomi_error">okunamadı (%1$s)</string>
     <string name="log_xiaomi_columns">%1$d satır, sütunlar: %2$s</string>
+    <string name="log_xiaomi_hours">bugün saat saat: %1$s</string>
     <string name="log_xiaomi_summary">%1$d satır, bugün %2$d adım, son: %3$s</string>
 
     <string name="widget_today_label">Bugünün adımı</string>
