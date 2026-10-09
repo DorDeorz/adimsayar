@@ -118,6 +118,7 @@
     <string name="update_checking">Comprobando…</string>
     <string name="update_up_to_date">Tienes la última versión</string>
     <string name="update_available">Nueva versión disponible: %1$s. Toca para descargar</string>
+    <string name="update_no_release">Aún no hay ninguna versión publicada</string>
     <string name="update_failed">No se pudo comprobar. Revisa tu conexión a internet</string>
     <string name="github_page">Página de GitHub</string>
     <string name="github_page_hint">Código fuente, versiones y reporte de errores</string>

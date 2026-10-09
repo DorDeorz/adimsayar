@@ -118,6 +118,7 @@
     <string name="update_checking">جارٍ التحقق…</string>
     <string name="update_up_to_date">لديك أحدث إصدار</string>
     <string name="update_available">يتوفر إصدار جديد: %1$s. اضغط للتنزيل</string>
+    <string name="update_no_release">لم يُنشر أي إصدار بعد</string>
     <string name="update_failed">تعذّر التحقق. تحقّق من اتصال الإنترنت</string>
     <string name="github_page">صفحة GitHub</string>
     <string name="github_page_hint">الشيفرة المصدرية والإصدارات والإبلاغ عن المشكلات</string>

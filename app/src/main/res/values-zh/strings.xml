@@ -118,6 +118,7 @@
     <string name="update_checking">正在检查…</string>
     <string name="update_up_to_date">已是最新版本</string>
     <string name="update_available">有新版本：%1$s。点按下载</string>
+    <string name="update_no_release">尚未发布任何版本</string>
     <string name="update_failed">无法检查。请检查网络连接</string>
     <string name="github_page">GitHub 页面</string>
     <string name="github_page_hint">源代码、版本和问题反馈</string>

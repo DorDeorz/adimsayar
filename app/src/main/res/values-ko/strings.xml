@@ -118,6 +118,7 @@
     <string name="update_checking">확인 중…</string>
     <string name="update_up_to_date">최신 버전입니다</string>
     <string name="update_available">새 버전 %1$s이(가) 있습니다. 탭하여 다운로드</string>
+    <string name="update_no_release">아직 게시된 릴리스가 없습니다</string>
     <string name="update_failed">확인할 수 없습니다. 인터넷 연결을 확인하세요</string>
     <string name="github_page">GitHub 페이지</string>
     <string name="github_page_hint">소스 코드, 릴리스 및 문제 신고</string>
