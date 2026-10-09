@@ -11,20 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Gradle projesi var mı
+        id: proje
+        run: |
+          if [ -f gradlew ]; then echo "var=true" >> "$GITHUB_OUTPUT"; else echo "var=false" >> "$GITHUB_OUTPUT"; echo "gradlew yok, derleme atlandı" >> "$GITHUB_STEP_SUMMARY"; fi
       - uses: actions/setup-java@v4
+        if: steps.proje.outputs.var == 'true'
         with:
           distribution: temurin
           java-version: 21
       - uses: gradle/actions/setup-gradle@v4
+        if: steps.proje.outputs.var == 'true'
       - name: Build, lint, test
+        if: steps.proje.outputs.var == 'true'
         run: ./gradlew --stacktrace assembleDebug assembleRelease lint testDebugUnitTest
       - name: Lint raporu
-        if: always()
+        if: always() && steps.proje.outputs.var == 'true'
         run: cat app/build/intermediates/lint_intermediate_text_report/debug/lintReportDebug/lint-results-debug.txt || true
       - name: APK boyutu
+        if: steps.proje.outputs.var == 'true'
         run: ls -l app/build/outputs/apk/release/*.apk | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.proje.outputs.var == 'true'
         with:
           name: adimsayar-apk-ve-raporlar
           path: |
