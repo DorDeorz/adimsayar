@@ -171,12 +171,10 @@ Release APK, depoda bulunmayan ve GitHub Actions Secret'larında saklanan bir an
 ### Yeni sürüm yayınlama
 
 1. `app/build.gradle.kts` içinde `versionName` ve `versionCode` artırılır ve `main`'e birleştirilir.
-2. `main` üzerinde `versionName` ile aynı adda bir etiket gönderilir, örneğin `v0.6.1`:
-
-   ```
-   git tag v0.6.1 && git push origin v0.6.1
-   ```
-3. GitHub Actions APK'yı derler, imzalar ve `adimsayar-0.6.1.apk` adıyla bir GitHub Release yayınlar. Etiket `versionName` ile uyuşmazsa iş durur.
+2. `versionName` ile aynı adda bir etiketle sürüm yayınlanır, örneğin `v0.6.1`. İki yoldan biri:
+   - GitHub'da Releases → "Draft a new release" → etiket `v0.6.1` → "Publish release"
+   - ya da komut satırından: `git tag v0.6.1 && git push origin v0.6.1`
+3. GitHub Actions APK'yı derler, imzalar ve `adimsayar-0.6.1.apk` olarak Release'e ekler. Etiket `versionName` ile uyuşmazsa iş durur.
 
 ### Kaynaktan derleme
 
