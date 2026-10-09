@@ -154,6 +154,19 @@
     <string name="export_done">%1$d gün dışa aktarıldı</string>
     <string name="import_done">%1$d gün güncellendi</string>
     <string name="csv_failed">Dosya okunamadı veya yazılamadı</string>
+    <string name="settings_language">Dil</string>
+    <string name="language">Uygulama dili</string>
+    <string name="language_system">Sistem</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="medal_group_early">Erken kalkan</string>
+    <string name="medal_group_early_text">Saat 08:00\'den önce en az 1.000 adım attığın gün sayısı (HyperOS kaydı açıkken)</string>
+
+    <string-array name="release_notes_0_4_0">
+        <item>Bugün widget\'ında hedef halkası</item>
+        <item>Erken kalkan madalyası (HyperOS kaydı açıkken)</item>
+        <item>İngilizce dil seçeneği (Ayarlar → Dil)</item>
+    </string-array>
 
     <string-array name="release_notes_0_3_0">
         <item>Mesafe ve kalori tahmini (boy, kilo, km veya mil)</item>

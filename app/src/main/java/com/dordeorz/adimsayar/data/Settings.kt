@@ -11,6 +11,8 @@ enum class ThemeMode { System, Light, Dark }
 
 enum class DistanceUnit { Km, Mile }
 
+enum class AppLanguage { System, Turkish, English }
+
 data class AppSettings(
     val themeMode: ThemeMode = ThemeMode.System,
     val dynamicColor: Boolean = true,
@@ -22,6 +24,7 @@ data class AppSettings(
     val weekStart: DayOfWeek = DayOfWeek.MONDAY,
     val goalNotification: Boolean = false,
     val streakReminder: Boolean = false,
+    val language: AppLanguage = AppLanguage.System,
 )
 
 const val DEFAULT_DAILY_GOAL = 10_000L
@@ -61,6 +64,8 @@ class SettingsStore private constructor(context: Context) {
 
     fun setStreakReminder(enabled: Boolean) = update { it.copy(streakReminder = enabled) }
 
+    fun setLanguage(language: AppLanguage) = update { it.copy(language = language) }
+
     private fun update(change: (AppSettings) -> AppSettings) {
         val next = change(_settings.value)
         prefs.edit {
@@ -74,6 +79,7 @@ class SettingsStore private constructor(context: Context) {
             putString(KEY_WEEK_START, next.weekStart.name)
             putBoolean(KEY_GOAL_NOTIFICATION, next.goalNotification)
             putBoolean(KEY_STREAK_REMINDER, next.streakReminder)
+            putString(KEY_LANGUAGE, next.language.name)
         }
         _settings.value = next
     }
@@ -89,6 +95,7 @@ class SettingsStore private constructor(context: Context) {
         weekStart = WEEK_START_OPTIONS.firstOrNull { it.name == prefs.getString(KEY_WEEK_START, null) } ?: DayOfWeek.MONDAY,
         goalNotification = prefs.getBoolean(KEY_GOAL_NOTIFICATION, false),
         streakReminder = prefs.getBoolean(KEY_STREAK_REMINDER, false),
+        language = AppLanguage.entries.firstOrNull { it.name == prefs.getString(KEY_LANGUAGE, null) } ?: AppLanguage.System,
     )
 
     companion object {
@@ -103,6 +110,7 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_WEEK_START = "week_start"
         private const val KEY_GOAL_NOTIFICATION = "goal_notification"
         private const val KEY_STREAK_REMINDER = "streak_reminder"
+        private const val KEY_LANGUAGE = "language"
 
         @Volatile
         private var instance: SettingsStore? = null

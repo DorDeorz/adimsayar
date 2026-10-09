@@ -99,4 +99,20 @@ class AchievementMathTest {
         val result = AchievementMath.compute(history, LocalDate.of(2026, 10, 2), 10_000, 70_000)
         assertEquals(MonthSteps(YearMonth.of(2026, 10), 7_000), result.records.bestMonth)
     }
+
+    @Test
+    fun earlyBirdMedalsNeedHourlyData() {
+        val result = AchievementMath.compute(days(5_000, 6_000), monday.plusDays(1), 10_000, 70_000)
+        assertTrue(result.medals.none { it.group == MedalGroup.EarlyBird })
+    }
+
+    @Test
+    fun earlyBirdCountsMorningDaysUpToToday() {
+        val mornings = (0L..7L).map { monday.plusDays(it) }.toSet()
+        val result = AchievementMath.compute(days(*LongArray(7) { 4_000 }), monday.plusDays(6), 10_000, 70_000, earlyBirdDays = mornings)
+        assertEquals(monday, medal(result, MedalGroup.EarlyBird, 1).earnedOn)
+        assertEquals(monday.plusDays(6), medal(result, MedalGroup.EarlyBird, 7).earnedOn)
+        assertEquals(7L, medal(result, MedalGroup.EarlyBird, 30).progress)
+        assertFalse(medal(result, MedalGroup.EarlyBird, 30).earned)
+    }
 }

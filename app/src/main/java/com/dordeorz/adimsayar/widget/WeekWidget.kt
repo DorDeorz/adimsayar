@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.ImageProvider
-import androidx.glance.LocalContext
 import androidx.glance.LocalSize
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
@@ -37,10 +36,12 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
+import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.data.DaySteps
+import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import java.time.LocalDate
 
@@ -55,7 +56,9 @@ class WeekWidget : GlanceAppWidget() {
         provideContent {
             val flow = remember { repository.observeWeek(today) }
             val week by flow.collectAsState(initial)
-            WeekContent(week)
+            val settings by SettingsStore.get(context).settings.collectAsState()
+            val localized = remember(settings.language) { Locales.wrap(context) }
+            WeekContent(localized, week)
         }
     }
 }
@@ -77,8 +80,7 @@ private val BAR_WIDTH = 14.dp
 private val MIN_BAR = 3.dp
 
 @Composable
-private fun WeekContent(week: List<DaySteps>) {
-    val context = LocalContext.current
+private fun WeekContent(context: Context, week: List<DaySteps>) {
     val size = LocalSize.current
     val maxBar = (size.height - PADDING * 2 - TITLE_HEIGHT - VALUE_HEIGHT - LABEL_HEIGHT).coerceAtLeast(MIN_BAR)
     val maxSteps = week.maxOfOrNull { it.steps }?.coerceAtLeast(1L) ?: 1L

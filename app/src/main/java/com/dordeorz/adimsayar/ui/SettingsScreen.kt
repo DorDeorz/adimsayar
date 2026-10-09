@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
@@ -58,6 +59,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.4.0", R.array.release_notes_0_4_0),
     ReleaseNote("0.3.0", R.array.release_notes_0_3_0),
     ReleaseNote("0.2.0", R.array.release_notes_0_2_0),
     ReleaseNote("0.1.0", R.array.release_notes_0_1_0),
@@ -98,7 +100,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                 title = stringResource(R.string.week_start),
                 options = WEEK_START_OPTIONS,
                 selected = settings.weekStart,
-                label = { it.getDisplayName(TextStyle.FULL, TURKISH) },
+                label = { it.getDisplayName(TextStyle.FULL, appLocale) },
                 onSelect = actions.onWeekStartChange,
             )
 
@@ -168,6 +170,16 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                     onCheckedChange = actions.onDynamicColorChange,
                 )
             }
+
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.settings_language))
+            ChoiceRow(
+                title = stringResource(R.string.language),
+                options = AppLanguage.entries,
+                selected = settings.language,
+                label = { stringResource(languageLabel(it)) },
+                onSelect = actions.onLanguageChange,
+            )
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
@@ -359,6 +371,12 @@ private fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
         Text(title, style = MaterialTheme.typography.bodyLarge)
         Text(hint, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
+}
+
+private fun languageLabel(language: AppLanguage) = when (language) {
+    AppLanguage.System -> R.string.language_system
+    AppLanguage.Turkish -> R.string.language_turkish
+    AppLanguage.English -> R.string.language_english
 }
 
 @Composable

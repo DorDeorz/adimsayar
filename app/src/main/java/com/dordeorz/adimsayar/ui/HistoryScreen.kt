@@ -102,7 +102,7 @@ private fun MonthCard(
                     Icon(painterResource(R.drawable.ic_chevron_left), contentDescription = stringResource(R.string.previous_month))
                 }
                 Text(
-                    MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(TURKISH) },
+                    MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(appLocale) },
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),
@@ -119,7 +119,7 @@ private fun MonthCard(
             Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
                 weekDays(state.settings.weekStart).forEach { day ->
                     Text(
-                        day.getDisplayName(TextStyle.SHORT, TURKISH),
+                        day.getDisplayName(TextStyle.SHORT, appLocale),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
@@ -308,7 +308,7 @@ private fun RecordsCard(records: Records, today: LocalDate) {
             RecordRow(
                 stringResource(R.string.record_best_month),
                 records.bestMonth?.let { format(it.steps) } ?: "-",
-                records.bestMonth?.let { MONTH_FORMAT.format(it.month).replaceFirstChar { c -> c.titlecase(TURKISH) } },
+                records.bestMonth?.let { MONTH_FORMAT.format(it.month).replaceFirstChar { c -> c.titlecase(appLocale) } },
             )
             RecordRow(stringResource(R.string.record_longest_streak), stringResource(R.string.days_count, records.longestStreak), null)
             RecordRow(stringResource(R.string.record_goal_days), records.goalDays.toString(), null)

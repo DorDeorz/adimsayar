@@ -10,6 +10,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.edit
+import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.AchievementMath
@@ -19,7 +20,6 @@ import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
-import java.util.Locale
 
 object Reminders {
 
@@ -38,11 +38,12 @@ object Reminders {
         val today = LocalDate.now().toString()
         if (prefs.getString(KEY_GOAL_DATE, null) == today) return
         prefs.edit { putString(KEY_GOAL_DATE, today) }
+        val strings = Locales.wrap(context)
         notify(
-            context,
+            strings,
             GOAL_NOTIFICATION_ID,
-            context.getString(R.string.notify_goal_title),
-            context.getString(R.string.notify_goal_text, format(steps)),
+            strings.getString(R.string.notify_goal_title),
+            strings.getString(R.string.notify_goal_text, format(steps)),
         )
     }
 
@@ -56,11 +57,12 @@ object Reminders {
         val streak = AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart)
             .records.currentStreak
         if (streak == 0) return
+        val strings = Locales.wrap(context)
         notify(
-            context,
+            strings,
             STREAK_NOTIFICATION_ID,
-            context.getString(R.string.notify_streak_title, streak),
-            context.getString(R.string.notify_streak_text, format(settings.dailyGoal - steps)),
+            strings.getString(R.string.notify_streak_title, streak),
+            strings.getString(R.string.notify_streak_text, format(settings.dailyGoal - steps)),
         )
     }
 
@@ -110,5 +112,5 @@ object Reminders {
         }
     }
 
-    private fun format(steps: Long): String = NumberFormat.getIntegerInstance(Locale.forLanguageTag("tr-TR")).format(steps)
+    private fun format(steps: Long): String = NumberFormat.getIntegerInstance(Locales.current).format(steps)
 }

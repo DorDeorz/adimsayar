@@ -40,6 +40,7 @@ private fun MedalGroup.title(): Int = when (this) {
     MedalGroup.Streak -> R.string.medal_group_streak
     MedalGroup.WeeklyGoal -> R.string.medal_group_weekly
     MedalGroup.Total -> R.string.medal_group_total
+    MedalGroup.EarlyBird -> R.string.medal_group_early
 }
 
 @StringRes
@@ -48,6 +49,7 @@ private fun MedalGroup.description(): Int = when (this) {
     MedalGroup.Streak -> R.string.medal_group_streak_text
     MedalGroup.WeeklyGoal -> R.string.medal_group_weekly_text
     MedalGroup.Total -> R.string.medal_group_total_text
+    MedalGroup.EarlyBird -> R.string.medal_group_early_text
 }
 
 @Composable
@@ -67,7 +69,7 @@ fun MedalsScreen(state: MainUiState) {
                 count = medals.size,
             )
         }
-        items(MedalGroup.entries) { group -> MedalGroupCard(group, groups[group].orEmpty()) }
+        items(groups.keys.toList()) { group -> MedalGroupCard(group, groups[group].orEmpty()) }
         item {
             Text(
                 stringResource(R.string.medals_retroactive),
@@ -185,7 +187,7 @@ private fun MedalBadge(medal: Medal, modifier: Modifier) {
 @Composable
 private fun targetLabel(medal: Medal): String = when (medal.group) {
     MedalGroup.DailySteps -> stringResource(R.string.steps_value, format(medal.target))
-    MedalGroup.Streak -> stringResource(R.string.days_count, medal.target.toInt())
+    MedalGroup.Streak, MedalGroup.EarlyBird -> stringResource(R.string.days_count, medal.target.toInt())
     MedalGroup.WeeklyGoal -> stringResource(R.string.weeks_count, medal.target.toInt())
     MedalGroup.Total -> if (medal.target >= 1_000_000L) {
         stringResource(R.string.million_steps, formatMillions(medal.target))
@@ -196,5 +198,5 @@ private fun targetLabel(medal: Medal): String = when (medal.group) {
 
 private fun formatMillions(steps: Long): String {
     val millions = steps / 1_000_000.0
-    return if (steps % 1_000_000L == 0L) (steps / 1_000_000L).toString() else String.format(TURKISH, "%.1f", millions)
+    return if (steps % 1_000_000L == 0L) (steps / 1_000_000L).toString() else String.format(appLocale, "%.1f", millions)
 }

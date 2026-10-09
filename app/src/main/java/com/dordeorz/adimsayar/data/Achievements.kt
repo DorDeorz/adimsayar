@@ -10,7 +10,11 @@ enum class MedalGroup(val targets: List<Long>) {
     Streak(listOf(3L, 7L, 14L, 30L, 100L)),
     WeeklyGoal(listOf(1L, 4L, 12L, 26L, 52L)),
     Total(listOf(100_000L, 500_000L, 1_000_000L, 2_500_000L, 5_000_000L, 10_000_000L)),
+    EarlyBird(listOf(1L, 7L, 30L, 100L, 365L)),
 }
+
+const val EARLY_BIRD_HOUR = 8
+const val EARLY_BIRD_STEPS = 1_000L
 
 data class Medal(val group: MedalGroup, val tier: Int, val target: Long, val progress: Long, val earnedOn: LocalDate?) {
     val earned: Boolean get() = earnedOn != null
@@ -47,6 +51,7 @@ object AchievementMath {
         dailyGoal: Long,
         weeklyGoal: Long,
         firstDay: DayOfWeek = DayOfWeek.MONDAY,
+        earlyBirdDays: Set<LocalDate>? = null,
     ): Achievements {
         val first = days.keys.filter { !it.isAfter(today) }.minOrNull() ?: today
         var total = 0L
@@ -63,6 +68,7 @@ object AchievementMath {
         var weekSum = 0L
         var weekMet = false
         var metWeeks = 0
+        var earlyDays = 0
         val earned = HashMap<Pair<MedalGroup, Long>, LocalDate>()
 
         fun earn(group: MedalGroup, value: Long, date: LocalDate) {
@@ -106,6 +112,10 @@ object AchievementMath {
             earn(MedalGroup.DailySteps, steps, date)
             earn(MedalGroup.Streak, streak.toLong(), date)
             earn(MedalGroup.Total, total, date)
+            if (earlyBirdDays != null && date in earlyBirdDays) {
+                earlyDays++
+                earn(MedalGroup.EarlyBird, earlyDays.toLong(), date)
+            }
             date = date.plusDays(1)
         }
 
@@ -114,8 +124,10 @@ object AchievementMath {
             MedalGroup.Streak to longestStreak.toLong(),
             MedalGroup.WeeklyGoal to metWeeks.toLong(),
             MedalGroup.Total to total,
+            MedalGroup.EarlyBird to earlyDays.toLong(),
         )
-        val medals = MedalGroup.entries.flatMap { group ->
+        val groups = MedalGroup.entries.filter { it != MedalGroup.EarlyBird || earlyBirdDays != null }
+        val medals = groups.flatMap { group ->
             group.targets.mapIndexed { tier, target ->
                 Medal(group, tier, target, progress.getValue(group), earned[group to target])
             }

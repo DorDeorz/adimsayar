@@ -16,6 +16,8 @@ v1: ana ekran (bugün, son 7 gün, toplam), iki widget, marka bazlı pil yardım
 
 0.3.0: alt menüde Bugün, Geçmiş (aylık takvim, saat saat dağılım, rekorlar) ve Madalyalar (seviye ve madalyalar). Ayarlar: günlük/haftalık hedef, hafta başlangıcı, boy/kilo ile mesafe ve kalori tahmini, tema, isteğe bağlı hedef ve seri bildirimleri, CSV dışa/içe aktarma, sürüm notları.
 
+0.4.0: Bugün widget'ında hedef halkası, erken kalkan madalyası (HyperOS kaydı açıkken, saat 08:00'den önceki adımlardan), Türkçe/İngilizce dil seçimi.
+
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)
 

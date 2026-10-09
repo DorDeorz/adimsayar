@@ -4,8 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
+import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
@@ -84,6 +85,7 @@ class MainActions(
     val onWeekStartChange: (DayOfWeek) -> Unit,
     val onGoalNotificationChange: (Boolean) -> Unit,
     val onStreakReminderChange: (Boolean) -> Unit,
+    val onLanguageChange: (AppLanguage) -> Unit,
     val onExport: () -> Unit,
     val onImport: () -> Unit,
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,

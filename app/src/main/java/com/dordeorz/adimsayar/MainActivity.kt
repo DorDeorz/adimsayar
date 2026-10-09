@@ -1,21 +1,23 @@
 package com.dordeorz.adimsayar
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
@@ -25,6 +27,7 @@ import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.AchievementMath
+import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -95,6 +98,7 @@ class MainActivity : ComponentActivity() {
             settingsStore.setGoalNotification(enabled)
             if (enabled) requestNotificationPermission()
         },
+        onLanguageChange = ::changeLanguage,
         onStreakReminderChange = { enabled ->
             settingsStore.setStreakReminder(enabled)
             if (enabled) requestNotificationPermission()
@@ -128,6 +132,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(Locales.wrap(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -138,8 +146,19 @@ class MainActivity : ComponentActivity() {
             val appSettings by settingsStore.settings.collectAsStateWithLifecycle()
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
             val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
-            val achievements = remember(history, currentDay, appSettings) {
-                AchievementMath.compute(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal, appSettings.weekStart)
+            val earlyBirdSource = xiaomiEnabled
+            val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdSource, history[currentDay]) {
+                value = if (earlyBirdSource) withContext(Dispatchers.IO) { XiaomiSteps.earlyBirdDays(applicationContext) } else null
+            }
+            val achievements = remember(history, currentDay, appSettings, earlyBirdDays) {
+                AchievementMath.compute(
+                    history,
+                    currentDay,
+                    appSettings.dailyGoal,
+                    appSettings.weeklyGoal,
+                    appSettings.weekStart,
+                    earlyBirdDays,
+                )
             }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
@@ -234,8 +253,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun changeLanguage(language: AppLanguage) {
+        if (language == settingsStore.settings.value.language) return
+        settingsStore.setLanguage(language)
+        refreshWidgets()
+        recreate()
+    }
+
     private fun transferCsv(@StringRes done: Int, block: suspend () -> Int?) {
         val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
         AppScope.launch(Dispatchers.IO) {
             val count = try {
                 block()
@@ -245,7 +272,7 @@ class MainActivity : ComponentActivity() {
                 null
             }
             withContext(Dispatchers.Main) {
-                val text = if (count == null) appContext.getString(R.string.csv_failed) else appContext.getString(done, count)
+                val text = if (count == null) strings.getString(R.string.csv_failed) else strings.getString(done, count)
                 Toast.makeText(appContext, text, Toast.LENGTH_LONG).show()
             }
             if (count != null) Widgets.updateAll(appContext)

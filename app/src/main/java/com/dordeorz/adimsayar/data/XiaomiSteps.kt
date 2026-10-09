@@ -99,6 +99,26 @@ object XiaomiSteps {
         }
     }
 
+    fun earlyBirdDays(context: Context): Set<LocalDate>? {
+        val zone = ZoneId.systemDefault()
+        return try {
+            context.contentResolver.query(URI, DETAIL_PROJECTION, null, null, null)?.use {
+                val begin = it.getColumnIndexOrThrow(COLUMN_BEGIN)
+                val steps = it.getColumnIndexOrThrow(COLUMN_STEPS)
+                val mornings = HashMap<LocalDate, Long>()
+                while (it.moveToNext()) {
+                    val start = Instant.ofEpochMilli(it.getLong(begin)).atZone(zone)
+                    if (start.hour >= EARLY_BIRD_HOUR) continue
+                    val day = start.toLocalDate()
+                    mornings[day] = (mornings[day] ?: 0L) + it.getLong(steps)
+                }
+                mornings.filterValues { count -> count >= EARLY_BIRD_STEPS }.keys
+            }
+        } catch (e: RuntimeException) {
+            null
+        }
+    }
+
     private fun dailyTotals(context: Context): Map<LocalDate, Long>? {
         val zone = ZoneId.systemDefault()
         val cursor = context.contentResolver.query(URI, PROJECTION, null, null, null) ?: return null
