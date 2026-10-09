@@ -9,6 +9,7 @@ import java.net.URL
 sealed interface UpdateResult {
     data class Available(val version: String, val url: String) : UpdateResult
     data object UpToDate : UpdateResult
+    data object NoRelease : UpdateResult
     data object Failed : UpdateResult
 }
 
@@ -26,7 +27,11 @@ object UpdateChecker {
                 connection.connectTimeout = TIMEOUT_MS
                 connection.readTimeout = TIMEOUT_MS
                 connection.setRequestProperty("Accept", "application/vnd.github+json")
-                if (connection.responseCode != HttpURLConnection.HTTP_OK) return@runCatching UpdateResult.Failed
+                when (connection.responseCode) {
+                    HttpURLConnection.HTTP_OK -> Unit
+                    HttpURLConnection.HTTP_NOT_FOUND -> return@runCatching UpdateResult.NoRelease
+                    else -> return@runCatching UpdateResult.Failed
+                }
                 val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })
                 val latest = json.getString("tag_name").removePrefix("v")
                 if (isNewer(latest, currentVersion)) {

@@ -118,6 +118,7 @@
     <string name="update_checking">Проверка…</string>
     <string name="update_up_to_date">У вас последняя версия</string>
     <string name="update_available">Доступна новая версия: %1$s. Нажмите, чтобы скачать</string>
+    <string name="update_no_release">Опубликованных версий пока нет</string>
     <string name="update_failed">Не удалось проверить. Проверьте подключение к интернету</string>
     <string name="github_page">Страница на GitHub</string>
     <string name="github_page_hint">Исходный код, версии и сообщения об ошибках</string>

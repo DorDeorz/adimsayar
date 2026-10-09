@@ -118,6 +118,7 @@
     <string name="update_checking">Controllo in corso…</string>
     <string name="update_up_to_date">Hai l\'ultima versione</string>
     <string name="update_available">Nuova versione disponibile: %1$s. Tocca per scaricare</string>
+    <string name="update_no_release">Nessuna versione ancora pubblicata</string>
     <string name="update_failed">Controllo non riuscito. Verifica la connessione a internet</string>
     <string name="github_page">Pagina GitHub</string>
     <string name="github_page_hint">Codice sorgente, versioni e segnalazioni</string>

@@ -248,6 +248,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                     checking -> stringResource(R.string.update_checking)
                     available != null -> stringResource(R.string.update_available, available.version)
                     update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
+                    update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
                     update == UpdateResult.Failed -> stringResource(R.string.update_failed)
                     else -> stringResource(R.string.check_updates_hint)
                 },
