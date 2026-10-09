@@ -46,7 +46,7 @@ Cihazın üreticisine göre davranış değişebilir. Samsung ve Xiaomi'ye özg�
 | Doğruluk (vs Mi Fitness / Samsung Health) | 5000 adımda ±%3 | Referans olarak sistem pedometresi |
 | Kök neden olmayan kayıp | 0'a düşme kabul edilemez | Yeniden başlatma gerektirmemeli |
 | Sensör donması toleransı | Kullanıcı müdahalesi gerekmesin | Bkz. aşağıdaki bölüm |
-| Crash-free oturum | > %99,5 | Temel kalite |
+| Crash-free oturum | > %99,5 | Ağ ve analitik olmadığı için Play Console yoksa ölçülemez; yerel crash log ile izlenir |
 | APK boyutu | < 20 MB | İndirme eşiği |
 
 ### Sensör donması
@@ -57,6 +57,8 @@ Bu kabul edilemez bir durumdur: kullanıcı sayaç donduğunda fark etmeli ve uy
 
 Bu nedenle **tek sensöre güvenilmez, doğrulama yapılır.** `TYPE_STEP_COUNTER` ve `TYPE_STEP_DETECTOR` birbirini kontrol eder; biri sürekli geride kalıyorsa sensör donmuş demektir ve uygulama bunu kullanıcıya bildirir.
 
+Uygulama arka planda sensörü sürekli dinlemediği için donma tespiti yalnızca uygulama açıkken yapılır.
+
 Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi ölçülmelidir. Hedef: fark edilen her donmada kullanıcı müdahalesi gerekmeden toparlanma.
 
 ### Ölçüm nasıl yapılır
@@ -66,6 +68,28 @@ Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi 
 - Pil tüketimi: uygulama aktifken 24 saat boyunca pil yüzdesi farkı, baz olarak cihazın kendi tüketimiyle karşılaştırılarak.
 - Doğruluk: Mi Fitness (veya benzeri referans uygulama) ile eşzamanlı, en az 3 ayrı günde 5000+ adımlık yürüyüş.
 - Widget gecikmesi: widget'ın gösterdiği değer ile uygulamanın gösterdiği değer arasındaki farkın zaman farkı.
+
+### Kapalıyken sayma testi
+
+Uygulama arka planda sensörü dinlemez, sayacı seyrek okur ve farkı kaydeder (bkz. `CLAUDE.md` → "Seyrek okuma ve fark modeli"). Bunun çalışması sayacın uygulama kapalıyken de saymasına bağlıdır. Her test cihazında:
+
+1. Uygulamayı açıp sayıyı not et, sonra son uygulamalardan kapat.
+2. Elle sayarak 500 adım yürü.
+3. Uygulamayı aç ve farkı kontrol et.
+
+Fark 500'e ±%3 içinde değilse kalıcı bildirimli foreground service, ayarlardan açılabilen bir seçenek olarak eklenir.
+
+İlk sonuç (2026-10-09, Redmi Note 12 Pro 4G): başarısız, 500 adımdan sonra fark 0 göründü. Seçenek "Arka planda sürekli say" anahtarı olarak eklendi (varsayılan kapalı, 0.3.0'dan beri Ayarlar'da). Okuma kaydı (Ayarlar → Okuma kaydı) hangi okumanın değer aldığını gösterir.
+
+Redmi'de canlı testler (2026-10-09, adb ile):
+
+| Test | Koşul | Yürünen | Sensör sayacı | HyperOS kaydı |
+|---|---|---|---|---|
+| 2 | Arka planda sürekli say açık | 50 | +61 | — |
+| 3 | Kapalı, uygulama kaydırılıp kapatıldı | 50 | +4 | — |
+| 4 | Kapalı, uygulama kaydırılıp kapatıldı | 100 | +0 | +136 (yürüyüş öncesi 18 dk dahil) |
+
+Sonuç: bu cihazda `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken sayıyor. HyperOS'un kendi servisi yalnızca wakeup step detector'ı açık tutuyor ve adımları kendi kaydına yazıyor. Uygulama son uygulamalardan kaydırılınca HyperOS süreci öldürüyor (`SwipeUpClean`). Bu yüzden Xiaomi'de HyperOS adım kaydı ana kaynak olarak seçilebilir (bkz. "Xiaomi / HyperOS adım kaydı").
 
 ## Veri kaynakları
 
@@ -80,6 +104,26 @@ Bu, uygulamanın temel vaadiyle çelişir. Doğru ama nadiren eksik veri, çoğu
 Bu kararın bedeli kabul edilmiştir: Samsung Health aktarımına güvenilerek sensör donmasının kolayca aşılması artık mümkün değildir. Bunun yerine donma kendi tespit edilip kullanıcıya bildirilir.
 
 İleride giyilebilir cihaz desteği istenirse Health Connect eklenebilir, ancak o zaman aralık bazlı deduplikasyon birlikte eklenmelidir. Temel yapıda yer almaz.
+
+### Xiaomi / HyperOS adım kaydı
+
+**Karar (2026-10-09, kullanıcı onayı): Xiaomi cihazlarda HyperOS'un adım kaydı, kullanıcının açtığı bir anahtarla ana kaynak olabilir.**
+
+Kayıt `content://com.miui.providers.steps/item` üzerinden okunur. Okuma izni `miui.permission.READ_STEPS` normal korumalıdır, kurulumda kendiliğinden verilir. Yazma izni sistem uygulamalarına özeldir; kayıt yalnızca telefonun kendi sensöründen gelir, saat verisi karışmaz. Bu yüzden Health Connect gerekçesi buraya uygulanmaz.
+
+Anahtar açıkken:
+
+- Günlük toplamlar kayıttaki satırlardan hesaplanır ve tabloya yazılır. Gece yarısını geçen satır süreye göre bölünür. Kayıtta bulunan geçmiş günler de içe alınır.
+- Sensör okumaları kaydedilmeye devam eder ama toplamlara eklenmez; çift sayım olmaz.
+- "Arka planda sürekli say" servisi kapatılır, bildirim gerekmez.
+- Anahtar kapatılınca son sayaç okuması silinir, sensör sayımı sıfırdan başlar.
+
+Bilinen trade-off'lar:
+
+- HyperOS adımları birkaç dakikalık parçalar halinde yazar; ekrandaki sayı birkaç dakika geride kalabilir.
+- Kaydın günlük toplamları HyperOS'un sayımına bağlıdır. Senkronizasyon kayıttaki günleri yeniden yazar, yani bu kaynakta tamamlanmış bir gün de HyperOS kaydı değişirse güncellenir.
+- Bu API belgelenmemiştir; bir HyperOS güncellemesi onu kaldırabilir. Kayıt okunamazsa uygulama açıkken uyarı kartı çıkar, anahtar kapatılabilir kalır ve kullanıcı sensör yoluna dönebilir.
+- HyperOS'un kendi sayımı durursa: uygulama açıkken step detector 10 dakikada en az 100 adım görüp kaydın bugünkü toplamı hiç artmamışsa uyarı kartı çıkar (`XiaomiStallDetector`). Kontrol yalnızca uygulama açıkken yapılır, çünkü detector'ı dinlemek sürekli kayıt gerektirir.
 
 ### Kullanılacak sensörler
 
@@ -137,7 +181,7 @@ Arkadaşlarla yarış gibi sosyal özellikler ileride istenirse hesap + sunucu g
 
 1. Günlük toplamlar tek gerçek kaynak olsun, türetilmiş hiçbir şey veritabanında tutulmasın
 2. Madalya kuralları kodda olsun, tabloda satır olarak değil
-3. Günlük kayıtlar tarihe göre indeksli ve eklemeli (append-only) olsun
+3. Günlük kayıtlar tarihe göre indeksli olsun (gün başına tek satır, geçmiş günler değişmez)
 
 ## Seviye ve madalya sistemi
 

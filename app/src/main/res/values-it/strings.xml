@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Oggi</string>
+    <string name="steps_unit">passi</string>
+    <string name="goal_short">Obiettivo %1$s</string>
+    <string name="last_7_days">Ultimi 7 giorni</string>
+    <string name="total">Totale</string>
+    <string name="last_reading">Ultima lettura del contatore: %1$s</string>
+    <string name="no_reading_yet">Contatore non ancora letto</string>
+
+    <string name="permission_title">Serve l\'autorizzazione Attività fisica</string>
+    <string name="permission_text">AdımSayar legge i tuoi passi dal sensore del telefono. Per questo Android chiede l\'autorizzazione Attività fisica.</string>
+    <string name="permission_grant">Consenti</string>
+    <string name="permission_denied_text">Autorizzazione negata. Impostazioni → App → AdımSayar → Autorizzazioni → Attività fisica → Consenti.</string>
+    <string name="permission_open_settings">Apri impostazioni</string>
+
+    <string name="sensor_missing_title">Sensore passi non trovato</string>
+    <string name="sensor_missing_text">Questo telefono non segnala un sensore contapassi. AdımSayar non può contare i passi su questo dispositivo.</string>
+
+    <string name="frozen_title">Il contapassi sembra bloccato</string>
+    <string name="frozen_text">Il telefono rileva i passi ma il contatore non avanza. Il sensore è stato ricollegato; questo avviso sparirà da solo dopo qualche passo.</string>
+
+    <string name="service_card_title">Continua a contare in background</string>
+    <string name="xiaomi_unreadable_title">Impossibile leggere il registro passi di HyperOS</string>
+    <string name="xiaomi_unreadable_text">I passi non si stanno aggiornando. Un aggiornamento di HyperOS potrebbe aver cambiato il registro. Puoi disattivare l\'opzione qui sotto e continuare con «Continua a contare in background».</string>
+    <string name="xiaomi_stalled_title">Il registro passi di HyperOS non avanza</string>
+    <string name="xiaomi_stalled_text">Il sensore del telefono ha rilevato passi negli ultimi minuti, ma il registro di HyperOS non aumenta. Ricontrolla tra qualche minuto; se non si riprende, disattiva l\'opzione qui sotto e attiva «Continua a contare in background».</string>
+    <string name="xiaomi_card_title">Usa il registro passi di HyperOS</string>
+    <string name="xiaomi_card_text">I passi vengono letti dal registro del telefono. Sono contati tutti anche con l\'app chiusa, senza notifiche, e vengono aggiunti anche i giorni passati.</string>
+    <string name="service_card_text">Attivala se i passi non vengono contati con l\'app chiusa. Il contatore resta attivo; nella barra delle notifiche compare una notifica silenziosa e fissa.</string>
+    <string name="service_channel">Contapassi</string>
+    <string name="service_title">AdımSayar sta contando</string>
+    <string name="service_text">%1$s passi oggi</string>
+    <string name="service_text_starting">Avvio del contatore</string>
+
+    <string name="log_title">Registro letture</string>
+    <string name="log_empty">Ancora nessuna voce</string>
+    <string name="log_reading">contatore %1$d, +%2$d passi</string>
+    <string name="log_reboot">telefono riavviato, contatore %1$d, +%2$d passi</string>
+    <string name="log_reset">contatore azzerato, contatore %1$d, +%2$d passi</string>
+    <string name="log_stale">vecchio valore ignorato, contatore %1$d, +%2$d passi</string>
+    <string name="log_timeout">il sensore non ha risposto</string>
+    <string name="log_no_permission">nessuna autorizzazione</string>
+    <string name="log_no_sensor">nessun sensore</string>
+    <string name="log_register_failed">impossibile collegarsi al sensore</string>
+    <string name="source_app">app</string>
+    <string name="source_job">attività 15 min</string>
+    <string name="source_system">evento di sistema</string>
+    <string name="source_widget">widget</string>
+    <string name="source_service">contatore in background</string>
+    <string name="log_xiaomi_denied">nessuna autorizzazione a leggere il registro HyperOS</string>
+    <string name="log_xiaomi_missing">registro HyperOS non trovato</string>
+    <string name="log_xiaomi_error">impossibile leggere il registro HyperOS (%1$s)</string>
+    <string name="log_xiaomi_synced">registro HyperOS: %1$d passi oggi, %2$d giorni aggiornati</string>
+
+    <string name="tab_today">Oggi</string>
+    <string name="tab_history">Cronologia</string>
+    <string name="tab_medals">Medaglie</string>
+    <string name="goal_reached">Obiettivo giornaliero raggiunto!</string>
+    <string name="goal_remaining">%1$s passi all\'obiettivo</string>
+    <string name="steps_value">%1$s passi</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">Serie</string>
+    <string name="days_count">%1$d giorni</string>
+    <string name="weeks_count">%1$d settimane</string>
+    <string name="million_steps">%1$s milioni di passi</string>
+    <string name="streak_best">Più lunga: %1$d giorni</string>
+    <string name="this_week">Questa settimana</string>
+
+    <string name="previous_month">Mese precedente</string>
+    <string name="next_month">Mese successivo</string>
+    <string name="daily_average">Media giornaliera</string>
+    <string name="goal_days">Giorni obiettivo</string>
+    <string name="records">Record</string>
+    <string name="record_best_day">Giorno migliore</string>
+    <string name="record_best_week">Settimana migliore</string>
+    <string name="week_of">Settimana del %1$s</string>
+    <string name="record_longest_streak">Serie più lunga</string>
+    <string name="record_goal_days">Giorni con obiettivo raggiunto</string>
+    <string name="record_active_average">Media dei giorni attivi</string>
+    <string name="active_days">%1$d giorni attivi</string>
+    <string name="until_date">Al %1$s</string>
+
+    <string name="level">Livello</string>
+    <string name="level_next">%1$s passi al livello successivo</string>
+    <string name="medals_earned">%1$d / %2$d medaglie</string>
+    <string name="medals_retroactive">Le medaglie sono calcolate dai giorni registrati. Se cambi obiettivo, anche i giorni passati vengono valutati con il nuovo obiettivo.</string>
+    <string name="medal_group_daily">Passi giornalieri</string>
+    <string name="medal_group_daily_text">Fai questo numero di passi in un solo giorno</string>
+    <string name="medal_group_streak">Serie</string>
+    <string name="medal_group_streak_text">Raggiungi l\'obiettivo giornaliero per più giorni di fila</string>
+    <string name="medal_group_weekly">Obiettivo settimanale</string>
+    <string name="medal_group_weekly_text">Numero di settimane in cui hai raggiunto l\'obiettivo settimanale</string>
+    <string name="medal_group_total">Distanza totale</string>
+    <string name="medal_group_total_text">Passi totali di tutti i giorni</string>
+
+    <string name="settings">Impostazioni</string>
+    <string name="back">Indietro</string>
+    <string name="settings_goals">Obiettivi</string>
+    <string name="daily_goal">Obiettivo giornaliero</string>
+    <string name="weekly_goal">Obiettivo settimanale</string>
+    <string name="goal_range">Tra %1$s e %2$s</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Predefinito di sistema</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="settings_dynamic_color">Usa i colori del telefono</string>
+    <string name="settings_dynamic_color_hint">Prende i colori dallo sfondo. Se disattivato, viene usato il tema verde.</string>
+    <string name="settings_counting">Fonte dei passi</string>
+    <string name="settings_about">Info</string>
+    <string name="settings_version">Versione</string>
+    <string name="release_notes">Note di versione</string>
+    <string name="release_notes_hint">Cosa è cambiato in ogni versione</string>
+    <string name="log_hint">Ultime letture del contatore e di HyperOS</string>
+    <string name="save">Salva</string>
+    <string name="cancel">Annulla</string>
+    <string name="close">Chiudi</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">Ora per ora</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">Camminata %1$s</string>
+    <string name="running_steps">Corsa %1$s</string>
+    <string name="record_best_month">Mese migliore</string>
+    <string name="week_start">Primo giorno della settimana</string>
+    <string name="settings_body">Corpo e distanza</string>
+    <string name="height">Altezza</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">Peso</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">Unità di distanza</string>
+    <string name="body_hint">Distanza e calorie sono stimate da altezza e peso; sono valori approssimativi.</string>
+    <string name="settings_notifications">Notifiche</string>
+    <string name="goal_notification">Avvisa quando raggiungo l\'obiettivo</string>
+    <string name="goal_notification_hint">Ricevi una notifica il giorno in cui raggiungi l\'obiettivo giornaliero.</string>
+    <string name="streak_reminder">Promemoria serale della serie</string>
+    <string name="streak_reminder_hint">Ti avvisa verso le 20:00 se non hai raggiunto l\'obiettivo e hai una serie in corso.</string>
+    <string name="notify_channel">Obiettivo e serie</string>
+    <string name="notify_goal_title">Obiettivo giornaliero raggiunto!</string>
+    <string name="notify_goal_text">Oggi hai fatto %1$s passi.</string>
+    <string name="notify_streak_title">La tua serie di %1$d giorni è a rischio</string>
+    <string name="notify_streak_text">Mancano %1$s passi per mantenere la serie.</string>
+    <string name="settings_data">Dati</string>
+    <string name="export_csv">Esporta</string>
+    <string name="export_csv_hint">Salva tutti i giorni in un file CSV</string>
+    <string name="import_csv">Importa</string>
+    <string name="import_csv_hint">Ripristina i giorni da un file CSV; viene mantenuto il valore più alto</string>
+    <string name="export_done">%1$d giorni esportati</string>
+    <string name="import_done">%1$d giorni aggiornati</string>
+    <string name="csv_failed">Impossibile leggere o scrivere il file</string>
+    <string name="settings_language">Lingua</string>
+    <string name="language">Lingua dell\'app</string>
+    <string name="language_system">Sistema</string>
+    <string name="medal_group_early">Mattiniero</string>
+    <string name="medal_group_early_text">Giorni con almeno 1.000 passi prima delle 08:00 (con il registro HyperOS attivo)</string>
+
+    <string name="widget_streak_label">Serie e settimana</string>
+    <string name="widget_streak_description">La tua serie di obiettivi giornalieri e i progressi della settimana</string>
+    <string name="widget_month_label">Calendario mensile</string>
+    <string name="widget_month_description">I giorni del mese, colorati in base all\'obiettivo</string>
+    <string name="month_goal_days">%1$d giorni obiettivo</string>
+
+    <string name="near_goal_notification">Avvisa quando sei vicino all\'obiettivo</string>
+    <string name="near_goal_notification_hint">Ricevi una notifica il giorno in cui raggiungi l\'80% dell\'obiettivo giornaliero.</string>
+    <string name="weekly_summary">Riepilogo settimanale</string>
+    <string name="weekly_summary_hint">L\'ultimo giorno della settimana verso le 20:00 mostra il totale della settimana e la variazione rispetto alla settimana precedente.</string>
+    <string name="notify_near_title">Obiettivo quasi raggiunto!</string>
+    <string name="notify_near_text">Mancano %1$s passi all\'obiettivo giornaliero.</string>
+    <string name="notify_week_title">Questa settimana hai fatto %1$s passi</string>
+    <string name="notify_week_more">%1$d%% in più della settimana scorsa. Obiettivo settimanale: %2$s</string>
+    <string name="notify_week_less">%1$d%% in meno della settimana scorsa. Obiettivo settimanale: %2$s</string>
+    <string name="notify_week_goal">Obiettivo settimanale: %1$s</string>
+    <string name="year_summary">Riepilogo %1$d</string>
+    <string name="previous_year">Anno precedente</string>
+    <string name="next_year">Anno successivo</string>
+    <string name="year_medals">Medaglie ottenute</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Notifica di riepilogo settimanale: il totale della settimana e la variazione rispetto alla precedente, la sera dell\'ultimo giorno</item>
+        <item>Notifica quando sei vicino all\'obiettivo (80% dell\'obiettivo giornaliero)</item>
+        <item>Riepilogo annuale in Cronologia: totale, media, giorni obiettivo, mese e giorno migliori, medaglie ottenute</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>Le medaglie mostrano quante volte sono state ottenute (es. 5x)</item>
+        <item>I widget usano i colori del telefono (Material You) o il tema dell\'app</item>
+        <item>I widget si adattano alle dimensioni: più semplici se piccoli, più dettagliati se grandi</item>
+        <item>Nuovi widget: serie e settimana, calendario mensile</item>
+        <item>Nuove lingue: tedesco, spagnolo, francese, italiano, portoghese, russo, arabo, giapponese, cinese, coreano</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>Anello dell\'obiettivo nel widget Oggi</item>
+        <item>Medaglia Mattiniero (con il registro HyperOS attivo)</item>
+        <item>Lingua inglese disponibile (Impostazioni → Lingua)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>Stima di distanza e calorie (altezza, peso, km o miglia)</item>
+        <item>Dettaglio ora per ora e divisione camminata/corsa del giorno scelto in Cronologia (con il registro HyperOS attivo)</item>
+        <item>Record del mese migliore e scelta del primo giorno della settimana (lunedì o domenica)</item>
+        <item>Notifiche facoltative: obiettivo raggiunto e promemoria serale della serie</item>
+        <item>Esportazione e importazione CSV</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>Nuovo design: Oggi, Cronologia e Medaglie nella barra in basso</item>
+        <item>Anello dell\'obiettivo, serie e progressi settimanali nella schermata Oggi</item>
+        <item>Cronologia: calendario mensile, dettagli del giorno e record personali</item>
+        <item>Medaglie e livelli: passi giornalieri, serie, obiettivo settimanale e passi totali</item>
+        <item>Obiettivi giornaliero e settimanale regolabili; anche il widget mostra il nuovo obiettivo</item>
+        <item>Impostazioni: tema chiaro, scuro o di sistema e colori del telefono</item>
+        <item>Le opzioni della fonte dei passi e il registro letture sono passati nelle Impostazioni</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>Prima versione: conteggio dei passi, registri giornalieri, widget di oggi e dei 7 giorni</item>
+        <item>Su Xiaomi, lettura dal registro passi di HyperOS, compresi i giorni passati</item>
+        <item>Opzione per continuare a contare in background e scheda di aiuto sulla batteria</item>
+    </string-array>
+
+    <string name="widget_today_label">Passi di oggi</string>
+    <string name="widget_today_description">Passi fatti oggi e progressi verso l\'obiettivo</string>
+    <string name="widget_week_label">Grafico 7 giorni</string>
+    <string name="widget_week_description">Passi degli ultimi 7 giorni</string>
+
+    <string name="oem_title">Registra i passi anche in background</string>
+    <string name="oem_title_stock">Esclusione dall\'ottimizzazione batteria</string>
+    <string name="oem_intro">Questo telefono può chiudere le app in background. I passaggi qui sotto permettono ad AdımSayar di leggere il contatore anche con l\'app chiusa.</string>
+    <string name="oem_open">Apri</string>
+    <string name="oem_dismiss">Chiudi per ora</string>
+    <string name="oem_open_failed">Impossibile aprire questa schermata su questo telefono. Esegui il passaggio a mano nelle Impostazioni.</string>
+    <string name="oem_battery_common">Impostazioni → App → AdımSayar → Batteria → Nessuna restrizione</string>
+
+    <string name="oem_xiaomi_1">Impostazioni → App → Gestisci app → AdımSayar → Avvio automatico → Attivo</string>
+    <string name="oem_xiaomi_2">Nella stessa schermata, Risparmio energetico → Nessuna restrizione</string>
+
+    <string name="oem_samsung_1">Impostazioni → Applicazioni → AdımSayar → Batteria → Senza restrizioni</string>
+    <string name="oem_samsung_2">Batteria → Limiti utilizzo in background → App mai in sospensione → aggiungi AdımSayar</string>
+
+    <string name="oem_huawei_1">Batteria → Avvio app → AdımSayar → disattiva Gestisci automaticamente, attiva Avvio automatico, Avvio secondario ed Esegui in background</string>
+
+    <string name="oem_oppo_1">Batteria → Consenti attività in background → AdımSayar: Consenti esecuzione in background</string>
+    <string name="oem_oppo_2">Avvio automatico → AdımSayar → Attivo</string>
+
+    <string name="oem_vivo_1">Batteria → Gestione consumo in background → Consumo elevato in background → aggiungi AdımSayar alla whitelist</string>
+    <string name="oem_vivo_2">Avvio automatico → AdımSayar → Attivo</string>
+
+    <string name="oem_asus_1">Avvio automatico → consenti AdımSayar</string>
+
+    <string name="oem_transsion_1">Gestione automatica → seleziona AdımSayar nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
+</resources>

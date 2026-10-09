@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Сегодня</string>
+    <string name="steps_unit">шагов</string>
+    <string name="goal_short">Цель %1$s</string>
+    <string name="last_7_days">Последние 7 дней</string>
+    <string name="total">Всего</string>
+    <string name="last_reading">Последнее чтение счётчика: %1$s</string>
+    <string name="no_reading_yet">Счётчик ещё не считан</string>
+
+    <string name="permission_title">Нужно разрешение «Физическая активность»</string>
+    <string name="permission_text">AdımSayar считывает шаги с собственного датчика телефона. Для этого Android запрашивает разрешение на доступ к физической активности.</string>
+    <string name="permission_grant">Разрешить</string>
+    <string name="permission_denied_text">Разрешение отклонено. Настройки → Приложения → AdımSayar → Разрешения → Физическая активность → Разрешить.</string>
+    <string name="permission_open_settings">Открыть настройки</string>
+
+    <string name="sensor_missing_title">Датчик шагов не найден</string>
+    <string name="sensor_missing_text">Этот телефон не сообщает о датчике-счётчике шагов. AdımSayar не может считать шаги на этом устройстве.</string>
+
+    <string name="frozen_title">Счётчик шагов, похоже, завис</string>
+    <string name="frozen_text">Телефон распознаёт шаги, но счётчик не меняется. Датчик переподключён; это предупреждение исчезнет само через несколько шагов.</string>
+
+    <string name="service_card_title">Считать шаги в фоне</string>
+    <string name="xiaomi_unreadable_title">Не удаётся прочитать запись шагов HyperOS</string>
+    <string name="xiaomi_unreadable_text">Шаги сейчас не обновляются. Возможно, обновление HyperOS изменило запись. Можно выключить переключатель ниже и считать шаги через «Считать шаги в фоне».</string>
+    <string name="xiaomi_stalled_title">Запись шагов HyperOS не растёт</string>
+    <string name="xiaomi_stalled_text">Датчик телефона зафиксировал шаги за последние минуты, но запись HyperOS не увеличивается. Проверьте снова через несколько минут; если не наладится, выключите переключатель ниже и включите «Считать шаги в фоне».</string>
+    <string name="xiaomi_card_title">Использовать запись шагов HyperOS</string>
+    <string name="xiaomi_card_text">Шаги берутся из собственной записи шагов телефона. Они учитываются полностью даже при закрытом приложении, уведомление не нужно, а прошлые дни тоже добавляются.</string>
+    <string name="service_card_text">Включите, если шаги не считаются при закрытом приложении. Счётчик остаётся включённым; в панели уведомлений появится беззвучное постоянное уведомление.</string>
+    <string name="service_channel">Счётчик шагов</string>
+    <string name="service_title">AdımSayar считает шаги</string>
+    <string name="service_text">Шагов сегодня: %1$s</string>
+    <string name="service_text_starting">Запуск счётчика</string>
+
+    <string name="log_title">Журнал чтений</string>
+    <string name="log_empty">Записей пока нет</string>
+    <string name="log_reading">счётчик %1$d, шагов: +%2$d</string>
+    <string name="log_reboot">телефон перезагружен, счётчик %1$d, шагов: +%2$d</string>
+    <string name="log_reset">счётчик сброшен, счётчик %1$d, шагов: +%2$d</string>
+    <string name="log_stale">старое значение пропущено, счётчик %1$d, шагов: +%2$d</string>
+    <string name="log_timeout">датчик не ответил</string>
+    <string name="log_no_permission">нет разрешения</string>
+    <string name="log_no_sensor">нет датчика</string>
+    <string name="log_register_failed">не удалось подключиться к датчику</string>
+    <string name="source_app">приложение</string>
+    <string name="source_job">задача раз в 15 мин</string>
+    <string name="source_system">системное событие</string>
+    <string name="source_widget">виджет</string>
+    <string name="source_service">фоновый счётчик</string>
+    <string name="log_xiaomi_denied">нет разрешения на чтение записи HyperOS</string>
+    <string name="log_xiaomi_missing">запись HyperOS не найдена</string>
+    <string name="log_xiaomi_error">не удалось прочитать запись HyperOS (%1$s)</string>
+    <string name="log_xiaomi_synced">запись HyperOS: шагов сегодня: %1$d, обновлено дней: %2$d</string>
+
+    <string name="tab_today">Сегодня</string>
+    <string name="tab_history">История</string>
+    <string name="tab_medals">Медали</string>
+    <string name="goal_reached">Дневная цель достигнута!</string>
+    <string name="goal_remaining">До цели осталось шагов: %1$s</string>
+    <string name="steps_value">Шагов: %1$s</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">Серия</string>
+    <string name="days_count">Дней: %1$d</string>
+    <string name="weeks_count">Недель: %1$d</string>
+    <string name="million_steps">%1$s млн шагов</string>
+    <string name="streak_best">Рекорд, дней: %1$d</string>
+    <string name="this_week">Эта неделя</string>
+
+    <string name="previous_month">Предыдущий месяц</string>
+    <string name="next_month">Следующий месяц</string>
+    <string name="daily_average">В среднем за день</string>
+    <string name="goal_days">Дни с целью</string>
+    <string name="records">Рекорды</string>
+    <string name="record_best_day">Лучший день</string>
+    <string name="record_best_week">Лучшая неделя</string>
+    <string name="week_of">Неделя с %1$s</string>
+    <string name="record_longest_streak">Самая длинная серия</string>
+    <string name="record_goal_days">Дней с достигнутой целью</string>
+    <string name="record_active_average">Среднее за активный день</string>
+    <string name="active_days">Активных дней: %1$d</string>
+    <string name="until_date">На %1$s</string>
+
+    <string name="level">Уровень</string>
+    <string name="level_next">До следующего уровня шагов: %1$s</string>
+    <string name="medals_earned">Медали: %1$d / %2$d</string>
+    <string name="medals_retroactive">Медали рассчитываются по записанным дням. Если изменить цель, прошлые дни тоже будут оцениваться по новой цели.</string>
+    <string name="medal_group_daily">Шаги за день</string>
+    <string name="medal_group_daily_text">Пройдите столько шагов за один день</string>
+    <string name="medal_group_streak">Серия</string>
+    <string name="medal_group_streak_text">Достигайте дневной цели несколько дней подряд</string>
+    <string name="medal_group_weekly">Недельная цель</string>
+    <string name="medal_group_weekly_text">Число недель, когда вы достигли недельной цели</string>
+    <string name="medal_group_total">Общая дистанция</string>
+    <string name="medal_group_total_text">Сумма шагов за все дни</string>
+
+    <string name="settings">Настройки</string>
+    <string name="back">Назад</string>
+    <string name="settings_goals">Цели</string>
+    <string name="daily_goal">Дневная цель</string>
+    <string name="weekly_goal">Недельная цель</string>
+    <string name="goal_range">От %1$s до %2$s</string>
+    <string name="settings_theme">Тема</string>
+    <string name="theme_system">Как в системе</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="settings_dynamic_color">Цвета телефона</string>
+    <string name="settings_dynamic_color_hint">Цвета берутся из обоев. Если выключено, используется зелёная тема.</string>
+    <string name="settings_counting">Источник шагов</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_version">Версия</string>
+    <string name="release_notes">Что нового</string>
+    <string name="release_notes_hint">Изменения в каждой версии</string>
+    <string name="log_hint">Последние чтения счётчика и HyperOS</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="close">Закрыть</string>
+
+    <string name="unit_km">км</string>
+    <string name="unit_mile">миль</string>
+    <string name="unit_cm">см</string>
+    <string name="unit_kg">кг</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s ккал</string>
+    <string name="hourly">По часам</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">Ходьба: %1$s</string>
+    <string name="running_steps">Бег: %1$s</string>
+    <string name="record_best_month">Лучший месяц</string>
+    <string name="week_start">Первый день недели</string>
+    <string name="settings_body">Тело и дистанция</string>
+    <string name="height">Рост</string>
+    <string name="height_value">%1$d см</string>
+    <string name="weight">Вес</string>
+    <string name="weight_value">%1$d кг</string>
+    <string name="distance_unit">Единица расстояния</string>
+    <string name="body_hint">Дистанция и калории оцениваются по росту и весу; значения приблизительные.</string>
+    <string name="settings_notifications">Уведомления</string>
+    <string name="goal_notification">Уведомлять о достижении цели</string>
+    <string name="goal_notification_hint">Одно уведомление в день, когда вы достигнете дневной цели.</string>
+    <string name="streak_reminder">Вечернее напоминание о серии</string>
+    <string name="streak_reminder_hint">Напомнит около 20:00, если цель ещё не достигнута, а серия идёт.</string>
+    <string name="notify_channel">Цель и серия</string>
+    <string name="notify_goal_title">Дневная цель достигнута!</string>
+    <string name="notify_goal_text">Сегодня пройдено шагов: %1$s.</string>
+    <string name="notify_streak_title">Серия под угрозой (дней: %1$d)</string>
+    <string name="notify_streak_text">Чтобы сохранить серию, осталось шагов: %1$s.</string>
+    <string name="settings_data">Данные</string>
+    <string name="export_csv">Экспорт</string>
+    <string name="export_csv_hint">Сохранить все дни в файл CSV</string>
+    <string name="import_csv">Импорт</string>
+    <string name="import_csv_hint">Восстановить дни из файла CSV; сохраняется большее значение</string>
+    <string name="export_done">Экспортировано дней: %1$d</string>
+    <string name="import_done">Обновлено дней: %1$d</string>
+    <string name="csv_failed">Не удалось прочитать или записать файл</string>
+    <string name="settings_language">Язык</string>
+    <string name="language">Язык приложения</string>
+    <string name="language_system">Системный</string>
+    <string name="medal_group_early">Ранняя пташка</string>
+    <string name="medal_group_early_text">Дни, когда до 08:00 пройдено не меньше 1 000 шагов (при включённой записи HyperOS)</string>
+
+    <string name="widget_streak_label">Серия и неделя</string>
+    <string name="widget_streak_description">Серия дневных целей и прогресс за эту неделю</string>
+    <string name="widget_month_label">Календарь месяца</string>
+    <string name="widget_month_description">Дни этого месяца, окрашенные по цели</string>
+    <string name="month_goal_days">Дней с целью: %1$d</string>
+
+    <string name="near_goal_notification">Уведомлять о близости к цели</string>
+    <string name="near_goal_notification_hint">Вы получите одно уведомление в день, когда достигнете 80% дневной цели.</string>
+    <string name="weekly_summary">Итоги недели</string>
+    <string name="weekly_summary_hint">В последний день недели около 20:00 показывает сумму за неделю и изменение по сравнению с прошлой неделей.</string>
+    <string name="notify_near_title">Цель почти достигнута!</string>
+    <string name="notify_near_text">До дневной цели осталось шагов: %1$s.</string>
+    <string name="notify_week_title">Шагов за эту неделю: %1$s</string>
+    <string name="notify_week_more">На %1$d%% больше, чем на прошлой неделе. Недельная цель: %2$s</string>
+    <string name="notify_week_less">На %1$d%% меньше, чем на прошлой неделе. Недельная цель: %2$s</string>
+    <string name="notify_week_goal">Недельная цель: %1$s</string>
+    <string name="year_summary">Итоги года: %1$d</string>
+    <string name="previous_year">Предыдущий год</string>
+    <string name="next_year">Следующий год</string>
+    <string name="year_medals">Полученные медали</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Уведомление с итогами недели: сумма за неделю и изменение по сравнению с прошлой, вечером последнего дня</item>
+        <item>Уведомление, когда вы близки к цели (80% дневной цели)</item>
+        <item>Итоги года в Истории: всего, в среднем, дни с целью, лучший месяц и день, полученные медали</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>Медали показывают, сколько раз каждая получена (например, 5x)</item>
+        <item>Виджеты используют цвета телефона (Material You) или тему приложения</item>
+        <item>Виджеты подстраиваются под размер: проще, когда маленькие, подробнее, когда большие</item>
+        <item>Новые виджеты: серия и неделя, календарь месяца</item>
+        <item>Новые языки: немецкий, испанский, французский, итальянский, португальский, русский, арабский, японский, китайский, корейский</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>Кольцо цели на виджете «Сегодня»</item>
+        <item>Медаль «Ранняя пташка» (при включённой записи HyperOS)</item>
+        <item>Английский язык (Настройки → Язык)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>Оценка дистанции и калорий (рост, вес, km или мили)</item>
+        <item>Разбивка по часам и разделение на ходьбу и бег для выбранного дня в Истории (при включённой записи HyperOS)</item>
+        <item>Рекорд лучшего месяца и выбор первого дня недели (понедельник или воскресенье)</item>
+        <item>Уведомления по желанию: о достижении цели и вечернее напоминание о серии</item>
+        <item>Экспорт и импорт CSV</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>Новый дизайн: «Сегодня», «История» и «Медали» в нижней панели</item>
+        <item>Кольцо цели, серия и недельный прогресс на экране «Сегодня»</item>
+        <item>История: календарь месяца, подробности дня и личные рекорды</item>
+        <item>Медали и уровни: шаги за день, серия, недельная цель и общее число шагов</item>
+        <item>Настраиваемые дневная и недельная цели; виджет тоже показывает новую цель</item>
+        <item>Настройки: светлая, тёмная или системная тема и цвета телефона</item>
+        <item>Переключатели источника шагов и журнал чтений перенесены в Настройки</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>Первая версия: подсчёт шагов, дневные записи, виджеты «Сегодня» и «7 дней»</item>
+        <item>На Xiaomi чтение из записи шагов HyperOS, включая прошлые дни</item>
+        <item>Возможность считать шаги в фоне и карточка с советами по батарее</item>
+    </string-array>
+
+    <string name="widget_today_label">Шаги за сегодня</string>
+    <string name="widget_today_description">Шаги за сегодня и прогресс к цели</string>
+    <string name="widget_week_label">График за 7 дней</string>
+    <string name="widget_week_description">Число шагов за последние 7 дней</string>
+
+    <string name="oem_title">Записывать шаги и в фоне</string>
+    <string name="oem_title_stock">Исключение из оптимизации батареи</string>
+    <string name="oem_intro">Этот телефон может закрывать приложения в фоне. Шаги ниже позволят AdımSayar читать счётчик даже при закрытом приложении.</string>
+    <string name="oem_open">Открыть</string>
+    <string name="oem_dismiss">Пока закрыть</string>
+    <string name="oem_open_failed">Не удалось открыть этот экран на этом телефоне. Выполните шаг вручную в Настройках.</string>
+    <string name="oem_battery_common">Настройки → Приложения → AdımSayar → Батарея → Без ограничений</string>
+
+    <string name="oem_xiaomi_1">Настройки → Приложения → Все приложения → AdımSayar → Автозапуск → Вкл.</string>
+    <string name="oem_xiaomi_2">На том же экране: Контроль активности → Нет ограничений</string>
+
+    <string name="oem_samsung_1">Настройки → Приложения → AdımSayar → Батарея → Без ограничений</string>
+    <string name="oem_samsung_2">Батарея → Ограничения использования в фоновом режиме → Приложения без перехода в спящий режим → добавить AdımSayar</string>
+
+    <string name="oem_huawei_1">Батарея → Запуск приложений → AdımSayar → выключите «Автоматическое управление», включите «Автозапуск», «Косвенный запуск» и «Работа в фоновом режиме»</string>
+
+    <string name="oem_oppo_1">Батарея → Разрешить фоновую активность → AdımSayar: Разрешить работу в фоне</string>
+    <string name="oem_oppo_2">Автозапуск → AdımSayar → Вкл.</string>
+
+    <string name="oem_vivo_1">Батарея → Управление энергопотреблением в фоне → Высокое энергопотребление в фоне → добавьте AdımSayar в белый список</string>
+    <string name="oem_vivo_2">Автозапуск → AdımSayar → Вкл.</string>
+
+    <string name="oem_asus_1">Автозапуск → разрешить AdımSayar</string>
+
+    <string name="oem_transsion_1">Автоуправление → выберите AdımSayar в списке приложений и включите все три разрешения</string>
+</resources>

@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Bu dosya Claude Code için projet talimatlarıdır. Kod yazmaya başlamadan önce oku.
+Bu dosya Claude Code için proje talimatlarıdır. Kod yazmaya başlamadan önce oku.
 
 Hedefler ve ölçüm planı `GOALS.md` içindedir. Orada tanımlı metrikler varsa kod bunlara göre yazılır.
 
@@ -8,38 +8,39 @@ Hedefler ve ölçüm planı `GOALS.md` içindedir. Orada tanımlı metrikler var
 
 AdımSayar — telefon için adım sayma uygulaması. Tüm Android telefonları hedeflenir.
 
+Uygulama öncelikle geliştiricinin kendi Redmi Note 12 Pro 4G'si için yapılır; bu cihazda resmi bir adım sayar yoktur. Play Store yayını öncelik değildir. Çekirdek özellikler: günün adımı widget'ı, 7 günlük tablo widget'ı, uygulamada geçmiş ve toplam.
+
 Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, HyperOS 1 / Android 12, birincil) ve **Galaxy S22** (SD 8 Gen 1 / Exynos 2200, Android 16'ya kadar, ikincil).
 
 İki cihaz farklı üreticilerin arka plan yönetimini test etmek içindir (HyperOS ve One UI). Tek cihazda yapılan test yeterli sayılmaz.
 
 ## Durum
 
-Repo boş bir iskelettir. Şunlar henüz kararlaştırılmamıştır ve bunları **kullanıcıya sor, kendin karar verme**:
-
-- Framework seçimi (native Kotlin, Flutter, React Native/Expo vb.)
-- Kalıcı depolama teknolojisi
-- Grafik/UI kütüphanesi
+v1 kodu yazıldı: `app/` altında tek modül, paket `com.dordeorz.adimsayar`.
 
 Kararlaştırılmış ve değiştirilmemesi gerekenler:
 
+- Framework: native Kotlin, Jetpack Compose + Material3. Widget'lar Glance ile. `minSdk 23`.
+- Kalıcı depolama: Room.
+- Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
+- Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
 - Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
 - **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
-- Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır.
+- Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
+- Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
 - Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
 
 ## Kaynak çokluğu
 
-Tek sensöre güvenilmez. Üç kaynak okunur ve çapraz doğrulanır:
+Tek sensöre güvenilmez. İki kaynak okunur ve çapraz doğrulanır:
 
 | Kaynak | Güçlü yanı | Zayıf yanı |
 |---|---|---|
 | `TYPE_STEP_DETECTOR` | Çapraz doğrulama, donmaya duyarlı değil | Yavaşlatma/hızlanma sırasında hata |
-| `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Dongelebiliyor** |
+| `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Donabiliyor** |
 
-**Health Connect kullanılmayacaktır.** Bu karar `GOALS.md` içinde gerekçesiyle tanımlıdır. `androidx.health` bağımlılığı ekleme. Sağlık uygulamalarından veri okumayan tek veri kaynağı telefonun kendi sensörleridir.
-
-Gerekçenin özeti: Health Connect telefon ve giyilebilir cihaz verisini birleştirir, kolunda saat varken adım iki kez yazılır. Ayrıca kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve okunabilir bir API yoktur, dolayısıyla aynı gün iki farklı toplam üretilebilir. Bu, uygulamanın temel vaadiyle ve türetilmiş veri ilkesiyle çelişir.
+Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır. Gerekçenin özeti: Health Connect telefon ve giyilebilir cihaz verisini birleştirir, kolunda saat varken adım iki kez yazılır. Ayrıca kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve okunabilir bir API yoktur, dolayısıyla aynı gün iki farklı toplam üretilebilir. Bu, uygulamanın temel vaadiyle ve türetilmiş veri ilkesiyle çelişir.
 
 Giyilebilir cihaz desteği ileride istenirse Health Connect eklenebilir, ancak aralık bazlı deduplikasyonla birlikte eklenmelidir.
 
@@ -53,6 +54,8 @@ Bazı cihazlarda `getDefaultSensor(TYPE_STEP_COUNTER)` `null` döner. Cihaz `FEA
 
 Kural: **tek ölçüme güvenme, doğrula.** `TYPE_STEP_DETECTOR` olay üretmeye devam ederken sayaç hiç ilerlemiyorsa donmuş demektir. Bu durumda kullanıcıya bildir ve yeniden kayıt dene. Kullanıcı cihazı yeniden başlatmak zorunda kalmamalıdır.
 
+Donma kuralı bir pencere ve eşikle tanımlanır (ör. 2 dakikada detector ≥ 50 adım, counter 0), çünkü iki sensörün olayları farklı zamanlarda teslim edilebilir. İki sensörü karşılaştırmak sürekli dinleme gerektirdiği için donma tespiti yalnızca uygulama açıkken yapılır. Bu bilinen bir trade-off'tur.
+
 ## Üreticiye özgü davranış
 
 Üretici tespiti `Build.MANUFACTURER` ile yapılır. Model adına göre kırpmaya çalışma.
@@ -61,7 +64,9 @@ Kural: **tek ölçüme güvenme, doğrula.** `TYPE_STEP_DETECTOR` olay üretmeye
 
 Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu). API adı `miui` olsa da HyperOS'ta da çalışır.
 
-Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve açıkça seçildiğinde kullanılır. Health Connect yerine geçmez, yalnızca ek bir doğrulama kaynağı olabilir.
+Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve kullanıcı Ayarlar'daki "HyperOS adım kaydını kullan" anahtarını açtığında kullanılır (`data/XiaomiSteps.kt`). Açıkken günlük toplamlar HyperOS kaydından gelir, sensör okumaları toplamlara eklenmez. Gerekçe ve test sonuçları `GOALS.md` → "Xiaomi / HyperOS adım kaydı". Okuma izni `miui.permission.READ_STEPS` manifest'te tanımlıdır.
+
+Redmi'de `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken sayar; HyperOS'un kendi servisi yalnızca detector'ı açık tutar. Bu cihazda bildirimsiz sayım ancak HyperOS kaydıyla mümkündür.
 
 HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
 
@@ -71,36 +76,34 @@ HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kay
 
 ## Adım sayma
 
-### Kritik kural: sensör kaydı açık kalmalı
+### Seyrek okuma ve fark modeli
 
-`Sensor.TYPE_STEP_COUNTER` **yalnızca kayıtlı olduğu sürece sayar.** Kaydı kaldırırsan o dönemde atılan adımlar hiçbir yerde okunamaz ve telafisi yoktur.
+`TYPE_STEP_COUNTER` cihaz açıldığından beri kümülatif adım sayısını verir. Uygulama sensörü sürekli dinlemez; sayacı seyrek okur ve son okumaya göre farkı kaydeder:
 
-Bu yüzden "pil için kaydı kaldır" bir optimizasyon değil, **ürün kararıdır** ve varsayılan olarak yapılmamalıdır.
+- Uygulama açıldığında (açıkken canlı sayaç için kayıtlı kalır)
+- Widget güncellenirken
+- `JobScheduler` ile periyodik arka plan okuması (~15 dk)
+- `BOOT_COMPLETED`, `TIME_SET`, `TIMEZONE_CHANGED` sonrası
 
-Pil tasarrufu kaydetmeyi bırakmaktan değil, **donanım batch'lemesinden** gelir:
+Her okumada son sayaç değeri ve `elapsedRealtimeNanos` saklanır. Yeni değer öncekinden küçükse cihaz yeniden başlamıştır; yeni değer olduğu gibi fark kabul edilir.
 
-```kotlin
-sensorManager.registerListener(
-    listener,
-    stepSensor,
-    SensorManager.SENSOR_DELAY_UI,   // örnekleme hızı
-    60_000_000L                      // maxReportLatency: 60 sn
-)
-```
+Bilinen trade-off'lar:
 
-`maxReportLatency` pozitif verildiğinde olaylar donanım FIFO'sunda birikir ve işlemci uyandırılmaz. Pil tasarrufunun asıl kaynağı budur.
+- Android belgelerine göre hiçbir uygulama sensörü dinlemiyorsa sayaç saymayabilir. Pratikte birçok cihazda sistem servisi sensörü açık tutar, ama bu varsayılmaz, ölçülür (bkz. `GOALS.md` → "Kapalıyken sayma testi").
+- Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
+- Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
 
-Bu, cihazınızda gerçekten çalıştığını doğrulamak icin `sensor.getFifoMaxEventCount()` kontrol edilebilir. `0` dönüyorsa cihaz batch modunu desteklemiyor demektir.
+Yedek yol: kullanıcının Ayarlar'dan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 
 ### Davranış tablosu
 
 | Durum | Davranış |
 |---|---|
-| Uygulama açık | Sensör kayıtlı, canlı sayaç |
-| Uygulama arka planda | **Kayıt açık kalır**, `maxReportLatency` ile toplu teslim |
-| Widget güncellemesi | `JobScheduler` ile seyrek okuma, aralık olabildiğince uzun |
+| Uygulama açık | Sensörler kayıtlı, canlı sayaç, donma kontrolü |
+| Uygulama arka planda | Kayıt yok, periyodik okuma ve fark |
+| Widget güncellemesi | Aynı fark modeliyle okuma |
 
-Google'ın önerisi: seyrek okuma yapacaksan aralığı "olabildiğince uzun" tut, gerçek zamanlı veriye ihtiyacın yoksa.
+Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 parametreli sürüm, `maxReportLatency`). `sensor.getFifoMaxEventCount()` `0` dönüyorsa cihaz batch'lemeyi desteklemiyor demektir.
 
 ### İzinler
 
@@ -110,12 +113,12 @@ Google'ın önerisi: seyrek okuma yapacaksan aralığı "olabildiğince uzun" tu
 
 ## Widget'lar
 
-İki widget: günün adımı, ve 7 günlük tablo.
+Dört widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
 
 Kurallar:
 
-- İkisi de **paylaşılan günlük snapshot** okur. İkinci widget için ayrı sensör okuması yoktur.
-- Gün dönümü `AlarmManager` ile tam 00:00'da tetiklenir. `JobScheduler` bırakılırsa gün dönümü "15:00 civarında" gibi kayabilir.
+- Hepsi **paylaşılan günlük snapshot** okur. Widget başına ayrı sensör okuması yoktur.
+- Gün dönümü `AlarmManager` ile 00:00'da tetiklenir. `JobScheduler` bırakılırsa gün dönümü "15:00 civarında" gibi kayabilir. Android 14+'ta tam zamanlı alarm izni varsayılan kapalıdır; o cihazlarda birkaç dakika kayan `setAndAllowWhileIdle` yeterlidir, çünkü adımların güne bölünmesi alarmdan değil okuma zamanından yapılır.
 - `updatePeriodMillis` en fazla 30 dakikaya kırpılır ve yine de garanti değildir. Kesinlik beklenmemeli.
 - Widget çizimi ana ekrandaki verinin kopyası değil, aynı kaynaktan okunmalıdır.
 
@@ -127,11 +130,11 @@ Widget güncelleme davranışı üreticiden bağımsız olmalıdır. HyperOS ve 
 
 Günlük adım toplamları tek gerçek kaynaktır. Türetilmiş hiçbir şey veritabanında saklanmaz.
 
-Kalıcılık: günlük kayıtlar tarihe göre indeksli ve eklemeli (append-only) olsun. Bu, ileride sunucuya taşımak (varsa) ucuz kılar.
+Kalıcılık: Room'da `date` birincil anahtarlı günlük toplam tablosu. Gün içinde toplam güncellenir (upsert). Bir gün, gece yarısını geçen ilk okumayla tamamlanır; sonrasında değiştirilmez.
 
 Veri kaybına karşı iki katman:
 
-- `android:allowBackup="true"` — Google Otomatik Yedekleme, ücretsiz
+- `android:allowBackup="true"` — Google Otomatik Yedekleme, ücretsiz. Son sayaç değeri ve okuma zamanı yedekten **hariç tutulur** (`fullBackupContent` ve API 31+ için `dataExtractionRules`); yoksa yeni cihaza geri yüklemede ilk fark yanlış hesaplanır.
 - Dışa/içe aktarma — kullanıcı kontrolünde dosya
 
 Xiaomi Cloud'a güvenilmez.

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">今日</string>
+    <string name="steps_unit">歩</string>
+    <string name="goal_short">目標 %1$s</string>
+    <string name="last_7_days">過去7日間</string>
+    <string name="total">合計</string>
+    <string name="last_reading">最終カウンター読み取り: %1$s</string>
+    <string name="no_reading_yet">カウンターはまだ読み取られていません</string>
+
+    <string name="permission_title">身体活動の権限が必要です</string>
+    <string name="permission_text">AdımSayar はスマートフォン本体のセンサーから歩数を読み取ります。そのため Android が身体活動の権限を求めます。</string>
+    <string name="permission_grant">許可</string>
+    <string name="permission_denied_text">権限が拒否されました。設定 → アプリ → AdımSayar → 権限 → 身体活動 → 許可。</string>
+    <string name="permission_open_settings">設定を開く</string>
+
+    <string name="sensor_missing_title">歩数センサーが見つかりません</string>
+    <string name="sensor_missing_text">このスマートフォンは歩数計センサーを搭載していません。この端末では AdımSayar で歩数を数えられません。</string>
+
+    <string name="frozen_title">歩数カウンターが止まっているようです</string>
+    <string name="frozen_text">歩行は検出されていますが、カウンターが進んでいません。センサーを再接続しました。数歩歩くとこの警告は自動的に消えます。</string>
+
+    <string name="service_card_title">バックグラウンドでカウントを続ける</string>
+    <string name="xiaomi_unreadable_title">HyperOS の歩数記録を読み取れません</string>
+    <string name="xiaomi_unreadable_text">現在、歩数が更新されていません。HyperOS のアップデートで記録が変わった可能性があります。下のスイッチをオフにして、「バックグラウンドでカウントを続ける」でカウントを続けられます。</string>
+    <string name="xiaomi_stalled_title">HyperOS の歩数記録が増えていません</string>
+    <string name="xiaomi_stalled_text">数分以内にスマートフォンのセンサーが歩行を検出しましたが、HyperOS の記録が増えていません。数分後にもう一度確認し、回復しない場合は下のスイッチをオフにして「バックグラウンドでカウントを続ける」をオンにしてください。</string>
+    <string name="xiaomi_card_title">HyperOS の歩数記録を使用</string>
+    <string name="xiaomi_card_text">スマートフォン本体の歩数記録から読み取ります。アプリを閉じていてもすべてカウントされ、通知は不要で、過去の日の歩数も追加されます。</string>
+    <string name="service_card_text">アプリを閉じているときに歩数がカウントされない場合はオンにしてください。カウンターが動作し続け、通知バーにサイレントの常駐通知が表示されます。</string>
+    <string name="service_channel">歩数カウンター</string>
+    <string name="service_title">AdımSayar がカウント中</string>
+    <string name="service_text">今日 %1$s 歩</string>
+    <string name="service_text_starting">カウンターを起動しています</string>
+
+    <string name="log_title">読み取りログ</string>
+    <string name="log_empty">まだ記録はありません</string>
+    <string name="log_reading">カウンター %1$d、+%2$d 歩</string>
+    <string name="log_reboot">再起動、カウンター %1$d、+%2$d 歩</string>
+    <string name="log_reset">カウンターがリセット、カウンター %1$d、+%2$d 歩</string>
+    <string name="log_stale">古い値を無視、カウンター %1$d、+%2$d 歩</string>
+    <string name="log_timeout">センサーが応答しませんでした</string>
+    <string name="log_no_permission">権限なし</string>
+    <string name="log_no_sensor">センサーなし</string>
+    <string name="log_register_failed">センサーに接続できませんでした</string>
+    <string name="source_app">アプリ</string>
+    <string name="source_job">15分ごとのジョブ</string>
+    <string name="source_system">システムイベント</string>
+    <string name="source_widget">ウィジェット</string>
+    <string name="source_service">バックグラウンドカウンター</string>
+    <string name="log_xiaomi_denied">HyperOS の記録を読み取る権限がありません</string>
+    <string name="log_xiaomi_missing">HyperOS の記録が見つかりません</string>
+    <string name="log_xiaomi_error">HyperOS の記録を読み取れませんでした (%1$s)</string>
+    <string name="log_xiaomi_synced">HyperOS の記録: 今日 %1$d 歩、%2$d 日分を更新</string>
+
+    <string name="tab_today">今日</string>
+    <string name="tab_history">履歴</string>
+    <string name="tab_medals">メダル</string>
+    <string name="goal_reached">1日の目標を達成しました！</string>
+    <string name="goal_remaining">目標まであと %1$s 歩</string>
+    <string name="steps_value">%1$s 歩</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">連続記録</string>
+    <string name="days_count">%1$d 日</string>
+    <string name="weeks_count">%1$d 週</string>
+    <string name="million_steps">%1$s 百万歩</string>
+    <string name="streak_best">最長: %1$d 日</string>
+    <string name="this_week">今週</string>
+
+    <string name="previous_month">前の月</string>
+    <string name="next_month">次の月</string>
+    <string name="daily_average">1日の平均</string>
+    <string name="goal_days">目標達成日</string>
+    <string name="records">記録</string>
+    <string name="record_best_day">最高の日</string>
+    <string name="record_best_week">最高の週</string>
+    <string name="week_of">%1$s の週</string>
+    <string name="record_longest_streak">最長連続記録</string>
+    <string name="record_goal_days">目標達成日数</string>
+    <string name="record_active_average">活動日の平均</string>
+    <string name="active_days">活動日 %1$d 日</string>
+    <string name="until_date">%1$s 時点</string>
+
+    <string name="level">レベル</string>
+    <string name="level_next">次のレベルまであと %1$s 歩</string>
+    <string name="medals_earned">メダル %1$d / %2$d</string>
+    <string name="medals_retroactive">メダルは記録された日から計算されます。目標を変更すると、過去の日も新しい目標で判定されます。</string>
+    <string name="medal_group_daily">1日の歩数</string>
+    <string name="medal_group_daily_text">1日でこの歩数を歩く</string>
+    <string name="medal_group_streak">連続記録</string>
+    <string name="medal_group_streak_text">連続した日に1日の目標を達成する</string>
+    <string name="medal_group_weekly">週間目標</string>
+    <string name="medal_group_weekly_text">週間目標を達成した週の数</string>
+    <string name="medal_group_total">累計距離</string>
+    <string name="medal_group_total_text">全期間の合計歩数</string>
+
+    <string name="settings">設定</string>
+    <string name="back">戻る</string>
+    <string name="settings_goals">目標</string>
+    <string name="daily_goal">1日の目標</string>
+    <string name="weekly_goal">週間目標</string>
+    <string name="goal_range">%1$s〜%2$s</string>
+    <string name="settings_theme">テーマ</string>
+    <string name="theme_system">システムのデフォルト</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="settings_dynamic_color">スマートフォンの色を使用</string>
+    <string name="settings_dynamic_color_hint">壁紙から色を取得します。オフのときは緑のテーマを使用します。</string>
+    <string name="settings_counting">歩数のソース</string>
+    <string name="settings_about">アプリについて</string>
+    <string name="settings_version">バージョン</string>
+    <string name="release_notes">リリースノート</string>
+    <string name="release_notes_hint">各バージョンの変更点</string>
+    <string name="log_hint">最新のカウンターと HyperOS の読み取り</string>
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="close">閉じる</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">時間ごと</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">ウォーキング %1$s</string>
+    <string name="running_steps">ランニング %1$s</string>
+    <string name="record_best_month">最高の月</string>
+    <string name="week_start">週の始まり</string>
+    <string name="settings_body">身体と距離</string>
+    <string name="height">身長</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">体重</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">距離の単位</string>
+    <string name="body_hint">距離とカロリーは身長と体重から推定した概算値です。</string>
+    <string name="settings_notifications">通知</string>
+    <string name="goal_notification">目標達成時に通知</string>
+    <string name="goal_notification_hint">1日の目標を達成した日に1回通知されます。</string>
+    <string name="streak_reminder">夜の連続記録リマインダー</string>
+    <string name="streak_reminder_hint">連続記録中で目標を未達成の場合、20:00頃にお知らせします。</string>
+    <string name="notify_channel">目標と連続記録</string>
+    <string name="notify_goal_title">1日の目標を達成しました！</string>
+    <string name="notify_goal_text">今日は %1$s 歩歩きました。</string>
+    <string name="notify_streak_title">%1$d 日の連続記録が途切れそうです</string>
+    <string name="notify_streak_text">連続記録を守るまであと %1$s 歩です。</string>
+    <string name="settings_data">データ</string>
+    <string name="export_csv">エクスポート</string>
+    <string name="export_csv_hint">すべての日を CSV ファイルに保存</string>
+    <string name="import_csv">インポート</string>
+    <string name="import_csv_hint">CSV ファイルから日を復元します。大きいほうの値が保持されます</string>
+    <string name="export_done">%1$d 日分をエクスポートしました</string>
+    <string name="import_done">%1$d 日分を更新しました</string>
+    <string name="csv_failed">ファイルを読み書きできませんでした</string>
+    <string name="settings_language">言語</string>
+    <string name="language">アプリの言語</string>
+    <string name="language_system">システム</string>
+    <string name="medal_group_early">早起き</string>
+    <string name="medal_group_early_text">08:00 までに 1,000 歩以上歩いた日 (HyperOS の記録がオンのとき)</string>
+
+    <string name="widget_streak_label">連続記録と今週</string>
+    <string name="widget_streak_description">1日の目標の連続記録と今週の進捗</string>
+    <string name="widget_month_label">月間カレンダー</string>
+    <string name="widget_month_description">今月の日を目標達成度で色分け</string>
+    <string name="month_goal_days">目標達成 %1$d 日</string>
+
+    <string name="near_goal_notification">目標が近づいたら通知</string>
+    <string name="near_goal_notification_hint">1日の目標の80%に達した日に、通知が1回届きます。</string>
+    <string name="weekly_summary">週間サマリー</string>
+    <string name="weekly_summary_hint">週の最終日の20:00ごろに、週の合計と前週からの変化を表示します。</string>
+    <string name="notify_near_title">もう少しで目標達成！</string>
+    <string name="notify_near_text">1日の目標まであと %1$s 歩です。</string>
+    <string name="notify_week_title">今週は %1$s 歩歩きました</string>
+    <string name="notify_week_more">前週より %1$d%% 多い。週間目標: %2$s</string>
+    <string name="notify_week_less">前週より %1$d%% 少ない。週間目標: %2$s</string>
+    <string name="notify_week_goal">週間目標: %1$s</string>
+    <string name="year_summary">%1$d 年のまとめ</string>
+    <string name="previous_year">前の年</string>
+    <string name="next_year">次の年</string>
+    <string name="year_medals">獲得したメダル</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>週間サマリー通知: 週の最終日の夜に、週の合計と前週からの変化を表示</item>
+        <item>目標が近づいたときの通知 (1日の目標の80%)</item>
+        <item>履歴に年間サマリー: 合計、平均、目標達成日、最高の月と日、獲得したメダル</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>メダルごとの獲得回数を表示 (例: 5x)</item>
+        <item>ウィジェットがスマートフォンの色 (Material You) またはアプリのテーマを使用</item>
+        <item>ウィジェットがサイズに合わせて変化: 小さいときはシンプル、大きいときは詳細表示</item>
+        <item>新しいウィジェット: 連続記録と今週、月間カレンダー</item>
+        <item>新しい言語: ドイツ語、スペイン語、フランス語、イタリア語、ポルトガル語、ロシア語、アラビア語、日本語、中国語、韓国語</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>今日ウィジェットに目標リング</item>
+        <item>早起きメダル (HyperOS の記録がオンのとき)</item>
+        <item>英語オプション (設定 → 言語)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>距離とカロリーの推定 (身長、体重、km またはマイル)</item>
+        <item>履歴で選択した日の時間別内訳とウォーキング/ランニングの内訳 (HyperOS の記録がオンのとき)</item>
+        <item>最高の月の記録と週の始まりの選択 (月曜日または日曜日)</item>
+        <item>任意の通知: 目標達成時と夜の連続記録リマインダー</item>
+        <item>CSV のエクスポートとインポート</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>新デザイン: 下部バーに今日、履歴、メダル</item>
+        <item>今日画面に目標リング、連続記録、週間の進捗</item>
+        <item>履歴: 月間カレンダー、日の詳細、自己ベスト</item>
+        <item>メダルとレベル: 1日の歩数、連続記録、週間目標、合計歩数</item>
+        <item>1日と週間の目標を変更可能に。ウィジェットにも新しい目標を表示</item>
+        <item>設定: ライト、ダーク、システムのテーマとスマートフォンの色</item>
+        <item>歩数のソースのスイッチと読み取りログを設定に移動</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>最初のバージョン: 歩数カウント、毎日の記録、今日と7日間のウィジェット</item>
+        <item>Xiaomi では HyperOS の歩数記録から読み取り (過去の日も含む)</item>
+        <item>バックグラウンドでカウントを続けるオプションとバッテリーのヘルプカード</item>
+    </string-array>
+
+    <string name="widget_today_label">今日の歩数</string>
+    <string name="widget_today_description">今日の歩数と目標の進捗</string>
+    <string name="widget_week_label">7日間のグラフ</string>
+    <string name="widget_week_description">過去7日間の歩数</string>
+
+    <string name="oem_title">バックグラウンドでも歩数を記録</string>
+    <string name="oem_title_stock">電池の最適化の除外</string>
+    <string name="oem_intro">このスマートフォンはバックグラウンドのアプリを終了することがあります。以下の手順を行うと、アプリを閉じていても AdımSayar がカウンターを読み取れます。</string>
+    <string name="oem_open">開く</string>
+    <string name="oem_dismiss">今は閉じる</string>
+    <string name="oem_open_failed">このスマートフォンではこの画面を開けませんでした。設定から手動で行ってください。</string>
+    <string name="oem_battery_common">設定 → アプリ → AdımSayar → バッテリー → 制限なし</string>
+
+    <string name="oem_xiaomi_1">設定 → アプリ → アプリを管理 → AdımSayar → 自動起動 → オン</string>
+    <string name="oem_xiaomi_2">同じ画面で、バッテリーセーバー → 制限なし</string>
+
+    <string name="oem_samsung_1">設定 → アプリ → AdımSayar → バッテリー → 制限なし</string>
+    <string name="oem_samsung_2">バッテリー → バックグラウンドでの使用制限 → スリープさせないアプリ → AdımSayar を追加</string>
+
+    <string name="oem_huawei_1">バッテリー → アプリ起動 → AdımSayar → 自動管理をオフにし、自動起動、二次起動、バックグラウンドで実行をオン</string>
+
+    <string name="oem_oppo_1">バッテリー → バックグラウンドアクティビティを許可 → AdımSayar: バックグラウンド実行を許可</string>
+    <string name="oem_oppo_2">自動起動 → AdımSayar → オン</string>
+
+    <string name="oem_vivo_1">バッテリー → バックグラウンドでの電力消費の管理 → バックグラウンドでの高い電力消費 → AdımSayar をホワイトリストに追加</string>
+    <string name="oem_vivo_2">自動起動 → AdımSayar → オン</string>
+
+    <string name="oem_asus_1">自動起動 → AdımSayar を許可</string>
+
+    <string name="oem_transsion_1">自動管理 → アプリ一覧で AdımSayar を選択し、3つの権限をすべてオン</string>
+</resources>

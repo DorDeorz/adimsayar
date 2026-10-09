@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Hoy</string>
+    <string name="steps_unit">pasos</string>
+    <string name="goal_short">Meta %1$s</string>
+    <string name="last_7_days">Últimos 7 días</string>
+    <string name="total">Total</string>
+    <string name="last_reading">Última lectura del contador: %1$s</string>
+    <string name="no_reading_yet">Contador aún sin leer</string>
+
+    <string name="permission_title">Se necesita el permiso de actividad física</string>
+    <string name="permission_text">AdımSayar lee tus pasos del propio sensor del teléfono. Android pide el permiso de actividad física para ello.</string>
+    <string name="permission_grant">Permitir</string>
+    <string name="permission_denied_text">Permiso denegado. Ajustes → Aplicaciones → AdımSayar → Permisos → Actividad física → Permitir.</string>
+    <string name="permission_open_settings">Abrir ajustes</string>
+
+    <string name="sensor_missing_title">No se encontró el sensor de pasos</string>
+    <string name="sensor_missing_text">Este teléfono no informa de ningún sensor contador de pasos. AdımSayar no puede contar pasos en este dispositivo.</string>
+
+    <string name="frozen_title">El contador de pasos parece congelado</string>
+    <string name="frozen_text">El teléfono detecta pasos, pero el contador no avanza. El sensor se ha vuelto a conectar; este aviso desaparece solo después de unos pasos.</string>
+
+    <string name="service_card_title">Seguir contando en segundo plano</string>
+    <string name="xiaomi_unreadable_title">No se puede leer el registro de pasos de HyperOS</string>
+    <string name="xiaomi_unreadable_text">Los pasos no se están actualizando ahora mismo. Puede que una actualización de HyperOS haya cambiado el registro. Puedes desactivar el interruptor de abajo y seguir contando con "Seguir contando en segundo plano".</string>
+    <string name="xiaomi_stalled_title">El registro de pasos de HyperOS no avanza</string>
+    <string name="xiaomi_stalled_text">El sensor del teléfono ha detectado pasos en los últimos minutos, pero el registro de HyperOS no aumenta. Vuelve a comprobarlo en unos minutos; si no se recupera, desactiva el interruptor de abajo y activa "Seguir contando en segundo plano".</string>
+    <string name="xiaomi_card_title">Usar el registro de pasos de HyperOS</string>
+    <string name="xiaomi_card_text">Los pasos se leen del propio registro de pasos del teléfono. Se cuentan por completo aunque la app esté cerrada, no hace falta ninguna notificación y también se añaden los días anteriores.</string>
+    <string name="service_card_text">Actívalo si no se cuentan pasos con la app cerrada. El contador se mantiene activo; aparece una notificación silenciosa y permanente en la barra de notificaciones.</string>
+    <string name="service_channel">Contador de pasos</string>
+    <string name="service_title">AdımSayar está contando</string>
+    <string name="service_text">%1$s pasos hoy</string>
+    <string name="service_text_starting">Iniciando el contador</string>
+
+    <string name="log_title">Registro de lecturas</string>
+    <string name="log_empty">Aún no hay entradas</string>
+    <string name="log_reading">contador %1$d, +%2$d pasos</string>
+    <string name="log_reboot">teléfono reiniciado, contador %1$d, +%2$d pasos</string>
+    <string name="log_reset">contador restablecido, contador %1$d, +%2$d pasos</string>
+    <string name="log_stale">valor antiguo ignorado, contador %1$d, +%2$d pasos</string>
+    <string name="log_timeout">el sensor no respondió</string>
+    <string name="log_no_permission">sin permiso</string>
+    <string name="log_no_sensor">sin sensor</string>
+    <string name="log_register_failed">no se pudo conectar con el sensor</string>
+    <string name="source_app">app</string>
+    <string name="source_job">tarea de 15 min</string>
+    <string name="source_system">evento del sistema</string>
+    <string name="source_widget">widget</string>
+    <string name="source_service">contador en segundo plano</string>
+    <string name="log_xiaomi_denied">sin permiso de lectura del registro de HyperOS</string>
+    <string name="log_xiaomi_missing">no se encontró el registro de HyperOS</string>
+    <string name="log_xiaomi_error">no se pudo leer el registro de HyperOS (%1$s)</string>
+    <string name="log_xiaomi_synced">Registro de HyperOS: %1$d pasos hoy, %2$d días actualizados</string>
+
+    <string name="tab_today">Hoy</string>
+    <string name="tab_history">Historial</string>
+    <string name="tab_medals">Medallas</string>
+    <string name="goal_reached">¡Meta diaria alcanzada!</string>
+    <string name="goal_remaining">Faltan %1$s pasos para tu meta</string>
+    <string name="steps_value">%1$s pasos</string>
+    <string name="percent_of_goal">%1$d %%</string>
+    <string name="streak">Racha</string>
+    <string name="days_count">%1$d días</string>
+    <string name="weeks_count">%1$d semanas</string>
+    <string name="million_steps">%1$s millones de pasos</string>
+    <string name="streak_best">Más larga: %1$d días</string>
+    <string name="this_week">Esta semana</string>
+
+    <string name="previous_month">Mes anterior</string>
+    <string name="next_month">Mes siguiente</string>
+    <string name="daily_average">Media diaria</string>
+    <string name="goal_days">Días con meta</string>
+    <string name="records">Récords</string>
+    <string name="record_best_day">Mejor día</string>
+    <string name="record_best_week">Mejor semana</string>
+    <string name="week_of">Semana del %1$s</string>
+    <string name="record_longest_streak">Racha más larga</string>
+    <string name="record_goal_days">Días con la meta alcanzada</string>
+    <string name="record_active_average">Media de días activos</string>
+    <string name="active_days">%1$d días activos</string>
+    <string name="until_date">Hasta el %1$s</string>
+
+    <string name="level">Nivel</string>
+    <string name="level_next">Faltan %1$s pasos para el siguiente nivel</string>
+    <string name="medals_earned">%1$d / %2$d medallas</string>
+    <string name="medals_retroactive">Las medallas se calculan a partir de tus días registrados. Si cambias tu meta, los días anteriores también se evalúan con la nueva meta.</string>
+    <string name="medal_group_daily">Pasos diarios</string>
+    <string name="medal_group_daily_text">Camina esta cantidad de pasos en un solo día</string>
+    <string name="medal_group_streak">Racha</string>
+    <string name="medal_group_streak_text">Alcanza tu meta diaria en días consecutivos</string>
+    <string name="medal_group_weekly">Meta semanal</string>
+    <string name="medal_group_weekly_text">Número de semanas en que alcanzaste tu meta semanal</string>
+    <string name="medal_group_total">Distancia total</string>
+    <string name="medal_group_total_text">Pasos totales de todos los días</string>
+
+    <string name="settings">Ajustes</string>
+    <string name="back">Atrás</string>
+    <string name="settings_goals">Metas</string>
+    <string name="daily_goal">Meta diaria</string>
+    <string name="weekly_goal">Meta semanal</string>
+    <string name="goal_range">Entre %1$s y %2$s</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Predeterminado del sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="settings_dynamic_color">Usar los colores del teléfono</string>
+    <string name="settings_dynamic_color_hint">Toma los colores del fondo de pantalla. Si está desactivado, se usa el tema verde.</string>
+    <string name="settings_counting">Fuente de pasos</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_version">Versión</string>
+    <string name="release_notes">Novedades</string>
+    <string name="release_notes_hint">Qué cambió en cada versión</string>
+    <string name="log_hint">Últimas lecturas del contador y de HyperOS</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Cerrar</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">Hora a hora</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">Caminando %1$s</string>
+    <string name="running_steps">Corriendo %1$s</string>
+    <string name="record_best_month">Mejor mes</string>
+    <string name="week_start">Primer día de la semana</string>
+    <string name="settings_body">Cuerpo y distancia</string>
+    <string name="height">Altura</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">Peso</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">Unidad de distancia</string>
+    <string name="body_hint">La distancia y las calorías se estiman a partir de la altura y el peso; son aproximadas.</string>
+    <string name="settings_notifications">Notificaciones</string>
+    <string name="goal_notification">Avisar al alcanzar la meta</string>
+    <string name="goal_notification_hint">Recibes una notificación el día que alcanzas tu meta diaria.</string>
+    <string name="streak_reminder">Recordatorio de racha por la tarde</string>
+    <string name="streak_reminder_hint">Te avisa hacia las 20:00 si no has alcanzado tu meta y tienes una racha.</string>
+    <string name="notify_channel">Meta y racha</string>
+    <string name="notify_goal_title">¡Meta diaria alcanzada!</string>
+    <string name="notify_goal_text">Hoy has caminado %1$s pasos.</string>
+    <string name="notify_streak_title">Tu racha de %1$d días está en riesgo</string>
+    <string name="notify_streak_text">Faltan %1$s pasos para mantener tu racha.</string>
+    <string name="settings_data">Datos</string>
+    <string name="export_csv">Exportar</string>
+    <string name="export_csv_hint">Guardar todos los días en un archivo CSV</string>
+    <string name="import_csv">Importar</string>
+    <string name="import_csv_hint">Restaurar días desde un archivo CSV; se conserva el número más alto</string>
+    <string name="export_done">%1$d días exportados</string>
+    <string name="import_done">%1$d días actualizados</string>
+    <string name="csv_failed">No se pudo leer ni escribir el archivo</string>
+    <string name="settings_language">Idioma</string>
+    <string name="language">Idioma de la app</string>
+    <string name="language_system">Sistema</string>
+    <string name="medal_group_early">Madrugador</string>
+    <string name="medal_group_early_text">Días con al menos 1000 pasos antes de las 08:00 (con el registro de HyperOS activado)</string>
+
+    <string name="widget_streak_label">Racha y semana</string>
+    <string name="widget_streak_description">Tu racha de meta diaria y el progreso de esta semana</string>
+    <string name="widget_month_label">Calendario mensual</string>
+    <string name="widget_month_description">Los días de este mes, coloreados según la meta</string>
+    <string name="month_goal_days">%1$d días con meta</string>
+
+    <string name="near_goal_notification">Avisar cuando esté cerca de la meta</string>
+    <string name="near_goal_notification_hint">Recibirás una notificación el día que alcances el 80% de tu meta diaria.</string>
+    <string name="weekly_summary">Resumen semanal</string>
+    <string name="weekly_summary_hint">El último día de la semana, hacia las 20:00, muestra el total de la semana y el cambio respecto a la semana anterior.</string>
+    <string name="notify_near_title">¡Casi alcanzas tu meta!</string>
+    <string name="notify_near_text">Te faltan %1$s pasos para tu meta diaria.</string>
+    <string name="notify_week_title">Esta semana caminaste %1$s pasos</string>
+    <string name="notify_week_more">%1$d%% más que la semana pasada. Meta semanal: %2$s</string>
+    <string name="notify_week_less">%1$d%% menos que la semana pasada. Meta semanal: %2$s</string>
+    <string name="notify_week_goal">Meta semanal: %1$s</string>
+    <string name="year_summary">Resumen de %1$d</string>
+    <string name="previous_year">Año anterior</string>
+    <string name="next_year">Año siguiente</string>
+    <string name="year_medals">Medallas ganadas</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Notificación de resumen semanal: el total de la semana y el cambio respecto a la anterior, la noche de su último día</item>
+        <item>Notificación cuando estás cerca de tu meta (80% de la meta diaria)</item>
+        <item>Resumen anual en Historial: total, promedio, días con meta, mejor mes y día, medallas ganadas</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>Las medallas muestran cuántas veces se han ganado (p. ej., 5x)</item>
+        <item>Los widgets usan los colores del teléfono (Material You) o el tema de la app</item>
+        <item>Los widgets se adaptan a su tamaño: más simples si son pequeños, más detalle si son grandes</item>
+        <item>Nuevos widgets: racha y semana, calendario mensual</item>
+        <item>Nuevos idiomas: alemán, español, francés, italiano, portugués, ruso, árabe, japonés, chino y coreano</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>Anillo de meta en el widget Hoy</item>
+        <item>Medalla de madrugador (con el registro de HyperOS activado)</item>
+        <item>Opción de idioma inglés (Ajustes → Idioma)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>Estimación de distancia y calorías (altura, peso, km o millas)</item>
+        <item>Desglose por horas y reparto entre caminar y correr del día seleccionado en Historial (con el registro de HyperOS activado)</item>
+        <item>Récord del mejor mes y elección del primer día de la semana (lunes o domingo)</item>
+        <item>Notificaciones opcionales: al alcanzar la meta y recordatorio de racha por la tarde</item>
+        <item>Exportación e importación CSV</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>Nuevo diseño: Hoy, Historial y Medallas en la barra inferior</item>
+        <item>Anillo de meta, racha y progreso semanal en la pantalla Hoy</item>
+        <item>Historial: calendario mensual, detalles del día y récords personales</item>
+        <item>Medallas y niveles: pasos diarios, racha, meta semanal y pasos totales</item>
+        <item>Metas diaria y semanal ajustables; el widget también muestra la nueva meta</item>
+        <item>Ajustes: tema claro, oscuro o del sistema y colores del teléfono</item>
+        <item>Los interruptores de fuente de pasos y el registro de lecturas se movieron a Ajustes</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>Primera versión: conteo de pasos, registros diarios, widgets de hoy y de 7 días</item>
+        <item>En Xiaomi, lectura del registro de pasos de HyperOS, incluidos los días anteriores</item>
+        <item>Opción para seguir contando en segundo plano y una tarjeta de ayuda sobre la batería</item>
+    </string-array>
+
+    <string name="widget_today_label">Pasos de hoy</string>
+    <string name="widget_today_description">Pasos dados hoy y progreso hacia la meta</string>
+    <string name="widget_week_label">Gráfico de 7 días</string>
+    <string name="widget_week_description">Pasos de los últimos 7 días</string>
+
+    <string name="oem_title">Registrar pasos también en segundo plano</string>
+    <string name="oem_title_stock">Excluir de la optimización de batería</string>
+    <string name="oem_intro">Este teléfono puede cerrar apps en segundo plano. Con estos pasos, AdımSayar puede leer el contador aunque la app esté cerrada.</string>
+    <string name="oem_open">Abrir</string>
+    <string name="oem_dismiss">Cerrar por ahora</string>
+    <string name="oem_open_failed">No se pudo abrir esta pantalla en este teléfono. Haz el paso manualmente en Ajustes.</string>
+    <string name="oem_battery_common">Ajustes → Aplicaciones → AdımSayar → Batería → Sin restricciones</string>
+
+    <string name="oem_xiaomi_1">Ajustes → Aplicaciones → Administrar aplicaciones → AdımSayar → Inicio automático → Activado</string>
+    <string name="oem_xiaomi_2">En la misma pantalla, Ahorro de batería → Sin restricciones</string>
+
+    <string name="oem_samsung_1">Ajustes → Aplicaciones → AdımSayar → Batería → Sin restricciones</string>
+    <string name="oem_samsung_2">Batería → Límites de uso en segundo plano → Aplicaciones que nunca entran en suspensión → añadir AdımSayar</string>
+
+    <string name="oem_huawei_1">Batería → Inicio de aplicaciones → AdımSayar → desactiva Gestionar automáticamente y activa Inicio automático, Inicio secundario y Ejecutar en segundo plano</string>
+
+    <string name="oem_oppo_1">Batería → Permitir actividad en segundo plano → AdımSayar: Permitir ejecución en segundo plano</string>
+    <string name="oem_oppo_2">Inicio automático → AdımSayar → Activado</string>
+
+    <string name="oem_vivo_1">Batería → Gestión del consumo en segundo plano → Alto consumo en segundo plano → añadir AdımSayar a la lista blanca</string>
+    <string name="oem_vivo_2">Inicio automático → AdımSayar → Activado</string>
+
+    <string name="oem_asus_1">Inicio automático → permitir AdımSayar</string>
+
+    <string name="oem_transsion_1">Gestión automática → elige AdımSayar en la lista de apps y activa los tres permisos</string>
+</resources>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">今天</string>
+    <string name="steps_unit">步</string>
+    <string name="goal_short">目标 %1$s</string>
+    <string name="last_7_days">最近 7 天</string>
+    <string name="total">总计</string>
+    <string name="last_reading">上次读取计步器：%1$s</string>
+    <string name="no_reading_yet">尚未读取计步器</string>
+
+    <string name="permission_title">需要“身体活动”权限</string>
+    <string name="permission_text">AdımSayar 从手机自带的传感器读取步数，为此 Android 需要“身体活动”权限。</string>
+    <string name="permission_grant">允许</string>
+    <string name="permission_denied_text">权限被拒绝。设置 → 应用 → AdımSayar → 权限 → 身体活动 → 允许。</string>
+    <string name="permission_open_settings">打开设置</string>
+
+    <string name="sensor_missing_title">未找到计步传感器</string>
+    <string name="sensor_missing_text">这部手机没有提供计步传感器，AdımSayar 无法在此设备上计步。</string>
+
+    <string name="frozen_title">计步器似乎卡住了</string>
+    <string name="frozen_text">手机能检测到步伐，但计步器没有变化。传感器已重新连接，走几步后此提示会自动消失。</string>
+
+    <string name="service_card_title">在后台继续计步</string>
+    <string name="xiaomi_unreadable_title">无法读取 HyperOS 步数记录</string>
+    <string name="xiaomi_unreadable_text">步数目前没有更新，可能是 HyperOS 更新改变了记录方式。你可以关闭下方开关，改用“在后台继续计步”。</string>
+    <string name="xiaomi_stalled_title">HyperOS 步数记录没有变化</string>
+    <string name="xiaomi_stalled_text">手机传感器在过去几分钟内检测到步伐，但 HyperOS 记录没有增加。请几分钟后再看；如果仍未恢复，请关闭下方开关并开启“在后台继续计步”。</string>
+    <string name="xiaomi_card_title">使用 HyperOS 步数记录</string>
+    <string name="xiaomi_card_text">从手机自带的步数记录读取。即使应用关闭也能完整计步，无需通知，还会补充以往的天数。</string>
+    <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。</string>
+    <string name="service_channel">计步器</string>
+    <string name="service_title">AdımSayar 正在计步</string>
+    <string name="service_text">今天 %1$s 步</string>
+    <string name="service_text_starting">正在启动计步器</string>
+
+    <string name="log_title">读取记录</string>
+    <string name="log_empty">暂无记录</string>
+    <string name="log_reading">计数 %1$d，+%2$d 步</string>
+    <string name="log_reboot">手机已重启，计数 %1$d，+%2$d 步</string>
+    <string name="log_reset">计数已重置，计数 %1$d，+%2$d 步</string>
+    <string name="log_stale">已忽略旧值，计数 %1$d，+%2$d 步</string>
+    <string name="log_timeout">传感器无响应</string>
+    <string name="log_no_permission">无权限</string>
+    <string name="log_no_sensor">无传感器</string>
+    <string name="log_register_failed">无法连接传感器</string>
+    <string name="source_app">应用</string>
+    <string name="source_job">15 分钟任务</string>
+    <string name="source_system">系统事件</string>
+    <string name="source_widget">小部件</string>
+    <string name="source_service">后台计步</string>
+    <string name="log_xiaomi_denied">没有 HyperOS 记录的读取权限</string>
+    <string name="log_xiaomi_missing">未找到 HyperOS 记录</string>
+    <string name="log_xiaomi_error">无法读取 HyperOS 记录（%1$s）</string>
+    <string name="log_xiaomi_synced">HyperOS 记录：今天 %1$d 步，已更新 %2$d 天</string>
+
+    <string name="tab_today">今天</string>
+    <string name="tab_history">历史</string>
+    <string name="tab_medals">勋章</string>
+    <string name="goal_reached">已达成每日目标！</string>
+    <string name="goal_remaining">距离目标还差 %1$s 步</string>
+    <string name="steps_value">%1$s 步</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">连续达标</string>
+    <string name="days_count">%1$d 天</string>
+    <string name="weeks_count">%1$d 周</string>
+    <string name="million_steps">%1$s 百万步</string>
+    <string name="streak_best">最长：%1$d 天</string>
+    <string name="this_week">本周</string>
+
+    <string name="previous_month">上个月</string>
+    <string name="next_month">下个月</string>
+    <string name="daily_average">日均</string>
+    <string name="goal_days">达标天数</string>
+    <string name="records">纪录</string>
+    <string name="record_best_day">最佳单日</string>
+    <string name="record_best_week">最佳单周</string>
+    <string name="week_of">%1$s 那一周</string>
+    <string name="record_longest_streak">最长连续达标</string>
+    <string name="record_goal_days">达标天数</string>
+    <string name="record_active_average">活跃日均值</string>
+    <string name="active_days">%1$d 个活跃日</string>
+    <string name="until_date">截至 %1$s</string>
+
+    <string name="level">等级</string>
+    <string name="level_next">距离下一级还差 %1$s 步</string>
+    <string name="medals_earned">%1$d / %2$d 枚勋章</string>
+    <string name="medals_retroactive">勋章根据已记录的天数计算。如果修改目标，以往的天数也会按新目标评估。</string>
+    <string name="medal_group_daily">每日步数</string>
+    <string name="medal_group_daily_text">在一天内走到这么多步</string>
+    <string name="medal_group_streak">连续达标</string>
+    <string name="medal_group_streak_text">连续多天达成每日目标</string>
+    <string name="medal_group_weekly">每周目标</string>
+    <string name="medal_group_weekly_text">达成每周目标的周数</string>
+    <string name="medal_group_total">总距离</string>
+    <string name="medal_group_total_text">所有天数的总步数</string>
+
+    <string name="settings">设置</string>
+    <string name="back">返回</string>
+    <string name="settings_goals">目标</string>
+    <string name="daily_goal">每日目标</string>
+    <string name="weekly_goal">每周目标</string>
+    <string name="goal_range">%1$s 到 %2$s 之间</string>
+    <string name="settings_theme">主题</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_dark">深色</string>
+    <string name="settings_dynamic_color">使用手机配色</string>
+    <string name="settings_dynamic_color_hint">从壁纸提取颜色。关闭时使用绿色主题。</string>
+    <string name="settings_counting">步数来源</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_version">版本</string>
+    <string name="release_notes">更新说明</string>
+    <string name="release_notes_hint">各版本的变化</string>
+    <string name="log_hint">最近的计步器和 HyperOS 读取</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">按小时</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">步行 %1$s</string>
+    <string name="running_steps">跑步 %1$s</string>
+    <string name="record_best_month">最佳单月</string>
+    <string name="week_start">每周第一天</string>
+    <string name="settings_body">身体与距离</string>
+    <string name="height">身高</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">体重</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">距离单位</string>
+    <string name="body_hint">距离和卡路里根据身高和体重估算，仅供参考。</string>
+    <string name="settings_notifications">通知</string>
+    <string name="goal_notification">达成目标时通知</string>
+    <string name="goal_notification_hint">达成每日目标的当天会收到一条通知。</string>
+    <string name="streak_reminder">晚间连续达标提醒</string>
+    <string name="streak_reminder_hint">如果你正在连续达标但当天还未达成目标，会在 20:00 左右提醒你。</string>
+    <string name="notify_channel">目标与连续达标</string>
+    <string name="notify_goal_title">已达成每日目标！</string>
+    <string name="notify_goal_text">你今天走了 %1$s 步。</string>
+    <string name="notify_streak_title">你的 %1$d 天连续达标即将中断</string>
+    <string name="notify_streak_text">再走 %1$s 步即可保持连续达标。</string>
+    <string name="settings_data">数据</string>
+    <string name="export_csv">导出</string>
+    <string name="export_csv_hint">将所有天数保存为 CSV 文件</string>
+    <string name="import_csv">导入</string>
+    <string name="import_csv_hint">从 CSV 文件恢复天数，保留较大的数值</string>
+    <string name="export_done">已导出 %1$d 天</string>
+    <string name="import_done">已更新 %1$d 天</string>
+    <string name="csv_failed">无法读取或写入文件</string>
+    <string name="settings_language">语言</string>
+    <string name="language">应用语言</string>
+    <string name="language_system">系统</string>
+    <string name="medal_group_early">早起鸟</string>
+    <string name="medal_group_early_text">08:00 前至少走 1,000 步的天数（需开启 HyperOS 记录）</string>
+
+    <string name="widget_streak_label">连续达标与本周</string>
+    <string name="widget_streak_description">每日目标连续达标情况和本周进度</string>
+    <string name="widget_month_label">月历</string>
+    <string name="widget_month_description">本月各天，按目标完成情况着色</string>
+    <string name="month_goal_days">%1$d 天达标</string>
+
+    <string name="near_goal_notification">接近目标时通知</string>
+    <string name="near_goal_notification_hint">在达到每日目标 80% 的当天，你会收到一条通知。</string>
+    <string name="weekly_summary">每周总结</string>
+    <string name="weekly_summary_hint">在每周最后一天 20:00 左右，显示本周总步数及与上周相比的变化。</string>
+    <string name="notify_near_title">即将达成目标！</string>
+    <string name="notify_near_text">距离每日目标还差 %1$s 步。</string>
+    <string name="notify_week_title">本周你走了 %1$s 步</string>
+    <string name="notify_week_more">比上周多 %1$d%%。每周目标：%2$s</string>
+    <string name="notify_week_less">比上周少 %1$d%%。每周目标：%2$s</string>
+    <string name="notify_week_goal">每周目标：%1$s</string>
+    <string name="year_summary">%1$d 年总结</string>
+    <string name="previous_year">上一年</string>
+    <string name="next_year">下一年</string>
+    <string name="year_medals">获得的勋章</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>每周总结通知：在每周最后一天晚上显示本周总步数及与上周相比的变化</item>
+        <item>接近目标时的通知（每日目标的 80%）</item>
+        <item>历史中的年度总结：总计、平均、达标天数、最佳月份和单日、获得的勋章</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>勋章显示获得次数（例如 5x）</item>
+        <item>小部件使用手机配色（Material You）或应用主题</item>
+        <item>小部件随尺寸调整：小尺寸更简洁，大尺寸更详细</item>
+        <item>新小部件：连续达标与本周、月历</item>
+        <item>新增语言：德语、西班牙语、法语、意大利语、葡萄牙语、俄语、阿拉伯语、日语、中文、韩语</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>“今天”小部件新增目标圆环</item>
+        <item>早起鸟勋章（需开启 HyperOS 记录）</item>
+        <item>英语选项（设置 → 语言）</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>距离和卡路里估算（身高、体重、公里或英里）</item>
+        <item>历史中所选日期的每小时明细和步行/跑步区分（需开启 HyperOS 记录）</item>
+        <item>最佳单月纪录，以及每周第一天的选择（周一或周日）</item>
+        <item>可选通知：达成目标时，以及晚间连续达标提醒</item>
+        <item>CSV 导出和导入</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>全新设计：底部栏包含今天、历史和勋章</item>
+        <item>“今天”页面显示目标圆环、连续达标和每周进度</item>
+        <item>历史：月历、单日详情和个人纪录</item>
+        <item>勋章和等级：每日步数、连续达标、每周目标和总步数</item>
+        <item>可调整每日和每周目标；小部件也会显示新目标</item>
+        <item>设置：浅色、深色或跟随系统主题，以及手机配色</item>
+        <item>步数来源开关和读取记录移至设置</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>首个版本：计步、每日记录、今天和 7 天小部件</item>
+        <item>在小米手机上读取 HyperOS 步数记录，包括以往的天数</item>
+        <item>后台继续计步选项和电池帮助卡片</item>
+    </string-array>
+
+    <string name="widget_today_label">今日步数</string>
+    <string name="widget_today_description">今天的步数和目标进度</string>
+    <string name="widget_week_label">7 天图表</string>
+    <string name="widget_week_description">最近 7 天的步数</string>
+
+    <string name="oem_title">在后台也记录步数</string>
+    <string name="oem_title_stock">电池优化豁免</string>
+    <string name="oem_intro">这部手机可能会在后台关闭应用。按以下步骤操作后，即使应用关闭，AdımSayar 也能读取计步器。</string>
+    <string name="oem_open">打开</string>
+    <string name="oem_dismiss">暂时关闭</string>
+    <string name="oem_open_failed">此手机无法打开该页面，请在设置中手动完成此步骤。</string>
+    <string name="oem_battery_common">设置 → 应用 → AdımSayar → 电池 → 无限制</string>
+
+    <string name="oem_xiaomi_1">设置 → 应用设置 → 应用管理 → AdımSayar → 自启动 → 开启</string>
+    <string name="oem_xiaomi_2">在同一页面，省电策略 → 无限制</string>
+
+    <string name="oem_samsung_1">设置 → 应用程序 → AdımSayar → 电池 → 不受限制</string>
+    <string name="oem_samsung_2">电池 → 后台使用限制 → 永不休眠的应用程序 → 添加 AdımSayar</string>
+
+    <string name="oem_huawei_1">电池 → 应用启动管理 → AdımSayar → 关闭自动管理，开启允许自启动、允许关联启动和允许后台活动</string>
+
+    <string name="oem_oppo_1">电池 → 允许后台行为 → AdımSayar：允许后台运行</string>
+    <string name="oem_oppo_2">自启动 → AdımSayar → 开启</string>
+
+    <string name="oem_vivo_1">电池 → 后台耗电管理 → 允许后台高耗电 → 将 AdımSayar 加入白名单</string>
+    <string name="oem_vivo_2">自启动 → AdımSayar → 开启</string>
+
+    <string name="oem_asus_1">自启动 → 允许 AdımSayar</string>
+
+    <string name="oem_transsion_1">自动管理 → 在应用列表中选择 AdımSayar，开启全部三项权限</string>
+</resources>
