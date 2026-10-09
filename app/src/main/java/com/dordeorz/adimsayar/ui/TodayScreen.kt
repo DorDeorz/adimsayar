@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -74,6 +75,16 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
                 MessageCard(stringResource(R.string.xiaomi_stalled_title), stringResource(R.string.xiaomi_stalled_text))
             }
             null -> Unit
+        }
+        if (state.xiaomiProblem != null) {
+            item {
+                SwitchCard(
+                    stringResource(R.string.xiaomi_card_title),
+                    stringResource(R.string.xiaomi_card_text),
+                    state.xiaomiEnabled,
+                    actions.onXiaomiEnabledChange,
+                )
+            }
         }
         state.batteryProfile?.let { profile ->
             item { BatteryHelpCard(profile = profile, onDismiss = actions.onDismissBatteryCard) }
@@ -274,6 +285,19 @@ private fun Bar(steps: Long, scale: Long, goal: Long, isToday: Boolean) {
             .clip(RoundedCornerShape(topStart = 6.dp, topEnd = 6.dp))
             .background(color),
     )
+}
+
+@Composable
+private fun SwitchCard(title: String, text: String, enabled: Boolean, onChange: (Boolean) -> Unit) {
+    Card {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(text, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = enabled, onCheckedChange = onChange, modifier = Modifier.padding(start = 12.dp))
+        }
+    }
 }
 
 @Composable
