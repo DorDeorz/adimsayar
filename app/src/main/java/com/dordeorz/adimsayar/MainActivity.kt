@@ -59,8 +59,6 @@ class MainActivity : ComponentActivity() {
             monitor.start()
             StepCounterService.startIfEnabled(applicationContext)
         }
-        val appContext = applicationContext
-        AppScope.launch(Dispatchers.IO) { XiaomiSteps.probe(appContext) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +106,8 @@ class MainActivity : ComponentActivity() {
             monitor.start()
             StepCounterService.startIfEnabled(applicationContext)
         }
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) { XiaomiSteps.probe(appContext) }
     }
 
     override fun onResume() {
