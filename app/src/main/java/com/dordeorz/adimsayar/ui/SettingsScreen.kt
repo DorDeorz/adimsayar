@@ -43,10 +43,12 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
-import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.DistanceUnit
+import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
+import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
@@ -54,11 +56,12 @@ import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
 import com.dordeorz.adimsayar.data.WEIGHT_RANGE
 import java.time.format.TextStyle
 
-private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, ReleaseNotes }
+private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.5.0", R.array.release_notes_0_5_0),
     ReleaseNote("0.4.0", R.array.release_notes_0_4_0),
     ReleaseNote("0.3.0", R.array.release_notes_0_3_0),
     ReleaseNote("0.2.0", R.array.release_notes_0_2_0),
@@ -173,13 +176,9 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_language))
-            ChoiceRow(
-                title = stringResource(R.string.language),
-                options = AppLanguage.entries,
-                selected = settings.language,
-                label = { stringResource(languageLabel(it)) },
-                onSelect = actions.onLanguageChange,
-            )
+            ValueRow(stringResource(R.string.language), languageLabel(settings.language)) {
+                dialog = SettingsDialog.Language
+            }
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
@@ -272,6 +271,11 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                 }
             }
         }
+        SettingsDialog.Language -> LanguageDialog(
+            selected = settings.language,
+            onSelect = actions.onLanguageChange,
+            onDismiss = { dialog = null },
+        )
         null -> Unit
     }
 }
@@ -373,10 +377,36 @@ private fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
     }
 }
 
-private fun languageLabel(language: AppLanguage) = when (language) {
-    AppLanguage.System -> R.string.language_system
-    AppLanguage.Turkish -> R.string.language_turkish
-    AppLanguage.English -> R.string.language_english
+@Composable
+private fun languageLabel(language: String): String =
+    if (language == SYSTEM_LANGUAGE) stringResource(R.string.language_system) else Locales.displayName(language)
+
+@Composable
+private fun LanguageDialog(selected: String, onSelect: (String) -> Unit, onDismiss: () -> Unit) {
+    TextListDialog(stringResource(R.string.language), onDismiss = onDismiss) {
+        Column(Modifier.selectableGroup()) {
+            (listOf(SYSTEM_LANGUAGE) + SUPPORTED_LANGUAGES).forEach { language ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = language == selected,
+                            onClick = {
+                                onDismiss()
+                                onSelect(language)
+                            },
+                            role = Role.RadioButton,
+                        )
+                        .padding(vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
+                    RadioButton(selected = language == selected, onClick = null)
+                    Text(languageLabel(language), style = MaterialTheme.typography.bodyLarge)
+                }
+            }
+        }
+    }
 }
 
 @Composable

@@ -160,6 +160,19 @@
     <string name="medal_group_early">Early bird</string>
     <string name="medal_group_early_text">Days with at least 1,000 steps before 08:00 (with the HyperOS record on)</string>
 
+    <string name="widget_streak_label">Streak and week</string>
+    <string name="widget_streak_description">Your daily goal streak and this week\'s progress</string>
+    <string name="widget_month_label">Monthly calendar</string>
+    <string name="widget_month_description">This month\'s days, colored by goal</string>
+    <string name="month_goal_days">%1$d goal days</string>
+
+    <string-array name="release_notes_0_5_0">
+        <item>Medals show how many times each was earned (e.g. 5x)</item>
+        <item>Widgets use the phone\'s colors (Material You) or the app theme</item>
+        <item>Widgets adapt to their size: simpler when small, more detail when large</item>
+        <item>New widgets: streak and week, monthly calendar</item>
+        <item>New languages: German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese, Korean</item>
+    </string-array>
     <string-array name="release_notes_0_4_0">
         <item>Goal ring on the Today widget</item>
         <item>Early bird medal (with the HyperOS record on)</item>

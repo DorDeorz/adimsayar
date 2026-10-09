@@ -11,7 +11,6 @@ enum class ThemeMode { System, Light, Dark }
 
 enum class DistanceUnit { Km, Mile }
 
-enum class AppLanguage { System, Turkish, English }
 
 data class AppSettings(
     val themeMode: ThemeMode = ThemeMode.System,
@@ -24,7 +23,7 @@ data class AppSettings(
     val weekStart: DayOfWeek = DayOfWeek.MONDAY,
     val goalNotification: Boolean = false,
     val streakReminder: Boolean = false,
-    val language: AppLanguage = AppLanguage.System,
+    val language: String = SYSTEM_LANGUAGE,
 )
 
 const val DEFAULT_DAILY_GOAL = 10_000L
@@ -36,6 +35,15 @@ const val DEFAULT_WEIGHT_KG = 70
 val HEIGHT_RANGE = 100..230
 val WEIGHT_RANGE = 30..250
 val WEEK_START_OPTIONS = listOf(DayOfWeek.MONDAY, DayOfWeek.SUNDAY)
+const val SYSTEM_LANGUAGE = ""
+val SUPPORTED_LANGUAGES = listOf("tr", "en", "de", "es", "fr", "it", "pt", "ru", "ar", "ja", "zh", "ko")
+
+private fun languageTag(stored: String?): String = when (stored) {
+    "Turkish" -> "tr"
+    "English" -> "en"
+    in SUPPORTED_LANGUAGES -> stored.orEmpty()
+    else -> SYSTEM_LANGUAGE
+}
 
 class SettingsStore private constructor(context: Context) {
 
@@ -64,7 +72,7 @@ class SettingsStore private constructor(context: Context) {
 
     fun setStreakReminder(enabled: Boolean) = update { it.copy(streakReminder = enabled) }
 
-    fun setLanguage(language: AppLanguage) = update { it.copy(language = language) }
+    fun setLanguage(language: String) = update { it.copy(language = language) }
 
     private fun update(change: (AppSettings) -> AppSettings) {
         val next = change(_settings.value)
@@ -79,7 +87,7 @@ class SettingsStore private constructor(context: Context) {
             putString(KEY_WEEK_START, next.weekStart.name)
             putBoolean(KEY_GOAL_NOTIFICATION, next.goalNotification)
             putBoolean(KEY_STREAK_REMINDER, next.streakReminder)
-            putString(KEY_LANGUAGE, next.language.name)
+            putString(KEY_LANGUAGE, next.language)
         }
         _settings.value = next
     }
@@ -95,7 +103,7 @@ class SettingsStore private constructor(context: Context) {
         weekStart = WEEK_START_OPTIONS.firstOrNull { it.name == prefs.getString(KEY_WEEK_START, null) } ?: DayOfWeek.MONDAY,
         goalNotification = prefs.getBoolean(KEY_GOAL_NOTIFICATION, false),
         streakReminder = prefs.getBoolean(KEY_STREAK_REMINDER, false),
-        language = AppLanguage.entries.firstOrNull { it.name == prefs.getString(KEY_LANGUAGE, null) } ?: AppLanguage.System,
+        language = languageTag(prefs.getString(KEY_LANGUAGE, null)),
     )
 
     companion object {

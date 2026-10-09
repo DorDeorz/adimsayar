@@ -25,7 +25,7 @@ private val Neutral17 = Color(0xFF262825)
 private val Neutral90 = Color(0xFFE6E7E1)
 private val Neutral95 = Color(0xFFF2F2EE)
 
-private val LightColors = lightColorScheme(
+internal val LightColors = lightColorScheme(
     primary = Green,
     primaryContainer = GreenContainer,
     onPrimaryContainer = Color(0xFF0B2E0E),
@@ -34,7 +34,7 @@ private val LightColors = lightColorScheme(
     surfaceContainer = Neutral90,
     surfaceContainerHighest = Color(0xFFDCDDD7),
 )
-private val DarkColors = darkColorScheme(
+internal val DarkColors = darkColorScheme(
     primary = GreenDark,
     primaryContainer = GreenContainerDark,
     onPrimaryContainer = GreenContainer,

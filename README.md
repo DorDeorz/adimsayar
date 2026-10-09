@@ -18,6 +18,8 @@ v1: ana ekran (bugün, son 7 gün, toplam), iki widget, marka bazlı pil yardım
 
 0.4.0: Bugün widget'ında hedef halkası, erken kalkan madalyası (HyperOS kaydı açıkken, saat 08:00'den önceki adımlardan), Türkçe/İngilizce dil seçimi.
 
+0.5.0: madalyalarda kaç kez kazanıldığı (ör. 5x), Material You renkli ve boyuta uyan widget'lar, yeni widget'lar (seri ve hafta, aylık takvim), 12 dil.
+
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)
 

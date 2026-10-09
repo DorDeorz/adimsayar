@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">اليوم</string>
+    <string name="steps_unit">خطوة</string>
+    <string name="goal_short">الهدف %1$s</string>
+    <string name="last_7_days">آخر 7 أيام</string>
+    <string name="total">الإجمالي</string>
+    <string name="last_reading">آخر قراءة للعداد: %1$s</string>
+    <string name="no_reading_yet">لم تتم قراءة العداد بعد</string>
+
+    <string name="permission_title">مطلوب إذن النشاط البدني</string>
+    <string name="permission_text">يقرأ AdımSayar خطواتك من مستشعر الهاتف نفسه. ولهذا يطلب Android إذن النشاط البدني.</string>
+    <string name="permission_grant">سماح</string>
+    <string name="permission_denied_text">تم رفض الإذن. الإعدادات ← التطبيقات ← AdımSayar ← الأذونات ← النشاط البدني ← سماح.</string>
+    <string name="permission_open_settings">فتح الإعدادات</string>
+
+    <string name="sensor_missing_title">لم يتم العثور على مستشعر الخطوات</string>
+    <string name="sensor_missing_text">لا يوفّر هذا الهاتف مستشعرًا لعدّ الخطوات. لا يستطيع AdımSayar عدّ الخطوات على هذا الجهاز.</string>
+
+    <string name="frozen_title">يبدو أن عداد الخطوات متوقف</string>
+    <string name="frozen_text">يرصد الهاتف الخطوات لكن العداد لا يتقدم. تمت إعادة الاتصال بالمستشعر، وسيختفي هذا التنبيه تلقائيًا بعد بضع خطوات.</string>
+
+    <string name="service_card_title">متابعة العدّ في الخلفية</string>
+    <string name="xiaomi_unreadable_title">تعذّرت قراءة سجل خطوات HyperOS</string>
+    <string name="xiaomi_unreadable_text">الخطوات لا تتحدث حاليًا. ربما غيّر تحديث HyperOS السجل. يمكنك إيقاف المفتاح أدناه ومتابعة العدّ عبر «متابعة العدّ في الخلفية».</string>
+    <string name="xiaomi_stalled_title">سجل خطوات HyperOS لا يتقدم</string>
+    <string name="xiaomi_stalled_text">رصد مستشعر الهاتف خطوات في الدقائق الأخيرة لكن سجل HyperOS لا يزيد. تحقّق مجددًا بعد بضع دقائق، وإن لم يتحسن فأوقف المفتاح أدناه وشغّل «متابعة العدّ في الخلفية».</string>
+    <string name="xiaomi_card_title">استخدام سجل خطوات HyperOS</string>
+    <string name="xiaomi_card_text">تُقرأ الخطوات من سجل الخطوات الخاص بالهاتف. تُحسب كاملة حتى والتطبيق مغلق، ولا حاجة إلى إشعار، وتُضاف الأيام السابقة أيضًا.</string>
+    <string name="service_card_text">شغّل هذا الخيار إذا لم تُحسب الخطوات والتطبيق مغلق. يبقى العداد قيد التشغيل، ويظهر إشعار صامت دائم في شريط الإشعارات.</string>
+    <string name="service_channel">عداد الخطوات</string>
+    <string name="service_title">AdımSayar يعدّ الخطوات</string>
+    <string name="service_text">خطوات اليوم: %1$s</string>
+    <string name="service_text_starting">جارٍ تشغيل العداد</string>
+
+    <string name="log_title">سجل القراءات</string>
+    <string name="log_empty">لا توجد سجلات بعد</string>
+    <string name="log_reading">العداد %1$d، +%2$d خطوة</string>
+    <string name="log_reboot">أُعيد تشغيل الهاتف، العداد %1$d، +%2$d خطوة</string>
+    <string name="log_reset">أُعيد ضبط العداد، العداد %1$d، +%2$d خطوة</string>
+    <string name="log_stale">تم تجاهل قيمة قديمة، العداد %1$d، +%2$d خطوة</string>
+    <string name="log_timeout">المستشعر لم يستجب</string>
+    <string name="log_no_permission">لا يوجد إذن</string>
+    <string name="log_no_sensor">لا يوجد مستشعر</string>
+    <string name="log_register_failed">تعذّر الاتصال بالمستشعر</string>
+    <string name="source_app">التطبيق</string>
+    <string name="source_job">مهمة كل 15 دقيقة</string>
+    <string name="source_system">حدث نظام</string>
+    <string name="source_widget">الأداة</string>
+    <string name="source_service">العداد في الخلفية</string>
+    <string name="log_xiaomi_denied">لا يوجد إذن لقراءة سجل HyperOS</string>
+    <string name="log_xiaomi_missing">لم يتم العثور على سجل HyperOS</string>
+    <string name="log_xiaomi_error">تعذّرت قراءة سجل HyperOS (%1$s)</string>
+    <string name="log_xiaomi_synced">سجل HyperOS: خطوات اليوم %1$d، الأيام المحدّثة %2$d</string>
+
+    <string name="tab_today">اليوم</string>
+    <string name="tab_history">السجل</string>
+    <string name="tab_medals">الميداليات</string>
+    <string name="goal_reached">تم بلوغ الهدف اليومي!</string>
+    <string name="goal_remaining">المتبقي للهدف: %1$s خطوة</string>
+    <string name="steps_value">%1$s خطوة</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">السلسلة</string>
+    <string name="days_count">%1$d يوم</string>
+    <string name="weeks_count">%1$d أسبوع</string>
+    <string name="million_steps">%1$s مليون خطوة</string>
+    <string name="streak_best">الأطول: %1$d يوم</string>
+    <string name="this_week">هذا الأسبوع</string>
+
+    <string name="previous_month">الشهر السابق</string>
+    <string name="next_month">الشهر التالي</string>
+    <string name="daily_average">المتوسط اليومي</string>
+    <string name="goal_days">أيام الهدف</string>
+    <string name="records">الأرقام القياسية</string>
+    <string name="record_best_day">أفضل يوم</string>
+    <string name="record_best_week">أفضل أسبوع</string>
+    <string name="week_of">أسبوع %1$s</string>
+    <string name="record_longest_streak">أطول سلسلة</string>
+    <string name="record_goal_days">أيام بلوغ الهدف</string>
+    <string name="record_active_average">متوسط الأيام النشطة</string>
+    <string name="active_days">الأيام النشطة: %1$d</string>
+    <string name="until_date">حتى %1$s</string>
+
+    <string name="level">المستوى</string>
+    <string name="level_next">المتبقي للمستوى التالي: %1$s خطوة</string>
+    <string name="medals_earned">%1$d / %2$d ميدالية</string>
+    <string name="medals_retroactive">تُحسب الميداليات من الأيام المسجلة. إذا غيّرت هدفك، تُقيَّم الأيام السابقة أيضًا وفق الهدف الجديد.</string>
+    <string name="medal_group_daily">الخطوات اليومية</string>
+    <string name="medal_group_daily_text">امشِ هذا العدد من الخطوات في يوم واحد</string>
+    <string name="medal_group_streak">السلسلة</string>
+    <string name="medal_group_streak_text">ابلغ هدفك اليومي في أيام متتالية</string>
+    <string name="medal_group_weekly">الهدف الأسبوعي</string>
+    <string name="medal_group_weekly_text">عدد الأسابيع التي بلغت فيها هدفك الأسبوعي</string>
+    <string name="medal_group_total">المسافة الإجمالية</string>
+    <string name="medal_group_total_text">إجمالي الخطوات في جميع الأيام</string>
+
+    <string name="settings">الإعدادات</string>
+    <string name="back">رجوع</string>
+    <string name="settings_goals">الأهداف</string>
+    <string name="daily_goal">الهدف اليومي</string>
+    <string name="weekly_goal">الهدف الأسبوعي</string>
+    <string name="goal_range">بين %1$s و%2$s</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="theme_system">حسب النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="settings_dynamic_color">استخدام ألوان الهاتف</string>
+    <string name="settings_dynamic_color_hint">يأخذ الألوان من الخلفية. عند إيقافه يُستخدم المظهر الأخضر.</string>
+    <string name="settings_counting">مصدر الخطوات</string>
+    <string name="settings_about">حول</string>
+    <string name="settings_version">الإصدار</string>
+    <string name="release_notes">ملاحظات الإصدار</string>
+    <string name="release_notes_hint">ما الجديد في كل إصدار</string>
+    <string name="log_hint">أحدث قراءات العداد وHyperOS</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="close">إغلاق</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">ميل</string>
+    <string name="unit_cm">سم</string>
+    <string name="unit_kg">كغ</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">حسب الساعة</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">مشي %1$s</string>
+    <string name="running_steps">جري %1$s</string>
+    <string name="record_best_month">أفضل شهر</string>
+    <string name="week_start">أول يوم في الأسبوع</string>
+    <string name="settings_body">الجسم والمسافة</string>
+    <string name="height">الطول</string>
+    <string name="height_value">%1$d سم</string>
+    <string name="weight">الوزن</string>
+    <string name="weight_value">%1$d كغ</string>
+    <string name="distance_unit">وحدة المسافة</string>
+    <string name="body_hint">تُقدَّر المسافة والسعرات الحرارية من الطول والوزن، وهي تقريبية.</string>
+    <string name="settings_notifications">الإشعارات</string>
+    <string name="goal_notification">إشعار عند بلوغ الهدف</string>
+    <string name="goal_notification_hint">يصلك إشعار واحد في اليوم الذي تبلغ فيه هدفك اليومي.</string>
+    <string name="streak_reminder">تذكير مسائي بالسلسلة</string>
+    <string name="streak_reminder_hint">يذكّرك نحو الساعة 20:00 إذا لم تبلغ هدفك ولديك سلسلة.</string>
+    <string name="notify_channel">الهدف والسلسلة</string>
+    <string name="notify_goal_title">تم بلوغ الهدف اليومي!</string>
+    <string name="notify_goal_text">مشيت اليوم %1$s خطوة.</string>
+    <string name="notify_streak_title">سلسلتك (%1$d يوم) معرّضة للانقطاع</string>
+    <string name="notify_streak_text">متبقٍ %1$s خطوة للحفاظ على سلسلتك.</string>
+    <string name="settings_data">البيانات</string>
+    <string name="export_csv">تصدير</string>
+    <string name="export_csv_hint">حفظ جميع الأيام في ملف CSV</string>
+    <string name="import_csv">استيراد</string>
+    <string name="import_csv_hint">استعادة الأيام من ملف CSV، ويُحتفظ بالرقم الأعلى</string>
+    <string name="export_done">تم تصدير الأيام: %1$d</string>
+    <string name="import_done">تم تحديث الأيام: %1$d</string>
+    <string name="csv_failed">تعذّرت قراءة الملف أو كتابته</string>
+    <string name="settings_language">اللغة</string>
+    <string name="language">لغة التطبيق</string>
+    <string name="language_system">النظام</string>
+    <string name="medal_group_early">الطائر المبكر</string>
+    <string name="medal_group_early_text">أيام فيها 1,000 خطوة على الأقل قبل 08:00 (مع تشغيل سجل HyperOS)</string>
+
+    <string name="widget_streak_label">السلسلة والأسبوع</string>
+    <string name="widget_streak_description">سلسلة هدفك اليومي وتقدّم هذا الأسبوع</string>
+    <string name="widget_month_label">التقويم الشهري</string>
+    <string name="widget_month_description">أيام هذا الشهر ملوّنة حسب الهدف</string>
+    <string name="month_goal_days">أيام الهدف: %1$d</string>
+
+    <string-array name="release_notes_0_5_0">
+        <item>تعرض الميداليات عدد مرات الحصول على كل منها (مثل 5x)</item>
+        <item>تستخدم الأدوات ألوان الهاتف (Material You) أو مظهر التطبيق</item>
+        <item>تتكيف الأدوات مع حجمها: أبسط عندما تكون صغيرة وتفاصيل أكثر عندما تكون كبيرة</item>
+        <item>أدوات جديدة: السلسلة والأسبوع، والتقويم الشهري</item>
+        <item>لغات جديدة: الألمانية والإسبانية والفرنسية والإيطالية والبرتغالية والروسية والعربية واليابانية والصينية والكورية</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>حلقة الهدف في أداة اليوم</item>
+        <item>ميدالية الطائر المبكر (مع تشغيل سجل HyperOS)</item>
+        <item>خيار اللغة الإنجليزية (الإعدادات ← اللغة)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>تقدير المسافة والسعرات الحرارية (الطول، الوزن، km أو ميل)</item>
+        <item>توزيع حسب الساعة وفصل المشي عن الجري لليوم المحدد في السجل (مع تشغيل سجل HyperOS)</item>
+        <item>رقم أفضل شهر واختيار أول يوم في الأسبوع (الاثنين أو الأحد)</item>
+        <item>إشعارات اختيارية: عند بلوغ الهدف وتذكير مسائي بالسلسلة</item>
+        <item>تصدير واستيراد CSV</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>تصميم جديد: اليوم والسجل والميداليات في الشريط السفلي</item>
+        <item>حلقة الهدف والسلسلة والتقدم الأسبوعي في شاشة اليوم</item>
+        <item>السجل: تقويم شهري وتفاصيل اليوم والأرقام القياسية الشخصية</item>
+        <item>الميداليات والمستويات: الخطوات اليومية والسلسلة والهدف الأسبوعي وإجمالي الخطوات</item>
+        <item>أهداف يومية وأسبوعية قابلة للتعديل، وتعرض الأداة الهدف الجديد أيضًا</item>
+        <item>الإعدادات: مظهر فاتح أو داكن أو حسب النظام، وألوان الهاتف</item>
+        <item>نُقلت مفاتيح مصدر الخطوات وسجل القراءات إلى الإعدادات</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>الإصدار الأول: عدّ الخطوات والسجلات اليومية وأداتا اليوم و7 أيام</item>
+        <item>على هواتف Xiaomi، القراءة من سجل خطوات HyperOS بما في ذلك الأيام السابقة</item>
+        <item>خيار متابعة العدّ في الخلفية وبطاقة مساعدة للبطارية</item>
+    </string-array>
+
+    <string name="widget_today_label">خطوات اليوم</string>
+    <string name="widget_today_description">الخطوات التي مشيتها اليوم والتقدم نحو الهدف</string>
+    <string name="widget_week_label">مخطط 7 أيام</string>
+    <string name="widget_week_description">عدد الخطوات في آخر 7 أيام</string>
+
+    <string name="oem_title">سجّل الخطوات في الخلفية أيضًا</string>
+    <string name="oem_title_stock">استثناء من تحسين البطارية</string>
+    <string name="oem_intro">قد يغلق هذا الهاتف التطبيقات في الخلفية. تتيح الخطوات أدناه لـ AdımSayar قراءة العداد حتى والتطبيق مغلق.</string>
+    <string name="oem_open">فتح</string>
+    <string name="oem_dismiss">إغلاق الآن</string>
+    <string name="oem_open_failed">تعذّر فتح هذه الشاشة على هذا الهاتف. نفّذ الخطوة يدويًا من الإعدادات.</string>
+    <string name="oem_battery_common">الإعدادات ← التطبيقات ← AdımSayar ← البطارية ← بلا قيود</string>
+
+    <string name="oem_xiaomi_1">الإعدادات ← التطبيقات ← إدارة التطبيقات ← AdımSayar ← التشغيل التلقائي ← تشغيل</string>
+    <string name="oem_xiaomi_2">في الشاشة نفسها، توفير البطارية ← بلا قيود</string>
+
+    <string name="oem_samsung_1">الإعدادات ← التطبيقات ← AdımSayar ← البطارية ← غير مقيد</string>
+    <string name="oem_samsung_2">البطارية ← حدود الاستخدام في الخلفية ← التطبيقات التي لا تدخل في وضع السكون مطلقًا ← أضف AdımSayar</string>
+
+    <string name="oem_huawei_1">البطارية ← تشغيل التطبيقات ← AdımSayar ← أوقف الإدارة التلقائية، وشغّل التشغيل التلقائي والتشغيل الثانوي والتشغيل في الخلفية</string>
+
+    <string name="oem_oppo_1">البطارية ← السماح بالنشاط في الخلفية ← AdımSayar: السماح بالتشغيل في الخلفية</string>
+    <string name="oem_oppo_2">التشغيل التلقائي ← AdımSayar ← تشغيل</string>
+
+    <string name="oem_vivo_1">البطارية ← إدارة استهلاك الطاقة في الخلفية ← استهلاك عالٍ للطاقة في الخلفية ← أضف AdımSayar إلى القائمة المسموح بها</string>
+    <string name="oem_vivo_2">التشغيل التلقائي ← AdımSayar ← تشغيل</string>
+
+    <string name="oem_asus_1">التشغيل التلقائي ← السماح لـ AdımSayar</string>
+
+    <string name="oem_transsion_1">الإدارة التلقائية ← اختر AdımSayar من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
+</resources>

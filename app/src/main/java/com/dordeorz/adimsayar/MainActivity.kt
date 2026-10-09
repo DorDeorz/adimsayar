@@ -27,7 +27,6 @@ import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.AchievementMath
-import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -253,7 +252,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun changeLanguage(language: AppLanguage) {
+    private fun changeLanguage(language: String) {
         if (language == settingsStore.settings.value.language) return
         settingsStore.setLanguage(language)
         refreshWidgets()

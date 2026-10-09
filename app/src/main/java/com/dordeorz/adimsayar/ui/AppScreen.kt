@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
-import com.dordeorz.adimsayar.data.AppLanguage
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
@@ -85,7 +84,7 @@ class MainActions(
     val onWeekStartChange: (DayOfWeek) -> Unit,
     val onGoalNotificationChange: (Boolean) -> Unit,
     val onStreakReminderChange: (Boolean) -> Unit,
-    val onLanguageChange: (AppLanguage) -> Unit,
+    val onLanguageChange: (String) -> Unit,
     val onExport: () -> Unit,
     val onImport: () -> Unit,
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,

@@ -115,4 +115,19 @@ class AchievementMathTest {
         assertEquals(7L, medal(result, MedalGroup.EarlyBird, 30).progress)
         assertFalse(medal(result, MedalGroup.EarlyBird, 30).earned)
     }
+
+    @Test
+    fun medalsCountHowManyTimesTheyWereEarned() {
+        val result = AchievementMath.compute(
+            days(6_000, 11_000, 12_000, 13_000, 2_000, 10_000, 10_000, 10_000),
+            monday.plusDays(7),
+            10_000,
+            30_000,
+        )
+        assertEquals(7, medal(result, MedalGroup.DailySteps, 5_000).times)
+        assertEquals(6, medal(result, MedalGroup.DailySteps, 10_000).times)
+        assertEquals(2, medal(result, MedalGroup.Streak, 3).times)
+        assertEquals(1, medal(result, MedalGroup.WeeklyGoal, 1).times)
+        assertEquals(0, medal(result, MedalGroup.Total, 100_000).times)
+    }
 }

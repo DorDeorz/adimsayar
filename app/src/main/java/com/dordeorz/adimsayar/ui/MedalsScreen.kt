@@ -149,24 +149,38 @@ private fun MedalBadge(medal: Medal, modifier: Modifier) {
     val color = MedalColors[medal.tier % MedalColors.size]
     val muted = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f)
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(
-            modifier = Modifier
-                .size(56.dp)
-                .then(
-                    if (medal.earned) {
-                        Modifier.background(color.copy(alpha = 0.18f), CircleShape).border(3.dp, color, CircleShape)
-                    } else {
-                        Modifier.border(2.dp, muted, CircleShape)
-                    },
-                ),
-            contentAlignment = Alignment.Center,
-        ) {
-            Icon(
-                painterResource(R.drawable.ic_trophy),
-                contentDescription = null,
-                tint = if (medal.earned) color else muted,
-                modifier = Modifier.size(28.dp),
-            )
+        Box(modifier = Modifier.size(64.dp)) {
+            Box(
+                modifier = Modifier
+                    .size(56.dp)
+                    .align(Alignment.Center)
+                    .then(
+                        if (medal.earned) {
+                            Modifier.background(color.copy(alpha = 0.18f), CircleShape).border(3.dp, color, CircleShape)
+                        } else {
+                            Modifier.border(2.dp, muted, CircleShape)
+                        },
+                    ),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    painterResource(R.drawable.ic_trophy),
+                    contentDescription = null,
+                    tint = if (medal.earned) color else muted,
+                    modifier = Modifier.size(28.dp),
+                )
+            }
+            if (medal.times > 0) {
+                Text(
+                    text = "${medal.times}x",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .background(MaterialTheme.colorScheme.primary, CircleShape)
+                        .padding(horizontal = 6.dp, vertical = 1.dp),
+                )
+            }
         }
         Text(
             targetLabel(medal),

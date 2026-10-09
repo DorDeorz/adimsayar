@@ -16,7 +16,14 @@ enum class MedalGroup(val targets: List<Long>) {
 const val EARLY_BIRD_HOUR = 8
 const val EARLY_BIRD_STEPS = 1_000L
 
-data class Medal(val group: MedalGroup, val tier: Int, val target: Long, val progress: Long, val earnedOn: LocalDate?) {
+data class Medal(
+    val group: MedalGroup,
+    val tier: Int,
+    val target: Long,
+    val progress: Long,
+    val earnedOn: LocalDate?,
+    val times: Int = 0,
+) {
     val earned: Boolean get() = earnedOn != null
 }
 
@@ -70,6 +77,8 @@ object AchievementMath {
         var metWeeks = 0
         var earlyDays = 0
         val earned = HashMap<Pair<MedalGroup, Long>, LocalDate>()
+        val dailyTimes = IntArray(MedalGroup.DailySteps.targets.size)
+        val streakTimes = IntArray(MedalGroup.Streak.targets.size)
 
         fun earn(group: MedalGroup, value: Long, date: LocalDate) {
             for (target in group.targets) {
@@ -111,6 +120,10 @@ object AchievementMath {
             }
             earn(MedalGroup.DailySteps, steps, date)
             earn(MedalGroup.Streak, streak.toLong(), date)
+            MedalGroup.DailySteps.targets.forEachIndexed { i, target -> if (steps >= target) dailyTimes[i]++ }
+            if (steps >= dailyGoal) {
+                MedalGroup.Streak.targets.forEachIndexed { i, target -> if (streak.toLong() == target) streakTimes[i]++ }
+            }
             earn(MedalGroup.Total, total, date)
             if (earlyBirdDays != null && date in earlyBirdDays) {
                 earlyDays++
@@ -129,7 +142,14 @@ object AchievementMath {
         val groups = MedalGroup.entries.filter { it != MedalGroup.EarlyBird || earlyBirdDays != null }
         val medals = groups.flatMap { group ->
             group.targets.mapIndexed { tier, target ->
-                Medal(group, tier, target, progress.getValue(group), earned[group to target])
+                val times = when (group) {
+                    MedalGroup.DailySteps -> dailyTimes[tier]
+                    MedalGroup.Streak -> streakTimes[tier]
+                    MedalGroup.WeeklyGoal -> (metWeeks / target).toInt()
+                    MedalGroup.EarlyBird -> (earlyDays / target).toInt()
+                    MedalGroup.Total -> 0
+                }
+                Medal(group, tier, target, progress.getValue(group), earned[group to target], times)
             }
         }
         val records = Records(
