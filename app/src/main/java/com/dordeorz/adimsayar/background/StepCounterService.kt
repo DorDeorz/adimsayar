@@ -24,6 +24,7 @@ import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.isNotable
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.launch
@@ -57,16 +58,16 @@ class StepCounterService : Service(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        val counter = event.values[0].toLong()
         val now = SystemClock.elapsedRealtime()
         val appContext = applicationContext
+        val reading = StepSensors.reading(appContext, event)
         AppScope.launch {
             val repository = StepRepository.get(appContext)
-            val added = repository.record(StepSensors.reading(counter))
+            val interval = repository.record(reading)
             showNotification(repository.today())
-            if (lastLogMs == 0L || now - lastLogMs >= LOG_INTERVAL_MS) {
+            if (lastLogMs == 0L || now - lastLogMs >= LOG_INTERVAL_MS || interval.kind.isNotable()) {
                 lastLogMs = now
-                ReadingLog.get(appContext).reading(ReadSource.Service, counter, added)
+                ReadingLog.get(appContext).reading(ReadSource.Service, reading, interval)
             }
             if (now - lastWidgetMs >= WIDGET_INTERVAL_MS) {
                 lastWidgetMs = now

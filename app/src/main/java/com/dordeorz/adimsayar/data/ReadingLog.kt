@@ -25,8 +25,15 @@ class ReadingLog private constructor(private val context: Context) {
 
     val lines: StateFlow<List<String>> = _lines.asStateFlow()
 
-    fun reading(source: ReadSource, counter: Long, added: Long) =
-        add(source, context.getString(R.string.log_reading, counter, added))
+    fun reading(source: ReadSource, reading: CounterReading, interval: StepInterval) {
+        val text = when (interval.kind) {
+            ReadingKind.Reboot -> R.string.log_reboot
+            ReadingKind.Reset -> R.string.log_reset
+            ReadingKind.Stale -> R.string.log_stale
+            ReadingKind.Baseline, ReadingKind.Steps -> R.string.log_reading
+        }
+        add(source, context.getString(text, reading.counter, interval.steps))
+    }
 
     fun failure(source: ReadSource, @StringRes reason: Int) = add(source, context.getString(reason))
 

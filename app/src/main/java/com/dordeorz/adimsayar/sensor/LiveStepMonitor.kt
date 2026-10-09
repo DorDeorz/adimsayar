@@ -10,6 +10,7 @@ import com.dordeorz.adimsayar.AppScope
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.isNotable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 
 class LiveStepMonitor(context: Context) {
 
+    private val appContext = context.applicationContext
     private val manager = StepSensors.sensorManager(context)
     private val counter = manager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     private val detector = manager?.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
@@ -37,9 +39,10 @@ class LiveStepMonitor(context: Context) {
             if (previous != null && value > previous) _frozen.value = false
             lastCounterValue = value
             val first = previous == null
+            val reading = StepSensors.reading(appContext, event)
             AppScope.launch {
-                val added = repository.record(StepSensors.reading(value))
-                if (first) log.reading(ReadSource.App, value, added)
+                val interval = repository.record(reading)
+                if (first || interval.kind.isNotable()) log.reading(ReadSource.App, reading, interval)
             }
         }
 

@@ -25,13 +25,14 @@ class StepRepository private constructor(context: Context) {
 
     val lastReadingWallMs: StateFlow<Long?> = _lastReadingWallMs.asStateFlow()
 
-    suspend fun record(reading: CounterReading): Long = mutex.withLock {
+    suspend fun record(reading: CounterReading): StepInterval = mutex.withLock {
         val interval = StepMath.interval(loadReading(), reading)
+        if (interval.kind == ReadingKind.Stale) return@withLock interval
         saveReading(reading)
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
         if (days.isNotEmpty()) dao.add(days.mapKeys { it.key.toString() })
         _lastReadingWallMs.value = reading.wallMs
-        interval.steps
+        interval
     }
 
     suspend fun today(): Long = loadWeek(LocalDate.now()).last().steps
@@ -55,11 +56,12 @@ class StepRepository private constructor(context: Context) {
     }
 
     private fun loadReading(): CounterReading? {
-        if (!counterPrefs.contains(KEY_COUNTER)) return null
+        if (!counterPrefs.contains(KEY_COUNTER) || !counterPrefs.contains(KEY_BOOT)) return null
         return CounterReading(
             counter = counterPrefs.getLong(KEY_COUNTER, 0L),
             elapsedMs = counterPrefs.getLong(KEY_ELAPSED, 0L),
             wallMs = counterPrefs.getLong(KEY_WALL, 0L),
+            bootCount = counterPrefs.getInt(KEY_BOOT, NO_BOOT_COUNT).takeIf { it != NO_BOOT_COUNT },
         )
     }
 
@@ -68,6 +70,7 @@ class StepRepository private constructor(context: Context) {
             putLong(KEY_COUNTER, reading.counter)
             putLong(KEY_ELAPSED, reading.elapsedMs)
             putLong(KEY_WALL, reading.wallMs)
+            putInt(KEY_BOOT, reading.bootCount ?: NO_BOOT_COUNT)
         }
     }
 
@@ -76,6 +79,8 @@ class StepRepository private constructor(context: Context) {
         private const val KEY_COUNTER = "counter"
         private const val KEY_ELAPSED = "elapsed_ms"
         private const val KEY_WALL = "wall_ms"
+        private const val KEY_BOOT = "boot_count"
+        private const val NO_BOOT_COUNT = -1
 
         @Volatile
         private var instance: StepRepository? = null

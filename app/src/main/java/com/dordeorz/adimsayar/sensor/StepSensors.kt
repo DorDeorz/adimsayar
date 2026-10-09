@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.SystemClock
+import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.dordeorz.adimsayar.data.CounterReading
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -25,7 +26,24 @@ object StepSensors {
 
     fun hasCounter(context: Context): Boolean = sensorManager(context)?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null
 
-    fun reading(counter: Long) = CounterReading(counter, SystemClock.elapsedRealtime(), System.currentTimeMillis())
+    fun reading(context: Context, event: SensorEvent): CounterReading {
+        val nowNs = SystemClock.elapsedRealtimeNanos()
+        val wallNowMs = System.currentTimeMillis()
+        val eventNs = if (event.timestamp in 1..nowNs) event.timestamp else nowNs
+        return CounterReading(
+            counter = event.values[0].toLong(),
+            elapsedMs = eventNs / 1_000_000,
+            wallMs = wallNowMs - (nowNs - eventNs) / 1_000_000,
+            bootCount = bootCount(context),
+        )
+    }
+
+    private fun bootCount(context: Context): Int? =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Settings.Global.getInt(context.contentResolver, Settings.Global.BOOT_COUNT, -1).takeIf { it >= 0 }
+        } else {
+            null
+        }
 
     suspend fun readCounterOnce(context: Context, timeoutMs: Long): CounterReading? {
         if (!hasPermission(context)) return null
@@ -36,7 +54,7 @@ object StepSensors {
                 val listener = object : SensorEventListener {
                     override fun onSensorChanged(event: SensorEvent) {
                         manager.unregisterListener(this)
-                        if (continuation.isActive) continuation.resume(reading(event.values[0].toLong()))
+                        if (continuation.isActive) continuation.resume(reading(context, event))
                     }
 
                     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit

@@ -20,7 +20,7 @@ object StepUpdater {
                 if (reading == null) {
                     log.failure(source, R.string.log_timeout)
                 } else {
-                    log.reading(source, reading.counter, StepRepository.get(context).record(reading))
+                    log.reading(source, reading, StepRepository.get(context).record(reading))
                 }
             }
         }
