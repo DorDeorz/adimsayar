@@ -206,17 +206,86 @@ app/src/main/java/com/dordeorz/adimsayar/
 
 Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kuralları: [CLAUDE.md](CLAUDE.md).
 
-## Sürümler
+## Sürüm geçmişi
 
-| Sürüm | Yenilikler |
-|---|---|
-| 0.6.1 | Ayarlar'da güncelleme kontrolü ve GitHub sayfası bağlantısı |
-| 0.6.0 | Haftalık özet bildirimi, hedefe yaklaşınca bildirim, Geçmiş'te yıllık özet |
-| 0.5.0 | Madalya sayaçları (5x), Material You renkli ve boyuta uyan widget'lar, seri ve takvim widget'ları, 12 dil |
-| 0.4.0 | Widget'ta hedef halkası, erken kalkan madalyası, İngilizce |
-| 0.3.0 | Mesafe/kalori, saat saat dağılım, yürüyüş/koşu, en iyi ay, isteğe bağlı bildirimler, CSV |
-| 0.2.0 | Yeni tasarım: Bugün, Geçmiş, Madalyalar, Ayarlar |
-| 0.1.0 | İlk sürüm: adım sayma, günlük kayıt, iki widget, HyperOS kaydı, arka planda sayma |
+Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
+
+### 0.6.1
+
+Eklenenler
+- Ayarlar'da "Güncellemeleri kontrol et": GitHub'daki son sürümle karşılaştırır, yeni sürüm varsa indirme sayfasını açar. Yalnızca dokununca çalışır, arka planda kontrol yapılmaz.
+- Ayarlar'da GitHub sayfası bağlantısı (kaynak kod, sürümler, hata bildirimi).
+- Henüz yayınlanmış sürüm yoksa güncelleme kontrolü bunu ayrıca söyler.
+
+Depo ve derleme
+- İmza anahtarı depodan çıkarıldı; APK artık GitHub Secret'larında saklanan yeni bir anahtarla imzalanıyor. Bu sürüme geçerken uygulamayı bir kez kaldırıp kurmak gerekir (önce CSV dışa aktar).
+- `v*` etiketi gönderilince APK otomatik derlenip GitHub Releases'te yayınlanıyor.
+- Açık kaynak README, ekran görüntüleri ve MIT lisansı.
+
+### 0.6.0
+
+Eklenenler
+- Haftalık özet bildirimi: haftanın son günü akşamı haftanın toplamı ve geçen haftayla fark.
+- Hedefe yaklaşınca bildirim (günlük hedefin %80'i).
+- Geçmiş'te yıllık özet: toplam, günlük ortalama, hedef günleri, en iyi ay ve gün, kazanılan madalyalar.
+
+### 0.5.0
+
+Eklenenler
+- Madalyalarda kaç kez kazanıldığı (ör. `5x`).
+- Widget'lar telefonun renklerini (Material You) veya uygulamanın temasını kullanıyor.
+- Widget'lar boyutlarına göre düzenleniyor: küçültülünce sadeleşir, büyütülünce ayrıntı ekler.
+- Yeni widget'lar: Seri ve hafta, Aylık takvim.
+- 10 yeni dil: Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince, Korece.
+
+Düzeltilenler
+- Arapçada sağdan sola düzen, Latin rakamlar, her dilde yerel tarih sırası ve birimler.
+
+### 0.4.0
+
+Eklenenler
+- Bugün widget'ında hedef halkası.
+- Erken kalkan madalyası (08:00'den önce 1.000 adım; HyperOS kaydı açıkken).
+- İngilizce dil seçeneği.
+
+Düzeltilenler
+- Üst çubuk durum çubuğunun altına alındı; Geçmiş'te ay değişince seçili gün o aya taşınıyor.
+- 15 dakikalık arka plan okuması, widget'ların kullandığı WorkManager ile aynı iş numarasını aldığı için hiç çalışmıyordu; ayrı numaraya taşındı.
+
+### 0.3.0
+
+Eklenenler
+- Boy ve kilodan mesafe ve kalori tahmini (km veya mil).
+- Geçmiş'te seçilen günün saat saat dağılımı ve yürüyüş/koşu ayrımı (HyperOS kaydı açıkken).
+- En iyi ay rekoru, hafta başlangıcı seçimi (pazartesi veya pazar).
+- İsteğe bağlı bildirimler: hedefe ulaşınca, akşam seri hatırlatması.
+- CSV ile dışa ve içe aktarma.
+
+Düzeltilenler
+- HyperOS uyarı kartı çıkınca kaynak anahtarı da uyarının altında gösteriliyor.
+- Seri hesabında bugünden önceki eksik gün doğru sayılıyor.
+
+### 0.2.0
+
+Eklenenler
+- Yeni tasarım: alt menüde Bugün, Geçmiş ve Madalyalar.
+- Bugün ekranında hedef halkası, seri ve haftalık ilerleme.
+- Geçmiş: aylık takvim, gün ayrıntısı ve kişisel rekorlar.
+- Madalyalar ve seviye: günlük adım, seri, haftalık hedef, toplam yol.
+- Ayarlanabilir günlük ve haftalık hedef; widget da yeni hedefi gösteriyor.
+- Ayarlar: açık, koyu veya sistem teması, telefonun renkleri, adım kaynağı anahtarları ve okuma kaydı.
+
+### 0.1.0
+
+Eklenenler
+- İlk sürüm: adım sensöründen okuma, günlük kayıt, Bugün ve 7 günlük tablo widget'ları.
+- "Arka planda sürekli say" seçeneği ve marka bazlı pil yardım kartı.
+- Xiaomi'de HyperOS adım kaydından okuma; geçmiş günler de içe alınıyor.
+- HyperOS kaydı okunamazsa veya ilerlemezse uyarı kartı.
+
+Düzeltilenler
+- Arka plan servisinin 60 saniyede bir toplu gelen eski sayaç değerleri, yeni değerlerden sonra gelince adımlar şişiyordu (50 adım 424 görünüyordu). Okumalar artık olay zaman damgasıyla sıralanıyor, telefonun yeniden başlatılması açılış sayacından anlaşılıyor.
+- CI derlemeleri sabit bir anahtarla imzalandı ki yeni sürüm eskisinin üstüne kurulabilsin.
 
 ## Geliştirme
 
