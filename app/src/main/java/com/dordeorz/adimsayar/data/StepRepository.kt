@@ -37,6 +37,7 @@ class StepRepository private constructor(private val context: Context) {
 
     suspend fun replaceDays(days: Map<LocalDate, Long>) = mutex.withLock {
         dao.replace(days.mapKeys { it.key.toString() })
+        _lastReadingWallMs.value = System.currentTimeMillis()
     }
 
     suspend fun resetReading() = mutex.withLock {
