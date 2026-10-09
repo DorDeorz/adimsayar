@@ -222,8 +222,12 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 
 Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. Kardeş proje: [Kronometre](https://github.com/DorDeorz/kronometre).
 
+## Lisans
+
+[MIT](LICENSE). Kodu kullanabilir, değiştirebilir ve dağıtabilirsin; telif ve lisans metninin korunması yeterli.
+
 ---
 
 ### English
 
-AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages.
+AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages. Licensed under MIT.
