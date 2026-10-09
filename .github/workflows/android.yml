@@ -29,9 +29,13 @@ jobs:
         if: steps.proje.outputs.var == 'true'
         env:
           KEYSTORE_BASE64: ${{ secrets.ADIMSAYAR_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/adimsayar.p12"
+            echo "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > "$RUNNER_TEMP/adimsayar.p12"
+            echo "Anahtar dosyası: $(wc -c < "$RUNNER_TEMP/adimsayar.p12") bayt, sha256 $(sha256sum "$RUNNER_TEMP/adimsayar.p12" | cut -c1-12)"
+            echo "Şifre uzunluğu: ${#KEYSTORE_PASSWORD}"
+            keytool -list -storetype PKCS12 -keystore "$RUNNER_TEMP/adimsayar.p12" -storepass "$KEYSTORE_PASSWORD" > /dev/null
             echo "ADIMSAYAR_KEYSTORE_FILE=$RUNNER_TEMP/adimsayar.p12" >> "$GITHUB_ENV"
           else
             echo "İmza anahtarı yok: release APK geçici debug anahtarıyla imzalandı, telefona kurma" >> "$GITHUB_STEP_SUMMARY"
