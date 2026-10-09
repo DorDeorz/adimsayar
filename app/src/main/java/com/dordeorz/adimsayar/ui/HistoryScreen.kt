@@ -68,7 +68,10 @@ fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayD
                 selected = selected,
                 canGoBack = month > firstMonth,
                 canGoForward = month < currentMonth,
-                onMonthChange = { monthText = it.toString() },
+                onMonthChange = {
+                    monthText = it.toString()
+                    selectedText = (if (it == currentMonth) state.today else it.atEndOfMonth()).toString()
+                },
                 onSelect = { selectedText = it.toString() },
             )
         }
