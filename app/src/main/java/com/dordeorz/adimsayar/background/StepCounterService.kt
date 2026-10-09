@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.dordeorz.adimsayar.AppScope
+import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.ReadSource
@@ -29,7 +30,6 @@ import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
-import java.util.Locale
 
 class StepCounterService : Service(), SensorEventListener {
 
@@ -100,8 +100,9 @@ class StepCounterService : Service(), SensorEventListener {
         }
 
     private fun buildNotification(today: Long?): Notification {
+        val strings = Locales.wrap(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, getString(R.string.service_channel), NotificationManager.IMPORTANCE_MIN)
+            val channel = NotificationChannel(CHANNEL_ID, strings.getString(R.string.service_channel), NotificationManager.IMPORTANCE_MIN)
             channel.setShowBadge(false)
             getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
         }
@@ -112,13 +113,13 @@ class StepCounterService : Service(), SensorEventListener {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val text = if (today == null) {
-            getString(R.string.service_text_starting)
+            strings.getString(R.string.service_text_starting)
         } else {
-            getString(R.string.service_text, NumberFormat.getIntegerInstance(Locale.forLanguageTag("tr-TR")).format(today))
+            strings.getString(R.string.service_text, NumberFormat.getIntegerInstance(Locales.current).format(today))
         }
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(getString(R.string.service_title))
+            .setContentTitle(strings.getString(R.string.service_title))
             .setContentText(text)
             .setContentIntent(open)
             .setOngoing(true)

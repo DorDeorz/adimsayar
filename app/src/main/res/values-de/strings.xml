@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Heute</string>
+    <string name="steps_unit">Schritte</string>
+    <string name="goal_short">Ziel %1$s</string>
+    <string name="last_7_days">Letzte 7 Tage</string>
+    <string name="total">Gesamt</string>
+    <string name="last_reading">Letzte Zählerablesung: %1$s</string>
+    <string name="no_reading_yet">Zähler noch nicht abgelesen</string>
+
+    <string name="permission_title">Berechtigung für körperliche Aktivität nötig</string>
+    <string name="permission_text">AdımSayar liest deine Schritte vom eigenen Sensor des Telefons. Android fragt dafür nach der Berechtigung für körperliche Aktivität.</string>
+    <string name="permission_grant">Zulassen</string>
+    <string name="permission_denied_text">Berechtigung verweigert. Einstellungen → Apps → AdımSayar → Berechtigungen → Körperliche Aktivität → Zulassen.</string>
+    <string name="permission_open_settings">Einstellungen öffnen</string>
+
+    <string name="sensor_missing_title">Schrittsensor nicht gefunden</string>
+    <string name="sensor_missing_text">Dieses Telefon meldet keinen Schrittzähler-Sensor. AdımSayar kann auf diesem Gerät keine Schritte zählen.</string>
+
+    <string name="frozen_title">Der Schrittzähler scheint eingefroren</string>
+    <string name="frozen_text">Das Telefon erkennt Schritte, aber der Zähler bewegt sich nicht. Der Sensor wurde neu verbunden; diese Warnung verschwindet nach ein paar Schritten von selbst.</string>
+
+    <string name="service_card_title">Im Hintergrund weiterzählen</string>
+    <string name="xiaomi_unreadable_title">HyperOS-Schrittaufzeichnung nicht lesbar</string>
+    <string name="xiaomi_unreadable_text">Die Schritte werden gerade nicht aktualisiert. Ein HyperOS-Update hat die Aufzeichnung vielleicht geändert. Du kannst den Schalter unten ausschalten und mit "Im Hintergrund weiterzählen" weiterzählen.</string>
+    <string name="xiaomi_stalled_title">Die HyperOS-Schrittaufzeichnung bewegt sich nicht</string>
+    <string name="xiaomi_stalled_text">Der Sensor des Telefons hat in den letzten Minuten Schritte erkannt, aber die HyperOS-Aufzeichnung steigt nicht. Schau in ein paar Minuten wieder nach; wenn sie sich nicht erholt, schalte den Schalter unten aus und "Im Hintergrund weiterzählen" ein.</string>
+    <string name="xiaomi_card_title">HyperOS-Schrittaufzeichnung verwenden</string>
+    <string name="xiaomi_card_text">Die Schritte werden aus der eigenen Schrittaufzeichnung des Telefons gelesen. Sie werden auch bei geschlossener App vollständig gezählt, es ist keine Benachrichtigung nötig, und vergangene Tage werden ebenfalls übernommen.</string>
+    <string name="service_card_text">Schalte das ein, wenn bei geschlossener App keine Schritte gezählt werden. Der Zähler bleibt aktiv; in der Benachrichtigungsleiste erscheint eine stille, dauerhafte Benachrichtigung.</string>
+    <string name="service_channel">Schrittzähler</string>
+    <string name="service_title">AdımSayar zählt</string>
+    <string name="service_text">Heute %1$s Schritte</string>
+    <string name="service_text_starting">Zähler wird gestartet</string>
+
+    <string name="log_title">Ableseprotokoll</string>
+    <string name="log_empty">Noch keine Einträge</string>
+    <string name="log_reading">Zähler %1$d, +%2$d Schritte</string>
+    <string name="log_reboot">Telefon neu gestartet, Zähler %1$d, +%2$d Schritte</string>
+    <string name="log_reset">Zähler zurückgesetzt, Zähler %1$d, +%2$d Schritte</string>
+    <string name="log_stale">alter Wert ignoriert, Zähler %1$d, +%2$d Schritte</string>
+    <string name="log_timeout">Sensor hat nicht geantwortet</string>
+    <string name="log_no_permission">keine Berechtigung</string>
+    <string name="log_no_sensor">kein Sensor</string>
+    <string name="log_register_failed">Verbindung zum Sensor fehlgeschlagen</string>
+    <string name="source_app">App</string>
+    <string name="source_job">15-Min.-Job</string>
+    <string name="source_system">Systemereignis</string>
+    <string name="source_widget">Widget</string>
+    <string name="source_service">Hintergrundzähler</string>
+    <string name="log_xiaomi_denied">keine Leseberechtigung für die HyperOS-Aufzeichnung</string>
+    <string name="log_xiaomi_missing">HyperOS-Aufzeichnung nicht gefunden</string>
+    <string name="log_xiaomi_error">HyperOS-Aufzeichnung nicht lesbar (%1$s)</string>
+    <string name="log_xiaomi_synced">HyperOS-Aufzeichnung: heute %1$d Schritte, %2$d Tage aktualisiert</string>
+
+    <string name="tab_today">Heute</string>
+    <string name="tab_history">Verlauf</string>
+    <string name="tab_medals">Medaillen</string>
+    <string name="goal_reached">Tagesziel erreicht!</string>
+    <string name="goal_remaining">Noch %1$s Schritte bis zum Ziel</string>
+    <string name="steps_value">%1$s Schritte</string>
+    <string name="percent_of_goal">%1$d %%</string>
+    <string name="streak">Serie</string>
+    <string name="days_count">%1$d Tage</string>
+    <string name="weeks_count">%1$d Wochen</string>
+    <string name="million_steps">%1$s Millionen Schritte</string>
+    <string name="streak_best">Längste: %1$d Tage</string>
+    <string name="this_week">Diese Woche</string>
+
+    <string name="previous_month">Vorheriger Monat</string>
+    <string name="next_month">Nächster Monat</string>
+    <string name="daily_average">Tagesdurchschnitt</string>
+    <string name="goal_days">Zieltage</string>
+    <string name="records">Rekorde</string>
+    <string name="record_best_day">Bester Tag</string>
+    <string name="record_best_week">Beste Woche</string>
+    <string name="week_of">Woche vom %1$s</string>
+    <string name="record_longest_streak">Längste Serie</string>
+    <string name="record_goal_days">Tage mit erreichtem Ziel</string>
+    <string name="record_active_average">Schnitt aktiver Tage</string>
+    <string name="active_days">%1$d aktive Tage</string>
+    <string name="until_date">Stand %1$s</string>
+
+    <string name="level">Level</string>
+    <string name="level_next">Noch %1$s Schritte bis zum nächsten Level</string>
+    <string name="medals_earned">%1$d / %2$d Medaillen</string>
+    <string name="medals_retroactive">Medaillen werden aus deinen aufgezeichneten Tagen berechnet. Wenn du dein Ziel änderst, werden auch vergangene Tage nach dem neuen Ziel bewertet.</string>
+    <string name="medal_group_daily">Tagesschritte</string>
+    <string name="medal_group_daily_text">Gehe so viele Schritte an einem einzigen Tag</string>
+    <string name="medal_group_streak">Serie</string>
+    <string name="medal_group_streak_text">Erreiche dein Tagesziel an aufeinanderfolgenden Tagen</string>
+    <string name="medal_group_weekly">Wochenziel</string>
+    <string name="medal_group_weekly_text">Anzahl der Wochen, in denen du dein Wochenziel erreicht hast</string>
+    <string name="medal_group_total">Gesamtstrecke</string>
+    <string name="medal_group_total_text">Schritte über alle Tage zusammen</string>
+
+    <string name="settings">Einstellungen</string>
+    <string name="back">Zurück</string>
+    <string name="settings_goals">Ziele</string>
+    <string name="daily_goal">Tagesziel</string>
+    <string name="weekly_goal">Wochenziel</string>
+    <string name="goal_range">Zwischen %1$s und %2$s</string>
+    <string name="settings_theme">Design</string>
+    <string name="theme_system">Systemstandard</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="settings_dynamic_color">Telefonfarben verwenden</string>
+    <string name="settings_dynamic_color_hint">Übernimmt die Farben vom Hintergrundbild. Wenn aus, wird das grüne Design verwendet.</string>
+    <string name="settings_counting">Schrittquelle</string>
+    <string name="settings_about">Info</string>
+    <string name="settings_version">Version</string>
+    <string name="release_notes">Versionshinweise</string>
+    <string name="release_notes_hint">Was sich in jeder Version geändert hat</string>
+    <string name="check_updates">Nach Updates suchen</string>
+    <string name="check_updates_hint">Vergleicht mit der neuesten Version auf GitHub</string>
+    <string name="update_checking">Wird geprüft…</string>
+    <string name="update_up_to_date">Du hast die neueste Version</string>
+    <string name="update_available">Neue Version verfügbar: %1$s. Zum Herunterladen tippen</string>
+    <string name="update_no_release">Noch keine Version veröffentlicht</string>
+    <string name="update_failed">Prüfung fehlgeschlagen. Internetverbindung prüfen</string>
+    <string name="github_page">GitHub-Seite</string>
+    <string name="github_page_hint">Quellcode, Versionen und Fehlermeldungen</string>
+    <string name="log_hint">Letzte Zähler- und HyperOS-Ablesungen</string>
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="close">Schließen</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">Stunde für Stunde</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">Gehen %1$s</string>
+    <string name="running_steps">Laufen %1$s</string>
+    <string name="record_best_month">Bester Monat</string>
+    <string name="week_start">Erster Wochentag</string>
+    <string name="settings_body">Körper und Strecke</string>
+    <string name="height">Größe</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">Gewicht</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">Streckeneinheit</string>
+    <string name="body_hint">Strecke und Kalorien werden aus Größe und Gewicht geschätzt; die Werte sind ungefähr.</string>
+    <string name="settings_notifications">Benachrichtigungen</string>
+    <string name="goal_notification">Bei erreichtem Ziel benachrichtigen</string>
+    <string name="goal_notification_hint">Du bekommst eine Benachrichtigung an dem Tag, an dem du dein Tagesziel erreichst.</string>
+    <string name="streak_reminder">Abendliche Serien-Erinnerung</string>
+    <string name="streak_reminder_hint">Erinnert dich gegen 20:00, wenn du dein Ziel noch nicht erreicht hast und eine Serie läuft.</string>
+    <string name="notify_channel">Ziel und Serie</string>
+    <string name="notify_goal_title">Tagesziel erreicht!</string>
+    <string name="notify_goal_text">Du bist heute %1$s Schritte gegangen.</string>
+    <string name="notify_streak_title">Deine %1$d-Tage-Serie ist in Gefahr</string>
+    <string name="notify_streak_text">Noch %1$s Schritte, um deine Serie zu halten.</string>
+    <string name="settings_data">Daten</string>
+    <string name="export_csv">Exportieren</string>
+    <string name="export_csv_hint">Alle Tage in einer CSV-Datei speichern</string>
+    <string name="import_csv">Importieren</string>
+    <string name="import_csv_hint">Tage aus einer CSV-Datei wiederherstellen; der höhere Wert bleibt erhalten</string>
+    <string name="export_done">%1$d Tage exportiert</string>
+    <string name="import_done">%1$d Tage aktualisiert</string>
+    <string name="csv_failed">Datei konnte nicht gelesen oder geschrieben werden</string>
+    <string name="settings_language">Sprache</string>
+    <string name="language">App-Sprache</string>
+    <string name="language_system">System</string>
+    <string name="medal_group_early">Frühaufsteher</string>
+    <string name="medal_group_early_text">Tage mit mindestens 1.000 Schritten vor 08:00 (bei aktiver HyperOS-Aufzeichnung)</string>
+
+    <string name="widget_streak_label">Serie und Woche</string>
+    <string name="widget_streak_description">Deine Tagesziel-Serie und der Fortschritt dieser Woche</string>
+    <string name="widget_month_label">Monatskalender</string>
+    <string name="widget_month_description">Die Tage dieses Monats, nach Ziel eingefärbt</string>
+    <string name="month_goal_days">%1$d Zieltage</string>
+
+    <string name="near_goal_notification">Benachrichtigen, wenn das Ziel nah ist</string>
+    <string name="near_goal_notification_hint">Du erhältst eine Benachrichtigung an dem Tag, an dem du 80 % deines Tagesziels erreichst.</string>
+    <string name="weekly_summary">Wochenzusammenfassung</string>
+    <string name="weekly_summary_hint">Zeigt am letzten Tag der Woche gegen 20:00 die Wochensumme und die Veränderung zur Vorwoche.</string>
+    <string name="notify_near_title">Fast am Ziel!</string>
+    <string name="notify_near_text">Noch %1$s Schritte bis zu deinem Tagesziel.</string>
+    <string name="notify_week_title">Du bist diese Woche %1$s Schritte gegangen</string>
+    <string name="notify_week_more">%1$d%% mehr als letzte Woche. Wochenziel: %2$s</string>
+    <string name="notify_week_less">%1$d%% weniger als letzte Woche. Wochenziel: %2$s</string>
+    <string name="notify_week_goal">Wochenziel: %1$s</string>
+    <string name="year_summary">Zusammenfassung %1$d</string>
+    <string name="previous_year">Vorheriges Jahr</string>
+    <string name="next_year">Nächstes Jahr</string>
+    <string name="year_medals">Verdiente Medaillen</string>
+
+    <string-array name="release_notes_0_6_1">
+        <item>Update-Prüfung in den Einstellungen: sucht die neueste Version auf GitHub und öffnet die Download-Seite</item>
+        <item>Link zur GitHub-Seite</item>
+    </string-array>
+    <string-array name="release_notes_0_6_0">
+        <item>Benachrichtigung mit Wochenzusammenfassung: Wochensumme und Veränderung zur Vorwoche, am Abend des letzten Tages</item>
+        <item>Benachrichtigung, wenn du nah an deinem Ziel bist (80 % des Tagesziels)</item>
+        <item>Jahreszusammenfassung im Verlauf: Gesamt, Durchschnitt, Zieltage, bester Monat und Tag, verdiente Medaillen</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>Medaillen zeigen, wie oft sie verdient wurden (z. B. 5x)</item>
+        <item>Widgets nutzen die Farben des Telefons (Material You) oder das App-Design</item>
+        <item>Widgets passen sich ihrer Größe an: klein einfacher, groß mit mehr Details</item>
+        <item>Neue Widgets: Serie und Woche, Monatskalender</item>
+        <item>Neue Sprachen: Deutsch, Spanisch, Französisch, Italienisch, Portugiesisch, Russisch, Arabisch, Japanisch, Chinesisch, Koreanisch</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>Zielring im Heute-Widget</item>
+        <item>Frühaufsteher-Medaille (bei aktiver HyperOS-Aufzeichnung)</item>
+        <item>Englisch als Sprachoption (Einstellungen → Sprache)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>Strecken- und Kalorienschätzung (Größe, Gewicht, km oder Meilen)</item>
+        <item>Stündliche Aufteilung und Gehen/Laufen für den gewählten Tag im Verlauf (bei aktiver HyperOS-Aufzeichnung)</item>
+        <item>Rekord für den besten Monat und Wahl des ersten Wochentags (Montag oder Sonntag)</item>
+        <item>Optionale Benachrichtigungen: bei erreichtem Ziel und abendliche Serien-Erinnerung</item>
+        <item>CSV-Export und -Import</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>Neues Design: Heute, Verlauf und Medaillen in der unteren Leiste</item>
+        <item>Zielring, Serie und Wochenfortschritt auf dem Heute-Bildschirm</item>
+        <item>Verlauf: Monatskalender, Tagesdetails und persönliche Rekorde</item>
+        <item>Medaillen und Level: Tagesschritte, Serie, Wochenziel und Gesamtschritte</item>
+        <item>Einstellbare Tages- und Wochenziele; auch das Widget zeigt das neue Ziel</item>
+        <item>Einstellungen: helles, dunkles oder System-Design und Telefonfarben</item>
+        <item>Schalter für die Schrittquelle und das Ableseprotokoll sind in die Einstellungen umgezogen</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>Erste Version: Schrittzählung, Tageswerte, Widgets für heute und 7 Tage</item>
+        <item>Auf Xiaomi Lesen aus der HyperOS-Schrittaufzeichnung, auch für vergangene Tage</item>
+        <item>Option zum Weiterzählen im Hintergrund und eine Akku-Hilfekarte</item>
+    </string-array>
+
+    <string name="widget_today_label">Schritte heute</string>
+    <string name="widget_today_description">Heute gegangene Schritte und Zielfortschritt</string>
+    <string name="widget_week_label">7-Tage-Diagramm</string>
+    <string name="widget_week_description">Schrittzahlen der letzten 7 Tage</string>
+
+    <string name="oem_title">Schritte auch im Hintergrund aufzeichnen</string>
+    <string name="oem_title_stock">Ausnahme von der Akku-Optimierung</string>
+    <string name="oem_intro">Dieses Telefon kann Apps im Hintergrund schließen. Mit den folgenden Schritten kann AdımSayar den Zähler auch bei geschlossener App lesen.</string>
+    <string name="oem_open">Öffnen</string>
+    <string name="oem_dismiss">Vorerst schließen</string>
+    <string name="oem_open_failed">Dieser Bildschirm lässt sich auf diesem Telefon nicht öffnen. Führe den Schritt manuell in den Einstellungen aus.</string>
+    <string name="oem_battery_common">Einstellungen → Apps → AdımSayar → Akku → Nicht eingeschränkt</string>
+
+    <string name="oem_xiaomi_1">Einstellungen → Apps → Apps verwalten → AdımSayar → Autostart → An</string>
+    <string name="oem_xiaomi_2">Auf demselben Bildschirm: Energiesparmodus → Keine Einschränkungen</string>
+
+    <string name="oem_samsung_1">Einstellungen → Apps → AdımSayar → Akku → Nicht eingeschränkt</string>
+    <string name="oem_samsung_2">Akku → Einschränkungen der Hintergrundnutzung → Apps, die nie in den Standby-Modus wechseln → AdımSayar hinzufügen</string>
+
+    <string name="oem_huawei_1">Akku → App-Start → AdımSayar → Automatisch verwalten ausschalten, Automatischer Start, Sekundärer Start und Im Hintergrund ausführen einschalten</string>
+
+    <string name="oem_oppo_1">Akku → Hintergrundaktivität zulassen → AdımSayar: Ausführung im Hintergrund zulassen</string>
+    <string name="oem_oppo_2">Automatischer Start → AdımSayar → An</string>
+
+    <string name="oem_vivo_1">Akku → Verwaltung des Hintergrundenergieverbrauchs → Hoher Energieverbrauch im Hintergrund → AdımSayar zur Whitelist hinzufügen</string>
+    <string name="oem_vivo_2">Autostart → AdımSayar → An</string>
+
+    <string name="oem_asus_1">Autostart → AdımSayar zulassen</string>
+
+    <string name="oem_transsion_1">Automatische Verwaltung → AdımSayar in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
+</resources>

@@ -12,8 +12,8 @@ android {
         applicationId = "com.dordeorz.adimsayar"
         minSdk = 23
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 7
+        versionName = "0.6.1"
     }
 
     signingConfigs {
@@ -42,6 +42,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     lint {
@@ -61,6 +62,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.glance.appwidget)
+    implementation(libs.androidx.glance.material3)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)

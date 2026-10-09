@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import android.content.Context
 import androidx.core.content.edit
+import com.dordeorz.adimsayar.background.Reminders
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,10 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.io.InputStream
+import java.io.OutputStream
 import java.time.LocalDate
 import java.time.ZoneId
-
-const val DAILY_GOAL = 10_000L
+import java.time.format.DateTimeParseException
 
 data class DaySteps(val date: LocalDate, val steps: Long)
 
@@ -30,7 +32,10 @@ class StepRepository private constructor(private val context: Context) {
         if (interval.kind == ReadingKind.Stale) return@withLock interval
         saveReading(reading)
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
-        if (days.isNotEmpty() && !XiaomiSteps.isEnabled(context)) dao.add(days.mapKeys { it.key.toString() })
+        if (days.isNotEmpty() && !XiaomiSteps.isEnabled(context)) {
+            dao.add(days.mapKeys { it.key.toString() })
+            Reminders.onTodaySteps(context, dao.get(LocalDate.now().toString())?.steps ?: 0L)
+        }
         _lastReadingWallMs.value = reading.wallMs
         interval
     }
@@ -38,6 +43,43 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun replaceDays(days: Map<LocalDate, Long>) = mutex.withLock {
         dao.replace(days.mapKeys { it.key.toString() })
         _lastReadingWallMs.value = System.currentTimeMillis()
+        Reminders.onTodaySteps(context, days[LocalDate.now()] ?: 0L)
+    }
+
+    suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
+
+    suspend fun exportCsv(output: OutputStream): Int {
+        val rows = dao.loadAll()
+        output.bufferedWriter().use { writer ->
+            writer.write(CSV_HEADER)
+            writer.newLine()
+            for (row in rows) {
+                writer.write("${row.date},${row.steps}")
+                writer.newLine()
+            }
+        }
+        return rows.size
+    }
+
+    suspend fun importCsv(input: InputStream): Int? = mutex.withLock {
+        val parsed = HashMap<String, Long>()
+        input.bufferedReader().useLines { lines ->
+            for (line in lines) {
+                val parts = line.trim().split(',', ';')
+                if (parts.size < 2) continue
+                val date = try {
+                    LocalDate.parse(parts[0].trim())
+                } catch (e: DateTimeParseException) {
+                    continue
+                }
+                val steps = parts[1].trim().toLongOrNull()?.takeIf { it >= 0L } ?: continue
+                parsed[date.toString()] = steps
+            }
+        }
+        if (parsed.isEmpty()) return@withLock null
+        val changed = parsed.filter { (date, steps) -> steps > (dao.get(date)?.steps ?: 0L) }
+        dao.replace(changed)
+        changed.size
     }
 
     suspend fun resetReading() = mutex.withLock {
@@ -52,7 +94,8 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun loadWeek(today: LocalDate): List<DaySteps> =
         fillWeek(dao.loadFrom(weekStart(today).toString()), today)
 
-    fun observeTotal(): Flow<Long> = dao.observeTotal()
+    fun observeHistory(): Flow<Map<LocalDate, Long>> =
+        dao.observeAll().map { rows -> rows.associate { LocalDate.parse(it.date) to it.steps } }
 
     private fun weekStart(today: LocalDate) = today.minusDays(6)
 
@@ -85,6 +128,7 @@ class StepRepository private constructor(private val context: Context) {
 
     companion object {
         const val COUNTER_PREFS = "counter"
+        private const val CSV_HEADER = "tarih,adim"
         private const val KEY_COUNTER = "counter"
         private const val KEY_ELAPSED = "elapsed_ms"
         private const val KEY_WALL = "wall_ms"

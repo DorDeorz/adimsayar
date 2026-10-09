@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Today</string>
+    <string name="steps_unit">steps</string>
+    <string name="goal_short">Goal %1$s</string>
+    <string name="last_7_days">Last 7 days</string>
+    <string name="total">Total</string>
+    <string name="last_reading">Last counter reading: %1$s</string>
+    <string name="no_reading_yet">Counter not read yet</string>
+
+    <string name="permission_title">Physical activity permission needed</string>
+    <string name="permission_text">AdımSayar reads your steps from the phone\'s own sensor. Android asks for the physical activity permission for this.</string>
+    <string name="permission_grant">Allow</string>
+    <string name="permission_denied_text">Permission denied. Settings → Apps → AdımSayar → Permissions → Physical activity → Allow.</string>
+    <string name="permission_open_settings">Open settings</string>
+
+    <string name="sensor_missing_title">Step sensor not found</string>
+    <string name="sensor_missing_text">This phone does not report a step counter sensor. AdımSayar cannot count steps on this device.</string>
+
+    <string name="frozen_title">The step counter seems frozen</string>
+    <string name="frozen_text">The phone detects steps but the counter is not moving. The sensor was reconnected; this warning goes away by itself after a few steps.</string>
+
+    <string name="service_card_title">Keep counting in the background</string>
+    <string name="xiaomi_unreadable_title">Can\'t read the HyperOS step record</string>
+    <string name="xiaomi_unreadable_text">Steps are not updating right now. A HyperOS update may have changed the record. You can turn off the switch below and keep counting with "Keep counting in the background".</string>
+    <string name="xiaomi_stalled_title">The HyperOS step record is not moving</string>
+    <string name="xiaomi_stalled_text">The phone\'s sensor has seen steps in the last few minutes but the HyperOS record is not increasing. Check again in a few minutes; if it doesn\'t recover, turn off the switch below and turn on "Keep counting in the background".</string>
+    <string name="xiaomi_card_title">Use the HyperOS step record</string>
+    <string name="xiaomi_card_text">Steps are read from the phone\'s own step record. They are counted fully even while the app is closed, no notification is needed, and past days are added too.</string>
+    <string name="service_card_text">Turn this on if steps aren\'t counted while the app is closed. The counter is kept on; a silent, persistent notification appears in the notification bar.</string>
+    <string name="service_channel">Step counter</string>
+    <string name="service_title">AdımSayar is counting</string>
+    <string name="service_text">%1$s steps today</string>
+    <string name="service_text_starting">Starting the counter</string>
+
+    <string name="log_title">Reading log</string>
+    <string name="log_empty">No entries yet</string>
+    <string name="log_reading">counter %1$d, +%2$d steps</string>
+    <string name="log_reboot">phone restarted, counter %1$d, +%2$d steps</string>
+    <string name="log_reset">counter reset, counter %1$d, +%2$d steps</string>
+    <string name="log_stale">old value ignored, counter %1$d, +%2$d steps</string>
+    <string name="log_timeout">sensor did not respond</string>
+    <string name="log_no_permission">no permission</string>
+    <string name="log_no_sensor">no sensor</string>
+    <string name="log_register_failed">couldn\'t connect to the sensor</string>
+    <string name="source_app">app</string>
+    <string name="source_job">15 min job</string>
+    <string name="source_system">system event</string>
+    <string name="source_widget">widget</string>
+    <string name="source_service">background counter</string>
+    <string name="log_xiaomi_denied">no read permission for the HyperOS record</string>
+    <string name="log_xiaomi_missing">HyperOS record not found</string>
+    <string name="log_xiaomi_error">couldn\'t read the HyperOS record (%1$s)</string>
+    <string name="log_xiaomi_synced">HyperOS record: %1$d steps today, %2$d days updated</string>
+
+    <string name="tab_today">Today</string>
+    <string name="tab_history">History</string>
+    <string name="tab_medals">Medals</string>
+    <string name="goal_reached">Daily goal reached!</string>
+    <string name="goal_remaining">%1$s steps to your goal</string>
+    <string name="steps_value">%1$s steps</string>
+    <string name="percent_of_goal">%1$d%%</string>
+    <string name="streak">Streak</string>
+    <string name="days_count">%1$d days</string>
+    <string name="weeks_count">%1$d weeks</string>
+    <string name="million_steps">%1$s million steps</string>
+    <string name="streak_best">Longest: %1$d days</string>
+    <string name="this_week">This week</string>
+
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+    <string name="daily_average">Daily average</string>
+    <string name="goal_days">Goal days</string>
+    <string name="records">Records</string>
+    <string name="record_best_day">Best day</string>
+    <string name="record_best_week">Best week</string>
+    <string name="week_of">Week of %1$s</string>
+    <string name="record_longest_streak">Longest streak</string>
+    <string name="record_goal_days">Days goal reached</string>
+    <string name="record_active_average">Active day average</string>
+    <string name="active_days">%1$d active days</string>
+    <string name="until_date">As of %1$s</string>
+
+    <string name="level">Level</string>
+    <string name="level_next">%1$s steps to the next level</string>
+    <string name="medals_earned">%1$d / %2$d medals</string>
+    <string name="medals_retroactive">Medals are calculated from your recorded days. If you change your goal, past days are judged by the new goal too.</string>
+    <string name="medal_group_daily">Daily steps</string>
+    <string name="medal_group_daily_text">Walk this many steps in a single day</string>
+    <string name="medal_group_streak">Streak</string>
+    <string name="medal_group_streak_text">Reach your daily goal on consecutive days</string>
+    <string name="medal_group_weekly">Weekly goal</string>
+    <string name="medal_group_weekly_text">Number of weeks you reached your weekly goal</string>
+    <string name="medal_group_total">Total distance</string>
+    <string name="medal_group_total_text">Total steps across all days</string>
+
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="settings_goals">Goals</string>
+    <string name="daily_goal">Daily goal</string>
+    <string name="weekly_goal">Weekly goal</string>
+    <string name="goal_range">Between %1$s and %2$s</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_dynamic_color">Use phone colors</string>
+    <string name="settings_dynamic_color_hint">Takes colors from the wallpaper. When off, the green theme is used.</string>
+    <string name="settings_counting">Step source</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version</string>
+    <string name="release_notes">Release notes</string>
+    <string name="release_notes_hint">What changed in each version</string>
+    <string name="check_updates">Check for updates</string>
+    <string name="check_updates_hint">Compares with the latest release on GitHub</string>
+    <string name="update_checking">Checking…</string>
+    <string name="update_up_to_date">You have the latest version</string>
+    <string name="update_available">New version available: %1$s. Tap to download</string>
+    <string name="update_no_release">No release has been published yet</string>
+    <string name="update_failed">Couldn\'t check. Check your internet connection</string>
+    <string name="github_page">GitHub page</string>
+    <string name="github_page_hint">Source code, releases and issue reports</string>
+    <string name="log_hint">Latest counter and HyperOS readings</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_mile">mi</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_kg">kg</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="hourly">Hour by hour</string>
+    <string name="hour_label">%1$02d:00</string>
+    <string name="walking_steps">Walking %1$s</string>
+    <string name="running_steps">Running %1$s</string>
+    <string name="record_best_month">Best month</string>
+    <string name="week_start">First day of week</string>
+    <string name="settings_body">Body and distance</string>
+    <string name="height">Height</string>
+    <string name="height_value">%1$d cm</string>
+    <string name="weight">Weight</string>
+    <string name="weight_value">%1$d kg</string>
+    <string name="distance_unit">Distance unit</string>
+    <string name="body_hint">Distance and calories are estimated from height and weight; they are approximate.</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="goal_notification">Notify when goal is reached</string>
+    <string name="goal_notification_hint">You get one notification on the day you reach your daily goal.</string>
+    <string name="streak_reminder">Evening streak reminder</string>
+    <string name="streak_reminder_hint">Reminds you around 20:00 if you haven\'t reached your goal and have a streak.</string>
+    <string name="notify_channel">Goal and streak</string>
+    <string name="notify_goal_title">Daily goal reached!</string>
+    <string name="notify_goal_text">You walked %1$s steps today.</string>
+    <string name="notify_streak_title">Your %1$d-day streak is at risk</string>
+    <string name="notify_streak_text">%1$s steps left to keep your streak.</string>
+    <string name="settings_data">Data</string>
+    <string name="export_csv">Export</string>
+    <string name="export_csv_hint">Save all days to a CSV file</string>
+    <string name="import_csv">Import</string>
+    <string name="import_csv_hint">Restore days from a CSV file; the higher number is kept</string>
+    <string name="export_done">%1$d days exported</string>
+    <string name="import_done">%1$d days updated</string>
+    <string name="csv_failed">Couldn\'t read or write the file</string>
+    <string name="settings_language">Language</string>
+    <string name="language">App language</string>
+    <string name="language_system">System</string>
+    <string name="medal_group_early">Early bird</string>
+    <string name="medal_group_early_text">Days with at least 1,000 steps before 08:00 (with the HyperOS record on)</string>
+
+    <string name="widget_streak_label">Streak and week</string>
+    <string name="widget_streak_description">Your daily goal streak and this week\'s progress</string>
+    <string name="widget_month_label">Monthly calendar</string>
+    <string name="widget_month_description">This month\'s days, colored by goal</string>
+    <string name="month_goal_days">%1$d goal days</string>
+
+    <string name="near_goal_notification">Notify when close to goal</string>
+    <string name="near_goal_notification_hint">You get one notification on the day you reach 80% of your daily goal.</string>
+    <string name="weekly_summary">Weekly summary</string>
+    <string name="weekly_summary_hint">On the last day of the week around 20:00, shows the week\'s total and the change from last week.</string>
+    <string name="notify_near_title">Almost at your goal!</string>
+    <string name="notify_near_text">%1$s steps to your daily goal.</string>
+    <string name="notify_week_title">You walked %1$s steps this week</string>
+    <string name="notify_week_more">%1$d%% more than last week. Weekly goal: %2$s</string>
+    <string name="notify_week_less">%1$d%% less than last week. Weekly goal: %2$s</string>
+    <string name="notify_week_goal">Weekly goal: %1$s</string>
+    <string name="year_summary">%1$d summary</string>
+    <string name="previous_year">Previous year</string>
+    <string name="next_year">Next year</string>
+    <string name="year_medals">Medals earned</string>
+
+    <string-array name="release_notes_0_6_1">
+        <item>Update check in Settings: looks up the latest release on GitHub and opens the download page if there is one</item>
+        <item>Link to the GitHub page</item>
+    </string-array>
+    <string-array name="release_notes_0_6_0">
+        <item>Weekly summary notification: the week\'s total and the change from last week, on the evening of its last day</item>
+        <item>Notification when you are close to your goal (80% of the daily goal)</item>
+        <item>Yearly summary in History: total, average, goal days, best month and day, medals earned</item>
+    </string-array>
+    <string-array name="release_notes_0_5_0">
+        <item>Medals show how many times each was earned (e.g. 5x)</item>
+        <item>Widgets use the phone\'s colors (Material You) or the app theme</item>
+        <item>Widgets adapt to their size: simpler when small, more detail when large</item>
+        <item>New widgets: streak and week, monthly calendar</item>
+        <item>New languages: German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese, Korean</item>
+    </string-array>
+    <string-array name="release_notes_0_4_0">
+        <item>Goal ring on the Today widget</item>
+        <item>Early bird medal (with the HyperOS record on)</item>
+        <item>English language option (Settings → Language)</item>
+    </string-array>
+    <string-array name="release_notes_0_3_0">
+        <item>Distance and calorie estimate (height, weight, km or miles)</item>
+        <item>Hourly breakdown and walking/running split for the selected day in History (with the HyperOS record on)</item>
+        <item>Best month record and first day of week choice (Monday or Sunday)</item>
+        <item>Optional notifications: when the goal is reached and an evening streak reminder</item>
+        <item>CSV export and import</item>
+    </string-array>
+    <string-array name="release_notes_0_2_0">
+        <item>New design: Today, History and Medals in the bottom bar</item>
+        <item>Goal ring, streak and weekly progress on the Today screen</item>
+        <item>History: monthly calendar, day details and personal records</item>
+        <item>Medals and levels: daily steps, streak, weekly goal and total steps</item>
+        <item>Adjustable daily and weekly goals; the widget shows the new goal too</item>
+        <item>Settings: light, dark or system theme and phone colors</item>
+        <item>Step source switches and the reading log moved to Settings</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>First version: step counting, daily records, today and 7-day widgets</item>
+        <item>On Xiaomi, reading from the HyperOS step record, including past days</item>
+        <item>Option to keep counting in the background and a battery help card</item>
+    </string-array>
+
+    <string name="widget_today_label">Today\'s steps</string>
+    <string name="widget_today_description">Steps taken today and goal progress</string>
+    <string name="widget_week_label">7-day chart</string>
+    <string name="widget_week_description">Step counts for the last 7 days</string>
+
+    <string name="oem_title">Record steps in the background too</string>
+    <string name="oem_title_stock">Battery optimization exemption</string>
+    <string name="oem_intro">This phone may close apps in the background. The steps below let AdımSayar read the counter even while the app is closed.</string>
+    <string name="oem_open">Open</string>
+    <string name="oem_dismiss">Close for now</string>
+    <string name="oem_open_failed">This screen couldn\'t be opened on this phone. Do the step manually in Settings.</string>
+    <string name="oem_battery_common">Settings → Apps → AdımSayar → Battery → No restrictions</string>
+
+    <string name="oem_xiaomi_1">Settings → Apps → Manage apps → AdımSayar → Autostart → On</string>
+    <string name="oem_xiaomi_2">On the same screen, Battery saver → No restrictions</string>
+
+    <string name="oem_samsung_1">Settings → Apps → AdımSayar → Battery → Unrestricted</string>
+    <string name="oem_samsung_2">Battery → Background usage limits → Never sleeping apps → add AdımSayar</string>
+
+    <string name="oem_huawei_1">Battery → App launch → AdımSayar → turn off Manage automatically, turn on Auto-launch, Secondary launch and Run in background</string>
+
+    <string name="oem_oppo_1">Battery → Allow background activity → AdımSayar: Allow background running</string>
+    <string name="oem_oppo_2">Auto launch → AdımSayar → On</string>
+
+    <string name="oem_vivo_1">Battery → Background power consumption management → High background power consumption → whitelist AdımSayar</string>
+    <string name="oem_vivo_2">Autostart → AdımSayar → On</string>
+
+    <string name="oem_asus_1">Auto-start → allow AdımSayar</string>
+
+    <string name="oem_transsion_1">Auto management → select AdımSayar in the app list, turn on all three permissions</string>
+</resources>

@@ -21,6 +21,7 @@ object Schedules {
     fun ensure(context: Context) {
         schedulePeriodic(context)
         scheduleMidnight(context)
+        Reminders.scheduleEvening(context)
     }
 
     fun requestRead(context: Context) {

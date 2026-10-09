@@ -24,9 +24,10 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Kalıcı depolama: Room.
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
-- Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
+- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü içindir (bkz. "İzinler").
 - **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
-- Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır.
+- Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
+- Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
 - Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
 
@@ -63,7 +64,7 @@ Donma kuralı bir pencere ve eşikle tanımlanır (ör. 2 dakikada detector ≥ 
 
 Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu). API adı `miui` olsa da HyperOS'ta da çalışır.
 
-Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve kullanıcı ana ekrandaki "HyperOS adım kaydını kullan" anahtarını açtığında kullanılır (`data/XiaomiSteps.kt`). Açıkken günlük toplamlar HyperOS kaydından gelir, sensör okumaları toplamlara eklenmez. Gerekçe ve test sonuçları `GOALS.md` → "Xiaomi / HyperOS adım kaydı". Okuma izni `miui.permission.READ_STEPS` manifest'te tanımlıdır.
+Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve kullanıcı Ayarlar'daki "HyperOS adım kaydını kullan" anahtarını açtığında kullanılır (`data/XiaomiSteps.kt`). Açıkken günlük toplamlar HyperOS kaydından gelir, sensör okumaları toplamlara eklenmez. Gerekçe ve test sonuçları `GOALS.md` → "Xiaomi / HyperOS adım kaydı". Okuma izni `miui.permission.READ_STEPS` manifest'te tanımlıdır.
 
 Redmi'de `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken sayar; HyperOS'un kendi servisi yalnızca detector'ı açık tutar. Bu cihazda bildirimsiz sayım ancak HyperOS kaydıyla mümkündür.
 
@@ -92,7 +93,7 @@ Bilinen trade-off'lar:
 - Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
 - Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
 
-Yedek yol: kullanıcının ana ekrandan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
+Yedek yol: kullanıcının Ayarlar'dan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 
 ### Davranış tablosu
 
@@ -108,15 +109,15 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 - API 29+ (Android 10) runtime izni: `ACTIVITY_RECOGNITION`. İki sensör için de zorunlu.
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
-- Ağ izni (`INTERNET`) ekleme. Bu uygulama çevrimdışıdır.
+- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz. Başka hiçbir ağ isteği eklenmez.
 
 ## Widget'lar
 
-İki widget: günün adımı, ve 7 günlük tablo.
+Dört widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
 
 Kurallar:
 
-- İkisi de **paylaşılan günlük snapshot** okur. İkinci widget için ayrı sensör okuması yoktur.
+- Hepsi **paylaşılan günlük snapshot** okur. Widget başına ayrı sensör okuması yoktur.
 - Gün dönümü `AlarmManager` ile 00:00'da tetiklenir. `JobScheduler` bırakılırsa gün dönümü "15:00 civarında" gibi kayabilir. Android 14+'ta tam zamanlı alarm izni varsayılan kapalıdır; o cihazlarda birkaç dakika kayan `setAndAllowWhileIdle` yeterlidir, çünkü adımların güne bölünmesi alarmdan değil okuma zamanından yapılır.
 - `updatePeriodMillis` en fazla 30 dakikaya kırpılır ve yine de garanti değildir. Kesinlik beklenmemeli.
 - Widget çizimi ana ekrandaki verinin kopyası değil, aynı kaynaktan okunmalıdır.
@@ -143,7 +144,7 @@ Xiaomi Cloud'a güvenilmez.
 - Kullanıcının seçtiği stack dışına çıkma; yeni bağımlılık eklemeden önce mevcut çözümü kullan.
 - Yorum satırı yazma; kod kendini açıklasın.
 - Türkçe arayüz metinlerini kullanıcıya sormadan değiştirme.
-- Ağ izni, hesap ekranı, analitik veya reklam SDK'sı ekleme.
+- Güncelleme kontrolü dışında ağ isteği, hesap ekranı, analitik veya reklam SDK'sı ekleme.
 - Kararlaştırılmış bir maddeyi değiştirmek gerekiyorsa önce kullanıcıya sor ve `GOALS.md` ile `CLAUDE.md`'yi birlikte güncelle.
 
 ## Pil optimizasyonu yardımı
