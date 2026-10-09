@@ -12,15 +12,11 @@ Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 P
 
 ## Ekran görüntüleri
 
-> **Yer tutucu:** ekran görüntüleri gerçek telefondan alınıp `docs/screenshots/` klasörüne eklenecek.
-
 | Bugün | Geçmiş | Madalyalar | Ayarlar |
 |---|---|---|---|
-| _eklenecek_ | _eklenecek_ | _eklenecek_ | _eklenecek_ |
+| <img src="docs/screenshots/today.png" width="200" alt="Bugün"> | <img src="docs/screenshots/history.png" width="200" alt="Geçmiş"> | <img src="docs/screenshots/medals.png" width="200" alt="Madalyalar"> | <img src="docs/screenshots/settings.png" width="200" alt="Ayarlar"> |
 
-| Bugün widget'ı | 7 günlük tablo | Seri ve hafta | Aylık takvim |
-|---|---|---|---|
-| _eklenecek_ | _eklenecek_ | _eklenecek_ | _eklenecek_ |
+> **Yer tutucu:** widget görüntüleri (Bugün, 7 günlük tablo, Seri ve hafta, Aylık takvim) eklenecek.
 
 ## Özellikler
 
