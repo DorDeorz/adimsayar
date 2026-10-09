@@ -14,6 +14,8 @@ Test cihazları: Redmi Note 12 Pro 4G (HyperOS 1 / Android 12, birincil) ve Gala
 
 v1: ana ekran (bugün, son 7 gün, toplam), iki widget, marka bazlı pil yardım kartı.
 
+0.3.0: alt menüde Bugün, Geçmiş (aylık takvim, saat saat dağılım, rekorlar) ve Madalyalar (seviye ve madalyalar). Ayarlar: günlük/haftalık hedef, hafta başlangıcı, boy/kilo ile mesafe ve kalori tahmini, tema, isteğe bağlı hedef ve seri bildirimleri, CSV dışa/içe aktarma, sürüm notları.
+
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)
 

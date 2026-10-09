@@ -79,7 +79,7 @@ Uygulama arka planda sensörü dinlemez, sayacı seyrek okur ve farkı kaydeder 
 
 Fark 500'e ±%3 içinde değilse kalıcı bildirimli foreground service, ayarlardan açılabilen bir seçenek olarak eklenir.
 
-İlk sonuç (2026-10-09, Redmi Note 12 Pro 4G): başarısız, 500 adımdan sonra fark 0 göründü. Seçenek ana ekrana "Arka planda sürekli say" anahtarı olarak eklendi (varsayılan kapalı). Ana ekrandaki okuma kaydı hangi okumanın değer aldığını gösterir.
+İlk sonuç (2026-10-09, Redmi Note 12 Pro 4G): başarısız, 500 adımdan sonra fark 0 göründü. Seçenek "Arka planda sürekli say" anahtarı olarak eklendi (varsayılan kapalı, 0.3.0'dan beri Ayarlar'da). Okuma kaydı (Ayarlar → Okuma kaydı) hangi okumanın değer aldığını gösterir.
 
 Redmi'de canlı testler (2026-10-09, adb ile):
 
