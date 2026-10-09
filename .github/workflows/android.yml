@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     tags: ['v*']
+  release:
+    types: [published]
   pull_request:
   workflow_dispatch:
 
@@ -71,4 +73,8 @@ jobs:
           if [ "$VERSION" != "$NAME" ]; then echo "Etiket $TAG, versionName $NAME ile uyuşmuyor"; exit 1; fi
           if [ -z "$ADIMSAYAR_KEYSTORE_FILE" ]; then echo "İmza anahtarı Secret'ları yok, Release yayınlanmadı"; exit 1; fi
           cp app/build/outputs/apk/release/app-release.apk "adimsayar-$VERSION.apk"
-          gh release create "$TAG" "adimsayar-$VERSION.apk" --title "AdımSayar $VERSION" --generate-notes
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" "adimsayar-$VERSION.apk" --clobber
+          else
+            gh release create "$TAG" "adimsayar-$VERSION.apk" --title "AdımSayar $VERSION" --generate-notes
+          fi
