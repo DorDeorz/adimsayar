@@ -189,7 +189,7 @@ private fun MedalBadge(medal: Medal, modifier: Modifier) {
             modifier = Modifier.padding(top = 6.dp),
         )
         Text(
-            text = medal.earnedOn?.let { DAY_FORMAT.format(it) + " " + it.year }
+            text = medal.earnedOn?.let { SHORT_DATE_FORMAT.format(it) }
                 ?: stringResource(R.string.percent_of_goal, percent(medal.progress, medal.target).coerceAtMost(99)),
             style = MaterialTheme.typography.labelSmall,
             color = if (medal.earned) MaterialTheme.colorScheme.onSurfaceVariant else muted,

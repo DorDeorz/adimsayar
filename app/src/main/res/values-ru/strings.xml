@@ -122,7 +122,7 @@
     <string name="unit_mile">миль</string>
     <string name="unit_cm">см</string>
     <string name="unit_kg">кг</string>
-    <string name="distance_calories">≈ %1$s %2$s · %3$s kcal</string>
+    <string name="distance_calories">≈ %1$s %2$s · %3$s ккал</string>
     <string name="hourly">По часам</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Ходьба: %1$s</string>

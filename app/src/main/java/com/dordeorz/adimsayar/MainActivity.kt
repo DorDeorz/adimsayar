@@ -14,12 +14,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -167,28 +170,31 @@ class MainActivity : ComponentActivity() {
                 val style = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { dark }
                 enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
             }
+            val direction = if (Locales.isRtl()) LayoutDirection.Rtl else LayoutDirection.Ltr
             AdimSayarTheme(darkTheme = dark, dynamicColor = appSettings.dynamicColor) {
-                AppScreen(
-                    state = MainUiState(
-                        today = currentDay,
-                        week = week,
-                        history = history,
-                        achievements = achievements,
-                        settings = appSettings,
-                        lastReadingWallMs = lastReading,
-                        permission = permission,
-                        sensorAvailable = sensorAvailable,
-                        frozen = frozen,
-                        batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
-                        serviceEnabled = serviceEnabled,
-                        xiaomiAvailable = xiaomiAvailable,
-                        xiaomiEnabled = xiaomiEnabled,
-                        xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
-                        logLines = logLines,
-                        version = BuildConfig.VERSION_NAME,
-                    ),
-                    actions = actions,
-                )
+                CompositionLocalProvider(LocalLayoutDirection provides direction) {
+                    AppScreen(
+                        state = MainUiState(
+                            today = currentDay,
+                            week = week,
+                            history = history,
+                            achievements = achievements,
+                            settings = appSettings,
+                            lastReadingWallMs = lastReading,
+                            permission = permission,
+                            sensorAvailable = sensorAvailable,
+                            frozen = frozen,
+                            batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
+                            serviceEnabled = serviceEnabled,
+                            xiaomiAvailable = xiaomiAvailable,
+                            xiaomiEnabled = xiaomiEnabled,
+                            xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
+                            logLines = logLines,
+                            version = BuildConfig.VERSION_NAME,
+                        ),
+                        actions = actions,
+                    )
+                }
             }
         }
     }

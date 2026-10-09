@@ -3,6 +3,8 @@ package com.dordeorz.adimsayar
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.text.TextUtils
+import android.view.View
 import androidx.core.os.ConfigurationCompat
 import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
@@ -18,10 +20,16 @@ object Locales {
         private set
 
     fun resolve(language: String): Locale {
-        if (language != SYSTEM_LANGUAGE) return Locale.forLanguageTag(language)
         val system = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
-        return if (system != null && system.language in SUPPORTED_LANGUAGES) system else FALLBACK
+        val locale = when {
+            language != SYSTEM_LANGUAGE -> Locale.forLanguageTag(language)
+            system != null && system.language in SUPPORTED_LANGUAGES -> system
+            else -> FALLBACK
+        }
+        return Locale.Builder().setLocale(locale).setUnicodeLocaleKeyword("nu", "latn").build()
     }
+
+    fun isRtl(): Boolean = TextUtils.getLayoutDirectionFromLocale(current) == View.LAYOUT_DIRECTION_RTL
 
     fun displayName(language: String): String {
         val locale = Locale.forLanguageTag(language)
