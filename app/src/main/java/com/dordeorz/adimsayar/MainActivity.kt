@@ -90,7 +90,7 @@ class MainActivity : ComponentActivity() {
                         settings.edit { putBoolean(KEY_BATTERY_CARD_DISMISSED, true) }
                         batteryCardVisible = false
                     },
-                    onServiceEnabledChange = ::setServiceEnabled,
+                    onServiceEnabledChange = ::changeServiceEnabled,
                 )
             }
         }
@@ -128,7 +128,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setServiceEnabled(enabled: Boolean) {
+    private fun changeServiceEnabled(enabled: Boolean) {
         serviceEnabled = enabled
         if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
