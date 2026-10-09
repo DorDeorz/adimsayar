@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,12 +21,14 @@ import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.ui.MainScreen
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
+import com.dordeorz.adimsayar.ui.XiaomiProblem
 import com.dordeorz.adimsayar.ui.oem.BatteryOptimization
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import com.dordeorz.adimsayar.ui.theme.AdimSayarTheme
@@ -53,6 +56,7 @@ class MainActivity : ComponentActivity() {
     private var xiaomiAvailable by mutableStateOf(false)
     private var xiaomiEnabled by mutableStateOf(false)
     private var xiaomiSync: Job? = null
+    private var xiaomiProblem by mutableStateOf<XiaomiProblem?>(null)
 
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
@@ -94,6 +98,7 @@ class MainActivity : ComponentActivity() {
                         serviceEnabled = serviceEnabled,
                         xiaomiAvailable = xiaomiAvailable,
                         xiaomiEnabled = xiaomiEnabled,
+                        xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
                         logLines = logLines,
                     ),
                     onRequestPermission = ::requestPermission,
@@ -177,9 +182,16 @@ class MainActivity : ComponentActivity() {
     private fun startXiaomiSync() {
         if (!xiaomiEnabled || xiaomiSync?.isActive == true) return
         val appContext = applicationContext
+        val stallDetector = XiaomiStallDetector()
         xiaomiSync = AppScope.launch(Dispatchers.IO) {
             while (isActive) {
-                XiaomiSteps.sync(appContext, ReadSource.App)
+                val today = XiaomiSteps.sync(appContext, ReadSource.App)
+                val problem = when {
+                    today == null -> XiaomiProblem.Unreadable
+                    stallDetector.onSync(today, monitor.detectorSteps, SystemClock.elapsedRealtime()) -> XiaomiProblem.Stalled
+                    else -> null
+                }
+                withContext(Dispatchers.Main) { xiaomiProblem = problem }
                 delay(XIAOMI_SYNC_INTERVAL_MS)
             }
         }

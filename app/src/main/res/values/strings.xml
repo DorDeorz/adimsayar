@@ -24,6 +24,10 @@
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
 
     <string name="service_card_title">Arka planda sürekli say</string>
+    <string name="xiaomi_unreadable_title">HyperOS adım kaydı okunamıyor</string>
+    <string name="xiaomi_unreadable_text">Adımlar şu an güncellenmiyor. Bir HyperOS güncellemesi kaydı değiştirmiş olabilir. Aşağıdaki anahtarı kapatıp "Arka planda sürekli say" ile saymaya devam edebilirsin.</string>
+    <string name="xiaomi_stalled_title">HyperOS adım kaydı ilerlemiyor</string>
+    <string name="xiaomi_stalled_text">Telefonun sensörü son dakikalarda adım görüyor ama HyperOS kaydı artmıyor. Birkaç dakika sonra tekrar bak; düzelmezse aşağıdaki anahtarı kapatıp "Arka planda sürekli say"ı açabilirsin.</string>
     <string name="xiaomi_card_title">HyperOS adım kaydını kullan</string>
     <string name="xiaomi_card_text">Adımlar telefonun kendi adım kaydından okunur. Uygulama kapalıyken de eksiksiz sayılır, bildirim gerekmez ve geçmiş günler de eklenir.</string>
     <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür.</string>

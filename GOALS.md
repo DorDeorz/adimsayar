@@ -122,7 +122,8 @@ Bilinen trade-off'lar:
 
 - HyperOS adımları birkaç dakikalık parçalar halinde yazar; ekrandaki sayı birkaç dakika geride kalabilir.
 - Kaydın günlük toplamları HyperOS'un sayımına bağlıdır. Senkronizasyon kayıttaki günleri yeniden yazar, yani bu kaynakta tamamlanmış bir gün de HyperOS kaydı değişirse güncellenir.
-- Bu API belgelenmemiştir; bir HyperOS güncellemesi onu kaldırabilir. O durumda anahtar kaybolur ve sensör yolu kullanılır.
+- Bu API belgelenmemiştir; bir HyperOS güncellemesi onu kaldırabilir. Kayıt okunamazsa uygulama açıkken uyarı kartı çıkar, anahtar kapatılabilir kalır ve kullanıcı sensör yoluna dönebilir.
+- HyperOS'un kendi sayımı durursa: uygulama açıkken step detector 10 dakikada en az 100 adım görüp kaydın bugünkü toplamı hiç artmamışsa uyarı kartı çıkar (`XiaomiStallDetector`). Kontrol yalnızca uygulama açıkken yapılır, çünkü detector'ı dinlemek sürekli kayıt gerektirir.
 
 ### Kullanılacak sensörler
 

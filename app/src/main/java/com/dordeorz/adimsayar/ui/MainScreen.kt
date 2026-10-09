@@ -48,6 +48,8 @@ private val DAY_FORMAT: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM",
 
 enum class PermissionState { Granted, NeedsRequest, Denied }
 
+enum class XiaomiProblem { Unreadable, Stalled }
+
 data class MainUiState(
     val week: List<DaySteps>,
     val total: Long,
@@ -59,6 +61,7 @@ data class MainUiState(
     val serviceEnabled: Boolean,
     val xiaomiAvailable: Boolean,
     val xiaomiEnabled: Boolean,
+    val xiaomiProblem: XiaomiProblem?,
     val logLines: List<String>,
 )
 
@@ -89,7 +92,16 @@ fun MainScreen(
             if (state.frozen) {
                 item { MessageCard(stringResource(R.string.frozen_title), stringResource(R.string.frozen_text)) }
             }
-            if (state.xiaomiAvailable) {
+            when (state.xiaomiProblem) {
+                XiaomiProblem.Unreadable -> item {
+                    MessageCard(stringResource(R.string.xiaomi_unreadable_title), stringResource(R.string.xiaomi_unreadable_text))
+                }
+                XiaomiProblem.Stalled -> item {
+                    MessageCard(stringResource(R.string.xiaomi_stalled_title), stringResource(R.string.xiaomi_stalled_text))
+                }
+                null -> Unit
+            }
+            if (state.xiaomiAvailable || state.xiaomiEnabled) {
                 item {
                     SwitchCard(
                         stringResource(R.string.xiaomi_card_title),

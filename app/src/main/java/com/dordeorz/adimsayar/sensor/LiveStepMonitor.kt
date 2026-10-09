@@ -31,6 +31,10 @@ class LiveStepMonitor(context: Context) {
 
     val frozen: StateFlow<Boolean> = _frozen.asStateFlow()
 
+    @Volatile
+    var detectorSteps = 0L
+        private set
+
     private val counterListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             val value = event.values[0].toLong()
@@ -52,6 +56,7 @@ class LiveStepMonitor(context: Context) {
     private val detectorListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             val now = SystemClock.elapsedRealtime()
+            detectorSteps++
             freezeDetector.onDetectorStep(now)
             if (freezeDetector.isFrozen(now)) {
                 _frozen.value = true

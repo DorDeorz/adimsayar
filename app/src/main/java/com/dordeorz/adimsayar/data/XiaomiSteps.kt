@@ -39,20 +39,20 @@ object XiaomiSteps {
         }
     }
 
-    suspend fun sync(context: Context, source: ReadSource) {
+    suspend fun sync(context: Context, source: ReadSource): Long? {
         val log = ReadingLog.get(context)
         val days = try {
             dailyTotals(context)
         } catch (e: SecurityException) {
             log.failure(source, R.string.log_xiaomi_denied)
-            return
+            return null
         } catch (e: RuntimeException) {
             log.note(source, context.getString(R.string.log_xiaomi_error, e.javaClass.simpleName))
-            return
+            return null
         }
         if (days == null) {
             log.failure(source, R.string.log_xiaomi_missing)
-            return
+            return null
         }
         StepRepository.get(context).replaceDays(days)
         val today = days[LocalDate.now()] ?: 0L
@@ -60,6 +60,7 @@ object XiaomiSteps {
             lastLoggedToday = today
             log.note(source, context.getString(R.string.log_xiaomi_synced, today, days.size))
         }
+        return today
     }
 
     private fun dailyTotals(context: Context): Map<LocalDate, Long>? {
