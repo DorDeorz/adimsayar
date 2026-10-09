@@ -3,12 +3,15 @@ name: Android
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Gradle projesi var mı
@@ -22,8 +25,26 @@ jobs:
           java-version: 21
       - uses: gradle/actions/setup-gradle@v4
         if: steps.proje.outputs.var == 'true'
+      - name: İmza anahtarı
+        if: steps.proje.outputs.var == 'true'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ADIMSAYAR_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > "$RUNNER_TEMP/adimsayar.p12"
+            SIZE=$(wc -c < "$RUNNER_TEMP/adimsayar.p12")
+            echo "Anahtar dosyası: $SIZE bayt, sha256 $(sha256sum "$RUNNER_TEMP/adimsayar.p12" | cut -c1-12). Şifre uzunluğu: ${#KEYSTORE_PASSWORD}"
+            if [ "$SIZE" -lt 1000 ]; then echo "::error::ADIMSAYAR_KEYSTORE_BASE64 yanlış: keystore-base64.txt dosyasının tamamı olmalı"; exit 1; fi
+            keytool -list -storetype PKCS12 -keystore "$RUNNER_TEMP/adimsayar.p12" -storepass "$KEYSTORE_PASSWORD" > /dev/null || { echo "::error::ADIMSAYAR_KEYSTORE_PASSWORD yanlış"; exit 1; }
+            echo "ADIMSAYAR_KEYSTORE_FILE=$RUNNER_TEMP/adimsayar.p12" >> "$GITHUB_ENV"
+          else
+            echo "İmza anahtarı yok: release APK geçici debug anahtarıyla imzalandı, telefona kurma" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Build, lint, test
         if: steps.proje.outputs.var == 'true'
+        env:
+          ADIMSAYAR_KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
         run: ./gradlew --stacktrace assembleDebug assembleRelease lint testDebugUnitTest
       - name: Lint raporu
         if: always() && steps.proje.outputs.var == 'true'
@@ -39,3 +60,15 @@ jobs:
             app/build/outputs/apk/
             app/build/reports/
           if-no-files-found: ignore
+      - name: GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v') && steps.proje.outputs.var == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          NAME=$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' app/build.gradle.kts)
+          if [ "$VERSION" != "$NAME" ]; then echo "Etiket $TAG, versionName $NAME ile uyuşmuyor"; exit 1; fi
+          if [ -z "$ADIMSAYAR_KEYSTORE_FILE" ]; then echo "İmza anahtarı Secret'ları yok, Release yayınlanmadı"; exit 1; fi
+          cp app/build/outputs/apk/release/app-release.apk "adimsayar-$VERSION.apk"
+          gh release create "$TAG" "adimsayar-$VERSION.apk" --title "AdımSayar $VERSION" --generate-notes

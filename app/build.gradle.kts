@@ -16,12 +16,16 @@ android {
         versionName = "0.6.1"
     }
 
+    val releaseKeystore = System.getenv("ADIMSAYAR_KEYSTORE_FILE")
+
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("ADIMSAYAR_KEYSTORE_PASSWORD")
+                keyAlias = "adimsayar"
+                keyPassword = System.getenv("ADIMSAYAR_KEYSTORE_PASSWORD")
+            }
         }
     }
 
@@ -30,7 +34,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName(if (releaseKeystore != null) "release" else "debug")
         }
     }
 
