@@ -16,6 +16,7 @@ enum class ReadSource(@param:StringRes val label: Int) {
     System(R.string.source_system),
     Widget(R.string.source_widget),
     Service(R.string.source_service),
+    Xiaomi(R.string.source_xiaomi),
 }
 
 class ReadingLog private constructor(private val context: Context) {
@@ -36,6 +37,8 @@ class ReadingLog private constructor(private val context: Context) {
     }
 
     fun failure(source: ReadSource, @StringRes reason: Int) = add(source, context.getString(reason))
+
+    fun note(source: ReadSource, text: String) = add(source, text)
 
     @Synchronized
     private fun add(source: ReadSource, text: String) {

@@ -21,6 +21,7 @@ import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
+import com.dordeorz.adimsayar.sensor.XiaomiSteps
 import com.dordeorz.adimsayar.ui.MainScreen
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
@@ -28,6 +29,7 @@ import com.dordeorz.adimsayar.ui.oem.BatteryOptimization
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import com.dordeorz.adimsayar.ui.theme.AdimSayarTheme
 import com.dordeorz.adimsayar.widget.Widgets
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -57,6 +59,8 @@ class MainActivity : ComponentActivity() {
             monitor.start()
             StepCounterService.startIfEnabled(applicationContext)
         }
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) { XiaomiSteps.probe(appContext) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
