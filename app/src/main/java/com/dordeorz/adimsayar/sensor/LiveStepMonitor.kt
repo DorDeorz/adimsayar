@@ -10,6 +10,7 @@ import com.dordeorz.adimsayar.AppScope
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.data.isNotable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,7 +47,7 @@ class LiveStepMonitor(context: Context) {
             val reading = StepSensors.reading(appContext, event)
             AppScope.launch {
                 val interval = repository.record(reading)
-                if (first || interval.kind.isNotable()) log.reading(ReadSource.App, reading, interval)
+                if ((first || interval.kind.isNotable()) && !XiaomiSteps.isEnabled(appContext)) log.reading(ReadSource.App, reading, interval)
             }
         }
 
