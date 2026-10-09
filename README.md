@@ -1,6 +1,6 @@
 # AdımSayar
 
-Android için reklamsız, hesapsız, internetsiz adım sayar. Adımlar yalnızca telefonun kendi sensörlerinden (Xiaomi'de isteğe bağlı olarak HyperOS'un kendi adım kaydından) okunur ve tüm veriler telefonda kalır.
+Android için reklamsız, hesapsız adım sayar. Adımlar yalnızca telefonun kendi sensörlerinden (Xiaomi'de isteğe bağlı olarak HyperOS'un kendi adım kaydından) okunur ve tüm veriler telefonda kalır.
 
 Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 Pro 4G (HyperOS) için yazıldı; tüm Android telefonlarda çalışacak şekilde tasarlandı.
 
@@ -8,7 +8,7 @@ Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 P
 - Glance ile ana ekran widget'ları
 - Room ile cihazda kalıcı kayıt
 - minSdk 23 (Android 6.0), targetSdk 36
-- İnternet izni yok, hesap yok, analitik veya reklam SDK'sı yok
+- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü için
 
 ## Ekran görüntüleri
 
@@ -68,6 +68,7 @@ Widget'lar telefonun duvar kağıdı renklerini (Material You) veya uygulamanın
 - Açık, koyu veya sistem teması; telefonun renklerini kullanma
 - 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça (sağdan sola), Japonca, Çince, Korece
 - CSV dışa/içe aktarma (`tarih,adim`); içe aktarırken her gün için yüksek olan sayı kalır
+- Güncelleme kontrolü (GitHub'daki son sürümle karşılaştırır, yeni sürüm varsa indirme sayfasını açar) ve GitHub sayfası bağlantısı
 - Adım kaynağı anahtarları, okuma kaydı ve sürüm notları
 
 ## Adım verisi nasıl alınıyor
@@ -135,7 +136,7 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 
 ## Gizlilik
 
-- İnternet izni yoktur; uygulama hiçbir veriyi telefondan dışarı göndermez.
+- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`). Bu istek yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
 - Hesap, sunucu, senkronizasyon, analitik ve reklam yoktur.
 - Veri kaybına karşı Android'in kendi yedeklemesi (`allowBackup`) ve kullanıcının kendi eliyle yaptığı CSV dışa aktarma kullanılır.
 
@@ -149,14 +150,27 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 | `POST_NOTIFICATIONS` | Servis bildirimi ve isteğe bağlı hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gün dönümünü tam gece yarısı yapmak |
+| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü |
 
 ## Kurulum
 
-APK her derlemede GitHub Actions'ta üretilir. [Actions](../../actions) sekmesinde son başarılı çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısından `app-release.apk` indirilip telefona kurulur.
+En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile görebilirsin.
+
+Her derlemenin APK'sı ayrıca [Actions](../../actions) sekmesinde, çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısında bulunur.
 
 Release APK, depoda bulunmayan ve GitHub Actions Secret'larında saklanan bir anahtarla imzalanır (`ADIMSAYAR_KEYSTORE_BASE64`, `ADIMSAYAR_KEYSTORE_PASSWORD`, `ADIMSAYAR_KEY_ALIAS`, `ADIMSAYAR_KEY_PASSWORD`). Bu Secret'lar olmadan (örneğin bir fork'ta) APK geçici bir debug anahtarıyla imzalanır.
 
 İlk açılışta "Fiziksel etkinlik" izni verilmelidir. Xiaomi telefonlarda Ayarlar → Adım kaynağı → "HyperOS adım kaydını kullan" açılması önerilir.
+
+### Yeni sürüm yayınlama
+
+1. `app/build.gradle.kts` içinde `versionName` ve `versionCode` artırılır ve `main`'e birleştirilir.
+2. `main` üzerinde `versionName` ile aynı adda bir etiket gönderilir, örneğin `v0.6.1`:
+
+   ```
+   git tag v0.6.1 && git push origin v0.6.1
+   ```
+3. GitHub Actions APK'yı derler, imzalar ve `adimsayar-0.6.1.apk` adıyla bir GitHub Release yayınlar. Etiket `versionName` ile uyuşmazsa iş durur.
 
 ### Kaynaktan derleme
 
@@ -190,6 +204,7 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 
 | Sürüm | Yenilikler |
 |---|---|
+| 0.6.1 | Ayarlar'da güncelleme kontrolü ve GitHub sayfası bağlantısı |
 | 0.6.0 | Haftalık özet bildirimi, hedefe yaklaşınca bildirim, Geçmiş'te yıllık özet |
 | 0.5.0 | Madalya sayaçları (5x), Material You renkli ve boyuta uyan widget'lar, seri ve takvim widget'ları, 12 dil |
 | 0.4.0 | Widget'ta hedef halkası, erken kalkan madalyası, İngilizce |
@@ -205,4 +220,4 @@ Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. 
 
 ### English
 
-AdımSayar is an offline Android step counter: no account, no network permission, no ads or analytics. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages.
+AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages.
