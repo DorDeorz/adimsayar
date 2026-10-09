@@ -100,6 +100,15 @@ class MainActivity : ComponentActivity() {
             settingsStore.setGoalNotification(enabled)
             if (enabled) requestNotificationPermission()
         },
+        onNearGoalNotificationChange = { enabled ->
+            settingsStore.setNearGoalNotification(enabled)
+            if (enabled) requestNotificationPermission()
+        },
+        onWeeklySummaryChange = { enabled ->
+            settingsStore.setWeeklySummary(enabled)
+            if (enabled) requestNotificationPermission()
+            Reminders.scheduleEvening(applicationContext)
+        },
         onLanguageChange = ::changeLanguage,
         onStreakReminderChange = { enabled ->
             settingsStore.setStreakReminder(enabled)

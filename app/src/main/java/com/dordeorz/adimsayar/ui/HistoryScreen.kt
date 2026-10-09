@@ -24,8 +24,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -38,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.Records
 import kotlinx.coroutines.Dispatchers
@@ -77,6 +80,54 @@ fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayD
         }
         item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, loadDayDetail) }
         item { RecordsCard(state.achievements.records, state.today) }
+        item { YearCard(state) }
+    }
+}
+
+@Composable
+private fun YearCard(state: MainUiState) {
+    val currentYear = state.today.year
+    val firstYear = state.history.keys.minOrNull()?.year?.coerceAtMost(currentYear) ?: currentYear
+    var yearValue by rememberSaveable { mutableIntStateOf(currentYear) }
+    val year = yearValue.coerceIn(firstYear, currentYear)
+    val summary = remember(state.history, state.achievements, state.settings.dailyGoal, year, state.today) {
+        AchievementMath.year(state.history, year, state.today, state.settings.dailyGoal, state.achievements.medals)
+    }
+    Card {
+        Column(modifier = Modifier.padding(vertical = 8.dp)) {
+            Row(modifier = Modifier.padding(horizontal = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { yearValue = year - 1 }, enabled = year > firstYear) {
+                    Icon(painterResource(R.drawable.ic_chevron_left), contentDescription = stringResource(R.string.previous_year))
+                }
+                Text(
+                    stringResource(R.string.year_summary, year),
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f),
+                )
+                IconButton(onClick = { yearValue = year + 1 }, enabled = year < currentYear) {
+                    Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = stringResource(R.string.next_year))
+                }
+            }
+            RecordRow(stringResource(R.string.total), format(summary.total), null)
+            RecordRow(stringResource(R.string.daily_average), format(summary.dailyAverage), null)
+            RecordRow(
+                stringResource(R.string.record_goal_days),
+                summary.goalDays.toString(),
+                stringResource(R.string.active_days, summary.activeDays),
+            )
+            RecordRow(
+                stringResource(R.string.record_best_month),
+                summary.bestMonth?.let { format(it.steps) } ?: "-",
+                summary.bestMonth?.let { MONTH_FORMAT.format(it.month).replaceFirstChar { c -> c.titlecase(appLocale) } },
+            )
+            RecordRow(
+                stringResource(R.string.record_best_day),
+                summary.bestDay?.let { format(it.steps) } ?: "-",
+                summary.bestDay?.let { FULL_DATE_FORMAT.format(it.date) },
+            )
+            RecordRow(stringResource(R.string.year_medals), summary.medals.toString(), null)
+        }
     }
 }
 

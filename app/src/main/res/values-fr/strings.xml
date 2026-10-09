@@ -166,6 +166,26 @@
     <string name="widget_month_description">Les jours du mois, colorés selon l\'objectif</string>
     <string name="month_goal_days">%1$d jours objectif</string>
 
+    <string name="near_goal_notification">Me prévenir près de l\'objectif</string>
+    <string name="near_goal_notification_hint">Vous recevez une notification le jour où vous atteignez 80 % de votre objectif quotidien.</string>
+    <string name="weekly_summary">Résumé hebdomadaire</string>
+    <string name="weekly_summary_hint">Le dernier jour de la semaine vers 20:00, affiche le total de la semaine et l\'évolution par rapport à la semaine précédente.</string>
+    <string name="notify_near_title">Objectif presque atteint !</string>
+    <string name="notify_near_text">Plus que %1$s pas avant votre objectif quotidien.</string>
+    <string name="notify_week_title">Vous avez fait %1$s pas cette semaine</string>
+    <string name="notify_week_more">%1$d%% de plus que la semaine dernière. Objectif hebdomadaire : %2$s</string>
+    <string name="notify_week_less">%1$d%% de moins que la semaine dernière. Objectif hebdomadaire : %2$s</string>
+    <string name="notify_week_goal">Objectif hebdomadaire : %1$s</string>
+    <string name="year_summary">Bilan %1$d</string>
+    <string name="previous_year">Année précédente</string>
+    <string name="next_year">Année suivante</string>
+    <string name="year_medals">Médailles obtenues</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Notification de résumé hebdomadaire : le total de la semaine et l\'évolution par rapport à la précédente, le soir du dernier jour</item>
+        <item>Notification quand vous êtes proche de votre objectif (80 % de l\'objectif quotidien)</item>
+        <item>Bilan annuel dans l\'Historique : total, moyenne, jours objectif, meilleur mois et meilleur jour, médailles obtenues</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>Les médailles indiquent combien de fois chacune a été obtenue (ex. 5x)</item>
         <item>Les widgets utilisent les couleurs du téléphone (Material You) ou le thème de l\'app</item>

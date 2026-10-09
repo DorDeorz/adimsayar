@@ -166,6 +166,26 @@
     <string name="widget_month_description">今月の日を目標達成度で色分け</string>
     <string name="month_goal_days">目標達成 %1$d 日</string>
 
+    <string name="near_goal_notification">目標が近づいたら通知</string>
+    <string name="near_goal_notification_hint">1日の目標の80%に達した日に、通知が1回届きます。</string>
+    <string name="weekly_summary">週間サマリー</string>
+    <string name="weekly_summary_hint">週の最終日の20:00ごろに、週の合計と前週からの変化を表示します。</string>
+    <string name="notify_near_title">もう少しで目標達成！</string>
+    <string name="notify_near_text">1日の目標まであと %1$s 歩です。</string>
+    <string name="notify_week_title">今週は %1$s 歩歩きました</string>
+    <string name="notify_week_more">前週より %1$d%% 多い。週間目標: %2$s</string>
+    <string name="notify_week_less">前週より %1$d%% 少ない。週間目標: %2$s</string>
+    <string name="notify_week_goal">週間目標: %1$s</string>
+    <string name="year_summary">%1$d 年のまとめ</string>
+    <string name="previous_year">前の年</string>
+    <string name="next_year">次の年</string>
+    <string name="year_medals">獲得したメダル</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>週間サマリー通知: 週の最終日の夜に、週の合計と前週からの変化を表示</item>
+        <item>目標が近づいたときの通知 (1日の目標の80%)</item>
+        <item>履歴に年間サマリー: 合計、平均、目標達成日、最高の月と日、獲得したメダル</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>メダルごとの獲得回数を表示 (例: 5x)</item>
         <item>ウィジェットがスマートフォンの色 (Material You) またはアプリのテーマを使用</item>

@@ -166,6 +166,26 @@
     <string name="widget_month_description">Bu ayın günleri, hedefe göre renkli</string>
     <string name="month_goal_days">%1$d gün hedefte</string>
 
+    <string name="near_goal_notification">Hedefe yaklaşınca bildir</string>
+    <string name="near_goal_notification_hint">Günlük hedefin %80\'ine ulaştığın gün bir kez bildirim gelir.</string>
+    <string name="weekly_summary">Haftalık özet</string>
+    <string name="weekly_summary_hint">Haftanın son günü saat 20:00 civarı haftanın toplamını ve geçen haftayla farkını bildirir.</string>
+    <string name="notify_near_title">Hedefe çok az kaldı!</string>
+    <string name="notify_near_text">Günlük hedefe %1$s adım kaldı.</string>
+    <string name="notify_week_title">Bu hafta %1$s adım attın</string>
+    <string name="notify_week_more">Geçen haftadan %%%1$d fazla. Haftalık hedef: %2$s</string>
+    <string name="notify_week_less">Geçen haftadan %%%1$d az. Haftalık hedef: %2$s</string>
+    <string name="notify_week_goal">Haftalık hedef: %1$s</string>
+    <string name="year_summary">%1$d özeti</string>
+    <string name="previous_year">Önceki yıl</string>
+    <string name="next_year">Sonraki yıl</string>
+    <string name="year_medals">Kazanılan madalya</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Haftalık özet bildirimi: haftanın son günü akşamı toplam ve geçen haftayla fark</item>
+        <item>Hedefe yaklaşınca bildirim (günlük hedefin %80\'i)</item>
+        <item>Geçmiş\'te yıllık özet: toplam, ortalama, hedef günleri, en iyi ay ve gün, kazanılan madalyalar</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>Madalyalarda her madalyanın kaç kez kazanıldığı (ör. 5x)</item>
         <item>Widget\'lar telefonun renklerini (Material You) veya uygulamanın temasını kullanır</item>

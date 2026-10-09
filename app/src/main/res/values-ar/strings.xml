@@ -166,6 +166,26 @@
     <string name="widget_month_description">أيام هذا الشهر ملوّنة حسب الهدف</string>
     <string name="month_goal_days">أيام الهدف: %1$d</string>
 
+    <string name="near_goal_notification">إشعار عند الاقتراب من الهدف</string>
+    <string name="near_goal_notification_hint">ستتلقى إشعارًا واحدًا في اليوم الذي تبلغ فيه 80% من هدفك اليومي.</string>
+    <string name="weekly_summary">الملخص الأسبوعي</string>
+    <string name="weekly_summary_hint">في آخر يوم من الأسبوع نحو الساعة 20:00، يعرض إجمالي الأسبوع والتغير مقارنة بالأسبوع الماضي.</string>
+    <string name="notify_near_title">اقتربت من هدفك!</string>
+    <string name="notify_near_text">الخطوات المتبقية لهدفك اليومي: %1$s.</string>
+    <string name="notify_week_title">خطواتك هذا الأسبوع: %1$s</string>
+    <string name="notify_week_more">أكثر من الأسبوع الماضي بنسبة %1$d%%. الهدف الأسبوعي: %2$s</string>
+    <string name="notify_week_less">أقل من الأسبوع الماضي بنسبة %1$d%%. الهدف الأسبوعي: %2$s</string>
+    <string name="notify_week_goal">الهدف الأسبوعي: %1$s</string>
+    <string name="year_summary">ملخص عام %1$d</string>
+    <string name="previous_year">السنة السابقة</string>
+    <string name="next_year">السنة التالية</string>
+    <string name="year_medals">الميداليات المكتسبة</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>إشعار الملخص الأسبوعي: إجمالي الأسبوع والتغير مقارنة بالأسبوع الماضي، مساء آخر يوم منه</item>
+        <item>إشعار عند اقترابك من هدفك (80% من الهدف اليومي)</item>
+        <item>ملخص سنوي في السجل: الإجمالي والمتوسط وأيام الهدف وأفضل شهر ويوم والميداليات المكتسبة</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>تعرض الميداليات عدد مرات الحصول على كل منها (مثل 5x)</item>
         <item>تستخدم الأدوات ألوان الهاتف (Material You) أو مظهر التطبيق</item>

@@ -130,4 +130,24 @@ class AchievementMathTest {
         assertEquals(1, medal(result, MedalGroup.WeeklyGoal, 1).times)
         assertEquals(0, medal(result, MedalGroup.Total, 100_000).times)
     }
+
+    @Test
+    fun yearSummaryCoversOnlyThatYear() {
+        val history = mapOf(
+            LocalDate.of(2025, 12, 31) to 20_000L,
+            LocalDate.of(2026, 1, 1) to 12_000L,
+            LocalDate.of(2026, 1, 2) to 0L,
+            LocalDate.of(2026, 2, 1) to 8_000L,
+        )
+        val today = LocalDate.of(2026, 2, 1)
+        val medals = AchievementMath.compute(history, today, 10_000, 70_000).medals
+        val summary = AchievementMath.year(history, 2026, today, 10_000, medals)
+        assertEquals(20_000L, summary.total)
+        assertEquals(20_000L / 32, summary.dailyAverage)
+        assertEquals(2, summary.activeDays)
+        assertEquals(1, summary.goalDays)
+        assertEquals(DaySteps(LocalDate.of(2026, 1, 1), 12_000), summary.bestDay)
+        assertEquals(MonthSteps(YearMonth.of(2026, 1), 12_000), summary.bestMonth)
+        assertEquals(0, summary.medals)
+    }
 }

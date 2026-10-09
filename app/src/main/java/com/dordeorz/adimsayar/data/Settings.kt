@@ -23,6 +23,8 @@ data class AppSettings(
     val weekStart: DayOfWeek = DayOfWeek.MONDAY,
     val goalNotification: Boolean = false,
     val streakReminder: Boolean = false,
+    val nearGoalNotification: Boolean = false,
+    val weeklySummary: Boolean = false,
     val language: String = SYSTEM_LANGUAGE,
 )
 
@@ -72,6 +74,10 @@ class SettingsStore private constructor(context: Context) {
 
     fun setStreakReminder(enabled: Boolean) = update { it.copy(streakReminder = enabled) }
 
+    fun setNearGoalNotification(enabled: Boolean) = update { it.copy(nearGoalNotification = enabled) }
+
+    fun setWeeklySummary(enabled: Boolean) = update { it.copy(weeklySummary = enabled) }
+
     fun setLanguage(language: String) = update { it.copy(language = language) }
 
     private fun update(change: (AppSettings) -> AppSettings) {
@@ -87,6 +93,8 @@ class SettingsStore private constructor(context: Context) {
             putString(KEY_WEEK_START, next.weekStart.name)
             putBoolean(KEY_GOAL_NOTIFICATION, next.goalNotification)
             putBoolean(KEY_STREAK_REMINDER, next.streakReminder)
+            putBoolean(KEY_NEAR_GOAL, next.nearGoalNotification)
+            putBoolean(KEY_WEEKLY_SUMMARY, next.weeklySummary)
             putString(KEY_LANGUAGE, next.language)
         }
         _settings.value = next
@@ -103,6 +111,8 @@ class SettingsStore private constructor(context: Context) {
         weekStart = WEEK_START_OPTIONS.firstOrNull { it.name == prefs.getString(KEY_WEEK_START, null) } ?: DayOfWeek.MONDAY,
         goalNotification = prefs.getBoolean(KEY_GOAL_NOTIFICATION, false),
         streakReminder = prefs.getBoolean(KEY_STREAK_REMINDER, false),
+        nearGoalNotification = prefs.getBoolean(KEY_NEAR_GOAL, false),
+        weeklySummary = prefs.getBoolean(KEY_WEEKLY_SUMMARY, false),
         language = languageTag(prefs.getString(KEY_LANGUAGE, null)),
     )
 
@@ -118,6 +128,8 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_WEEK_START = "week_start"
         private const val KEY_GOAL_NOTIFICATION = "goal_notification"
         private const val KEY_STREAK_REMINDER = "streak_reminder"
+        private const val KEY_NEAR_GOAL = "near_goal_notification"
+        private const val KEY_WEEKLY_SUMMARY = "weekly_summary"
         private const val KEY_LANGUAGE = "language"
 
         @Volatile

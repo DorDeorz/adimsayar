@@ -166,6 +166,26 @@
     <string name="widget_month_description">이번 달 날짜를 목표 달성에 따라 색으로 표시</string>
     <string name="month_goal_days">목표 달성 %1$d일</string>
 
+    <string name="near_goal_notification">목표에 가까워지면 알림</string>
+    <string name="near_goal_notification_hint">일일 목표의 80%에 도달한 날 알림을 한 번 받습니다.</string>
+    <string name="weekly_summary">주간 요약</string>
+    <string name="weekly_summary_hint">한 주의 마지막 날 20:00쯤 주간 합계와 지난주 대비 변화를 보여줍니다.</string>
+    <string name="notify_near_title">목표까지 거의 다 왔어요!</string>
+    <string name="notify_near_text">일일 목표까지 %1$s걸음 남았습니다.</string>
+    <string name="notify_week_title">이번 주에 %1$s걸음 걸었습니다</string>
+    <string name="notify_week_more">지난주보다 %1$d%% 많음. 주간 목표: %2$s</string>
+    <string name="notify_week_less">지난주보다 %1$d%% 적음. 주간 목표: %2$s</string>
+    <string name="notify_week_goal">주간 목표: %1$s</string>
+    <string name="year_summary">%1$d년 요약</string>
+    <string name="previous_year">이전 연도</string>
+    <string name="next_year">다음 연도</string>
+    <string name="year_medals">획득한 메달</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>주간 요약 알림: 한 주의 마지막 날 저녁에 주간 합계와 지난주 대비 변화 표시</item>
+        <item>목표에 가까워지면 알림(일일 목표의 80%)</item>
+        <item>기록에 연간 요약 추가: 합계, 평균, 목표 달성일, 최고의 달과 날, 획득한 메달</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>메달별 획득 횟수 표시(예: 5x)</item>
         <item>위젯에 휴대전화 색상(Material You) 또는 앱 테마 적용</item>

@@ -166,6 +166,26 @@
     <string name="widget_month_description">Os dias deste mês, coloridos pela meta</string>
     <string name="month_goal_days">%1$d dias com meta</string>
 
+    <string name="near_goal_notification">Avisar quando estiver perto da meta</string>
+    <string name="near_goal_notification_hint">Você recebe uma notificação no dia em que atingir 80% da meta diária.</string>
+    <string name="weekly_summary">Resumo semanal</string>
+    <string name="weekly_summary_hint">No último dia da semana, por volta das 20:00, mostra o total da semana e a mudança em relação à semana anterior.</string>
+    <string name="notify_near_title">Quase lá!</string>
+    <string name="notify_near_text">Faltam %1$s passos para a sua meta diária.</string>
+    <string name="notify_week_title">Você caminhou %1$s passos esta semana</string>
+    <string name="notify_week_more">%1$d%% a mais que na semana passada. Meta semanal: %2$s</string>
+    <string name="notify_week_less">%1$d%% a menos que na semana passada. Meta semanal: %2$s</string>
+    <string name="notify_week_goal">Meta semanal: %1$s</string>
+    <string name="year_summary">Resumo de %1$d</string>
+    <string name="previous_year">Ano anterior</string>
+    <string name="next_year">Próximo ano</string>
+    <string name="year_medals">Medalhas conquistadas</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Notificação de resumo semanal: o total da semana e a mudança em relação à anterior, na noite do último dia</item>
+        <item>Notificação quando você está perto da meta (80% da meta diária)</item>
+        <item>Resumo anual no Histórico: total, média, dias com meta, melhor mês e dia, medalhas conquistadas</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>As medalhas mostram quantas vezes cada uma foi conquistada (ex.: 5x)</item>
         <item>Os widgets usam as cores do celular (Material You) ou o tema do app</item>

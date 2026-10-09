@@ -3,6 +3,7 @@ package com.dordeorz.adimsayar.data
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalAdjusters
 
 enum class MedalGroup(val targets: List<Long>) {
@@ -46,6 +47,17 @@ data class Records(
 data class Level(val number: Int, val from: Long, val to: Long)
 
 data class Achievements(val records: Records, val medals: List<Medal>, val level: Level)
+
+data class YearSummary(
+    val year: Int,
+    val total: Long,
+    val dailyAverage: Long,
+    val activeDays: Int,
+    val goalDays: Int,
+    val bestDay: DaySteps?,
+    val bestMonth: MonthSteps?,
+    val medals: Int,
+)
 
 fun weekStartOf(date: LocalDate, firstDay: DayOfWeek = DayOfWeek.MONDAY): LocalDate =
     date.with(TemporalAdjusters.previousOrSame(firstDay))
@@ -164,6 +176,30 @@ object AchievementMath {
             metWeeks = metWeeks,
         )
         return Achievements(records, medals, level(total))
+    }
+
+    fun year(days: Map<LocalDate, Long>, year: Int, today: LocalDate, dailyGoal: Long, medals: List<Medal>): YearSummary {
+        val inYear = days.filter { (date, _) -> date.year == year && !date.isAfter(today) }
+        val first = inYear.keys.minOrNull()
+        val last = if (today.year == year) today else LocalDate.of(year, 12, 31)
+        val span = if (first == null) 0L else ChronoUnit.DAYS.between(first, last) + 1
+        val total = inYear.values.sum()
+        val bestDay = inYear.maxByOrNull { it.value }?.takeIf { it.value > 0L }?.let { DaySteps(it.key, it.value) }
+        val bestMonth = inYear.entries
+            .groupBy({ YearMonth.from(it.key) }, { it.value })
+            .map { (month, steps) -> MonthSteps(month, steps.sum()) }
+            .maxByOrNull { it.steps }
+            ?.takeIf { it.steps > 0L }
+        return YearSummary(
+            year = year,
+            total = total,
+            dailyAverage = if (span == 0L) 0L else total / span,
+            activeDays = inYear.values.count { it > 0L },
+            goalDays = inYear.values.count { it >= dailyGoal },
+            bestDay = bestDay,
+            bestMonth = bestMonth,
+            medals = medals.count { it.earnedOn?.year == year },
+        )
     }
 
     fun level(total: Long): Level {

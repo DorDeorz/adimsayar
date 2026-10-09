@@ -166,6 +166,26 @@
     <string name="widget_month_description">Die Tage dieses Monats, nach Ziel eingefärbt</string>
     <string name="month_goal_days">%1$d Zieltage</string>
 
+    <string name="near_goal_notification">Benachrichtigen, wenn das Ziel nah ist</string>
+    <string name="near_goal_notification_hint">Du erhältst eine Benachrichtigung an dem Tag, an dem du 80 % deines Tagesziels erreichst.</string>
+    <string name="weekly_summary">Wochenzusammenfassung</string>
+    <string name="weekly_summary_hint">Zeigt am letzten Tag der Woche gegen 20:00 die Wochensumme und die Veränderung zur Vorwoche.</string>
+    <string name="notify_near_title">Fast am Ziel!</string>
+    <string name="notify_near_text">Noch %1$s Schritte bis zu deinem Tagesziel.</string>
+    <string name="notify_week_title">Du bist diese Woche %1$s Schritte gegangen</string>
+    <string name="notify_week_more">%1$d%% mehr als letzte Woche. Wochenziel: %2$s</string>
+    <string name="notify_week_less">%1$d%% weniger als letzte Woche. Wochenziel: %2$s</string>
+    <string name="notify_week_goal">Wochenziel: %1$s</string>
+    <string name="year_summary">Zusammenfassung %1$d</string>
+    <string name="previous_year">Vorheriges Jahr</string>
+    <string name="next_year">Nächstes Jahr</string>
+    <string name="year_medals">Verdiente Medaillen</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Benachrichtigung mit Wochenzusammenfassung: Wochensumme und Veränderung zur Vorwoche, am Abend des letzten Tages</item>
+        <item>Benachrichtigung, wenn du nah an deinem Ziel bist (80 % des Tagesziels)</item>
+        <item>Jahreszusammenfassung im Verlauf: Gesamt, Durchschnitt, Zieltage, bester Monat und Tag, verdiente Medaillen</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>Medaillen zeigen, wie oft sie verdient wurden (z. B. 5x)</item>
         <item>Widgets nutzen die Farben des Telefons (Material You) oder das App-Design</item>

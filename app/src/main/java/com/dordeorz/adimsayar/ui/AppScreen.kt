@@ -84,6 +84,8 @@ class MainActions(
     val onWeekStartChange: (DayOfWeek) -> Unit,
     val onGoalNotificationChange: (Boolean) -> Unit,
     val onStreakReminderChange: (Boolean) -> Unit,
+    val onNearGoalNotificationChange: (Boolean) -> Unit,
+    val onWeeklySummaryChange: (Boolean) -> Unit,
     val onLanguageChange: (String) -> Unit,
     val onExport: () -> Unit,
     val onImport: () -> Unit,

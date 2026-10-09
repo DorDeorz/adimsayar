@@ -61,6 +61,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.6.0", R.array.release_notes_0_6_0),
     ReleaseNote("0.5.0", R.array.release_notes_0_5_0),
     ReleaseNote("0.4.0", R.array.release_notes_0_4_0),
     ReleaseNote("0.3.0", R.array.release_notes_0_3_0),
@@ -142,6 +143,18 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                 hint = stringResource(R.string.streak_reminder_hint),
                 checked = settings.streakReminder,
                 onCheckedChange = actions.onStreakReminderChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.near_goal_notification),
+                hint = stringResource(R.string.near_goal_notification_hint),
+                checked = settings.nearGoalNotification,
+                onCheckedChange = actions.onNearGoalNotificationChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.weekly_summary),
+                hint = stringResource(R.string.weekly_summary_hint),
+                checked = settings.weeklySummary,
+                onCheckedChange = actions.onWeeklySummaryChange,
             )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))

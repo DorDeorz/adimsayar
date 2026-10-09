@@ -166,6 +166,26 @@
     <string name="widget_month_description">Дни этого месяца, окрашенные по цели</string>
     <string name="month_goal_days">Дней с целью: %1$d</string>
 
+    <string name="near_goal_notification">Уведомлять о близости к цели</string>
+    <string name="near_goal_notification_hint">Вы получите одно уведомление в день, когда достигнете 80% дневной цели.</string>
+    <string name="weekly_summary">Итоги недели</string>
+    <string name="weekly_summary_hint">В последний день недели около 20:00 показывает сумму за неделю и изменение по сравнению с прошлой неделей.</string>
+    <string name="notify_near_title">Цель почти достигнута!</string>
+    <string name="notify_near_text">До дневной цели осталось шагов: %1$s.</string>
+    <string name="notify_week_title">Шагов за эту неделю: %1$s</string>
+    <string name="notify_week_more">На %1$d%% больше, чем на прошлой неделе. Недельная цель: %2$s</string>
+    <string name="notify_week_less">На %1$d%% меньше, чем на прошлой неделе. Недельная цель: %2$s</string>
+    <string name="notify_week_goal">Недельная цель: %1$s</string>
+    <string name="year_summary">Итоги года: %1$d</string>
+    <string name="previous_year">Предыдущий год</string>
+    <string name="next_year">Следующий год</string>
+    <string name="year_medals">Полученные медали</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Уведомление с итогами недели: сумма за неделю и изменение по сравнению с прошлой, вечером последнего дня</item>
+        <item>Уведомление, когда вы близки к цели (80% дневной цели)</item>
+        <item>Итоги года в Истории: всего, в среднем, дни с целью, лучший месяц и день, полученные медали</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>Медали показывают, сколько раз каждая получена (например, 5x)</item>
         <item>Виджеты используют цвета телефона (Material You) или тему приложения</item>

@@ -166,6 +166,26 @@
     <string name="widget_month_description">This month\'s days, colored by goal</string>
     <string name="month_goal_days">%1$d goal days</string>
 
+    <string name="near_goal_notification">Notify when close to goal</string>
+    <string name="near_goal_notification_hint">You get one notification on the day you reach 80% of your daily goal.</string>
+    <string name="weekly_summary">Weekly summary</string>
+    <string name="weekly_summary_hint">On the last day of the week around 20:00, shows the week\'s total and the change from last week.</string>
+    <string name="notify_near_title">Almost at your goal!</string>
+    <string name="notify_near_text">%1$s steps to your daily goal.</string>
+    <string name="notify_week_title">You walked %1$s steps this week</string>
+    <string name="notify_week_more">%1$d%% more than last week. Weekly goal: %2$s</string>
+    <string name="notify_week_less">%1$d%% less than last week. Weekly goal: %2$s</string>
+    <string name="notify_week_goal">Weekly goal: %1$s</string>
+    <string name="year_summary">%1$d summary</string>
+    <string name="previous_year">Previous year</string>
+    <string name="next_year">Next year</string>
+    <string name="year_medals">Medals earned</string>
+
+    <string-array name="release_notes_0_6_0">
+        <item>Weekly summary notification: the week\'s total and the change from last week, on the evening of its last day</item>
+        <item>Notification when you are close to your goal (80% of the daily goal)</item>
+        <item>Yearly summary in History: total, average, goal days, best month and day, medals earned</item>
+    </string-array>
     <string-array name="release_notes_0_5_0">
         <item>Medals show how many times each was earned (e.g. 5x)</item>
         <item>Widgets use the phone\'s colors (Material You) or the app theme</item>

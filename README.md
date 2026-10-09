@@ -20,6 +20,8 @@ v1: ana ekran (bugün, son 7 gün, toplam), iki widget, marka bazlı pil yardım
 
 0.5.0: madalyalarda kaç kez kazanıldığı (ör. 5x), Material You renkli ve boyuta uyan widget'lar, yeni widget'lar (seri ve hafta, aylık takvim), 12 dil.
 
+0.6.0: haftalık özet bildirimi, hedefe yaklaşınca (%80) bildirim, Geçmiş'te yıllık özet.
+
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)
 
