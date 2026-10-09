@@ -12,8 +12,6 @@ import kotlinx.coroutines.sync.withLock
 import java.time.LocalDate
 import java.time.ZoneId
 
-const val DAILY_GOAL = 10_000L
-
 data class DaySteps(val date: LocalDate, val steps: Long)
 
 class StepRepository private constructor(private val context: Context) {
@@ -52,7 +50,8 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun loadWeek(today: LocalDate): List<DaySteps> =
         fillWeek(dao.loadFrom(weekStart(today).toString()), today)
 
-    fun observeTotal(): Flow<Long> = dao.observeTotal()
+    fun observeHistory(): Flow<Map<LocalDate, Long>> =
+        dao.observeAll().map { rows -> rows.associate { LocalDate.parse(it.date) to it.steps } }
 
     private fun weekStart(today: LocalDate) = today.minusDays(6)
 

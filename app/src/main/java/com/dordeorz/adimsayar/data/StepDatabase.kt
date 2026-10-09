@@ -46,8 +46,9 @@ abstract class DailyStepsDao {
     @Query("SELECT * FROM daily_steps WHERE date >= :from ORDER BY date")
     abstract suspend fun loadFrom(from: String): List<DailySteps>
 
-    @Query("SELECT COALESCE(SUM(steps), 0) FROM daily_steps")
-    abstract fun observeTotal(): Flow<Long>
+    @Query("SELECT * FROM daily_steps ORDER BY date")
+    abstract fun observeAll(): Flow<List<DailySteps>>
+
 }
 
 @Database(entities = [DailySteps::class], version = 1, exportSchema = false)

@@ -1,0 +1,251 @@
+package com.dordeorz.adimsayar.ui
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.Records
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.TextStyle
+
+@Composable
+fun HistoryScreen(state: MainUiState) {
+    val currentMonth = YearMonth.from(state.today)
+    val firstMonth = state.history.keys.minOrNull()?.let(YearMonth::from)?.coerceAtMost(currentMonth) ?: currentMonth
+    var monthText by rememberSaveable { mutableStateOf(currentMonth.toString()) }
+    var selectedText by rememberSaveable { mutableStateOf(state.today.toString()) }
+    val month = YearMonth.parse(monthText).coerceIn(firstMonth, currentMonth)
+    val selected = LocalDate.parse(selectedText)
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        item {
+            MonthCard(
+                month = month,
+                state = state,
+                selected = selected,
+                canGoBack = month > firstMonth,
+                canGoForward = month < currentMonth,
+                onMonthChange = { monthText = it.toString() },
+                onSelect = { selectedText = it.toString() },
+            )
+        }
+        item { SelectedDayCard(selected, state.history[selected] ?: 0L, state.settings.dailyGoal) }
+        item { RecordsCard(state.achievements.records, state.today) }
+    }
+}
+
+@Composable
+private fun MonthCard(
+    month: YearMonth,
+    state: MainUiState,
+    selected: LocalDate,
+    canGoBack: Boolean,
+    canGoForward: Boolean,
+    onMonthChange: (YearMonth) -> Unit,
+    onSelect: (LocalDate) -> Unit,
+) {
+    val goal = state.settings.dailyGoal
+    val lastDay = if (month == YearMonth.from(state.today)) state.today else month.atEndOfMonth()
+    val days = (1..lastDay.dayOfMonth).map { month.atDay(it) }
+    val monthTotal = days.sumOf { state.history[it] ?: 0L }
+    val goalDays = days.count { (state.history[it] ?: 0L) >= goal }
+    Card {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { onMonthChange(month.minusMonths(1)) }, enabled = canGoBack) {
+                    Icon(painterResource(R.drawable.ic_chevron_left), contentDescription = stringResource(R.string.previous_month))
+                }
+                Text(
+                    MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(TURKISH) },
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f),
+                )
+                IconButton(onClick = { onMonthChange(month.plusMonths(1)) }, enabled = canGoForward) {
+                    Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = stringResource(R.string.next_month))
+                }
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+                MonthStat(stringResource(R.string.total), format(monthTotal), Modifier.weight(1f))
+                MonthStat(stringResource(R.string.daily_average), format(monthTotal / days.size), Modifier.weight(1f))
+                MonthStat(stringResource(R.string.goal_days), goalDays.toString(), Modifier.weight(1f))
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
+                DayOfWeek.entries.forEach { day ->
+                    Text(
+                        day.getDisplayName(TextStyle.SHORT, TURKISH),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+            val leading = month.atDay(1).dayOfWeek.value - 1
+            val cells: List<LocalDate?> = List(leading) { null } + (1..month.lengthOfMonth()).map { month.atDay(it) }
+            cells.chunked(7).forEach { week ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    week.forEach { date ->
+                        Box(modifier = Modifier.weight(1f).padding(2.dp)) {
+                            if (date != null) {
+                                DayCell(
+                                    date = date,
+                                    steps = state.history[date] ?: 0L,
+                                    goal = goal,
+                                    future = date.isAfter(state.today),
+                                    selected = date == selected,
+                                    onClick = { onSelect(date) },
+                                )
+                            }
+                        }
+                    }
+                    repeat(7 - week.size) { Box(modifier = Modifier.weight(1f)) }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MonthStat(label: String, value: String, modifier: Modifier) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+        Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun DayCell(date: LocalDate, steps: Long, goal: Long, future: Boolean, selected: Boolean, onClick: () -> Unit) {
+    val primary = MaterialTheme.colorScheme.primary
+    val reached = steps >= goal
+    val background = when {
+        future || steps == 0L -> Color.Transparent
+        reached -> primary
+        steps * 2 >= goal -> primary.copy(alpha = 0.4f)
+        else -> primary.copy(alpha = 0.15f)
+    }
+    val textColor = when {
+        future -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+        reached -> MaterialTheme.colorScheme.onPrimary
+        else -> MaterialTheme.colorScheme.onSurface
+    }
+    val shape = RoundedCornerShape(10.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(0.8f)
+            .clip(shape)
+            .background(background)
+            .then(if (selected) Modifier.border(2.dp, MaterialTheme.colorScheme.onSurface, shape) else Modifier)
+            .clickable(enabled = !future, onClick = onClick),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(date.dayOfMonth.toString(), style = MaterialTheme.typography.labelLarge, color = textColor)
+        if (!future && steps > 0L) {
+            Text(formatCompact(steps), style = MaterialTheme.typography.labelSmall, color = textColor, maxLines = 1)
+        }
+    }
+}
+
+@Composable
+private fun SelectedDayCard(date: LocalDate, steps: Long, goal: Long) {
+    Card {
+        Row(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(LONG_DAY_FORMAT.format(date), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.steps_value, format(steps)), style = MaterialTheme.typography.headlineMedium)
+            }
+            Text(
+                stringResource(R.string.percent_of_goal, percent(steps, goal)),
+                style = MaterialTheme.typography.titleMedium,
+                color = if (steps >= goal) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+    }
+}
+
+@Composable
+private fun RecordsCard(records: Records, today: LocalDate) {
+    Card {
+        Column(modifier = Modifier.padding(vertical = 8.dp)) {
+            Text(
+                stringResource(R.string.records),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+            RecordRow(
+                stringResource(R.string.record_best_day),
+                records.bestDay?.let { format(it.steps) } ?: "-",
+                records.bestDay?.let { FULL_DATE_FORMAT.format(it.date) },
+            )
+            RecordRow(
+                stringResource(R.string.record_best_week),
+                records.bestWeek?.let { format(it.steps) } ?: "-",
+                records.bestWeek?.let { stringResource(R.string.week_of, DAY_FORMAT.format(it.start)) },
+            )
+            RecordRow(stringResource(R.string.record_longest_streak), stringResource(R.string.days_count, records.longestStreak), null)
+            RecordRow(stringResource(R.string.record_goal_days), records.goalDays.toString(), null)
+            RecordRow(
+                stringResource(R.string.record_active_average),
+                format(if (records.activeDays == 0) 0L else records.total / records.activeDays),
+                stringResource(R.string.active_days, records.activeDays),
+            )
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
+            RecordRow(stringResource(R.string.total), format(records.total), stringResource(R.string.until_date, FULL_DATE_FORMAT.format(today)))
+        }
+    }
+}
+
+@Composable
+private fun RecordRow(label: String, value: String, hint: String?) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(label, style = MaterialTheme.typography.bodyLarge)
+            if (hint != null) {
+                Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+        Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+    }
+}

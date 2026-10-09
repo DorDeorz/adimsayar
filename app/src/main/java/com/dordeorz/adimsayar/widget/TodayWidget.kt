@@ -33,7 +33,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
-import com.dordeorz.adimsayar.data.DAILY_GOAL
+import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import java.time.LocalDate
 
@@ -48,7 +48,8 @@ class TodayWidget : GlanceAppWidget() {
         provideContent {
             val flow = remember { repository.observeWeek(today) }
             val week by flow.collectAsState(initial)
-            TodayContent(week.lastOrNull()?.steps ?: 0L)
+            val settings by SettingsStore.get(context).settings.collectAsState()
+            TodayContent(week.lastOrNull()?.steps ?: 0L, settings.dailyGoal)
         }
     }
 }
@@ -63,7 +64,7 @@ class TodayWidgetReceiver : GlanceAppWidgetReceiver() {
 }
 
 @Composable
-private fun TodayContent(steps: Long) {
+private fun TodayContent(steps: Long, goal: Long) {
     val context = LocalContext.current
     Column(
         modifier = GlanceModifier
@@ -85,14 +86,14 @@ private fun TodayContent(steps: Long) {
         )
         Spacer(GlanceModifier.height(6.dp))
         LinearProgressIndicator(
-            progress = (steps.toFloat() / DAILY_GOAL).coerceIn(0f, 1f),
+            progress = (steps.toFloat() / goal).coerceIn(0f, 1f),
             modifier = GlanceModifier.fillMaxWidth().height(6.dp),
             color = Accent,
             backgroundColor = AccentMuted,
         )
         Spacer(GlanceModifier.height(4.dp))
         Text(
-            text = context.getString(R.string.goal_short, formatSteps(DAILY_GOAL)),
+            text = context.getString(R.string.goal_short, formatSteps(goal)),
             style = TextStyle(color = TextSecondary, fontSize = 11.sp),
         )
     }

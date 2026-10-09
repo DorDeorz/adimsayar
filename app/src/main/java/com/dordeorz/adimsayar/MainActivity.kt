@@ -2,13 +2,16 @@ package com.dordeorz.adimsayar
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,20 +21,24 @@ import androidx.core.content.edit
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
+import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
+import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
-import com.dordeorz.adimsayar.ui.MainScreen
+import com.dordeorz.adimsayar.ui.AppScreen
+import com.dordeorz.adimsayar.ui.MainActions
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
 import com.dordeorz.adimsayar.ui.XiaomiProblem
 import com.dordeorz.adimsayar.ui.oem.BatteryOptimization
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import com.dordeorz.adimsayar.ui.theme.AdimSayarTheme
+import com.dordeorz.adimsayar.ui.theme.isDarkTheme
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -58,6 +65,26 @@ class MainActivity : ComponentActivity() {
     private var xiaomiSync: Job? = null
     private var xiaomiProblem by mutableStateOf<XiaomiProblem?>(null)
 
+    private val settingsStore by lazy { SettingsStore.get(applicationContext) }
+
+    private val actions = MainActions(
+        onRequestPermission = ::requestPermission,
+        onOpenAppSettings = { BatteryOptimization.openAppDetails(this) },
+        onDismissBatteryCard = {
+            settings.edit { putBoolean(KEY_BATTERY_CARD_DISMISSED, true) }
+            batteryCardVisible = false
+        },
+        onServiceEnabledChange = ::changeServiceEnabled,
+        onXiaomiEnabledChange = ::changeXiaomiEnabled,
+        onThemeModeChange = { settingsStore.setThemeMode(it) },
+        onDynamicColorChange = { settingsStore.setDynamicColor(it) },
+        onDailyGoalChange = { goal ->
+            settingsStore.setDailyGoal(goal)
+            refreshWidgets()
+        },
+        onWeeklyGoalChange = { settingsStore.setWeeklyGoal(it) },
+    )
+
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -80,16 +107,28 @@ class MainActivity : ComponentActivity() {
         Schedules.ensure(applicationContext)
         setContent {
             val currentDay = today
+            val appSettings by settingsStore.settings.collectAsStateWithLifecycle()
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
-            val total by remember { repository.observeTotal() }.collectAsStateWithLifecycle(0L)
+            val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
+            val achievements = remember(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal) {
+                AchievementMath.compute(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal)
+            }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
             val logLines by ReadingLog.get(applicationContext).lines.collectAsStateWithLifecycle()
-            AdimSayarTheme {
-                MainScreen(
+            val dark = isDarkTheme(appSettings.themeMode)
+            LaunchedEffect(dark) {
+                val style = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { dark }
+                enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
+            }
+            AdimSayarTheme(darkTheme = dark, dynamicColor = appSettings.dynamicColor) {
+                AppScreen(
                     state = MainUiState(
+                        today = currentDay,
                         week = week,
-                        total = total,
+                        history = history,
+                        achievements = achievements,
+                        settings = appSettings,
                         lastReadingWallMs = lastReading,
                         permission = permission,
                         sensorAvailable = sensorAvailable,
@@ -100,15 +139,9 @@ class MainActivity : ComponentActivity() {
                         xiaomiEnabled = xiaomiEnabled,
                         xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
                         logLines = logLines,
+                        version = BuildConfig.VERSION_NAME,
                     ),
-                    onRequestPermission = ::requestPermission,
-                    onOpenAppSettings = { BatteryOptimization.openAppDetails(this) },
-                    onDismissBatteryCard = {
-                        settings.edit { putBoolean(KEY_BATTERY_CARD_DISMISSED, true) }
-                        batteryCardVisible = false
-                    },
-                    onServiceEnabledChange = ::changeServiceEnabled,
-                    onXiaomiEnabledChange = ::changeXiaomiEnabled,
+                    actions = actions,
                 )
             }
         }
@@ -142,9 +175,13 @@ class MainActivity : ComponentActivity() {
         xiaomiSync?.cancel()
         xiaomiSync = null
         monitor.stop()
+        refreshWidgets()
+        super.onStop()
+    }
+
+    private fun refreshWidgets() {
         val appContext = applicationContext
         AppScope.launch { Widgets.updateAll(appContext) }
-        super.onStop()
     }
 
     private fun refreshPermission() {

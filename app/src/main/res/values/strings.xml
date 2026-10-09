@@ -7,7 +7,6 @@
     <string name="goal_short">Hedef %1$s</string>
     <string name="last_7_days">Son 7 gün</string>
     <string name="total">Toplam</string>
-    <string name="week_average">7 gün ortalaması</string>
     <string name="last_reading">Son sayaç okuması: %1$s</string>
     <string name="no_reading_yet">Henüz sayaç okunmadı</string>
 
@@ -55,6 +54,84 @@
     <string name="log_xiaomi_missing">HyperOS kaydı bulunamadı</string>
     <string name="log_xiaomi_error">HyperOS kaydı okunamadı (%1$s)</string>
     <string name="log_xiaomi_synced">HyperOS kaydı: bugün %1$d adım, %2$d gün güncellendi</string>
+
+    <string name="tab_today">Bugün</string>
+    <string name="tab_history">Geçmiş</string>
+    <string name="tab_medals">Madalyalar</string>
+    <string name="goal_reached">Günlük hedef tamam!</string>
+    <string name="goal_remaining">Hedefe %1$s adım kaldı</string>
+    <string name="steps_value">%1$s adım</string>
+    <string name="percent_of_goal">%%%1$d</string>
+    <string name="streak">Seri</string>
+    <string name="days_count">%1$d gün</string>
+    <string name="weeks_count">%1$d hafta</string>
+    <string name="million_steps">%1$s milyon adım</string>
+    <string name="streak_best">En uzun: %1$d gün</string>
+    <string name="this_week">Bu hafta</string>
+
+    <string name="previous_month">Önceki ay</string>
+    <string name="next_month">Sonraki ay</string>
+    <string name="daily_average">Günlük ortalama</string>
+    <string name="goal_days">Hedef günü</string>
+    <string name="records">Rekorlar</string>
+    <string name="record_best_day">En iyi gün</string>
+    <string name="record_best_week">En iyi hafta</string>
+    <string name="week_of">%1$s haftası</string>
+    <string name="record_longest_streak">En uzun seri</string>
+    <string name="record_goal_days">Hedefe ulaşılan gün</string>
+    <string name="record_active_average">Aktif gün ortalaması</string>
+    <string name="active_days">%1$d aktif gün</string>
+    <string name="until_date">%1$s itibarıyla</string>
+
+    <string name="level">Seviye</string>
+    <string name="level_next">Sonraki seviyeye %1$s adım</string>
+    <string name="medals_earned">%1$d / %2$d madalya</string>
+    <string name="medals_retroactive">Madalyalar kayıtlı günlerden hesaplanır. Hedefi değiştirirsen geçmiş günler de yeni hedefe göre değerlendirilir.</string>
+    <string name="medal_group_daily">Günlük adım</string>
+    <string name="medal_group_daily_text">Tek bir günde bu kadar adım at</string>
+    <string name="medal_group_streak">Seri</string>
+    <string name="medal_group_streak_text">Günlük hedefe art arda ulaş</string>
+    <string name="medal_group_weekly">Haftalık hedef</string>
+    <string name="medal_group_weekly_text">Haftalık hedefe ulaştığın hafta sayısı (hafta pazartesi başlar)</string>
+    <string name="medal_group_total">Toplam yol</string>
+    <string name="medal_group_total_text">Tüm günlerin toplam adımı</string>
+
+    <string name="settings">Ayarlar</string>
+    <string name="back">Geri</string>
+    <string name="settings_goals">Hedefler</string>
+    <string name="daily_goal">Günlük hedef</string>
+    <string name="weekly_goal">Haftalık hedef</string>
+    <string name="goal_range">%1$s ile %2$s arası</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistem varsayılanı</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="settings_dynamic_color">Telefonun renklerini kullan</string>
+    <string name="settings_dynamic_color_hint">Renkleri duvar kağıdından alır. Kapalıyken yeşil tema kullanılır.</string>
+    <string name="settings_counting">Adım kaynağı</string>
+    <string name="settings_about">Hakkında</string>
+    <string name="settings_version">Sürüm</string>
+    <string name="release_notes">Sürüm notları</string>
+    <string name="release_notes_hint">Her sürümde neler değişti</string>
+    <string name="log_hint">Sayaç ve HyperOS okumalarının son kayıtları</string>
+    <string name="save">Kaydet</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="close">Kapat</string>
+
+    <string-array name="release_notes_0_2_0">
+        <item>Yeni tasarım: alt menüde Bugün, Geçmiş ve Madalyalar</item>
+        <item>Bugün ekranında hedef halkası, seri ve haftalık ilerleme</item>
+        <item>Geçmiş: aylık takvim, gün detayı ve kişisel rekorlar</item>
+        <item>Madalyalar ve seviye: günlük adım, seri, haftalık hedef ve toplam adım</item>
+        <item>Günlük ve haftalık hedef ayarlanabilir; widget da yeni hedefi gösterir</item>
+        <item>Ayarlar: açık, koyu veya sistem teması ve telefonun renkleri</item>
+        <item>Adım kaynağı anahtarları ve okuma kaydı Ayarlar\'a taşındı</item>
+    </string-array>
+    <string-array name="release_notes_0_1_0">
+        <item>İlk sürüm: adım sayma, günlük kayıt, bugün ve 7 gün widget\'ları</item>
+        <item>Xiaomi\'de HyperOS adım kaydından okuma, geçmiş günler dahil</item>
+        <item>Arka planda sürekli sayma seçeneği ve pil yardım kartı</item>
+    </string-array>
 
     <string name="widget_today_label">Bugünün adımı</string>
     <string name="widget_today_description">Bugün atılan adımlar ve hedef ilerlemesi</string>
