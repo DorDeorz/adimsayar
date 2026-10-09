@@ -16,13 +16,14 @@ Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, HyperOS 1 / Android 12, biri
 
 ## Durum
 
-Repoda henüz uygulama kodu yoktur.
+v1 kodu yazıldı: `app/` altında tek modül, paket `com.dordeorz.adimsayar`.
 
 Kararlaştırılmış ve değiştirilmemesi gerekenler:
 
 - Framework: native Kotlin, Jetpack Compose + Material3. Widget'lar Glance ile. `minSdk 23`.
 - Kalıcı depolama: Room.
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
+- Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
 - Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
 - **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır.
@@ -62,7 +63,9 @@ Donma kuralı bir pencere ve eşikle tanımlanır (ör. 2 dakikada detector ≥ 
 
 Xiaomi'nin kendi adım servisi vardır: `miui.util.FeatureParser.getBoolean("support_steps_provider", false)` ile destek kontrolü, ardından `content://` üzerinden sorgu. Yürüyüş/koşu ayrımı da verir (mod 0 = desteklenmiyor, 2 = yürüyüş, 3 = koşu). API adı `miui` olsa da HyperOS'ta da çalışır.
 
-Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve açıkça seçildiğinde kullanılır. Health Connect yerine geçmez, yalnızca ek bir doğrulama kaynağı olabilir.
+Bu bir varsayılan yol **değildir**. Standart sensörler temel kaynaktır; Xiaomi'ye özgü yol yalnızca üretici tespitiyle ve kullanıcı ana ekrandaki "HyperOS adım kaydını kullan" anahtarını açtığında kullanılır (`data/XiaomiSteps.kt`). Açıkken günlük toplamlar HyperOS kaydından gelir, sensör okumaları toplamlara eklenmez. Gerekçe ve test sonuçları `GOALS.md` → "Xiaomi / HyperOS adım kaydı". Okuma izni `miui.permission.READ_STEPS` manifest'te tanımlıdır.
+
+Redmi'de `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken sayar; HyperOS'un kendi servisi yalnızca detector'ı açık tutar. Bu cihazda bildirimsiz sayım ancak HyperOS kaydıyla mümkündür.
 
 HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kayıp bir gün kabul edilemezdir. `BOOT_COMPLETED` ve saat değişimi sonrası yeniden başlatma gerekebilir.
 
@@ -89,7 +92,7 @@ Bilinen trade-off'lar:
 - Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
 - Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
 
-Test başarısız olursa yedek yol: kullanıcının ayarlardan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (Android 14+ için `foregroundServiceType="health"`). Varsayılan kapalıdır.
+Yedek yol: kullanıcının ana ekrandan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 
 ### Davranış tablosu
 

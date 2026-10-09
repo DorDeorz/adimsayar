@@ -1,0 +1,8 @@
+-keep class androidx.glance.** { *; }
+-keep class * extends androidx.glance.appwidget.GlanceAppWidget { *; }
+-keep class * extends androidx.glance.appwidget.GlanceAppWidgetReceiver { *; }
+-keepclassmembers class * extends android.widget.RemoteViews { <init>(...); }
+-keep class androidx.work.** { *; }
+-keep class androidx.room.** { *; }
+-keep class androidx.sqlite.** { *; }
+-keep class * extends androidx.room.RoomDatabase { <init>(); }

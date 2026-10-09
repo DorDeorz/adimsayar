@@ -1,0 +1,31 @@
+package com.dordeorz.adimsayar.widget
+
+import android.content.Context
+import androidx.compose.ui.graphics.Color
+import androidx.glance.appwidget.updateAll
+import androidx.glance.color.ColorProvider
+import java.text.NumberFormat
+import java.time.format.TextStyle
+import java.util.Locale
+
+object Widgets {
+
+    suspend fun updateAll(context: Context) {
+        TodayWidget().updateAll(context)
+        WeekWidget().updateAll(context)
+    }
+}
+
+internal val TURKISH: Locale = Locale.forLanguageTag("tr-TR")
+
+internal val TextPrimary = ColorProvider(day = Color(0xFF1B1C1A), night = Color(0xFFF2F2EE))
+internal val TextSecondary = ColorProvider(day = Color(0xFF5A5D57), night = Color(0xFFB5B8B0))
+internal val Accent = ColorProvider(day = Color(0xFF2E7D32), night = Color(0xFF81C784))
+internal val AccentMuted = ColorProvider(day = Color(0xFFC8E6C9), night = Color(0xFF2E4A30))
+
+internal fun formatSteps(steps: Long): String = NumberFormat.getIntegerInstance(TURKISH).format(steps)
+
+internal fun formatCompact(steps: Long): String =
+    if (steps < 1_000L) steps.toString() else String.format(TURKISH, "%.1fB", steps / 1_000.0)
+
+internal fun shortDayName(date: java.time.LocalDate): String = date.dayOfWeek.getDisplayName(TextStyle.SHORT, TURKISH)
