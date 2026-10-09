@@ -13,8 +13,8 @@ import java.time.ZoneId
 
 object Schedules {
 
-    private const val PERIODIC_JOB_ID = 1
-    const val READ_NOW_JOB_ID = 2
+    private const val PERIODIC_JOB_ID = 0x5A_D1_00_01
+    const val READ_NOW_JOB_ID = 0x5A_D1_00_02
     private const val PERIODIC_MS = 15 * 60 * 1000L
     private const val MIDNIGHT_DELAY_MS = 5_000L
 
@@ -32,7 +32,8 @@ object Schedules {
 
     private fun schedulePeriodic(context: Context) {
         val scheduler = context.getSystemService(JobScheduler::class.java) ?: return
-        if (scheduler.allPendingJobs.any { it.id == PERIODIC_JOB_ID }) return
+        val existing = scheduler.allPendingJobs.firstOrNull { it.id == PERIODIC_JOB_ID }
+        if (existing?.service?.className == StepJobService::class.java.name) return
         val job = JobInfo.Builder(PERIODIC_JOB_ID, ComponentName(context, StepJobService::class.java))
             .setPeriodic(PERIODIC_MS)
             .setPersisted(true)
