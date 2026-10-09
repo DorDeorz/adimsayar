@@ -16,7 +16,7 @@ captures/
 # İmza anahtarları
 *.jks
 *.keystore
-!app/debug.keystore
+*.p12
 keystore.properties
 
 # IDE

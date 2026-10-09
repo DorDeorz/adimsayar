@@ -158,6 +158,8 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 
 APK her derlemede GitHub Actions'ta üretilir. [Actions](../../actions) sekmesinde son başarılı çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısından `app-release.apk` indirilip telefona kurulur.
 
+Release APK, depoda bulunmayan ve GitHub Actions Secret'larında saklanan bir anahtarla imzalanır (`ADIMSAYAR_KEYSTORE_BASE64`, `ADIMSAYAR_KEYSTORE_PASSWORD`, `ADIMSAYAR_KEY_ALIAS`, `ADIMSAYAR_KEY_PASSWORD`). Bu Secret'lar olmadan (örneğin bir fork'ta) APK geçici bir debug anahtarıyla imzalanır.
+
 İlk açılışta "Fiziksel etkinlik" izni verilmelidir. Xiaomi telefonlarda Ayarlar → Adım kaynağı → "HyperOS adım kaydını kullan" açılması önerilir.
 
 ### Kaynaktan derleme
