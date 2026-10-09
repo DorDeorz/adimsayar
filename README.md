@@ -12,18 +12,24 @@ Test cihazları: Redmi Note 12 Pro 4G (HyperOS 1 / Android 12, birincil) ve Gala
 
 ## Proje durumu
 
-Henüz uygulama kodu yok. Teknoloji: native Kotlin, Jetpack Compose + Material3, Glance widget'ları, Room.
+v1: ana ekran (bugün, son 7 gün, toplam), iki widget, marka bazlı pil yardım kartı.
 
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)
 
 ## Kurulum
 
-Henüz kurulum yok — proje iskeleti oluşturulduktan sonra buraya eklenecek.
+APK GitHub Actions'ta derlenir. Bir PR veya `main` çalıştırmasının "adimsayar-apk-ve-raporlar" çıktısından `app-release.apk` (debug anahtarıyla imzalı) indirilip telefona kurulur.
+
+Yerelde derlemek için Android SDK ve JDK 21 gerekir:
+
+```
+./gradlew assembleDebug
+```
 
 ## Çalıştırma
 
-Henüz çalıştırma komutu yok.
+İlk açılışta "Fiziksel etkinlik" izni verilmelidir. Sayaç ilk okumada yalnızca başlangıç değeri alır; adımlar bu andan sonra sayılır.
 
 ## Widget'lar
 

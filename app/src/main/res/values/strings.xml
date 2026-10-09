@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdımSayar</string>
+
+    <string name="today">Bugün</string>
+    <string name="steps_unit">adım</string>
+    <string name="goal_short">Hedef %1$s</string>
+    <string name="last_7_days">Son 7 gün</string>
+    <string name="total">Toplam</string>
+    <string name="week_average">7 gün ortalaması</string>
+    <string name="last_reading">Son sayaç okuması: %1$s</string>
+    <string name="no_reading_yet">Henüz sayaç okunmadı</string>
+
+    <string name="permission_title">Fiziksel etkinlik izni gerekiyor</string>
+    <string name="permission_text">AdımSayar adımlarını telefonun kendi sensöründen okur. Bunun için Android fiziksel etkinlik izni ister.</string>
+    <string name="permission_grant">İzin ver</string>
+    <string name="permission_denied_text">İzin reddedildi. Ayarlar → Uygulamalar → AdımSayar → İzinler → Fiziksel etkinlik → İzin ver.</string>
+    <string name="permission_open_settings">Ayarları aç</string>
+
+    <string name="sensor_missing_title">Adım sensörü bulunamadı</string>
+    <string name="sensor_missing_text">Bu telefon adım sayacı sensörü bildirmiyor. AdımSayar bu cihazda adım sayamaz.</string>
+
+    <string name="frozen_title">Adım sayacı donmuş görünüyor</string>
+    <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
+
+    <string name="widget_today_label">Bugünün adımı</string>
+    <string name="widget_today_description">Bugün atılan adımlar ve hedef ilerlemesi</string>
+    <string name="widget_week_label">7 günlük tablo</string>
+    <string name="widget_week_description">Son 7 günün adım sayıları</string>
+
+    <string name="oem_title">Adımlar arka planda da kaydedilsin</string>
+    <string name="oem_title_stock">Pil optimizasyonu muafiyeti</string>
+    <string name="oem_intro">Bu telefon arka plandaki uygulamaları kapatabilir. Aşağıdaki adımlar AdımSayar\'ın uygulama kapalıyken de sayacı okuyabilmesini sağlar.</string>
+    <string name="oem_open">Aç</string>
+    <string name="oem_dismiss">Şimdilik kapat</string>
+    <string name="oem_open_failed">Bu ekran bu telefonda açılamadı. Adımı Ayarlar içinden elle yap.</string>
+    <string name="oem_battery_common">Ayarlar → Uygulamalar → AdımSayar → Pil → Kısıtlama yok</string>
+
+    <string name="oem_xiaomi_1">Ayarlar → Uygulamalar → Uygulamaları yönet → AdımSayar → Otomatik başlatma → Aç</string>
+    <string name="oem_xiaomi_2">Aynı ekranda Pil tasarrufu → Kısıtlama yok</string>
+
+    <string name="oem_samsung_1">Ayarlar → Uygulamalar → AdımSayar → Pil → Kısıtlanmamış</string>
+    <string name="oem_samsung_2">Pil → Arka plan kullanımı sınırları → Hiç uykuya dalmayan uygulamalar → AdımSayar ekle</string>
+
+    <string name="oem_huawei_1">Pil → Uygulama başlatma → AdımSayar → Otomatik yönetimi kapat, Otomatik başlatma / İkincil başlatma / Arka planda çalışma üçünü de aç</string>
+
+    <string name="oem_oppo_1">Pil → Arka plan etkinliğine izin ver → AdımSayar: Arka planda çalıştırmaya izin ver</string>
+    <string name="oem_oppo_2">Otomatik başlatma → AdımSayar → Aç</string>
+
+    <string name="oem_vivo_1">Pil → Arka plan yönetimi → Yüksek arka plan tüketimi → AdımSayar\'ı beyaz listeye al</string>
+    <string name="oem_vivo_2">Otomatik başlatma → AdımSayar → Aç</string>
+
+    <string name="oem_asus_1">Otomatik başlatma → AdımSayar\'a izin ver</string>
+
+    <string name="oem_transsion_1">Otomatik yönetim → uygulama listesinden AdımSayar\'ı seç, üç izni de aç</string>
+</resources>

@@ -16,7 +16,7 @@ Test cihazları: **Redmi Note 12 Pro 4G** (SD 732G, HyperOS 1 / Android 12, biri
 
 ## Durum
 
-Repoda henüz uygulama kodu yoktur.
+v1 kodu yazıldı: `app/` altında tek modül, paket `com.dordeorz.adimsayar`.
 
 Kararlaştırılmış ve değiştirilmemesi gerekenler:
 
