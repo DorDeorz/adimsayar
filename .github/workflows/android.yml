@@ -33,9 +33,10 @@ jobs:
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
             echo "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > "$RUNNER_TEMP/adimsayar.p12"
-            echo "Anahtar dosyası: $(wc -c < "$RUNNER_TEMP/adimsayar.p12") bayt, sha256 $(sha256sum "$RUNNER_TEMP/adimsayar.p12" | cut -c1-12)"
-            echo "Şifre uzunluğu: ${#KEYSTORE_PASSWORD}"
-            keytool -list -storetype PKCS12 -keystore "$RUNNER_TEMP/adimsayar.p12" -storepass "$KEYSTORE_PASSWORD" > /dev/null
+            SIZE=$(wc -c < "$RUNNER_TEMP/adimsayar.p12")
+            echo "Anahtar dosyası: $SIZE bayt, sha256 $(sha256sum "$RUNNER_TEMP/adimsayar.p12" | cut -c1-12). Şifre uzunluğu: ${#KEYSTORE_PASSWORD}"
+            if [ "$SIZE" -lt 1000 ]; then echo "::error::ADIMSAYAR_KEYSTORE_BASE64 yanlış: keystore-base64.txt dosyasının tamamı olmalı"; exit 1; fi
+            keytool -list -storetype PKCS12 -keystore "$RUNNER_TEMP/adimsayar.p12" -storepass "$KEYSTORE_PASSWORD" > /dev/null || { echo "::error::ADIMSAYAR_KEYSTORE_PASSWORD yanlış"; exit 1; }
             echo "ADIMSAYAR_KEYSTORE_FILE=$RUNNER_TEMP/adimsayar.p12" >> "$GITHUB_ENV"
           else
             echo "İmza anahtarı yok: release APK geçici debug anahtarıyla imzalandı, telefona kurma" >> "$GITHUB_STEP_SUMMARY"
@@ -44,8 +45,6 @@ jobs:
         if: steps.proje.outputs.var == 'true'
         env:
           ADIMSAYAR_KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
-          ADIMSAYAR_KEY_ALIAS: ${{ secrets.ADIMSAYAR_KEY_ALIAS }}
-          ADIMSAYAR_KEY_PASSWORD: ${{ secrets.ADIMSAYAR_KEY_PASSWORD }}
         run: ./gradlew --stacktrace assembleDebug assembleRelease lint testDebugUnitTest
       - name: Lint raporu
         if: always() && steps.proje.outputs.var == 'true'

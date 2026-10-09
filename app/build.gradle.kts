@@ -23,8 +23,8 @@ android {
             create("release") {
                 storeFile = file(releaseKeystore)
                 storePassword = System.getenv("ADIMSAYAR_KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("ADIMSAYAR_KEY_ALIAS")
-                keyPassword = System.getenv("ADIMSAYAR_KEY_PASSWORD")
+                keyAlias = "adimsayar"
+                keyPassword = System.getenv("ADIMSAYAR_KEYSTORE_PASSWORD")
             }
         }
     }
