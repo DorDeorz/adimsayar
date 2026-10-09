@@ -38,7 +38,7 @@ class AchievementMathTest {
 
     @Test
     fun missedPastDayBreaksStreak() {
-        val result = AchievementMath.compute(days(12_000, 11_000, 0, 10_500), monday.plusDays(4), 10_000, 70_000)
+        val result = AchievementMath.compute(days(12_000, 11_000, 0, 10_500, 2_000), monday.plusDays(5), 10_000, 70_000)
         assertEquals(0, result.records.currentStreak)
         assertEquals(2, result.records.longestStreak)
         assertEquals(3, result.records.goalDays)
