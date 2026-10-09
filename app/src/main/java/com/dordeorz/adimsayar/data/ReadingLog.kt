@@ -16,7 +16,6 @@ enum class ReadSource(@param:StringRes val label: Int) {
     System(R.string.source_system),
     Widget(R.string.source_widget),
     Service(R.string.source_service),
-    Xiaomi(R.string.source_xiaomi),
 }
 
 class ReadingLog private constructor(private val context: Context) {

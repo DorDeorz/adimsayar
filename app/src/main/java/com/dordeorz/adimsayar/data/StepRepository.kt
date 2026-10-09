@@ -16,7 +16,7 @@ const val DAILY_GOAL = 10_000L
 
 data class DaySteps(val date: LocalDate, val steps: Long)
 
-class StepRepository private constructor(context: Context) {
+class StepRepository private constructor(private val context: Context) {
 
     private val dao = StepDatabase.get(context).dailySteps()
     private val counterPrefs = context.getSharedPreferences(COUNTER_PREFS, Context.MODE_PRIVATE)
@@ -30,9 +30,17 @@ class StepRepository private constructor(context: Context) {
         if (interval.kind == ReadingKind.Stale) return@withLock interval
         saveReading(reading)
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
-        if (days.isNotEmpty()) dao.add(days.mapKeys { it.key.toString() })
+        if (days.isNotEmpty() && !XiaomiSteps.isEnabled(context)) dao.add(days.mapKeys { it.key.toString() })
         _lastReadingWallMs.value = reading.wallMs
         interval
+    }
+
+    suspend fun replaceDays(days: Map<LocalDate, Long>) = mutex.withLock {
+        dao.replace(days.mapKeys { it.key.toString() })
+    }
+
+    suspend fun resetReading() = mutex.withLock {
+        counterPrefs.edit(commit = true) { clear() }
     }
 
     suspend fun today(): Long = loadWeek(LocalDate.now()).last().steps

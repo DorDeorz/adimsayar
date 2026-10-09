@@ -57,6 +57,8 @@ data class MainUiState(
     val frozen: Boolean,
     val batteryProfile: OemProfile?,
     val serviceEnabled: Boolean,
+    val xiaomiAvailable: Boolean,
+    val xiaomiEnabled: Boolean,
     val logLines: List<String>,
 )
 
@@ -69,6 +71,7 @@ fun MainScreen(
     onOpenAppSettings: () -> Unit,
     onDismissBatteryCard: () -> Unit,
     onServiceEnabledChange: (Boolean) -> Unit,
+    onXiaomiEnabledChange: (Boolean) -> Unit,
 ) {
     val today = state.week.lastOrNull()?.steps ?: 0L
     Scaffold { padding ->
@@ -86,8 +89,25 @@ fun MainScreen(
             if (state.frozen) {
                 item { MessageCard(stringResource(R.string.frozen_title), stringResource(R.string.frozen_text)) }
             }
-            if (state.sensorAvailable && state.permission == PermissionState.Granted) {
-                item { ServiceCard(state.serviceEnabled, onServiceEnabledChange) }
+            if (state.xiaomiAvailable) {
+                item {
+                    SwitchCard(
+                        stringResource(R.string.xiaomi_card_title),
+                        stringResource(R.string.xiaomi_card_text),
+                        state.xiaomiEnabled,
+                        onXiaomiEnabledChange,
+                    )
+                }
+            }
+            if (state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled) {
+                item {
+                    SwitchCard(
+                        stringResource(R.string.service_card_title),
+                        stringResource(R.string.service_card_text),
+                        state.serviceEnabled,
+                        onServiceEnabledChange,
+                    )
+                }
             }
             state.batteryProfile?.let { profile ->
                 item { BatteryHelpCard(profile = profile, onDismiss = onDismissBatteryCard) }
@@ -114,13 +134,13 @@ fun MainScreen(
 }
 
 @Composable
-private fun ServiceCard(enabled: Boolean, onChange: (Boolean) -> Unit) {
+private fun SwitchCard(title: String, text: String, enabled: Boolean, onChange: (Boolean) -> Unit) {
     Card {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(stringResource(R.string.service_card_title), style = MaterialTheme.typography.titleMedium)
+                Text(title, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    stringResource(R.string.service_card_text),
+                    text,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

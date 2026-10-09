@@ -35,6 +35,11 @@ abstract class DailyStepsDao {
         }
     }
 
+    @Transaction
+    open suspend fun replace(days: Map<String, Long>) {
+        for ((date, steps) in days) upsert(DailySteps(date, steps))
+    }
+
     @Query("SELECT * FROM daily_steps WHERE date >= :from ORDER BY date")
     abstract fun observeFrom(from: String): Flow<List<DailySteps>>
 

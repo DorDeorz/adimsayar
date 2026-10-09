@@ -81,6 +81,16 @@ Fark 500'e ±%3 içinde değilse kalıcı bildirimli foreground service, ayarlar
 
 İlk sonuç (2026-10-09, Redmi Note 12 Pro 4G): başarısız, 500 adımdan sonra fark 0 göründü. Seçenek ana ekrana "Arka planda sürekli say" anahtarı olarak eklendi (varsayılan kapalı). Ana ekrandaki okuma kaydı hangi okumanın değer aldığını gösterir.
 
+Redmi'de canlı testler (2026-10-09, adb ile):
+
+| Test | Koşul | Yürünen | Sensör sayacı | HyperOS kaydı |
+|---|---|---|---|---|
+| 2 | Arka planda sürekli say açık | 50 | +61 | — |
+| 3 | Kapalı, uygulama kaydırılıp kapatıldı | 50 | +4 | — |
+| 4 | Kapalı, uygulama kaydırılıp kapatıldı | 100 | +0 | +136 (yürüyüş öncesi 18 dk dahil) |
+
+Sonuç: bu cihazda `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken sayıyor. HyperOS'un kendi servisi yalnızca wakeup step detector'ı açık tutuyor ve adımları kendi kaydına yazıyor. Uygulama son uygulamalardan kaydırılınca HyperOS süreci öldürüyor (`SwipeUpClean`). Bu yüzden Xiaomi'de HyperOS adım kaydı ana kaynak olarak seçilebilir (bkz. "Xiaomi / HyperOS adım kaydı").
+
 ## Veri kaynakları
 
 **Karar: Health Connect kullanılmayacak. Veri yalnızca telefonun kendi sensörlerinden okunur.**
@@ -94,6 +104,25 @@ Bu, uygulamanın temel vaadiyle çelişir. Doğru ama nadiren eksik veri, çoğu
 Bu kararın bedeli kabul edilmiştir: Samsung Health aktarımına güvenilerek sensör donmasının kolayca aşılması artık mümkün değildir. Bunun yerine donma kendi tespit edilip kullanıcıya bildirilir.
 
 İleride giyilebilir cihaz desteği istenirse Health Connect eklenebilir, ancak o zaman aralık bazlı deduplikasyon birlikte eklenmelidir. Temel yapıda yer almaz.
+
+### Xiaomi / HyperOS adım kaydı
+
+**Karar (2026-10-09, kullanıcı onayı): Xiaomi cihazlarda HyperOS'un adım kaydı, kullanıcının açtığı bir anahtarla ana kaynak olabilir.**
+
+Kayıt `content://com.miui.providers.steps/item` üzerinden okunur. Okuma izni `miui.permission.READ_STEPS` normal korumalıdır, kurulumda kendiliğinden verilir. Yazma izni sistem uygulamalarına özeldir; kayıt yalnızca telefonun kendi sensöründen gelir, saat verisi karışmaz. Bu yüzden Health Connect gerekçesi buraya uygulanmaz.
+
+Anahtar açıkken:
+
+- Günlük toplamlar kayıttaki satırlardan hesaplanır ve tabloya yazılır. Gece yarısını geçen satır süreye göre bölünür. Kayıtta bulunan geçmiş günler de içe alınır.
+- Sensör okumaları kaydedilmeye devam eder ama toplamlara eklenmez; çift sayım olmaz.
+- "Arka planda sürekli say" servisi kapatılır, bildirim gerekmez.
+- Anahtar kapatılınca son sayaç okuması silinir, sensör sayımı sıfırdan başlar.
+
+Bilinen trade-off'lar:
+
+- HyperOS adımları birkaç dakikalık parçalar halinde yazar; ekrandaki sayı birkaç dakika geride kalabilir.
+- Kaydın günlük toplamları HyperOS'un sayımına bağlıdır. Senkronizasyon kayıttaki günleri yeniden yazar, yani bu kaynakta tamamlanmış bir gün de HyperOS kaydı değişirse güncellenir.
+- Bu API belgelenmemiştir; bir HyperOS güncellemesi onu kaldırabilir. O durumda anahtar kaybolur ve sensör yolu kullanılır.
 
 ### Kullanılacak sensörler
 

@@ -17,11 +17,12 @@ import androidx.core.content.edit
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
+import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
-import com.dordeorz.adimsayar.sensor.XiaomiSteps
 import com.dordeorz.adimsayar.ui.MainScreen
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
@@ -30,7 +31,11 @@ import com.dordeorz.adimsayar.ui.oem.OemProfile
 import com.dordeorz.adimsayar.ui.theme.AdimSayarTheme
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class MainActivity : ComponentActivity() {
@@ -45,6 +50,9 @@ class MainActivity : ComponentActivity() {
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
     private var serviceEnabled by mutableStateOf(false)
+    private var xiaomiAvailable by mutableStateOf(false)
+    private var xiaomiEnabled by mutableStateOf(false)
+    private var xiaomiSync: Job? = null
 
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
@@ -84,6 +92,8 @@ class MainActivity : ComponentActivity() {
                         frozen = frozen,
                         batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
                         serviceEnabled = serviceEnabled,
+                        xiaomiAvailable = xiaomiAvailable,
+                        xiaomiEnabled = xiaomiEnabled,
                         logLines = logLines,
                     ),
                     onRequestPermission = ::requestPermission,
@@ -93,6 +103,7 @@ class MainActivity : ComponentActivity() {
                         batteryCardVisible = false
                     },
                     onServiceEnabledChange = ::changeServiceEnabled,
+                    onXiaomiEnabledChange = ::changeXiaomiEnabled,
                 )
             }
         }
@@ -106,8 +117,13 @@ class MainActivity : ComponentActivity() {
             monitor.start()
             StepCounterService.startIfEnabled(applicationContext)
         }
+        xiaomiEnabled = XiaomiSteps.isEnabled(this)
         val appContext = applicationContext
-        AppScope.launch(Dispatchers.IO) { XiaomiSteps.probe(appContext) }
+        AppScope.launch(Dispatchers.IO) {
+            val available = XiaomiSteps.isAvailable(appContext)
+            withContext(Dispatchers.Main) { xiaomiAvailable = available }
+        }
+        startXiaomiSync()
     }
 
     override fun onResume() {
@@ -118,6 +134,8 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onStop() {
+        xiaomiSync?.cancel()
+        xiaomiSync = null
         monitor.stop()
         val appContext = applicationContext
         AppScope.launch { Widgets.updateAll(appContext) }
@@ -142,6 +160,31 @@ class MainActivity : ComponentActivity() {
         StepCounterService.setEnabled(applicationContext, enabled)
     }
 
+    private fun changeXiaomiEnabled(enabled: Boolean) {
+        xiaomiEnabled = enabled
+        XiaomiSteps.setEnabled(applicationContext, enabled)
+        if (enabled) {
+            serviceEnabled = false
+            StepCounterService.setEnabled(applicationContext, false)
+            startXiaomiSync()
+        } else {
+            xiaomiSync?.cancel()
+            xiaomiSync = null
+            AppScope.launch { repository.resetReading() }
+        }
+    }
+
+    private fun startXiaomiSync() {
+        if (!xiaomiEnabled || xiaomiSync?.isActive == true) return
+        val appContext = applicationContext
+        xiaomiSync = AppScope.launch(Dispatchers.IO) {
+            while (isActive) {
+                XiaomiSteps.sync(appContext, ReadSource.App)
+                delay(XIAOMI_SYNC_INTERVAL_MS)
+            }
+        }
+    }
+
     private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             permissionLauncher.launch(Manifest.permission.ACTIVITY_RECOGNITION)
@@ -151,5 +194,6 @@ class MainActivity : ComponentActivity() {
     private companion object {
         const val SETTINGS_PREFS = "settings"
         const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
+        const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
     }
 }

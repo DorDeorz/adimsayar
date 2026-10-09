@@ -24,6 +24,8 @@
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
 
     <string name="service_card_title">Arka planda sürekli say</string>
+    <string name="xiaomi_card_title">HyperOS adım kaydını kullan</string>
+    <string name="xiaomi_card_text">Adımlar telefonun kendi adım kaydından okunur. Uygulama kapalıyken de eksiksiz sayılır, bildirim gerekmez ve geçmiş günler de eklenir.</string>
     <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür.</string>
     <string name="service_channel">Adım sayacı</string>
     <string name="service_title">AdımSayar sayıyor</string>
@@ -45,13 +47,10 @@
     <string name="source_system">sistem olayı</string>
     <string name="source_widget">widget</string>
     <string name="source_service">arka plan sayacı</string>
-    <string name="source_xiaomi">Xiaomi kaydı</string>
-    <string name="log_xiaomi_denied">okuma izni verilmedi</string>
-    <string name="log_xiaomi_missing">kayıt bulunamadı</string>
-    <string name="log_xiaomi_error">okunamadı (%1$s)</string>
-    <string name="log_xiaomi_columns">%1$d satır, sütunlar: %2$s</string>
-    <string name="log_xiaomi_hours">bugün saat saat: %1$s</string>
-    <string name="log_xiaomi_summary">%1$d satır, bugün %2$d adım, son: %3$s</string>
+    <string name="log_xiaomi_denied">HyperOS kaydı için okuma izni yok</string>
+    <string name="log_xiaomi_missing">HyperOS kaydı bulunamadı</string>
+    <string name="log_xiaomi_error">HyperOS kaydı okunamadı (%1$s)</string>
+    <string name="log_xiaomi_synced">HyperOS kaydı: bugün %1$d adım, %2$d gün güncellendi</string>
 
     <string name="widget_today_label">Bugünün adımı</string>
     <string name="widget_today_description">Bugün atılan adımlar ve hedef ilerlemesi</string>
