@@ -18,6 +18,7 @@ class SystemEventReceiver : BroadcastReceiver() {
                 Schedules.ensure(appContext)
                 StepCounterService.startIfEnabled(appContext)
                 StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
+                if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
             } finally {
                 pending.finish()
             }
@@ -26,9 +27,11 @@ class SystemEventReceiver : BroadcastReceiver() {
 
     companion object {
         const val ACTION_MIDNIGHT = "com.dordeorz.adimsayar.MIDNIGHT"
+        const val ACTION_EVENING = "com.dordeorz.adimsayar.EVENING"
         private const val READ_TIMEOUT_MS = 5_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
+            ACTION_EVENING,
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,

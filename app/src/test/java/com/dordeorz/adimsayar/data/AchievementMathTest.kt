@@ -5,7 +5,9 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.YearMonth
 
 class AchievementMathTest {
 
@@ -81,5 +83,20 @@ class AchievementMathTest {
         assertEquals(Level(1, 25_000, 75_000), AchievementMath.level(25_000))
         assertEquals(Level(2, 75_000, 150_000), AchievementMath.level(149_999))
         assertEquals(10, AchievementMath.level(1_400_000).number)
+    }
+
+    @Test
+    fun weekCanStartOnSunday() {
+        val steps = LongArray(7) { 10_000 }
+        val result = AchievementMath.compute(days(*steps), monday.plusDays(6), 10_000, 60_000, DayOfWeek.SUNDAY)
+        assertEquals(WeekSteps(monday.minusDays(1), 60_000), result.records.bestWeek)
+        assertEquals(monday.plusDays(5), medal(result, MedalGroup.WeeklyGoal, 1).earnedOn)
+    }
+
+    @Test
+    fun bestMonthSumsCalendarMonth() {
+        val history = mapOf(LocalDate.of(2026, 9, 30) to 5_000L, LocalDate.of(2026, 10, 1) to 3_000L, LocalDate.of(2026, 10, 2) to 4_000L)
+        val result = AchievementMath.compute(history, LocalDate.of(2026, 10, 2), 10_000, 70_000)
+        assertEquals(MonthSteps(YearMonth.of(2026, 10), 7_000), result.records.bestMonth)
     }
 }

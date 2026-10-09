@@ -5,8 +5,11 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
+import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+
+class DayDetail(val hours: LongArray, val walking: Long, val running: Long)
 
 object XiaomiSteps {
 
@@ -15,6 +18,10 @@ object XiaomiSteps {
     private const val COLUMN_BEGIN = "_begin_time"
     private const val COLUMN_END = "_end_time"
     private const val COLUMN_STEPS = "_steps"
+    private const val COLUMN_MODE = "_mode"
+    private const val MODE_WALKING = 2
+    private const val MODE_RUNNING = 3
+    private val DETAIL_PROJECTION = arrayOf(COLUMN_BEGIN, COLUMN_STEPS, COLUMN_MODE)
     private const val SETTINGS_PREFS = "settings"
     private const val KEY_ENABLED = "xiaomi_source"
 
@@ -61,6 +68,35 @@ object XiaomiSteps {
             log.note(source, context.getString(R.string.log_xiaomi_synced, today, days.size))
         }
         return today
+    }
+
+    fun dayDetail(context: Context, date: LocalDate): DayDetail? {
+        val zone = ZoneId.systemDefault()
+        val from = date.atStartOfDay(zone).toInstant().toEpochMilli()
+        val to = date.plusDays(1).atStartOfDay(zone).toInstant().toEpochMilli()
+        return try {
+            context.contentResolver.query(URI, DETAIL_PROJECTION, null, null, null)?.use {
+                val begin = it.getColumnIndexOrThrow(COLUMN_BEGIN)
+                val steps = it.getColumnIndexOrThrow(COLUMN_STEPS)
+                val mode = it.getColumnIndexOrThrow(COLUMN_MODE)
+                val hours = LongArray(24)
+                var walking = 0L
+                var running = 0L
+                while (it.moveToNext()) {
+                    val start = it.getLong(begin)
+                    if (start < from || start >= to) continue
+                    val count = it.getLong(steps)
+                    hours[Instant.ofEpochMilli(start).atZone(zone).hour] += count
+                    when (it.getInt(mode)) {
+                        MODE_WALKING -> walking += count
+                        MODE_RUNNING -> running += count
+                    }
+                }
+                DayDetail(hours, walking, running)
+            }
+        } catch (e: RuntimeException) {
+            null
+        }
     }
 
     private fun dailyTotals(context: Context): Map<LocalDate, Long>? {

@@ -24,3 +24,5 @@ internal fun formatCompact(steps: Long): String = when {
 internal fun shortDayName(date: LocalDate): String = date.dayOfWeek.getDisplayName(TextStyle.SHORT, TURKISH)
 
 internal fun percent(steps: Long, goal: Long): Int = if (goal <= 0L) 0 else ((steps * 100L) / goal).toInt()
+
+internal fun formatDecimal(value: Double): String = String.format(TURKISH, "%.1f", value)

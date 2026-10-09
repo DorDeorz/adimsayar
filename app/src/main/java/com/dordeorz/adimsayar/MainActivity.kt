@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -19,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.AchievementMath
@@ -46,6 +49,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.time.LocalDate
 
 class MainActivity : ComponentActivity() {
@@ -83,7 +87,31 @@ class MainActivity : ComponentActivity() {
             refreshWidgets()
         },
         onWeeklyGoalChange = { settingsStore.setWeeklyGoal(it) },
+        onHeightChange = { settingsStore.setHeight(it) },
+        onWeightChange = { settingsStore.setWeight(it) },
+        onDistanceUnitChange = { settingsStore.setDistanceUnit(it) },
+        onWeekStartChange = { settingsStore.setWeekStart(it) },
+        onGoalNotificationChange = { enabled ->
+            settingsStore.setGoalNotification(enabled)
+            if (enabled) requestNotificationPermission()
+        },
+        onStreakReminderChange = { enabled ->
+            settingsStore.setStreakReminder(enabled)
+            if (enabled) requestNotificationPermission()
+            Reminders.scheduleEvening(applicationContext)
+        },
+        onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
+        onImport = { importLauncher.launch(arrayOf("text/*", "application/octet-stream")) },
+        loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
     )
+
+    private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
+        if (uri != null) transferCsv(R.string.export_done) { repository.exportCsv(requireNotNull(contentResolver.openOutputStream(uri))) }
+    }
+
+    private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) transferCsv(R.string.import_done) { repository.importCsv(requireNotNull(contentResolver.openInputStream(uri))) }
+    }
 
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
@@ -110,8 +138,8 @@ class MainActivity : ComponentActivity() {
             val appSettings by settingsStore.settings.collectAsStateWithLifecycle()
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
             val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
-            val achievements = remember(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal) {
-                AchievementMath.compute(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal)
+            val achievements = remember(history, currentDay, appSettings) {
+                AchievementMath.compute(history, currentDay, appSettings.dailyGoal, appSettings.weeklyGoal, appSettings.weekStart)
             }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
@@ -194,12 +222,34 @@ class MainActivity : ComponentActivity() {
 
     private fun changeServiceEnabled(enabled: Boolean) {
         serviceEnabled = enabled
-        if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+        if (enabled) requestNotificationPermission()
+        StepCounterService.setEnabled(applicationContext, enabled)
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
         ) {
             notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
-        StepCounterService.setEnabled(applicationContext, enabled)
+    }
+
+    private fun transferCsv(@StringRes done: Int, block: suspend () -> Int?) {
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) {
+            val count = try {
+                block()
+            } catch (e: IOException) {
+                null
+            } catch (e: RuntimeException) {
+                null
+            }
+            withContext(Dispatchers.Main) {
+                val text = if (count == null) appContext.getString(R.string.csv_failed) else appContext.getString(done, count)
+                Toast.makeText(appContext, text, Toast.LENGTH_LONG).show()
+            }
+            if (count != null) Widgets.updateAll(appContext)
+        }
     }
 
     private fun changeXiaomiEnabled(enabled: Boolean) {
@@ -244,5 +294,6 @@ class MainActivity : ComponentActivity() {
         const val SETTINGS_PREFS = "settings"
         const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
+        const val EXPORT_FILE_NAME = "adimsayar-%s.csv"
     }
 }

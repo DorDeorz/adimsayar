@@ -132,6 +132,12 @@ private fun TodayRing(state: MainUiState, steps: Long, goal: Long) {
             color = if (steps >= goal) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(top = 12.dp),
         )
+        Text(
+            distanceAndCalories(steps, state.settings),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 4.dp),
+        )
     }
 }
 
@@ -162,7 +168,7 @@ internal fun ProgressRing(fraction: Float, stroke: Dp, modifier: Modifier = Modi
 
 @Composable
 private fun SummaryRow(state: MainUiState) {
-    val weekStart = weekStartOf(state.today)
+    val weekStart = weekStartOf(state.today, state.settings.weekStart)
     val weekSteps = state.history.filterKeys { !it.isBefore(weekStart) && !it.isAfter(state.today) }.values.sum()
     val weeklyGoal = state.settings.weeklyGoal
     Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {

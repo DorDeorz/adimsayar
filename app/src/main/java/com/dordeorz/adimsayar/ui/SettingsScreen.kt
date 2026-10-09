@@ -17,6 +17,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,14 +45,20 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
+import com.dordeorz.adimsayar.data.DistanceUnit
+import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
+import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
+import com.dordeorz.adimsayar.data.WEIGHT_RANGE
+import java.time.format.TextStyle
 
-private enum class SettingsDialog { DailyGoal, WeeklyGoal, Log, ReleaseNotes }
+private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, ReleaseNotes }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.3.0", R.array.release_notes_0_3_0),
     ReleaseNote("0.2.0", R.array.release_notes_0_2_0),
     ReleaseNote("0.1.0", R.array.release_notes_0_1_0),
 )
@@ -87,6 +94,50 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
             ValueRow(stringResource(R.string.weekly_goal), stringResource(R.string.steps_value, format(settings.weeklyGoal))) {
                 dialog = SettingsDialog.WeeklyGoal
             }
+            ChoiceRow(
+                title = stringResource(R.string.week_start),
+                options = WEEK_START_OPTIONS,
+                selected = settings.weekStart,
+                label = { it.getDisplayName(TextStyle.FULL, TURKISH) },
+                onSelect = actions.onWeekStartChange,
+            )
+
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.settings_body))
+            ValueRow(stringResource(R.string.height), stringResource(R.string.height_value, settings.heightCm)) {
+                dialog = SettingsDialog.Height
+            }
+            ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
+                dialog = SettingsDialog.Weight
+            }
+            ChoiceRow(
+                title = stringResource(R.string.distance_unit),
+                options = DistanceUnit.entries,
+                selected = settings.distanceUnit,
+                label = { stringResource(if (it == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km) },
+                onSelect = actions.onDistanceUnitChange,
+            )
+            Text(
+                stringResource(R.string.body_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+            )
+
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.settings_notifications))
+            SwitchRow(
+                title = stringResource(R.string.goal_notification),
+                hint = stringResource(R.string.goal_notification_hint),
+                checked = settings.goalNotification,
+                onCheckedChange = actions.onGoalNotificationChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.streak_reminder),
+                hint = stringResource(R.string.streak_reminder_hint),
+                checked = settings.streakReminder,
+                onCheckedChange = actions.onStreakReminderChange,
+            )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_theme))
@@ -142,6 +193,11 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
             }
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.settings_data))
+            ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
+            ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
+
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_about))
             ValueRow(stringResource(R.string.settings_version), state.version, onClick = null)
             ClickRow(stringResource(R.string.release_notes), stringResource(R.string.release_notes_hint)) {
@@ -154,6 +210,24 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
     }
 
     when (dialog) {
+        SettingsDialog.Height -> GoalDialog(
+            title = stringResource(R.string.height),
+            current = settings.heightCm.toLong(),
+            range = HEIGHT_RANGE.first.toLong()..HEIGHT_RANGE.last.toLong(),
+            presets = emptyList(),
+            unit = stringResource(R.string.unit_cm),
+            onSave = { actions.onHeightChange(it.toInt()) },
+            onDismiss = { dialog = null },
+        )
+        SettingsDialog.Weight -> GoalDialog(
+            title = stringResource(R.string.weight),
+            current = settings.weightKg.toLong(),
+            range = WEIGHT_RANGE.first.toLong()..WEIGHT_RANGE.last.toLong(),
+            presets = emptyList(),
+            unit = stringResource(R.string.unit_kg),
+            onSave = { actions.onWeightChange(it.toInt()) },
+            onDismiss = { dialog = null },
+        )
         SettingsDialog.DailyGoal -> GoalDialog(
             title = stringResource(R.string.daily_goal),
             current = settings.dailyGoal,
@@ -196,6 +270,7 @@ private fun GoalDialog(
     current: Long,
     range: LongRange,
     presets: List<Long>,
+    unit: String = stringResource(R.string.steps_unit),
     onSave: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -209,10 +284,10 @@ private fun GoalDialog(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = text,
-                    onValueChange = { input -> text = input.filter(Char::isDigit).take(7) },
+                    onValueChange = { input -> text = input.filter(Char::isDigit).take(range.last.toString().length) },
                     singleLine = true,
                     isError = !valid,
-                    suffix = { Text(stringResource(R.string.steps_unit)) },
+                    suffix = { Text(unit) },
                     supportingText = { Text(stringResource(R.string.goal_range, format(range.first), format(range.last))) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth(),
@@ -283,6 +358,22 @@ private fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
     ) {
         Text(title, style = MaterialTheme.typography.bodyLarge)
         Text(hint, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Text(title, style = MaterialTheme.typography.bodyLarge)
+        Row(modifier = Modifier.padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            options.forEach { option ->
+                FilterChip(
+                    selected = option == selected,
+                    onClick = { onSelect(option) },
+                    label = { Text(label(option)) },
+                )
+            }
+        }
     }
 }
 

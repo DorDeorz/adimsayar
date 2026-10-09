@@ -28,9 +28,12 @@ import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
 import com.dordeorz.adimsayar.data.AppSettings
+import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
+import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.ui.oem.OemProfile
+import java.time.DayOfWeek
 import java.time.LocalDate
 
 enum class PermissionState { Granted, NeedsRequest, Denied }
@@ -72,6 +75,15 @@ class MainActions(
     val onDynamicColorChange: (Boolean) -> Unit,
     val onDailyGoalChange: (Long) -> Unit,
     val onWeeklyGoalChange: (Long) -> Unit,
+    val onHeightChange: (Int) -> Unit,
+    val onWeightChange: (Int) -> Unit,
+    val onDistanceUnitChange: (DistanceUnit) -> Unit,
+    val onWeekStartChange: (DayOfWeek) -> Unit,
+    val onGoalNotificationChange: (Boolean) -> Unit,
+    val onStreakReminderChange: (Boolean) -> Unit,
+    val onExport: () -> Unit,
+    val onImport: () -> Unit,
+    val loadDayDetail: suspend (LocalDate) -> DayDetail?,
 )
 
 @Composable
@@ -118,7 +130,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
                 Tab.Today -> TodayScreen(state, actions)
-                Tab.History -> HistoryScreen(state)
+                Tab.History -> HistoryScreen(state, actions.loadDayDetail)
                 Tab.Medals -> MedalsScreen(state)
             }
         }

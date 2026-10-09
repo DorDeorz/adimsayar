@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters
 
 enum class MedalGroup(val targets: List<Long>) {
@@ -17,12 +18,15 @@ data class Medal(val group: MedalGroup, val tier: Int, val target: Long, val pro
 
 data class WeekSteps(val start: LocalDate, val steps: Long)
 
+data class MonthSteps(val month: YearMonth, val steps: Long)
+
 data class Records(
     val total: Long,
     val activeDays: Int,
     val goalDays: Int,
     val bestDay: DaySteps?,
     val bestWeek: WeekSteps?,
+    val bestMonth: MonthSteps?,
     val currentStreak: Int,
     val longestStreak: Int,
     val metWeeks: Int,
@@ -32,11 +36,18 @@ data class Level(val number: Int, val from: Long, val to: Long)
 
 data class Achievements(val records: Records, val medals: List<Medal>, val level: Level)
 
-fun weekStartOf(date: LocalDate): LocalDate = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+fun weekStartOf(date: LocalDate, firstDay: DayOfWeek = DayOfWeek.MONDAY): LocalDate =
+    date.with(TemporalAdjusters.previousOrSame(firstDay))
 
 object AchievementMath {
 
-    fun compute(days: Map<LocalDate, Long>, today: LocalDate, dailyGoal: Long, weeklyGoal: Long): Achievements {
+    fun compute(
+        days: Map<LocalDate, Long>,
+        today: LocalDate,
+        dailyGoal: Long,
+        weeklyGoal: Long,
+        firstDay: DayOfWeek = DayOfWeek.MONDAY,
+    ): Achievements {
         val first = days.keys.filter { !it.isAfter(today) }.minOrNull() ?: today
         var total = 0L
         var activeDays = 0
@@ -45,7 +56,10 @@ object AchievementMath {
         var bestWeek: WeekSteps? = null
         var streak = 0
         var longestStreak = 0
-        var weekStart = weekStartOf(first)
+        var bestMonth: MonthSteps? = null
+        var month = YearMonth.from(first)
+        var monthSum = 0L
+        var weekStart = weekStartOf(first, firstDay)
         var weekSum = 0L
         var weekMet = false
         var metWeeks = 0
@@ -61,16 +75,22 @@ object AchievementMath {
         var date = first
         while (!date.isAfter(today)) {
             val steps = days[date] ?: 0L
-            if (weekStartOf(date) != weekStart) {
-                weekStart = weekStartOf(date)
+            if (YearMonth.from(date) != month) {
+                month = YearMonth.from(date)
+                monthSum = 0L
+            }
+            if (weekStartOf(date, firstDay) != weekStart) {
+                weekStart = weekStartOf(date, firstDay)
                 weekSum = 0L
                 weekMet = false
             }
             total += steps
             weekSum += steps
+            monthSum += steps
             if (steps > 0L) activeDays++
             if (steps > (bestDay?.steps ?: 0L)) bestDay = DaySteps(date, steps)
             if (weekSum > (bestWeek?.steps ?: 0L)) bestWeek = WeekSteps(weekStart, weekSum)
+            if (monthSum > (bestMonth?.steps ?: 0L)) bestMonth = MonthSteps(month, monthSum)
             if (steps >= dailyGoal) {
                 goalDays++
                 streak++
@@ -106,6 +126,7 @@ object AchievementMath {
             goalDays = goalDays,
             bestDay = bestDay,
             bestWeek = bestWeek,
+            bestMonth = bestMonth,
             currentStreak = streak,
             longestStreak = longestStreak,
             metWeeks = metWeeks,

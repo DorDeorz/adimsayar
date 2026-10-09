@@ -49,6 +49,9 @@ abstract class DailyStepsDao {
     @Query("SELECT * FROM daily_steps ORDER BY date")
     abstract fun observeAll(): Flow<List<DailySteps>>
 
+    @Query("SELECT * FROM daily_steps ORDER BY date")
+    abstract suspend fun loadAll(): List<DailySteps>
+
 }
 
 @Database(entities = [DailySteps::class], version = 1, exportSchema = false)
