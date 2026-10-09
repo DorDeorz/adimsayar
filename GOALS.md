@@ -160,7 +160,9 @@ Android `updatePeriodMillis` değerini en fazla 30 dakikaya kısar ve yine de ga
 
 **Tüm veriler cihazda kalır. Hesap, sunucu ve senkronizasyon yoktur.**
 
-Kapsam dışı: kullanıcı sistemi, giriş ekranı, token yönetimi, backend, ağ izni.
+Kapsam dışı: kullanıcı sistemi, giriş ekranı, token yönetimi, backend.
+
+Ağ erişiminin tek istisnası Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz.
 
 ### Veri kaybı koruması
 

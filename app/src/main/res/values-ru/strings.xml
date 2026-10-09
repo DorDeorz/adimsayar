@@ -113,6 +113,14 @@
     <string name="settings_version">Версия</string>
     <string name="release_notes">Что нового</string>
     <string name="release_notes_hint">Изменения в каждой версии</string>
+    <string name="check_updates">Проверить обновления</string>
+    <string name="check_updates_hint">Сравнивает с последней версией на GitHub</string>
+    <string name="update_checking">Проверка…</string>
+    <string name="update_up_to_date">У вас последняя версия</string>
+    <string name="update_available">Доступна новая версия: %1$s. Нажмите, чтобы скачать</string>
+    <string name="update_failed">Не удалось проверить. Проверьте подключение к интернету</string>
+    <string name="github_page">Страница на GitHub</string>
+    <string name="github_page_hint">Исходный код, версии и сообщения об ошибках</string>
     <string name="log_hint">Последние чтения счётчика и HyperOS</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
@@ -181,6 +189,10 @@
     <string name="next_year">Следующий год</string>
     <string name="year_medals">Полученные медали</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>Проверка обновлений в настройках: смотрит последнюю версию на GitHub и открывает страницу загрузки</item>
+        <item>Ссылка на страницу GitHub</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>Уведомление с итогами недели: сумма за неделю и изменение по сравнению с прошлой, вечером последнего дня</item>
         <item>Уведомление, когда вы близки к цели (80% дневной цели)</item>

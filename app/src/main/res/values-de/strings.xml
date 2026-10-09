@@ -113,6 +113,14 @@
     <string name="settings_version">Version</string>
     <string name="release_notes">Versionshinweise</string>
     <string name="release_notes_hint">Was sich in jeder Version geändert hat</string>
+    <string name="check_updates">Nach Updates suchen</string>
+    <string name="check_updates_hint">Vergleicht mit der neuesten Version auf GitHub</string>
+    <string name="update_checking">Wird geprüft…</string>
+    <string name="update_up_to_date">Du hast die neueste Version</string>
+    <string name="update_available">Neue Version verfügbar: %1$s. Zum Herunterladen tippen</string>
+    <string name="update_failed">Prüfung fehlgeschlagen. Internetverbindung prüfen</string>
+    <string name="github_page">GitHub-Seite</string>
+    <string name="github_page_hint">Quellcode, Versionen und Fehlermeldungen</string>
     <string name="log_hint">Letzte Zähler- und HyperOS-Ablesungen</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
@@ -181,6 +189,10 @@
     <string name="next_year">Nächstes Jahr</string>
     <string name="year_medals">Verdiente Medaillen</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>Update-Prüfung in den Einstellungen: sucht die neueste Version auf GitHub und öffnet die Download-Seite</item>
+        <item>Link zur GitHub-Seite</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>Benachrichtigung mit Wochenzusammenfassung: Wochensumme und Veränderung zur Vorwoche, am Abend des letzten Tages</item>
         <item>Benachrichtigung, wenn du nah an deinem Ziel bist (80 % des Tagesziels)</item>

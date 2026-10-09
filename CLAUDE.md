@@ -24,7 +24,7 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Kalıcı depolama: Room.
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
-- Veriler sadece cihazda tutulur. Hesap, sunucu, senkronizasyon ve ağ izni yoktur.
+- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü içindir (bkz. "İzinler").
 - **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
@@ -109,7 +109,7 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 - API 29+ (Android 10) runtime izni: `ACTIVITY_RECOGNITION`. İki sensör için de zorunlu.
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
-- Ağ izni (`INTERNET`) ekleme. Bu uygulama çevrimdışıdır.
+- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz. Başka hiçbir ağ isteği eklenmez.
 
 ## Widget'lar
 
@@ -144,7 +144,7 @@ Xiaomi Cloud'a güvenilmez.
 - Kullanıcının seçtiği stack dışına çıkma; yeni bağımlılık eklemeden önce mevcut çözümü kullan.
 - Yorum satırı yazma; kod kendini açıklasın.
 - Türkçe arayüz metinlerini kullanıcıya sormadan değiştirme.
-- Ağ izni, hesap ekranı, analitik veya reklam SDK'sı ekleme.
+- Güncelleme kontrolü dışında ağ isteği, hesap ekranı, analitik veya reklam SDK'sı ekleme.
 - Kararlaştırılmış bir maddeyi değiştirmek gerekiyorsa önce kullanıcıya sor ve `GOALS.md` ile `CLAUDE.md`'yi birlikte güncelle.
 
 ## Pil optimizasyonu yardımı

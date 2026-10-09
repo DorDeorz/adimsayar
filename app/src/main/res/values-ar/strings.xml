@@ -113,6 +113,14 @@
     <string name="settings_version">الإصدار</string>
     <string name="release_notes">ملاحظات الإصدار</string>
     <string name="release_notes_hint">ما الجديد في كل إصدار</string>
+    <string name="check_updates">التحقق من التحديثات</string>
+    <string name="check_updates_hint">يقارن مع أحدث إصدار على GitHub</string>
+    <string name="update_checking">جارٍ التحقق…</string>
+    <string name="update_up_to_date">لديك أحدث إصدار</string>
+    <string name="update_available">يتوفر إصدار جديد: %1$s. اضغط للتنزيل</string>
+    <string name="update_failed">تعذّر التحقق. تحقّق من اتصال الإنترنت</string>
+    <string name="github_page">صفحة GitHub</string>
+    <string name="github_page_hint">الشيفرة المصدرية والإصدارات والإبلاغ عن المشكلات</string>
     <string name="log_hint">أحدث قراءات العداد وHyperOS</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
@@ -181,6 +189,10 @@
     <string name="next_year">السنة التالية</string>
     <string name="year_medals">الميداليات المكتسبة</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>التحقق من التحديثات في الإعدادات: يبحث عن أحدث إصدار على GitHub ويفتح صفحة التنزيل</item>
+        <item>رابط صفحة GitHub</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>إشعار الملخص الأسبوعي: إجمالي الأسبوع والتغير مقارنة بالأسبوع الماضي، مساء آخر يوم منه</item>
         <item>إشعار عند اقترابك من هدفك (80% من الهدف اليومي)</item>
