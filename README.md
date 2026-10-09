@@ -16,7 +16,13 @@ Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 P
 |---|---|---|---|
 | <img src="docs/screenshots/today.png" width="200" alt="Bugün"> | <img src="docs/screenshots/history.png" width="200" alt="Geçmiş"> | <img src="docs/screenshots/medals.png" width="200" alt="Madalyalar"> | <img src="docs/screenshots/settings.png" width="200" alt="Ayarlar"> |
 
-> **Yer tutucu:** widget görüntüleri (Bugün, 7 günlük tablo, Seri ve hafta, Aylık takvim) eklenecek.
+| Bugün widget'ı | 7 günlük tablo |
+|---|---|
+| <img src="docs/screenshots/widget_today.png" width="360" alt="Bugün widget'ı"> | <img src="docs/screenshots/widget_week.png" width="360" alt="7 günlük tablo"> |
+
+| Seri ve hafta | Aylık takvim |
+|---|---|
+| <img src="docs/screenshots/widget_streak.png" width="160" alt="Seri ve hafta"> | <img src="docs/screenshots/widget_month.png" width="240" alt="Aylık takvim"> |
 
 ## Özellikler
 
