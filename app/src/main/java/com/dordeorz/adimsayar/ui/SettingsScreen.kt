@@ -32,10 +32,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -51,16 +54,20 @@ import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
+import com.dordeorz.adimsayar.data.UpdateChecker
+import com.dordeorz.adimsayar.data.UpdateResult
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
 import com.dordeorz.adimsayar.data.WEIGHT_RANGE
 import java.time.format.TextStyle
+import kotlinx.coroutines.launch
 
 private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.6.1", R.array.release_notes_0_6_1),
     ReleaseNote("0.6.0", R.array.release_notes_0_6_0),
     ReleaseNote("0.5.0", R.array.release_notes_0_5_0),
     ReleaseNote("0.4.0", R.array.release_notes_0_4_0),
@@ -229,6 +236,34 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
             }
             ClickRow(stringResource(R.string.log_title), stringResource(R.string.log_hint)) {
                 dialog = SettingsDialog.Log
+            }
+            val uriHandler = LocalUriHandler.current
+            val scope = rememberCoroutineScope()
+            var checking by remember { mutableStateOf(false) }
+            var update by remember { mutableStateOf<UpdateResult?>(null) }
+            val available = update as? UpdateResult.Available
+            ClickRow(
+                stringResource(R.string.check_updates),
+                when {
+                    checking -> stringResource(R.string.update_checking)
+                    available != null -> stringResource(R.string.update_available, available.version)
+                    update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
+                    update == UpdateResult.Failed -> stringResource(R.string.update_failed)
+                    else -> stringResource(R.string.check_updates_hint)
+                },
+            ) {
+                when {
+                    checking -> Unit
+                    available != null -> runCatching { uriHandler.openUri(available.url) }
+                    else -> scope.launch {
+                        checking = true
+                        update = UpdateChecker.check(state.version)
+                        checking = false
+                    }
+                }
+            }
+            ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
+                runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }
             }
         }
     }

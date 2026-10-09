@@ -113,6 +113,14 @@
     <string name="settings_version">版本</string>
     <string name="release_notes">更新说明</string>
     <string name="release_notes_hint">各版本的变化</string>
+    <string name="check_updates">检查更新</string>
+    <string name="check_updates_hint">与 GitHub 上的最新版本比较</string>
+    <string name="update_checking">正在检查…</string>
+    <string name="update_up_to_date">已是最新版本</string>
+    <string name="update_available">有新版本：%1$s。点按下载</string>
+    <string name="update_failed">无法检查。请检查网络连接</string>
+    <string name="github_page">GitHub 页面</string>
+    <string name="github_page_hint">源代码、版本和问题反馈</string>
     <string name="log_hint">最近的计步器和 HyperOS 读取</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
@@ -181,6 +189,10 @@
     <string name="next_year">下一年</string>
     <string name="year_medals">获得的勋章</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>设置中检查更新：查询 GitHub 上的最新版本，有新版本时打开下载页面</item>
+        <item>GitHub 页面链接</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>每周总结通知：在每周最后一天晚上显示本周总步数及与上周相比的变化</item>
         <item>接近目标时的通知（每日目标的 80%）</item>

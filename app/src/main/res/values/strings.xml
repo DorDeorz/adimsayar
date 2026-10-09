@@ -113,6 +113,14 @@
     <string name="settings_version">Sürüm</string>
     <string name="release_notes">Sürüm notları</string>
     <string name="release_notes_hint">Her sürümde neler değişti</string>
+    <string name="check_updates">Güncellemeleri kontrol et</string>
+    <string name="check_updates_hint">GitHub\'daki son sürümle karşılaştırır</string>
+    <string name="update_checking">Kontrol ediliyor…</string>
+    <string name="update_up_to_date">Güncel sürümü kullanıyorsun</string>
+    <string name="update_available">Yeni sürüm var: %1$s. İndirmek için dokun</string>
+    <string name="update_failed">Kontrol edilemedi. İnternet bağlantını kontrol et</string>
+    <string name="github_page">GitHub sayfası</string>
+    <string name="github_page_hint">Kaynak kod, sürümler ve hata bildirimi</string>
     <string name="log_hint">Sayaç ve HyperOS okumalarının son kayıtları</string>
     <string name="save">Kaydet</string>
     <string name="cancel">Vazgeç</string>
@@ -181,6 +189,10 @@
     <string name="next_year">Sonraki yıl</string>
     <string name="year_medals">Kazanılan madalya</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>Ayarlar\'da güncelleme kontrolü: GitHub\'daki son sürüme bakar, yeni sürüm varsa indirme sayfasını açar</item>
+        <item>GitHub sayfası bağlantısı</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>Haftalık özet bildirimi: haftanın son günü akşamı toplam ve geçen haftayla fark</item>
         <item>Hedefe yaklaşınca bildirim (günlük hedefin %80\'i)</item>

@@ -113,6 +113,14 @@
     <string name="settings_version">Versión</string>
     <string name="release_notes">Novedades</string>
     <string name="release_notes_hint">Qué cambió en cada versión</string>
+    <string name="check_updates">Buscar actualizaciones</string>
+    <string name="check_updates_hint">Compara con la última versión en GitHub</string>
+    <string name="update_checking">Comprobando…</string>
+    <string name="update_up_to_date">Tienes la última versión</string>
+    <string name="update_available">Nueva versión disponible: %1$s. Toca para descargar</string>
+    <string name="update_failed">No se pudo comprobar. Revisa tu conexión a internet</string>
+    <string name="github_page">Página de GitHub</string>
+    <string name="github_page_hint">Código fuente, versiones y reporte de errores</string>
     <string name="log_hint">Últimas lecturas del contador y de HyperOS</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
@@ -181,6 +189,10 @@
     <string name="next_year">Año siguiente</string>
     <string name="year_medals">Medallas ganadas</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>Búsqueda de actualizaciones en Ajustes: consulta la última versión en GitHub y abre la página de descarga</item>
+        <item>Enlace a la página de GitHub</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>Notificación de resumen semanal: el total de la semana y el cambio respecto a la anterior, la noche de su último día</item>
         <item>Notificación cuando estás cerca de tu meta (80% de la meta diaria)</item>

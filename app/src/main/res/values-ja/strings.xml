@@ -113,6 +113,14 @@
     <string name="settings_version">バージョン</string>
     <string name="release_notes">リリースノート</string>
     <string name="release_notes_hint">各バージョンの変更点</string>
+    <string name="check_updates">アップデートを確認</string>
+    <string name="check_updates_hint">GitHub の最新リリースと比較します</string>
+    <string name="update_checking">確認中…</string>
+    <string name="update_up_to_date">最新バージョンです</string>
+    <string name="update_available">新しいバージョン %1$s があります。タップしてダウンロード</string>
+    <string name="update_failed">確認できませんでした。インターネット接続を確認してください</string>
+    <string name="github_page">GitHub ページ</string>
+    <string name="github_page_hint">ソースコード、リリース、不具合の報告</string>
     <string name="log_hint">最新のカウンターと HyperOS の読み取り</string>
     <string name="save">保存</string>
     <string name="cancel">キャンセル</string>
@@ -181,6 +189,10 @@
     <string name="next_year">次の年</string>
     <string name="year_medals">獲得したメダル</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>設定でアップデートを確認：GitHub の最新リリースを調べ、あればダウンロードページを開きます</item>
+        <item>GitHub ページへのリンク</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>週間サマリー通知: 週の最終日の夜に、週の合計と前週からの変化を表示</item>
         <item>目標が近づいたときの通知 (1日の目標の80%)</item>

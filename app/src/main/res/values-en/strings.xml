@@ -113,6 +113,14 @@
     <string name="settings_version">Version</string>
     <string name="release_notes">Release notes</string>
     <string name="release_notes_hint">What changed in each version</string>
+    <string name="check_updates">Check for updates</string>
+    <string name="check_updates_hint">Compares with the latest release on GitHub</string>
+    <string name="update_checking">Checking…</string>
+    <string name="update_up_to_date">You have the latest version</string>
+    <string name="update_available">New version available: %1$s. Tap to download</string>
+    <string name="update_failed">Couldn\'t check. Check your internet connection</string>
+    <string name="github_page">GitHub page</string>
+    <string name="github_page_hint">Source code, releases and issue reports</string>
     <string name="log_hint">Latest counter and HyperOS readings</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -181,6 +189,10 @@
     <string name="next_year">Next year</string>
     <string name="year_medals">Medals earned</string>
 
+    <string-array name="release_notes_0_6_1">
+        <item>Update check in Settings: looks up the latest release on GitHub and opens the download page if there is one</item>
+        <item>Link to the GitHub page</item>
+    </string-array>
     <string-array name="release_notes_0_6_0">
         <item>Weekly summary notification: the week\'s total and the change from last week, on the evening of its last day</item>
         <item>Notification when you are close to your goal (80% of the daily goal)</item>
