@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,6 +56,8 @@ data class MainUiState(
     val sensorAvailable: Boolean,
     val frozen: Boolean,
     val batteryProfile: OemProfile?,
+    val serviceEnabled: Boolean,
+    val logLines: List<String>,
 )
 
 private fun format(steps: Long): String = NumberFormat.getIntegerInstance(TURKISH).format(steps)
@@ -65,6 +68,7 @@ fun MainScreen(
     onRequestPermission: () -> Unit,
     onOpenAppSettings: () -> Unit,
     onDismissBatteryCard: () -> Unit,
+    onServiceEnabledChange: (Boolean) -> Unit,
 ) {
     val today = state.week.lastOrNull()?.steps ?: 0L
     Scaffold { padding ->
@@ -81,6 +85,9 @@ fun MainScreen(
             }
             if (state.frozen) {
                 item { MessageCard(stringResource(R.string.frozen_title), stringResource(R.string.frozen_text)) }
+            }
+            if (state.sensorAvailable && state.permission == PermissionState.Granted) {
+                item { ServiceCard(state.serviceEnabled, onServiceEnabledChange) }
             }
             state.batteryProfile?.let { profile ->
                 item { BatteryHelpCard(profile = profile, onDismiss = onDismissBatteryCard) }
@@ -100,6 +107,39 @@ fun MainScreen(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                 )
+            }
+            item { LogCard(state.logLines) }
+        }
+    }
+}
+
+@Composable
+private fun ServiceCard(enabled: Boolean, onChange: (Boolean) -> Unit) {
+    Card {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.service_card_title), style = MaterialTheme.typography.titleMedium)
+                Text(
+                    stringResource(R.string.service_card_text),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Switch(checked = enabled, onCheckedChange = onChange, modifier = Modifier.padding(start = 12.dp))
+        }
+    }
+}
+
+@Composable
+private fun LogCard(lines: List<String>) {
+    Card {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(stringResource(R.string.log_title), style = MaterialTheme.typography.titleMedium)
+            if (lines.isEmpty()) {
+                Text(stringResource(R.string.log_empty), style = MaterialTheme.typography.bodySmall)
+            }
+            lines.take(30).forEach { line ->
+                Text(line, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.dordeorz.adimsayar
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,9 +12,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.background.StepCounterService
+import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
@@ -38,6 +42,9 @@ class MainActivity : ComponentActivity() {
     private var permission by mutableStateOf(PermissionState.NeedsRequest)
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
+    private var serviceEnabled by mutableStateOf(false)
+
+    private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         permission = when {
@@ -46,7 +53,10 @@ class MainActivity : ComponentActivity() {
                 shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION) -> PermissionState.NeedsRequest
             else -> PermissionState.Denied
         }
-        if (granted) monitor.start()
+        if (granted) {
+            monitor.start()
+            StepCounterService.startIfEnabled(applicationContext)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +70,7 @@ class MainActivity : ComponentActivity() {
             val total by remember { repository.observeTotal() }.collectAsStateWithLifecycle(0L)
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
+            val logLines by ReadingLog.get(applicationContext).lines.collectAsStateWithLifecycle()
             AdimSayarTheme {
                 MainScreen(
                     state = MainUiState(
@@ -70,6 +81,8 @@ class MainActivity : ComponentActivity() {
                         sensorAvailable = sensorAvailable,
                         frozen = frozen,
                         batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
+                        serviceEnabled = serviceEnabled,
+                        logLines = logLines,
                     ),
                     onRequestPermission = ::requestPermission,
                     onOpenAppSettings = { BatteryOptimization.openAppDetails(this) },
@@ -77,6 +90,7 @@ class MainActivity : ComponentActivity() {
                         settings.edit { putBoolean(KEY_BATTERY_CARD_DISMISSED, true) }
                         batteryCardVisible = false
                     },
+                    onServiceEnabledChange = ::setServiceEnabled,
                 )
             }
         }
@@ -85,7 +99,11 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         refreshPermission()
-        if (permission == PermissionState.Granted) monitor.start()
+        serviceEnabled = StepCounterService.isEnabled(this)
+        if (permission == PermissionState.Granted) {
+            monitor.start()
+            StepCounterService.startIfEnabled(applicationContext)
+        }
     }
 
     override fun onResume() {
@@ -108,6 +126,16 @@ class MainActivity : ComponentActivity() {
             permission == PermissionState.Denied -> PermissionState.Denied
             else -> PermissionState.NeedsRequest
         }
+    }
+
+    private fun setServiceEnabled(enabled: Boolean) {
+        serviceEnabled = enabled
+        if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+        StepCounterService.setEnabled(applicationContext, enabled)
     }
 
     private fun requestPermission() {

@@ -25,13 +25,16 @@ class StepRepository private constructor(context: Context) {
 
     val lastReadingWallMs: StateFlow<Long?> = _lastReadingWallMs.asStateFlow()
 
-    suspend fun record(reading: CounterReading) = mutex.withLock {
+    suspend fun record(reading: CounterReading): Long = mutex.withLock {
         val interval = StepMath.interval(loadReading(), reading)
         saveReading(reading)
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
         if (days.isNotEmpty()) dao.add(days.mapKeys { it.key.toString() })
         _lastReadingWallMs.value = reading.wallMs
+        interval.steps
     }
+
+    suspend fun today(): Long = loadWeek(LocalDate.now()).last().steps
 
     fun observeWeek(today: LocalDate): Flow<List<DaySteps>> =
         dao.observeFrom(weekStart(today).toString()).map { fillWeek(it, today) }

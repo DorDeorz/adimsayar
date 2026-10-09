@@ -14,7 +14,7 @@ import java.time.ZoneId
 object Schedules {
 
     private const val PERIODIC_JOB_ID = 1
-    private const val READ_NOW_JOB_ID = 2
+    const val READ_NOW_JOB_ID = 2
     private const val PERIODIC_MS = 15 * 60 * 1000L
     private const val MIDNIGHT_DELAY_MS = 5_000L
 

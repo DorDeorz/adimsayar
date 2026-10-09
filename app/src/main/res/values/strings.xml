@@ -23,6 +23,26 @@
     <string name="frozen_title">Adım sayacı donmuş görünüyor</string>
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
 
+    <string name="service_card_title">Arka planda sürekli say</string>
+    <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür.</string>
+    <string name="service_channel">Adım sayacı</string>
+    <string name="service_title">AdımSayar sayıyor</string>
+    <string name="service_text">Bugün %1$s adım</string>
+    <string name="service_text_starting">Sayaç açılıyor</string>
+
+    <string name="log_title">Okuma kaydı</string>
+    <string name="log_empty">Henüz kayıt yok</string>
+    <string name="log_reading">sayaç %1$d, +%2$d adım</string>
+    <string name="log_timeout">sensör yanıt vermedi</string>
+    <string name="log_no_permission">izin yok</string>
+    <string name="log_no_sensor">sensör yok</string>
+    <string name="log_register_failed">sensöre bağlanılamadı</string>
+    <string name="source_app">uygulama</string>
+    <string name="source_job">15 dk işi</string>
+    <string name="source_system">sistem olayı</string>
+    <string name="source_widget">widget</string>
+    <string name="source_service">arka plan sayacı</string>
+
     <string name="widget_today_label">Bugünün adımı</string>
     <string name="widget_today_description">Bugün atılan adımlar ve hedef ilerlemesi</string>
     <string name="widget_week_label">7 günlük tablo</string>

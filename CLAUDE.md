@@ -89,7 +89,7 @@ Bilinen trade-off'lar:
 - Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
 - Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
 
-Test başarısız olursa yedek yol: kullanıcının ayarlardan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (Android 14+ için `foregroundServiceType="health"`). Varsayılan kapalıdır.
+Yedek yol: kullanıcının ana ekrandan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 
 ### Davranış tablosu
 

@@ -7,6 +7,8 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.SystemClock
 import com.dordeorz.adimsayar.AppScope
+import com.dordeorz.adimsayar.data.ReadSource
+import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +21,7 @@ class LiveStepMonitor(context: Context) {
     private val counter = manager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     private val detector = manager?.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
     private val repository = StepRepository.get(context)
+    private val log = ReadingLog.get(context)
     private val freezeDetector = FreezeDetector()
     private val _frozen = MutableStateFlow(false)
     private var running = false
@@ -33,7 +36,11 @@ class LiveStepMonitor(context: Context) {
             val previous = lastCounterValue
             if (previous != null && value > previous) _frozen.value = false
             lastCounterValue = value
-            AppScope.launch { repository.record(StepSensors.reading(value)) }
+            val first = previous == null
+            AppScope.launch {
+                val added = repository.record(StepSensors.reading(value))
+                if (first) log.reading(ReadSource.App, value, added)
+            }
         }
 
         override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
@@ -55,6 +62,7 @@ class LiveStepMonitor(context: Context) {
     fun start() {
         if (running || manager == null || counter == null) return
         running = true
+        lastCounterValue = null
         freezeDetector.reset(SystemClock.elapsedRealtime())
         manager.registerListener(counterListener, counter, SensorManager.SENSOR_DELAY_UI)
         if (detector != null) manager.registerListener(detectorListener, detector, SensorManager.SENSOR_DELAY_UI)

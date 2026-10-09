@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.dordeorz.adimsayar.AppScope
+import com.dordeorz.adimsayar.data.ReadSource
 import kotlinx.coroutines.launch
 
 class SystemEventReceiver : BroadcastReceiver() {
@@ -15,7 +16,8 @@ class SystemEventReceiver : BroadcastReceiver() {
         AppScope.launch {
             try {
                 Schedules.ensure(appContext)
-                StepUpdater.refresh(appContext, READ_TIMEOUT_MS)
+                StepCounterService.startIfEnabled(appContext)
+                StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
             } finally {
                 pending.finish()
             }
