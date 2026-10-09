@@ -12,7 +12,7 @@ Test cihazları: Redmi Note 12 Pro 4G (HyperOS 1 / Android 12, birincil) ve Gala
 
 ## Proje durumu
 
-Boş iskelet. Teknoloji seçimi ve uygulama kodu Claude Code ile bu repoda yapılacak.
+Henüz uygulama kodu yok. Teknoloji: native Kotlin, Jetpack Compose + Material3, Glance widget'ları, Room.
 
 - Hedefler ve ölçüm planı: [GOALS.md](GOALS.md)
 - Claude Code talimatları: [CLAUDE.md](CLAUDE.md)

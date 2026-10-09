@@ -46,7 +46,7 @@ Cihazın üreticisine göre davranış değişebilir. Samsung ve Xiaomi'ye özg�
 | Doğruluk (vs Mi Fitness / Samsung Health) | 5000 adımda ±%3 | Referans olarak sistem pedometresi |
 | Kök neden olmayan kayıp | 0'a düşme kabul edilemez | Yeniden başlatma gerektirmemeli |
 | Sensör donması toleransı | Kullanıcı müdahalesi gerekmesin | Bkz. aşağıdaki bölüm |
-| Crash-free oturum | > %99,5 | Temel kalite |
+| Crash-free oturum | > %99,5 | Ağ ve analitik olmadığı için Play Console yoksa ölçülemez; yerel crash log ile izlenir |
 | APK boyutu | < 20 MB | İndirme eşiği |
 
 ### Sensör donması
@@ -57,6 +57,8 @@ Bu kabul edilemez bir durumdur: kullanıcı sayaç donduğunda fark etmeli ve uy
 
 Bu nedenle **tek sensöre güvenilmez, doğrulama yapılır.** `TYPE_STEP_COUNTER` ve `TYPE_STEP_DETECTOR` birbirini kontrol eder; biri sürekli geride kalıyorsa sensör donmuş demektir ve uygulama bunu kullanıcıya bildirir.
 
+Uygulama arka planda sensörü sürekli dinlemediği için donma tespiti yalnızca uygulama açıkken yapılır.
+
 Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi ölçülmelidir. Hedef: fark edilen her donmada kullanıcı müdahalesi gerekmeden toparlanma.
 
 ### Ölçüm nasıl yapılır
@@ -66,6 +68,16 @@ Yeni cihazda ilk hafta boyunca donma olayları kaydedilmeli, toparlanma süresi 
 - Pil tüketimi: uygulama aktifken 24 saat boyunca pil yüzdesi farkı, baz olarak cihazın kendi tüketimiyle karşılaştırılarak.
 - Doğruluk: Mi Fitness (veya benzeri referans uygulama) ile eşzamanlı, en az 3 ayrı günde 5000+ adımlık yürüyüş.
 - Widget gecikmesi: widget'ın gösterdiği değer ile uygulamanın gösterdiği değer arasındaki farkın zaman farkı.
+
+### Kapalıyken sayma testi
+
+Uygulama arka planda sensörü dinlemez, sayacı seyrek okur ve farkı kaydeder (bkz. `CLAUDE.md` → "Seyrek okuma ve fark modeli"). Bunun çalışması sayacın uygulama kapalıyken de saymasına bağlıdır. Her test cihazında:
+
+1. Uygulamayı açıp sayıyı not et, sonra son uygulamalardan kapat.
+2. Elle sayarak 500 adım yürü.
+3. Uygulamayı aç ve farkı kontrol et.
+
+Fark 500'e ±%3 içinde değilse kalıcı bildirimli foreground service, ayarlardan açılabilen bir seçenek olarak eklenir.
 
 ## Veri kaynakları
 
@@ -137,7 +149,7 @@ Arkadaşlarla yarış gibi sosyal özellikler ileride istenirse hesap + sunucu g
 
 1. Günlük toplamlar tek gerçek kaynak olsun, türetilmiş hiçbir şey veritabanında tutulmasın
 2. Madalya kuralları kodda olsun, tabloda satır olarak değil
-3. Günlük kayıtlar tarihe göre indeksli ve eklemeli (append-only) olsun
+3. Günlük kayıtlar tarihe göre indeksli olsun (gün başına tek satır, geçmiş günler değişmez)
 
 ## Seviye ve madalya sistemi
 

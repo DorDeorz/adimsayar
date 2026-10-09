@@ -1,45 +1,32 @@
-# Bağımlılıklar
-node_modules/
-.pnp
-.pnp.js
-
-# Build çıktıları
+# Gradle
+.gradle/
 build/
-dist/
-out/
+local.properties
+.kotlin/
+
+# Android
 *.apk
 *.aab
-*.ipa
-*.app/
+*.ap_
+*.dex
+captures/
+.externalNativeBuild/
+.cxx/
 
-# Expo
-.expo/
-.expo-shared/
+# İmza anahtarları
 *.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
+*.keystore
+keystore.properties
 
-# Ortam değişkenleri
-.env
-.env.local
-.env.*.local
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Loglar
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editör / OS
-.vscode/*
-!.vscode/extensions.json
-.idea/
-.DS_Store
-Thumbs.db
-*.swp
-
-# Test / kapsam
-coverage/
