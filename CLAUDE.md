@@ -91,7 +91,7 @@ Bilinen trade-off'lar:
 
 - Android belgelerine göre hiçbir uygulama sensörü dinlemiyorsa sayaç saymayabilir. Pratikte birçok cihazda sistem servisi sensörü açık tutar, ama bu varsayılmaz, ölçülür (bkz. `GOALS.md` → "Kapalıyken sayma testi").
 - Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
-- Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
+- Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolur (en fazla bir okuma aralığı). Galaxy S22 testinde (2026-10-10) yeniden başlatmadan önceki 50 adım kayboldu. `ACTION_SHUTDOWN` ile kapanırken okuma denendi ve işe yaramadı: canlı log yayının gönderildiğini ama manifest'te kayıtlı alıcıya ulaşmadığını gösterdi; yayınla sistemin kapanması arasında yalnızca ~0,4 sn vardı. Bu boşluğu "Arka planda sürekli say" seçeneği en fazla 60 sn'ye indirir.
 
 Yedek yol: kullanıcının Ayarlar'dan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 
