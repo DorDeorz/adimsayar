@@ -83,7 +83,7 @@ HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kay
 - Uygulama açıldığında (açıkken canlı sayaç için kayıtlı kalır)
 - Widget güncellenirken
 - `JobScheduler` ile periyodik arka plan okuması (~15 dk)
-- `BOOT_COMPLETED`, `TIME_SET`, `TIMEZONE_CHANGED` sonrası
+- `BOOT_COMPLETED`, `TIME_SET`, `TIMEZONE_CHANGED` sonrası ve kapanırken (`ACTION_SHUTDOWN`)
 
 Her okumada son sayaç değeri ve `elapsedRealtimeNanos` saklanır. Yeni değer öncekinden küçükse cihaz yeniden başlamıştır; yeni değer olduğu gibi fark kabul edilir.
 
@@ -91,7 +91,7 @@ Bilinen trade-off'lar:
 
 - Android belgelerine göre hiçbir uygulama sensörü dinlemiyorsa sayaç saymayabilir. Pratikte birçok cihazda sistem servisi sensörü açık tutar, ama bu varsayılmaz, ölçülür (bkz. `GOALS.md` → "Kapalıyken sayma testi").
 - Gün sınırını geçen bir aralığın adımları iki güne en fazla bir okuma aralığı hatayla bölünür.
-- Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir.
+- Kapanmadan önceki son okumadan sonra atılan adımlar yeniden başlatmada kaybolabilir. Bunu daraltmak için `ACTION_SHUTDOWN` geldiğinde sayaç bir kez daha okunur (en fazla 3 sn); ani güç kesilmesinde ya da pil bittiğinde bu okuma yapılamaz. Galaxy S22 testinde (2026-10-10) bu okuma yokken yeniden başlatmadan önceki 50 adım kayboldu.
 
 Yedek yol: kullanıcının Ayarlar'dan açabileceği, sessiz kanalda kalıcı bildirimli foreground service (`StepCounterService`, Android 14+ için `foregroundServiceType="health"`). Sayacı `maxReportLatency` 60 sn ile kayıtlı tutar. Varsayılan kapalıdır. Redmi'deki ilk 500 adım testi başarısız olduğu için eklendi.
 

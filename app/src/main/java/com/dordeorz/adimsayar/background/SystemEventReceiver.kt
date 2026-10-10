@@ -15,6 +15,10 @@ class SystemEventReceiver : BroadcastReceiver() {
         val pending = goAsync()
         AppScope.launch {
             try {
+                if (intent.action == Intent.ACTION_SHUTDOWN) {
+                    StepUpdater.refresh(appContext, SHUTDOWN_TIMEOUT_MS, ReadSource.System)
+                    return@launch
+                }
                 Schedules.ensure(appContext)
                 StepCounterService.startIfEnabled(appContext)
                 StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
@@ -29,6 +33,7 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_MIDNIGHT = "com.dordeorz.adimsayar.MIDNIGHT"
         const val ACTION_EVENING = "com.dordeorz.adimsayar.EVENING"
         private const val READ_TIMEOUT_MS = 5_000L
+        private const val SHUTDOWN_TIMEOUT_MS = 3_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
             ACTION_EVENING,
@@ -36,6 +41,7 @@ class SystemEventReceiver : BroadcastReceiver() {
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,
             Intent.ACTION_TIMEZONE_CHANGED,
+            Intent.ACTION_SHUTDOWN,
         )
     }
 }
