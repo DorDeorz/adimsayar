@@ -263,4 +263,14 @@
     <string name="oem_asus_1">自動起動 → AdımSayar を許可</string>
 
     <string name="oem_transsion_1">自動管理 → アプリ一覧で AdımSayar を選択し、3つの権限をすべてオン</string>
+    <string name="wearable_card_title">バンドの歩数を使う</string>
+    <string name="wearable_card_text">Mi Fitness などのバンドアプリが Health Connect に書き込んだ歩数を読み取ります。バンドのデータがある日はバンドの歩数、ない日はスマホの歩数を使います。</string>
+    <string name="wearable_permission_denied">Health Connect の歩数読み取り権限が許可されませんでした。</string>
+    <string name="wearable_unavailable">このスマホに Health Connect がありません。Android 13 以前では Play ストアから Health Connect アプリをインストールしてください。</string>
+    <string name="wearable_privacy_title">バンドの歩数</string>
+    <string name="wearable_privacy_text">AdimSayar は Health Connect から歩数の記録だけを読み取ります。何も書き込まず、データをスマホの外に送ることもありません。読み取った歩数はこのスマホの日別合計にだけ使われます。</string>
+    <string name="log_wearable_missing">Health Connect が見つかりません</string>
+    <string name="log_wearable_denied">Health Connect の読み取り権限がありません</string>
+    <string name="log_wearable_error">Health Connect を読み取れませんでした（%1$s）</string>
+    <string name="log_wearable_synced">バンド：今日 %1$d 歩、%2$d 日分を更新</string>
 </resources>

@@ -248,8 +248,9 @@ private fun DayCell(date: LocalDate, steps: Long, goal: Long, future: Boolean, s
 @Composable
 private fun SelectedDayCard(date: LocalDate, steps: Long, state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?) {
     val goal = state.settings.dailyGoal
-    val detail by produceState<DayDetail?>(null, date, steps, state.xiaomiEnabled) {
-        value = if (state.xiaomiEnabled) withContext(Dispatchers.IO) { loadDayDetail(date) } else null
+    val hourly = state.xiaomiEnabled && !state.wearableEnabled
+    val detail by produceState<DayDetail?>(null, date, steps, hourly) {
+        value = if (hourly) withContext(Dispatchers.IO) { loadDayDetail(date) } else null
     }
     Card {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {

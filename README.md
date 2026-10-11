@@ -133,7 +133,7 @@ Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açı
 
 ### Kullanılmayanlar
 
-- **Health Connect kullanılmaz.** Telefon ve saat verisini birleştirdiği için saat takılıyken adımlar iki kez yazılabiliyor ve aynı gün için iki farklı toplam çıkabiliyor. Gerekçe: [GOALS.md](GOALS.md).
+- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin verisi olan günlerde bileklik sayısı, olmayan günlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. Gerekçe: [GOALS.md](GOALS.md).
 - Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
 
 ## Pil ve arka plan
@@ -298,4 +298,4 @@ Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. 
 
 ### English
 
-AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages. Licensed under MIT.
+AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is used only when the user turns on "Use band steps": step records from apps such as Mi Fitness are read (never written), and on days with band data the band's total replaces the phone's. The UI is available in 12 languages. Licensed under MIT.

@@ -263,4 +263,14 @@
     <string name="oem_asus_1">자동 시작 → AdımSayar 허용</string>
 
     <string name="oem_transsion_1">자동 관리 → 앱 목록에서 AdımSayar 선택 후 세 가지 권한 모두 켜기</string>
+    <string name="wearable_card_title">밴드 걸음 수 사용</string>
+    <string name="wearable_card_text">Mi Fitness 같은 밴드 앱이 Health Connect에 기록한 걸음 수를 읽습니다. 밴드 데이터가 있는 날은 밴드의 걸음 수를, 없는 날은 휴대폰의 걸음 수를 사용합니다.</string>
+    <string name="wearable_permission_denied">Health Connect 걸음 수 읽기 권한이 허용되지 않았습니다.</string>
+    <string name="wearable_unavailable">이 휴대폰에 Health Connect가 없습니다. Android 13 이하에서는 Play 스토어에서 Health Connect 앱을 설치하세요.</string>
+    <string name="wearable_privacy_title">밴드 걸음 수</string>
+    <string name="wearable_privacy_text">AdimSayar는 Health Connect에서 걸음 수 기록만 읽습니다. 아무것도 쓰지 않으며 데이터를 휴대폰 밖으로 보내지 않습니다. 읽은 걸음 수는 이 휴대폰의 일별 합계에만 사용됩니다.</string>
+    <string name="log_wearable_missing">Health Connect를 찾을 수 없음</string>
+    <string name="log_wearable_denied">Health Connect 읽기 권한 없음</string>
+    <string name="log_wearable_error">Health Connect를 읽을 수 없음 (%1$s)</string>
+    <string name="log_wearable_synced">밴드: 오늘 %1$d걸음, %2$d일 업데이트</string>
 </resources>

@@ -202,7 +202,8 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
-            if (showXiaomi || showService) {
+            val showWearable = state.wearableAvailable || state.wearableEnabled
+            if (showXiaomi || showService || showWearable) {
                 HorizontalDivider(Modifier.padding(vertical = 8.dp))
                 SectionTitle(stringResource(R.string.settings_counting))
                 if (showXiaomi) {
@@ -211,6 +212,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                         hint = stringResource(R.string.xiaomi_card_text),
                         checked = state.xiaomiEnabled,
                         onCheckedChange = actions.onXiaomiEnabledChange,
+                    )
+                }
+                if (showWearable) {
+                    SwitchRow(
+                        title = stringResource(R.string.wearable_card_title),
+                        hint = stringResource(R.string.wearable_card_text),
+                        checked = state.wearableEnabled,
+                        onCheckedChange = actions.onWearableEnabledChange,
                     )
                 }
                 if (showService) {

@@ -263,4 +263,14 @@
     <string name="oem_asus_1">التشغيل التلقائي ← السماح لـ AdımSayar</string>
 
     <string name="oem_transsion_1">الإدارة التلقائية ← اختر AdımSayar من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
+    <string name="wearable_card_title">استخدام خطوات السوار</string>
+    <string name="wearable_card_text">تُقرأ الخطوات التي تكتبها تطبيقات الأساور مثل Mi Fitness في Health Connect. في الأيام التي توجد فيها بيانات السوار يُستخدم عدّه، وإلا فعدّ الهاتف.</string>
+    <string name="wearable_permission_denied">لم يُمنح إذن قراءة الخطوات من Health Connect.</string>
+    <string name="wearable_unavailable">تطبيق Health Connect غير موجود على هذا الهاتف. على Android 13 وما قبله، ثبّت تطبيق Health Connect من متجر Play.</string>
+    <string name="wearable_privacy_title">خطوات السوار</string>
+    <string name="wearable_privacy_text">يقرأ AdimSayar سجلات الخطوات فقط من Health Connect. لا يكتب شيئًا ولا يرسل أي بيانات خارج الهاتف. تُستخدم الخطوات المقروءة فقط في المجاميع اليومية على هذا الهاتف.</string>
+    <string name="log_wearable_missing">لم يُعثر على Health Connect</string>
+    <string name="log_wearable_denied">لا يوجد إذن قراءة من Health Connect</string>
+    <string name="log_wearable_error">تعذّرت قراءة Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">السوار: خطوات اليوم %1$d، الأيام المحدّثة %2$d</string>
 </resources>

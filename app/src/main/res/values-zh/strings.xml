@@ -263,4 +263,14 @@
     <string name="oem_asus_1">自启动 → 允许 AdımSayar</string>
 
     <string name="oem_transsion_1">自动管理 → 在应用列表中选择 AdımSayar，开启全部三项权限</string>
+    <string name="wearable_card_title">使用手环步数</string>
+    <string name="wearable_card_text">读取 Mi Fitness 等手环应用写入 Health Connect 的步数。有手环数据的日子使用手环的计数，否则使用手机的计数。</string>
+    <string name="wearable_permission_denied">未授予读取 Health Connect 步数的权限。</string>
+    <string name="wearable_unavailable">此手机上没有 Health Connect。在 Android 13 及更早版本上，请从 Play 商店安装 Health Connect 应用。</string>
+    <string name="wearable_privacy_title">手环步数</string>
+    <string name="wearable_privacy_text">AdimSayar 只从 Health Connect 读取步数记录。它不写入任何内容，也不会把数据发送到手机之外。读取的步数只用于本机的每日总计。</string>
+    <string name="log_wearable_missing">未找到 Health Connect</string>
+    <string name="log_wearable_denied">没有 Health Connect 读取权限</string>
+    <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>
+    <string name="log_wearable_synced">手环：今天 %1$d 步，已更新 %2$d 天</string>
 </resources>

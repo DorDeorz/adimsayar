@@ -263,4 +263,14 @@
     <string name="oem_asus_1">Autostart → AdımSayar zulassen</string>
 
     <string name="oem_transsion_1">Automatische Verwaltung → AdımSayar in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
+    <string name="wearable_card_title">Armband-Schritte verwenden</string>
+    <string name="wearable_card_text">Liest die Schritte, die Armband-Apps wie Mi Fitness in Health Connect schreiben. An Tagen mit Armbanddaten zählt das Armband, sonst das Telefon.</string>
+    <string name="wearable_permission_denied">Die Berechtigung zum Lesen von Schritten in Health Connect wurde nicht erteilt.</string>
+    <string name="wearable_unavailable">Health Connect ist auf diesem Telefon nicht vorhanden. Installiere unter Android 13 und älter die App Health Connect aus dem Play Store.</string>
+    <string name="wearable_privacy_title">Armband-Schritte</string>
+    <string name="wearable_privacy_text">AdimSayar liest aus Health Connect nur Schrittaufzeichnungen. Es schreibt nichts und sendet keine Daten vom Telefon weg. Die gelesenen Schritte werden nur für die Tagessummen auf diesem Telefon verwendet.</string>
+    <string name="log_wearable_missing">Health Connect nicht gefunden</string>
+    <string name="log_wearable_denied">Keine Leseberechtigung für Health Connect</string>
+    <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
+    <string name="log_wearable_synced">Armband: heute %1$d Schritte, %2$d Tage aktualisiert</string>
 </resources>

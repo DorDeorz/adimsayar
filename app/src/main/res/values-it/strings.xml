@@ -263,4 +263,14 @@
     <string name="oem_asus_1">Avvio automatico → consenti AdımSayar</string>
 
     <string name="oem_transsion_1">Gestione automatica → seleziona AdımSayar nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
+    <string name="wearable_card_title">Usa i passi del bracciale</string>
+    <string name="wearable_card_text">Legge i passi che le app del bracciale come Mi Fitness scrivono in Health Connect. Nei giorni con dati del bracciale si usa il suo conteggio, altrimenti quello del telefono.</string>
+    <string name="wearable_permission_denied">Il permesso di lettura dei passi di Health Connect non è stato concesso.</string>
+    <string name="wearable_unavailable">Health Connect non è presente su questo telefono. Su Android 13 o precedenti installa l\'app Health Connect dal Play Store.</string>
+    <string name="wearable_privacy_title">Passi del bracciale</string>
+    <string name="wearable_privacy_text">AdimSayar legge da Health Connect solo i dati dei passi. Non scrive nulla e non invia dati fuori dal telefono. I passi letti servono solo per i totali giornalieri su questo telefono.</string>
+    <string name="log_wearable_missing">Health Connect non trovato</string>
+    <string name="log_wearable_denied">Nessun permesso di lettura di Health Connect</string>
+    <string name="log_wearable_error">Impossibile leggere Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">Bracciale: %1$d passi oggi, %2$d giorni aggiornati</string>
 </resources>

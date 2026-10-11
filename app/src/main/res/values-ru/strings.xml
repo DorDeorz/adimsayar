@@ -263,4 +263,14 @@
     <string name="oem_asus_1">Автозапуск → разрешить AdımSayar</string>
 
     <string name="oem_transsion_1">Автоуправление → выберите AdımSayar в списке приложений и включите все три разрешения</string>
+    <string name="wearable_card_title">Использовать шаги браслета</string>
+    <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В дни с данными браслета используется его счёт, иначе счёт телефона.</string>
+    <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
+    <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>
+    <string name="wearable_privacy_title">Шаги браслета</string>
+    <string name="wearable_privacy_text">AdimSayar только читает записи шагов из Health Connect. Он ничего не записывает и не отправляет данные с телефона. Прочитанные шаги используются только для дневных итогов на этом телефоне.</string>
+    <string name="log_wearable_missing">Health Connect не найден</string>
+    <string name="log_wearable_denied">Нет разрешения на чтение Health Connect</string>
+    <string name="log_wearable_error">Не удалось прочитать Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">Браслет: сегодня %1$d шагов, обновлено дней: %2$d</string>
 </resources>

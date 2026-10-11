@@ -64,5 +64,15 @@ object StepMath {
         return result
     }
 
+    fun bestSourcePerDay(sources: Collection<Map<LocalDate, Long>>): Map<LocalDate, Long> {
+        val best = HashMap<LocalDate, Long>()
+        for (source in sources) {
+            for ((day, steps) in source) {
+                if (steps > (best[day] ?: 0L)) best[day] = steps
+            }
+        }
+        return best
+    }
+
     fun dayOf(wallMs: Long, zone: ZoneId): LocalDate = Instant.ofEpochMilli(wallMs).atZone(zone).toLocalDate()
 }

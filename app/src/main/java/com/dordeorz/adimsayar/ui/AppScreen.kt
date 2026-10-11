@@ -64,6 +64,8 @@ data class MainUiState(
     val xiaomiAvailable: Boolean,
     val xiaomiEnabled: Boolean,
     val xiaomiProblem: XiaomiProblem?,
+    val wearableAvailable: Boolean,
+    val wearableEnabled: Boolean,
     val logLines: List<String>,
     val version: String,
 )
@@ -74,6 +76,7 @@ class MainActions(
     val onDismissBatteryCard: () -> Unit,
     val onServiceEnabledChange: (Boolean) -> Unit,
     val onXiaomiEnabledChange: (Boolean) -> Unit,
+    val onWearableEnabledChange: (Boolean) -> Unit,
     val onThemeModeChange: (ThemeMode) -> Unit,
     val onDynamicColorChange: (Boolean) -> Unit,
     val onDailyGoalChange: (Long) -> Unit,

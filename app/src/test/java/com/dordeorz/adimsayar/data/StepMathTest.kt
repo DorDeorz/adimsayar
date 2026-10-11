@@ -124,4 +124,13 @@ class StepMathTest {
     fun noStepsNoRows() {
         assertEquals(emptyMap<LocalDate, Long>(), StepMath.splitByDay(StepInterval(0L, 0L, 1L), zone))
     }
+
+    @Test
+    fun bestSourcePerDayTakesLargestSourceInsteadOfSum() {
+        val monday = LocalDate.parse("2026-10-12")
+        val tuesday = LocalDate.parse("2026-10-13")
+        val band = mapOf(monday to 9_000L, tuesday to 1_000L)
+        val otherApp = mapOf(monday to 7_000L, tuesday to 4_000L)
+        assertEquals(mapOf(monday to 9_000L, tuesday to 4_000L), StepMath.bestSourcePerDay(listOf(band, otherApp)))
+    }
 }
