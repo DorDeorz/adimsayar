@@ -131,11 +131,13 @@ object WearableHealth {
     private suspend fun <T : Record> readAll(client: HealthConnectClient, type: KClass<T>, from: Instant, to: Instant): List<T> {
         val result = ArrayList<T>()
         var pageToken: String? = null
+        var pages = 0
         do {
             val response = client.readRecords(ReadRecordsRequest(type, TimeRangeFilter.between(from, to), pageToken = pageToken))
             result += response.records
             pageToken = response.pageToken
-        } while (pageToken != null)
+            pages++
+        } while (!pageToken.isNullOrEmpty() && pages < WearableSteps.MAX_PAGES)
         return result
     }
 

@@ -10,6 +10,7 @@ import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import com.dordeorz.adimsayar.R
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.sync.Mutex
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -21,12 +22,16 @@ object WearableSteps {
     private const val KEY_BACKFILLED = "wearable_backfilled"
     private const val BACKFILL_DAYS = 30L
     private const val RECENT_DAYS = 1L
+    private const val KEY_LAST_ATTEMPT = "wearable_last_attempt"
+    private const val MIN_INTERVAL_MS = 5 * 60 * 1000L
+    const val MAX_PAGES = 100
 
     val READ_STEPS: String = HealthPermission.getReadPermission(StepsRecord::class)
     val PERMISSIONS: Set<String> = setOf(READ_STEPS, HealthPermission.PERMISSION_READ_HEALTH_DATA_IN_BACKGROUND) + WearableHealth.PERMISSIONS
 
     @Volatile
     private var lastLoggedToday: Long? = null
+    private val running = Mutex()
 
     fun isAvailable(context: Context): Boolean =
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
@@ -38,6 +43,7 @@ object WearableSteps {
         prefs(context).edit {
             putBoolean(KEY_ENABLED, enabled)
             putBoolean(KEY_BACKFILLED, false)
+            remove(KEY_LAST_ATTEMPT)
         }
         if (!enabled) StepRepository.get(context).clearBandDays()
     }
@@ -46,6 +52,19 @@ object WearableSteps {
         isAvailable(context) && READ_STEPS in HealthConnectClient.getOrCreate(context).permissionController.getGrantedPermissions()
 
     suspend fun sync(context: Context, source: ReadSource): Long? {
+        val now = System.currentTimeMillis()
+        val lastAttempt = prefs(context).getLong(KEY_LAST_ATTEMPT, 0L)
+        if (now - lastAttempt in 0 until MIN_INTERVAL_MS) return null
+        if (!running.tryLock()) return null
+        return try {
+            prefs(context).edit(commit = true) { putLong(KEY_LAST_ATTEMPT, now) }
+            syncNow(context, source)
+        } finally {
+            running.unlock()
+        }
+    }
+
+    private suspend fun syncNow(context: Context, source: ReadSource): Long? {
         val log = ReadingLog.get(context)
         if (!isAvailable(context)) {
             log.failure(source, R.string.log_wearable_missing)
@@ -78,6 +97,7 @@ object WearableSteps {
     private suspend fun dailyTotals(client: HealthConnectClient, from: Instant, to: Instant, zone: ZoneId): Map<LocalDate, Long> {
         val byOrigin = HashMap<String, HashMap<LocalDate, Long>>()
         var pageToken: String? = null
+        var pages = 0
         do {
             val response = client.readRecords(
                 ReadRecordsRequest(StepsRecord::class, TimeRangeFilter.between(from, to), pageToken = pageToken),
@@ -90,7 +110,8 @@ object WearableSteps {
                 }
             }
             pageToken = response.pageToken
-        } while (pageToken != null)
+            pages++
+        } while (!pageToken.isNullOrEmpty() && pages < MAX_PAGES)
         return StepMath.bestSourcePerDay(byOrigin.values)
     }
 
