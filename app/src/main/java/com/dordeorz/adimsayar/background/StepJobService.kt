@@ -12,9 +12,11 @@ class StepJobService : JobService() {
     private var running: Job? = null
 
     override fun onStartJob(params: JobParameters): Boolean {
+        val source = if (params.jobId == Schedules.READ_NOW_JOB_ID) ReadSource.Widget else ReadSource.Job
+        if (ReadOnceService.start(applicationContext, source)) return false
         running = AppScope.launch {
             try {
-                StepUpdater.refresh(applicationContext, READ_TIMEOUT_MS, if (params.jobId == Schedules.READ_NOW_JOB_ID) ReadSource.Widget else ReadSource.Job)
+                StepUpdater.refresh(applicationContext, READ_TIMEOUT_MS, source)
             } finally {
                 jobFinished(params, false)
             }

@@ -101,11 +101,7 @@ class StepCounterService : Service(), SensorEventListener {
 
     private fun buildNotification(today: Long?): Notification {
         val strings = Locales.wrap(this)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, strings.getString(R.string.service_channel), NotificationManager.IMPORTANCE_MIN)
-            channel.setShowBadge(false)
-            getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
-        }
+        createChannel(this)
         val open = PendingIntent.getActivity(
             this,
             0,
@@ -132,13 +128,20 @@ class StepCounterService : Service(), SensorEventListener {
     }
 
     companion object {
-        private const val CHANNEL_ID = "sayac"
+        const val CHANNEL_ID = "sayac"
         private const val NOTIFICATION_ID = 1
         private const val MAX_REPORT_LATENCY_US = 60_000_000
         private const val LOG_INTERVAL_MS = 15 * 60 * 1000L
         private const val WIDGET_INTERVAL_MS = 5 * 60 * 1000L
         private const val SETTINGS_PREFS = "settings"
         private const val KEY_ENABLED = "background_service"
+
+        fun createChannel(context: Context) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+            val channel = NotificationChannel(CHANNEL_ID, Locales.wrap(context).getString(R.string.service_channel), NotificationManager.IMPORTANCE_MIN)
+            channel.setShowBadge(false)
+            context.getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
+        }
 
         fun isEnabled(context: Context): Boolean =
             context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ENABLED, false)
