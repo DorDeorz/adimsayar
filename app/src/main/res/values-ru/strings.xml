@@ -190,6 +190,23 @@
     <string name="next_year">Следующий год</string>
     <string name="year_medals">Полученные медали</string>
 
+    <string name="health_title">Здоровье (браслет)</string>
+    <string name="health_last_days">Последние %1$d дн.</string>
+    <string name="health_loading">Чтение из Health Connect…</string>
+    <string name="health_empty">Нет данных браслета за этот период</string>
+    <string name="health_sleep_average">Средний сон</string>
+    <string name="health_nights">Ночей: %1$d</string>
+    <string name="health_sleep_longest">Самый долгий сон</string>
+    <string name="health_resting_average">Средний пульс в покое</string>
+    <string name="health_bpm">%1$d уд/мин</string>
+    <string name="health_exercise_total">Всего тренировок</string>
+    <string name="health_exercise_count">Тренировок: %1$d</string>
+    <string name="health_exercise_longest">Самая долгая тренировка</string>
+    <string name="health_distance">Расстояние браслета</string>
+    <string name="health_km">%1$s км</string>
+    <string name="health_resting_chart">Пульс в покое</string>
+    <string name="health_min_max">%1$d–%2$d уд/мин</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Шаги с Mi Band и других браслетов можно читать через Health Connect (Настройки, по умолчанию выключено). В часы, когда браслет надет, считается браслет, в остальные — телефон</item>
         <item>Данные браслета в истории: тренировки, расстояние, активные калории, пульс и сон</item>

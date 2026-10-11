@@ -190,6 +190,23 @@
     <string name="next_year">السنة التالية</string>
     <string name="year_medals">الميداليات المكتسبة</string>
 
+    <string name="health_title">ملخص الصحة (السوار)</string>
+    <string name="health_last_days">آخر %1$d يومًا</string>
+    <string name="health_loading">جارٍ القراءة من Health Connect…</string>
+    <string name="health_empty">لا توجد بيانات من السوار في هذه الفترة</string>
+    <string name="health_sleep_average">متوسط النوم</string>
+    <string name="health_nights">%1$d ليالٍ</string>
+    <string name="health_sleep_longest">أطول نوم</string>
+    <string name="health_resting_average">متوسط نبض الراحة</string>
+    <string name="health_bpm">%1$d نبضة/د</string>
+    <string name="health_exercise_total">إجمالي التمارين</string>
+    <string name="health_exercise_count">%1$d تمارين</string>
+    <string name="health_exercise_longest">أطول تمرين</string>
+    <string name="health_distance">مسافة السوار</string>
+    <string name="health_km">%1$s كم</string>
+    <string name="health_resting_chart">نبض الراحة</string>
+    <string name="health_min_max">%1$d–%2$d نبضة/د</string>
+
     <string-array name="release_notes_0_7_0">
         <item>يمكن قراءة خطوات Mi Band والأساور الأخرى عبر Health Connect (الإعدادات، معطّل افتراضيًا). في الساعات التي تُلبس فيها السوار تُحسب خطوات السوار، وفي غيرها خطوات الهاتف</item>
         <item>بيانات السوار في السجل: التمارين والمسافة والسعرات النشطة ونبض القلب والنوم</item>

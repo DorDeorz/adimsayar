@@ -126,6 +126,7 @@ class MainActivity : ComponentActivity() {
         onImport = { importLauncher.launch(arrayOf("text/*", "application/octet-stream")) },
         loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
+        loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
     )
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->

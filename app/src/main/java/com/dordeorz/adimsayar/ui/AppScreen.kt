@@ -32,6 +32,7 @@ import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.BandDay
+import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.DistanceUnit
@@ -95,6 +96,7 @@ class MainActions(
     val onImport: () -> Unit,
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,
     val loadBandDay: suspend (LocalDate) -> BandDay?,
+    val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
 )
 
 @Composable
@@ -141,7 +143,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
                 Tab.Today -> TodayScreen(state, actions)
-                Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay)
+                Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay, actions.loadBandPeriod)
                 Tab.Medals -> MedalsScreen(state)
             }
         }

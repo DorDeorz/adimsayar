@@ -190,6 +190,23 @@
     <string name="next_year">다음 연도</string>
     <string name="year_medals">획득한 메달</string>
 
+    <string name="health_title">건강 요약 (밴드)</string>
+    <string name="health_last_days">최근 %1$d일</string>
+    <string name="health_loading">Health Connect에서 읽는 중…</string>
+    <string name="health_empty">이 기간에 밴드 데이터가 없습니다</string>
+    <string name="health_sleep_average">평균 수면</string>
+    <string name="health_nights">%1$d일 밤</string>
+    <string name="health_sleep_longest">가장 긴 수면</string>
+    <string name="health_resting_average">평균 안정 시 심박수</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">총 운동</string>
+    <string name="health_exercise_count">운동 %1$d회</string>
+    <string name="health_exercise_longest">가장 긴 운동</string>
+    <string name="health_distance">밴드 거리</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">안정 시 심박수</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>
         <item>기록에 밴드 데이터: 운동, 거리, 활동 칼로리, 심박수, 수면</item>

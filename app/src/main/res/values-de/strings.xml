@@ -190,6 +190,23 @@
     <string name="next_year">Nächstes Jahr</string>
     <string name="year_medals">Verdiente Medaillen</string>
 
+    <string name="health_title">Gesundheit (Armband)</string>
+    <string name="health_last_days">Letzte %1$d Tage</string>
+    <string name="health_loading">Wird aus Health Connect gelesen…</string>
+    <string name="health_empty">Keine Armbanddaten in diesem Zeitraum</string>
+    <string name="health_sleep_average">Durchschnittlicher Schlaf</string>
+    <string name="health_nights">%1$d Nächte</string>
+    <string name="health_sleep_longest">Längster Schlaf</string>
+    <string name="health_resting_average">Durchschnittlicher Ruhepuls</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Training gesamt</string>
+    <string name="health_exercise_count">%1$d Trainings</string>
+    <string name="health_exercise_longest">Längstes Training</string>
+    <string name="health_distance">Armband-Strecke</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">Ruhepuls</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>
         <item>Armbanddaten im Verlauf: Trainings, Strecke, aktive Kalorien, Puls und Schlaf</item>

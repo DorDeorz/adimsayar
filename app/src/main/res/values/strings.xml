@@ -190,6 +190,23 @@
     <string name="next_year">Sonraki yıl</string>
     <string name="year_medals">Kazanılan madalya</string>
 
+    <string name="health_title">Sağlık özeti (bileklik)</string>
+    <string name="health_last_days">Son %1$d gün</string>
+    <string name="health_loading">Health Connect\'ten okunuyor…</string>
+    <string name="health_empty">Bu dönemde bileklik verisi yok</string>
+    <string name="health_sleep_average">Ortalama uyku</string>
+    <string name="health_nights">%1$d gece</string>
+    <string name="health_sleep_longest">En uzun uyku</string>
+    <string name="health_resting_average">Ortalama dinlenme nabzı</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Toplam egzersiz</string>
+    <string name="health_exercise_count">%1$d egzersiz</string>
+    <string name="health_exercise_longest">En uzun egzersiz</string>
+    <string name="health_distance">Bileklik mesafesi</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">Dinlenme nabzı</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>
         <item>Geçmiş\'te bileklik verileri: egzersizler, mesafe, aktif kalori, nabız ve uyku</item>

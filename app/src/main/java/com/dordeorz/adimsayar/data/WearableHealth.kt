@@ -38,6 +38,14 @@ class BandDay(
     val restingWeek: List<Pair<LocalDate, Long?>>,
 )
 
+class BandPeriod(
+    val days: List<LocalDate>,
+    val sleep: Map<LocalDate, Long>,
+    val resting: List<Pair<LocalDate, Long?>>,
+    val exercises: List<Exercise>,
+    val distanceKm: Double?,
+)
+
 object WearableHealth {
 
     private const val WEEK_DAYS = 7L
@@ -60,6 +68,73 @@ object WearableHealth {
         } catch (e: Exception) {
             null
         }
+    }
+
+    suspend fun period(context: Context, to: LocalDate, days: Long): BandPeriod? {
+        if (!WearableSteps.isAvailable(context)) return null
+        return try {
+            readPeriod(HealthConnectClient.getOrCreate(context), to.minusDays(days - 1), to, ZoneId.systemDefault())
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private suspend fun readPeriod(client: HealthConnectClient, from: LocalDate, to: LocalDate, zone: ZoneId): BandPeriod {
+        val granted = client.permissionController.getGrantedPermissions()
+        fun allowed(type: KClass<out Record>) = HealthPermission.getReadPermission(type) in granted
+
+        val start = from.atStartOfDay(zone).toInstant()
+        val end = to.plusDays(1).atStartOfDay(zone).toInstant()
+        val localRange = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
+        val days = generateSequence(from) { it.plusDays(1) }.takeWhile { !it.isAfter(to) }.toList()
+
+        val sleep = if (allowed(SleepSessionRecord::class)) {
+            readAll(client, SleepSessionRecord::class, start.minus(Duration.ofHours(12)), end)
+                .filter { it.endTime >= start && it.endTime < end }
+                .groupBy { it.endTime.atZone(zone).toLocalDate() }
+                .mapValues { (_, sessions) ->
+                    sessions.groupBy { it.metadata.dataOrigin.packageName }.values
+                        .maxOf { origin -> origin.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                }
+                .filterValues { it > 0L }
+        } else {
+            emptyMap()
+        }
+
+        val exercises = if (allowed(ExerciseSessionRecord::class)) {
+            readAll(client, ExerciseSessionRecord::class, start, end)
+                .distinctBy { it.exerciseType to it.startTime.epochSecond / 60 }
+                .map { Exercise(kindOf(it.exerciseType), it.title, it.startTime, Duration.between(it.startTime, it.endTime).toMinutes()) }
+                .sortedBy { it.start }
+        } else {
+            emptyList()
+        }
+
+        val restingMetrics = buildSet<AggregateMetric<*>> {
+            if (allowed(HeartRateRecord::class)) add(HeartRateRecord.BPM_MIN)
+            if (allowed(RestingHeartRateRecord::class)) add(RestingHeartRateRecord.BPM_AVG)
+        }
+        val restingByDay = if (restingMetrics.isNotEmpty()) {
+            client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(restingMetrics, localRange, Period.ofDays(1)))
+                .associate { it.startTime.toLocalDate() to (it.result[RestingHeartRateRecord.BPM_AVG] ?: it.result[HeartRateRecord.BPM_MIN]) }
+        } else {
+            emptyMap()
+        }
+
+        val distance = if (allowed(DistanceRecord::class)) {
+            client.aggregate(AggregateRequest(setOf(DistanceRecord.DISTANCE_TOTAL), localRange)).dataOrigins
+                .mapNotNull { origin ->
+                    client.aggregate(AggregateRequest(setOf(DistanceRecord.DISTANCE_TOTAL), localRange, setOf(origin)))[DistanceRecord.DISTANCE_TOTAL]?.inKilometers
+                }
+                .maxOrNull()
+                ?.takeIf { it > 0.0 }
+        } else {
+            null
+        }
+
+        return BandPeriod(days, sleep, days.map { it to restingByDay[it] }, exercises, distance)
     }
 
     private suspend fun read(client: HealthConnectClient, date: LocalDate, zone: ZoneId): BandDay {

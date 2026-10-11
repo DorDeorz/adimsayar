@@ -190,6 +190,23 @@
     <string name="next_year">Año siguiente</string>
     <string name="year_medals">Medallas ganadas</string>
 
+    <string name="health_title">Resumen de salud (pulsera)</string>
+    <string name="health_last_days">Últimos %1$d días</string>
+    <string name="health_loading">Leyendo de Health Connect…</string>
+    <string name="health_empty">No hay datos de la pulsera en este periodo</string>
+    <string name="health_sleep_average">Sueño medio</string>
+    <string name="health_nights">%1$d noches</string>
+    <string name="health_sleep_longest">Sueño más largo</string>
+    <string name="health_resting_average">Pulso en reposo medio</string>
+    <string name="health_bpm">%1$d lpm</string>
+    <string name="health_exercise_total">Entrenamiento total</string>
+    <string name="health_exercise_count">%1$d entrenamientos</string>
+    <string name="health_exercise_longest">Entrenamiento más largo</string>
+    <string name="health_distance">Distancia de la pulsera</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">Pulso en reposo</string>
+    <string name="health_min_max">%1$d–%2$d lpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Los pasos de Mi Band y otras pulseras se pueden leer con Health Connect (Ajustes, desactivado por defecto). En las horas con pulsera cuenta la pulsera; en las demás, el teléfono</item>
         <item>Datos de la pulsera en el Historial: entrenamientos, distancia, calorías activas, pulso y sueño</item>

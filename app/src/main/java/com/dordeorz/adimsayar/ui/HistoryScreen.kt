@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.BandDay
+import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.ExerciseKind
 import com.dordeorz.adimsayar.data.Records
@@ -50,10 +52,16 @@ import kotlinx.coroutines.withContext
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.ZoneId
 import java.time.format.TextStyle
 
 @Composable
-fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?, loadBandDay: suspend (LocalDate) -> BandDay?) {
+fun HistoryScreen(
+    state: MainUiState,
+    loadDayDetail: suspend (LocalDate) -> DayDetail?,
+    loadBandDay: suspend (LocalDate) -> BandDay?,
+    loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
+) {
     val currentMonth = YearMonth.from(state.today)
     val firstMonth = state.history.keys.minOrNull()?.let(YearMonth::from)?.coerceAtMost(currentMonth) ?: currentMonth
     var monthText by rememberSaveable { mutableStateOf(currentMonth.toString()) }
@@ -81,6 +89,7 @@ fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayD
             )
         }
         item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, loadDayDetail, loadBandDay) }
+        if (state.wearableEnabled) item { HealthCard(state.today, loadBandPeriod) }
         item { RecordsCard(state.achievements.records, state.today) }
         item { YearCard(state) }
     }
@@ -383,7 +392,7 @@ private fun BandSection(day: BandDay) {
             )
         }
     }
-    if (day.restingWeek.isNotEmpty()) RestingWeekChart(day.restingWeek)
+    if (day.restingWeek.isNotEmpty()) RestingChart(stringResource(R.string.band_resting_week), day.restingWeek)
     day.sleepMinutes?.takeIf { it > 0L }?.let { minutes ->
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.band_sleep), style = MaterialTheme.typography.labelLarge)
@@ -397,23 +406,26 @@ private fun BandSection(day: BandDay) {
 }
 
 @Composable
-private fun RestingWeekChart(week: List<Pair<LocalDate, Long?>>) {
-    val values = week.mapNotNull { it.second }
+private fun RestingChart(title: String, days: List<Pair<LocalDate, Long?>>) {
+    val values = days.mapNotNull { it.second }
+    if (values.isEmpty()) return
     val max = values.max()
     val min = (values.min() - RESTING_CHART_FLOOR).coerceAtLeast(0L)
     val range = (max - min).coerceAtLeast(1L)
     val color = MaterialTheme.colorScheme.tertiary
+    val wide = days.size <= WEEK_DAYS
+    val spacing = if (wide) 6.dp else 2.dp
     Column(modifier = Modifier.padding(top = 16.dp)) {
-        Text(stringResource(R.string.band_resting_week), style = MaterialTheme.typography.labelLarge)
+        Text(title, style = MaterialTheme.typography.labelLarge)
         Row(
             modifier = Modifier.fillMaxWidth().height(HOURLY_HEIGHT).padding(top = 8.dp),
             verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            horizontalArrangement = Arrangement.spacedBy(spacing),
         ) {
-            week.forEach { (_, bpm) ->
+            days.forEach { (_, bpm) ->
                 Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                     if (bpm != null) {
-                        Text(bpm.toString(), style = MaterialTheme.typography.labelSmall)
+                        if (wide) Text(bpm.toString(), style = MaterialTheme.typography.labelSmall)
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -425,15 +437,120 @@ private fun RestingWeekChart(week: List<Pair<LocalDate, Long?>>) {
                 }
             }
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            week.forEach { (date, _) ->
+        if (wide) {
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(spacing)) {
+                days.forEach { (date, _) ->
+                    Text(
+                        date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+        } else {
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
                 Text(
-                    date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                    DAY_FORMAT.format(days.first().first),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f),
+                )
+                Text(
+                    stringResource(R.string.health_min_max, values.min(), values.max()),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),
                 )
+                Text(
+                    DAY_FORMAT.format(days.last().first),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun HealthCard(today: LocalDate, loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?) {
+    var daysValue by rememberSaveable { mutableIntStateOf(WEEK_DAYS) }
+    val days = daysValue.toLong()
+    val period by produceState<BandPeriod?>(null, today, days) {
+        value = null
+        value = withContext(Dispatchers.IO) { loadBandPeriod(today, days) }
+    }
+    Card {
+        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+            Text(
+                stringResource(R.string.health_title),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+            Row(modifier = Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf(WEEK_DAYS, MONTH_DAYS).forEach { option ->
+                    FilterChip(
+                        selected = option == daysValue,
+                        onClick = { daysValue = option },
+                        label = { Text(stringResource(R.string.health_last_days, option)) },
+                    )
+                }
+            }
+            val data = period
+            val sleep = data?.sleep.orEmpty()
+            val resting = data?.resting?.mapNotNull { it.second }.orEmpty()
+            val exercises = data?.exercises.orEmpty()
+            if (data == null || (sleep.isEmpty() && resting.isEmpty() && exercises.isEmpty() && data.distanceKm == null)) {
+                Text(
+                    stringResource(if (data == null) R.string.health_loading else R.string.health_empty),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(16.dp),
+                )
+                return@Column
+            }
+            if (sleep.isNotEmpty()) {
+                val average = sleep.values.sum() / sleep.size
+                val longest = sleep.entries.maxBy { it.value }
+                RecordRow(
+                    stringResource(R.string.health_sleep_average),
+                    stringResource(R.string.band_sleep_value, average / 60, average % 60),
+                    stringResource(R.string.health_nights, sleep.size),
+                )
+                RecordRow(
+                    stringResource(R.string.health_sleep_longest),
+                    stringResource(R.string.band_sleep_value, longest.value / 60, longest.value % 60),
+                    FULL_DATE_FORMAT.format(longest.key),
+                )
+            }
+            if (resting.isNotEmpty()) {
+                RecordRow(stringResource(R.string.health_resting_average), stringResource(R.string.health_bpm, resting.sum() / resting.size), null)
+            }
+            if (exercises.isNotEmpty()) {
+                val longest = exercises.maxBy { it.minutes }
+                RecordRow(
+                    stringResource(R.string.health_exercise_total),
+                    stringResource(R.string.duration_minutes, exercises.sumOf { it.minutes }),
+                    stringResource(R.string.health_exercise_count, exercises.size),
+                )
+                RecordRow(
+                    stringResource(R.string.health_exercise_longest),
+                    stringResource(R.string.duration_minutes, longest.minutes),
+                    (longest.title?.takeIf { it.isNotBlank() } ?: stringResource(exerciseLabel(longest.kind))) + " · " +
+                        FULL_DATE_FORMAT.format(longest.start.atZone(ZoneId.systemDefault()).toLocalDate()),
+                )
+            }
+            data.distanceKm?.let { km ->
+                RecordRow(stringResource(R.string.health_distance), stringResource(R.string.health_km, formatDecimal(km)), null)
+            }
+            if (resting.isNotEmpty()) {
+                Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    RestingChart(stringResource(R.string.health_resting_chart), data.resting)
+                }
             }
         }
     }
@@ -451,6 +568,10 @@ private fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
 }
 
 private const val RESTING_CHART_FLOOR = 5L
+
+private const val WEEK_DAYS = 7
+
+private const val MONTH_DAYS = 30
 
 private val HOURLY_HEIGHT = 72.dp
 

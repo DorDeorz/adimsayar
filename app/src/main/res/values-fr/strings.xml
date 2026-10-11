@@ -190,6 +190,23 @@
     <string name="next_year">Année suivante</string>
     <string name="year_medals">Médailles obtenues</string>
 
+    <string name="health_title">Résumé santé (bracelet)</string>
+    <string name="health_last_days">%1$d derniers jours</string>
+    <string name="health_loading">Lecture depuis Health Connect…</string>
+    <string name="health_empty">Aucune donnée du bracelet sur cette période</string>
+    <string name="health_sleep_average">Sommeil moyen</string>
+    <string name="health_nights">%1$d nuits</string>
+    <string name="health_sleep_longest">Sommeil le plus long</string>
+    <string name="health_resting_average">Fréquence cardiaque au repos moyenne</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Exercice total</string>
+    <string name="health_exercise_count">%1$d exercices</string>
+    <string name="health_exercise_longest">Exercice le plus long</string>
+    <string name="health_distance">Distance du bracelet</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">Fréquence cardiaque au repos</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>
         <item>Données du bracelet dans l\'historique : exercices, distance, calories actives, fréquence cardiaque et sommeil</item>

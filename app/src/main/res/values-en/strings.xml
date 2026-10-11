@@ -190,6 +190,23 @@
     <string name="next_year">Next year</string>
     <string name="year_medals">Medals earned</string>
 
+    <string name="health_title">Health summary (band)</string>
+    <string name="health_last_days">Last %1$d days</string>
+    <string name="health_loading">Reading from Health Connect…</string>
+    <string name="health_empty">No band data in this period</string>
+    <string name="health_sleep_average">Average sleep</string>
+    <string name="health_nights">%1$d nights</string>
+    <string name="health_sleep_longest">Longest sleep</string>
+    <string name="health_resting_average">Average resting heart rate</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Total workouts</string>
+    <string name="health_exercise_count">%1$d workouts</string>
+    <string name="health_exercise_longest">Longest workout</string>
+    <string name="health_distance">Band distance</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_resting_chart">Resting heart rate</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
     <string-array name="release_notes_0_7_0">
         <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>
         <item>Band data in History: workouts, distance, active calories, heart rate and sleep</item>
