@@ -23,7 +23,7 @@ object WearableSteps {
 
     private const val SETTINGS_PREFS = "settings"
     private const val KEY_ENABLED = "wearable_source"
-    private const val KEY_BACKFILLED = "wearable_backfilled"
+    private const val KEY_BACKFILLED = "wearable_backfilled_hourly"
     private const val BACKFILL_DAYS = 30L
     private const val RECENT_DAYS = 1L
     private const val KEY_NEXT_ATTEMPT = "wearable_next_attempt"
