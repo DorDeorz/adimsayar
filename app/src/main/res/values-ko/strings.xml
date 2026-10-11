@@ -58,6 +58,7 @@
     <string name="tab_today">오늘</string>
     <string name="tab_history">기록</string>
     <string name="tab_medals">메달</string>
+    <string name="tab_health">건강</string>
     <string name="goal_reached">일일 목표 달성!</string>
     <string name="goal_remaining">목표까지 %1$s걸음</string>
     <string name="steps_value">%1$s걸음</string>
@@ -194,6 +195,8 @@
     <string name="next_year">다음 연도</string>
     <string name="year_medals">획득한 메달</string>
 
+    <string name="health_off_title">밴드가 꺼져 있습니다</string>
+    <string name="health_off_text">설정에서 밴드 걸음 수를 켜면 수면, 심박수, 운동 요약을 볼 수 있습니다.</string>
     <string name="health_title">건강 요약 (밴드)</string>
     <string name="health_last_days">최근 %1$d일</string>
     <string name="health_loading">Health Connect에서 읽는 중…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
         <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
         <item>이제 앱 안에서 업데이트를 다운로드하고 설치합니다</item>
         <item>앱이 열려 있으면 밴드 걸음 수를 1분마다 읽습니다</item>

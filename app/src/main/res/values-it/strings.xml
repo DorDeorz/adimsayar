@@ -58,6 +58,7 @@
     <string name="tab_today">Oggi</string>
     <string name="tab_history">Cronologia</string>
     <string name="tab_medals">Medaglie</string>
+    <string name="tab_health">Salute</string>
     <string name="goal_reached">Obiettivo giornaliero raggiunto!</string>
     <string name="goal_remaining">%1$s passi all\'obiettivo</string>
     <string name="steps_value">%1$s passi</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Anno successivo</string>
     <string name="year_medals">Medaglie ottenute</string>
 
+    <string name="health_off_title">Il braccialetto è disattivato</string>
+    <string name="health_off_text">Attiva i passi del braccialetto nelle impostazioni per vedere sonno, battito e allenamenti.</string>
     <string name="health_title">Riepilogo salute (braccialetto)</string>
     <string name="health_last_days">Ultimi %1$d giorni</string>
     <string name="health_loading">Lettura da Health Connect…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>Nuova barra in basso: Cronologia, Salute, Oggi (al centro), Medaglie, Impostazioni. Il riepilogo del braccialetto ha una pagina propria</item>
         <item>Riepilogo salute del braccialetto nella cronologia (7 o 30 giorni): sonno, battito a riposo con grafico, allenamenti, distanza</item>
         <item>Gli aggiornamenti ora si scaricano e installano dall\'app</item>
         <item>I passi del braccialetto vengono letti ogni minuto con l\'app aperta</item>

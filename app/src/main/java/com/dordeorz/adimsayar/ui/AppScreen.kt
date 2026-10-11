@@ -3,19 +3,21 @@ package com.dordeorz.adimsayar.ui
 import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +27,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -46,9 +50,11 @@ enum class PermissionState { Granted, NeedsRequest, Denied }
 enum class XiaomiProblem { Unreadable, Stalled }
 
 enum class Tab(@param:StringRes val label: Int, @param:DrawableRes val icon: Int) {
-    Today(R.string.tab_today, R.drawable.ic_walk),
     History(R.string.tab_history, R.drawable.ic_calendar),
+    Health(R.string.tab_health, R.drawable.ic_heart),
+    Today(R.string.tab_today, R.drawable.ic_walk),
     Medals(R.string.tab_medals, R.drawable.ic_trophy),
+    Settings(R.string.settings, R.drawable.ic_settings),
 }
 
 data class MainUiState(
@@ -102,39 +108,46 @@ class MainActions(
 @Composable
 fun AppScreen(state: MainUiState, actions: MainActions) {
     var tab by rememberSaveable { mutableStateOf(Tab.Today) }
-    var settingsOpen by rememberSaveable { mutableStateOf(false) }
-
-    if (settingsOpen) {
-        BackHandler { settingsOpen = false }
-        SettingsScreen(state, actions, onBack = { settingsOpen = false })
-        return
-    }
     if (tab != Tab.Today) BackHandler { tab = Tab.Today }
 
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.statusBars).padding(start = 20.dp, end = 4.dp, top = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    stringResource(tab.label),
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                IconButton(onClick = { settingsOpen = true }) {
-                    Icon(painterResource(R.drawable.ic_settings), contentDescription = stringResource(R.string.settings))
-                }
-            }
+            Text(
+                stringResource(tab.label),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.statusBars).padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 8.dp),
+            )
         },
         bottomBar = {
             NavigationBar {
                 Tab.entries.forEach { item ->
+                    val main = item == Tab.Today
+                    val label: (@Composable () -> Unit)? = if (main) null else { { Text(stringResource(item.label), maxLines = 1) } }
                     NavigationBarItem(
                         selected = item == tab,
                         onClick = { tab = item },
-                        icon = { Icon(painterResource(item.icon), contentDescription = null) },
-                        label = { Text(stringResource(item.label)) },
+                        icon = {
+                            if (main) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(TODAY_BUTTON_SIZE)
+                                        .clip(CircleShape)
+                                        .background(if (item == tab) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Icon(
+                                        painterResource(item.icon),
+                                        contentDescription = stringResource(item.label),
+                                        tint = if (item == tab) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
+                                        modifier = Modifier.size(TODAY_ICON_SIZE),
+                                    )
+                                }
+                            } else {
+                                Icon(painterResource(item.icon), contentDescription = null)
+                            }
+                        },
+                        label = label,
+                        colors = if (main) NavigationBarItemDefaults.colors(indicatorColor = Color.Transparent) else NavigationBarItemDefaults.colors(),
                     )
                 }
             }
@@ -142,10 +155,16 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
+                Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay)
+                Tab.Health -> HealthScreen(state, actions.loadBandPeriod, onOpenSettings = { tab = Tab.Settings })
                 Tab.Today -> TodayScreen(state, actions)
-                Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay, actions.loadBandPeriod)
                 Tab.Medals -> MedalsScreen(state)
+                Tab.Settings -> SettingsScreen(state, actions)
             }
         }
     }
 }
+
+private val TODAY_BUTTON_SIZE = 56.dp
+
+private val TODAY_ICON_SIZE = 30.dp

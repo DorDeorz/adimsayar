@@ -58,6 +58,7 @@
     <string name="tab_today">Aujourd\'hui</string>
     <string name="tab_history">Historique</string>
     <string name="tab_medals">Médailles</string>
+    <string name="tab_health">Santé</string>
     <string name="goal_reached">Objectif du jour atteint !</string>
     <string name="goal_remaining">Encore %1$s pas pour votre objectif</string>
     <string name="steps_value">%1$s pas</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Année suivante</string>
     <string name="year_medals">Médailles obtenues</string>
 
+    <string name="health_off_title">Le bracelet est désactivé</string>
+    <string name="health_off_text">Activez les pas du bracelet dans les réglages pour voir le sommeil, la fréquence cardiaque et les exercices.</string>
     <string name="health_title">Résumé santé (bracelet)</string>
     <string name="health_last_days">%1$d derniers jours</string>
     <string name="health_loading">Lecture depuis Health Connect…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
         <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
         <item>Les mises à jour se téléchargent et s\'installent depuis l\'appli</item>
         <item>Les pas du bracelet sont lus chaque minute quand l\'appli est ouverte</item>

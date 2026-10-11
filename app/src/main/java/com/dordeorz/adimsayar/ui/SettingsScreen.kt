@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,12 +20,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -40,7 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -86,26 +83,15 @@ private val DAILY_PRESETS = listOf(6_000L, 8_000L, 10_000L, 12_000L, 15_000L)
 private val WEEKLY_PRESETS = listOf(42_000L, 56_000L, 70_000L, 84_000L, 105_000L)
 
 @Composable
-fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit) {
+fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val settings = state.settings
     var dialog by rememberSaveable { mutableStateOf<SettingsDialog?>(null) }
-    Scaffold { padding ->
+    Box {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
                 .verticalScroll(rememberScrollState()),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                IconButton(onClick = onBack) {
-                    Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = stringResource(R.string.back))
-                }
-                Text(stringResource(R.string.settings), style = MaterialTheme.typography.titleLarge)
-            }
-
             SectionTitle(stringResource(R.string.settings_goals))
             ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
                 dialog = SettingsDialog.DailyGoal

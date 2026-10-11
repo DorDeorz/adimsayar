@@ -58,6 +58,7 @@
     <string name="tab_today">اليوم</string>
     <string name="tab_history">السجل</string>
     <string name="tab_medals">الميداليات</string>
+    <string name="tab_health">الصحة</string>
     <string name="goal_reached">تم بلوغ الهدف اليومي!</string>
     <string name="goal_remaining">المتبقي للهدف: %1$s خطوة</string>
     <string name="steps_value">%1$s خطوة</string>
@@ -194,6 +195,8 @@
     <string name="next_year">السنة التالية</string>
     <string name="year_medals">الميداليات المكتسبة</string>
 
+    <string name="health_off_title">السوار غير مفعّل</string>
+    <string name="health_off_text">فعّل خطوات السوار في الإعدادات لرؤية ملخص النوم ونبض القلب والتمارين.</string>
     <string name="health_title">ملخص الصحة (السوار)</string>
     <string name="health_last_days">آخر %1$d يومًا</string>
     <string name="health_loading">جارٍ القراءة من Health Connect…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d نبضة/د</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
         <item>ملخص صحة السوار في السجل (7 أو 30 يومًا): النوم ونبض الراحة مع رسم بياني والتمارين والمسافة</item>
         <item>تُنزَّل التحديثات وتُثبَّت الآن من داخل التطبيق</item>
         <item>تُقرأ خطوات السوار كل دقيقة أثناء فتح التطبيق</item>

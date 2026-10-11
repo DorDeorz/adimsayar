@@ -58,6 +58,7 @@
     <string name="tab_today">Сегодня</string>
     <string name="tab_history">История</string>
     <string name="tab_medals">Медали</string>
+    <string name="tab_health">Здоровье</string>
     <string name="goal_reached">Дневная цель достигнута!</string>
     <string name="goal_remaining">До цели осталось шагов: %1$s</string>
     <string name="steps_value">Шагов: %1$s</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Следующий год</string>
     <string name="year_medals">Полученные медали</string>
 
+    <string name="health_off_title">Браслет выключен</string>
+    <string name="health_off_text">Включите шаги браслета в настройках, чтобы видеть сон, пульс и тренировки.</string>
     <string name="health_title">Здоровье (браслет)</string>
     <string name="health_last_days">Последние %1$d дн.</string>
     <string name="health_loading">Чтение из Health Connect…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d уд/мин</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>Новая нижняя панель: История, Здоровье, Сегодня (в центре), Медали, Настройки. Сводка браслета на отдельной странице</item>
         <item>Сводка здоровья браслета в истории (7 или 30 дней): сон, пульс в покое с графиком, тренировки, расстояние</item>
         <item>Обновления теперь скачиваются и устанавливаются прямо из приложения</item>
         <item>Шаги браслета читаются каждую минуту, пока приложение открыто</item>

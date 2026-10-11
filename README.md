@@ -213,7 +213,8 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 ### 0.7.1
 
 Eklenenler
-- Geçmiş'te bileklik için "Sağlık özeti": son 7 ya da 30 günün ortalama ve en uzun uykusu, ortalama dinlenme nabzı ve grafiği, toplam ve en uzun egzersiz, bileklik mesafesi. Veriler saklanmaz, her açılışta Health Connect'ten okunur.
+- Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada, büyük, açılışta seçili), Madalyalar, Ayarlar. Ayarlar sağ üstteki dişliden alta taşındı.
+- Sağlık sayfasında bileklik için "Sağlık özeti": son 7 ya da 30 günün ortalama ve en uzun uykusu, ortalama dinlenme nabzı ve grafiği, toplam ve en uzun egzersiz, bileklik mesafesi. Veriler saklanmaz, her açılışta Health Connect'ten okunur.
 - Güncelleme uygulamanın içinden: Ayarlar → "Güncellemeleri kontrol et" yeni sürümün APK'sını GitHub'dan indirir ve Android'in kurulum ekranını açar. İlk seferde Android bu uygulamadan yüklemeye izin ister.
 
 Düzeltilenler

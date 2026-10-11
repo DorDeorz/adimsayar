@@ -58,6 +58,7 @@
     <string name="tab_today">今天</string>
     <string name="tab_history">历史</string>
     <string name="tab_medals">勋章</string>
+    <string name="tab_health">健康</string>
     <string name="goal_reached">已达成每日目标！</string>
     <string name="goal_remaining">距离目标还差 %1$s 步</string>
     <string name="steps_value">%1$s 步</string>
@@ -194,6 +195,8 @@
     <string name="next_year">下一年</string>
     <string name="year_medals">获得的勋章</string>
 
+    <string name="health_off_title">手环已关闭</string>
+    <string name="health_off_text">在设置中开启手环步数，即可查看睡眠、心率和锻炼摘要。</string>
     <string name="health_title">健康摘要（手环）</string>
     <string name="health_last_days">最近 %1$d 天</string>
     <string name="health_loading">正在从 Health Connect 读取…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d 次/分</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
         <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
         <item>现在可在应用内下载并安装更新</item>
         <item>应用打开时每分钟读取一次手环步数</item>

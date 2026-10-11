@@ -58,6 +58,7 @@
     <string name="tab_today">Bugün</string>
     <string name="tab_history">Geçmiş</string>
     <string name="tab_medals">Madalyalar</string>
+    <string name="tab_health">Sağlık</string>
     <string name="goal_reached">Günlük hedef tamam!</string>
     <string name="goal_remaining">Hedefe %1$s adım kaldı</string>
     <string name="steps_value">%1$s adım</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Sonraki yıl</string>
     <string name="year_medals">Kazanılan madalya</string>
 
+    <string name="health_off_title">Bileklik kapalı</string>
+    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar\'da "Bileklik adımlarını kullan"ı aç.</string>
     <string name="health_title">Sağlık özeti (bileklik)</string>
     <string name="health_last_days">Son %1$d gün</string>
     <string name="health_loading">Health Connect\'ten okunuyor…</string>
@@ -214,7 +217,8 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
-        <item>Geçmiş\'te bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
+        <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
+        <item>Sağlık sayfasında bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
         <item>Güncellemeler artık uygulamanın içinden indirilip kurulur</item>
         <item>Uygulama açıkken bileklik adımları dakikada bir okunur</item>
     </string-array>

@@ -58,6 +58,7 @@
     <string name="tab_today">Hoje</string>
     <string name="tab_history">Histórico</string>
     <string name="tab_medals">Medalhas</string>
+    <string name="tab_health">Saúde</string>
     <string name="goal_reached">Meta diária alcançada!</string>
     <string name="goal_remaining">Faltam %1$s passos para a meta</string>
     <string name="steps_value">%1$s passos</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Próximo ano</string>
     <string name="year_medals">Medalhas conquistadas</string>
 
+    <string name="health_off_title">A pulseira está desativada</string>
+    <string name="health_off_text">Ative os passos da pulseira nas configurações para ver sono, batimentos e exercícios.</string>
     <string name="health_title">Resumo de saúde (pulseira)</string>
     <string name="health_last_days">Últimos %1$d dias</string>
     <string name="health_loading">Lendo do Health Connect…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>Nova barra inferior: Histórico, Saúde, Hoje (centro), Medalhas, Configurações. O resumo da pulseira tem página própria</item>
         <item>Resumo de saúde da pulseira no Histórico (7 ou 30 dias): sono, batimento em repouso com gráfico, exercícios, distância</item>
         <item>As atualizações agora são baixadas e instaladas dentro do app</item>
         <item>Os passos da pulseira são lidos a cada minuto com o app aberto</item>

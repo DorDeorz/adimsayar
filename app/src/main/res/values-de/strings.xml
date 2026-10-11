@@ -58,6 +58,7 @@
     <string name="tab_today">Heute</string>
     <string name="tab_history">Verlauf</string>
     <string name="tab_medals">Medaillen</string>
+    <string name="tab_health">Gesundheit</string>
     <string name="goal_reached">Tagesziel erreicht!</string>
     <string name="goal_remaining">Noch %1$s Schritte bis zum Ziel</string>
     <string name="steps_value">%1$s Schritte</string>
@@ -194,6 +195,8 @@
     <string name="next_year">Nächstes Jahr</string>
     <string name="year_medals">Verdiente Medaillen</string>
 
+    <string name="health_off_title">Armband ist aus</string>
+    <string name="health_off_text">Aktiviere in den Einstellungen die Armbandschritte, um Schlaf, Puls und Trainings zu sehen.</string>
     <string name="health_title">Gesundheit (Armband)</string>
     <string name="health_last_days">Letzte %1$d Tage</string>
     <string name="health_loading">Wird aus Health Connect gelesen…</string>
@@ -214,6 +217,7 @@
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string-array name="release_notes_0_7_1">
+        <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
         <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
         <item>Updates werden jetzt direkt in der App heruntergeladen und installiert</item>
         <item>Armbandschritte werden bei geöffneter App jede Minute gelesen</item>
