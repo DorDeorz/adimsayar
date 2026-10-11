@@ -62,7 +62,7 @@ object WearableSteps {
             log.failure(source, R.string.log_wearable_denied)
             return null
         } catch (e: Exception) {
-            log.note(source, context.getString(R.string.log_wearable_error, e.javaClass.simpleName))
+            log.note(source, context.getString(R.string.log_wearable_error, listOfNotNull(e.javaClass.simpleName, e.message?.take(120)).joinToString(": ")))
             return null
         }
         StepRepository.get(context).replaceBandDays(days)
