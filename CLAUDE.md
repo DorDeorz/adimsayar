@@ -87,6 +87,8 @@ HyperOS arka plan işlerini agresif öldürür. Yeniden başlatma gerektiren kay
 - `JobScheduler` ile periyodik arka plan okuması (~15 dk)
 - `BOOT_COMPLETED`, `TIME_SET`, `TIMEZONE_CHANGED` sonrası
 
+Android 9+ sensörlere yalnızca etkin (ön planda ya da ön plan servisinde) uygulamalar erişebilir; arka plandaki işte `TYPE_STEP_COUNTER` olay vermez. Galaxy S22'de (2026-10-11) 15 dk işinin ve widget'ın tüm okumaları "sensör yanıt vermedi" ile bitti, logda `SensorService: resetSensorStateForIdleUID` görüldü. Bu yüzden iş, sayacı kısa bir ön plan servisi (`ReadOnceService`, `health` tipi, en fazla 10 sn) içinde okur. Android 12+ bu servisi arka plandan yalnızca pil optimizasyonu muafiyeti olan uygulamaya başlatır; muafiyet yoksa okuma eski yoldan denenir. Bildirim ertelenir (`FOREGROUND_SERVICE_DEFERRED`), servis 10 sn dolmadan bittiği için çoğu zaman görünmez. Bu kalıcı bildirimli servis değildir.
+
 Her okumada son sayaç değeri ve `elapsedRealtimeNanos` saklanır. Yeni değer öncekinden küçükse cihaz yeniden başlamıştır; yeni değer olduğu gibi fark kabul edilir.
 
 Bilinen trade-off'lar:
@@ -102,7 +104,7 @@ Yedek yol: kullanıcının Ayarlar'dan açabileceği, sessiz kanalda kalıcı bi
 | Durum | Davranış |
 |---|---|
 | Uygulama açık | Sensörler kayıtlı, canlı sayaç, donma kontrolü |
-| Uygulama arka planda | Kayıt yok, periyodik okuma ve fark |
+| Uygulama arka planda | Kayıt yok, periyodik okuma (kısa ön plan servisinde) ve fark |
 | Widget güncellemesi | Aynı fark modeliyle okuma |
 
 Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 parametreli sürüm, `maxReportLatency`). `sensor.getFifoMaxEventCount()` `0` dönüyorsa cihaz batch'lemeyi desteklemiyor demektir.
