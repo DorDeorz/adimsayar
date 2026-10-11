@@ -264,7 +264,7 @@
 
     <string name="oem_transsion_1">自動管理 → アプリ一覧で AdımSayar を選択し、3つの権限をすべてオン</string>
     <string name="wearable_card_title">バンドの歩数を使う</string>
-    <string name="wearable_card_text">Mi Fitness などのバンドアプリが Health Connect に書き込んだ歩数を読み取ります。バンドのデータがある日はバンドの歩数、ない日はスマホの歩数を使います。許可すると、履歴にワークアウト、距離、カロリー、心拍数、睡眠も表示されます。</string>
+    <string name="wearable_card_text">Mi Fitness などのバンドアプリが Health Connect に書き込んだ歩数を読み取ります。バンドが計測した時間帯はバンドの歩数、それ以外はスマホの歩数を使います。許可すると、履歴にワークアウト、距離、カロリー、心拍数、睡眠も表示されます。</string>
     <string name="wearable_permission_denied">Health Connect の歩数読み取り権限が許可されませんでした。</string>
     <string name="wearable_unavailable">このスマホに Health Connect がありません。Android 13 以前では Play ストアから Health Connect アプリをインストールしてください。</string>
     <string name="wearable_privacy_title">バンドの歩数</string>

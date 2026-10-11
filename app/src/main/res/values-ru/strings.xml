@@ -264,7 +264,7 @@
 
     <string name="oem_transsion_1">Автоуправление → выберите AdımSayar в списке приложений и включите все три разрешения</string>
     <string name="wearable_card_title">Использовать шаги браслета</string>
-    <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В дни с данными браслета используется его счёт, иначе счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
+    <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В часы, когда считал браслет, используется его счёт, в остальные — счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
     <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
     <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>
     <string name="wearable_privacy_title">Шаги браслета</string>

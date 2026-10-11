@@ -114,14 +114,16 @@ Neden: kullanıcının Xiaomi Mi Band 8'i Mi Fitness ile eşleşiyor. Bileklik a
 İlk karardaki sorunlar şöyle önlenir:
 
 - Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz. Her kaynak uygulama için ayrı günlük toplam istenir (`dataOriginFilter`). İlk sürüm ham kayıtları sayfa sayfa okuyordu ve Redmi'de Health Connect'in istek sınırına takıldı; okumalar artık birkaç istekle yapılır, en az 5 dakika arayla, hata sonrası 1 saat beklenerek. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
-- Bilekliğin verisi olan günde bileklik toplamı kullanılır, olmayan günde telefonun toplamı. Kullanıcıya göre bileklik telefondan daha doğru sayar; telefonun daha yüksek olması bilekliğin yanlış saydığı anlamına gelmez. Bileklik bağlı değilse o gün için veri gelmez ve telefonun sayısı kullanılır, gün boş kalmaz.
+- Saat saat birleştirilir: bilekliğin adım yazdığı saatte bileklik sayısı, yazmadığı saatte telefonun sayısı kullanılır. Kullanıcıya göre bileklik telefondan daha doğru sayar; telefonun daha yüksek olması bilekliğin yanlış saydığı anlamına gelmez. Bileklik takılı ya da bağlı değilken veri gelmez ve o saatler telefondan sayılır. İlk sürüm gün bazında "bileklik varsa bileklik" kuralını kullanıyordu; Redmi'de bileklik günün sonunda kısa süre takılınca gün 1.561 adımdan 17'ye düştü (2026-10-11), bu yüzden saatliğe geçildi.
+- Telefonun saatlik verisi yalnızca HyperOS kaydı açıkken vardır. Diğer telefonlarda gün bazında bileklik ile telefonun büyüğü alınır.
 - Telefon toplamları değiştirilmez. Bileklik toplamları ayrı tabloda tutulur ve okurken birleştirilir. Anahtar kapatılınca bileklik tablosu silinir, telefonun sayıları geri gelir.
 - Health Connect'e hiçbir şey yazılmaz, veri telefondan çıkmaz.
 
 Bilinen trade-off'lar:
 
 - Gün içinde bileklik verisi Mi Fitness'ın eşitleme aralığıyla gelir. Bileklik o gün bir kez eşitlendiyse, sonraki eşitlemeye kadar bugünün sayısı telefonun canlı sayısının gerisinde kalabilir.
-- Bileklik günün bir kısmında takılmadıysa (şarj, unutma) o günün toplamı yalnızca bilekliğin gördüğü adımlardır; telefonun o saatlerdeki adımları eklenmez. Saatlik birleştirme yalnızca HyperOS kaydının saatlik verisiyle mümkün olurdu, şimdilik yapılmadı.
+- Bilekliğin takıldığı ya da çıkarıldığı saatte o saatin tamamı bileklikten sayılır; o saatte bileklik takılmadan önce atılan telefon adımları kaybolur.
+- Telefon toplamı bileklik okumaları arasında artarsa, bilekliksiz saatlerdeki bu artış bir sonraki bileklik okumasında (en geç 5-15 dakika) toplama yansır.
 - İlk açılışta son 30 gün okunur (Health Connect izin öncesindeki 30 günden eskisini vermez), sonra her okumada dün ve bugün.
 - Arka planda (15 dakikalık iş, widget) okuma için Health Connect'in arka planda okuma izni de istenir. Bu izin cihazda yoksa bileklik verisi uygulama açılınca güncellenir.
 - Bileklik açıkken Geçmiş'teki saatlik döküm gizlenir, çünkü HyperOS'un saatlik verisi bileklik toplamıyla tutmaz.

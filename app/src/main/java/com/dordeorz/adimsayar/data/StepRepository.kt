@@ -51,6 +51,9 @@ class StepRepository private constructor(private val context: Context) {
         Reminders.onTodaySteps(context, dao.getMerged(LocalDate.now().toString())?.steps ?: 0L)
     }
 
+    suspend fun loadPhoneDays(from: LocalDate): Map<LocalDate, Long> =
+        dao.loadPhoneFrom(from.toString()).associate { LocalDate.parse(it.date) to it.steps }
+
     suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }

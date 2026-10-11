@@ -6,14 +6,18 @@ import androidx.core.content.edit
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
-import androidx.health.connect.client.records.metadata.DataOrigin
+import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import com.dordeorz.adimsayar.R
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
+import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Period
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 object WearableSteps {
 
@@ -77,7 +81,7 @@ object WearableSteps {
         val today = LocalDate.now()
         val from = today.minusDays(if (backfilled) RECENT_DAYS else BACKFILL_DAYS)
         val days = try {
-            dailyTotals(HealthConnectClient.getOrCreate(context), from, today)
+            merged(context, bandHourly(HealthConnectClient.getOrCreate(context), from, today), from)
         } catch (e: CancellationException) {
             throw e
         } catch (e: SecurityException) {
@@ -97,19 +101,36 @@ object WearableSteps {
         return todaySteps
     }
 
-    private suspend fun dailyTotals(client: HealthConnectClient, from: LocalDate, to: LocalDate): Map<LocalDate, Long> {
-        val range = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
-        val origins = client.aggregateGroupByPeriod(dailySteps(range, emptySet())).flatMap { it.result.dataOrigins }.toSet()
-        val perOrigin = origins.map { origin ->
-            client.aggregateGroupByPeriod(dailySteps(range, setOf(origin))).mapNotNull { group ->
-                group.result[StepsRecord.COUNT_TOTAL]?.takeIf { it > 0L }?.let { group.startTime.toLocalDate() to it }
-            }.toMap()
-        }
-        return StepMath.bestSourcePerDay(perOrigin)
+    private suspend fun merged(context: Context, band: Map<LocalDateTime, Long>, from: LocalDate): Map<LocalDate, Long> {
+        val phoneHours = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.hourlyTotals(context, from) else null
+        if (phoneHours != null) return StepMath.mergeHourly(band, phoneHours)
+        val bandDays = HashMap<LocalDate, Long>()
+        for ((hour, steps) in band) bandDays[hour.toLocalDate()] = (bandDays[hour.toLocalDate()] ?: 0L) + steps
+        return StepMath.mergeDaily(bandDays, StepRepository.get(context).loadPhoneDays(from))
     }
 
-    private fun dailySteps(range: TimeRangeFilter, origins: Set<DataOrigin>) =
-        AggregateGroupByPeriodRequest(setOf(StepsRecord.COUNT_TOTAL), range, Period.ofDays(1), origins)
+    private suspend fun bandHourly(client: HealthConnectClient, from: LocalDate, to: LocalDate): Map<LocalDateTime, Long> {
+        val zone = ZoneId.systemDefault()
+        val days = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
+        val origins = client.aggregateGroupByPeriod(
+            AggregateGroupByPeriodRequest(setOf(StepsRecord.COUNT_TOTAL), days, Period.ofDays(1)),
+        ).flatMap { it.result.dataOrigins }.toSet()
+        val hours = TimeRangeFilter.between(from.atStartOfDay(zone).toInstant(), to.plusDays(1).atStartOfDay(zone).toInstant())
+        val perOrigin = origins.map { origin ->
+            client.aggregateGroupByDuration(
+                AggregateGroupByDurationRequest(setOf(StepsRecord.COUNT_TOTAL), hours, Duration.ofHours(1), setOf(origin)),
+            ).mapNotNull { group ->
+                group.result[StepsRecord.COUNT_TOTAL]?.takeIf { it > 0L }?.let {
+                    group.startTime.atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS) to it
+                }
+            }.toMap()
+        }
+        val best = HashMap<LocalDateTime, Long>()
+        for (source in perOrigin) {
+            for ((hour, steps) in source) if (steps > (best[hour] ?: 0L)) best[hour] = steps
+        }
+        return best
+    }
 
     private fun prefs(context: Context) = context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE)
 }

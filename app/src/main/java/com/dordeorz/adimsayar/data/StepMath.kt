@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
 
 data class CounterReading(val counter: Long, val elapsedMs: Long, val wallMs: Long, val bootCount: Int?)
@@ -64,15 +65,20 @@ object StepMath {
         return result
     }
 
-    fun bestSourcePerDay(sources: Collection<Map<LocalDate, Long>>): Map<LocalDate, Long> {
-        val best = HashMap<LocalDate, Long>()
-        for (source in sources) {
-            for ((day, steps) in source) {
-                if (steps > (best[day] ?: 0L)) best[day] = steps
-            }
+    fun mergeHourly(band: Map<LocalDateTime, Long>, phone: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
+        val bandDays = band.filterValues { it > 0L }.keys.map { it.toLocalDate() }.toSet()
+        val result = HashMap<LocalDate, Long>()
+        for (hour in band.keys + phone.keys) {
+            val day = hour.toLocalDate()
+            if (day !in bandDays) continue
+            val steps = band[hour]?.takeIf { it > 0L } ?: phone[hour] ?: 0L
+            result[day] = (result[day] ?: 0L) + steps
         }
-        return best
+        return result
     }
+
+    fun mergeDaily(band: Map<LocalDate, Long>, phone: Map<LocalDate, Long>): Map<LocalDate, Long> =
+        band.filterValues { it > 0L }.mapValues { (day, steps) -> maxOf(steps, phone[day] ?: 0L) }
 
     fun dayOf(wallMs: Long, zone: ZoneId): LocalDate = Instant.ofEpochMilli(wallMs).atZone(zone).toLocalDate()
 }

@@ -7,6 +7,8 @@ import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import java.time.ZoneId
 
 class DayDetail(val hours: LongArray, val walking: Long, val running: Long)
@@ -93,6 +95,27 @@ object XiaomiSteps {
                     }
                 }
                 DayDetail(hours, walking, running)
+            }
+        } catch (e: RuntimeException) {
+            null
+        }
+    }
+
+    fun hourlyTotals(context: Context, from: LocalDate): Map<LocalDateTime, Long>? {
+        val zone = ZoneId.systemDefault()
+        val fromMs = from.atStartOfDay(zone).toInstant().toEpochMilli()
+        return try {
+            context.contentResolver.query(URI, PROJECTION, null, null, null)?.use {
+                val begin = it.getColumnIndexOrThrow(COLUMN_BEGIN)
+                val steps = it.getColumnIndexOrThrow(COLUMN_STEPS)
+                val hours = HashMap<LocalDateTime, Long>()
+                while (it.moveToNext()) {
+                    val start = it.getLong(begin)
+                    if (start < fromMs) continue
+                    val hour = Instant.ofEpochMilli(start).atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS)
+                    hours[hour] = (hours[hour] ?: 0L) + it.getLong(steps)
+                }
+                hours
             }
         } catch (e: RuntimeException) {
             null

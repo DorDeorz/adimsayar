@@ -126,11 +126,18 @@ class StepMathTest {
     }
 
     @Test
-    fun bestSourcePerDayTakesLargestSourceInsteadOfSum() {
-        val monday = LocalDate.parse("2026-10-12")
-        val tuesday = LocalDate.parse("2026-10-13")
-        val band = mapOf(monday to 9_000L, tuesday to 1_000L)
-        val otherApp = mapOf(monday to 7_000L, tuesday to 4_000L)
-        assertEquals(mapOf(monday to 9_000L, tuesday to 4_000L), StepMath.bestSourcePerDay(listOf(band, otherApp)))
+    fun mergeHourlyUsesBandHoursAndPhoneForTheRest() {
+        val morning = LocalDateTime.parse("2026-10-11T09:00")
+        val evening = LocalDateTime.parse("2026-10-11T21:00")
+        val otherDay = LocalDateTime.parse("2026-10-10T12:00")
+        val band = mapOf(evening to 200L)
+        val phone = mapOf(morning to 1_500L, evening to 260L, otherDay to 3_000L)
+        assertEquals(mapOf(LocalDate.parse("2026-10-11") to 1_700L), StepMath.mergeHourly(band, phone))
+    }
+
+    @Test
+    fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
+        val day = LocalDate.parse("2026-10-11")
+        assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))
     }
 }

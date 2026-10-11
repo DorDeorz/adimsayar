@@ -264,7 +264,7 @@
 
     <string name="oem_transsion_1">Gestione automatica → seleziona AdımSayar nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
     <string name="wearable_card_title">Usa i passi del bracciale</string>
-    <string name="wearable_card_text">Legge i passi che le app del bracciale come Mi Fitness scrivono in Health Connect. Nei giorni con dati del bracciale si usa il suo conteggio, altrimenti quello del telefono. Se lo consenti, la cronologia mostra anche allenamenti, distanza, calorie, battito e sonno.</string>
+    <string name="wearable_card_text">Legge i passi che le app del bracciale come Mi Fitness scrivono in Health Connect. Nelle ore contate dal bracciale si usa il suo conteggio, nelle altre quello del telefono. Se lo consenti, la cronologia mostra anche allenamenti, distanza, calorie, battito e sonno.</string>
     <string name="wearable_permission_denied">Il permesso di lettura dei passi di Health Connect non è stato concesso.</string>
     <string name="wearable_unavailable">Health Connect non è presente su questo telefono. Su Android 13 o precedenti installa l\'app Health Connect dal Play Store.</string>
     <string name="wearable_privacy_title">Passi del bracciale</string>

@@ -264,7 +264,7 @@
 
     <string name="oem_transsion_1">Gerenciamento automático → selecione AdımSayar na lista de apps e ative as três permissões</string>
     <string name="wearable_card_title">Usar passos da pulseira</string>
-    <string name="wearable_card_text">Lê os passos que apps de pulseira como o Mi Fitness gravam no Health Connect. Nos dias com dados da pulseira, é usada a contagem dela; caso contrário, a do telefone. Se você permitir, o histórico também mostra treinos, distância, calorias, frequência cardíaca e sono.</string>
+    <string name="wearable_card_text">Lê os passos que apps de pulseira como o Mi Fitness gravam no Health Connect. Nas horas contadas pela pulseira, é usada a contagem dela; nas outras, a do telefone. Se você permitir, o histórico também mostra treinos, distância, calorias, frequência cardíaca e sono.</string>
     <string name="wearable_permission_denied">A permissão para ler passos do Health Connect não foi concedida.</string>
     <string name="wearable_unavailable">O Health Connect não está neste telefone. No Android 13 ou anterior, instale o app Health Connect pela Play Store.</string>
     <string name="wearable_privacy_title">Passos da pulseira</string>

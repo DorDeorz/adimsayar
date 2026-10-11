@@ -66,6 +66,9 @@ abstract class DailyStepsDao {
     @Query("SELECT * FROM ($MERGED) ORDER BY date")
     abstract suspend fun loadAll(): List<DailySteps>
 
+    @Query("SELECT * FROM daily_steps WHERE date >= :from")
+    abstract suspend fun loadPhoneFrom(from: String): List<DailySteps>
+
     @Upsert
     abstract suspend fun upsertBand(days: List<BandSteps>)
 
