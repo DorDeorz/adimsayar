@@ -279,7 +279,7 @@ private fun SelectedDayCard(
                     Text(LONG_DAY_FORMAT.format(date), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(stringResource(R.string.steps_value, format(steps)), style = MaterialTheme.typography.headlineMedium)
                     Text(
-                        distanceAndCalories(steps, state.settings, band?.distanceKm, band?.activeKcal),
+                        distanceAndCalories(steps, state.settings, band?.distanceKm),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -376,6 +376,16 @@ private fun BandSection(day: BandDay) {
             }
         }
     }
+    day.activeKcal?.let { kcal ->
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Text(stringResource(R.string.band_active_kcal), style = MaterialTheme.typography.labelLarge)
+            Text(
+                stringResource(R.string.band_kcal_value, format(kcal)),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+        }
+    }
     day.heart?.let { heart ->
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.band_heart), style = MaterialTheme.typography.labelLarge)
@@ -392,7 +402,6 @@ private fun BandSection(day: BandDay) {
             )
         }
     }
-    if (day.restingWeek.isNotEmpty()) RestingChart(stringResource(R.string.band_resting_week), day.restingWeek)
     day.sleepMinutes?.takeIf { it > 0L }?.let { minutes ->
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.band_sleep), style = MaterialTheme.typography.labelLarge)
@@ -526,6 +535,12 @@ private fun HealthCard(today: LocalDate, loadBandPeriod: suspend (LocalDate, Lon
                     stringResource(R.string.band_sleep_value, longest.value / 60, longest.value % 60),
                     FULL_DATE_FORMAT.format(longest.key),
                 )
+            } else {
+                RecordRow(
+                    stringResource(R.string.health_sleep_average),
+                    "-",
+                    stringResource(if (data.sleepAllowed) R.string.health_no_records else R.string.health_no_permission),
+                )
             }
             if (resting.isNotEmpty()) {
                 RecordRow(stringResource(R.string.health_resting_average), stringResource(R.string.health_bpm, resting.sum() / resting.size), null)
@@ -542,6 +557,12 @@ private fun HealthCard(today: LocalDate, loadBandPeriod: suspend (LocalDate, Lon
                     stringResource(R.string.duration_minutes, longest.minutes),
                     (longest.title?.takeIf { it.isNotBlank() } ?: stringResource(exerciseLabel(longest.kind))) + " · " +
                         FULL_DATE_FORMAT.format(longest.start.atZone(ZoneId.systemDefault()).toLocalDate()),
+                )
+            } else {
+                RecordRow(
+                    stringResource(R.string.health_exercise_total),
+                    "-",
+                    stringResource(if (data.exerciseAllowed) R.string.health_no_records else R.string.health_no_permission),
                 )
             }
             data.distanceKm?.let { km ->

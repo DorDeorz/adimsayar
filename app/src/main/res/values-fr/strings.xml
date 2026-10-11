@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">Exercice le plus long</string>
     <string name="health_distance">Distance du bracelet</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Le bracelet n\'a rien enregistré sur cette période</string>
+    <string name="health_no_permission">Autorisation Health Connect non accordée</string>
     <string name="health_resting_chart">Fréquence cardiaque au repos</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Impossible de lire Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Bracelet : %1$d pas aujourd\'hui, %2$d jours mis à jour</string>
     <string name="band_exercises">Entraînements</string>
+    <string name="band_active_kcal">Calories actives (bracelet)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Fréquence cardiaque</string>
     <string name="band_heart_value">Repos %1$s · min %2$s · moy. %3$s · max %4$s</string>
-    <string name="band_resting_week">Fréquence au repos, 7 derniers jours</string>
     <string name="band_sleep">Sommeil</string>
     <string name="band_sleep_value">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>

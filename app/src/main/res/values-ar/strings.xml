@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">أطول تمرين</string>
     <string name="health_distance">مسافة السوار</string>
     <string name="health_km">%1$s كم</string>
+    <string name="health_no_records">لم يسجّل السوار بيانات في هذه الفترة</string>
+    <string name="health_no_permission">لم يُمنح إذن Health Connect</string>
     <string name="health_resting_chart">نبض الراحة</string>
     <string name="health_min_max">%1$d–%2$d نبضة/د</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">تعذّرت قراءة Health Connect (%1$s)</string>
     <string name="log_wearable_synced">السوار: خطوات اليوم %1$d، الأيام المحدّثة %2$d</string>
     <string name="band_exercises">التمارين</string>
+    <string name="band_active_kcal">السعرات النشطة (السوار)</string>
+    <string name="band_kcal_value">%1$s سعرة</string>
     <string name="band_heart">نبض القلب</string>
     <string name="band_heart_value">الراحة %1$s · الأدنى %2$s · المتوسط %3$s · الأعلى %4$s</string>
-    <string name="band_resting_week">نبض الراحة لآخر 7 أيام</string>
     <string name="band_sleep">النوم</string>
     <string name="band_sleep_value">%1$d س %2$d د</string>
     <string name="duration_minutes">%1$d د</string>

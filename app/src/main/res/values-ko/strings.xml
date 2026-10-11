@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">가장 긴 운동</string>
     <string name="health_distance">밴드 거리</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">이 기간에 밴드 기록이 없습니다</string>
+    <string name="health_no_permission">Health Connect 권한이 없습니다</string>
     <string name="health_resting_chart">안정 시 심박수</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Health Connect를 읽을 수 없음 (%1$s)</string>
     <string name="log_wearable_synced">밴드: 오늘 %1$d걸음, %2$d일 업데이트</string>
     <string name="band_exercises">운동</string>
+    <string name="band_active_kcal">활동 칼로리 (밴드)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">심박수</string>
     <string name="band_heart_value">안정 시 %1$s · 최저 %2$s · 평균 %3$s · 최고 %4$s</string>
-    <string name="band_resting_week">최근 7일 안정 시 심박수</string>
     <string name="band_sleep">수면</string>
     <string name="band_sleep_value">%1$d시간 %2$d분</string>
     <string name="duration_minutes">%1$d분</string>

@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">Längstes Training</string>
     <string name="health_distance">Armband-Strecke</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Das Armband hat in diesem Zeitraum nichts gespeichert</string>
+    <string name="health_no_permission">Keine Health-Connect-Berechtigung</string>
     <string name="health_resting_chart">Ruhepuls</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
     <string name="log_wearable_synced">Armband: heute %1$d Schritte, %2$d Tage aktualisiert</string>
     <string name="band_exercises">Trainings</string>
+    <string name="band_active_kcal">Aktive Kalorien (Armband)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Puls</string>
     <string name="band_heart_value">Ruhe %1$s · min. %2$s · Ø %3$s · max. %4$s</string>
-    <string name="band_resting_week">Ruhepuls der letzten 7 Tage</string>
     <string name="band_sleep">Schlaf</string>
     <string name="band_sleep_value">%1$d Std. %2$d Min.</string>
     <string name="duration_minutes">%1$d Min.</string>

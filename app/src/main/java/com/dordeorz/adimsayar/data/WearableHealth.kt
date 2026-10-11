@@ -35,7 +35,6 @@ class BandDay(
     val exercises: List<Exercise>,
     val heart: HeartSummary?,
     val sleepMinutes: Long?,
-    val restingWeek: List<Pair<LocalDate, Long?>>,
 )
 
 class BandPeriod(
@@ -44,11 +43,11 @@ class BandPeriod(
     val resting: List<Pair<LocalDate, Long?>>,
     val exercises: List<Exercise>,
     val distanceKm: Double?,
+    val sleepAllowed: Boolean,
+    val exerciseAllowed: Boolean,
 )
 
 object WearableHealth {
-
-    private const val WEEK_DAYS = 7L
 
     val PERMISSIONS: Set<String> = setOf(
         HealthPermission.getReadPermission(ExerciseSessionRecord::class),
@@ -134,7 +133,7 @@ object WearableHealth {
             null
         }
 
-        return BandPeriod(days, sleep, days.map { it to restingByDay[it] }, exercises, distance)
+        return BandPeriod(days, sleep, days.map { it to restingByDay[it] }, exercises, distance, allowed(SleepSessionRecord::class), allowed(ExerciseSessionRecord::class))
     }
 
     private suspend fun read(client: HealthConnectClient, date: LocalDate, zone: ZoneId): BandDay {
@@ -183,26 +182,17 @@ object WearableHealth {
             if (allowed(HeartRateRecord::class)) addAll(listOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_AVG, HeartRateRecord.BPM_MAX))
             if (allowed(RestingHeartRateRecord::class)) add(RestingHeartRateRecord.BPM_AVG)
         }
-        val heartByDay = if (heartMetrics.isNotEmpty()) {
-            val weekRange = TimeRangeFilter.between(date.minusDays(WEEK_DAYS - 1).atStartOfDay(), date.plusDays(1).atStartOfDay())
-            client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(heartMetrics, weekRange, Period.ofDays(1)))
-                .associate { it.startTime.toLocalDate() to it.result }
-        } else {
-            emptyMap()
-        }
-        val restingWeek = (WEEK_DAYS - 1 downTo 0L).map { offset ->
-            val day = date.minusDays(offset)
-            val result = heartByDay[day]
-            day to (result?.get(RestingHeartRateRecord.BPM_AVG) ?: result?.get(HeartRateRecord.BPM_MIN))
-        }
-        val heart = heartByDay[date]?.let { result ->
+        val heart = if (heartMetrics.isNotEmpty()) {
+            val result = client.aggregate(AggregateRequest(heartMetrics, dayRange))
             val min = result[HeartRateRecord.BPM_MIN]
             val avg = result[HeartRateRecord.BPM_AVG]
             val max = result[HeartRateRecord.BPM_MAX]
             if (min != null && avg != null && max != null) HeartSummary(result[RestingHeartRateRecord.BPM_AVG] ?: min, min, avg, max) else null
+        } else {
+            null
         }
 
-        return BandDay(distance, kcal, exercises, heart, sleep, restingWeek.takeIf { week -> week.any { it.second != null } } ?: emptyList())
+        return BandDay(distance, kcal, exercises, heart, sleep)
     }
 
     private suspend fun <T : Record> readAll(client: HealthConnectClient, type: KClass<T>, from: Instant, to: Instant): List<T> {

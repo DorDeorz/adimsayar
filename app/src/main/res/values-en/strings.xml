@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">Longest workout</string>
     <string name="health_distance">Band distance</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">The band wrote no records in this period</string>
+    <string name="health_no_permission">Health Connect permission not granted</string>
     <string name="health_resting_chart">Resting heart rate</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Health Connect could not be read (%1$s)</string>
     <string name="log_wearable_synced">Band: %1$d steps today, %2$d days updated</string>
     <string name="band_exercises">Workouts</string>
+    <string name="band_active_kcal">Active calories (band)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Heart rate</string>
     <string name="band_heart_value">Resting %1$s · min %2$s · avg %3$s · max %4$s</string>
-    <string name="band_resting_week">Resting heart rate, last 7 days</string>
     <string name="band_sleep">Sleep</string>
     <string name="band_sleep_value">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>

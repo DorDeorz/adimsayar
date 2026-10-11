@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">Самая долгая тренировка</string>
     <string name="health_distance">Расстояние браслета</string>
     <string name="health_km">%1$s км</string>
+    <string name="health_no_records">Браслет не записал данных за этот период</string>
+    <string name="health_no_permission">Нет разрешения Health Connect</string>
     <string name="health_resting_chart">Пульс в покое</string>
     <string name="health_min_max">%1$d–%2$d уд/мин</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Не удалось прочитать Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Браслет: сегодня %1$d шагов, обновлено дней: %2$d</string>
     <string name="band_exercises">Тренировки</string>
+    <string name="band_active_kcal">Активные калории (браслет)</string>
+    <string name="band_kcal_value">%1$s ккал</string>
     <string name="band_heart">Пульс</string>
     <string name="band_heart_value">Покой %1$s · мин. %2$s · сред. %3$s · макс. %4$s</string>
-    <string name="band_resting_week">Пульс в покое за 7 дней</string>
     <string name="band_sleep">Сон</string>
     <string name="band_sleep_value">%1$d ч %2$d мин</string>
     <string name="duration_minutes">%1$d мин</string>

@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">最长锻炼</string>
     <string name="health_distance">手环距离</string>
     <string name="health_km">%1$s 公里</string>
+    <string name="health_no_records">此期间手环没有记录</string>
+    <string name="health_no_permission">未授予 Health Connect 权限</string>
     <string name="health_resting_chart">静息心率</string>
     <string name="health_min_max">%1$d–%2$d 次/分</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>
     <string name="log_wearable_synced">手环：今天 %1$d 步，已更新 %2$d 天</string>
     <string name="band_exercises">锻炼</string>
+    <string name="band_active_kcal">活动卡路里（手环）</string>
+    <string name="band_kcal_value">%1$s 千卡</string>
     <string name="band_heart">心率</string>
     <string name="band_heart_value">静息 %1$s · 最低 %2$s · 平均 %3$s · 最高 %4$s</string>
-    <string name="band_resting_week">近 7 天静息心率</string>
     <string name="band_sleep">睡眠</string>
     <string name="band_sleep_value">%1$d 小时 %2$d 分钟</string>
     <string name="duration_minutes">%1$d 分钟</string>

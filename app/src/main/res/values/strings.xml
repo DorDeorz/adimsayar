@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">En uzun egzersiz</string>
     <string name="health_distance">Bileklik mesafesi</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Bileklik bu dönemde kayıt yazmadı</string>
+    <string name="health_no_permission">Health Connect izni verilmedi</string>
     <string name="health_resting_chart">Dinlenme nabzı</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -306,9 +308,10 @@
     <string name="log_wearable_error">Health Connect okunamadı (%1$s)</string>
     <string name="log_wearable_synced">Bileklik: bugün %1$d adım, %2$d gün güncellendi</string>
     <string name="band_exercises">Egzersizler</string>
+    <string name="band_active_kcal">Aktif kalori (bileklik)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Nabız</string>
     <string name="band_heart_value">Dinlenme %1$s · en düşük %2$s · ortalama %3$s · en yüksek %4$s</string>
-    <string name="band_resting_week">Son 7 günün dinlenme nabzı</string>
     <string name="band_sleep">Uyku</string>
     <string name="band_sleep_value">%1$d sa %2$d dk</string>
     <string name="duration_minutes">%1$d dk</string>

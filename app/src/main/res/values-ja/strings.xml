@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">最長ワークアウト</string>
     <string name="health_distance">バンドの距離</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">この期間、バンドの記録はありません</string>
+    <string name="health_no_permission">Health Connect の権限がありません</string>
     <string name="health_resting_chart">安静時心拍数</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Health Connect を読み取れませんでした（%1$s）</string>
     <string name="log_wearable_synced">バンド：今日 %1$d 歩、%2$d 日分を更新</string>
     <string name="band_exercises">ワークアウト</string>
+    <string name="band_active_kcal">アクティブカロリー（バンド）</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">心拍数</string>
     <string name="band_heart_value">安静時 %1$s · 最低 %2$s · 平均 %3$s · 最高 %4$s</string>
-    <string name="band_resting_week">過去 7 日間の安静時心拍数</string>
     <string name="band_sleep">睡眠</string>
     <string name="band_sleep_value">%1$d 時間 %2$d 分</string>
     <string name="duration_minutes">%1$d 分</string>

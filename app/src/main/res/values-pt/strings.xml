@@ -208,6 +208,8 @@
     <string name="health_exercise_longest">Exercício mais longo</string>
     <string name="health_distance">Distância da pulseira</string>
     <string name="health_km">%1$s km</string>
+    <string name="health_no_records">A pulseira não gravou registros neste período</string>
+    <string name="health_no_permission">Sem permissão do Health Connect</string>
     <string name="health_resting_chart">Batimento em repouso</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
@@ -305,9 +307,10 @@
     <string name="log_wearable_error">Não foi possível ler o Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Pulseira: %1$d passos hoje, %2$d dias atualizados</string>
     <string name="band_exercises">Treinos</string>
+    <string name="band_active_kcal">Calorias ativas (pulseira)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Frequência cardíaca</string>
     <string name="band_heart_value">Repouso %1$s · mín. %2$s · média %3$s · máx. %4$s</string>
-    <string name="band_resting_week">Frequência em repouso, últimos 7 dias</string>
     <string name="band_sleep">Sono</string>
     <string name="band_sleep_value">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>
