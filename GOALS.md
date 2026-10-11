@@ -193,7 +193,7 @@ Android `updatePeriodMillis` değerini en fazla 30 dakikaya kısar ve yine de ga
 
 Kapsam dışı: kullanıcı sistemi, giriş ekranı, token yönetimi, backend.
 
-Ağ erişiminin tek istisnası Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz.
+Ağ erişiminin tek istisnası Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı dokununca APK GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12, kullanıcı isteği: tarayıcıya gitmeden güncellemek). İlk seferde Android "bu kaynaktan yüklemeye izin ver" ister. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz.
 
 ### Veri kaybı koruması
 

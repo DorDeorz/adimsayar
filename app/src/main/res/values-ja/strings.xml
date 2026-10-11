@@ -120,6 +120,10 @@
     <string name="update_available">新しいバージョン %1$s があります。タップしてダウンロード</string>
     <string name="update_no_release">公開されたリリースはまだありません</string>
     <string name="update_failed">確認できませんでした。インターネット接続を確認してください</string>
+    <string name="update_downloading">ダウンロード中… %1$d%%</string>
+    <string name="update_ready">ダウンロード完了。タップしてインストール</string>
+    <string name="update_install_permission">設定でこのアプリからのインストールを許可して、もう一度タップしてください</string>
+    <string name="update_download_failed">ダウンロードできませんでした。タップして GitHub ページを開きます</string>
     <string name="github_page">GitHub ページ</string>
     <string name="github_page_hint">ソースコード、リリース、不具合の報告</string>
     <string name="log_hint">最新のカウンターと HyperOS の読み取り</string>

@@ -120,6 +120,10 @@
     <string name="update_available">يتوفر إصدار جديد: %1$s. اضغط للتنزيل</string>
     <string name="update_no_release">لم يُنشر أي إصدار بعد</string>
     <string name="update_failed">تعذّر التحقق. تحقّق من اتصال الإنترنت</string>
+    <string name="update_downloading">جارٍ التنزيل… %1$d%%</string>
+    <string name="update_ready">تم التنزيل. اضغط للتثبيت</string>
+    <string name="update_install_permission">اسمح بالتثبيت من هذا التطبيق في الإعدادات ثم اضغط مرة أخرى</string>
+    <string name="update_download_failed">تعذّر التنزيل. اضغط لفتح صفحة GitHub</string>
     <string name="github_page">صفحة GitHub</string>
     <string name="github_page_hint">الشيفرة المصدرية والإصدارات والإبلاغ عن المشكلات</string>
     <string name="log_hint">أحدث قراءات العداد وHyperOS</string>

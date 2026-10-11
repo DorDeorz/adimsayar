@@ -120,6 +120,10 @@
     <string name="update_available">Доступна новая версия: %1$s. Нажмите, чтобы скачать</string>
     <string name="update_no_release">Опубликованных версий пока нет</string>
     <string name="update_failed">Не удалось проверить. Проверьте подключение к интернету</string>
+    <string name="update_downloading">Загрузка… %1$d%%</string>
+    <string name="update_ready">Загружено. Нажмите, чтобы установить</string>
+    <string name="update_install_permission">Разрешите установку из этого приложения в настройках и нажмите снова</string>
+    <string name="update_download_failed">Не удалось загрузить. Нажмите, чтобы открыть страницу GitHub</string>
     <string name="github_page">Страница на GitHub</string>
     <string name="github_page_hint">Исходный код, версии и сообщения об ошибках</string>
     <string name="log_hint">Последние чтения счётчика и HyperOS</string>

@@ -120,6 +120,10 @@
     <string name="update_available">Neue Version verfügbar: %1$s. Zum Herunterladen tippen</string>
     <string name="update_no_release">Noch keine Version veröffentlicht</string>
     <string name="update_failed">Prüfung fehlgeschlagen. Internetverbindung prüfen</string>
+    <string name="update_downloading">Wird heruntergeladen… %1$d %%</string>
+    <string name="update_ready">Heruntergeladen. Zum Installieren tippen</string>
+    <string name="update_install_permission">Installation aus dieser App in den Einstellungen erlauben und erneut tippen</string>
+    <string name="update_download_failed">Download fehlgeschlagen. Tippen, um die GitHub-Seite zu öffnen</string>
     <string name="github_page">GitHub-Seite</string>
     <string name="github_page_hint">Quellcode, Versionen und Fehlermeldungen</string>
     <string name="log_hint">Letzte Zähler- und HyperOS-Ablesungen</string>

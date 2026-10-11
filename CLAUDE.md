@@ -24,7 +24,7 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Kalıcı depolama: Room.
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
-- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü içindir (bkz. "İzinler").
+- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü ve indirmesi içindir (bkz. "İzinler").
 - **Health Connect yalnızca bileklik verisi için, kullanıcının açtığı anahtarla okunur** (2026-10-11 kararı). Varsayılan kapalıdır. Yalnızca okuma yapılır, Health Connect'e hiçbir şey yazılmaz. Kapalıyken veri yalnızca telefonun kendi sensörlerinden (ve açıksa HyperOS kaydından) gelir. Bağımlılık `androidx.health.connect:connect-client`. Adımlar `data/WearableSteps.kt`; egzersiz, mesafe, aktif kalori, nabız ve uyku `data/WearableHealth.kt` içinde, Geçmiş'te seçilen gün için anlık okunur ve hiçbir yerde saklanmaz.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
@@ -113,7 +113,7 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 - API 29+ (Android 10) runtime izni: `ACTIVITY_RECOGNITION`. İki sensör için de zorunlu.
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
-- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz. Başka hiçbir ağ isteği eklenmez.
+- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı ikinci kez dokununca o sürümün APK'sı GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12 kararı; `REQUEST_INSTALL_PACKAGES`, `FileProvider`, `data/UpdateInstaller.kt`). Kurulum kullanıcı onayıyla Android tarafından yapılır, uygulama sessiz kurulum yapmaz. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz. Başka hiçbir ağ isteği eklenmez.
 
 ## Widget'lar
 

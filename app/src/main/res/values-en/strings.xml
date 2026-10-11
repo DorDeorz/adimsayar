@@ -120,6 +120,10 @@
     <string name="update_available">New version available: %1$s. Tap to download</string>
     <string name="update_no_release">No release has been published yet</string>
     <string name="update_failed">Couldn\'t check. Check your internet connection</string>
+    <string name="update_downloading">Downloading… %1$d%%</string>
+    <string name="update_ready">Downloaded. Tap to install</string>
+    <string name="update_install_permission">Allow installs from this app in Settings, then tap again</string>
+    <string name="update_download_failed">Download failed. Tap to open the GitHub page</string>
     <string name="github_page">GitHub page</string>
     <string name="github_page_hint">Source code, releases and issue reports</string>
     <string name="log_hint">Latest counter and HyperOS readings</string>

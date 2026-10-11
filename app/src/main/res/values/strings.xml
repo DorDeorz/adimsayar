@@ -120,6 +120,10 @@
     <string name="update_available">Yeni sürüm var: %1$s. İndirmek için dokun</string>
     <string name="update_no_release">Henüz yayınlanmış bir sürüm yok</string>
     <string name="update_failed">Kontrol edilemedi. İnternet bağlantını kontrol et</string>
+    <string name="update_downloading">İndiriliyor… %%%1$d</string>
+    <string name="update_ready">İndirildi. Kurmak için dokun</string>
+    <string name="update_install_permission">Ayarlar\'da bu uygulamadan yüklemeye izin ver, sonra tekrar dokun</string>
+    <string name="update_download_failed">İndirilemedi. GitHub sayfasını açmak için dokun</string>
     <string name="github_page">GitHub sayfası</string>
     <string name="github_page_hint">Kaynak kod, sürümler ve hata bildirimi</string>
     <string name="log_hint">Sayaç ve HyperOS okumalarının son kayıtları</string>

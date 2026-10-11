@@ -8,7 +8,7 @@ Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 P
 - Glance ile ana ekran widget'ları
 - Room ile cihazda kalıcı kayıt
 - minSdk 23 (Android 6.0), targetSdk 36
-- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü için
+- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü ve indirmesi için
 
 ## Ekran görüntüleri
 
@@ -142,7 +142,7 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 
 ## Gizlilik
 
-- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`). Bu istek yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
+- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`); yeni sürüm varsa tekrar dokununca APK'yı GitHub'dan indirip kurulum ekranını açar. Bu istekler yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
 - Hesap, sunucu, senkronizasyon, analitik ve reklam yoktur.
 - Veri kaybına karşı Android'in kendi yedeklemesi (`allowBackup`) ve kullanıcının kendi eliyle yaptığı CSV dışa aktarma kullanılır.
 
@@ -156,11 +156,12 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 | `POST_NOTIFICATIONS` | Servis bildirimi ve isteğe bağlı hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gün dönümünü tam gece yarısı yapmak |
-| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü |
+| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü ve indirmesi |
+| `REQUEST_INSTALL_PACKAGES` | İndirilen güncellemeyi kurmak için Android'in kurulum ekranını açmak |
 
 ## Kurulum
 
-En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile görebilirsin.
+En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile uygulamanın içinden indirip kurabilirsin.
 
 Her derlemenin APK'sı ayrıca [Actions](../../actions) sekmesinde, çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısında bulunur.
 

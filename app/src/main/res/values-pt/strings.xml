@@ -120,6 +120,10 @@
     <string name="update_available">Nova versão disponível: %1$s. Toque para baixar</string>
     <string name="update_no_release">Nenhuma versão publicada ainda</string>
     <string name="update_failed">Não foi possível verificar. Confira sua conexão com a internet</string>
+    <string name="update_downloading">Baixando… %1$d%%</string>
+    <string name="update_ready">Baixado. Toque para instalar</string>
+    <string name="update_install_permission">Permita instalar a partir deste app nas configurações e toque de novo</string>
+    <string name="update_download_failed">Falha no download. Toque para abrir a página do GitHub</string>
     <string name="github_page">Página do GitHub</string>
     <string name="github_page_hint">Código-fonte, versões e relato de problemas</string>
     <string name="log_hint">Últimas leituras do contador e do HyperOS</string>

@@ -120,6 +120,10 @@
     <string name="update_available">有新版本：%1$s。点按下载</string>
     <string name="update_no_release">尚未发布任何版本</string>
     <string name="update_failed">无法检查。请检查网络连接</string>
+    <string name="update_downloading">正在下载… %1$d%%</string>
+    <string name="update_ready">已下载。点按安装</string>
+    <string name="update_install_permission">请在设置中允许此应用安装应用，然后再次点按</string>
+    <string name="update_download_failed">下载失败。点按打开 GitHub 页面</string>
     <string name="github_page">GitHub 页面</string>
     <string name="github_page_hint">源代码、版本和问题反馈</string>
     <string name="log_hint">最近的计步器和 HyperOS 读取</string>
