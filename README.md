@@ -133,7 +133,7 @@ Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açı
 
 ### Kullanılmayanlar
 
-- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin verisi olan günlerde bileklik sayısı, olmayan günlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. Gerekçe: [GOALS.md](GOALS.md).
+- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin verisi olan günlerde bileklik sayısı, olmayan günlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün için egzersizler, mesafe, kalori, nabız ve uyku da gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
 - Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
 
 ## Pil ve arka plan

@@ -35,6 +35,7 @@ import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
@@ -124,6 +125,7 @@ class MainActivity : ComponentActivity() {
         onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/octet-stream")) },
         loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
+        loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
     )
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->

@@ -264,13 +264,28 @@
 
     <string name="oem_transsion_1">Gestión automática → elige AdımSayar en la lista de apps y activa los tres permisos</string>
     <string name="wearable_card_title">Usar pasos de la pulsera</string>
-    <string name="wearable_card_text">Lee los pasos que las apps de pulsera como Mi Fitness escriben en Health Connect. Los días con datos de la pulsera se usa su recuento; si no, el del teléfono.</string>
+    <string name="wearable_card_text">Lee los pasos que las apps de pulsera como Mi Fitness escriben en Health Connect. Los días con datos de la pulsera se usa su recuento; si no, el del teléfono. Si lo permites, el historial también muestra entrenamientos, distancia, calorías, frecuencia cardíaca y sueño.</string>
     <string name="wearable_permission_denied">No se concedió el permiso para leer pasos de Health Connect.</string>
     <string name="wearable_unavailable">Health Connect no está en este teléfono. En Android 13 o anterior, instala la app Health Connect desde Play Store.</string>
     <string name="wearable_privacy_title">Pasos de la pulsera</string>
-    <string name="wearable_privacy_text">AdimSayar solo lee registros de pasos de Health Connect. No escribe nada ni envía datos fuera del teléfono. Los pasos leídos solo se usan para los totales diarios en este teléfono.</string>
+    <string name="wearable_privacy_text">AdimSayar solo lee de Health Connect registros de pasos, entrenamientos, distancia, calorías, frecuencia cardíaca y sueño. No escribe nada ni envía datos fuera del teléfono. Los datos leídos solo se muestran dentro de la app en este teléfono.</string>
     <string name="log_wearable_missing">Health Connect no encontrado</string>
     <string name="log_wearable_denied">Sin permiso de lectura de Health Connect</string>
     <string name="log_wearable_error">No se pudo leer Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Pulsera: %1$d pasos hoy, %2$d días actualizados</string>
+    <string name="band_exercises">Entrenamientos</string>
+    <string name="band_heart">Frecuencia cardíaca</string>
+    <string name="band_heart_value">Reposo %1$s · mín. %2$s · media %3$s · máx. %4$s</string>
+    <string name="band_resting_week">Frecuencia en reposo, últimos 7 días</string>
+    <string name="band_sleep">Sueño</string>
+    <string name="band_sleep_value">%1$d h %2$d min</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="exercise_walking">Caminata</string>
+    <string name="exercise_running">Carrera</string>
+    <string name="exercise_biking">Ciclismo</string>
+    <string name="exercise_hiking">Senderismo</string>
+    <string name="exercise_swimming">Natación</string>
+    <string name="exercise_yoga">Yoga</string>
+    <string name="exercise_strength">Fuerza</string>
+    <string name="exercise_other">Entrenamiento</string>
 </resources>

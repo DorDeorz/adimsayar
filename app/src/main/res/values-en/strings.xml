@@ -264,13 +264,28 @@
 
     <string name="oem_transsion_1">Auto management → select AdımSayar in the app list, turn on all three permissions</string>
     <string name="wearable_card_title">Use band steps</string>
-    <string name="wearable_card_text">Reads the steps that band apps such as Mi Fitness write to Health Connect. On days with band data the band\'s count is used, otherwise the phone\'s count.</string>
+    <string name="wearable_card_text">Reads the steps that band apps such as Mi Fitness write to Health Connect. On days with band data the band\'s count is used, otherwise the phone\'s count. If you allow it, workouts, distance, calories, heart rate and sleep are also shown in History.</string>
     <string name="wearable_permission_denied">Health Connect step read permission was not granted.</string>
     <string name="wearable_unavailable">Health Connect is not on this phone. On Android 13 and earlier, install the Health Connect app from the Play Store.</string>
     <string name="wearable_privacy_title">Band steps</string>
-    <string name="wearable_privacy_text">AdimSayar only reads step records from Health Connect. It writes nothing and never sends data off the phone. The steps it reads are only used for the daily totals on this phone.</string>
+    <string name="wearable_privacy_text">AdimSayar only reads step, workout, distance, calorie, heart rate and sleep records from Health Connect. It writes nothing and never sends data off the phone. The data it reads is only shown inside the app on this phone.</string>
     <string name="log_wearable_missing">Health Connect not found</string>
     <string name="log_wearable_denied">No Health Connect read permission</string>
     <string name="log_wearable_error">Health Connect could not be read (%1$s)</string>
     <string name="log_wearable_synced">Band: %1$d steps today, %2$d days updated</string>
+    <string name="band_exercises">Workouts</string>
+    <string name="band_heart">Heart rate</string>
+    <string name="band_heart_value">Resting %1$s · min %2$s · avg %3$s · max %4$s</string>
+    <string name="band_resting_week">Resting heart rate, last 7 days</string>
+    <string name="band_sleep">Sleep</string>
+    <string name="band_sleep_value">%1$d h %2$d min</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="exercise_walking">Walking</string>
+    <string name="exercise_running">Running</string>
+    <string name="exercise_biking">Cycling</string>
+    <string name="exercise_hiking">Hiking</string>
+    <string name="exercise_swimming">Swimming</string>
+    <string name="exercise_yoga">Yoga</string>
+    <string name="exercise_strength">Strength training</string>
+    <string name="exercise_other">Workout</string>
 </resources>

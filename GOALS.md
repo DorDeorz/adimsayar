@@ -127,6 +127,13 @@ Bilinen trade-off'lar:
 - Bileklik açıkken Geçmiş'teki saatlik döküm gizlenir, çünkü HyperOS'un saatlik verisi bileklik toplamıyla tutmaz.
 - Android 13 ve öncesinde Health Connect ayrı bir uygulama olarak Play Store'dan kurulmalıdır. Android 9 öncesinde anahtar görünmez.
 
+Diğer bileklik verileri (kullanıcı kararı 2026-10-11, "Hepsi, uyku dahil"): aynı anahtarla egzersizler, mesafe, aktif kalori, nabız ve uyku da okunur. Her tür ayrı Health Connect izniyle gelir; izin verilmeyen tür okunmaz. Bu veriler saklanmaz, Geçmiş'te seçilen gün açılınca Health Connect'ten okunur:
+
+- Mesafe ve aktif kalori: adımlardaki gibi kaynak uygulamaya göre toplanır, en büyük kaynak alınır. Bileklik değeri varsa boy ve kiloyla yapılan tahminin yerine gösterilir. Aktif kalori dinlenme harcamasını içermez, bu yüzden tahminle aynı ölçek değildir.
+- Egzersizler: o gün başlayan oturumlar, türü ve süresiyle. Aynı dakikada başlayan aynı türden oturumlar bir kez gösterilir.
+- Nabız: günün en düşük, ortalama ve en yüksek değeri; dinlenme nabzı varsa o da. Son 7 günün grafiği dinlenme nabzını, yoksa günün en düşük nabzını gösterir.
+- Uyku: o gün sabah biten uyku oturumlarının toplam süresi.
+
 ### Xiaomi / HyperOS adım kaydı
 
 **Karar (2026-10-09, kullanıcı onayı): Xiaomi cihazlarda HyperOS'un adım kaydı, kullanıcının açtığı bir anahtarla ana kaynak olabilir.**

@@ -23,7 +23,7 @@ object WearableSteps {
     private const val RECENT_DAYS = 1L
 
     val READ_STEPS: String = HealthPermission.getReadPermission(StepsRecord::class)
-    val PERMISSIONS: Set<String> = setOf(READ_STEPS, HealthPermission.PERMISSION_READ_HEALTH_DATA_IN_BACKGROUND)
+    val PERMISSIONS: Set<String> = setOf(READ_STEPS, HealthPermission.PERMISSION_READ_HEALTH_DATA_IN_BACKGROUND) + WearableHealth.PERMISSIONS
 
     @Volatile
     private var lastLoggedToday: Long? = null
