@@ -36,7 +36,7 @@ object UpdateInstaller {
                 connection.readTimeout = TIMEOUT_MS
                 connection.instanceFollowRedirects = true
                 if (connection.responseCode != HttpURLConnection.HTTP_OK) return@runCatching null
-                val total = connection.contentLengthLong
+                val total = connection.getHeaderField("Content-Length")?.toLongOrNull() ?: -1L
                 var done = 0L
                 connection.inputStream.use { input ->
                     partial.outputStream().use { output ->
