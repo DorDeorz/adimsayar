@@ -67,9 +67,15 @@ object WearableSteps {
         if (now < next && next - now <= ERROR_BACKOFF_MS) return null
         if (!running.tryLock()) return null
         return try {
-            prefs(context).edit(commit = true) { putLong(key, now + if (foreground) APP_INTERVAL_MS else MIN_INTERVAL_MS) }
+            prefs(context).edit(commit = true) {
+                putLong(KEY_NEXT_APP_ATTEMPT, now + APP_INTERVAL_MS)
+                putLong(KEY_NEXT_ATTEMPT, now + MIN_INTERVAL_MS)
+            }
             syncNow(context, source).also { today ->
-                if (today == null) prefs(context).edit(commit = true) { putLong(key, now + if (foreground) MIN_INTERVAL_MS else ERROR_BACKOFF_MS) }
+                if (today == null) prefs(context).edit(commit = true) {
+                    putLong(KEY_NEXT_APP_ATTEMPT, now + MIN_INTERVAL_MS)
+                    putLong(KEY_NEXT_ATTEMPT, now + ERROR_BACKOFF_MS)
+                }
             }
         } finally {
             running.unlock()
