@@ -113,7 +113,7 @@ Neden: kullanıcının Xiaomi Mi Band 8'i Mi Fitness ile eşleşiyor. Bileklik a
 
 İlk karardaki sorunlar şöyle önlenir:
 
-- Health Connect'in birleştirilmiş toplamı kullanılmaz. Ham adım kayıtları okunur ve kaynak uygulamaya göre günlere bölünür. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
+- Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz. Her kaynak uygulama için ayrı günlük toplam istenir (`dataOriginFilter`). İlk sürüm ham kayıtları sayfa sayfa okuyordu ve Redmi'de Health Connect'in istek sınırına takıldı; okumalar artık birkaç istekle yapılır, en az 5 dakika arayla, hata sonrası 1 saat beklenerek. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
 - Bilekliğin verisi olan günde bileklik toplamı kullanılır, olmayan günde telefonun toplamı. Kullanıcıya göre bileklik telefondan daha doğru sayar; telefonun daha yüksek olması bilekliğin yanlış saydığı anlamına gelmez. Bileklik bağlı değilse o gün için veri gelmez ve telefonun sayısı kullanılır, gün boş kalmaz.
 - Telefon toplamları değiştirilmez. Bileklik toplamları ayrı tabloda tutulur ve okurken birleştirilir. Anahtar kapatılınca bileklik tablosu silinir, telefonun sayıları geri gelir.
 - Health Connect'e hiçbir şey yazılmaz, veri telefondan çıkmaz.

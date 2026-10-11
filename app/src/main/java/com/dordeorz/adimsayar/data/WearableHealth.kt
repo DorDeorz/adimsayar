@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
+import androidx.health.connect.client.aggregate.AggregateMetric
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
 import androidx.health.connect.client.records.DistanceRecord
@@ -10,12 +11,15 @@ import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.RestingHeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
+import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
+import androidx.health.connect.client.request.AggregateRequest
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import kotlinx.coroutines.CancellationException
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
+import java.time.Period
 import java.time.ZoneId
 import kotlin.reflect.KClass
 
@@ -37,7 +41,6 @@ class BandDay(
 object WearableHealth {
 
     private const val WEEK_DAYS = 7L
-    private const val SCALE = 1000L
 
     val PERMISSIONS: Set<String> = setOf(
         HealthPermission.getReadPermission(ExerciseSessionRecord::class),
@@ -65,21 +68,24 @@ object WearableHealth {
 
         val from = date.atStartOfDay(zone).toInstant()
         val to = date.plusDays(1).atStartOfDay(zone).toInstant()
+        val dayRange = TimeRangeFilter.between(date.atStartOfDay(), date.plusDays(1).atStartOfDay())
 
-        val distance = if (allowed(DistanceRecord::class)) {
-            largestOrigin(readAll(client, DistanceRecord::class, from, to), date, zone) { record ->
-                StepInterval(Math.round(record.distance.inMeters * SCALE), record.startTime.toEpochMilli(), record.endTime.toEpochMilli())
-            }?.let { it.toDouble() / SCALE / 1000.0 }
-        } else {
-            null
+        val amountMetrics = buildSet<AggregateMetric<*>> {
+            if (allowed(DistanceRecord::class)) add(DistanceRecord.DISTANCE_TOTAL)
+            if (allowed(ActiveCaloriesBurnedRecord::class)) add(ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL)
         }
-        val kcal = if (allowed(ActiveCaloriesBurnedRecord::class)) {
-            largestOrigin(readAll(client, ActiveCaloriesBurnedRecord::class, from, to), date, zone) { record ->
-                StepInterval(Math.round(record.energy.inKilocalories * SCALE), record.startTime.toEpochMilli(), record.endTime.toEpochMilli())
-            }?.let { Math.round(it.toDouble() / SCALE) }
-        } else {
-            null
+        var distance: Double? = null
+        var kcal: Long? = null
+        if (amountMetrics.isNotEmpty()) {
+            val origins = client.aggregate(AggregateRequest(amountMetrics, dayRange)).dataOrigins
+            for (origin in origins) {
+                val result = client.aggregate(AggregateRequest(amountMetrics, dayRange, setOf(origin)))
+                result[DistanceRecord.DISTANCE_TOTAL]?.inKilometers?.takeIf { it > 0.0 }?.let { distance = maxOf(distance ?: 0.0, it) }
+                result[ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL]?.inKilocalories?.takeIf { it > 0.0 }
+                    ?.let { kcal = maxOf(kcal ?: 0L, Math.round(it)) }
+            }
         }
+
         val exercises = if (allowed(ExerciseSessionRecord::class)) {
             readAll(client, ExerciseSessionRecord::class, from, to)
                 .distinctBy { it.exerciseType to it.startTime.epochSecond / 60 }
@@ -98,34 +104,30 @@ object WearableHealth {
             null
         }
 
-        val heartAllowed = allowed(HeartRateRecord::class)
-        val restingAllowed = allowed(RestingHeartRateRecord::class)
-        val weekFrom = date.minusDays(WEEK_DAYS - 1).atStartOfDay(zone).toInstant()
-        val samples = if (heartAllowed) {
-            readAll(client, HeartRateRecord::class, weekFrom, to).flatMap { it.samples }.filter { it.time >= weekFrom && it.time < to }
-        } else {
-            emptyList()
+        val heartMetrics = buildSet<AggregateMetric<*>> {
+            if (allowed(HeartRateRecord::class)) addAll(listOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_AVG, HeartRateRecord.BPM_MAX))
+            if (allowed(RestingHeartRateRecord::class)) add(RestingHeartRateRecord.BPM_AVG)
         }
-        val resting = if (restingAllowed) readAll(client, RestingHeartRateRecord::class, weekFrom, to) else emptyList()
-        val samplesByDay = samples.groupBy { it.time.atZone(zone).toLocalDate() }.mapValues { (_, list) -> list.map { it.beatsPerMinute } }
-        val restingByDay = resting.groupBy { it.time.atZone(zone).toLocalDate() }
-            .mapValues { (_, list) -> Math.round(list.map { it.beatsPerMinute }.average()) }
+        val heartByDay = if (heartMetrics.isNotEmpty()) {
+            val weekRange = TimeRangeFilter.between(date.minusDays(WEEK_DAYS - 1).atStartOfDay(), date.plusDays(1).atStartOfDay())
+            client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(heartMetrics, weekRange, Period.ofDays(1)))
+                .associate { it.startTime.toLocalDate() to it.result }
+        } else {
+            emptyMap()
+        }
         val restingWeek = (WEEK_DAYS - 1 downTo 0L).map { offset ->
             val day = date.minusDays(offset)
-            day to (restingByDay[day] ?: samplesByDay[day]?.minOrNull())
+            val result = heartByDay[day]
+            day to (result?.get(RestingHeartRateRecord.BPM_AVG) ?: result?.get(HeartRateRecord.BPM_MIN))
         }
-        val heart = samplesByDay[date]?.takeIf { it.isNotEmpty() }?.let { bpm ->
-            HeartSummary(restingByDay[date], bpm.min(), Math.round(bpm.average()), bpm.max())
+        val heart = heartByDay[date]?.let { result ->
+            val min = result[HeartRateRecord.BPM_MIN]
+            val avg = result[HeartRateRecord.BPM_AVG]
+            val max = result[HeartRateRecord.BPM_MAX]
+            if (min != null && avg != null && max != null) HeartSummary(result[RestingHeartRateRecord.BPM_AVG], min, avg, max) else null
         }
 
         return BandDay(distance, kcal, exercises, heart, sleep, restingWeek.takeIf { week -> week.any { it.second != null } } ?: emptyList())
-    }
-
-    private fun <T : Record> largestOrigin(records: List<T>, date: LocalDate, zone: ZoneId, interval: (T) -> StepInterval): Long? {
-        val byOrigin = records.groupBy { it.metadata.dataOrigin.packageName }.values.map { list ->
-            list.sumOf { StepMath.splitByDay(interval(it), zone)[date] ?: 0L }
-        }
-        return byOrigin.maxOrNull()?.takeIf { it > 0L }
     }
 
     private suspend fun <T : Record> readAll(client: HealthConnectClient, type: KClass<T>, from: Instant, to: Instant): List<T> {

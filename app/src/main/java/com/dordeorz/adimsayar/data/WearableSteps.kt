@@ -6,14 +6,14 @@ import androidx.core.content.edit
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.StepsRecord
-import androidx.health.connect.client.request.ReadRecordsRequest
+import androidx.health.connect.client.records.metadata.DataOrigin
+import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import com.dordeorz.adimsayar.R
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
+import java.time.Period
 
 object WearableSteps {
 
@@ -22,9 +22,10 @@ object WearableSteps {
     private const val KEY_BACKFILLED = "wearable_backfilled"
     private const val BACKFILL_DAYS = 30L
     private const val RECENT_DAYS = 1L
-    private const val KEY_LAST_ATTEMPT = "wearable_last_attempt"
+    private const val KEY_NEXT_ATTEMPT = "wearable_next_attempt"
     private const val MIN_INTERVAL_MS = 5 * 60 * 1000L
-    const val MAX_PAGES = 100
+    private const val ERROR_BACKOFF_MS = 60 * 60 * 1000L
+    const val MAX_PAGES = 20
 
     val READ_STEPS: String = HealthPermission.getReadPermission(StepsRecord::class)
     val PERMISSIONS: Set<String> = setOf(READ_STEPS, HealthPermission.PERMISSION_READ_HEALTH_DATA_IN_BACKGROUND) + WearableHealth.PERMISSIONS
@@ -43,7 +44,7 @@ object WearableSteps {
         prefs(context).edit {
             putBoolean(KEY_ENABLED, enabled)
             putBoolean(KEY_BACKFILLED, false)
-            remove(KEY_LAST_ATTEMPT)
+            remove(KEY_NEXT_ATTEMPT)
         }
         if (!enabled) StepRepository.get(context).clearBandDays()
     }
@@ -53,12 +54,14 @@ object WearableSteps {
 
     suspend fun sync(context: Context, source: ReadSource): Long? {
         val now = System.currentTimeMillis()
-        val lastAttempt = prefs(context).getLong(KEY_LAST_ATTEMPT, 0L)
-        if (now - lastAttempt in 0 until MIN_INTERVAL_MS) return null
+        val next = prefs(context).getLong(KEY_NEXT_ATTEMPT, 0L)
+        if (now < next && next - now <= ERROR_BACKOFF_MS) return null
         if (!running.tryLock()) return null
         return try {
-            prefs(context).edit(commit = true) { putLong(KEY_LAST_ATTEMPT, now) }
-            syncNow(context, source)
+            prefs(context).edit(commit = true) { putLong(KEY_NEXT_ATTEMPT, now + MIN_INTERVAL_MS) }
+            syncNow(context, source).also { today ->
+                if (today == null) prefs(context).edit(commit = true) { putLong(KEY_NEXT_ATTEMPT, now + ERROR_BACKOFF_MS) }
+            }
         } finally {
             running.unlock()
         }
@@ -70,11 +73,11 @@ object WearableSteps {
             log.failure(source, R.string.log_wearable_missing)
             return null
         }
-        val zone = ZoneId.systemDefault()
         val backfilled = prefs(context).getBoolean(KEY_BACKFILLED, false)
-        val from = LocalDate.now().minusDays(if (backfilled) RECENT_DAYS else BACKFILL_DAYS).atStartOfDay(zone).toInstant()
+        val today = LocalDate.now()
+        val from = today.minusDays(if (backfilled) RECENT_DAYS else BACKFILL_DAYS)
         val days = try {
-            dailyTotals(HealthConnectClient.getOrCreate(context), from, Instant.now(), zone)
+            dailyTotals(HealthConnectClient.getOrCreate(context), from, today)
         } catch (e: CancellationException) {
             throw e
         } catch (e: SecurityException) {
@@ -86,34 +89,27 @@ object WearableSteps {
         }
         StepRepository.get(context).replaceBandDays(days)
         prefs(context).edit { putBoolean(KEY_BACKFILLED, true) }
-        val today = days[LocalDate.now()] ?: 0L
-        if (source != ReadSource.App || today != lastLoggedToday) {
-            lastLoggedToday = today
-            log.note(source, context.getString(R.string.log_wearable_synced, today, days.size))
+        val todaySteps = days[today] ?: 0L
+        if (source != ReadSource.App || todaySteps != lastLoggedToday) {
+            lastLoggedToday = todaySteps
+            log.note(source, context.getString(R.string.log_wearable_synced, todaySteps, days.size))
         }
-        return today
+        return todaySteps
     }
 
-    private suspend fun dailyTotals(client: HealthConnectClient, from: Instant, to: Instant, zone: ZoneId): Map<LocalDate, Long> {
-        val byOrigin = HashMap<String, HashMap<LocalDate, Long>>()
-        var pageToken: String? = null
-        var pages = 0
-        do {
-            val response = client.readRecords(
-                ReadRecordsRequest(StepsRecord::class, TimeRangeFilter.between(from, to), pageToken = pageToken),
-            )
-            for (record in response.records) {
-                val totals = byOrigin.getOrPut(record.metadata.dataOrigin.packageName) { HashMap() }
-                val interval = StepInterval(record.count, record.startTime.toEpochMilli(), record.endTime.toEpochMilli())
-                for ((day, count) in StepMath.splitByDay(interval, zone)) {
-                    totals[day] = (totals[day] ?: 0L) + count
-                }
-            }
-            pageToken = response.pageToken
-            pages++
-        } while (!pageToken.isNullOrEmpty() && pages < MAX_PAGES)
-        return StepMath.bestSourcePerDay(byOrigin.values)
+    private suspend fun dailyTotals(client: HealthConnectClient, from: LocalDate, to: LocalDate): Map<LocalDate, Long> {
+        val range = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
+        val origins = client.aggregateGroupByPeriod(dailySteps(range, emptySet())).flatMap { it.result.dataOrigins }.toSet()
+        val perOrigin = origins.map { origin ->
+            client.aggregateGroupByPeriod(dailySteps(range, setOf(origin))).mapNotNull { group ->
+                group.result[StepsRecord.COUNT_TOTAL]?.takeIf { it > 0L }?.let { group.startTime.toLocalDate() to it }
+            }.toMap()
+        }
+        return StepMath.bestSourcePerDay(perOrigin)
     }
+
+    private fun dailySteps(range: TimeRangeFilter, origins: Set<DataOrigin>) =
+        AggregateGroupByPeriodRequest(setOf(StepsRecord.COUNT_TOTAL), range, Period.ofDays(1), origins)
 
     private fun prefs(context: Context) = context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE)
 }

@@ -40,7 +40,7 @@ Tek sensöre güvenilmez. İki kaynak okunur ve çapraz doğrulanır:
 | `TYPE_STEP_DETECTOR` | Çapraz doğrulama, donmaya duyarlı değil | Yavaşlatma/hızlanma sırasında hata |
 | `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Donabiliyor** |
 
-Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır ("Bileklik adımları"). Özet: Health Connect'in birleştirilmiş toplamı (`aggregate`) kullanılmaz, çünkü telefon ve bileklik adımlarını kullanıcının değiştirebildiği bir öncelik sırasıyla birleştirir. Bunun yerine ham kayıtlar okunur ve kaynak uygulamaya göre ayrılır:
+Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır ("Bileklik adımları"). Özet: Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz, çünkü telefon ve bileklik adımlarını kullanıcının değiştirebildiği bir öncelik sırasıyla birleştirir. Bunun yerine her kaynak uygulama için ayrı günlük toplam istenir (`aggregateGroupByPeriod` + `dataOriginFilter`). Ham kayıtlar sayfa sayfa okunmaz: Mi Fitness dakikalık kayıt yazdığı için bu Health Connect'in istek sınırını aşıyordu (2026-10-11, Redmi'de "Rate limited"). Okumalar en az 5 dakika arayla yapılır, hata sonrası 1 saat beklenir.
 
 - Her gün için kaynak uygulamaların (ör. Mi Fitness) toplamlarından en büyüğü alınır; farklı uygulamaların adımları toplanmaz.
 - Bilekliğin verisi olan günlerde bileklik toplamı telefonun toplamının yerine geçer, olmayan günlerde telefonun toplamı kullanılır. Bileklik telefondan daha doğru sayar, bu yüzden telefonun daha yüksek olması bilekliğin hatası sayılmaz (kullanıcı kararı).
