@@ -27,6 +27,8 @@ object WearableSteps {
     private const val BACKFILL_DAYS = 30L
     private const val RECENT_DAYS = 1L
     private const val KEY_NEXT_ATTEMPT = "wearable_next_attempt"
+    private const val KEY_NEXT_APP_ATTEMPT = "wearable_next_app_attempt"
+    private const val APP_INTERVAL_MS = 60 * 1000L
     private const val MIN_INTERVAL_MS = 5 * 60 * 1000L
     private const val ERROR_BACKOFF_MS = 60 * 60 * 1000L
     const val MAX_PAGES = 20
@@ -49,6 +51,7 @@ object WearableSteps {
             putBoolean(KEY_ENABLED, enabled)
             putBoolean(KEY_BACKFILLED, false)
             remove(KEY_NEXT_ATTEMPT)
+            remove(KEY_NEXT_APP_ATTEMPT)
         }
         if (!enabled) StepRepository.get(context).clearBandDays()
     }
@@ -57,14 +60,16 @@ object WearableSteps {
         isAvailable(context) && READ_STEPS in HealthConnectClient.getOrCreate(context).permissionController.getGrantedPermissions()
 
     suspend fun sync(context: Context, source: ReadSource): Long? {
+        val foreground = source == ReadSource.App
+        val key = if (foreground) KEY_NEXT_APP_ATTEMPT else KEY_NEXT_ATTEMPT
         val now = System.currentTimeMillis()
-        val next = prefs(context).getLong(KEY_NEXT_ATTEMPT, 0L)
+        val next = prefs(context).getLong(key, 0L)
         if (now < next && next - now <= ERROR_BACKOFF_MS) return null
         if (!running.tryLock()) return null
         return try {
-            prefs(context).edit(commit = true) { putLong(KEY_NEXT_ATTEMPT, now + MIN_INTERVAL_MS) }
+            prefs(context).edit(commit = true) { putLong(key, now + if (foreground) APP_INTERVAL_MS else MIN_INTERVAL_MS) }
             syncNow(context, source).also { today ->
-                if (today == null) prefs(context).edit(commit = true) { putLong(KEY_NEXT_ATTEMPT, now + ERROR_BACKOFF_MS) }
+                if (today == null) prefs(context).edit(commit = true) { putLong(key, now + if (foreground) MIN_INTERVAL_MS else ERROR_BACKOFF_MS) }
             }
         } finally {
             running.unlock()
