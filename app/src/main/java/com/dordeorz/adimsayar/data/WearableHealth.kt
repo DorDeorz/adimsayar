@@ -199,7 +199,7 @@ object WearableHealth {
             val min = result[HeartRateRecord.BPM_MIN]
             val avg = result[HeartRateRecord.BPM_AVG]
             val max = result[HeartRateRecord.BPM_MAX]
-            if (min != null && avg != null && max != null) HeartSummary(result[RestingHeartRateRecord.BPM_AVG], min, avg, max) else null
+            if (min != null && avg != null && max != null) HeartSummary(result[RestingHeartRateRecord.BPM_AVG] ?: min, min, avg, max) else null
         }
 
         return BandDay(distance, kcal, exercises, heart, sleep, restingWeek.takeIf { week -> week.any { it.second != null } } ?: emptyList())
