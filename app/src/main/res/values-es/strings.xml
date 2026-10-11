@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Pulso en reposo</string>
     <string name="health_min_max">%1$d–%2$d lpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Resumen de salud de la pulsera en el Historial (7 o 30 días): sueño, pulso en reposo con gráfico, entrenamientos, distancia</item>
+        <item>Las actualizaciones ahora se descargan e instalan desde la app</item>
+        <item>Los pasos de la pulsera se leen cada minuto con la app abierta</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Los pasos de Mi Band y otras pulseras se pueden leer con Health Connect (Ajustes, desactivado por defecto). En las horas con pulsera cuenta la pulsera; en las demás, el teléfono</item>
         <item>Datos de la pulsera en el Historial: entrenamientos, distancia, calorías activas, pulso y sueño</item>

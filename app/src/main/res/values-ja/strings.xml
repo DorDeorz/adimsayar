@@ -211,6 +211,11 @@
     <string name="health_resting_chart">安静時心拍数</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>履歴にバンドの健康サマリー（7 日または 30 日）：睡眠、安静時心拍数とグラフ、ワークアウト、距離</item>
+        <item>アップデートをアプリ内でダウンロードしてインストールできます</item>
+        <item>アプリを開いている間はバンドの歩数を 1 分ごとに読み込みます</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band などのバンドの歩数を Health Connect から読み込めます（設定、既定はオフ）。バンドを着けていた時間はバンド、それ以外は電話の歩数を使います</item>
         <item>履歴にバンドのデータ：ワークアウト、距離、アクティブカロリー、心拍数、睡眠</item>

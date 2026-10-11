@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Resting heart rate</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Health summary for the band in History, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
+        <item>Updates are now downloaded and installed from inside the app</item>
+        <item>Band steps are read every minute while the app is open</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>
         <item>Band data in History: workouts, distance, active calories, heart rate and sleep</item>

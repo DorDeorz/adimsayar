@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Battito a riposo</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Riepilogo salute del braccialetto nella cronologia (7 o 30 giorni): sonno, battito a riposo con grafico, allenamenti, distanza</item>
+        <item>Gli aggiornamenti ora si scaricano e installano dall\'app</item>
+        <item>I passi del braccialetto vengono letti ogni minuto con l\'app aperta</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>I passi di Mi Band e di altri braccialetti si possono leggere tramite Health Connect (Impostazioni, disattivato di default). Nelle ore con il braccialetto conta il braccialetto, nelle altre il telefono</item>
         <item>Dati del braccialetto nella cronologia: allenamenti, distanza, calorie attive, battito e sonno</item>

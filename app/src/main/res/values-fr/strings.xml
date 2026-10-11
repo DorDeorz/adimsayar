@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Fréquence cardiaque au repos</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
+        <item>Les mises à jour se téléchargent et s\'installent depuis l\'appli</item>
+        <item>Les pas du bracelet sont lus chaque minute quand l\'appli est ouverte</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>
         <item>Données du bracelet dans l\'historique : exercices, distance, calories actives, fréquence cardiaque et sommeil</item>

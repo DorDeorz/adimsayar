@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Dinlenme nabzı</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Geçmiş\'te bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
+        <item>Güncellemeler artık uygulamanın içinden indirilip kurulur</item>
+        <item>Uygulama açıkken bileklik adımları dakikada bir okunur</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>
         <item>Geçmiş\'te bileklik verileri: egzersizler, mesafe, aktif kalori, nabız ve uyku</item>

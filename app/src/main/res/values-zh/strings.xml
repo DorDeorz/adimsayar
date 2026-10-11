@@ -211,6 +211,11 @@
     <string name="health_resting_chart">静息心率</string>
     <string name="health_min_max">%1$d–%2$d 次/分</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
+        <item>现在可在应用内下载并安装更新</item>
+        <item>应用打开时每分钟读取一次手环步数</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>可通过 Health Connect 读取 Mi Band 等手环的步数（设置中，默认关闭）。佩戴手环的小时使用手环数据，其余小时使用手机数据</item>
         <item>历史中的手环数据：锻炼、距离、活动卡路里、心率和睡眠</item>

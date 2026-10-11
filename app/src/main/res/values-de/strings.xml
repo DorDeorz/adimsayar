@@ -211,6 +211,11 @@
     <string name="health_resting_chart">Ruhepuls</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
+        <item>Updates werden jetzt direkt in der App heruntergeladen und installiert</item>
+        <item>Armbandschritte werden bei geöffneter App jede Minute gelesen</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>
         <item>Armbanddaten im Verlauf: Trainings, Strecke, aktive Kalorien, Puls und Schlaf</item>

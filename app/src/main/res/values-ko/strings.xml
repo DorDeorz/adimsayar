@@ -211,6 +211,11 @@
     <string name="health_resting_chart">안정 시 심박수</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
+    <string-array name="release_notes_0_7_1">
+        <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
+        <item>이제 앱 안에서 업데이트를 다운로드하고 설치합니다</item>
+        <item>앱이 열려 있으면 밴드 걸음 수를 1분마다 읽습니다</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>
         <item>기록에 밴드 데이터: 운동, 거리, 활동 칼로리, 심박수, 수면</item>
