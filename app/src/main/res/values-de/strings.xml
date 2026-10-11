@@ -263,4 +263,29 @@
     <string name="oem_asus_1">Autostart → AdımSayar zulassen</string>
 
     <string name="oem_transsion_1">Automatische Verwaltung → AdımSayar in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
+    <string name="wearable_card_title">Armband-Schritte verwenden</string>
+    <string name="wearable_card_text">Liest die Schritte, die Armband-Apps wie Mi Fitness in Health Connect schreiben. An Tagen mit Armbanddaten zählt das Armband, sonst das Telefon. Wenn du es erlaubst, werden auch Trainings, Strecke, Kalorien, Puls und Schlaf im Verlauf angezeigt.</string>
+    <string name="wearable_permission_denied">Die Berechtigung zum Lesen von Schritten in Health Connect wurde nicht erteilt.</string>
+    <string name="wearable_unavailable">Health Connect ist auf diesem Telefon nicht vorhanden. Installiere unter Android 13 und älter die App Health Connect aus dem Play Store.</string>
+    <string name="wearable_privacy_title">Armband-Schritte</string>
+    <string name="wearable_privacy_text">AdimSayar liest aus Health Connect nur Schritt-, Trainings-, Strecken-, Kalorien-, Puls- und Schlafdaten. Es schreibt nichts und sendet keine Daten vom Telefon weg. Die gelesenen Daten werden nur in der App auf diesem Telefon angezeigt.</string>
+    <string name="log_wearable_missing">Health Connect nicht gefunden</string>
+    <string name="log_wearable_denied">Keine Leseberechtigung für Health Connect</string>
+    <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
+    <string name="log_wearable_synced">Armband: heute %1$d Schritte, %2$d Tage aktualisiert</string>
+    <string name="band_exercises">Trainings</string>
+    <string name="band_heart">Puls</string>
+    <string name="band_heart_value">Ruhe %1$s · min. %2$s · Ø %3$s · max. %4$s</string>
+    <string name="band_resting_week">Ruhepuls der letzten 7 Tage</string>
+    <string name="band_sleep">Schlaf</string>
+    <string name="band_sleep_value">%1$d Std. %2$d Min.</string>
+    <string name="duration_minutes">%1$d Min.</string>
+    <string name="exercise_walking">Gehen</string>
+    <string name="exercise_running">Laufen</string>
+    <string name="exercise_biking">Radfahren</string>
+    <string name="exercise_hiking">Wandern</string>
+    <string name="exercise_swimming">Schwimmen</string>
+    <string name="exercise_yoga">Yoga</string>
+    <string name="exercise_strength">Krafttraining</string>
+    <string name="exercise_other">Training</string>
 </resources>

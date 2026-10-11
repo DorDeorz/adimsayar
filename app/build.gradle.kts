@@ -72,6 +72,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.profileinstaller)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.health.connect.client)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

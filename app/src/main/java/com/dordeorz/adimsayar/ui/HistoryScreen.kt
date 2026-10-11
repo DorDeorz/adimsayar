@@ -41,7 +41,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.AchievementMath
+import com.dordeorz.adimsayar.data.BandDay
 import com.dordeorz.adimsayar.data.DayDetail
+import com.dordeorz.adimsayar.data.ExerciseKind
 import com.dordeorz.adimsayar.data.Records
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -51,7 +53,7 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 
 @Composable
-fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?) {
+fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?, loadBandDay: suspend (LocalDate) -> BandDay?) {
     val currentMonth = YearMonth.from(state.today)
     val firstMonth = state.history.keys.minOrNull()?.let(YearMonth::from)?.coerceAtMost(currentMonth) ?: currentMonth
     var monthText by rememberSaveable { mutableStateOf(currentMonth.toString()) }
@@ -78,7 +80,7 @@ fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayD
                 onSelect = { selectedText = it.toString() },
             )
         }
-        item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, loadDayDetail) }
+        item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, loadDayDetail, loadBandDay) }
         item { RecordsCard(state.achievements.records, state.today) }
         item { YearCard(state) }
     }
@@ -246,10 +248,20 @@ private fun DayCell(date: LocalDate, steps: Long, goal: Long, future: Boolean, s
 }
 
 @Composable
-private fun SelectedDayCard(date: LocalDate, steps: Long, state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?) {
+private fun SelectedDayCard(
+    date: LocalDate,
+    steps: Long,
+    state: MainUiState,
+    loadDayDetail: suspend (LocalDate) -> DayDetail?,
+    loadBandDay: suspend (LocalDate) -> BandDay?,
+) {
     val goal = state.settings.dailyGoal
-    val detail by produceState<DayDetail?>(null, date, steps, state.xiaomiEnabled) {
-        value = if (state.xiaomiEnabled) withContext(Dispatchers.IO) { loadDayDetail(date) } else null
+    val hourly = state.xiaomiEnabled && !state.wearableEnabled
+    val detail by produceState<DayDetail?>(null, date, steps, hourly) {
+        value = if (hourly) withContext(Dispatchers.IO) { loadDayDetail(date) } else null
+    }
+    val band by produceState<BandDay?>(null, date, steps, state.wearableEnabled) {
+        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { loadBandDay(date) } else null
     }
     Card {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
@@ -258,7 +270,7 @@ private fun SelectedDayCard(date: LocalDate, steps: Long, state: MainUiState, lo
                     Text(LONG_DAY_FORMAT.format(date), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(stringResource(R.string.steps_value, format(steps)), style = MaterialTheme.typography.headlineMedium)
                     Text(
-                        distanceAndCalories(steps, state.settings),
+                        distanceAndCalories(steps, state.settings, band?.distanceKm, band?.activeKcal),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -273,6 +285,7 @@ private fun SelectedDayCard(date: LocalDate, steps: Long, state: MainUiState, lo
                 if (day.walking > 0L || day.running > 0L) WalkRunRow(day)
                 if (day.hours.any { it > 0L }) HourlyChart(day.hours)
             }
+            band?.let { BandSection(it) }
         }
     }
 }
@@ -332,6 +345,112 @@ private fun HourlyChart(hours: LongArray) {
         }
     }
 }
+
+@Composable
+private fun BandSection(day: BandDay) {
+    if (day.exercises.isNotEmpty()) {
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Text(stringResource(R.string.band_exercises), style = MaterialTheme.typography.labelLarge)
+            day.exercises.forEach { exercise ->
+                Row(modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
+                    Text(
+                        exercise.title?.takeIf { it.isNotBlank() } ?: stringResource(exerciseLabel(exercise.kind)),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        stringResource(R.string.duration_minutes, exercise.minutes),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+        }
+    }
+    day.heart?.let { heart ->
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Text(stringResource(R.string.band_heart), style = MaterialTheme.typography.labelLarge)
+            Text(
+                stringResource(
+                    R.string.band_heart_value,
+                    heart.resting?.toString() ?: "-",
+                    heart.min.toString(),
+                    heart.average.toString(),
+                    heart.max.toString(),
+                ),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+        }
+    }
+    if (day.restingWeek.isNotEmpty()) RestingWeekChart(day.restingWeek)
+    day.sleepMinutes?.takeIf { it > 0L }?.let { minutes ->
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Text(stringResource(R.string.band_sleep), style = MaterialTheme.typography.labelLarge)
+            Text(
+                stringResource(R.string.band_sleep_value, minutes / 60, minutes % 60),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun RestingWeekChart(week: List<Pair<LocalDate, Long?>>) {
+    val values = week.mapNotNull { it.second }
+    val max = values.max()
+    val min = (values.min() - RESTING_CHART_FLOOR).coerceAtLeast(0L)
+    val range = (max - min).coerceAtLeast(1L)
+    val color = MaterialTheme.colorScheme.tertiary
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Text(stringResource(R.string.band_resting_week), style = MaterialTheme.typography.labelLarge)
+        Row(
+            modifier = Modifier.fillMaxWidth().height(HOURLY_HEIGHT).padding(top = 8.dp),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            week.forEach { (_, bpm) ->
+                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                    if (bpm != null) {
+                        Text(bpm.toString(), style = MaterialTheme.typography.labelSmall)
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height((HOURLY_HEIGHT - 28.dp) * ((bpm - min).toFloat() / range))
+                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
+                                .background(color),
+                        )
+                    }
+                }
+            }
+        }
+        Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            week.forEach { (date, _) ->
+                Text(
+                    date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+        }
+    }
+}
+
+private fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
+    ExerciseKind.Walking -> R.string.exercise_walking
+    ExerciseKind.Running -> R.string.exercise_running
+    ExerciseKind.Biking -> R.string.exercise_biking
+    ExerciseKind.Hiking -> R.string.exercise_hiking
+    ExerciseKind.Swimming -> R.string.exercise_swimming
+    ExerciseKind.Yoga -> R.string.exercise_yoga
+    ExerciseKind.Strength -> R.string.exercise_strength
+    ExerciseKind.Other -> R.string.exercise_other
+}
+
+private const val RESTING_CHART_FLOOR = 5L
 
 private val HOURLY_HEIGHT = 72.dp
 

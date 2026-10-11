@@ -25,7 +25,7 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
 - Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü içindir (bkz. "İzinler").
-- **Health Connect kullanılmaz.** Veri yalnızca telefonun kendi sensörlerinden okunur. `androidx.health` bağımlılığı ekleme.
+- **Health Connect yalnızca bileklik verisi için, kullanıcının açtığı anahtarla okunur** (2026-10-11 kararı). Varsayılan kapalıdır. Yalnızca okuma yapılır, Health Connect'e hiçbir şey yazılmaz. Kapalıyken veri yalnızca telefonun kendi sensörlerinden (ve açıksa HyperOS kaydından) gelir. Bağımlılık `androidx.health.connect:connect-client`. Adımlar `data/WearableSteps.kt`; egzersiz, mesafe, aktif kalori, nabız ve uyku `data/WearableHealth.kt` içinde, Geçmiş'te seçilen gün için anlık okunur ve hiçbir yerde saklanmaz.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
@@ -40,9 +40,11 @@ Tek sensöre güvenilmez. İki kaynak okunur ve çapraz doğrulanır:
 | `TYPE_STEP_DETECTOR` | Çapraz doğrulama, donmaya duyarlı değil | Yavaşlatma/hızlanma sırasında hata |
 | `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Donabiliyor** |
 
-Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır. Gerekçenin özeti: Health Connect telefon ve giyilebilir cihaz verisini birleştirir, kolunda saat varken adım iki kez yazılır. Ayrıca kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve okunabilir bir API yoktur, dolayısıyla aynı gün iki farklı toplam üretilebilir. Bu, uygulamanın temel vaadiyle ve türetilmiş veri ilkesiyle çelişir.
+Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır ("Bileklik adımları"). Özet: Health Connect'in birleştirilmiş toplamı (`aggregate`) kullanılmaz, çünkü telefon ve bileklik adımlarını kullanıcının değiştirebildiği bir öncelik sırasıyla birleştirir. Bunun yerine ham kayıtlar okunur ve kaynak uygulamaya göre ayrılır:
 
-Giyilebilir cihaz desteği ileride istenirse Health Connect eklenebilir, ancak aralık bazlı deduplikasyonla birlikte eklenmelidir.
+- Her gün için kaynak uygulamaların (ör. Mi Fitness) toplamlarından en büyüğü alınır; farklı uygulamaların adımları toplanmaz.
+- Bilekliğin verisi olan günlerde bileklik toplamı telefonun toplamının yerine geçer, olmayan günlerde telefonun toplamı kullanılır. Bileklik telefondan daha doğru sayar, bu yüzden telefonun daha yüksek olması bilekliğin hatası sayılmaz (kullanıcı kararı).
+- Bileklik toplamları ayrı tabloda (`band_steps`) tutulur, telefon toplamları (`daily_steps`) değişmez. Anahtar kapatılınca bileklik tablosu silinir ve telefonun sayıları geri gelir.
 
 ### Kritik: sensörün null dönmesi
 
