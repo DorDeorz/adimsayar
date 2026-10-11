@@ -34,7 +34,7 @@ class StepRepository private constructor(private val context: Context) {
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
         if (days.isNotEmpty() && !XiaomiSteps.isEnabled(context)) {
             dao.add(days.mapKeys { it.key.toString() })
-            Reminders.onTodaySteps(context, dao.get(LocalDate.now().toString())?.steps ?: 0L)
+            Reminders.onTodaySteps(context, dao.getMerged(LocalDate.now().toString())?.steps ?: 0L)
         }
         _lastReadingWallMs.value = reading.wallMs
         interval
@@ -43,8 +43,18 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun replaceDays(days: Map<LocalDate, Long>) = mutex.withLock {
         dao.replace(days.mapKeys { it.key.toString() })
         _lastReadingWallMs.value = System.currentTimeMillis()
-        Reminders.onTodaySteps(context, days[LocalDate.now()] ?: 0L)
+        Reminders.onTodaySteps(context, dao.getMerged(LocalDate.now().toString())?.steps ?: 0L)
     }
+
+    suspend fun replaceBandDays(days: Map<LocalDate, Long>) = mutex.withLock {
+        dao.upsertBand(days.map { (date, steps) -> BandSteps(date.toString(), steps) })
+        Reminders.onTodaySteps(context, dao.getMerged(LocalDate.now().toString())?.steps ?: 0L)
+    }
+
+    suspend fun loadPhoneDays(from: LocalDate): Map<LocalDate, Long> =
+        dao.loadPhoneFrom(from.toString()).associate { LocalDate.parse(it.date) to it.steps }
+
+    suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
 

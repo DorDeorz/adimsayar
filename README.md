@@ -133,7 +133,7 @@ Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açı
 
 ### Kullanılmayanlar
 
-- **Health Connect kullanılmaz.** Telefon ve saat verisini birleştirdiği için saat takılıyken adımlar iki kez yazılabiliyor ve aynı gün için iki farklı toplam çıkabiliyor. Gerekçe: [GOALS.md](GOALS.md).
+- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün için egzersizler, mesafe, kalori, nabız ve uyku da gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
 - Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
 
 ## Pil ve arka plan
@@ -208,6 +208,17 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 ## Sürüm geçmişi
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
+
+### 0.7.0
+
+Eklenenler
+- Bileklik adımları (Ayarlar → "Bileklik adımlarını kullan", varsayılan kapalı): Mi Band gibi bilekliklerin Mi Fitness'ın Health Connect'e yazdığı adımları okunur. Bilekliğin adım yazdığı saatlerde bileklik, diğer saatlerde telefon sayılır. Health Connect'e hiçbir şey yazılmaz.
+- Geçmiş'te seçilen gün için bileklik verileri: egzersizler, mesafe, aktif kalori, nabız (7 günlük dinlenme nabzı grafiği) ve uyku. Bu veriler saklanmaz, her seferinde Health Connect'ten okunur.
+
+Düzeltilenler
+- Samsung'da uygulama kapalıyken 15 dakikalık okumalar sensöre ulaşamıyordu; artık kısa süreli bir servisle okunuyor, kalıcı bildirim yok.
+
+Not: Veritabanı sürümü yükseldi. 0.7.0'dan sonra 0.6.1'e geri dönülemez (önce CSV dışa aktarın).
 
 ### 0.6.1
 
@@ -298,4 +309,4 @@ Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. 
 
 ### English
 
-AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is intentionally not used. The UI is available in 12 languages. Licensed under MIT.
+AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is used only when the user turns on "Use band steps": step records from apps such as Mi Fitness are read (never written), and for hours the band counted, the band's steps replace the phone's. The UI is available in 12 languages. Licensed under MIT.

@@ -93,9 +93,9 @@ Sonuç: bu cihazda `TYPE_STEP_COUNTER` yalnızca bir uygulama kayıtlıyken say�
 
 ## Veri kaynakları
 
-**Karar: Health Connect kullanılmayacak. Veri yalnızca telefonun kendi sensörlerinden okunur.**
+**İlk karar: Health Connect kullanılmayacak. Veri yalnızca telefonun kendi sensörlerinden okunur.** 2026-10-11'de bileklik adımları için değiştirildi, bkz. "Bileklik adımları".
 
-Bu karar şu gerekçeyle verildi:
+İlk karar şu gerekçeyle verildi:
 
 Health Connect, telefon ve giyilebilir cihaz verilerini birleştirir. Kullanıcı kolunda saat taşırken telefon da sayıyorsa adım iki kez yazılır. Samsung kullanıcılarında bu yaygın bir şikâyettir. Ayrıca Health Connect'in kaynak öncelik sırasını yalnızca kullanıcı değiştirebilir ve bu sıra okunabilir bir API ile alınamaz. Sonuç olarak **aynı cihaz, aynı gün, hiçbir veri değişikliği olmadan iki farklı toplam üretilebilir.**
 
@@ -104,6 +104,37 @@ Bu, uygulamanın temel vaadiyle çelişir. Doğru ama nadiren eksik veri, çoğu
 Bu kararın bedeli kabul edilmiştir: Samsung Health aktarımına güvenilerek sensör donmasının kolayca aşılması artık mümkün değildir. Bunun yerine donma kendi tespit edilip kullanıcıya bildirilir.
 
 İleride giyilebilir cihaz desteği istenirse Health Connect eklenebilir, ancak o zaman aralık bazlı deduplikasyon birlikte eklenmelidir. Temel yapıda yer almaz.
+
+### Bileklik adımları
+
+**Karar (2026-10-11, kullanıcı onayı): bileklik adımları Health Connect'ten, Ayarlar'daki "Bileklik adımlarını kullan" anahtarıyla okunur.** Varsayılan kapalıdır.
+
+Neden: kullanıcının Xiaomi Mi Band 8'i Mi Fitness ile eşleşiyor. Bileklik aynı anda tek uygulamaya bağlanır ve Mi Fitness verisini başka uygulamalara yalnızca Health Connect üzerinden veriyor. Gadgetbridge Mi Fitness'ın yerine geçtiği ve gizli anahtar çıkarmak gerektiği için seçilmedi.
+
+İlk karardaki sorunlar şöyle önlenir:
+
+- Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz. Her kaynak uygulama için ayrı günlük toplam istenir (`dataOriginFilter`). İlk sürüm ham kayıtları sayfa sayfa okuyordu ve Redmi'de Health Connect'in istek sınırına takıldı; okumalar artık birkaç istekle yapılır, en az 5 dakika arayla, hata sonrası 1 saat beklenerek. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
+- Saat saat birleştirilir: bilekliğin adım yazdığı saatte bileklik sayısı, yazmadığı saatte telefonun sayısı kullanılır. Kullanıcıya göre bileklik telefondan daha doğru sayar; telefonun daha yüksek olması bilekliğin yanlış saydığı anlamına gelmez. Bileklik takılı ya da bağlı değilken veri gelmez ve o saatler telefondan sayılır. İlk sürüm gün bazında "bileklik varsa bileklik" kuralını kullanıyordu; Redmi'de bileklik günün sonunda kısa süre takılınca gün 1.561 adımdan 17'ye düştü (2026-10-11), bu yüzden saatliğe geçildi.
+- Telefonun saatlik verisi yalnızca HyperOS kaydı açıkken vardır. Diğer telefonlarda gün bazında bileklik ile telefonun büyüğü alınır.
+- Telefon toplamları değiştirilmez. Bileklik toplamları ayrı tabloda tutulur ve okurken birleştirilir. Anahtar kapatılınca bileklik tablosu silinir, telefonun sayıları geri gelir.
+- Health Connect'e hiçbir şey yazılmaz, veri telefondan çıkmaz.
+
+Bilinen trade-off'lar:
+
+- Gün içinde bileklik verisi Mi Fitness'ın eşitleme aralığıyla gelir. Bileklik o gün bir kez eşitlendiyse, sonraki eşitlemeye kadar bugünün sayısı telefonun canlı sayısının gerisinde kalabilir.
+- Bilekliğin takıldığı ya da çıkarıldığı saatte o saatin tamamı bileklikten sayılır; o saatte bileklik takılmadan önce atılan telefon adımları kaybolur.
+- Telefon toplamı bileklik okumaları arasında artarsa, bilekliksiz saatlerdeki bu artış bir sonraki bileklik okumasında (en geç 5-15 dakika) toplama yansır.
+- İlk açılışta son 30 gün okunur (Health Connect izin öncesindeki 30 günden eskisini vermez), sonra her okumada dün ve bugün.
+- Arka planda (15 dakikalık iş, widget) okuma için Health Connect'in arka planda okuma izni de istenir. Bu izin cihazda yoksa bileklik verisi uygulama açılınca güncellenir.
+- Bileklik açıkken Geçmiş'teki saatlik döküm gizlenir, çünkü HyperOS'un saatlik verisi bileklik toplamıyla tutmaz.
+- Android 13 ve öncesinde Health Connect ayrı bir uygulama olarak Play Store'dan kurulmalıdır. Android 9 öncesinde anahtar görünmez.
+
+Diğer bileklik verileri (kullanıcı kararı 2026-10-11, "Hepsi, uyku dahil"): aynı anahtarla egzersizler, mesafe, aktif kalori, nabız ve uyku da okunur. Her tür ayrı Health Connect izniyle gelir; izin verilmeyen tür okunmaz. Bu veriler saklanmaz, Geçmiş'te seçilen gün açılınca Health Connect'ten okunur:
+
+- Mesafe ve aktif kalori: adımlardaki gibi kaynak uygulamaya göre toplanır, en büyük kaynak alınır. Bileklik değeri varsa boy ve kiloyla yapılan tahminin yerine gösterilir. Aktif kalori dinlenme harcamasını içermez, bu yüzden tahminle aynı ölçek değildir.
+- Egzersizler: o gün başlayan oturumlar, türü ve süresiyle. Aynı dakikada başlayan aynı türden oturumlar bir kez gösterilir.
+- Nabız: günün en düşük, ortalama ve en yüksek değeri; dinlenme nabzı varsa o da. Son 7 günün grafiği dinlenme nabzını, yoksa günün en düşük nabzını gösterir.
+- Uyku: o gün sabah biten uyku oturumlarının toplam süresi.
 
 ### Xiaomi / HyperOS adım kaydı
 

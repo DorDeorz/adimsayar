@@ -190,6 +190,11 @@
     <string name="next_year">Année suivante</string>
     <string name="year_medals">Médailles obtenues</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>
+        <item>Données du bracelet dans l\'historique : exercices, distance, calories actives, fréquence cardiaque et sommeil</item>
+        <item>Sur Samsung, les pas sont lus toutes les 15 minutes même appli fermée</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Recherche de mises à jour dans les réglages : consulte la dernière version sur GitHub et ouvre la page de téléchargement</item>
         <item>Lien vers la page GitHub</item>
@@ -263,4 +268,29 @@
     <string name="oem_asus_1">Démarrage automatique → autoriser AdımSayar</string>
 
     <string name="oem_transsion_1">Gestion automatique → sélectionnez AdımSayar dans la liste des applications, activez les trois autorisations</string>
+    <string name="wearable_card_title">Utiliser les pas du bracelet</string>
+    <string name="wearable_card_text">Lit les pas que les applis de bracelet comme Mi Fitness écrivent dans Health Connect. Pour les heures comptées par le bracelet, son total est utilisé, sinon celui du téléphone. Si tu l\'autorises, l\'historique affiche aussi entraînements, distance, calories, fréquence cardiaque et sommeil.</string>
+    <string name="wearable_permission_denied">L\'autorisation de lire les pas dans Health Connect n\'a pas été accordée.</string>
+    <string name="wearable_unavailable">Health Connect n\'est pas présent sur ce téléphone. Sous Android 13 ou antérieur, installe l\'appli Health Connect depuis le Play Store.</string>
+    <string name="wearable_privacy_title">Pas du bracelet</string>
+    <string name="wearable_privacy_text">AdimSayar lit uniquement les pas, entraînements, distances, calories, fréquences cardiaques et sommeils de Health Connect. Il n\'écrit rien et n\'envoie aucune donnée hors du téléphone. Les données lues sont seulement affichées dans l\'appli sur ce téléphone.</string>
+    <string name="log_wearable_missing">Health Connect introuvable</string>
+    <string name="log_wearable_denied">Pas d\'autorisation de lecture Health Connect</string>
+    <string name="log_wearable_error">Impossible de lire Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">Bracelet : %1$d pas aujourd\'hui, %2$d jours mis à jour</string>
+    <string name="band_exercises">Entraînements</string>
+    <string name="band_heart">Fréquence cardiaque</string>
+    <string name="band_heart_value">Repos %1$s · min %2$s · moy. %3$s · max %4$s</string>
+    <string name="band_resting_week">Fréquence au repos, 7 derniers jours</string>
+    <string name="band_sleep">Sommeil</string>
+    <string name="band_sleep_value">%1$d h %2$d min</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="exercise_walking">Marche</string>
+    <string name="exercise_running">Course</string>
+    <string name="exercise_biking">Vélo</string>
+    <string name="exercise_hiking">Randonnée</string>
+    <string name="exercise_swimming">Natation</string>
+    <string name="exercise_yoga">Yoga</string>
+    <string name="exercise_strength">Musculation</string>
+    <string name="exercise_other">Entraînement</string>
 </resources>

@@ -190,6 +190,11 @@
     <string name="next_year">다음 연도</string>
     <string name="year_medals">획득한 메달</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>
+        <item>기록에 밴드 데이터: 운동, 거리, 활동 칼로리, 심박수, 수면</item>
+        <item>Samsung에서는 앱이 닫혀 있어도 15분마다 걸음 수를 읽습니다</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>설정에서 업데이트 확인: GitHub 최신 릴리스를 확인하고 있으면 다운로드 페이지를 엽니다</item>
         <item>GitHub 페이지 링크</item>
@@ -263,4 +268,29 @@
     <string name="oem_asus_1">자동 시작 → AdımSayar 허용</string>
 
     <string name="oem_transsion_1">자동 관리 → 앱 목록에서 AdımSayar 선택 후 세 가지 권한 모두 켜기</string>
+    <string name="wearable_card_title">밴드 걸음 수 사용</string>
+    <string name="wearable_card_text">Mi Fitness 같은 밴드 앱이 Health Connect에 기록한 걸음 수를 읽습니다. 밴드가 측정한 시간대는 밴드의 걸음 수를, 그 외 시간대는 휴대폰의 걸음 수를 사용합니다. 허용하면 기록 화면에 운동, 거리, 칼로리, 심박수, 수면도 표시됩니다.</string>
+    <string name="wearable_permission_denied">Health Connect 걸음 수 읽기 권한이 허용되지 않았습니다.</string>
+    <string name="wearable_unavailable">이 휴대폰에 Health Connect가 없습니다. Android 13 이하에서는 Play 스토어에서 Health Connect 앱을 설치하세요.</string>
+    <string name="wearable_privacy_title">밴드 걸음 수</string>
+    <string name="wearable_privacy_text">AdimSayar는 Health Connect에서 걸음 수, 운동, 거리, 칼로리, 심박수, 수면 기록만 읽습니다. 아무것도 쓰지 않으며 데이터를 휴대폰 밖으로 보내지 않습니다. 읽은 데이터는 이 휴대폰의 앱 안에서만 표시됩니다.</string>
+    <string name="log_wearable_missing">Health Connect를 찾을 수 없음</string>
+    <string name="log_wearable_denied">Health Connect 읽기 권한 없음</string>
+    <string name="log_wearable_error">Health Connect를 읽을 수 없음 (%1$s)</string>
+    <string name="log_wearable_synced">밴드: 오늘 %1$d걸음, %2$d일 업데이트</string>
+    <string name="band_exercises">운동</string>
+    <string name="band_heart">심박수</string>
+    <string name="band_heart_value">안정 시 %1$s · 최저 %2$s · 평균 %3$s · 최고 %4$s</string>
+    <string name="band_resting_week">최근 7일 안정 시 심박수</string>
+    <string name="band_sleep">수면</string>
+    <string name="band_sleep_value">%1$d시간 %2$d분</string>
+    <string name="duration_minutes">%1$d분</string>
+    <string name="exercise_walking">걷기</string>
+    <string name="exercise_running">달리기</string>
+    <string name="exercise_biking">자전거</string>
+    <string name="exercise_hiking">하이킹</string>
+    <string name="exercise_swimming">수영</string>
+    <string name="exercise_yoga">요가</string>
+    <string name="exercise_strength">근력 운동</string>
+    <string name="exercise_other">운동</string>
 </resources>

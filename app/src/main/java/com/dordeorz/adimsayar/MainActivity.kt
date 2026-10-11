@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.health.connect.client.PermissionController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
@@ -34,6 +35,8 @@ import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.WearableHealth
+import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
@@ -73,6 +76,9 @@ class MainActivity : ComponentActivity() {
     private var xiaomiEnabled by mutableStateOf(false)
     private var xiaomiSync: Job? = null
     private var xiaomiProblem by mutableStateOf<XiaomiProblem?>(null)
+    private var wearableAvailable by mutableStateOf(false)
+    private var wearableEnabled by mutableStateOf(false)
+    private var wearableSync: Job? = null
 
     private val settingsStore by lazy { SettingsStore.get(applicationContext) }
 
@@ -85,6 +91,7 @@ class MainActivity : ComponentActivity() {
         },
         onServiceEnabledChange = ::changeServiceEnabled,
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
+        onWearableEnabledChange = ::changeWearableEnabled,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = { settingsStore.setDynamicColor(it) },
         onDailyGoalChange = { goal ->
@@ -118,6 +125,7 @@ class MainActivity : ComponentActivity() {
         onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/octet-stream")) },
         loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
+        loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
     )
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
@@ -127,6 +135,15 @@ class MainActivity : ComponentActivity() {
     private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) transferCsv(R.string.import_done) { repository.importCsv(requireNotNull(contentResolver.openInputStream(uri))) }
     }
+
+    private val wearablePermissionLauncher =
+        registerForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->
+            if (WearableSteps.READ_STEPS in granted) {
+                enableWearable()
+            } else {
+                Toast.makeText(this, R.string.wearable_permission_denied, Toast.LENGTH_LONG).show()
+            }
+        }
 
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
@@ -198,6 +215,8 @@ class MainActivity : ComponentActivity() {
                             xiaomiAvailable = xiaomiAvailable,
                             xiaomiEnabled = xiaomiEnabled,
                             xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
+                            wearableAvailable = wearableAvailable,
+                            wearableEnabled = wearableEnabled,
                             logLines = logLines,
                             version = BuildConfig.VERSION_NAME,
                         ),
@@ -223,6 +242,9 @@ class MainActivity : ComponentActivity() {
             withContext(Dispatchers.Main) { xiaomiAvailable = available }
         }
         startXiaomiSync()
+        wearableAvailable = WearableSteps.isAvailable(this)
+        wearableEnabled = WearableSteps.isEnabled(this)
+        startWearableSync()
     }
 
     override fun onResume() {
@@ -235,6 +257,8 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         xiaomiSync?.cancel()
         xiaomiSync = null
+        wearableSync?.cancel()
+        wearableSync = null
         monitor.stop()
         refreshWidgets()
         super.onStop()
@@ -320,6 +344,53 @@ class MainActivity : ComponentActivity() {
                     else -> null
                 }
                 withContext(Dispatchers.Main) { xiaomiProblem = problem }
+                delay(XIAOMI_SYNC_INTERVAL_MS)
+            }
+        }
+    }
+
+    private fun changeWearableEnabled(enabled: Boolean) {
+        if (!enabled) {
+            wearableEnabled = false
+            wearableSync?.cancel()
+            wearableSync = null
+            val appContext = applicationContext
+            AppScope.launch(Dispatchers.IO) {
+                WearableSteps.setEnabled(appContext, false)
+                Widgets.updateAll(appContext)
+            }
+            return
+        }
+        if (!WearableSteps.isAvailable(this)) {
+            Toast.makeText(this, R.string.wearable_unavailable, Toast.LENGTH_LONG).show()
+            return
+        }
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.Main) {
+            if (WearableSteps.hasPermission(appContext)) {
+                enableWearable()
+            } else {
+                runCatching { wearablePermissionLauncher.launch(WearableSteps.PERMISSIONS) }
+            }
+        }
+    }
+
+    private fun enableWearable() {
+        wearableEnabled = true
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) {
+            WearableSteps.setEnabled(appContext, true)
+            withContext(Dispatchers.Main) { startWearableSync() }
+        }
+    }
+
+    private fun startWearableSync() {
+        if (!wearableEnabled || wearableSync?.isActive == true) return
+        val appContext = applicationContext
+        wearableSync = AppScope.launch(Dispatchers.IO) {
+            while (isActive) {
+                WearableSteps.sync(appContext, ReadSource.App)
+                Widgets.updateAll(appContext)
                 delay(XIAOMI_SYNC_INTERVAL_MS)
             }
         }

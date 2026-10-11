@@ -124,4 +124,20 @@ class StepMathTest {
     fun noStepsNoRows() {
         assertEquals(emptyMap<LocalDate, Long>(), StepMath.splitByDay(StepInterval(0L, 0L, 1L), zone))
     }
+
+    @Test
+    fun mergeHourlyUsesBandHoursAndPhoneForTheRest() {
+        val morning = LocalDateTime.parse("2026-10-11T09:00")
+        val evening = LocalDateTime.parse("2026-10-11T21:00")
+        val otherDay = LocalDateTime.parse("2026-10-10T12:00")
+        val band = mapOf(evening to 200L)
+        val phone = mapOf(morning to 1_500L, evening to 260L, otherDay to 3_000L)
+        assertEquals(mapOf(LocalDate.parse("2026-10-11") to 1_700L), StepMath.mergeHourly(band, phone))
+    }
+
+    @Test
+    fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
+        val day = LocalDate.parse("2026-10-11")
+        assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))
+    }
 }

@@ -190,6 +190,11 @@
     <string name="next_year">Anno successivo</string>
     <string name="year_medals">Medaglie ottenute</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>I passi di Mi Band e di altri braccialetti si possono leggere tramite Health Connect (Impostazioni, disattivato di default). Nelle ore con il braccialetto conta il braccialetto, nelle altre il telefono</item>
+        <item>Dati del braccialetto nella cronologia: allenamenti, distanza, calorie attive, battito e sonno</item>
+        <item>Su Samsung i passi vengono letti ogni 15 minuti anche con l\'app chiusa</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Controllo aggiornamenti nelle impostazioni: cerca l\'ultima versione su GitHub e apre la pagina di download</item>
         <item>Link alla pagina GitHub</item>
@@ -263,4 +268,29 @@
     <string name="oem_asus_1">Avvio automatico → consenti AdımSayar</string>
 
     <string name="oem_transsion_1">Gestione automatica → seleziona AdımSayar nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
+    <string name="wearable_card_title">Usa i passi del bracciale</string>
+    <string name="wearable_card_text">Legge i passi che le app del bracciale come Mi Fitness scrivono in Health Connect. Nelle ore contate dal bracciale si usa il suo conteggio, nelle altre quello del telefono. Se lo consenti, la cronologia mostra anche allenamenti, distanza, calorie, battito e sonno.</string>
+    <string name="wearable_permission_denied">Il permesso di lettura dei passi di Health Connect non è stato concesso.</string>
+    <string name="wearable_unavailable">Health Connect non è presente su questo telefono. Su Android 13 o precedenti installa l\'app Health Connect dal Play Store.</string>
+    <string name="wearable_privacy_title">Passi del bracciale</string>
+    <string name="wearable_privacy_text">AdimSayar legge da Health Connect solo passi, allenamenti, distanza, calorie, battito e sonno. Non scrive nulla e non invia dati fuori dal telefono. I dati letti vengono mostrati solo nell\'app su questo telefono.</string>
+    <string name="log_wearable_missing">Health Connect non trovato</string>
+    <string name="log_wearable_denied">Nessun permesso di lettura di Health Connect</string>
+    <string name="log_wearable_error">Impossibile leggere Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">Bracciale: %1$d passi oggi, %2$d giorni aggiornati</string>
+    <string name="band_exercises">Allenamenti</string>
+    <string name="band_heart">Battito</string>
+    <string name="band_heart_value">Riposo %1$s · min %2$s · media %3$s · max %4$s</string>
+    <string name="band_resting_week">Battito a riposo, ultimi 7 giorni</string>
+    <string name="band_sleep">Sonno</string>
+    <string name="band_sleep_value">%1$d h %2$d min</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="exercise_walking">Camminata</string>
+    <string name="exercise_running">Corsa</string>
+    <string name="exercise_biking">Ciclismo</string>
+    <string name="exercise_hiking">Escursionismo</string>
+    <string name="exercise_swimming">Nuoto</string>
+    <string name="exercise_yoga">Yoga</string>
+    <string name="exercise_strength">Forza</string>
+    <string name="exercise_other">Allenamento</string>
 </resources>

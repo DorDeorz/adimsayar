@@ -190,6 +190,11 @@
     <string name="next_year">下一年</string>
     <string name="year_medals">获得的勋章</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>可通过 Health Connect 读取 Mi Band 等手环的步数（设置中，默认关闭）。佩戴手环的小时使用手环数据，其余小时使用手机数据</item>
+        <item>历史中的手环数据：锻炼、距离、活动卡路里、心率和睡眠</item>
+        <item>在 Samsung 上，即使应用关闭，也会每 15 分钟读取一次步数</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>设置中检查更新：查询 GitHub 上的最新版本，有新版本时打开下载页面</item>
         <item>GitHub 页面链接</item>
@@ -263,4 +268,29 @@
     <string name="oem_asus_1">自启动 → 允许 AdımSayar</string>
 
     <string name="oem_transsion_1">自动管理 → 在应用列表中选择 AdımSayar，开启全部三项权限</string>
+    <string name="wearable_card_title">使用手环步数</string>
+    <string name="wearable_card_text">读取 Mi Fitness 等手环应用写入 Health Connect 的步数。手环计步的时段使用手环的计数，其他时段使用手机的计数。如果你允许，历史记录中还会显示锻炼、距离、卡路里、心率和睡眠。</string>
+    <string name="wearable_permission_denied">未授予读取 Health Connect 步数的权限。</string>
+    <string name="wearable_unavailable">此手机上没有 Health Connect。在 Android 13 及更早版本上，请从 Play 商店安装 Health Connect 应用。</string>
+    <string name="wearable_privacy_title">手环步数</string>
+    <string name="wearable_privacy_text">AdimSayar 只从 Health Connect 读取步数、锻炼、距离、卡路里、心率和睡眠记录。它不写入任何内容，也不会把数据发送到手机之外。读取的数据只在本机的应用内显示。</string>
+    <string name="log_wearable_missing">未找到 Health Connect</string>
+    <string name="log_wearable_denied">没有 Health Connect 读取权限</string>
+    <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>
+    <string name="log_wearable_synced">手环：今天 %1$d 步，已更新 %2$d 天</string>
+    <string name="band_exercises">锻炼</string>
+    <string name="band_heart">心率</string>
+    <string name="band_heart_value">静息 %1$s · 最低 %2$s · 平均 %3$s · 最高 %4$s</string>
+    <string name="band_resting_week">近 7 天静息心率</string>
+    <string name="band_sleep">睡眠</string>
+    <string name="band_sleep_value">%1$d 小时 %2$d 分钟</string>
+    <string name="duration_minutes">%1$d 分钟</string>
+    <string name="exercise_walking">步行</string>
+    <string name="exercise_running">跑步</string>
+    <string name="exercise_biking">骑行</string>
+    <string name="exercise_hiking">徒步</string>
+    <string name="exercise_swimming">游泳</string>
+    <string name="exercise_yoga">瑜伽</string>
+    <string name="exercise_strength">力量训练</string>
+    <string name="exercise_other">锻炼</string>
 </resources>

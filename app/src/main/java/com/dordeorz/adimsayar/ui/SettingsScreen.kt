@@ -67,6 +67,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.7.0", R.array.release_notes_0_7_0),
     ReleaseNote("0.6.1", R.array.release_notes_0_6_1),
     ReleaseNote("0.6.0", R.array.release_notes_0_6_0),
     ReleaseNote("0.5.0", R.array.release_notes_0_5_0),
@@ -202,7 +203,8 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
-            if (showXiaomi || showService) {
+            val showWearable = state.wearableAvailable || state.wearableEnabled
+            if (showXiaomi || showService || showWearable) {
                 HorizontalDivider(Modifier.padding(vertical = 8.dp))
                 SectionTitle(stringResource(R.string.settings_counting))
                 if (showXiaomi) {
@@ -211,6 +213,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                         hint = stringResource(R.string.xiaomi_card_text),
                         checked = state.xiaomiEnabled,
                         onCheckedChange = actions.onXiaomiEnabledChange,
+                    )
+                }
+                if (showWearable) {
+                    SwitchRow(
+                        title = stringResource(R.string.wearable_card_title),
+                        hint = stringResource(R.string.wearable_card_text),
+                        checked = state.wearableEnabled,
+                        onCheckedChange = actions.onWearableEnabledChange,
                     )
                 }
                 if (showService) {

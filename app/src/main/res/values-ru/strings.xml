@@ -190,6 +190,11 @@
     <string name="next_year">Следующий год</string>
     <string name="year_medals">Полученные медали</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Шаги с Mi Band и других браслетов можно читать через Health Connect (Настройки, по умолчанию выключено). В часы, когда браслет надет, считается браслет, в остальные — телефон</item>
+        <item>Данные браслета в истории: тренировки, расстояние, активные калории, пульс и сон</item>
+        <item>На Samsung шаги читаются каждые 15 минут, даже когда приложение закрыто</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Проверка обновлений в настройках: смотрит последнюю версию на GitHub и открывает страницу загрузки</item>
         <item>Ссылка на страницу GitHub</item>
@@ -263,4 +268,29 @@
     <string name="oem_asus_1">Автозапуск → разрешить AdımSayar</string>
 
     <string name="oem_transsion_1">Автоуправление → выберите AdımSayar в списке приложений и включите все три разрешения</string>
+    <string name="wearable_card_title">Использовать шаги браслета</string>
+    <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В часы, когда считал браслет, используется его счёт, в остальные — счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
+    <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
+    <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>
+    <string name="wearable_privacy_title">Шаги браслета</string>
+    <string name="wearable_privacy_text">AdimSayar читает из Health Connect только шаги, тренировки, расстояние, калории, пульс и сон. Он ничего не записывает и не отправляет данные с телефона. Прочитанные данные показываются только в приложении на этом телефоне.</string>
+    <string name="log_wearable_missing">Health Connect не найден</string>
+    <string name="log_wearable_denied">Нет разрешения на чтение Health Connect</string>
+    <string name="log_wearable_error">Не удалось прочитать Health Connect (%1$s)</string>
+    <string name="log_wearable_synced">Браслет: сегодня %1$d шагов, обновлено дней: %2$d</string>
+    <string name="band_exercises">Тренировки</string>
+    <string name="band_heart">Пульс</string>
+    <string name="band_heart_value">Покой %1$s · мин. %2$s · сред. %3$s · макс. %4$s</string>
+    <string name="band_resting_week">Пульс в покое за 7 дней</string>
+    <string name="band_sleep">Сон</string>
+    <string name="band_sleep_value">%1$d ч %2$d мин</string>
+    <string name="duration_minutes">%1$d мин</string>
+    <string name="exercise_walking">Ходьба</string>
+    <string name="exercise_running">Бег</string>
+    <string name="exercise_biking">Велосипед</string>
+    <string name="exercise_hiking">Поход</string>
+    <string name="exercise_swimming">Плавание</string>
+    <string name="exercise_yoga">Йога</string>
+    <string name="exercise_strength">Силовая тренировка</string>
+    <string name="exercise_other">Тренировка</string>
 </resources>
