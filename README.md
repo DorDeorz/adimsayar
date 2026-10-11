@@ -133,7 +133,7 @@ Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açı
 
 ### Kullanılmayanlar
 
-- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün için egzersizler, mesafe, kalori, nabız ve uyku da gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
+- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün ve Sağlık sayfası için egzersizler, mesafe, kalori, nabız, uyku ve kan oksijeni de gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
 - Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
 
 ## Pil ve arka plan
@@ -158,6 +158,7 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 | `SCHEDULE_EXACT_ALARM` | Gün dönümünü tam gece yarısı yapmak |
 | `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü ve indirmesi |
 | `REQUEST_INSTALL_PACKAGES` | İndirilen güncellemeyi kurmak için Android'in kurulum ekranını açmak |
+| `health.READ_*` (adım, egzersiz, mesafe, aktif kalori, nabız, dinlenme nabzı, uyku, kan oksijeni, arka planda okuma) | İsteğe bağlı "Bileklik adımlarını kullan"; yalnızca okuma |
 
 ## Kurulum
 
@@ -210,9 +211,13 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
 
-### 0.7.1
+### 0.8.0
 
 Eklenenler
+- Sağlık sayfasında uyku evreleri (derin, hafif, REM, uyanık), ortalama yatış ve kalkış saati, kan oksijeni (SpO2), egzersiz türleri ve egzersiz yapılan günler, aktif kalori ve dinlenme nabzının önceki döneme göre değişimi.
+- Bugünün saatlik nabız grafiği.
+- Kilo kaydı: kilonu Sağlık sayfasından ekle; vücut kitle endeksi, toplam değişim, son ölçümden beri değişim ve grafik. Ayarlar'da isteğe bağlı "Haftalık kilo hatırlatması" (haftanın ilk günü 09:00 civarı).
+- Bileklik açıkken haftalık özet bildirimi ortalama dinlenme nabzını ve uykuyu da gösterir.
 - Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada, büyük, açılışta seçili), Madalyalar, Ayarlar. Ayarlar sağ üstteki dişliden alta taşındı.
 - Sağlık sayfasında bileklik için "Sağlık özeti": son 7 ya da 30 günün ortalama ve en uzun uykusu, ortalama dinlenme nabzı ve grafiği, toplam ve en uzun egzersiz, bileklik mesafesi. Veriler saklanmaz, her açılışta Health Connect'ten okunur.
 - Güncelleme uygulamanın içinden: Ayarlar → "Güncellemeleri kontrol et" yeni sürümün APK'sını GitHub'dan indirir ve Android'in kurulum ekranını açar. İlk seferde Android bu uygulamadan yüklemeye izin ister.

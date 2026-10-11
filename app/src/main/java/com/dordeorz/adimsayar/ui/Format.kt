@@ -16,6 +16,7 @@ internal val SHORT_DATE_FORMAT: DateTimeFormatter get() = localized("dMMMy")
 internal val LONG_DAY_FORMAT: DateTimeFormatter get() = localized("dMMMMEEEE")
 internal val FULL_DATE_FORMAT: DateTimeFormatter get() = localized("dMMMMy")
 internal val MONTH_FORMAT: DateTimeFormatter get() = localized("yMMMM")
+internal val CLOCK_FORMAT: DateTimeFormatter get() = localized("Hm")
 
 private val formatters = ConcurrentHashMap<Pair<Locale, String>, DateTimeFormatter>()
 

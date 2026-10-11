@@ -216,11 +216,64 @@
     <string name="health_resting_chart">安静時心拍数</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">一部のヘルスケア権限が許可されていません</string>
+    <string name="health_grant">許可</string>
+    <string name="health_bed_wake">平均就寝・起床時刻</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">睡眠段階</string>
+    <string name="health_nights_average">%1$d 夜の平均</string>
+    <string name="sleep_deep">深い睡眠</string>
+    <string name="sleep_light">浅い睡眠</string>
+    <string name="sleep_rem">レム睡眠</string>
+    <string name="sleep_awake">覚醒</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">前の %1$d 日より %2$d bpm 低下</string>
+    <string name="health_resting_up">前の %1$d 日より %2$d bpm 上昇</string>
+    <string name="health_resting_same">前の %1$d 日と同じ</string>
+    <string name="health_oxygen">血中酸素 (SpO2)</string>
+    <string name="health_oxygen_hint">最低 %1$s · %2$d 回測定</string>
+    <string name="health_exercise_days">運動した日</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">1日平均 %1$s kcal</string>
+    <string name="heart_today_title">今日の心拍数</string>
+    <string name="heart_today_empty">今日の心拍数の記録はありません</string>
+    <string name="weight_title">体重と BMI</string>
+    <string name="weight_empty">体重の記録はまだありません。体重を追加すると、ここに BMI と変化が表示されます。</string>
+    <string name="weight_add">体重を追加</string>
+    <string name="weight_current">現在の体重</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">BMI (体格指数)</string>
+    <string name="weight_bmi_hint">%1$s · 身長 %2$d cm</string>
+    <string name="bmi_under">低体重</string>
+    <string name="bmi_normal">普通</string>
+    <string name="bmi_over">過体重</string>
+    <string name="bmi_obese">肥満</string>
+    <string name="weight_total_change">合計の変化</string>
+    <string name="weight_since">%1$s から</string>
+    <string name="weight_last_change">前回の記録から</string>
+    <string name="weight_entries">記録</string>
+    <string name="weight_dialog_title">体重 · %1$s</string>
+    <string name="weight_delete">削除</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">毎週の体重リマインダー</string>
+    <string name="weight_reminder_hint">週の初日の 09:00 ごろに体重を量るよう通知します。</string>
+    <string name="notify_weight_title">体重を量る時間です</string>
+    <string name="notify_weight_text">新しい週の始まりです。体重を量って AdımSayar に記録しましょう。</string>
+    <string name="notify_health_resting">平均安静時心拍数: %1$d bpm</string>
+    <string name="notify_health_resting_down">平均安静時心拍数: %1$d bpm、先週より %2$d 低下</string>
+    <string name="notify_health_resting_up">平均安静時心拍数: %1$d bpm、先週より %2$d 上昇</string>
+    <string name="notify_health_sleep">平均睡眠: %1$d 時間 %2$d 分</string>
+    <string name="weekly_summary_band_hint">バンドがオンのときは安静時心拍数と平均睡眠も含まれます。</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
         <item>履歴にバンドの健康サマリー（7 日または 30 日）：睡眠、安静時心拍数とグラフ、ワークアウト、距離</item>
         <item>アップデートをアプリ内でダウンロードしてインストールできます</item>
         <item>アプリを開いている間はバンドの歩数を 1 分ごとに読み込みます</item>
+        <item>ヘルスページ: 睡眠段階 (深い・浅い・レム・覚醒)、平均就寝・起床時刻、血中酸素 (SpO2)、運動の種類と運動した日、アクティブカロリー、前の期間と比べた安静時心拍数</item>
+        <item>今日の1時間ごとの心拍数グラフ</item>
+        <item>体重記録: BMI、合計の変化とグラフ。週初めの体重リマインダー (任意)</item>
+        <item>バンドがオンのとき、週間サマリー通知に安静時心拍数と睡眠も表示</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band などのバンドの歩数を Health Connect から読み込めます（設定、既定はオフ）。バンドを着けていた時間はバンド、それ以外は電話の歩数を使います</item>

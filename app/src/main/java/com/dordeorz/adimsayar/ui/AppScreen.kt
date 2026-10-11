@@ -21,6 +21,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,7 +41,9 @@ import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.DistanceUnit
+import com.dordeorz.adimsayar.data.HeartHour
 import com.dordeorz.adimsayar.data.ThemeMode
+import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -76,6 +79,9 @@ data class MainUiState(
     val wearableEnabled: Boolean,
     val logLines: List<String>,
     val version: String,
+    val weights: List<Weight>,
+    val healthRefresh: Int,
+    val requestedTab: Tab?,
 )
 
 class MainActions(
@@ -103,12 +109,24 @@ class MainActions(
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,
     val loadBandDay: suspend (LocalDate) -> BandDay?,
     val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
+    val loadHeartHours: suspend (LocalDate) -> List<HeartHour>?,
+    val onGrantHealthPermissions: () -> Unit,
+    val onAddWeight: (LocalDate, Double) -> Unit,
+    val onDeleteWeight: (LocalDate) -> Unit,
+    val onWeightReminderChange: (Boolean) -> Unit,
+    val onTabOpened: () -> Unit,
 )
 
 @Composable
 fun AppScreen(state: MainUiState, actions: MainActions) {
     var tab by rememberSaveable { mutableStateOf(Tab.Today) }
     if (tab != Tab.Today) BackHandler { tab = Tab.Today }
+    LaunchedEffect(state.requestedTab) {
+        state.requestedTab?.let {
+            tab = it
+            actions.onTabOpened()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -156,7 +174,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
                 Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay)
-                Tab.Health -> HealthScreen(state, actions.loadBandPeriod, onOpenSettings = { tab = Tab.Settings })
+                Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
                 Tab.Today -> TodayScreen(state, actions)
                 Tab.Medals -> MedalsScreen(state)
                 Tab.Settings -> SettingsScreen(state, actions)

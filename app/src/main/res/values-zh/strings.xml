@@ -216,11 +216,64 @@
     <string name="health_resting_chart">静息心率</string>
     <string name="health_min_max">%1$d–%2$d 次/分</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">部分健康权限未授予</string>
+    <string name="health_grant">授权</string>
+    <string name="health_bed_wake">平均入睡和起床时间</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">睡眠阶段</string>
+    <string name="health_nights_average">%1$d 晚平均</string>
+    <string name="sleep_deep">深睡</string>
+    <string name="sleep_light">浅睡</string>
+    <string name="sleep_rem">快速眼动</string>
+    <string name="sleep_awake">清醒</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">比前 %1$d 天低 %2$d bpm</string>
+    <string name="health_resting_up">比前 %1$d 天高 %2$d bpm</string>
+    <string name="health_resting_same">与前 %1$d 天相同</string>
+    <string name="health_oxygen">血氧 (SpO2)</string>
+    <string name="health_oxygen_hint">最低 %1$s · %2$d 次测量</string>
+    <string name="health_exercise_days">运动天数</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">平均每天 %1$s 千卡</string>
+    <string name="heart_today_title">今日心率</string>
+    <string name="heart_today_empty">今天没有心率记录</string>
+    <string name="weight_title">体重和身体质量指数</string>
+    <string name="weight_empty">还没有体重记录。添加体重后，这里会显示 BMI 和变化。</string>
+    <string name="weight_add">添加体重</string>
+    <string name="weight_current">当前体重</string>
+    <string name="weight_kg">%1$s 公斤</string>
+    <string name="weight_bmi">身体质量指数 (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · 身高 %2$d 厘米</string>
+    <string name="bmi_under">偏瘦</string>
+    <string name="bmi_normal">正常</string>
+    <string name="bmi_over">超重</string>
+    <string name="bmi_obese">肥胖</string>
+    <string name="weight_total_change">总变化</string>
+    <string name="weight_since">自 %1$s 起</string>
+    <string name="weight_last_change">自上次记录起</string>
+    <string name="weight_entries">记录</string>
+    <string name="weight_dialog_title">体重 · %1$s</string>
+    <string name="weight_delete">删除</string>
+    <string name="weight_range">%1$s–%2$s 公斤</string>
+    <string name="weight_reminder">每周体重提醒</string>
+    <string name="weight_reminder_hint">在每周第一天 09:00 左右提醒你称体重。</string>
+    <string name="notify_weight_title">该称体重了</string>
+    <string name="notify_weight_text">新的一周开始了：称一下体重并记录到 AdımSayar。</string>
+    <string name="notify_health_resting">平均静息心率：%1$d bpm</string>
+    <string name="notify_health_resting_down">平均静息心率：%1$d bpm，比上周低 %2$d</string>
+    <string name="notify_health_resting_up">平均静息心率：%1$d bpm，比上周高 %2$d</string>
+    <string name="notify_health_sleep">平均睡眠：%1$d 小时 %2$d 分钟</string>
+    <string name="weekly_summary_band_hint">开启手环后，还会包含静息心率和平均睡眠。</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
         <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
         <item>现在可在应用内下载并安装更新</item>
         <item>应用打开时每分钟读取一次手环步数</item>
+        <item>健康页面：睡眠阶段（深睡、浅睡、快速眼动、清醒）、平均入睡和起床时间、血氧 (SpO2)、运动类型和运动天数、活动热量，以及与上一时段相比的静息心率</item>
+        <item>今日每小时心率图</item>
+        <item>体重记录：BMI、总变化和图表。可选的每周称重提醒</item>
+        <item>开启手环后，每周总结通知也会显示静息心率和睡眠</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>可通过 Health Connect 读取 Mi Band 等手环的步数（设置中，默认关闭）。佩戴手环的小时使用手环数据，其余小时使用手机数据</item>

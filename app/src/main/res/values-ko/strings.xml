@@ -216,11 +216,64 @@
     <string name="health_resting_chart">안정 시 심박수</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">일부 건강 권한이 허용되지 않았습니다</string>
+    <string name="health_grant">허용</string>
+    <string name="health_bed_wake">평균 취침·기상 시간</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">수면 단계</string>
+    <string name="health_nights_average">%1$d일 밤 평균</string>
+    <string name="sleep_deep">깊은 수면</string>
+    <string name="sleep_light">얕은 수면</string>
+    <string name="sleep_rem">렘수면</string>
+    <string name="sleep_awake">깨어 있음</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">이전 %1$d일보다 %2$d bpm 낮음</string>
+    <string name="health_resting_up">이전 %1$d일보다 %2$d bpm 높음</string>
+    <string name="health_resting_same">이전 %1$d일과 같음</string>
+    <string name="health_oxygen">혈중 산소 (SpO2)</string>
+    <string name="health_oxygen_hint">최저 %1$s · %2$d회 측정</string>
+    <string name="health_exercise_days">운동한 날</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">하루 평균 %1$s kcal</string>
+    <string name="heart_today_title">오늘의 심박수</string>
+    <string name="heart_today_empty">오늘 심박수 기록이 없습니다</string>
+    <string name="weight_title">체중과 체질량지수</string>
+    <string name="weight_empty">아직 체중 기록이 없습니다. 체중을 추가하면 여기에서 BMI와 변화를 볼 수 있습니다.</string>
+    <string name="weight_add">체중 추가</string>
+    <string name="weight_current">현재 체중</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">체질량지수 (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · 키 %2$d cm</string>
+    <string name="bmi_under">저체중</string>
+    <string name="bmi_normal">정상</string>
+    <string name="bmi_over">과체중</string>
+    <string name="bmi_obese">비만</string>
+    <string name="weight_total_change">총 변화</string>
+    <string name="weight_since">%1$s부터</string>
+    <string name="weight_last_change">지난 기록 이후</string>
+    <string name="weight_entries">기록</string>
+    <string name="weight_dialog_title">체중 · %1$s</string>
+    <string name="weight_delete">삭제</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">주간 체중 알림</string>
+    <string name="weight_reminder_hint">한 주의 첫날 09:00쯤 체중을 재도록 알려 줍니다.</string>
+    <string name="notify_weight_title">체중을 잴 시간입니다</string>
+    <string name="notify_weight_text">새로운 한 주가 시작됩니다. 체중을 재고 AdımSayar에 기록하세요.</string>
+    <string name="notify_health_resting">평균 안정 시 심박수: %1$d bpm</string>
+    <string name="notify_health_resting_down">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 낮음</string>
+    <string name="notify_health_resting_up">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 높음</string>
+    <string name="notify_health_sleep">평균 수면: %1$d시간 %2$d분</string>
+    <string name="weekly_summary_band_hint">밴드를 켜면 안정 시 심박수와 평균 수면도 포함됩니다.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
         <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
         <item>이제 앱 안에서 업데이트를 다운로드하고 설치합니다</item>
         <item>앱이 열려 있으면 밴드 걸음 수를 1분마다 읽습니다</item>
+        <item>건강 페이지: 수면 단계(깊은 수면, 얕은 수면, 렘수면, 깨어 있음), 평균 취침·기상 시간, 혈중 산소(SpO2), 운동 종류와 운동한 날, 활동 칼로리, 이전 기간 대비 안정 시 심박수</item>
+        <item>오늘의 시간별 심박수 차트</item>
+        <item>체중 기록: BMI, 총 변화와 차트. 선택형 주간 체중 알림</item>
+        <item>밴드를 켜면 주간 요약 알림에 안정 시 심박수와 수면도 표시</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>

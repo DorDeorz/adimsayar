@@ -216,11 +216,64 @@
     <string name="health_resting_chart">Fréquence cardiaque au repos</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">Certaines autorisations de santé manquent</string>
+    <string name="health_grant">Autoriser</string>
+    <string name="health_bed_wake">Coucher et lever moyens</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Phases de sommeil</string>
+    <string name="health_nights_average">Moyenne sur %1$d nuits</string>
+    <string name="sleep_deep">Profond</string>
+    <string name="sleep_light">Léger</string>
+    <string name="sleep_rem">Paradoxal</string>
+    <string name="sleep_awake">Éveillé</string>
+    <string name="health_percent">%1$s %%</string>
+    <string name="health_resting_down">%2$d bpm de moins que les %1$d jours précédents</string>
+    <string name="health_resting_up">%2$d bpm de plus que les %1$d jours précédents</string>
+    <string name="health_resting_same">Identique aux %1$d jours précédents</string>
+    <string name="health_oxygen">Oxygène sanguin (SpO2)</string>
+    <string name="health_oxygen_hint">Minimum %1$s · %2$d mesures</string>
+    <string name="health_exercise_days">Jours d\'entraînement</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">%1$s kcal par jour en moyenne</string>
+    <string name="heart_today_title">Fréquence cardiaque du jour</string>
+    <string name="heart_today_empty">Aucune mesure de fréquence cardiaque aujourd\'hui</string>
+    <string name="weight_title">Poids et indice de masse corporelle</string>
+    <string name="weight_empty">Aucun poids enregistré. Ajoutez votre poids pour voir ici votre IMC et votre évolution.</string>
+    <string name="weight_add">Ajouter un poids</string>
+    <string name="weight_current">Poids actuel</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Indice de masse corporelle (IMC)</string>
+    <string name="weight_bmi_hint">%1$s · taille %2$d cm</string>
+    <string name="bmi_under">Insuffisance pondérale</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Surpoids</string>
+    <string name="bmi_obese">Obésité</string>
+    <string name="weight_total_change">Variation totale</string>
+    <string name="weight_since">Depuis le %1$s</string>
+    <string name="weight_last_change">Depuis la dernière mesure</string>
+    <string name="weight_entries">Mesures</string>
+    <string name="weight_dialog_title">Poids · %1$s</string>
+    <string name="weight_delete">Supprimer</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Rappel de pesée hebdomadaire</string>
+    <string name="weight_reminder_hint">Vous rappelle de vous peser vers 09:00 le premier jour de la semaine.</string>
+    <string name="notify_weight_title">C\'est l\'heure de la pesée</string>
+    <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans AdımSayar.</string>
+    <string name="notify_health_resting">Fréquence cardiaque au repos moyenne : %1$d bpm</string>
+    <string name="notify_health_resting_down">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de moins que la semaine dernière</string>
+    <string name="notify_health_resting_up">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de plus que la semaine dernière</string>
+    <string name="notify_health_sleep">Sommeil moyen : %1$d h %2$d min</string>
+    <string name="weekly_summary_band_hint">Avec le bracelet activé, la fréquence au repos et le sommeil moyen sont ajoutés.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
         <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
         <item>Les mises à jour se téléchargent et s\'installent depuis l\'appli</item>
         <item>Les pas du bracelet sont lus chaque minute quand l\'appli est ouverte</item>
+        <item>Page Santé : phases de sommeil (profond, léger, paradoxal, éveillé), coucher et lever moyens, oxygène sanguin (SpO2), types et jours d\'entraînement, calories actives et fréquence au repos par rapport à la période précédente</item>
+        <item>Graphique horaire de la fréquence cardiaque du jour</item>
+        <item>Suivi du poids : indice de masse corporelle, variation totale et graphique. Rappel de pesée hebdomadaire facultatif</item>
+        <item>Avec le bracelet activé, le résumé hebdomadaire indique aussi la fréquence au repos et le sommeil</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>

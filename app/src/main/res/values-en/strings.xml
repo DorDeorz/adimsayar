@@ -216,11 +216,64 @@
     <string name="health_resting_chart">Resting heart rate</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">Some health permissions are not granted</string>
+    <string name="health_grant">Grant</string>
+    <string name="health_bed_wake">Average bedtime and wake-up</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Sleep stages</string>
+    <string name="health_nights_average">Average of %1$d nights</string>
+    <string name="sleep_deep">Deep</string>
+    <string name="sleep_light">Light</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Awake</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">Down %2$d bpm from the previous %1$d days</string>
+    <string name="health_resting_up">Up %2$d bpm from the previous %1$d days</string>
+    <string name="health_resting_same">Same as the previous %1$d days</string>
+    <string name="health_oxygen">Blood oxygen (SpO2)</string>
+    <string name="health_oxygen_hint">Lowest %1$s · %2$d readings</string>
+    <string name="health_exercise_days">Workout days</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">%1$s kcal per day on average</string>
+    <string name="heart_today_title">Today\'s heart rate</string>
+    <string name="heart_today_empty">No heart rate records today</string>
+    <string name="weight_title">Weight and body mass index</string>
+    <string name="weight_empty">No weight entries yet. Add your weight to see your BMI and progress here.</string>
+    <string name="weight_add">Add weight</string>
+    <string name="weight_current">Current weight</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Body mass index (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · height %2$d cm</string>
+    <string name="bmi_under">Underweight</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Overweight</string>
+    <string name="bmi_obese">Obese</string>
+    <string name="weight_total_change">Total change</string>
+    <string name="weight_since">Since %1$s</string>
+    <string name="weight_last_change">Since last entry</string>
+    <string name="weight_entries">Entries</string>
+    <string name="weight_dialog_title">Weight · %1$s</string>
+    <string name="weight_delete">Delete</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Weekly weight reminder</string>
+    <string name="weight_reminder_hint">Reminds you to weigh yourself around 09:00 on the first day of the week.</string>
+    <string name="notify_weight_title">Time to weigh in</string>
+    <string name="notify_weight_text">Starting a new week: weigh yourself and add it to AdımSayar.</string>
+    <string name="notify_health_resting">Average resting heart rate: %1$d bpm</string>
+    <string name="notify_health_resting_down">Average resting heart rate: %1$d bpm, %2$d lower than last week</string>
+    <string name="notify_health_resting_up">Average resting heart rate: %1$d bpm, %2$d higher than last week</string>
+    <string name="notify_health_sleep">Average sleep: %1$d h %2$d min</string>
+    <string name="weekly_summary_band_hint">With the band on, resting heart rate and average sleep are included.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
-        <item>Health summary for the band in History, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
+        <item>Health summary for the band on the Health page, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
         <item>Updates are now downloaded and installed from inside the app</item>
         <item>Band steps are read every minute while the app is open</item>
+        <item>Health page: sleep stages (deep, light, REM, awake), average bedtime and wake-up, blood oxygen (SpO2), workout types and workout days, active calories and resting heart rate compared with the previous period</item>
+        <item>Today\'s hourly heart rate chart</item>
+        <item>Weight log: body mass index, total change and chart. Optional weekly weigh-in reminder</item>
+        <item>With the band on, the weekly summary notification also shows resting heart rate and sleep</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>

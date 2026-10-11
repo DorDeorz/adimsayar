@@ -13,7 +13,7 @@ android {
         minSdk = 23
         targetSdk = 36
         versionCode = 9
-        versionName = "0.7.1"
+        versionName = "0.8.0"
     }
 
     val releaseKeystore = System.getenv("ADIMSAYAR_KEYSTORE_FILE")

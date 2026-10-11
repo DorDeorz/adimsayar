@@ -216,11 +216,64 @@
     <string name="health_resting_chart">Batimento em repouso</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">Algumas permissões de saúde não foram concedidas</string>
+    <string name="health_grant">Conceder</string>
+    <string name="health_bed_wake">Hora média de deitar e acordar</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Fases do sono</string>
+    <string name="health_nights_average">Média de %1$d noites</string>
+    <string name="sleep_deep">Profundo</string>
+    <string name="sleep_light">Leve</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Acordado</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">%2$d bpm a menos que os %1$d dias anteriores</string>
+    <string name="health_resting_up">%2$d bpm a mais que os %1$d dias anteriores</string>
+    <string name="health_resting_same">Igual aos %1$d dias anteriores</string>
+    <string name="health_oxygen">Oxigênio no sangue (SpO2)</string>
+    <string name="health_oxygen_hint">Mínimo %1$s · %2$d medições</string>
+    <string name="health_exercise_days">Dias com exercício</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">Em média %1$s kcal por dia</string>
+    <string name="heart_today_title">Frequência cardíaca de hoje</string>
+    <string name="heart_today_empty">Nenhum registro de frequência cardíaca hoje</string>
+    <string name="weight_title">Peso e índice de massa corporal</string>
+    <string name="weight_empty">Ainda não há registros de peso. Adicione seu peso para ver aqui o IMC e a evolução.</string>
+    <string name="weight_add">Adicionar peso</string>
+    <string name="weight_current">Peso atual</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Índice de massa corporal (IMC)</string>
+    <string name="weight_bmi_hint">%1$s · altura %2$d cm</string>
+    <string name="bmi_under">Abaixo do peso</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Sobrepeso</string>
+    <string name="bmi_obese">Obesidade</string>
+    <string name="weight_total_change">Mudança total</string>
+    <string name="weight_since">Desde %1$s</string>
+    <string name="weight_last_change">Desde o último registro</string>
+    <string name="weight_entries">Registros</string>
+    <string name="weight_dialog_title">Peso · %1$s</string>
+    <string name="weight_delete">Excluir</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Lembrete semanal de peso</string>
+    <string name="weight_reminder_hint">Lembra você de se pesar por volta das 09:00 no primeiro dia da semana.</string>
+    <string name="notify_weight_title">Hora de se pesar</string>
+    <string name="notify_weight_text">Começando uma nova semana: pese-se e adicione no AdımSayar.</string>
+    <string name="notify_health_resting">Frequência cardíaca em repouso média: %1$d bpm</string>
+    <string name="notify_health_resting_down">Frequência cardíaca em repouso média: %1$d bpm, %2$d a menos que na semana passada</string>
+    <string name="notify_health_resting_up">Frequência cardíaca em repouso média: %1$d bpm, %2$d a mais que na semana passada</string>
+    <string name="notify_health_sleep">Sono médio: %1$d h %2$d min</string>
+    <string name="weekly_summary_band_hint">Com a pulseira ativada, a frequência em repouso e o sono médio são incluídos.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>Nova barra inferior: Histórico, Saúde, Hoje (centro), Medalhas, Configurações. O resumo da pulseira tem página própria</item>
         <item>Resumo de saúde da pulseira no Histórico (7 ou 30 dias): sono, batimento em repouso com gráfico, exercícios, distância</item>
         <item>As atualizações agora são baixadas e instaladas dentro do app</item>
         <item>Os passos da pulseira são lidos a cada minuto com o app aberto</item>
+        <item>Página Saúde: fases do sono (profundo, leve, REM, acordado), hora média de deitar e acordar, oxigênio no sangue (SpO2), tipos e dias de exercício, calorias ativas e frequência em repouso comparada ao período anterior</item>
+        <item>Gráfico horário da frequência cardíaca de hoje</item>
+        <item>Registro de peso: índice de massa corporal, mudança total e gráfico. Lembrete semanal de peso opcional</item>
+        <item>Com a pulseira ativada, o resumo semanal também mostra a frequência em repouso e o sono</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Os passos da Mi Band e de outras pulseiras podem ser lidos pelo Health Connect (Configurações, desativado por padrão). Nas horas com a pulseira conta a pulseira; nas outras, o telefone</item>

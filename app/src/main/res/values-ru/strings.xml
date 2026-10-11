@@ -216,11 +216,64 @@
     <string name="health_resting_chart">Пульс в покое</string>
     <string name="health_min_max">%1$d–%2$d уд/мин</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">Некоторые разрешения на данные о здоровье не выданы</string>
+    <string name="health_grant">Разрешить</string>
+    <string name="health_bed_wake">Среднее время отхода ко сну и подъёма</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Фазы сна</string>
+    <string name="health_nights_average">Среднее за %1$d ночей</string>
+    <string name="sleep_deep">Глубокий</string>
+    <string name="sleep_light">Лёгкий</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Бодрствование</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">На %2$d уд/мин ниже, чем за предыдущие %1$d дней</string>
+    <string name="health_resting_up">На %2$d уд/мин выше, чем за предыдущие %1$d дней</string>
+    <string name="health_resting_same">Как за предыдущие %1$d дней</string>
+    <string name="health_oxygen">Кислород в крови (SpO2)</string>
+    <string name="health_oxygen_hint">Минимум %1$s · %2$d измерений</string>
+    <string name="health_exercise_days">Дни с тренировками</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">В среднем %1$s ккал в день</string>
+    <string name="heart_today_title">Пульс сегодня</string>
+    <string name="heart_today_empty">Сегодня нет данных о пульсе</string>
+    <string name="weight_title">Вес и индекс массы тела</string>
+    <string name="weight_empty">Записей веса пока нет. Добавьте свой вес, чтобы видеть здесь ИМТ и изменения.</string>
+    <string name="weight_add">Добавить вес</string>
+    <string name="weight_current">Текущий вес</string>
+    <string name="weight_kg">%1$s кг</string>
+    <string name="weight_bmi">Индекс массы тела (ИМТ)</string>
+    <string name="weight_bmi_hint">%1$s · рост %2$d см</string>
+    <string name="bmi_under">Недостаточный вес</string>
+    <string name="bmi_normal">Норма</string>
+    <string name="bmi_over">Избыточный вес</string>
+    <string name="bmi_obese">Ожирение</string>
+    <string name="weight_total_change">Общее изменение</string>
+    <string name="weight_since">С %1$s</string>
+    <string name="weight_last_change">С последнего измерения</string>
+    <string name="weight_entries">Записи</string>
+    <string name="weight_dialog_title">Вес · %1$s</string>
+    <string name="weight_delete">Удалить</string>
+    <string name="weight_range">%1$s–%2$s кг</string>
+    <string name="weight_reminder">Еженедельное напоминание о весе</string>
+    <string name="weight_reminder_hint">Напоминает взвеситься около 09:00 в первый день недели.</string>
+    <string name="notify_weight_title">Пора взвеситься</string>
+    <string name="notify_weight_text">Начинается новая неделя: взвесьтесь и добавьте вес в AdımSayar.</string>
+    <string name="notify_health_resting">Средний пульс в покое: %1$d уд/мин</string>
+    <string name="notify_health_resting_down">Средний пульс в покое: %1$d уд/мин, на %2$d ниже, чем на прошлой неделе</string>
+    <string name="notify_health_resting_up">Средний пульс в покое: %1$d уд/мин, на %2$d выше, чем на прошлой неделе</string>
+    <string name="notify_health_sleep">Средний сон: %1$d ч %2$d мин</string>
+    <string name="weekly_summary_band_hint">Когда браслет включён, добавляются пульс в покое и средний сон.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>Новая нижняя панель: История, Здоровье, Сегодня (в центре), Медали, Настройки. Сводка браслета на отдельной странице</item>
         <item>Сводка здоровья браслета в истории (7 или 30 дней): сон, пульс в покое с графиком, тренировки, расстояние</item>
         <item>Обновления теперь скачиваются и устанавливаются прямо из приложения</item>
         <item>Шаги браслета читаются каждую минуту, пока приложение открыто</item>
+        <item>Страница «Здоровье»: фазы сна (глубокий, лёгкий, REM, бодрствование), среднее время отхода ко сну и подъёма, кислород в крови (SpO2), виды и дни тренировок, активные калории и пульс в покое по сравнению с прошлым периодом</item>
+        <item>Почасовой график пульса за сегодня</item>
+        <item>Журнал веса: индекс массы тела, общее изменение и график. Необязательное еженедельное напоминание о взвешивании</item>
+        <item>Когда браслет включён, недельная сводка также показывает пульс в покое и сон</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Шаги с Mi Band и других браслетов можно читать через Health Connect (Настройки, по умолчанию выключено). В часы, когда браслет надет, считается браслет, в остальные — телефон</item>

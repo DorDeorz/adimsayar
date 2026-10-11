@@ -8,9 +8,11 @@ import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
 import androidx.health.connect.client.records.DistanceRecord
 import androidx.health.connect.client.records.ExerciseSessionRecord
 import androidx.health.connect.client.records.HeartRateRecord
+import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.RestingHeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
+import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.request.AggregateRequest
 import androidx.health.connect.client.request.ReadRecordsRequest
@@ -39,13 +41,22 @@ class BandDay(
 
 class BandPeriod(
     val days: List<LocalDate>,
-    val sleep: Map<LocalDate, Long>,
+    val nights: Map<LocalDate, SleepNight>,
     val resting: List<Pair<LocalDate, Long?>>,
+    val restingBefore: Long?,
     val exercises: List<Exercise>,
     val distanceKm: Double?,
+    val activeKcal: Map<LocalDate, Long>,
+    val oxygen: OxygenSummary?,
     val sleepAllowed: Boolean,
     val exerciseAllowed: Boolean,
+    val oxygenAllowed: Boolean,
+    val missingPermissions: Boolean,
 )
+
+class OxygenSummary(val average: Double, val min: Double, val count: Int)
+
+class HeartHour(val hour: Int, val min: Long, val max: Long)
 
 object WearableHealth {
 
@@ -56,6 +67,7 @@ object WearableHealth {
         HealthPermission.getReadPermission(HeartRateRecord::class),
         HealthPermission.getReadPermission(RestingHeartRateRecord::class),
         HealthPermission.getReadPermission(SleepSessionRecord::class),
+        HealthPermission.getReadPermission(OxygenSaturationRecord::class),
     )
 
     suspend fun day(context: Context, date: LocalDate): BandDay? {
@@ -80,6 +92,27 @@ object WearableHealth {
         }
     }
 
+    suspend fun heartHours(context: Context, date: LocalDate): List<HeartHour>? {
+        if (!WearableSteps.isAvailable(context)) return null
+        return try {
+            val client = HealthConnectClient.getOrCreate(context)
+            if (HealthPermission.getReadPermission(HeartRateRecord::class) !in client.permissionController.getGrantedPermissions()) return null
+            val zone = ZoneId.systemDefault()
+            val range = TimeRangeFilter.between(date.atStartOfDay(zone).toInstant(), date.plusDays(1).atStartOfDay(zone).toInstant())
+            client.aggregateGroupByDuration(
+                AggregateGroupByDurationRequest(setOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_MAX), range, Duration.ofHours(1)),
+            ).mapNotNull { group ->
+                val min = group.result[HeartRateRecord.BPM_MIN]
+                val max = group.result[HeartRateRecord.BPM_MAX]
+                if (min != null && max != null) HeartHour(group.startTime.atZone(zone).hour, min, max) else null
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     private suspend fun readPeriod(client: HealthConnectClient, from: LocalDate, to: LocalDate, zone: ZoneId): BandPeriod {
         val granted = client.permissionController.getGrantedPermissions()
         fun allowed(type: KClass<out Record>) = HealthPermission.getReadPermission(type) in granted
@@ -89,15 +122,17 @@ object WearableHealth {
         val localRange = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
         val days = generateSequence(from) { it.plusDays(1) }.takeWhile { !it.isAfter(to) }.toList()
 
-        val sleep = if (allowed(SleepSessionRecord::class)) {
+        val nights = if (allowed(SleepSessionRecord::class)) {
             readAll(client, SleepSessionRecord::class, start.minus(Duration.ofHours(12)), end)
                 .filter { it.endTime >= start && it.endTime < end }
                 .groupBy { it.endTime.atZone(zone).toLocalDate() }
-                .mapValues { (_, sessions) ->
+                .mapNotNull { (date, sessions) ->
                     sessions.groupBy { it.metadata.dataOrigin.packageName }.values
-                        .maxOf { origin -> origin.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                        .mapNotNull { origin -> HealthMath.night(origin.map(::span)) }
+                        .maxByOrNull { it.minutes }
+                        ?.let { date to it }
                 }
-                .filterValues { it > 0L }
+                .toMap()
         } else {
             emptyMap()
         }
@@ -115,12 +150,15 @@ object WearableHealth {
             if (allowed(HeartRateRecord::class)) add(HeartRateRecord.BPM_MIN)
             if (allowed(RestingHeartRateRecord::class)) add(RestingHeartRateRecord.BPM_AVG)
         }
+        val before = from.minusDays(days.size.toLong())
         val restingByDay = if (restingMetrics.isNotEmpty()) {
-            client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(restingMetrics, localRange, Period.ofDays(1)))
+            val range = TimeRangeFilter.between(before.atStartOfDay(), to.plusDays(1).atStartOfDay())
+            client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(restingMetrics, range, Period.ofDays(1)))
                 .associate { it.startTime.toLocalDate() to (it.result[RestingHeartRateRecord.BPM_AVG] ?: it.result[HeartRateRecord.BPM_MIN]) }
         } else {
             emptyMap()
         }
+        val restingBefore = HealthMath.average(restingByDay.filterKeys { it < from && !it.isBefore(before) }.values.filterNotNull())
 
         val distance = if (allowed(DistanceRecord::class)) {
             client.aggregate(AggregateRequest(setOf(DistanceRecord.DISTANCE_TOTAL), localRange)).dataOrigins
@@ -133,7 +171,56 @@ object WearableHealth {
             null
         }
 
-        return BandPeriod(days, sleep, days.map { it to restingByDay[it] }, exercises, distance, allowed(SleepSessionRecord::class), allowed(ExerciseSessionRecord::class))
+        val activeKcal = HashMap<LocalDate, Long>()
+        if (allowed(ActiveCaloriesBurnedRecord::class)) {
+            val metric = setOf(ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL)
+            for (origin in client.aggregate(AggregateRequest(metric, localRange)).dataOrigins) {
+                client.aggregateGroupByPeriod(AggregateGroupByPeriodRequest(metric, localRange, Period.ofDays(1), setOf(origin))).forEach { group ->
+                    val kcal = group.result[ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL]?.inKilocalories?.let { Math.round(it) } ?: 0L
+                    val date = group.startTime.toLocalDate()
+                    if (kcal > (activeKcal[date] ?: 0L)) activeKcal[date] = kcal
+                }
+            }
+        }
+
+        val oxygen = if (allowed(OxygenSaturationRecord::class)) {
+            readAll(client, OxygenSaturationRecord::class, start, end)
+                .map { it.percentage.value }
+                .filter { it > 0.0 }
+                .takeIf { it.isNotEmpty() }
+                ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        } else {
+            null
+        }
+
+        return BandPeriod(
+            days = days,
+            nights = nights,
+            resting = days.map { it to restingByDay[it] },
+            restingBefore = restingBefore,
+            exercises = exercises,
+            distanceKm = distance,
+            activeKcal = activeKcal,
+            oxygen = oxygen,
+            sleepAllowed = allowed(SleepSessionRecord::class),
+            exerciseAllowed = allowed(ExerciseSessionRecord::class),
+            oxygenAllowed = allowed(OxygenSaturationRecord::class),
+            missingPermissions = !granted.containsAll(PERMISSIONS),
+        )
+    }
+
+    private fun span(record: SleepSessionRecord) = SleepSpan(
+        record.startTime,
+        record.endTime,
+        record.stages.mapNotNull { stage -> stageOf(stage.stage)?.let { Triple(it, stage.startTime, stage.endTime) } },
+    )
+
+    private fun stageOf(type: Int): SleepStage? = when (type) {
+        SleepSessionRecord.STAGE_TYPE_DEEP -> SleepStage.Deep
+        SleepSessionRecord.STAGE_TYPE_LIGHT -> SleepStage.Light
+        SleepSessionRecord.STAGE_TYPE_REM -> SleepStage.Rem
+        SleepSessionRecord.STAGE_TYPE_AWAKE, SleepSessionRecord.STAGE_TYPE_OUT_OF_BED -> SleepStage.Awake
+        else -> null
     }
 
     private suspend fun read(client: HealthConnectClient, date: LocalDate, zone: ZoneId): BandDay {

@@ -68,7 +68,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
-    ReleaseNote("0.7.1", R.array.release_notes_0_7_1),
+    ReleaseNote("0.8.0", R.array.release_notes_0_8_0),
     ReleaseNote("0.7.0", R.array.release_notes_0_7_0),
     ReleaseNote("0.6.1", R.array.release_notes_0_6_1),
     ReleaseNote("0.6.0", R.array.release_notes_0_6_0),
@@ -151,9 +151,16 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             )
             SwitchRow(
                 title = stringResource(R.string.weekly_summary),
-                hint = stringResource(R.string.weekly_summary_hint),
+                hint = stringResource(R.string.weekly_summary_hint) +
+                    if (state.wearableEnabled) " " + stringResource(R.string.weekly_summary_band_hint) else "",
                 checked = settings.weeklySummary,
                 onCheckedChange = actions.onWeeklySummaryChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.weight_reminder),
+                hint = stringResource(R.string.weight_reminder_hint),
+                checked = settings.weightReminder,
+                onCheckedChange = actions.onWeightReminderChange,
             )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))

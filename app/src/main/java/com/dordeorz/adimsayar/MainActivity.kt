@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -17,6 +18,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -37,6 +39,7 @@ import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
+import com.dordeorz.adimsayar.data.Weights
 import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
@@ -45,6 +48,7 @@ import com.dordeorz.adimsayar.ui.AppScreen
 import com.dordeorz.adimsayar.ui.MainActions
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.ui.XiaomiProblem
 import com.dordeorz.adimsayar.ui.oem.BatteryOptimization
 import com.dordeorz.adimsayar.ui.oem.OemProfile
@@ -79,6 +83,8 @@ class MainActivity : ComponentActivity() {
     private var wearableAvailable by mutableStateOf(false)
     private var wearableEnabled by mutableStateOf(false)
     private var wearableSync: Job? = null
+    private var healthRefresh by mutableIntStateOf(0)
+    private var requestedTab by mutableStateOf<Tab?>(null)
 
     private val settingsStore by lazy { SettingsStore.get(applicationContext) }
 
@@ -127,6 +133,22 @@ class MainActivity : ComponentActivity() {
         loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
         loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
+        loadHeartHours = { date -> WearableHealth.heartHours(applicationContext, date) },
+        onGrantHealthPermissions = { runCatching { healthPermissionLauncher.launch(WearableSteps.PERMISSIONS) } },
+        onAddWeight = { date, kg ->
+            val appContext = applicationContext
+            AppScope.launch(Dispatchers.IO) { Weights.add(appContext, date, kg) }
+        },
+        onDeleteWeight = { date ->
+            val appContext = applicationContext
+            AppScope.launch(Dispatchers.IO) { Weights.delete(appContext, date) }
+        },
+        onWeightReminderChange = { enabled ->
+            settingsStore.setWeightReminder(enabled)
+            if (enabled) requestNotificationPermission()
+            Reminders.scheduleWeight(applicationContext)
+        },
+        onTabOpened = { requestedTab = null },
     )
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
@@ -145,6 +167,9 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this, R.string.wearable_permission_denied, Toast.LENGTH_LONG).show()
             }
         }
+
+    private val healthPermissionLauncher =
+        registerForActivityResult(PermissionController.createRequestPermissionResultContract()) { healthRefresh++ }
 
     private val notificationLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
@@ -170,11 +195,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         monitor = LiveStepMonitor(applicationContext)
         Schedules.ensure(applicationContext)
+        if (savedInstanceState == null) openRequestedTab(intent)
         setContent {
             val currentDay = today
             val appSettings by settingsStore.settings.collectAsStateWithLifecycle()
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
             val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
+            val weights by remember { Weights.observe(applicationContext) }.collectAsStateWithLifecycle(emptyList())
             val earlyBirdSource = xiaomiEnabled
             val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdSource, history[currentDay]) {
                 value = if (earlyBirdSource) withContext(Dispatchers.IO) { XiaomiSteps.earlyBirdDays(applicationContext) } else null
@@ -220,12 +247,24 @@ class MainActivity : ComponentActivity() {
                             wearableEnabled = wearableEnabled,
                             logLines = logLines,
                             version = BuildConfig.VERSION_NAME,
+                            weights = weights,
+                            healthRefresh = healthRefresh,
+                            requestedTab = requestedTab,
                         ),
                         actions = actions,
                     )
                 }
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        openRequestedTab(intent)
+    }
+
+    private fun openRequestedTab(intent: Intent?) {
+        if (intent?.getStringExtra(EXTRA_TAB) == TAB_HEALTH) requestedTab = Tab.Health
     }
 
     override fun onStart() {
@@ -403,10 +442,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private companion object {
-        const val SETTINGS_PREFS = "settings"
-        const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
-        const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
-        const val EXPORT_FILE_NAME = "adimsayar-%s.csv"
+    companion object {
+        const val EXTRA_TAB = "tab"
+        const val TAB_HEALTH = "health"
+        private const val SETTINGS_PREFS = "settings"
+        private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
+        private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
+        private const val EXPORT_FILE_NAME = "adimsayar-%s.csv"
     }
 }

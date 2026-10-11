@@ -136,6 +136,18 @@ Diğer bileklik verileri (kullanıcı kararı 2026-10-11, "Hepsi, uyku dahil"): 
 - Nabız: günün en düşük, ortalama ve en yüksek değeri; dinlenme nabzı varsa o da. Son 7 günün grafiği dinlenme nabzını, yoksa günün en düşük nabzını gösterir.
 - Uyku: o gün sabah biten uyku oturumlarının toplam süresi.
 
+Sağlık sayfası (kullanıcı isteği 2026-10-12, "hepsini ekleyelim"): seçilen son 7 ya da 30 gün için aynı veriler anlık okunur ve saklanmaz.
+
+- Uyku: her gece için en uzun kaynak uygulama alınır. Evreler (derin, hafif, REM, uyanık) bileklik yazdıysa gösterilir. Ortalama yatış saati gece yarısını aşan saatler için öğlen eksenine göre ortalanır.
+- Dinlenme nabzı: dönemin ortalaması bir önceki aynı uzunluktaki dönemle karşılaştırılır.
+- Kan oksijeni (SpO2): dönemdeki ölçümlerin ortalaması ve en düşüğü. Ayrı izin ister; anahtarı daha önce açanlar Sağlık sayfasındaki "İzin ver" ile verir.
+- Egzersizler türe göre gruplanır; egzersiz yapılan günler ayrıca gösterilir.
+- Aktif kalori: her gün için en büyük kaynak uygulama.
+- Bugünün nabzı saat saat en düşük ve en yüksek değerle gösterilir.
+- Haftalık özet bildirimi bileklik açıkken haftanın ortalama dinlenme nabzını (geçen haftayla farkıyla) ve ortalama uykusunu ekler.
+
+Kilo kaydı (aynı istek): kullanıcı kilosunu elle girer, Room `weights` tablosunda saklanır. Vücut kitle endeksi Ayarlar'daki boyla, toplam değişim ilk kayda göre hesaplanır, saklanmaz. İsteğe bağlı "Haftalık kilo hatırlatması" haftanın ilk günü 09:00 civarı bildirim gönderir (`setAndAllowWhileIdle`, birkaç dakika kayabilir).
+
 ### Xiaomi / HyperOS adım kaydı
 
 **Karar (2026-10-09, kullanıcı onayı): Xiaomi cihazlarda HyperOS'un adım kaydı, kullanıcının açtığı bir anahtarla ana kaynak olabilir.**

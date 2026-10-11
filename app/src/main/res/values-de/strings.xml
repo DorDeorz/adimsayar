@@ -216,11 +216,64 @@
     <string name="health_resting_chart">Ruhepuls</string>
     <string name="health_min_max">%1$d–%2$d bpm</string>
 
-    <string-array name="release_notes_0_7_1">
+    <string name="health_permissions_missing">Einige Gesundheitsberechtigungen fehlen</string>
+    <string name="health_grant">Erlauben</string>
+    <string name="health_bed_wake">Durchschnittliche Schlafens- und Aufwachzeit</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Schlafphasen</string>
+    <string name="health_nights_average">Durchschnitt aus %1$d Nächten</string>
+    <string name="sleep_deep">Tief</string>
+    <string name="sleep_light">Leicht</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Wach</string>
+    <string name="health_percent">%1$s %%</string>
+    <string name="health_resting_down">%2$d bpm niedriger als die %1$d Tage davor</string>
+    <string name="health_resting_up">%2$d bpm höher als die %1$d Tage davor</string>
+    <string name="health_resting_same">Gleich wie die %1$d Tage davor</string>
+    <string name="health_oxygen">Blutsauerstoff (SpO2)</string>
+    <string name="health_oxygen_hint">Niedrigster %1$s · %2$d Messungen</string>
+    <string name="health_exercise_days">Trainingstage</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">Durchschnittlich %1$s kcal pro Tag</string>
+    <string name="heart_today_title">Herzfrequenz heute</string>
+    <string name="heart_today_empty">Heute keine Herzfrequenzdaten</string>
+    <string name="weight_title">Gewicht und Body-Mass-Index</string>
+    <string name="weight_empty">Noch keine Gewichtseinträge. Trage dein Gewicht ein, um BMI und Verlauf zu sehen.</string>
+    <string name="weight_add">Gewicht eintragen</string>
+    <string name="weight_current">Aktuelles Gewicht</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Body-Mass-Index (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · Größe %2$d cm</string>
+    <string name="bmi_under">Untergewicht</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Übergewicht</string>
+    <string name="bmi_obese">Adipositas</string>
+    <string name="weight_total_change">Gesamtänderung</string>
+    <string name="weight_since">Seit %1$s</string>
+    <string name="weight_last_change">Seit dem letzten Eintrag</string>
+    <string name="weight_entries">Einträge</string>
+    <string name="weight_dialog_title">Gewicht · %1$s</string>
+    <string name="weight_delete">Löschen</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Wöchentliche Gewichtserinnerung</string>
+    <string name="weight_reminder_hint">Erinnert dich am ersten Tag der Woche gegen 09:00 ans Wiegen.</string>
+    <string name="notify_weight_title">Zeit zum Wiegen</string>
+    <string name="notify_weight_text">Eine neue Woche beginnt: Wiege dich und trage es in AdımSayar ein.</string>
+    <string name="notify_health_resting">Durchschnittlicher Ruhepuls: %1$d bpm</string>
+    <string name="notify_health_resting_down">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d niedriger als letzte Woche</string>
+    <string name="notify_health_resting_up">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d höher als letzte Woche</string>
+    <string name="notify_health_sleep">Durchschnittlicher Schlaf: %1$d Std. %2$d Min.</string>
+    <string name="weekly_summary_band_hint">Mit aktivem Armband kommen Ruhepuls und durchschnittlicher Schlaf hinzu.</string>
+
+    <string-array name="release_notes_0_8_0">
         <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
         <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
         <item>Updates werden jetzt direkt in der App heruntergeladen und installiert</item>
         <item>Armbandschritte werden bei geöffneter App jede Minute gelesen</item>
+        <item>Gesundheitsseite: Schlafphasen (tief, leicht, REM, wach), durchschnittliche Schlafens- und Aufwachzeit, Blutsauerstoff (SpO2), Trainingsarten und Trainingstage, aktive Kalorien und Ruhepuls im Vergleich zum Vorzeitraum</item>
+        <item>Stündliches Herzfrequenzdiagramm für heute</item>
+        <item>Gewichtsprotokoll: Body-Mass-Index, Gesamtänderung und Diagramm. Optionale wöchentliche Wiege-Erinnerung</item>
+        <item>Mit aktivem Armband zeigt die Wochenübersicht auch Ruhepuls und Schlaf</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>
