@@ -190,6 +190,11 @@
     <string name="next_year">Anno successivo</string>
     <string name="year_medals">Medaglie ottenute</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>I passi di Mi Band e di altri braccialetti si possono leggere tramite Health Connect (Impostazioni, disattivato di default). Nelle ore con il braccialetto conta il braccialetto, nelle altre il telefono</item>
+        <item>Dati del braccialetto nella cronologia: allenamenti, distanza, calorie attive, battito e sonno</item>
+        <item>Su Samsung i passi vengono letti ogni 15 minuti anche con l\'app chiusa</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Controllo aggiornamenti nelle impostazioni: cerca l\'ultima versione su GitHub e apre la pagina di download</item>
         <item>Link alla pagina GitHub</item>

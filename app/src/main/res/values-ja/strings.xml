@@ -190,6 +190,11 @@
     <string name="next_year">次の年</string>
     <string name="year_medals">獲得したメダル</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Mi Band などのバンドの歩数を Health Connect から読み込めます（設定、既定はオフ）。バンドを着けていた時間はバンド、それ以外は電話の歩数を使います</item>
+        <item>履歴にバンドのデータ：ワークアウト、距離、アクティブカロリー、心拍数、睡眠</item>
+        <item>Samsung ではアプリを閉じていても 15 分ごとに歩数を読み込みます</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>設定でアップデートを確認：GitHub の最新リリースを調べ、あればダウンロードページを開きます</item>
         <item>GitHub ページへのリンク</item>

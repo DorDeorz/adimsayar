@@ -190,6 +190,11 @@
     <string name="next_year">Sonraki yıl</string>
     <string name="year_medals">Kazanılan madalya</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>
+        <item>Geçmiş\'te bileklik verileri: egzersizler, mesafe, aktif kalori, nabız ve uyku</item>
+        <item>Samsung\'da uygulama kapalıyken de adımlar 15 dakikada bir okunur</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Ayarlar\'da güncelleme kontrolü: GitHub\'daki son sürüme bakar, yeni sürüm varsa indirme sayfasını açar</item>
         <item>GitHub sayfası bağlantısı</item>

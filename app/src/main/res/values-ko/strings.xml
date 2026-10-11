@@ -190,6 +190,11 @@
     <string name="next_year">다음 연도</string>
     <string name="year_medals">획득한 메달</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>
+        <item>기록에 밴드 데이터: 운동, 거리, 활동 칼로리, 심박수, 수면</item>
+        <item>Samsung에서는 앱이 닫혀 있어도 15분마다 걸음 수를 읽습니다</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>설정에서 업데이트 확인: GitHub 최신 릴리스를 확인하고 있으면 다운로드 페이지를 엽니다</item>
         <item>GitHub 페이지 링크</item>

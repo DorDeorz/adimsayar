@@ -190,6 +190,11 @@
     <string name="next_year">Next year</string>
     <string name="year_medals">Medals earned</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>
+        <item>Band data in History: workouts, distance, active calories, heart rate and sleep</item>
+        <item>On Samsung, steps are read every 15 minutes even when the app is closed</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Update check in Settings: looks up the latest release on GitHub and opens the download page if there is one</item>
         <item>Link to the GitHub page</item>

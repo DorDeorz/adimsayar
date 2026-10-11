@@ -190,6 +190,11 @@
     <string name="next_year">Año siguiente</string>
     <string name="year_medals">Medallas ganadas</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Los pasos de Mi Band y otras pulseras se pueden leer con Health Connect (Ajustes, desactivado por defecto). En las horas con pulsera cuenta la pulsera; en las demás, el teléfono</item>
+        <item>Datos de la pulsera en el Historial: entrenamientos, distancia, calorías activas, pulso y sueño</item>
+        <item>En Samsung, los pasos se leen cada 15 minutos aunque la app esté cerrada</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Búsqueda de actualizaciones en Ajustes: consulta la última versión en GitHub y abre la página de descarga</item>
         <item>Enlace a la página de GitHub</item>

@@ -190,6 +190,11 @@
     <string name="next_year">Année suivante</string>
     <string name="year_medals">Médailles obtenues</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>
+        <item>Données du bracelet dans l\'historique : exercices, distance, calories actives, fréquence cardiaque et sommeil</item>
+        <item>Sur Samsung, les pas sont lus toutes les 15 minutes même appli fermée</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Recherche de mises à jour dans les réglages : consulte la dernière version sur GitHub et ouvre la page de téléchargement</item>
         <item>Lien vers la page GitHub</item>

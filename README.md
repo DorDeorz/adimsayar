@@ -209,6 +209,17 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
 
+### 0.7.0
+
+Eklenenler
+- Bileklik adımları (Ayarlar → "Bileklik adımlarını kullan", varsayılan kapalı): Mi Band gibi bilekliklerin Mi Fitness'ın Health Connect'e yazdığı adımları okunur. Bilekliğin adım yazdığı saatlerde bileklik, diğer saatlerde telefon sayılır. Health Connect'e hiçbir şey yazılmaz.
+- Geçmiş'te seçilen gün için bileklik verileri: egzersizler, mesafe, aktif kalori, nabız (7 günlük dinlenme nabzı grafiği) ve uyku. Bu veriler saklanmaz, her seferinde Health Connect'ten okunur.
+
+Düzeltilenler
+- Samsung'da uygulama kapalıyken 15 dakikalık okumalar sensöre ulaşamıyordu; artık kısa süreli bir servisle okunuyor, kalıcı bildirim yok.
+
+Not: Veritabanı sürümü yükseldi. 0.7.0'dan sonra 0.6.1'e geri dönülemez (önce CSV dışa aktarın).
+
 ### 0.6.1
 
 Eklenenler

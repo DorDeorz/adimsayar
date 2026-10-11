@@ -190,6 +190,11 @@
     <string name="next_year">Nächstes Jahr</string>
     <string name="year_medals">Verdiente Medaillen</string>
 
+    <string-array name="release_notes_0_7_0">
+        <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>
+        <item>Armbanddaten im Verlauf: Trainings, Strecke, aktive Kalorien, Puls und Schlaf</item>
+        <item>Auf Samsung werden Schritte auch bei geschlossener App alle 15 Minuten gelesen</item>
+    </string-array>
     <string-array name="release_notes_0_6_1">
         <item>Update-Prüfung in den Einstellungen: sucht die neueste Version auf GitHub und öffnet die Download-Seite</item>
         <item>Link zur GitHub-Seite</item>
