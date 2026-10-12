@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">今天</string>
     <string name="steps_unit">步</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">尚未读取计步器</string>
 
     <string name="permission_title">需要“身体活动”权限</string>
-    <string name="permission_text">AdımSayar 从手机自带的传感器读取步数，为此 Android 需要“身体活动”权限。</string>
+    <string name="permission_text">FitWren 从手机自带的传感器读取步数，为此 Android 需要“身体活动”权限。</string>
     <string name="permission_grant">允许</string>
-    <string name="permission_denied_text">权限被拒绝。设置 → 应用 → AdımSayar → 权限 → 身体活动 → 允许。</string>
+    <string name="permission_denied_text">权限被拒绝。设置 → 应用 → FitWren → 权限 → 身体活动 → 允许。</string>
     <string name="permission_open_settings">打开设置</string>
 
     <string name="sensor_missing_title">未找到计步传感器</string>
-    <string name="sensor_missing_text">这部手机没有提供计步传感器，AdımSayar 无法在此设备上计步。</string>
+    <string name="sensor_missing_text">这部手机没有提供计步传感器，FitWren 无法在此设备上计步。</string>
 
     <string name="frozen_title">计步器似乎卡住了</string>
     <string name="frozen_text">手机能检测到步伐，但计步器没有变化。传感器已重新连接，走几步后此提示会自动消失。</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">从手机自带的步数记录读取。即使应用关闭也能完整计步，无需通知，还会补充以往的天数。</string>
     <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。</string>
     <string name="service_channel">计步器</string>
-    <string name="service_title">AdımSayar 正在计步</string>
+    <string name="service_title">FitWren 正在计步</string>
     <string name="service_text">今天 %1$s 步</string>
     <string name="service_text_starting">正在启动计步器</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">导出</string>
     <string name="export_csv_hint">将所有天数保存为 CSV 文件</string>
     <string name="import_csv">导入</string>
-    <string name="import_csv_hint">从 AdımSayar CSV，或 Samsung Health、Mi Fitness、Mi Fit、Google Fit 的导出文件（CSV 或 zip）导入天数，保留较大的数值。带密码的 zip 请先解压再选择 CSV 文件。</string>
+    <string name="import_csv_hint">从 FitWren CSV，或 Samsung Health、Mi Fitness、Mi Fit、Google Fit 的导出文件（CSV 或 zip）导入天数，保留较大的数值。带密码的 zip 请先解压再选择 CSV 文件。</string>
     <string name="export_done">已导出 %1$d 天</string>
     <string name="import_done">已更新 %1$d 天</string>
     <string name="csv_failed">无法读取或写入文件</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">每周体重提醒</string>
     <string name="weight_reminder_hint">在每周第一天 09:00 左右提醒你称体重。</string>
     <string name="notify_weight_title">该称体重了</string>
-    <string name="notify_weight_text">新的一周开始了：称一下体重并记录到 AdımSayar。</string>
+    <string name="notify_weight_text">新的一周开始了：称一下体重并记录到 FitWren。</string>
     <string name="notify_health_resting">平均静息心率：%1$d bpm</string>
     <string name="notify_health_resting_down">平均静息心率：%1$d bpm，比上周低 %2$d</string>
     <string name="notify_health_resting_up">平均静息心率：%1$d bpm，比上周高 %2$d</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch 和 Galaxy Fit 使用 Samsung Health。在 Samsung Health → 设置 → Health Connect 中允许共享数据。</string>
     <string name="setup_steps_google">Pixel Watch 和 Fitbit 设备使用 Fitbit 应用。在 Fitbit 应用的设置中开启与 Health Connect 同步。</string>
     <string name="setup_steps_garmin">在 Garmin Connect 设置中打开 已连接的应用 → Health Connect 并开启。</string>
-    <string name="setup_steps_huawei">华为运动健康目前不向 Health Connect 写入数据，因此华为和荣耀手表的数据无法进入 AdımSayar。</string>
+    <string name="setup_steps_huawei">华为运动健康目前不向 Health Connect 写入数据，因此华为和荣耀手表的数据无法进入 FitWren。</string>
     <string name="setup_steps_other">在手表的应用（例如 Wearfit Pro、Da Fit、FitCloudPro）中查找 Health Connect 选项。如果该应用不在 Health Connect → 应用权限 列表中，就无法发送数据。Apple Watch 只能配合 iPhone 使用。</string>
     <string name="setup_open_hc">打开 Health Connect</string>
-    <string name="setup_step_permission">AdımSayar 的权限</string>
+    <string name="setup_step_permission">FitWren 的权限</string>
     <string name="setup_permission_wait">请先安装 Health Connect。</string>
     <string name="setup_permission_enable">打开下面的开关以读取手环数据。Health Connect 会询问我们可以读取哪些数据。</string>
     <string name="setup_permission_ready">所有权限均已授予。</string>
@@ -313,6 +313,10 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>应用改名为 FitWren（计步与健康）</item>
+        <item>你的数据、设置和小部件保持不变</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>小鸟小组件：剩余步数用简写显示，不再截断</item>
         <item>小号今日小组件显示距目标的进度条</item>
@@ -408,35 +412,35 @@
 
     <string name="oem_title">在后台也记录步数</string>
     <string name="oem_title_stock">电池优化豁免</string>
-    <string name="oem_intro">这部手机可能会在后台关闭应用。按以下步骤操作后，即使应用关闭，AdımSayar 也能读取计步器。</string>
+    <string name="oem_intro">这部手机可能会在后台关闭应用。按以下步骤操作后，即使应用关闭，FitWren 也能读取计步器。</string>
     <string name="oem_open">打开</string>
     <string name="oem_dismiss">暂时关闭</string>
     <string name="oem_open_failed">此手机无法打开该页面，请在设置中手动完成此步骤。</string>
-    <string name="oem_battery_common">设置 → 应用 → AdımSayar → 电池 → 无限制</string>
+    <string name="oem_battery_common">设置 → 应用 → FitWren → 电池 → 无限制</string>
 
-    <string name="oem_xiaomi_1">设置 → 应用设置 → 应用管理 → AdımSayar → 自启动 → 开启</string>
+    <string name="oem_xiaomi_1">设置 → 应用设置 → 应用管理 → FitWren → 自启动 → 开启</string>
     <string name="oem_xiaomi_2">在同一页面，省电策略 → 无限制</string>
 
-    <string name="oem_samsung_1">设置 → 应用程序 → AdımSayar → 电池 → 不受限制</string>
-    <string name="oem_samsung_2">电池 → 后台使用限制 → 永不休眠的应用程序 → 添加 AdımSayar</string>
+    <string name="oem_samsung_1">设置 → 应用程序 → FitWren → 电池 → 不受限制</string>
+    <string name="oem_samsung_2">电池 → 后台使用限制 → 永不休眠的应用程序 → 添加 FitWren</string>
 
-    <string name="oem_huawei_1">电池 → 应用启动管理 → AdımSayar → 关闭自动管理，开启允许自启动、允许关联启动和允许后台活动</string>
+    <string name="oem_huawei_1">电池 → 应用启动管理 → FitWren → 关闭自动管理，开启允许自启动、允许关联启动和允许后台活动</string>
 
-    <string name="oem_oppo_1">电池 → 允许后台行为 → AdımSayar：允许后台运行</string>
-    <string name="oem_oppo_2">自启动 → AdımSayar → 开启</string>
+    <string name="oem_oppo_1">电池 → 允许后台行为 → FitWren：允许后台运行</string>
+    <string name="oem_oppo_2">自启动 → FitWren → 开启</string>
 
-    <string name="oem_vivo_1">电池 → 后台耗电管理 → 允许后台高耗电 → 将 AdımSayar 加入白名单</string>
-    <string name="oem_vivo_2">自启动 → AdımSayar → 开启</string>
+    <string name="oem_vivo_1">电池 → 后台耗电管理 → 允许后台高耗电 → 将 FitWren 加入白名单</string>
+    <string name="oem_vivo_2">自启动 → FitWren → 开启</string>
 
-    <string name="oem_asus_1">自启动 → 允许 AdımSayar</string>
+    <string name="oem_asus_1">自启动 → 允许 FitWren</string>
 
-    <string name="oem_transsion_1">自动管理 → 在应用列表中选择 AdımSayar，开启全部三项权限</string>
+    <string name="oem_transsion_1">自动管理 → 在应用列表中选择 FitWren，开启全部三项权限</string>
     <string name="wearable_card_title">使用手环步数</string>
     <string name="wearable_card_text">读取 Mi Fitness 等手环应用写入 Health Connect 的步数。手环计步的时段使用手环的计数，其他时段使用手机的计数。如果你允许，历史记录中还会显示锻炼、距离、卡路里、心率和睡眠。</string>
     <string name="wearable_permission_denied">未授予读取 Health Connect 步数的权限。</string>
     <string name="wearable_unavailable">此手机上没有 Health Connect。在 Android 13 及更早版本上，请从 Play 商店安装 Health Connect 应用。</string>
     <string name="wearable_privacy_title">手环步数</string>
-    <string name="wearable_privacy_text">AdimSayar 只从 Health Connect 读取步数、锻炼、距离、卡路里、心率和睡眠记录。它不写入任何内容，也不会把数据发送到手机之外。读取的数据只在本机的应用内显示。</string>
+    <string name="wearable_privacy_text">FitWren 只从 Health Connect 读取步数、锻炼、距离、卡路里、心率和睡眠记录。它不写入任何内容，也不会把数据发送到手机之外。读取的数据只在本机的应用内显示。</string>
     <string name="log_wearable_missing">未找到 Health Connect</string>
     <string name="log_wearable_denied">没有 Health Connect 读取权限</string>
     <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>

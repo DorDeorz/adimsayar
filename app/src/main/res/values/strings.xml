@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">Bugün</string>
     <string name="steps_unit">adım</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">Henüz sayaç okunmadı</string>
 
     <string name="permission_title">Fiziksel etkinlik izni gerekiyor</string>
-    <string name="permission_text">AdımSayar adımlarını telefonun kendi sensöründen okur. Bunun için Android fiziksel etkinlik izni ister.</string>
+    <string name="permission_text">FitWren adımlarını telefonun kendi sensöründen okur. Bunun için Android fiziksel etkinlik izni ister.</string>
     <string name="permission_grant">İzin ver</string>
-    <string name="permission_denied_text">İzin reddedildi. Ayarlar → Uygulamalar → AdımSayar → İzinler → Fiziksel etkinlik → İzin ver.</string>
+    <string name="permission_denied_text">İzin reddedildi. Ayarlar → Uygulamalar → FitWren → İzinler → Fiziksel etkinlik → İzin ver.</string>
     <string name="permission_open_settings">Ayarları aç</string>
 
     <string name="sensor_missing_title">Adım sensörü bulunamadı</string>
-    <string name="sensor_missing_text">Bu telefon adım sayacı sensörü bildirmiyor. AdımSayar bu cihazda adım sayamaz.</string>
+    <string name="sensor_missing_text">Bu telefon adım sayacı sensörü bildirmiyor. FitWren bu cihazda adım sayamaz.</string>
 
     <string name="frozen_title">Adım sayacı donmuş görünüyor</string>
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">Adımlar telefonun kendi adım kaydından okunur. Uygulama kapalıyken de eksiksiz sayılır, bildirim gerekmez ve geçmiş günler de eklenir.</string>
     <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür.</string>
     <string name="service_channel">Adım sayacı</string>
-    <string name="service_title">AdımSayar sayıyor</string>
+    <string name="service_title">FitWren sayıyor</string>
     <string name="service_text">Bugün %1$s adım</string>
     <string name="service_text_starting">Sayaç açılıyor</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">Dışa aktar</string>
     <string name="export_csv_hint">Tüm günleri CSV dosyasına kaydet</string>
     <string name="import_csv">İçe aktar</string>
-    <string name="import_csv_hint">AdımSayar CSV, Samsung Health, Mi Fitness, Mi Fit ya da Google Fit dışa aktarımından (CSV veya zip) günleri yükle; daha yüksek olan sayı kalır. Şifreli zipi önce açıp CSV dosyasını seç.</string>
+    <string name="import_csv_hint">FitWren CSV, Samsung Health, Mi Fitness, Mi Fit ya da Google Fit dışa aktarımından (CSV veya zip) günleri yükle; daha yüksek olan sayı kalır. Şifreli zipi önce açıp CSV dosyasını seç.</string>
     <string name="export_done">%1$d gün dışa aktarıldı</string>
     <string name="import_done">%1$d gün güncellendi</string>
     <string name="csv_failed">Dosya okunamadı veya yazılamadı</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">Haftalık kilo hatırlatması</string>
     <string name="weight_reminder_hint">Haftanın ilk günü saat 09:00 civarı kilonu ölçmeni hatırlatır.</string>
     <string name="notify_weight_title">Kilo ölçme zamanı</string>
-    <string name="notify_weight_text">Yeni haftaya başlarken kilonu ölç ve AdımSayar’a ekle.</string>
+    <string name="notify_weight_text">Yeni haftaya başlarken kilonu ölç ve FitWren’e ekle.</string>
     <string name="notify_health_resting">Ortalama dinlenme nabzı: %1$d bpm</string>
     <string name="notify_health_resting_down">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d düşük</string>
     <string name="notify_health_resting_up">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d yüksek</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch ve Galaxy Fit, Samsung Health ile çalışır. Samsung Health → Ayarlar → Health Connect bölümünden verileri paylaşmaya izin ver.</string>
     <string name="setup_steps_google">Pixel Watch ve Fitbit cihazları Fitbit uygulamasıyla çalışır. Fitbit uygulamasının ayarlarından Health Connect ile eşitlemeyi aç.</string>
     <string name="setup_steps_garmin">Garmin Connect\'in ayarlarında Bağlı Uygulamalar → Health Connect\'i aç.</string>
-    <string name="setup_steps_huawei">Huawei Health şu an Health Connect\'e veri yazmıyor. Bu yüzden Huawei ve Honor saatlerin verileri AdımSayar\'a gelemez.</string>
+    <string name="setup_steps_huawei">Huawei Health şu an Health Connect\'e veri yazmıyor. Bu yüzden Huawei ve Honor saatlerin verileri FitWren\'e gelemez.</string>
     <string name="setup_steps_other">Saatinin uygulamasında (ör. Wearfit Pro, Da Fit, FitCloudPro) Health Connect seçeneği ara. Uygulama Health Connect → Uygulama izinleri listesinde görünmüyorsa veri gönderemiyor demektir. Apple Watch yalnızca iPhone ile çalışır.</string>
     <string name="setup_open_hc">Health Connect\'i aç</string>
-    <string name="setup_step_permission">AdımSayar\'ın izinleri</string>
+    <string name="setup_step_permission">FitWren\'in izinleri</string>
     <string name="setup_permission_wait">Önce Health Connect\'i kur.</string>
     <string name="setup_permission_enable">Bileklik verilerini okumak için aşağıdaki anahtarı aç. Health Connect hangi verileri okuyabileceğimizi soracak.</string>
     <string name="setup_permission_ready">Tüm izinler verildi.</string>
@@ -313,6 +313,10 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>Uygulamanın yeni adı FitWren: Adım Sayar &amp; Sağlık</item>
+        <item>Verilerin, ayarların ve widget\'ların aynen duruyor</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Kuş widget\'ında kalan adım artık kısa yazılıyor ve kesilmiyor</item>
         <item>Küçük Bugün widget\'ında hedefe ne kadar kaldığını gösteren çubuk</item>
@@ -409,35 +413,35 @@
 
     <string name="oem_title">Adımlar arka planda da kaydedilsin</string>
     <string name="oem_title_stock">Pil optimizasyonu muafiyeti</string>
-    <string name="oem_intro">Bu telefon arka plandaki uygulamaları kapatabilir. Aşağıdaki adımlar AdımSayar\'ın uygulama kapalıyken de sayacı okuyabilmesini sağlar.</string>
+    <string name="oem_intro">Bu telefon arka plandaki uygulamaları kapatabilir. Aşağıdaki adımlar FitWren\'in uygulama kapalıyken de sayacı okuyabilmesini sağlar.</string>
     <string name="oem_open">Aç</string>
     <string name="oem_dismiss">Şimdilik kapat</string>
     <string name="oem_open_failed">Bu ekran bu telefonda açılamadı. Adımı Ayarlar içinden elle yap.</string>
-    <string name="oem_battery_common">Ayarlar → Uygulamalar → AdımSayar → Pil → Kısıtlama yok</string>
+    <string name="oem_battery_common">Ayarlar → Uygulamalar → FitWren → Pil → Kısıtlama yok</string>
 
-    <string name="oem_xiaomi_1">Ayarlar → Uygulamalar → Uygulamaları yönet → AdımSayar → Otomatik başlatma → Aç</string>
+    <string name="oem_xiaomi_1">Ayarlar → Uygulamalar → Uygulamaları yönet → FitWren → Otomatik başlatma → Aç</string>
     <string name="oem_xiaomi_2">Aynı ekranda Pil tasarrufu → Kısıtlama yok</string>
 
-    <string name="oem_samsung_1">Ayarlar → Uygulamalar → AdımSayar → Pil → Kısıtlanmamış</string>
-    <string name="oem_samsung_2">Pil → Arka plan kullanımı sınırları → Hiç uykuya dalmayan uygulamalar → AdımSayar ekle</string>
+    <string name="oem_samsung_1">Ayarlar → Uygulamalar → FitWren → Pil → Kısıtlanmamış</string>
+    <string name="oem_samsung_2">Pil → Arka plan kullanımı sınırları → Hiç uykuya dalmayan uygulamalar → FitWren ekle</string>
 
-    <string name="oem_huawei_1">Pil → Uygulama başlatma → AdımSayar → Otomatik yönetimi kapat, Otomatik başlatma / İkincil başlatma / Arka planda çalışma üçünü de aç</string>
+    <string name="oem_huawei_1">Pil → Uygulama başlatma → FitWren → Otomatik yönetimi kapat, Otomatik başlatma / İkincil başlatma / Arka planda çalışma üçünü de aç</string>
 
-    <string name="oem_oppo_1">Pil → Arka plan etkinliğine izin ver → AdımSayar: Arka planda çalıştırmaya izin ver</string>
-    <string name="oem_oppo_2">Otomatik başlatma → AdımSayar → Aç</string>
+    <string name="oem_oppo_1">Pil → Arka plan etkinliğine izin ver → FitWren: Arka planda çalıştırmaya izin ver</string>
+    <string name="oem_oppo_2">Otomatik başlatma → FitWren → Aç</string>
 
-    <string name="oem_vivo_1">Pil → Arka plan yönetimi → Yüksek arka plan tüketimi → AdımSayar\'ı beyaz listeye al</string>
-    <string name="oem_vivo_2">Otomatik başlatma → AdımSayar → Aç</string>
+    <string name="oem_vivo_1">Pil → Arka plan yönetimi → Yüksek arka plan tüketimi → FitWren\'i beyaz listeye al</string>
+    <string name="oem_vivo_2">Otomatik başlatma → FitWren → Aç</string>
 
-    <string name="oem_asus_1">Otomatik başlatma → AdımSayar\'a izin ver</string>
+    <string name="oem_asus_1">Otomatik başlatma → FitWren\'e izin ver</string>
 
-    <string name="oem_transsion_1">Otomatik yönetim → uygulama listesinden AdımSayar\'ı seç, üç izni de aç</string>
+    <string name="oem_transsion_1">Otomatik yönetim → uygulama listesinden FitWren\'i seç, üç izni de aç</string>
     <string name="wearable_card_title">Bileklik adımlarını kullan</string>
     <string name="wearable_card_text">Mi Fitness gibi bileklik uygulamalarının Health Connect\'e yazdığı adımlar okunur. Bilekliğin adım saydığı saatlerde onun sayısı, diğer saatlerde telefonun sayısı kullanılır. İzin verirsen egzersiz, mesafe, kalori, nabız ve uyku da Geçmiş\'te gösterilir.</string>
     <string name="wearable_permission_denied">Health Connect adım okuma izni verilmedi.</string>
     <string name="wearable_unavailable">Health Connect bu telefonda yok. Android 13 ve öncesinde Play Store\'dan Health Connect uygulamasını kur.</string>
     <string name="wearable_privacy_title">Bileklik adımları</string>
-    <string name="wearable_privacy_text">AdımSayar, Health Connect\'ten yalnızca adım, egzersiz, mesafe, kalori, nabız ve uyku kayıtlarını okur. Hiçbir şey yazmaz ve veriyi telefondan dışarı göndermez. Okunan veriler yalnızca bu telefonda, uygulamanın içinde gösterilir.</string>
+    <string name="wearable_privacy_text">FitWren, Health Connect\'ten yalnızca adım, egzersiz, mesafe, kalori, nabız ve uyku kayıtlarını okur. Hiçbir şey yazmaz ve veriyi telefondan dışarı göndermez. Okunan veriler yalnızca bu telefonda, uygulamanın içinde gösterilir.</string>
     <string name="log_wearable_missing">Health Connect bulunamadı</string>
     <string name="log_wearable_denied">Health Connect okuma izni yok</string>
     <string name="log_wearable_error">Health Connect okunamadı (%1$s)</string>

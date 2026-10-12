@@ -81,5 +81,5 @@ jobs:
           if gh release view "$TAG" > /dev/null 2>&1; then
             gh release upload "$TAG" "adimsayar-$VERSION.apk" --clobber
           else
-            gh release create "$TAG" "adimsayar-$VERSION.apk" --target "$GITHUB_SHA" --title "AdımSayar $VERSION" --generate-notes
+            gh release create "$TAG" "adimsayar-$VERSION.apk" --target "$GITHUB_SHA" --title "FitWren $VERSION" --generate-notes
           fi

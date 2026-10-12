@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">今日</string>
     <string name="steps_unit">歩</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">カウンターはまだ読み取られていません</string>
 
     <string name="permission_title">身体活動の権限が必要です</string>
-    <string name="permission_text">AdımSayar はスマートフォン本体のセンサーから歩数を読み取ります。そのため Android が身体活動の権限を求めます。</string>
+    <string name="permission_text">FitWren はスマートフォン本体のセンサーから歩数を読み取ります。そのため Android が身体活動の権限を求めます。</string>
     <string name="permission_grant">許可</string>
-    <string name="permission_denied_text">権限が拒否されました。設定 → アプリ → AdımSayar → 権限 → 身体活動 → 許可。</string>
+    <string name="permission_denied_text">権限が拒否されました。設定 → アプリ → FitWren → 権限 → 身体活動 → 許可。</string>
     <string name="permission_open_settings">設定を開く</string>
 
     <string name="sensor_missing_title">歩数センサーが見つかりません</string>
-    <string name="sensor_missing_text">このスマートフォンは歩数計センサーを搭載していません。この端末では AdımSayar で歩数を数えられません。</string>
+    <string name="sensor_missing_text">このスマートフォンは歩数計センサーを搭載していません。この端末では FitWren で歩数を数えられません。</string>
 
     <string name="frozen_title">歩数カウンターが止まっているようです</string>
     <string name="frozen_text">歩行は検出されていますが、カウンターが進んでいません。センサーを再接続しました。数歩歩くとこの警告は自動的に消えます。</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">スマートフォン本体の歩数記録から読み取ります。アプリを閉じていてもすべてカウントされ、通知は不要で、過去の日の歩数も追加されます。</string>
     <string name="service_card_text">アプリを閉じているときに歩数がカウントされない場合はオンにしてください。カウンターが動作し続け、通知バーにサイレントの常駐通知が表示されます。</string>
     <string name="service_channel">歩数カウンター</string>
-    <string name="service_title">AdımSayar がカウント中</string>
+    <string name="service_title">FitWren がカウント中</string>
     <string name="service_text">今日 %1$s 歩</string>
     <string name="service_text_starting">カウンターを起動しています</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">エクスポート</string>
     <string name="export_csv_hint">すべての日を CSV ファイルに保存</string>
     <string name="import_csv">インポート</string>
-    <string name="import_csv_hint">AdımSayar の CSV、または Samsung Health・Mi Fitness・Mi Fit・Google Fit のエクスポート（CSV または zip）から日を読み込みます。大きいほうの値が保持されます。パスワード付き zip は先に展開して CSV を選んでください。</string>
+    <string name="import_csv_hint">FitWren の CSV、または Samsung Health・Mi Fitness・Mi Fit・Google Fit のエクスポート（CSV または zip）から日を読み込みます。大きいほうの値が保持されます。パスワード付き zip は先に展開して CSV を選んでください。</string>
     <string name="export_done">%1$d 日分をエクスポートしました</string>
     <string name="import_done">%1$d 日分を更新しました</string>
     <string name="csv_failed">ファイルを読み書きできませんでした</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">毎週の体重リマインダー</string>
     <string name="weight_reminder_hint">週の初日の 09:00 ごろに体重を量るよう通知します。</string>
     <string name="notify_weight_title">体重を量る時間です</string>
-    <string name="notify_weight_text">新しい週の始まりです。体重を量って AdımSayar に記録しましょう。</string>
+    <string name="notify_weight_text">新しい週の始まりです。体重を量って FitWren に記録しましょう。</string>
     <string name="notify_health_resting">平均安静時心拍数: %1$d bpm</string>
     <string name="notify_health_resting_down">平均安静時心拍数: %1$d bpm、先週より %2$d 低下</string>
     <string name="notify_health_resting_up">平均安静時心拍数: %1$d bpm、先週より %2$d 上昇</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch と Galaxy Fit は Samsung Health で動作します。Samsung Health → 設定 → Health Connect でデータの共有を許可してください。</string>
     <string name="setup_steps_google">Pixel Watch と Fitbit デバイスは Fitbit アプリで動作します。Fitbit アプリの設定で Health Connect との同期をオンにしてください。</string>
     <string name="setup_steps_garmin">Garmin Connect の設定で 接続済みアプリ → Health Connect を開いてオンにしてください。</string>
-    <string name="setup_steps_huawei">Huawei Health は現在 Health Connect に書き込まないため、Huawei と Honor の時計のデータは AdımSayar に届きません。</string>
+    <string name="setup_steps_huawei">Huawei Health は現在 Health Connect に書き込まないため、Huawei と Honor の時計のデータは FitWren に届きません。</string>
     <string name="setup_steps_other">時計のアプリ (例: Wearfit Pro、Da Fit、FitCloudPro) に Health Connect の項目があるか探してください。Health Connect → アプリの権限 にアプリが表示されない場合、データを送れません。Apple Watch は iPhone でのみ使えます。</string>
     <string name="setup_open_hc">Health Connect を開く</string>
-    <string name="setup_step_permission">AdımSayar の権限</string>
+    <string name="setup_step_permission">FitWren の権限</string>
     <string name="setup_permission_wait">先に Health Connect をインストールしてください。</string>
     <string name="setup_permission_enable">下のスイッチをオンにするとバンドのデータを読み取れます。Health Connect が読み取ってよいデータを確認します。</string>
     <string name="setup_permission_ready">すべての権限が許可されています。</string>
@@ -313,6 +313,10 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>アプリの名前が FitWren（歩数計＆ヘルス）になりました</item>
+        <item>データ、設定、ウィジェットはそのまま残ります</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>鳥ウィジェット: 残り歩数を短く表示し、切れなくなりました</item>
         <item>小さな「今日」ウィジェットに目標までの進捗バーを表示</item>
@@ -408,35 +412,35 @@
 
     <string name="oem_title">バックグラウンドでも歩数を記録</string>
     <string name="oem_title_stock">電池の最適化の除外</string>
-    <string name="oem_intro">このスマートフォンはバックグラウンドのアプリを終了することがあります。以下の手順を行うと、アプリを閉じていても AdımSayar がカウンターを読み取れます。</string>
+    <string name="oem_intro">このスマートフォンはバックグラウンドのアプリを終了することがあります。以下の手順を行うと、アプリを閉じていても FitWren がカウンターを読み取れます。</string>
     <string name="oem_open">開く</string>
     <string name="oem_dismiss">今は閉じる</string>
     <string name="oem_open_failed">このスマートフォンではこの画面を開けませんでした。設定から手動で行ってください。</string>
-    <string name="oem_battery_common">設定 → アプリ → AdımSayar → バッテリー → 制限なし</string>
+    <string name="oem_battery_common">設定 → アプリ → FitWren → バッテリー → 制限なし</string>
 
-    <string name="oem_xiaomi_1">設定 → アプリ → アプリを管理 → AdımSayar → 自動起動 → オン</string>
+    <string name="oem_xiaomi_1">設定 → アプリ → アプリを管理 → FitWren → 自動起動 → オン</string>
     <string name="oem_xiaomi_2">同じ画面で、バッテリーセーバー → 制限なし</string>
 
-    <string name="oem_samsung_1">設定 → アプリ → AdımSayar → バッテリー → 制限なし</string>
-    <string name="oem_samsung_2">バッテリー → バックグラウンドでの使用制限 → スリープさせないアプリ → AdımSayar を追加</string>
+    <string name="oem_samsung_1">設定 → アプリ → FitWren → バッテリー → 制限なし</string>
+    <string name="oem_samsung_2">バッテリー → バックグラウンドでの使用制限 → スリープさせないアプリ → FitWren を追加</string>
 
-    <string name="oem_huawei_1">バッテリー → アプリ起動 → AdımSayar → 自動管理をオフにし、自動起動、二次起動、バックグラウンドで実行をオン</string>
+    <string name="oem_huawei_1">バッテリー → アプリ起動 → FitWren → 自動管理をオフにし、自動起動、二次起動、バックグラウンドで実行をオン</string>
 
-    <string name="oem_oppo_1">バッテリー → バックグラウンドアクティビティを許可 → AdımSayar: バックグラウンド実行を許可</string>
-    <string name="oem_oppo_2">自動起動 → AdımSayar → オン</string>
+    <string name="oem_oppo_1">バッテリー → バックグラウンドアクティビティを許可 → FitWren: バックグラウンド実行を許可</string>
+    <string name="oem_oppo_2">自動起動 → FitWren → オン</string>
 
-    <string name="oem_vivo_1">バッテリー → バックグラウンドでの電力消費の管理 → バックグラウンドでの高い電力消費 → AdımSayar をホワイトリストに追加</string>
-    <string name="oem_vivo_2">自動起動 → AdımSayar → オン</string>
+    <string name="oem_vivo_1">バッテリー → バックグラウンドでの電力消費の管理 → バックグラウンドでの高い電力消費 → FitWren をホワイトリストに追加</string>
+    <string name="oem_vivo_2">自動起動 → FitWren → オン</string>
 
-    <string name="oem_asus_1">自動起動 → AdımSayar を許可</string>
+    <string name="oem_asus_1">自動起動 → FitWren を許可</string>
 
-    <string name="oem_transsion_1">自動管理 → アプリ一覧で AdımSayar を選択し、3つの権限をすべてオン</string>
+    <string name="oem_transsion_1">自動管理 → アプリ一覧で FitWren を選択し、3つの権限をすべてオン</string>
     <string name="wearable_card_title">バンドの歩数を使う</string>
     <string name="wearable_card_text">Mi Fitness などのバンドアプリが Health Connect に書き込んだ歩数を読み取ります。バンドが計測した時間帯はバンドの歩数、それ以外はスマホの歩数を使います。許可すると、履歴にワークアウト、距離、カロリー、心拍数、睡眠も表示されます。</string>
     <string name="wearable_permission_denied">Health Connect の歩数読み取り権限が許可されませんでした。</string>
     <string name="wearable_unavailable">このスマホに Health Connect がありません。Android 13 以前では Play ストアから Health Connect アプリをインストールしてください。</string>
     <string name="wearable_privacy_title">バンドの歩数</string>
-    <string name="wearable_privacy_text">AdimSayar は Health Connect から歩数、ワークアウト、距離、カロリー、心拍数、睡眠の記録だけを読み取ります。何も書き込まず、データをスマホの外に送ることもありません。読み取ったデータはこのスマホのアプリ内でのみ表示されます。</string>
+    <string name="wearable_privacy_text">FitWren は Health Connect から歩数、ワークアウト、距離、カロリー、心拍数、睡眠の記録だけを読み取ります。何も書き込まず、データをスマホの外に送ることもありません。読み取ったデータはこのスマホのアプリ内でのみ表示されます。</string>
     <string name="log_wearable_missing">Health Connect が見つかりません</string>
     <string name="log_wearable_denied">Health Connect の読み取り権限がありません</string>
     <string name="log_wearable_error">Health Connect を読み取れませんでした（%1$s）</string>

@@ -1,6 +1,8 @@
-# AdımSayar
+# FitWren – Adım Sayar & Sağlık
 
-Android için reklamsız, hesapsız adım sayar. Adımlar yalnızca telefonun kendi sensörlerinden (Xiaomi'de isteğe bağlı olarak HyperOS'un kendi adım kaydından) okunur ve tüm veriler telefonda kalır.
+Eski adı AdımSayar (0.9.3'te değişti; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve veriler etkilenmez).
+
+Android için reklamsız, hesapsız adım sayar ve sağlık takibi. Adımlar yalnızca telefonun kendi sensörlerinden (Xiaomi'de isteğe bağlı olarak HyperOS'un kendi adım kaydından) okunur ve tüm veriler telefonda kalır.
 
 Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 Pro 4G (HyperOS) için yazıldı; tüm Android telefonlarda çalışacak şekilde tasarlandı.
 
@@ -326,4 +328,4 @@ Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. 
 
 ### English
 
-AdımSayar is a private Android step counter: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is used only when the user turns on "Use band steps": step records from apps such as Mi Fitness are read (never written), and for hours the band counted, the band's steps replace the phone's. The UI is available in 12 languages. Licensed under MIT.
+FitWren (formerly AdımSayar) is a private Android step counter and health app: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is used only when the user turns on "Use band steps": step records from apps such as Mi Fitness are read (never written), and for hours the band counted, the band's steps replace the phone's. The UI is available in 12 languages. Licensed under MIT.

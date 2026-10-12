@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">اليوم</string>
     <string name="steps_unit">خطوة</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">لم تتم قراءة العداد بعد</string>
 
     <string name="permission_title">مطلوب إذن النشاط البدني</string>
-    <string name="permission_text">يقرأ AdımSayar خطواتك من مستشعر الهاتف نفسه. ولهذا يطلب Android إذن النشاط البدني.</string>
+    <string name="permission_text">يقرأ FitWren خطواتك من مستشعر الهاتف نفسه. ولهذا يطلب Android إذن النشاط البدني.</string>
     <string name="permission_grant">سماح</string>
-    <string name="permission_denied_text">تم رفض الإذن. الإعدادات ← التطبيقات ← AdımSayar ← الأذونات ← النشاط البدني ← سماح.</string>
+    <string name="permission_denied_text">تم رفض الإذن. الإعدادات ← التطبيقات ← FitWren ← الأذونات ← النشاط البدني ← سماح.</string>
     <string name="permission_open_settings">فتح الإعدادات</string>
 
     <string name="sensor_missing_title">لم يتم العثور على مستشعر الخطوات</string>
-    <string name="sensor_missing_text">لا يوفّر هذا الهاتف مستشعرًا لعدّ الخطوات. لا يستطيع AdımSayar عدّ الخطوات على هذا الجهاز.</string>
+    <string name="sensor_missing_text">لا يوفّر هذا الهاتف مستشعرًا لعدّ الخطوات. لا يستطيع FitWren عدّ الخطوات على هذا الجهاز.</string>
 
     <string name="frozen_title">يبدو أن عداد الخطوات متوقف</string>
     <string name="frozen_text">يرصد الهاتف الخطوات لكن العداد لا يتقدم. تمت إعادة الاتصال بالمستشعر، وسيختفي هذا التنبيه تلقائيًا بعد بضع خطوات.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">تُقرأ الخطوات من سجل الخطوات الخاص بالهاتف. تُحسب كاملة حتى والتطبيق مغلق، ولا حاجة إلى إشعار، وتُضاف الأيام السابقة أيضًا.</string>
     <string name="service_card_text">شغّل هذا الخيار إذا لم تُحسب الخطوات والتطبيق مغلق. يبقى العداد قيد التشغيل، ويظهر إشعار صامت دائم في شريط الإشعارات.</string>
     <string name="service_channel">عداد الخطوات</string>
-    <string name="service_title">AdımSayar يعدّ الخطوات</string>
+    <string name="service_title">FitWren يعدّ الخطوات</string>
     <string name="service_text">خطوات اليوم: %1$s</string>
     <string name="service_text_starting">جارٍ تشغيل العداد</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">تصدير</string>
     <string name="export_csv_hint">حفظ جميع الأيام في ملف CSV</string>
     <string name="import_csv">استيراد</string>
-    <string name="import_csv_hint">حمّل الأيام من ملف CSV من AdımSayar أو من تصدير Samsung Health أو Mi Fitness أو Mi Fit أو Google Fit (CSV أو zip)، ويُحتفظ بالرقم الأعلى. فك ضغط الملفات المحمية بكلمة مرور أولًا واختر ملف CSV.</string>
+    <string name="import_csv_hint">حمّل الأيام من ملف CSV من FitWren أو من تصدير Samsung Health أو Mi Fitness أو Mi Fit أو Google Fit (CSV أو zip)، ويُحتفظ بالرقم الأعلى. فك ضغط الملفات المحمية بكلمة مرور أولًا واختر ملف CSV.</string>
     <string name="export_done">تم تصدير الأيام: %1$d</string>
     <string name="import_done">تم تحديث الأيام: %1$d</string>
     <string name="csv_failed">تعذّرت قراءة الملف أو كتابته</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">تذكير أسبوعي بالوزن</string>
     <string name="weight_reminder_hint">يذكّرك بوزن نفسك قرابة الساعة 09:00 في أول يوم من الأسبوع.</string>
     <string name="notify_weight_title">حان وقت الوزن</string>
-    <string name="notify_weight_text">أسبوع جديد يبدأ: زن نفسك وأضف وزنك إلى AdımSayar.</string>
+    <string name="notify_weight_text">أسبوع جديد يبدأ: زن نفسك وأضف وزنك إلى FitWren.</string>
     <string name="notify_health_resting">متوسط نبض الراحة: %1$d نبضة/دقيقة</string>
     <string name="notify_health_resting_down">متوسط نبض الراحة: %1$d نبضة/دقيقة، أقل بـ %2$d من الأسبوع الماضي</string>
     <string name="notify_health_resting_up">متوسط نبض الراحة: %1$d نبضة/دقيقة، أعلى بـ %2$d من الأسبوع الماضي</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">تعمل Galaxy Watch وGalaxy Fit مع Samsung Health. في Samsung Health ← الإعدادات ← Health Connect اسمح بمشاركة بياناتك.</string>
     <string name="setup_steps_google">تعمل Pixel Watch وأجهزة Fitbit مع تطبيق Fitbit. فعّل المزامنة مع Health Connect من إعدادات تطبيق Fitbit.</string>
     <string name="setup_steps_garmin">في إعدادات Garmin Connect افتح التطبيقات المتصلة ← Health Connect وفعّله.</string>
-    <string name="setup_steps_huawei">لا يكتب Huawei Health حاليًا في Health Connect، لذلك لا يمكن أن تصل بيانات ساعات Huawei وHonor إلى AdımSayar.</string>
+    <string name="setup_steps_huawei">لا يكتب Huawei Health حاليًا في Health Connect، لذلك لا يمكن أن تصل بيانات ساعات Huawei وHonor إلى FitWren.</string>
     <string name="setup_steps_other">ابحث عن خيار Health Connect في تطبيق ساعتك (مثل Wearfit Pro وDa Fit وFitCloudPro). إن لم يظهر التطبيق في Health Connect ← أذونات التطبيقات فلا يمكنه إرسال البيانات. تعمل Apple Watch مع iPhone فقط.</string>
     <string name="setup_open_hc">فتح Health Connect</string>
-    <string name="setup_step_permission">أذونات AdımSayar</string>
+    <string name="setup_step_permission">أذونات FitWren</string>
     <string name="setup_permission_wait">ثبّت Health Connect أولًا.</string>
     <string name="setup_permission_enable">فعّل المفتاح أدناه لقراءة بيانات السوار. سيسأل Health Connect عن البيانات التي يمكننا قراءتها.</string>
     <string name="setup_permission_ready">تم منح كل الأذونات.</string>
@@ -313,6 +313,10 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>الاسم الجديد للتطبيق: FitWren – عداد الخطى والصحة</item>
+        <item>بياناتك وإعداداتك وأدواتك تبقى كما هي</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>أداة الطائر: الخطوات المتبقية مختصرة وتظهر كاملة</item>
         <item>تعرض أداة اليوم الصغيرة شريط تقدم نحو الهدف</item>
@@ -408,35 +412,35 @@
 
     <string name="oem_title">سجّل الخطوات في الخلفية أيضًا</string>
     <string name="oem_title_stock">استثناء من تحسين البطارية</string>
-    <string name="oem_intro">قد يغلق هذا الهاتف التطبيقات في الخلفية. تتيح الخطوات أدناه لـ AdımSayar قراءة العداد حتى والتطبيق مغلق.</string>
+    <string name="oem_intro">قد يغلق هذا الهاتف التطبيقات في الخلفية. تتيح الخطوات أدناه لـ FitWren قراءة العداد حتى والتطبيق مغلق.</string>
     <string name="oem_open">فتح</string>
     <string name="oem_dismiss">إغلاق الآن</string>
     <string name="oem_open_failed">تعذّر فتح هذه الشاشة على هذا الهاتف. نفّذ الخطوة يدويًا من الإعدادات.</string>
-    <string name="oem_battery_common">الإعدادات ← التطبيقات ← AdımSayar ← البطارية ← بلا قيود</string>
+    <string name="oem_battery_common">الإعدادات ← التطبيقات ← FitWren ← البطارية ← بلا قيود</string>
 
-    <string name="oem_xiaomi_1">الإعدادات ← التطبيقات ← إدارة التطبيقات ← AdımSayar ← التشغيل التلقائي ← تشغيل</string>
+    <string name="oem_xiaomi_1">الإعدادات ← التطبيقات ← إدارة التطبيقات ← FitWren ← التشغيل التلقائي ← تشغيل</string>
     <string name="oem_xiaomi_2">في الشاشة نفسها، توفير البطارية ← بلا قيود</string>
 
-    <string name="oem_samsung_1">الإعدادات ← التطبيقات ← AdımSayar ← البطارية ← غير مقيد</string>
-    <string name="oem_samsung_2">البطارية ← حدود الاستخدام في الخلفية ← التطبيقات التي لا تدخل في وضع السكون مطلقًا ← أضف AdımSayar</string>
+    <string name="oem_samsung_1">الإعدادات ← التطبيقات ← FitWren ← البطارية ← غير مقيد</string>
+    <string name="oem_samsung_2">البطارية ← حدود الاستخدام في الخلفية ← التطبيقات التي لا تدخل في وضع السكون مطلقًا ← أضف FitWren</string>
 
-    <string name="oem_huawei_1">البطارية ← تشغيل التطبيقات ← AdımSayar ← أوقف الإدارة التلقائية، وشغّل التشغيل التلقائي والتشغيل الثانوي والتشغيل في الخلفية</string>
+    <string name="oem_huawei_1">البطارية ← تشغيل التطبيقات ← FitWren ← أوقف الإدارة التلقائية، وشغّل التشغيل التلقائي والتشغيل الثانوي والتشغيل في الخلفية</string>
 
-    <string name="oem_oppo_1">البطارية ← السماح بالنشاط في الخلفية ← AdımSayar: السماح بالتشغيل في الخلفية</string>
-    <string name="oem_oppo_2">التشغيل التلقائي ← AdımSayar ← تشغيل</string>
+    <string name="oem_oppo_1">البطارية ← السماح بالنشاط في الخلفية ← FitWren: السماح بالتشغيل في الخلفية</string>
+    <string name="oem_oppo_2">التشغيل التلقائي ← FitWren ← تشغيل</string>
 
-    <string name="oem_vivo_1">البطارية ← إدارة استهلاك الطاقة في الخلفية ← استهلاك عالٍ للطاقة في الخلفية ← أضف AdımSayar إلى القائمة المسموح بها</string>
-    <string name="oem_vivo_2">التشغيل التلقائي ← AdımSayar ← تشغيل</string>
+    <string name="oem_vivo_1">البطارية ← إدارة استهلاك الطاقة في الخلفية ← استهلاك عالٍ للطاقة في الخلفية ← أضف FitWren إلى القائمة المسموح بها</string>
+    <string name="oem_vivo_2">التشغيل التلقائي ← FitWren ← تشغيل</string>
 
-    <string name="oem_asus_1">التشغيل التلقائي ← السماح لـ AdımSayar</string>
+    <string name="oem_asus_1">التشغيل التلقائي ← السماح لـ FitWren</string>
 
-    <string name="oem_transsion_1">الإدارة التلقائية ← اختر AdımSayar من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
+    <string name="oem_transsion_1">الإدارة التلقائية ← اختر FitWren من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
     <string name="wearable_card_title">استخدام خطوات السوار</string>
     <string name="wearable_card_text">تُقرأ الخطوات التي تكتبها تطبيقات الأساور مثل Mi Fitness في Health Connect. في الساعات التي عدّ فيها السوار يُستخدم عدّه، وفي غيرها عدّ الهاتف. إذا سمحت بذلك، يعرض السجل أيضًا التمارين والمسافة والسعرات ونبض القلب والنوم.</string>
     <string name="wearable_permission_denied">لم يُمنح إذن قراءة الخطوات من Health Connect.</string>
     <string name="wearable_unavailable">تطبيق Health Connect غير موجود على هذا الهاتف. على Android 13 وما قبله، ثبّت تطبيق Health Connect من متجر Play.</string>
     <string name="wearable_privacy_title">خطوات السوار</string>
-    <string name="wearable_privacy_text">يقرأ AdimSayar من Health Connect سجلات الخطوات والتمارين والمسافة والسعرات ونبض القلب والنوم فقط. لا يكتب شيئًا ولا يرسل أي بيانات خارج الهاتف. تُعرض البيانات المقروءة داخل التطبيق على هذا الهاتف فقط.</string>
+    <string name="wearable_privacy_text">يقرأ FitWren من Health Connect سجلات الخطوات والتمارين والمسافة والسعرات ونبض القلب والنوم فقط. لا يكتب شيئًا ولا يرسل أي بيانات خارج الهاتف. تُعرض البيانات المقروءة داخل التطبيق على هذا الهاتف فقط.</string>
     <string name="log_wearable_missing">لم يُعثر على Health Connect</string>
     <string name="log_wearable_denied">لا يوجد إذن قراءة من Health Connect</string>
     <string name="log_wearable_error">تعذّرت قراءة Health Connect (%1$s)</string>

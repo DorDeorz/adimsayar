@@ -6,7 +6,7 @@ Hedefler ve ölçüm planı `GOALS.md` içindedir. Orada tanımlı metrikler var
 
 ## Proje
 
-AdımSayar — telefon için adım sayma uygulaması. Tüm Android telefonları hedeflenir.
+FitWren – Adım Sayar & Sağlık (eski adı AdımSayar) — telefon için adım sayma ve sağlık uygulaması. Görünen ad 2026-10-12'de değişti; paket adı `com.dordeorz.adimsayar`, repo adı ve APK dosya adı (`adimsayar-x.y.z.apk`) değişmez, çünkü güncelleme ve kullanıcı verisi bunlara bağlıdır. Tüm Android telefonları hedeflenir.
 
 Uygulama öncelikle geliştiricinin kendi Redmi Note 12 Pro 4G'si için yapılır; bu cihazda resmi bir adım sayar yoktur. Play Store yayını öncelik değildir. Çekirdek özellikler: günün adımı widget'ı, 7 günlük tablo widget'ı, uygulamada geçmiş ve toplam.
 

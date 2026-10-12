@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">Aujourd\'hui</string>
     <string name="steps_unit">pas</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">Compteur pas encore lu</string>
 
     <string name="permission_title">Autorisation d\'activité physique requise</string>
-    <string name="permission_text">AdımSayar lit vos pas depuis le capteur du téléphone. Android demande pour cela l\'autorisation d\'activité physique.</string>
+    <string name="permission_text">FitWren lit vos pas depuis le capteur du téléphone. Android demande pour cela l\'autorisation d\'activité physique.</string>
     <string name="permission_grant">Autoriser</string>
-    <string name="permission_denied_text">Autorisation refusée. Paramètres → Applications → AdımSayar → Autorisations → Activité physique → Autoriser.</string>
+    <string name="permission_denied_text">Autorisation refusée. Paramètres → Applications → FitWren → Autorisations → Activité physique → Autoriser.</string>
     <string name="permission_open_settings">Ouvrir les paramètres</string>
 
     <string name="sensor_missing_title">Capteur de pas introuvable</string>
-    <string name="sensor_missing_text">Ce téléphone ne signale aucun capteur de pas. AdımSayar ne peut pas compter les pas sur cet appareil.</string>
+    <string name="sensor_missing_text">Ce téléphone ne signale aucun capteur de pas. FitWren ne peut pas compter les pas sur cet appareil.</string>
 
     <string name="frozen_title">Le compteur de pas semble bloqué</string>
     <string name="frozen_text">Le téléphone détecte des pas mais le compteur n\'avance pas. Le capteur a été reconnecté ; cet avertissement disparaîtra de lui-même après quelques pas.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">Les pas sont lus depuis le relevé du téléphone. Ils sont tous comptés même quand l\'app est fermée, sans notification, et les jours passés sont aussi ajoutés.</string>
     <string name="service_card_text">Activez cette option si les pas ne sont pas comptés quand l\'app est fermée. Le compteur reste actif ; une notification silencieuse et permanente s\'affiche dans la barre de notifications.</string>
     <string name="service_channel">Compteur de pas</string>
-    <string name="service_title">AdımSayar compte vos pas</string>
+    <string name="service_title">FitWren compte vos pas</string>
     <string name="service_text">%1$s pas aujourd\'hui</string>
     <string name="service_text_starting">Démarrage du compteur</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">Exporter</string>
     <string name="export_csv_hint">Enregistrer tous les jours dans un fichier CSV</string>
     <string name="import_csv">Importer</string>
-    <string name="import_csv_hint">Importer des jours depuis un CSV AdımSayar ou un export Samsung Health, Mi Fitness, Mi Fit ou Google Fit (CSV ou zip) ; la valeur la plus élevée est conservée. Décompressez d’abord les zip protégés et choisissez le CSV.</string>
+    <string name="import_csv_hint">Importer des jours depuis un CSV FitWren ou un export Samsung Health, Mi Fitness, Mi Fit ou Google Fit (CSV ou zip) ; la valeur la plus élevée est conservée. Décompressez d’abord les zip protégés et choisissez le CSV.</string>
     <string name="export_done">%1$d jours exportés</string>
     <string name="import_done">%1$d jours mis à jour</string>
     <string name="csv_failed">Impossible de lire ou d\'écrire le fichier</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">Rappel de pesée hebdomadaire</string>
     <string name="weight_reminder_hint">Vous rappelle de vous peser vers 09:00 le premier jour de la semaine.</string>
     <string name="notify_weight_title">C\'est l\'heure de la pesée</string>
-    <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans AdımSayar.</string>
+    <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans FitWren.</string>
     <string name="notify_health_resting">Fréquence cardiaque au repos moyenne : %1$d bpm</string>
     <string name="notify_health_resting_down">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de moins que la semaine dernière</string>
     <string name="notify_health_resting_up">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de plus que la semaine dernière</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch et Galaxy Fit fonctionnent avec Samsung Health. Dans Samsung Health → Paramètres → Health Connect, autorisez le partage de vos données.</string>
     <string name="setup_steps_google">La Pixel Watch et les appareils Fitbit fonctionnent avec l\'application Fitbit. Activez la synchronisation avec Health Connect dans ses paramètres.</string>
     <string name="setup_steps_garmin">Dans les paramètres de Garmin Connect, ouvrez Applications connectées → Health Connect et activez-le.</string>
-    <string name="setup_steps_huawei">Huawei Health n\'écrit pas dans Health Connect pour le moment : les données des montres Huawei et Honor ne peuvent pas arriver dans AdımSayar.</string>
+    <string name="setup_steps_huawei">Huawei Health n\'écrit pas dans Health Connect pour le moment : les données des montres Huawei et Honor ne peuvent pas arriver dans FitWren.</string>
     <string name="setup_steps_other">Cherchez une option Health Connect dans l\'application de votre montre (par exemple Wearfit Pro, Da Fit, FitCloudPro). Si l\'application n\'apparaît pas dans Health Connect → Autorisations des applications, elle ne peut pas envoyer de données. L\'Apple Watch ne fonctionne qu\'avec un iPhone.</string>
     <string name="setup_open_hc">Ouvrir Health Connect</string>
-    <string name="setup_step_permission">Autorisations d\'AdımSayar</string>
+    <string name="setup_step_permission">Autorisations d\'FitWren</string>
     <string name="setup_permission_wait">Installez d\'abord Health Connect.</string>
     <string name="setup_permission_enable">Activez l\'interrupteur ci-dessous pour lire les données du bracelet. Health Connect demandera quelles données nous pouvons lire.</string>
     <string name="setup_permission_ready">Toutes les autorisations sont accordées.</string>
@@ -313,6 +313,10 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>L\'app change de nom : FitWren – Podomètre et santé</item>
+        <item>Tes données, réglages et widgets restent inchangés</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Widget oiseau : les pas restants sont abrégés et tiennent</item>
         <item>Le petit widget Aujourd\'hui affiche une barre de progression vers l\'objectif</item>
@@ -408,35 +412,35 @@
 
     <string name="oem_title">Enregistrer les pas aussi en arrière-plan</string>
     <string name="oem_title_stock">Exemption d\'optimisation de la batterie</string>
-    <string name="oem_intro">Ce téléphone peut fermer les applications en arrière-plan. Les étapes ci-dessous permettent à AdımSayar de lire le compteur même quand l\'app est fermée.</string>
+    <string name="oem_intro">Ce téléphone peut fermer les applications en arrière-plan. Les étapes ci-dessous permettent à FitWren de lire le compteur même quand l\'app est fermée.</string>
     <string name="oem_open">Ouvrir</string>
     <string name="oem_dismiss">Fermer pour l\'instant</string>
     <string name="oem_open_failed">Impossible d\'ouvrir cet écran sur ce téléphone. Faites l\'étape à la main dans les Paramètres.</string>
-    <string name="oem_battery_common">Paramètres → Applications → AdımSayar → Batterie → Aucune restriction</string>
+    <string name="oem_battery_common">Paramètres → Applications → FitWren → Batterie → Aucune restriction</string>
 
-    <string name="oem_xiaomi_1">Paramètres → Applications → Gérer les applications → AdımSayar → Démarrage automatique → Activé</string>
+    <string name="oem_xiaomi_1">Paramètres → Applications → Gérer les applications → FitWren → Démarrage automatique → Activé</string>
     <string name="oem_xiaomi_2">Sur le même écran, Économiseur de batterie → Aucune restriction</string>
 
-    <string name="oem_samsung_1">Paramètres → Applications → AdımSayar → Batterie → Non restreinte</string>
-    <string name="oem_samsung_2">Batterie → Limites d\'utilisation en arrière-plan → Applications jamais en veille → ajouter AdımSayar</string>
+    <string name="oem_samsung_1">Paramètres → Applications → FitWren → Batterie → Non restreinte</string>
+    <string name="oem_samsung_2">Batterie → Limites d\'utilisation en arrière-plan → Applications jamais en veille → ajouter FitWren</string>
 
-    <string name="oem_huawei_1">Batterie → Lancement d\'applications → AdımSayar → désactiver Gérer automatiquement, activer Lancement automatique, Lancement secondaire et Exécution en arrière-plan</string>
+    <string name="oem_huawei_1">Batterie → Lancement d\'applications → FitWren → désactiver Gérer automatiquement, activer Lancement automatique, Lancement secondaire et Exécution en arrière-plan</string>
 
-    <string name="oem_oppo_1">Batterie → Autoriser l\'activité en arrière-plan → AdımSayar : Autoriser l\'exécution en arrière-plan</string>
-    <string name="oem_oppo_2">Démarrage automatique → AdımSayar → Activé</string>
+    <string name="oem_oppo_1">Batterie → Autoriser l\'activité en arrière-plan → FitWren : Autoriser l\'exécution en arrière-plan</string>
+    <string name="oem_oppo_2">Démarrage automatique → FitWren → Activé</string>
 
-    <string name="oem_vivo_1">Batterie → Gestion de la consommation en arrière-plan → Consommation élevée en arrière-plan → ajouter AdımSayar à la liste blanche</string>
-    <string name="oem_vivo_2">Démarrage automatique → AdımSayar → Activé</string>
+    <string name="oem_vivo_1">Batterie → Gestion de la consommation en arrière-plan → Consommation élevée en arrière-plan → ajouter FitWren à la liste blanche</string>
+    <string name="oem_vivo_2">Démarrage automatique → FitWren → Activé</string>
 
-    <string name="oem_asus_1">Démarrage automatique → autoriser AdımSayar</string>
+    <string name="oem_asus_1">Démarrage automatique → autoriser FitWren</string>
 
-    <string name="oem_transsion_1">Gestion automatique → sélectionnez AdımSayar dans la liste des applications, activez les trois autorisations</string>
+    <string name="oem_transsion_1">Gestion automatique → sélectionnez FitWren dans la liste des applications, activez les trois autorisations</string>
     <string name="wearable_card_title">Utiliser les pas du bracelet</string>
     <string name="wearable_card_text">Lit les pas que les applis de bracelet comme Mi Fitness écrivent dans Health Connect. Pour les heures comptées par le bracelet, son total est utilisé, sinon celui du téléphone. Si tu l\'autorises, l\'historique affiche aussi entraînements, distance, calories, fréquence cardiaque et sommeil.</string>
     <string name="wearable_permission_denied">L\'autorisation de lire les pas dans Health Connect n\'a pas été accordée.</string>
     <string name="wearable_unavailable">Health Connect n\'est pas présent sur ce téléphone. Sous Android 13 ou antérieur, installe l\'appli Health Connect depuis le Play Store.</string>
     <string name="wearable_privacy_title">Pas du bracelet</string>
-    <string name="wearable_privacy_text">AdimSayar lit uniquement les pas, entraînements, distances, calories, fréquences cardiaques et sommeils de Health Connect. Il n\'écrit rien et n\'envoie aucune donnée hors du téléphone. Les données lues sont seulement affichées dans l\'appli sur ce téléphone.</string>
+    <string name="wearable_privacy_text">FitWren lit uniquement les pas, entraînements, distances, calories, fréquences cardiaques et sommeils de Health Connect. Il n\'écrit rien et n\'envoie aucune donnée hors du téléphone. Les données lues sont seulement affichées dans l\'appli sur ce téléphone.</string>
     <string name="log_wearable_missing">Health Connect introuvable</string>
     <string name="log_wearable_denied">Pas d\'autorisation de lecture Health Connect</string>
     <string name="log_wearable_error">Impossible de lire Health Connect (%1$s)</string>
