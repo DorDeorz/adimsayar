@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">Сегодня</string>
     <string name="steps_unit">шагов</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">Счётчик ещё не считан</string>
 
     <string name="permission_title">Нужно разрешение «Физическая активность»</string>
-    <string name="permission_text">AdımSayar считывает шаги с собственного датчика телефона. Для этого Android запрашивает разрешение на доступ к физической активности.</string>
+    <string name="permission_text">FitWren считывает шаги с собственного датчика телефона. Для этого Android запрашивает разрешение на доступ к физической активности.</string>
     <string name="permission_grant">Разрешить</string>
-    <string name="permission_denied_text">Разрешение отклонено. Настройки → Приложения → AdımSayar → Разрешения → Физическая активность → Разрешить.</string>
+    <string name="permission_denied_text">Разрешение отклонено. Настройки → Приложения → FitWren → Разрешения → Физическая активность → Разрешить.</string>
     <string name="permission_open_settings">Открыть настройки</string>
 
     <string name="sensor_missing_title">Датчик шагов не найден</string>
-    <string name="sensor_missing_text">Этот телефон не сообщает о датчике-счётчике шагов. AdımSayar не может считать шаги на этом устройстве.</string>
+    <string name="sensor_missing_text">Этот телефон не сообщает о датчике-счётчике шагов. FitWren не может считать шаги на этом устройстве.</string>
 
     <string name="frozen_title">Счётчик шагов, похоже, завис</string>
     <string name="frozen_text">Телефон распознаёт шаги, но счётчик не меняется. Датчик переподключён; это предупреждение исчезнет само через несколько шагов.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">Шаги берутся из собственной записи шагов телефона. Они учитываются полностью даже при закрытом приложении, уведомление не нужно, а прошлые дни тоже добавляются.</string>
     <string name="service_card_text">Включите, если шаги не считаются при закрытом приложении. Счётчик остаётся включённым; в панели уведомлений появится беззвучное постоянное уведомление.</string>
     <string name="service_channel">Счётчик шагов</string>
-    <string name="service_title">AdımSayar считает шаги</string>
+    <string name="service_title">FitWren считает шаги</string>
     <string name="service_text">Шагов сегодня: %1$s</string>
     <string name="service_text_starting">Запуск счётчика</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">Экспорт</string>
     <string name="export_csv_hint">Сохранить все дни в файл CSV</string>
     <string name="import_csv">Импорт</string>
-    <string name="import_csv_hint">Загрузить дни из CSV AdımSayar или экспорта Samsung Health, Mi Fitness, Mi Fit или Google Fit (CSV или zip); сохраняется большее значение. Архив с паролем сначала распакуйте и выберите CSV.</string>
+    <string name="import_csv_hint">Загрузить дни из CSV FitWren или экспорта Samsung Health, Mi Fitness, Mi Fit или Google Fit (CSV или zip); сохраняется большее значение. Архив с паролем сначала распакуйте и выберите CSV.</string>
     <string name="export_done">Экспортировано дней: %1$d</string>
     <string name="import_done">Обновлено дней: %1$d</string>
     <string name="csv_failed">Не удалось прочитать или записать файл</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">Еженедельное напоминание о весе</string>
     <string name="weight_reminder_hint">Напоминает взвеситься около 09:00 в первый день недели.</string>
     <string name="notify_weight_title">Пора взвеситься</string>
-    <string name="notify_weight_text">Начинается новая неделя: взвесьтесь и добавьте вес в AdımSayar.</string>
+    <string name="notify_weight_text">Начинается новая неделя: взвесьтесь и добавьте вес в FitWren.</string>
     <string name="notify_health_resting">Средний пульс в покое: %1$d уд/мин</string>
     <string name="notify_health_resting_down">Средний пульс в покое: %1$d уд/мин, на %2$d ниже, чем на прошлой неделе</string>
     <string name="notify_health_resting_up">Средний пульс в покое: %1$d уд/мин, на %2$d выше, чем на прошлой неделе</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch и Galaxy Fit работают с Samsung Health. В Samsung Health → Настройки → Health Connect разрешите обмен данными.</string>
     <string name="setup_steps_google">Pixel Watch и устройства Fitbit работают с приложением Fitbit. Включите синхронизацию с Health Connect в его настройках.</string>
     <string name="setup_steps_garmin">В настройках Garmin Connect откройте Подключённые приложения → Health Connect и включите его.</string>
-    <string name="setup_steps_huawei">Huawei Health сейчас не записывает данные в Health Connect, поэтому данные часов Huawei и Honor не могут попасть в AdımSayar.</string>
+    <string name="setup_steps_huawei">Huawei Health сейчас не записывает данные в Health Connect, поэтому данные часов Huawei и Honor не могут попасть в FitWren.</string>
     <string name="setup_steps_other">Поищите пункт Health Connect в приложении ваших часов (например, Wearfit Pro, Da Fit, FitCloudPro). Если приложения нет в Health Connect → Разрешения приложений, оно не может отправлять данные. Apple Watch работает только с iPhone.</string>
     <string name="setup_open_hc">Открыть Health Connect</string>
-    <string name="setup_step_permission">Разрешения AdımSayar</string>
+    <string name="setup_step_permission">Разрешения FitWren</string>
     <string name="setup_permission_wait">Сначала установите Health Connect.</string>
     <string name="setup_permission_enable">Включите переключатель ниже, чтобы читать данные браслета. Health Connect спросит, какие данные нам можно читать.</string>
     <string name="setup_permission_ready">Все разрешения выданы.</string>
@@ -313,6 +313,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>Новое название приложения: FitWren – шагомер и здоровье</item>
+        <item>Ваши данные, настройки и виджеты сохранены</item>
+        <item>Новый значок: жёлтый крапивник шагает внутри кольца цели</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Виджет птицы: оставшиеся шаги показаны кратко и помещаются</item>
         <item>Маленький виджет «Сегодня» показывает полосу прогресса до цели</item>
@@ -408,35 +413,35 @@
 
     <string name="oem_title">Записывать шаги и в фоне</string>
     <string name="oem_title_stock">Исключение из оптимизации батареи</string>
-    <string name="oem_intro">Этот телефон может закрывать приложения в фоне. Шаги ниже позволят AdımSayar читать счётчик даже при закрытом приложении.</string>
+    <string name="oem_intro">Этот телефон может закрывать приложения в фоне. Шаги ниже позволят FitWren читать счётчик даже при закрытом приложении.</string>
     <string name="oem_open">Открыть</string>
     <string name="oem_dismiss">Пока закрыть</string>
     <string name="oem_open_failed">Не удалось открыть этот экран на этом телефоне. Выполните шаг вручную в Настройках.</string>
-    <string name="oem_battery_common">Настройки → Приложения → AdımSayar → Батарея → Без ограничений</string>
+    <string name="oem_battery_common">Настройки → Приложения → FitWren → Батарея → Без ограничений</string>
 
-    <string name="oem_xiaomi_1">Настройки → Приложения → Все приложения → AdımSayar → Автозапуск → Вкл.</string>
+    <string name="oem_xiaomi_1">Настройки → Приложения → Все приложения → FitWren → Автозапуск → Вкл.</string>
     <string name="oem_xiaomi_2">На том же экране: Контроль активности → Нет ограничений</string>
 
-    <string name="oem_samsung_1">Настройки → Приложения → AdımSayar → Батарея → Без ограничений</string>
-    <string name="oem_samsung_2">Батарея → Ограничения использования в фоновом режиме → Приложения без перехода в спящий режим → добавить AdımSayar</string>
+    <string name="oem_samsung_1">Настройки → Приложения → FitWren → Батарея → Без ограничений</string>
+    <string name="oem_samsung_2">Батарея → Ограничения использования в фоновом режиме → Приложения без перехода в спящий режим → добавить FitWren</string>
 
-    <string name="oem_huawei_1">Батарея → Запуск приложений → AdımSayar → выключите «Автоматическое управление», включите «Автозапуск», «Косвенный запуск» и «Работа в фоновом режиме»</string>
+    <string name="oem_huawei_1">Батарея → Запуск приложений → FitWren → выключите «Автоматическое управление», включите «Автозапуск», «Косвенный запуск» и «Работа в фоновом режиме»</string>
 
-    <string name="oem_oppo_1">Батарея → Разрешить фоновую активность → AdımSayar: Разрешить работу в фоне</string>
-    <string name="oem_oppo_2">Автозапуск → AdımSayar → Вкл.</string>
+    <string name="oem_oppo_1">Батарея → Разрешить фоновую активность → FitWren: Разрешить работу в фоне</string>
+    <string name="oem_oppo_2">Автозапуск → FitWren → Вкл.</string>
 
-    <string name="oem_vivo_1">Батарея → Управление энергопотреблением в фоне → Высокое энергопотребление в фоне → добавьте AdımSayar в белый список</string>
-    <string name="oem_vivo_2">Автозапуск → AdımSayar → Вкл.</string>
+    <string name="oem_vivo_1">Батарея → Управление энергопотреблением в фоне → Высокое энергопотребление в фоне → добавьте FitWren в белый список</string>
+    <string name="oem_vivo_2">Автозапуск → FitWren → Вкл.</string>
 
-    <string name="oem_asus_1">Автозапуск → разрешить AdımSayar</string>
+    <string name="oem_asus_1">Автозапуск → разрешить FitWren</string>
 
-    <string name="oem_transsion_1">Автоуправление → выберите AdımSayar в списке приложений и включите все три разрешения</string>
+    <string name="oem_transsion_1">Автоуправление → выберите FitWren в списке приложений и включите все три разрешения</string>
     <string name="wearable_card_title">Использовать шаги браслета</string>
     <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В часы, когда считал браслет, используется его счёт, в остальные — счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
     <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
     <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>
     <string name="wearable_privacy_title">Шаги браслета</string>
-    <string name="wearable_privacy_text">AdimSayar читает из Health Connect только шаги, тренировки, расстояние, калории, пульс и сон. Он ничего не записывает и не отправляет данные с телефона. Прочитанные данные показываются только в приложении на этом телефоне.</string>
+    <string name="wearable_privacy_text">FitWren читает из Health Connect только шаги, тренировки, расстояние, калории, пульс и сон. Он ничего не записывает и не отправляет данные с телефона. Прочитанные данные показываются только в приложении на этом телефоне.</string>
     <string name="log_wearable_missing">Health Connect не найден</string>
     <string name="log_wearable_denied">Нет разрешения на чтение Health Connect</string>
     <string name="log_wearable_error">Не удалось прочитать Health Connect (%1$s)</string>

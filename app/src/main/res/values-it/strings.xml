@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">Oggi</string>
     <string name="steps_unit">passi</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">Contatore non ancora letto</string>
 
     <string name="permission_title">Serve l\'autorizzazione Attività fisica</string>
-    <string name="permission_text">AdımSayar legge i tuoi passi dal sensore del telefono. Per questo Android chiede l\'autorizzazione Attività fisica.</string>
+    <string name="permission_text">FitWren legge i tuoi passi dal sensore del telefono. Per questo Android chiede l\'autorizzazione Attività fisica.</string>
     <string name="permission_grant">Consenti</string>
-    <string name="permission_denied_text">Autorizzazione negata. Impostazioni → App → AdımSayar → Autorizzazioni → Attività fisica → Consenti.</string>
+    <string name="permission_denied_text">Autorizzazione negata. Impostazioni → App → FitWren → Autorizzazioni → Attività fisica → Consenti.</string>
     <string name="permission_open_settings">Apri impostazioni</string>
 
     <string name="sensor_missing_title">Sensore passi non trovato</string>
-    <string name="sensor_missing_text">Questo telefono non segnala un sensore contapassi. AdımSayar non può contare i passi su questo dispositivo.</string>
+    <string name="sensor_missing_text">Questo telefono non segnala un sensore contapassi. FitWren non può contare i passi su questo dispositivo.</string>
 
     <string name="frozen_title">Il contapassi sembra bloccato</string>
     <string name="frozen_text">Il telefono rileva i passi ma il contatore non avanza. Il sensore è stato ricollegato; questo avviso sparirà da solo dopo qualche passo.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">I passi vengono letti dal registro del telefono. Sono contati tutti anche con l\'app chiusa, senza notifiche, e vengono aggiunti anche i giorni passati.</string>
     <string name="service_card_text">Attivala se i passi non vengono contati con l\'app chiusa. Il contatore resta attivo; nella barra delle notifiche compare una notifica silenziosa e fissa.</string>
     <string name="service_channel">Contapassi</string>
-    <string name="service_title">AdımSayar sta contando</string>
+    <string name="service_title">FitWren sta contando</string>
     <string name="service_text">%1$s passi oggi</string>
     <string name="service_text_starting">Avvio del contatore</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">Esporta</string>
     <string name="export_csv_hint">Salva tutti i giorni in un file CSV</string>
     <string name="import_csv">Importa</string>
-    <string name="import_csv_hint">Carica i giorni da un CSV di AdımSayar o da un’esportazione di Samsung Health, Mi Fitness, Mi Fit o Google Fit (CSV o zip); resta il valore più alto. Estrai prima gli zip protetti e scegli il CSV.</string>
+    <string name="import_csv_hint">Carica i giorni da un CSV di FitWren o da un’esportazione di Samsung Health, Mi Fitness, Mi Fit o Google Fit (CSV o zip); resta il valore più alto. Estrai prima gli zip protetti e scegli il CSV.</string>
     <string name="export_done">%1$d giorni esportati</string>
     <string name="import_done">%1$d giorni aggiornati</string>
     <string name="csv_failed">Impossibile leggere o scrivere il file</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">Promemoria settimanale del peso</string>
     <string name="weight_reminder_hint">Ti ricorda di pesarti verso le 09:00 il primo giorno della settimana.</string>
     <string name="notify_weight_title">È ora di pesarsi</string>
-    <string name="notify_weight_text">Inizia una nuova settimana: pesati e aggiungilo in AdımSayar.</string>
+    <string name="notify_weight_text">Inizia una nuova settimana: pesati e aggiungilo in FitWren.</string>
     <string name="notify_health_resting">Frequenza cardiaca a riposo media: %1$d bpm</string>
     <string name="notify_health_resting_down">Frequenza cardiaca a riposo media: %1$d bpm, %2$d in meno della settimana scorsa</string>
     <string name="notify_health_resting_up">Frequenza cardiaca a riposo media: %1$d bpm, %2$d in più della settimana scorsa</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch e Galaxy Fit funzionano con Samsung Health. In Samsung Health → Impostazioni → Health Connect consenti la condivisione dei dati.</string>
     <string name="setup_steps_google">Pixel Watch e i dispositivi Fitbit funzionano con l\'app Fitbit. Attiva la sincronizzazione con Health Connect nelle impostazioni dell\'app Fitbit.</string>
     <string name="setup_steps_garmin">Nelle impostazioni di Garmin Connect apri App collegate → Health Connect e attivalo.</string>
-    <string name="setup_steps_huawei">Al momento Huawei Health non scrive in Health Connect, quindi i dati degli orologi Huawei e Honor non possono arrivare ad AdımSayar.</string>
+    <string name="setup_steps_huawei">Al momento Huawei Health non scrive in Health Connect, quindi i dati degli orologi Huawei e Honor non possono arrivare ad FitWren.</string>
     <string name="setup_steps_other">Cerca un\'opzione Health Connect nell\'app del tuo orologio (ad esempio Wearfit Pro, Da Fit, FitCloudPro). Se l\'app non compare in Health Connect → Autorizzazioni app, non può inviare dati. Apple Watch funziona solo con iPhone.</string>
     <string name="setup_open_hc">Apri Health Connect</string>
-    <string name="setup_step_permission">Autorizzazioni di AdımSayar</string>
+    <string name="setup_step_permission">Autorizzazioni di FitWren</string>
     <string name="setup_permission_wait">Installa prima Health Connect.</string>
     <string name="setup_permission_enable">Attiva l\'interruttore qui sotto per leggere i dati del braccialetto. Health Connect chiederà quali dati possiamo leggere.</string>
     <string name="setup_permission_ready">Tutte le autorizzazioni concesse.</string>
@@ -313,6 +313,11 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>L\'app ha un nuovo nome: FitWren – Contapassi e salute</item>
+        <item>Dati, impostazioni e widget restano invariati</item>
+        <item>Nuova icona: uno scricciolo giallo che cammina nell\'anello dell\'obiettivo</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Widget uccello: i passi rimanenti sono abbreviati e ci stanno</item>
         <item>Il widget piccolo Oggi mostra una barra di avanzamento verso l\'obiettivo</item>
@@ -408,35 +413,35 @@
 
     <string name="oem_title">Registra i passi anche in background</string>
     <string name="oem_title_stock">Esclusione dall\'ottimizzazione batteria</string>
-    <string name="oem_intro">Questo telefono può chiudere le app in background. I passaggi qui sotto permettono ad AdımSayar di leggere il contatore anche con l\'app chiusa.</string>
+    <string name="oem_intro">Questo telefono può chiudere le app in background. I passaggi qui sotto permettono ad FitWren di leggere il contatore anche con l\'app chiusa.</string>
     <string name="oem_open">Apri</string>
     <string name="oem_dismiss">Chiudi per ora</string>
     <string name="oem_open_failed">Impossibile aprire questa schermata su questo telefono. Esegui il passaggio a mano nelle Impostazioni.</string>
-    <string name="oem_battery_common">Impostazioni → App → AdımSayar → Batteria → Nessuna restrizione</string>
+    <string name="oem_battery_common">Impostazioni → App → FitWren → Batteria → Nessuna restrizione</string>
 
-    <string name="oem_xiaomi_1">Impostazioni → App → Gestisci app → AdımSayar → Avvio automatico → Attivo</string>
+    <string name="oem_xiaomi_1">Impostazioni → App → Gestisci app → FitWren → Avvio automatico → Attivo</string>
     <string name="oem_xiaomi_2">Nella stessa schermata, Risparmio energetico → Nessuna restrizione</string>
 
-    <string name="oem_samsung_1">Impostazioni → Applicazioni → AdımSayar → Batteria → Senza restrizioni</string>
-    <string name="oem_samsung_2">Batteria → Limiti utilizzo in background → App mai in sospensione → aggiungi AdımSayar</string>
+    <string name="oem_samsung_1">Impostazioni → Applicazioni → FitWren → Batteria → Senza restrizioni</string>
+    <string name="oem_samsung_2">Batteria → Limiti utilizzo in background → App mai in sospensione → aggiungi FitWren</string>
 
-    <string name="oem_huawei_1">Batteria → Avvio app → AdımSayar → disattiva Gestisci automaticamente, attiva Avvio automatico, Avvio secondario ed Esegui in background</string>
+    <string name="oem_huawei_1">Batteria → Avvio app → FitWren → disattiva Gestisci automaticamente, attiva Avvio automatico, Avvio secondario ed Esegui in background</string>
 
-    <string name="oem_oppo_1">Batteria → Consenti attività in background → AdımSayar: Consenti esecuzione in background</string>
-    <string name="oem_oppo_2">Avvio automatico → AdımSayar → Attivo</string>
+    <string name="oem_oppo_1">Batteria → Consenti attività in background → FitWren: Consenti esecuzione in background</string>
+    <string name="oem_oppo_2">Avvio automatico → FitWren → Attivo</string>
 
-    <string name="oem_vivo_1">Batteria → Gestione consumo in background → Consumo elevato in background → aggiungi AdımSayar alla whitelist</string>
-    <string name="oem_vivo_2">Avvio automatico → AdımSayar → Attivo</string>
+    <string name="oem_vivo_1">Batteria → Gestione consumo in background → Consumo elevato in background → aggiungi FitWren alla whitelist</string>
+    <string name="oem_vivo_2">Avvio automatico → FitWren → Attivo</string>
 
-    <string name="oem_asus_1">Avvio automatico → consenti AdımSayar</string>
+    <string name="oem_asus_1">Avvio automatico → consenti FitWren</string>
 
-    <string name="oem_transsion_1">Gestione automatica → seleziona AdımSayar nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
+    <string name="oem_transsion_1">Gestione automatica → seleziona FitWren nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
     <string name="wearable_card_title">Usa i passi del bracciale</string>
     <string name="wearable_card_text">Legge i passi che le app del bracciale come Mi Fitness scrivono in Health Connect. Nelle ore contate dal bracciale si usa il suo conteggio, nelle altre quello del telefono. Se lo consenti, la cronologia mostra anche allenamenti, distanza, calorie, battito e sonno.</string>
     <string name="wearable_permission_denied">Il permesso di lettura dei passi di Health Connect non è stato concesso.</string>
     <string name="wearable_unavailable">Health Connect non è presente su questo telefono. Su Android 13 o precedenti installa l\'app Health Connect dal Play Store.</string>
     <string name="wearable_privacy_title">Passi del bracciale</string>
-    <string name="wearable_privacy_text">AdimSayar legge da Health Connect solo passi, allenamenti, distanza, calorie, battito e sonno. Non scrive nulla e non invia dati fuori dal telefono. I dati letti vengono mostrati solo nell\'app su questo telefono.</string>
+    <string name="wearable_privacy_text">FitWren legge da Health Connect solo passi, allenamenti, distanza, calorie, battito e sonno. Non scrive nulla e non invia dati fuori dal telefono. I dati letti vengono mostrati solo nell\'app su questo telefono.</string>
     <string name="log_wearable_missing">Health Connect non trovato</string>
     <string name="log_wearable_denied">Nessun permesso di lettura di Health Connect</string>
     <string name="log_wearable_error">Impossibile leggere Health Connect (%1$s)</string>

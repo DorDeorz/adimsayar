@@ -541,7 +541,7 @@ class MainActivity : ComponentActivity() {
         private const val SETTINGS_PREFS = "settings"
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
-        private const val EXPORT_FILE_NAME = "adimsayar-%s.csv"
+        private const val EXPORT_FILE_NAME = "fitwren-%s.csv"
         private const val SOURCE_DAYS = 7L
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"

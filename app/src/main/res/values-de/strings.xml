@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AdımSayar</string>
+    <string name="app_name">FitWren</string>
 
     <string name="today">Heute</string>
     <string name="steps_unit">Schritte</string>
@@ -11,13 +11,13 @@
     <string name="no_reading_yet">Zähler noch nicht abgelesen</string>
 
     <string name="permission_title">Berechtigung für körperliche Aktivität nötig</string>
-    <string name="permission_text">AdımSayar liest deine Schritte vom eigenen Sensor des Telefons. Android fragt dafür nach der Berechtigung für körperliche Aktivität.</string>
+    <string name="permission_text">FitWren liest deine Schritte vom eigenen Sensor des Telefons. Android fragt dafür nach der Berechtigung für körperliche Aktivität.</string>
     <string name="permission_grant">Zulassen</string>
-    <string name="permission_denied_text">Berechtigung verweigert. Einstellungen → Apps → AdımSayar → Berechtigungen → Körperliche Aktivität → Zulassen.</string>
+    <string name="permission_denied_text">Berechtigung verweigert. Einstellungen → Apps → FitWren → Berechtigungen → Körperliche Aktivität → Zulassen.</string>
     <string name="permission_open_settings">Einstellungen öffnen</string>
 
     <string name="sensor_missing_title">Schrittsensor nicht gefunden</string>
-    <string name="sensor_missing_text">Dieses Telefon meldet keinen Schrittzähler-Sensor. AdımSayar kann auf diesem Gerät keine Schritte zählen.</string>
+    <string name="sensor_missing_text">Dieses Telefon meldet keinen Schrittzähler-Sensor. FitWren kann auf diesem Gerät keine Schritte zählen.</string>
 
     <string name="frozen_title">Der Schrittzähler scheint eingefroren</string>
     <string name="frozen_text">Das Telefon erkennt Schritte, aber der Zähler bewegt sich nicht. Der Sensor wurde neu verbunden; diese Warnung verschwindet nach ein paar Schritten von selbst.</string>
@@ -31,7 +31,7 @@
     <string name="xiaomi_card_text">Die Schritte werden aus der eigenen Schrittaufzeichnung des Telefons gelesen. Sie werden auch bei geschlossener App vollständig gezählt, es ist keine Benachrichtigung nötig, und vergangene Tage werden ebenfalls übernommen.</string>
     <string name="service_card_text">Schalte das ein, wenn bei geschlossener App keine Schritte gezählt werden. Der Zähler bleibt aktiv; in der Benachrichtigungsleiste erscheint eine stille, dauerhafte Benachrichtigung.</string>
     <string name="service_channel">Schrittzähler</string>
-    <string name="service_title">AdımSayar zählt</string>
+    <string name="service_title">FitWren zählt</string>
     <string name="service_text">Heute %1$s Schritte</string>
     <string name="service_text_starting">Zähler wird gestartet</string>
 
@@ -164,7 +164,7 @@
     <string name="export_csv">Exportieren</string>
     <string name="export_csv_hint">Alle Tage in einer CSV-Datei speichern</string>
     <string name="import_csv">Importieren</string>
-    <string name="import_csv_hint">Tage aus einer AdımSayar-CSV oder einem Export von Samsung Health, Mi Fitness, Mi Fit oder Google Fit (CSV oder ZIP) laden; der höhere Wert bleibt. Passwortgeschützte ZIPs zuerst entpacken und die CSV wählen.</string>
+    <string name="import_csv_hint">Tage aus einer FitWren-CSV oder einem Export von Samsung Health, Mi Fitness, Mi Fit oder Google Fit (CSV oder ZIP) laden; der höhere Wert bleibt. Passwortgeschützte ZIPs zuerst entpacken und die CSV wählen.</string>
     <string name="export_done">%1$d Tage exportiert</string>
     <string name="import_done">%1$d Tage aktualisiert</string>
     <string name="csv_failed">Datei konnte nicht gelesen oder geschrieben werden</string>
@@ -256,7 +256,7 @@
     <string name="weight_reminder">Wöchentliche Gewichtserinnerung</string>
     <string name="weight_reminder_hint">Erinnert dich am ersten Tag der Woche gegen 09:00 ans Wiegen.</string>
     <string name="notify_weight_title">Zeit zum Wiegen</string>
-    <string name="notify_weight_text">Eine neue Woche beginnt: Wiege dich und trage es in AdımSayar ein.</string>
+    <string name="notify_weight_text">Eine neue Woche beginnt: Wiege dich und trage es in FitWren ein.</string>
     <string name="notify_health_resting">Durchschnittlicher Ruhepuls: %1$d bpm</string>
     <string name="notify_health_resting_down">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d niedriger als letzte Woche</string>
     <string name="notify_health_resting_up">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d höher als letzte Woche</string>
@@ -285,10 +285,10 @@
     <string name="setup_steps_samsung">Galaxy Watch und Galaxy Fit arbeiten mit Samsung Health. Erlaube in Samsung Health → Einstellungen → Health Connect das Teilen deiner Daten.</string>
     <string name="setup_steps_google">Pixel Watch und Fitbit-Geräte arbeiten mit der Fitbit-App. Schalte in den Einstellungen der Fitbit-App die Synchronisierung mit Health Connect ein.</string>
     <string name="setup_steps_garmin">Öffne in den Einstellungen von Garmin Connect Verbundene Apps → Health Connect und schalte es ein.</string>
-    <string name="setup_steps_huawei">Huawei Health schreibt derzeit nicht in Health Connect. Daten von Huawei- und Honor-Uhren können AdımSayar daher nicht erreichen.</string>
+    <string name="setup_steps_huawei">Huawei Health schreibt derzeit nicht in Health Connect. Daten von Huawei- und Honor-Uhren können FitWren daher nicht erreichen.</string>
     <string name="setup_steps_other">Suche in der App deiner Uhr (z. B. Wearfit Pro, Da Fit, FitCloudPro) nach einer Health-Connect-Option. Steht die App nicht unter Health Connect → App-Berechtigungen, kann sie keine Daten senden. Die Apple Watch funktioniert nur mit einem iPhone.</string>
     <string name="setup_open_hc">Health Connect öffnen</string>
-    <string name="setup_step_permission">Berechtigungen von AdımSayar</string>
+    <string name="setup_step_permission">Berechtigungen von FitWren</string>
     <string name="setup_permission_wait">Installiere zuerst Health Connect.</string>
     <string name="setup_permission_enable">Schalte unten den Schalter ein, um Armbanddaten zu lesen. Health Connect fragt, welche Daten wir lesen dürfen.</string>
     <string name="setup_permission_ready">Alle Berechtigungen erteilt.</string>
@@ -313,6 +313,11 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_3">
+        <item>Die App heißt jetzt FitWren – Schrittzähler &amp; Gesundheit</item>
+        <item>Deine Daten, Einstellungen und Widgets bleiben erhalten</item>
+        <item>Neues Symbol: ein gelber Zaunkönig, der im Zielring läuft</item>
+    </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Vogel-Widget: verbleibende Schritte werden kurz angezeigt und passen</item>
         <item>Kleines Heute-Widget zeigt jetzt einen Fortschrittsbalken zum Ziel</item>
@@ -408,35 +413,35 @@
 
     <string name="oem_title">Schritte auch im Hintergrund aufzeichnen</string>
     <string name="oem_title_stock">Ausnahme von der Akku-Optimierung</string>
-    <string name="oem_intro">Dieses Telefon kann Apps im Hintergrund schließen. Mit den folgenden Schritten kann AdımSayar den Zähler auch bei geschlossener App lesen.</string>
+    <string name="oem_intro">Dieses Telefon kann Apps im Hintergrund schließen. Mit den folgenden Schritten kann FitWren den Zähler auch bei geschlossener App lesen.</string>
     <string name="oem_open">Öffnen</string>
     <string name="oem_dismiss">Vorerst schließen</string>
     <string name="oem_open_failed">Dieser Bildschirm lässt sich auf diesem Telefon nicht öffnen. Führe den Schritt manuell in den Einstellungen aus.</string>
-    <string name="oem_battery_common">Einstellungen → Apps → AdımSayar → Akku → Nicht eingeschränkt</string>
+    <string name="oem_battery_common">Einstellungen → Apps → FitWren → Akku → Nicht eingeschränkt</string>
 
-    <string name="oem_xiaomi_1">Einstellungen → Apps → Apps verwalten → AdımSayar → Autostart → An</string>
+    <string name="oem_xiaomi_1">Einstellungen → Apps → Apps verwalten → FitWren → Autostart → An</string>
     <string name="oem_xiaomi_2">Auf demselben Bildschirm: Energiesparmodus → Keine Einschränkungen</string>
 
-    <string name="oem_samsung_1">Einstellungen → Apps → AdımSayar → Akku → Nicht eingeschränkt</string>
-    <string name="oem_samsung_2">Akku → Einschränkungen der Hintergrundnutzung → Apps, die nie in den Standby-Modus wechseln → AdımSayar hinzufügen</string>
+    <string name="oem_samsung_1">Einstellungen → Apps → FitWren → Akku → Nicht eingeschränkt</string>
+    <string name="oem_samsung_2">Akku → Einschränkungen der Hintergrundnutzung → Apps, die nie in den Standby-Modus wechseln → FitWren hinzufügen</string>
 
-    <string name="oem_huawei_1">Akku → App-Start → AdımSayar → Automatisch verwalten ausschalten, Automatischer Start, Sekundärer Start und Im Hintergrund ausführen einschalten</string>
+    <string name="oem_huawei_1">Akku → App-Start → FitWren → Automatisch verwalten ausschalten, Automatischer Start, Sekundärer Start und Im Hintergrund ausführen einschalten</string>
 
-    <string name="oem_oppo_1">Akku → Hintergrundaktivität zulassen → AdımSayar: Ausführung im Hintergrund zulassen</string>
-    <string name="oem_oppo_2">Automatischer Start → AdımSayar → An</string>
+    <string name="oem_oppo_1">Akku → Hintergrundaktivität zulassen → FitWren: Ausführung im Hintergrund zulassen</string>
+    <string name="oem_oppo_2">Automatischer Start → FitWren → An</string>
 
-    <string name="oem_vivo_1">Akku → Verwaltung des Hintergrundenergieverbrauchs → Hoher Energieverbrauch im Hintergrund → AdımSayar zur Whitelist hinzufügen</string>
-    <string name="oem_vivo_2">Autostart → AdımSayar → An</string>
+    <string name="oem_vivo_1">Akku → Verwaltung des Hintergrundenergieverbrauchs → Hoher Energieverbrauch im Hintergrund → FitWren zur Whitelist hinzufügen</string>
+    <string name="oem_vivo_2">Autostart → FitWren → An</string>
 
-    <string name="oem_asus_1">Autostart → AdımSayar zulassen</string>
+    <string name="oem_asus_1">Autostart → FitWren zulassen</string>
 
-    <string name="oem_transsion_1">Automatische Verwaltung → AdımSayar in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
+    <string name="oem_transsion_1">Automatische Verwaltung → FitWren in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
     <string name="wearable_card_title">Armband-Schritte verwenden</string>
     <string name="wearable_card_text">Liest die Schritte, die Armband-Apps wie Mi Fitness in Health Connect schreiben. In Stunden, in denen das Armband gezählt hat, zählt das Armband, sonst das Telefon. Wenn du es erlaubst, werden auch Trainings, Strecke, Kalorien, Puls und Schlaf im Verlauf angezeigt.</string>
     <string name="wearable_permission_denied">Die Berechtigung zum Lesen von Schritten in Health Connect wurde nicht erteilt.</string>
     <string name="wearable_unavailable">Health Connect ist auf diesem Telefon nicht vorhanden. Installiere unter Android 13 und älter die App Health Connect aus dem Play Store.</string>
     <string name="wearable_privacy_title">Armband-Schritte</string>
-    <string name="wearable_privacy_text">AdimSayar liest aus Health Connect nur Schritt-, Trainings-, Strecken-, Kalorien-, Puls- und Schlafdaten. Es schreibt nichts und sendet keine Daten vom Telefon weg. Die gelesenen Daten werden nur in der App auf diesem Telefon angezeigt.</string>
+    <string name="wearable_privacy_text">FitWren liest aus Health Connect nur Schritt-, Trainings-, Strecken-, Kalorien-, Puls- und Schlafdaten. Es schreibt nichts und sendet keine Daten vom Telefon weg. Die gelesenen Daten werden nur in der App auf diesem Telefon angezeigt.</string>
     <string name="log_wearable_missing">Health Connect nicht gefunden</string>
     <string name="log_wearable_denied">Keine Leseberechtigung für Health Connect</string>
     <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
