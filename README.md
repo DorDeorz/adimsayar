@@ -1,331 +1,166 @@
-# FitWren – Adım Sayar & Sağlık
-
-Eski adı AdımSayar (0.9.3'te değişti; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve veriler etkilenmez).
-
-Android için reklamsız, hesapsız adım sayar ve sağlık takibi. Adımlar yalnızca telefonun kendi sensörlerinden (Xiaomi'de isteğe bağlı olarak HyperOS'un kendi adım kaydından) okunur ve tüm veriler telefonda kalır.
-
-Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 Pro 4G (HyperOS) için yazıldı; tüm Android telefonlarda çalışacak şekilde tasarlandı.
-
-- Kotlin, Jetpack Compose, Material 3
-- Glance ile ana ekran widget'ları
-- Room ile cihazda kalıcı kayıt
-- minSdk 23 (Android 6.0), targetSdk 36
-- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü ve indirmesi için
-
-## Ekran görüntüleri
-
-| Bugün | Geçmiş | Madalyalar | Ayarlar |
-|---|---|---|---|
-| <img src="docs/screenshots/today.png" width="200" alt="Bugün"> | <img src="docs/screenshots/history.png" width="200" alt="Geçmiş"> | <img src="docs/screenshots/medals.png" width="200" alt="Madalyalar"> | <img src="docs/screenshots/settings.png" width="200" alt="Ayarlar"> |
-
-| Bugün widget'ı | 7 günlük tablo |
-|---|---|
-| <img src="docs/screenshots/widget_today.png" width="360" alt="Bugün widget'ı"> | <img src="docs/screenshots/widget_week.png" width="360" alt="7 günlük tablo"> |
-
-| Seri ve hafta | Aylık takvim |
-|---|---|
-| <img src="docs/screenshots/widget_streak.png" width="160" alt="Seri ve hafta"> | <img src="docs/screenshots/widget_month.png" width="240" alt="Aylık takvim"> |
-
-## Özellikler
-
-### Bugün
-
-- Günlük hedefe göre ilerleme halkası, kalan adım sayısı
-- Mesafe ve kalori tahmini (boy ve kilodan, km veya mil)
-- Seri (günlük hedefe art arda ulaşılan gün sayısı) ve bu haftanın ilerlemesi
-- Son 7 günün tablosu
-
-### Geçmiş
-
-- Aylık takvim; her gün hedefe göre renklenir, ay ay gezilir
-- Seçilen günün saat saat dağılımı ve yürüyüş/koşu ayrımı (HyperOS kaydı açıkken)
-- Rekorlar: en iyi gün, en iyi hafta, en iyi ay, en uzun seri, hedefe ulaşılan gün sayısı, aktif gün ortalaması
-- Yıllık özet: toplam, günlük ortalama, hedef günleri, en iyi ay ve gün, kazanılan madalyalar
-
-### Madalyalar ve seviye
-
-- Beş madalya grubu: günlük adım (5.000 – 30.000), seri (3 – 100 gün), haftalık hedef (1 – 52 hafta), toplam yol (100 bin – 10 milyon adım), erken kalkan (08:00'den önce 1.000 adım; HyperOS kaydı açıkken)
-- Her madalyanın kaç kez kazanıldığı (ör. `5x`)
-- Toplam adıma göre seviye
-
-Madalyalar ve seviyeler hiçbir yerde saklanmaz, her açılışta günlük toplamlardan yeniden hesaplanır. Hedefi değiştirirsen geçmiş günler de yeni hedefe göre değerlendirilir.
-
-### Widget'lar
-
-Dört widget var. Hepsi uygulamayla aynı günlük kayıttan okur, kendi sensör okumaları yoktur.
-
-1. **Bugünün adımı** – hedef halkasıyla bugünkü adım; boyutuna göre sadeleşir veya ayrıntı ekler
-2. **7 günlük tablo** – son 7 günün adımları
-3. **Seri ve hafta** – günlük hedef serisi ve haftalık ilerleme
-4. **Aylık takvim** – bu ayın günleri, hedefe göre renkli
-
-Widget'lar telefonun duvar kağıdı renklerini (Material You) veya uygulamanın temasını kullanır.
-
-### Bildirimler (hepsi isteğe bağlı, varsayılan kapalı)
-
-- Günlük hedefe ulaşınca
-- Hedefin %80'ine yaklaşınca
-- Akşam seri hatırlatması (saat 20:00 civarı, hedefe ulaşılmadıysa)
-- Haftalık özet (haftanın son günü akşamı, geçen haftayla fark)
-
-### Ayarlar
-
-- Günlük ve haftalık hedef
-- Hafta başlangıcı (pazartesi veya pazar)
-- Boy, kilo, mesafe birimi
-- Açık, koyu veya sistem teması; telefonun renklerini kullanma
-- 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça (sağdan sola), Japonca, Çince, Korece
-- CSV dışa/içe aktarma (`tarih,adim`); içe aktarırken her gün için yüksek olan sayı kalır
-- Güncelleme kontrolü (GitHub'daki son sürümle karşılaştırır, yeni sürüm varsa indirme sayfasını açar) ve GitHub sayfası bağlantısı
-- Adım kaynağı anahtarları, okuma kaydı ve sürüm notları
-
-## Adım verisi nasıl alınıyor
-
-Uygulamanın tek gerçek verisi **gün başına toplam adım**dır (`daily_steps` tablosu: tarih, adım). Diğer her şey bundan türetilir. Bu tabloya veri üç yoldan gelebilir.
-
-### 1. Telefonun adım sayacı sensörü (`TYPE_STEP_COUNTER`) – varsayılan yol
-
-Android'in adım sayacı, telefon açıldığından beri atılan toplam adımı veren bir donanım sayacıdır. Uygulama bu sayacı okur ve iki okuma arasındaki farkı adım olarak kaydeder:
-
-1. İlk okumada yalnızca başlangıç değeri alınır; adımlar bu andan sonra sayılır.
-2. Her yeni okumada önceki okumayla fark hesaplanır (`StepMath.interval`).
-3. Bu fark iki okumanın saatleri arasında günlere bölünür (`StepMath.splitByDay`); gece yarısını geçen bir aralık iki güne orantılı dağıtılır.
-4. Günlük toplamlara eklenir.
-
-Okumaları güvenilir kılan kontroller:
-
-- **Yeniden başlatma:** telefon yeniden açılınca sayaç sıfırlanır. Bu, `Settings.Global.BOOT_COUNT` değişiminden anlaşılır; o durumda sayacın yeni değeri açılıştan sonraki adım olarak eklenir.
-- **Geç gelen eski okumalar:** donanım olayları toplu teslim edebildiği için eski bir değer yeni bir değerden sonra gelebilir. Okumalar olayın kendi zaman damgasıyla sıralanır; eski olanlar yok sayılır.
-- **Sayaç sıfırlanması:** aynı açılışta sayaç geriye giderse yeni değer adım olarak eklenir, negatif adım yazılmaz.
-
-Sensör şu anlarda okunur:
-
-| Ne zaman | Nasıl |
-|---|---|
-| Uygulama ekrandayken | Canlı dinleyici, adımlar anında görünür |
-| Her 15 dakikada bir | `JobScheduler` işi sayacı bir kez okur ve widget'ları yeniler |
-| Tam gece yarısı | `AlarmManager` ile gün dönümü, widget'lar yeni güne geçer |
-| Açılış, saat veya saat dilimi değişimi, güncelleme | Sistem olayı alıcısı zamanlamaları yeniden kurar ve sayacı okur |
-| "Arka planda sürekli say" açıksa | Ön plan servisi sayacı sürekli kayıtlı tutar (aşağıda) |
-
-### 2. "Arka planda sürekli say" (isteğe bağlı ön plan servisi)
-
-Bazı telefonlarda adım sayacı yalnızca bir uygulama onu dinlerken ilerler. Uygulama kapatılınca (örneğin HyperOS son uygulamalardan kaydırınca uygulamayı tamamen öldürür) o sırada atılan adımlar hiçbir yerden okunamaz.
-
-Bu anahtar açılırsa küçük, sessiz, kalıcı bir bildirimle bir ön plan servisi çalışır ve sayacı sürekli kayıtlı tutar. Pil için olaylar donanımda biriktirilip 60 saniyede bir toplu teslim edilir (`maxReportLatency`), böylece işlemci her adımda uyandırılmaz. Bildirim bugünkü adımı gösterir.
-
-Varsayılan olarak kapalıdır. Bildirimsiz yol yeterli olan telefonlarda gerekmez.
-
-### 3. Xiaomi / HyperOS adım kaydı (isteğe bağlı, yalnızca Xiaomi)
-
-HyperOS (ve MIUI) adımları kendi sistem servisiyle sürekli kaydeder; uygulama açık olsun olmasın. Bu kayıt `content://com.miui.providers.steps/item` adresinden, `miui.permission.READ_STEPS` izniyle (normal izin, kurulumda otomatik verilir) okunabilir. Her satır bir zaman aralığı ve o aralıktaki adım sayısıdır (`_begin_time`, `_end_time`, `_steps`, `_mode`).
-
-Ayarlar'daki **"HyperOS adım kaydını kullan"** anahtarı yalnızca üretici Xiaomi ise ve kayıt okunabiliyorsa görünür. Açıldığında:
-
-- Günlük toplamlar sensörden değil, bu kayıttan hesaplanır; telefonda geçmişte kaydedilmiş günler de içe alınır.
-- Uygulama kapalıyken atılan adımlar da eksiksiz gelir, bildirim gerekmez; ön plan servisi kapatılır.
-- Saat saat dağılım ve yürüyüş/koşu ayrımı (`_mode`: 2 yürüyüş, 3 koşu) bu kayıttan gelir. Erken kalkan madalyası da yalnızca bu kayıtla hesaplanabilir.
-- Kayıt okunamazsa veya telefonun sensörü adım görürken kayıt on dakika boyunca ilerlemezse uyarı kartı çıkar ve anahtar kapatılıp sensör yoluna dönülebilir.
-
-Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açıkça seçtiğinde kullanılır.
-
-### Donma kontrolü
-
-`TYPE_STEP_COUNTER` bazı telefonlarda (özellikle Samsung'da raporlanmış) saymayı durdurabiliyor. Uygulama ekrandayken adım dedektörü (`TYPE_STEP_DETECTOR`) da dinlenir. Son iki dakikada dedektör en az 50 adım görmüş ama sayaç hiç ilerlememişse sayaç donmuş sayılır: kullanıcıya uyarı gösterilir ve sensöre yeniden bağlanılır. Telefonu yeniden başlatmak gerekmez.
-
-### Kullanılmayanlar
-
-- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün ve Sağlık sayfası için egzersizler, mesafe, kalori, nabız, uyku ve kan oksijeni de gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
-- Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
-
-## Pil ve arka plan
-
-Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları agresif biçimde kapatabiliyor. Uygulama pil optimizasyonu muafiyetini zorla istemez. Bunun yerine, marka agresifse ve muafiyet verilmemişse, o markaya özel adımları ve ilgili ayar ekranına kısayolu gösteren kapatılabilir bir yardım kartı gösterir. Muafiyet verildiğinde kart kendiliğinden kaybolur.
-
-## Gizlilik
-
-- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`); yeni sürüm varsa tekrar dokununca APK'yı GitHub'dan indirip kurulum ekranını açar. Bu istekler yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
-- Hesap, sunucu, senkronizasyon, analitik ve reklam yoktur.
-- Veri kaybına karşı Android'in kendi yedeklemesi (`allowBackup`) ve kullanıcının kendi eliyle yaptığı CSV dışa aktarma kullanılır.
-
-İstenen izinler:
-
-| İzin | Neden |
-|---|---|
-| `ACTIVITY_RECOGNITION` | Adım sensörlerini okumak (Android 10+) |
-| `miui.permission.READ_STEPS` | Xiaomi'de HyperOS adım kaydını okumak |
-| `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_HEALTH` | İsteğe bağlı "Arka planda sürekli say" |
-| `POST_NOTIFICATIONS` | Servis bildirimi ve isteğe bağlı hedef bildirimleri |
-| `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
-| `SCHEDULE_EXACT_ALARM` | Gün dönümünü tam gece yarısı yapmak |
-| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü ve indirmesi |
-| `REQUEST_INSTALL_PACKAGES` | İndirilen güncellemeyi kurmak için Android'in kurulum ekranını açmak |
-| `health.READ_*` (adım, egzersiz, mesafe, aktif kalori, nabız, dinlenme nabzı, uyku, kan oksijeni, arka planda okuma) | İsteğe bağlı "Bileklik adımlarını kullan"; yalnızca okuma |
-
-## Kurulum
-
-En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile uygulamanın içinden indirip kurabilirsin.
-
-Her derlemenin APK'sı ayrıca [Actions](../../actions) sekmesinde, çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısında bulunur.
-
-Release APK, depoda bulunmayan ve GitHub Actions Secret'larında saklanan bir anahtarla imzalanır (`ADIMSAYAR_KEYSTORE_BASE64`, `ADIMSAYAR_KEYSTORE_PASSWORD`). Bu Secret'lar olmadan (örneğin bir fork'ta) APK geçici bir debug anahtarıyla imzalanır.
-
-İlk açılışta "Fiziksel etkinlik" izni verilmelidir. Xiaomi telefonlarda Ayarlar → Adım kaynağı → "HyperOS adım kaydını kullan" açılması önerilir.
-
-### Yeni sürüm yayınlama
-
-1. `app/build.gradle.kts` içinde `versionName` ve `versionCode` artırılır ve `main`'e birleştirilir.
-2. `versionName` ile aynı adda bir etiketle sürüm yayınlanır, örneğin `v0.6.1`. Üç yoldan biri:
-   - Actions → "Android" → "Run workflow" → `main`, "versionName ile GitHub Release yayınla" işaretli (etiket otomatik oluşur)
-   - GitHub'da Releases → "Draft a new release" → etiket `v0.6.1` → "Publish release"
-   - ya da komut satırından: `git tag v0.6.1 && git push origin v0.6.1`
-3. GitHub Actions APK'yı derler, imzalar ve `adimsayar-0.6.1.apk` olarak Release'e ekler. Etiket `versionName` ile uyuşmazsa iş durur.
-
-### Kaynaktan derleme
-
-Android SDK ve JDK 21 gerekir:
-
-```
-./gradlew assembleDebug
-```
-
-Testler:
-
-```
-./gradlew testDebugUnitTest
-```
-
-## Proje yapısı
-
-```
-app/src/main/java/com/dordeorz/adimsayar/
-├── MainActivity.kt          izin, canlı sayaç, ekranlar
-├── sensor/                  sensör okuma, canlı dinleyici, donma kontrolü
-├── data/                    Room veritabanı, adım hesabı, HyperOS kaydı, madalyalar, ayarlar
-├── background/              15 dk işi, gece yarısı alarmı, ön plan servisi, bildirimler
-├── widget/                  dört Glance widget'ı
-└── ui/                      Compose ekranları, tema, marka bazlı pil yardımı
-```
-
-Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kuralları: [CLAUDE.md](CLAUDE.md).
-
-## Sürüm geçmişi
-
-Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
-
-### 0.8.0
-
-Eklenenler
-- Sağlık sayfasında uyku evreleri (derin, hafif, REM, uyanık), ortalama yatış ve kalkış saati, kan oksijeni (SpO2), egzersiz türleri ve egzersiz yapılan günler, aktif kalori ve dinlenme nabzının önceki döneme göre değişimi.
-- Bugünün saatlik nabız grafiği.
-- Kilo kaydı: kilonu Sağlık sayfasından ekle; vücut kitle endeksi, toplam değişim, son ölçümden beri değişim ve grafik. Ayarlar'da isteğe bağlı "Haftalık kilo hatırlatması" (haftanın ilk günü 09:00 civarı).
-- Bileklik açıkken haftalık özet bildirimi ortalama dinlenme nabzını ve uykuyu da gösterir.
-- Sağlık sayfasında bileklik ya da saat bağlı değilse uyarı ve "Bileklik ve saat kurulumu" ekranı: Health Connect kurulumu, markaya göre (Xiaomi, Samsung, Google/Fitbit, Garmin, Huawei, diğer) ayar yolu, izinler ve son 7 günde Health Connect'e veri yazan uygulamaların listesi; uygulama bildiriyorsa cihazın türü (bileklik, saat) ve modeli de görünür.
-- Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada, büyük, açılışta seçili), Madalyalar, Ayarlar. Ayarlar sağ üstteki dişliden alta taşındı.
-- Sağlık sayfasında bileklik için "Sağlık özeti": son 7 ya da 30 günün ortalama ve en uzun uykusu, ortalama dinlenme nabzı ve grafiği, toplam ve en uzun egzersiz, bileklik mesafesi. Veriler saklanmaz, her açılışta Health Connect'ten okunur.
-- Güncelleme uygulamanın içinden: Ayarlar → "Güncellemeleri kontrol et" yeni sürümün APK'sını GitHub'dan indirir ve Android'in kurulum ekranını açar. İlk seferde Android bu uygulamadan yüklemeye izin ister.
-
-Düzeltilenler
-- Uygulama açıkken bileklik adımları dakikada bir okunur (önce 5 dakikada bir). Mi Fitness veriyi gecikmeli yazdığında yeni sayı daha çabuk görünür.
-
-### 0.7.0
-
-Eklenenler
-- Bileklik adımları (Ayarlar → "Bileklik adımlarını kullan", varsayılan kapalı): Mi Band gibi bilekliklerin Mi Fitness'ın Health Connect'e yazdığı adımları okunur. Bilekliğin adım yazdığı saatlerde bileklik, diğer saatlerde telefon sayılır. Health Connect'e hiçbir şey yazılmaz.
-- Geçmiş'te seçilen gün için bileklik verileri: egzersizler, mesafe, aktif kalori, nabız (7 günlük dinlenme nabzı grafiği) ve uyku. Bu veriler saklanmaz, her seferinde Health Connect'ten okunur.
-
-Düzeltilenler
-- Samsung'da uygulama kapalıyken 15 dakikalık okumalar sensöre ulaşamıyordu; artık kısa süreli bir servisle okunuyor, kalıcı bildirim yok.
-
-Not: Veritabanı sürümü yükseldi. 0.7.0'dan sonra 0.6.1'e geri dönülemez (önce CSV dışa aktarın).
-
-### 0.6.1
-
-Eklenenler
-- Ayarlar'da "Güncellemeleri kontrol et": GitHub'daki son sürümle karşılaştırır, yeni sürüm varsa indirme sayfasını açar. Yalnızca dokununca çalışır, arka planda kontrol yapılmaz.
-- Ayarlar'da GitHub sayfası bağlantısı (kaynak kod, sürümler, hata bildirimi).
-- Henüz yayınlanmış sürüm yoksa güncelleme kontrolü bunu ayrıca söyler.
-
-Depo ve derleme
-- İmza anahtarı depodan çıkarıldı; APK artık GitHub Secret'larında saklanan yeni bir anahtarla imzalanıyor. Bu sürüme geçerken uygulamayı bir kez kaldırıp kurmak gerekir (önce CSV dışa aktar).
-- `v*` etiketi gönderilince APK otomatik derlenip GitHub Releases'te yayınlanıyor.
-- Açık kaynak README, ekran görüntüleri ve MIT lisansı.
-
-### 0.6.0
-
-Eklenenler
-- Haftalık özet bildirimi: haftanın son günü akşamı haftanın toplamı ve geçen haftayla fark.
-- Hedefe yaklaşınca bildirim (günlük hedefin %80'i).
-- Geçmiş'te yıllık özet: toplam, günlük ortalama, hedef günleri, en iyi ay ve gün, kazanılan madalyalar.
-
-### 0.5.0
-
-Eklenenler
-- Madalyalarda kaç kez kazanıldığı (ör. `5x`).
-- Widget'lar telefonun renklerini (Material You) veya uygulamanın temasını kullanıyor.
-- Widget'lar boyutlarına göre düzenleniyor: küçültülünce sadeleşir, büyütülünce ayrıntı ekler.
-- Yeni widget'lar: Seri ve hafta, Aylık takvim.
-- 10 yeni dil: Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince, Korece.
-
-Düzeltilenler
-- Arapçada sağdan sola düzen, Latin rakamlar, her dilde yerel tarih sırası ve birimler.
-
-### 0.4.0
-
-Eklenenler
-- Bugün widget'ında hedef halkası.
-- Erken kalkan madalyası (08:00'den önce 1.000 adım; HyperOS kaydı açıkken).
-- İngilizce dil seçeneği.
-
-Düzeltilenler
-- Üst çubuk durum çubuğunun altına alındı; Geçmiş'te ay değişince seçili gün o aya taşınıyor.
-- 15 dakikalık arka plan okuması, widget'ların kullandığı WorkManager ile aynı iş numarasını aldığı için hiç çalışmıyordu; ayrı numaraya taşındı.
-
-### 0.3.0
-
-Eklenenler
-- Boy ve kilodan mesafe ve kalori tahmini (km veya mil).
-- Geçmiş'te seçilen günün saat saat dağılımı ve yürüyüş/koşu ayrımı (HyperOS kaydı açıkken).
-- En iyi ay rekoru, hafta başlangıcı seçimi (pazartesi veya pazar).
-- İsteğe bağlı bildirimler: hedefe ulaşınca, akşam seri hatırlatması.
-- CSV ile dışa ve içe aktarma.
-
-Düzeltilenler
-- HyperOS uyarı kartı çıkınca kaynak anahtarı da uyarının altında gösteriliyor.
-- Seri hesabında bugünden önceki eksik gün doğru sayılıyor.
-
-### 0.2.0
-
-Eklenenler
-- Yeni tasarım: alt menüde Bugün, Geçmiş ve Madalyalar.
-- Bugün ekranında hedef halkası, seri ve haftalık ilerleme.
-- Geçmiş: aylık takvim, gün ayrıntısı ve kişisel rekorlar.
-- Madalyalar ve seviye: günlük adım, seri, haftalık hedef, toplam yol.
-- Ayarlanabilir günlük ve haftalık hedef; widget da yeni hedefi gösteriyor.
-- Ayarlar: açık, koyu veya sistem teması, telefonun renkleri, adım kaynağı anahtarları ve okuma kaydı.
-
-### 0.1.0
-
-Eklenenler
-- İlk sürüm: adım sensöründen okuma, günlük kayıt, Bugün ve 7 günlük tablo widget'ları.
-- "Arka planda sürekli say" seçeneği ve marka bazlı pil yardım kartı.
-- Xiaomi'de HyperOS adım kaydından okuma; geçmiş günler de içe alınıyor.
-- HyperOS kaydı okunamazsa veya ilerlemezse uyarı kartı.
-
-Düzeltilenler
-- Arka plan servisinin 60 saniyede bir toplu gelen eski sayaç değerleri, yeni değerlerden sonra gelince adımlar şişiyordu (50 adım 424 görünüyordu). Okumalar artık olay zaman damgasıyla sıralanıyor, telefonun yeniden başlatılması açılış sayacından anlaşılıyor.
-- CI derlemeleri sabit bir anahtarla imzalandı ki yeni sürüm eskisinin üstüne kurulabilsin.
-
-## Geliştirme
-
-Bu proje [Claude Code](https://claude.com/claude-code) ile geliştirilmektedir. Kardeş proje: [Kronometre](https://github.com/DorDeorz/kronometre).
-
-## Lisans
-
-[MIT](LICENSE). Kodu kullanabilir, değiştirebilir ve dağıtabilirsin; telif ve lisans metninin korunması yeterli.
+<p align="center">
+  <img src="docs/icon.png" width="112" alt="FitWren icon">
+</p>
+
+<h1 align="center">FitWren – Step Counter &amp; Health</h1>
+
+<p align="center">
+  A private step counter and health tracker for Android.<br>
+  No account, no ads, no tracking. Your data never leaves your phone.
+</p>
+
+<p align="center">
+  <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/DorDeorz/adimsayar?label=download&amp;color=2E7D32" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/Android-6.0%2B-2E7D32" alt="Android 6.0+">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?color=2E7D32" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <b>English</b> · <a href="README.tr.md">Türkçe</a>
+</p>
 
 ---
 
-### English
+<p align="center">
+  <img src="docs/screenshots/today.png" width="200" alt="Today">
+  <img src="docs/screenshots/history.png" width="200" alt="History">
+  <img src="docs/screenshots/health.png" width="200" alt="Health">
+  <img src="docs/screenshots/medals.png" width="200" alt="Medals">
+</p>
 
-FitWren (formerly AdımSayar) is a private Android step counter and health app: no account, no server, no ads or analytics; the network is used only for a manual update check against GitHub Releases. Steps come from the phone's own `TYPE_STEP_COUNTER` sensor (with an optional foreground service for ROMs that stop the counter when the app is killed), or on Xiaomi phones optionally from HyperOS's own step record (`content://com.miui.providers.steps/item`). Daily totals are the only stored data; medals, levels, streaks and records are derived on the fly. Health Connect is used only when the user turns on "Use band steps": step records from apps such as Mi Fitness are read (never written), and for hours the band counted, the band's steps replace the phone's. The UI is available in 12 languages. Licensed under MIT.
+## Why FitWren
+
+Many phones ship without a step counter app, or with one that wants an account and sends your data to a server. FitWren counts steps with your phone's own sensor, stores everything on the device and works without any sign-in.
+
+- **Accurate.** Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.
+- **Battery friendly.** No always-on service by default. The counter is read now and then and the difference is saved.
+- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates".
+- **Works on every Android phone.** Tested on Xiaomi (HyperOS) and Samsung (One UI), the two brands that are hardest on background apps.
+
+## Features
+
+### Today
+- Progress ring toward your daily goal, steps left, distance and calories
+- Streak, weekly progress and the last 7 days
+- Water tracking with a goal suggested from your weight
+- A little wren that grows with your total steps and reacts to how your day is going. Tap it and it hops.
+- Share your day as an image
+
+### History
+- Monthly calendar colored by goal, hour-by-hour chart for any day
+- Records: best day, week and month, longest streak
+- Yearly summary
+- Streak freeze: two per month, so one missed day doesn't break your streak
+
+### Health (optional, with a fitness band or watch)
+- Reads steps from bands such as the Mi Band through Health Connect. Hours the band counted use the band, other hours use the phone, so no step is counted twice.
+- Sleep with stages, heart rate with zones, resting heart rate trend, SpO₂, workouts and active calories
+- Weight log with BMI and a chart
+- A setup guide that shows which apps write to Health Connect
+
+### Medals and goals
+- Medals for daily steps, streaks, weekly goals, total distance and early walks. Once earned, a medal stays.
+- Levels, three weekly challenges picked from your own history
+- Virtual routes: walk from Istanbul to Ankara or along the Camino with your steps
+
+### 13 home-screen widgets
+
+Today's steps, 7-day chart, streak and week, monthly calendar, today by hour, heatmap, sleep and heart, the wren, water (add a glass with one tap), virtual route, weekly challenges, weight and daily summary.
+
+Every widget resizes to fit, follows your wallpaper colors (Material You) or the app theme, and has adjustable background transparency. Tapping a widget opens the matching page.
+
+<p align="center">
+  <img src="docs/screenshots/widgets.png" width="320" alt="Widgets on the home screen">
+</p>
+
+### And also
+- Daily goal, weekly goal, first day of week, km or miles
+- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders
+- Light, dark or system theme
+- 12 languages: English, Turkish, German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese and Korean
+- Export and import as CSV. Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
+
+## Install
+
+1. Download the latest APK from [Releases](../../releases/latest).
+2. Open it on your phone and allow installing from this source.
+3. On first launch, allow "Physical activity".
+4. On Xiaomi phones, turn on Settings → Step source → "Use the HyperOS step record" for counting without a notification.
+
+Updates: Settings → About → "Check for updates" downloads the new APK from GitHub and opens Android's installer. You can also track releases with [Obtainium](https://github.com/ImranR98/Obtainium).
+
+## Privacy
+
+FitWren stores daily step totals, water, weight and your settings on the phone. Nothing is sent anywhere.
+
+The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
+
+Health Connect is used only if you turn on "Use band steps", and only for reading. FitWren never writes to Health Connect.
+
+<details>
+<summary>Permissions and why they are needed</summary>
+
+| Permission | Why |
+|---|---|
+| `ACTIVITY_RECOGNITION` | Read the step sensors (Android 10+) |
+| `miui.permission.READ_STEPS` | Read the HyperOS step record on Xiaomi |
+| `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_HEALTH` | Read the counter for a few seconds in the background, and the optional "Keep counting in the background" mode |
+| `POST_NOTIFICATIONS` | Optional reminders and goal notifications |
+| `RECEIVE_BOOT_COMPLETED` | Restore schedules after a reboot |
+| `SCHEDULE_EXACT_ALARM` | Switch to the new day at midnight |
+| `INTERNET` | Only the update check and download you start yourself |
+| `REQUEST_INSTALL_PACKAGES` | Open Android's installer for a downloaded update |
+| `health.READ_*` | Optional band data from Health Connect, read only |
+
+</details>
+
+## How steps are counted
+
+<details>
+<summary>Technical details</summary>
+
+The only real data is the **step total per day**. Medal progress, levels, streaks and records are calculated from it.
+
+**Phone sensor (default).** Android's `TYPE_STEP_COUNTER` reports the steps since the phone was turned on. FitWren reads it when the app opens, when a widget updates, every ~15 minutes with `JobScheduler`, and after a reboot or time change. The difference since the last reading is split across days and hours and added to the totals. Android 9+ gives sensors only to active apps, so the background reading runs inside a short foreground service that finishes in under 10 seconds and usually shows no notification.
+
+**Frozen sensor check.** On some phones (Samsung especially) the counter can stop. While the app is open, the step detector is also read. If the detector saw at least 50 steps in two minutes and the counter didn't move, FitWren warns you and re-registers the sensor.
+
+**HyperOS step record (Xiaomi, optional).** HyperOS records steps with its own service even when no app is running. With the switch on, daily and hourly totals come from this record, including walk/run split and past days.
+
+**Keep counting in the background (optional).** For phones that stop counting when the app is killed, a quiet foreground service keeps the counter registered and batches events every 60 seconds.
+
+**Fitness band (optional).** Each Health Connect source is asked for its own daily and hourly totals. The largest source per hour is used, never a sum, and band hours replace phone hours. Band totals live in their own table, so turning the switch off brings the phone's numbers back.
+
+**Battery help.** Some brands kill background apps aggressively. FitWren never forces the battery exemption. If your brand is known for it and the exemption is not granted, a dismissible card shows the steps for your phone.
+
+Design decisions and measurements: [GOALS.md](GOALS.md).
+
+</details>
+
+## Build from source
+
+You need the Android SDK and JDK 21.
+
+```
+./gradlew assembleDebug
+./gradlew testDebugUnitTest
+```
+
+Built with Kotlin, Jetpack Compose, Material 3, Glance and Room. `minSdk 23`, `targetSdk 36`.
+
+```
+app/src/main/java/com/dordeorz/adimsayar/
+├── sensor/       step sensors, live counter, frozen sensor check
+├── data/         Room database, step math, HyperOS and Health Connect sources, medals, routes
+├── background/   periodic reading, midnight alarm, services, reminders
+├── widget/       13 Glance widgets
+└── ui/           Compose screens, theme, battery help
+```
+
+Release APKs are built and signed by GitHub Actions with a key kept in repository secrets. Without those secrets (in a fork, for example) the APK is signed with a temporary debug key. Version history: [CHANGELOG.md](CHANGELOG.md) (Turkish; the in-app release notes are translated). How to publish a release: [docs/RELEASING.md](docs/RELEASING.md).
+
+## License
+
+[MIT](LICENSE). FitWren was formerly called AdımSayar; the package name `com.dordeorz.adimsayar` stays the same, so updates and your data are not affected.
+
+Built with [Claude Code](https://claude.com/claude-code). Sister project: [Kronometre](https://github.com/DorDeorz/kronometre).
