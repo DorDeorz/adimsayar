@@ -313,6 +313,12 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>أداة الطائر: المستوى والخطوات المتبقية والارتقاء</item>
+        <item>لم تعد نصوص أداة النوم والنبض مقطوعة</item>
+        <item>خريطة الحرارة: يسهل التمييز بين الأيام الفارغة وقليلة الخطوات</item>
+        <item>بطاقة الطائر تعرض المستوى والارتقاء</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>تتبع الماء في شاشة اليوم: أضف أكوابًا أو احذفها، وهدف يومي مقترح حسب وزنك. ماء آخر 7 أيام في صفحة الصحة</item>
         <item>تذكير اختياري بشرب الماء (الإعدادات): كل 1 أو 2 أو 3 ساعات يخبرك بالمتبقي، ويمكن إضافة كوب من الإشعار</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">نوم الليلة الماضية والنبض من السوار</string>
     <string name="widget_health_title">النوم والنبض</string>
     <string name="widget_health_off">بيانات السوار متوقفة. يمكنك تشغيلها من الإعدادات.</string>
-    <string name="widget_health_sleep">نوم الليلة الماضية</string>
+    <string name="widget_health_sleep">النوم</string>
     <string name="widget_health_latest">آخر قياس</string>
-    <string name="widget_health_latest_at">آخر قياس · %1$s</string>
+    <string name="widget_health_latest_at">آخر · %1$s</string>
     <string name="route_title">مسار افتراضي</string>
     <string name="route_empty">اختر مسارًا وشاهد خطواتك تتقدم على الخريطة.</string>
     <string name="route_choose">اختر مسارًا</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">يكبر الطائر مع مجموع خطواتك. مزاجه يتبع خطوات اليوم. العناصر تأتي مع الميداليات.</string>
     <string name="widget_bird_label">طائر</string>
     <string name="widget_bird_description">طائر يكبر مع خطواتك</string>
+    <string name="bird_level">المستوى %1$d</string>
+    <string name="bird_level_next">%2$s خطوة حتى المستوى %1$d</string>
+    <string name="bird_level_up">ارتقيت مستوى اليوم! 🎉</string>
 </resources>

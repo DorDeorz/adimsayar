@@ -313,6 +313,12 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>鳥ウィジェット: レベル、次のレベルまでの歩数、レベルアップ</item>
+        <item>睡眠・心拍ウィジェットの文字が切れなくなりました</item>
+        <item>ヒートマップ: 記録なしの日と歩数の少ない日を見分けやすく</item>
+        <item>鳥カードにレベルとレベルアップを表示</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>今日の画面で水分記録: コップの追加・削除、体重からの目標の提案。健康ページに直近7日の水分グラフ</item>
         <item>水分補給リマインダー（設定・任意）: 1・2・3時間ごとに残りの量を通知。通知から1杯追加可能</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">バンドからの昨夜の睡眠と心拍</string>
     <string name="widget_health_title">睡眠と心拍</string>
     <string name="widget_health_off">バンドのデータはオフです。設定でオンにできます。</string>
-    <string name="widget_health_sleep">昨夜の睡眠</string>
+    <string name="widget_health_sleep">睡眠</string>
     <string name="widget_health_latest">最新の測定</string>
-    <string name="widget_health_latest_at">最新の測定 · %1$s</string>
+    <string name="widget_health_latest_at">最新 · %1$s</string>
     <string name="route_title">バーチャルルート</string>
     <string name="route_empty">ルートを選ぶと、歩いた分だけ地図上を進みます。</string>
     <string name="route_choose">ルートを選ぶ</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">鳥は合計歩数で成長します。気分は今日の歩数で変わります。アイテムはメダルで手に入ります。</string>
     <string name="widget_bird_label">鳥</string>
     <string name="widget_bird_description">歩数で育つ鳥</string>
+    <string name="bird_level">レベル %1$d</string>
+    <string name="bird_level_next">レベル%1$dまで%2$s歩</string>
+    <string name="bird_level_up">今日レベルアップ！🎉</string>
 </resources>

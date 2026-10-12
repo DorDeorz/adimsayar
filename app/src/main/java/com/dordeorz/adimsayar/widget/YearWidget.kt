@@ -113,7 +113,7 @@ private fun YearContent(context: Context, history: Map<LocalDate, Long>, today: 
                 provider = ImageProvider(heatmapBitmap(width, height, cell, levels, filled = false)),
                 contentDescription = null,
                 modifier = GlanceModifier.fillMaxSize(),
-                colorFilter = ColorFilter.tint(GlanceTheme.colors.secondaryContainer),
+                colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurfaceVariant),
             )
             Image(
                 provider = ImageProvider(heatmapBitmap(width, height, cell, levels, filled = true)),
@@ -133,7 +133,8 @@ private fun level(steps: Long, goal: Long): Int = when {
     else -> 4
 }
 
-private val LEVEL_ALPHA = intArrayOf(0, 70, 130, 200, 255)
+private val LEVEL_ALPHA = intArrayOf(0, 105, 160, 210, 255)
+private const val EMPTY_ALPHA = 46
 
 private fun heatmapBitmap(width: Int, height: Int, cell: Float, levels: Array<IntArray>, filled: Boolean): Bitmap {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -145,7 +146,7 @@ private fun heatmapBitmap(width: Int, height: Int, cell: Float, levels: Array<In
     levels.forEachIndexed { week, days ->
         days.forEachIndexed { day, value ->
             if (value < 0) return@forEachIndexed
-            val alpha = if (filled) LEVEL_ALPHA[value] else if (value == 0) 255 else 0
+            val alpha = if (filled) LEVEL_ALPHA[value] else if (value == 0) EMPTY_ALPHA else 0
             if (alpha == 0) return@forEachIndexed
             paint.color = android.graphics.Color.argb(alpha, 255, 255, 255)
             val x = left + week * cell

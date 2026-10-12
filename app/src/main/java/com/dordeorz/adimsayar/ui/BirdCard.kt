@@ -55,6 +55,7 @@ internal fun BirdCard(state: MainUiState) {
             BirdImage(bird, Modifier.size(BIRD_SIZE))
             Column(modifier = Modifier.weight(1f).padding(start = 16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(stringResource(bird.stage.title()), style = MaterialTheme.typography.titleMedium)
+                LevelLine(bird)
                 Text(stringResource(bird.mood.text()), style = MaterialTheme.typography.bodyMedium)
                 StageProgress(bird)
                 Text(
@@ -73,6 +74,15 @@ internal fun BirdImage(bird: BirdState, modifier: Modifier) {
     Canvas(modifier = modifier) {
         drawIntoCanvas { BirdPainter.draw(it.nativeCanvas, size.minDimension, bird) }
     }
+}
+
+@Composable
+private fun LevelLine(bird: BirdState) {
+    Text(
+        if (bird.leveledUpToday) stringResource(R.string.bird_level_up) else stringResource(R.string.bird_level, bird.level),
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.primary,
+    )
 }
 
 @Composable
@@ -104,7 +114,17 @@ private fun BirdDialog(bird: BirdState, onDismiss: () -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 BirdImage(bird, Modifier.size(BIG_BIRD_SIZE).align(Alignment.CenterHorizontally))
+                LevelLine(bird)
                 Text(stringResource(bird.mood.text()), style = MaterialTheme.typography.bodyLarge)
+                LinearProgressIndicator(
+                    progress = { bird.levelFraction },
+                    modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                )
+                Text(
+                    stringResource(R.string.bird_level_next, bird.level + 1, format(bird.stepsToNextLevel)),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
                 StageProgress(bird)
                 Text(stringResource(R.string.bird_items_title), style = MaterialTheme.typography.titleSmall)
                 BirdItem.entries.forEach { item ->

@@ -313,6 +313,12 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>새 위젯: 레벨, 다음 레벨까지 걸음, 레벨 업</item>
+        <item>수면·심박 위젯 글자가 더 이상 잘리지 않아요</item>
+        <item>히트맵: 빈 날과 걸음이 적은 날을 더 쉽게 구분</item>
+        <item>새 카드에 레벨과 레벨 업 표시</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>오늘 화면에서 물 기록: 잔 추가·삭제, 체중 기반 권장 목표. 건강 페이지에 최근 7일 물 그래프</item>
         <item>선택 사항인 물 알림(설정): 1, 2, 3시간마다 남은 양을 알려 주고 알림에서 한 잔 추가 가능</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">밴드에서 가져온 어젯밤 수면과 심박</string>
     <string name="widget_health_title">수면과 심박</string>
     <string name="widget_health_off">밴드 데이터가 꺼져 있어요. 설정에서 켤 수 있어요.</string>
-    <string name="widget_health_sleep">어젯밤 수면</string>
+    <string name="widget_health_sleep">수면</string>
     <string name="widget_health_latest">최근 측정</string>
-    <string name="widget_health_latest_at">최근 측정 · %1$s</string>
+    <string name="widget_health_latest_at">최근 · %1$s</string>
     <string name="route_title">가상 경로</string>
     <string name="route_empty">경로를 고르면 걸음 수만큼 지도에서 나아갑니다.</string>
     <string name="route_choose">경로 선택</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">새는 총 걸음 수로 자라요. 기분은 오늘 걸음 수에 따라 바뀌어요. 아이템은 메달로 얻어요.</string>
     <string name="widget_bird_label">새</string>
     <string name="widget_bird_description">걸음으로 자라는 새</string>
+    <string name="bird_level">레벨 %1$d</string>
+    <string name="bird_level_next">레벨 %1$d까지 %2$s걸음</string>
+    <string name="bird_level_up">오늘 레벨 업! 🎉</string>
 </resources>

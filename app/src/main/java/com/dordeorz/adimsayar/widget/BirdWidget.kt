@@ -19,6 +19,7 @@ import androidx.glance.ImageProvider
 import androidx.glance.LocalSize
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.LinearProgressIndicator
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.provideContent
 import androidx.glance.layout.Alignment
@@ -26,6 +27,9 @@ import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
+import androidx.glance.layout.fillMaxSize
+import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.height
 import androidx.glance.layout.size
 import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
@@ -86,36 +90,74 @@ class BirdWidgetReceiver : GlanceAppWidgetReceiver() {
 
 private val PADDING = 12.dp
 private val TEXT_WIDTH = 120.dp
-private const val WIDE_RATIO = 1.6f
+private val INFO_HEIGHT = 72.dp
+private val MOOD_HEIGHT = 34.dp
+private val MIN_BIRD = 48.dp
+private const val WIDE_RATIO = 1.4f
 private const val MAX_BIRD_PX = 600
 
 @Composable
 private fun BirdContent(context: Context, bird: BirdState) {
     val size = LocalSize.current
-    val inner = minOf(size.width, size.height) - PADDING * 2
-    val wide = size.width.value >= size.height.value * WIDE_RATIO && size.width - size.height >= TEXT_WIDTH
+    val width = size.width - PADDING * 2
+    val height = size.height - PADDING * 2
+    val wide = size.width.value >= size.height.value * WIDE_RATIO && width - height >= TEXT_WIDTH
     Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
-        if (wide) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                BirdBitmap(context, bird, inner)
+        when {
+            wide -> Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
+                BirdBitmap(context, bird, height)
                 Spacer(GlanceModifier.width(12.dp))
-                Column {
-                    Text(
-                        text = context.getString(bird.stage.title()),
-                        maxLines = 1,
-                        style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 16.sp, fontWeight = FontWeight.Bold),
-                    )
-                    Text(
-                        text = context.getString(bird.mood.text()),
-                        maxLines = 3,
-                        style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
-                    )
+                Column(modifier = GlanceModifier.defaultWeight()) {
+                    BirdInfo(context, bird, showMood = height >= INFO_HEIGHT + MOOD_HEIGHT)
                 }
             }
-        } else {
-            BirdBitmap(context, bird, inner)
+            height - width >= INFO_HEIGHT - MIN_BIRD || height >= width + INFO_HEIGHT / 2 -> {
+                val showMood = height - INFO_HEIGHT - MOOD_HEIGHT >= minOf(width, MIN_BIRD * 2)
+                val birdSide = minOf(width, height - INFO_HEIGHT - if (showMood) MOOD_HEIGHT else 0.dp).coerceAtLeast(MIN_BIRD)
+                Column(modifier = GlanceModifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Box(modifier = GlanceModifier.fillMaxWidth().defaultWeight(), contentAlignment = Alignment.Center) {
+                        BirdBitmap(context, bird, birdSide)
+                    }
+                    BirdInfo(context, bird, showMood)
+                }
+            }
+            else -> BirdBitmap(context, bird, minOf(width, height))
         }
     }
+}
+
+@Composable
+private fun BirdInfo(context: Context, bird: BirdState, showMood: Boolean) {
+    Text(
+        text = context.getString(bird.stage.title()),
+        maxLines = 1,
+        style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold),
+    )
+    Text(
+        text = if (bird.leveledUpToday) context.getString(R.string.bird_level_up) else context.getString(R.string.bird_level, bird.level),
+        maxLines = 1,
+        style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+    )
+    if (showMood) {
+        Text(
+            text = context.getString(bird.mood.text()),
+            maxLines = 2,
+            style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
+        )
+    }
+    Spacer(GlanceModifier.height(6.dp))
+    LinearProgressIndicator(
+        progress = bird.levelFraction,
+        modifier = GlanceModifier.fillMaxWidth().height(6.dp),
+        color = GlanceTheme.colors.primary,
+        backgroundColor = GlanceTheme.colors.secondaryContainer,
+    )
+    Spacer(GlanceModifier.height(4.dp))
+    Text(
+        text = context.getString(R.string.bird_level_next, bird.level + 1, formatSteps(bird.stepsToNextLevel)),
+        maxLines = 1,
+        style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
+    )
 }
 
 @Composable

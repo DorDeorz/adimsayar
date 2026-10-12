@@ -21,6 +21,10 @@ class BirdState(
     val nextStage: BirdStage?,
     val stepsToNext: Long,
     val stageFraction: Float,
+    val level: Int = 0,
+    val levelFraction: Float = 0f,
+    val stepsToNextLevel: Long = 0L,
+    val leveledUpToday: Boolean = false,
 )
 
 object Avatar {
@@ -36,6 +40,7 @@ object Avatar {
         dailyGoal: Long,
     ): BirdState {
         val total = achievements.records.total
+        val level = achievements.level
         val stage = BirdStage.entries.last { achievements.level.number >= it.minLevel }
         val next = BirdStage.entries.firstOrNull { it.minLevel > stage.minLevel }
         val from = AchievementMath.levelStart(stage.minLevel)
@@ -50,6 +55,10 @@ object Avatar {
             nextStage = next,
             stepsToNext = if (to == null) 0L else (to - total).coerceAtLeast(0L),
             stageFraction = if (to == null) 1f else ((total - from).toFloat() / (to - from)).coerceIn(0f, 1f),
+            level = level.number,
+            levelFraction = ((total - level.from).toFloat() / (level.to - level.from)).coerceIn(0f, 1f),
+            stepsToNextLevel = (level.to - total).coerceAtLeast(0L),
+            leveledUpToday = AchievementMath.level(total - (days[today] ?: 0L)).number < level.number,
         )
     }
 

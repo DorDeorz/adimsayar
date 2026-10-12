@@ -44,4 +44,16 @@ class AvatarTest {
         assertEquals(setOf(BirdItem.Scarf, BirdItem.Cap), bird.items)
         assertEquals(AchievementMath.levelStart(BirdStage.Fledgling.minLevel) - 420_000L, bird.stepsToNext)
     }
+
+    @Test
+    fun levelUpTodayAndStepsToNextLevel() {
+        val days = mapOf(today to 30_000L)
+        val achievements = AchievementMath.compute(days, today, goal, 70_000L, DayOfWeek.MONDAY)
+        val bird = Avatar.state(achievements, days, emptySet(), today, 12, goal)
+        assertEquals(1, bird.level)
+        assertEquals(true, bird.leveledUpToday)
+        assertEquals(AchievementMath.levelStart(2) - 30_000L, bird.stepsToNextLevel)
+        val calm = Avatar.state(achievements, mapOf(today to 1_000L), emptySet(), today, 12, goal)
+        assertEquals(false, calm.leveledUpToday)
+    }
 }

@@ -73,6 +73,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.9.1", R.array.release_notes_0_9_1),
     ReleaseNote("0.9.0", R.array.release_notes_0_9_0),
     ReleaseNote("0.8.0", R.array.release_notes_0_8_0),
     ReleaseNote("0.7.0", R.array.release_notes_0_7_0),
