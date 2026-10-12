@@ -12,6 +12,7 @@ import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.RestingHeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
+import androidx.health.connect.client.records.metadata.Device
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
@@ -61,7 +62,11 @@ class HeartHour(val hour: Int, val min: Long, val max: Long)
 
 enum class HealthType { Steps, Heart, Sleep, Oxygen, Exercise, Distance, Calories }
 
-class SourceApp(val packageName: String, val types: Set<HealthType>)
+enum class DeviceKind { Watch, Band, Ring, Phone, Other }
+
+data class SourceDevice(val kind: DeviceKind, val name: String?)
+
+class SourceApp(val packageName: String, val types: Set<HealthType>, val devices: Set<SourceDevice>)
 
 class SourceReport(val apps: List<SourceApp>, val missingPermissions: Boolean) {
     val hasWearable: Boolean get() = apps.any { app -> app.types.any { it in WEARABLE_TYPES } }
@@ -131,12 +136,30 @@ object WearableHealth {
             for ((type, record, metric) in metrics) {
                 if (allowed(record)) add(type, client.aggregate(AggregateRequest(setOf(metric), range)).dataOrigins.map { it.packageName })
             }
+            val devices = HashMap<String, MutableSet<SourceDevice>>()
+            fun collect(records: List<Record>) {
+                for (record in records) {
+                    val device = record.metadata.device ?: continue
+                    val name = listOfNotNull(device.manufacturer, device.model).filter { it.isNotBlank() }.joinToString(" ").ifBlank { null }
+                    devices.getOrPut(record.metadata.dataOrigin.packageName) { LinkedHashSet() } += SourceDevice(deviceKind(device), name)
+                }
+            }
             if (allowed(OxygenSaturationRecord::class)) {
                 val records = client.readRecords(ReadRecordsRequest(OxygenSaturationRecord::class, range, pageSize = SOURCE_PAGE_SIZE)).records
                 add(HealthType.Oxygen, records.map { it.metadata.dataOrigin.packageName }.toSet())
+                collect(records)
+            }
+            if (allowed(HeartRateRecord::class)) {
+                collect(client.readRecords(ReadRecordsRequest(HeartRateRecord::class, range, ascendingOrder = false, pageSize = SOURCE_PAGE_SIZE)).records)
+            }
+            if (allowed(StepsRecord::class)) {
+                collect(client.readRecords(ReadRecordsRequest(StepsRecord::class, range, ascendingOrder = false, pageSize = SOURCE_PAGE_SIZE)).records)
             }
             SourceReport(
-                found.map { (pkg, types) -> SourceApp(pkg, types.sortedBy { it.ordinal }.toSet()) },
+                found.map { (pkg, types) ->
+                    val known = devices[pkg].orEmpty()
+                    SourceApp(pkg, types.sortedBy { it.ordinal }.toSet(), known.filter { it.kind != DeviceKind.Other || it.name != null }.toSet())
+                },
                 !granted.containsAll(PERMISSIONS) || WearableSteps.READ_STEPS !in granted,
             )
         } catch (e: CancellationException) {
@@ -261,6 +284,14 @@ object WearableHealth {
             oxygenAllowed = allowed(OxygenSaturationRecord::class),
             missingPermissions = !granted.containsAll(PERMISSIONS),
         )
+    }
+
+    private fun deviceKind(device: Device): DeviceKind = when (device.type) {
+        Device.TYPE_WATCH -> DeviceKind.Watch
+        Device.TYPE_FITNESS_BAND -> DeviceKind.Band
+        Device.TYPE_RING -> DeviceKind.Ring
+        Device.TYPE_PHONE -> DeviceKind.Phone
+        else -> DeviceKind.Other
     }
 
     private fun span(record: SleepSessionRecord) = SleepSpan(

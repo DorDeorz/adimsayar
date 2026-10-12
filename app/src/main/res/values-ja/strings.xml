@@ -309,6 +309,12 @@
     <string name="source_distance">距離</string>
     <string name="source_calories">アクティブカロリー</string>
 
+    <string name="device_watch">時計</string>
+    <string name="device_band">バンド</string>
+    <string name="device_ring">スマートリング</string>
+    <string name="device_phone">スマホ</string>
+    <string name="device_other">その他のデバイス</string>
+
     <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
         <item>履歴にバンドの健康サマリー（7 日または 30 日）：睡眠、安静時心拍数とグラフ、ワークアウト、距離</item>
@@ -319,6 +325,7 @@
         <item>体重記録: BMI、合計の変化とグラフ。週初めの体重リマインダー (任意)</item>
         <item>バンドがオンのとき、週間サマリー通知に安静時心拍数と睡眠も表示</item>
         <item>バンドや時計が接続されていないときにヘルスページで警告し、手順ごとの設定を表示: Health Connect、メーカー別の手順、権限、データを書き込んでいるアプリの確認</item>
+        <item>設定画面に、データを書き込むデバイスの種類とモデルを表示 (アプリが提供する場合)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band などのバンドの歩数を Health Connect から読み込めます（設定、既定はオフ）。バンドを着けていた時間はバンド、それ以外は電話の歩数を使います</item>

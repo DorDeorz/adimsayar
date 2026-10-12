@@ -309,6 +309,12 @@
     <string name="source_distance">거리</string>
     <string name="source_calories">활동 칼로리</string>
 
+    <string name="device_watch">시계</string>
+    <string name="device_band">밴드</string>
+    <string name="device_ring">스마트 링</string>
+    <string name="device_phone">휴대폰</string>
+    <string name="device_other">기타 기기</string>
+
     <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
         <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
@@ -319,6 +325,7 @@
         <item>체중 기록: BMI, 총 변화와 차트. 선택형 주간 체중 알림</item>
         <item>밴드를 켜면 주간 요약 알림에 안정 시 심박수와 수면도 표시</item>
         <item>밴드나 시계가 연결되지 않으면 건강 페이지에서 알리고 단계별 설정 제공: Health Connect, 브랜드별 방법, 권한, 데이터를 기록하는 앱 확인</item>
+        <item>설정 화면에 데이터를 기록하는 기기의 종류와 모델 표시(앱이 제공하는 경우)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>

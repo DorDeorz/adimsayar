@@ -309,6 +309,12 @@
     <string name="source_distance">Distancia</string>
     <string name="source_calories">Calorías activas</string>
 
+    <string name="device_watch">Reloj</string>
+    <string name="device_band">Pulsera</string>
+    <string name="device_ring">Anillo inteligente</string>
+    <string name="device_phone">Teléfono</string>
+    <string name="device_other">Otro dispositivo</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Nueva barra inferior: Historial, Salud, Hoy (centro), Medallas, Ajustes. El resumen de la pulsera tiene su propia página</item>
         <item>Resumen de salud de la pulsera en el Historial (7 o 30 días): sueño, pulso en reposo con gráfico, entrenamientos, distancia</item>
@@ -319,6 +325,7 @@
         <item>Registro de peso: índice de masa corporal, cambio total y gráfico. Recordatorio semanal de peso opcional</item>
         <item>Con la pulsera activada, el resumen semanal también muestra la frecuencia en reposo y el sueño</item>
         <item>La página de salud avisa si no hay pulsera ni reloj conectado, con una configuración paso a paso: Health Connect, pasos según la marca, permisos y comprobación de qué apps escriben datos</item>
+        <item>La configuración muestra el tipo y modelo del dispositivo que escribe datos (si la app lo indica)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Los pasos de Mi Band y otras pulseras se pueden leer con Health Connect (Ajustes, desactivado por defecto). En las horas con pulsera cuenta la pulsera; en las demás, el teléfono</item>

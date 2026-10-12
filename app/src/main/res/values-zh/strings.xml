@@ -309,6 +309,12 @@
     <string name="source_distance">距离</string>
     <string name="source_calories">活动热量</string>
 
+    <string name="device_watch">手表</string>
+    <string name="device_band">手环</string>
+    <string name="device_ring">智能戒指</string>
+    <string name="device_phone">手机</string>
+    <string name="device_other">其他设备</string>
+
     <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
         <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
@@ -319,6 +325,7 @@
         <item>体重记录：BMI、总变化和图表。可选的每周称重提醒</item>
         <item>开启手环后，每周总结通知也会显示静息心率和睡眠</item>
         <item>未连接手环或手表时，健康页面会提示，并提供分步设置：Health Connect、按品牌的步骤、权限，以及检查哪些应用在写入数据</item>
+        <item>设置页面会显示写入数据的设备类型和型号（如果应用提供）</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>可通过 Health Connect 读取 Mi Band 等手环的步数（设置中，默认关闭）。佩戴手环的小时使用手环数据，其余小时使用手机数据</item>

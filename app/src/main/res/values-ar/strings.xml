@@ -309,6 +309,12 @@
     <string name="source_distance">المسافة</string>
     <string name="source_calories">السعرات النشطة</string>
 
+    <string name="device_watch">ساعة</string>
+    <string name="device_band">سوار</string>
+    <string name="device_ring">خاتم ذكي</string>
+    <string name="device_phone">هاتف</string>
+    <string name="device_other">جهاز آخر</string>
+
     <string-array name="release_notes_0_8_0">
         <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
         <item>ملخص صحة السوار في السجل (7 أو 30 يومًا): النوم ونبض الراحة مع رسم بياني والتمارين والمسافة</item>
@@ -319,6 +325,7 @@
         <item>سجل الوزن: مؤشر كتلة الجسم والتغير الكلي ومخطط. تذكير أسبوعي اختياري بالوزن</item>
         <item>عند تفعيل السوار يعرض الملخص الأسبوعي أيضًا نبض الراحة والنوم</item>
         <item>تنبّه صفحة الصحة عند عدم توصيل سوار أو ساعة، مع إعداد خطوة بخطوة: Health Connect وخطوات حسب العلامة والأذونات والتحقق من التطبيقات التي تكتب البيانات</item>
+        <item>تعرض شاشة الإعداد نوع الجهاز الذي يكتب البيانات وطرازه (إن أبلغ التطبيق عنهما)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>يمكن قراءة خطوات Mi Band والأساور الأخرى عبر Health Connect (الإعدادات، معطّل افتراضيًا). في الساعات التي تُلبس فيها السوار تُحسب خطوات السوار، وفي غيرها خطوات الهاتف</item>

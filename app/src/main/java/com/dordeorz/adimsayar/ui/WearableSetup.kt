@@ -38,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.DeviceKind
 import com.dordeorz.adimsayar.data.HealthType
 import com.dordeorz.adimsayar.data.SourceReport
 import kotlinx.coroutines.Dispatchers
@@ -153,6 +154,12 @@ fun WearableSetupScreen(state: MainUiState, actions: MainActions, onClose: () ->
                         data.apps.forEach { app ->
                             Column(modifier = Modifier.padding(vertical = 4.dp)) {
                                 Text(appLabel(LocalContext.current, app.packageName), style = MaterialTheme.typography.bodyLarge)
+                                app.devices.forEach { device ->
+                                    Text(
+                                        listOfNotNull(device.name, stringResource(deviceLabel(device.kind))).joinToString(" · "),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                }
                                 Text(
                                     app.types.map { stringResource(typeLabel(it)) }.joinToString(", "),
                                     style = MaterialTheme.typography.bodySmall,
@@ -194,6 +201,14 @@ private fun SetupStep(number: Int, title: String, content: @Composable () -> Uni
 @Composable
 private fun SetupText(text: String) {
     Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+}
+
+private fun deviceLabel(kind: DeviceKind): Int = when (kind) {
+    DeviceKind.Watch -> R.string.device_watch
+    DeviceKind.Band -> R.string.device_band
+    DeviceKind.Ring -> R.string.device_ring
+    DeviceKind.Phone -> R.string.device_phone
+    DeviceKind.Other -> R.string.device_other
 }
 
 private fun typeLabel(type: HealthType): Int = when (type) {

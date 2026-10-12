@@ -309,6 +309,12 @@
     <string name="source_distance">Mesafe</string>
     <string name="source_calories">Aktif kalori</string>
 
+    <string name="device_watch">Saat</string>
+    <string name="device_band">Bileklik</string>
+    <string name="device_ring">Akıllı yüzük</string>
+    <string name="device_phone">Telefon</string>
+    <string name="device_other">Diğer cihaz</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
         <item>Sağlık sayfasında bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
@@ -319,6 +325,7 @@
         <item>Kilo kaydı: vücut kitle endeksi, toplam değişim ve grafik. İsteğe bağlı hafta başı kilo hatırlatması</item>
         <item>Bileklik açıkken haftalık özet bildirimi dinlenme nabzını ve uykuyu da gösterir</item>
         <item>Sağlık sayfasında bileklik ya da saat bağlı değilse uyarı ve adım adım kurulum ekranı: Health Connect, markaya göre ayar yolu, izinler ve veri yazan uygulamaların kontrolü</item>
+        <item>Kurulum ekranında veriyi yazan cihazın türü ve modeli (uygulama bildiriyorsa) gösterilir</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>

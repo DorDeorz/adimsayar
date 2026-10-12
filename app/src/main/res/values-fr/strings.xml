@@ -309,6 +309,12 @@
     <string name="source_distance">Distance</string>
     <string name="source_calories">Calories actives</string>
 
+    <string name="device_watch">Montre</string>
+    <string name="device_band">Bracelet</string>
+    <string name="device_ring">Bague connectée</string>
+    <string name="device_phone">Téléphone</string>
+    <string name="device_other">Autre appareil</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
         <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
@@ -319,6 +325,7 @@
         <item>Suivi du poids : indice de masse corporelle, variation totale et graphique. Rappel de pesée hebdomadaire facultatif</item>
         <item>Avec le bracelet activé, le résumé hebdomadaire indique aussi la fréquence au repos et le sommeil</item>
         <item>La page Santé avertit si aucun bracelet ni montre n\'est connecté, avec une configuration pas à pas : Health Connect, étapes selon la marque, autorisations et vérification des applications qui écrivent des données</item>
+        <item>La configuration affiche le type et le modèle de l\'appareil qui écrit les données (si l\'application l\'indique)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>

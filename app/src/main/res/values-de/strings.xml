@@ -309,6 +309,12 @@
     <string name="source_distance">Strecke</string>
     <string name="source_calories">Aktive Kalorien</string>
 
+    <string name="device_watch">Uhr</string>
+    <string name="device_band">Armband</string>
+    <string name="device_ring">Smart Ring</string>
+    <string name="device_phone">Handy</string>
+    <string name="device_other">Anderes Gerät</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
         <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
@@ -319,6 +325,7 @@
         <item>Gewichtsprotokoll: Body-Mass-Index, Gesamtänderung und Diagramm. Optionale wöchentliche Wiege-Erinnerung</item>
         <item>Mit aktivem Armband zeigt die Wochenübersicht auch Ruhepuls und Schlaf</item>
         <item>Die Gesundheitsseite warnt, wenn kein Armband und keine Uhr verbunden ist, mit Schritt-für-Schritt-Einrichtung: Health Connect, Anleitung je Marke, Berechtigungen und Prüfung, welche Apps Daten schreiben</item>
+        <item>Die Einrichtung zeigt Typ und Modell des Geräts, das Daten schreibt (wenn die App es meldet)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>

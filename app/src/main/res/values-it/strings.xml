@@ -309,6 +309,12 @@
     <string name="source_distance">Distanza</string>
     <string name="source_calories">Calorie attive</string>
 
+    <string name="device_watch">Orologio</string>
+    <string name="device_band">Braccialetto</string>
+    <string name="device_ring">Anello smart</string>
+    <string name="device_phone">Telefono</string>
+    <string name="device_other">Altro dispositivo</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Nuova barra in basso: Cronologia, Salute, Oggi (al centro), Medaglie, Impostazioni. Il riepilogo del braccialetto ha una pagina propria</item>
         <item>Riepilogo salute del braccialetto nella cronologia (7 o 30 giorni): sonno, battito a riposo con grafico, allenamenti, distanza</item>
@@ -319,6 +325,7 @@
         <item>Registro del peso: indice di massa corporea, variazione totale e grafico. Promemoria settimanale del peso opzionale</item>
         <item>Con il braccialetto attivo, il riepilogo settimanale mostra anche battito a riposo e sonno</item>
         <item>La pagina Salute avvisa se non c\'è un braccialetto o orologio collegato, con una configurazione passo passo: Health Connect, passaggi per marca, autorizzazioni e verifica delle app che scrivono dati</item>
+        <item>La configurazione mostra tipo e modello del dispositivo che scrive i dati (se l\'app lo indica)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>I passi di Mi Band e di altri braccialetti si possono leggere tramite Health Connect (Impostazioni, disattivato di default). Nelle ore con il braccialetto conta il braccialetto, nelle altre il telefono</item>

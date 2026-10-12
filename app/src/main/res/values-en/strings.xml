@@ -309,6 +309,12 @@
     <string name="source_distance">Distance</string>
     <string name="source_calories">Active calories</string>
 
+    <string name="device_watch">Watch</string>
+    <string name="device_band">Band</string>
+    <string name="device_ring">Smart ring</string>
+    <string name="device_phone">Phone</string>
+    <string name="device_other">Other device</string>
+
     <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
         <item>Health summary for the band on the Health page, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
@@ -319,6 +325,7 @@
         <item>Weight log: body mass index, total change and chart. Optional weekly weigh-in reminder</item>
         <item>With the band on, the weekly summary notification also shows resting heart rate and sleep</item>
         <item>Health page warns when no band or watch is connected, with a step-by-step setup: Health Connect, brand-specific steps, permissions and a check of which apps write data</item>
+        <item>The setup screen shows the type and model of the device writing data (when the app reports it)</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>
