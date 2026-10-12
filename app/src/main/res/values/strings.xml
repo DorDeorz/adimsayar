@@ -313,6 +313,9 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Kuş widget\'ında kalan adım artık kısa yazılıyor ve kesilmiyor</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Kuş widget\'ı: seviye, sonraki seviyeye kalan adım ve seviye atlama</item>
         <item>Uyku ve nabız widget\'ında yazılar artık kesilmiyor</item>
@@ -586,4 +589,5 @@
     <string name="bird_level">Seviye %1$d</string>
     <string name="bird_level_next">Seviye %1$d için %2$s adım</string>
     <string name="bird_level_up">Bugün seviye atladın! 🎉</string>
+    <string name="bird_level_left">%1$s adım kaldı</string>
 </resources>

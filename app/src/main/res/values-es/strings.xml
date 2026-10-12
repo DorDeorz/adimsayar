@@ -313,6 +313,9 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Widget del pájaro: los pasos restantes se muestran abreviados y caben</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget del pájaro: nivel, pasos al siguiente nivel y subida de nivel</item>
         <item>Las etiquetas del widget de sueño y pulso ya no se cortan</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">Nivel %1$d</string>
     <string name="bird_level_next">%2$s pasos para el nivel %1$d</string>
     <string name="bird_level_up">¡Subiste de nivel hoy! 🎉</string>
+    <string name="bird_level_left">Faltan %1$s pasos</string>
 </resources>

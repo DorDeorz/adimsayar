@@ -46,6 +46,7 @@ import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.ui.BirdPainter
+import com.dordeorz.adimsayar.ui.formatCompact
 import com.dordeorz.adimsayar.ui.text
 import com.dordeorz.adimsayar.ui.title
 import java.time.LocalDate
@@ -154,7 +155,7 @@ private fun BirdInfo(context: Context, bird: BirdState, showMood: Boolean) {
     )
     Spacer(GlanceModifier.height(4.dp))
     Text(
-        text = context.getString(R.string.bird_level_next, bird.level + 1, formatSteps(bird.stepsToNextLevel)),
+        text = context.getString(R.string.bird_level_left, formatCompact(bird.stepsToNextLevel)),
         maxLines = 1,
         style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
     )

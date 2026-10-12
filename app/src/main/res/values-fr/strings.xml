@@ -313,6 +313,9 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Widget oiseau : les pas restants sont abrégés et tiennent</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget oiseau : niveau, pas avant le prochain niveau et montée de niveau</item>
         <item>Les libellés du widget sommeil et pouls ne sont plus coupés</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">Niveau %1$d</string>
     <string name="bird_level_next">%2$s pas avant le niveau %1$d</string>
     <string name="bird_level_up">Niveau gagné aujourd\'hui ! 🎉</string>
+    <string name="bird_level_left">Encore %1$s pas</string>
 </resources>

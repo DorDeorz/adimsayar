@@ -313,6 +313,9 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Widget uccello: i passi rimanenti sono abbreviati e ci stanno</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget uccello: livello, passi al prossimo livello e salita di livello</item>
         <item>Le etichette del widget sonno e battito non vengono più tagliate</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">Livello %1$d</string>
     <string name="bird_level_next">%2$s passi al livello %1$d</string>
     <string name="bird_level_up">Oggi sei salito di livello! 🎉</string>
+    <string name="bird_level_left">Mancano %1$s passi</string>
 </resources>

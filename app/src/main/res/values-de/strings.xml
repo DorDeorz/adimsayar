@@ -313,6 +313,9 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Vogel-Widget: verbleibende Schritte werden kurz angezeigt und passen</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Vogel-Widget: Level, Schritte bis zum nächsten Level und Aufstieg</item>
         <item>Beschriftungen im Schlaf- und Puls-Widget werden nicht mehr abgeschnitten</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">Level %1$d</string>
     <string name="bird_level_next">Noch %2$s Schritte bis Level %1$d</string>
     <string name="bird_level_up">Heute aufgestiegen! 🎉</string>
+    <string name="bird_level_left">Noch %1$s Schritte</string>
 </resources>

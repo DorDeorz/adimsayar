@@ -313,6 +313,9 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>أداة الطائر: الخطوات المتبقية مختصرة وتظهر كاملة</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>أداة الطائر: المستوى والخطوات المتبقية والارتقاء</item>
         <item>لم تعد نصوص أداة النوم والنبض مقطوعة</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">المستوى %1$d</string>
     <string name="bird_level_next">%2$s خطوة حتى المستوى %1$d</string>
     <string name="bird_level_up">ارتقيت مستوى اليوم! 🎉</string>
+    <string name="bird_level_left">متبقٍ %1$s خطوة</string>
 </resources>

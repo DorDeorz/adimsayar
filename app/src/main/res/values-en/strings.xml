@@ -313,6 +313,9 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Bird widget: steps left now use a short form and fit</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Bird widget: level, steps to next level and level-up</item>
         <item>Sleep and heart widget labels no longer get cut off</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">Level %1$d</string>
     <string name="bird_level_next">%2$s steps to level %1$d</string>
     <string name="bird_level_up">Level up today! 🎉</string>
+    <string name="bird_level_left">%1$s steps to go</string>
 </resources>

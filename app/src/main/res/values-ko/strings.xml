@@ -313,6 +313,9 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>새 위젯: 남은 걸음을 짧게 표시해 잘리지 않아요</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>새 위젯: 레벨, 다음 레벨까지 걸음, 레벨 업</item>
         <item>수면·심박 위젯 글자가 더 이상 잘리지 않아요</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">레벨 %1$d</string>
     <string name="bird_level_next">레벨 %1$d까지 %2$s걸음</string>
     <string name="bird_level_up">오늘 레벨 업! 🎉</string>
+    <string name="bird_level_left">%1$s걸음 남음</string>
 </resources>

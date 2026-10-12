@@ -313,6 +313,9 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>小鸟小组件：剩余步数用简写显示，不再截断</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>小鸟小组件：等级、距下一级的步数和升级</item>
         <item>睡眠和心率小组件的文字不再被截断</item>
@@ -585,4 +588,5 @@
     <string name="bird_level">等级 %1$d</string>
     <string name="bird_level_next">距离等级 %1$d 还差 %2$s 步</string>
     <string name="bird_level_up">今天升级了！🎉</string>
+    <string name="bird_level_left">还差 %1$s 步</string>
 </resources>
