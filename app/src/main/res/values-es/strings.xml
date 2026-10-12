@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>La app tiene un nombre nuevo: FitWren – Podómetro y salud</item>
         <item>Tus datos, ajustes y widgets se mantienen</item>
+        <item>Nuevo icono: un chochín amarillo caminando dentro del anillo de meta</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Widget del pájaro: los pasos restantes se muestran abreviados y caben</item>

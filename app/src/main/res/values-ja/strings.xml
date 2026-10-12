@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>アプリの名前が FitWren（歩数計＆ヘルス）になりました</item>
         <item>データ、設定、ウィジェットはそのまま残ります</item>
+        <item>新しいアイコン：目標リングの中を歩く黄色いミソサザイ</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>鳥ウィジェット: 残り歩数を短く表示し、切れなくなりました</item>

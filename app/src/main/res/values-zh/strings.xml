@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>应用改名为 FitWren（计步与健康）</item>
         <item>你的数据、设置和小部件保持不变</item>
+        <item>新图标：在目标圆环里行走的黄色鹪鹩</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>小鸟小组件：剩余步数用简写显示，不再截断</item>

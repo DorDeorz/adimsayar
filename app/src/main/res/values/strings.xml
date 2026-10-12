@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>Uygulamanın yeni adı FitWren: Adım Sayar &amp; Sağlık</item>
         <item>Verilerin, ayarların ve widget\'ların aynen duruyor</item>
+        <item>Yeni ikon: hedef halkasında yürüyen sarı çalıkuşu</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Kuş widget\'ında kalan adım artık kısa yazılıyor ve kesilmiyor</item>

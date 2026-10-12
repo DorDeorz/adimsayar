@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>앱 이름이 FitWren(만보기 및 건강)으로 바뀌었습니다</item>
         <item>데이터, 설정, 위젯은 그대로 유지됩니다</item>
+        <item>새 아이콘: 목표 링 안을 걷는 노란 굴뚝새</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>새 위젯: 남은 걸음을 짧게 표시해 잘리지 않아요</item>

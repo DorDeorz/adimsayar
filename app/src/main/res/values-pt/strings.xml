@@ -316,6 +316,7 @@
     <string-array name="release_notes_0_9_3">
         <item>O app tem um novo nome: FitWren – Contador de passos e saúde</item>
         <item>Seus dados, ajustes e widgets continuam iguais</item>
+        <item>Novo ícone: uma carriça amarela caminhando dentro do anel da meta</item>
     </string-array>
     <string-array name="release_notes_0_9_2">
         <item>Widget do pássaro: passos restantes abreviados e cabem</item>
