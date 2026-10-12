@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.math.abs
 
 internal val appLocale: Locale get() = Locales.current
 internal val TIME_FORMAT: DateTimeFormatter get() = localized("dMMMHHmm")
@@ -39,3 +40,9 @@ internal fun shortDayName(date: LocalDate): String = date.dayOfWeek.getDisplayNa
 internal fun percent(steps: Long, goal: Long): Int = if (goal <= 0L) 0 else ((steps * 100L) / goal).toInt()
 
 internal fun formatDecimal(value: Double): String = String.format(appLocale, "%.1f", value)
+
+internal fun signedKg(kg: Double): String = when {
+    abs(kg) < 0.05 -> formatDecimal(0.0)
+    kg > 0 -> "+" + formatDecimal(kg)
+    else -> "−" + formatDecimal(-kg)
+}

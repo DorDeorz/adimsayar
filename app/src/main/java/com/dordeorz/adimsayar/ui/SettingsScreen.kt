@@ -46,6 +46,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.WIDGET_OPACITY_OPTIONS
 import com.dordeorz.adimsayar.data.AGE_RANGE
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.GLASS_OPTIONS
@@ -232,6 +233,13 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     onCheckedChange = actions.onDynamicColorChange,
                 )
             }
+            ChoiceRow(
+                title = stringResource(R.string.settings_widget_opacity),
+                options = WIDGET_OPACITY_OPTIONS,
+                selected = settings.widgetOpacity,
+                label = { stringResource(R.string.percent_of_goal, it) },
+                onSelect = actions.onWidgetOpacityChange,
+            )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_language))

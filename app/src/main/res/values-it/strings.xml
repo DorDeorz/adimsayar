@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>Widget uccello: i passi rimanenti sono abbreviati e ci stanno</item>
         <item>Il widget piccolo Oggi mostra una barra di avanzamento verso l\'obiettivo</item>
+        <item>Nuovi widget: acqua (un bicchiere con un tocco), percorso virtuale, sfide settimanali, peso e riepilogo del giorno</item>
+        <item>I widget cambiano colore e mostrano ✓ quando raggiungi l\'obiettivo; si vede l\'ora dell\'ultimo aggiornamento</item>
+        <item>Toccando un widget si apre la pagina giusta; la trasparenza dello sfondo si sceglie nelle Impostazioni</item>
+        <item>Tocca l\'uccellino: salta e sbatte le ali, e ogni tanto sbatte le palpebre</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget uccello: livello, passi al prossimo livello e salita di livello</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">%2$s passi al livello %1$d</string>
     <string name="bird_level_up">Oggi sei salito di livello! 🎉</string>
     <string name="bird_level_left">Mancano %1$s passi</string>
+    <string name="widget_goal_done">Obiettivo raggiunto</string>
+    <string name="widget_updated_at">Aggiornato %1$s</string>
+    <string name="settings_widget_opacity">Sfondo del widget</string>
+    <string name="widget_water_label">Acqua</string>
+    <string name="widget_water_description">Acqua bevuta oggi, aggiungi un bicchiere con un tocco</string>
+    <string name="widget_route_label">Percorso virtuale</string>
+    <string name="widget_route_description">Avanzamento sul percorso e prossima tappa</string>
+    <string name="widget_route_none">Nessun percorso scelto. Sceglilo nella pagina Medaglie.</string>
+    <string name="widget_challenge_label">Sfide settimanali</string>
+    <string name="widget_challenge_description">Sfide di questa settimana e i tuoi progressi</string>
+    <string name="widget_weight_label">Peso</string>
+    <string name="widget_weight_description">Ultimo peso, variazione e grafico</string>
+    <string name="widget_weight_empty">Ancora nessun peso registrato</string>
+    <string name="widget_summary_label">Riepilogo del giorno</string>
+    <string name="widget_summary_description">Passi, acqua, sonno e battito in un widget</string>
+    <string name="widget_summary_distance">Distanza</string>
+    <string name="widget_summary_calories">Calorie</string>
 </resources>

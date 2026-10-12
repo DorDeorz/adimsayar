@@ -21,6 +21,7 @@ import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
+import com.dordeorz.adimsayar.widget.Widgets
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.weekStartOf
@@ -108,6 +109,18 @@ object Reminders {
         val drunk = Water.add(context, LocalDate.now(), settings.glassMl)
         if (drunk >= settings.waterGoalMl) {
             NotificationManagerCompat.from(context).cancel(WATER_NOTIFICATION_ID)
+        } else {
+            notifyWater(context, drunk, settings, alert = false)
+        }
+        Widgets.updateWater(context)
+    }
+
+    fun onWaterChanged(context: Context, drunk: Int) {
+        val settings = SettingsStore.get(context).settings.value
+        val manager = context.getSystemService(NotificationManager::class.java) ?: return
+        if (manager.activeNotifications.none { it.id == WATER_NOTIFICATION_ID }) return
+        if (drunk >= settings.waterGoalMl) {
+            manager.cancel(WATER_NOTIFICATION_ID)
         } else {
             notifyWater(context, drunk, settings, alert = false)
         }

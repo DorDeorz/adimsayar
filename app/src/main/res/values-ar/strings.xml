@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>أداة الطائر: الخطوات المتبقية مختصرة وتظهر كاملة</item>
         <item>تعرض أداة اليوم الصغيرة شريط تقدم نحو الهدف</item>
+        <item>أدوات جديدة: الماء (أضف كوبًا بلمسة)، المسار الافتراضي، تحديات الأسبوع، الوزن وملخص اليوم</item>
+        <item>تتغير ألوان الأدوات وتظهر ✓ عند بلوغ الهدف، ويظهر وقت آخر تحديث</item>
+        <item>لمس الأداة يفتح الصفحة المناسبة، ويمكن اختيار شفافية الخلفية من الإعدادات</item>
+        <item>المس الطائر فيقفز ويرفرف بجناحيه، ويرمش أحيانًا</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>أداة الطائر: المستوى والخطوات المتبقية والارتقاء</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">%2$s خطوة حتى المستوى %1$d</string>
     <string name="bird_level_up">ارتقيت مستوى اليوم! 🎉</string>
     <string name="bird_level_left">متبقٍ %1$s خطوة</string>
+    <string name="widget_goal_done">تم بلوغ الهدف</string>
+    <string name="widget_updated_at">آخر تحديث %1$s</string>
+    <string name="settings_widget_opacity">خلفية الأداة</string>
+    <string name="widget_water_label">الماء</string>
+    <string name="widget_water_description">الماء الذي شربته اليوم، أضف كوبًا بلمسة</string>
+    <string name="widget_route_label">المسار الافتراضي</string>
+    <string name="widget_route_description">تقدمك في المسار والمحطة التالية</string>
+    <string name="widget_route_none">لم يتم اختيار مسار. اختر واحدًا من صفحة الأوسمة.</string>
+    <string name="widget_challenge_label">تحديات الأسبوع</string>
+    <string name="widget_challenge_description">تحديات هذا الأسبوع وتقدمك</string>
+    <string name="widget_weight_label">الوزن</string>
+    <string name="widget_weight_description">آخر وزن والتغير والرسم البياني</string>
+    <string name="widget_weight_empty">لا توجد أوزان مسجلة بعد</string>
+    <string name="widget_summary_label">ملخص اليوم</string>
+    <string name="widget_summary_description">الخطوات والماء والنوم والنبض في أداة واحدة</string>
+    <string name="widget_summary_distance">المسافة</string>
+    <string name="widget_summary_calories">السعرات</string>
 </resources>

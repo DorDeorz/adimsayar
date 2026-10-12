@@ -36,6 +36,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
@@ -56,7 +57,9 @@ class YearWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                YearContent(localized, history, today, settings)
+                WidgetSurface(Tab.History, settings.widgetOpacity) {
+                    YearContent(localized, history, today, settings)
+                }
             }
         }
     }
@@ -94,7 +97,7 @@ private fun YearContent(context: Context, history: Map<LocalDate, Long>, today: 
             if (date.isAfter(today)) -1 else level(history[date] ?: 0L, goal)
         }
     }
-    Column(modifier = widgetSurface()) {
+    Column(modifier = GlanceModifier.fillMaxSize()) {
         Row(modifier = GlanceModifier.fillMaxWidth().height(TITLE_HEIGHT), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = context.getString(R.string.widget_year_title, weeks),

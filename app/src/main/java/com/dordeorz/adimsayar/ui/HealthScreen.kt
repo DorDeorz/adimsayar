@@ -72,7 +72,6 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Locale
-import kotlin.math.abs
 
 @Composable
 fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () -> Unit) {
@@ -771,12 +770,12 @@ private fun WeightCard(state: MainUiState, actions: MainActions) {
                     val previous = weights[weights.size - 2]
                     RecordRow(
                         stringResource(R.string.weight_total_change),
-                        stringResource(R.string.weight_kg, signed(latest.kg - first.kg)),
+                        stringResource(R.string.weight_kg, signedKg(latest.kg - first.kg)),
                         stringResource(R.string.weight_since, FULL_DATE_FORMAT.format(first.date)),
                     )
                     RecordRow(
                         stringResource(R.string.weight_last_change),
-                        stringResource(R.string.weight_kg, signed(latest.kg - previous.kg)),
+                        stringResource(R.string.weight_kg, signedKg(latest.kg - previous.kg)),
                         FULL_DATE_FORMAT.format(previous.date),
                     )
                     WeightChart(weights.takeLast(WEIGHT_CHART_ENTRIES))
@@ -818,11 +817,6 @@ private fun WeightCard(state: MainUiState, actions: MainActions) {
     }
 }
 
-private fun signed(kg: Double): String = when {
-    abs(kg) < 0.05 -> formatDecimal(0.0)
-    kg > 0 -> "+" + formatDecimal(kg)
-    else -> "−" + formatDecimal(-kg)
-}
 
 private fun bmiLabel(category: BmiCategory): Int = when (category) {
     BmiCategory.Under -> R.string.bmi_under

@@ -211,5 +211,65 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/health_widget_info" />
         </receiver>
+
+        <receiver
+            android:name=".widget.WaterWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_water_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/water_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.RouteWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_route_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/route_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ChallengeWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_challenge_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/challenge_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.WeightWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_weight_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weight_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.SummaryWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_summary_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/summary_widget_info" />
+        </receiver>
     </application>
 </manifest>

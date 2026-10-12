@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>새 위젯: 남은 걸음을 짧게 표시해 잘리지 않아요</item>
         <item>작은 오늘 위젯에 목표까지의 진행 막대 표시</item>
+        <item>새 위젯: 물(한 번 탭으로 한 잔 추가), 가상 경로, 주간 챌린지, 체중, 오늘 요약</item>
+        <item>목표를 달성하면 위젯 색이 바뀌고 ✓가 표시되며 마지막 업데이트 시간이 보입니다</item>
+        <item>위젯을 탭하면 해당 페이지가 열리고, 설정에서 위젯 배경 투명도를 고를 수 있습니다</item>
+        <item>새를 탭하면 뛰어오르며 날갯짓하고 가끔 눈을 깜빡입니다</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>새 위젯: 레벨, 다음 레벨까지 걸음, 레벨 업</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">레벨 %1$d까지 %2$s걸음</string>
     <string name="bird_level_up">오늘 레벨 업! 🎉</string>
     <string name="bird_level_left">%1$s걸음 남음</string>
+    <string name="widget_goal_done">목표 달성</string>
+    <string name="widget_updated_at">%1$s 업데이트</string>
+    <string name="settings_widget_opacity">위젯 배경</string>
+    <string name="widget_water_label">물</string>
+    <string name="widget_water_description">오늘 마신 물, 한 번 탭으로 한 잔 추가</string>
+    <string name="widget_route_label">가상 경로</string>
+    <string name="widget_route_description">경로 진행 상황과 다음 정류장</string>
+    <string name="widget_route_none">선택한 경로가 없습니다. 메달 페이지에서 고르세요.</string>
+    <string name="widget_challenge_label">주간 챌린지</string>
+    <string name="widget_challenge_description">이번 주 챌린지와 진행 상황</string>
+    <string name="widget_weight_label">체중</string>
+    <string name="widget_weight_description">최근 체중, 변화와 그래프</string>
+    <string name="widget_weight_empty">아직 체중 기록이 없습니다</string>
+    <string name="widget_summary_label">오늘 요약</string>
+    <string name="widget_summary_description">걸음, 물, 수면, 심박을 하나의 위젯에</string>
+    <string name="widget_summary_distance">거리</string>
+    <string name="widget_summary_calories">칼로리</string>
 </resources>

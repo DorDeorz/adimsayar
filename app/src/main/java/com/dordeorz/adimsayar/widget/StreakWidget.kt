@@ -36,6 +36,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -67,7 +68,9 @@ class StreakWidget : GlanceAppWidget() {
             val weekStart = weekStartOf(today, settings.weekStart)
             val weekSteps = history.filterKeys { !it.isBefore(weekStart) && !it.isAfter(today) }.values.sum()
             WidgetTheme(settings.dynamicColor) {
-                StreakContent(localized, streak, weekSteps, settings)
+                WidgetSurface(Tab.Medals, settings.widgetOpacity) {
+                    StreakContent(localized, streak, weekSteps, settings)
+                }
             }
         }
     }
@@ -89,7 +92,7 @@ private const val WIDE_RATIO = 1.8f
 @Composable
 private fun StreakContent(context: Context, streak: Int, weekSteps: Long, settings: AppSettings) {
     val size = LocalSize.current
-    Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
+    Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when {
             size.height < COMPACT_HEIGHT || size.width < COMPACT_WIDTH -> StreakBlock(context, streak)
             size.width.value >= size.height.value * WIDE_RATIO -> Row(

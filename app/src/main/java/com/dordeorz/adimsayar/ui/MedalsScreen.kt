@@ -26,13 +26,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Challenge
-import com.dordeorz.adimsayar.data.ChallengeKind
 import com.dordeorz.adimsayar.data.Level
 import com.dordeorz.adimsayar.data.Medal
 import com.dordeorz.adimsayar.data.MedalGroup
@@ -291,18 +291,7 @@ private fun ChallengeRow(challenge: Challenge) {
 }
 
 @Composable
-private fun challengeText(challenge: Challenge): String = when (challenge.kind) {
-    ChallengeKind.WeekTotal -> stringResource(R.string.challenge_week_total, format(challenge.target))
-    ChallengeKind.GoalDays -> stringResource(R.string.challenge_goal_days, challenge.target.toInt())
-    ChallengeKind.BigDay -> stringResource(R.string.challenge_big_day, format(challenge.target))
-    ChallengeKind.EveryDay -> stringResource(R.string.challenge_every_day, format(challenge.threshold))
-    ChallengeKind.Weekend -> stringResource(R.string.challenge_weekend, format(challenge.target))
-    ChallengeKind.BeatLastWeek -> stringResource(R.string.challenge_beat_last_week, format(challenge.target - 1))
-}
+private fun challengeText(challenge: Challenge): String = challengeText(LocalContext.current, challenge)
 
 @Composable
-private fun challengeProgress(challenge: Challenge): String = when (challenge.kind) {
-    ChallengeKind.GoalDays, ChallengeKind.EveryDay ->
-        stringResource(R.string.challenges_days_progress, challenge.progress.coerceAtMost(challenge.target).toInt(), challenge.target.toInt())
-    else -> stringResource(R.string.challenges_steps_progress, format(challenge.progress), format(challenge.target))
-}
+private fun challengeProgress(challenge: Challenge): String = challengeProgress(LocalContext.current, challenge)

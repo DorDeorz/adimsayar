@@ -23,6 +23,7 @@ import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
+import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
@@ -34,6 +35,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.ui.MONTH_FORMAT
@@ -56,7 +58,9 @@ class MonthWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                MonthContent(localized, history, today, settings.dailyGoal, settings.weekStart)
+                WidgetSurface(Tab.History, settings.widgetOpacity) {
+                    MonthContent(localized, history, today, settings.dailyGoal, settings.weekStart)
+                }
             }
         }
     }
@@ -91,7 +95,7 @@ private fun MonthContent(context: Context, history: Map<LocalDate, Long>, today:
     val height = (size.height - PADDING * 2 - TITLE_HEIGHT - headerHeight) / rows
     val cell = minOf(width, height)
     val goalDays = (1..today.dayOfMonth).count { (history[month.atDay(it)] ?: 0L) >= goal }
-    Column(modifier = widgetSurface(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = GlanceModifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(Locales.current) } + " · " +
                 context.getString(R.string.month_goal_days, goalDays),

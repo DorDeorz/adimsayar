@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>Bird widget: steps left now use a short form and fit</item>
         <item>Small Today widget now shows a progress bar toward the goal</item>
+        <item>New widgets: water (add a glass with one tap), virtual route, weekly challenges, weight and daily summary</item>
+        <item>Widgets change color and show ✓ when you reach the goal; the last update time is shown</item>
+        <item>Tapping a widget opens the matching page; widget background transparency can be set in Settings</item>
+        <item>Tap the bird and it hops and flaps its wings; it also blinks now and then</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Bird widget: level, steps to next level and level-up</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">%2$s steps to level %1$d</string>
     <string name="bird_level_up">Level up today! 🎉</string>
     <string name="bird_level_left">%1$s steps to go</string>
+    <string name="widget_goal_done">Goal reached</string>
+    <string name="widget_updated_at">Updated %1$s</string>
+    <string name="settings_widget_opacity">Widget background</string>
+    <string name="widget_water_label">Water</string>
+    <string name="widget_water_description">Water you drank today, add a glass with one tap</string>
+    <string name="widget_route_label">Virtual route</string>
+    <string name="widget_route_description">Your route progress and next stop</string>
+    <string name="widget_route_none">No route chosen. Pick one on the Medals page.</string>
+    <string name="widget_challenge_label">Weekly challenges</string>
+    <string name="widget_challenge_description">This week\'s challenges and your progress</string>
+    <string name="widget_weight_label">Weight</string>
+    <string name="widget_weight_description">Latest weight, change and chart</string>
+    <string name="widget_weight_empty">No weight entries yet</string>
+    <string name="widget_summary_label">Daily summary</string>
+    <string name="widget_summary_description">Steps, water, sleep and heart rate in one widget</string>
+    <string name="widget_summary_distance">Distance</string>
+    <string name="widget_summary_calories">Calories</string>
 </resources>

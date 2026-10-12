@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>Widget oiseau : les pas restants sont abrégés et tiennent</item>
         <item>Le petit widget Aujourd\'hui affiche une barre de progression vers l\'objectif</item>
+        <item>Nouveaux widgets : eau (un verre d\'un toucher), itinéraire virtuel, défis de la semaine, poids et résumé du jour</item>
+        <item>Les widgets changent de couleur et affichent ✓ quand l\'objectif est atteint ; l\'heure de mise à jour est affichée</item>
+        <item>Toucher un widget ouvre la page correspondante ; la transparence du fond se règle dans les Paramètres</item>
+        <item>Touche l\'oiseau : il saute et bat des ailes, et cligne des yeux de temps en temps</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget oiseau : niveau, pas avant le prochain niveau et montée de niveau</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">%2$s pas avant le niveau %1$d</string>
     <string name="bird_level_up">Niveau gagné aujourd\'hui ! 🎉</string>
     <string name="bird_level_left">Encore %1$s pas</string>
+    <string name="widget_goal_done">Objectif atteint</string>
+    <string name="widget_updated_at">Mis à jour %1$s</string>
+    <string name="settings_widget_opacity">Fond du widget</string>
+    <string name="widget_water_label">Eau</string>
+    <string name="widget_water_description">Eau bue aujourd\'hui, ajoute un verre d\'un toucher</string>
+    <string name="widget_route_label">Itinéraire virtuel</string>
+    <string name="widget_route_description">Ta progression sur l\'itinéraire et la prochaine étape</string>
+    <string name="widget_route_none">Aucun itinéraire choisi. Choisis-en un sur la page Médailles.</string>
+    <string name="widget_challenge_label">Défis de la semaine</string>
+    <string name="widget_challenge_description">Défis de cette semaine et ta progression</string>
+    <string name="widget_weight_label">Poids</string>
+    <string name="widget_weight_description">Dernier poids, évolution et graphique</string>
+    <string name="widget_weight_empty">Aucun poids enregistré</string>
+    <string name="widget_summary_label">Résumé du jour</string>
+    <string name="widget_summary_description">Pas, eau, sommeil et pouls dans un widget</string>
+    <string name="widget_summary_distance">Distance</string>
+    <string name="widget_summary_calories">Calories</string>
 </resources>

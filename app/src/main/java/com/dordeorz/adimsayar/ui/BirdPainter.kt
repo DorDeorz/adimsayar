@@ -8,6 +8,7 @@ import com.dordeorz.adimsayar.data.BirdItem
 import com.dordeorz.adimsayar.data.BirdMood
 import com.dordeorz.adimsayar.data.BirdStage
 import com.dordeorz.adimsayar.data.BirdState
+import kotlin.math.abs
 
 private const val UNIT = 100f
 private const val BODY = 0xFFFFC93C.toInt()
@@ -29,11 +30,17 @@ private const val TEAR = 0xFF64B5F6.toInt()
 private const val SPARKLE = 0xFFFFD54F.toInt()
 private const val ZZZ = 0xFF90A4AE.toInt()
 
+private const val HOP_HEIGHT = 12f
+private const val WING_LIFT = 75f
+private const val EGG_TILT = 12f
+
+class BirdPose(val hop: Float = 0f, val flap: Float = 0f, val blink: Boolean = false)
+
 object BirdPainter {
-    fun draw(canvas: Canvas, size: Float, bird: BirdState) = BirdDrawer().draw(canvas, size, bird)
+    fun draw(canvas: Canvas, size: Float, bird: BirdState, pose: BirdPose = BirdPose()) = BirdDrawer(pose).draw(canvas, size, bird)
 }
 
-private class BirdDrawer {
+private class BirdDrawer(private val pose: BirdPose) {
 
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -47,13 +54,18 @@ private class BirdDrawer {
         canvas.save()
         canvas.scale(size / UNIT, size / UNIT)
         fill.color = SHADOW
-        canvas.drawOval(RectF(26f, 90f, 74f, 98f), fill)
+        val shadow = 24f * (1f - pose.hop * 0.35f)
+        canvas.drawOval(RectF(50f - shadow, 90f, 50f + shadow, 98f), fill)
         if (BirdItem.Sun in bird.items) sun(canvas)
         if (bird.stage == BirdStage.Egg) {
+            canvas.save()
+            canvas.translate(0f, -pose.hop * HOP_HEIGHT * 0.5f)
+            canvas.rotate(pose.flap * EGG_TILT, 50f, 94f)
             egg(canvas, bird)
+            canvas.restore()
         } else {
             canvas.save()
-            canvas.translate(50f, 93f)
+            canvas.translate(50f, 93f - pose.hop * HOP_HEIGHT)
             val scale = scaleOf(bird.stage)
             canvas.scale(scale, scale)
             body(canvas, bird)
@@ -110,8 +122,9 @@ private class BirdDrawer {
         canvas.drawCircle(0f, -38f, 28f, fill)
         fill.color = BELLY
         canvas.drawOval(RectF(-16f, -46f, 18f, -14f), fill)
-        wing(canvas, -24f, if (excited) -60f else 15f)
-        wing(canvas, 24f, if (excited) 60f else -15f)
+        val lift = abs(pose.flap) * WING_LIFT
+        wing(canvas, -24f, if (excited) -60f else 15f, lift)
+        wing(canvas, 24f, if (excited) 60f else -15f, -lift)
         if (stage >= BirdStage.Bird) crest(canvas, stage == BirdStage.Elder)
         eyes(canvas, bird.mood)
         beak(canvas, bird.mood)
@@ -140,8 +153,9 @@ private class BirdDrawer {
         canvas.drawPath(path, fill)
     }
 
-    private fun wing(canvas: Canvas, x: Float, angle: Float) {
+    private fun wing(canvas: Canvas, x: Float, angle: Float, lift: Float) {
         canvas.save()
+        canvas.rotate(lift, x * 0.75f, -50f)
         canvas.rotate(angle, x, -38f)
         fill.color = WING
         canvas.drawOval(RectF(x - 7f, -52f, x + 7f, -26f), fill)
@@ -161,6 +175,10 @@ private class BirdDrawer {
         stroke.strokeWidth = 2.4f
         fill.color = EYE
         for (x in floatArrayOf(-9f, 9f)) {
+            if (pose.blink && mood != BirdMood.Sleepy) {
+                canvas.drawLine(x - 3.5f, -46f, x + 3.5f, -46f, stroke)
+                continue
+            }
             when (mood) {
                 BirdMood.Sleepy -> canvas.drawArc(RectF(x - 4f, -50f, x + 4f, -44f), 0f, 180f, false, stroke)
                 BirdMood.Excited -> canvas.drawArc(RectF(x - 4f, -50f, x + 4f, -42f), 180f, 180f, false, stroke)

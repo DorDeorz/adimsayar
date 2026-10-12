@@ -1,6 +1,7 @@
 package com.dordeorz.adimsayar.data
 
 import java.time.LocalDate
+import kotlin.math.cos
 
 class RouteStop(val name: String, val km: Int, val lat: Double, val lon: Double)
 
@@ -122,6 +123,24 @@ object Routes {
             date = date.plusDays(1)
         }
         return RouteProgress(route, km, start, finishedOn)
+    }
+
+    fun projector(route: VirtualRoute, width: Float, height: Float, padding: Float): (Double, Double) -> Pair<Float, Float> {
+        val lats = route.stops.map { it.lat }
+        val lons = route.stops.map { it.lon }
+        val scaleX = cos(Math.toRadians((lats.min() + lats.max()) / 2))
+        val minX = lons.min() * scaleX
+        val maxX = lons.max() * scaleX
+        val minY = lats.min()
+        val maxY = lats.max()
+        val spanX = (maxX - minX).coerceAtLeast(0.01)
+        val spanY = (maxY - minY).coerceAtLeast(0.01)
+        val scale = minOf((width - padding * 2) / spanX, (height - padding * 2) / spanY)
+        val offsetX = (width - spanX * scale) / 2
+        val offsetY = (height - spanY * scale) / 2
+        return { lat, lon ->
+            (offsetX + (lon * scaleX - minX) * scale).toFloat() to (offsetY + (maxY - lat) * scale).toFloat()
+        }
     }
 
     fun position(route: VirtualRoute, km: Double): Pair<Double, Double> {

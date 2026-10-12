@@ -1,7 +1,13 @@
 package com.dordeorz.adimsayar.ui
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,9 +27,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -39,9 +47,18 @@ import com.dordeorz.adimsayar.data.Avatar
 import com.dordeorz.adimsayar.data.BirdItem
 import com.dordeorz.adimsayar.data.BirdState
 import java.time.LocalTime
+import kotlin.random.Random
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private val BIRD_SIZE = 104.dp
 private val BIG_BIRD_SIZE = 200.dp
+private const val BLINK_EVERY_MS = 3_000L
+private const val BLINK_JITTER_MS = 2_500L
+private const val BLINK_MS = 140L
+private const val HOP_UP_MS = 200
+private const val FLAP_MS = 70
+private const val FLAPS = 3
 
 @Composable
 internal fun BirdCard(state: MainUiState) {
@@ -71,8 +88,36 @@ internal fun BirdCard(state: MainUiState) {
 
 @Composable
 internal fun BirdImage(bird: BirdState, modifier: Modifier) {
-    Canvas(modifier = modifier) {
-        drawIntoCanvas { BirdPainter.draw(it.nativeCanvas, size.minDimension, bird) }
+    val hop = remember { Animatable(0f) }
+    val flap = remember { Animatable(0f) }
+    var blink by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(bird.stage) {
+        while (true) {
+            delay(BLINK_EVERY_MS + Random.nextLong(BLINK_JITTER_MS))
+            blink = true
+            delay(BLINK_MS)
+            blink = false
+        }
+    }
+    val interaction = remember { MutableInteractionSource() }
+    Canvas(
+        modifier = modifier.clickable(interactionSource = interaction, indication = null) {
+            scope.launch {
+                hop.animateTo(1f, tween(HOP_UP_MS, easing = FastOutSlowInEasing))
+                hop.animateTo(0f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow))
+            }
+            scope.launch {
+                repeat(FLAPS) {
+                    flap.animateTo(1f, tween(FLAP_MS, easing = FastOutSlowInEasing))
+                    flap.animateTo(-1f, tween(FLAP_MS * 2, easing = FastOutSlowInEasing))
+                }
+                flap.animateTo(0f, tween(FLAP_MS, easing = FastOutSlowInEasing))
+            }
+        },
+    ) {
+        val pose = BirdPose(hop.value, flap.value, blink)
+        drawIntoCanvas { BirdPainter.draw(it.nativeCanvas, size.minDimension, bird, pose) }
     }
 }
 

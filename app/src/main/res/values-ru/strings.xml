@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>Виджет птицы: оставшиеся шаги показаны кратко и помещаются</item>
         <item>Маленький виджет «Сегодня» показывает полосу прогресса до цели</item>
+        <item>Новые виджеты: вода (стакан одним касанием), виртуальный маршрут, задания недели, вес и итоги дня</item>
+        <item>Виджеты меняют цвет и показывают ✓ при достижении цели; видно время последнего обновления</item>
+        <item>Касание виджета открывает нужную страницу; прозрачность фона виджетов настраивается в Настройках</item>
+        <item>Коснитесь птицы: она подпрыгивает и машет крыльями, а иногда моргает</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Виджет птицы: уровень, шаги до следующего уровня и повышение</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">%2$s шагов до уровня %1$d</string>
     <string name="bird_level_up">Сегодня новый уровень! 🎉</string>
     <string name="bird_level_left">Осталось %1$s шагов</string>
+    <string name="widget_goal_done">Цель достигнута</string>
+    <string name="widget_updated_at">Обновлено %1$s</string>
+    <string name="settings_widget_opacity">Фон виджета</string>
+    <string name="widget_water_label">Вода</string>
+    <string name="widget_water_description">Вода за сегодня, стакан одним касанием</string>
+    <string name="widget_route_label">Виртуальный маршрут</string>
+    <string name="widget_route_description">Прогресс по маршруту и следующая остановка</string>
+    <string name="widget_route_none">Маршрут не выбран. Выберите его на странице «Медали».</string>
+    <string name="widget_challenge_label">Задания недели</string>
+    <string name="widget_challenge_description">Задания этой недели и ваш прогресс</string>
+    <string name="widget_weight_label">Вес</string>
+    <string name="widget_weight_description">Последний вес, изменение и график</string>
+    <string name="widget_weight_empty">Записей веса пока нет</string>
+    <string name="widget_summary_label">Итоги дня</string>
+    <string name="widget_summary_description">Шаги, вода, сон и пульс в одном виджете</string>
+    <string name="widget_summary_distance">Расстояние</string>
+    <string name="widget_summary_calories">Калории</string>
 </resources>

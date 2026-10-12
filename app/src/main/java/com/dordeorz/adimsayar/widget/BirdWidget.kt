@@ -38,6 +38,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.Avatar
 import com.dordeorz.adimsayar.data.BirdState
@@ -74,7 +75,9 @@ class BirdWidget : GlanceAppWidget() {
                 Avatar.state(achievements, history, freezes, today, hour, settings.dailyGoal)
             }
             WidgetTheme(settings.dynamicColor) {
-                BirdContent(localized, bird)
+                WidgetSurface(Tab.Today, settings.widgetOpacity) {
+                    BirdContent(localized, bird)
+                }
             }
         }
     }
@@ -103,7 +106,7 @@ private fun BirdContent(context: Context, bird: BirdState) {
     val width = size.width - PADDING * 2
     val height = size.height - PADDING * 2
     val wide = size.width.value >= size.height.value * WIDE_RATIO && width - height >= TEXT_WIDTH
-    Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
+    Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when {
             wide -> Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
                 BirdBitmap(context, bird, height)

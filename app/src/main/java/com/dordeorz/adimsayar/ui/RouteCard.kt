@@ -51,7 +51,6 @@ import com.dordeorz.adimsayar.data.Routes
 import com.dordeorz.adimsayar.data.VirtualRoute
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import kotlin.math.cos
 import kotlin.math.roundToInt
 
 private val MAP_HEIGHT = 180.dp
@@ -188,21 +187,8 @@ private fun RouteMap(progress: RouteProgress) {
 }
 
 private fun projector(route: VirtualRoute, width: Float, height: Float, padding: Float): (Double, Double) -> Offset {
-    val lats = route.stops.map { it.lat }
-    val lons = route.stops.map { it.lon }
-    val scaleX = cos(Math.toRadians((lats.min() + lats.max()) / 2))
-    val minX = lons.min() * scaleX
-    val maxX = lons.max() * scaleX
-    val minY = lats.min()
-    val maxY = lats.max()
-    val spanX = (maxX - minX).coerceAtLeast(0.01)
-    val spanY = (maxY - minY).coerceAtLeast(0.01)
-    val scale = minOf((width - padding * 2) / spanX, (height - padding * 2) / spanY)
-    val offsetX = (width - spanX * scale) / 2
-    val offsetY = (height - spanY * scale) / 2
-    return { lat, lon ->
-        Offset((offsetX + (lon * scaleX - minX) * scale).toFloat(), (offsetY + (maxY - lat) * scale).toFloat())
-    }
+    val project = Routes.projector(route, width, height, padding)
+    return { lat, lon -> project(lat, lon).let { (x, y) -> Offset(x, y) } }
 }
 
 private fun polyline(points: List<Offset>): Path = Path().apply {

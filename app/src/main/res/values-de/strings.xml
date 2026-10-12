@@ -316,6 +316,10 @@
     <string-array name="release_notes_0_9_2">
         <item>Vogel-Widget: verbleibende Schritte werden kurz angezeigt und passen</item>
         <item>Kleines Heute-Widget zeigt jetzt einen Fortschrittsbalken zum Ziel</item>
+        <item>Neue Widgets: Wasser (Glas mit einem Tippen), virtuelle Route, Wochenaufgaben, Gewicht und Tagesübersicht</item>
+        <item>Widgets ändern beim Erreichen des Ziels die Farbe und zeigen ✓; die letzte Aktualisierung wird angezeigt</item>
+        <item>Tippen auf ein Widget öffnet die passende Seite; die Transparenz des Hintergrunds ist in den Einstellungen wählbar</item>
+        <item>Tippe auf den Vogel: Er hüpft und schlägt mit den Flügeln und blinzelt ab und zu</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Vogel-Widget: Level, Schritte bis zum nächsten Level und Aufstieg</item>
@@ -590,4 +594,21 @@
     <string name="bird_level_next">Noch %2$s Schritte bis Level %1$d</string>
     <string name="bird_level_up">Heute aufgestiegen! 🎉</string>
     <string name="bird_level_left">Noch %1$s Schritte</string>
+    <string name="widget_goal_done">Ziel erreicht</string>
+    <string name="widget_updated_at">Aktualisiert %1$s</string>
+    <string name="settings_widget_opacity">Widget-Hintergrund</string>
+    <string name="widget_water_label">Wasser</string>
+    <string name="widget_water_description">Heute getrunkenes Wasser, Glas mit einem Tippen hinzufügen</string>
+    <string name="widget_route_label">Virtuelle Route</string>
+    <string name="widget_route_description">Fortschritt auf der Route und nächster Halt</string>
+    <string name="widget_route_none">Keine Route gewählt. Wähle eine auf der Seite Medaillen.</string>
+    <string name="widget_challenge_label">Wochenaufgaben</string>
+    <string name="widget_challenge_description">Aufgaben dieser Woche und dein Fortschritt</string>
+    <string name="widget_weight_label">Gewicht</string>
+    <string name="widget_weight_description">Letztes Gewicht, Veränderung und Diagramm</string>
+    <string name="widget_weight_empty">Noch keine Gewichtseinträge</string>
+    <string name="widget_summary_label">Tagesübersicht</string>
+    <string name="widget_summary_description">Schritte, Wasser, Schlaf und Puls in einem Widget</string>
+    <string name="widget_summary_distance">Strecke</string>
+    <string name="widget_summary_calories">Kalorien</string>
 </resources>

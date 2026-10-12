@@ -27,6 +27,7 @@ import androidx.glance.layout.Column
 import androidx.glance.layout.Row
 import androidx.glance.layout.RowScope
 import androidx.glance.layout.fillMaxHeight
+import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.width
@@ -37,6 +38,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
@@ -56,7 +58,9 @@ class WeekWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                WeekContent(localized, week, settings.dailyGoal)
+                WidgetSurface(Tab.History, settings.widgetOpacity) {
+                    WeekContent(localized, week, settings.dailyGoal)
+                }
             }
         }
     }
@@ -89,7 +93,7 @@ private fun WeekContent(context: Context, week: List<DaySteps>, goal: Long) {
     val maxBar = (size.height - PADDING * 2 - TITLE_HEIGHT - valueHeight - LABEL_HEIGHT).coerceAtLeast(MIN_BAR)
     val barWidth = (column * 0.55f).coerceIn(MIN_BAR, MAX_BAR_WIDTH)
     val maxSteps = maxOf(week.maxOfOrNull { it.steps } ?: 0L, goal).coerceAtLeast(1L)
-    Column(modifier = widgetSurface()) {
+    Column(modifier = GlanceModifier.fillMaxSize()) {
         Text(
             text = context.getString(R.string.last_7_days),
             modifier = GlanceModifier.height(TITLE_HEIGHT),
