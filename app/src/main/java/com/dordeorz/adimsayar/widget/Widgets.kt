@@ -30,6 +30,10 @@ object Widgets {
         WeekWidget().updateAll(context)
         StreakWidget().updateAll(context)
         MonthWidget().updateAll(context)
+        HourlyWidget().updateAll(context)
+        YearWidget().updateAll(context)
+        HealthWidget().updateAll(context)
+        BirdWidget().updateAll(context)
     }
 }
 

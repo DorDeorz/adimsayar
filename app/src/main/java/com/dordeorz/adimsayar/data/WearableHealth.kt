@@ -23,6 +23,7 @@ import kotlinx.coroutines.CancellationException
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.Period
 import java.time.ZoneId
 import kotlin.reflect.KClass
@@ -58,7 +59,11 @@ class BandPeriod(
 
 class OxygenSummary(val average: Double, val min: Double, val count: Int)
 
-class HeartHour(val hour: Int, val min: Long, val max: Long)
+class HeartSlot(val start: LocalTime, val min: Long, val avg: Long, val max: Long)
+
+class HeartDay(val slots: List<HeartSlot>, val resting: Long?)
+
+class HealthSnapshot(val sleepMinutes: Long?, val resting: Long?, val latest: Long?, val latestAt: Instant?)
 
 enum class HealthType { Steps, Heart, Sleep, Oxygen, Exercise, Distance, Calories }
 
@@ -79,6 +84,7 @@ class SourceReport(val apps: List<SourceApp>, val missingPermissions: Boolean) {
 object WearableHealth {
 
     private const val SOURCE_PAGE_SIZE = 200
+    const val HEART_SLOT_MINUTES = 5L
 
     val PERMISSIONS: Set<String> = setOf(
         HealthPermission.getReadPermission(ExerciseSessionRecord::class),
@@ -169,20 +175,78 @@ object WearableHealth {
         }
     }
 
-    suspend fun heartHours(context: Context, date: LocalDate): List<HeartHour>? {
+    suspend fun snapshot(context: Context): HealthSnapshot? {
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
-            if (HealthPermission.getReadPermission(HeartRateRecord::class) !in client.permissionController.getGrantedPermissions()) return null
+            val granted = client.permissionController.getGrantedPermissions()
+            fun allowed(type: KClass<out Record>) = HealthPermission.getReadPermission(type) in granted
+            val zone = ZoneId.systemDefault()
+            val today = LocalDate.now(zone)
+            val from = today.atStartOfDay(zone).toInstant()
+            val to = today.plusDays(1).atStartOfDay(zone).toInstant()
+            val sleep = if (allowed(SleepSessionRecord::class)) {
+                readAll(client, SleepSessionRecord::class, from.minus(Duration.ofHours(12)), to)
+                    .filter { it.endTime >= from && it.endTime < to }
+                    .groupBy { it.metadata.dataOrigin.packageName }
+                    .values
+                    .maxOfOrNull { sessions -> sessions.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+            } else {
+                null
+            }
+            val dayRange = TimeRangeFilter.between(today.atStartOfDay(), today.plusDays(1).atStartOfDay())
+            val restingMetrics = buildSet<AggregateMetric<*>> {
+                if (allowed(HeartRateRecord::class)) add(HeartRateRecord.BPM_MIN)
+                if (allowed(RestingHeartRateRecord::class)) add(RestingHeartRateRecord.BPM_AVG)
+            }
+            val resting = if (restingMetrics.isNotEmpty()) {
+                val result = client.aggregate(AggregateRequest(restingMetrics, dayRange))
+                result[RestingHeartRateRecord.BPM_AVG] ?: result[HeartRateRecord.BPM_MIN]
+            } else {
+                null
+            }
+            val latest = if (allowed(HeartRateRecord::class)) {
+                client.readRecords(
+                    ReadRecordsRequest(HeartRateRecord::class, TimeRangeFilter.between(from, Instant.now()), ascendingOrder = false, pageSize = 1),
+                ).records.firstOrNull()?.samples?.maxByOrNull { it.time }
+            } else {
+                null
+            }
+            HealthSnapshot(sleep, resting, latest?.beatsPerMinute, latest?.time)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun heartDay(context: Context, date: LocalDate): HeartDay? {
+        if (!WearableSteps.isAvailable(context)) return null
+        return try {
+            val client = HealthConnectClient.getOrCreate(context)
+            val granted = client.permissionController.getGrantedPermissions()
+            if (HealthPermission.getReadPermission(HeartRateRecord::class) !in granted) return null
             val zone = ZoneId.systemDefault()
             val range = TimeRangeFilter.between(date.atStartOfDay(zone).toInstant(), date.plusDays(1).atStartOfDay(zone).toInstant())
-            client.aggregateGroupByDuration(
-                AggregateGroupByDurationRequest(setOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_MAX), range, Duration.ofHours(1)),
+            val slots = client.aggregateGroupByDuration(
+                AggregateGroupByDurationRequest(
+                    setOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_AVG, HeartRateRecord.BPM_MAX),
+                    range,
+                    Duration.ofMinutes(HEART_SLOT_MINUTES),
+                ),
             ).mapNotNull { group ->
                 val min = group.result[HeartRateRecord.BPM_MIN]
+                val avg = group.result[HeartRateRecord.BPM_AVG]
                 val max = group.result[HeartRateRecord.BPM_MAX]
-                if (min != null && max != null) HeartHour(group.startTime.atZone(zone).hour, min, max) else null
+                if (min != null && avg != null && max != null) HeartSlot(group.startTime.atZone(zone).toLocalTime(), min, avg, max) else null
             }
+            val resting = if (HealthPermission.getReadPermission(RestingHeartRateRecord::class) in granted) {
+                val dayRange = TimeRangeFilter.between(date.atStartOfDay(), date.plusDays(1).atStartOfDay())
+                client.aggregate(AggregateRequest(setOf(RestingHeartRateRecord.BPM_AVG), dayRange))[RestingHeartRateRecord.BPM_AVG]
+            } else {
+                null
+            }
+            HeartDay(slots, resting ?: HealthMath.restingEstimate(slots.map { it.avg }))
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {

@@ -150,4 +150,26 @@ class AchievementMathTest {
         assertEquals(MonthSteps(YearMonth.of(2026, 1), 12_000), summary.bestMonth)
         assertEquals(0, summary.medals)
     }
+
+    @Test
+    fun freezeKeepsStreakWithoutCountingTheDay() {
+        val history = days(12_000, 3_000, 11_000, 10_500)
+        val today = monday.plusDays(3)
+        assertEquals(2, AchievementMath.compute(history, today, 10_000, 70_000).records.currentStreak)
+        val frozen = AchievementMath.compute(history, today, 10_000, 70_000, freezes = setOf(monday.plusDays(1)))
+        assertEquals(3, frozen.records.currentStreak)
+        assertEquals(3, frozen.records.goalDays)
+    }
+
+    @Test
+    fun keptMedalSurvivesGoalChange() {
+        val history = days(12_000, 12_000, 12_000)
+        val today = monday.plusDays(2)
+        val earned = AchievementMath.compute(history, today, 10_000, 70_000)
+        val kept = mapOf(KeptMedals.key(medal(earned, MedalGroup.Streak, 3)) to monday.plusDays(2))
+        val harder = AchievementMath.compute(history, today, 15_000, 70_000)
+        assertFalse(medal(harder, MedalGroup.Streak, 3).earned)
+        val applied = harder.copy(medals = KeptMedals.apply(harder.medals, kept))
+        assertEquals(monday.plusDays(2), medal(applied, MedalGroup.Streak, 3).earnedOn)
+    }
 }

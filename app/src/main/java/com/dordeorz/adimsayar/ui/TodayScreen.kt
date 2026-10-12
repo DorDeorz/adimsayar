@@ -1,5 +1,6 @@
 package com.dordeorz.adimsayar.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,9 +23,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +39,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,10 +50,16 @@ import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.coerceAtMost
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.DaySteps
+import com.dordeorz.adimsayar.data.Distance
+import com.dordeorz.adimsayar.data.DistanceUnit
+import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.weekStartOf
 import com.dordeorz.adimsayar.ui.oem.BatteryHelpCard
 import java.time.Instant
+import java.time.LocalDate
+import java.time.YearMonth
 import java.time.ZoneId
 
 private val CHART_HEIGHT = 120.dp
@@ -59,6 +74,11 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item { TodayRing(state, steps, goal) }
+        item { ShareButton(state, steps, goal) }
+        freezeOffer(state)?.let { saved ->
+            item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
+        }
+        item { BirdCard(state) }
         if (!state.sensorAvailable) {
             item { MessageCard(stringResource(R.string.sensor_missing_title), stringResource(R.string.sensor_missing_text)) }
         } else if (state.permission != PermissionState.Granted) {
@@ -90,6 +110,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
             item { BatteryHelpCard(profile = profile, onDismiss = actions.onDismissBatteryCard) }
         }
         item { SummaryRow(state) }
+        item { WaterCard(state, actions.onAddWater) }
         item { WeekCard(state.week, goal) }
         item {
             val reading = state.lastReadingWallMs
@@ -323,6 +344,157 @@ private fun MessageCard(title: String, text: String) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onErrorContainer)
             Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onErrorContainer)
+        }
+    }
+}
+
+private fun freezeOffer(state: MainUiState): Int? {
+    val yesterday = state.today.minusDays(1)
+    val goal = state.settings.dailyGoal
+    if ((state.history[yesterday] ?: 0L) >= goal || yesterday in state.freezes) return null
+    if (StreakFreezes.left(state.freezes, YearMonth.from(yesterday)) == 0) return null
+    val saved = AchievementMath.compute(
+        state.history,
+        state.today,
+        goal,
+        state.settings.weeklyGoal,
+        state.settings.weekStart,
+        freezes = state.freezes + yesterday,
+    ).records.currentStreak
+    return saved.takeIf { it > state.achievements.records.currentStreak }
+}
+
+@Composable
+private fun FreezeOfferCard(state: MainUiState, saved: Int, onFreeze: (LocalDate, Boolean) -> Unit) {
+    val yesterday = state.today.minusDays(1)
+    var hidden by rememberSaveable(state.today.toString()) { mutableStateOf(false) }
+    if (hidden) return
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Icon(
+                    painterResource(R.drawable.ic_snow),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    modifier = Modifier.size(20.dp),
+                )
+                Text(
+                    stringResource(R.string.freeze_offer_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+                )
+            }
+            Text(
+                stringResource(R.string.freeze_offer_text, saved, StreakFreezes.left(state.freezes, YearMonth.from(yesterday))),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
+            )
+            Row(modifier = Modifier.align(Alignment.End), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                TextButton(onClick = { hidden = true }) { Text(stringResource(R.string.freeze_offer_skip)) }
+                Button(onClick = { onFreeze(yesterday, true) }) { Text(stringResource(R.string.freeze_use)) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun WaterCard(state: MainUiState, onAddWater: (Int) -> Unit) {
+    val drunk = state.water[state.today] ?: 0
+    val goal = state.settings.waterGoalMl
+    val glass = state.settings.glassMl
+    Card {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    painterResource(R.drawable.ic_water),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp),
+                )
+                Text(
+                    stringResource(R.string.water_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.weight(1f).padding(start = 8.dp),
+                )
+                Text(
+                    stringResource(R.string.water_value, format(drunk.toLong()), format(goal.toLong())),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
+            LinearProgressIndicator(
+                progress = { (drunk.toFloat() / goal).coerceIn(0f, 1f) },
+                modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp).height(8.dp).clip(RoundedCornerShape(4.dp)),
+            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                val left = goal - drunk
+                Text(
+                    if (left <= 0) {
+                        stringResource(R.string.water_reached)
+                    } else {
+                        stringResource(R.string.water_left, format(left.toLong()), (left + glass - 1) / glass)
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (left <= 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f),
+                )
+                OutlinedButton(onClick = { onAddWater(-glass) }, enabled = drunk > 0) { Text("−") }
+                Button(onClick = { onAddWater(glass) }, modifier = Modifier.padding(start = 8.dp)) {
+                    Text(stringResource(R.string.water_add_glass, glass))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ShareButton(state: MainUiState, steps: Long, goal: Long) {
+    val context = LocalContext.current
+    val colors = MaterialTheme.colorScheme
+    val title = stringResource(R.string.app_name)
+    val date = LONG_DAY_FORMAT.format(state.today)
+    val unit = stringResource(R.string.steps_unit)
+    val percentText = stringResource(R.string.percent_of_goal, percent(steps, goal))
+    val goalText = stringResource(R.string.goal_short, format(goal))
+    val distanceUnit = stringResource(if (state.settings.distanceUnit == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km)
+    val distanceLabel = stringResource(R.string.share_distance)
+    val kcalLabel = stringResource(R.string.share_kcal)
+    val streakLabel = stringResource(R.string.streak)
+    val streakValue = stringResource(R.string.days_count, state.achievements.records.currentStreak)
+    val chooser = stringResource(R.string.share_title)
+    val failed = stringResource(R.string.share_failed)
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        OutlinedButton(onClick = {
+            val km = Distance.inUnit(Distance.km(steps, state.settings.heightCm), state.settings.distanceUnit)
+            val kcal = Distance.kcal(steps, state.settings.heightCm, state.settings.weightKg)
+            val scale = maxOf(state.week.maxOfOrNull { it.steps } ?: 0L, goal).coerceAtLeast(1L)
+            val content = ShareContent(
+                title = title,
+                date = date,
+                steps = format(steps),
+                unit = unit,
+                percent = percentText,
+                fraction = steps.toFloat() / goal,
+                goal = goalText,
+                stats = listOf(
+                    ShareStat("${formatDecimal(km)} $distanceUnit", distanceLabel),
+                    ShareStat(format(kcal), kcalLabel),
+                    ShareStat(streakValue, streakLabel),
+                ),
+                week = state.week.map { ShareBar(shortDayName(it.date), it.steps.toFloat() / scale, it.steps >= goal) },
+                goalLine = goal.toFloat() / scale,
+            )
+            val palette = ShareColors(
+                background = colors.surface.toArgb(),
+                surface = colors.surfaceContainerHighest.toArgb(),
+                primary = colors.primary.toArgb(),
+                muted = colors.onSurfaceVariant.toArgb(),
+                text = colors.onSurface.toArgb(),
+            )
+            if (!ShareCard.share(context, content, palette, chooser)) Toast.makeText(context, failed, Toast.LENGTH_LONG).show()
+        }) {
+            Icon(painterResource(R.drawable.ic_share), contentDescription = null, modifier = Modifier.size(18.dp))
+            Text(stringResource(R.string.share_button), modifier = Modifier.padding(start = 8.dp))
         }
     }
 }

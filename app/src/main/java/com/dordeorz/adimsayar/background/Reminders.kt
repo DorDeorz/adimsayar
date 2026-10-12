@@ -19,6 +19,8 @@ import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.HealthMath
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.StreakFreezes
+import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.weekStartOf
@@ -31,6 +33,12 @@ import kotlin.math.abs
 object Reminders {
 
     private const val CHANNEL_ID = "hedef"
+    private const val WATER_CHANNEL_ID = "su"
+    private const val WATER_NOTIFICATION_ID = 15
+    private const val WATER_REQUEST = 3
+    private const val WATER_ADD_REQUEST = 4
+    private const val WATER_FIRST_HOUR = 9
+    private const val WATER_LAST_HOUR = 21
     private const val GOAL_NOTIFICATION_ID = 10
     private const val STREAK_NOTIFICATION_ID = 11
     private const val NEAR_NOTIFICATION_ID = 12
@@ -66,7 +74,7 @@ object Reminders {
         val today = LocalDate.now()
         val history = StepRepository.get(context).loadHistory()
         val strings = Locales.wrap(context)
-        if (settings.streakReminder) streakCheck(strings, history, today, settings)
+        if (settings.streakReminder) streakCheck(strings, history, StreakFreezes.load(context), today, settings)
         if (settings.weeklySummary && today.dayOfWeek == settings.weekStart.minus(1)) {
             val health = if (WearableSteps.isEnabled(context)) healthLines(strings, WearableHealth.period(context, today, HEALTH_DAYS)) else emptyList()
             weeklySummary(strings, history, today, settings, health)
@@ -84,6 +92,91 @@ object Reminders {
             strings.getString(R.string.notify_weight_text),
             MainActivity.TAB_HEALTH,
         )
+    }
+
+    suspend fun waterCheck(context: Context) {
+        val settings = SettingsStore.get(context).settings.value
+        if (!settings.waterReminder) return
+        val hour = LocalTime.now().hour
+        if (hour < WATER_FIRST_HOUR || hour > WATER_LAST_HOUR) return
+        val drunk = Water.today(context)
+        if (drunk < settings.waterGoalMl) notifyWater(context, drunk, settings, alert = true)
+    }
+
+    suspend fun addWater(context: Context) {
+        val settings = SettingsStore.get(context).settings.value
+        val drunk = Water.add(context, LocalDate.now(), settings.glassMl)
+        if (drunk >= settings.waterGoalMl) {
+            NotificationManagerCompat.from(context).cancel(WATER_NOTIFICATION_ID)
+        } else {
+            notifyWater(context, drunk, settings, alert = false)
+        }
+    }
+
+    private fun notifyWater(context: Context, drunk: Int, settings: AppSettings, alert: Boolean) {
+        val strings = Locales.wrap(context)
+        val left = settings.waterGoalMl - drunk
+        val glasses = (left + settings.glassMl - 1) / settings.glassMl
+        val manager = NotificationManagerCompat.from(context)
+        if (!manager.areNotificationsEnabled()) return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(WATER_CHANNEL_ID, strings.getString(R.string.water_channel), NotificationManager.IMPORTANCE_DEFAULT)
+            context.getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
+        }
+        val open = PendingIntent.getActivity(
+            context,
+            WATER_NOTIFICATION_ID,
+            Intent(context, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val add = PendingIntent.getBroadcast(
+            context,
+            WATER_ADD_REQUEST,
+            Intent(context, SystemEventReceiver::class.java).setAction(SystemEventReceiver.ACTION_WATER_ADD),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val text = strings.getString(R.string.notify_water_text, format(drunk.toLong()), format(settings.waterGoalMl.toLong()), format(left.toLong()), glasses)
+        val notification = NotificationCompat.Builder(context, WATER_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(strings.getString(R.string.notify_water_title))
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
+            .setContentIntent(open)
+            .addAction(0, strings.getString(R.string.water_add_glass, settings.glassMl), add)
+            .setOnlyAlertOnce(!alert)
+            .setAutoCancel(true)
+            .build()
+        try {
+            manager.notify(WATER_NOTIFICATION_ID, notification)
+        } catch (e: SecurityException) {
+            return
+        }
+    }
+
+    fun scheduleWater(context: Context) {
+        val alarms = context.getSystemService(AlarmManager::class.java) ?: return
+        val intent = Intent(context, SystemEventReceiver::class.java).setAction(SystemEventReceiver.ACTION_WATER)
+        val pending = PendingIntent.getBroadcast(
+            context,
+            WATER_REQUEST,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val settings = SettingsStore.get(context).settings.value
+        if (!settings.waterReminder) {
+            alarms.cancel(pending)
+            NotificationManagerCompat.from(context).cancel(WATER_NOTIFICATION_ID)
+            return
+        }
+        val zone = ZoneId.systemDefault()
+        val now = System.currentTimeMillis()
+        val today = LocalDate.now(zone)
+        val next = (listOf(today, today.plusDays(1))).flatMap { date ->
+            (WATER_FIRST_HOUR..WATER_LAST_HOUR step settings.waterIntervalHours).map { hour ->
+                date.atTime(hour, 0).atZone(zone).toInstant().toEpochMilli()
+            }
+        }.first { it > now }
+        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next, pending)
     }
 
     private fun healthLines(strings: Context, period: BandPeriod?): List<String> {
@@ -104,10 +197,10 @@ object Reminders {
         return lines
     }
 
-    private fun streakCheck(strings: Context, history: Map<LocalDate, Long>, today: LocalDate, settings: AppSettings) {
+    private fun streakCheck(strings: Context, history: Map<LocalDate, Long>, freezes: Set<LocalDate>, today: LocalDate, settings: AppSettings) {
         val steps = history[today] ?: 0L
         if (steps >= settings.dailyGoal) return
-        val streak = AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart)
+        val streak = AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart, freezes = freezes)
             .records.currentStreak
         if (streak == 0) return
         notify(

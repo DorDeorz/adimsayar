@@ -32,6 +32,67 @@ data class WeightEntry(
     val kg: Double,
 )
 
+@Entity(tableName = "hourly_steps")
+data class HourlySteps(
+    @PrimaryKey val hour: String,
+    val steps: Long,
+)
+
+@Entity(tableName = "water")
+data class WaterDay(
+    @PrimaryKey val date: String,
+    val ml: Int,
+)
+
+@Entity(tableName = "streak_freezes")
+data class StreakFreeze(
+    @PrimaryKey val date: String,
+)
+
+@Entity(tableName = "medals")
+data class KeptMedal(
+    @PrimaryKey val id: String,
+    val date: String,
+)
+
+@Dao
+interface WaterDao {
+
+    @Query("SELECT * FROM water ORDER BY date")
+    fun observeAll(): Flow<List<WaterDay>>
+
+    @Query("SELECT * FROM water WHERE date = :date")
+    suspend fun get(date: String): WaterDay?
+
+    @Upsert
+    suspend fun upsert(day: WaterDay)
+}
+
+@Dao
+interface KeepDao {
+
+    @Query("SELECT * FROM streak_freezes")
+    fun observeFreezes(): Flow<List<StreakFreeze>>
+
+    @Query("SELECT * FROM streak_freezes")
+    suspend fun loadFreezes(): List<StreakFreeze>
+
+    @Upsert
+    suspend fun addFreeze(freeze: StreakFreeze)
+
+    @Query("DELETE FROM streak_freezes WHERE date = :date")
+    suspend fun removeFreeze(date: String)
+
+    @Query("SELECT * FROM medals")
+    fun observeMedals(): Flow<List<KeptMedal>>
+
+    @Query("SELECT * FROM medals")
+    suspend fun loadMedals(): List<KeptMedal>
+
+    @Upsert
+    suspend fun keepMedals(medals: List<KeptMedal>)
+}
+
 @Dao
 interface WeightDao {
 
@@ -91,6 +152,23 @@ abstract class DailyStepsDao {
     @Query("SELECT * FROM daily_steps WHERE date >= :from")
     abstract suspend fun loadPhoneFrom(from: String): List<DailySteps>
 
+    @Query("SELECT * FROM hourly_steps WHERE hour >= :from AND hour < :to ORDER BY hour")
+    abstract suspend fun loadHours(from: String, to: String): List<HourlySteps>
+
+    @Query("SELECT * FROM hourly_steps WHERE hour = :hour")
+    abstract suspend fun getHour(hour: String): HourlySteps?
+
+    @Upsert
+    abstract suspend fun upsertHour(hour: HourlySteps)
+
+    @Transaction
+    open suspend fun addHours(hours: Map<String, Long>) {
+        for ((hour, steps) in hours) {
+            val current = getHour(hour)?.steps ?: 0L
+            upsertHour(HourlySteps(hour, current + steps))
+        }
+    }
+
     @Upsert
     abstract suspend fun upsertBand(days: List<BandSteps>)
 
@@ -98,11 +176,27 @@ abstract class DailyStepsDao {
     abstract suspend fun clearBand()
 }
 
-@Database(entities = [DailySteps::class, BandSteps::class, WeightEntry::class], version = 3, exportSchema = false)
+@Database(
+    entities = [
+        DailySteps::class,
+        BandSteps::class,
+        WeightEntry::class,
+        HourlySteps::class,
+        WaterDay::class,
+        StreakFreeze::class,
+        KeptMedal::class,
+    ],
+    version = 4,
+    exportSchema = false,
+)
 abstract class StepDatabase : RoomDatabase() {
     abstract fun dailySteps(): DailyStepsDao
 
     abstract fun weights(): WeightDao
+
+    abstract fun water(): WaterDao
+
+    abstract fun keep(): KeepDao
 
     companion object {
         @Volatile
@@ -120,9 +214,18 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `hourly_steps` (`hour` TEXT NOT NULL, `steps` INTEGER NOT NULL, PRIMARY KEY(`hour`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `water` (`date` TEXT NOT NULL, `ml` INTEGER NOT NULL, PRIMARY KEY(`date`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `streak_freezes` (`date` TEXT NOT NULL, PRIMARY KEY(`date`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `medals` (`id` TEXT NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY(`id`))")
+            }
+        }
+
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
                 .also { instance = it }
         }

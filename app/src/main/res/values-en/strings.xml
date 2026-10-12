@@ -87,7 +87,7 @@
     <string name="level">Level</string>
     <string name="level_next">%1$s steps to the next level</string>
     <string name="medals_earned">%1$d / %2$d medals</string>
-    <string name="medals_retroactive">Medals are calculated from your recorded days. If you change your goal, past days are judged by the new goal too.</string>
+    <string name="medals_retroactive">Medals are calculated from your recorded days. Once you earn a medal, the date you first earned it is saved, so changing your goal won’t take it away.</string>
     <string name="medal_group_daily">Daily steps</string>
     <string name="medal_group_daily_text">Walk this many steps in a single day</string>
     <string name="medal_group_streak">Streak</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">Export</string>
     <string name="export_csv_hint">Save all days to a CSV file</string>
     <string name="import_csv">Import</string>
-    <string name="import_csv_hint">Restore days from a CSV file; the higher number is kept</string>
+    <string name="import_csv_hint">Load days from an AdimSayar CSV or a Samsung Health, Mi Fitness, Mi Fit or Google Fit export (CSV or zip); the higher number is kept. Unzip password-protected archives first and pick the CSV file.</string>
     <string name="export_done">%1$d days exported</string>
     <string name="import_done">%1$d days updated</string>
     <string name="csv_failed">Couldn\'t read or write the file</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">Workout days</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">%1$s kcal per day on average</string>
-    <string name="heart_today_title">Today\'s heart rate</string>
-    <string name="heart_today_empty">No heart rate records today</string>
     <string name="weight_title">Weight and body mass index</string>
     <string name="weight_empty">No weight entries yet. Add your weight to see your BMI and progress here.</string>
     <string name="weight_add">Add weight</string>
@@ -315,6 +313,20 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>Water tracking on the Today screen: add or remove glasses, daily goal suggested from your weight. Last 7 days of water on the Health page</item>
+        <item>Optional water reminder (Settings): every 1, 2 or 3 hours it tells you how much is left; add a glass from the notification</item>
+        <item>Streak freeze: 2 per month. Use one on a missed day and your streak stays alive (Today screen and History)</item>
+        <item>Medals are now permanent: the date you first earned them is saved and they stay when your goal changes</item>
+        <item>Weekly challenges on the Medals page: 3 challenges each week, picked from your history</item>
+        <item>Share button on the Today screen: share your day as an image</item>
+        <item>Import now also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports (CSV or zip)</item>
+        <item>Three new widgets: today hour by hour, a heatmap of recent weeks, sleep and heart</item>
+        <item>Phone steps are now also saved hour by hour, so History shows an hourly chart even without the HyperOS record</item>
+        <item>Detailed heart rate on the Health page: pick a day, resting/lowest/average/highest, a chart with axis, tap an hour for details, heart rate zones by age and explanations. Age added to Settings</item>
+        <item>Virtual route: walk from Istanbul to Ankara or the Camino with your steps</item>
+        <item>Bird: an avatar that grows with your total steps and reacts to today, plus a widget</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
         <item>Health summary for the band on the Health page, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
@@ -431,4 +443,137 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Strength training</string>
     <string name="exercise_other">Workout</string>
+    <string name="age">Age</string>
+    <string name="age_value">%1$d years</string>
+    <string name="age_unit">years</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">Water</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">%1$s ml to go (%2$d glasses)</string>
+    <string name="water_reached">You reached today’s water goal</string>
+    <string name="water_goal">Daily water goal</string>
+    <string name="water_goal_hint">Suggested for your weight: %1$s ml (%2$d kg × 35 ml)</string>
+    <string name="water_glass">Glass size</string>
+    <string name="water_reminder">Water reminder</string>
+    <string name="water_reminder_hint">Between 09:00 and 21:00, tells you how much water is left until your daily goal. You can add a glass right from the notification.</string>
+    <string name="water_interval">Reminder interval</string>
+    <string name="water_interval_value">Every %1$d h</string>
+    <string name="water_channel">Water reminder</string>
+    <string name="notify_water_title">Time for some water</string>
+    <string name="notify_water_text">Today %1$s / %2$s ml. %3$s ml (%4$d glasses) to go.</string>
+    <string name="water_week_title">Water · last 7 days</string>
+    <string name="water_week_summary">Average %1$s ml on logged days · goal reached on %2$d days</string>
+    <string name="freeze_title">Streak freeze</string>
+    <string name="freeze_left">Use a freeze on this day and your streak stays alive. %1$d of %2$d left this month.</string>
+    <string name="freeze_used">Freeze used on this day, your streak continued</string>
+    <string name="freeze_use">Use freeze</string>
+    <string name="freeze_undo">Undo</string>
+    <string name="freeze_offer_title">You missed yesterday’s goal</string>
+    <string name="freeze_offer_text">Use a freeze for yesterday and your streak continues at %1$d days. You have %2$d freezes left this month.</string>
+    <string name="freeze_offer_skip">Not now</string>
+    <string name="challenges_title">This week’s challenges</string>
+    <string name="challenges_days_left">%1$d days left this week</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">Last week: %1$d of %2$d completed</string>
+    <string name="challenges_completed">Challenges completed so far: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d days</string>
+    <string name="challenges_steps_progress">%1$s / %2$s steps</string>
+    <string name="challenge_done">Completed</string>
+    <string name="challenge_week_total">Walk %1$s steps in total this week</string>
+    <string name="challenge_goal_days">Reach your daily goal on %1$d days</string>
+    <string name="challenge_big_day">Walk %1$s steps in a single day</string>
+    <string name="challenge_every_day">Walk at least %1$s steps every day this week</string>
+    <string name="challenge_weekend">Walk %1$s steps over the weekend (Saturday and Sunday)</string>
+    <string name="challenge_beat_last_week">Beat last week: walk more than %1$s steps</string>
+    <string name="share_button">Share</string>
+    <string name="share_title">Share today’s steps</string>
+    <string name="share_failed">Couldn’t share</string>
+    <string name="share_distance">Distance</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">Heart rate</string>
+    <string name="heart_previous_day">Previous day</string>
+    <string name="heart_next_day">Next day</string>
+    <string name="heart_empty">No heart rate data for this day</string>
+    <string name="heart_resting">Resting</string>
+    <string name="heart_lowest">Lowest</string>
+    <string name="heart_average">Average</string>
+    <string name="heart_highest">Highest</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">Your resting heart rate is %1$d bpm: below the usual range. This is common in people who exercise regularly and is usually fine without dizziness or fatigue.</string>
+    <string name="heart_resting_normal">Your resting heart rate is %1$d bpm: in the normal range (60–100). A drop over time usually means better fitness.</string>
+    <string name="heart_resting_high">Your resting heart rate is %1$d bpm: above the normal range (over 100). If it stays this high, talk to a doctor.</string>
+    <string name="heart_tap_hint">Tap an hour on the chart for details</string>
+    <string name="heart_hour_detail">%1$s–%2$s · lowest %3$d · average %4$d · highest %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · no readings this hour</string>
+    <string name="heart_zones_title">Heart rate zones (approximate)</string>
+    <string name="heart_zones_hint">Based on your age: %1$d years, estimated max heart rate %2$d bpm. You can change your age in Settings.</string>
+    <string name="heart_zone_rest">Rest</string>
+    <string name="heart_zone_light">Light</string>
+    <string name="heart_zone_fat">Fat burn</string>
+    <string name="heart_zone_cardio">Aerobic</string>
+    <string name="heart_zone_peak">Anaerobic</string>
+    <string name="heart_zone_max">Maximum</string>
+    <string name="heart_zone_below">Below %1$d bpm</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">%1$d bpm and above</string>
+    <string name="heart_explain">Average: the mean of all readings during the day. Resting heart rate: beats per minute while at rest; if the band doesn’t report it, it is estimated from the calmest readings of the day. On the chart, light bars show each hour’s lowest and highest rate and the dark line shows 5-minute averages.</string>
+    <string name="widget_hourly_label">Hour by hour</string>
+    <string name="widget_hourly_description">Today’s steps hour by hour</string>
+    <string name="widget_hourly_title">Today by hour</string>
+    <string name="widget_hourly_peak">Peak %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">No hourly data for today yet</string>
+    <string name="widget_year_label">Heatmap</string>
+    <string name="widget_year_description">Recent weeks’ steps shown by color intensity</string>
+    <string name="widget_year_title">Last %1$d weeks</string>
+    <string name="widget_year_goal_days">%1$d goal days</string>
+    <string name="widget_health_label">Sleep and heart</string>
+    <string name="widget_health_description">Last night’s sleep and heart rate from your band</string>
+    <string name="widget_health_title">Sleep and heart</string>
+    <string name="widget_health_off">Band data is off. You can turn it on in Settings.</string>
+    <string name="widget_health_sleep">Last night’s sleep</string>
+    <string name="widget_health_latest">Latest reading</string>
+    <string name="widget_health_latest_at">Latest reading · %1$s</string>
+    <string name="route_title">Virtual route</string>
+    <string name="route_empty">Pick a route and watch your steps move along the map.</string>
+    <string name="route_choose">Choose route</string>
+    <string name="route_change">Change route</string>
+    <string name="route_stop">Leave route</string>
+    <string name="route_pick_hint">The new route starts today.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">Next stop %1$s, %2$s %3$s to go</string>
+    <string name="route_done">Finished! You did it in %1$d days.</string>
+    <string name="route_started">Started %1$s</string>
+    <string name="route_approx">Distances are approximate. Steps are converted using your height.</string>
+    <string name="route_item">%1$s %2$s · %3$d stops</string>
+    <string name="bird_stage_egg">Egg</string>
+    <string name="bird_stage_hatchling">Just hatched</string>
+    <string name="bird_stage_chick">Chick</string>
+    <string name="bird_stage_fledgling">Fledgling</string>
+    <string name="bird_stage_bird">Bird</string>
+    <string name="bird_stage_elder">Wise bird</string>
+    <string name="bird_mood_sleepy">Sleepy. A short walk will wake it up.</string>
+    <string name="bird_mood_sad">You missed yesterday\'s goal, so it\'s a bit sad.</string>
+    <string name="bird_mood_calm">Calm. It cheers up at half your goal.</string>
+    <string name="bird_mood_happy">Happy. The goal is close.</string>
+    <string name="bird_mood_excited">Thrilled! Today\'s goal is done.</string>
+    <string name="bird_next">%2$s steps to %1$s</string>
+    <string name="bird_last">Final stage reached</string>
+    <string name="bird_items">Items %1$d/%2$d</string>
+    <string name="bird_items_title">Bird\'s items</string>
+    <string name="bird_item_scarf">Scarf</string>
+    <string name="bird_item_ribbon">Medal</string>
+    <string name="bird_item_sun">Sun</string>
+    <string name="bird_item_cap">Party hat</string>
+    <string name="bird_item_crown">Crown</string>
+    <string name="bird_unlock_scarf">7-day streak</string>
+    <string name="bird_unlock_ribbon">Weekly goal 4 times</string>
+    <string name="bird_unlock_sun">Early bird on 7 days</string>
+    <string name="bird_unlock_cap">20,000 steps in a day</string>
+    <string name="bird_unlock_crown">1 million steps in total</string>
+    <string name="bird_hint">The bird grows with your total steps. Its mood follows today\'s steps. Items come with medals.</string>
+    <string name="widget_bird_label">Bird</string>
+    <string name="widget_bird_description">A bird that grows with your steps</string>
 </resources>

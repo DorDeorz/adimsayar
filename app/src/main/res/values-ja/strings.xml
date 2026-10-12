@@ -87,7 +87,7 @@
     <string name="level">レベル</string>
     <string name="level_next">次のレベルまであと %1$s 歩</string>
     <string name="medals_earned">メダル %1$d / %2$d</string>
-    <string name="medals_retroactive">メダルは記録された日から計算されます。目標を変更すると、過去の日も新しい目標で判定されます。</string>
+    <string name="medals_retroactive">メダルは記録された日から計算されます。メダルを獲得すると最初に獲得した日付が保存されるため、目標を変えても失われません。</string>
     <string name="medal_group_daily">1日の歩数</string>
     <string name="medal_group_daily_text">1日でこの歩数を歩く</string>
     <string name="medal_group_streak">連続記録</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">エクスポート</string>
     <string name="export_csv_hint">すべての日を CSV ファイルに保存</string>
     <string name="import_csv">インポート</string>
-    <string name="import_csv_hint">CSV ファイルから日を復元します。大きいほうの値が保持されます</string>
+    <string name="import_csv_hint">AdımSayar の CSV、または Samsung Health・Mi Fitness・Mi Fit・Google Fit のエクスポート（CSV または zip）から日を読み込みます。大きいほうの値が保持されます。パスワード付き zip は先に展開して CSV を選んでください。</string>
     <string name="export_done">%1$d 日分をエクスポートしました</string>
     <string name="import_done">%1$d 日分を更新しました</string>
     <string name="csv_failed">ファイルを読み書きできませんでした</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">運動した日</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">1日平均 %1$s kcal</string>
-    <string name="heart_today_title">今日の心拍数</string>
-    <string name="heart_today_empty">今日の心拍数の記録はありません</string>
     <string name="weight_title">体重と BMI</string>
     <string name="weight_empty">体重の記録はまだありません。体重を追加すると、ここに BMI と変化が表示されます。</string>
     <string name="weight_add">体重を追加</string>
@@ -315,6 +313,20 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>今日の画面で水分記録: コップの追加・削除、体重からの目標の提案。健康ページに直近7日の水分グラフ</item>
+        <item>水分補給リマインダー（設定・任意）: 1・2・3時間ごとに残りの量を通知。通知から1杯追加可能</item>
+        <item>連続記録の保護: 毎月2回。未達成の日に使うと連続記録が続きます（今日の画面と履歴）</item>
+        <item>メダルが永続化: 最初に獲得した日付を保存し、目標を変えても失われません</item>
+        <item>メダルページに週間チャレンジ: 履歴に合わせて毎週3件</item>
+        <item>今日の画面に共有ボタン: 1日のまとめを画像で共有</item>
+        <item>インポートが Samsung Health・Mi Fitness・Mi Fit・Google Fit のエクスポート（CSV または zip）にも対応</item>
+        <item>新しいウィジェット3種: 今日の時間別、最近数週間のヒートマップ、睡眠と心拍</item>
+        <item>スマホの歩数を時間ごとにも保存。HyperOS の記録がなくても履歴に時間別グラフを表示</item>
+        <item>健康ページの心拍を詳しく: 日付の選択、安静時・最低・平均・最高、目盛り付きグラフ、時間帯タップで詳細、年齢別の心拍ゾーンと説明。設定に年齢を追加</item>
+        <item>バーチャルルート: 歩数でイスタンブールからアンカラやカミーノを歩こう</item>
+        <item>鳥: 歩数で育ち、今日の様子に反応するアバターとウィジェット</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
         <item>履歴にバンドの健康サマリー（7 日または 30 日）：睡眠、安静時心拍数とグラフ、ワークアウト、距離</item>
@@ -431,4 +443,137 @@
     <string name="exercise_yoga">ヨガ</string>
     <string name="exercise_strength">筋トレ</string>
     <string name="exercise_other">ワークアウト</string>
+    <string name="age">年齢</string>
+    <string name="age_value">%1$d 歳</string>
+    <string name="age_unit">歳</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">水分</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">あと %1$s ml（%2$d 杯）</string>
+    <string name="water_reached">今日の水分目標を達成しました</string>
+    <string name="water_goal">1日の水分目標</string>
+    <string name="water_goal_hint">体重からの目安: %1$s ml（%2$d kg × 35 ml）</string>
+    <string name="water_glass">コップの量</string>
+    <string name="water_reminder">水分補給リマインダー</string>
+    <string name="water_reminder_hint">09:00〜21:00 の間、1日の目標まであとどれだけ飲めばよいかを通知します。通知から1杯追加できます。</string>
+    <string name="water_interval">通知の間隔</string>
+    <string name="water_interval_value">%1$d 時間ごと</string>
+    <string name="water_channel">水分補給リマインダー</string>
+    <string name="notify_water_title">水分補給の時間です</string>
+    <string name="notify_water_text">今日は %1$s / %2$s ml。あと %3$s ml（%4$d 杯）です。</string>
+    <string name="water_week_title">水分 · 直近7日</string>
+    <string name="water_week_summary">記録した日の平均 %1$s ml · 目標達成 %2$d 日</string>
+    <string name="freeze_title">連続記録の保護</string>
+    <string name="freeze_left">この日に保護を使うと連続記録が途切れません。今月の残り %1$d / %2$d</string>
+    <string name="freeze_used">この日は保護を使い、連続記録が続きました</string>
+    <string name="freeze_use">保護を使う</string>
+    <string name="freeze_undo">取り消す</string>
+    <string name="freeze_offer_title">昨日は目標に届きませんでした</string>
+    <string name="freeze_offer_text">昨日に保護を使うと連続記録は %1$d 日のまま続きます。今月の残り %2$d 回。</string>
+    <string name="freeze_offer_skip">今はしない</string>
+    <string name="challenges_title">今週のチャレンジ</string>
+    <string name="challenges_days_left">今週はあと %1$d 日</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">先週: %2$d 件中 %1$d 件達成</string>
+    <string name="challenges_completed">これまでに達成したチャレンジ: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d 日</string>
+    <string name="challenges_steps_progress">%1$s / %2$s 歩</string>
+    <string name="challenge_done">達成</string>
+    <string name="challenge_week_total">今週合計 %1$s 歩歩く</string>
+    <string name="challenge_goal_days">%1$d 日間、1日の目標を達成する</string>
+    <string name="challenge_big_day">1日で %1$s 歩歩く</string>
+    <string name="challenge_every_day">今週は毎日 %1$s 歩以上歩く</string>
+    <string name="challenge_weekend">週末（土日）に合計 %1$s 歩歩く</string>
+    <string name="challenge_beat_last_week">先週を超える: %1$s 歩より多く歩く</string>
+    <string name="share_button">共有</string>
+    <string name="share_title">今日の歩数を共有</string>
+    <string name="share_failed">共有できませんでした</string>
+    <string name="share_distance">距離</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">心拍数</string>
+    <string name="heart_previous_day">前の日</string>
+    <string name="heart_next_day">次の日</string>
+    <string name="heart_empty">この日の心拍データはありません</string>
+    <string name="heart_resting">安静時</string>
+    <string name="heart_lowest">最低</string>
+    <string name="heart_average">平均</string>
+    <string name="heart_highest">最高</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">安静時心拍数は %1$d bpm で、通常より低めです。運動習慣のある人によく見られ、めまいやだるさがなければ通常は問題ありません。</string>
+    <string name="heart_resting_normal">安静時心拍数は %1$d bpm で、正常範囲（60〜100）です。時間とともに下がるのは体力向上のサインです。</string>
+    <string name="heart_resting_high">安静時心拍数は %1$d bpm で、正常範囲より高め（100 超）です。続く場合は医師に相談してください。</string>
+    <string name="heart_tap_hint">グラフの時間帯をタップすると詳細が表示されます</string>
+    <string name="heart_hour_detail">%1$s–%2$s · 最低 %3$d · 平均 %4$d · 最高 %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · この時間の測定なし</string>
+    <string name="heart_zones_title">心拍ゾーン（目安）</string>
+    <string name="heart_zones_hint">年齢に基づく計算: %1$d 歳、推定最大心拍数 %2$d bpm。年齢は設定で変更できます。</string>
+    <string name="heart_zone_rest">安静</string>
+    <string name="heart_zone_light">軽め</string>
+    <string name="heart_zone_fat">脂肪燃焼</string>
+    <string name="heart_zone_cardio">有酸素</string>
+    <string name="heart_zone_peak">無酸素</string>
+    <string name="heart_zone_max">最大</string>
+    <string name="heart_zone_below">%1$d bpm 未満</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">%1$d bpm 以上</string>
+    <string name="heart_explain">平均: 1日のすべての測定値の平均です。安静時心拍数: 安静にしているときの1分あたりの拍数で、バンドが送らない場合は1日の最も落ち着いた測定値から推定します。グラフの薄い棒は各時間の最低と最高、濃い線は5分ごとの平均です。</string>
+    <string name="widget_hourly_label">時間ごと</string>
+    <string name="widget_hourly_description">今日の歩数を時間ごとに表示</string>
+    <string name="widget_hourly_title">今日の時間別</string>
+    <string name="widget_hourly_peak">最多 %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">今日の時間別データはまだありません</string>
+    <string name="widget_year_label">ヒートマップ</string>
+    <string name="widget_year_description">最近数週間の歩数を色の濃さで表示</string>
+    <string name="widget_year_title">直近 %1$d 週</string>
+    <string name="widget_year_goal_days">目標達成 %1$d 日</string>
+    <string name="widget_health_label">睡眠と心拍</string>
+    <string name="widget_health_description">バンドからの昨夜の睡眠と心拍</string>
+    <string name="widget_health_title">睡眠と心拍</string>
+    <string name="widget_health_off">バンドのデータはオフです。設定でオンにできます。</string>
+    <string name="widget_health_sleep">昨夜の睡眠</string>
+    <string name="widget_health_latest">最新の測定</string>
+    <string name="widget_health_latest_at">最新の測定 · %1$s</string>
+    <string name="route_title">バーチャルルート</string>
+    <string name="route_empty">ルートを選ぶと、歩いた分だけ地図上を進みます。</string>
+    <string name="route_choose">ルートを選ぶ</string>
+    <string name="route_change">ルートを変更</string>
+    <string name="route_stop">ルートをやめる</string>
+    <string name="route_pick_hint">新しいルートは今日から始まります。</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">次は%1$s、あと%2$s %3$s</string>
+    <string name="route_done">完走！%1$d日で達成しました。</string>
+    <string name="route_started">開始日: %1$s</string>
+    <string name="route_approx">距離はおおよそです。歩数は身長から換算します。</string>
+    <string name="route_item">%1$s %2$s · %3$d か所</string>
+    <string name="bird_stage_egg">たまご</string>
+    <string name="bird_stage_hatchling">ふ化したて</string>
+    <string name="bird_stage_chick">ひよこ</string>
+    <string name="bird_stage_fledgling">若鳥</string>
+    <string name="bird_stage_bird">鳥</string>
+    <string name="bird_stage_elder">賢い鳥</string>
+    <string name="bird_mood_sleepy">眠そう。少し歩けば目を覚まします。</string>
+    <string name="bird_mood_sad">昨日は目標未達成で、少ししょんぼり。</string>
+    <string name="bird_mood_calm">落ち着いています。目標の半分で元気になります。</string>
+    <string name="bird_mood_happy">ごきげん。目標まであと少し。</string>
+    <string name="bird_mood_excited">大喜び！今日の目標達成。</string>
+    <string name="bird_next">%1$sまであと%2$s歩</string>
+    <string name="bird_last">最終段階に到達</string>
+    <string name="bird_items">アイテム %1$d/%2$d</string>
+    <string name="bird_items_title">鳥のアイテム</string>
+    <string name="bird_item_scarf">マフラー</string>
+    <string name="bird_item_ribbon">メダル</string>
+    <string name="bird_item_sun">太陽</string>
+    <string name="bird_item_cap">パーティーハット</string>
+    <string name="bird_item_crown">王冠</string>
+    <string name="bird_unlock_scarf">7日連続</string>
+    <string name="bird_unlock_ribbon">週間目標を4回</string>
+    <string name="bird_unlock_sun">早起き7日</string>
+    <string name="bird_unlock_cap">1日20,000歩</string>
+    <string name="bird_unlock_crown">合計100万歩</string>
+    <string name="bird_hint">鳥は合計歩数で成長します。気分は今日の歩数で変わります。アイテムはメダルで手に入ります。</string>
+    <string name="widget_bird_label">鳥</string>
+    <string name="widget_bird_description">歩数で育つ鳥</string>
 </resources>

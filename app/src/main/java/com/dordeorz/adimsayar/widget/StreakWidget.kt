@@ -40,6 +40,7 @@ import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.weekStartOf
 import java.time.LocalDate
 
@@ -51,13 +52,17 @@ class StreakWidget : GlanceAppWidget() {
         val repository = StepRepository.get(context)
         val today = LocalDate.now()
         val initial = repository.loadHistory()
+        val initialFreezes = StreakFreezes.load(context)
         provideContent {
             val flow = remember { repository.observeHistory() }
             val history by flow.collectAsState(initial)
+            val freezeFlow = remember { StreakFreezes.observe(context) }
+            val freezes by freezeFlow.collectAsState(initialFreezes)
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
-            val streak = remember(history, settings) {
-                AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart).records.currentStreak
+            val streak = remember(history, settings, freezes) {
+                AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart, freezes = freezes)
+                    .records.currentStreak
             }
             val weekStart = weekStartOf(today, settings.weekStart)
             val weekSteps = history.filterKeys { !it.isBefore(weekStart) && !it.isAfter(today) }.values.sum()

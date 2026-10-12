@@ -46,7 +46,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AGE_RANGE
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
+import com.dordeorz.adimsayar.data.GLASS_OPTIONS
+import com.dordeorz.adimsayar.data.WATER_GOAL_RANGE
+import com.dordeorz.adimsayar.data.WATER_INTERVAL_OPTIONS
+import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
@@ -63,11 +68,12 @@ import java.io.File
 import java.time.format.TextStyle
 import kotlinx.coroutines.launch
 
-private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, ReleaseNotes, Language }
+private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, WaterGoal, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.9.0", R.array.release_notes_0_9_0),
     ReleaseNote("0.8.0", R.array.release_notes_0_8_0),
     ReleaseNote("0.7.0", R.array.release_notes_0_7_0),
     ReleaseNote("0.6.1", R.array.release_notes_0_6_1),
@@ -81,6 +87,7 @@ private val RELEASE_NOTES = listOf(
 
 private val DAILY_PRESETS = listOf(6_000L, 8_000L, 10_000L, 12_000L, 15_000L)
 private val WEEKLY_PRESETS = listOf(42_000L, 56_000L, 70_000L, 84_000L, 105_000L)
+private val WATER_PRESETS = listOf(1_500, 2_000, 2_500, 3_000)
 
 @Composable
 fun SettingsScreen(state: MainUiState, actions: MainActions) {
@@ -115,6 +122,9 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
                 dialog = SettingsDialog.Weight
             }
+            ValueRow(stringResource(R.string.age), stringResource(R.string.age_value, settings.age)) {
+                dialog = SettingsDialog.Age
+            }
             ChoiceRow(
                 title = stringResource(R.string.distance_unit),
                 options = DistanceUnit.entries,
@@ -128,6 +138,34 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
+
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.water_title))
+            ValueRow(stringResource(R.string.water_goal), stringResource(R.string.water_ml, format(settings.waterGoalMl.toLong()))) {
+                dialog = SettingsDialog.WaterGoal
+            }
+            ChoiceRow(
+                title = stringResource(R.string.water_glass),
+                options = GLASS_OPTIONS,
+                selected = settings.glassMl,
+                label = { stringResource(R.string.water_ml, it.toString()) },
+                onSelect = actions.onGlassChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.water_reminder),
+                hint = stringResource(R.string.water_reminder_hint),
+                checked = settings.waterReminder,
+                onCheckedChange = actions.onWaterReminderChange,
+            )
+            if (settings.waterReminder) {
+                ChoiceRow(
+                    title = stringResource(R.string.water_interval),
+                    options = WATER_INTERVAL_OPTIONS,
+                    selected = settings.waterIntervalHours,
+                    label = { stringResource(R.string.water_interval_value, it) },
+                    onSelect = actions.onWaterIntervalChange,
+                )
+            }
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_notifications))
@@ -327,6 +365,25 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             onSave = { actions.onWeightChange(it.toInt()) },
             onDismiss = { dialog = null },
         )
+        SettingsDialog.Age -> GoalDialog(
+            title = stringResource(R.string.age),
+            current = settings.age.toLong(),
+            range = AGE_RANGE.first.toLong()..AGE_RANGE.last.toLong(),
+            presets = emptyList(),
+            unit = stringResource(R.string.age_unit),
+            onSave = { actions.onAgeChange(it.toInt()) },
+            onDismiss = { dialog = null },
+        )
+        SettingsDialog.WaterGoal -> GoalDialog(
+            title = stringResource(R.string.water_goal),
+            current = settings.waterGoalMl.toLong(),
+            range = WATER_GOAL_RANGE.first.toLong()..WATER_GOAL_RANGE.last.toLong(),
+            presets = (listOf(Water.suggestedGoal(settings.weightKg)) + WATER_PRESETS).distinct().sorted().map { it.toLong() },
+            unit = stringResource(R.string.unit_ml),
+            hint = stringResource(R.string.water_goal_hint, format(Water.suggestedGoal(settings.weightKg).toLong()), settings.weightKg),
+            onSave = { actions.onWaterGoalChange(it.toInt()) },
+            onDismiss = { dialog = null },
+        )
         SettingsDialog.DailyGoal -> GoalDialog(
             title = stringResource(R.string.daily_goal),
             current = settings.dailyGoal,
@@ -375,6 +432,7 @@ private fun GoalDialog(
     range: LongRange,
     presets: List<Long>,
     unit: String = stringResource(R.string.steps_unit),
+    hint: String? = null,
     onSave: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -386,6 +444,7 @@ private fun GoalDialog(
         title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                if (hint != null) Text(hint, style = MaterialTheme.typography.bodyMedium)
                 OutlinedTextField(
                     value = text,
                     onValueChange = { input -> text = input.filter(Char::isDigit).take(range.last.toString().length) },

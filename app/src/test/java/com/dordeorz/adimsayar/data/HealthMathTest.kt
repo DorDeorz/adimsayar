@@ -60,4 +60,19 @@ class HealthMathTest {
         assertEquals(61L, HealthMath.average(listOf(60L, 61L, 62L)))
         assertNull(HealthMath.average(emptyList()))
     }
+
+    @Test
+    fun heartZonesFollowAgeBasedMaximum() {
+        val max = HealthMath.maxHeartRate(30)
+        assertEquals(190L, max)
+        assertEquals(HeartZone.Rest, HealthMath.zoneOf(80L, max))
+        assertEquals(HeartZone.FatBurn, HealthMath.zoneOf(120L, max))
+        assertEquals(HeartZone.Max, HealthMath.zoneOf(185L, max))
+        assertEquals(mapOf(HeartZone.Rest to 10L, HeartZone.Cardio to 5L), HealthMath.zoneMinutes(listOf(70L, 75L, 140L), max, 5L))
+    }
+
+    @Test
+    fun restingEstimateUsesCalmReadings() {
+        assertEquals(55L, HealthMath.restingEstimate(listOf(90L, 55L, 60L, 120L, 58L)))
+    }
 }

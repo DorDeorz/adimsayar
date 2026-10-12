@@ -14,7 +14,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.time.LocalDate
 import java.time.ZoneId
-import java.time.format.DateTimeParseException
+import java.time.LocalDateTime
 
 data class DaySteps(val date: LocalDate, val steps: Long)
 
@@ -34,6 +34,7 @@ class StepRepository private constructor(private val context: Context) {
         val days = StepMath.splitByDay(interval, ZoneId.systemDefault())
         if (days.isNotEmpty() && !XiaomiSteps.isEnabled(context)) {
             dao.add(days.mapKeys { it.key.toString() })
+            dao.addHours(StepMath.splitByHour(interval, ZoneId.systemDefault()).mapKeys { it.key.toString() })
             Reminders.onTodaySteps(context, dao.getMerged(LocalDate.now().toString())?.steps ?: 0L)
         }
         _lastReadingWallMs.value = reading.wallMs
@@ -54,6 +55,14 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun loadPhoneDays(from: LocalDate): Map<LocalDate, Long> =
         dao.loadPhoneFrom(from.toString()).associate { LocalDate.parse(it.date) to it.steps }
 
+    suspend fun loadPhoneHours(date: LocalDate): LongArray? {
+        val rows = dao.loadHours(date.atStartOfDay().toString(), date.plusDays(1).atStartOfDay().toString())
+        if (rows.isEmpty()) return null
+        val hours = LongArray(HOURS_PER_DAY)
+        for (row in rows) hours[LocalDateTime.parse(row.hour).hour] += row.steps
+        return hours
+    }
+
     suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
@@ -72,20 +81,7 @@ class StepRepository private constructor(private val context: Context) {
     }
 
     suspend fun importCsv(input: InputStream): Int? = mutex.withLock {
-        val parsed = HashMap<String, Long>()
-        input.bufferedReader().useLines { lines ->
-            for (line in lines) {
-                val parts = line.trim().split(',', ';')
-                if (parts.size < 2) continue
-                val date = try {
-                    LocalDate.parse(parts[0].trim())
-                } catch (e: DateTimeParseException) {
-                    continue
-                }
-                val steps = parts[1].trim().toLongOrNull()?.takeIf { it >= 0L } ?: continue
-                parsed[date.toString()] = steps
-            }
-        }
+        val parsed = HistoryImport.read(input, ZoneId.systemDefault()).mapKeys { it.key.toString() }
         if (parsed.isEmpty()) return@withLock null
         val changed = parsed.filter { (date, steps) -> steps > (dao.get(date)?.steps ?: 0L) }
         dao.replace(changed)
@@ -144,6 +140,7 @@ class StepRepository private constructor(private val context: Context) {
         private const val KEY_WALL = "wall_ms"
         private const val KEY_BOOT = "boot_count"
         private const val NO_BOOT_COUNT = -1
+        private const val HOURS_PER_DAY = 24
 
         @Volatile
         private var instance: StepRepository? = null

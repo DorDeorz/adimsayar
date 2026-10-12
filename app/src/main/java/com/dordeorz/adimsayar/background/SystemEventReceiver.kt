@@ -15,11 +15,16 @@ class SystemEventReceiver : BroadcastReceiver() {
         val pending = goAsync()
         AppScope.launch {
             try {
+                if (intent.action == ACTION_WATER_ADD) {
+                    Reminders.addWater(appContext)
+                    return@launch
+                }
                 Schedules.ensure(appContext)
                 StepCounterService.startIfEnabled(appContext)
                 StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
                 if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
                 if (intent.action == ACTION_WEIGHT) Reminders.weightCheck(appContext)
+                if (intent.action == ACTION_WATER) Reminders.waterCheck(appContext)
             } finally {
                 pending.finish()
             }
@@ -30,11 +35,15 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_MIDNIGHT = "com.dordeorz.adimsayar.MIDNIGHT"
         const val ACTION_EVENING = "com.dordeorz.adimsayar.EVENING"
         const val ACTION_WEIGHT = "com.dordeorz.adimsayar.WEIGHT"
+        const val ACTION_WATER = "com.dordeorz.adimsayar.WATER"
+        const val ACTION_WATER_ADD = "com.dordeorz.adimsayar.WATER_ADD"
         private const val READ_TIMEOUT_MS = 5_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
             ACTION_EVENING,
             ACTION_WEIGHT,
+            ACTION_WATER,
+            ACTION_WATER_ADD,
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,

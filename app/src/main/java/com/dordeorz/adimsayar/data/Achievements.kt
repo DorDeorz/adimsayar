@@ -71,6 +71,7 @@ object AchievementMath {
         weeklyGoal: Long,
         firstDay: DayOfWeek = DayOfWeek.MONDAY,
         earlyBirdDays: Set<LocalDate>? = null,
+        freezes: Set<LocalDate> = emptySet(),
     ): Achievements {
         val first = days.keys.filter { !it.isAfter(today) }.minOrNull() ?: today
         var total = 0L
@@ -122,7 +123,7 @@ object AchievementMath {
                 goalDays++
                 streak++
                 longestStreak = maxOf(longestStreak, streak)
-            } else if (date != today) {
+            } else if (date != today && date !in freezes) {
                 streak = 0
             }
             if (!weekMet && weekSum >= weeklyGoal) {
@@ -208,7 +209,7 @@ object AchievementMath {
         return Level(number, levelStart(number), levelStart(number + 1))
     }
 
-    private fun levelStart(level: Int): Long = LEVEL_STEP * level * (level + 1) / 2
+    fun levelStart(level: Int): Long = LEVEL_STEP * level * (level + 1) / 2
 
     private const val LEVEL_STEP = 25_000L
 }
