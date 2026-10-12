@@ -313,6 +313,9 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>El botón +250 ml del widget de agua ahora añade el agua</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>La app tiene un nombre nuevo: FitWren – Podómetro y salud</item>
         <item>Tus datos, ajustes y widgets se mantienen</item>

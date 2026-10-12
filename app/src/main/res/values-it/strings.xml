@@ -313,6 +313,9 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>Il pulsante +250 ml del widget acqua ora aggiunge l\'acqua</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>L\'app ha un nuovo nome: FitWren – Contapassi e salute</item>
         <item>Dati, impostazioni e widget restano invariati</item>
