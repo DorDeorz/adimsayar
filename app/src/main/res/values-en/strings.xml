@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>Bird widget: steps left now use a short form and fit</item>
+        <item>Small Today widget now shows a progress bar toward the goal</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Bird widget: level, steps to next level and level-up</item>

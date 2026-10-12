@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>鳥ウィジェット: 残り歩数を短く表示し、切れなくなりました</item>
+        <item>小さな「今日」ウィジェットに目標までの進捗バーを表示</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>鳥ウィジェット: レベル、次のレベルまでの歩数、レベルアップ</item>

@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>새 위젯: 남은 걸음을 짧게 표시해 잘리지 않아요</item>
+        <item>작은 오늘 위젯에 목표까지의 진행 막대 표시</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>새 위젯: 레벨, 다음 레벨까지 걸음, 레벨 업</item>

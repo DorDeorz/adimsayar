@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>Widget uccello: i passi rimanenti sono abbreviati e ci stanno</item>
+        <item>Il widget piccolo Oggi mostra una barra di avanzamento verso l\'obiettivo</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget uccello: livello, passi al prossimo livello e salita di livello</item>

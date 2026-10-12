@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>أداة الطائر: الخطوات المتبقية مختصرة وتظهر كاملة</item>
+        <item>تعرض أداة اليوم الصغيرة شريط تقدم نحو الهدف</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>أداة الطائر: المستوى والخطوات المتبقية والارتقاء</item>

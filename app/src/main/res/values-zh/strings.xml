@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>小鸟小组件：剩余步数用简写显示，不再截断</item>
+        <item>小号今日小组件显示距目标的进度条</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>小鸟小组件：等级、距下一级的步数和升级</item>

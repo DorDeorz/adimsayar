@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>Kuş widget\'ında kalan adım artık kısa yazılıyor ve kesilmiyor</item>
+        <item>Küçük Bugün widget\'ında hedefe ne kadar kaldığını gösteren çubuk</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Kuş widget\'ı: seviye, sonraki seviyeye kalan adım ve seviye atlama</item>

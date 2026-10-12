@@ -96,7 +96,7 @@ private fun TodayContent(context: Context, steps: Long, settings: AppSettings) {
     val innerHeight = size.height - PADDING * 2
     Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
         when {
-            size.width < TINY || size.height < TINY -> TinyContent(context, steps, goal)
+            size.width < TINY || size.height < TINY -> TinyContent(context, steps, goal, fraction)
             size.width.value >= size.height.value * WIDE_RATIO && innerHeight >= MIN_RING ->
                 WideContent(context, steps, fraction, innerHeight, settings)
             minOf(innerWidth, innerHeight - TITLE_HEIGHT) >= MIN_RING ->
@@ -107,8 +107,8 @@ private fun TodayContent(context: Context, steps: Long, settings: AppSettings) {
 }
 
 @Composable
-private fun TinyContent(context: Context, steps: Long, goal: Long) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+private fun TinyContent(context: Context, steps: Long, goal: Long, fraction: Float) {
+    Column(modifier = GlanceModifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = formatSteps(steps),
             maxLines = 1,
@@ -118,6 +118,13 @@ private fun TinyContent(context: Context, steps: Long, goal: Long) {
             text = context.getString(R.string.percent_of_goal, percent(steps, goal)),
             maxLines = 1,
             style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+        )
+        Spacer(GlanceModifier.height(6.dp))
+        LinearProgressIndicator(
+            progress = fraction,
+            modifier = GlanceModifier.fillMaxWidth().height(6.dp),
+            color = GlanceTheme.colors.primary,
+            backgroundColor = GlanceTheme.colors.secondaryContainer,
         )
     }
 }

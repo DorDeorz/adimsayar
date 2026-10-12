@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>Widget do pássaro: passos restantes abreviados e cabem</item>
+        <item>O widget pequeno Hoje mostra uma barra de progresso até a meta</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget do pássaro: nível, passos para o próximo nível e subida de nível</item>

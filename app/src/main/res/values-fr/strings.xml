@@ -315,6 +315,7 @@
 
     <string-array name="release_notes_0_9_2">
         <item>Widget oiseau : les pas restants sont abrégés et tiennent</item>
+        <item>Le petit widget Aujourd\'hui affiche une barre de progression vers l\'objectif</item>
     </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget oiseau : niveau, pas avant le prochain niveau et montée de niveau</item>
