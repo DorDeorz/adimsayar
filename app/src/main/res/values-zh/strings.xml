@@ -313,6 +313,9 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>饮水小组件的 +250 ml 按钮现在可以加水了</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>应用改名为 FitWren（计步与健康）</item>
         <item>你的数据、设置和小部件保持不变</item>

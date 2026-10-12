@@ -313,6 +313,9 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>The +250 ml button on the water widget now adds the water</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>The app has a new name: FitWren – Step Counter &amp; Health</item>
         <item>Your data, settings and widgets stay as they are</item>

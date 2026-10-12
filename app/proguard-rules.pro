@@ -6,3 +6,4 @@
 -keep class androidx.room.** { *; }
 -keep class androidx.sqlite.** { *; }
 -keep class * extends androidx.room.RoomDatabase { <init>(); }
+-keep class * implements androidx.glance.appwidget.action.ActionCallback { <init>(); }

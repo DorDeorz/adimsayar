@@ -313,6 +313,9 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>물 위젯의 +250 ml 버튼이 이제 물을 추가합니다</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>앱 이름이 FitWren(만보기 및 건강)으로 바뀌었습니다</item>
         <item>데이터, 설정, 위젯은 그대로 유지됩니다</item>

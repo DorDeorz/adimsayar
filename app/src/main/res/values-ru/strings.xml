@@ -313,6 +313,9 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>Кнопка +250 мл в виджете воды теперь добавляет воду</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>Новое название приложения: FitWren – шагомер и здоровье</item>
         <item>Ваши данные, настройки и виджеты сохранены</item>

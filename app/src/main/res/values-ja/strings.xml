@@ -313,6 +313,9 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_4">
+        <item>水分ウィジェットの +250 ml ボタンで水分が追加されるようになりました</item>
+    </string-array>
     <string-array name="release_notes_0_9_3">
         <item>アプリの名前が FitWren（歩数計＆ヘルス）になりました</item>
         <item>データ、設定、ウィジェットはそのまま残ります</item>
