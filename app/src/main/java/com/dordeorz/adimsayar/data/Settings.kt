@@ -32,6 +32,8 @@ data class AppSettings(
     val glassMl: Int = DEFAULT_GLASS_ML,
     val waterReminder: Boolean = false,
     val waterIntervalHours: Int = DEFAULT_WATER_INTERVAL_HOURS,
+    val routeId: String = NO_ROUTE,
+    val routeStartDay: Long = NO_ROUTE_START,
 )
 
 const val DEFAULT_DAILY_GOAL = 10_000L
@@ -51,6 +53,8 @@ const val DEFAULT_GLASS_ML = 250
 val GLASS_OPTIONS = listOf(200, 250, 330, 500)
 const val DEFAULT_WATER_INTERVAL_HOURS = 2
 val WATER_INTERVAL_OPTIONS = listOf(1, 2, 3)
+const val NO_ROUTE = ""
+const val NO_ROUTE_START = -1L
 const val SYSTEM_LANGUAGE = ""
 val SUPPORTED_LANGUAGES = listOf("tr", "en", "de", "es", "fr", "it", "pt", "ru", "ar", "ja", "zh", "ko")
 
@@ -108,6 +112,8 @@ class SettingsStore private constructor(context: Context) {
         it.copy(waterIntervalHours = hours.takeIf { value -> value in WATER_INTERVAL_OPTIONS } ?: DEFAULT_WATER_INTERVAL_HOURS)
     }
 
+    fun setRoute(id: String, startDay: Long) = update { it.copy(routeId = id, routeStartDay = startDay) }
+
     private fun update(change: (AppSettings) -> AppSettings) {
         val next = change(_settings.value)
         prefs.edit {
@@ -130,6 +136,8 @@ class SettingsStore private constructor(context: Context) {
             putInt(KEY_GLASS, next.glassMl)
             putBoolean(KEY_WATER_REMINDER, next.waterReminder)
             putInt(KEY_WATER_INTERVAL, next.waterIntervalHours)
+            putString(KEY_ROUTE, next.routeId)
+            putLong(KEY_ROUTE_START, next.routeStartDay)
         }
         _settings.value = next
     }
@@ -154,6 +162,8 @@ class SettingsStore private constructor(context: Context) {
         glassMl = prefs.getInt(KEY_GLASS, DEFAULT_GLASS_ML),
         waterReminder = prefs.getBoolean(KEY_WATER_REMINDER, false),
         waterIntervalHours = prefs.getInt(KEY_WATER_INTERVAL, DEFAULT_WATER_INTERVAL_HOURS),
+        routeId = prefs.getString(KEY_ROUTE, null) ?: NO_ROUTE,
+        routeStartDay = prefs.getLong(KEY_ROUTE_START, NO_ROUTE_START),
     )
 
     companion object {
@@ -177,6 +187,8 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_GLASS = "glass_ml"
         private const val KEY_WATER_REMINDER = "water_reminder"
         private const val KEY_WATER_INTERVAL = "water_interval_hours"
+        private const val KEY_ROUTE = "route"
+        private const val KEY_ROUTE_START = "route_start_day"
 
         @Volatile
         private var instance: SettingsStore? = null

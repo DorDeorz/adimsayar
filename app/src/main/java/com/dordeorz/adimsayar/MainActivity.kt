@@ -38,6 +38,8 @@ import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.ChallengeMath
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.KeptMedals
+import com.dordeorz.adimsayar.data.NO_ROUTE
+import com.dordeorz.adimsayar.data.NO_ROUTE_START
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.ReadSource
@@ -195,6 +197,9 @@ class MainActivity : ComponentActivity() {
         onWaterIntervalChange = { hours ->
             settingsStore.setWaterInterval(hours)
             Reminders.scheduleWater(applicationContext)
+        },
+        onRouteChange = { id ->
+            if (id == null) settingsStore.setRoute(NO_ROUTE, NO_ROUTE_START) else settingsStore.setRoute(id, LocalDate.now().toEpochDay())
         },
     )
 

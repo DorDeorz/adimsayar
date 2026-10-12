@@ -324,6 +324,7 @@
         <item>Three new widgets: today hour by hour, a heatmap of recent weeks, sleep and heart</item>
         <item>Phone steps are now also saved hour by hour, so History shows an hourly chart even without the HyperOS record</item>
         <item>Detailed heart rate on the Health page: pick a day, resting/lowest/average/highest, a chart with axis, tap an hour for details, heart rate zones by age and explanations. Age added to Settings</item>
+        <item>Virtual route: walk from Istanbul to Ankara or the Camino with your steps</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">Last night’s sleep</string>
     <string name="widget_health_latest">Latest reading</string>
     <string name="widget_health_latest_at">Latest reading · %1$s</string>
+    <string name="route_title">Virtual route</string>
+    <string name="route_empty">Pick a route and watch your steps move along the map.</string>
+    <string name="route_choose">Choose route</string>
+    <string name="route_change">Change route</string>
+    <string name="route_stop">Leave route</string>
+    <string name="route_pick_hint">The new route starts today.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">Next stop %1$s, %2$s %3$s to go</string>
+    <string name="route_done">Finished! You did it in %1$d days.</string>
+    <string name="route_started">Started %1$s</string>
+    <string name="route_approx">Distances are approximate. Steps are converted using your height.</string>
+    <string name="route_item">%1$s %2$s · %3$d stops</string>
 </resources>

@@ -324,6 +324,7 @@
         <item>三个新小组件：今日每小时、最近几周热力图、睡眠和心率</item>
         <item>手机步数现在也按小时保存，没有 HyperOS 记录时历史中也会显示每小时图表</item>
         <item>健康页面心率更详细：选择日期，静息/最低/平均/最高，带坐标轴的图表，点击小时查看详情，按年龄的心率区间及说明。设置中新增年龄</item>
+        <item>虚拟路线：用步数从伊斯坦布尔走到安卡拉或走完朝圣之路</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">昨晚睡眠</string>
     <string name="widget_health_latest">最新测量</string>
     <string name="widget_health_latest_at">最新测量 · %1$s</string>
+    <string name="route_title">虚拟路线</string>
+    <string name="route_empty">选择一条路线，你的步数会在地图上前进。</string>
+    <string name="route_choose">选择路线</string>
+    <string name="route_change">更换路线</string>
+    <string name="route_stop">放弃路线</string>
+    <string name="route_pick_hint">新路线从今天开始。</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">下一站%1$s，还有 %2$s %3$s</string>
+    <string name="route_done">完成！你用了 %1$d 天。</string>
+    <string name="route_started">开始于 %1$s</string>
+    <string name="route_approx">距离为近似值。步数按你的身高换算。</string>
+    <string name="route_item">%1$s %2$s · %3$d 站</string>
 </resources>

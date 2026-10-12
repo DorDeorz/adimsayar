@@ -61,7 +61,7 @@ private fun MedalGroup.description(): Int = when (this) {
 }
 
 @Composable
-fun MedalsScreen(state: MainUiState) {
+fun MedalsScreen(state: MainUiState, onRouteChange: (String?) -> Unit) {
     val medals = state.achievements.medals
     val groups = medals.groupBy { it.group }
     LazyColumn(
@@ -78,6 +78,7 @@ fun MedalsScreen(state: MainUiState) {
             )
         }
         item { ChallengesCard(state) }
+        item { RouteCard(state, onRouteChange) }
         items(groups.keys.toList()) { group -> MedalGroupCard(group, groups[group].orEmpty()) }
         item {
             Text(

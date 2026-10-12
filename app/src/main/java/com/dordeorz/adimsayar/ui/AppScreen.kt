@@ -130,6 +130,7 @@ class MainActions(
     val onGlassChange: (Int) -> Unit,
     val onWaterReminderChange: (Boolean) -> Unit,
     val onWaterIntervalChange: (Int) -> Unit,
+    val onRouteChange: (String?) -> Unit,
 )
 
 @Composable
@@ -191,7 +192,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
                 Tab.History -> HistoryScreen(state, actions)
                 Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
                 Tab.Today -> TodayScreen(state, actions)
-                Tab.Medals -> MedalsScreen(state)
+                Tab.Medals -> MedalsScreen(state, actions.onRouteChange)
                 Tab.Settings -> SettingsScreen(state, actions)
             }
         }

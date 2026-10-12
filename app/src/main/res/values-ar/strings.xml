@@ -324,6 +324,7 @@
         <item>ثلاث أدوات جديدة: اليوم ساعة بساعة، وخريطة حرارية للأسابيع الأخيرة، والنوم والنبض</item>
         <item>تُحفظ خطوات الهاتف الآن ساعة بساعة أيضًا، فيظهر رسم بالساعة في السجل حتى دون سجل HyperOS</item>
         <item>نبض مفصل في صفحة الصحة: اختيار اليوم، الراحة/الأدنى/المتوسط/الأعلى، رسم بمحور، المس ساعة للتفاصيل، مناطق النبض حسب العمر مع شرح. أُضيف العمر إلى الإعدادات</item>
+        <item>مسار افتراضي: امشِ من إسطنبول إلى أنقرة أو طريق كامينو بخطواتك</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">نوم الليلة الماضية</string>
     <string name="widget_health_latest">آخر قياس</string>
     <string name="widget_health_latest_at">آخر قياس · %1$s</string>
+    <string name="route_title">مسار افتراضي</string>
+    <string name="route_empty">اختر مسارًا وشاهد خطواتك تتقدم على الخريطة.</string>
+    <string name="route_choose">اختر مسارًا</string>
+    <string name="route_change">تغيير المسار</string>
+    <string name="route_stop">ترك المسار</string>
+    <string name="route_pick_hint">يبدأ المسار الجديد اليوم.</string>
+    <string name="route_name">%1$s ← %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">المحطة التالية %1$s، متبقٍ %2$s %3$s</string>
+    <string name="route_done">اكتمل! أنهيته في %1$d يومًا.</string>
+    <string name="route_started">البداية: %1$s</string>
+    <string name="route_approx">المسافات تقريبية. تُحوَّل الخطوات حسب طولك.</string>
+    <string name="route_item">%1$s %2$s · %3$d محطات</string>
 </resources>

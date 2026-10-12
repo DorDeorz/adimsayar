@@ -324,6 +324,7 @@
         <item>새 위젯 3개: 오늘 시간별, 최근 몇 주 히트맵, 수면과 심박</item>
         <item>휴대폰 걸음 수를 시간별로도 저장해 HyperOS 기록 없이도 기록에 시간별 그래프가 보여요</item>
         <item>건강 페이지의 자세한 심박수: 날짜 선택, 안정 시·최저·평균·최고, 눈금 있는 그래프, 시간을 누르면 상세, 나이별 심박 구간과 설명. 설정에 나이 추가</item>
+        <item>가상 경로: 걸음으로 이스탄불에서 앙카라까지, 또는 카미노를 걸어 보세요</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">어젯밤 수면</string>
     <string name="widget_health_latest">최근 측정</string>
     <string name="widget_health_latest_at">최근 측정 · %1$s</string>
+    <string name="route_title">가상 경로</string>
+    <string name="route_empty">경로를 고르면 걸음 수만큼 지도에서 나아갑니다.</string>
+    <string name="route_choose">경로 선택</string>
+    <string name="route_change">경로 변경</string>
+    <string name="route_stop">경로 그만두기</string>
+    <string name="route_pick_hint">새 경로는 오늘부터 시작됩니다.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">다음 정류지 %1$s, %2$s %3$s 남음</string>
+    <string name="route_done">완주! %1$d일 만에 끝냈어요.</string>
+    <string name="route_started">시작: %1$s</string>
+    <string name="route_approx">거리는 대략적입니다. 걸음 수는 키로 환산됩니다.</string>
+    <string name="route_item">%1$s %2$s · 정류지 %3$d곳</string>
 </resources>

@@ -324,6 +324,7 @@
         <item>Trois nouveaux widgets : aujourd’hui heure par heure, carte de chaleur des dernières semaines, sommeil et cœur</item>
         <item>Les pas du téléphone sont aussi enregistrés heure par heure ; l’Historique affiche un graphique horaire même sans le registre HyperOS</item>
         <item>Fréquence cardiaque détaillée sur la page Santé : choix du jour, repos/min/moyenne/max, graphique avec axe, touchez une heure pour le détail, zones selon l’âge et explications. Âge ajouté aux réglages</item>
+        <item>Itinéraire virtuel : marche d\'Istanbul à Ankara ou le Camino avec tes pas</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">Sommeil de la nuit</string>
     <string name="widget_health_latest">Dernière mesure</string>
     <string name="widget_health_latest_at">Dernière mesure · %1$s</string>
+    <string name="route_title">Itinéraire virtuel</string>
+    <string name="route_empty">Choisis un itinéraire et regarde tes pas avancer sur la carte.</string>
+    <string name="route_choose">Choisir un itinéraire</string>
+    <string name="route_change">Changer d\'itinéraire</string>
+    <string name="route_stop">Abandonner</string>
+    <string name="route_pick_hint">Le nouvel itinéraire commence aujourd\'hui.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">Prochaine étape %1$s, encore %2$s %3$s</string>
+    <string name="route_done">Terminé ! Tu l\'as fait en %1$d jours.</string>
+    <string name="route_started">Commencé le %1$s</string>
+    <string name="route_approx">Les distances sont approximatives. Les pas sont convertis selon ta taille.</string>
+    <string name="route_item">%1$s %2$s · %3$d étapes</string>
 </resources>

@@ -324,6 +324,7 @@
         <item>Tres widgets nuevos: hoy hora a hora, mapa de calor de las últimas semanas, sueño y pulso</item>
         <item>Los pasos del teléfono ahora también se guardan por hora; el Historial muestra un gráfico por hora aun sin el registro de HyperOS</item>
         <item>Frecuencia cardiaca detallada en Salud: elige un día, reposo/mínima/media/máxima, gráfico con eje, toca una hora para detalles, zonas según la edad y explicaciones. Edad añadida en Ajustes</item>
+        <item>Ruta virtual: camina de Estambul a Ankara o el Camino con tus pasos</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nueva barra inferior: Historial, Salud, Hoy (centro), Medallas, Ajustes. El resumen de la pulsera tiene su propia página</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">Sueño de anoche</string>
     <string name="widget_health_latest">Última medición</string>
     <string name="widget_health_latest_at">Última medición · %1$s</string>
+    <string name="route_title">Ruta virtual</string>
+    <string name="route_empty">Elige una ruta y mira cómo tus pasos avanzan en el mapa.</string>
+    <string name="route_choose">Elegir ruta</string>
+    <string name="route_change">Cambiar ruta</string>
+    <string name="route_stop">Dejar ruta</string>
+    <string name="route_pick_hint">La nueva ruta empieza hoy.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">Próxima parada %1$s, faltan %2$s %3$s</string>
+    <string name="route_done">¡Completada! La terminaste en %1$d días.</string>
+    <string name="route_started">Inicio: %1$s</string>
+    <string name="route_approx">Las distancias son aproximadas. Los pasos se convierten según tu altura.</string>
+    <string name="route_item">%1$s %2$s · %3$d paradas</string>
 </resources>

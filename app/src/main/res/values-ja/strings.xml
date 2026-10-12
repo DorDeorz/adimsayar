@@ -324,6 +324,7 @@
         <item>新しいウィジェット3種: 今日の時間別、最近数週間のヒートマップ、睡眠と心拍</item>
         <item>スマホの歩数を時間ごとにも保存。HyperOS の記録がなくても履歴に時間別グラフを表示</item>
         <item>健康ページの心拍を詳しく: 日付の選択、安静時・最低・平均・最高、目盛り付きグラフ、時間帯タップで詳細、年齢別の心拍ゾーンと説明。設定に年齢を追加</item>
+        <item>バーチャルルート: 歩数でイスタンブールからアンカラやカミーノを歩こう</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
@@ -533,4 +534,17 @@
     <string name="widget_health_sleep">昨夜の睡眠</string>
     <string name="widget_health_latest">最新の測定</string>
     <string name="widget_health_latest_at">最新の測定 · %1$s</string>
+    <string name="route_title">バーチャルルート</string>
+    <string name="route_empty">ルートを選ぶと、歩いた分だけ地図上を進みます。</string>
+    <string name="route_choose">ルートを選ぶ</string>
+    <string name="route_change">ルートを変更</string>
+    <string name="route_stop">ルートをやめる</string>
+    <string name="route_pick_hint">新しいルートは今日から始まります。</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">次は%1$s、あと%2$s %3$s</string>
+    <string name="route_done">完走！%1$d日で達成しました。</string>
+    <string name="route_started">開始日: %1$s</string>
+    <string name="route_approx">距離はおおよそです。歩数は身長から換算します。</string>
+    <string name="route_item">%1$s %2$s · %3$d か所</string>
 </resources>

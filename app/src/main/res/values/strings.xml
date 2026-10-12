@@ -324,6 +324,7 @@
         <item>Üç yeni widget: bugün saat saat, son haftaların ısı haritası, uyku ve nabız</item>
         <item>Telefonun adımları artık saat saat de kaydedilir; HyperOS kaydı kapalıyken de Geçmiş’te saatlik grafik görünür</item>
         <item>Sağlık sayfasında ayrıntılı nabız: gün seçimi, dinlenme/en düşük/ortalama/en yüksek, eksenli grafik, saate dokununca ayrıntı, yaşa göre nabız bölgeleri ve açıklamalar. Ayarlar’a yaş eklendi</item>
+        <item>Sanal rota: adımlarınla İstanbul\'dan Ankara\'ya ya da Camino\'da yürü</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
@@ -534,4 +535,17 @@
     <string name="widget_health_sleep">Dün geceki uyku</string>
     <string name="widget_health_latest">Son ölçüm</string>
     <string name="widget_health_latest_at">Son ölçüm · %1$s</string>
+    <string name="route_title">Sanal rota</string>
+    <string name="route_empty">Bir rota seç, attığın adımlar haritada ilerlesin.</string>
+    <string name="route_choose">Rota seç</string>
+    <string name="route_change">Rotayı değiştir</string>
+    <string name="route_stop">Rotayı bırak</string>
+    <string name="route_pick_hint">Yeni rota bugünden başlar.</string>
+    <string name="route_name">%1$s → %2$s</string>
+    <string name="route_distance">%1$s / %2$s %3$s</string>
+    <string name="route_next">Sıradaki durak %1$s, %2$s %3$s kaldı</string>
+    <string name="route_done">Tamamlandı! %1$d günde bitirdin.</string>
+    <string name="route_started">Başlangıç: %1$s</string>
+    <string name="route_approx">Mesafeler yaklaşıktır. Adımların boyuna göre km\'ye çevrilir.</string>
+    <string name="route_item">%1$s %2$s · %3$d durak</string>
 </resources>
