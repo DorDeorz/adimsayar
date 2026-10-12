@@ -8,7 +8,7 @@ Kişisel kullanım için, sistemde adım uygulaması olmayan bir Redmi Note 12 P
 - Glance ile ana ekran widget'ları
 - Room ile cihazda kalıcı kayıt
 - minSdk 23 (Android 6.0), targetSdk 36
-- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü için
+- Hesap yok, sunucu yok, analitik veya reklam SDK'sı yok; internet yalnızca Ayarlar'dan elle güncelleme kontrolü ve indirmesi için
 
 ## Ekran görüntüleri
 
@@ -133,7 +133,7 @@ Bu yol yalnızca üretici tespitiyle (`Build.MANUFACTURER`) ve kullanıcı açı
 
 ### Kullanılmayanlar
 
-- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün için egzersizler, mesafe, kalori, nabız ve uyku da gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
+- **Health Connect yalnızca bileklik adımları için ve isteğe bağlı kullanılır.** Ayarlar'daki "Bileklik adımlarını kullan" anahtarı açılınca Mi Fitness gibi uygulamaların yazdığı adımlar okunur; bilekliğin adım saydığı saatlerde bileklik sayısı, diğer saatlerde telefonun sayısı kullanılır. Adımlar iki kez sayılmaz. İzin verilirse Geçmiş'te seçilen gün ve Sağlık sayfası için egzersizler, mesafe, kalori, nabız, uyku ve kan oksijeni de gösterilir; bu veriler saklanmaz. Gerekçe: [GOALS.md](GOALS.md).
 - Sensör hiç yoksa (bazı telefonlar adım sayacı bildirdiği halde vermiyor) uygulama çökmez, açıklayıcı bir mesaj gösterir.
 
 ## Pil ve arka plan
@@ -142,7 +142,7 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 
 ## Gizlilik
 
-- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`). Bu istek yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
+- Uygulama adım verisini hiçbir yere göndermez. İnterneti tek bir iş için kullanır: Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda GitHub'dan son sürümün numarasını okur (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`); yeni sürüm varsa tekrar dokununca APK'yı GitHub'dan indirip kurulum ekranını açar. Bu istekler yalnızca sen dokunduğunda yapılır, arka planda çalışmaz ve istekle hiçbir veri gönderilmez.
 - Hesap, sunucu, senkronizasyon, analitik ve reklam yoktur.
 - Veri kaybına karşı Android'in kendi yedeklemesi (`allowBackup`) ve kullanıcının kendi eliyle yaptığı CSV dışa aktarma kullanılır.
 
@@ -156,11 +156,13 @@ Xiaomi, Huawei, Oppo, Vivo, Samsung gibi markalar arka plandaki uygulamaları ag
 | `POST_NOTIFICATIONS` | Servis bildirimi ve isteğe bağlı hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gün dönümünü tam gece yarısı yapmak |
-| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü |
+| `INTERNET` | Yalnızca elle başlatılan güncelleme kontrolü ve indirmesi |
+| `REQUEST_INSTALL_PACKAGES` | İndirilen güncellemeyi kurmak için Android'in kurulum ekranını açmak |
+| `health.READ_*` (adım, egzersiz, mesafe, aktif kalori, nabız, dinlenme nabzı, uyku, kan oksijeni, arka planda okuma) | İsteğe bağlı "Bileklik adımlarını kullan"; yalnızca okuma |
 
 ## Kurulum
 
-En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile görebilirsin.
+En kolay yol: [Releases](../../releases/latest) sayfasından son sürümün APK'sını indirip telefona kurmak. Sonraki sürümleri Ayarlar → "Güncellemeleri kontrol et" ile uygulamanın içinden indirip kurabilirsin.
 
 Her derlemenin APK'sı ayrıca [Actions](../../actions) sekmesinde, çalıştırmanın `adimsayar-apk-ve-raporlar` çıktısında bulunur.
 
@@ -208,6 +210,21 @@ Tasarım kararları ve ölçüm planı: [GOALS.md](GOALS.md). Geliştirme kurall
 ## Sürüm geçmişi
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulama içinde de Ayarlar → Sürüm notları altında görülebilir.
+
+### 0.8.0
+
+Eklenenler
+- Sağlık sayfasında uyku evreleri (derin, hafif, REM, uyanık), ortalama yatış ve kalkış saati, kan oksijeni (SpO2), egzersiz türleri ve egzersiz yapılan günler, aktif kalori ve dinlenme nabzının önceki döneme göre değişimi.
+- Bugünün saatlik nabız grafiği.
+- Kilo kaydı: kilonu Sağlık sayfasından ekle; vücut kitle endeksi, toplam değişim, son ölçümden beri değişim ve grafik. Ayarlar'da isteğe bağlı "Haftalık kilo hatırlatması" (haftanın ilk günü 09:00 civarı).
+- Bileklik açıkken haftalık özet bildirimi ortalama dinlenme nabzını ve uykuyu da gösterir.
+- Sağlık sayfasında bileklik ya da saat bağlı değilse uyarı ve "Bileklik ve saat kurulumu" ekranı: Health Connect kurulumu, markaya göre (Xiaomi, Samsung, Google/Fitbit, Garmin, Huawei, diğer) ayar yolu, izinler ve son 7 günde Health Connect'e veri yazan uygulamaların listesi; uygulama bildiriyorsa cihazın türü (bileklik, saat) ve modeli de görünür.
+- Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada, büyük, açılışta seçili), Madalyalar, Ayarlar. Ayarlar sağ üstteki dişliden alta taşındı.
+- Sağlık sayfasında bileklik için "Sağlık özeti": son 7 ya da 30 günün ortalama ve en uzun uykusu, ortalama dinlenme nabzı ve grafiği, toplam ve en uzun egzersiz, bileklik mesafesi. Veriler saklanmaz, her açılışta Health Connect'ten okunur.
+- Güncelleme uygulamanın içinden: Ayarlar → "Güncellemeleri kontrol et" yeni sürümün APK'sını GitHub'dan indirir ve Android'in kurulum ekranını açar. İlk seferde Android bu uygulamadan yüklemeye izin ister.
+
+Düzeltilenler
+- Uygulama açıkken bileklik adımları dakikada bir okunur (önce 5 dakikada bir). Mi Fitness veriyi gecikmeli yazdığında yeni sayı daha çabuk görünür.
 
 ### 0.7.0
 

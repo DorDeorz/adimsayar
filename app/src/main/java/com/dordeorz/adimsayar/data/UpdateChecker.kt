@@ -7,7 +7,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 sealed interface UpdateResult {
-    data class Available(val version: String, val url: String) : UpdateResult
+    data class Available(val version: String, val url: String, val apkUrl: String?) : UpdateResult
     data object UpToDate : UpdateResult
     data object NoRelease : UpdateResult
     data object Failed : UpdateResult
@@ -35,7 +35,7 @@ object UpdateChecker {
                 val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })
                 val latest = json.getString("tag_name").removePrefix("v")
                 if (isNewer(latest, currentVersion)) {
-                    UpdateResult.Available(latest, json.optString("html_url", RELEASES_URL))
+                    UpdateResult.Available(latest, json.optString("html_url", RELEASES_URL), apkUrl(json))
                 } else {
                     UpdateResult.UpToDate
                 }
@@ -43,6 +43,16 @@ object UpdateChecker {
                 connection.disconnect()
             }
         }.getOrDefault(UpdateResult.Failed)
+    }
+
+    private fun apkUrl(json: JSONObject): String? {
+        val assets = json.optJSONArray("assets") ?: return null
+        for (i in 0 until assets.length()) {
+            val asset = assets.optJSONObject(i) ?: continue
+            val url = asset.optString("browser_download_url")
+            if (asset.optString("name").endsWith(".apk") && url.startsWith("https://")) return url
+        }
+        return null
     }
 
     fun isNewer(latest: String, current: String): Boolean {

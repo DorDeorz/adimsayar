@@ -58,6 +58,7 @@
     <string name="tab_today">Aujourd\'hui</string>
     <string name="tab_history">Historique</string>
     <string name="tab_medals">Médailles</string>
+    <string name="tab_health">Santé</string>
     <string name="goal_reached">Objectif du jour atteint !</string>
     <string name="goal_remaining">Encore %1$s pas pour votre objectif</string>
     <string name="steps_value">%1$s pas</string>
@@ -120,6 +121,10 @@
     <string name="update_available">Nouvelle version disponible : %1$s. Touchez pour télécharger</string>
     <string name="update_no_release">Aucune version publiée pour le moment</string>
     <string name="update_failed">Vérification impossible. Vérifiez votre connexion internet</string>
+    <string name="update_downloading">Téléchargement… %1$d %%</string>
+    <string name="update_ready">Téléchargé. Touchez pour installer</string>
+    <string name="update_install_permission">Autorisez les installations depuis cette appli dans les réglages, puis touchez à nouveau</string>
+    <string name="update_download_failed">Échec du téléchargement. Touchez pour ouvrir la page GitHub</string>
     <string name="github_page">Page GitHub</string>
     <string name="github_page_hint">Code source, versions et signalement de bugs</string>
     <string name="log_hint">Dernières lectures du compteur et de HyperOS</string>
@@ -190,6 +195,138 @@
     <string name="next_year">Année suivante</string>
     <string name="year_medals">Médailles obtenues</string>
 
+    <string name="health_off_title">Le bracelet est désactivé</string>
+    <string name="health_off_text">Activez les pas du bracelet dans les réglages pour voir le sommeil, la fréquence cardiaque et les exercices.</string>
+    <string name="health_title">Résumé santé (bracelet)</string>
+    <string name="health_last_days">%1$d derniers jours</string>
+    <string name="health_loading">Lecture depuis Health Connect…</string>
+    <string name="health_empty">Aucune donnée du bracelet sur cette période</string>
+    <string name="health_sleep_average">Sommeil moyen</string>
+    <string name="health_nights">%1$d nuits</string>
+    <string name="health_sleep_longest">Sommeil le plus long</string>
+    <string name="health_resting_average">Fréquence cardiaque au repos moyenne</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Exercice total</string>
+    <string name="health_exercise_count">%1$d exercices</string>
+    <string name="health_exercise_longest">Exercice le plus long</string>
+    <string name="health_distance">Distance du bracelet</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Le bracelet n\'a rien enregistré sur cette période</string>
+    <string name="health_no_permission">Autorisation Health Connect non accordée</string>
+    <string name="health_resting_chart">Fréquence cardiaque au repos</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
+    <string name="health_permissions_missing">Certaines autorisations de santé manquent</string>
+    <string name="health_grant">Autoriser</string>
+    <string name="health_bed_wake">Coucher et lever moyens</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Phases de sommeil</string>
+    <string name="health_nights_average">Moyenne sur %1$d nuits</string>
+    <string name="sleep_deep">Profond</string>
+    <string name="sleep_light">Léger</string>
+    <string name="sleep_rem">Paradoxal</string>
+    <string name="sleep_awake">Éveillé</string>
+    <string name="health_percent">%1$s %%</string>
+    <string name="health_resting_down">%2$d bpm de moins que les %1$d jours précédents</string>
+    <string name="health_resting_up">%2$d bpm de plus que les %1$d jours précédents</string>
+    <string name="health_resting_same">Identique aux %1$d jours précédents</string>
+    <string name="health_oxygen">Oxygène sanguin (SpO2)</string>
+    <string name="health_oxygen_hint">Minimum %1$s · %2$d mesures</string>
+    <string name="health_exercise_days">Jours d\'entraînement</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">%1$s kcal par jour en moyenne</string>
+    <string name="heart_today_title">Fréquence cardiaque du jour</string>
+    <string name="heart_today_empty">Aucune mesure de fréquence cardiaque aujourd\'hui</string>
+    <string name="weight_title">Poids et indice de masse corporelle</string>
+    <string name="weight_empty">Aucun poids enregistré. Ajoutez votre poids pour voir ici votre IMC et votre évolution.</string>
+    <string name="weight_add">Ajouter un poids</string>
+    <string name="weight_current">Poids actuel</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Indice de masse corporelle (IMC)</string>
+    <string name="weight_bmi_hint">%1$s · taille %2$d cm</string>
+    <string name="bmi_under">Insuffisance pondérale</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Surpoids</string>
+    <string name="bmi_obese">Obésité</string>
+    <string name="weight_total_change">Variation totale</string>
+    <string name="weight_since">Depuis le %1$s</string>
+    <string name="weight_last_change">Depuis la dernière mesure</string>
+    <string name="weight_entries">Mesures</string>
+    <string name="weight_dialog_title">Poids · %1$s</string>
+    <string name="weight_delete">Supprimer</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Rappel de pesée hebdomadaire</string>
+    <string name="weight_reminder_hint">Vous rappelle de vous peser vers 09:00 le premier jour de la semaine.</string>
+    <string name="notify_weight_title">C\'est l\'heure de la pesée</string>
+    <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans AdımSayar.</string>
+    <string name="notify_health_resting">Fréquence cardiaque au repos moyenne : %1$d bpm</string>
+    <string name="notify_health_resting_down">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de moins que la semaine dernière</string>
+    <string name="notify_health_resting_up">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de plus que la semaine dernière</string>
+    <string name="notify_health_sleep">Sommeil moyen : %1$d h %2$d min</string>
+    <string name="weekly_summary_band_hint">Avec le bracelet activé, la fréquence au repos et le sommeil moyen sont ajoutés.</string>
+
+    <string name="setup_warning_title">Aucun bracelet ni montre trouvé</string>
+    <string name="setup_warning_text">Ces 7 derniers jours, aucun bracelet ni montre n\'a écrit de fréquence cardiaque, de sommeil ou d\'oxygène sanguin dans Health Connect. Le téléphone ne peut pas les mesurer : sans bracelet ni montre, elles ne sont pas collectées.</string>
+    <string name="setup_open">Configurer</string>
+    <string name="setup_title">Configurer bracelet et montre</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect nécessite Android 9 ou plus. Les données du bracelet ne peuvent pas être lues sur ce téléphone.</string>
+    <string name="setup_hc_ready">Health Connect est prêt.</string>
+    <string name="setup_hc_missing">Health Connect n\'est pas sur ce téléphone. Jusqu\'à Android 13, il s\'installe depuis le Play Store ; à partir d\'Android 14, il est intégré.</string>
+    <string name="setup_hc_install">Ouvrir dans le Play Store</string>
+    <string name="setup_step_brand">L\'application de votre bracelet ou montre</string>
+    <string name="setup_brand_question">Choisissez la marque de votre bracelet ou montre :</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Autre</string>
+    <string name="setup_steps_xiaomi">Les Mi Band et montres Xiaomi s\'associent à Mi Fitness. Dans Mi Fitness → Profil → Health Connect, activez-le et autorisez tous les types de données. Si vous utilisez Zepp Life, cherchez une option Health Connect dans ses réglages.</string>
+    <string name="setup_steps_samsung">Galaxy Watch et Galaxy Fit fonctionnent avec Samsung Health. Dans Samsung Health → Paramètres → Health Connect, autorisez le partage de vos données.</string>
+    <string name="setup_steps_google">La Pixel Watch et les appareils Fitbit fonctionnent avec l\'application Fitbit. Activez la synchronisation avec Health Connect dans ses paramètres.</string>
+    <string name="setup_steps_garmin">Dans les paramètres de Garmin Connect, ouvrez Applications connectées → Health Connect et activez-le.</string>
+    <string name="setup_steps_huawei">Huawei Health n\'écrit pas dans Health Connect pour le moment : les données des montres Huawei et Honor ne peuvent pas arriver dans AdımSayar.</string>
+    <string name="setup_steps_other">Cherchez une option Health Connect dans l\'application de votre montre (par exemple Wearfit Pro, Da Fit, FitCloudPro). Si l\'application n\'apparaît pas dans Health Connect → Autorisations des applications, elle ne peut pas envoyer de données. L\'Apple Watch ne fonctionne qu\'avec un iPhone.</string>
+    <string name="setup_open_hc">Ouvrir Health Connect</string>
+    <string name="setup_step_permission">Autorisations d\'AdımSayar</string>
+    <string name="setup_permission_wait">Installez d\'abord Health Connect.</string>
+    <string name="setup_permission_enable">Activez l\'interrupteur ci-dessous pour lire les données du bracelet. Health Connect demandera quelles données nous pouvons lire.</string>
+    <string name="setup_permission_ready">Toutes les autorisations sont accordées.</string>
+    <string name="setup_step_check">Vérification</string>
+    <string name="setup_check_wait">Une fois les autorisations accordées, les applications ayant écrit des données ces 7 derniers jours apparaissent ici.</string>
+    <string name="setup_check_none">Aucune application n\'a écrit dans Health Connect ces 7 derniers jours. Après le réglage de l\'étape 2, ouvrez l\'application du bracelet, laissez-la se synchroniser, puis vérifiez à nouveau.</string>
+    <string name="setup_check_found">Applications ayant écrit dans Health Connect ces 7 derniers jours :</string>
+    <string name="setup_check_ok">Les données du bracelet ou de la montre arrivent.</string>
+    <string name="setup_check_no_wearable">Seules arrivent des données que le téléphone peut aussi mesurer, comme les pas. Pour la fréquence cardiaque, le sommeil et l\'oxygène sanguin, l\'application du bracelet ou de la montre doit écrire dans Health Connect.</string>
+    <string name="setup_check_again">Vérifier à nouveau</string>
+    <string name="source_steps">Pas</string>
+    <string name="source_heart">Fréquence cardiaque</string>
+    <string name="source_sleep">Sommeil</string>
+    <string name="source_oxygen">Oxygène sanguin</string>
+    <string name="source_exercise">Entraînements</string>
+    <string name="source_distance">Distance</string>
+    <string name="source_calories">Calories actives</string>
+
+    <string name="device_watch">Montre</string>
+    <string name="device_band">Bracelet</string>
+    <string name="device_ring">Bague connectée</string>
+    <string name="device_phone">Téléphone</string>
+    <string name="device_other">Autre appareil</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
+        <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
+        <item>Les mises à jour se téléchargent et s\'installent depuis l\'appli</item>
+        <item>Les pas du bracelet sont lus chaque minute quand l\'appli est ouverte</item>
+        <item>Page Santé : phases de sommeil (profond, léger, paradoxal, éveillé), coucher et lever moyens, oxygène sanguin (SpO2), types et jours d\'entraînement, calories actives et fréquence au repos par rapport à la période précédente</item>
+        <item>Graphique horaire de la fréquence cardiaque du jour</item>
+        <item>Suivi du poids : indice de masse corporelle, variation totale et graphique. Rappel de pesée hebdomadaire facultatif</item>
+        <item>Avec le bracelet activé, le résumé hebdomadaire indique aussi la fréquence au repos et le sommeil</item>
+        <item>La page Santé avertit si aucun bracelet ni montre n\'est connecté, avec une configuration pas à pas : Health Connect, étapes selon la marque, autorisations et vérification des applications qui écrivent des données</item>
+        <item>La configuration affiche le type et le modèle de l\'appareil qui écrit les données (si l\'application l\'indique)</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>
         <item>Données du bracelet dans l\'historique : exercices, distance, calories actives, fréquence cardiaque et sommeil</item>
@@ -279,9 +416,10 @@
     <string name="log_wearable_error">Impossible de lire Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Bracelet : %1$d pas aujourd\'hui, %2$d jours mis à jour</string>
     <string name="band_exercises">Entraînements</string>
+    <string name="band_active_kcal">Calories actives (bracelet)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Fréquence cardiaque</string>
     <string name="band_heart_value">Repos %1$s · min %2$s · moy. %3$s · max %4$s</string>
-    <string name="band_resting_week">Fréquence au repos, 7 derniers jours</string>
     <string name="band_sleep">Sommeil</string>
     <string name="band_sleep_value">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>

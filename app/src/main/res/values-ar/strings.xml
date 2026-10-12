@@ -58,6 +58,7 @@
     <string name="tab_today">اليوم</string>
     <string name="tab_history">السجل</string>
     <string name="tab_medals">الميداليات</string>
+    <string name="tab_health">الصحة</string>
     <string name="goal_reached">تم بلوغ الهدف اليومي!</string>
     <string name="goal_remaining">المتبقي للهدف: %1$s خطوة</string>
     <string name="steps_value">%1$s خطوة</string>
@@ -120,6 +121,10 @@
     <string name="update_available">يتوفر إصدار جديد: %1$s. اضغط للتنزيل</string>
     <string name="update_no_release">لم يُنشر أي إصدار بعد</string>
     <string name="update_failed">تعذّر التحقق. تحقّق من اتصال الإنترنت</string>
+    <string name="update_downloading">جارٍ التنزيل… %1$d%%</string>
+    <string name="update_ready">تم التنزيل. اضغط للتثبيت</string>
+    <string name="update_install_permission">اسمح بالتثبيت من هذا التطبيق في الإعدادات ثم اضغط مرة أخرى</string>
+    <string name="update_download_failed">تعذّر التنزيل. اضغط لفتح صفحة GitHub</string>
     <string name="github_page">صفحة GitHub</string>
     <string name="github_page_hint">الشيفرة المصدرية والإصدارات والإبلاغ عن المشكلات</string>
     <string name="log_hint">أحدث قراءات العداد وHyperOS</string>
@@ -190,6 +195,138 @@
     <string name="next_year">السنة التالية</string>
     <string name="year_medals">الميداليات المكتسبة</string>
 
+    <string name="health_off_title">السوار غير مفعّل</string>
+    <string name="health_off_text">فعّل خطوات السوار في الإعدادات لرؤية ملخص النوم ونبض القلب والتمارين.</string>
+    <string name="health_title">ملخص الصحة (السوار)</string>
+    <string name="health_last_days">آخر %1$d يومًا</string>
+    <string name="health_loading">جارٍ القراءة من Health Connect…</string>
+    <string name="health_empty">لا توجد بيانات من السوار في هذه الفترة</string>
+    <string name="health_sleep_average">متوسط النوم</string>
+    <string name="health_nights">%1$d ليالٍ</string>
+    <string name="health_sleep_longest">أطول نوم</string>
+    <string name="health_resting_average">متوسط نبض الراحة</string>
+    <string name="health_bpm">%1$d نبضة/د</string>
+    <string name="health_exercise_total">إجمالي التمارين</string>
+    <string name="health_exercise_count">%1$d تمارين</string>
+    <string name="health_exercise_longest">أطول تمرين</string>
+    <string name="health_distance">مسافة السوار</string>
+    <string name="health_km">%1$s كم</string>
+    <string name="health_no_records">لم يسجّل السوار بيانات في هذه الفترة</string>
+    <string name="health_no_permission">لم يُمنح إذن Health Connect</string>
+    <string name="health_resting_chart">نبض الراحة</string>
+    <string name="health_min_max">%1$d–%2$d نبضة/د</string>
+
+    <string name="health_permissions_missing">لم تُمنح بعض أذونات الصحة</string>
+    <string name="health_grant">منح الإذن</string>
+    <string name="health_bed_wake">متوسط وقت النوم والاستيقاظ</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">مراحل النوم</string>
+    <string name="health_nights_average">متوسط %1$d ليالٍ</string>
+    <string name="sleep_deep">عميق</string>
+    <string name="sleep_light">خفيف</string>
+    <string name="sleep_rem">حركة العين السريعة</string>
+    <string name="sleep_awake">مستيقظ</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">أقل بـ %2$d نبضة/دقيقة من الأيام الـ %1$d السابقة</string>
+    <string name="health_resting_up">أعلى بـ %2$d نبضة/دقيقة من الأيام الـ %1$d السابقة</string>
+    <string name="health_resting_same">مثل الأيام الـ %1$d السابقة</string>
+    <string name="health_oxygen">أكسجين الدم (SpO2)</string>
+    <string name="health_oxygen_hint">الأدنى %1$s · %2$d قياسًا</string>
+    <string name="health_exercise_days">أيام التمرين</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">%1$s سعرة حرارية يوميًا في المتوسط</string>
+    <string name="heart_today_title">نبض القلب اليوم</string>
+    <string name="heart_today_empty">لا توجد قياسات للنبض اليوم</string>
+    <string name="weight_title">الوزن ومؤشر كتلة الجسم</string>
+    <string name="weight_empty">لا توجد أوزان مسجلة بعد. أضف وزنك لترى هنا مؤشر كتلة الجسم والتغير.</string>
+    <string name="weight_add">إضافة وزن</string>
+    <string name="weight_current">الوزن الحالي</string>
+    <string name="weight_kg">%1$s كغ</string>
+    <string name="weight_bmi">مؤشر كتلة الجسم</string>
+    <string name="weight_bmi_hint">%1$s · الطول %2$d سم</string>
+    <string name="bmi_under">نقص الوزن</string>
+    <string name="bmi_normal">طبيعي</string>
+    <string name="bmi_over">زيادة الوزن</string>
+    <string name="bmi_obese">سمنة</string>
+    <string name="weight_total_change">التغير الكلي</string>
+    <string name="weight_since">منذ %1$s</string>
+    <string name="weight_last_change">منذ آخر قياس</string>
+    <string name="weight_entries">السجلات</string>
+    <string name="weight_dialog_title">الوزن · %1$s</string>
+    <string name="weight_delete">حذف</string>
+    <string name="weight_range">%1$s–%2$s كغ</string>
+    <string name="weight_reminder">تذكير أسبوعي بالوزن</string>
+    <string name="weight_reminder_hint">يذكّرك بوزن نفسك قرابة الساعة 09:00 في أول يوم من الأسبوع.</string>
+    <string name="notify_weight_title">حان وقت الوزن</string>
+    <string name="notify_weight_text">أسبوع جديد يبدأ: زن نفسك وأضف وزنك إلى AdımSayar.</string>
+    <string name="notify_health_resting">متوسط نبض الراحة: %1$d نبضة/دقيقة</string>
+    <string name="notify_health_resting_down">متوسط نبض الراحة: %1$d نبضة/دقيقة، أقل بـ %2$d من الأسبوع الماضي</string>
+    <string name="notify_health_resting_up">متوسط نبض الراحة: %1$d نبضة/دقيقة، أعلى بـ %2$d من الأسبوع الماضي</string>
+    <string name="notify_health_sleep">متوسط النوم: %1$d س %2$d د</string>
+    <string name="weekly_summary_band_hint">عند تفعيل السوار يُضاف نبض الراحة ومتوسط النوم.</string>
+
+    <string name="setup_warning_title">لم يُعثر على سوار أو ساعة</string>
+    <string name="setup_warning_text">خلال آخر 7 أيام لم يكتب أي سوار أو ساعة ذكية نبض القلب أو النوم أو أكسجين الدم في Health Connect. لا يستطيع الهاتف قياس هذه البيانات، لذا لا تُجمع دون سوار أو ساعة.</string>
+    <string name="setup_open">الإعداد</string>
+    <string name="setup_title">إعداد السوار والساعة</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">يتطلب Health Connect نظام Android 9 أو أحدث. لا يمكن قراءة بيانات السوار على هذا الهاتف.</string>
+    <string name="setup_hc_ready">Health Connect جاهز.</string>
+    <string name="setup_hc_missing">Health Connect غير موجود على هذا الهاتف. حتى Android 13 يُثبَّت من Play Store، ومن Android 14 يأتي مع النظام.</string>
+    <string name="setup_hc_install">فتح في Play Store</string>
+    <string name="setup_step_brand">تطبيق السوار أو الساعة</string>
+    <string name="setup_brand_question">اختر علامة السوار أو الساعة:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">أخرى</string>
+    <string name="setup_steps_xiaomi">تُقرن Mi Band وساعات Xiaomi مع Mi Fitness. في Mi Fitness ← الملف الشخصي ← Health Connect فعّله واسمح بكل أنواع البيانات. إن كنت تستخدم Zepp Life فابحث في إعداداته عن خيار Health Connect.</string>
+    <string name="setup_steps_samsung">تعمل Galaxy Watch وGalaxy Fit مع Samsung Health. في Samsung Health ← الإعدادات ← Health Connect اسمح بمشاركة بياناتك.</string>
+    <string name="setup_steps_google">تعمل Pixel Watch وأجهزة Fitbit مع تطبيق Fitbit. فعّل المزامنة مع Health Connect من إعدادات تطبيق Fitbit.</string>
+    <string name="setup_steps_garmin">في إعدادات Garmin Connect افتح التطبيقات المتصلة ← Health Connect وفعّله.</string>
+    <string name="setup_steps_huawei">لا يكتب Huawei Health حاليًا في Health Connect، لذلك لا يمكن أن تصل بيانات ساعات Huawei وHonor إلى AdımSayar.</string>
+    <string name="setup_steps_other">ابحث عن خيار Health Connect في تطبيق ساعتك (مثل Wearfit Pro وDa Fit وFitCloudPro). إن لم يظهر التطبيق في Health Connect ← أذونات التطبيقات فلا يمكنه إرسال البيانات. تعمل Apple Watch مع iPhone فقط.</string>
+    <string name="setup_open_hc">فتح Health Connect</string>
+    <string name="setup_step_permission">أذونات AdımSayar</string>
+    <string name="setup_permission_wait">ثبّت Health Connect أولًا.</string>
+    <string name="setup_permission_enable">فعّل المفتاح أدناه لقراءة بيانات السوار. سيسأل Health Connect عن البيانات التي يمكننا قراءتها.</string>
+    <string name="setup_permission_ready">تم منح كل الأذونات.</string>
+    <string name="setup_step_check">التحقق</string>
+    <string name="setup_check_wait">بعد منح الأذونات تظهر هنا التطبيقات التي كتبت بيانات خلال آخر 7 أيام.</string>
+    <string name="setup_check_none">لم يكتب أي تطبيق بيانات في Health Connect خلال آخر 7 أيام. بعد إعداد الخطوة 2 افتح تطبيق السوار وانتظر المزامنة ثم تحقق مجددًا.</string>
+    <string name="setup_check_found">التطبيقات التي كتبت بيانات في Health Connect خلال آخر 7 أيام:</string>
+    <string name="setup_check_ok">بيانات السوار أو الساعة تصل.</string>
+    <string name="setup_check_no_wearable">تصل فقط بيانات يستطيع الهاتف قياسها أيضًا مثل الخطوات. لنبض القلب والنوم وأكسجين الدم يجب أن يكتب تطبيق السوار أو الساعة في Health Connect.</string>
+    <string name="setup_check_again">تحقق مجددًا</string>
+    <string name="source_steps">الخطوات</string>
+    <string name="source_heart">نبض القلب</string>
+    <string name="source_sleep">النوم</string>
+    <string name="source_oxygen">أكسجين الدم</string>
+    <string name="source_exercise">التمارين</string>
+    <string name="source_distance">المسافة</string>
+    <string name="source_calories">السعرات النشطة</string>
+
+    <string name="device_watch">ساعة</string>
+    <string name="device_band">سوار</string>
+    <string name="device_ring">خاتم ذكي</string>
+    <string name="device_phone">هاتف</string>
+    <string name="device_other">جهاز آخر</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
+        <item>ملخص صحة السوار في السجل (7 أو 30 يومًا): النوم ونبض الراحة مع رسم بياني والتمارين والمسافة</item>
+        <item>تُنزَّل التحديثات وتُثبَّت الآن من داخل التطبيق</item>
+        <item>تُقرأ خطوات السوار كل دقيقة أثناء فتح التطبيق</item>
+        <item>صفحة الصحة: مراحل النوم (عميق، خفيف، حركة العين السريعة، مستيقظ)، متوسط وقت النوم والاستيقاظ، أكسجين الدم (SpO2)، أنواع التمارين وأيامها، السعرات النشطة ونبض الراحة مقارنة بالفترة السابقة</item>
+        <item>مخطط نبض القلب لكل ساعة اليوم</item>
+        <item>سجل الوزن: مؤشر كتلة الجسم والتغير الكلي ومخطط. تذكير أسبوعي اختياري بالوزن</item>
+        <item>عند تفعيل السوار يعرض الملخص الأسبوعي أيضًا نبض الراحة والنوم</item>
+        <item>تنبّه صفحة الصحة عند عدم توصيل سوار أو ساعة، مع إعداد خطوة بخطوة: Health Connect وخطوات حسب العلامة والأذونات والتحقق من التطبيقات التي تكتب البيانات</item>
+        <item>تعرض شاشة الإعداد نوع الجهاز الذي يكتب البيانات وطرازه (إن أبلغ التطبيق عنهما)</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>يمكن قراءة خطوات Mi Band والأساور الأخرى عبر Health Connect (الإعدادات، معطّل افتراضيًا). في الساعات التي تُلبس فيها السوار تُحسب خطوات السوار، وفي غيرها خطوات الهاتف</item>
         <item>بيانات السوار في السجل: التمارين والمسافة والسعرات النشطة ونبض القلب والنوم</item>
@@ -279,9 +416,10 @@
     <string name="log_wearable_error">تعذّرت قراءة Health Connect (%1$s)</string>
     <string name="log_wearable_synced">السوار: خطوات اليوم %1$d، الأيام المحدّثة %2$d</string>
     <string name="band_exercises">التمارين</string>
+    <string name="band_active_kcal">السعرات النشطة (السوار)</string>
+    <string name="band_kcal_value">%1$s سعرة</string>
     <string name="band_heart">نبض القلب</string>
     <string name="band_heart_value">الراحة %1$s · الأدنى %2$s · المتوسط %3$s · الأعلى %4$s</string>
-    <string name="band_resting_week">نبض الراحة لآخر 7 أيام</string>
     <string name="band_sleep">النوم</string>
     <string name="band_sleep_value">%1$d س %2$d د</string>
     <string name="duration_minutes">%1$d د</string>

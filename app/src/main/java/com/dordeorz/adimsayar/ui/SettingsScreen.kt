@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,12 +20,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -38,8 +36,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -54,11 +52,14 @@ import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
+import com.dordeorz.adimsayar.data.InstallStart
 import com.dordeorz.adimsayar.data.UpdateChecker
+import com.dordeorz.adimsayar.data.UpdateInstaller
 import com.dordeorz.adimsayar.data.UpdateResult
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
 import com.dordeorz.adimsayar.data.WEIGHT_RANGE
+import java.io.File
 import java.time.format.TextStyle
 import kotlinx.coroutines.launch
 
@@ -67,6 +68,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Log, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.8.0", R.array.release_notes_0_8_0),
     ReleaseNote("0.7.0", R.array.release_notes_0_7_0),
     ReleaseNote("0.6.1", R.array.release_notes_0_6_1),
     ReleaseNote("0.6.0", R.array.release_notes_0_6_0),
@@ -81,26 +83,15 @@ private val DAILY_PRESETS = listOf(6_000L, 8_000L, 10_000L, 12_000L, 15_000L)
 private val WEEKLY_PRESETS = listOf(42_000L, 56_000L, 70_000L, 84_000L, 105_000L)
 
 @Composable
-fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit) {
+fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val settings = state.settings
     var dialog by rememberSaveable { mutableStateOf<SettingsDialog?>(null) }
-    Scaffold { padding ->
+    Box {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
                 .verticalScroll(rememberScrollState()),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                IconButton(onClick = onBack) {
-                    Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = stringResource(R.string.back))
-                }
-                Text(stringResource(R.string.settings), style = MaterialTheme.typography.titleLarge)
-            }
-
             SectionTitle(stringResource(R.string.settings_goals))
             ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
                 dialog = SettingsDialog.DailyGoal
@@ -160,9 +151,16 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
             )
             SwitchRow(
                 title = stringResource(R.string.weekly_summary),
-                hint = stringResource(R.string.weekly_summary_hint),
+                hint = stringResource(R.string.weekly_summary_hint) +
+                    if (state.wearableEnabled) " " + stringResource(R.string.weekly_summary_band_hint) else "",
                 checked = settings.weeklySummary,
                 onCheckedChange = actions.onWeeklySummaryChange,
+            )
+            SwitchRow(
+                title = stringResource(R.string.weight_reminder),
+                hint = stringResource(R.string.weight_reminder_hint),
+                checked = settings.weightReminder,
+                onCheckedChange = actions.onWeightReminderChange,
             )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
@@ -249,13 +247,22 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
             }
             val uriHandler = LocalUriHandler.current
             val scope = rememberCoroutineScope()
+            val context = LocalContext.current
             var checking by remember { mutableStateOf(false) }
             var update by remember { mutableStateOf<UpdateResult?>(null) }
+            var progress by remember { mutableStateOf<Int?>(null) }
+            var apk by remember { mutableStateOf<File?>(null) }
+            var downloadFailed by remember { mutableStateOf(false) }
+            var needsPermission by remember { mutableStateOf(false) }
             val available = update as? UpdateResult.Available
             ClickRow(
                 stringResource(R.string.check_updates),
                 when {
                     checking -> stringResource(R.string.update_checking)
+                    progress != null -> stringResource(R.string.update_downloading, progress ?: 0)
+                    needsPermission -> stringResource(R.string.update_install_permission)
+                    apk != null -> stringResource(R.string.update_ready)
+                    downloadFailed -> stringResource(R.string.update_download_failed)
                     available != null -> stringResource(R.string.update_available, available.version)
                     update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
                     update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
@@ -263,9 +270,31 @@ fun SettingsScreen(state: MainUiState, actions: MainActions, onBack: () -> Unit)
                     else -> stringResource(R.string.check_updates_hint)
                 },
             ) {
+                val file = apk
                 when {
-                    checking -> Unit
-                    available != null -> runCatching { uriHandler.openUri(available.url) }
+                    checking || progress != null -> Unit
+                    file != null -> {
+                        val start = UpdateInstaller.install(context, file)
+                        needsPermission = start == InstallStart.NeedsPermission
+                        if (start == InstallStart.Failed) {
+                            apk = null
+                            downloadFailed = true
+                        }
+                    }
+                    available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
+                    available?.apkUrl != null -> scope.launch {
+                        progress = 0
+                        val downloaded = UpdateInstaller.download(context, available.apkUrl, available.version) { percent ->
+                            scope.launch { progress = percent }
+                        }
+                        progress = null
+                        apk = downloaded
+                        downloadFailed = downloaded == null
+                        if (downloaded != null) {
+                            val start = UpdateInstaller.install(context, downloaded)
+                            needsPermission = start == InstallStart.NeedsPermission
+                        }
+                    }
                     else -> scope.launch {
                         checking = true
                         update = UpdateChecker.check(state.version)

@@ -26,6 +26,28 @@ data class BandSteps(
     val steps: Long,
 )
 
+@Entity(tableName = "weights")
+data class WeightEntry(
+    @PrimaryKey val date: String,
+    val kg: Double,
+)
+
+@Dao
+interface WeightDao {
+
+    @Query("SELECT * FROM weights ORDER BY date")
+    fun observeAll(): Flow<List<WeightEntry>>
+
+    @Query("SELECT * FROM weights ORDER BY date DESC LIMIT 1")
+    suspend fun latest(): WeightEntry?
+
+    @Upsert
+    suspend fun upsert(entry: WeightEntry)
+
+    @Query("DELETE FROM weights WHERE date = :date")
+    suspend fun delete(date: String)
+}
+
 private const val MERGED = "SELECT date, steps FROM band_steps UNION ALL " +
     "SELECT date, steps FROM daily_steps WHERE date NOT IN (SELECT date FROM band_steps)"
 
@@ -76,9 +98,11 @@ abstract class DailyStepsDao {
     abstract suspend fun clearBand()
 }
 
-@Database(entities = [DailySteps::class, BandSteps::class], version = 2, exportSchema = false)
+@Database(entities = [DailySteps::class, BandSteps::class, WeightEntry::class], version = 3, exportSchema = false)
 abstract class StepDatabase : RoomDatabase() {
     abstract fun dailySteps(): DailyStepsDao
+
+    abstract fun weights(): WeightDao
 
     companion object {
         @Volatile
@@ -90,9 +114,15 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `weights` (`date` TEXT NOT NULL, `kg` REAL NOT NULL, PRIMARY KEY(`date`))")
+            }
+        }
+
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
                 .also { instance = it }
         }

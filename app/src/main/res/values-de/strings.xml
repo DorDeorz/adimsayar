@@ -58,6 +58,7 @@
     <string name="tab_today">Heute</string>
     <string name="tab_history">Verlauf</string>
     <string name="tab_medals">Medaillen</string>
+    <string name="tab_health">Gesundheit</string>
     <string name="goal_reached">Tagesziel erreicht!</string>
     <string name="goal_remaining">Noch %1$s Schritte bis zum Ziel</string>
     <string name="steps_value">%1$s Schritte</string>
@@ -120,6 +121,10 @@
     <string name="update_available">Neue Version verfügbar: %1$s. Zum Herunterladen tippen</string>
     <string name="update_no_release">Noch keine Version veröffentlicht</string>
     <string name="update_failed">Prüfung fehlgeschlagen. Internetverbindung prüfen</string>
+    <string name="update_downloading">Wird heruntergeladen… %1$d %%</string>
+    <string name="update_ready">Heruntergeladen. Zum Installieren tippen</string>
+    <string name="update_install_permission">Installation aus dieser App in den Einstellungen erlauben und erneut tippen</string>
+    <string name="update_download_failed">Download fehlgeschlagen. Tippen, um die GitHub-Seite zu öffnen</string>
     <string name="github_page">GitHub-Seite</string>
     <string name="github_page_hint">Quellcode, Versionen und Fehlermeldungen</string>
     <string name="log_hint">Letzte Zähler- und HyperOS-Ablesungen</string>
@@ -190,6 +195,138 @@
     <string name="next_year">Nächstes Jahr</string>
     <string name="year_medals">Verdiente Medaillen</string>
 
+    <string name="health_off_title">Armband ist aus</string>
+    <string name="health_off_text">Aktiviere in den Einstellungen die Armbandschritte, um Schlaf, Puls und Trainings zu sehen.</string>
+    <string name="health_title">Gesundheit (Armband)</string>
+    <string name="health_last_days">Letzte %1$d Tage</string>
+    <string name="health_loading">Wird aus Health Connect gelesen…</string>
+    <string name="health_empty">Keine Armbanddaten in diesem Zeitraum</string>
+    <string name="health_sleep_average">Durchschnittlicher Schlaf</string>
+    <string name="health_nights">%1$d Nächte</string>
+    <string name="health_sleep_longest">Längster Schlaf</string>
+    <string name="health_resting_average">Durchschnittlicher Ruhepuls</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Training gesamt</string>
+    <string name="health_exercise_count">%1$d Trainings</string>
+    <string name="health_exercise_longest">Längstes Training</string>
+    <string name="health_distance">Armband-Strecke</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Das Armband hat in diesem Zeitraum nichts gespeichert</string>
+    <string name="health_no_permission">Keine Health-Connect-Berechtigung</string>
+    <string name="health_resting_chart">Ruhepuls</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
+    <string name="health_permissions_missing">Einige Gesundheitsberechtigungen fehlen</string>
+    <string name="health_grant">Erlauben</string>
+    <string name="health_bed_wake">Durchschnittliche Schlafens- und Aufwachzeit</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Schlafphasen</string>
+    <string name="health_nights_average">Durchschnitt aus %1$d Nächten</string>
+    <string name="sleep_deep">Tief</string>
+    <string name="sleep_light">Leicht</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Wach</string>
+    <string name="health_percent">%1$s %%</string>
+    <string name="health_resting_down">%2$d bpm niedriger als die %1$d Tage davor</string>
+    <string name="health_resting_up">%2$d bpm höher als die %1$d Tage davor</string>
+    <string name="health_resting_same">Gleich wie die %1$d Tage davor</string>
+    <string name="health_oxygen">Blutsauerstoff (SpO2)</string>
+    <string name="health_oxygen_hint">Niedrigster %1$s · %2$d Messungen</string>
+    <string name="health_exercise_days">Trainingstage</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">Durchschnittlich %1$s kcal pro Tag</string>
+    <string name="heart_today_title">Herzfrequenz heute</string>
+    <string name="heart_today_empty">Heute keine Herzfrequenzdaten</string>
+    <string name="weight_title">Gewicht und Body-Mass-Index</string>
+    <string name="weight_empty">Noch keine Gewichtseinträge. Trage dein Gewicht ein, um BMI und Verlauf zu sehen.</string>
+    <string name="weight_add">Gewicht eintragen</string>
+    <string name="weight_current">Aktuelles Gewicht</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Body-Mass-Index (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · Größe %2$d cm</string>
+    <string name="bmi_under">Untergewicht</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Übergewicht</string>
+    <string name="bmi_obese">Adipositas</string>
+    <string name="weight_total_change">Gesamtänderung</string>
+    <string name="weight_since">Seit %1$s</string>
+    <string name="weight_last_change">Seit dem letzten Eintrag</string>
+    <string name="weight_entries">Einträge</string>
+    <string name="weight_dialog_title">Gewicht · %1$s</string>
+    <string name="weight_delete">Löschen</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Wöchentliche Gewichtserinnerung</string>
+    <string name="weight_reminder_hint">Erinnert dich am ersten Tag der Woche gegen 09:00 ans Wiegen.</string>
+    <string name="notify_weight_title">Zeit zum Wiegen</string>
+    <string name="notify_weight_text">Eine neue Woche beginnt: Wiege dich und trage es in AdımSayar ein.</string>
+    <string name="notify_health_resting">Durchschnittlicher Ruhepuls: %1$d bpm</string>
+    <string name="notify_health_resting_down">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d niedriger als letzte Woche</string>
+    <string name="notify_health_resting_up">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d höher als letzte Woche</string>
+    <string name="notify_health_sleep">Durchschnittlicher Schlaf: %1$d Std. %2$d Min.</string>
+    <string name="weekly_summary_band_hint">Mit aktivem Armband kommen Ruhepuls und durchschnittlicher Schlaf hinzu.</string>
+
+    <string name="setup_warning_title">Kein Armband und keine Uhr gefunden</string>
+    <string name="setup_warning_text">In den letzten 7 Tagen hat kein Armband und keine Smartwatch Herzfrequenz, Schlaf oder Blutsauerstoff in Health Connect geschrieben. Das Handy kann diese Werte nicht messen, ohne Armband oder Uhr werden sie nicht erfasst.</string>
+    <string name="setup_open">Einrichten</string>
+    <string name="setup_title">Armband und Uhr einrichten</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect braucht Android 9 oder neuer. Auf diesem Handy können keine Armbanddaten gelesen werden.</string>
+    <string name="setup_hc_ready">Health Connect ist bereit.</string>
+    <string name="setup_hc_missing">Health Connect fehlt auf diesem Handy. Bis Android 13 wird es aus dem Play Store installiert, ab Android 14 ist es enthalten.</string>
+    <string name="setup_hc_install">Im Play Store öffnen</string>
+    <string name="setup_step_brand">App deines Armbands oder deiner Uhr</string>
+    <string name="setup_brand_question">Wähle die Marke deines Armbands oder deiner Uhr:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Andere</string>
+    <string name="setup_steps_xiaomi">Mi Band und Xiaomi-Uhren werden mit Mi Fitness gekoppelt. Schalte in Mi Fitness → Profil → Health Connect ein und erlaube alle Datentypen. Wenn du Zepp Life nutzt, sieh in den Einstellungen nach einer Health-Connect-Option.</string>
+    <string name="setup_steps_samsung">Galaxy Watch und Galaxy Fit arbeiten mit Samsung Health. Erlaube in Samsung Health → Einstellungen → Health Connect das Teilen deiner Daten.</string>
+    <string name="setup_steps_google">Pixel Watch und Fitbit-Geräte arbeiten mit der Fitbit-App. Schalte in den Einstellungen der Fitbit-App die Synchronisierung mit Health Connect ein.</string>
+    <string name="setup_steps_garmin">Öffne in den Einstellungen von Garmin Connect Verbundene Apps → Health Connect und schalte es ein.</string>
+    <string name="setup_steps_huawei">Huawei Health schreibt derzeit nicht in Health Connect. Daten von Huawei- und Honor-Uhren können AdımSayar daher nicht erreichen.</string>
+    <string name="setup_steps_other">Suche in der App deiner Uhr (z. B. Wearfit Pro, Da Fit, FitCloudPro) nach einer Health-Connect-Option. Steht die App nicht unter Health Connect → App-Berechtigungen, kann sie keine Daten senden. Die Apple Watch funktioniert nur mit einem iPhone.</string>
+    <string name="setup_open_hc">Health Connect öffnen</string>
+    <string name="setup_step_permission">Berechtigungen von AdımSayar</string>
+    <string name="setup_permission_wait">Installiere zuerst Health Connect.</string>
+    <string name="setup_permission_enable">Schalte unten den Schalter ein, um Armbanddaten zu lesen. Health Connect fragt, welche Daten wir lesen dürfen.</string>
+    <string name="setup_permission_ready">Alle Berechtigungen erteilt.</string>
+    <string name="setup_step_check">Prüfen</string>
+    <string name="setup_check_wait">Sobald die Berechtigungen erteilt sind, stehen hier die Apps, die in den letzten 7 Tagen Daten geschrieben haben.</string>
+    <string name="setup_check_none">Keine App hat in den letzten 7 Tagen Daten in Health Connect geschrieben. Öffne nach der Einstellung aus Schritt 2 die App deines Armbands, lass sie synchronisieren und prüfe erneut.</string>
+    <string name="setup_check_found">Apps, die in den letzten 7 Tagen Daten in Health Connect geschrieben haben:</string>
+    <string name="setup_check_ok">Daten von Armband oder Uhr kommen an.</string>
+    <string name="setup_check_no_wearable">Es kommen nur Daten an, die auch das Handy messen kann, etwa Schritte. Für Herzfrequenz, Schlaf und Blutsauerstoff muss die App deines Armbands oder deiner Uhr in Health Connect schreiben.</string>
+    <string name="setup_check_again">Erneut prüfen</string>
+    <string name="source_steps">Schritte</string>
+    <string name="source_heart">Herzfrequenz</string>
+    <string name="source_sleep">Schlaf</string>
+    <string name="source_oxygen">Blutsauerstoff</string>
+    <string name="source_exercise">Training</string>
+    <string name="source_distance">Strecke</string>
+    <string name="source_calories">Aktive Kalorien</string>
+
+    <string name="device_watch">Uhr</string>
+    <string name="device_band">Armband</string>
+    <string name="device_ring">Smart Ring</string>
+    <string name="device_phone">Handy</string>
+    <string name="device_other">Anderes Gerät</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
+        <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
+        <item>Updates werden jetzt direkt in der App heruntergeladen und installiert</item>
+        <item>Armbandschritte werden bei geöffneter App jede Minute gelesen</item>
+        <item>Gesundheitsseite: Schlafphasen (tief, leicht, REM, wach), durchschnittliche Schlafens- und Aufwachzeit, Blutsauerstoff (SpO2), Trainingsarten und Trainingstage, aktive Kalorien und Ruhepuls im Vergleich zum Vorzeitraum</item>
+        <item>Stündliches Herzfrequenzdiagramm für heute</item>
+        <item>Gewichtsprotokoll: Body-Mass-Index, Gesamtänderung und Diagramm. Optionale wöchentliche Wiege-Erinnerung</item>
+        <item>Mit aktivem Armband zeigt die Wochenübersicht auch Ruhepuls und Schlaf</item>
+        <item>Die Gesundheitsseite warnt, wenn kein Armband und keine Uhr verbunden ist, mit Schritt-für-Schritt-Einrichtung: Health Connect, Anleitung je Marke, Berechtigungen und Prüfung, welche Apps Daten schreiben</item>
+        <item>Die Einrichtung zeigt Typ und Modell des Geräts, das Daten schreibt (wenn die App es meldet)</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Schritte von Mi Band und anderen Armbändern können über Health Connect gelesen werden (Einstellungen, standardmäßig aus). In Stunden mit Armband zählt das Armband, sonst das Telefon</item>
         <item>Armbanddaten im Verlauf: Trainings, Strecke, aktive Kalorien, Puls und Schlaf</item>
@@ -279,9 +416,10 @@
     <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
     <string name="log_wearable_synced">Armband: heute %1$d Schritte, %2$d Tage aktualisiert</string>
     <string name="band_exercises">Trainings</string>
+    <string name="band_active_kcal">Aktive Kalorien (Armband)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Puls</string>
     <string name="band_heart_value">Ruhe %1$s · min. %2$s · Ø %3$s · max. %4$s</string>
-    <string name="band_resting_week">Ruhepuls der letzten 7 Tage</string>
     <string name="band_sleep">Schlaf</string>
     <string name="band_sleep_value">%1$d Std. %2$d Min.</string>
     <string name="duration_minutes">%1$d Min.</string>

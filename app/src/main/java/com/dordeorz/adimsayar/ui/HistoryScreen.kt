@@ -53,7 +53,11 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 
 @Composable
-fun HistoryScreen(state: MainUiState, loadDayDetail: suspend (LocalDate) -> DayDetail?, loadBandDay: suspend (LocalDate) -> BandDay?) {
+fun HistoryScreen(
+    state: MainUiState,
+    loadDayDetail: suspend (LocalDate) -> DayDetail?,
+    loadBandDay: suspend (LocalDate) -> BandDay?,
+) {
     val currentMonth = YearMonth.from(state.today)
     val firstMonth = state.history.keys.minOrNull()?.let(YearMonth::from)?.coerceAtMost(currentMonth) ?: currentMonth
     var monthText by rememberSaveable { mutableStateOf(currentMonth.toString()) }
@@ -270,7 +274,7 @@ private fun SelectedDayCard(
                     Text(LONG_DAY_FORMAT.format(date), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(stringResource(R.string.steps_value, format(steps)), style = MaterialTheme.typography.headlineMedium)
                     Text(
-                        distanceAndCalories(steps, state.settings, band?.distanceKm, band?.activeKcal),
+                        distanceAndCalories(steps, state.settings, band?.distanceKm),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -367,6 +371,16 @@ private fun BandSection(day: BandDay) {
             }
         }
     }
+    day.activeKcal?.let { kcal ->
+        Column(modifier = Modifier.padding(top = 16.dp)) {
+            Text(stringResource(R.string.band_active_kcal), style = MaterialTheme.typography.labelLarge)
+            Text(
+                stringResource(R.string.band_kcal_value, format(kcal)),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+        }
+    }
     day.heart?.let { heart ->
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.band_heart), style = MaterialTheme.typography.labelLarge)
@@ -383,7 +397,6 @@ private fun BandSection(day: BandDay) {
             )
         }
     }
-    if (day.restingWeek.isNotEmpty()) RestingWeekChart(day.restingWeek)
     day.sleepMinutes?.takeIf { it > 0L }?.let { minutes ->
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.band_sleep), style = MaterialTheme.typography.labelLarge)
@@ -396,50 +409,7 @@ private fun BandSection(day: BandDay) {
     }
 }
 
-@Composable
-private fun RestingWeekChart(week: List<Pair<LocalDate, Long?>>) {
-    val values = week.mapNotNull { it.second }
-    val max = values.max()
-    val min = (values.min() - RESTING_CHART_FLOOR).coerceAtLeast(0L)
-    val range = (max - min).coerceAtLeast(1L)
-    val color = MaterialTheme.colorScheme.tertiary
-    Column(modifier = Modifier.padding(top = 16.dp)) {
-        Text(stringResource(R.string.band_resting_week), style = MaterialTheme.typography.labelLarge)
-        Row(
-            modifier = Modifier.fillMaxWidth().height(HOURLY_HEIGHT).padding(top = 8.dp),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-        ) {
-            week.forEach { (_, bpm) ->
-                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    if (bpm != null) {
-                        Text(bpm.toString(), style = MaterialTheme.typography.labelSmall)
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height((HOURLY_HEIGHT - 28.dp) * ((bpm - min).toFloat() / range))
-                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                                .background(color),
-                        )
-                    }
-                }
-            }
-        }
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            week.forEach { (date, _) ->
-                Text(
-                    date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f),
-                )
-            }
-        }
-    }
-}
-
-private fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
+internal fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
     ExerciseKind.Walking -> R.string.exercise_walking
     ExerciseKind.Running -> R.string.exercise_running
     ExerciseKind.Biking -> R.string.exercise_biking
@@ -449,8 +419,6 @@ private fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
     ExerciseKind.Strength -> R.string.exercise_strength
     ExerciseKind.Other -> R.string.exercise_other
 }
-
-private const val RESTING_CHART_FLOOR = 5L
 
 private val HOURLY_HEIGHT = 72.dp
 
@@ -494,7 +462,7 @@ private fun RecordsCard(records: Records, today: LocalDate) {
 }
 
 @Composable
-private fun RecordRow(label: String, value: String, hint: String?) {
+internal fun RecordRow(label: String, value: String, hint: String?) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,

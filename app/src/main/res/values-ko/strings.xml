@@ -58,6 +58,7 @@
     <string name="tab_today">오늘</string>
     <string name="tab_history">기록</string>
     <string name="tab_medals">메달</string>
+    <string name="tab_health">건강</string>
     <string name="goal_reached">일일 목표 달성!</string>
     <string name="goal_remaining">목표까지 %1$s걸음</string>
     <string name="steps_value">%1$s걸음</string>
@@ -120,6 +121,10 @@
     <string name="update_available">새 버전 %1$s이(가) 있습니다. 탭하여 다운로드</string>
     <string name="update_no_release">아직 게시된 릴리스가 없습니다</string>
     <string name="update_failed">확인할 수 없습니다. 인터넷 연결을 확인하세요</string>
+    <string name="update_downloading">다운로드 중… %1$d%%</string>
+    <string name="update_ready">다운로드 완료. 눌러서 설치</string>
+    <string name="update_install_permission">설정에서 이 앱의 설치를 허용한 뒤 다시 누르세요</string>
+    <string name="update_download_failed">다운로드하지 못했습니다. 눌러서 GitHub 페이지 열기</string>
     <string name="github_page">GitHub 페이지</string>
     <string name="github_page_hint">소스 코드, 릴리스 및 문제 신고</string>
     <string name="log_hint">최근 카운터 및 HyperOS 읽기</string>
@@ -190,6 +195,138 @@
     <string name="next_year">다음 연도</string>
     <string name="year_medals">획득한 메달</string>
 
+    <string name="health_off_title">밴드가 꺼져 있습니다</string>
+    <string name="health_off_text">설정에서 밴드 걸음 수를 켜면 수면, 심박수, 운동 요약을 볼 수 있습니다.</string>
+    <string name="health_title">건강 요약 (밴드)</string>
+    <string name="health_last_days">최근 %1$d일</string>
+    <string name="health_loading">Health Connect에서 읽는 중…</string>
+    <string name="health_empty">이 기간에 밴드 데이터가 없습니다</string>
+    <string name="health_sleep_average">평균 수면</string>
+    <string name="health_nights">%1$d일 밤</string>
+    <string name="health_sleep_longest">가장 긴 수면</string>
+    <string name="health_resting_average">평균 안정 시 심박수</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">총 운동</string>
+    <string name="health_exercise_count">운동 %1$d회</string>
+    <string name="health_exercise_longest">가장 긴 운동</string>
+    <string name="health_distance">밴드 거리</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_no_records">이 기간에 밴드 기록이 없습니다</string>
+    <string name="health_no_permission">Health Connect 권한이 없습니다</string>
+    <string name="health_resting_chart">안정 시 심박수</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
+    <string name="health_permissions_missing">일부 건강 권한이 허용되지 않았습니다</string>
+    <string name="health_grant">허용</string>
+    <string name="health_bed_wake">평균 취침·기상 시간</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">수면 단계</string>
+    <string name="health_nights_average">%1$d일 밤 평균</string>
+    <string name="sleep_deep">깊은 수면</string>
+    <string name="sleep_light">얕은 수면</string>
+    <string name="sleep_rem">렘수면</string>
+    <string name="sleep_awake">깨어 있음</string>
+    <string name="health_percent">%1$s%%</string>
+    <string name="health_resting_down">이전 %1$d일보다 %2$d bpm 낮음</string>
+    <string name="health_resting_up">이전 %1$d일보다 %2$d bpm 높음</string>
+    <string name="health_resting_same">이전 %1$d일과 같음</string>
+    <string name="health_oxygen">혈중 산소 (SpO2)</string>
+    <string name="health_oxygen_hint">최저 %1$s · %2$d회 측정</string>
+    <string name="health_exercise_days">운동한 날</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">하루 평균 %1$s kcal</string>
+    <string name="heart_today_title">오늘의 심박수</string>
+    <string name="heart_today_empty">오늘 심박수 기록이 없습니다</string>
+    <string name="weight_title">체중과 체질량지수</string>
+    <string name="weight_empty">아직 체중 기록이 없습니다. 체중을 추가하면 여기에서 BMI와 변화를 볼 수 있습니다.</string>
+    <string name="weight_add">체중 추가</string>
+    <string name="weight_current">현재 체중</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">체질량지수 (BMI)</string>
+    <string name="weight_bmi_hint">%1$s · 키 %2$d cm</string>
+    <string name="bmi_under">저체중</string>
+    <string name="bmi_normal">정상</string>
+    <string name="bmi_over">과체중</string>
+    <string name="bmi_obese">비만</string>
+    <string name="weight_total_change">총 변화</string>
+    <string name="weight_since">%1$s부터</string>
+    <string name="weight_last_change">지난 기록 이후</string>
+    <string name="weight_entries">기록</string>
+    <string name="weight_dialog_title">체중 · %1$s</string>
+    <string name="weight_delete">삭제</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">주간 체중 알림</string>
+    <string name="weight_reminder_hint">한 주의 첫날 09:00쯤 체중을 재도록 알려 줍니다.</string>
+    <string name="notify_weight_title">체중을 잴 시간입니다</string>
+    <string name="notify_weight_text">새로운 한 주가 시작됩니다. 체중을 재고 AdımSayar에 기록하세요.</string>
+    <string name="notify_health_resting">평균 안정 시 심박수: %1$d bpm</string>
+    <string name="notify_health_resting_down">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 낮음</string>
+    <string name="notify_health_resting_up">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 높음</string>
+    <string name="notify_health_sleep">평균 수면: %1$d시간 %2$d분</string>
+    <string name="weekly_summary_band_hint">밴드를 켜면 안정 시 심박수와 평균 수면도 포함됩니다.</string>
+
+    <string name="setup_warning_title">밴드나 시계를 찾을 수 없습니다</string>
+    <string name="setup_warning_text">지난 7일 동안 어떤 밴드나 스마트워치도 Health Connect에 심박수, 수면, 혈중 산소를 기록하지 않았습니다. 휴대폰은 이를 측정할 수 없어 밴드나 시계 없이는 수집되지 않습니다.</string>
+    <string name="setup_open">설정</string>
+    <string name="setup_title">밴드 및 시계 설정</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect에는 Android 9 이상이 필요합니다. 이 휴대폰에서는 밴드 데이터를 읽을 수 없습니다.</string>
+    <string name="setup_hc_ready">Health Connect가 준비되었습니다.</string>
+    <string name="setup_hc_missing">이 휴대폰에는 Health Connect가 없습니다. Android 13 이하는 Play 스토어에서 설치하고, Android 14 이상은 기본 탑재되어 있습니다.</string>
+    <string name="setup_hc_install">Play 스토어에서 열기</string>
+    <string name="setup_step_brand">밴드나 시계의 앱</string>
+    <string name="setup_brand_question">밴드나 시계의 브랜드를 선택하세요:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">기타</string>
+    <string name="setup_steps_xiaomi">Mi Band와 Xiaomi 시계는 Mi Fitness와 페어링됩니다. Mi Fitness → 프로필 → Health Connect를 켜고 모든 데이터 유형을 허용하세요. Zepp Life를 사용한다면 설정에 Health Connect 항목이 있는지 확인하세요.</string>
+    <string name="setup_steps_samsung">Galaxy Watch와 Galaxy Fit은 Samsung Health와 함께 작동합니다. Samsung Health → 설정 → Health Connect에서 데이터 공유를 허용하세요.</string>
+    <string name="setup_steps_google">Pixel Watch와 Fitbit 기기는 Fitbit 앱과 함께 작동합니다. Fitbit 앱 설정에서 Health Connect 동기화를 켜세요.</string>
+    <string name="setup_steps_garmin">Garmin Connect 설정에서 연결된 앱 → Health Connect를 열고 켜세요.</string>
+    <string name="setup_steps_huawei">Huawei Health는 현재 Health Connect에 기록하지 않으므로 Huawei와 Honor 시계의 데이터는 AdımSayar에 전달될 수 없습니다.</string>
+    <string name="setup_steps_other">시계 앱(예: Wearfit Pro, Da Fit, FitCloudPro)에서 Health Connect 항목을 찾아보세요. 앱이 Health Connect → 앱 권한 목록에 없으면 데이터를 보낼 수 없습니다. Apple Watch는 iPhone에서만 작동합니다.</string>
+    <string name="setup_open_hc">Health Connect 열기</string>
+    <string name="setup_step_permission">AdımSayar 권한</string>
+    <string name="setup_permission_wait">먼저 Health Connect를 설치하세요.</string>
+    <string name="setup_permission_enable">아래 스위치를 켜면 밴드 데이터를 읽습니다. Health Connect가 읽을 수 있는 데이터를 물어봅니다.</string>
+    <string name="setup_permission_ready">모든 권한이 허용되었습니다.</string>
+    <string name="setup_step_check">확인</string>
+    <string name="setup_check_wait">권한을 허용하면 지난 7일 동안 데이터를 기록한 앱이 여기에 표시됩니다.</string>
+    <string name="setup_check_none">지난 7일 동안 Health Connect에 데이터를 기록한 앱이 없습니다. 2단계 설정 후 밴드 앱을 열어 동기화를 기다린 다음 다시 확인하세요.</string>
+    <string name="setup_check_found">지난 7일 동안 Health Connect에 데이터를 기록한 앱:</string>
+    <string name="setup_check_ok">밴드나 시계 데이터가 들어오고 있습니다.</string>
+    <string name="setup_check_no_wearable">걸음 수처럼 휴대폰도 측정할 수 있는 데이터만 들어옵니다. 심박수, 수면, 혈중 산소는 밴드나 시계 앱이 Health Connect에 기록해야 합니다.</string>
+    <string name="setup_check_again">다시 확인</string>
+    <string name="source_steps">걸음 수</string>
+    <string name="source_heart">심박수</string>
+    <string name="source_sleep">수면</string>
+    <string name="source_oxygen">혈중 산소</string>
+    <string name="source_exercise">운동</string>
+    <string name="source_distance">거리</string>
+    <string name="source_calories">활동 칼로리</string>
+
+    <string name="device_watch">시계</string>
+    <string name="device_band">밴드</string>
+    <string name="device_ring">스마트 링</string>
+    <string name="device_phone">휴대폰</string>
+    <string name="device_other">기타 기기</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
+        <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
+        <item>이제 앱 안에서 업데이트를 다운로드하고 설치합니다</item>
+        <item>앱이 열려 있으면 밴드 걸음 수를 1분마다 읽습니다</item>
+        <item>건강 페이지: 수면 단계(깊은 수면, 얕은 수면, 렘수면, 깨어 있음), 평균 취침·기상 시간, 혈중 산소(SpO2), 운동 종류와 운동한 날, 활동 칼로리, 이전 기간 대비 안정 시 심박수</item>
+        <item>오늘의 시간별 심박수 차트</item>
+        <item>체중 기록: BMI, 총 변화와 차트. 선택형 주간 체중 알림</item>
+        <item>밴드를 켜면 주간 요약 알림에 안정 시 심박수와 수면도 표시</item>
+        <item>밴드나 시계가 연결되지 않으면 건강 페이지에서 알리고 단계별 설정 제공: Health Connect, 브랜드별 방법, 권한, 데이터를 기록하는 앱 확인</item>
+        <item>설정 화면에 데이터를 기록하는 기기의 종류와 모델 표시(앱이 제공하는 경우)</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>
         <item>기록에 밴드 데이터: 운동, 거리, 활동 칼로리, 심박수, 수면</item>
@@ -279,9 +416,10 @@
     <string name="log_wearable_error">Health Connect를 읽을 수 없음 (%1$s)</string>
     <string name="log_wearable_synced">밴드: 오늘 %1$d걸음, %2$d일 업데이트</string>
     <string name="band_exercises">운동</string>
+    <string name="band_active_kcal">활동 칼로리 (밴드)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">심박수</string>
     <string name="band_heart_value">안정 시 %1$s · 최저 %2$s · 평균 %3$s · 최고 %4$s</string>
-    <string name="band_resting_week">최근 7일 안정 시 심박수</string>
     <string name="band_sleep">수면</string>
     <string name="band_sleep_value">%1$d시간 %2$d분</string>
     <string name="duration_minutes">%1$d분</string>

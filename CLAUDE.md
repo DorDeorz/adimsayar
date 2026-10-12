@@ -24,8 +24,8 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Kalıcı depolama: Room.
 - Arka planda sayma: kalıcı bildirimli servis yoktur. Sayaç seyrek okunur ve fark kaydedilir (bkz. "Adım sayma").
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
-- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü içindir (bkz. "İzinler").
-- **Health Connect yalnızca bileklik verisi için, kullanıcının açtığı anahtarla okunur** (2026-10-11 kararı). Varsayılan kapalıdır. Yalnızca okuma yapılır, Health Connect'e hiçbir şey yazılmaz. Kapalıyken veri yalnızca telefonun kendi sensörlerinden (ve açıksa HyperOS kaydından) gelir. Bağımlılık `androidx.health.connect:connect-client`. Adımlar `data/WearableSteps.kt`; egzersiz, mesafe, aktif kalori, nabız ve uyku `data/WearableHealth.kt` içinde, Geçmiş'te seçilen gün için anlık okunur ve hiçbir yerde saklanmaz.
+- Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü ve indirmesi içindir (bkz. "İzinler").
+- **Health Connect yalnızca bileklik verisi için, kullanıcının açtığı anahtarla okunur** (2026-10-11 kararı). Varsayılan kapalıdır. Yalnızca okuma yapılır, Health Connect'e hiçbir şey yazılmaz. Kapalıyken veri yalnızca telefonun kendi sensörlerinden (ve açıksa HyperOS kaydından) gelir. Bağımlılık `androidx.health.connect:connect-client`. Adımlar `data/WearableSteps.kt`; egzersiz, mesafe, aktif kalori, nabız, uyku (evreleriyle) ve kan oksijeni `data/WearableHealth.kt` içinde; Geçmiş'te seçilen gün ve Sağlık sayfasındaki 7/30 günlük özet için anlık okunur ve hiçbir yerde saklanmaz.
 - Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
@@ -40,7 +40,7 @@ Tek sensöre güvenilmez. İki kaynak okunur ve çapraz doğrulanır:
 | `TYPE_STEP_DETECTOR` | Çapraz doğrulama, donmaya duyarlı değil | Yavaşlatma/hızlanma sırasında hata |
 | `TYPE_STEP_COUNTER` | Birincil kaynak, genelde en doğru | **Donabiliyor** |
 
-Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır ("Bileklik adımları"). Özet: Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz, çünkü telefon ve bileklik adımlarını kullanıcının değiştirebildiği bir öncelik sırasıyla birleştirir. Bunun yerine her kaynak uygulama için ayrı günlük toplam istenir (`aggregateGroupByPeriod` + `dataOriginFilter`). Ham kayıtlar sayfa sayfa okunmaz: Mi Fitness dakikalık kayıt yazdığı için bu Health Connect'in istek sınırını aşıyordu (2026-10-11, Redmi'de "Rate limited"). Okumalar en az 5 dakika arayla yapılır, hata sonrası 1 saat beklenir.
+Health Connect kararı `GOALS.md` içinde gerekçesiyle tanımlıdır ("Bileklik adımları"). Özet: Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz, çünkü telefon ve bileklik adımlarını kullanıcının değiştirebildiği bir öncelik sırasıyla birleştirir. Bunun yerine her kaynak uygulama için ayrı günlük toplam istenir (`aggregateGroupByPeriod` + `dataOriginFilter`). Ham kayıtlar sayfa sayfa okunmaz: Mi Fitness dakikalık kayıt yazdığı için bu Health Connect'in istek sınırını aşıyordu (2026-10-11, Redmi'de "Rate limited"). Arka planda okumalar en az 5 dakika arayla yapılır, hata sonrası 1 saat beklenir. Uygulama açıkken dakikada bir okunur, hata sonrası 5 dakika beklenir; her okuma ikisini de erteler, böylece aynı dakikada iki okuma olmaz; arka plandaki bir hata uygulama açıkken yapılan okumayı bekletmez (2026-10-12: gece Mi Fitness 175 yazmışken uygulama 70'te kaldı).
 
 - Her saat için kaynak uygulamaların (ör. Mi Fitness) sayılarından en büyüğü alınır; farklı uygulamaların adımları toplanmaz.
 - Saat saat birleştirilir: bilekliğin adım yazdığı saatlerde bileklik, yazmadığı saatlerde telefon sayılır. Bileklik telefondan daha doğru sayar, bu yüzden telefonun daha yüksek olması bilekliğin hatası sayılmaz; bileklik takılı olmayan saatler de telefondan gelir (kullanıcı kararları, 2026-10-11). Telefonun saatlik verisi yalnızca HyperOS kaydı açıkken vardır; yoksa gün bazında bileklik ile telefonun büyüğü alınır.
@@ -113,7 +113,7 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 - API 29+ (Android 10) runtime izni: `ACTIVITY_RECOGNITION`. İki sensör için de zorunlu.
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
-- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz. Başka hiçbir ağ isteği eklenmez.
+- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı ikinci kez dokununca o sürümün APK'sı GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12 kararı; `REQUEST_INSTALL_PACKAGES`, `FileProvider`, `data/UpdateInstaller.kt`). Kurulum kullanıcı onayıyla Android tarafından yapılır, uygulama sessiz kurulum yapmaz. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz. Başka hiçbir ağ isteği eklenmez.
 
 ## Widget'lar
 
@@ -133,6 +133,8 @@ Widget güncelleme davranışı üreticiden bağımsız olmalıdır. HyperOS ve 
 ## Veri
 
 Günlük adım toplamları tek gerçek kaynaktır. Türetilmiş hiçbir şey veritabanında saklanmaz.
+
+Kullanıcının elle girdiği kilo ölçümleri de saklanır (`weights` tablosu, `date` birincil anahtarlı; 2026-10-12 kullanıcı isteği). Bunlar ölçüm değil kullanıcı girdisidir; vücut kitle endeksi ve kilo değişimi saklanmaz, her seferinde hesaplanır (`data/HealthMath.kt`). Son kilo Ayarlar'daki kilo değerini de günceller.
 
 Kalıcılık: Room'da `date` birincil anahtarlı günlük toplam tablosu. Gün içinde toplam güncellenir (upsert). Bir gün, gece yarısını geçen ilk okumayla tamamlanır; sonrasında değiştirilmez.
 

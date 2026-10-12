@@ -25,6 +25,7 @@ data class AppSettings(
     val streakReminder: Boolean = false,
     val nearGoalNotification: Boolean = false,
     val weeklySummary: Boolean = false,
+    val weightReminder: Boolean = false,
     val language: String = SYSTEM_LANGUAGE,
 )
 
@@ -78,6 +79,8 @@ class SettingsStore private constructor(context: Context) {
 
     fun setWeeklySummary(enabled: Boolean) = update { it.copy(weeklySummary = enabled) }
 
+    fun setWeightReminder(enabled: Boolean) = update { it.copy(weightReminder = enabled) }
+
     fun setLanguage(language: String) = update { it.copy(language = language) }
 
     private fun update(change: (AppSettings) -> AppSettings) {
@@ -95,6 +98,7 @@ class SettingsStore private constructor(context: Context) {
             putBoolean(KEY_STREAK_REMINDER, next.streakReminder)
             putBoolean(KEY_NEAR_GOAL, next.nearGoalNotification)
             putBoolean(KEY_WEEKLY_SUMMARY, next.weeklySummary)
+            putBoolean(KEY_WEIGHT_REMINDER, next.weightReminder)
             putString(KEY_LANGUAGE, next.language)
         }
         _settings.value = next
@@ -113,6 +117,7 @@ class SettingsStore private constructor(context: Context) {
         streakReminder = prefs.getBoolean(KEY_STREAK_REMINDER, false),
         nearGoalNotification = prefs.getBoolean(KEY_NEAR_GOAL, false),
         weeklySummary = prefs.getBoolean(KEY_WEEKLY_SUMMARY, false),
+        weightReminder = prefs.getBoolean(KEY_WEIGHT_REMINDER, false),
         language = languageTag(prefs.getString(KEY_LANGUAGE, null)),
     )
 
@@ -130,6 +135,7 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_STREAK_REMINDER = "streak_reminder"
         private const val KEY_NEAR_GOAL = "near_goal_notification"
         private const val KEY_WEEKLY_SUMMARY = "weekly_summary"
+        private const val KEY_WEIGHT_REMINDER = "weight_reminder"
         private const val KEY_LANGUAGE = "language"
 
         @Volatile

@@ -19,6 +19,7 @@ class SystemEventReceiver : BroadcastReceiver() {
                 StepCounterService.startIfEnabled(appContext)
                 StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
                 if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
+                if (intent.action == ACTION_WEIGHT) Reminders.weightCheck(appContext)
             } finally {
                 pending.finish()
             }
@@ -28,10 +29,12 @@ class SystemEventReceiver : BroadcastReceiver() {
     companion object {
         const val ACTION_MIDNIGHT = "com.dordeorz.adimsayar.MIDNIGHT"
         const val ACTION_EVENING = "com.dordeorz.adimsayar.EVENING"
+        const val ACTION_WEIGHT = "com.dordeorz.adimsayar.WEIGHT"
         private const val READ_TIMEOUT_MS = 5_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
             ACTION_EVENING,
+            ACTION_WEIGHT,
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,

@@ -58,6 +58,7 @@
     <string name="tab_today">Bugün</string>
     <string name="tab_history">Geçmiş</string>
     <string name="tab_medals">Madalyalar</string>
+    <string name="tab_health">Sağlık</string>
     <string name="goal_reached">Günlük hedef tamam!</string>
     <string name="goal_remaining">Hedefe %1$s adım kaldı</string>
     <string name="steps_value">%1$s adım</string>
@@ -120,6 +121,10 @@
     <string name="update_available">Yeni sürüm var: %1$s. İndirmek için dokun</string>
     <string name="update_no_release">Henüz yayınlanmış bir sürüm yok</string>
     <string name="update_failed">Kontrol edilemedi. İnternet bağlantını kontrol et</string>
+    <string name="update_downloading">İndiriliyor… %%%1$d</string>
+    <string name="update_ready">İndirildi. Kurmak için dokun</string>
+    <string name="update_install_permission">Ayarlar\'da bu uygulamadan yüklemeye izin ver, sonra tekrar dokun</string>
+    <string name="update_download_failed">İndirilemedi. GitHub sayfasını açmak için dokun</string>
     <string name="github_page">GitHub sayfası</string>
     <string name="github_page_hint">Kaynak kod, sürümler ve hata bildirimi</string>
     <string name="log_hint">Sayaç ve HyperOS okumalarının son kayıtları</string>
@@ -190,6 +195,138 @@
     <string name="next_year">Sonraki yıl</string>
     <string name="year_medals">Kazanılan madalya</string>
 
+    <string name="health_off_title">Bileklik kapalı</string>
+    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar\'da "Bileklik adımlarını kullan"ı aç.</string>
+    <string name="health_title">Sağlık özeti (bileklik)</string>
+    <string name="health_last_days">Son %1$d gün</string>
+    <string name="health_loading">Health Connect\'ten okunuyor…</string>
+    <string name="health_empty">Bu dönemde bileklik verisi yok</string>
+    <string name="health_sleep_average">Ortalama uyku</string>
+    <string name="health_nights">%1$d gece</string>
+    <string name="health_sleep_longest">En uzun uyku</string>
+    <string name="health_resting_average">Ortalama dinlenme nabzı</string>
+    <string name="health_bpm">%1$d bpm</string>
+    <string name="health_exercise_total">Toplam egzersiz</string>
+    <string name="health_exercise_count">%1$d egzersiz</string>
+    <string name="health_exercise_longest">En uzun egzersiz</string>
+    <string name="health_distance">Bileklik mesafesi</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_no_records">Bileklik bu dönemde kayıt yazmadı</string>
+    <string name="health_no_permission">Health Connect izni verilmedi</string>
+    <string name="health_resting_chart">Dinlenme nabzı</string>
+    <string name="health_min_max">%1$d–%2$d bpm</string>
+
+    <string name="health_permissions_missing">Bazı sağlık izinleri verilmedi</string>
+    <string name="health_grant">İzin ver</string>
+    <string name="health_bed_wake">Ortalama yatış ve kalkış</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Uyku evreleri</string>
+    <string name="health_nights_average">%1$d gecenin ortalaması</string>
+    <string name="sleep_deep">Derin</string>
+    <string name="sleep_light">Hafif</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Uyanık</string>
+    <string name="health_percent">%%%1$s</string>
+    <string name="health_resting_down">Önceki %1$d güne göre %2$d bpm düştü</string>
+    <string name="health_resting_up">Önceki %1$d güne göre %2$d bpm arttı</string>
+    <string name="health_resting_same">Önceki %1$d günle aynı</string>
+    <string name="health_oxygen">Kan oksijeni (SpO2)</string>
+    <string name="health_oxygen_hint">En düşük %1$s · %2$d ölçüm</string>
+    <string name="health_exercise_days">Egzersiz yapılan günler</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">Günde ortalama %1$s kcal</string>
+    <string name="heart_today_title">Bugünün nabzı</string>
+    <string name="heart_today_empty">Bugün nabız kaydı yok</string>
+    <string name="weight_title">Kilo ve vücut kitle endeksi</string>
+    <string name="weight_empty">Henüz kilo kaydı yok. Kilonu ekle, vücut kitle endeksi ve değişim burada görünsün.</string>
+    <string name="weight_add">Kilo ekle</string>
+    <string name="weight_current">Güncel kilo</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Vücut kitle endeksi (VKİ)</string>
+    <string name="weight_bmi_hint">%1$s · boy %2$d cm</string>
+    <string name="bmi_under">Zayıf</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Fazla kilolu</string>
+    <string name="bmi_obese">Obez</string>
+    <string name="weight_total_change">Toplam değişim</string>
+    <string name="weight_since">%1$s tarihinden beri</string>
+    <string name="weight_last_change">Son ölçümden beri</string>
+    <string name="weight_entries">Kayıtlar</string>
+    <string name="weight_dialog_title">Kilo · %1$s</string>
+    <string name="weight_delete">Sil</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Haftalık kilo hatırlatması</string>
+    <string name="weight_reminder_hint">Haftanın ilk günü saat 09:00 civarı kilonu ölçmeni hatırlatır.</string>
+    <string name="notify_weight_title">Kilo ölçme zamanı</string>
+    <string name="notify_weight_text">Yeni haftaya başlarken kilonu ölç ve AdımSayar’a ekle.</string>
+    <string name="notify_health_resting">Ortalama dinlenme nabzı: %1$d bpm</string>
+    <string name="notify_health_resting_down">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d düşük</string>
+    <string name="notify_health_resting_up">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d yüksek</string>
+    <string name="notify_health_sleep">Ortalama uyku: %1$d sa %2$d dk</string>
+    <string name="weekly_summary_band_hint">Bileklik açıkken dinlenme nabzı ve uyku ortalaması da eklenir.</string>
+
+    <string name="setup_warning_title">Bağlı bileklik ya da saat bulunamadı</string>
+    <string name="setup_warning_text">Son 7 günde hiçbir bileklik ya da akıllı saat Health Connect\'e nabız, uyku veya kan oksijeni yazmadı. Bu veriler telefonla ölçülemez, bir bileklik ya da saat bağlanmadan toplanamaz.</string>
+    <string name="setup_open">Kurulum</string>
+    <string name="setup_title">Bileklik ve saat kurulumu</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect için Android 9 ya da üstü gerekir. Bu telefonda bileklik verileri okunamaz.</string>
+    <string name="setup_hc_ready">Health Connect hazır.</string>
+    <string name="setup_hc_missing">Health Connect bu telefonda yok. Android 13 ve öncesinde Play Store\'dan kurulur, Android 14 ve sonrasında sistemle gelir.</string>
+    <string name="setup_hc_install">Play Store\'da aç</string>
+    <string name="setup_step_brand">Bileklik ya da saatinin uygulaması</string>
+    <string name="setup_brand_question">Bileklik ya da saatinin markasını seç:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Diğer</string>
+    <string name="setup_steps_xiaomi">Mi Band ve Xiaomi saatler Mi Fitness ile eşleşir. Mi Fitness → Profil → Health Connect\'i aç ve tüm veri türlerine izin ver. Zepp Life kullanıyorsan ayarlarında Health Connect seçeneği olup olmadığına bak.</string>
+    <string name="setup_steps_samsung">Galaxy Watch ve Galaxy Fit, Samsung Health ile çalışır. Samsung Health → Ayarlar → Health Connect bölümünden verileri paylaşmaya izin ver.</string>
+    <string name="setup_steps_google">Pixel Watch ve Fitbit cihazları Fitbit uygulamasıyla çalışır. Fitbit uygulamasının ayarlarından Health Connect ile eşitlemeyi aç.</string>
+    <string name="setup_steps_garmin">Garmin Connect\'in ayarlarında Bağlı Uygulamalar → Health Connect\'i aç.</string>
+    <string name="setup_steps_huawei">Huawei Health şu an Health Connect\'e veri yazmıyor. Bu yüzden Huawei ve Honor saatlerin verileri AdımSayar\'a gelemez.</string>
+    <string name="setup_steps_other">Saatinin uygulamasında (ör. Wearfit Pro, Da Fit, FitCloudPro) Health Connect seçeneği ara. Uygulama Health Connect → Uygulama izinleri listesinde görünmüyorsa veri gönderemiyor demektir. Apple Watch yalnızca iPhone ile çalışır.</string>
+    <string name="setup_open_hc">Health Connect\'i aç</string>
+    <string name="setup_step_permission">AdımSayar\'ın izinleri</string>
+    <string name="setup_permission_wait">Önce Health Connect\'i kur.</string>
+    <string name="setup_permission_enable">Bileklik verilerini okumak için aşağıdaki anahtarı aç. Health Connect hangi verileri okuyabileceğimizi soracak.</string>
+    <string name="setup_permission_ready">Tüm izinler verildi.</string>
+    <string name="setup_step_check">Kontrol</string>
+    <string name="setup_check_wait">İzinler verilince son 7 günde veri yazan uygulamalar burada listelenir.</string>
+    <string name="setup_check_none">Son 7 günde Health Connect\'e veri yazan bir uygulama yok. 2. adımdaki ayarı yaptıktan sonra bileklik uygulamasını açıp eşitlemesini bekle, sonra tekrar kontrol et.</string>
+    <string name="setup_check_found">Son 7 günde Health Connect\'e veri yazan uygulamalar:</string>
+    <string name="setup_check_ok">Bileklik ya da saat verisi geliyor.</string>
+    <string name="setup_check_no_wearable">Gelen veriler yalnızca adım gibi telefonun da ölçebildiği türler. Nabız, uyku ve kan oksijeni için bileklik ya da saatin uygulamasının Health Connect\'e yazması gerekir.</string>
+    <string name="setup_check_again">Tekrar kontrol et</string>
+    <string name="source_steps">Adım</string>
+    <string name="source_heart">Nabız</string>
+    <string name="source_sleep">Uyku</string>
+    <string name="source_oxygen">Kan oksijeni</string>
+    <string name="source_exercise">Egzersiz</string>
+    <string name="source_distance">Mesafe</string>
+    <string name="source_calories">Aktif kalori</string>
+
+    <string name="device_watch">Saat</string>
+    <string name="device_band">Bileklik</string>
+    <string name="device_ring">Akıllı yüzük</string>
+    <string name="device_phone">Telefon</string>
+    <string name="device_other">Diğer cihaz</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
+        <item>Sağlık sayfasında bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
+        <item>Güncellemeler artık uygulamanın içinden indirilip kurulur</item>
+        <item>Uygulama açıkken bileklik adımları dakikada bir okunur</item>
+        <item>Sağlık sayfasında uyku evreleri (derin, hafif, REM, uyanık), ortalama yatış ve kalkış saati, kan oksijeni (SpO2), egzersiz türleri ve egzersiz günleri, aktif kalori ve dinlenme nabzının önceki döneme göre değişimi</item>
+        <item>Bugünün saatlik nabız grafiği</item>
+        <item>Kilo kaydı: vücut kitle endeksi, toplam değişim ve grafik. İsteğe bağlı hafta başı kilo hatırlatması</item>
+        <item>Bileklik açıkken haftalık özet bildirimi dinlenme nabzını ve uykuyu da gösterir</item>
+        <item>Sağlık sayfasında bileklik ya da saat bağlı değilse uyarı ve adım adım kurulum ekranı: Health Connect, markaya göre ayar yolu, izinler ve veri yazan uygulamaların kontrolü</item>
+        <item>Kurulum ekranında veriyi yazan cihazın türü ve modeli (uygulama bildiriyorsa) gösterilir</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>
         <item>Geçmiş\'te bileklik verileri: egzersizler, mesafe, aktif kalori, nabız ve uyku</item>
@@ -280,9 +417,10 @@
     <string name="log_wearable_error">Health Connect okunamadı (%1$s)</string>
     <string name="log_wearable_synced">Bileklik: bugün %1$d adım, %2$d gün güncellendi</string>
     <string name="band_exercises">Egzersizler</string>
+    <string name="band_active_kcal">Aktif kalori (bileklik)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Nabız</string>
     <string name="band_heart_value">Dinlenme %1$s · en düşük %2$s · ortalama %3$s · en yüksek %4$s</string>
-    <string name="band_resting_week">Son 7 günün dinlenme nabzı</string>
     <string name="band_sleep">Uyku</string>
     <string name="band_sleep_value">%1$d sa %2$d dk</string>
     <string name="duration_minutes">%1$d dk</string>

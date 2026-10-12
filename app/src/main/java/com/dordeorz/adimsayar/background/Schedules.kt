@@ -22,6 +22,7 @@ object Schedules {
         schedulePeriodic(context)
         scheduleMidnight(context)
         Reminders.scheduleEvening(context)
+        Reminders.scheduleWeight(context)
     }
 
     fun requestRead(context: Context) {

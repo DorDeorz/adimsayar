@@ -113,7 +113,7 @@ Neden: kullanıcının Xiaomi Mi Band 8'i Mi Fitness ile eşleşiyor. Bileklik a
 
 İlk karardaki sorunlar şöyle önlenir:
 
-- Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz. Her kaynak uygulama için ayrı günlük toplam istenir (`dataOriginFilter`). İlk sürüm ham kayıtları sayfa sayfa okuyordu ve Redmi'de Health Connect'in istek sınırına takıldı; okumalar artık birkaç istekle yapılır, en az 5 dakika arayla, hata sonrası 1 saat beklenerek. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
+- Health Connect'in tüm kaynakları birleştiren toplamı kullanılmaz. Her kaynak uygulama için ayrı günlük toplam istenir (`dataOriginFilter`). İlk sürüm ham kayıtları sayfa sayfa okuyordu ve Redmi'de Health Connect'in istek sınırına takıldı; okumalar artık birkaç istekle yapılır. Arka planda en az 5 dakika arayla, hata sonrası 1 saat beklenerek; uygulama açıkken dakikada bir, hata sonrası 5 dakika beklenerek. Arka plandaki bekleme uygulama açıkken yapılan okumayı etkilemez, çünkü Mi Fitness veriyi gecikmeli yazdığında kullanıcı uygulamayı açıp yeni sayıyı görmek ister. Bir günde birden fazla uygulama kayıt yazdıysa en büyük toplam alınır, toplamlar eklenmez. Böylece aynı adım iki kez sayılmaz ve sonuç kullanıcının Health Connect öncelik sırasına bağlı değildir.
 - Saat saat birleştirilir: bilekliğin adım yazdığı saatte bileklik sayısı, yazmadığı saatte telefonun sayısı kullanılır. Kullanıcıya göre bileklik telefondan daha doğru sayar; telefonun daha yüksek olması bilekliğin yanlış saydığı anlamına gelmez. Bileklik takılı ya da bağlı değilken veri gelmez ve o saatler telefondan sayılır. İlk sürüm gün bazında "bileklik varsa bileklik" kuralını kullanıyordu; Redmi'de bileklik günün sonunda kısa süre takılınca gün 1.561 adımdan 17'ye düştü (2026-10-11), bu yüzden saatliğe geçildi.
 - Telefonun saatlik verisi yalnızca HyperOS kaydı açıkken vardır. Diğer telefonlarda gün bazında bileklik ile telefonun büyüğü alınır.
 - Telefon toplamları değiştirilmez. Bileklik toplamları ayrı tabloda tutulur ve okurken birleştirilir. Anahtar kapatılınca bileklik tablosu silinir, telefonun sayıları geri gelir.
@@ -135,6 +135,20 @@ Diğer bileklik verileri (kullanıcı kararı 2026-10-11, "Hepsi, uyku dahil"): 
 - Egzersizler: o gün başlayan oturumlar, türü ve süresiyle. Aynı dakikada başlayan aynı türden oturumlar bir kez gösterilir.
 - Nabız: günün en düşük, ortalama ve en yüksek değeri; dinlenme nabzı varsa o da. Son 7 günün grafiği dinlenme nabzını, yoksa günün en düşük nabzını gösterir.
 - Uyku: o gün sabah biten uyku oturumlarının toplam süresi.
+
+Sağlık sayfası (kullanıcı isteği 2026-10-12, "hepsini ekleyelim"): seçilen son 7 ya da 30 gün için aynı veriler anlık okunur ve saklanmaz.
+
+- Uyku: her gece için en uzun kaynak uygulama alınır. Evreler (derin, hafif, REM, uyanık) bileklik yazdıysa gösterilir. Ortalama yatış saati gece yarısını aşan saatler için öğlen eksenine göre ortalanır.
+- Dinlenme nabzı: dönemin ortalaması bir önceki aynı uzunluktaki dönemle karşılaştırılır.
+- Kan oksijeni (SpO2): dönemdeki ölçümlerin ortalaması ve en düşüğü. Ayrı izin ister; anahtarı daha önce açanlar Sağlık sayfasındaki "İzin ver" ile verir.
+- Egzersizler türe göre gruplanır; egzersiz yapılan günler ayrıca gösterilir.
+- Aktif kalori: her gün için en büyük kaynak uygulama.
+- Bugünün nabzı saat saat en düşük ve en yüksek değerle gösterilir.
+- Haftalık özet bildirimi bileklik açıkken haftanın ortalama dinlenme nabzını (geçen haftayla farkıyla) ve ortalama uykusunu ekler.
+
+Bileklik ve saat kurulumu (kullanıcı isteği 2026-10-12): son 7 günde hiçbir uygulama Health Connect'e nabız, uyku ya da kan oksijeni yazmadıysa Sağlık sayfası "bağlı bileklik ya da saat bulunamadı" uyarısı gösterir; adım gibi telefonun da ölçebildiği türler bileklik sayılmaz. Kurulum ekranı Health Connect'in durumunu, markaya göre ayar yolunu, izinleri ve son 7 günde veri yazan uygulamaları (Health Connect'in kaynak bilgisinden) gösterir. Uygulama adlarını gösterebilmek için manifest'e Health Connect izni isteyen uygulamaları görünür kılan `<queries>` eklendi. Huawei Health Health Connect'e yazmadığı için Huawei saatler desteklenmez; Apple Watch Android'de çalışmaz.
+
+Kilo kaydı (aynı istek): kullanıcı kilosunu elle girer, Room `weights` tablosunda saklanır. Vücut kitle endeksi Ayarlar'daki boyla, toplam değişim ilk kayda göre hesaplanır, saklanmaz. İsteğe bağlı "Haftalık kilo hatırlatması" haftanın ilk günü 09:00 civarı bildirim gönderir (`setAndAllowWhileIdle`, birkaç dakika kayabilir).
 
 ### Xiaomi / HyperOS adım kaydı
 
@@ -193,7 +207,7 @@ Android `updatePeriodMillis` değerini en fazla 30 dakikaya kısar ve yine de ga
 
 Kapsam dışı: kullanıcı sistemi, giriş ekranı, token yönetimi, backend.
 
-Ağ erişiminin tek istisnası Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol yapılmaz.
+Ağ erişiminin tek istisnası Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı dokununca APK GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12, kullanıcı isteği: tarayıcıya gitmeden güncellemek). İlk seferde Android "bu kaynaktan yüklemeye izin ver" ister. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz.
 
 ### Veri kaybı koruması
 

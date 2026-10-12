@@ -58,6 +58,7 @@
     <string name="tab_today">Hoy</string>
     <string name="tab_history">Historial</string>
     <string name="tab_medals">Medallas</string>
+    <string name="tab_health">Salud</string>
     <string name="goal_reached">¡Meta diaria alcanzada!</string>
     <string name="goal_remaining">Faltan %1$s pasos para tu meta</string>
     <string name="steps_value">%1$s pasos</string>
@@ -120,6 +121,10 @@
     <string name="update_available">Nueva versión disponible: %1$s. Toca para descargar</string>
     <string name="update_no_release">Aún no hay ninguna versión publicada</string>
     <string name="update_failed">No se pudo comprobar. Revisa tu conexión a internet</string>
+    <string name="update_downloading">Descargando… %1$d %%</string>
+    <string name="update_ready">Descargado. Toca para instalar</string>
+    <string name="update_install_permission">Permite instalar desde esta app en Ajustes y vuelve a tocar</string>
+    <string name="update_download_failed">No se pudo descargar. Toca para abrir la página de GitHub</string>
     <string name="github_page">Página de GitHub</string>
     <string name="github_page_hint">Código fuente, versiones y reporte de errores</string>
     <string name="log_hint">Últimas lecturas del contador y de HyperOS</string>
@@ -190,6 +195,138 @@
     <string name="next_year">Año siguiente</string>
     <string name="year_medals">Medallas ganadas</string>
 
+    <string name="health_off_title">La pulsera está desactivada</string>
+    <string name="health_off_text">Activa los pasos de la pulsera en Ajustes para ver el resumen de sueño, pulso y entrenamientos.</string>
+    <string name="health_title">Resumen de salud (pulsera)</string>
+    <string name="health_last_days">Últimos %1$d días</string>
+    <string name="health_loading">Leyendo de Health Connect…</string>
+    <string name="health_empty">No hay datos de la pulsera en este periodo</string>
+    <string name="health_sleep_average">Sueño medio</string>
+    <string name="health_nights">%1$d noches</string>
+    <string name="health_sleep_longest">Sueño más largo</string>
+    <string name="health_resting_average">Pulso en reposo medio</string>
+    <string name="health_bpm">%1$d lpm</string>
+    <string name="health_exercise_total">Entrenamiento total</string>
+    <string name="health_exercise_count">%1$d entrenamientos</string>
+    <string name="health_exercise_longest">Entrenamiento más largo</string>
+    <string name="health_distance">Distancia de la pulsera</string>
+    <string name="health_km">%1$s km</string>
+    <string name="health_no_records">La pulsera no guardó registros en este periodo</string>
+    <string name="health_no_permission">Sin permiso de Health Connect</string>
+    <string name="health_resting_chart">Pulso en reposo</string>
+    <string name="health_min_max">%1$d–%2$d lpm</string>
+
+    <string name="health_permissions_missing">Faltan algunos permisos de salud</string>
+    <string name="health_grant">Conceder</string>
+    <string name="health_bed_wake">Hora media de acostarse y levantarse</string>
+    <string name="health_time_range">%1$s – %2$s</string>
+    <string name="health_sleep_stages">Fases del sueño</string>
+    <string name="health_nights_average">Media de %1$d noches</string>
+    <string name="sleep_deep">Profundo</string>
+    <string name="sleep_light">Ligero</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_awake">Despierto</string>
+    <string name="health_percent">%1$s %%</string>
+    <string name="health_resting_down">%2$d lpm menos que los %1$d días anteriores</string>
+    <string name="health_resting_up">%2$d lpm más que los %1$d días anteriores</string>
+    <string name="health_resting_same">Igual que los %1$d días anteriores</string>
+    <string name="health_oxygen">Oxígeno en sangre (SpO2)</string>
+    <string name="health_oxygen_hint">Mínimo %1$s · %2$d mediciones</string>
+    <string name="health_exercise_days">Días con ejercicio</string>
+    <string name="health_days_ratio">%1$d/%2$d</string>
+    <string name="health_kcal_daily">%1$s kcal al día de media</string>
+    <string name="heart_today_title">Frecuencia cardiaca de hoy</string>
+    <string name="heart_today_empty">Hoy no hay registros de frecuencia cardiaca</string>
+    <string name="weight_title">Peso e índice de masa corporal</string>
+    <string name="weight_empty">Aún no hay registros de peso. Añade tu peso para ver aquí tu IMC y tu evolución.</string>
+    <string name="weight_add">Añadir peso</string>
+    <string name="weight_current">Peso actual</string>
+    <string name="weight_kg">%1$s kg</string>
+    <string name="weight_bmi">Índice de masa corporal (IMC)</string>
+    <string name="weight_bmi_hint">%1$s · altura %2$d cm</string>
+    <string name="bmi_under">Bajo peso</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_over">Sobrepeso</string>
+    <string name="bmi_obese">Obesidad</string>
+    <string name="weight_total_change">Cambio total</string>
+    <string name="weight_since">Desde el %1$s</string>
+    <string name="weight_last_change">Desde el último registro</string>
+    <string name="weight_entries">Registros</string>
+    <string name="weight_dialog_title">Peso · %1$s</string>
+    <string name="weight_delete">Eliminar</string>
+    <string name="weight_range">%1$s–%2$s kg</string>
+    <string name="weight_reminder">Recordatorio semanal de peso</string>
+    <string name="weight_reminder_hint">Te recuerda pesarte hacia las 09:00 del primer día de la semana.</string>
+    <string name="notify_weight_title">Hora de pesarse</string>
+    <string name="notify_weight_text">Empieza una nueva semana: pésate y añádelo a AdımSayar.</string>
+    <string name="notify_health_resting">Frecuencia cardiaca en reposo media: %1$d lpm</string>
+    <string name="notify_health_resting_down">Frecuencia cardiaca en reposo media: %1$d lpm, %2$d menos que la semana pasada</string>
+    <string name="notify_health_resting_up">Frecuencia cardiaca en reposo media: %1$d lpm, %2$d más que la semana pasada</string>
+    <string name="notify_health_sleep">Sueño medio: %1$d h %2$d min</string>
+    <string name="weekly_summary_band_hint">Con la pulsera activada se añaden la frecuencia en reposo y el sueño medio.</string>
+
+    <string name="setup_warning_title">No se encontró ninguna pulsera ni reloj</string>
+    <string name="setup_warning_text">En los últimos 7 días ninguna pulsera ni reloj escribió frecuencia cardiaca, sueño u oxígeno en sangre en Health Connect. El teléfono no puede medirlos, así que sin pulsera o reloj no se recogen.</string>
+    <string name="setup_open">Configurar</string>
+    <string name="setup_title">Configurar pulsera y reloj</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect requiere Android 9 o posterior. En este teléfono no se pueden leer datos de la pulsera.</string>
+    <string name="setup_hc_ready">Health Connect está listo.</string>
+    <string name="setup_hc_missing">Health Connect no está en este teléfono. Hasta Android 13 se instala desde Play Store; desde Android 14 viene incluido.</string>
+    <string name="setup_hc_install">Abrir en Play Store</string>
+    <string name="setup_step_brand">La app de tu pulsera o reloj</string>
+    <string name="setup_brand_question">Elige la marca de tu pulsera o reloj:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Otra</string>
+    <string name="setup_steps_xiaomi">Las Mi Band y los relojes Xiaomi se vinculan con Mi Fitness. En Mi Fitness → Perfil → Health Connect, actívalo y permite todos los tipos de datos. Si usas Zepp Life, busca una opción de Health Connect en sus ajustes.</string>
+    <string name="setup_steps_samsung">Galaxy Watch y Galaxy Fit funcionan con Samsung Health. En Samsung Health → Ajustes → Health Connect, permite compartir tus datos.</string>
+    <string name="setup_steps_google">Pixel Watch y los dispositivos Fitbit funcionan con la app Fitbit. Activa la sincronización con Health Connect en los ajustes de la app Fitbit.</string>
+    <string name="setup_steps_garmin">En los ajustes de Garmin Connect, abre Aplicaciones conectadas → Health Connect y actívalo.</string>
+    <string name="setup_steps_huawei">Huawei Health no escribe en Health Connect por ahora, así que los datos de relojes Huawei y Honor no pueden llegar a AdımSayar.</string>
+    <string name="setup_steps_other">Busca una opción de Health Connect en la app de tu reloj (por ejemplo Wearfit Pro, Da Fit, FitCloudPro). Si la app no aparece en Health Connect → Permisos de apps, no puede enviar datos. El Apple Watch solo funciona con iPhone.</string>
+    <string name="setup_open_hc">Abrir Health Connect</string>
+    <string name="setup_step_permission">Permisos de AdımSayar</string>
+    <string name="setup_permission_wait">Instala primero Health Connect.</string>
+    <string name="setup_permission_enable">Activa el interruptor de abajo para leer los datos de la pulsera. Health Connect preguntará qué datos podemos leer.</string>
+    <string name="setup_permission_ready">Todos los permisos concedidos.</string>
+    <string name="setup_step_check">Comprobar</string>
+    <string name="setup_check_wait">Cuando concedas los permisos, aquí aparecerán las apps que escribieron datos en los últimos 7 días.</string>
+    <string name="setup_check_none">Ninguna app escribió datos en Health Connect en los últimos 7 días. Tras el ajuste del paso 2, abre la app de tu pulsera, deja que sincronice y vuelve a comprobar.</string>
+    <string name="setup_check_found">Apps que escribieron datos en Health Connect en los últimos 7 días:</string>
+    <string name="setup_check_ok">Llegan datos de la pulsera o el reloj.</string>
+    <string name="setup_check_no_wearable">Solo llegan datos que el teléfono también puede medir, como los pasos. Para frecuencia cardiaca, sueño y oxígeno en sangre, la app de tu pulsera o reloj debe escribir en Health Connect.</string>
+    <string name="setup_check_again">Volver a comprobar</string>
+    <string name="source_steps">Pasos</string>
+    <string name="source_heart">Frecuencia cardiaca</string>
+    <string name="source_sleep">Sueño</string>
+    <string name="source_oxygen">Oxígeno en sangre</string>
+    <string name="source_exercise">Ejercicio</string>
+    <string name="source_distance">Distancia</string>
+    <string name="source_calories">Calorías activas</string>
+
+    <string name="device_watch">Reloj</string>
+    <string name="device_band">Pulsera</string>
+    <string name="device_ring">Anillo inteligente</string>
+    <string name="device_phone">Teléfono</string>
+    <string name="device_other">Otro dispositivo</string>
+
+    <string-array name="release_notes_0_8_0">
+        <item>Nueva barra inferior: Historial, Salud, Hoy (centro), Medallas, Ajustes. El resumen de la pulsera tiene su propia página</item>
+        <item>Resumen de salud de la pulsera en el Historial (7 o 30 días): sueño, pulso en reposo con gráfico, entrenamientos, distancia</item>
+        <item>Las actualizaciones ahora se descargan e instalan desde la app</item>
+        <item>Los pasos de la pulsera se leen cada minuto con la app abierta</item>
+        <item>Página de salud: fases del sueño (profundo, ligero, REM, despierto), hora media de acostarse y levantarse, oxígeno en sangre (SpO2), tipos de ejercicio y días con ejercicio, calorías activas y frecuencia en reposo frente al periodo anterior</item>
+        <item>Gráfico de frecuencia cardiaca por horas de hoy</item>
+        <item>Registro de peso: índice de masa corporal, cambio total y gráfico. Recordatorio semanal de peso opcional</item>
+        <item>Con la pulsera activada, el resumen semanal también muestra la frecuencia en reposo y el sueño</item>
+        <item>La página de salud avisa si no hay pulsera ni reloj conectado, con una configuración paso a paso: Health Connect, pasos según la marca, permisos y comprobación de qué apps escriben datos</item>
+        <item>La configuración muestra el tipo y modelo del dispositivo que escribe datos (si la app lo indica)</item>
+    </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Los pasos de Mi Band y otras pulseras se pueden leer con Health Connect (Ajustes, desactivado por defecto). En las horas con pulsera cuenta la pulsera; en las demás, el teléfono</item>
         <item>Datos de la pulsera en el Historial: entrenamientos, distancia, calorías activas, pulso y sueño</item>
@@ -279,9 +416,10 @@
     <string name="log_wearable_error">No se pudo leer Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Pulsera: %1$d pasos hoy, %2$d días actualizados</string>
     <string name="band_exercises">Entrenamientos</string>
+    <string name="band_active_kcal">Calorías activas (pulsera)</string>
+    <string name="band_kcal_value">%1$s kcal</string>
     <string name="band_heart">Frecuencia cardíaca</string>
     <string name="band_heart_value">Reposo %1$s · mín. %2$s · media %3$s · máx. %4$s</string>
-    <string name="band_resting_week">Frecuencia en reposo, últimos 7 días</string>
     <string name="band_sleep">Sueño</string>
     <string name="band_sleep_value">%1$d h %2$d min</string>
     <string name="duration_minutes">%1$d min</string>

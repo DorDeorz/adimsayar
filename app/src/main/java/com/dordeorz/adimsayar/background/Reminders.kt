@@ -15,8 +15,12 @@ import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.AppSettings
+import com.dordeorz.adimsayar.data.BandPeriod
+import com.dordeorz.adimsayar.data.HealthMath
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
+import com.dordeorz.adimsayar.data.WearableHealth
+import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.weekStartOf
 import java.text.NumberFormat
 import java.time.LocalDate
@@ -31,12 +35,16 @@ object Reminders {
     private const val STREAK_NOTIFICATION_ID = 11
     private const val NEAR_NOTIFICATION_ID = 12
     private const val WEEK_NOTIFICATION_ID = 13
+    private const val WEIGHT_NOTIFICATION_ID = 14
     private const val NEAR_GOAL_PERCENT = 80
     private const val PREFS = "reminders"
     private const val KEY_GOAL_DATE = "goal_notified_date"
     private const val KEY_NEAR_DATE = "near_notified_date"
     private const val EVENING_REQUEST = 1
+    private const val WEIGHT_REQUEST = 2
+    private const val HEALTH_DAYS = 7L
     private val EVENING_TIME: LocalTime = LocalTime.of(20, 0)
+    private val WEIGHT_TIME: LocalTime = LocalTime.of(9, 0)
 
     fun onTodaySteps(context: Context, steps: Long) {
         val settings = SettingsStore.get(context).settings.value
@@ -59,7 +67,41 @@ object Reminders {
         val history = StepRepository.get(context).loadHistory()
         val strings = Locales.wrap(context)
         if (settings.streakReminder) streakCheck(strings, history, today, settings)
-        if (settings.weeklySummary && today.dayOfWeek == settings.weekStart.minus(1)) weeklySummary(strings, history, today, settings)
+        if (settings.weeklySummary && today.dayOfWeek == settings.weekStart.minus(1)) {
+            val health = if (WearableSteps.isEnabled(context)) healthLines(strings, WearableHealth.period(context, today, HEALTH_DAYS)) else emptyList()
+            weeklySummary(strings, history, today, settings, health)
+        }
+    }
+
+    fun weightCheck(context: Context) {
+        val settings = SettingsStore.get(context).settings.value
+        if (!settings.weightReminder) return
+        val strings = Locales.wrap(context)
+        notify(
+            strings,
+            WEIGHT_NOTIFICATION_ID,
+            strings.getString(R.string.notify_weight_title),
+            strings.getString(R.string.notify_weight_text),
+            MainActivity.TAB_HEALTH,
+        )
+    }
+
+    private fun healthLines(strings: Context, period: BandPeriod?): List<String> {
+        if (period == null) return emptyList()
+        val lines = ArrayList<String>()
+        HealthMath.average(period.resting.mapNotNull { it.second })?.let { resting ->
+            val before = period.restingBefore
+            lines += if (before == null || before == resting) {
+                strings.getString(R.string.notify_health_resting, resting)
+            } else {
+                val res = if (resting < before) R.string.notify_health_resting_down else R.string.notify_health_resting_up
+                strings.getString(res, resting, abs(resting - before))
+            }
+        }
+        HealthMath.average(period.nights.values.map { it.minutes })?.let { sleep ->
+            lines += strings.getString(R.string.notify_health_sleep, sleep / 60, sleep % 60)
+        }
+        return lines
     }
 
     private fun streakCheck(strings: Context, history: Map<LocalDate, Long>, today: LocalDate, settings: AppSettings) {
@@ -76,7 +118,7 @@ object Reminders {
         )
     }
 
-    private fun weeklySummary(strings: Context, history: Map<LocalDate, Long>, today: LocalDate, settings: AppSettings) {
+    private fun weeklySummary(strings: Context, history: Map<LocalDate, Long>, today: LocalDate, settings: AppSettings, health: List<String>) {
         val start = weekStartOf(today, settings.weekStart)
         val thisWeek = (0L..6L).sumOf { history[start.plusDays(it)] ?: 0L }
         val lastWeek = (1L..7L).sumOf { history[start.minusDays(it)] ?: 0L }
@@ -86,7 +128,7 @@ object Reminders {
             thisWeek >= lastWeek -> strings.getString(R.string.notify_week_more, percentChange(thisWeek, lastWeek), goal)
             else -> strings.getString(R.string.notify_week_less, percentChange(thisWeek, lastWeek), goal)
         }
-        notify(strings, WEEK_NOTIFICATION_ID, strings.getString(R.string.notify_week_title, format(thisWeek)), text)
+        notify(strings, WEEK_NOTIFICATION_ID, strings.getString(R.string.notify_week_title, format(thisWeek)), (listOf(text) + health).joinToString("\n"))
     }
 
     private fun percentChange(now: Long, before: Long): Int = (abs(now - before) * 100 / before).toInt()
@@ -121,7 +163,30 @@ object Reminders {
         alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next.atZone(zone).toInstant().toEpochMilli(), pending)
     }
 
-    private fun notify(context: Context, id: Int, title: String, text: String) {
+    fun scheduleWeight(context: Context) {
+        val alarms = context.getSystemService(AlarmManager::class.java) ?: return
+        val intent = Intent(context, SystemEventReceiver::class.java).setAction(SystemEventReceiver.ACTION_WEIGHT)
+        val pending = PendingIntent.getBroadcast(
+            context,
+            WEIGHT_REQUEST,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val settings = SettingsStore.get(context).settings.value
+        if (!settings.weightReminder) {
+            alarms.cancel(pending)
+            return
+        }
+        val zone = ZoneId.systemDefault()
+        val now = System.currentTimeMillis()
+        val next = generateSequence(LocalDate.now(zone)) { it.plusDays(1) }
+            .map { it.atTime(WEIGHT_TIME).atZone(zone).toInstant().toEpochMilli() to it }
+            .first { (at, date) -> at > now && date.dayOfWeek == settings.weekStart }
+            .first
+        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next, pending)
+    }
+
+    private fun notify(context: Context, id: Int, title: String, text: String, tab: String? = null) {
         val manager = NotificationManagerCompat.from(context)
         if (!manager.areNotificationsEnabled()) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -130,14 +195,15 @@ object Reminders {
         }
         val open = PendingIntent.getActivity(
             context,
-            0,
-            Intent(context, MainActivity::class.java),
+            id,
+            Intent(context, MainActivity::class.java).apply { if (tab != null) putExtra(MainActivity.EXTRA_TAB, tab) },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(open)
             .setAutoCancel(true)
             .build()
