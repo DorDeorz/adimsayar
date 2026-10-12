@@ -15,7 +15,7 @@
         android:strokeLineCap="round"
         android:strokeWidth="5" />
     <path
-        android:pathData="M33,70l3.6,-2.6M33,70l4.4,0M33,70l3.6,2.6M33,70l-2,0M40,75l3.6,-2.6M40,75l4.4,0M40,75l3.6,2.6M40,75l-2,0M47,70l3.6,-2.6M47,70l4.4,0M47,70l3.6,2.6M47,70l-2,0"
+        android:pathData="M42,73l3.6,-2.6M42,73l4.4,0M42,73l3.6,2.6M42,73l-2,0M49,77l3.6,-2.6M49,77l4.4,0M49,77l3.6,2.6M49,77l-2,0M56,73l3.6,-2.6M56,73l4.4,0M56,73l3.6,2.6M56,73l-2,0"
         android:strokeColor="#FFFFE8A3"
         android:strokeLineCap="round"
         android:strokeWidth="1.7" />
