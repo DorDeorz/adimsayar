@@ -313,6 +313,14 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>鳥ウィジェット: 残り歩数を短く表示し、切れなくなりました</item>
+        <item>小さな「今日」ウィジェットに目標までの進捗バーを表示</item>
+        <item>新しいウィジェット：水分（ワンタップで1杯追加）、バーチャルルート、今週のチャレンジ、体重、今日のまとめ</item>
+        <item>目標達成でウィジェットの色が変わり✓が表示され、最終更新時刻も表示</item>
+        <item>ウィジェットをタップすると該当ページが開き、背景の透明度を設定で選べます</item>
+        <item>鳥をタップすると跳ねて羽ばたき、ときどきまばたきします</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>鳥ウィジェット: レベル、次のレベルまでの歩数、レベルアップ</item>
         <item>睡眠・心拍ウィジェットの文字が切れなくなりました</item>
@@ -585,4 +593,22 @@
     <string name="bird_level">レベル %1$d</string>
     <string name="bird_level_next">レベル%1$dまで%2$s歩</string>
     <string name="bird_level_up">今日レベルアップ！🎉</string>
+    <string name="bird_level_left">あと%1$s歩</string>
+    <string name="widget_goal_done">目標達成</string>
+    <string name="widget_updated_at">%1$s に更新</string>
+    <string name="settings_widget_opacity">ウィジェットの背景</string>
+    <string name="widget_water_label">水分</string>
+    <string name="widget_water_description">今日飲んだ水、ワンタップで1杯追加</string>
+    <string name="widget_route_label">バーチャルルート</string>
+    <string name="widget_route_description">ルートの進み具合と次の地点</string>
+    <string name="widget_route_none">ルートが選ばれていません。メダルのページで選べます。</string>
+    <string name="widget_challenge_label">今週のチャレンジ</string>
+    <string name="widget_challenge_description">今週のチャレンジと進み具合</string>
+    <string name="widget_weight_label">体重</string>
+    <string name="widget_weight_description">最新の体重、変化とグラフ</string>
+    <string name="widget_weight_empty">体重の記録はまだありません</string>
+    <string name="widget_summary_label">今日のまとめ</string>
+    <string name="widget_summary_description">歩数、水分、睡眠、心拍を1つのウィジェットに</string>
+    <string name="widget_summary_distance">距離</string>
+    <string name="widget_summary_calories">カロリー</string>
 </resources>

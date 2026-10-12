@@ -38,6 +38,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.Avatar
 import com.dordeorz.adimsayar.data.BirdState
@@ -46,6 +47,7 @@ import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.ui.BirdPainter
+import com.dordeorz.adimsayar.ui.formatCompact
 import com.dordeorz.adimsayar.ui.text
 import com.dordeorz.adimsayar.ui.title
 import java.time.LocalDate
@@ -73,7 +75,9 @@ class BirdWidget : GlanceAppWidget() {
                 Avatar.state(achievements, history, freezes, today, hour, settings.dailyGoal)
             }
             WidgetTheme(settings.dynamicColor) {
-                BirdContent(localized, bird)
+                WidgetSurface(Tab.Today, settings.widgetOpacity) {
+                    BirdContent(localized, bird)
+                }
             }
         }
     }
@@ -102,7 +106,7 @@ private fun BirdContent(context: Context, bird: BirdState) {
     val width = size.width - PADDING * 2
     val height = size.height - PADDING * 2
     val wide = size.width.value >= size.height.value * WIDE_RATIO && width - height >= TEXT_WIDTH
-    Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
+    Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when {
             wide -> Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
                 BirdBitmap(context, bird, height)
@@ -154,7 +158,7 @@ private fun BirdInfo(context: Context, bird: BirdState, showMood: Boolean) {
     )
     Spacer(GlanceModifier.height(4.dp))
     Text(
-        text = context.getString(R.string.bird_level_next, bird.level + 1, formatSteps(bird.stepsToNextLevel)),
+        text = context.getString(R.string.bird_level_left, formatCompact(bird.stepsToNextLevel)),
         maxLines = 1,
         style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
     )

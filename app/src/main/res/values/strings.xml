@@ -313,6 +313,14 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Kuş widget\'ında kalan adım artık kısa yazılıyor ve kesilmiyor</item>
+        <item>Küçük Bugün widget\'ında hedefe ne kadar kaldığını gösteren çubuk</item>
+        <item>Yeni widget\'lar: su (tek dokunuşla bardak ekleme), sanal rota, haftalık görevler, kilo ve günün özeti</item>
+        <item>Widget\'larda hedefe ulaşınca renk değişir ve ✓ çıkar; son güncelleme saati görünür</item>
+        <item>Widget\'a dokununca ilgili sayfa açılır; Ayarlar\'dan widget arka planının saydamlığı seçilebilir</item>
+        <item>Kuşa dokununca zıplıyor ve kanat çırpıyor, ara sıra göz kırpıyor</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Kuş widget\'ı: seviye, sonraki seviyeye kalan adım ve seviye atlama</item>
         <item>Uyku ve nabız widget\'ında yazılar artık kesilmiyor</item>
@@ -586,4 +594,22 @@
     <string name="bird_level">Seviye %1$d</string>
     <string name="bird_level_next">Seviye %1$d için %2$s adım</string>
     <string name="bird_level_up">Bugün seviye atladın! 🎉</string>
+    <string name="bird_level_left">%1$s adım kaldı</string>
+    <string name="widget_goal_done">Hedef tamam</string>
+    <string name="widget_updated_at">%1$s güncellendi</string>
+    <string name="settings_widget_opacity">Widget arka planı</string>
+    <string name="widget_water_label">Su</string>
+    <string name="widget_water_description">Bugün içtiğin su ve tek dokunuşla bardak ekleme</string>
+    <string name="widget_route_label">Sanal rota</string>
+    <string name="widget_route_description">Rotadaki ilerlemen ve sıradaki durak</string>
+    <string name="widget_route_none">Rota seçilmedi. Madalyalar sayfasından seçebilirsin.</string>
+    <string name="widget_challenge_label">Haftalık görevler</string>
+    <string name="widget_challenge_description">Bu haftanın görevleri ve ilerlemen</string>
+    <string name="widget_weight_label">Kilo</string>
+    <string name="widget_weight_description">Son kilon, değişim ve grafik</string>
+    <string name="widget_weight_empty">Henüz kilo kaydı yok</string>
+    <string name="widget_summary_label">Günün özeti</string>
+    <string name="widget_summary_description">Adım, su, uyku ve nabız tek widget\'ta</string>
+    <string name="widget_summary_distance">Mesafe</string>
+    <string name="widget_summary_calories">Kalori</string>
 </resources>

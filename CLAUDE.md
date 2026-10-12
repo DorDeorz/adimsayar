@@ -30,7 +30,7 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Seri jokeri: ayda 2 hak, `streak_freezes` tablosu. Jokerli gün seriyi bozmaz, uzatmaz, hedef günü sayılmaz.
 - Haftalık görevler saklanmaz; haftanın başlangıç tarihiyle tohumlanır, o haftadan önceki 28 güne göre seçilir (`data/Challenges.kt`).
 - Sanal rota: seçilen rota ve başlangıç günü ayarlarda saklanır, ilerleme o günden bu yana adımlardan (boya göre km) hesaplanır (`data/Routes.kt`). Rota mesafeleri yaklaşıktır, harita koordinatlardan çevrimdışı çizilir.
-- Kuş avatarı türetilmiştir, saklanmaz (`data/Avatar.kt`, çizim `ui/BirdPainter.kt`): evre seviyeden, ruh hali bugünkü ve dünkü adımdan, eşyalar madalyalardan gelir.
+- Kuş avatarı türetilmiştir, saklanmaz (`data/Avatar.kt`, çizim `ui/BirdPainter.kt`): evre seviyeden, ruh hali bugünkü ve dünkü adımdan, eşyalar madalyalardan gelir. Uygulamada kuşa dokununca zıplar ve kanat çırpar, ara sıra göz kırpar (`BirdPose`); animasyon yalnızca dokunuşta ve kısa göz kırpmada çizilir, sürekli çizim yoktur. Widget'ta animasyon yoktur.
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
 - Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
@@ -121,7 +121,7 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 ## Widget'lar
 
-Sekiz widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim, saat saat bugün, ısı haritası, uyku ve nabız, kuş. Glance satır/sütunları en fazla 10 çocuk aldığı için 24 saatlik çubuklar ve ısı haritası beyaz bitmap olarak çizilip `ColorFilter.tint` ile boyanır. Uyku ve nabız widget'ı Health Connect'i en fazla 15 dakikada bir okur. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
+On üç widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim, saat saat bugün, ısı haritası, uyku ve nabız, kuş, su (tek dokunuşla bardak ekler), sanal rota, haftalık görevler, kilo, günün özeti. Widget'a dokununca ilgili sekme açılır. Hedefe ulaşınca vurgu rengi `tertiary` olur ve ✓ çıkar. Arka plan saydamlığı Ayarlar'dan seçilir (%100/80/60/40); saydamlık 1×1 beyaz bitmap'in `widgetBackground` ile boyanmasıyla yapılır. Glance satır/sütunları en fazla 10 çocuk aldığı için 24 saatlik çubuklar ve ısı haritası beyaz bitmap olarak çizilip `ColorFilter.tint` ile boyanır. Uyku ve nabız widget'ı Health Connect'i en fazla 15 dakikada bir okur. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
 
 Kurallar:
 

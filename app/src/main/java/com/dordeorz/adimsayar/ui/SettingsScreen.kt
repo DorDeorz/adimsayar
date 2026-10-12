@@ -46,6 +46,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.WIDGET_OPACITY_OPTIONS
 import com.dordeorz.adimsayar.data.AGE_RANGE
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.GLASS_OPTIONS
@@ -73,6 +74,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.9.2", R.array.release_notes_0_9_2),
     ReleaseNote("0.9.1", R.array.release_notes_0_9_1),
     ReleaseNote("0.9.0", R.array.release_notes_0_9_0),
     ReleaseNote("0.8.0", R.array.release_notes_0_8_0),
@@ -231,6 +233,13 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     onCheckedChange = actions.onDynamicColorChange,
                 )
             }
+            ChoiceRow(
+                title = stringResource(R.string.settings_widget_opacity),
+                options = WIDGET_OPACITY_OPTIONS,
+                selected = settings.widgetOpacity,
+                label = { stringResource(R.string.percent_of_goal, it) },
+                onSelect = actions.onWidgetOpacityChange,
+            )
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))
             SectionTitle(stringResource(R.string.settings_language))

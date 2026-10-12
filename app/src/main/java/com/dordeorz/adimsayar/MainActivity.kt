@@ -108,7 +108,14 @@ class MainActivity : ComponentActivity() {
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
-        onDynamicColorChange = { settingsStore.setDynamicColor(it) },
+        onDynamicColorChange = {
+            settingsStore.setDynamicColor(it)
+            refreshWidgets()
+        },
+        onWidgetOpacityChange = {
+            settingsStore.setWidgetOpacity(it)
+            refreshWidgets()
+        },
         onDailyGoalChange = { goal ->
             settingsStore.setDailyGoal(goal)
             refreshWidgets()
@@ -152,11 +159,17 @@ class MainActivity : ComponentActivity() {
         onGrantHealthPermissions = { runCatching { healthPermissionLauncher.launch(WearableSteps.PERMISSIONS) } },
         onAddWeight = { date, kg ->
             val appContext = applicationContext
-            AppScope.launch(Dispatchers.IO) { Weights.add(appContext, date, kg) }
+            AppScope.launch(Dispatchers.IO) {
+                Weights.add(appContext, date, kg)
+                Widgets.updateWeight(appContext)
+            }
         },
         onDeleteWeight = { date ->
             val appContext = applicationContext
-            AppScope.launch(Dispatchers.IO) { Weights.delete(appContext, date) }
+            AppScope.launch(Dispatchers.IO) {
+                Weights.delete(appContext, date)
+                Widgets.updateWeight(appContext)
+            }
         },
         onWeightReminderChange = { enabled ->
             settingsStore.setWeightReminder(enabled)
@@ -177,7 +190,11 @@ class MainActivity : ComponentActivity() {
         },
         onAddWater = { ml ->
             val appContext = applicationContext
-            AppScope.launch(Dispatchers.IO) { Water.add(appContext, LocalDate.now(), ml) }
+            AppScope.launch(Dispatchers.IO) {
+                val drunk = Water.add(appContext, LocalDate.now(), ml)
+                Reminders.onWaterChanged(appContext, drunk)
+                Widgets.updateWater(appContext)
+            }
         },
         onFreezeChange = { date, frozen ->
             val appContext = applicationContext
@@ -200,6 +217,7 @@ class MainActivity : ComponentActivity() {
         },
         onRouteChange = { id ->
             if (id == null) settingsStore.setRoute(NO_ROUTE, NO_ROUTE_START) else settingsStore.setRoute(id, LocalDate.now().toEpochDay())
+            refreshWidgets()
         },
     )
 
@@ -338,7 +356,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun openRequestedTab(intent: Intent?) {
-        if (intent?.getStringExtra(EXTRA_TAB) == TAB_HEALTH) requestedTab = Tab.Health
+        val name = intent?.getStringExtra(EXTRA_TAB) ?: return
+        Tab.entries.firstOrNull { it.name.lowercase() == name }?.let { requestedTab = it }
     }
 
     override fun onStart() {

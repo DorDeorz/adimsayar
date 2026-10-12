@@ -98,6 +98,7 @@ class MainActions(
     val onWearableEnabledChange: (Boolean) -> Unit,
     val onThemeModeChange: (ThemeMode) -> Unit,
     val onDynamicColorChange: (Boolean) -> Unit,
+    val onWidgetOpacityChange: (Int) -> Unit,
     val onDailyGoalChange: (Long) -> Unit,
     val onWeeklyGoalChange: (Long) -> Unit,
     val onHeightChange: (Int) -> Unit,

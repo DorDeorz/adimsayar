@@ -313,6 +313,14 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>小鸟小组件：剩余步数用简写显示，不再截断</item>
+        <item>小号今日小组件显示距目标的进度条</item>
+        <item>新小组件：饮水（一键加一杯）、虚拟路线、每周挑战、体重和今日概览</item>
+        <item>达成目标时小组件会变色并显示 ✓，并显示最后更新时间</item>
+        <item>点击小组件会打开对应页面；可在设置中选择小组件背景透明度</item>
+        <item>点一下小鸟，它会跳起来拍打翅膀，还会不时眨眼</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>小鸟小组件：等级、距下一级的步数和升级</item>
         <item>睡眠和心率小组件的文字不再被截断</item>
@@ -585,4 +593,22 @@
     <string name="bird_level">等级 %1$d</string>
     <string name="bird_level_next">距离等级 %1$d 还差 %2$s 步</string>
     <string name="bird_level_up">今天升级了！🎉</string>
+    <string name="bird_level_left">还差 %1$s 步</string>
+    <string name="widget_goal_done">已达成目标</string>
+    <string name="widget_updated_at">%1$s 更新</string>
+    <string name="settings_widget_opacity">小组件背景</string>
+    <string name="widget_water_label">饮水</string>
+    <string name="widget_water_description">今天的饮水量，一键加一杯</string>
+    <string name="widget_route_label">虚拟路线</string>
+    <string name="widget_route_description">路线进度和下一站</string>
+    <string name="widget_route_none">尚未选择路线。可在奖牌页面选择。</string>
+    <string name="widget_challenge_label">每周挑战</string>
+    <string name="widget_challenge_description">本周挑战和你的进度</string>
+    <string name="widget_weight_label">体重</string>
+    <string name="widget_weight_description">最新体重、变化和图表</string>
+    <string name="widget_weight_empty">还没有体重记录</string>
+    <string name="widget_summary_label">今日概览</string>
+    <string name="widget_summary_description">步数、饮水、睡眠和心率尽在一个小组件</string>
+    <string name="widget_summary_distance">距离</string>
+    <string name="widget_summary_calories">卡路里</string>
 </resources>

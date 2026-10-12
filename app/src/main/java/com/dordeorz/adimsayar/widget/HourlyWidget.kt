@@ -27,6 +27,7 @@ import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
+import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.text.FontWeight
@@ -35,6 +36,7 @@ import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.XiaomiSteps
@@ -57,7 +59,9 @@ class HourlyWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                HourlyContent(localized, hours)
+                WidgetSurface(Tab.Today, settings.widgetOpacity) {
+                    HourlyContent(localized, hours)
+                }
             }
         }
     }
@@ -83,7 +87,7 @@ private const val HOURS = 24
 @Composable
 private fun HourlyContent(context: Context, hours: LongArray?) {
     val size = LocalSize.current
-    Column(modifier = widgetSurface()) {
+    Column(modifier = GlanceModifier.fillMaxSize()) {
         Row(modifier = GlanceModifier.fillMaxWidth().height(TITLE_HEIGHT), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = context.getString(R.string.widget_hourly_title),

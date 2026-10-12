@@ -38,9 +38,11 @@ import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import androidx.glance.unit.ColorProvider
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.Distance
 import com.dordeorz.adimsayar.data.DistanceUnit
@@ -63,9 +65,12 @@ class TodayWidget : GlanceAppWidget() {
             val flow = remember { repository.observeWeek(today) }
             val week by flow.collectAsState(initial)
             val settings by SettingsStore.get(context).settings.collectAsState()
+            val updated by repository.lastReadingWallMs.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                TodayContent(localized, week.lastOrNull()?.steps ?: 0L, settings)
+                WidgetSurface(Tab.Today, settings.widgetOpacity) {
+                    TodayContent(localized, week.lastOrNull()?.steps ?: 0L, settings, updated)
+                }
             }
         }
     }
@@ -82,52 +87,101 @@ class TodayWidgetReceiver : GlanceAppWidgetReceiver() {
 
 private val PADDING = 12.dp
 private val TITLE_HEIGHT = 18.dp
+private val STAMP_HEIGHT = 14.dp
 private val MIN_RING = 76.dp
 private val TINY = 100.dp
 private const val MAX_RING_PX = 480
 private const val WIDE_RATIO = 1.6f
 
 @Composable
-private fun TodayContent(context: Context, steps: Long, settings: AppSettings) {
+private fun TodayContent(context: Context, steps: Long, settings: AppSettings, updated: Long?) {
     val size = LocalSize.current
     val goal = settings.dailyGoal
     val fraction = (steps.toFloat() / goal).coerceIn(0f, 1f)
+    val done = steps >= goal
     val innerWidth = size.width - PADDING * 2
     val innerHeight = size.height - PADDING * 2
-    Box(modifier = widgetSurface(), contentAlignment = Alignment.Center) {
+    val squareRing = minOf(innerWidth, innerHeight - TITLE_HEIGHT - STAMP_HEIGHT)
+    Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when {
-            size.width < TINY || size.height < TINY -> TinyContent(context, steps, goal)
+            size.width < TINY || size.height < TINY -> TinyContent(context, steps, goal, fraction, done)
             size.width.value >= size.height.value * WIDE_RATIO && innerHeight >= MIN_RING ->
-                WideContent(context, steps, fraction, innerHeight, settings)
-            minOf(innerWidth, innerHeight - TITLE_HEIGHT) >= MIN_RING ->
-                SquareContent(context, steps, goal, fraction, minOf(innerWidth, innerHeight - TITLE_HEIGHT))
-            else -> BarContent(context, steps, goal, fraction)
+                WideContent(context, steps, fraction, done, innerHeight, settings, updated)
+            squareRing >= MIN_RING -> SquareContent(context, steps, goal, fraction, done, squareRing, updated)
+            else -> BarContent(context, steps, goal, fraction, done)
         }
     }
 }
 
 @Composable
-private fun TinyContent(context: Context, steps: Long, goal: Long) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+private fun accent(done: Boolean): ColorProvider = if (done) GlanceTheme.colors.tertiary else GlanceTheme.colors.primary
+
+@Composable
+private fun GoalLine(context: Context, goal: Long, done: Boolean, fontSize: Float) {
+    if (!done) {
         Text(
-            text = formatSteps(steps),
+            text = context.getString(R.string.goal_short, formatSteps(goal)),
             maxLines = 1,
-            style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 20.sp, fontWeight = FontWeight.Bold),
+            style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = fontSize.sp),
         )
+        return
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(
+            provider = ImageProvider(R.drawable.ic_check),
+            contentDescription = null,
+            modifier = GlanceModifier.size((fontSize + 2f).dp),
+            colorFilter = ColorFilter.tint(GlanceTheme.colors.tertiary),
+        )
+        Spacer(GlanceModifier.width(3.dp))
         Text(
-            text = context.getString(R.string.percent_of_goal, percent(steps, goal)),
+            text = context.getString(R.string.widget_goal_done),
             maxLines = 1,
-            style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+            style = TextStyle(color = GlanceTheme.colors.tertiary, fontSize = fontSize.sp, fontWeight = FontWeight.Medium),
         )
     }
 }
 
 @Composable
-private fun SquareContent(context: Context, steps: Long, goal: Long, fraction: Float, ring: Dp) {
+private fun TinyContent(context: Context, steps: Long, goal: Long, fraction: Float, done: Boolean) {
+    Column(modifier = GlanceModifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = formatSteps(steps),
+            maxLines = 1,
+            style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 20.sp, fontWeight = FontWeight.Bold),
+        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (done) {
+                Image(
+                    provider = ImageProvider(R.drawable.ic_check),
+                    contentDescription = null,
+                    modifier = GlanceModifier.size(13.dp),
+                    colorFilter = ColorFilter.tint(GlanceTheme.colors.tertiary),
+                )
+                Spacer(GlanceModifier.width(2.dp))
+            }
+            Text(
+                text = context.getString(R.string.percent_of_goal, percent(steps, goal)),
+                maxLines = 1,
+                style = TextStyle(color = accent(done), fontSize = 12.sp, fontWeight = FontWeight.Medium),
+            )
+        }
+        Spacer(GlanceModifier.height(6.dp))
+        LinearProgressIndicator(
+            progress = fraction,
+            modifier = GlanceModifier.fillMaxWidth().height(6.dp),
+            color = accent(done),
+            backgroundColor = GlanceTheme.colors.secondaryContainer,
+        )
+    }
+}
+
+@Composable
+private fun SquareContent(context: Context, steps: Long, goal: Long, fraction: Float, done: Boolean, ring: Dp, updated: Long?) {
     Column(modifier = GlanceModifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         Title(context)
         Box(modifier = GlanceModifier.fillMaxWidth().defaultWeight(), contentAlignment = Alignment.Center) {
-            Ring(context, fraction, ring) {
+            Ring(context, fraction, ring, accent(done)) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = formatSteps(steps),
@@ -138,29 +192,25 @@ private fun SquareContent(context: Context, steps: Long, goal: Long, fraction: F
                             fontWeight = FontWeight.Bold,
                         ),
                     )
-                    Text(
-                        text = context.getString(R.string.goal_short, formatSteps(goal)),
-                        maxLines = 1,
-                        style = TextStyle(
-                            color = GlanceTheme.colors.onSurfaceVariant,
-                            fontSize = (ring.value * 0.09f).coerceIn(9f, 12f).sp,
-                        ),
-                    )
+                    GoalLine(context, goal, done, (ring.value * 0.09f).coerceIn(9f, 12f))
                 }
             }
+        }
+        Box(modifier = GlanceModifier.height(STAMP_HEIGHT), contentAlignment = Alignment.BottomCenter) {
+            UpdatedText(context, updated)
         }
     }
 }
 
 @Composable
-private fun WideContent(context: Context, steps: Long, fraction: Float, ring: Dp, settings: AppSettings) {
+private fun WideContent(context: Context, steps: Long, fraction: Float, done: Boolean, ring: Dp, settings: AppSettings, updated: Long?) {
     Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
-        Ring(context, fraction, ring) {
+        Ring(context, fraction, ring, accent(done)) {
             Text(
                 text = context.getString(R.string.percent_of_goal, percent(steps, settings.dailyGoal)),
                 maxLines = 1,
                 style = TextStyle(
-                    color = GlanceTheme.colors.primary,
+                    color = accent(done),
                     fontSize = (ring.value * 0.2f).coerceAtMost(24f).sp,
                     fontWeight = FontWeight.Bold,
                 ),
@@ -174,22 +224,19 @@ private fun WideContent(context: Context, steps: Long, fraction: Float, ring: Dp
                 maxLines = 1,
                 style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 30.sp, fontWeight = FontWeight.Bold),
             )
-            Text(
-                text = context.getString(R.string.goal_short, formatSteps(settings.dailyGoal)),
-                maxLines = 1,
-                style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
-            )
+            GoalLine(context, settings.dailyGoal, done, 12f)
             Text(
                 text = distanceText(context, steps, settings),
                 maxLines = 1,
                 style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
             )
+            if (ring >= MIN_RING + STAMP_HEIGHT) UpdatedText(context, updated)
         }
     }
 }
 
 @Composable
-private fun BarContent(context: Context, steps: Long, goal: Long, fraction: Float) {
+private fun BarContent(context: Context, steps: Long, goal: Long, fraction: Float, done: Boolean) {
     Column(modifier = GlanceModifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         Title(context)
         Text(
@@ -201,14 +248,11 @@ private fun BarContent(context: Context, steps: Long, goal: Long, fraction: Floa
         LinearProgressIndicator(
             progress = fraction,
             modifier = GlanceModifier.fillMaxWidth().height(6.dp),
-            color = GlanceTheme.colors.primary,
+            color = accent(done),
             backgroundColor = GlanceTheme.colors.secondaryContainer,
         )
         Spacer(GlanceModifier.height(4.dp))
-        Text(
-            text = context.getString(R.string.goal_short, formatSteps(goal)),
-            style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
-        )
+        GoalLine(context, goal, done, 11f)
     }
 }
 
@@ -222,7 +266,7 @@ private fun Title(context: Context) {
 }
 
 @Composable
-private fun Ring(context: Context, fraction: Float, ring: Dp, content: @Composable () -> Unit) {
+internal fun Ring(context: Context, fraction: Float, ring: Dp, color: ColorProvider, content: @Composable () -> Unit) {
     val px = (ring.value * context.resources.displayMetrics.density).toInt().coerceIn(1, MAX_RING_PX)
     val stroke = px * 0.09f
     Box(modifier = GlanceModifier.size(ring), contentAlignment = Alignment.Center) {
@@ -237,7 +281,7 @@ private fun Ring(context: Context, fraction: Float, ring: Dp, content: @Composab
                 provider = ImageProvider(ringBitmap(px, stroke, fraction)),
                 contentDescription = null,
                 modifier = GlanceModifier.fillMaxSize(),
-                colorFilter = ColorFilter.tint(GlanceTheme.colors.primary),
+                colorFilter = ColorFilter.tint(color),
             )
         }
         content()

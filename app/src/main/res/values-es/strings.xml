@@ -313,6 +313,14 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_9_2">
+        <item>Widget del pájaro: los pasos restantes se muestran abreviados y caben</item>
+        <item>El widget pequeño de Hoy muestra una barra de progreso hacia la meta</item>
+        <item>Nuevos widgets: agua (añade un vaso con un toque), ruta virtual, retos semanales, peso y resumen del día</item>
+        <item>Los widgets cambian de color y muestran ✓ al alcanzar la meta; se ve la hora de la última actualización</item>
+        <item>Tocar un widget abre la página correspondiente; la transparencia del fondo se elige en Ajustes</item>
+        <item>Toca el pájaro: salta y bate las alas, y a veces parpadea</item>
+    </string-array>
     <string-array name="release_notes_0_9_1">
         <item>Widget del pájaro: nivel, pasos al siguiente nivel y subida de nivel</item>
         <item>Las etiquetas del widget de sueño y pulso ya no se cortan</item>
@@ -585,4 +593,22 @@
     <string name="bird_level">Nivel %1$d</string>
     <string name="bird_level_next">%2$s pasos para el nivel %1$d</string>
     <string name="bird_level_up">¡Subiste de nivel hoy! 🎉</string>
+    <string name="bird_level_left">Faltan %1$s pasos</string>
+    <string name="widget_goal_done">Meta alcanzada</string>
+    <string name="widget_updated_at">Actualizado %1$s</string>
+    <string name="settings_widget_opacity">Fondo del widget</string>
+    <string name="widget_water_label">Agua</string>
+    <string name="widget_water_description">Agua de hoy, añade un vaso con un toque</string>
+    <string name="widget_route_label">Ruta virtual</string>
+    <string name="widget_route_description">Tu avance en la ruta y la próxima parada</string>
+    <string name="widget_route_none">No hay ruta elegida. Elige una en la página Medallas.</string>
+    <string name="widget_challenge_label">Retos semanales</string>
+    <string name="widget_challenge_description">Retos de esta semana y tu progreso</string>
+    <string name="widget_weight_label">Peso</string>
+    <string name="widget_weight_description">Último peso, cambio y gráfico</string>
+    <string name="widget_weight_empty">Aún no hay registros de peso</string>
+    <string name="widget_summary_label">Resumen del día</string>
+    <string name="widget_summary_description">Pasos, agua, sueño y pulso en un widget</string>
+    <string name="widget_summary_distance">Distancia</string>
+    <string name="widget_summary_calories">Calorías</string>
 </resources>

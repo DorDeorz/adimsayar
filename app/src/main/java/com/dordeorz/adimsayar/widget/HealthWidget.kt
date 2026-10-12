@@ -9,31 +9,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
-import androidx.glance.ColorFilter
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
-import androidx.glance.Image
-import androidx.glance.ImageProvider
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.provideContent
-import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
-import androidx.glance.layout.ColumnScope
-import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
-import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.height
-import androidx.glance.layout.size
-import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
+import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.HealthSnapshot
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.WearableHealth
@@ -54,7 +47,9 @@ class HealthWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
-                HealthContent(localized, enabled, snapshot)
+                WidgetSurface(Tab.Health, settings.widgetOpacity) {
+                    HealthContent(localized, enabled, snapshot)
+                }
             }
         }
     }
@@ -109,7 +104,7 @@ internal object HealthCache {
 
 @Composable
 private fun HealthContent(context: Context, enabled: Boolean, snapshot: HealthSnapshot?) {
-    Column(modifier = widgetSurface()) {
+    Column(modifier = GlanceModifier.fillMaxSize()) {
         Text(
             text = context.getString(R.string.widget_health_title),
             maxLines = 1,
@@ -124,21 +119,18 @@ private fun HealthContent(context: Context, enabled: Boolean, snapshot: HealthSn
             return@Column
         }
         val sleep = snapshot?.sleepMinutes?.takeIf { it > 0L }
-        HealthRow(
-            context,
+        InfoRow(
             R.drawable.ic_moon,
             if (sleep == null) "-" else context.getString(R.string.band_sleep_value, sleep / 60, sleep % 60),
             context.getString(R.string.widget_health_sleep),
         )
-        HealthRow(
-            context,
+        InfoRow(
             R.drawable.ic_heart,
             snapshot?.resting?.let { context.getString(R.string.health_bpm, it) } ?: "-",
             context.getString(R.string.heart_resting),
         )
         val latestAt = snapshot?.latestAt
-        HealthRow(
-            context,
+        InfoRow(
             R.drawable.ic_heart,
             snapshot?.latest?.let { context.getString(R.string.health_bpm, it) } ?: "-",
             if (latestAt == null) {
@@ -147,30 +139,5 @@ private fun HealthContent(context: Context, enabled: Boolean, snapshot: HealthSn
                 context.getString(R.string.widget_health_latest_at, CLOCK_FORMAT.format(latestAt.atZone(ZoneId.systemDefault())))
             },
         )
-    }
-}
-
-@Composable
-private fun ColumnScope.HealthRow(context: Context, icon: Int, value: String, label: String) {
-    Row(modifier = GlanceModifier.fillMaxWidth().defaultWeight(), verticalAlignment = Alignment.CenterVertically) {
-        Image(
-            provider = ImageProvider(icon),
-            contentDescription = null,
-            modifier = GlanceModifier.size(18.dp),
-            colorFilter = ColorFilter.tint(GlanceTheme.colors.primary),
-        )
-        Spacer(GlanceModifier.width(8.dp))
-        Column(modifier = GlanceModifier.defaultWeight()) {
-            Text(
-                text = value,
-                maxLines = 1,
-                style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 16.sp, fontWeight = FontWeight.Bold),
-            )
-            Text(
-                text = label,
-                maxLines = 1,
-                style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
-            )
-        }
     }
 }
