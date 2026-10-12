@@ -313,6 +313,12 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Vogel-Widget: Level, Schritte bis zum nächsten Level und Aufstieg</item>
+        <item>Beschriftungen im Schlaf- und Puls-Widget werden nicht mehr abgeschnitten</item>
+        <item>Heatmap: Leere Tage und Tage mit wenigen Schritten sind besser unterscheidbar</item>
+        <item>Vogelkarte zeigt Level und Aufstieg</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Wasser-Tracking auf dem Heute-Bildschirm: Gläser hinzufügen oder entfernen, Tagesziel nach Gewicht. Wasser der letzten 7 Tage auf der Gesundheitsseite</item>
         <item>Optionale Wasser-Erinnerung (Einstellungen): alle 1, 2 oder 3 Stunden, wie viel noch fehlt; Glas direkt in der Benachrichtigung hinzufügen</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Schlaf der letzten Nacht und Puls vom Armband</string>
     <string name="widget_health_title">Schlaf und Puls</string>
     <string name="widget_health_off">Armbanddaten sind aus. Du kannst sie in den Einstellungen einschalten.</string>
-    <string name="widget_health_sleep">Schlaf letzte Nacht</string>
+    <string name="widget_health_sleep">Schlaf</string>
     <string name="widget_health_latest">Letzte Messung</string>
-    <string name="widget_health_latest_at">Letzte Messung · %1$s</string>
+    <string name="widget_health_latest_at">Zuletzt · %1$s</string>
     <string name="route_title">Virtuelle Route</string>
     <string name="route_empty">Wähle eine Route und sieh deine Schritte auf der Karte vorankommen.</string>
     <string name="route_choose">Route wählen</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">Der Vogel wächst mit deinen Gesamtschritten. Seine Laune folgt den heutigen Schritten. Gegenstände gibt es mit Medaillen.</string>
     <string name="widget_bird_label">Vogel</string>
     <string name="widget_bird_description">Ein Vogel, der mit deinen Schritten wächst</string>
+    <string name="bird_level">Level %1$d</string>
+    <string name="bird_level_next">Noch %2$s Schritte bis Level %1$d</string>
+    <string name="bird_level_up">Heute aufgestiegen! 🎉</string>
 </resources>

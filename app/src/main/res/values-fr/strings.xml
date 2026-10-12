@@ -313,6 +313,12 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Widget oiseau : niveau, pas avant le prochain niveau et montée de niveau</item>
+        <item>Les libellés du widget sommeil et pouls ne sont plus coupés</item>
+        <item>Carte de chaleur : jours vides et jours peu actifs mieux distingués</item>
+        <item>La carte oiseau affiche niveau et montée</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Suivi de l’eau sur l’écran Aujourd’hui : ajoutez ou retirez des verres, objectif conseillé selon votre poids. Eau des 7 derniers jours sur la page Santé</item>
         <item>Rappel d’hydratation facultatif (Réglages) : toutes les 1, 2 ou 3 heures, indique ce qu’il reste ; ajoutez un verre depuis la notification</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Sommeil de la nuit et fréquence cardiaque du bracelet</string>
     <string name="widget_health_title">Sommeil et cœur</string>
     <string name="widget_health_off">Les données du bracelet sont désactivées. Activez-les dans les réglages.</string>
-    <string name="widget_health_sleep">Sommeil de la nuit</string>
+    <string name="widget_health_sleep">Sommeil</string>
     <string name="widget_health_latest">Dernière mesure</string>
-    <string name="widget_health_latest_at">Dernière mesure · %1$s</string>
+    <string name="widget_health_latest_at">Dernière · %1$s</string>
     <string name="route_title">Itinéraire virtuel</string>
     <string name="route_empty">Choisis un itinéraire et regarde tes pas avancer sur la carte.</string>
     <string name="route_choose">Choisir un itinéraire</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">L\'oiseau grandit avec tes pas cumulés. Son humeur suit tes pas du jour. Les objets arrivent avec les médailles.</string>
     <string name="widget_bird_label">Oiseau</string>
     <string name="widget_bird_description">Un oiseau qui grandit avec tes pas</string>
+    <string name="bird_level">Niveau %1$d</string>
+    <string name="bird_level_next">%2$s pas avant le niveau %1$d</string>
+    <string name="bird_level_up">Niveau gagné aujourd\'hui ! 🎉</string>
 </resources>

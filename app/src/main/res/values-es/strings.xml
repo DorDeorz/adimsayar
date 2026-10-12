@@ -313,6 +313,12 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Widget del pájaro: nivel, pasos al siguiente nivel y subida de nivel</item>
+        <item>Las etiquetas del widget de sueño y pulso ya no se cortan</item>
+        <item>Mapa de calor: los días vacíos y con pocos pasos se distinguen mejor</item>
+        <item>La tarjeta del pájaro muestra nivel y subida</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Registro de agua en la pantalla Hoy: añade o quita vasos, meta diaria sugerida según tu peso. Agua de los últimos 7 días en la página Salud</item>
         <item>Recordatorio de agua opcional (Ajustes): cada 1, 2 o 3 horas te dice cuánto falta; añade un vaso desde la notificación</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Sueño de anoche y pulso de tu pulsera</string>
     <string name="widget_health_title">Sueño y pulso</string>
     <string name="widget_health_off">Los datos de la pulsera están desactivados. Puedes activarlos en Ajustes.</string>
-    <string name="widget_health_sleep">Sueño de anoche</string>
+    <string name="widget_health_sleep">Sueño</string>
     <string name="widget_health_latest">Última medición</string>
-    <string name="widget_health_latest_at">Última medición · %1$s</string>
+    <string name="widget_health_latest_at">Última · %1$s</string>
     <string name="route_title">Ruta virtual</string>
     <string name="route_empty">Elige una ruta y mira cómo tus pasos avanzan en el mapa.</string>
     <string name="route_choose">Elegir ruta</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">El pájaro crece con tus pasos totales. Su ánimo depende de los pasos de hoy. Los objetos llegan con las medallas.</string>
     <string name="widget_bird_label">Pájaro</string>
     <string name="widget_bird_description">Un pájaro que crece con tus pasos</string>
+    <string name="bird_level">Nivel %1$d</string>
+    <string name="bird_level_next">%2$s pasos para el nivel %1$d</string>
+    <string name="bird_level_up">¡Subiste de nivel hoy! 🎉</string>
 </resources>

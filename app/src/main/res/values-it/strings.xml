@@ -313,6 +313,12 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Widget uccello: livello, passi al prossimo livello e salita di livello</item>
+        <item>Le etichette del widget sonno e battito non vengono più tagliate</item>
+        <item>Mappa di calore: giorni vuoti e con pochi passi più distinguibili</item>
+        <item>La scheda uccello mostra livello e salita</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Registro dell’acqua nella schermata Oggi: aggiungi o togli bicchieri, obiettivo suggerito in base al peso. Acqua degli ultimi 7 giorni nella pagina Salute</item>
         <item>Promemoria acqua facoltativo (Impostazioni): ogni 1, 2 o 3 ore indica quanto manca; aggiungi un bicchiere dalla notifica</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Sonno di stanotte e battito dal bracciale</string>
     <string name="widget_health_title">Sonno e battito</string>
     <string name="widget_health_off">I dati del bracciale sono disattivati. Puoi attivarli nelle Impostazioni.</string>
-    <string name="widget_health_sleep">Sonno di stanotte</string>
+    <string name="widget_health_sleep">Sonno</string>
     <string name="widget_health_latest">Ultima misura</string>
-    <string name="widget_health_latest_at">Ultima misura · %1$s</string>
+    <string name="widget_health_latest_at">Ultima · %1$s</string>
     <string name="route_title">Percorso virtuale</string>
     <string name="route_empty">Scegli un percorso e guarda i tuoi passi avanzare sulla mappa.</string>
     <string name="route_choose">Scegli percorso</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">L\'uccello cresce con i passi totali. L\'umore segue i passi di oggi. Gli oggetti arrivano con le medaglie.</string>
     <string name="widget_bird_label">Uccello</string>
     <string name="widget_bird_description">Un uccello che cresce con i tuoi passi</string>
+    <string name="bird_level">Livello %1$d</string>
+    <string name="bird_level_next">%2$s passi al livello %1$d</string>
+    <string name="bird_level_up">Oggi sei salito di livello! 🎉</string>
 </resources>

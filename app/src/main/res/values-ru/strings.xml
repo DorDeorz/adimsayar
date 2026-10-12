@@ -313,6 +313,12 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Виджет птицы: уровень, шаги до следующего уровня и повышение</item>
+        <item>Подписи в виджете сна и пульса больше не обрезаются</item>
+        <item>Тепловая карта: пустые дни и дни с малым числом шагов легче различить</item>
+        <item>Карточка птицы показывает уровень и повышение</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Учёт воды на экране «Сегодня»: добавляйте и убирайте стаканы, дневная цель по весу. Вода за 7 дней на странице «Здоровье»</item>
         <item>Необязательное напоминание о воде (Настройки): каждые 1, 2 или 3 часа сообщает, сколько осталось; стакан можно добавить из уведомления</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Сон прошлой ночи и пульс с браслета</string>
     <string name="widget_health_title">Сон и пульс</string>
     <string name="widget_health_off">Данные браслета выключены. Включить можно в настройках.</string>
-    <string name="widget_health_sleep">Сон прошлой ночи</string>
+    <string name="widget_health_sleep">Сон</string>
     <string name="widget_health_latest">Последнее измерение</string>
-    <string name="widget_health_latest_at">Последнее измерение · %1$s</string>
+    <string name="widget_health_latest_at">Посл. · %1$s</string>
     <string name="route_title">Виртуальный маршрут</string>
     <string name="route_empty">Выбери маршрут, и твои шаги будут продвигаться по карте.</string>
     <string name="route_choose">Выбрать маршрут</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">Птица растёт вместе с общим числом шагов. Настроение зависит от сегодняшних шагов. Предметы дают медали.</string>
     <string name="widget_bird_label">Птица</string>
     <string name="widget_bird_description">Птица, которая растёт с твоими шагами</string>
+    <string name="bird_level">Уровень %1$d</string>
+    <string name="bird_level_next">%2$s шагов до уровня %1$d</string>
+    <string name="bird_level_up">Сегодня новый уровень! 🎉</string>
 </resources>

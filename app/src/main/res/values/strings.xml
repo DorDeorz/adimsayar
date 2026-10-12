@@ -313,6 +313,12 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Kuş widget\'ı: seviye, sonraki seviyeye kalan adım ve seviye atlama</item>
+        <item>Uyku ve nabız widget\'ında yazılar artık kesilmiyor</item>
+        <item>Isı haritasında boş günler ve az adımlı günler daha kolay ayırt ediliyor</item>
+        <item>Kuş kartında seviye ve seviye atlama gösteriliyor</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Bugün ekranında su takibi: bardak ekle ya da çıkar, kilona göre önerilen günlük hedef. Sağlık sayfasında son 7 günün su grafiği</item>
         <item>İsteğe bağlı su hatırlatması (Ayarlar): 1, 2 ya da 3 saatte bir ne kadar su kaldığını söyler; bildirimden bardak eklenebilir</item>
@@ -533,9 +539,9 @@
     <string name="widget_health_description">Bileklikten dün geceki uyku ve nabız</string>
     <string name="widget_health_title">Uyku ve nabız</string>
     <string name="widget_health_off">Bileklik verisi kapalı. Ayarlar’dan açabilirsin.</string>
-    <string name="widget_health_sleep">Dün geceki uyku</string>
+    <string name="widget_health_sleep">Uyku</string>
     <string name="widget_health_latest">Son ölçüm</string>
-    <string name="widget_health_latest_at">Son ölçüm · %1$s</string>
+    <string name="widget_health_latest_at">Son · %1$s</string>
     <string name="route_title">Sanal rota</string>
     <string name="route_empty">Bir rota seç, attığın adımlar haritada ilerlesin.</string>
     <string name="route_choose">Rota seç</string>
@@ -577,4 +583,7 @@
     <string name="bird_hint">Kuş toplam adımınla büyür. Ruh hali bugünkü adımına göre değişir. Eşyalar madalyalarla gelir.</string>
     <string name="widget_bird_label">Kuş</string>
     <string name="widget_bird_description">Adımlarınla büyüyen kuş</string>
+    <string name="bird_level">Seviye %1$d</string>
+    <string name="bird_level_next">Seviye %1$d için %2$s adım</string>
+    <string name="bird_level_up">Bugün seviye atladın! 🎉</string>
 </resources>

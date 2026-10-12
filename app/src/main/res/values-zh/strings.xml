@@ -313,6 +313,12 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>小鸟小组件：等级、距下一级的步数和升级</item>
+        <item>睡眠和心率小组件的文字不再被截断</item>
+        <item>热力图：空白日与步数少的日子更易区分</item>
+        <item>小鸟卡片显示等级和升级</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>今日页面新增饮水记录：增减杯数，按体重建议每日目标。健康页面显示最近 7 天饮水</item>
         <item>可选喝水提醒（设置）：每 1、2 或 3 小时提醒还差多少，可在通知中添加一杯</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">来自手环的昨晚睡眠和心率</string>
     <string name="widget_health_title">睡眠和心率</string>
     <string name="widget_health_off">手环数据已关闭，可在设置中开启。</string>
-    <string name="widget_health_sleep">昨晚睡眠</string>
+    <string name="widget_health_sleep">睡眠</string>
     <string name="widget_health_latest">最新测量</string>
-    <string name="widget_health_latest_at">最新测量 · %1$s</string>
+    <string name="widget_health_latest_at">最新 · %1$s</string>
     <string name="route_title">虚拟路线</string>
     <string name="route_empty">选择一条路线，你的步数会在地图上前进。</string>
     <string name="route_choose">选择路线</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">小鸟随总步数成长。心情取决于今天的步数。物品随奖牌获得。</string>
     <string name="widget_bird_label">小鸟</string>
     <string name="widget_bird_description">随步数成长的小鸟</string>
+    <string name="bird_level">等级 %1$d</string>
+    <string name="bird_level_next">距离等级 %1$d 还差 %2$s 步</string>
+    <string name="bird_level_up">今天升级了！🎉</string>
 </resources>

@@ -313,6 +313,12 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_9_1">
+        <item>Bird widget: level, steps to next level and level-up</item>
+        <item>Sleep and heart widget labels no longer get cut off</item>
+        <item>Heatmap: empty days and low-step days are easier to tell apart</item>
+        <item>Bird card shows level and level-up</item>
+    </string-array>
     <string-array name="release_notes_0_9_0">
         <item>Water tracking on the Today screen: add or remove glasses, daily goal suggested from your weight. Last 7 days of water on the Health page</item>
         <item>Optional water reminder (Settings): every 1, 2 or 3 hours it tells you how much is left; add a glass from the notification</item>
@@ -532,9 +538,9 @@
     <string name="widget_health_description">Last night’s sleep and heart rate from your band</string>
     <string name="widget_health_title">Sleep and heart</string>
     <string name="widget_health_off">Band data is off. You can turn it on in Settings.</string>
-    <string name="widget_health_sleep">Last night’s sleep</string>
+    <string name="widget_health_sleep">Sleep</string>
     <string name="widget_health_latest">Latest reading</string>
-    <string name="widget_health_latest_at">Latest reading · %1$s</string>
+    <string name="widget_health_latest_at">Latest · %1$s</string>
     <string name="route_title">Virtual route</string>
     <string name="route_empty">Pick a route and watch your steps move along the map.</string>
     <string name="route_choose">Choose route</string>
@@ -576,4 +582,7 @@
     <string name="bird_hint">The bird grows with your total steps. Its mood follows today\'s steps. Items come with medals.</string>
     <string name="widget_bird_label">Bird</string>
     <string name="widget_bird_description">A bird that grows with your steps</string>
+    <string name="bird_level">Level %1$d</string>
+    <string name="bird_level_next">%2$s steps to level %1$d</string>
+    <string name="bird_level_up">Level up today! 🎉</string>
 </resources>
