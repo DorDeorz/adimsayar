@@ -43,7 +43,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Günlük hedefe göre ilerleme halkası, kalan adım, mesafe ve kalori
 - Seri, haftalık ilerleme ve son 7 gün
 - Kilona göre önerilen hedefle su takibi
-- Toplam adımınla büyüyen, günün nasıl geçtiğine göre ruh hali değişen küçük bir çalıkuşu. Dokununca zıplar.
+- Adımlarınla büyüyen küçük bir kuş ([civcivle tanış](#civcivle-tanış))
 - Günün özetini resim olarak paylaşma
 
 ### Geçmiş
@@ -79,6 +79,55 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 - Açık, koyu ya da sistem teması
 - 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince ve Korece
 - CSV ile dışa ve içe aktarma. İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur.
+
+<p align="center">
+  <img src="docs/screenshots/today_more.png" width="200" alt="Bugün: seri, su ve son 7 gün">
+  <img src="docs/screenshots/heart.png" width="200" alt="Nabız">
+  <img src="docs/screenshots/route.png" width="200" alt="Sanal rota">
+</p>
+
+## Civcivle tanış
+
+Adımların küçük bir kuşu büyütür. Bugün ekranında ve kendi widget'ında yaşar. Hakkında hiçbir şey saklanmaz: görünüşü her seferinde adım geçmişinden hesaplanır.
+
+### Toplam adımınla büyür
+
+<p align="center"><img src="docs/bird/stages.svg" width="720" alt="Yumurtadan bilge kuşa altı evre"></p>
+
+| Evre | Seviye | Toplam adım |
+|---|---|---|
+| Yumurta | 0 | başlangıçtan. Yolun yarısında kabukta çatlak belirir. |
+| Yumurtadan yeni çıktı | 1 | 25.000 |
+| Civciv | 3 | 150.000 |
+| Yavru kuş | 6 | 525.000. Kuyruğu çıkar. |
+| Kuş | 10 | 1.375.000. Tepeliği çıkar, kuyruğu uzar. |
+| Bilge kuş | 15 | 3.000.000. Tepeliği altın rengi olur. |
+
+Kart, sonraki seviyeye ve evreye kaç adım kaldığını gösterir ve seviye atladığın günü kutlar.
+
+### Ruh hali gününe göre değişir
+
+<p align="center"><img src="docs/bird/moods.svg" width="600" alt="Uykulu, üzgün, sakin, neşeli ve coşkulu kuş"></p>
+
+1. **Uykulu:** saat 07:00'den önce ya da günlük hedefinin %10'unun altındayken.
+2. **Üzgün:** dün hedefi kaçırdıysan ve bugün hâlâ yarının altındaysan. Düne joker kullanırsan üzülmez.
+3. **Sakin:** hedefin yarısının altında.
+4. **Neşeli:** hedefin yarısı ya da fazlası. Yanakları kızarır.
+5. **Coşkulu:** hedefe ulaştın. Kanatlar havada, etrafında parıltılar.
+
+### Madalyalar ona eşya getirir
+
+<p align="center"><img src="docs/bird/items.svg" width="720" alt="Atkı, madalya, güneş, parti şapkası, taç ve hepsini takmış bilge kuş"></p>
+
+| Eşya | Nasıl kazanılır |
+|---|---|
+| Atkı | 7 günlük seri |
+| Madalya | Haftalık hedefe 4 kez ulaşmak |
+| Güneş | 7 gün erken yürüyüş (HyperOS kaydı açıkken) |
+| Parti şapkası | Bir günde 20.000 adım |
+| Taç | Toplam 1 milyon adım. Parti şapkasının yerine geçer. |
+
+Madalyalar kalıcı olduğu için kazanılan eşya da kalır. Uygulamada kuşa dokununca zıplar ve kanat çırpar, ara sıra da göz kırpar. Widget aynı kuşu animasyonsuz gösterir.
 
 ## Kurulum
 

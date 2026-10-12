@@ -43,7 +43,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Progress ring toward your daily goal, steps left, distance and calories
 - Streak, weekly progress and the last 7 days
 - Water tracking with a goal suggested from your weight
-- A little wren that grows with your total steps and reacts to how your day is going. Tap it and it hops.
+- A little wren that grows with your steps ([meet the wren](#meet-the-wren))
 - Share your day as an image
 
 ### History
@@ -79,6 +79,55 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 - Light, dark or system theme
 - 12 languages: English, Turkish, German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese and Korean
 - Export and import as CSV. Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
+
+<p align="center">
+  <img src="docs/screenshots/today_more.png" width="200" alt="Today: streak, water and last 7 days">
+  <img src="docs/screenshots/heart.png" width="200" alt="Heart rate">
+  <img src="docs/screenshots/route.png" width="200" alt="Virtual route">
+</p>
+
+## Meet the wren
+
+Your steps raise a little bird. It lives on the Today screen and in its own widget. Nothing about it is stored: its look is worked out from your step history every time.
+
+### It grows with your total steps
+
+<p align="center"><img src="docs/bird/stages.svg" width="720" alt="The six stages of the wren, from egg to wise bird"></p>
+
+| Stage | Level | Total steps |
+|---|---|---|
+| Egg | 0 | from the start. A crack appears halfway to hatching. |
+| Just hatched | 1 | 25,000 |
+| Chick | 3 | 150,000 |
+| Fledgling | 6 | 525,000. It gets a tail. |
+| Bird | 10 | 1,375,000. It gets a crest and a longer tail. |
+| Wise bird | 15 | 3,000,000. The crest turns gold. |
+
+The card shows how many steps are left to the next level and stage, and celebrates the day you level up.
+
+### Its mood follows your day
+
+<p align="center"><img src="docs/bird/moods.svg" width="600" alt="Sleepy, sad, calm, happy and thrilled wren"></p>
+
+1. **Sleepy:** before 07:00, or under 10% of your daily goal.
+2. **Sad:** you missed yesterday's goal and today is still under half. A streak freeze on yesterday keeps it from being sad.
+3. **Calm:** under half of your goal.
+4. **Happy:** half of your goal or more. It blushes.
+5. **Thrilled:** goal reached. Wings up, sparkles around it.
+
+### Medals bring it items
+
+<p align="center"><img src="docs/bird/items.svg" width="720" alt="Scarf, medal, sun, party hat, crown and a wise bird wearing everything"></p>
+
+| Item | How to earn it |
+|---|---|
+| Scarf | A 7-day streak |
+| Medal | Reach your weekly goal 4 times |
+| Sun | Early walks on 7 days (with the HyperOS record on) |
+| Party hat | 20,000 steps in one day |
+| Crown | 1 million steps in total. It replaces the party hat. |
+
+Medals are permanent, so items stay once earned. Tap the bird in the app and it hops and flaps its wings; now and then it blinks. The widget shows the same bird without animation.
 
 ## Install
 
