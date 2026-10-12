@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">Ortalama uyku: %1$d sa %2$d dk</string>
     <string name="weekly_summary_band_hint">Bileklik açıkken dinlenme nabzı ve uyku ortalaması da eklenir.</string>
 
+    <string name="setup_warning_title">Bağlı bileklik ya da saat bulunamadı</string>
+    <string name="setup_warning_text">Son 7 günde hiçbir bileklik ya da akıllı saat Health Connect\'e nabız, uyku veya kan oksijeni yazmadı. Bu veriler telefonla ölçülemez, bir bileklik ya da saat bağlanmadan toplanamaz.</string>
+    <string name="setup_open">Kurulum</string>
+    <string name="setup_title">Bileklik ve saat kurulumu</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect için Android 9 ya da üstü gerekir. Bu telefonda bileklik verileri okunamaz.</string>
+    <string name="setup_hc_ready">Health Connect hazır.</string>
+    <string name="setup_hc_missing">Health Connect bu telefonda yok. Android 13 ve öncesinde Play Store\'dan kurulur, Android 14 ve sonrasında sistemle gelir.</string>
+    <string name="setup_hc_install">Play Store\'da aç</string>
+    <string name="setup_step_brand">Bileklik ya da saatinin uygulaması</string>
+    <string name="setup_brand_question">Bileklik ya da saatinin markasını seç:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Diğer</string>
+    <string name="setup_steps_xiaomi">Mi Band ve Xiaomi saatler Mi Fitness ile eşleşir. Mi Fitness → Profil → Health Connect\'i aç ve tüm veri türlerine izin ver. Zepp Life kullanıyorsan ayarlarında Health Connect seçeneği olup olmadığına bak.</string>
+    <string name="setup_steps_samsung">Galaxy Watch ve Galaxy Fit, Samsung Health ile çalışır. Samsung Health → Ayarlar → Health Connect bölümünden verileri paylaşmaya izin ver.</string>
+    <string name="setup_steps_google">Pixel Watch ve Fitbit cihazları Fitbit uygulamasıyla çalışır. Fitbit uygulamasının ayarlarından Health Connect ile eşitlemeyi aç.</string>
+    <string name="setup_steps_garmin">Garmin Connect\'in ayarlarında Bağlı Uygulamalar → Health Connect\'i aç.</string>
+    <string name="setup_steps_huawei">Huawei Health şu an Health Connect\'e veri yazmıyor. Bu yüzden Huawei ve Honor saatlerin verileri AdımSayar\'a gelemez.</string>
+    <string name="setup_steps_other">Saatinin uygulamasında (ör. Wearfit Pro, Da Fit, FitCloudPro) Health Connect seçeneği ara. Uygulama Health Connect → Uygulama izinleri listesinde görünmüyorsa veri gönderemiyor demektir. Apple Watch yalnızca iPhone ile çalışır.</string>
+    <string name="setup_open_hc">Health Connect\'i aç</string>
+    <string name="setup_step_permission">AdımSayar\'ın izinleri</string>
+    <string name="setup_permission_wait">Önce Health Connect\'i kur.</string>
+    <string name="setup_permission_enable">Bileklik verilerini okumak için aşağıdaki anahtarı aç. Health Connect hangi verileri okuyabileceğimizi soracak.</string>
+    <string name="setup_permission_ready">Tüm izinler verildi.</string>
+    <string name="setup_step_check">Kontrol</string>
+    <string name="setup_check_wait">İzinler verilince son 7 günde veri yazan uygulamalar burada listelenir.</string>
+    <string name="setup_check_none">Son 7 günde Health Connect\'e veri yazan bir uygulama yok. 2. adımdaki ayarı yaptıktan sonra bileklik uygulamasını açıp eşitlemesini bekle, sonra tekrar kontrol et.</string>
+    <string name="setup_check_found">Son 7 günde Health Connect\'e veri yazan uygulamalar:</string>
+    <string name="setup_check_ok">Bileklik ya da saat verisi geliyor.</string>
+    <string name="setup_check_no_wearable">Gelen veriler yalnızca adım gibi telefonun da ölçebildiği türler. Nabız, uyku ve kan oksijeni için bileklik ya da saatin uygulamasının Health Connect\'e yazması gerekir.</string>
+    <string name="setup_check_again">Tekrar kontrol et</string>
+    <string name="source_steps">Adım</string>
+    <string name="source_heart">Nabız</string>
+    <string name="source_sleep">Uyku</string>
+    <string name="source_oxygen">Kan oksijeni</string>
+    <string name="source_exercise">Egzersiz</string>
+    <string name="source_distance">Mesafe</string>
+    <string name="source_calories">Aktif kalori</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
         <item>Sağlık sayfasında bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
@@ -274,6 +318,7 @@
         <item>Bugünün saatlik nabız grafiği</item>
         <item>Kilo kaydı: vücut kitle endeksi, toplam değişim ve grafik. İsteğe bağlı hafta başı kilo hatırlatması</item>
         <item>Bileklik açıkken haftalık özet bildirimi dinlenme nabzını ve uykuyu da gösterir</item>
+        <item>Sağlık sayfasında bileklik ya da saat bağlı değilse uyarı ve adım adım kurulum ekranı: Health Connect, markaya göre ayar yolu, izinler ve veri yazan uygulamaların kontrolü</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band ve diğer bilekliklerin adımları Health Connect üzerinden okunabilir (Ayarlar, varsayılan kapalı). Bilekliğin takılı olduğu saatlerde bileklik, diğer saatlerde telefon sayılır</item>

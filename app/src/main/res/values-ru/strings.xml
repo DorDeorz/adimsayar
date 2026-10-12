@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">Средний сон: %1$d ч %2$d мин</string>
     <string name="weekly_summary_band_hint">Когда браслет включён, добавляются пульс в покое и средний сон.</string>
 
+    <string name="setup_warning_title">Браслет или часы не найдены</string>
+    <string name="setup_warning_text">За последние 7 дней ни один браслет или смарт-часы не записали в Health Connect пульс, сон или кислород в крови. Телефон не может их измерить, поэтому без браслета или часов эти данные не собираются.</string>
+    <string name="setup_open">Настроить</string>
+    <string name="setup_title">Настройка браслета и часов</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Для Health Connect нужен Android 9 или новее. На этом телефоне данные браслета прочитать нельзя.</string>
+    <string name="setup_hc_ready">Health Connect готов.</string>
+    <string name="setup_hc_missing">На этом телефоне нет Health Connect. До Android 13 он устанавливается из Play Store, начиная с Android 14 встроен в систему.</string>
+    <string name="setup_hc_install">Открыть в Play Store</string>
+    <string name="setup_step_brand">Приложение браслета или часов</string>
+    <string name="setup_brand_question">Выберите марку браслета или часов:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Другое</string>
+    <string name="setup_steps_xiaomi">Mi Band и часы Xiaomi подключаются через Mi Fitness. В Mi Fitness → Профиль → Health Connect включите его и разрешите все типы данных. Если вы пользуетесь Zepp Life, поищите в его настройках пункт Health Connect.</string>
+    <string name="setup_steps_samsung">Galaxy Watch и Galaxy Fit работают с Samsung Health. В Samsung Health → Настройки → Health Connect разрешите обмен данными.</string>
+    <string name="setup_steps_google">Pixel Watch и устройства Fitbit работают с приложением Fitbit. Включите синхронизацию с Health Connect в его настройках.</string>
+    <string name="setup_steps_garmin">В настройках Garmin Connect откройте Подключённые приложения → Health Connect и включите его.</string>
+    <string name="setup_steps_huawei">Huawei Health сейчас не записывает данные в Health Connect, поэтому данные часов Huawei и Honor не могут попасть в AdımSayar.</string>
+    <string name="setup_steps_other">Поищите пункт Health Connect в приложении ваших часов (например, Wearfit Pro, Da Fit, FitCloudPro). Если приложения нет в Health Connect → Разрешения приложений, оно не может отправлять данные. Apple Watch работает только с iPhone.</string>
+    <string name="setup_open_hc">Открыть Health Connect</string>
+    <string name="setup_step_permission">Разрешения AdımSayar</string>
+    <string name="setup_permission_wait">Сначала установите Health Connect.</string>
+    <string name="setup_permission_enable">Включите переключатель ниже, чтобы читать данные браслета. Health Connect спросит, какие данные нам можно читать.</string>
+    <string name="setup_permission_ready">Все разрешения выданы.</string>
+    <string name="setup_step_check">Проверка</string>
+    <string name="setup_check_wait">После выдачи разрешений здесь появятся приложения, записывавшие данные за последние 7 дней.</string>
+    <string name="setup_check_none">За последние 7 дней ни одно приложение не записало данные в Health Connect. После настройки из шага 2 откройте приложение браслета, дождитесь синхронизации и проверьте снова.</string>
+    <string name="setup_check_found">Приложения, записывавшие данные в Health Connect за последние 7 дней:</string>
+    <string name="setup_check_ok">Данные браслета или часов поступают.</string>
+    <string name="setup_check_no_wearable">Поступают только данные, которые может измерить и телефон, например шаги. Для пульса, сна и кислорода в крови приложение браслета или часов должно записывать данные в Health Connect.</string>
+    <string name="setup_check_again">Проверить снова</string>
+    <string name="source_steps">Шаги</string>
+    <string name="source_heart">Пульс</string>
+    <string name="source_sleep">Сон</string>
+    <string name="source_oxygen">Кислород в крови</string>
+    <string name="source_exercise">Тренировки</string>
+    <string name="source_distance">Расстояние</string>
+    <string name="source_calories">Активные калории</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Новая нижняя панель: История, Здоровье, Сегодня (в центре), Медали, Настройки. Сводка браслета на отдельной странице</item>
         <item>Сводка здоровья браслета в истории (7 или 30 дней): сон, пульс в покое с графиком, тренировки, расстояние</item>
@@ -274,6 +318,7 @@
         <item>Почасовой график пульса за сегодня</item>
         <item>Журнал веса: индекс массы тела, общее изменение и график. Необязательное еженедельное напоминание о взвешивании</item>
         <item>Когда браслет включён, недельная сводка также показывает пульс в покое и сон</item>
+        <item>Страница «Здоровье» предупреждает, если браслет или часы не подключены, и предлагает пошаговую настройку: Health Connect, инструкции по марке, разрешения и проверка приложений, записывающих данные</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Шаги с Mi Band и других браслетов можно читать через Health Connect (Настройки, по умолчанию выключено). В часы, когда браслет надет, считается браслет, в остальные — телефон</item>

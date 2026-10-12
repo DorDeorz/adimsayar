@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">Sommeil moyen : %1$d h %2$d min</string>
     <string name="weekly_summary_band_hint">Avec le bracelet activé, la fréquence au repos et le sommeil moyen sont ajoutés.</string>
 
+    <string name="setup_warning_title">Aucun bracelet ni montre trouvé</string>
+    <string name="setup_warning_text">Ces 7 derniers jours, aucun bracelet ni montre n\'a écrit de fréquence cardiaque, de sommeil ou d\'oxygène sanguin dans Health Connect. Le téléphone ne peut pas les mesurer : sans bracelet ni montre, elles ne sont pas collectées.</string>
+    <string name="setup_open">Configurer</string>
+    <string name="setup_title">Configurer bracelet et montre</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect nécessite Android 9 ou plus. Les données du bracelet ne peuvent pas être lues sur ce téléphone.</string>
+    <string name="setup_hc_ready">Health Connect est prêt.</string>
+    <string name="setup_hc_missing">Health Connect n\'est pas sur ce téléphone. Jusqu\'à Android 13, il s\'installe depuis le Play Store ; à partir d\'Android 14, il est intégré.</string>
+    <string name="setup_hc_install">Ouvrir dans le Play Store</string>
+    <string name="setup_step_brand">L\'application de votre bracelet ou montre</string>
+    <string name="setup_brand_question">Choisissez la marque de votre bracelet ou montre :</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Autre</string>
+    <string name="setup_steps_xiaomi">Les Mi Band et montres Xiaomi s\'associent à Mi Fitness. Dans Mi Fitness → Profil → Health Connect, activez-le et autorisez tous les types de données. Si vous utilisez Zepp Life, cherchez une option Health Connect dans ses réglages.</string>
+    <string name="setup_steps_samsung">Galaxy Watch et Galaxy Fit fonctionnent avec Samsung Health. Dans Samsung Health → Paramètres → Health Connect, autorisez le partage de vos données.</string>
+    <string name="setup_steps_google">La Pixel Watch et les appareils Fitbit fonctionnent avec l\'application Fitbit. Activez la synchronisation avec Health Connect dans ses paramètres.</string>
+    <string name="setup_steps_garmin">Dans les paramètres de Garmin Connect, ouvrez Applications connectées → Health Connect et activez-le.</string>
+    <string name="setup_steps_huawei">Huawei Health n\'écrit pas dans Health Connect pour le moment : les données des montres Huawei et Honor ne peuvent pas arriver dans AdımSayar.</string>
+    <string name="setup_steps_other">Cherchez une option Health Connect dans l\'application de votre montre (par exemple Wearfit Pro, Da Fit, FitCloudPro). Si l\'application n\'apparaît pas dans Health Connect → Autorisations des applications, elle ne peut pas envoyer de données. L\'Apple Watch ne fonctionne qu\'avec un iPhone.</string>
+    <string name="setup_open_hc">Ouvrir Health Connect</string>
+    <string name="setup_step_permission">Autorisations d\'AdımSayar</string>
+    <string name="setup_permission_wait">Installez d\'abord Health Connect.</string>
+    <string name="setup_permission_enable">Activez l\'interrupteur ci-dessous pour lire les données du bracelet. Health Connect demandera quelles données nous pouvons lire.</string>
+    <string name="setup_permission_ready">Toutes les autorisations sont accordées.</string>
+    <string name="setup_step_check">Vérification</string>
+    <string name="setup_check_wait">Une fois les autorisations accordées, les applications ayant écrit des données ces 7 derniers jours apparaissent ici.</string>
+    <string name="setup_check_none">Aucune application n\'a écrit dans Health Connect ces 7 derniers jours. Après le réglage de l\'étape 2, ouvrez l\'application du bracelet, laissez-la se synchroniser, puis vérifiez à nouveau.</string>
+    <string name="setup_check_found">Applications ayant écrit dans Health Connect ces 7 derniers jours :</string>
+    <string name="setup_check_ok">Les données du bracelet ou de la montre arrivent.</string>
+    <string name="setup_check_no_wearable">Seules arrivent des données que le téléphone peut aussi mesurer, comme les pas. Pour la fréquence cardiaque, le sommeil et l\'oxygène sanguin, l\'application du bracelet ou de la montre doit écrire dans Health Connect.</string>
+    <string name="setup_check_again">Vérifier à nouveau</string>
+    <string name="source_steps">Pas</string>
+    <string name="source_heart">Fréquence cardiaque</string>
+    <string name="source_sleep">Sommeil</string>
+    <string name="source_oxygen">Oxygène sanguin</string>
+    <string name="source_exercise">Entraînements</string>
+    <string name="source_distance">Distance</string>
+    <string name="source_calories">Calories actives</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
         <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
@@ -274,6 +318,7 @@
         <item>Graphique horaire de la fréquence cardiaque du jour</item>
         <item>Suivi du poids : indice de masse corporelle, variation totale et graphique. Rappel de pesée hebdomadaire facultatif</item>
         <item>Avec le bracelet activé, le résumé hebdomadaire indique aussi la fréquence au repos et le sommeil</item>
+        <item>La page Santé avertit si aucun bracelet ni montre n\'est connecté, avec une configuration pas à pas : Health Connect, étapes selon la marque, autorisations et vérification des applications qui écrivent des données</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Les pas du Mi Band et d\'autres bracelets peuvent être lus via Health Connect (Réglages, désactivé par défaut). Aux heures où le bracelet est porté, il fait foi ; sinon, le téléphone</item>

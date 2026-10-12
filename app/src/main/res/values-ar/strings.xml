@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">متوسط النوم: %1$d س %2$d د</string>
     <string name="weekly_summary_band_hint">عند تفعيل السوار يُضاف نبض الراحة ومتوسط النوم.</string>
 
+    <string name="setup_warning_title">لم يُعثر على سوار أو ساعة</string>
+    <string name="setup_warning_text">خلال آخر 7 أيام لم يكتب أي سوار أو ساعة ذكية نبض القلب أو النوم أو أكسجين الدم في Health Connect. لا يستطيع الهاتف قياس هذه البيانات، لذا لا تُجمع دون سوار أو ساعة.</string>
+    <string name="setup_open">الإعداد</string>
+    <string name="setup_title">إعداد السوار والساعة</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">يتطلب Health Connect نظام Android 9 أو أحدث. لا يمكن قراءة بيانات السوار على هذا الهاتف.</string>
+    <string name="setup_hc_ready">Health Connect جاهز.</string>
+    <string name="setup_hc_missing">Health Connect غير موجود على هذا الهاتف. حتى Android 13 يُثبَّت من Play Store، ومن Android 14 يأتي مع النظام.</string>
+    <string name="setup_hc_install">فتح في Play Store</string>
+    <string name="setup_step_brand">تطبيق السوار أو الساعة</string>
+    <string name="setup_brand_question">اختر علامة السوار أو الساعة:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">أخرى</string>
+    <string name="setup_steps_xiaomi">تُقرن Mi Band وساعات Xiaomi مع Mi Fitness. في Mi Fitness ← الملف الشخصي ← Health Connect فعّله واسمح بكل أنواع البيانات. إن كنت تستخدم Zepp Life فابحث في إعداداته عن خيار Health Connect.</string>
+    <string name="setup_steps_samsung">تعمل Galaxy Watch وGalaxy Fit مع Samsung Health. في Samsung Health ← الإعدادات ← Health Connect اسمح بمشاركة بياناتك.</string>
+    <string name="setup_steps_google">تعمل Pixel Watch وأجهزة Fitbit مع تطبيق Fitbit. فعّل المزامنة مع Health Connect من إعدادات تطبيق Fitbit.</string>
+    <string name="setup_steps_garmin">في إعدادات Garmin Connect افتح التطبيقات المتصلة ← Health Connect وفعّله.</string>
+    <string name="setup_steps_huawei">لا يكتب Huawei Health حاليًا في Health Connect، لذلك لا يمكن أن تصل بيانات ساعات Huawei وHonor إلى AdımSayar.</string>
+    <string name="setup_steps_other">ابحث عن خيار Health Connect في تطبيق ساعتك (مثل Wearfit Pro وDa Fit وFitCloudPro). إن لم يظهر التطبيق في Health Connect ← أذونات التطبيقات فلا يمكنه إرسال البيانات. تعمل Apple Watch مع iPhone فقط.</string>
+    <string name="setup_open_hc">فتح Health Connect</string>
+    <string name="setup_step_permission">أذونات AdımSayar</string>
+    <string name="setup_permission_wait">ثبّت Health Connect أولًا.</string>
+    <string name="setup_permission_enable">فعّل المفتاح أدناه لقراءة بيانات السوار. سيسأل Health Connect عن البيانات التي يمكننا قراءتها.</string>
+    <string name="setup_permission_ready">تم منح كل الأذونات.</string>
+    <string name="setup_step_check">التحقق</string>
+    <string name="setup_check_wait">بعد منح الأذونات تظهر هنا التطبيقات التي كتبت بيانات خلال آخر 7 أيام.</string>
+    <string name="setup_check_none">لم يكتب أي تطبيق بيانات في Health Connect خلال آخر 7 أيام. بعد إعداد الخطوة 2 افتح تطبيق السوار وانتظر المزامنة ثم تحقق مجددًا.</string>
+    <string name="setup_check_found">التطبيقات التي كتبت بيانات في Health Connect خلال آخر 7 أيام:</string>
+    <string name="setup_check_ok">بيانات السوار أو الساعة تصل.</string>
+    <string name="setup_check_no_wearable">تصل فقط بيانات يستطيع الهاتف قياسها أيضًا مثل الخطوات. لنبض القلب والنوم وأكسجين الدم يجب أن يكتب تطبيق السوار أو الساعة في Health Connect.</string>
+    <string name="setup_check_again">تحقق مجددًا</string>
+    <string name="source_steps">الخطوات</string>
+    <string name="source_heart">نبض القلب</string>
+    <string name="source_sleep">النوم</string>
+    <string name="source_oxygen">أكسجين الدم</string>
+    <string name="source_exercise">التمارين</string>
+    <string name="source_distance">المسافة</string>
+    <string name="source_calories">السعرات النشطة</string>
+
     <string-array name="release_notes_0_8_0">
         <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
         <item>ملخص صحة السوار في السجل (7 أو 30 يومًا): النوم ونبض الراحة مع رسم بياني والتمارين والمسافة</item>
@@ -274,6 +318,7 @@
         <item>مخطط نبض القلب لكل ساعة اليوم</item>
         <item>سجل الوزن: مؤشر كتلة الجسم والتغير الكلي ومخطط. تذكير أسبوعي اختياري بالوزن</item>
         <item>عند تفعيل السوار يعرض الملخص الأسبوعي أيضًا نبض الراحة والنوم</item>
+        <item>تنبّه صفحة الصحة عند عدم توصيل سوار أو ساعة، مع إعداد خطوة بخطوة: Health Connect وخطوات حسب العلامة والأذونات والتحقق من التطبيقات التي تكتب البيانات</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>يمكن قراءة خطوات Mi Band والأساور الأخرى عبر Health Connect (الإعدادات، معطّل افتراضيًا). في الساعات التي تُلبس فيها السوار تُحسب خطوات السوار، وفي غيرها خطوات الهاتف</item>

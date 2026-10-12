@@ -42,6 +42,7 @@ import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.HeartHour
+import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.ui.oem.OemProfile
@@ -115,6 +116,9 @@ class MainActions(
     val onDeleteWeight: (LocalDate) -> Unit,
     val onWeightReminderChange: (Boolean) -> Unit,
     val onTabOpened: () -> Unit,
+    val loadSources: suspend () -> SourceReport?,
+    val onOpenHealthConnect: () -> Unit,
+    val onInstallHealthConnect: () -> Unit,
 )
 
 @Composable

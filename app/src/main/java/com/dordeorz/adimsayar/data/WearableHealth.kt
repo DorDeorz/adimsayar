@@ -12,6 +12,7 @@ import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.RestingHeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
+import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.request.AggregateRequest
@@ -58,7 +59,21 @@ class OxygenSummary(val average: Double, val min: Double, val count: Int)
 
 class HeartHour(val hour: Int, val min: Long, val max: Long)
 
+enum class HealthType { Steps, Heart, Sleep, Oxygen, Exercise, Distance, Calories }
+
+class SourceApp(val packageName: String, val types: Set<HealthType>)
+
+class SourceReport(val apps: List<SourceApp>, val missingPermissions: Boolean) {
+    val hasWearable: Boolean get() = apps.any { app -> app.types.any { it in WEARABLE_TYPES } }
+
+    private companion object {
+        val WEARABLE_TYPES = setOf(HealthType.Heart, HealthType.Sleep, HealthType.Oxygen)
+    }
+}
+
 object WearableHealth {
+
+    private const val SOURCE_PAGE_SIZE = 200
 
     val PERMISSIONS: Set<String> = setOf(
         HealthPermission.getReadPermission(ExerciseSessionRecord::class),
@@ -85,6 +100,45 @@ object WearableHealth {
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             readPeriod(HealthConnectClient.getOrCreate(context), to.minusDays(days - 1), to, ZoneId.systemDefault())
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun sources(context: Context, days: Long): SourceReport? {
+        if (!WearableSteps.isAvailable(context)) return null
+        return try {
+            val client = HealthConnectClient.getOrCreate(context)
+            val granted = client.permissionController.getGrantedPermissions()
+            fun allowed(type: KClass<out Record>) = HealthPermission.getReadPermission(type) in granted
+            val zone = ZoneId.systemDefault()
+            val today = LocalDate.now(zone)
+            val range = TimeRangeFilter.between(today.minusDays(days - 1).atStartOfDay(zone).toInstant(), today.plusDays(1).atStartOfDay(zone).toInstant())
+            val found = LinkedHashMap<String, MutableSet<HealthType>>()
+            fun add(type: HealthType, packages: Collection<String>) {
+                packages.filter { it != context.packageName }.forEach { found.getOrPut(it) { LinkedHashSet() } += type }
+            }
+            val metrics = listOf<Triple<HealthType, KClass<out Record>, AggregateMetric<*>>>(
+                Triple(HealthType.Steps, StepsRecord::class, StepsRecord.COUNT_TOTAL),
+                Triple(HealthType.Heart, HeartRateRecord::class, HeartRateRecord.BPM_AVG),
+                Triple(HealthType.Sleep, SleepSessionRecord::class, SleepSessionRecord.SLEEP_DURATION_TOTAL),
+                Triple(HealthType.Exercise, ExerciseSessionRecord::class, ExerciseSessionRecord.EXERCISE_DURATION_TOTAL),
+                Triple(HealthType.Distance, DistanceRecord::class, DistanceRecord.DISTANCE_TOTAL),
+                Triple(HealthType.Calories, ActiveCaloriesBurnedRecord::class, ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL),
+            )
+            for ((type, record, metric) in metrics) {
+                if (allowed(record)) add(type, client.aggregate(AggregateRequest(setOf(metric), range)).dataOrigins.map { it.packageName })
+            }
+            if (allowed(OxygenSaturationRecord::class)) {
+                val records = client.readRecords(ReadRecordsRequest(OxygenSaturationRecord::class, range, pageSize = SOURCE_PAGE_SIZE)).records
+                add(HealthType.Oxygen, records.map { it.metadata.dataOrigin.packageName }.toSet())
+            }
+            SourceReport(
+                found.map { (pkg, types) -> SourceApp(pkg, types.sortedBy { it.ordinal }.toSet()) },
+                !granted.containsAll(PERMISSIONS) || WearableSteps.READ_STEPS !in granted,
+            )
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {

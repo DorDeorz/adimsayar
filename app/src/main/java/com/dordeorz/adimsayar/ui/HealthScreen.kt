@@ -49,6 +49,7 @@ import com.dordeorz.adimsayar.data.BmiCategory
 import com.dordeorz.adimsayar.data.HealthMath
 import com.dordeorz.adimsayar.data.HeartHour
 import com.dordeorz.adimsayar.data.SleepStage
+import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.data.Weights
 import kotlinx.coroutines.Dispatchers
@@ -62,12 +63,21 @@ import kotlin.math.abs
 
 @Composable
 fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () -> Unit) {
+    var setup by rememberSaveable { mutableStateOf(false) }
+    if (setup) {
+        WearableSetupScreen(state, actions, onClose = { setup = false })
+        return
+    }
+    val sources by produceState<SourceReport?>(null, state.wearableEnabled, state.healthRefresh) {
+        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { actions.loadSources() } else null
+    }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         if (state.wearableEnabled) {
+            if (sources?.hasWearable == false) item { SourceWarningCard(onSetup = { setup = true }) }
             item { HealthCard(state.today, state.healthRefresh, actions) }
             item { HeartTodayCard(state.today, state.healthRefresh, actions.loadHeartHours) }
         } else {
@@ -80,12 +90,20 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
-                        Button(onClick = onOpenSettings) { Text(stringResource(R.string.settings)) }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Button(onClick = { setup = true }) { Text(stringResource(R.string.setup_open)) }
+                            TextButton(onClick = onOpenSettings) { Text(stringResource(R.string.settings)) }
+                        }
                     }
                 }
             }
         }
         item { WeightCard(state, actions) }
+        if (state.wearableEnabled) {
+            item {
+                TextButton(onClick = { setup = true }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.setup_title)) }
+            }
+        }
     }
 }
 

@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">평균 수면: %1$d시간 %2$d분</string>
     <string name="weekly_summary_band_hint">밴드를 켜면 안정 시 심박수와 평균 수면도 포함됩니다.</string>
 
+    <string name="setup_warning_title">밴드나 시계를 찾을 수 없습니다</string>
+    <string name="setup_warning_text">지난 7일 동안 어떤 밴드나 스마트워치도 Health Connect에 심박수, 수면, 혈중 산소를 기록하지 않았습니다. 휴대폰은 이를 측정할 수 없어 밴드나 시계 없이는 수집되지 않습니다.</string>
+    <string name="setup_open">설정</string>
+    <string name="setup_title">밴드 및 시계 설정</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect에는 Android 9 이상이 필요합니다. 이 휴대폰에서는 밴드 데이터를 읽을 수 없습니다.</string>
+    <string name="setup_hc_ready">Health Connect가 준비되었습니다.</string>
+    <string name="setup_hc_missing">이 휴대폰에는 Health Connect가 없습니다. Android 13 이하는 Play 스토어에서 설치하고, Android 14 이상은 기본 탑재되어 있습니다.</string>
+    <string name="setup_hc_install">Play 스토어에서 열기</string>
+    <string name="setup_step_brand">밴드나 시계의 앱</string>
+    <string name="setup_brand_question">밴드나 시계의 브랜드를 선택하세요:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">기타</string>
+    <string name="setup_steps_xiaomi">Mi Band와 Xiaomi 시계는 Mi Fitness와 페어링됩니다. Mi Fitness → 프로필 → Health Connect를 켜고 모든 데이터 유형을 허용하세요. Zepp Life를 사용한다면 설정에 Health Connect 항목이 있는지 확인하세요.</string>
+    <string name="setup_steps_samsung">Galaxy Watch와 Galaxy Fit은 Samsung Health와 함께 작동합니다. Samsung Health → 설정 → Health Connect에서 데이터 공유를 허용하세요.</string>
+    <string name="setup_steps_google">Pixel Watch와 Fitbit 기기는 Fitbit 앱과 함께 작동합니다. Fitbit 앱 설정에서 Health Connect 동기화를 켜세요.</string>
+    <string name="setup_steps_garmin">Garmin Connect 설정에서 연결된 앱 → Health Connect를 열고 켜세요.</string>
+    <string name="setup_steps_huawei">Huawei Health는 현재 Health Connect에 기록하지 않으므로 Huawei와 Honor 시계의 데이터는 AdımSayar에 전달될 수 없습니다.</string>
+    <string name="setup_steps_other">시계 앱(예: Wearfit Pro, Da Fit, FitCloudPro)에서 Health Connect 항목을 찾아보세요. 앱이 Health Connect → 앱 권한 목록에 없으면 데이터를 보낼 수 없습니다. Apple Watch는 iPhone에서만 작동합니다.</string>
+    <string name="setup_open_hc">Health Connect 열기</string>
+    <string name="setup_step_permission">AdımSayar 권한</string>
+    <string name="setup_permission_wait">먼저 Health Connect를 설치하세요.</string>
+    <string name="setup_permission_enable">아래 스위치를 켜면 밴드 데이터를 읽습니다. Health Connect가 읽을 수 있는 데이터를 물어봅니다.</string>
+    <string name="setup_permission_ready">모든 권한이 허용되었습니다.</string>
+    <string name="setup_step_check">확인</string>
+    <string name="setup_check_wait">권한을 허용하면 지난 7일 동안 데이터를 기록한 앱이 여기에 표시됩니다.</string>
+    <string name="setup_check_none">지난 7일 동안 Health Connect에 데이터를 기록한 앱이 없습니다. 2단계 설정 후 밴드 앱을 열어 동기화를 기다린 다음 다시 확인하세요.</string>
+    <string name="setup_check_found">지난 7일 동안 Health Connect에 데이터를 기록한 앱:</string>
+    <string name="setup_check_ok">밴드나 시계 데이터가 들어오고 있습니다.</string>
+    <string name="setup_check_no_wearable">걸음 수처럼 휴대폰도 측정할 수 있는 데이터만 들어옵니다. 심박수, 수면, 혈중 산소는 밴드나 시계 앱이 Health Connect에 기록해야 합니다.</string>
+    <string name="setup_check_again">다시 확인</string>
+    <string name="source_steps">걸음 수</string>
+    <string name="source_heart">심박수</string>
+    <string name="source_sleep">수면</string>
+    <string name="source_oxygen">혈중 산소</string>
+    <string name="source_exercise">운동</string>
+    <string name="source_distance">거리</string>
+    <string name="source_calories">활동 칼로리</string>
+
     <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
         <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
@@ -274,6 +318,7 @@
         <item>오늘의 시간별 심박수 차트</item>
         <item>체중 기록: BMI, 총 변화와 차트. 선택형 주간 체중 알림</item>
         <item>밴드를 켜면 주간 요약 알림에 안정 시 심박수와 수면도 표시</item>
+        <item>밴드나 시계가 연결되지 않으면 건강 페이지에서 알리고 단계별 설정 제공: Health Connect, 브랜드별 방법, 권한, 데이터를 기록하는 앱 확인</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Health Connect로 Mi Band 등 밴드의 걸음 수를 읽을 수 있습니다(설정, 기본값 꺼짐). 밴드를 착용한 시간에는 밴드, 나머지 시간에는 휴대폰 걸음 수를 사용합니다</item>

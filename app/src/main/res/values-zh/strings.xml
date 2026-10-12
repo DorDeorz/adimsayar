@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">平均睡眠：%1$d 小时 %2$d 分钟</string>
     <string name="weekly_summary_band_hint">开启手环后，还会包含静息心率和平均睡眠。</string>
 
+    <string name="setup_warning_title">未找到手环或手表</string>
+    <string name="setup_warning_text">过去 7 天没有任何手环或智能手表向 Health Connect 写入心率、睡眠或血氧。手机无法测量这些数据，没有手环或手表就无法收集。</string>
+    <string name="setup_open">设置</string>
+    <string name="setup_title">手环和手表设置</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect 需要 Android 9 或更高版本。此手机无法读取手环数据。</string>
+    <string name="setup_hc_ready">Health Connect 已就绪。</string>
+    <string name="setup_hc_missing">此手机没有 Health Connect。Android 13 及以下需从 Play 商店安装，Android 14 及以上已内置。</string>
+    <string name="setup_hc_install">在 Play 商店打开</string>
+    <string name="setup_step_brand">手环或手表的应用</string>
+    <string name="setup_brand_question">选择你的手环或手表品牌：</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">其他</string>
+    <string name="setup_steps_xiaomi">小米手环和小米手表与 Mi Fitness 配对。在 Mi Fitness → 个人资料 → Health Connect 中开启，并允许所有数据类型。如果你使用 Zepp Life，请在其设置中查找 Health Connect 选项。</string>
+    <string name="setup_steps_samsung">Galaxy Watch 和 Galaxy Fit 使用 Samsung Health。在 Samsung Health → 设置 → Health Connect 中允许共享数据。</string>
+    <string name="setup_steps_google">Pixel Watch 和 Fitbit 设备使用 Fitbit 应用。在 Fitbit 应用的设置中开启与 Health Connect 同步。</string>
+    <string name="setup_steps_garmin">在 Garmin Connect 设置中打开 已连接的应用 → Health Connect 并开启。</string>
+    <string name="setup_steps_huawei">华为运动健康目前不向 Health Connect 写入数据，因此华为和荣耀手表的数据无法进入 AdımSayar。</string>
+    <string name="setup_steps_other">在手表的应用（例如 Wearfit Pro、Da Fit、FitCloudPro）中查找 Health Connect 选项。如果该应用不在 Health Connect → 应用权限 列表中，就无法发送数据。Apple Watch 只能配合 iPhone 使用。</string>
+    <string name="setup_open_hc">打开 Health Connect</string>
+    <string name="setup_step_permission">AdımSayar 的权限</string>
+    <string name="setup_permission_wait">请先安装 Health Connect。</string>
+    <string name="setup_permission_enable">打开下面的开关以读取手环数据。Health Connect 会询问我们可以读取哪些数据。</string>
+    <string name="setup_permission_ready">所有权限均已授予。</string>
+    <string name="setup_step_check">检查</string>
+    <string name="setup_check_wait">授予权限后，这里会列出过去 7 天写入数据的应用。</string>
+    <string name="setup_check_none">过去 7 天没有应用向 Health Connect 写入数据。完成第 2 步的设置后，打开手环应用等待同步，然后再次检查。</string>
+    <string name="setup_check_found">过去 7 天向 Health Connect 写入数据的应用：</string>
+    <string name="setup_check_ok">手环或手表的数据正在传入。</string>
+    <string name="setup_check_no_wearable">传入的只有手机也能测量的数据，例如步数。心率、睡眠和血氧需要手环或手表的应用写入 Health Connect。</string>
+    <string name="setup_check_again">再次检查</string>
+    <string name="source_steps">步数</string>
+    <string name="source_heart">心率</string>
+    <string name="source_sleep">睡眠</string>
+    <string name="source_oxygen">血氧</string>
+    <string name="source_exercise">运动</string>
+    <string name="source_distance">距离</string>
+    <string name="source_calories">活动热量</string>
+
     <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
         <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
@@ -274,6 +318,7 @@
         <item>今日每小时心率图</item>
         <item>体重记录：BMI、总变化和图表。可选的每周称重提醒</item>
         <item>开启手环后，每周总结通知也会显示静息心率和睡眠</item>
+        <item>未连接手环或手表时，健康页面会提示，并提供分步设置：Health Connect、按品牌的步骤、权限，以及检查哪些应用在写入数据</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>可通过 Health Connect 读取 Mi Band 等手环的步数（设置中，默认关闭）。佩戴手环的小时使用手环数据，其余小时使用手机数据</item>

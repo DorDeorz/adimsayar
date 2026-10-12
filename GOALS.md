@@ -146,6 +146,8 @@ Sağlık sayfası (kullanıcı isteği 2026-10-12, "hepsini ekleyelim"): seçile
 - Bugünün nabzı saat saat en düşük ve en yüksek değerle gösterilir.
 - Haftalık özet bildirimi bileklik açıkken haftanın ortalama dinlenme nabzını (geçen haftayla farkıyla) ve ortalama uykusunu ekler.
 
+Bileklik ve saat kurulumu (kullanıcı isteği 2026-10-12): son 7 günde hiçbir uygulama Health Connect'e nabız, uyku ya da kan oksijeni yazmadıysa Sağlık sayfası "bağlı bileklik ya da saat bulunamadı" uyarısı gösterir; adım gibi telefonun da ölçebildiği türler bileklik sayılmaz. Kurulum ekranı Health Connect'in durumunu, markaya göre ayar yolunu, izinleri ve son 7 günde veri yazan uygulamaları (Health Connect'in kaynak bilgisinden) gösterir. Uygulama adlarını gösterebilmek için manifest'e Health Connect izni isteyen uygulamaları görünür kılan `<queries>` eklendi. Huawei Health Health Connect'e yazmadığı için Huawei saatler desteklenmez; Apple Watch Android'de çalışmaz.
+
 Kilo kaydı (aynı istek): kullanıcı kilosunu elle girer, Room `weights` tablosunda saklanır. Vücut kitle endeksi Ayarlar'daki boyla, toplam değişim ilk kayda göre hesaplanır, saklanmaz. İsteğe bağlı "Haftalık kilo hatırlatması" haftanın ilk günü 09:00 civarı bildirim gönderir (`setAndAllowWhileIdle`, birkaç dakika kayabilir).
 
 ### Xiaomi / HyperOS adım kaydı

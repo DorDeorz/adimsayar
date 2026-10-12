@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">平均睡眠: %1$d 時間 %2$d 分</string>
     <string name="weekly_summary_band_hint">バンドがオンのときは安静時心拍数と平均睡眠も含まれます。</string>
 
+    <string name="setup_warning_title">バンドや時計が見つかりません</string>
+    <string name="setup_warning_text">過去7日間、どのバンドやスマートウォッチも Health Connect に心拍数・睡眠・血中酸素を書き込んでいません。これらはスマホでは測定できないため、バンドや時計がないと記録されません。</string>
+    <string name="setup_open">設定</string>
+    <string name="setup_title">バンドと時計の設定</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect には Android 9 以降が必要です。このスマホではバンドのデータを読み取れません。</string>
+    <string name="setup_hc_ready">Health Connect は準備完了です。</string>
+    <string name="setup_hc_missing">このスマホには Health Connect がありません。Android 13 以前は Play ストアからインストールし、Android 14 以降は標準搭載です。</string>
+    <string name="setup_hc_install">Play ストアで開く</string>
+    <string name="setup_step_brand">バンドや時計のアプリ</string>
+    <string name="setup_brand_question">バンドや時計のメーカーを選んでください:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">その他</string>
+    <string name="setup_steps_xiaomi">Mi Band と Xiaomi の時計は Mi Fitness とペアリングします。Mi Fitness → プロフィール → Health Connect をオンにし、すべてのデータの種類を許可してください。Zepp Life を使っている場合は、設定に Health Connect の項目があるか確認してください。</string>
+    <string name="setup_steps_samsung">Galaxy Watch と Galaxy Fit は Samsung Health で動作します。Samsung Health → 設定 → Health Connect でデータの共有を許可してください。</string>
+    <string name="setup_steps_google">Pixel Watch と Fitbit デバイスは Fitbit アプリで動作します。Fitbit アプリの設定で Health Connect との同期をオンにしてください。</string>
+    <string name="setup_steps_garmin">Garmin Connect の設定で 接続済みアプリ → Health Connect を開いてオンにしてください。</string>
+    <string name="setup_steps_huawei">Huawei Health は現在 Health Connect に書き込まないため、Huawei と Honor の時計のデータは AdımSayar に届きません。</string>
+    <string name="setup_steps_other">時計のアプリ (例: Wearfit Pro、Da Fit、FitCloudPro) に Health Connect の項目があるか探してください。Health Connect → アプリの権限 にアプリが表示されない場合、データを送れません。Apple Watch は iPhone でのみ使えます。</string>
+    <string name="setup_open_hc">Health Connect を開く</string>
+    <string name="setup_step_permission">AdımSayar の権限</string>
+    <string name="setup_permission_wait">先に Health Connect をインストールしてください。</string>
+    <string name="setup_permission_enable">下のスイッチをオンにするとバンドのデータを読み取れます。Health Connect が読み取ってよいデータを確認します。</string>
+    <string name="setup_permission_ready">すべての権限が許可されています。</string>
+    <string name="setup_step_check">確認</string>
+    <string name="setup_check_wait">権限を許可すると、過去7日間にデータを書き込んだアプリがここに表示されます。</string>
+    <string name="setup_check_none">過去7日間に Health Connect にデータを書き込んだアプリはありません。手順2の設定後、バンドのアプリを開いて同期を待ち、もう一度確認してください。</string>
+    <string name="setup_check_found">過去7日間に Health Connect にデータを書き込んだアプリ:</string>
+    <string name="setup_check_ok">バンドや時計のデータが届いています。</string>
+    <string name="setup_check_no_wearable">届いているのは歩数など、スマホでも測れるデータだけです。心拍数・睡眠・血中酸素には、バンドや時計のアプリが Health Connect に書き込む必要があります。</string>
+    <string name="setup_check_again">もう一度確認</string>
+    <string name="source_steps">歩数</string>
+    <string name="source_heart">心拍数</string>
+    <string name="source_sleep">睡眠</string>
+    <string name="source_oxygen">血中酸素</string>
+    <string name="source_exercise">運動</string>
+    <string name="source_distance">距離</string>
+    <string name="source_calories">アクティブカロリー</string>
+
     <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
         <item>履歴にバンドの健康サマリー（7 日または 30 日）：睡眠、安静時心拍数とグラフ、ワークアウト、距離</item>
@@ -274,6 +318,7 @@
         <item>今日の1時間ごとの心拍数グラフ</item>
         <item>体重記録: BMI、合計の変化とグラフ。週初めの体重リマインダー (任意)</item>
         <item>バンドがオンのとき、週間サマリー通知に安静時心拍数と睡眠も表示</item>
+        <item>バンドや時計が接続されていないときにヘルスページで警告し、手順ごとの設定を表示: Health Connect、メーカー別の手順、権限、データを書き込んでいるアプリの確認</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Mi Band などのバンドの歩数を Health Connect から読み込めます（設定、既定はオフ）。バンドを着けていた時間はバンド、それ以外は電話の歩数を使います</item>

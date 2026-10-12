@@ -1,10 +1,12 @@
 package com.dordeorz.adimsayar
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -149,7 +151,26 @@ class MainActivity : ComponentActivity() {
             Reminders.scheduleWeight(applicationContext)
         },
         onTabOpened = { requestedTab = null },
+        loadSources = { WearableHealth.sources(applicationContext, SOURCE_DAYS) },
+        onOpenHealthConnect = {
+            val action = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) HEALTH_CONNECT_SETTINGS_14 else HEALTH_CONNECT_SETTINGS
+            openOrToast(Intent(action))
+        },
+        onInstallHealthConnect = {
+            val market = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$HEALTH_CONNECT_PACKAGE"))
+            if (!openOrToast(market, silent = true)) {
+                openOrToast(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$HEALTH_CONNECT_PACKAGE")))
+            }
+        },
     )
+
+    private fun openOrToast(intent: Intent, silent: Boolean = false): Boolean = try {
+        startActivity(intent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        if (!silent) Toast.makeText(this, R.string.wearable_unavailable, Toast.LENGTH_LONG).show()
+        false
+    }
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         if (uri != null) transferCsv(R.string.export_done) { repository.exportCsv(requireNotNull(contentResolver.openOutputStream(uri))) }
@@ -449,5 +470,9 @@ class MainActivity : ComponentActivity() {
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
         private const val EXPORT_FILE_NAME = "adimsayar-%s.csv"
+        private const val SOURCE_DAYS = 7L
+        private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
+        private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"
+        private const val HEALTH_CONNECT_SETTINGS_14 = "android.health.connect.action.HEALTH_HOME_SETTINGS"
     }
 }

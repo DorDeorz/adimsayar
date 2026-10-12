@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">Average sleep: %1$d h %2$d min</string>
     <string name="weekly_summary_band_hint">With the band on, resting heart rate and average sleep are included.</string>
 
+    <string name="setup_warning_title">No band or watch found</string>
+    <string name="setup_warning_text">In the last 7 days no band or smartwatch wrote heart rate, sleep or blood oxygen to Health Connect. The phone can\'t measure these, so they can\'t be collected without a band or watch.</string>
+    <string name="setup_open">Set up</string>
+    <string name="setup_title">Band and watch setup</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect needs Android 9 or later. Band data can\'t be read on this phone.</string>
+    <string name="setup_hc_ready">Health Connect is ready.</string>
+    <string name="setup_hc_missing">Health Connect isn\'t on this phone. On Android 13 and earlier it\'s installed from the Play Store; Android 14 and later include it.</string>
+    <string name="setup_hc_install">Open in Play Store</string>
+    <string name="setup_step_brand">Your band or watch app</string>
+    <string name="setup_brand_question">Choose the brand of your band or watch:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Other</string>
+    <string name="setup_steps_xiaomi">Mi Band and Xiaomi watches pair with Mi Fitness. In Mi Fitness → Profile → Health Connect, turn it on and allow all data types. If you use Zepp Life, check its settings for a Health Connect option.</string>
+    <string name="setup_steps_samsung">Galaxy Watch and Galaxy Fit work with Samsung Health. In Samsung Health → Settings → Health Connect, allow sharing your data.</string>
+    <string name="setup_steps_google">Pixel Watch and Fitbit devices work with the Fitbit app. Turn on syncing with Health Connect in the Fitbit app\'s settings.</string>
+    <string name="setup_steps_garmin">In Garmin Connect settings, open Connected Apps → Health Connect and turn it on.</string>
+    <string name="setup_steps_huawei">Huawei Health doesn\'t write to Health Connect at the moment, so data from Huawei and Honor watches can\'t reach AdımSayar.</string>
+    <string name="setup_steps_other">Look for a Health Connect option in your watch\'s app (for example Wearfit Pro, Da Fit, FitCloudPro). If the app isn\'t listed under Health Connect → App permissions, it can\'t send data. Apple Watch only works with an iPhone.</string>
+    <string name="setup_open_hc">Open Health Connect</string>
+    <string name="setup_step_permission">AdımSayar permissions</string>
+    <string name="setup_permission_wait">Install Health Connect first.</string>
+    <string name="setup_permission_enable">Turn on the switch below to read band data. Health Connect will ask which data we may read.</string>
+    <string name="setup_permission_ready">All permissions granted.</string>
+    <string name="setup_step_check">Check</string>
+    <string name="setup_check_wait">Once permissions are granted, apps that wrote data in the last 7 days are listed here.</string>
+    <string name="setup_check_none">No app wrote data to Health Connect in the last 7 days. After the setting in step 2, open your band\'s app, let it sync, then check again.</string>
+    <string name="setup_check_found">Apps that wrote data to Health Connect in the last 7 days:</string>
+    <string name="setup_check_ok">Band or watch data is coming in.</string>
+    <string name="setup_check_no_wearable">Only data the phone can also measure, such as steps, is coming in. For heart rate, sleep and blood oxygen your band or watch app has to write to Health Connect.</string>
+    <string name="setup_check_again">Check again</string>
+    <string name="source_steps">Steps</string>
+    <string name="source_heart">Heart rate</string>
+    <string name="source_sleep">Sleep</string>
+    <string name="source_oxygen">Blood oxygen</string>
+    <string name="source_exercise">Workouts</string>
+    <string name="source_distance">Distance</string>
+    <string name="source_calories">Active calories</string>
+
     <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
         <item>Health summary for the band on the Health page, last 7 or 30 days: average and longest sleep, resting heart rate with chart, workouts, distance</item>
@@ -274,6 +318,7 @@
         <item>Today\'s hourly heart rate chart</item>
         <item>Weight log: body mass index, total change and chart. Optional weekly weigh-in reminder</item>
         <item>With the band on, the weekly summary notification also shows resting heart rate and sleep</item>
+        <item>Health page warns when no band or watch is connected, with a step-by-step setup: Health Connect, brand-specific steps, permissions and a check of which apps write data</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>Steps from Mi Band and other bands can be read through Health Connect (Settings, off by default). Hours when the band was worn use the band, other hours use the phone</item>

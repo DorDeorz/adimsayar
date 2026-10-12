@@ -265,6 +265,50 @@
     <string name="notify_health_sleep">Sonno medio: %1$d h %2$d min</string>
     <string name="weekly_summary_band_hint">Con il braccialetto attivo si aggiungono battito a riposo e sonno medio.</string>
 
+    <string name="setup_warning_title">Nessun braccialetto o orologio trovato</string>
+    <string name="setup_warning_text">Negli ultimi 7 giorni nessun braccialetto o smartwatch ha scritto battito, sonno o ossigeno nel sangue in Health Connect. Il telefono non può misurarli, quindi senza braccialetto o orologio non vengono raccolti.</string>
+    <string name="setup_open">Configura</string>
+    <string name="setup_title">Configura braccialetto e orologio</string>
+    <string name="setup_step_title">%1$d. %2$s</string>
+    <string name="setup_step_hc">Health Connect</string>
+    <string name="setup_hc_too_old">Health Connect richiede Android 9 o successivo. Su questo telefono non è possibile leggere i dati del braccialetto.</string>
+    <string name="setup_hc_ready">Health Connect è pronto.</string>
+    <string name="setup_hc_missing">Health Connect non è presente su questo telefono. Fino ad Android 13 si installa dal Play Store; da Android 14 è incluso.</string>
+    <string name="setup_hc_install">Apri nel Play Store</string>
+    <string name="setup_step_brand">L\'app del tuo braccialetto o orologio</string>
+    <string name="setup_brand_question">Scegli la marca del tuo braccialetto o orologio:</string>
+    <string name="setup_brand_xiaomi">Xiaomi / Mi Band</string>
+    <string name="setup_brand_samsung">Samsung</string>
+    <string name="setup_brand_google">Google / Fitbit</string>
+    <string name="setup_brand_garmin">Garmin</string>
+    <string name="setup_brand_huawei">Huawei / Honor</string>
+    <string name="setup_brand_other">Altro</string>
+    <string name="setup_steps_xiaomi">Mi Band e orologi Xiaomi si associano con Mi Fitness. In Mi Fitness → Profilo → Health Connect attivalo e consenti tutti i tipi di dati. Se usi Zepp Life, cerca un\'opzione Health Connect nelle sue impostazioni.</string>
+    <string name="setup_steps_samsung">Galaxy Watch e Galaxy Fit funzionano con Samsung Health. In Samsung Health → Impostazioni → Health Connect consenti la condivisione dei dati.</string>
+    <string name="setup_steps_google">Pixel Watch e i dispositivi Fitbit funzionano con l\'app Fitbit. Attiva la sincronizzazione con Health Connect nelle impostazioni dell\'app Fitbit.</string>
+    <string name="setup_steps_garmin">Nelle impostazioni di Garmin Connect apri App collegate → Health Connect e attivalo.</string>
+    <string name="setup_steps_huawei">Al momento Huawei Health non scrive in Health Connect, quindi i dati degli orologi Huawei e Honor non possono arrivare ad AdımSayar.</string>
+    <string name="setup_steps_other">Cerca un\'opzione Health Connect nell\'app del tuo orologio (ad esempio Wearfit Pro, Da Fit, FitCloudPro). Se l\'app non compare in Health Connect → Autorizzazioni app, non può inviare dati. Apple Watch funziona solo con iPhone.</string>
+    <string name="setup_open_hc">Apri Health Connect</string>
+    <string name="setup_step_permission">Autorizzazioni di AdımSayar</string>
+    <string name="setup_permission_wait">Installa prima Health Connect.</string>
+    <string name="setup_permission_enable">Attiva l\'interruttore qui sotto per leggere i dati del braccialetto. Health Connect chiederà quali dati possiamo leggere.</string>
+    <string name="setup_permission_ready">Tutte le autorizzazioni concesse.</string>
+    <string name="setup_step_check">Verifica</string>
+    <string name="setup_check_wait">Dopo aver concesso le autorizzazioni, qui compaiono le app che hanno scritto dati negli ultimi 7 giorni.</string>
+    <string name="setup_check_none">Nessuna app ha scritto dati in Health Connect negli ultimi 7 giorni. Dopo l\'impostazione del passo 2, apri l\'app del braccialetto, lasciala sincronizzare e verifica di nuovo.</string>
+    <string name="setup_check_found">App che hanno scritto dati in Health Connect negli ultimi 7 giorni:</string>
+    <string name="setup_check_ok">Arrivano dati dal braccialetto o dall\'orologio.</string>
+    <string name="setup_check_no_wearable">Arrivano solo dati che anche il telefono può misurare, come i passi. Per battito, sonno e ossigeno nel sangue l\'app del braccialetto o dell\'orologio deve scrivere in Health Connect.</string>
+    <string name="setup_check_again">Verifica di nuovo</string>
+    <string name="source_steps">Passi</string>
+    <string name="source_heart">Battito</string>
+    <string name="source_sleep">Sonno</string>
+    <string name="source_oxygen">Ossigeno nel sangue</string>
+    <string name="source_exercise">Allenamenti</string>
+    <string name="source_distance">Distanza</string>
+    <string name="source_calories">Calorie attive</string>
+
     <string-array name="release_notes_0_8_0">
         <item>Nuova barra in basso: Cronologia, Salute, Oggi (al centro), Medaglie, Impostazioni. Il riepilogo del braccialetto ha una pagina propria</item>
         <item>Riepilogo salute del braccialetto nella cronologia (7 o 30 giorni): sonno, battito a riposo con grafico, allenamenti, distanza</item>
@@ -274,6 +318,7 @@
         <item>Grafico orario della frequenza cardiaca di oggi</item>
         <item>Registro del peso: indice di massa corporea, variazione totale e grafico. Promemoria settimanale del peso opzionale</item>
         <item>Con il braccialetto attivo, il riepilogo settimanale mostra anche battito a riposo e sonno</item>
+        <item>La pagina Salute avvisa se non c\'è un braccialetto o orologio collegato, con una configurazione passo passo: Health Connect, passaggi per marca, autorizzazioni e verifica delle app che scrivono dati</item>
     </string-array>
     <string-array name="release_notes_0_7_0">
         <item>I passi di Mi Band e di altri braccialetti si possono leggere tramite Health Connect (Impostazioni, disattivato di default). Nelle ore con il braccialetto conta il braccialetto, nelle altre il telefono</item>
