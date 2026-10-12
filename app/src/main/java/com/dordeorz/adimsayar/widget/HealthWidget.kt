@@ -21,6 +21,7 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.provideContent
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
+import androidx.glance.layout.ColumnScope
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxWidth
@@ -150,7 +151,7 @@ private fun HealthContent(context: Context, enabled: Boolean, snapshot: HealthSn
 }
 
 @Composable
-private fun HealthRow(context: Context, icon: Int, value: String, label: String) {
+private fun ColumnScope.HealthRow(context: Context, icon: Int, value: String, label: String) {
     Row(modifier = GlanceModifier.fillMaxWidth().defaultWeight(), verticalAlignment = Alignment.CenterVertically) {
         Image(
             provider = ImageProvider(icon),
