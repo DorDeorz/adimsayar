@@ -243,6 +243,8 @@ Günlük adım toplamları  = tek gerçek kaynak (saklanır)
 Seviyeler              = f(toplam adım)              → türetilir
 Madalyalar             = f(günlük adım geçmişi) ∪ kalıcı madalyalar
 Haftalık görevler      = f(günlük adım geçmişi, hafta) → türetilir
+Sanal rota ilerlemesi  = f(adım geçmişi, seçilen rota, başlangıç günü) → türetilir
+Kuş avatarı            = f(seviye, bugün/dün adımı, madalyalar) → türetilir
 ```
 
 Kullanıcı kararı (2026-10-12, eski "madalyalar dondurulmaz" kararının yerine): kazanılan madalya kalıcıdır. Bir madalya ilk kez hesaplandığında `medals` tablosuna ilk kazanıldığı tarihle yazılır. Hedef ya da veri değişip hesap artık o madalyayı vermese de madalya kazanılmış görünür. Daha eski bir tarih hesaplanırsa (ör. içe aktarılan eski günler) saklanan tarih ona çekilir. "Nx" kazanma sayısı ve ilerleme yüzdesi türetilmiş kalır.
@@ -250,6 +252,10 @@ Kullanıcı kararı (2026-10-12, eski "madalyalar dondurulmaz" kararının yerin
 Seri jokeri (aynı istek): her takvim ayı için 2 hak. Kullanıcı hedefi kaçırdığı geçmiş bir güne joker kullanırsa o gün seriyi bozmaz ama seriyi uzatmaz ve hedef günü sayılmaz. Kullanılan jokerler `streak_freezes` tablosunda saklanır, geri alınabilir.
 
 Haftalık görevler saklanmaz: her hafta için 3 görev, haftanın başlangıç tarihiyle tohumlanmış rastgele seçimle ve o haftadan önceki 28 günün ortalamasına göre belirlenir. Bu yüzden aynı hafta her açılışta aynı görevleri gösterir; günlük hedef değişirse görevler de geriye dönük değişir.
+
+Sanal rota (kullanıcı isteği, 2026-10-12): yedi hazır rota (Türkiye içi dört rota, Edirne–Kars, Likya Yolu, Camino). Yalnızca rota kimliği ve başlangıç günü ayarlarda saklanır; ilerleme her açılışta o günden bu yana atılan adımların boya göre km karşılığından hesaplanır. Rota değiştirilince yeni rota bugünden başlar.
+
+Kuş avatarı (kullanıcı isteği, 2026-10-12, karakter seçimi "Kuş"): evre seviyeye bağlıdır (yumurta 0, yeni çıktı 1, civciv 3, yavru kuş 6, kuş 10, bilge kuş 15). Ruh hali: hedef tamamsa coşkulu; dün hedef kaçırıldıysa (jokerli değilse) ve bugün hedefin yarısının altındaysa üzgün; 07:00'den önce ya da hedefin %10'unun altında uykulu; yarının altında sakin; üstünde neşeli. Eşyalar madalyalardan gelir: 7 gün seri atkı, 4 haftalık hedef madalya, 7 gün erken kalkma güneş, bir günde 20.000 adım parti şapkası, toplam 1 milyon adım taç.
 
 ### Sonuçlar
 

@@ -325,6 +325,7 @@
         <item>Los pasos del teléfono ahora también se guardan por hora; el Historial muestra un gráfico por hora aun sin el registro de HyperOS</item>
         <item>Frecuencia cardiaca detallada en Salud: elige un día, reposo/mínima/media/máxima, gráfico con eje, toca una hora para detalles, zonas según la edad y explicaciones. Edad añadida en Ajustes</item>
         <item>Ruta virtual: camina de Estambul a Ankara o el Camino con tus pasos</item>
+        <item>Pájaro: un avatar que crece con tus pasos y reacciona al día, con widget</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nueva barra inferior: Historial, Salud, Hoy (centro), Medallas, Ajustes. El resumen de la pulsera tiene su propia página</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Inicio: %1$s</string>
     <string name="route_approx">Las distancias son aproximadas. Los pasos se convierten según tu altura.</string>
     <string name="route_item">%1$s %2$s · %3$d paradas</string>
+    <string name="bird_stage_egg">Huevo</string>
+    <string name="bird_stage_hatchling">Recién nacido</string>
+    <string name="bird_stage_chick">Pollito</string>
+    <string name="bird_stage_fledgling">Pajarito</string>
+    <string name="bird_stage_bird">Pájaro</string>
+    <string name="bird_stage_elder">Pájaro sabio</string>
+    <string name="bird_mood_sleepy">Con sueño. Un paseo corto lo despertará.</string>
+    <string name="bird_mood_sad">Ayer no llegaste a la meta y está algo triste.</string>
+    <string name="bird_mood_calm">Tranquilo. Se alegrará a mitad de la meta.</string>
+    <string name="bird_mood_happy">Contento. La meta está cerca.</string>
+    <string name="bird_mood_excited">¡Emocionado! La meta de hoy está hecha.</string>
+    <string name="bird_next">Faltan %2$s pasos para %1$s</string>
+    <string name="bird_last">Última etapa alcanzada</string>
+    <string name="bird_items">Objetos %1$d/%2$d</string>
+    <string name="bird_items_title">Objetos del pájaro</string>
+    <string name="bird_item_scarf">Bufanda</string>
+    <string name="bird_item_ribbon">Medalla</string>
+    <string name="bird_item_sun">Sol</string>
+    <string name="bird_item_cap">Gorro de fiesta</string>
+    <string name="bird_item_crown">Corona</string>
+    <string name="bird_unlock_scarf">Racha de 7 días</string>
+    <string name="bird_unlock_ribbon">Meta semanal 4 veces</string>
+    <string name="bird_unlock_sun">Madrugador 7 días</string>
+    <string name="bird_unlock_cap">20.000 pasos en un día</string>
+    <string name="bird_unlock_crown">1 millón de pasos en total</string>
+    <string name="bird_hint">El pájaro crece con tus pasos totales. Su ánimo depende de los pasos de hoy. Los objetos llegan con las medallas.</string>
+    <string name="widget_bird_label">Pájaro</string>
+    <string name="widget_bird_description">Un pájaro que crece con tus pasos</string>
 </resources>

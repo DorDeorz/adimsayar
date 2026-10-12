@@ -325,6 +325,7 @@
         <item>Les pas du téléphone sont aussi enregistrés heure par heure ; l’Historique affiche un graphique horaire même sans le registre HyperOS</item>
         <item>Fréquence cardiaque détaillée sur la page Santé : choix du jour, repos/min/moyenne/max, graphique avec axe, touchez une heure pour le détail, zones selon l’âge et explications. Âge ajouté aux réglages</item>
         <item>Itinéraire virtuel : marche d\'Istanbul à Ankara ou le Camino avec tes pas</item>
+        <item>Oiseau : un avatar qui grandit avec tes pas et réagit à ta journée, avec widget</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Commencé le %1$s</string>
     <string name="route_approx">Les distances sont approximatives. Les pas sont convertis selon ta taille.</string>
     <string name="route_item">%1$s %2$s · %3$d étapes</string>
+    <string name="bird_stage_egg">Œuf</string>
+    <string name="bird_stage_hatchling">Tout juste éclos</string>
+    <string name="bird_stage_chick">Poussin</string>
+    <string name="bird_stage_fledgling">Oisillon</string>
+    <string name="bird_stage_bird">Oiseau</string>
+    <string name="bird_stage_elder">Oiseau sage</string>
+    <string name="bird_mood_sleepy">Endormi. Une petite marche le réveillera.</string>
+    <string name="bird_mood_sad">Tu as manqué l\'objectif hier, il est un peu triste.</string>
+    <string name="bird_mood_calm">Calme. Il s\'égaiera à la moitié de l\'objectif.</string>
+    <string name="bird_mood_happy">Joyeux. L\'objectif est proche.</string>
+    <string name="bird_mood_excited">Ravi ! L\'objectif du jour est atteint.</string>
+    <string name="bird_next">Encore %2$s pas avant %1$s</string>
+    <string name="bird_last">Dernière étape atteinte</string>
+    <string name="bird_items">Objets %1$d/%2$d</string>
+    <string name="bird_items_title">Objets de l\'oiseau</string>
+    <string name="bird_item_scarf">Écharpe</string>
+    <string name="bird_item_ribbon">Médaille</string>
+    <string name="bird_item_sun">Soleil</string>
+    <string name="bird_item_cap">Chapeau de fête</string>
+    <string name="bird_item_crown">Couronne</string>
+    <string name="bird_unlock_scarf">Série de 7 jours</string>
+    <string name="bird_unlock_ribbon">Objectif hebdo 4 fois</string>
+    <string name="bird_unlock_sun">Lève-tôt 7 jours</string>
+    <string name="bird_unlock_cap">20 000 pas en un jour</string>
+    <string name="bird_unlock_crown">1 million de pas au total</string>
+    <string name="bird_hint">L\'oiseau grandit avec tes pas cumulés. Son humeur suit tes pas du jour. Les objets arrivent avec les médailles.</string>
+    <string name="widget_bird_label">Oiseau</string>
+    <string name="widget_bird_description">Un oiseau qui grandit avec tes pas</string>
 </resources>

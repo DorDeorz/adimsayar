@@ -325,6 +325,7 @@
         <item>Handy-Schritte werden jetzt auch stündlich gespeichert; der Verlauf zeigt auch ohne HyperOS-Aufzeichnung ein Stundendiagramm</item>
         <item>Detaillierter Puls auf der Gesundheitsseite: Tag wählen, Ruhe-/Tiefst-/Durchschnitts-/Höchstwert, Diagramm mit Achse, Stunde antippen für Details, Pulszonen nach Alter und Erklärungen. Alter in den Einstellungen</item>
         <item>Virtuelle Route: Laufe mit deinen Schritten von Istanbul nach Ankara oder den Jakobsweg</item>
+        <item>Vogel: ein Avatar, der mit deinen Schritten wächst und auf heute reagiert, mit Widget</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Gestartet am %1$s</string>
     <string name="route_approx">Entfernungen sind ungefähr. Schritte werden anhand deiner Größe umgerechnet.</string>
     <string name="route_item">%1$s %2$s · %3$d Halte</string>
+    <string name="bird_stage_egg">Ei</string>
+    <string name="bird_stage_hatchling">Frisch geschlüpft</string>
+    <string name="bird_stage_chick">Küken</string>
+    <string name="bird_stage_fledgling">Jungvogel</string>
+    <string name="bird_stage_bird">Vogel</string>
+    <string name="bird_stage_elder">Weiser Vogel</string>
+    <string name="bird_mood_sleepy">Müde. Ein kleiner Spaziergang weckt ihn.</string>
+    <string name="bird_mood_sad">Du hast gestern dein Ziel verpasst, er ist etwas traurig.</string>
+    <string name="bird_mood_calm">Ruhig. Bei der Hälfte deines Ziels wird er fröhlich.</string>
+    <string name="bird_mood_happy">Fröhlich. Das Ziel ist nah.</string>
+    <string name="bird_mood_excited">Begeistert! Das heutige Ziel ist geschafft.</string>
+    <string name="bird_next">Noch %2$s Schritte bis %1$s</string>
+    <string name="bird_last">Letzte Stufe erreicht</string>
+    <string name="bird_items">Gegenstände %1$d/%2$d</string>
+    <string name="bird_items_title">Gegenstände des Vogels</string>
+    <string name="bird_item_scarf">Schal</string>
+    <string name="bird_item_ribbon">Medaille</string>
+    <string name="bird_item_sun">Sonne</string>
+    <string name="bird_item_cap">Partyhut</string>
+    <string name="bird_item_crown">Krone</string>
+    <string name="bird_unlock_scarf">7-Tage-Serie</string>
+    <string name="bird_unlock_ribbon">Wochenziel 4-mal</string>
+    <string name="bird_unlock_sun">7 Tage Frühaufsteher</string>
+    <string name="bird_unlock_cap">20.000 Schritte an einem Tag</string>
+    <string name="bird_unlock_crown">Insgesamt 1 Million Schritte</string>
+    <string name="bird_hint">Der Vogel wächst mit deinen Gesamtschritten. Seine Laune folgt den heutigen Schritten. Gegenstände gibt es mit Medaillen.</string>
+    <string name="widget_bird_label">Vogel</string>
+    <string name="widget_bird_description">Ein Vogel, der mit deinen Schritten wächst</string>
 </resources>

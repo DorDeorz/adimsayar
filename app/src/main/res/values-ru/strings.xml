@@ -325,6 +325,7 @@
         <item>Шаги телефона теперь сохраняются и по часам; в истории есть почасовой график даже без записи HyperOS</item>
         <item>Подробный пульс на странице «Здоровье»: выбор дня, покой/минимум/среднее/максимум, график с осью, нажатие на час для подробностей, зоны по возрасту и пояснения. В настройки добавлен возраст</item>
         <item>Виртуальный маршрут: пройди от Стамбула до Анкары или путь Сантьяго своими шагами</item>
+        <item>Птица: аватар растёт с твоими шагами и реагирует на день, есть виджет</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Новая нижняя панель: История, Здоровье, Сегодня (в центре), Медали, Настройки. Сводка браслета на отдельной странице</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Начало: %1$s</string>
     <string name="route_approx">Расстояния приблизительные. Шаги пересчитываются по твоему росту.</string>
     <string name="route_item">%1$s %2$s · остановок: %3$d</string>
+    <string name="bird_stage_egg">Яйцо</string>
+    <string name="bird_stage_hatchling">Только вылупился</string>
+    <string name="bird_stage_chick">Птенец</string>
+    <string name="bird_stage_fledgling">Слёток</string>
+    <string name="bird_stage_bird">Птица</string>
+    <string name="bird_stage_elder">Мудрая птица</string>
+    <string name="bird_mood_sleepy">Сонный. Немного пройдись, и он проснётся.</string>
+    <string name="bird_mood_sad">Вчера цель не выполнена, он немного грустит.</string>
+    <string name="bird_mood_calm">Спокоен. Обрадуется на половине цели.</string>
+    <string name="bird_mood_happy">Радуется. Цель уже близко.</string>
+    <string name="bird_mood_excited">В восторге! Цель на сегодня выполнена.</string>
+    <string name="bird_next">До стадии «%1$s» осталось %2$s шагов</string>
+    <string name="bird_last">Достигнута последняя стадия</string>
+    <string name="bird_items">Предметы %1$d/%2$d</string>
+    <string name="bird_items_title">Предметы птицы</string>
+    <string name="bird_item_scarf">Шарф</string>
+    <string name="bird_item_ribbon">Медаль</string>
+    <string name="bird_item_sun">Солнце</string>
+    <string name="bird_item_cap">Праздничный колпак</string>
+    <string name="bird_item_crown">Корона</string>
+    <string name="bird_unlock_scarf">Серия 7 дней</string>
+    <string name="bird_unlock_ribbon">Недельная цель 4 раза</string>
+    <string name="bird_unlock_sun">Ранняя пташка 7 дней</string>
+    <string name="bird_unlock_cap">20 000 шагов за день</string>
+    <string name="bird_unlock_crown">Всего 1 миллион шагов</string>
+    <string name="bird_hint">Птица растёт вместе с общим числом шагов. Настроение зависит от сегодняшних шагов. Предметы дают медали.</string>
+    <string name="widget_bird_label">Птица</string>
+    <string name="widget_bird_description">Птица, которая растёт с твоими шагами</string>
 </resources>

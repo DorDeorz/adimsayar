@@ -209,7 +209,7 @@ object AchievementMath {
         return Level(number, levelStart(number), levelStart(number + 1))
     }
 
-    private fun levelStart(level: Int): Long = LEVEL_STEP * level * (level + 1) / 2
+    fun levelStart(level: Int): Long = LEVEL_STEP * level * (level + 1) / 2
 
     private const val LEVEL_STEP = 25_000L
 }

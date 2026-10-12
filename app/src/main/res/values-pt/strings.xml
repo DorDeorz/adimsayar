@@ -325,6 +325,7 @@
         <item>Os passos do telefone agora também são salvos por hora; o Histórico mostra gráfico por hora mesmo sem o registro do HyperOS</item>
         <item>Frequência cardíaca detalhada na página Saúde: escolha do dia, repouso/mínima/média/máxima, gráfico com eixo, toque em uma hora para detalhes, zonas por idade e explicações. Idade adicionada às Configurações</item>
         <item>Rota virtual: caminhe de Istambul a Ancara ou o Caminho com seus passos</item>
+        <item>Pássaro: um avatar que cresce com seus passos e reage ao dia, com widget</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nova barra inferior: Histórico, Saúde, Hoje (centro), Medalhas, Configurações. O resumo da pulseira tem página própria</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Início: %1$s</string>
     <string name="route_approx">As distâncias são aproximadas. Os passos são convertidos pela sua altura.</string>
     <string name="route_item">%1$s %2$s · %3$d paradas</string>
+    <string name="bird_stage_egg">Ovo</string>
+    <string name="bird_stage_hatchling">Recém-nascido</string>
+    <string name="bird_stage_chick">Pintinho</string>
+    <string name="bird_stage_fledgling">Filhote</string>
+    <string name="bird_stage_bird">Pássaro</string>
+    <string name="bird_stage_elder">Pássaro sábio</string>
+    <string name="bird_mood_sleepy">Sonolento. Uma caminhada curta vai acordá-lo.</string>
+    <string name="bird_mood_sad">Você perdeu a meta ontem e ele está um pouco triste.</string>
+    <string name="bird_mood_calm">Calmo. Fica alegre na metade da meta.</string>
+    <string name="bird_mood_happy">Feliz. A meta está perto.</string>
+    <string name="bird_mood_excited">Empolgado! A meta de hoje foi batida.</string>
+    <string name="bird_next">Faltam %2$s passos para %1$s</string>
+    <string name="bird_last">Última fase alcançada</string>
+    <string name="bird_items">Itens %1$d/%2$d</string>
+    <string name="bird_items_title">Itens do pássaro</string>
+    <string name="bird_item_scarf">Cachecol</string>
+    <string name="bird_item_ribbon">Medalha</string>
+    <string name="bird_item_sun">Sol</string>
+    <string name="bird_item_cap">Chapéu de festa</string>
+    <string name="bird_item_crown">Coroa</string>
+    <string name="bird_unlock_scarf">Sequência de 7 dias</string>
+    <string name="bird_unlock_ribbon">Meta semanal 4 vezes</string>
+    <string name="bird_unlock_sun">Madrugador por 7 dias</string>
+    <string name="bird_unlock_cap">20.000 passos em um dia</string>
+    <string name="bird_unlock_crown">1 milhão de passos no total</string>
+    <string name="bird_hint">O pássaro cresce com seus passos totais. O humor segue os passos de hoje. Os itens vêm com as medalhas.</string>
+    <string name="widget_bird_label">Pássaro</string>
+    <string name="widget_bird_description">Um pássaro que cresce com seus passos</string>
 </resources>

@@ -33,6 +33,7 @@ object Widgets {
         HourlyWidget().updateAll(context)
         YearWidget().updateAll(context)
         HealthWidget().updateAll(context)
+        BirdWidget().updateAll(context)
     }
 }
 

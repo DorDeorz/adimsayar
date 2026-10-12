@@ -325,6 +325,7 @@
         <item>スマホの歩数を時間ごとにも保存。HyperOS の記録がなくても履歴に時間別グラフを表示</item>
         <item>健康ページの心拍を詳しく: 日付の選択、安静時・最低・平均・最高、目盛り付きグラフ、時間帯タップで詳細、年齢別の心拍ゾーンと説明。設定に年齢を追加</item>
         <item>バーチャルルート: 歩数でイスタンブールからアンカラやカミーノを歩こう</item>
+        <item>鳥: 歩数で育ち、今日の様子に反応するアバターとウィジェット</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新しい下部バー：履歴・健康・今日（中央）・メダル・設定。バンドのサマリーは専用の健康ページに</item>
@@ -547,4 +548,32 @@
     <string name="route_started">開始日: %1$s</string>
     <string name="route_approx">距離はおおよそです。歩数は身長から換算します。</string>
     <string name="route_item">%1$s %2$s · %3$d か所</string>
+    <string name="bird_stage_egg">たまご</string>
+    <string name="bird_stage_hatchling">ふ化したて</string>
+    <string name="bird_stage_chick">ひよこ</string>
+    <string name="bird_stage_fledgling">若鳥</string>
+    <string name="bird_stage_bird">鳥</string>
+    <string name="bird_stage_elder">賢い鳥</string>
+    <string name="bird_mood_sleepy">眠そう。少し歩けば目を覚まします。</string>
+    <string name="bird_mood_sad">昨日は目標未達成で、少ししょんぼり。</string>
+    <string name="bird_mood_calm">落ち着いています。目標の半分で元気になります。</string>
+    <string name="bird_mood_happy">ごきげん。目標まであと少し。</string>
+    <string name="bird_mood_excited">大喜び！今日の目標達成。</string>
+    <string name="bird_next">%1$sまであと%2$s歩</string>
+    <string name="bird_last">最終段階に到達</string>
+    <string name="bird_items">アイテム %1$d/%2$d</string>
+    <string name="bird_items_title">鳥のアイテム</string>
+    <string name="bird_item_scarf">マフラー</string>
+    <string name="bird_item_ribbon">メダル</string>
+    <string name="bird_item_sun">太陽</string>
+    <string name="bird_item_cap">パーティーハット</string>
+    <string name="bird_item_crown">王冠</string>
+    <string name="bird_unlock_scarf">7日連続</string>
+    <string name="bird_unlock_ribbon">週間目標を4回</string>
+    <string name="bird_unlock_sun">早起き7日</string>
+    <string name="bird_unlock_cap">1日20,000歩</string>
+    <string name="bird_unlock_crown">合計100万歩</string>
+    <string name="bird_hint">鳥は合計歩数で成長します。気分は今日の歩数で変わります。アイテムはメダルで手に入ります。</string>
+    <string name="widget_bird_label">鳥</string>
+    <string name="widget_bird_description">歩数で育つ鳥</string>
 </resources>

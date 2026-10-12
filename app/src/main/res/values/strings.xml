@@ -325,6 +325,7 @@
         <item>Telefonun adımları artık saat saat de kaydedilir; HyperOS kaydı kapalıyken de Geçmiş’te saatlik grafik görünür</item>
         <item>Sağlık sayfasında ayrıntılı nabız: gün seçimi, dinlenme/en düşük/ortalama/en yüksek, eksenli grafik, saate dokununca ayrıntı, yaşa göre nabız bölgeleri ve açıklamalar. Ayarlar’a yaş eklendi</item>
         <item>Sanal rota: adımlarınla İstanbul\'dan Ankara\'ya ya da Camino\'da yürü</item>
+        <item>Kuş: toplam adımınla büyüyen, ruh hali bugüne göre değişen avatar ve widget\'ı</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
@@ -548,4 +549,32 @@
     <string name="route_started">Başlangıç: %1$s</string>
     <string name="route_approx">Mesafeler yaklaşıktır. Adımların boyuna göre km\'ye çevrilir.</string>
     <string name="route_item">%1$s %2$s · %3$d durak</string>
+    <string name="bird_stage_egg">Yumurta</string>
+    <string name="bird_stage_hatchling">Yumurtadan yeni çıktı</string>
+    <string name="bird_stage_chick">Civciv</string>
+    <string name="bird_stage_fledgling">Yavru kuş</string>
+    <string name="bird_stage_bird">Kuş</string>
+    <string name="bird_stage_elder">Bilge kuş</string>
+    <string name="bird_mood_sleepy">Uykulu. Biraz yürüyünce uyanacak.</string>
+    <string name="bird_mood_sad">Dün hedefi kaçırdın, biraz üzgün.</string>
+    <string name="bird_mood_calm">Sakin. Hedefin yarısında neşelenecek.</string>
+    <string name="bird_mood_happy">Neşeli. Hedefe az kaldı.</string>
+    <string name="bird_mood_excited">Coştu! Bugünün hedefi tamam.</string>
+    <string name="bird_next">%1$s evresine %2$s adım kaldı</string>
+    <string name="bird_last">Son evreye ulaştın</string>
+    <string name="bird_items">Eşyalar %1$d/%2$d</string>
+    <string name="bird_items_title">Kuşun eşyaları</string>
+    <string name="bird_item_scarf">Atkı</string>
+    <string name="bird_item_ribbon">Madalya</string>
+    <string name="bird_item_sun">Güneş</string>
+    <string name="bird_item_cap">Parti şapkası</string>
+    <string name="bird_item_crown">Taç</string>
+    <string name="bird_unlock_scarf">7 günlük seri</string>
+    <string name="bird_unlock_ribbon">4 hafta haftalık hedef</string>
+    <string name="bird_unlock_sun">7 gün erken kalkma</string>
+    <string name="bird_unlock_cap">Bir günde 20.000 adım</string>
+    <string name="bird_unlock_crown">Toplam 1 milyon adım</string>
+    <string name="bird_hint">Kuş toplam adımınla büyür. Ruh hali bugünkü adımına göre değişir. Eşyalar madalyalarla gelir.</string>
+    <string name="widget_bird_label">Kuş</string>
+    <string name="widget_bird_description">Adımlarınla büyüyen kuş</string>
 </resources>

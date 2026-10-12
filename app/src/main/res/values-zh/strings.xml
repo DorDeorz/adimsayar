@@ -325,6 +325,7 @@
         <item>手机步数现在也按小时保存，没有 HyperOS 记录时历史中也会显示每小时图表</item>
         <item>健康页面心率更详细：选择日期，静息/最低/平均/最高，带坐标轴的图表，点击小时查看详情，按年龄的心率区间及说明。设置中新增年龄</item>
         <item>虚拟路线：用步数从伊斯坦布尔走到安卡拉或走完朝圣之路</item>
+        <item>小鸟：随步数成长、对今天做出反应的头像和小组件</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
@@ -547,4 +548,32 @@
     <string name="route_started">开始于 %1$s</string>
     <string name="route_approx">距离为近似值。步数按你的身高换算。</string>
     <string name="route_item">%1$s %2$s · %3$d 站</string>
+    <string name="bird_stage_egg">蛋</string>
+    <string name="bird_stage_hatchling">刚破壳</string>
+    <string name="bird_stage_chick">小鸡</string>
+    <string name="bird_stage_fledgling">雏鸟</string>
+    <string name="bird_stage_bird">鸟</string>
+    <string name="bird_stage_elder">智慧鸟</string>
+    <string name="bird_mood_sleepy">困了。走一走就会醒来。</string>
+    <string name="bird_mood_sad">昨天没达标，它有点难过。</string>
+    <string name="bird_mood_calm">很平静。完成一半目标时会开心起来。</string>
+    <string name="bird_mood_happy">很开心。快达标了。</string>
+    <string name="bird_mood_excited">超兴奋！今天的目标完成了。</string>
+    <string name="bird_next">距离%1$s还差 %2$s 步</string>
+    <string name="bird_last">已到最终阶段</string>
+    <string name="bird_items">物品 %1$d/%2$d</string>
+    <string name="bird_items_title">小鸟的物品</string>
+    <string name="bird_item_scarf">围巾</string>
+    <string name="bird_item_ribbon">奖牌</string>
+    <string name="bird_item_sun">太阳</string>
+    <string name="bird_item_cap">派对帽</string>
+    <string name="bird_item_crown">王冠</string>
+    <string name="bird_unlock_scarf">连续 7 天</string>
+    <string name="bird_unlock_ribbon">周目标 4 次</string>
+    <string name="bird_unlock_sun">早起 7 天</string>
+    <string name="bird_unlock_cap">一天 20,000 步</string>
+    <string name="bird_unlock_crown">累计 100 万步</string>
+    <string name="bird_hint">小鸟随总步数成长。心情取决于今天的步数。物品随奖牌获得。</string>
+    <string name="widget_bird_label">小鸟</string>
+    <string name="widget_bird_description">随步数成长的小鸟</string>
 </resources>

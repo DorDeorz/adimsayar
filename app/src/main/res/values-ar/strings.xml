@@ -325,6 +325,7 @@
         <item>تُحفظ خطوات الهاتف الآن ساعة بساعة أيضًا، فيظهر رسم بالساعة في السجل حتى دون سجل HyperOS</item>
         <item>نبض مفصل في صفحة الصحة: اختيار اليوم، الراحة/الأدنى/المتوسط/الأعلى، رسم بمحور، المس ساعة للتفاصيل، مناطق النبض حسب العمر مع شرح. أُضيف العمر إلى الإعدادات</item>
         <item>مسار افتراضي: امشِ من إسطنبول إلى أنقرة أو طريق كامينو بخطواتك</item>
+        <item>طائر: صورة رمزية تكبر مع خطواتك وتتفاعل مع يومك، مع أداة</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
@@ -547,4 +548,32 @@
     <string name="route_started">البداية: %1$s</string>
     <string name="route_approx">المسافات تقريبية. تُحوَّل الخطوات حسب طولك.</string>
     <string name="route_item">%1$s %2$s · %3$d محطات</string>
+    <string name="bird_stage_egg">بيضة</string>
+    <string name="bird_stage_hatchling">فقس للتو</string>
+    <string name="bird_stage_chick">كتكوت</string>
+    <string name="bird_stage_fledgling">فرخ طائر</string>
+    <string name="bird_stage_bird">طائر</string>
+    <string name="bird_stage_elder">طائر حكيم</string>
+    <string name="bird_mood_sleepy">نعسان. مشية قصيرة ستوقظه.</string>
+    <string name="bird_mood_sad">فاتك هدف الأمس، لذا هو حزين قليلًا.</string>
+    <string name="bird_mood_calm">هادئ. سيبتهج عند منتصف هدفك.</string>
+    <string name="bird_mood_happy">سعيد. الهدف قريب.</string>
+    <string name="bird_mood_excited">متحمس! تحقق هدف اليوم.</string>
+    <string name="bird_next">متبقٍ %2$s خطوة حتى %1$s</string>
+    <string name="bird_last">وصلت إلى المرحلة الأخيرة</string>
+    <string name="bird_items">العناصر %1$d/%2$d</string>
+    <string name="bird_items_title">عناصر الطائر</string>
+    <string name="bird_item_scarf">وشاح</string>
+    <string name="bird_item_ribbon">ميدالية</string>
+    <string name="bird_item_sun">شمس</string>
+    <string name="bird_item_cap">قبعة حفلة</string>
+    <string name="bird_item_crown">تاج</string>
+    <string name="bird_unlock_scarf">سلسلة 7 أيام</string>
+    <string name="bird_unlock_ribbon">الهدف الأسبوعي 4 مرات</string>
+    <string name="bird_unlock_sun">الاستيقاظ مبكرًا 7 أيام</string>
+    <string name="bird_unlock_cap">20,000 خطوة في يوم</string>
+    <string name="bird_unlock_crown">مليون خطوة إجمالًا</string>
+    <string name="bird_hint">يكبر الطائر مع مجموع خطواتك. مزاجه يتبع خطوات اليوم. العناصر تأتي مع الميداليات.</string>
+    <string name="widget_bird_label">طائر</string>
+    <string name="widget_bird_description">طائر يكبر مع خطواتك</string>
 </resources>

@@ -78,6 +78,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         freezeOffer(state)?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
+        item { BirdCard(state) }
         if (!state.sensorAvailable) {
             item { MessageCard(stringResource(R.string.sensor_missing_title), stringResource(R.string.sensor_missing_text)) }
         } else if (state.permission != PermissionState.Granted) {

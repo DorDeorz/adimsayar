@@ -325,6 +325,7 @@
         <item>휴대폰 걸음 수를 시간별로도 저장해 HyperOS 기록 없이도 기록에 시간별 그래프가 보여요</item>
         <item>건강 페이지의 자세한 심박수: 날짜 선택, 안정 시·최저·평균·최고, 눈금 있는 그래프, 시간을 누르면 상세, 나이별 심박 구간과 설명. 설정에 나이 추가</item>
         <item>가상 경로: 걸음으로 이스탄불에서 앙카라까지, 또는 카미노를 걸어 보세요</item>
+        <item>새: 걸음으로 자라고 오늘에 반응하는 아바타와 위젯</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
@@ -547,4 +548,32 @@
     <string name="route_started">시작: %1$s</string>
     <string name="route_approx">거리는 대략적입니다. 걸음 수는 키로 환산됩니다.</string>
     <string name="route_item">%1$s %2$s · 정류지 %3$d곳</string>
+    <string name="bird_stage_egg">알</string>
+    <string name="bird_stage_hatchling">막 부화함</string>
+    <string name="bird_stage_chick">병아리</string>
+    <string name="bird_stage_fledgling">새끼 새</string>
+    <string name="bird_stage_bird">새</string>
+    <string name="bird_stage_elder">현명한 새</string>
+    <string name="bird_mood_sleepy">졸려요. 조금 걸으면 깨어나요.</string>
+    <string name="bird_mood_sad">어제 목표를 놓쳐서 조금 슬퍼요.</string>
+    <string name="bird_mood_calm">차분해요. 목표의 절반이면 신나요.</string>
+    <string name="bird_mood_happy">기분 좋아요. 목표가 가까워요.</string>
+    <string name="bird_mood_excited">신났어요! 오늘 목표 달성.</string>
+    <string name="bird_next">%1$s까지 %2$s걸음 남음</string>
+    <string name="bird_last">마지막 단계 도달</string>
+    <string name="bird_items">아이템 %1$d/%2$d</string>
+    <string name="bird_items_title">새의 아이템</string>
+    <string name="bird_item_scarf">목도리</string>
+    <string name="bird_item_ribbon">메달</string>
+    <string name="bird_item_sun">해</string>
+    <string name="bird_item_cap">파티 모자</string>
+    <string name="bird_item_crown">왕관</string>
+    <string name="bird_unlock_scarf">7일 연속</string>
+    <string name="bird_unlock_ribbon">주간 목표 4회</string>
+    <string name="bird_unlock_sun">일찍 일어나기 7일</string>
+    <string name="bird_unlock_cap">하루 20,000걸음</string>
+    <string name="bird_unlock_crown">총 100만 걸음</string>
+    <string name="bird_hint">새는 총 걸음 수로 자라요. 기분은 오늘 걸음 수에 따라 바뀌어요. 아이템은 메달로 얻어요.</string>
+    <string name="widget_bird_label">새</string>
+    <string name="widget_bird_description">걸음으로 자라는 새</string>
 </resources>

@@ -325,6 +325,7 @@
         <item>Phone steps are now also saved hour by hour, so History shows an hourly chart even without the HyperOS record</item>
         <item>Detailed heart rate on the Health page: pick a day, resting/lowest/average/highest, a chart with axis, tap an hour for details, heart rate zones by age and explanations. Age added to Settings</item>
         <item>Virtual route: walk from Istanbul to Ankara or the Camino with your steps</item>
+        <item>Bird: an avatar that grows with your total steps and reacts to today, plus a widget</item>
     </string-array>
     <string-array name="release_notes_0_8_0">
         <item>New bottom bar: History, Health, Today (centre), Medals, Settings. The band summary now has its own Health page</item>
@@ -547,4 +548,32 @@
     <string name="route_started">Started %1$s</string>
     <string name="route_approx">Distances are approximate. Steps are converted using your height.</string>
     <string name="route_item">%1$s %2$s · %3$d stops</string>
+    <string name="bird_stage_egg">Egg</string>
+    <string name="bird_stage_hatchling">Just hatched</string>
+    <string name="bird_stage_chick">Chick</string>
+    <string name="bird_stage_fledgling">Fledgling</string>
+    <string name="bird_stage_bird">Bird</string>
+    <string name="bird_stage_elder">Wise bird</string>
+    <string name="bird_mood_sleepy">Sleepy. A short walk will wake it up.</string>
+    <string name="bird_mood_sad">You missed yesterday\'s goal, so it\'s a bit sad.</string>
+    <string name="bird_mood_calm">Calm. It cheers up at half your goal.</string>
+    <string name="bird_mood_happy">Happy. The goal is close.</string>
+    <string name="bird_mood_excited">Thrilled! Today\'s goal is done.</string>
+    <string name="bird_next">%2$s steps to %1$s</string>
+    <string name="bird_last">Final stage reached</string>
+    <string name="bird_items">Items %1$d/%2$d</string>
+    <string name="bird_items_title">Bird\'s items</string>
+    <string name="bird_item_scarf">Scarf</string>
+    <string name="bird_item_ribbon">Medal</string>
+    <string name="bird_item_sun">Sun</string>
+    <string name="bird_item_cap">Party hat</string>
+    <string name="bird_item_crown">Crown</string>
+    <string name="bird_unlock_scarf">7-day streak</string>
+    <string name="bird_unlock_ribbon">Weekly goal 4 times</string>
+    <string name="bird_unlock_sun">Early bird on 7 days</string>
+    <string name="bird_unlock_cap">20,000 steps in a day</string>
+    <string name="bird_unlock_crown">1 million steps in total</string>
+    <string name="bird_hint">The bird grows with your total steps. Its mood follows today\'s steps. Items come with medals.</string>
+    <string name="widget_bird_label">Bird</string>
+    <string name="widget_bird_description">A bird that grows with your steps</string>
 </resources>
