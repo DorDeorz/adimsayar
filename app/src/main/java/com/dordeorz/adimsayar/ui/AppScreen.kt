@@ -38,10 +38,11 @@ import com.dordeorz.adimsayar.data.Achievements
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.BandDay
 import com.dordeorz.adimsayar.data.BandPeriod
+import com.dordeorz.adimsayar.data.ChallengeSummary
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.DistanceUnit
-import com.dordeorz.adimsayar.data.HeartHour
+import com.dordeorz.adimsayar.data.HeartDay
 import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.data.Weight
@@ -83,6 +84,9 @@ data class MainUiState(
     val weights: List<Weight>,
     val healthRefresh: Int,
     val requestedTab: Tab?,
+    val water: Map<LocalDate, Int>,
+    val freezes: Set<LocalDate>,
+    val challenges: ChallengeSummary,
 )
 
 class MainActions(
@@ -110,7 +114,7 @@ class MainActions(
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,
     val loadBandDay: suspend (LocalDate) -> BandDay?,
     val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
-    val loadHeartHours: suspend (LocalDate) -> List<HeartHour>?,
+    val loadHeartDay: suspend (LocalDate) -> HeartDay?,
     val onGrantHealthPermissions: () -> Unit,
     val onAddWeight: (LocalDate, Double) -> Unit,
     val onDeleteWeight: (LocalDate) -> Unit,
@@ -119,6 +123,13 @@ class MainActions(
     val loadSources: suspend () -> SourceReport?,
     val onOpenHealthConnect: () -> Unit,
     val onInstallHealthConnect: () -> Unit,
+    val onAddWater: (Int) -> Unit,
+    val onFreezeChange: (LocalDate, Boolean) -> Unit,
+    val onAgeChange: (Int) -> Unit,
+    val onWaterGoalChange: (Int) -> Unit,
+    val onGlassChange: (Int) -> Unit,
+    val onWaterReminderChange: (Boolean) -> Unit,
+    val onWaterIntervalChange: (Int) -> Unit,
 )
 
 @Composable
@@ -177,7 +188,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when (tab) {
-                Tab.History -> HistoryScreen(state, actions.loadDayDetail, actions.loadBandDay)
+                Tab.History -> HistoryScreen(state, actions)
                 Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
                 Tab.Today -> TodayScreen(state, actions)
                 Tab.Medals -> MedalsScreen(state)

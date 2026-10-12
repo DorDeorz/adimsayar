@@ -35,6 +35,11 @@ import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.AchievementMath
+import com.dordeorz.adimsayar.data.ChallengeMath
+import com.dordeorz.adimsayar.data.DayDetail
+import com.dordeorz.adimsayar.data.KeptMedals
+import com.dordeorz.adimsayar.data.StreakFreezes
+import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -131,11 +136,17 @@ class MainActivity : ComponentActivity() {
             Reminders.scheduleEvening(applicationContext)
         },
         onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
-        onImport = { importLauncher.launch(arrayOf("text/*", "application/octet-stream")) },
-        loadDayDetail = { date -> XiaomiSteps.dayDetail(applicationContext, date) },
+        onImport = { importLauncher.launch(arrayOf("text/*", "application/zip", "application/octet-stream")) },
+        loadDayDetail = { date ->
+            if (XiaomiSteps.isEnabled(applicationContext)) {
+                XiaomiSteps.dayDetail(applicationContext, date)
+            } else {
+                repository.loadPhoneHours(date)?.let { DayDetail(it, 0L, 0L) }
+            }
+        },
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
         loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
-        loadHeartHours = { date -> WearableHealth.heartHours(applicationContext, date) },
+        loadHeartDay = { date -> WearableHealth.heartDay(applicationContext, date) },
         onGrantHealthPermissions = { runCatching { healthPermissionLauncher.launch(WearableSteps.PERMISSIONS) } },
         onAddWeight = { date, kg ->
             val appContext = applicationContext
@@ -161,6 +172,29 @@ class MainActivity : ComponentActivity() {
             if (!openOrToast(market, silent = true)) {
                 openOrToast(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$HEALTH_CONNECT_PACKAGE")))
             }
+        },
+        onAddWater = { ml ->
+            val appContext = applicationContext
+            AppScope.launch(Dispatchers.IO) { Water.add(appContext, LocalDate.now(), ml) }
+        },
+        onFreezeChange = { date, frozen ->
+            val appContext = applicationContext
+            AppScope.launch(Dispatchers.IO) {
+                StreakFreezes.set(appContext, date, frozen)
+                Widgets.updateAll(appContext)
+            }
+        },
+        onAgeChange = { settingsStore.setAge(it) },
+        onWaterGoalChange = { settingsStore.setWaterGoal(it) },
+        onGlassChange = { settingsStore.setGlass(it) },
+        onWaterReminderChange = { enabled ->
+            settingsStore.setWaterReminder(enabled)
+            if (enabled) requestNotificationPermission()
+            Reminders.scheduleWater(applicationContext)
+        },
+        onWaterIntervalChange = { hours ->
+            settingsStore.setWaterInterval(hours)
+            Reminders.scheduleWater(applicationContext)
         },
     )
 
@@ -227,7 +261,10 @@ class MainActivity : ComponentActivity() {
             val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdSource, history[currentDay]) {
                 value = if (earlyBirdSource) withContext(Dispatchers.IO) { XiaomiSteps.earlyBirdDays(applicationContext) } else null
             }
-            val achievements = remember(history, currentDay, appSettings, earlyBirdDays) {
+            val water by remember { Water.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val freezes by remember { StreakFreezes.observe(applicationContext) }.collectAsStateWithLifecycle(emptySet())
+            val kept by remember { KeptMedals.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes) {
                 AchievementMath.compute(
                     history,
                     currentDay,
@@ -235,7 +272,15 @@ class MainActivity : ComponentActivity() {
                     appSettings.weeklyGoal,
                     appSettings.weekStart,
                     earlyBirdDays,
+                    freezes,
                 )
+            }
+            LaunchedEffect(computed) {
+                withContext(Dispatchers.IO) { KeptMedals.keep(applicationContext, computed.medals) }
+            }
+            val achievements = remember(computed, kept) { computed.copy(medals = KeptMedals.apply(computed.medals, kept)) }
+            val challenges = remember(history, currentDay, appSettings.dailyGoal, appSettings.weekStart) {
+                ChallengeMath.summary(history, currentDay, appSettings.dailyGoal, appSettings.weekStart)
             }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
@@ -271,6 +316,9 @@ class MainActivity : ComponentActivity() {
                             weights = weights,
                             healthRefresh = healthRefresh,
                             requestedTab = requestedTab,
+                            water = water,
+                            freezes = freezes,
+                            challenges = challenges,
                         ),
                         actions = actions,
                     )

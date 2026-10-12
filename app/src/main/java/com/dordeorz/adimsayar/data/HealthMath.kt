@@ -19,6 +19,10 @@ class SleepNight(
 
 enum class BmiCategory { Under, Normal, Over, Obese }
 
+enum class HeartZone(val fromPercent: Int) { Rest(0), Light(50), FatBurn(60), Cardio(70), Peak(80), Max(90) }
+
+enum class RestingCategory { Low, Normal, High }
+
 object HealthMath {
 
     private const val MINUTES_PER_DAY = 24 * 60
@@ -65,4 +69,28 @@ object HealthMath {
     }
 
     fun average(values: List<Long>): Long? = if (values.isEmpty()) null else Math.round(values.sum().toDouble() / values.size)
+
+    fun maxHeartRate(age: Int): Long = (220 - age).toLong()
+
+    fun zoneOf(bpm: Long, maxRate: Long): HeartZone {
+        val percent = bpm * 100 / maxRate.coerceAtLeast(1L)
+        return HeartZone.entries.last { percent >= it.fromPercent }
+    }
+
+    fun zoneBpm(zone: HeartZone, maxRate: Long): Long = maxRate * zone.fromPercent / 100
+
+    fun zoneMinutes(averages: List<Long>, maxRate: Long, slotMinutes: Long): Map<HeartZone, Long> =
+        averages.groupingBy { zoneOf(it, maxRate) }.eachCount().mapValues { it.value * slotMinutes }
+
+    fun restingEstimate(averages: List<Long>): Long? {
+        if (averages.isEmpty()) return null
+        val sorted = averages.sorted()
+        return sorted[(sorted.size - 1) / 10]
+    }
+
+    fun restingCategory(bpm: Long): RestingCategory = when {
+        bpm < 60L -> RestingCategory.Low
+        bpm <= 100L -> RestingCategory.Normal
+        else -> RestingCategory.High
+    }
 }

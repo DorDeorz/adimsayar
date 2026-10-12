@@ -23,6 +23,7 @@ object Schedules {
         scheduleMidnight(context)
         Reminders.scheduleEvening(context)
         Reminders.scheduleWeight(context)
+        Reminders.scheduleWater(context)
     }
 
     fun requestRead(context: Context) {

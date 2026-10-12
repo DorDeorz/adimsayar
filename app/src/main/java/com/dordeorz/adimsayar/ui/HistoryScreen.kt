@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -22,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -45,6 +47,7 @@ import com.dordeorz.adimsayar.data.BandDay
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.ExerciseKind
 import com.dordeorz.adimsayar.data.Records
+import com.dordeorz.adimsayar.data.StreakFreezes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.DayOfWeek
@@ -53,11 +56,7 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 
 @Composable
-fun HistoryScreen(
-    state: MainUiState,
-    loadDayDetail: suspend (LocalDate) -> DayDetail?,
-    loadBandDay: suspend (LocalDate) -> BandDay?,
-) {
+fun HistoryScreen(state: MainUiState, actions: MainActions) {
     val currentMonth = YearMonth.from(state.today)
     val firstMonth = state.history.keys.minOrNull()?.let(YearMonth::from)?.coerceAtMost(currentMonth) ?: currentMonth
     var monthText by rememberSaveable { mutableStateOf(currentMonth.toString()) }
@@ -84,7 +83,7 @@ fun HistoryScreen(
                 onSelect = { selectedText = it.toString() },
             )
         }
-        item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, loadDayDetail, loadBandDay) }
+        item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, actions) }
         item { RecordsCard(state.achievements.records, state.today) }
         item { YearCard(state) }
     }
@@ -195,6 +194,7 @@ private fun MonthCard(
                                     date = date,
                                     steps = state.history[date] ?: 0L,
                                     goal = goal,
+                                    frozen = date in state.freezes,
                                     future = date.isAfter(state.today),
                                     selected = date == selected,
                                     onClick = { onSelect(date) },
@@ -218,7 +218,7 @@ private fun MonthStat(label: String, value: String, modifier: Modifier) {
 }
 
 @Composable
-private fun DayCell(date: LocalDate, steps: Long, goal: Long, future: Boolean, selected: Boolean, onClick: () -> Unit) {
+private fun DayCell(date: LocalDate, steps: Long, goal: Long, frozen: Boolean, future: Boolean, selected: Boolean, onClick: () -> Unit) {
     val primary = MaterialTheme.colorScheme.primary
     val reached = steps >= goal
     val background = when {
@@ -245,7 +245,14 @@ private fun DayCell(date: LocalDate, steps: Long, goal: Long, future: Boolean, s
         verticalArrangement = Arrangement.Center,
     ) {
         Text(date.dayOfMonth.toString(), style = MaterialTheme.typography.labelLarge, color = textColor)
-        if (!future && steps > 0L) {
+        if (frozen && !reached) {
+            Icon(
+                painterResource(R.drawable.ic_snow),
+                contentDescription = stringResource(R.string.freeze_used),
+                tint = MaterialTheme.colorScheme.tertiary,
+                modifier = Modifier.size(12.dp),
+            )
+        } else if (!future && steps > 0L) {
             Text(formatCompact(steps), style = MaterialTheme.typography.labelSmall, color = textColor, maxLines = 1)
         }
     }
@@ -256,16 +263,15 @@ private fun SelectedDayCard(
     date: LocalDate,
     steps: Long,
     state: MainUiState,
-    loadDayDetail: suspend (LocalDate) -> DayDetail?,
-    loadBandDay: suspend (LocalDate) -> BandDay?,
+    actions: MainActions,
 ) {
     val goal = state.settings.dailyGoal
-    val hourly = state.xiaomiEnabled && !state.wearableEnabled
-    val detail by produceState<DayDetail?>(null, date, steps, hourly) {
-        value = if (hourly) withContext(Dispatchers.IO) { loadDayDetail(date) } else null
+    val hourly = !state.wearableEnabled
+    val detail by produceState<DayDetail?>(null, date, steps, hourly, state.xiaomiEnabled) {
+        value = if (hourly) withContext(Dispatchers.IO) { actions.loadDayDetail(date) } else null
     }
     val band by produceState<BandDay?>(null, date, steps, state.wearableEnabled) {
-        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { loadBandDay(date) } else null
+        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { actions.loadBandDay(date) } else null
     }
     Card {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
@@ -290,6 +296,35 @@ private fun SelectedDayCard(
                 if (day.hours.any { it > 0L }) HourlyChart(day.hours)
             }
             band?.let { BandSection(it) }
+            if (date < state.today && steps < goal) FreezeRow(date, state, actions.onFreezeChange)
+        }
+    }
+}
+
+@Composable
+private fun FreezeRow(date: LocalDate, state: MainUiState, onFreeze: (LocalDate, Boolean) -> Unit) {
+    val frozen = date in state.freezes
+    val left = StreakFreezes.left(state.freezes, YearMonth.from(date))
+    HorizontalDivider(modifier = Modifier.padding(top = 16.dp))
+    Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            painterResource(R.drawable.ic_snow),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.tertiary,
+            modifier = Modifier.size(20.dp),
+        )
+        Column(modifier = Modifier.weight(1f).padding(horizontal = 12.dp)) {
+            Text(stringResource(R.string.freeze_title), style = MaterialTheme.typography.bodyLarge)
+            Text(
+                if (frozen) stringResource(R.string.freeze_used) else stringResource(R.string.freeze_left, left, StreakFreezes.PER_MONTH),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        if (frozen) {
+            TextButton(onClick = { onFreeze(date, false) }) { Text(stringResource(R.string.freeze_undo)) }
+        } else {
+            TextButton(onClick = { onFreeze(date, true) }, enabled = left > 0) { Text(stringResource(R.string.freeze_use)) }
         }
     }
 }

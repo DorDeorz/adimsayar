@@ -148,6 +148,8 @@ Sağlık sayfası (kullanıcı isteği 2026-10-12, "hepsini ekleyelim"): seçile
 
 Bileklik ve saat kurulumu (kullanıcı isteği 2026-10-12): son 7 günde hiçbir uygulama Health Connect'e nabız, uyku ya da kan oksijeni yazmadıysa Sağlık sayfası "bağlı bileklik ya da saat bulunamadı" uyarısı gösterir; adım gibi telefonun da ölçebildiği türler bileklik sayılmaz. Kurulum ekranı Health Connect'in durumunu, markaya göre ayar yolunu, izinleri ve son 7 günde veri yazan uygulamaları (Health Connect'in kaynak bilgisinden) gösterir. Uygulama adlarını gösterebilmek için manifest'e Health Connect izni isteyen uygulamaları görünür kılan `<queries>` eklendi. Huawei Health Health Connect'e yazmadığı için Huawei saatler desteklenmez; Apple Watch Android'de çalışmaz.
 
+Ayrıntılı nabız (kullanıcı isteği 2026-10-12, "sadece ortalamasını veriyor, okuması zor"): Sağlık sayfasında son 30 günden bir gün seçilir. Nabız 5 dakikalık dilimlerle toplu okunur (`aggregateGroupByDuration`, en düşük/ortalama/en yüksek), ham kayıtlar sayfa sayfa okunmaz. Dinlenme nabzı bileklik bildirmezse günün 5 dakikalık ortalamalarının en düşük onda birinden tahmin edilir. Nabız bölgeleri tahmini en yüksek nabza (220 − yaş) göre hesaplanır; yaş Ayarlar'dadır (varsayılan 30). Bölgeler 5 dakikalık ortalamalardan hesaplandığı için kısa yüklenmeler düşük görünür; ekranda "yaklaşık" diye belirtilir.
+
 Kilo kaydı (aynı istek): kullanıcı kilosunu elle girer, Room `weights` tablosunda saklanır. Vücut kitle endeksi Ayarlar'daki boyla, toplam değişim ilk kayda göre hesaplanır, saklanmaz. İsteğe bağlı "Haftalık kilo hatırlatması" haftanın ilk günü 09:00 civarı bildirim gönderir (`setAndAllowWhileIdle`, birkaç dakika kayabilir).
 
 ### Xiaomi / HyperOS adım kaydı
@@ -181,10 +183,12 @@ Her iki sensör de yoksa uygulama çökmez, anlaşılır bir mesaj gösterir.
 
 ## Widget hedefleri
 
-İki widget:
+Temel iki widget:
 
 1. **Günün adımı** — bugünün toplam adımı ve hedef ilerlemesi
 2. **7 günlük tablo** — son 7 günün günlük adım sayıları
+
+Sonradan eklenenler: seri ve hafta, aylık takvim; 0.9.0'da (kullanıcı isteği 2026-10-12) saat saat bugün, son haftaların ısı haritası, uyku ve nabız. Saatlik ve ısı haritası çubukları beyaz bir bitmap olarak çizilir ve tema rengiyle boyanır, çünkü Glance satır ve sütunları en fazla 10 çocuk alır. Uyku ve nabız widget'ı Health Connect'i en fazla 15 dakikada bir okur, arada son değeri `health_widget` tercihinden gösterir.
 
 ### Mimari
 
@@ -215,7 +219,7 @@ Kullanıcının tek gerçek ihtiyacı atılan adım sayılarını kaybetmemektir
 
 | Yöntem | Ne zaman çalışır | Not |
 |---|---|---|
-| Dışa/içe aktarma (JSON) | Kullanıcı istediğinde | Tam kontrol, dosya saklar, unutulma riski var |
+| Dışa/içe aktarma (CSV) | Kullanıcı istediğinde | Tam kontrol, dosya saklar, unutulma riski var. İçe aktarma Samsung Health, Mi Fitness (`hlth_center_aggregated_fitness_data`, `daily_report`/`steps`), Mi Fit (`ACTIVITY`) ve Google Fit (`Daily activity metrics`) dışa aktarımlarını da okur; zip içindeki CSV'ler taranır, şifreli zip okunamaz. Her gün için daha yüksek sayı kalır |
 | Google Otomatik Yedekleme | Arka planda, otomatik | Ücretsiz, ~25 MB kota |
 
 `android:allowBackup="true"` ile açılır. Cihaz çalınsa bile Google hesabı üzerinden geri gelir.
@@ -226,29 +230,30 @@ Xiaomi Cloud'a güvenilmez. HyperOS üçüncü parti uygulama verisini yedekler 
 
 Arkadaşlarla yarış gibi sosyal özellikler ileride istenirse hesap + sunucu gerekir. Bunun için veri modeli şimdiden şu şekilde kurgulanır:
 
-1. Günlük toplamlar tek gerçek kaynak olsun, türetilmiş hiçbir şey veritabanında tutulmasın
+1. Günlük toplamlar tek gerçek kaynak olsun; veritabanında yalnızca ölçümler ve kullanıcı girdileri (kilo, su, joker, kalıcı madalya) tutulsun
 2. Madalya kuralları kodda olsun, tabloda satır olarak değil
 3. Günlük kayıtlar tarihe göre indeksli olsun (gün başına tek satır, geçmiş günler değişmez)
 
 ## Seviye ve madalya sistemi
 
-Madalyalar **kosmetiktir** ve **türetilmiş veridir**. Hiçbir yerde saklanmaz, her açılışta adım geçmişinden hesaplanır.
+Madalyalar **kosmetiktir**. Her açılışta adım geçmişinden hesaplanır.
 
 ```
 Günlük adım toplamları  = tek gerçek kaynak (saklanır)
 Seviyeler              = f(toplam adım)              → türetilir
-Madalyalar             = f(günlük adım geçmişi)      → türetilir
+Madalyalar             = f(günlük adım geçmişi) ∪ kalıcı madalyalar
+Haftalık görevler      = f(günlük adım geçmişi, hafta) → türetilir
 ```
 
-Kullanıcı kararı: madalya kuralları değişirse yeni kurala uymayan madalyalar geri alınır. Madalyalar dondurulmaz. Yani:
+Kullanıcı kararı (2026-10-12, eski "madalyalar dondurulmaz" kararının yerine): kazanılan madalya kalıcıdır. Bir madalya ilk kez hesaplandığında `medals` tablosuna ilk kazanıldığı tarihle yazılır. Hedef ya da veri değişip hesap artık o madalyayı vermese de madalya kazanılmış görünür. Daha eski bir tarih hesaplanırsa (ör. içe aktarılan eski günler) saklanan tarih ona çekilir. "Nx" kazanma sayısı ve ilerleme yüzdesi türetilmiş kalır.
 
-- Toplam adıma göre belirlenen madalyalar kullanıcının adım geçmişine göre hesaplanır
-- Bir madalyanın gerektirdiği adım sayısı değişirse, madalya eklenebilir veya kaldırılabilir
-- Kullanıcı bir madalyayı kaybedebilir; bu kabul edilmiş davranıştır
+Seri jokeri (aynı istek): her takvim ayı için 2 hak. Kullanıcı hedefi kaçırdığı geçmiş bir güne joker kullanırsa o gün seriyi bozmaz ama seriyi uzatmaz ve hedef günü sayılmaz. Kullanılan jokerler `streak_freezes` tablosunda saklanır, geri alınabilir.
+
+Haftalık görevler saklanmaz: her hafta için 3 görev, haftanın başlangıç tarihiyle tohumlanmış rastgele seçimle ve o haftadan önceki 28 günün ortalamasına göre belirlenir. Bu yüzden aynı hafta her açılışta aynı görevleri gösterir; günlük hedef değişirse görevler de geriye dönük değişir.
 
 ### Sonuçlar
 
-- Madalyalar hiçbir koşulda veri kaybına yol açmaz, çünkü saklanacak bir şey yoktur
+- Madalya tablosu silinirse yalnızca hedef değişikliğiyle kaybolacak madalyalar gider; adım verisi etkilenmez
 - İleride sosyal özellik gelirse veri modeli sunucuya taşımaya hazırdır
 
 ### UI kuralları

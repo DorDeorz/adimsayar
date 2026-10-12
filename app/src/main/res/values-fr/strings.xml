@@ -87,7 +87,7 @@
     <string name="level">Niveau</string>
     <string name="level_next">Encore %1$s pas pour le niveau suivant</string>
     <string name="medals_earned">%1$d / %2$d médailles</string>
-    <string name="medals_retroactive">Les médailles sont calculées à partir de vos jours enregistrés. Si vous changez d\'objectif, les jours passés sont aussi évalués selon le nouvel objectif.</string>
+    <string name="medals_retroactive">Les médailles sont calculées à partir de vos jours enregistrés. Une fois gagnée, la date de la première obtention est enregistrée : changer d’objectif ne vous la retire pas.</string>
     <string name="medal_group_daily">Pas quotidiens</string>
     <string name="medal_group_daily_text">Faites ce nombre de pas en une seule journée</string>
     <string name="medal_group_streak">Série</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">Exporter</string>
     <string name="export_csv_hint">Enregistrer tous les jours dans un fichier CSV</string>
     <string name="import_csv">Importer</string>
-    <string name="import_csv_hint">Restaurer des jours depuis un fichier CSV ; la valeur la plus élevée est conservée</string>
+    <string name="import_csv_hint">Importer des jours depuis un CSV AdımSayar ou un export Samsung Health, Mi Fitness, Mi Fit ou Google Fit (CSV ou zip) ; la valeur la plus élevée est conservée. Décompressez d’abord les zip protégés et choisissez le CSV.</string>
     <string name="export_done">%1$d jours exportés</string>
     <string name="import_done">%1$d jours mis à jour</string>
     <string name="csv_failed">Impossible de lire ou d\'écrire le fichier</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">Jours d\'entraînement</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">%1$s kcal par jour en moyenne</string>
-    <string name="heart_today_title">Fréquence cardiaque du jour</string>
-    <string name="heart_today_empty">Aucune mesure de fréquence cardiaque aujourd\'hui</string>
     <string name="weight_title">Poids et indice de masse corporelle</string>
     <string name="weight_empty">Aucun poids enregistré. Ajoutez votre poids pour voir ici votre IMC et votre évolution.</string>
     <string name="weight_add">Ajouter un poids</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>Suivi de l’eau sur l’écran Aujourd’hui : ajoutez ou retirez des verres, objectif conseillé selon votre poids. Eau des 7 derniers jours sur la page Santé</item>
+        <item>Rappel d’hydratation facultatif (Réglages) : toutes les 1, 2 ou 3 heures, indique ce qu’il reste ; ajoutez un verre depuis la notification</item>
+        <item>Joker de série : 2 par mois. Utilisez-le un jour manqué et la série continue (Aujourd’hui et Historique)</item>
+        <item>Les médailles sont désormais permanentes : la date d’obtention est enregistrée et elles restent si l’objectif change</item>
+        <item>Défis hebdomadaires sur la page Médailles : 3 défis chaque semaine selon votre historique</item>
+        <item>Bouton Partager sur l’écran Aujourd’hui : partagez votre journée en image</item>
+        <item>L’import lit aussi les exports Samsung Health, Mi Fitness, Mi Fit et Google Fit (CSV ou zip)</item>
+        <item>Trois nouveaux widgets : aujourd’hui heure par heure, carte de chaleur des dernières semaines, sommeil et cœur</item>
+        <item>Les pas du téléphone sont aussi enregistrés heure par heure ; l’Historique affiche un graphique horaire même sans le registre HyperOS</item>
+        <item>Fréquence cardiaque détaillée sur la page Santé : choix du jour, repos/min/moyenne/max, graphique avec axe, touchez une heure pour le détail, zones selon l’âge et explications. Âge ajouté aux réglages</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Nouvelle barre du bas : Historique, Santé, Aujourd\'hui (au centre), Médailles, Réglages. Le résumé du bracelet a sa propre page</item>
         <item>Résumé santé du bracelet dans l\'historique (7 ou 30 jours) : sommeil, fréquence cardiaque au repos avec graphique, exercices, distance</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Musculation</string>
     <string name="exercise_other">Entraînement</string>
+    <string name="age">Âge</string>
+    <string name="age_value">%1$d ans</string>
+    <string name="age_unit">ans</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">Eau</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">Encore %1$s ml (%2$d verres)</string>
+    <string name="water_reached">Objectif d’eau du jour atteint</string>
+    <string name="water_goal">Objectif d’eau quotidien</string>
+    <string name="water_goal_hint">Conseillé selon votre poids : %1$s ml (%2$d kg × 35 ml)</string>
+    <string name="water_glass">Taille du verre</string>
+    <string name="water_reminder">Rappel d’hydratation</string>
+    <string name="water_reminder_hint">Entre 09:00 et 21:00, indique combien d’eau il reste jusqu’à l’objectif du jour. Vous pouvez ajouter un verre depuis la notification.</string>
+    <string name="water_interval">Intervalle des rappels</string>
+    <string name="water_interval_value">Toutes les %1$d h</string>
+    <string name="water_channel">Rappel d’hydratation</string>
+    <string name="notify_water_title">C’est l’heure de boire</string>
+    <string name="notify_water_text">Aujourd’hui %1$s / %2$s ml. Encore %3$s ml (%4$d verres).</string>
+    <string name="water_week_title">Eau · 7 derniers jours</string>
+    <string name="water_week_summary">Moyenne %1$s ml les jours saisis · objectif atteint %2$d jours</string>
+    <string name="freeze_title">Joker de série</string>
+    <string name="freeze_left">Utilisez un joker ce jour-là et votre série continue. Il en reste %1$d sur %2$d ce mois-ci.</string>
+    <string name="freeze_used">Joker utilisé ce jour-là, la série a continué</string>
+    <string name="freeze_use">Utiliser un joker</string>
+    <string name="freeze_undo">Annuler</string>
+    <string name="freeze_offer_title">Objectif d’hier manqué</string>
+    <string name="freeze_offer_text">Utilisez un joker pour hier et votre série continue à %1$d jours. Il vous en reste %2$d ce mois-ci.</string>
+    <string name="freeze_offer_skip">Pas maintenant</string>
+    <string name="challenges_title">Défis de la semaine</string>
+    <string name="challenges_days_left">Encore %1$d jours cette semaine</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">Semaine dernière : %1$d sur %2$d réussis</string>
+    <string name="challenges_completed">Défis réussis jusqu’ici : %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d jours</string>
+    <string name="challenges_steps_progress">%1$s / %2$s pas</string>
+    <string name="challenge_done">Réussi</string>
+    <string name="challenge_week_total">Faites %1$s pas au total cette semaine</string>
+    <string name="challenge_goal_days">Atteignez votre objectif quotidien %1$d jours</string>
+    <string name="challenge_big_day">Faites %1$s pas en une seule journée</string>
+    <string name="challenge_every_day">Faites au moins %1$s pas chaque jour de la semaine</string>
+    <string name="challenge_weekend">Faites %1$s pas le week-end (samedi et dimanche)</string>
+    <string name="challenge_beat_last_week">Battez la semaine dernière : plus de %1$s pas</string>
+    <string name="share_button">Partager</string>
+    <string name="share_title">Partager les pas du jour</string>
+    <string name="share_failed">Partage impossible</string>
+    <string name="share_distance">Distance</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">Fréquence cardiaque</string>
+    <string name="heart_previous_day">Jour précédent</string>
+    <string name="heart_next_day">Jour suivant</string>
+    <string name="heart_empty">Aucune donnée cardiaque pour ce jour</string>
+    <string name="heart_resting">Au repos</string>
+    <string name="heart_lowest">Minimum</string>
+    <string name="heart_average">Moyenne</string>
+    <string name="heart_highest">Maximum</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">Votre fréquence au repos est de %1$d bpm : sous la plage habituelle. Fréquent chez les sportifs, généralement sans gravité sans vertiges ni fatigue.</string>
+    <string name="heart_resting_normal">Votre fréquence au repos est de %1$d bpm : dans la norme (60–100). Une baisse au fil du temps indique souvent une meilleure forme.</string>
+    <string name="heart_resting_high">Votre fréquence au repos est de %1$d bpm : au-dessus de la norme (plus de 100). Si cela persiste, consultez un médecin.</string>
+    <string name="heart_tap_hint">Touchez une heure du graphique pour les détails</string>
+    <string name="heart_hour_detail">%1$s–%2$s · min %3$d · moyenne %4$d · max %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · aucune mesure à cette heure</string>
+    <string name="heart_zones_title">Zones cardiaques (approximatives)</string>
+    <string name="heart_zones_hint">Selon votre âge : %1$d ans, fréquence max estimée %2$d bpm. Vous pouvez modifier votre âge dans les réglages.</string>
+    <string name="heart_zone_rest">Repos</string>
+    <string name="heart_zone_light">Légère</string>
+    <string name="heart_zone_fat">Brûlage des graisses</string>
+    <string name="heart_zone_cardio">Aérobie</string>
+    <string name="heart_zone_peak">Anaérobie</string>
+    <string name="heart_zone_max">Maximum</string>
+    <string name="heart_zone_below">Moins de %1$d bpm</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">%1$d bpm et plus</string>
+    <string name="heart_explain">Moyenne : moyenne de toutes les mesures de la journée. Fréquence au repos : battements par minute au repos ; si le bracelet ne la fournit pas, elle est estimée à partir des mesures les plus calmes. Sur le graphique, les barres claires montrent le minimum et le maximum de chaque heure et la ligne foncée la moyenne sur 5 minutes.</string>
+    <string name="widget_hourly_label">Heure par heure</string>
+    <string name="widget_hourly_description">Pas du jour heure par heure</string>
+    <string name="widget_hourly_title">Aujourd’hui par heure</string>
+    <string name="widget_hourly_peak">Pic %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">Pas encore de données horaires aujourd’hui</string>
+    <string name="widget_year_label">Carte de chaleur</string>
+    <string name="widget_year_description">Pas des dernières semaines par intensité de couleur</string>
+    <string name="widget_year_title">%1$d dernières semaines</string>
+    <string name="widget_year_goal_days">%1$d jours d’objectif</string>
+    <string name="widget_health_label">Sommeil et cœur</string>
+    <string name="widget_health_description">Sommeil de la nuit et fréquence cardiaque du bracelet</string>
+    <string name="widget_health_title">Sommeil et cœur</string>
+    <string name="widget_health_off">Les données du bracelet sont désactivées. Activez-les dans les réglages.</string>
+    <string name="widget_health_sleep">Sommeil de la nuit</string>
+    <string name="widget_health_latest">Dernière mesure</string>
+    <string name="widget_health_latest_at">Dernière mesure · %1$s</string>
 </resources>

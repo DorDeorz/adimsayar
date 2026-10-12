@@ -87,7 +87,7 @@
     <string name="level">Seviye</string>
     <string name="level_next">Sonraki seviyeye %1$s adım</string>
     <string name="medals_earned">%1$d / %2$d madalya</string>
-    <string name="medals_retroactive">Madalyalar kayıtlı günlerden hesaplanır. Hedefi değiştirirsen geçmiş günler de yeni hedefe göre değerlendirilir.</string>
+    <string name="medals_retroactive">Madalyalar kayıtlı günlerden hesaplanır. Bir madalyayı kazandığında ilk kazandığın tarih saklanır; hedefini değiştirsen de madalya kaybolmaz.</string>
     <string name="medal_group_daily">Günlük adım</string>
     <string name="medal_group_daily_text">Tek bir günde bu kadar adım at</string>
     <string name="medal_group_streak">Seri</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">Dışa aktar</string>
     <string name="export_csv_hint">Tüm günleri CSV dosyasına kaydet</string>
     <string name="import_csv">İçe aktar</string>
-    <string name="import_csv_hint">CSV dosyasından günleri geri yükle; daha yüksek olan sayı kalır</string>
+    <string name="import_csv_hint">AdımSayar CSV, Samsung Health, Mi Fitness, Mi Fit ya da Google Fit dışa aktarımından (CSV veya zip) günleri yükle; daha yüksek olan sayı kalır. Şifreli zipi önce açıp CSV dosyasını seç.</string>
     <string name="export_done">%1$d gün dışa aktarıldı</string>
     <string name="import_done">%1$d gün güncellendi</string>
     <string name="csv_failed">Dosya okunamadı veya yazılamadı</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">Egzersiz yapılan günler</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">Günde ortalama %1$s kcal</string>
-    <string name="heart_today_title">Bugünün nabzı</string>
-    <string name="heart_today_empty">Bugün nabız kaydı yok</string>
     <string name="weight_title">Kilo ve vücut kitle endeksi</string>
     <string name="weight_empty">Henüz kilo kaydı yok. Kilonu ekle, vücut kitle endeksi ve değişim burada görünsün.</string>
     <string name="weight_add">Kilo ekle</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>Bugün ekranında su takibi: bardak ekle ya da çıkar, kilona göre önerilen günlük hedef. Sağlık sayfasında son 7 günün su grafiği</item>
+        <item>İsteğe bağlı su hatırlatması (Ayarlar): 1, 2 ya da 3 saatte bir ne kadar su kaldığını söyler; bildirimden bardak eklenebilir</item>
+        <item>Seri jokeri: her ay 2 hak. Hedefi kaçırdığın bir güne joker kullanırsan serin bozulmaz (Bugün ekranı ve Geçmiş)</item>
+        <item>Madalyalar artık kalıcı: ilk kazandığın tarih saklanır, hedef değişince kaybolmaz</item>
+        <item>Madalyalar sayfasında haftalık görevler: her hafta geçmişine göre seçilen 3 görev</item>
+        <item>Bugün ekranında Paylaş düğmesi: günün özeti resim olarak paylaşılır</item>
+        <item>İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını (CSV veya zip) da okur</item>
+        <item>Üç yeni widget: bugün saat saat, son haftaların ısı haritası, uyku ve nabız</item>
+        <item>Telefonun adımları artık saat saat de kaydedilir; HyperOS kaydı kapalıyken de Geçmiş’te saatlik grafik görünür</item>
+        <item>Sağlık sayfasında ayrıntılı nabız: gün seçimi, dinlenme/en düşük/ortalama/en yüksek, eksenli grafik, saate dokununca ayrıntı, yaşa göre nabız bölgeleri ve açıklamalar. Ayarlar’a yaş eklendi</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Yeni alt menü: Geçmiş, Sağlık, Bugün (ortada), Madalyalar, Ayarlar. Bileklik özeti artık ayrı Sağlık sayfasında</item>
         <item>Sağlık sayfasında bileklik için son 7 ve 30 günün sağlık özeti: ortalama ve en uzun uyku, dinlenme nabzı ve grafiği, egzersizler, mesafe</item>
@@ -432,4 +442,96 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Kuvvet antrenmanı</string>
     <string name="exercise_other">Egzersiz</string>
+    <string name="age">Yaş</string>
+    <string name="age_value">%1$d yaş</string>
+    <string name="age_unit">yaş</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">Su</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">%1$s ml kaldı (%2$d bardak)</string>
+    <string name="water_reached">Bugünkü su hedefine ulaştın</string>
+    <string name="water_goal">Günlük su hedefi</string>
+    <string name="water_goal_hint">Kilona göre önerilen: %1$s ml (%2$d kg × 35 ml)</string>
+    <string name="water_glass">Bardak boyu</string>
+    <string name="water_reminder">Su hatırlatması</string>
+    <string name="water_reminder_hint">09:00–21:00 arasında, günlük hedefe ulaşana kadar ne kadar su kaldığını bildirir. Bildirimden tek dokunuşla bardak ekleyebilirsin.</string>
+    <string name="water_interval">Hatırlatma aralığı</string>
+    <string name="water_interval_value">%1$d saatte bir</string>
+    <string name="water_channel">Su hatırlatması</string>
+    <string name="notify_water_title">Su içme zamanı</string>
+    <string name="notify_water_text">Bugün %1$s / %2$s ml içtin. %3$s ml (%4$d bardak) kaldı.</string>
+    <string name="water_week_title">Su · son 7 gün</string>
+    <string name="water_week_summary">Kayıtlı günlerde ortalama %1$s ml · %2$d gün hedefe ulaştın</string>
+    <string name="freeze_title">Seri jokeri</string>
+    <string name="freeze_left">Bu güne joker kullanırsan serin bozulmaz. Bu ay %1$d / %2$d hakkın kaldı.</string>
+    <string name="freeze_used">Bu günde joker kullanıldı, serin bozulmadı</string>
+    <string name="freeze_use">Joker kullan</string>
+    <string name="freeze_undo">Geri al</string>
+    <string name="freeze_offer_title">Dün hedefe ulaşmadın</string>
+    <string name="freeze_offer_text">Dün için joker kullanırsan serin %1$d gün olarak devam eder. Bu ay %2$d joker hakkın var.</string>
+    <string name="freeze_offer_skip">Şimdi değil</string>
+    <string name="challenges_title">Bu haftanın görevleri</string>
+    <string name="challenges_days_left">Haftanın bitmesine %1$d gün var</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">Geçen hafta %1$d / %2$d görev tamamlandı</string>
+    <string name="challenges_completed">Şimdiye kadar tamamlanan görev: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d gün</string>
+    <string name="challenges_steps_progress">%1$s / %2$s adım</string>
+    <string name="challenge_done">Tamamlandı</string>
+    <string name="challenge_week_total">Bu hafta toplam %1$s adım at</string>
+    <string name="challenge_goal_days">%1$d gün günlük hedefine ulaş</string>
+    <string name="challenge_big_day">Bir günde %1$s adım at</string>
+    <string name="challenge_every_day">Haftanın her günü en az %1$s adım at</string>
+    <string name="challenge_weekend">Hafta sonu (cumartesi ve pazar) toplam %1$s adım at</string>
+    <string name="challenge_beat_last_week">Geçen haftayı geç: %1$s adımdan fazla at</string>
+    <string name="share_button">Paylaş</string>
+    <string name="share_title">Bugünkü adımlarını paylaş</string>
+    <string name="share_failed">Paylaşılamadı</string>
+    <string name="share_distance">Mesafe</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">Nabız</string>
+    <string name="heart_previous_day">Önceki gün</string>
+    <string name="heart_next_day">Sonraki gün</string>
+    <string name="heart_empty">Bu gün için nabız kaydı yok</string>
+    <string name="heart_resting">Dinlenme</string>
+    <string name="heart_lowest">En düşük</string>
+    <string name="heart_average">Ortalama</string>
+    <string name="heart_highest">En yüksek</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">Dinlenme nabzın %1$d bpm: normalin altında. Düzenli spor yapanlarda sık görülür; baş dönmesi ya da halsizlik yoksa genelde sorun değildir.</string>
+    <string name="heart_resting_normal">Dinlenme nabzın %1$d bpm: normal aralıkta (60–100). Zamanla düşmesi genelde kondisyonun arttığını gösterir.</string>
+    <string name="heart_resting_high">Dinlenme nabzın %1$d bpm: normalin üstünde (100’den yüksek). Uzun süre böyle kalırsa bir doktora danış.</string>
+    <string name="heart_tap_hint">Ayrıntı için grafikte bir saate dokun</string>
+    <string name="heart_hour_detail">%1$s–%2$s · en düşük %3$d · ortalama %4$d · en yüksek %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · bu saatte ölçüm yok</string>
+    <string name="heart_zones_title">Nabız bölgeleri (yaklaşık)</string>
+    <string name="heart_zones_hint">Yaşına göre hesaplanır: %1$d yaş, tahmini en yüksek nabız %2$d bpm. Yaşını Ayarlar’dan değiştirebilirsin.</string>
+    <string name="heart_zone_rest">Dinlenme</string>
+    <string name="heart_zone_light">Hafif</string>
+    <string name="heart_zone_fat">Yağ yakımı</string>
+    <string name="heart_zone_cardio">Aerobik</string>
+    <string name="heart_zone_peak">Anaerobik</string>
+    <string name="heart_zone_max">Maksimum</string>
+    <string name="heart_zone_below">%1$d bpm altı</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">%1$d bpm ve üstü</string>
+    <string name="heart_explain">Ortalama: gün boyunca ölçülen tüm değerlerin ortalaması. Dinlenme nabzı: dinlenirken kalbin dakikadaki atışı; bileklik bildirmezse günün en sakin ölçümlerinden tahmin edilir. Grafikte açık çubuklar o saatin en düşük ve en yüksek nabzını, koyu çizgi 5 dakikalık ortalamayı gösterir.</string>
+    <string name="widget_hourly_label">Saat saat</string>
+    <string name="widget_hourly_description">Bugünün adımları saat saat</string>
+    <string name="widget_hourly_title">Bugün saat saat</string>
+    <string name="widget_hourly_peak">En çok %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">Bugün için saatlik veri henüz yok</string>
+    <string name="widget_year_label">Isı haritası</string>
+    <string name="widget_year_description">Son haftaların adımları renk yoğunluğuyla</string>
+    <string name="widget_year_title">Son %1$d hafta</string>
+    <string name="widget_year_goal_days">%1$d gün hedef</string>
+    <string name="widget_health_label">Uyku ve nabız</string>
+    <string name="widget_health_description">Bileklikten dün geceki uyku ve nabız</string>
+    <string name="widget_health_title">Uyku ve nabız</string>
+    <string name="widget_health_off">Bileklik verisi kapalı. Ayarlar’dan açabilirsin.</string>
+    <string name="widget_health_sleep">Dün geceki uyku</string>
+    <string name="widget_health_latest">Son ölçüm</string>
+    <string name="widget_health_latest_at">Son ölçüm · %1$s</string>
 </resources>

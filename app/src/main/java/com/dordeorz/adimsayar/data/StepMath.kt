@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 data class CounterReading(val counter: Long, val elapsedMs: Long, val wallMs: Long, val bootCount: Int?)
 
@@ -65,6 +66,29 @@ object StepMath {
         return result
     }
 
+    fun splitByHour(interval: StepInterval, zone: ZoneId): Map<LocalDateTime, Long> {
+        val (steps, from, to) = interval
+        if (steps <= 0L) return emptyMap()
+        val lastHour = hourOf(to, zone)
+        if (to <= from) return mapOf(lastHour to steps)
+        val result = LinkedHashMap<LocalDateTime, Long>()
+        val total = (to - from).toDouble()
+        var assigned = 0L
+        var hour = hourOf(from, zone)
+        var start = from
+        while (hour < lastHour) {
+            val end = hour.plusHours(1).atZone(zone).toInstant().toEpochMilli()
+            val share = minOf(Math.round(steps * ((end - start).coerceAtLeast(0L) / total)), steps - assigned)
+            if (share > 0L) result[hour] = share
+            assigned += share
+            start = maxOf(start, end)
+            hour = hour.plusHours(1)
+        }
+        val rest = steps - assigned
+        if (rest > 0L) result[lastHour] = rest
+        return result
+    }
+
     fun mergeHourly(band: Map<LocalDateTime, Long>, phone: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
         val bandDays = band.filterValues { it > 0L }.keys.map { it.toLocalDate() }.toSet()
         val result = HashMap<LocalDate, Long>()
@@ -79,6 +103,9 @@ object StepMath {
 
     fun mergeDaily(band: Map<LocalDate, Long>, phone: Map<LocalDate, Long>): Map<LocalDate, Long> =
         band.filterValues { it > 0L }.mapValues { (day, steps) -> maxOf(steps, phone[day] ?: 0L) }
+
+    fun hourOf(wallMs: Long, zone: ZoneId): LocalDateTime =
+        Instant.ofEpochMilli(wallMs).atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS)
 
     fun dayOf(wallMs: Long, zone: ZoneId): LocalDate = Instant.ofEpochMilli(wallMs).atZone(zone).toLocalDate()
 }

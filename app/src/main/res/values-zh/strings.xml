@@ -87,7 +87,7 @@
     <string name="level">等级</string>
     <string name="level_next">距离下一级还差 %1$s 步</string>
     <string name="medals_earned">%1$d / %2$d 枚勋章</string>
-    <string name="medals_retroactive">勋章根据已记录的天数计算。如果修改目标，以往的天数也会按新目标评估。</string>
+    <string name="medals_retroactive">勋章根据已记录的天数计算。获得勋章后会保存首次获得的日期，修改目标也不会失去它。</string>
     <string name="medal_group_daily">每日步数</string>
     <string name="medal_group_daily_text">在一天内走到这么多步</string>
     <string name="medal_group_streak">连续达标</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">导出</string>
     <string name="export_csv_hint">将所有天数保存为 CSV 文件</string>
     <string name="import_csv">导入</string>
-    <string name="import_csv_hint">从 CSV 文件恢复天数，保留较大的数值</string>
+    <string name="import_csv_hint">从 AdımSayar CSV，或 Samsung Health、Mi Fitness、Mi Fit、Google Fit 的导出文件（CSV 或 zip）导入天数，保留较大的数值。带密码的 zip 请先解压再选择 CSV 文件。</string>
     <string name="export_done">已导出 %1$d 天</string>
     <string name="import_done">已更新 %1$d 天</string>
     <string name="csv_failed">无法读取或写入文件</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">运动天数</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">平均每天 %1$s 千卡</string>
-    <string name="heart_today_title">今日心率</string>
-    <string name="heart_today_empty">今天没有心率记录</string>
     <string name="weight_title">体重和身体质量指数</string>
     <string name="weight_empty">还没有体重记录。添加体重后，这里会显示 BMI 和变化。</string>
     <string name="weight_add">添加体重</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>今日页面新增饮水记录：增减杯数，按体重建议每日目标。健康页面显示最近 7 天饮水</item>
+        <item>可选喝水提醒（设置）：每 1、2 或 3 小时提醒还差多少，可在通知中添加一杯</item>
+        <item>连续保护卡：每月 2 张。在未达标的日子使用，连续记录不中断（今日页面和历史）</item>
+        <item>勋章现已永久保留：保存首次获得日期，修改目标也不会消失</item>
+        <item>勋章页面新增每周挑战：每周根据你的历史选出 3 项</item>
+        <item>今日页面新增分享按钮：以图片分享当天摘要</item>
+        <item>导入现在也支持 Samsung Health、Mi Fitness、Mi Fit 和 Google Fit 的导出文件（CSV 或 zip）</item>
+        <item>三个新小组件：今日每小时、最近几周热力图、睡眠和心率</item>
+        <item>手机步数现在也按小时保存，没有 HyperOS 记录时历史中也会显示每小时图表</item>
+        <item>健康页面心率更详细：选择日期，静息/最低/平均/最高，带坐标轴的图表，点击小时查看详情，按年龄的心率区间及说明。设置中新增年龄</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>新的底部栏：历史、健康、今天（居中）、奖牌、设置。手环摘要有独立的健康页面</item>
         <item>历史中的手环健康摘要（7 天或 30 天）：睡眠、静息心率及图表、锻炼、距离</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">瑜伽</string>
     <string name="exercise_strength">力量训练</string>
     <string name="exercise_other">锻炼</string>
+    <string name="age">年龄</string>
+    <string name="age_value">%1$d 岁</string>
+    <string name="age_unit">岁</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">饮水</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">还差 %1$s ml（%2$d 杯）</string>
+    <string name="water_reached">今天的饮水目标已完成</string>
+    <string name="water_goal">每日饮水目标</string>
+    <string name="water_goal_hint">按体重建议：%1$s ml（%2$d kg × 35 ml）</string>
+    <string name="water_glass">杯子容量</string>
+    <string name="water_reminder">喝水提醒</string>
+    <string name="water_reminder_hint">在 09:00–21:00 之间提醒你距离每日目标还差多少水，可直接在通知中添加一杯。</string>
+    <string name="water_interval">提醒间隔</string>
+    <string name="water_interval_value">每 %1$d 小时</string>
+    <string name="water_channel">喝水提醒</string>
+    <string name="notify_water_title">该喝水了</string>
+    <string name="notify_water_text">今天 %1$s / %2$s ml，还差 %3$s ml（%4$d 杯）。</string>
+    <string name="water_week_title">饮水 · 最近7天</string>
+    <string name="water_week_summary">记录日平均 %1$s ml · 达标 %2$d 天</string>
+    <string name="freeze_title">连续保护卡</string>
+    <string name="freeze_left">在这一天使用保护卡，连续记录不会中断。本月剩余 %1$d / %2$d</string>
+    <string name="freeze_used">这一天使用了保护卡，连续记录未中断</string>
+    <string name="freeze_use">使用保护卡</string>
+    <string name="freeze_undo">撤销</string>
+    <string name="freeze_offer_title">昨天没有达标</string>
+    <string name="freeze_offer_text">为昨天使用保护卡，连续记录将保持 %1$d 天。本月还剩 %2$d 张。</string>
+    <string name="freeze_offer_skip">暂不</string>
+    <string name="challenges_title">本周挑战</string>
+    <string name="challenges_days_left">本周还剩 %1$d 天</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">上周：完成 %1$d / %2$d</string>
+    <string name="challenges_completed">累计完成挑战：%1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d 天</string>
+    <string name="challenges_steps_progress">%1$s / %2$s 步</string>
+    <string name="challenge_done">已完成</string>
+    <string name="challenge_week_total">本周累计走 %1$s 步</string>
+    <string name="challenge_goal_days">有 %1$d 天达到每日目标</string>
+    <string name="challenge_big_day">单日走 %1$s 步</string>
+    <string name="challenge_every_day">本周每天至少走 %1$s 步</string>
+    <string name="challenge_weekend">周末（周六和周日）累计走 %1$s 步</string>
+    <string name="challenge_beat_last_week">超越上周：走超过 %1$s 步</string>
+    <string name="share_button">分享</string>
+    <string name="share_title">分享今天的步数</string>
+    <string name="share_failed">无法分享</string>
+    <string name="share_distance">距离</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">心率</string>
+    <string name="heart_previous_day">前一天</string>
+    <string name="heart_next_day">后一天</string>
+    <string name="heart_empty">这一天没有心率数据</string>
+    <string name="heart_resting">静息</string>
+    <string name="heart_lowest">最低</string>
+    <string name="heart_average">平均</string>
+    <string name="heart_highest">最高</string>
+    <string name="heart_unit">次/分</string>
+    <string name="heart_resting_low">你的静息心率为 %1$d 次/分，低于常见范围。经常运动的人较常见，如无头晕或乏力通常无碍。</string>
+    <string name="heart_resting_normal">你的静息心率为 %1$d 次/分，处于正常范围（60–100）。随时间下降通常意味着体能提升。</string>
+    <string name="heart_resting_high">你的静息心率为 %1$d 次/分，高于正常范围（超过 100）。如持续偏高，请咨询医生。</string>
+    <string name="heart_tap_hint">点击图表中的某个小时查看详情</string>
+    <string name="heart_hour_detail">%1$s–%2$s · 最低 %3$d · 平均 %4$d · 最高 %5$d 次/分</string>
+    <string name="heart_hour_empty">%1$s–%2$s · 该小时无测量</string>
+    <string name="heart_zones_title">心率区间（近似）</string>
+    <string name="heart_zones_hint">根据年龄计算：%1$d 岁，估计最大心率 %2$d 次/分。可在设置中修改年龄。</string>
+    <string name="heart_zone_rest">休息</string>
+    <string name="heart_zone_light">轻度</string>
+    <string name="heart_zone_fat">燃脂</string>
+    <string name="heart_zone_cardio">有氧</string>
+    <string name="heart_zone_peak">无氧</string>
+    <string name="heart_zone_max">极限</string>
+    <string name="heart_zone_below">低于 %1$d 次/分</string>
+    <string name="heart_zone_range">%1$d–%2$d 次/分</string>
+    <string name="heart_zone_above">%1$d 次/分及以上</string>
+    <string name="heart_explain">平均：全天所有测量值的平均。静息心率：安静时每分钟心跳次数；手环未提供时，按当天最平稳的测量值估算。图中浅色柱表示每小时的最低和最高心率，深色线表示 5 分钟平均值。</string>
+    <string name="widget_hourly_label">按小时</string>
+    <string name="widget_hourly_description">今天每小时的步数</string>
+    <string name="widget_hourly_title">今日每小时</string>
+    <string name="widget_hourly_peak">高峰 %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">今天还没有每小时数据</string>
+    <string name="widget_year_label">热力图</string>
+    <string name="widget_year_description">用颜色深浅显示最近几周的步数</string>
+    <string name="widget_year_title">最近 %1$d 周</string>
+    <string name="widget_year_goal_days">达标 %1$d 天</string>
+    <string name="widget_health_label">睡眠和心率</string>
+    <string name="widget_health_description">来自手环的昨晚睡眠和心率</string>
+    <string name="widget_health_title">睡眠和心率</string>
+    <string name="widget_health_off">手环数据已关闭，可在设置中开启。</string>
+    <string name="widget_health_sleep">昨晚睡眠</string>
+    <string name="widget_health_latest">最新测量</string>
+    <string name="widget_health_latest_at">最新测量 · %1$s</string>
 </resources>

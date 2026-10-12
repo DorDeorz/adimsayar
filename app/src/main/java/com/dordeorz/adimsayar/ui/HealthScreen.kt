@@ -3,6 +3,7 @@ package com.dordeorz.adimsayar.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -31,23 +34,33 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.BmiCategory
 import com.dordeorz.adimsayar.data.HealthMath
-import com.dordeorz.adimsayar.data.HeartHour
+import com.dordeorz.adimsayar.data.HeartDay
+import com.dordeorz.adimsayar.data.HeartSlot
+import com.dordeorz.adimsayar.data.HeartZone
+import com.dordeorz.adimsayar.data.RestingCategory
+import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.SleepStage
 import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.Weight
@@ -79,7 +92,7 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
         if (state.wearableEnabled) {
             if (sources?.hasWearable == false) item { SourceWarningCard(onSetup = { setup = true }) }
             item { HealthCard(state.today, state.healthRefresh, actions) }
-            item { HeartTodayCard(state.today, state.healthRefresh, actions.loadHeartHours) }
+            item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
         } else {
             item {
                 Card {
@@ -98,6 +111,7 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
                 }
             }
         }
+        item { WaterWeekCard(state) }
         item { WeightCard(state, actions) }
         if (state.wearableEnabled) {
             item {
@@ -423,51 +437,299 @@ private fun ExerciseDays(days: List<LocalDate>, active: Set<LocalDate>) {
 }
 
 @Composable
-private fun HeartTodayCard(today: LocalDate, refresh: Int, loadHeartHours: suspend (LocalDate) -> List<HeartHour>?) {
-    val hours by produceState<List<HeartHour>?>(null, today, refresh) {
-        value = withContext(Dispatchers.IO) { loadHeartHours(today) } ?: emptyList()
+private fun HeartDetailCard(today: LocalDate, refresh: Int, age: Int, loadHeartDay: suspend (LocalDate) -> HeartDay?) {
+    var offset by rememberSaveable { mutableIntStateOf(0) }
+    val date = today.minusDays(offset.toLong())
+    val day by produceState<HeartDay?>(null, date, refresh) {
+        value = null
+        value = withContext(Dispatchers.IO) { loadHeartDay(date) } ?: HeartDay(emptyList(), null)
     }
+    var selected by rememberSaveable(date.toString()) { mutableStateOf<Int?>(null) }
     Card {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-            Text(stringResource(R.string.heart_today_title), style = MaterialTheme.typography.titleMedium)
-            val data = hours
-            if (data.isNullOrEmpty()) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.heart_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                IconButton(onClick = { offset++ }, enabled = offset < HEART_DAYS - 1) {
+                    Icon(painterResource(R.drawable.ic_chevron_left), contentDescription = stringResource(R.string.heart_previous_day))
+                }
                 Text(
-                    stringResource(if (data == null) R.string.health_loading else R.string.heart_today_empty),
+                    if (offset == 0) stringResource(R.string.today) else DAY_FORMAT.format(date),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                IconButton(onClick = { offset-- }, enabled = offset > 0) {
+                    Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = stringResource(R.string.heart_next_day))
+                }
+            }
+            val data = day
+            if (data == null || data.slots.isEmpty()) {
+                Text(
+                    stringResource(if (data == null) R.string.health_loading else R.string.heart_empty),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 8.dp),
                 )
                 return@Column
             }
-            val low = data.minOf { it.min }
-            val high = data.maxOf { it.max }
-            Text(
-                stringResource(R.string.health_min_max, low, high),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            val floor = (low - HEART_CHART_MARGIN).coerceAtLeast(0L)
-            val range = (high + HEART_CHART_MARGIN - floor).toFloat()
-            val color = MaterialTheme.colorScheme.error
-            val byHour = data.associateBy { it.hour }
-            Canvas(modifier = Modifier.fillMaxWidth().height(HEART_CHART_HEIGHT).padding(top = 12.dp)) {
-                val slot = size.width / HOURS
-                val stroke = (slot * 0.5f).coerceAtMost(8.dp.toPx())
-                for (hour in 0 until HOURS) {
-                    val entry = byHour[hour] ?: continue
-                    val x = slot * hour + slot / 2
-                    val top = size.height * (1f - (entry.max - floor) / range)
-                    val bottom = size.height * (1f - (entry.min - floor) / range)
-                    drawLine(color, Offset(x, top), Offset(x, maxOf(bottom, top + 1f)), strokeWidth = stroke, cap = StrokeCap.Round)
+            val slots = data.slots
+            val lowest = slots.minBy { it.min }
+            val highest = slots.maxBy { it.max }
+            val average = HealthMath.average(slots.map { it.avg }) ?: 0L
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                HeartStat(stringResource(R.string.heart_resting), data.resting?.toString() ?: "-", null, Modifier.weight(1f))
+                HeartStat(stringResource(R.string.heart_lowest), lowest.min.toString(), CLOCK_FORMAT.format(lowest.start), Modifier.weight(1f))
+                HeartStat(stringResource(R.string.heart_average), average.toString(), null, Modifier.weight(1f))
+                HeartStat(stringResource(R.string.heart_highest), highest.max.toString(), CLOCK_FORMAT.format(highest.start), Modifier.weight(1f))
+            }
+            data.resting?.let { resting ->
+                Text(
+                    stringResource(
+                        when (HealthMath.restingCategory(resting)) {
+                            RestingCategory.Low -> R.string.heart_resting_low
+                            RestingCategory.Normal -> R.string.heart_resting_normal
+                            RestingCategory.High -> R.string.heart_resting_high
+                        },
+                        resting,
+                    ),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 8.dp),
+                )
+            }
+            HeartChart(slots, selected) { selected = it }
+            val hour = selected
+            val hourText = if (hour == null) {
+                stringResource(R.string.heart_tap_hint)
+            } else {
+                val from = CLOCK_FORMAT.format(LocalTime.of(hour, 0))
+                val to = CLOCK_FORMAT.format(LocalTime.of(hour, 0).plusHours(1))
+                val inHour = slots.filter { it.start.hour == hour }
+                if (inHour.isEmpty()) {
+                    stringResource(R.string.heart_hour_empty, from, to)
+                } else {
+                    stringResource(
+                        R.string.heart_hour_detail,
+                        from,
+                        to,
+                        inHour.minOf { it.min },
+                        HealthMath.average(inHour.map { it.avg }) ?: 0L,
+                        inHour.maxOf { it.max },
+                    )
                 }
             }
-            Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
-                listOf(0, 6, 12, 18).forEach { hour ->
+            Text(
+                hourText,
+                style = MaterialTheme.typography.bodyMedium,
+                color = if (hour == null) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 8.dp),
+            )
+            HeartZones(slots.map { it.avg }, age)
+            Text(
+                stringResource(R.string.heart_explain),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 12.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun HeartStat(label: String, value: String, hint: String?, modifier: Modifier) {
+    Column(
+        modifier = modifier.clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceVariant).padding(vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(value, style = MaterialTheme.typography.titleLarge)
+        Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+        Text(hint ?: stringResource(R.string.heart_unit), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun HeartChart(slots: List<HeartSlot>, selected: Int?, onSelect: (Int) -> Unit) {
+    val low = slots.minOf { it.min }
+    val high = slots.maxOf { it.max }
+    val step = when {
+        high - low <= 50L -> 10L
+        high - low <= 120L -> 20L
+        else -> 40L
+    }
+    val floor = ((low - 5L).coerceAtLeast(0L) / step) * step
+    val ceil = ((high + 5L + step - 1L) / step) * step
+    val range = (ceil - floor).coerceAtLeast(1L).toFloat()
+    val line = MaterialTheme.colorScheme.error
+    val band = line.copy(alpha = 0.25f)
+    val grid = MaterialTheme.colorScheme.outlineVariant
+    val highlight = MaterialTheme.colorScheme.surfaceVariant
+    val labelStyle = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+    val measurer = rememberTextMeasurer()
+    val hours = remember(slots) {
+        slots.groupBy { it.start.hour }.mapValues { (_, list) -> list.minOf { it.min } to list.maxOf { it.max } }
+    }
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(HEART_CHART_HEIGHT)
+                .pointerInput(slots) {
+                    detectTapGestures { tap ->
+                        val gutter = HEART_GUTTER.toPx()
+                        val slot = (size.width - gutter) / HOURS
+                        if (tap.x >= gutter) onSelect(((tap.x - gutter) / slot).toInt().coerceIn(0, HOURS - 1))
+                    }
+                },
+        ) {
+            val gutter = HEART_GUTTER.toPx()
+            val width = size.width - gutter
+            val slot = width / HOURS
+            fun y(bpm: Long) = size.height * (1f - (bpm - floor) / range)
+            selected?.let { drawRect(highlight, Offset(gutter + slot * it, 0f), Size(slot, size.height)) }
+            var mark = floor
+            while (mark <= ceil) {
+                val at = y(mark)
+                drawLine(grid, Offset(gutter, at), Offset(size.width, at), strokeWidth = 1.dp.toPx())
+                val label = measurer.measure(mark.toString(), labelStyle)
+                drawText(label, topLeft = Offset(0f, (at - label.size.height / 2f).coerceIn(0f, size.height - label.size.height)))
+                mark += step
+            }
+            for ((hour, value) in hours) {
+                val x = gutter + slot * hour + slot / 2
+                val top = y(value.second)
+                drawLine(band, Offset(x, top), Offset(x, maxOf(y(value.first), top + 1f)), strokeWidth = slot * 0.6f, cap = StrokeCap.Round)
+            }
+            val minutesPerSlot = WearableHealth.HEART_SLOT_MINUTES
+            var previous: Pair<Offset, Int>? = null
+            for (entry in slots) {
+                val minute = entry.start.hour * 60 + entry.start.minute
+                val point = Offset(gutter + width * (minute + minutesPerSlot / 2f) / (HOURS * 60), y(entry.avg))
+                val last = previous
+                if (last != null && minute - last.second <= HEART_GAP_MINUTES) {
+                    drawLine(line, last.first, point, strokeWidth = 2.dp.toPx(), cap = StrokeCap.Round)
+                } else {
+                    drawCircle(line, 1.5.dp.toPx(), point)
+                }
+                previous = point to minute
+            }
+        }
+        Row(modifier = Modifier.fillMaxWidth().padding(start = HEART_GUTTER, top = 4.dp)) {
+            listOf(0, 6, 12, 18).forEach { hour ->
+                Text(
+                    CLOCK_FORMAT.format(LocalTime.of(hour, 0)),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+        }
+    }
+}
+
+private val ZONE_COLORS = mapOf(
+    HeartZone.Rest to Color(0xFF9E9E9E),
+    HeartZone.Light to Color(0xFF64B5F6),
+    HeartZone.FatBurn to Color(0xFF81C784),
+    HeartZone.Cardio to Color(0xFFFFD54F),
+    HeartZone.Peak to Color(0xFFFF8A65),
+    HeartZone.Max to Color(0xFFE57373),
+)
+
+private fun zoneLabel(zone: HeartZone): Int = when (zone) {
+    HeartZone.Rest -> R.string.heart_zone_rest
+    HeartZone.Light -> R.string.heart_zone_light
+    HeartZone.FatBurn -> R.string.heart_zone_fat
+    HeartZone.Cardio -> R.string.heart_zone_cardio
+    HeartZone.Peak -> R.string.heart_zone_peak
+    HeartZone.Max -> R.string.heart_zone_max
+}
+
+@Composable
+private fun HeartZones(averages: List<Long>, age: Int) {
+    val maxRate = HealthMath.maxHeartRate(age)
+    val minutes = HealthMath.zoneMinutes(averages, maxRate, WearableHealth.HEART_SLOT_MINUTES)
+    val total = minutes.values.sum().coerceAtLeast(1L)
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Text(stringResource(R.string.heart_zones_title), style = MaterialTheme.typography.labelLarge)
+        Text(
+            stringResource(R.string.heart_zones_hint, age, maxRate),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).height(STAGE_BAR_HEIGHT).clip(RoundedCornerShape(6.dp))) {
+            HeartZone.entries.forEach { zone ->
+                val value = minutes[zone] ?: 0L
+                if (value > 0L) Box(modifier = Modifier.weight(value.toFloat() / total).fillMaxSize().background(ZONE_COLORS.getValue(zone)))
+            }
+        }
+        HeartZone.entries.forEach { zone ->
+            val from = HealthMath.zoneBpm(zone, maxRate)
+            val next = HeartZone.entries.getOrNull(zone.ordinal + 1)?.let { HealthMath.zoneBpm(it, maxRate) }
+            val range = when {
+                zone == HeartZone.Rest && next != null -> stringResource(R.string.heart_zone_below, next)
+                next == null -> stringResource(R.string.heart_zone_above, from)
+                else -> stringResource(R.string.heart_zone_range, from, next - 1)
+            }
+            val value = minutes[zone] ?: 0L
+            Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
+                Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(ZONE_COLORS.getValue(zone)))
+                Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+                    Text(stringResource(zoneLabel(zone)), style = MaterialTheme.typography.bodyMedium)
+                    Text(range, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Text(
+                    if (value >= 60L) sleepText(value) else stringResource(R.string.duration_minutes, value),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (value > 0L) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun WaterWeekCard(state: MainUiState) {
+    val days = (6 downTo 0).map { state.today.minusDays(it.toLong()) }
+    val goal = state.settings.waterGoalMl
+    val values = days.map { state.water[it] ?: 0 }
+    val scale = maxOf(values.max(), goal).coerceAtLeast(1)
+    val primary = MaterialTheme.colorScheme.primary
+    Card {
+        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+            Text(stringResource(R.string.water_week_title), style = MaterialTheme.typography.titleMedium)
+            val logged = values.filter { it > 0 }
+            Text(
+                stringResource(
+                    R.string.water_week_summary,
+                    format((if (logged.isEmpty()) 0 else logged.sum() / logged.size).toLong()),
+                    values.count { it >= goal },
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth().height(CHART_HEIGHT).padding(top = 8.dp),
+                verticalAlignment = Alignment.Bottom,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                values.forEach { ml ->
+                    Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                        if (ml > 0) Text(formatCompact(ml.toLong()), style = MaterialTheme.typography.labelSmall)
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height((CHART_HEIGHT - 28.dp) * (ml.toFloat() / scale))
+                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
+                                .background(if (ml >= goal) primary else primary.copy(alpha = 0.4f)),
+                        )
+                    }
+                }
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                days.forEach { date ->
                     Text(
-                        CLOCK_FORMAT.format(LocalTime.of(hour, 0)),
+                        date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
                         modifier = Modifier.weight(1f),
                     )
                 }
@@ -667,7 +929,9 @@ private fun WeightDialog(
 
 private const val RESTING_CHART_FLOOR = 5L
 
-private const val HEART_CHART_MARGIN = 5L
+private const val HEART_DAYS = 30
+
+private const val HEART_GAP_MINUTES = 30
 
 private const val HOURS = 24
 
@@ -683,6 +947,8 @@ private const val WEIGHT_INPUT_LENGTH = 5
 
 private val CHART_HEIGHT = 72.dp
 
-private val HEART_CHART_HEIGHT = 96.dp
+private val HEART_CHART_HEIGHT = 160.dp
+
+private val HEART_GUTTER = 32.dp
 
 private val STAGE_BAR_HEIGHT = 14.dp

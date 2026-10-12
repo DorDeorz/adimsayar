@@ -26,7 +26,9 @@ Kararlaştırılmış ve değiştirilmemesi gerekenler:
 - Xiaomi'de HyperOS adım kaydı, kullanıcının açtığı anahtarla ana kaynak olabilir (2026-10-09 kararı).
 - Veriler sadece cihazda tutulur. Hesap, sunucu ve senkronizasyon yoktur. `INTERNET` izni yalnızca kullanıcının başlattığı güncelleme kontrolü ve indirmesi içindir (bkz. "İzinler").
 - **Health Connect yalnızca bileklik verisi için, kullanıcının açtığı anahtarla okunur** (2026-10-11 kararı). Varsayılan kapalıdır. Yalnızca okuma yapılır, Health Connect'e hiçbir şey yazılmaz. Kapalıyken veri yalnızca telefonun kendi sensörlerinden (ve açıksa HyperOS kaydından) gelir. Bağımlılık `androidx.health.connect:connect-client`. Adımlar `data/WearableSteps.kt`; egzersiz, mesafe, aktif kalori, nabız, uyku (evreleriyle) ve kan oksijeni `data/WearableHealth.kt` içinde; Geçmiş'te seçilen gün ve Sağlık sayfasındaki 7/30 günlük özet için anlık okunur ve hiçbir yerde saklanmaz.
-- Madalyalar ve seviyeler türetilmiş veridir, hiçbir yerde saklanmaz. Kurallar değişirse geriye dönük uygulanır. Hesaplama `data/Achievements.kt` içindedir; günlük ve haftalık hedef kullanıcı ayarıdır, değişince geçmiş günler de yeni hedefe göre değerlendirilir. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
+- Madalyalar ve seviyeler adım geçmişinden hesaplanır (`data/Achievements.kt`). Kazanılan madalya kalıcıdır (2026-10-12 kararı): ilk kazanıldığı tarih `medals` tablosuna yazılır ve hedef değişince kaybolmaz (`data/Keeps.kt`). Seviye, "Nx" sayısı ve ilerleme türetilmiş kalır. Erken kalkan madalyası saatlik veri gerektirdiği için yalnızca HyperOS kaydı açıkken görünür ve o kayıttan hesaplanır.
+- Seri jokeri: ayda 2 hak, `streak_freezes` tablosu. Jokerli gün seriyi bozmaz, uzatmaz, hedef günü sayılmaz.
+- Haftalık görevler saklanmaz; haftanın başlangıç tarihiyle tohumlanır, o haftadan önceki 28 güne göre seçilir (`data/Challenges.kt`).
 - Arayüz Türkçe (varsayılan, `values/`) ve 11 dil daha içerir (`values-xx/`, liste `SUPPORTED_LANGUAGES`). Dil seçimi Ayarlar'dadır; "Sistem" desteklenmeyen bir dilde İngilizceye düşer. Widget ve bildirimler de seçilen dili kullanır (`Locales.kt`).
 - Ölçümler gerçek cihazda yapılır, emülatörde değil.
 - Uygulama tüm Android telefonları hedefler. Xiaomi'ye özgü bir çözüm varsayılan yapılmaz, üretici tespitiyle seçilen bir yol olarak uygulanır.
@@ -117,11 +119,11 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 ## Widget'lar
 
-Dört widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
+Yedi widget: günün adımı, 7 günlük tablo, seri ve hafta, aylık takvim, saat saat bugün, ısı haritası, uyku ve nabız. Glance satır/sütunları en fazla 10 çocuk aldığı için 24 saatlik çubuklar ve ısı haritası beyaz bitmap olarak çizilip `ColorFilter.tint` ile boyanır. Uyku ve nabız widget'ı Health Connect'i en fazla 15 dakikada bir okur. Renkler `GlanceTheme` ile gelir: "Telefonun renklerini kullan" açıksa Material You, değilse uygulamanın teması. Hepsi `SizeMode.Exact` ile boyuta göre düzen değiştirir.
 
 Kurallar:
 
-- Hepsi **paylaşılan günlük snapshot** okur. Widget başına ayrı sensör okuması yoktur.
+- Adım widget'ları **paylaşılan günlük snapshot** okur. Widget başına ayrı sensör okuması yoktur.
 - Gün dönümü `AlarmManager` ile 00:00'da tetiklenir. `JobScheduler` bırakılırsa gün dönümü "15:00 civarında" gibi kayabilir. Android 14+'ta tam zamanlı alarm izni varsayılan kapalıdır; o cihazlarda birkaç dakika kayan `setAndAllowWhileIdle` yeterlidir, çünkü adımların güne bölünmesi alarmdan değil okuma zamanından yapılır.
 - `updatePeriodMillis` en fazla 30 dakikaya kırpılır ve yine de garanti değildir. Kesinlik beklenmemeli.
 - Widget çizimi ana ekrandaki verinin kopyası değil, aynı kaynaktan okunmalıdır.
@@ -134,6 +136,10 @@ Widget güncelleme davranışı üreticiden bağımsız olmalıdır. HyperOS ve 
 
 Günlük adım toplamları tek gerçek kaynaktır. Türetilmiş hiçbir şey veritabanında saklanmaz.
 
+Kullanıcının elle girdiği su miktarı da saklanır (`water` tablosu, gün başına ml; 2026-10-12 kullanıcı isteği). İsteğe bağlı su hatırlatması 09:00–21:00 arasında 1, 2 ya da 3 saatte bir, hedefe ulaşılmadıysa bildirim gönderir; bildirimdeki düğme bir bardak ekler (`SystemEventReceiver.ACTION_WATER_ADD`). Önerilen hedef kilo × 35 ml'dir.
+
+Telefonun sayaç farkları gün tablosuna ek olarak saat saat de yazılır (`hourly_steps`, `StepMath.splitByHour`). Saatlik grafik ve saatlik widget HyperOS kaydı kapalıyken bu tablodan okur; bölme okuma aralığı kadar hatalıdır.
+
 Kullanıcının elle girdiği kilo ölçümleri de saklanır (`weights` tablosu, `date` birincil anahtarlı; 2026-10-12 kullanıcı isteği). Bunlar ölçüm değil kullanıcı girdisidir; vücut kitle endeksi ve kilo değişimi saklanmaz, her seferinde hesaplanır (`data/HealthMath.kt`). Son kilo Ayarlar'daki kilo değerini de günceller.
 
 Kalıcılık: Room'da `date` birincil anahtarlı günlük toplam tablosu. Gün içinde toplam güncellenir (upsert). Bir gün, gece yarısını geçen ilk okumayla tamamlanır; sonrasında değiştirilmez.
@@ -141,7 +147,8 @@ Kalıcılık: Room'da `date` birincil anahtarlı günlük toplam tablosu. Gün i
 Veri kaybına karşı iki katman:
 
 - `android:allowBackup="true"` — Google Otomatik Yedekleme, ücretsiz. Son sayaç değeri ve okuma zamanı yedekten **hariç tutulur** (`fullBackupContent` ve API 31+ için `dataExtractionRules`); yoksa yeni cihaza geri yüklemede ilk fark yanlış hesaplanır.
-- Dışa/içe aktarma — kullanıcı kontrolünde dosya
+- Dışa/içe aktarma — kullanıcı kontrolünde dosya. İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur (`data/HistoryImport.kt`)
+- Paylaşım kartı: günün özeti cihazda PNG olarak çizilir ve Android paylaşım menüsüyle gönderilir (`ui/ShareCard.kt`); uygulama ağa bir şey göndermez
 
 Xiaomi Cloud'a güvenilmez.
 

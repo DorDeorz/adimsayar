@@ -140,4 +140,16 @@ class StepMathTest {
         val day = LocalDate.parse("2026-10-11")
         assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))
     }
+
+    @Test
+    fun hourSplitKeepsTotalAndFollowsTime() {
+        val hours = StepMath.splitByHour(StepInterval(900L, at("2026-10-01T13:30"), at("2026-10-01T15:00")), zone)
+        assertEquals(mapOf(LocalDateTime.parse("2026-10-01T13:00") to 300L, LocalDateTime.parse("2026-10-01T14:00") to 600L), hours)
+    }
+
+    @Test
+    fun hourSplitOfInstantReadingGoesToItsHour() {
+        val hours = StepMath.splitByHour(StepInterval(5L, at("2026-10-01T09:10"), at("2026-10-01T09:10")), zone)
+        assertEquals(mapOf(LocalDateTime.parse("2026-10-01T09:00") to 5L), hours)
+    }
 }

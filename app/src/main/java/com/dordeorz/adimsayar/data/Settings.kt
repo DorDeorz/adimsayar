@@ -27,6 +27,11 @@ data class AppSettings(
     val weeklySummary: Boolean = false,
     val weightReminder: Boolean = false,
     val language: String = SYSTEM_LANGUAGE,
+    val age: Int = DEFAULT_AGE,
+    val waterGoalMl: Int = DEFAULT_WATER_GOAL_ML,
+    val glassMl: Int = DEFAULT_GLASS_ML,
+    val waterReminder: Boolean = false,
+    val waterIntervalHours: Int = DEFAULT_WATER_INTERVAL_HOURS,
 )
 
 const val DEFAULT_DAILY_GOAL = 10_000L
@@ -38,6 +43,14 @@ const val DEFAULT_WEIGHT_KG = 70
 val HEIGHT_RANGE = 100..230
 val WEIGHT_RANGE = 30..250
 val WEEK_START_OPTIONS = listOf(DayOfWeek.MONDAY, DayOfWeek.SUNDAY)
+const val DEFAULT_AGE = 30
+val AGE_RANGE = 10..100
+const val DEFAULT_WATER_GOAL_ML = 2_000
+val WATER_GOAL_RANGE = 500..6_000
+const val DEFAULT_GLASS_ML = 250
+val GLASS_OPTIONS = listOf(200, 250, 330, 500)
+const val DEFAULT_WATER_INTERVAL_HOURS = 2
+val WATER_INTERVAL_OPTIONS = listOf(1, 2, 3)
 const val SYSTEM_LANGUAGE = ""
 val SUPPORTED_LANGUAGES = listOf("tr", "en", "de", "es", "fr", "it", "pt", "ru", "ar", "ja", "zh", "ko")
 
@@ -83,6 +96,18 @@ class SettingsStore private constructor(context: Context) {
 
     fun setLanguage(language: String) = update { it.copy(language = language) }
 
+    fun setAge(age: Int) = update { it.copy(age = age.coerceIn(AGE_RANGE)) }
+
+    fun setWaterGoal(ml: Int) = update { it.copy(waterGoalMl = ml.coerceIn(WATER_GOAL_RANGE)) }
+
+    fun setGlass(ml: Int) = update { it.copy(glassMl = ml.takeIf { value -> value in GLASS_OPTIONS } ?: DEFAULT_GLASS_ML) }
+
+    fun setWaterReminder(enabled: Boolean) = update { it.copy(waterReminder = enabled) }
+
+    fun setWaterInterval(hours: Int) = update {
+        it.copy(waterIntervalHours = hours.takeIf { value -> value in WATER_INTERVAL_OPTIONS } ?: DEFAULT_WATER_INTERVAL_HOURS)
+    }
+
     private fun update(change: (AppSettings) -> AppSettings) {
         val next = change(_settings.value)
         prefs.edit {
@@ -100,6 +125,11 @@ class SettingsStore private constructor(context: Context) {
             putBoolean(KEY_WEEKLY_SUMMARY, next.weeklySummary)
             putBoolean(KEY_WEIGHT_REMINDER, next.weightReminder)
             putString(KEY_LANGUAGE, next.language)
+            putInt(KEY_AGE, next.age)
+            putInt(KEY_WATER_GOAL, next.waterGoalMl)
+            putInt(KEY_GLASS, next.glassMl)
+            putBoolean(KEY_WATER_REMINDER, next.waterReminder)
+            putInt(KEY_WATER_INTERVAL, next.waterIntervalHours)
         }
         _settings.value = next
     }
@@ -119,6 +149,11 @@ class SettingsStore private constructor(context: Context) {
         weeklySummary = prefs.getBoolean(KEY_WEEKLY_SUMMARY, false),
         weightReminder = prefs.getBoolean(KEY_WEIGHT_REMINDER, false),
         language = languageTag(prefs.getString(KEY_LANGUAGE, null)),
+        age = prefs.getInt(KEY_AGE, DEFAULT_AGE),
+        waterGoalMl = prefs.getInt(KEY_WATER_GOAL, DEFAULT_WATER_GOAL_ML),
+        glassMl = prefs.getInt(KEY_GLASS, DEFAULT_GLASS_ML),
+        waterReminder = prefs.getBoolean(KEY_WATER_REMINDER, false),
+        waterIntervalHours = prefs.getInt(KEY_WATER_INTERVAL, DEFAULT_WATER_INTERVAL_HOURS),
     )
 
     companion object {
@@ -137,6 +172,11 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_WEEKLY_SUMMARY = "weekly_summary"
         private const val KEY_WEIGHT_REMINDER = "weight_reminder"
         private const val KEY_LANGUAGE = "language"
+        private const val KEY_AGE = "age"
+        private const val KEY_WATER_GOAL = "water_goal_ml"
+        private const val KEY_GLASS = "glass_ml"
+        private const val KEY_WATER_REMINDER = "water_reminder"
+        private const val KEY_WATER_INTERVAL = "water_interval_hours"
 
         @Volatile
         private var instance: SettingsStore? = null

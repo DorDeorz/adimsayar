@@ -87,7 +87,7 @@
     <string name="level">المستوى</string>
     <string name="level_next">المتبقي للمستوى التالي: %1$s خطوة</string>
     <string name="medals_earned">%1$d / %2$d ميدالية</string>
-    <string name="medals_retroactive">تُحسب الميداليات من الأيام المسجلة. إذا غيّرت هدفك، تُقيَّم الأيام السابقة أيضًا وفق الهدف الجديد.</string>
+    <string name="medals_retroactive">تُحسب الميداليات من الأيام المسجلة. عند حصولك على ميدالية يُحفظ تاريخ حصولك عليها أول مرة، فلن تفقدها إذا غيّرت هدفك.</string>
     <string name="medal_group_daily">الخطوات اليومية</string>
     <string name="medal_group_daily_text">امشِ هذا العدد من الخطوات في يوم واحد</string>
     <string name="medal_group_streak">السلسلة</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">تصدير</string>
     <string name="export_csv_hint">حفظ جميع الأيام في ملف CSV</string>
     <string name="import_csv">استيراد</string>
-    <string name="import_csv_hint">استعادة الأيام من ملف CSV، ويُحتفظ بالرقم الأعلى</string>
+    <string name="import_csv_hint">حمّل الأيام من ملف CSV من AdımSayar أو من تصدير Samsung Health أو Mi Fitness أو Mi Fit أو Google Fit (CSV أو zip)، ويُحتفظ بالرقم الأعلى. فك ضغط الملفات المحمية بكلمة مرور أولًا واختر ملف CSV.</string>
     <string name="export_done">تم تصدير الأيام: %1$d</string>
     <string name="import_done">تم تحديث الأيام: %1$d</string>
     <string name="csv_failed">تعذّرت قراءة الملف أو كتابته</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">أيام التمرين</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">%1$s سعرة حرارية يوميًا في المتوسط</string>
-    <string name="heart_today_title">نبض القلب اليوم</string>
-    <string name="heart_today_empty">لا توجد قياسات للنبض اليوم</string>
     <string name="weight_title">الوزن ومؤشر كتلة الجسم</string>
     <string name="weight_empty">لا توجد أوزان مسجلة بعد. أضف وزنك لترى هنا مؤشر كتلة الجسم والتغير.</string>
     <string name="weight_add">إضافة وزن</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>تتبع الماء في شاشة اليوم: أضف أكوابًا أو احذفها، وهدف يومي مقترح حسب وزنك. ماء آخر 7 أيام في صفحة الصحة</item>
+        <item>تذكير اختياري بشرب الماء (الإعدادات): كل 1 أو 2 أو 3 ساعات يخبرك بالمتبقي، ويمكن إضافة كوب من الإشعار</item>
+        <item>تجميد السلسلة: مرتان شهريًا. استخدمه في يوم فائت لتستمر سلسلتك (شاشة اليوم والسجل)</item>
+        <item>أصبحت الميداليات دائمة: يُحفظ تاريخ الحصول عليها ولا تضيع عند تغيير الهدف</item>
+        <item>تحديات أسبوعية في صفحة الميداليات: 3 تحديات كل أسبوع تُختار حسب سجلك</item>
+        <item>زر مشاركة في شاشة اليوم: شارك ملخص يومك كصورة</item>
+        <item>يقرأ الاستيراد الآن أيضًا تصدير Samsung Health وMi Fitness وMi Fit وGoogle Fit (CSV أو zip)</item>
+        <item>ثلاث أدوات جديدة: اليوم ساعة بساعة، وخريطة حرارية للأسابيع الأخيرة، والنوم والنبض</item>
+        <item>تُحفظ خطوات الهاتف الآن ساعة بساعة أيضًا، فيظهر رسم بالساعة في السجل حتى دون سجل HyperOS</item>
+        <item>نبض مفصل في صفحة الصحة: اختيار اليوم، الراحة/الأدنى/المتوسط/الأعلى، رسم بمحور، المس ساعة للتفاصيل، مناطق النبض حسب العمر مع شرح. أُضيف العمر إلى الإعدادات</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>شريط سفلي جديد: السجل، الصحة، اليوم (في المنتصف)، الميداليات، الإعدادات. ملخص السوار في صفحة مستقلة</item>
         <item>ملخص صحة السوار في السجل (7 أو 30 يومًا): النوم ونبض الراحة مع رسم بياني والتمارين والمسافة</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">اليوغا</string>
     <string name="exercise_strength">تمارين القوة</string>
     <string name="exercise_other">تمرين</string>
+    <string name="age">العمر</string>
+    <string name="age_value">%1$d سنة</string>
+    <string name="age_unit">سنة</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">الماء</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">متبقٍ %1$s مل (%2$d أكواب)</string>
+    <string name="water_reached">وصلت إلى هدف الماء اليوم</string>
+    <string name="water_goal">هدف الماء اليومي</string>
+    <string name="water_goal_hint">المقترح حسب وزنك: %1$s مل (%2$d كغ × 35 مل)</string>
+    <string name="water_glass">حجم الكوب</string>
+    <string name="water_reminder">تذكير بشرب الماء</string>
+    <string name="water_reminder_hint">بين 09:00 و21:00 يخبرك بكمية الماء المتبقية حتى هدفك اليومي. يمكنك إضافة كوب من الإشعار مباشرة.</string>
+    <string name="water_interval">الفاصل بين التذكيرات</string>
+    <string name="water_interval_value">كل %1$d ساعة</string>
+    <string name="water_channel">تذكير بشرب الماء</string>
+    <string name="notify_water_title">حان وقت شرب الماء</string>
+    <string name="notify_water_text">اليوم %1$s / %2$s مل. متبقٍ %3$s مل (%4$d أكواب).</string>
+    <string name="water_week_title">الماء · آخر 7 أيام</string>
+    <string name="water_week_summary">متوسط %1$s مل في الأيام المسجلة · تحقق الهدف في %2$d أيام</string>
+    <string name="freeze_title">تجميد السلسلة</string>
+    <string name="freeze_left">استخدم التجميد في هذا اليوم لتستمر سلسلتك. المتبقي هذا الشهر %1$d من %2$d.</string>
+    <string name="freeze_used">استُخدم التجميد في هذا اليوم واستمرت السلسلة</string>
+    <string name="freeze_use">استخدم التجميد</string>
+    <string name="freeze_undo">تراجع</string>
+    <string name="freeze_offer_title">لم تحقق هدف الأمس</string>
+    <string name="freeze_offer_text">استخدم التجميد للأمس لتستمر سلسلتك عند %1$d يوم. لديك %2$d هذا الشهر.</string>
+    <string name="freeze_offer_skip">ليس الآن</string>
+    <string name="challenges_title">تحديات هذا الأسبوع</string>
+    <string name="challenges_days_left">متبقٍ %1$d أيام هذا الأسبوع</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">الأسبوع الماضي: أُنجز %1$d من %2$d</string>
+    <string name="challenges_completed">التحديات المنجزة حتى الآن: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d أيام</string>
+    <string name="challenges_steps_progress">%1$s / %2$s خطوة</string>
+    <string name="challenge_done">مكتمل</string>
+    <string name="challenge_week_total">امشِ %1$s خطوة إجمالًا هذا الأسبوع</string>
+    <string name="challenge_goal_days">حقق هدفك اليومي في %1$d أيام</string>
+    <string name="challenge_big_day">امشِ %1$s خطوة في يوم واحد</string>
+    <string name="challenge_every_day">امشِ %1$s خطوة على الأقل كل يوم هذا الأسبوع</string>
+    <string name="challenge_weekend">امشِ %1$s خطوة في عطلة نهاية الأسبوع (السبت والأحد)</string>
+    <string name="challenge_beat_last_week">تفوّق على الأسبوع الماضي: أكثر من %1$s خطوة</string>
+    <string name="share_button">مشاركة</string>
+    <string name="share_title">مشاركة خطوات اليوم</string>
+    <string name="share_failed">تعذرت المشاركة</string>
+    <string name="share_distance">المسافة</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">نبض القلب</string>
+    <string name="heart_previous_day">اليوم السابق</string>
+    <string name="heart_next_day">اليوم التالي</string>
+    <string name="heart_empty">لا توجد بيانات نبض لهذا اليوم</string>
+    <string name="heart_resting">أثناء الراحة</string>
+    <string name="heart_lowest">الأدنى</string>
+    <string name="heart_average">المتوسط</string>
+    <string name="heart_highest">الأعلى</string>
+    <string name="heart_unit">نبضة/د</string>
+    <string name="heart_resting_low">نبضك أثناء الراحة %1$d نبضة/د: أقل من المعتاد. يشيع لدى من يمارسون الرياضة بانتظام، وغالبًا لا مشكلة إن لم يصاحبه دوار أو تعب.</string>
+    <string name="heart_resting_normal">نبضك أثناء الراحة %1$d نبضة/د: ضمن المعدل الطبيعي (60–100). انخفاضه مع الوقت يدل غالبًا على تحسن لياقتك.</string>
+    <string name="heart_resting_high">نبضك أثناء الراحة %1$d نبضة/د: أعلى من الطبيعي (أكثر من 100). إن استمر كذلك فاستشر طبيبًا.</string>
+    <string name="heart_tap_hint">المس ساعة في الرسم لعرض التفاصيل</string>
+    <string name="heart_hour_detail">%1$s–%2$s · الأدنى %3$d · المتوسط %4$d · الأعلى %5$d نبضة/د</string>
+    <string name="heart_hour_empty">%1$s–%2$s · لا قياسات في هذه الساعة</string>
+    <string name="heart_zones_title">مناطق النبض (تقريبية)</string>
+    <string name="heart_zones_hint">حسب عمرك: %1$d سنة، والحد الأقصى المقدر للنبض %2$d نبضة/د. يمكنك تغيير عمرك من الإعدادات.</string>
+    <string name="heart_zone_rest">راحة</string>
+    <string name="heart_zone_light">خفيفة</string>
+    <string name="heart_zone_fat">حرق الدهون</string>
+    <string name="heart_zone_cardio">هوائية</string>
+    <string name="heart_zone_peak">لاهوائية</string>
+    <string name="heart_zone_max">القصوى</string>
+    <string name="heart_zone_below">أقل من %1$d نبضة/د</string>
+    <string name="heart_zone_range">%1$d–%2$d نبضة/د</string>
+    <string name="heart_zone_above">%1$d نبضة/د فأكثر</string>
+    <string name="heart_explain">المتوسط: متوسط كل القياسات خلال اليوم. نبض الراحة: عدد النبضات في الدقيقة أثناء الراحة، وإن لم يرسله السوار يُقدَّر من أهدأ قياسات اليوم. في الرسم تُظهر الأعمدة الفاتحة أدنى وأعلى نبض لكل ساعة، والخط الداكن متوسط كل 5 دقائق.</string>
+    <string name="widget_hourly_label">ساعة بساعة</string>
+    <string name="widget_hourly_description">خطوات اليوم ساعة بساعة</string>
+    <string name="widget_hourly_title">اليوم حسب الساعة</string>
+    <string name="widget_hourly_peak">الذروة %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">لا توجد بيانات بالساعة لليوم بعد</string>
+    <string name="widget_year_label">خريطة حرارية</string>
+    <string name="widget_year_description">خطوات الأسابيع الأخيرة بشدة اللون</string>
+    <string name="widget_year_title">آخر %1$d أسابيع</string>
+    <string name="widget_year_goal_days">%1$d أيام محققة</string>
+    <string name="widget_health_label">النوم والنبض</string>
+    <string name="widget_health_description">نوم الليلة الماضية والنبض من السوار</string>
+    <string name="widget_health_title">النوم والنبض</string>
+    <string name="widget_health_off">بيانات السوار متوقفة. يمكنك تشغيلها من الإعدادات.</string>
+    <string name="widget_health_sleep">نوم الليلة الماضية</string>
+    <string name="widget_health_latest">آخر قياس</string>
+    <string name="widget_health_latest_at">آخر قياس · %1$s</string>
 </resources>

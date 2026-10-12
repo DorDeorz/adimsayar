@@ -87,7 +87,7 @@
     <string name="level">Level</string>
     <string name="level_next">Noch %1$s Schritte bis zum nächsten Level</string>
     <string name="medals_earned">%1$d / %2$d Medaillen</string>
-    <string name="medals_retroactive">Medaillen werden aus deinen aufgezeichneten Tagen berechnet. Wenn du dein Ziel änderst, werden auch vergangene Tage nach dem neuen Ziel bewertet.</string>
+    <string name="medals_retroactive">Medaillen werden aus deinen aufgezeichneten Tagen berechnet. Sobald du eine Medaille verdienst, wird das Datum gespeichert, sodass sie bei einer Zieländerung nicht verloren geht.</string>
     <string name="medal_group_daily">Tagesschritte</string>
     <string name="medal_group_daily_text">Gehe so viele Schritte an einem einzigen Tag</string>
     <string name="medal_group_streak">Serie</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">Exportieren</string>
     <string name="export_csv_hint">Alle Tage in einer CSV-Datei speichern</string>
     <string name="import_csv">Importieren</string>
-    <string name="import_csv_hint">Tage aus einer CSV-Datei wiederherstellen; der höhere Wert bleibt erhalten</string>
+    <string name="import_csv_hint">Tage aus einer AdımSayar-CSV oder einem Export von Samsung Health, Mi Fitness, Mi Fit oder Google Fit (CSV oder ZIP) laden; der höhere Wert bleibt. Passwortgeschützte ZIPs zuerst entpacken und die CSV wählen.</string>
     <string name="export_done">%1$d Tage exportiert</string>
     <string name="import_done">%1$d Tage aktualisiert</string>
     <string name="csv_failed">Datei konnte nicht gelesen oder geschrieben werden</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">Trainingstage</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">Durchschnittlich %1$s kcal pro Tag</string>
-    <string name="heart_today_title">Herzfrequenz heute</string>
-    <string name="heart_today_empty">Heute keine Herzfrequenzdaten</string>
     <string name="weight_title">Gewicht und Body-Mass-Index</string>
     <string name="weight_empty">Noch keine Gewichtseinträge. Trage dein Gewicht ein, um BMI und Verlauf zu sehen.</string>
     <string name="weight_add">Gewicht eintragen</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>Wasser-Tracking auf dem Heute-Bildschirm: Gläser hinzufügen oder entfernen, Tagesziel nach Gewicht. Wasser der letzten 7 Tage auf der Gesundheitsseite</item>
+        <item>Optionale Wasser-Erinnerung (Einstellungen): alle 1, 2 oder 3 Stunden, wie viel noch fehlt; Glas direkt in der Benachrichtigung hinzufügen</item>
+        <item>Serien-Joker: 2 pro Monat. An einem verpassten Tag eingesetzt, bleibt die Serie bestehen (Heute und Verlauf)</item>
+        <item>Medaillen sind jetzt dauerhaft: das Datum wird gespeichert und sie bleiben bei Zieländerungen erhalten</item>
+        <item>Wöchentliche Aufgaben auf der Medaillenseite: jede Woche 3 Aufgaben passend zu deinem Verlauf</item>
+        <item>Teilen-Taste auf dem Heute-Bildschirm: Tagesübersicht als Bild teilen</item>
+        <item>Import liest jetzt auch Exporte von Samsung Health, Mi Fitness, Mi Fit und Google Fit (CSV oder ZIP)</item>
+        <item>Drei neue Widgets: heute Stunde für Stunde, Heatmap der letzten Wochen, Schlaf und Puls</item>
+        <item>Handy-Schritte werden jetzt auch stündlich gespeichert; der Verlauf zeigt auch ohne HyperOS-Aufzeichnung ein Stundendiagramm</item>
+        <item>Detaillierter Puls auf der Gesundheitsseite: Tag wählen, Ruhe-/Tiefst-/Durchschnitts-/Höchstwert, Diagramm mit Achse, Stunde antippen für Details, Pulszonen nach Alter und Erklärungen. Alter in den Einstellungen</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Neue untere Leiste: Verlauf, Gesundheit, Heute (Mitte), Medaillen, Einstellungen. Die Armbandübersicht hat eine eigene Seite</item>
         <item>Gesundheitsübersicht des Armbands im Verlauf (7 oder 30 Tage): Schlaf, Ruhepuls mit Diagramm, Trainings, Strecke</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Krafttraining</string>
     <string name="exercise_other">Training</string>
+    <string name="age">Alter</string>
+    <string name="age_value">%1$d Jahre</string>
+    <string name="age_unit">Jahre</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">Wasser</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">Noch %1$s ml (%2$d Gläser)</string>
+    <string name="water_reached">Tagesziel für Wasser erreicht</string>
+    <string name="water_goal">Tägliches Wasserziel</string>
+    <string name="water_goal_hint">Empfohlen für dein Gewicht: %1$s ml (%2$d kg × 35 ml)</string>
+    <string name="water_glass">Glasgröße</string>
+    <string name="water_reminder">Wasser-Erinnerung</string>
+    <string name="water_reminder_hint">Zwischen 09:00 und 21:00 zeigt sie, wie viel Wasser bis zum Tagesziel fehlt. Ein Glas kannst du direkt in der Benachrichtigung hinzufügen.</string>
+    <string name="water_interval">Erinnerungsintervall</string>
+    <string name="water_interval_value">Alle %1$d Std.</string>
+    <string name="water_channel">Wasser-Erinnerung</string>
+    <string name="notify_water_title">Zeit für ein Glas Wasser</string>
+    <string name="notify_water_text">Heute %1$s / %2$s ml. Noch %3$s ml (%4$d Gläser).</string>
+    <string name="water_week_title">Wasser · letzte 7 Tage</string>
+    <string name="water_week_summary">Durchschnitt %1$s ml an erfassten Tagen · Ziel an %2$d Tagen erreicht</string>
+    <string name="freeze_title">Serien-Joker</string>
+    <string name="freeze_left">Mit einem Joker an diesem Tag bleibt deine Serie bestehen. Diesen Monat noch %1$d von %2$d.</string>
+    <string name="freeze_used">An diesem Tag wurde ein Joker genutzt, die Serie lief weiter</string>
+    <string name="freeze_use">Joker nutzen</string>
+    <string name="freeze_undo">Rückgängig</string>
+    <string name="freeze_offer_title">Gestern Ziel verpasst</string>
+    <string name="freeze_offer_text">Nutze einen Joker für gestern und deine Serie läuft mit %1$d Tagen weiter. Diesen Monat hast du noch %2$d.</string>
+    <string name="freeze_offer_skip">Nicht jetzt</string>
+    <string name="challenges_title">Aufgaben dieser Woche</string>
+    <string name="challenges_days_left">Noch %1$d Tage diese Woche</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">Letzte Woche: %1$d von %2$d geschafft</string>
+    <string name="challenges_completed">Bisher geschaffte Aufgaben: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d Tage</string>
+    <string name="challenges_steps_progress">%1$s / %2$s Schritte</string>
+    <string name="challenge_done">Geschafft</string>
+    <string name="challenge_week_total">Gehe diese Woche insgesamt %1$s Schritte</string>
+    <string name="challenge_goal_days">Erreiche dein Tagesziel an %1$d Tagen</string>
+    <string name="challenge_big_day">Gehe an einem Tag %1$s Schritte</string>
+    <string name="challenge_every_day">Gehe jeden Tag dieser Woche mindestens %1$s Schritte</string>
+    <string name="challenge_weekend">Gehe am Wochenende (Samstag und Sonntag) %1$s Schritte</string>
+    <string name="challenge_beat_last_week">Schlage letzte Woche: mehr als %1$s Schritte</string>
+    <string name="share_button">Teilen</string>
+    <string name="share_title">Heutige Schritte teilen</string>
+    <string name="share_failed">Teilen fehlgeschlagen</string>
+    <string name="share_distance">Strecke</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">Puls</string>
+    <string name="heart_previous_day">Vorheriger Tag</string>
+    <string name="heart_next_day">Nächster Tag</string>
+    <string name="heart_empty">Keine Pulsdaten für diesen Tag</string>
+    <string name="heart_resting">Ruhepuls</string>
+    <string name="heart_lowest">Niedrigster</string>
+    <string name="heart_average">Durchschnitt</string>
+    <string name="heart_highest">Höchster</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">Dein Ruhepuls ist %1$d bpm: unter dem üblichen Bereich. Bei regelmäßig Sporttreibenden häufig und ohne Schwindel oder Müdigkeit meist unbedenklich.</string>
+    <string name="heart_resting_normal">Dein Ruhepuls ist %1$d bpm: im normalen Bereich (60–100). Sinkt er mit der Zeit, steigt meist die Fitness.</string>
+    <string name="heart_resting_high">Dein Ruhepuls ist %1$d bpm: über dem Normalbereich (über 100). Bleibt er so hoch, sprich mit einer Ärztin oder einem Arzt.</string>
+    <string name="heart_tap_hint">Tippe für Details auf eine Stunde im Diagramm</string>
+    <string name="heart_hour_detail">%1$s–%2$s · niedrigster %3$d · Durchschnitt %4$d · höchster %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · keine Messung in dieser Stunde</string>
+    <string name="heart_zones_title">Pulszonen (ungefähr)</string>
+    <string name="heart_zones_hint">Nach deinem Alter: %1$d Jahre, geschätzter Maximalpuls %2$d bpm. Das Alter kannst du in den Einstellungen ändern.</string>
+    <string name="heart_zone_rest">Ruhe</string>
+    <string name="heart_zone_light">Leicht</string>
+    <string name="heart_zone_fat">Fettverbrennung</string>
+    <string name="heart_zone_cardio">Aerob</string>
+    <string name="heart_zone_peak">Anaerob</string>
+    <string name="heart_zone_max">Maximum</string>
+    <string name="heart_zone_below">Unter %1$d bpm</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">Ab %1$d bpm</string>
+    <string name="heart_explain">Durchschnitt: Mittel aller Messungen des Tages. Ruhepuls: Schläge pro Minute in Ruhe; meldet das Armband ihn nicht, wird er aus den ruhigsten Messungen geschätzt. Im Diagramm zeigen helle Balken den niedrigsten und höchsten Puls je Stunde, die dunkle Linie den 5-Minuten-Durchschnitt.</string>
+    <string name="widget_hourly_label">Stunde für Stunde</string>
+    <string name="widget_hourly_description">Heutige Schritte Stunde für Stunde</string>
+    <string name="widget_hourly_title">Heute nach Stunden</string>
+    <string name="widget_hourly_peak">Spitze %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">Noch keine Stundenwerte für heute</string>
+    <string name="widget_year_label">Heatmap</string>
+    <string name="widget_year_description">Schritte der letzten Wochen als Farbintensität</string>
+    <string name="widget_year_title">Letzte %1$d Wochen</string>
+    <string name="widget_year_goal_days">%1$d Zieltage</string>
+    <string name="widget_health_label">Schlaf und Puls</string>
+    <string name="widget_health_description">Schlaf der letzten Nacht und Puls vom Armband</string>
+    <string name="widget_health_title">Schlaf und Puls</string>
+    <string name="widget_health_off">Armbanddaten sind aus. Du kannst sie in den Einstellungen einschalten.</string>
+    <string name="widget_health_sleep">Schlaf letzte Nacht</string>
+    <string name="widget_health_latest">Letzte Messung</string>
+    <string name="widget_health_latest_at">Letzte Messung · %1$s</string>
 </resources>

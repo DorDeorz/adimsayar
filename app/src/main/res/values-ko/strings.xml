@@ -87,7 +87,7 @@
     <string name="level">레벨</string>
     <string name="level_next">다음 레벨까지 %1$s걸음</string>
     <string name="medals_earned">메달 %1$d / %2$d개</string>
-    <string name="medals_retroactive">메달은 기록된 날짜를 바탕으로 계산됩니다. 목표를 바꾸면 지난 날짜도 새 목표로 평가됩니다.</string>
+    <string name="medals_retroactive">메달은 기록된 날짜를 바탕으로 계산됩니다. 메달을 얻으면 처음 얻은 날짜가 저장되므로 목표를 바꿔도 사라지지 않아요.</string>
     <string name="medal_group_daily">일일 걸음 수</string>
     <string name="medal_group_daily_text">하루에 이만큼 걷기</string>
     <string name="medal_group_streak">연속 달성</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">내보내기</string>
     <string name="export_csv_hint">모든 날짜를 CSV 파일로 저장</string>
     <string name="import_csv">가져오기</string>
-    <string name="import_csv_hint">CSV 파일에서 날짜 복원, 더 큰 값을 유지</string>
+    <string name="import_csv_hint">AdımSayar CSV 또는 Samsung Health, Mi Fitness, Mi Fit, Google Fit 내보내기(CSV 또는 zip)에서 날짜를 불러옵니다. 더 큰 값을 유지해요. 암호가 있는 zip은 먼저 풀고 CSV 파일을 선택하세요.</string>
     <string name="export_done">%1$d일 내보냄</string>
     <string name="import_done">%1$d일 업데이트됨</string>
     <string name="csv_failed">파일을 읽거나 쓸 수 없습니다</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">운동한 날</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">하루 평균 %1$s kcal</string>
-    <string name="heart_today_title">오늘의 심박수</string>
-    <string name="heart_today_empty">오늘 심박수 기록이 없습니다</string>
     <string name="weight_title">체중과 체질량지수</string>
     <string name="weight_empty">아직 체중 기록이 없습니다. 체중을 추가하면 여기에서 BMI와 변화를 볼 수 있습니다.</string>
     <string name="weight_add">체중 추가</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>오늘 화면에서 물 기록: 잔 추가·삭제, 체중 기반 권장 목표. 건강 페이지에 최근 7일 물 그래프</item>
+        <item>선택 사항인 물 알림(설정): 1, 2, 3시간마다 남은 양을 알려 주고 알림에서 한 잔 추가 가능</item>
+        <item>연속 보호권: 매달 2개. 놓친 날에 쓰면 연속 기록이 이어져요(오늘 화면과 기록)</item>
+        <item>메달이 영구 보존돼요: 처음 얻은 날짜가 저장되고 목표를 바꿔도 사라지지 않아요</item>
+        <item>메달 페이지에 주간 도전: 기록에 맞춰 매주 3개</item>
+        <item>오늘 화면에 공유 버튼: 하루 요약을 이미지로 공유</item>
+        <item>가져오기가 Samsung Health, Mi Fitness, Mi Fit, Google Fit 내보내기(CSV 또는 zip)도 읽어요</item>
+        <item>새 위젯 3개: 오늘 시간별, 최근 몇 주 히트맵, 수면과 심박</item>
+        <item>휴대폰 걸음 수를 시간별로도 저장해 HyperOS 기록 없이도 기록에 시간별 그래프가 보여요</item>
+        <item>건강 페이지의 자세한 심박수: 날짜 선택, 안정 시·최저·평균·최고, 눈금 있는 그래프, 시간을 누르면 상세, 나이별 심박 구간과 설명. 설정에 나이 추가</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>새 하단 바: 기록, 건강, 오늘(가운데), 메달, 설정. 밴드 요약은 별도의 건강 페이지에</item>
         <item>기록에 밴드 건강 요약(7일 또는 30일): 수면, 안정 시 심박수와 그래프, 운동, 거리</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">요가</string>
     <string name="exercise_strength">근력 운동</string>
     <string name="exercise_other">운동</string>
+    <string name="age">나이</string>
+    <string name="age_value">%1$d세</string>
+    <string name="age_unit">세</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">물</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">%1$s ml 남음 (%2$d잔)</string>
+    <string name="water_reached">오늘의 물 목표를 달성했어요</string>
+    <string name="water_goal">하루 물 목표</string>
+    <string name="water_goal_hint">체중 기준 권장량: %1$s ml (%2$d kg × 35 ml)</string>
+    <string name="water_glass">컵 크기</string>
+    <string name="water_reminder">물 마시기 알림</string>
+    <string name="water_reminder_hint">09:00–21:00 사이에 하루 목표까지 남은 물의 양을 알려 줍니다. 알림에서 바로 한 잔을 추가할 수 있어요.</string>
+    <string name="water_interval">알림 간격</string>
+    <string name="water_interval_value">%1$d시간마다</string>
+    <string name="water_channel">물 마시기 알림</string>
+    <string name="notify_water_title">물 마실 시간이에요</string>
+    <string name="notify_water_text">오늘 %1$s / %2$s ml. %3$s ml(%4$d잔) 남았어요.</string>
+    <string name="water_week_title">물 · 최근 7일</string>
+    <string name="water_week_summary">기록한 날 평균 %1$s ml · %2$d일 목표 달성</string>
+    <string name="freeze_title">연속 보호권</string>
+    <string name="freeze_left">이 날에 보호권을 쓰면 연속 기록이 이어집니다. 이번 달 %1$d / %2$d 남음</string>
+    <string name="freeze_used">이 날 보호권을 사용해 연속 기록이 이어졌어요</string>
+    <string name="freeze_use">보호권 사용</string>
+    <string name="freeze_undo">되돌리기</string>
+    <string name="freeze_offer_title">어제 목표를 달성하지 못했어요</string>
+    <string name="freeze_offer_text">어제에 보호권을 쓰면 연속 기록이 %1$d일로 이어집니다. 이번 달 %2$d개 남았어요.</string>
+    <string name="freeze_offer_skip">나중에</string>
+    <string name="challenges_title">이번 주 도전 과제</string>
+    <string name="challenges_days_left">이번 주 %1$d일 남음</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">지난주: %2$d개 중 %1$d개 완료</string>
+    <string name="challenges_completed">지금까지 완료한 도전: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d일</string>
+    <string name="challenges_steps_progress">%1$s / %2$s 걸음</string>
+    <string name="challenge_done">완료</string>
+    <string name="challenge_week_total">이번 주 총 %1$s걸음 걷기</string>
+    <string name="challenge_goal_days">%1$d일 동안 하루 목표 달성</string>
+    <string name="challenge_big_day">하루에 %1$s걸음 걷기</string>
+    <string name="challenge_every_day">이번 주 매일 %1$s걸음 이상 걷기</string>
+    <string name="challenge_weekend">주말(토·일)에 총 %1$s걸음 걷기</string>
+    <string name="challenge_beat_last_week">지난주 넘기기: %1$s걸음보다 더 걷기</string>
+    <string name="share_button">공유</string>
+    <string name="share_title">오늘 걸음 수 공유</string>
+    <string name="share_failed">공유하지 못했어요</string>
+    <string name="share_distance">거리</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">심박수</string>
+    <string name="heart_previous_day">이전 날</string>
+    <string name="heart_next_day">다음 날</string>
+    <string name="heart_empty">이 날의 심박수 데이터가 없어요</string>
+    <string name="heart_resting">안정 시</string>
+    <string name="heart_lowest">최저</string>
+    <string name="heart_average">평균</string>
+    <string name="heart_highest">최고</string>
+    <string name="heart_unit">bpm</string>
+    <string name="heart_resting_low">안정 시 심박수는 %1$d bpm으로 보통보다 낮아요. 규칙적으로 운동하는 사람에게 흔하며 어지럼이나 피로가 없다면 대개 괜찮아요.</string>
+    <string name="heart_resting_normal">안정 시 심박수는 %1$d bpm으로 정상 범위(60–100)예요. 시간이 지나며 낮아지면 보통 체력이 좋아졌다는 뜻이에요.</string>
+    <string name="heart_resting_high">안정 시 심박수는 %1$d bpm으로 정상보다 높아요(100 초과). 계속 높다면 의사와 상담하세요.</string>
+    <string name="heart_tap_hint">그래프에서 시간을 누르면 자세히 볼 수 있어요</string>
+    <string name="heart_hour_detail">%1$s–%2$s · 최저 %3$d · 평균 %4$d · 최고 %5$d bpm</string>
+    <string name="heart_hour_empty">%1$s–%2$s · 이 시간 측정 없음</string>
+    <string name="heart_zones_title">심박 구간(대략)</string>
+    <string name="heart_zones_hint">나이 기준: %1$d세, 예상 최대 심박수 %2$d bpm. 나이는 설정에서 바꿀 수 있어요.</string>
+    <string name="heart_zone_rest">휴식</string>
+    <string name="heart_zone_light">가벼움</string>
+    <string name="heart_zone_fat">지방 연소</string>
+    <string name="heart_zone_cardio">유산소</string>
+    <string name="heart_zone_peak">무산소</string>
+    <string name="heart_zone_max">최대</string>
+    <string name="heart_zone_below">%1$d bpm 미만</string>
+    <string name="heart_zone_range">%1$d–%2$d bpm</string>
+    <string name="heart_zone_above">%1$d bpm 이상</string>
+    <string name="heart_explain">평균: 하루 동안 측정한 모든 값의 평균이에요. 안정 시 심박수: 쉬고 있을 때의 분당 심박수로, 밴드가 보내지 않으면 하루 중 가장 안정된 측정값으로 추정해요. 그래프의 옅은 막대는 시간별 최저·최고, 진한 선은 5분 평균이에요.</string>
+    <string name="widget_hourly_label">시간별</string>
+    <string name="widget_hourly_description">오늘 걸음 수를 시간별로</string>
+    <string name="widget_hourly_title">오늘 시간별</string>
+    <string name="widget_hourly_peak">최다 %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">오늘 시간별 데이터가 아직 없어요</string>
+    <string name="widget_year_label">히트맵</string>
+    <string name="widget_year_description">최근 몇 주의 걸음 수를 색 농도로 표시</string>
+    <string name="widget_year_title">최근 %1$d주</string>
+    <string name="widget_year_goal_days">목표 달성 %1$d일</string>
+    <string name="widget_health_label">수면과 심박</string>
+    <string name="widget_health_description">밴드에서 가져온 어젯밤 수면과 심박</string>
+    <string name="widget_health_title">수면과 심박</string>
+    <string name="widget_health_off">밴드 데이터가 꺼져 있어요. 설정에서 켤 수 있어요.</string>
+    <string name="widget_health_sleep">어젯밤 수면</string>
+    <string name="widget_health_latest">최근 측정</string>
+    <string name="widget_health_latest_at">최근 측정 · %1$s</string>
 </resources>

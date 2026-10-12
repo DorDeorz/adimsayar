@@ -87,7 +87,7 @@
     <string name="level">Уровень</string>
     <string name="level_next">До следующего уровня шагов: %1$s</string>
     <string name="medals_earned">Медали: %1$d / %2$d</string>
-    <string name="medals_retroactive">Медали рассчитываются по записанным дням. Если изменить цель, прошлые дни тоже будут оцениваться по новой цели.</string>
+    <string name="medals_retroactive">Медали рассчитываются по записанным дням. Когда вы получаете медаль, дата первого получения сохраняется, и при смене цели медаль не пропадёт.</string>
     <string name="medal_group_daily">Шаги за день</string>
     <string name="medal_group_daily_text">Пройдите столько шагов за один день</string>
     <string name="medal_group_streak">Серия</string>
@@ -164,7 +164,7 @@
     <string name="export_csv">Экспорт</string>
     <string name="export_csv_hint">Сохранить все дни в файл CSV</string>
     <string name="import_csv">Импорт</string>
-    <string name="import_csv_hint">Восстановить дни из файла CSV; сохраняется большее значение</string>
+    <string name="import_csv_hint">Загрузить дни из CSV AdımSayar или экспорта Samsung Health, Mi Fitness, Mi Fit или Google Fit (CSV или zip); сохраняется большее значение. Архив с паролем сначала распакуйте и выберите CSV.</string>
     <string name="export_done">Экспортировано дней: %1$d</string>
     <string name="import_done">Обновлено дней: %1$d</string>
     <string name="csv_failed">Не удалось прочитать или записать файл</string>
@@ -235,8 +235,6 @@
     <string name="health_exercise_days">Дни с тренировками</string>
     <string name="health_days_ratio">%1$d/%2$d</string>
     <string name="health_kcal_daily">В среднем %1$s ккал в день</string>
-    <string name="heart_today_title">Пульс сегодня</string>
-    <string name="heart_today_empty">Сегодня нет данных о пульсе</string>
     <string name="weight_title">Вес и индекс массы тела</string>
     <string name="weight_empty">Записей веса пока нет. Добавьте свой вес, чтобы видеть здесь ИМТ и изменения.</string>
     <string name="weight_add">Добавить вес</string>
@@ -315,6 +313,18 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_0">
+        <item>Учёт воды на экране «Сегодня»: добавляйте и убирайте стаканы, дневная цель по весу. Вода за 7 дней на странице «Здоровье»</item>
+        <item>Необязательное напоминание о воде (Настройки): каждые 1, 2 или 3 часа сообщает, сколько осталось; стакан можно добавить из уведомления</item>
+        <item>Заморозка серии: 2 в месяц. Используйте в пропущенный день, и серия сохранится (экраны «Сегодня» и «История»)</item>
+        <item>Медали теперь постоянные: дата получения сохраняется, и они не пропадают при смене цели</item>
+        <item>Еженедельные задания на странице медалей: 3 задания в неделю по вашей истории</item>
+        <item>Кнопка «Поделиться» на экране «Сегодня»: итог дня в виде картинки</item>
+        <item>Импорт теперь читает и экспорт Samsung Health, Mi Fitness, Mi Fit и Google Fit (CSV или zip)</item>
+        <item>Три новых виджета: сегодня по часам, тепловая карта последних недель, сон и пульс</item>
+        <item>Шаги телефона теперь сохраняются и по часам; в истории есть почасовой график даже без записи HyperOS</item>
+        <item>Подробный пульс на странице «Здоровье»: выбор дня, покой/минимум/среднее/максимум, график с осью, нажатие на час для подробностей, зоны по возрасту и пояснения. В настройки добавлен возраст</item>
+    </string-array>
     <string-array name="release_notes_0_8_0">
         <item>Новая нижняя панель: История, Здоровье, Сегодня (в центре), Медали, Настройки. Сводка браслета на отдельной странице</item>
         <item>Сводка здоровья браслета в истории (7 или 30 дней): сон, пульс в покое с графиком, тренировки, расстояние</item>
@@ -431,4 +441,96 @@
     <string name="exercise_yoga">Йога</string>
     <string name="exercise_strength">Силовая тренировка</string>
     <string name="exercise_other">Тренировка</string>
+    <string name="age">Возраст</string>
+    <string name="age_value">Лет: %1$d</string>
+    <string name="age_unit">лет</string>
+    <string name="unit_ml">ml</string>
+    <string name="water_ml">%1$s ml</string>
+    <string name="water_title">Вода</string>
+    <string name="water_value">%1$s / %2$s ml</string>
+    <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_left">Осталось %1$s мл (стаканов: %2$d)</string>
+    <string name="water_reached">Цель по воде на сегодня выполнена</string>
+    <string name="water_goal">Дневная цель по воде</string>
+    <string name="water_goal_hint">Рекомендуется по весу: %1$s мл (%2$d кг × 35 мл)</string>
+    <string name="water_glass">Объём стакана</string>
+    <string name="water_reminder">Напоминание о воде</string>
+    <string name="water_reminder_hint">С 09:00 до 21:00 сообщает, сколько воды осталось до дневной цели. Стакан можно добавить прямо из уведомления.</string>
+    <string name="water_interval">Интервал напоминаний</string>
+    <string name="water_interval_value">Каждые %1$d ч</string>
+    <string name="water_channel">Напоминание о воде</string>
+    <string name="notify_water_title">Пора выпить воды</string>
+    <string name="notify_water_text">Сегодня %1$s / %2$s мл. Осталось %3$s мл (стаканов: %4$d).</string>
+    <string name="water_week_title">Вода · последние 7 дней</string>
+    <string name="water_week_summary">В среднем %1$s мл в отмеченные дни · цель выполнена дней: %2$d</string>
+    <string name="freeze_title">Заморозка серии</string>
+    <string name="freeze_left">Заморозка на этот день сохранит серию. В этом месяце осталось %1$d из %2$d.</string>
+    <string name="freeze_used">В этот день использована заморозка, серия продолжилась</string>
+    <string name="freeze_use">Заморозить</string>
+    <string name="freeze_undo">Отменить</string>
+    <string name="freeze_offer_title">Вчера цель не выполнена</string>
+    <string name="freeze_offer_text">Заморозьте вчерашний день, и серия продолжится: %1$d дн. В этом месяце осталось заморозок: %2$d.</string>
+    <string name="freeze_offer_skip">Не сейчас</string>
+    <string name="challenges_title">Задания недели</string>
+    <string name="challenges_days_left">До конца недели дней: %1$d</string>
+    <string name="challenges_ratio">%1$d / %2$d</string>
+    <string name="challenges_last_week">Прошлая неделя: выполнено %1$d из %2$d</string>
+    <string name="challenges_completed">Всего выполнено заданий: %1$d</string>
+    <string name="challenges_days_progress">%1$d / %2$d дн.</string>
+    <string name="challenges_steps_progress">%1$s / %2$s шагов</string>
+    <string name="challenge_done">Выполнено</string>
+    <string name="challenge_week_total">Пройдите за неделю %1$s шагов</string>
+    <string name="challenge_goal_days">Выполните дневную цель дней: %1$d</string>
+    <string name="challenge_big_day">Пройдите %1$s шагов за один день</string>
+    <string name="challenge_every_day">Проходите не меньше %1$s шагов каждый день недели</string>
+    <string name="challenge_weekend">Пройдите %1$s шагов за выходные (суббота и воскресенье)</string>
+    <string name="challenge_beat_last_week">Обгоните прошлую неделю: больше %1$s шагов</string>
+    <string name="share_button">Поделиться</string>
+    <string name="share_title">Поделиться шагами за сегодня</string>
+    <string name="share_failed">Не удалось поделиться</string>
+    <string name="share_distance">Расстояние</string>
+    <string name="share_kcal">kcal</string>
+    <string name="heart_title">Пульс</string>
+    <string name="heart_previous_day">Предыдущий день</string>
+    <string name="heart_next_day">Следующий день</string>
+    <string name="heart_empty">Нет данных о пульсе за этот день</string>
+    <string name="heart_resting">В покое</string>
+    <string name="heart_lowest">Минимум</string>
+    <string name="heart_average">Среднее</string>
+    <string name="heart_highest">Максимум</string>
+    <string name="heart_unit">уд/мин</string>
+    <string name="heart_resting_low">Пульс в покое %1$d уд/мин: ниже обычного. Часто бывает у тех, кто регулярно тренируется, и без головокружения и слабости обычно нормален.</string>
+    <string name="heart_resting_normal">Пульс в покое %1$d уд/мин: в норме (60–100). Снижение со временем обычно означает лучшую форму.</string>
+    <string name="heart_resting_high">Пульс в покое %1$d уд/мин: выше нормы (больше 100). Если так остаётся долго, обратитесь к врачу.</string>
+    <string name="heart_tap_hint">Нажмите на час на графике, чтобы увидеть подробности</string>
+    <string name="heart_hour_detail">%1$s–%2$s · мин. %3$d · сред. %4$d · макс. %5$d уд/мин</string>
+    <string name="heart_hour_empty">%1$s–%2$s · в этот час нет измерений</string>
+    <string name="heart_zones_title">Пульсовые зоны (примерно)</string>
+    <string name="heart_zones_hint">По возрасту: %1$d лет, расчётный максимум %2$d уд/мин. Возраст можно изменить в настройках.</string>
+    <string name="heart_zone_rest">Покой</string>
+    <string name="heart_zone_light">Лёгкая</string>
+    <string name="heart_zone_fat">Жиросжигание</string>
+    <string name="heart_zone_cardio">Аэробная</string>
+    <string name="heart_zone_peak">Анаэробная</string>
+    <string name="heart_zone_max">Максимальная</string>
+    <string name="heart_zone_below">Ниже %1$d уд/мин</string>
+    <string name="heart_zone_range">%1$d–%2$d уд/мин</string>
+    <string name="heart_zone_above">%1$d уд/мин и выше</string>
+    <string name="heart_explain">Среднее: среднее всех измерений за день. Пульс в покое: удары в минуту в состоянии покоя; если браслет его не передаёт, он оценивается по самым спокойным измерениям дня. На графике светлые столбцы показывают минимум и максимум за час, тёмная линия — среднее за 5 минут.</string>
+    <string name="widget_hourly_label">По часам</string>
+    <string name="widget_hourly_description">Шаги за сегодня по часам</string>
+    <string name="widget_hourly_title">Сегодня по часам</string>
+    <string name="widget_hourly_peak">Пик %1$02d:00 · %2$s</string>
+    <string name="widget_hourly_empty">Почасовых данных за сегодня пока нет</string>
+    <string name="widget_year_label">Тепловая карта</string>
+    <string name="widget_year_description">Шаги за последние недели в виде насыщенности цвета</string>
+    <string name="widget_year_title">Последние недели: %1$d</string>
+    <string name="widget_year_goal_days">Дней с целью: %1$d</string>
+    <string name="widget_health_label">Сон и пульс</string>
+    <string name="widget_health_description">Сон прошлой ночи и пульс с браслета</string>
+    <string name="widget_health_title">Сон и пульс</string>
+    <string name="widget_health_off">Данные браслета выключены. Включить можно в настройках.</string>
+    <string name="widget_health_sleep">Сон прошлой ночи</string>
+    <string name="widget_health_latest">Последнее измерение</string>
+    <string name="widget_health_latest_at">Последнее измерение · %1$s</string>
 </resources>
