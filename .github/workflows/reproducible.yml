@@ -1,0 +1,45 @@
+name: Tekrarlanabilir derleme
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'app/build.gradle.kts'
+      - 'build.gradle.kts'
+      - 'gradle/**'
+      - '.github/workflows/reproducible.yml'
+
+jobs:
+  karsilastir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: birinci
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Birinci derleme
+        working-directory: birinci
+        run: ./gradlew --no-daemon --no-build-cache assembleRelease
+      - name: İkinci derleme (başka klasörde, temiz)
+        run: |
+          cp -r birinci "$RUNNER_TEMP/ikinci"
+          cd "$RUNNER_TEMP/ikinci"
+          git clean -xdfq
+          ./gradlew --no-daemon --no-build-cache assembleRelease
+      - name: Karşılaştır
+        run: |
+          A=birinci/app/build/outputs/apk/release/app-release.apk
+          B="$RUNNER_TEMP/ikinci/app/build/outputs/apk/release/app-release.apk"
+          sha256sum "$A" "$B" | tee -a "$GITHUB_STEP_SUMMARY"
+          if cmp -s "$A" "$B"; then
+            echo "Aynı APK çıktı: derleme tekrarlanabilir" | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            mkdir -p a b
+            (cd a && unzip -qo "../$A") && (cd b && unzip -qo "$B")
+            diff -rq a b | tee -a "$GITHUB_STEP_SUMMARY" || true
+            echo "::error::İki derleme farklı APK üretti"
+            exit 1
+          fi

@@ -125,6 +125,9 @@
     <string name="update_ready">تم التنزيل. اضغط للتثبيت</string>
     <string name="update_install_permission">اسمح بالتثبيت من هذا التطبيق في الإعدادات ثم اضغط مرة أخرى</string>
     <string name="update_download_failed">تعذّر التنزيل. اضغط لفتح صفحة GitHub</string>
+    <string name="update_consent_title">التحديث من GitHub</string>
+    <string name="update_consent_text">يُنزَّل التحديث مباشرة من GitHub ويتجاوز فحوصات متجر التطبيقات. إذا ثبّتَّ FitWren من F-Droid أو IzzyOnDroid أو Obtainium فحدّثه من هناك.</string>
+    <string name="update_consent_download">تنزيل</string>
     <string name="github_page">صفحة GitHub</string>
     <string name="github_page_hint">الشيفرة المصدرية والإصدارات والإبلاغ عن المشكلات</string>
     <string name="log_hint">أحدث قراءات العداد وHyperOS</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>قبل تنزيل تحديث يطلب التطبيق الآن التأكيد لأنه يتجاوز فحوصات المتجر</item>
+        <item>جاهز لـ F-Droid وIzzyOnDroid: أوصاف ولقطات شاشة للمتاجر</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>زر ‎+250 مل في أداة الماء يضيف الماء الآن</item>
     </string-array>

@@ -125,6 +125,9 @@
     <string name="update_ready">Heruntergeladen. Zum Installieren tippen</string>
     <string name="update_install_permission">Installation aus dieser App in den Einstellungen erlauben und erneut tippen</string>
     <string name="update_download_failed">Download fehlgeschlagen. Tippen, um die GitHub-Seite zu öffnen</string>
+    <string name="update_consent_title">Von GitHub aktualisieren</string>
+    <string name="update_consent_text">Das Update wird direkt von GitHub geladen und umgeht die Prüfungen deines App-Stores. Wenn du FitWren aus F-Droid, IzzyOnDroid oder Obtainium installiert hast, aktualisiere es dort.</string>
+    <string name="update_consent_download">Herunterladen</string>
     <string name="github_page">GitHub-Seite</string>
     <string name="github_page_hint">Quellcode, Versionen und Fehlermeldungen</string>
     <string name="log_hint">Letzte Zähler- und HyperOS-Ablesungen</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>Vor dem Herunterladen eines Updates fragt die App jetzt nach, da die Prüfungen des App-Stores umgangen werden</item>
+        <item>Vorbereitet für F-Droid und IzzyOnDroid: Store-Beschreibungen und Screenshots hinzugefügt</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>Die +250-ml-Taste im Wasser-Widget fügt das Wasser jetzt hinzu</item>
     </string-array>

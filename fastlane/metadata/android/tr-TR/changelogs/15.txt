@@ -1,0 +1,2 @@
+- GitHub'dan güncelleme indirmeden önce, mağazanın denetimini atladığını söyleyen bir onay sorulur
+- F-Droid ve IzzyOnDroid için mağaza açıklamaları ve ekran görüntüleri

@@ -16,6 +16,10 @@
 </p>
 
 <p align="center">
+  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22com.dordeorz.adimsayar%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FDorDeorz%2Fadimsayar%22%2C%22author%22%3A%22DorDeorz%22%2C%22name%22%3A%22FitWren%22%7D"><img src="docs/badge_obtainium.png" height="48" alt="Obtainium ile al"></a>
+</p>
+
+<p align="center">
   <a href="README.md">English</a> · <b>Türkçe</b>
 </p>
 
@@ -136,13 +140,13 @@ Madalyalar kalıcı olduğu için kazanılan eşya da kalır. Uygulamada kuşa d
 3. İlk açılışta "Fiziksel etkinlik" iznini ver.
 4. Xiaomi telefonlarda bildirimsiz sayım için Ayarlar → Adım kaynağı → "HyperOS adım kaydını kullan"ı aç.
 
-Güncellemeler: Ayarlar → Hakkında → "Güncellemeleri kontrol et" yeni APK'yı GitHub'dan indirir ve Android'in kurulum ekranını açar. Sürümleri [Obtainium](https://github.com/ImranR98/Obtainium) ile de takip edebilirsin.
+Güncellemeler: Ayarlar → Hakkında → "Güncellemeleri kontrol et" önce onay ister, sonra yeni APK'yı GitHub'dan indirir ve Android'in kurulum ekranını açar. FitWren'i Obtainium ya da başka bir mağazadan kurduysan oradan güncelle. Sürümleri [Obtainium](https://github.com/ImranR98/Obtainium) ile de takip edebilirsin.
 
 ## Gizlilik
 
 FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda saklar. Hiçbir şey bir yere gönderilmez.
 
-Tek ağ isteği "Güncellemeleri kontrol et"e dokunduğunda yapılır: uygulama son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunursan APK'yı GitHub Releases'tan indirir. Bu isteklerle senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.
+Tek ağ isteği "Güncellemeleri kontrol et"e dokunduğunda yapılır: uygulama son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir. Bu isteklerle senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.
 
 Health Connect yalnızca "Bileklik adımlarını kullan" açıksa ve yalnızca okumak için kullanılır. FitWren Health Connect'e hiçbir şey yazmaz.
 

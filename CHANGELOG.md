@@ -2,6 +2,12 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.9.5
+
+- GitHub'dan güncelleme indirmeden önce, mağazanın denetimini atladığını söyleyen bir onay sorulur
+- F-Droid ve IzzyOnDroid'e hazırlık: mağaza açıklamaları ve ekran görüntüleri (`fastlane/`), APK'da Google'ın bağımlılık bloğu kapatıldı
+- README'ye Obtainium rozeti
+
 ## 0.9.4
 
 - Su widget'ındaki +250 ml düğmesi artık suyu ekliyor

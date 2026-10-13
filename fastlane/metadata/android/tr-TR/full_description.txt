@@ -1,0 +1,24 @@
+<p>FitWren adımlarını telefonun kendi sensörüyle sayar, her şeyi cihazda saklar ve giriş yapmadan çalışır. Hesap, sunucu, analitik ve reklam yoktur.</p>
+
+<p><b>Doğru sayar, pili yormaz</b></p>
+<ul>
+<li>Donanım adım sayacını okur ve adım dedektörüyle karşılaştırır. Sensör donarsa fark eder ve telefonu yeniden başlatmadan düzeltir.</li>
+<li>Varsayılan olarak sürekli çalışan bir servis yoktur: sayaç ara ara okunur ve fark kaydedilir.</li>
+<li>Xiaomi (HyperOS) ve Samsung'da (One UI) test edildi. Xiaomi'de isteğe bağlı olarak HyperOS adım kaydını kullanabilir.</li>
+</ul>
+
+<p><b>Bugün</b>: ilerleme halkası, mesafe ve kalori, seri, bu hafta, su takibi ve son 7 gün. Günün özetini resim olarak paylaşabilirsin.</p>
+
+<p><b>Geçmiş</b>: aylık takvim, saat saat grafik, rekorlar, yıllık özet ve seri jokeri.</p>
+
+<p><b>Sağlık (isteğe bağlı)</b>: Mi Band gibi bilekliklerin Health Connect'e yazdığı adımları, uyku evrelerini, nabzı, kan oksijenini, egzersizleri ve aktif kaloriyi okur. Yalnızca okur, hiçbir şey yazmaz. Vücut kitle endeksiyle kilo kaydı.</p>
+
+<p><b>Madalyalar ve hedefler</b>: kalıcı madalyalar, seviyeler, haftalık görevler ve İstanbul'dan Ankara'ya gibi sanal rotalar.</p>
+
+<p><b>Küçük bir kuş</b> toplam adımınla yumurtadan bilge kuşa büyür, ruh hali gününe göre değişir ve madalyalarla kazandığın eşyaları takar.</p>
+
+<p><b>13 widget</b>: bugün, 7 gün, seri, takvim, saat saat, ısı haritası, uyku ve nabız, kuş, su, rota, görevler, kilo ve günün özeti. Material You renkleri ve ayarlanabilir saydamlık.</p>
+
+<p>Ayrıca: günlük ve haftalık hedef, isteğe bağlı hatırlatmalar, açık ve koyu tema, 12 dil, CSV dışa ve içe aktarma (Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur).</p>
+
+<p><b>İnternet</b>: internet izni yalnızca Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda kullanılır. GitHub'dan son sürümü okur ve sen onaylarsan APK'yı indirir. Senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.</p>

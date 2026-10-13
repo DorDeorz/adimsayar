@@ -125,6 +125,9 @@
     <string name="update_ready">ダウンロード完了。タップしてインストール</string>
     <string name="update_install_permission">設定でこのアプリからのインストールを許可して、もう一度タップしてください</string>
     <string name="update_download_failed">ダウンロードできませんでした。タップして GitHub ページを開きます</string>
+    <string name="update_consent_title">GitHub から更新</string>
+    <string name="update_consent_text">更新は GitHub から直接ダウンロードされ、アプリストアのチェックを通りません。FitWren を F-Droid、IzzyOnDroid、Obtainium からインストールした場合は、そちらで更新してください。</string>
+    <string name="update_consent_download">ダウンロード</string>
     <string name="github_page">GitHub ページ</string>
     <string name="github_page_hint">ソースコード、リリース、不具合の報告</string>
     <string name="log_hint">最新のカウンターと HyperOS の読み取り</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>更新をダウンロードする前に確認するようになりました（アプリストアのチェックを通らないため）</item>
+        <item>F-Droid と IzzyOnDroid への準備：ストア用の説明とスクリーンショットを追加</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>水分ウィジェットの +250 ml ボタンで水分が追加されるようになりました</item>
     </string-array>

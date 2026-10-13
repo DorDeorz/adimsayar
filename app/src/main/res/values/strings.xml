@@ -125,6 +125,9 @@
     <string name="update_ready">İndirildi. Kurmak için dokun</string>
     <string name="update_install_permission">Ayarlar\'da bu uygulamadan yüklemeye izin ver, sonra tekrar dokun</string>
     <string name="update_download_failed">İndirilemedi. GitHub sayfasını açmak için dokun</string>
+    <string name="update_consent_title">GitHub\'dan güncelle</string>
+    <string name="update_consent_text">Güncelleme doğrudan GitHub\'dan indirilir ve uygulama mağazasının denetimini atlar. FitWren\'i F-Droid, IzzyOnDroid ya da Obtainium\'dan kurduysan güncellemeyi oradan al.</string>
+    <string name="update_consent_download">İndir</string>
     <string name="github_page">GitHub sayfası</string>
     <string name="github_page_hint">Kaynak kod, sürümler ve hata bildirimi</string>
     <string name="log_hint">Sayaç ve HyperOS okumalarının son kayıtları</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>Güncelleme indirmeden önce, mağazanın denetimini atladığını söyleyen bir onay sorulur</item>
+        <item>F-Droid ve IzzyOnDroid\'e hazırlık: mağaza açıklamaları ve ekran görüntüleri eklendi</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>Su widget\'ındaki +250 ml düğmesi artık suyu ekliyor</item>
     </string-array>

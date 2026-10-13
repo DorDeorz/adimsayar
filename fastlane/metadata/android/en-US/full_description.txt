@@ -1,0 +1,24 @@
+<p>FitWren counts your steps with your phone's own sensor, stores everything on the device and works without any sign-in. No account, no server, no analytics, no ads.</p>
+
+<p><b>Accurate and battery friendly</b></p>
+<ul>
+<li>Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.</li>
+<li>No always-on service by default: the counter is read now and then and the difference is saved.</li>
+<li>Tested on Xiaomi (HyperOS) and Samsung (One UI). On Xiaomi it can optionally use the HyperOS step record.</li>
+</ul>
+
+<p><b>Today</b>: progress ring, distance and calories, streak, this week, water tracking and the last 7 days. Share your day as an image.</p>
+
+<p><b>History</b>: monthly calendar, hour-by-hour chart, records, yearly summary and streak freezes.</p>
+
+<p><b>Health (optional)</b>: reads steps, sleep stages, heart rate, SpO2, workouts and active calories that bands such as the Mi Band write to Health Connect. Read only, never written. Weight log with BMI.</p>
+
+<p><b>Medals and goals</b>: permanent medals, levels, weekly challenges and virtual routes such as Istanbul to Ankara.</p>
+
+<p><b>A little wren</b> grows from an egg to a wise bird with your total steps, changes its mood with your day and wears items you earn with medals.</p>
+
+<p><b>13 widgets</b>: today, 7 days, streak, calendar, by hour, heatmap, sleep and heart, the wren, water, route, challenges, weight and daily summary. Material You colors and adjustable transparency.</p>
+
+<p>Also: daily and weekly goals, optional reminders, light and dark theme, 12 languages, CSV export and import (also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports).</p>
+
+<p><b>Network</b>: the internet permission is used only when you tap "Check for updates" in Settings. It reads the latest version from GitHub and, after you confirm, downloads the APK. Nothing about you or your steps is sent.</p>
