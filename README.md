@@ -16,6 +16,10 @@
 </p>
 
 <p align="center">
+  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22com.dordeorz.adimsayar%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FDorDeorz%2Fadimsayar%22%2C%22author%22%3A%22DorDeorz%22%2C%22name%22%3A%22FitWren%22%7D"><img src="docs/badge_obtainium.png" height="48" alt="Get it on Obtainium"></a>
+</p>
+
+<p align="center">
   <b>English</b> · <a href="README.tr.md">Türkçe</a>
 </p>
 
@@ -136,13 +140,13 @@ Medals are permanent, so items stay once earned. Tap the bird in the app and it 
 3. On first launch, allow "Physical activity".
 4. On Xiaomi phones, turn on Settings → Step source → "Use the HyperOS step record" for counting without a notification.
 
-Updates: Settings → About → "Check for updates" downloads the new APK from GitHub and opens Android's installer. You can also track releases with [Obtainium](https://github.com/ImranR98/Obtainium).
+Updates: Settings → About → "Check for updates" asks you to confirm, then downloads the new APK from GitHub and opens Android's installer. If you installed FitWren from Obtainium or another store, update it there. You can also track releases with [Obtainium](https://github.com/ImranR98/Obtainium).
 
 ## Privacy
 
 FitWren stores daily step totals, water, weight and your settings on the phone. Nothing is sent anywhere.
 
-The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
+The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
 
 Health Connect is used only if you turn on "Use band steps", and only for reading. FitWren never writes to Health Connect.
 

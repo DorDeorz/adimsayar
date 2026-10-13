@@ -74,6 +74,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.9.5", R.array.release_notes_0_9_5),
     ReleaseNote("0.9.4", R.array.release_notes_0_9_4),
     ReleaseNote("0.9.3", R.array.release_notes_0_9_3),
     ReleaseNote("0.9.2", R.array.release_notes_0_9_2),
@@ -304,7 +305,23 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             var apk by remember { mutableStateOf<File?>(null) }
             var downloadFailed by remember { mutableStateOf(false) }
             var needsPermission by remember { mutableStateOf(false) }
+            var confirmDownload by remember { mutableStateOf(false) }
             val available = update as? UpdateResult.Available
+            val download: (UpdateResult.Available, String) -> Unit = { release, url ->
+                scope.launch {
+                    progress = 0
+                    val downloaded = UpdateInstaller.download(context, url, release.version) { percent ->
+                        scope.launch { progress = percent }
+                    }
+                    progress = null
+                    apk = downloaded
+                    downloadFailed = downloaded == null
+                    if (downloaded != null) {
+                        val start = UpdateInstaller.install(context, downloaded)
+                        needsPermission = start == InstallStart.NeedsPermission
+                    }
+                }
+            }
             ClickRow(
                 stringResource(R.string.check_updates),
                 when {
@@ -332,25 +349,30 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         }
                     }
                     available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
-                    available?.apkUrl != null -> scope.launch {
-                        progress = 0
-                        val downloaded = UpdateInstaller.download(context, available.apkUrl, available.version) { percent ->
-                            scope.launch { progress = percent }
-                        }
-                        progress = null
-                        apk = downloaded
-                        downloadFailed = downloaded == null
-                        if (downloaded != null) {
-                            val start = UpdateInstaller.install(context, downloaded)
-                            needsPermission = start == InstallStart.NeedsPermission
-                        }
-                    }
+                    available?.apkUrl != null -> confirmDownload = true
                     else -> scope.launch {
                         checking = true
                         update = UpdateChecker.check(state.version)
                         checking = false
                     }
                 }
+            }
+            val url = available?.apkUrl
+            if (confirmDownload && available != null && url != null) {
+                AlertDialog(
+                    onDismissRequest = { confirmDownload = false },
+                    title = { Text(stringResource(R.string.update_consent_title)) },
+                    text = { Text(stringResource(R.string.update_consent_text)) },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            confirmDownload = false
+                            download(available, url)
+                        }) { Text(stringResource(R.string.update_consent_download)) }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { confirmDownload = false }) { Text(stringResource(R.string.cancel)) }
+                    },
+                )
             }
             ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
                 runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }

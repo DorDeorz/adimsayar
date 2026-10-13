@@ -125,6 +125,9 @@
     <string name="update_ready">已下载。点按安装</string>
     <string name="update_install_permission">请在设置中允许此应用安装应用，然后再次点按</string>
     <string name="update_download_failed">下载失败。点按打开 GitHub 页面</string>
+    <string name="update_consent_title">从 GitHub 更新</string>
+    <string name="update_consent_text">更新会直接从 GitHub 下载，不经过应用商店的检查。如果你是从 F-Droid、IzzyOnDroid 或 Obtainium 安装的 FitWren，请在那里更新。</string>
+    <string name="update_consent_download">下载</string>
     <string name="github_page">GitHub 页面</string>
     <string name="github_page_hint">源代码、版本和问题反馈</string>
     <string name="log_hint">最近的计步器和 HyperOS 读取</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>下载更新前会先请你确认，因为它不经过应用商店的检查</item>
+        <item>为 F-Droid 和 IzzyOnDroid 做好准备：添加了商店说明和截图</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>饮水小组件的 +250 ml 按钮现在可以加水了</item>
     </string-array>

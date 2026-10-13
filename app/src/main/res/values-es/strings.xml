@@ -125,6 +125,9 @@
     <string name="update_ready">Descargado. Toca para instalar</string>
     <string name="update_install_permission">Permite instalar desde esta app en Ajustes y vuelve a tocar</string>
     <string name="update_download_failed">No se pudo descargar. Toca para abrir la página de GitHub</string>
+    <string name="update_consent_title">Actualizar desde GitHub</string>
+    <string name="update_consent_text">La actualización se descarga directamente de GitHub y omite las comprobaciones de tu tienda de apps. Si instalaste FitWren desde F-Droid, IzzyOnDroid u Obtainium, actualízala allí.</string>
+    <string name="update_consent_download">Descargar</string>
     <string name="github_page">Página de GitHub</string>
     <string name="github_page_hint">Código fuente, versiones y reporte de errores</string>
     <string name="log_hint">Últimas lecturas del contador y de HyperOS</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>Antes de descargar una actualización, la app pide confirmación, ya que omite las comprobaciones de la tienda</item>
+        <item>Preparada para F-Droid e IzzyOnDroid: descripciones y capturas para las tiendas</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>El botón +250 ml del widget de agua ahora añade el agua</item>
     </string-array>

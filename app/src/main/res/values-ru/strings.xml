@@ -125,6 +125,9 @@
     <string name="update_ready">Загружено. Нажмите, чтобы установить</string>
     <string name="update_install_permission">Разрешите установку из этого приложения в настройках и нажмите снова</string>
     <string name="update_download_failed">Не удалось загрузить. Нажмите, чтобы открыть страницу GitHub</string>
+    <string name="update_consent_title">Обновить с GitHub</string>
+    <string name="update_consent_text">Обновление загружается прямо с GitHub и обходит проверки магазина приложений. Если вы установили FitWren из F-Droid, IzzyOnDroid или Obtainium, обновляйте его там.</string>
+    <string name="update_consent_download">Скачать</string>
     <string name="github_page">Страница на GitHub</string>
     <string name="github_page_hint">Исходный код, версии и сообщения об ошибках</string>
     <string name="log_hint">Последние чтения счётчика и HyperOS</string>
@@ -313,6 +316,10 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_5">
+        <item>Перед загрузкой обновления приложение просит подтверждение, так как оно обходит проверки магазина</item>
+        <item>Подготовка к F-Droid и IzzyOnDroid: описания и скриншоты для магазинов</item>
+    </string-array>
     <string-array name="release_notes_0_9_4">
         <item>Кнопка +250 мл в виджете воды теперь добавляет воду</item>
     </string-array>

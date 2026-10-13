@@ -1,0 +1,2 @@
+- Before downloading an update from GitHub, the app asks you to confirm, since it skips your app store's checks
+- Store descriptions and screenshots for F-Droid and IzzyOnDroid

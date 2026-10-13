@@ -117,7 +117,7 @@ Uygulama açıkken pil için batch'leme kullanılabilir (`registerListener` 4 pa
 
 - API 29+ (Android 10) runtime izni: `ACTIVITY_RECOGNITION`. İki sensör için de zorunlu.
 - `HIGH_SAMPLING_RATE_SENSORS` gereksiz, ekleme.
-- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı ikinci kez dokununca o sürümün APK'sı GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12 kararı; `REQUEST_INSTALL_PACKAGES`, `FileProvider`, `data/UpdateInstaller.kt`). Kurulum kullanıcı onayıyla Android tarafından yapılır, uygulama sessiz kurulum yapmaz. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz. Başka hiçbir ağ isteği eklenmez.
+- `INTERNET` yalnızca güncelleme kontrolü için vardır. Tek istisna Ayarlar'daki güncelleme kontrolüdür (2026-10-09 kararı): yalnızca kullanıcı düğmeye bastığında GitHub'ın son sürüm bilgisini (`api.github.com/repos/DorDeorz/adimsayar/releases/latest`) okur. Yeni sürüm varsa kullanıcı ikinci kez dokunup mağaza denetimini atladığını söyleyen onay penceresini kabul edince (2026-10-13, F-Droid/IzzyOnDroid kuralı) o sürümün APK'sı GitHub Releases'tan indirilir ve Android'in kurulum ekranı açılır (2026-10-12 kararı; `REQUEST_INSTALL_PACKAGES`, `FileProvider`, `data/UpdateInstaller.kt`). Kurulum kullanıcı onayıyla Android tarafından yapılır, uygulama sessiz kurulum yapmaz. Adım verisi ya da kişisel bilgi gönderilmez, arka planda kontrol ya da indirme yapılmaz. Başka hiçbir ağ isteği eklenmez.
 
 ## Widget'lar
 
@@ -153,6 +153,15 @@ Veri kaybına karşı iki katman:
 - Paylaşım kartı: günün özeti cihazda PNG olarak çizilir ve Android paylaşım menüsüyle gönderilir (`ui/ShareCard.kt`); uygulama ağa bir şey göndermez
 
 Xiaomi Cloud'a güvenilmez.
+
+## Dağıtım
+
+GitHub Releases (Obtainium bunu okur), IzzyOnDroid ve F-Droid hedeflenir (2026-10-13 kararı; ayrıntı `/mnt/project-files/ideas/acik-kaynak-magazalar.md`). Bunun için:
+
+- Mağaza metinleri ve görselleri `fastlane/metadata/android/{en-US,tr-TR}` altındadır. Her sürümde `changelogs/<versionCode>.txt` eklenir.
+- `dependenciesInfo` kapalıdır; APK'ya Google'ın şifreli bağımlılık bloğu eklenmez.
+- Derleme tekrarlanabilir olmalıdır (aynı koddan bayt bayt aynı APK), böylece F-Droid geliştiricinin imzalı APK'sını yayınlayabilir. Kontrol: Actions → "Tekrarlanabilir derleme".
+- Google Play Services, Firebase, analitik ya da reklam kütüphanesi eklenmez.
 
 ## Genel kurallar
 
