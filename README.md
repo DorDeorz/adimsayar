@@ -22,10 +22,10 @@
 ---
 
 <p align="center">
-  <img src="docs/screenshots/today.png" width="200" alt="Today">
-  <img src="docs/screenshots/history.png" width="200" alt="History">
-  <img src="docs/screenshots/health.png" width="200" alt="Health">
-  <img src="docs/screenshots/medals.png" width="200" alt="Medals">
+  <img src="docs/screenshots/en/today.png" width="200" alt="Today">
+  <img src="docs/screenshots/en/history.png" width="200" alt="History">
+  <img src="docs/screenshots/en/health.png" width="200" alt="Health">
+  <img src="docs/screenshots/en/medals.png" width="200" alt="Medals">
 </p>
 
 ## Why FitWren
@@ -70,7 +70,7 @@ Today's steps, 7-day chart, streak and week, monthly calendar, today by hour, he
 Every widget resizes to fit, follows your wallpaper colors (Material You) or the app theme, and has adjustable background transparency. Tapping a widget opens the matching page.
 
 <p align="center">
-  <img src="docs/screenshots/widgets.png" width="320" alt="Widgets on the home screen">
+  <img src="docs/screenshots/en/widgets.png" width="320" alt="Widgets on the home screen">
 </p>
 
 ### And also
@@ -81,9 +81,9 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 - Export and import as CSV. Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
 
 <p align="center">
-  <img src="docs/screenshots/today_more.png" width="200" alt="Today: streak, water and last 7 days">
-  <img src="docs/screenshots/heart.png" width="200" alt="Heart rate">
-  <img src="docs/screenshots/route.png" width="200" alt="Virtual route">
+  <img src="docs/screenshots/en/today_more.png" width="200" alt="Today: streak, water and last 7 days">
+  <img src="docs/screenshots/en/heart.png" width="200" alt="Heart rate">
+  <img src="docs/screenshots/en/route.png" width="200" alt="Virtual route">
 </p>
 
 ## Meet the wren
