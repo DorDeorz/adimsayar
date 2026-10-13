@@ -186,8 +186,6 @@ The only real data is the **step total per day**. Medal progress, levels, streak
 
 **Battery help.** Some brands kill background apps aggressively. FitWren never forces the battery exemption. If your brand is known for it and the exemption is not granted, a dismissible card shows the steps for your phone.
 
-Design decisions and measurements: [GOALS.md](GOALS.md).
-
 </details>
 
 ## Build from source
