@@ -186,8 +186,6 @@ Tek gerçek veri **gün başına toplam adım**dır. Madalya ilerlemesi, seviyel
 
 **Pil yardımı.** Bazı markalar arka plan uygulamalarını agresif biçimde kapatır. FitWren pil muafiyetini zorla istemez. Marka bununla biliniyorsa ve muafiyet verilmemişse, telefonuna özel adımları gösteren kapatılabilir bir kart çıkar.
 
-Tasarım kararları ve ölçümler: [GOALS.md](GOALS.md).
-
 </details>
 
 ## Kaynaktan derleme
