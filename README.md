@@ -80,7 +80,8 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 ### And also
 - Daily goal, weekly goal, first day of week, km or miles
 - Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders
-- Light, dark or system theme
+- Light, dark or system theme; optionally your wallpaper colors (Material You, Android 12+)
+- Screen reader labels on the goal ring and water buttons; days that reached the goal are marked with ✓ in the chart, not only by color
 - 12 languages: English, Turkish, German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese and Korean
 - Export and import as CSV. Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
 
