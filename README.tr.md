@@ -80,7 +80,8 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 ### Ve ayrıca
 - Günlük hedef, haftalık hedef, haftanın ilk günü, km ya da mil
 - İsteğe bağlı bildirimler: hedefe ulaşınca, hedefe yaklaşınca, akşam seri hatırlatması, haftalık özet, su ve kilo hatırlatmaları
-- Açık, koyu ya da sistem teması
+- Açık, koyu ya da sistem teması; istersen duvar kağıdının renkleri (Material You, Android 12+)
+- Ekran okuyucu için hedef halkası ve su düğmelerinde açıklama; grafikte hedefe ulaşılan günler yalnızca renkle değil ✓ ile de işaretli
 - 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince ve Korece
 - CSV ile dışa ve içe aktarma. İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur.
 
