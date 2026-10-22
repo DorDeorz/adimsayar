@@ -316,6 +316,12 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>完整配色：关闭动态配色时不再出现紫色，深色主题下按钮文字清晰可读</item>
+        <item>计数时数字不再跳动；浅色主题启动时不再闪现深色屏幕</item>
+        <item>目标圆环和步数以平滑动画填充；标签页切换动画</item>
+        <item>为屏幕阅读器添加圆环和饮水按钮说明；达标的日子显示 ✓</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>下载更新前会先请你确认，因为它不经过应用商店的检查</item>
         <item>为 F-Droid 和 IzzyOnDroid 做好准备：添加了商店说明和截图</item>
@@ -480,6 +486,7 @@
     <string name="water_title">饮水</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">减去一杯（%1$d 毫升）</string>
     <string name="water_left">还差 %1$s ml（%2$d 杯）</string>
     <string name="water_reached">今天的饮水目标已完成</string>
     <string name="water_goal">每日饮水目标</string>

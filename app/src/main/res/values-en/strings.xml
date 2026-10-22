@@ -316,6 +316,12 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Complete color palette: no more purple tones with dynamic color off, readable button text in dark theme</item>
+        <item>Numbers no longer jump while counting; no dark flash on launch in light theme</item>
+        <item>Goal ring and step count fill with a smooth animation; animated tab switching</item>
+        <item>Screen reader labels for the ring and water button; ✓ mark on days that reached the goal</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Before downloading an update, the app now asks you to confirm, since it skips your app store\'s checks</item>
         <item>Ready for F-Droid and IzzyOnDroid: store descriptions and screenshots added</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Water</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Remove one glass (%1$d ml)</string>
     <string name="water_left">%1$s ml to go (%2$d glasses)</string>
     <string name="water_reached">You reached today’s water goal</string>
     <string name="water_goal">Daily water goal</string>

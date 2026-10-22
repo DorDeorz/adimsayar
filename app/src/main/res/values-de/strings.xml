@@ -316,6 +316,12 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Vollständige Farbpalette: keine Lilatöne mehr ohne dynamische Farben, lesbare Schaltflächen im dunklen Design</item>
+        <item>Zahlen springen beim Zählen nicht mehr; kein dunkles Aufblitzen beim Start im hellen Design</item>
+        <item>Zielring und Schrittzahl füllen sich mit einer sanften Animation; animierter Tabwechsel</item>
+        <item>Screenreader-Beschriftungen für Ring und Wasser-Schaltfläche; ✓ an Tagen mit erreichtem Ziel</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Vor dem Herunterladen eines Updates fragt die App jetzt nach, da die Prüfungen des App-Stores umgangen werden</item>
         <item>Vorbereitet für F-Droid und IzzyOnDroid: Store-Beschreibungen und Screenshots hinzugefügt</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Wasser</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Ein Glas (%1$d ml) entfernen</string>
     <string name="water_left">Noch %1$s ml (%2$d Gläser)</string>
     <string name="water_reached">Tagesziel für Wasser erreicht</string>
     <string name="water_goal">Tägliches Wasserziel</string>

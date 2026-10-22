@@ -316,6 +316,12 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>색상 팔레트 완성: 동적 색상을 꺼도 보라색이 나오지 않고, 다크 테마에서 버튼 글자가 잘 보임</item>
+        <item>숫자가 셀 때 흔들리지 않음; 라이트 테마에서 시작할 때 어두운 화면이 번쩍이지 않음</item>
+        <item>목표 링과 걸음 수가 부드러운 애니메이션으로 채워짐; 탭 전환 애니메이션</item>
+        <item>스크린 리더용 링과 물 버튼 설명; 목표를 달성한 날에 ✓ 표시</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>업데이트를 내려받기 전에 확인을 요청합니다. 앱 스토어의 검사를 거치지 않기 때문입니다</item>
         <item>F-Droid와 IzzyOnDroid 준비: 스토어 설명과 스크린샷 추가</item>
@@ -480,6 +486,7 @@
     <string name="water_title">물</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">한 잔(%1$d ml) 빼기</string>
     <string name="water_left">%1$s ml 남음 (%2$d잔)</string>
     <string name="water_reached">오늘의 물 목표를 달성했어요</string>
     <string name="water_goal">하루 물 목표</string>

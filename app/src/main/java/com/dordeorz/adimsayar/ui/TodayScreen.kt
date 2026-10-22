@@ -1,6 +1,8 @@
 package com.dordeorz.adimsayar.ui
 
 import android.widget.Toast
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,8 +30,10 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -43,6 +47,11 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.progressBarRangeInfo
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -61,8 +70,11 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.ZoneId
+import kotlin.math.roundToLong
 
 private val CHART_HEIGHT = 120.dp
+
+private const val RING_ANIMATION_MS = 700
 
 @Composable
 fun TodayScreen(state: MainUiState, actions: MainActions) {
@@ -137,12 +149,29 @@ private fun TodayRing(state: MainUiState, steps: Long, goal: Long) {
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        Box(modifier = Modifier.padding(top = 16.dp).size(240.dp), contentAlignment = Alignment.Center) {
+        val unit = stringResource(R.string.steps_unit)
+        val ringDescription = listOf(
+            "${format(steps)} $unit",
+            stringResource(R.string.goal_short, format(goal)),
+            stringResource(R.string.percent_of_goal, percent(steps, goal)),
+        ).joinToString(", ")
+        val shownSteps = remember { Animatable(0f) }
+        LaunchedEffect(steps) { shownSteps.animateTo(steps.toFloat(), tween(RING_ANIMATION_MS)) }
+        Box(
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .size(240.dp)
+                .clearAndSetSemantics {
+                    contentDescription = ringDescription
+                    progressBarRangeInfo = ProgressBarRangeInfo((steps.toFloat() / goal).coerceIn(0f, 1f), 0f..1f)
+                },
+            contentAlignment = Alignment.Center,
+        ) {
             ProgressRing(fraction = steps.toFloat() / goal, stroke = 18.dp, modifier = Modifier.fillMaxSize())
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(format(steps), style = MaterialTheme.typography.displayLarge)
+                Text(format(shownSteps.value.roundToLong()), style = MaterialTheme.typography.displayLarge)
                 Text(
-                    stringResource(R.string.steps_unit),
+                    unit,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -177,7 +206,9 @@ private fun TodayRing(state: MainUiState, steps: Long, goal: Long) {
 internal fun ProgressRing(fraction: Float, stroke: Dp, modifier: Modifier = Modifier) {
     val track = MaterialTheme.colorScheme.surfaceContainerHighest
     val progress = MaterialTheme.colorScheme.primary
-    val sweep = 360f * fraction.coerceIn(0f, 1f)
+    val animated = remember { Animatable(0f) }
+    LaunchedEffect(fraction) { animated.animateTo(fraction.coerceIn(0f, 1f), tween(RING_ANIMATION_MS)) }
+    val sweep = 360f * animated.value
     Canvas(modifier = modifier) {
         val width = stroke.toPx()
         val inset = width / 2f
@@ -273,10 +304,12 @@ private fun WeekCard(week: List<DaySteps>, goal: Long) {
                 week.forEachIndexed { index, day ->
                     val isToday = index == week.lastIndex
                     Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                        val reached = day.steps >= goal
                         Text(
-                            formatCompact(day.steps),
+                            if (reached) "✓ ${formatCompact(day.steps)}" else formatCompact(day.steps),
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = if (reached) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontWeight = if (reached) FontWeight.SemiBold else FontWeight.Normal,
                         )
                         Text(
                             shortDayName(day.date),
@@ -438,7 +471,12 @@ private fun WaterCard(state: MainUiState, onAddWater: (Int) -> Unit) {
                     color = if (left <= 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f),
                 )
-                OutlinedButton(onClick = { onAddWater(-glass) }, enabled = drunk > 0) { Text("−") }
+                val removeDescription = stringResource(R.string.water_remove_glass, glass)
+                OutlinedButton(
+                    onClick = { onAddWater(-glass) },
+                    enabled = drunk > 0,
+                    modifier = Modifier.semantics { contentDescription = removeDescription },
+                ) { Text("−", modifier = Modifier.clearAndSetSemantics { }) }
                 Button(onClick = { onAddWater(glass) }, modifier = Modifier.padding(start = 8.dp)) {
                     Text(stringResource(R.string.water_add_glass, glass))
                 }

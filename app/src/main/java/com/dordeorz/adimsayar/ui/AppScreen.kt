@@ -3,6 +3,11 @@ package com.dordeorz.adimsayar.ui
 import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -188,13 +193,20 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
             }
         },
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
-            when (tab) {
-                Tab.History -> HistoryScreen(state, actions)
-                Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
-                Tab.Today -> TodayScreen(state, actions)
-                Tab.Medals -> MedalsScreen(state, actions.onRouteChange)
-                Tab.Settings -> SettingsScreen(state, actions)
+        AnimatedContent(
+            targetState = tab,
+            modifier = Modifier.fillMaxSize().padding(padding),
+            transitionSpec = { fadeIn(tween(TAB_FADE_IN_MS, delayMillis = TAB_FADE_OUT_MS)) togetherWith fadeOut(tween(TAB_FADE_OUT_MS)) },
+            label = "tab",
+        ) { shown ->
+            Box(modifier = Modifier.fillMaxSize()) {
+                when (shown) {
+                    Tab.History -> HistoryScreen(state, actions)
+                    Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
+                    Tab.Today -> TodayScreen(state, actions)
+                    Tab.Medals -> MedalsScreen(state, actions.onRouteChange)
+                    Tab.Settings -> SettingsScreen(state, actions)
+                }
             }
         }
     }
@@ -203,3 +215,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
 private val TODAY_BUTTON_SIZE = 56.dp
 
 private val TODAY_ICON_SIZE = 30.dp
+
+private const val TAB_FADE_IN_MS = 180
+
+private const val TAB_FADE_OUT_MS = 90

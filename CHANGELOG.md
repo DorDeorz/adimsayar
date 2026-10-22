@@ -2,6 +2,15 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.9.6
+
+- Renk paleti tamamlandı: dinamik renk kapalıyken veya Android 12 öncesinde mor tonlar kalmadı, koyu temada dolgulu buton yazıları okunuyor; widget'lar da aynı paleti kullanıyor
+- Tüm yazı stillerinde sabit genişlikli rakamlar: sayılar sayarken kaymıyor
+- Açılış ekranı arka planı açık/koyu temaya uyuyor (açık temada koyu flaş yok)
+- Hedef halkası ve adım sayısı animasyonla doluyor; sekmeler arasında yumuşak geçiş
+- Erişilebilirlik: ekran okuyucu halkayı adım, hedef ve yüzdeyle okuyor; su "−" düğmesinin açıklaması var; son 7 gün grafiğinde hedefe ulaşan günlerde ✓
+- Arka plan servisi bildirimi yalnızca adım sayısı değişince yeniliyor
+
 ## 0.9.5
 
 - GitHub'dan güncelleme indirmeden önce, mağazanın denetimini atladığını söyleyen bir onay sorulur
