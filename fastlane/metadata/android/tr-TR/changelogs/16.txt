@@ -1,0 +1,4 @@
+- Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor
+- Rakamlar sayarken kaymıyor; açık temada açılışta koyu ekran çıkmıyor
+- Hedef halkası ve adım sayısı yumuşak animasyonla doluyor; sekmeler arası geçiş animasyonu
+- Ekran okuyucu için halka ve su düğmesi açıklamaları; hedefe ulaşan günlerde ✓ işareti

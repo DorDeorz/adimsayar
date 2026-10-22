@@ -316,6 +316,12 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor</item>
+        <item>Rakamlar artık sayarken kaymıyor; açılışta açık temada koyu ekran çıkmıyor</item>
+        <item>Hedef halkası ve adım sayısı yumuşak bir animasyonla doluyor; sekmeler arasında geçiş animasyonu</item>
+        <item>Ekran okuyucu için halka ve su düğmesi açıklamaları; hedefe ulaşan günlerde ✓ işareti</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Güncelleme indirmeden önce, mağazanın denetimini atladığını söyleyen bir onay sorulur</item>
         <item>F-Droid ve IzzyOnDroid\'e hazırlık: mağaza açıklamaları ve ekran görüntüleri eklendi</item>
@@ -481,6 +487,7 @@
     <string name="water_title">Su</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Bir bardak (%1$d ml) çıkar</string>
     <string name="water_left">%1$s ml kaldı (%2$d bardak)</string>
     <string name="water_reached">Bugünkü su hedefine ulaştın</string>
     <string name="water_goal">Günlük su hedefi</string>

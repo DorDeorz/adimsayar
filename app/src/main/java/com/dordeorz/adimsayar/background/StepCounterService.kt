@@ -40,6 +40,9 @@ class StepCounterService : Service(), SensorEventListener {
     @Volatile
     private var lastWidgetMs = 0L
 
+    @Volatile
+    private var shownSteps = -1L
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -64,7 +67,11 @@ class StepCounterService : Service(), SensorEventListener {
         AppScope.launch {
             val repository = StepRepository.get(appContext)
             val interval = repository.record(reading)
-            showNotification(repository.today())
+            val today = repository.today()
+            if (today != shownSteps) {
+                shownSteps = today
+                showNotification(today)
+            }
             if (lastLogMs == 0L || now - lastLogMs >= LOG_INTERVAL_MS || interval.kind.isNotable()) {
                 lastLogMs = now
                 ReadingLog.get(appContext).reading(ReadSource.Service, reading, interval)

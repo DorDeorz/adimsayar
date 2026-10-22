@@ -316,6 +316,12 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Полная цветовая палитра: без фиолетовых оттенков при выключенных динамических цветах, читаемый текст кнопок в тёмной теме</item>
+        <item>Цифры больше не прыгают при подсчёте; нет тёмной вспышки при запуске в светлой теме</item>
+        <item>Кольцо цели и число шагов заполняются плавной анимацией; анимированное переключение вкладок</item>
+        <item>Подписи для экранного диктора у кольца и кнопки воды; отметка ✓ в дни с достигнутой целью</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Перед загрузкой обновления приложение просит подтверждение, так как оно обходит проверки магазина</item>
         <item>Подготовка к F-Droid и IzzyOnDroid: описания и скриншоты для магазинов</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Вода</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Убрать один стакан (%1$d мл)</string>
     <string name="water_left">Осталось %1$s мл (стаканов: %2$d)</string>
     <string name="water_reached">Цель по воде на сегодня выполнена</string>
     <string name="water_goal">Дневная цель по воде</string>

@@ -316,6 +316,12 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Paleta de cores completa: sem tons roxos com cor dinâmica desligada, texto dos botões legível no tema escuro</item>
+        <item>Os números não pulam mais ao contar; sem flash escuro ao abrir no tema claro</item>
+        <item>O anel da meta e os passos se enchem com uma animação suave; troca de abas animada</item>
+        <item>Rótulos de leitor de tela no anel e no botão de água; marca ✓ nos dias em que a meta foi atingida</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Antes de baixar uma atualização, o app pede confirmação, pois ela ignora as verificações da loja</item>
         <item>Pronto para F-Droid e IzzyOnDroid: descrições e capturas de tela para as lojas</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Água</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Remover um copo (%1$d ml)</string>
     <string name="water_left">Faltam %1$s ml (%2$d copos)</string>
     <string name="water_reached">Você atingiu a meta de água de hoje</string>
     <string name="water_goal">Meta diária de água</string>

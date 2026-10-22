@@ -316,6 +316,12 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Tavolozza colori completa: niente più toni viola con i colori dinamici spenti, testo dei pulsanti leggibile nel tema scuro</item>
+        <item>I numeri non saltano più durante il conteggio; nessun lampo scuro all\'avvio nel tema chiaro</item>
+        <item>Anello obiettivo e passi si riempiono con un\'animazione fluida; cambio di scheda animato</item>
+        <item>Etichette per lettore schermo sull\'anello e sul pulsante acqua; segno ✓ nei giorni con obiettivo raggiunto</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Prima di scaricare un aggiornamento l\'app chiede conferma, perché salta i controlli dello store</item>
         <item>Pronta per F-Droid e IzzyOnDroid: descrizioni e screenshot per gli store</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Acqua</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Togli un bicchiere (%1$d ml)</string>
     <string name="water_left">Mancano %1$s ml (%2$d bicchieri)</string>
     <string name="water_reached">Hai raggiunto l’obiettivo d’acqua di oggi</string>
     <string name="water_goal">Obiettivo d’acqua giornaliero</string>

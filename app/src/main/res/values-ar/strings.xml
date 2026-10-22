@@ -316,6 +316,12 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>لوحة ألوان كاملة: لا ألوان بنفسجية عند إيقاف الألوان الديناميكية، ونص الأزرار مقروء في الوضع الداكن</item>
+        <item>لم تعد الأرقام تقفز أثناء العد؛ لا وميض داكن عند الفتح في الوضع الفاتح</item>
+        <item>حلقة الهدف وعدد الخطوات يمتلئان بحركة سلسة؛ انتقال متحرك بين التبويبات</item>
+        <item>أوصاف لقارئ الشاشة للحلقة وزر الماء؛ علامة ✓ في الأيام التي تحقق فيها الهدف</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>قبل تنزيل تحديث يطلب التطبيق الآن التأكيد لأنه يتجاوز فحوصات المتجر</item>
         <item>جاهز لـ F-Droid وIzzyOnDroid: أوصاف ولقطات شاشة للمتاجر</item>
@@ -480,6 +486,7 @@
     <string name="water_title">الماء</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">إزالة كوب واحد (%1$d مل)</string>
     <string name="water_left">متبقٍ %1$s مل (%2$d أكواب)</string>
     <string name="water_reached">وصلت إلى هدف الماء اليوم</string>
     <string name="water_goal">هدف الماء اليومي</string>

@@ -316,6 +316,12 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>カラーパレットを完成：ダイナミックカラーがオフでも紫色が出ず、ダークテーマでボタンの文字が読みやすく</item>
+        <item>カウント中に数字がずれなくなりました；ライトテーマで起動時に暗い画面が出なくなりました</item>
+        <item>目標リングと歩数がなめらかなアニメーションで増加；タブ切り替えのアニメーション</item>
+        <item>スクリーンリーダー用にリングと水ボタンの説明を追加；目標達成日に ✓ を表示</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>更新をダウンロードする前に確認するようになりました（アプリストアのチェックを通らないため）</item>
         <item>F-Droid と IzzyOnDroid への準備：ストア用の説明とスクリーンショットを追加</item>
@@ -480,6 +486,7 @@
     <string name="water_title">水分</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">コップ1杯（%1$d ml）を取り消す</string>
     <string name="water_left">あと %1$s ml（%2$d 杯）</string>
     <string name="water_reached">今日の水分目標を達成しました</string>
     <string name="water_goal">1日の水分目標</string>

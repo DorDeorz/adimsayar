@@ -1,0 +1,4 @@
+- Complete color palette: no purple tones with dynamic color off, readable button text in dark theme
+- Numbers no longer jump while counting; no dark flash on launch in light theme
+- Goal ring and step count fill with a smooth animation; animated tab switching
+- Screen reader labels for the ring and water button; ✓ mark on days that reached the goal

@@ -316,6 +316,12 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_9_6">
+        <item>Palette de couleurs complète : plus de tons violets sans couleurs dynamiques, texte des boutons lisible en thème sombre</item>
+        <item>Les chiffres ne sautent plus pendant le comptage ; plus de flash sombre au lancement en thème clair</item>
+        <item>L\'anneau d\'objectif et le nombre de pas se remplissent avec une animation douce ; changement d\'onglet animé</item>
+        <item>Libellés pour lecteur d\'écran sur l\'anneau et le bouton d\'eau ; marque ✓ les jours où l\'objectif est atteint</item>
+    </string-array>
     <string-array name="release_notes_0_9_5">
         <item>Avant de télécharger une mise à jour, l\'appli demande une confirmation, car elle contourne les vérifications du magasin</item>
         <item>Prête pour F-Droid et IzzyOnDroid : descriptions et captures pour les magasins</item>
@@ -480,6 +486,7 @@
     <string name="water_title">Eau</string>
     <string name="water_value">%1$s / %2$s ml</string>
     <string name="water_add_glass">+%1$d ml</string>
+    <string name="water_remove_glass">Retirer un verre (%1$d ml)</string>
     <string name="water_left">Encore %1$s ml (%2$d verres)</string>
     <string name="water_reached">Objectif d’eau du jour atteint</string>
     <string name="water_goal">Objectif d’eau quotidien</string>
