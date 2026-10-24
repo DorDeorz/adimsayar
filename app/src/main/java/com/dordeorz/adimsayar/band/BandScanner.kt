@@ -18,6 +18,14 @@ class BandScanner(private val context: Context) {
         val adapter = context.getSystemService(BluetoothManager::class.java)?.adapter ?: return false
         if (!adapter.isEnabled) return false
         val scanner = adapter.bluetoothLeScanner ?: return false
+        try {
+            adapter.bondedDevices?.forEach { device ->
+                val name = device.name ?: return@forEach
+                if (NAMES.any { name.startsWith(it) }) onFound(FoundBand(device.address, name))
+            }
+        } catch (e: SecurityException) {
+            return false
+        }
         val cb = object : ScanCallback() {
             override fun onScanResult(callbackType: Int, result: ScanResult) {
                 val name = result.scanRecord?.deviceName ?: return
