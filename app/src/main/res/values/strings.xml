@@ -454,6 +454,11 @@
 
     <string name="oem_transsion_1">Otomatik yönetim → uygulama listesinden FitWren\'i seç, üç izni de aç</string>
     <string name="wearable_card_title">Bileklik adımlarını kullan</string>
+    <string name="wearable_resync">Bileklik verilerini yeniden eşitle</string>
+    <string name="wearable_resync_hint">Son 30 günün bileklik verilerini Health Connect\'ten baştan okur. Bileklik uygulaması eksik saatleri geç yazdıysa onları da alır.</string>
+    <string name="wearable_resync_started">Bileklik verileri yeniden okunuyor…</string>
+    <string name="wearable_resync_done">Bileklik verileri yeniden okundu</string>
+    <string name="wearable_resync_failed">Bileklik verileri okunamadı, biraz sonra tekrar dene</string>
     <string name="wearable_card_text">Mi Fitness gibi bileklik uygulamalarının Health Connect\'e yazdığı adımlar okunur. Bilekliğin adım saydığı saatlerde onun sayısı, diğer saatlerde telefonun sayısı kullanılır. İzin verirsen egzersiz, mesafe, kalori, nabız ve uyku da Geçmiş\'te gösterilir.</string>
     <string name="wearable_permission_denied">Health Connect adım okuma izni verilmedi.</string>
     <string name="wearable_unavailable">Health Connect bu telefonda yok. Android 13 ve öncesinde Play Store\'dan Health Connect uygulamasını kur.</string>

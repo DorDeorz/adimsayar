@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">Gerenciamento automático → selecione FitWren na lista de apps e ative as três permissões</string>
     <string name="wearable_card_title">Usar passos da pulseira</string>
+    <string name="wearable_resync">Ressincronizar a pulseira</string>
+    <string name="wearable_resync_hint">Lê de novo no Health Connect os dados da pulseira dos últimos 30 dias, incluindo horas que o app dela gravou com atraso.</string>
+    <string name="wearable_resync_started">Lendo de novo os dados da pulseira…</string>
+    <string name="wearable_resync_done">Dados da pulseira lidos de novo</string>
+    <string name="wearable_resync_failed">Não foi possível ler os dados da pulseira, tente de novo daqui a pouco</string>
     <string name="wearable_card_text">Lê os passos que apps de pulseira como o Mi Fitness gravam no Health Connect. Nas horas contadas pela pulseira, é usada a contagem dela; nas outras, a do telefone. Se você permitir, o histórico também mostra treinos, distância, calorias, frequência cardíaca e sono.</string>
     <string name="wearable_permission_denied">A permissão para ler passos do Health Connect não foi concedida.</string>
     <string name="wearable_unavailable">O Health Connect não está neste telefone. No Android 13 ou anterior, instale o app Health Connect pela Play Store.</string>

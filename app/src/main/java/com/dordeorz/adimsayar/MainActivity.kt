@@ -107,6 +107,7 @@ class MainActivity : ComponentActivity() {
         onServiceEnabledChange = ::changeServiceEnabled,
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
+        onWearableResync = ::resyncWearable,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = {
             settingsStore.setDynamicColor(it)
@@ -504,6 +505,20 @@ class MainActivity : ComponentActivity() {
                 enableWearable()
             } else {
                 runCatching { wearablePermissionLauncher.launch(WearableSteps.PERMISSIONS) }
+            }
+        }
+    }
+
+    private fun resyncWearable() {
+        val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
+        Toast.makeText(appContext, strings.getString(R.string.wearable_resync_started), Toast.LENGTH_SHORT).show()
+        AppScope.launch(Dispatchers.IO) {
+            val today = WearableSteps.resync(appContext)
+            Widgets.updateAll(appContext)
+            withContext(Dispatchers.Main) {
+                val text = if (today == null) strings.getString(R.string.wearable_resync_failed) else strings.getString(R.string.wearable_resync_done)
+                Toast.makeText(appContext, text, Toast.LENGTH_LONG).show()
             }
         }
     }

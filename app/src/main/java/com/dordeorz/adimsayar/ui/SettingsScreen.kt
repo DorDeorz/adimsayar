@@ -272,6 +272,9 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         checked = state.wearableEnabled,
                         onCheckedChange = actions.onWearableEnabledChange,
                     )
+                    if (state.wearableEnabled) {
+                        ClickRow(stringResource(R.string.wearable_resync), stringResource(R.string.wearable_resync_hint), actions.onWearableResync)
+                    }
                 }
                 if (showService) {
                     SwitchRow(

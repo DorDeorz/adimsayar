@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">Automatische Verwaltung → FitWren in der App-Liste auswählen, alle drei Berechtigungen einschalten</string>
     <string name="wearable_card_title">Armband-Schritte verwenden</string>
+    <string name="wearable_resync">Armbanddaten neu synchronisieren</string>
+    <string name="wearable_resync_hint">Liest die Armbanddaten der letzten 30 Tage erneut aus Health Connect, auch Stunden, die die Armband-App spät geschrieben hat.</string>
+    <string name="wearable_resync_started">Armbanddaten werden neu gelesen…</string>
+    <string name="wearable_resync_done">Armbanddaten neu gelesen</string>
+    <string name="wearable_resync_failed">Armbanddaten konnten nicht gelesen werden, versuche es gleich noch einmal</string>
     <string name="wearable_card_text">Liest die Schritte, die Armband-Apps wie Mi Fitness in Health Connect schreiben. In Stunden, in denen das Armband gezählt hat, zählt das Armband, sonst das Telefon. Wenn du es erlaubst, werden auch Trainings, Strecke, Kalorien, Puls und Schlaf im Verlauf angezeigt.</string>
     <string name="wearable_permission_denied">Die Berechtigung zum Lesen von Schritten in Health Connect wurde nicht erteilt.</string>
     <string name="wearable_unavailable">Health Connect ist auf diesem Telefon nicht vorhanden. Installiere unter Android 13 und älter die App Health Connect aus dem Play Store.</string>

@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">Gestion automatique → sélectionnez FitWren dans la liste des applications, activez les trois autorisations</string>
     <string name="wearable_card_title">Utiliser les pas du bracelet</string>
+    <string name="wearable_resync">Resynchroniser le bracelet</string>
+    <string name="wearable_resync_hint">Relit depuis Health Connect les données du bracelet des 30 derniers jours, y compris les heures écrites en retard par son application.</string>
+    <string name="wearable_resync_started">Relecture des données du bracelet…</string>
+    <string name="wearable_resync_done">Données du bracelet relues</string>
+    <string name="wearable_resync_failed">Impossible de lire les données du bracelet, réessayez dans un instant</string>
     <string name="wearable_card_text">Lit les pas que les applis de bracelet comme Mi Fitness écrivent dans Health Connect. Pour les heures comptées par le bracelet, son total est utilisé, sinon celui du téléphone. Si tu l\'autorises, l\'historique affiche aussi entraînements, distance, calories, fréquence cardiaque et sommeil.</string>
     <string name="wearable_permission_denied">L\'autorisation de lire les pas dans Health Connect n\'a pas été accordée.</string>
     <string name="wearable_unavailable">Health Connect n\'est pas présent sur ce téléphone. Sous Android 13 ou antérieur, installe l\'appli Health Connect depuis le Play Store.</string>

@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">自动管理 → 在应用列表中选择 FitWren，开启全部三项权限</string>
     <string name="wearable_card_title">使用手环步数</string>
+    <string name="wearable_resync">重新同步手环数据</string>
+    <string name="wearable_resync_hint">从 Health Connect 重新读取最近 30 天的手环数据，包括手环应用延迟写入的时段。</string>
+    <string name="wearable_resync_started">正在重新读取手环数据…</string>
+    <string name="wearable_resync_done">已重新读取手环数据</string>
+    <string name="wearable_resync_failed">无法读取手环数据，请稍后再试</string>
     <string name="wearable_card_text">读取 Mi Fitness 等手环应用写入 Health Connect 的步数。手环计步的时段使用手环的计数，其他时段使用手机的计数。如果你允许，历史记录中还会显示锻炼、距离、卡路里、心率和睡眠。</string>
     <string name="wearable_permission_denied">未授予读取 Health Connect 步数的权限。</string>
     <string name="wearable_unavailable">此手机上没有 Health Connect。在 Android 13 及更早版本上，请从 Play 商店安装 Health Connect 应用。</string>

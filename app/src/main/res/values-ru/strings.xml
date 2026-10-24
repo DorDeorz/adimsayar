@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">Автоуправление → выберите FitWren в списке приложений и включите все три разрешения</string>
     <string name="wearable_card_title">Использовать шаги браслета</string>
+    <string name="wearable_resync">Пересинхронизировать браслет</string>
+    <string name="wearable_resync_hint">Заново читает из Health Connect данные браслета за последние 30 дней, включая часы, которые его приложение записало с опозданием.</string>
+    <string name="wearable_resync_started">Данные браслета читаются заново…</string>
+    <string name="wearable_resync_done">Данные браслета прочитаны заново</string>
+    <string name="wearable_resync_failed">Не удалось прочитать данные браслета, попробуйте чуть позже</string>
     <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В часы, когда считал браслет, используется его счёт, в остальные — счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
     <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
     <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>

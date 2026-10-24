@@ -453,6 +453,11 @@
 
     <string name="oem_transsion_1">자동 관리 → 앱 목록에서 FitWren 선택 후 세 가지 권한 모두 켜기</string>
     <string name="wearable_card_title">밴드 걸음 수 사용</string>
+    <string name="wearable_resync">밴드 데이터 다시 동기화</string>
+    <string name="wearable_resync_hint">Health Connect에서 최근 30일의 밴드 데이터를 다시 읽습니다. 밴드 앱이 늦게 기록한 시간도 가져옵니다.</string>
+    <string name="wearable_resync_started">밴드 데이터를 다시 읽는 중…</string>
+    <string name="wearable_resync_done">밴드 데이터를 다시 읽었습니다</string>
+    <string name="wearable_resync_failed">밴드 데이터를 읽지 못했습니다. 잠시 후 다시 시도하세요</string>
     <string name="wearable_card_text">Mi Fitness 같은 밴드 앱이 Health Connect에 기록한 걸음 수를 읽습니다. 밴드가 측정한 시간대는 밴드의 걸음 수를, 그 외 시간대는 휴대폰의 걸음 수를 사용합니다. 허용하면 기록 화면에 운동, 거리, 칼로리, 심박수, 수면도 표시됩니다.</string>
     <string name="wearable_permission_denied">Health Connect 걸음 수 읽기 권한이 허용되지 않았습니다.</string>
     <string name="wearable_unavailable">이 휴대폰에 Health Connect가 없습니다. Android 13 이하에서는 Play 스토어에서 Health Connect 앱을 설치하세요.</string>

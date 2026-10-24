@@ -11,6 +11,7 @@ import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import com.dordeorz.adimsayar.R
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import java.time.Duration
 import java.time.LocalDate
@@ -25,12 +26,14 @@ object WearableSteps {
     private const val KEY_ENABLED = "wearable_source"
     private const val KEY_BACKFILLED = "wearable_backfilled_hourly"
     private const val BACKFILL_DAYS = 30L
-    private const val RECENT_DAYS = 1L
+    private const val RECENT_DAYS = 6L
     private const val KEY_NEXT_ATTEMPT = "wearable_next_attempt"
     private const val KEY_NEXT_APP_ATTEMPT = "wearable_next_app_attempt"
     private const val APP_INTERVAL_MS = 60 * 1000L
     private const val MIN_INTERVAL_MS = 5 * 60 * 1000L
     private const val ERROR_BACKOFF_MS = 60 * 60 * 1000L
+    private const val RESYNC_ATTEMPTS = 10
+    private const val RESYNC_WAIT_MS = 1_000L
     const val MAX_PAGES = 20
 
     val READ_STEPS: String = HealthPermission.getReadPermission(StepsRecord::class)
@@ -54,6 +57,19 @@ object WearableSteps {
             remove(KEY_NEXT_APP_ATTEMPT)
         }
         if (!enabled) StepRepository.get(context).clearBandDays()
+    }
+
+    suspend fun resync(context: Context): Long? {
+        prefs(context).edit(commit = true) {
+            putBoolean(KEY_BACKFILLED, false)
+            remove(KEY_NEXT_ATTEMPT)
+            remove(KEY_NEXT_APP_ATTEMPT)
+        }
+        repeat(RESYNC_ATTEMPTS) {
+            if (!running.isLocked) return sync(context, ReadSource.App)
+            delay(RESYNC_WAIT_MS)
+        }
+        return null
     }
 
     suspend fun hasPermission(context: Context): Boolean =
