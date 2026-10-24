@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
+import android.bluetooth.BluetoothStatusCodes
 import android.content.Context
 import android.os.Build
 import android.text.format.DateFormat
@@ -305,7 +306,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
 
     private fun write(characteristic: BluetoothGattCharacteristic, value: ByteArray): Boolean =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            gatt.writeCharacteristic(characteristic, value, characteristic.writeType) == BluetoothGatt.GATT_SUCCESS
+            gatt.writeCharacteristic(characteristic, value, characteristic.writeType) == BluetoothStatusCodes.SUCCESS
         } else {
             @Suppress("DEPRECATION")
             characteristic.value = value
@@ -315,7 +316,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
 
     private fun writeDescriptor(descriptor: BluetoothGattDescriptor): Boolean =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            gatt.writeDescriptor(descriptor, BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE) == BluetoothGatt.GATT_SUCCESS
+            gatt.writeDescriptor(descriptor, BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE) == BluetoothStatusCodes.SUCCESS
         } else {
             @Suppress("DEPRECATION")
             descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
