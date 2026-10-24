@@ -2,6 +2,14 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.10.0
+
+- Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar bir kez Xiaomi Cloud Tokens Extractor ile alınır. Şimdilik yalnızca adımlar okunur.
+- Health Connect seçeneği ayrı olarak duruyor (Samsung ve diğer saatler için). İkisi aynı anda açık olmaz.
+- Health Connect'ten her okumada son 7 gün yeniden okunuyor; Mi Fitness'ın geç yazdığı adımlar kaçmıyor. Ayarlar'a "Bileklik verilerini yeniden eşitle" eklendi.
+- Lisans MIT'den AGPL-3.0'a geçti: bileklik bağlantısı Gadgetbridge'in Xiaomi koduna dayanıyor.
+- Veritabanı sürümü 5 (yeni `band_hours` tablosu).
+
 ## 0.9.6
 
 - Renk paleti tamamlandı: dinamik renk kapalıyken veya Android 12 öncesinde mor tonlar kalmadı, koyu temada dolgulu buton yazıları okunuyor; widget'lar da aynı paleti kullanıyor

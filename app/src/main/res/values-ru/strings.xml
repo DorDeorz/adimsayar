@@ -316,6 +316,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Прямое подключение браслета: Настройки → Подключиться к браслету напрямую читает шаги Xiaomi Smart Band 8 без Mi Fitness и Health Connect</item>
+        <item>Последние 7 дней снова читаются из Health Connect, поэтому опоздавшие шаги браслета больше не теряются. В Настройки добавлено «Синхронизировать заново»</item>
+        <item>Лицензия теперь AGPL-3.0: подключение браслета основано на коде Gadgetbridge</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Полная цветовая палитра: без фиолетовых оттенков при выключенных динамических цветах, читаемый текст кнопок в тёмной теме</item>
         <item>Цифры больше не прыгают при подсчёте; нет тёмной вспышки при запуске в светлой теме</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">Шаги, вода, сон и пульс в одном виджете</string>
     <string name="widget_summary_distance">Расстояние</string>
     <string name="widget_summary_calories">Калории</string>
+    <string name="band_title">Подключиться к браслету напрямую</string>
+    <string name="band_hint">Получать шаги с браслета Xiaomi без Mi Fitness</string>
+    <string name="band_step_about">Как это работает</string>
+    <string name="band_about_text">FitWren сам подключается к браслету по Bluetooth и читает шаги напрямую. Mi Fitness и Health Connect не нужны.\n\nПока поддерживаются Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 и Redmi Watch 2 Lite.\n\nБраслет подключается только к одному приложению. Получив ключ, удалите Mi Fitness с телефона. Не удаляйте браслет внутри Mi Fitness, иначе браслет сбросится и ключ изменится.</string>
+    <string name="band_step_key">Ключ</string>
+    <string name="band_key_help">Браслет защищён ключом, привязанным к вашему аккаунту Xiaomi. Ключ нужно один раз получить на компьютере:\n1. На компьютере скачайте и откройте token_extractor.exe со страницы github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Войдите в аккаунт Xiaomi, который используете в Mi Fitness.\n3. Когда спросят регион, оставьте поле пустым и нажмите Enter.\n4. Найдите браслет в списке. Введите здесь 32-символьный код из строки BLE KEY.</string>
+    <string name="band_key_label">Ключ (32 символа)</string>
+    <string name="band_key_save">Сохранить</string>
+    <string name="band_key_saved">Ключ сохранён</string>
+    <string name="band_key_invalid">Ключ должен состоять из 32 символов (0-9, a-f)</string>
+    <string name="band_step_device">Браслет</string>
+    <string name="band_device_none">Браслет ещё не выбран.</string>
+    <string name="band_device_selected">Выбран: %1$s</string>
+    <string name="band_scan">Найти браслет</string>
+    <string name="band_scanning">Поиск… Держите браслет рядом с телефоном.</string>
+    <string name="band_scan_empty">Браслет не найден. Включён ли Bluetooth? Возможно, к браслету подключён Mi Fitness.</string>
+    <string name="band_scan_denied">Разрешение Bluetooth не выдано.</string>
+    <string name="band_step_test">Подключить и проверить</string>
+    <string name="band_test">Подключить и проверить</string>
+    <string name="band_testing">Подключение…</string>
+    <string name="band_last_sync">Последняя синхронизация: %1$s</string>
+    <string name="band_enable">Брать шаги с браслета</string>
+    <string name="band_enable_hint">Если включено, FitWren подключается к браслету при открытии приложения и каждые 15 минут. Вариант Health Connect выключается.</string>
+    <string name="band_result_ok">Подключено, шаги прочитаны</string>
+    <string name="band_result_bluetooth_off">Bluetooth выключен</string>
+    <string name="band_result_permission">Нет разрешения Bluetooth</string>
+    <string name="band_result_connect">Не удалось подключиться к браслету. Он может быть далеко, или подключён Mi Fitness.</string>
+    <string name="band_result_unsupported">Это устройство пока не поддерживается</string>
+    <string name="band_result_auth">Ключ не принят. Проверьте ключ.</string>
+    <string name="band_result_timeout">Браслет не ответил</string>
+    <string name="log_band_synced">Браслет (напрямую): прочитано файлов: %1$d</string>
+    <string name="log_band_failed">Браслет (напрямую): %1$s</string>
 </resources>

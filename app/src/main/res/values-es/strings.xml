@@ -316,6 +316,11 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Conexión directa con la pulsera: Ajustes → Conectar directamente a la pulsera lee los pasos de Xiaomi Smart Band 8 sin Mi Fitness ni Health Connect</item>
+        <item>Se vuelven a leer los últimos 7 días de Health Connect, así no se pierden pasos de la pulsera que llegan tarde. Se añadió \"Volver a sincronizar\" en Ajustes</item>
+        <item>La licencia ahora es AGPL-3.0: la conexión con la pulsera se basa en el código de Gadgetbridge</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Paleta de colores completa: sin tonos morados con el color dinámico desactivado, texto de botones legible en tema oscuro</item>
         <item>Los números ya no saltan al contar; sin destello oscuro al abrir en tema claro</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">Pasos, agua, sueño y pulso en un widget</string>
     <string name="widget_summary_distance">Distancia</string>
     <string name="widget_summary_calories">Calorías</string>
+    <string name="band_title">Conectar directamente a la pulsera</string>
+    <string name="band_hint">Obtén los pasos de una pulsera Xiaomi sin Mi Fitness</string>
+    <string name="band_step_about">Cómo funciona</string>
+    <string name="band_about_text">FitWren se conecta por sí misma a la pulsera por Bluetooth y lee los pasos directamente. No hacen falta Mi Fitness ni Health Connect.\n\nPor ahora son compatibles Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 y Redmi Watch 2 Lite.\n\nLa pulsera se conecta a una sola app a la vez. Cuando tengas la clave, desinstala Mi Fitness del teléfono. No quites la pulsera dentro de Mi Fitness: la pulsera se restablece y la clave cambia.</string>
+    <string name="band_step_key">Clave</string>
+    <string name="band_key_help">La pulsera está protegida por una clave vinculada a tu cuenta de Xiaomi. Debes obtenerla una vez en un ordenador:\n1. En un ordenador, descarga y abre token_extractor.exe desde github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Inicia sesión con la cuenta de Xiaomi que usas en Mi Fitness.\n3. Cuando pida una región, déjala vacía y pulsa Intro.\n4. Busca tu pulsera en la lista. Escribe aquí el código de 32 caracteres de la línea BLE KEY.</string>
+    <string name="band_key_label">Clave (32 caracteres)</string>
+    <string name="band_key_save">Guardar</string>
+    <string name="band_key_saved">Clave guardada</string>
+    <string name="band_key_invalid">La clave debe tener 32 caracteres (0-9, a-f)</string>
+    <string name="band_step_device">Pulsera</string>
+    <string name="band_device_none">Aún no has elegido una pulsera.</string>
+    <string name="band_device_selected">Elegida: %1$s</string>
+    <string name="band_scan">Buscar pulsera</string>
+    <string name="band_scanning">Buscando… Mantén la pulsera cerca del teléfono.</string>
+    <string name="band_scan_empty">No se encontró ninguna pulsera. ¿Está activado el Bluetooth? Puede que Mi Fitness esté conectada a la pulsera.</string>
+    <string name="band_scan_denied">No se concedió el permiso de Bluetooth.</string>
+    <string name="band_step_test">Conectar y probar</string>
+    <string name="band_test">Conectar y probar</string>
+    <string name="band_testing">Conectando…</string>
+    <string name="band_last_sync">Última sincronización: %1$s</string>
+    <string name="band_enable">Tomar los pasos de la pulsera</string>
+    <string name="band_enable_hint">Si está activado, FitWren se conecta a la pulsera al abrir la app y cada 15 minutos. La opción de Health Connect se desactiva.</string>
+    <string name="band_result_ok">Conectado, se leyeron los pasos</string>
+    <string name="band_result_bluetooth_off">El Bluetooth está desactivado</string>
+    <string name="band_result_permission">Sin permiso de Bluetooth</string>
+    <string name="band_result_connect">No se pudo conectar a la pulsera. Puede estar lejos o Mi Fitness puede estar conectada.</string>
+    <string name="band_result_unsupported">Este dispositivo aún no es compatible</string>
+    <string name="band_result_auth">La clave no fue aceptada. Revisa la clave.</string>
+    <string name="band_result_timeout">La pulsera no respondió</string>
+    <string name="log_band_synced">Pulsera (directa): %1$d archivos leídos</string>
+    <string name="log_band_failed">Pulsera (directa): %1$s</string>
 </resources>

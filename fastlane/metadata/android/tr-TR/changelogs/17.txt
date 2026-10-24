@@ -1,0 +1,3 @@
+- Saate doğrudan bağlantı: Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur
+- Health Connect'ten son 7 gün yeniden okunuyor, geç gelen bileklik adımları kaçmıyor; Ayarlar'da "Bileklik verilerini yeniden eşitle"
+- Lisans AGPL-3.0 oldu (bileklik bağlantısı Gadgetbridge'e dayanıyor)

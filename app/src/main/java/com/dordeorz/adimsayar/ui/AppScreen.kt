@@ -102,6 +102,7 @@ class MainActions(
     val onXiaomiEnabledChange: (Boolean) -> Unit,
     val onWearableEnabledChange: (Boolean) -> Unit,
     val onWearableResync: () -> Unit,
+    val onBandDirectChange: suspend (Boolean) -> Unit,
     val onThemeModeChange: (ThemeMode) -> Unit,
     val onDynamicColorChange: (Boolean) -> Unit,
     val onWidgetOpacityChange: (Int) -> Unit,

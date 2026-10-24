@@ -316,6 +316,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Ligação direta à pulseira: Definições → Ligar diretamente à pulseira lê os passos da Xiaomi Smart Band 8 sem Mi Fitness nem Health Connect</item>
+        <item>Os últimos 7 dias voltam a ser lidos do Health Connect, assim os passos da pulseira que chegam tarde não se perdem. \"Sincronizar novamente\" adicionado às Definições</item>
+        <item>A licença agora é AGPL-3.0: a ligação à pulseira baseia-se no código do Gadgetbridge</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Paleta de cores completa: sem tons roxos com cor dinâmica desligada, texto dos botões legível no tema escuro</item>
         <item>Os números não pulam mais ao contar; sem flash escuro ao abrir no tema claro</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">Passos, água, sono e pulso em um widget</string>
     <string name="widget_summary_distance">Distância</string>
     <string name="widget_summary_calories">Calorias</string>
+    <string name="band_title">Ligar diretamente à pulseira</string>
+    <string name="band_hint">Obter os passos de uma pulseira Xiaomi sem o Mi Fitness</string>
+    <string name="band_step_about">Como funciona</string>
+    <string name="band_about_text">O FitWren liga-se sozinho à pulseira por Bluetooth e lê os passos diretamente. Não é preciso o Mi Fitness nem o Health Connect.\n\nPor agora são suportadas Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 e Redmi Watch 2 Lite.\n\nA pulseira liga-se a uma app de cada vez. Depois de obter a chave, desinstale o Mi Fitness do telefone. Não remova a pulseira dentro do Mi Fitness, senão a pulseira é reposta e a chave muda.</string>
+    <string name="band_step_key">Chave</string>
+    <string name="band_key_help">A pulseira está protegida por uma chave ligada à sua conta Xiaomi. Tem de a obter uma vez num computador:\n1. Num computador, transfira e abra token_extractor.exe em github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Inicie sessão com a conta Xiaomi que usa no Mi Fitness.\n3. Quando pedir uma região, deixe em branco e prima Enter.\n4. Encontre a sua pulseira na lista. Escreva aqui o código de 32 caracteres da linha BLE KEY.</string>
+    <string name="band_key_label">Chave (32 caracteres)</string>
+    <string name="band_key_save">Guardar</string>
+    <string name="band_key_saved">Chave guardada</string>
+    <string name="band_key_invalid">A chave deve ter 32 caracteres (0-9, a-f)</string>
+    <string name="band_step_device">Pulseira</string>
+    <string name="band_device_none">Ainda não escolheu uma pulseira.</string>
+    <string name="band_device_selected">Escolhida: %1$s</string>
+    <string name="band_scan">Procurar pulseira</string>
+    <string name="band_scanning">A procurar… Mantenha a pulseira perto do telefone.</string>
+    <string name="band_scan_empty">Nenhuma pulseira encontrada. O Bluetooth está ligado? O Mi Fitness pode estar ligado à pulseira.</string>
+    <string name="band_scan_denied">A permissão de Bluetooth não foi concedida.</string>
+    <string name="band_step_test">Ligar e testar</string>
+    <string name="band_test">Ligar e testar</string>
+    <string name="band_testing">A ligar…</string>
+    <string name="band_last_sync">Última sincronização: %1$s</string>
+    <string name="band_enable">Usar os passos da pulseira</string>
+    <string name="band_enable_hint">Quando ativo, o FitWren liga-se à pulseira ao abrir a app e a cada 15 minutos. A opção Health Connect é desligada.</string>
+    <string name="band_result_ok">Ligado, os passos foram lidos</string>
+    <string name="band_result_bluetooth_off">O Bluetooth está desligado</string>
+    <string name="band_result_permission">Sem permissão de Bluetooth</string>
+    <string name="band_result_connect">Não foi possível ligar à pulseira. Pode estar longe ou o Mi Fitness pode estar ligado.</string>
+    <string name="band_result_unsupported">Este dispositivo ainda não é suportado</string>
+    <string name="band_result_auth">A chave não foi aceite. Verifique a chave.</string>
+    <string name="band_result_timeout">A pulseira não respondeu</string>
+    <string name="log_band_synced">Pulseira (direta): %1$d ficheiros lidos</string>
+    <string name="log_band_failed">Pulseira (direta): %1$s</string>
 </resources>

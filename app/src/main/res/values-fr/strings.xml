@@ -316,6 +316,11 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Connexion directe au bracelet : Paramètres → Se connecter directement au bracelet lit les pas du Xiaomi Smart Band 8 sans Mi Fitness ni Health Connect</item>
+        <item>Les 7 derniers jours sont relus depuis Health Connect, les pas du bracelet arrivés en retard ne sont plus perdus. « Resynchroniser » ajouté aux Paramètres</item>
+        <item>La licence est désormais AGPL-3.0 : la connexion au bracelet s\'appuie sur le code de Gadgetbridge</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Palette de couleurs complète : plus de tons violets sans couleurs dynamiques, texte des boutons lisible en thème sombre</item>
         <item>Les chiffres ne sautent plus pendant le comptage ; plus de flash sombre au lancement en thème clair</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">Pas, eau, sommeil et pouls dans un widget</string>
     <string name="widget_summary_distance">Distance</string>
     <string name="widget_summary_calories">Calories</string>
+    <string name="band_title">Se connecter directement au bracelet</string>
+    <string name="band_hint">Obtenir les pas d\'un bracelet Xiaomi sans Mi Fitness</string>
+    <string name="band_step_about">Fonctionnement</string>
+    <string name="band_about_text">FitWren se connecte lui-même au bracelet en Bluetooth et lit les pas directement. Mi Fitness et Health Connect ne sont pas nécessaires.\n\nPour l\'instant, Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 et Redmi Watch 2 Lite sont pris en charge.\n\nLe bracelet ne se connecte qu\'à une seule app à la fois. Une fois la clé obtenue, désinstallez Mi Fitness du téléphone. Ne supprimez pas le bracelet dans Mi Fitness, sinon il est réinitialisé et la clé change.</string>
+    <string name="band_step_key">Clé</string>
+    <string name="band_key_help">Le bracelet est protégé par une clé liée à votre compte Xiaomi. Vous devez l\'obtenir une fois sur un ordinateur :\n1. Sur un ordinateur, téléchargez et ouvrez token_extractor.exe depuis github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Connectez-vous avec le compte Xiaomi utilisé dans Mi Fitness.\n3. Quand une région est demandée, laissez vide et appuyez sur Entrée.\n4. Trouvez votre bracelet dans la liste. Saisissez ici le code de 32 caractères de la ligne BLE KEY.</string>
+    <string name="band_key_label">Clé (32 caractères)</string>
+    <string name="band_key_save">Enregistrer</string>
+    <string name="band_key_saved">Clé enregistrée</string>
+    <string name="band_key_invalid">La clé doit faire 32 caractères (0-9, a-f)</string>
+    <string name="band_step_device">Bracelet</string>
+    <string name="band_device_none">Aucun bracelet choisi pour l\'instant.</string>
+    <string name="band_device_selected">Choisi : %1$s</string>
+    <string name="band_scan">Rechercher le bracelet</string>
+    <string name="band_scanning">Recherche… Gardez le bracelet près du téléphone.</string>
+    <string name="band_scan_empty">Aucun bracelet trouvé. Le Bluetooth est-il activé ? Mi Fitness est peut-être connecté au bracelet.</string>
+    <string name="band_scan_denied">L\'autorisation Bluetooth n\'a pas été accordée.</string>
+    <string name="band_step_test">Connecter et tester</string>
+    <string name="band_test">Connecter et tester</string>
+    <string name="band_testing">Connexion…</string>
+    <string name="band_last_sync">Dernière synchronisation : %1$s</string>
+    <string name="band_enable">Prendre les pas du bracelet</string>
+    <string name="band_enable_hint">Si activé, FitWren se connecte au bracelet à l\'ouverture de l\'app et toutes les 15 minutes. L\'option Health Connect est désactivée.</string>
+    <string name="band_result_ok">Connecté, les pas ont été lus</string>
+    <string name="band_result_bluetooth_off">Le Bluetooth est désactivé</string>
+    <string name="band_result_permission">Pas d\'autorisation Bluetooth</string>
+    <string name="band_result_connect">Impossible de se connecter au bracelet. Il est peut-être trop loin ou Mi Fitness est connecté.</string>
+    <string name="band_result_unsupported">Cet appareil n\'est pas encore pris en charge</string>
+    <string name="band_result_auth">La clé n\'a pas été acceptée. Vérifiez la clé.</string>
+    <string name="band_result_timeout">Le bracelet n\'a pas répondu</string>
+    <string name="log_band_synced">Bracelet (direct) : %1$d fichiers lus</string>
+    <string name="log_band_failed">Bracelet (direct) : %1$s</string>
 </resources>

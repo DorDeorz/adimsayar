@@ -26,6 +26,15 @@ data class BandSteps(
     val steps: Long,
 )
 
+@Entity(tableName = "band_hours", primaryKeys = ["hour", "file"])
+data class BandHour(
+    val hour: String,
+    val file: Long,
+    val steps: Long,
+)
+
+data class HourTotal(val hour: String, val steps: Long)
+
 @Entity(tableName = "weights")
 data class WeightEntry(
     @PrimaryKey val date: String,
@@ -174,19 +183,26 @@ abstract class DailyStepsDao {
 
     @Query("DELETE FROM band_steps")
     abstract suspend fun clearBand()
+
+    @Upsert
+    abstract suspend fun upsertBandHours(hours: List<BandHour>)
+
+    @Query("SELECT hour, SUM(steps) AS steps FROM band_hours WHERE hour >= :from GROUP BY hour")
+    abstract suspend fun loadBandHours(from: String): List<HourTotal>
 }
 
 @Database(
     entities = [
         DailySteps::class,
         BandSteps::class,
+        BandHour::class,
         WeightEntry::class,
         HourlySteps::class,
         WaterDay::class,
         StreakFreeze::class,
         KeptMedal::class,
     ],
-    version = 4,
+    version = 5,
     exportSchema = false,
 )
 abstract class StepDatabase : RoomDatabase() {
@@ -223,9 +239,15 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `band_hours` (`hour` TEXT NOT NULL, `file` INTEGER NOT NULL, `steps` INTEGER NOT NULL, PRIMARY KEY(`hour`, `file`))")
+            }
+        }
+
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .build()
                 .also { instance = it }
         }

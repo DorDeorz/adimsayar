@@ -12,7 +12,7 @@
 <p align="center">
   <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/DorDeorz/adimsayar?label=indir&amp;color=2E7D32" alt="Son sürüm"></a>
   <img src="https://img.shields.io/badge/Android-6.0%2B-2E7D32" alt="Android 6.0+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?label=lisans&amp;color=2E7D32" alt="MIT lisansı"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?label=lisans&amp;color=2E7D32" alt="AGPL-3.0 lisansı"></a>
 </p>
 
 <p align="center">
@@ -202,6 +202,7 @@ Kotlin, Jetpack Compose, Material 3, Glance ve Room ile yazıldı. `minSdk 23`, 
 ```
 app/src/main/java/com/dordeorz/adimsayar/
 ├── sensor/       adım sensörleri, canlı sayaç, donma kontrolü
+├── band/         Xiaomi bilekliklere doğrudan Bluetooth bağlantısı (Gadgetbridge tabanlı)
 ├── data/         Room veritabanı, adım hesabı, HyperOS ve Health Connect kaynakları, madalyalar, rotalar
 ├── background/   periyodik okuma, gece yarısı alarmı, servisler, hatırlatmalar
 ├── widget/       13 Glance widget'ı
@@ -212,6 +213,6 @@ Release APK'ları GitHub Actions'ta, depo Secret'larında saklanan bir anahtarla
 
 ## Lisans
 
-[MIT](LICENSE). FitWren'in eski adı AdımSayar'dı; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve verilerin etkilenmez.
+[AGPL-3.0](LICENSE). FitWren 0.9.6'ya kadar MIT lisanslıydı. 0.10.0'dan itibaren AGPL-3.0, çünkü bilekliğe doğrudan bağlantı (`app/src/main/java/com/dordeorz/adimsayar/band/`) [Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge)'in Xiaomi kodunun Kotlin'e yeniden yazılmış hâlidir (Telif © Gadgetbridge katkıcıları, AGPL-3.0). FitWren'in eski adı AdımSayar'dı; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve verilerin etkilenmez.
 
 [Claude Code](https://claude.com/claude-code) ile geliştirildi. Kardeş proje: [Kronometre](https://github.com/DorDeorz/kronometre).

@@ -74,6 +74,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
     ReleaseNote("0.9.5", R.array.release_notes_0_9_5),
     ReleaseNote("0.9.4", R.array.release_notes_0_9_4),
@@ -100,6 +101,11 @@ private val WATER_PRESETS = listOf(1_500, 2_000, 2_500, 3_000)
 fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val settings = state.settings
     var dialog by rememberSaveable { mutableStateOf<SettingsDialog?>(null) }
+    var bandSetup by rememberSaveable { mutableStateOf(false) }
+    if (bandSetup) {
+        BandSetupScreen(actions, onClose = { bandSetup = false })
+        return
+    }
     Box {
         Column(
             modifier = Modifier
@@ -254,36 +260,35 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
             val showWearable = state.wearableAvailable || state.wearableEnabled
-            if (showXiaomi || showService || showWearable) {
-                HorizontalDivider(Modifier.padding(vertical = 8.dp))
-                SectionTitle(stringResource(R.string.settings_counting))
-                if (showXiaomi) {
-                    SwitchRow(
-                        title = stringResource(R.string.xiaomi_card_title),
-                        hint = stringResource(R.string.xiaomi_card_text),
-                        checked = state.xiaomiEnabled,
-                        onCheckedChange = actions.onXiaomiEnabledChange,
-                    )
+            HorizontalDivider(Modifier.padding(vertical = 8.dp))
+            SectionTitle(stringResource(R.string.settings_counting))
+            if (showXiaomi) {
+                SwitchRow(
+                    title = stringResource(R.string.xiaomi_card_title),
+                    hint = stringResource(R.string.xiaomi_card_text),
+                    checked = state.xiaomiEnabled,
+                    onCheckedChange = actions.onXiaomiEnabledChange,
+                )
+            }
+            if (showWearable) {
+                SwitchRow(
+                    title = stringResource(R.string.wearable_card_title),
+                    hint = stringResource(R.string.wearable_card_text),
+                    checked = state.wearableEnabled,
+                    onCheckedChange = actions.onWearableEnabledChange,
+                )
+                if (state.wearableEnabled) {
+                    ClickRow(stringResource(R.string.wearable_resync), stringResource(R.string.wearable_resync_hint), actions.onWearableResync)
                 }
-                if (showWearable) {
-                    SwitchRow(
-                        title = stringResource(R.string.wearable_card_title),
-                        hint = stringResource(R.string.wearable_card_text),
-                        checked = state.wearableEnabled,
-                        onCheckedChange = actions.onWearableEnabledChange,
-                    )
-                    if (state.wearableEnabled) {
-                        ClickRow(stringResource(R.string.wearable_resync), stringResource(R.string.wearable_resync_hint), actions.onWearableResync)
-                    }
-                }
-                if (showService) {
-                    SwitchRow(
-                        title = stringResource(R.string.service_card_title),
-                        hint = stringResource(R.string.service_card_text),
-                        checked = state.serviceEnabled,
-                        onCheckedChange = actions.onServiceEnabledChange,
-                    )
-                }
+            }
+            ClickRow(stringResource(R.string.band_title), stringResource(R.string.band_hint)) { bandSetup = true }
+            if (showService) {
+                SwitchRow(
+                    title = stringResource(R.string.service_card_title),
+                    hint = stringResource(R.string.service_card_text),
+                    checked = state.serviceEnabled,
+                    onCheckedChange = actions.onServiceEnabledChange,
+                )
             }
 
             HorizontalDivider(Modifier.padding(vertical = 8.dp))

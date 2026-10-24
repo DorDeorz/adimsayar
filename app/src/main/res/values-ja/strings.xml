@@ -316,6 +316,11 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>バンドへの直接接続: 設定 → バンドに直接接続 で、Mi Fitness や Health Connect なしで Xiaomi Smart Band 8 の歩数を読み取ります</item>
+        <item>Health Connect から直近 7 日分を読み直すため、遅れて届いたバンドの歩数を取りこぼしません。設定に「再同期」を追加</item>
+        <item>ライセンスが AGPL-3.0 になりました: バンド接続は Gadgetbridge のコードに基づいています</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>カラーパレットを完成：ダイナミックカラーがオフでも紫色が出ず、ダークテーマでボタンの文字が読みやすく</item>
         <item>カウント中に数字がずれなくなりました；ライトテーマで起動時に暗い画面が出なくなりました</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">歩数、水分、睡眠、心拍を1つのウィジェットに</string>
     <string name="widget_summary_distance">距離</string>
     <string name="widget_summary_calories">カロリー</string>
+    <string name="band_title">バンドに直接接続</string>
+    <string name="band_hint">Mi Fitness なしで Xiaomi バンドから歩数を取得</string>
+    <string name="band_step_about">しくみ</string>
+    <string name="band_about_text">FitWren が Bluetooth でバンドに直接接続し、歩数を読み取ります。Mi Fitness と Health Connect は不要です。\n\n現在対応しているのは Xiaomi Smart Band 8、Band 8 Active、Redmi Smart Band 2、Redmi Watch 2 Lite です。\n\nバンドは同時に 1 つのアプリにしか接続できません。キーを取得したら、スマートフォンから Mi Fitness をアンインストールしてください。Mi Fitness 内でバンドを削除しないでください。バンドがリセットされ、キーが変わります。</string>
+    <string name="band_step_key">キー</string>
+    <string name="band_key_help">バンドは Xiaomi アカウントに紐づくキーで保護されています。パソコンで一度だけキーを取得する必要があります:\n1. パソコンで github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor から token_extractor.exe をダウンロードして開きます。\n2. Mi Fitness で使っている Xiaomi アカウントでログインします。\n3. 地域を聞かれたら空欄のまま Enter を押します。\n4. 一覧からバンドを探し、BLE KEY 行の 32 文字のコードをここに入力します。</string>
+    <string name="band_key_label">キー(32 文字)</string>
+    <string name="band_key_save">保存</string>
+    <string name="band_key_saved">キーを保存しました</string>
+    <string name="band_key_invalid">キーは 32 文字(0-9、a-f)にしてください</string>
+    <string name="band_step_device">バンド</string>
+    <string name="band_device_none">まだバンドが選択されていません。</string>
+    <string name="band_device_selected">選択中: %1$s</string>
+    <string name="band_scan">バンドを検索</string>
+    <string name="band_scanning">検索中… バンドをスマートフォンの近くに置いてください。</string>
+    <string name="band_scan_empty">バンドが見つかりません。Bluetooth はオンですか?Mi Fitness がバンドに接続している可能性があります。</string>
+    <string name="band_scan_denied">Bluetooth の権限が許可されませんでした。</string>
+    <string name="band_step_test">接続してテスト</string>
+    <string name="band_test">接続してテスト</string>
+    <string name="band_testing">接続中…</string>
+    <string name="band_last_sync">最終同期: %1$s</string>
+    <string name="band_enable">歩数をバンドから取得</string>
+    <string name="band_enable_hint">オンにすると、アプリを開いたときと 15 分ごとに FitWren がバンドに接続します。Health Connect のオプションはオフになります。</string>
+    <string name="band_result_ok">接続し、歩数を読み取りました</string>
+    <string name="band_result_bluetooth_off">Bluetooth がオフです</string>
+    <string name="band_result_permission">Bluetooth の権限がありません</string>
+    <string name="band_result_connect">バンドに接続できませんでした。離れているか、Mi Fitness が接続している可能性があります。</string>
+    <string name="band_result_unsupported">このデバイスにはまだ対応していません</string>
+    <string name="band_result_auth">キーが受け付けられませんでした。キーを確認してください。</string>
+    <string name="band_result_timeout">バンドが応答しませんでした</string>
+    <string name="log_band_synced">バンド(直接): %1$d 件のファイルを読み取り</string>
+    <string name="log_band_failed">バンド(直接): %1$s</string>
 </resources>

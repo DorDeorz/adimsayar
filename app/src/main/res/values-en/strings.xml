@@ -316,6 +316,11 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Direct band connection: Settings → Connect to the band directly reads Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect</item>
+        <item>The last 7 days are read again from Health Connect, so late band steps are no longer missed. \"Resync\" added to Settings</item>
+        <item>The license is now AGPL-3.0: the band connection is based on Gadgetbridge\'s code</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Complete color palette: no more purple tones with dynamic color off, readable button text in dark theme</item>
         <item>Numbers no longer jump while counting; no dark flash on launch in light theme</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">Steps, water, sleep and heart rate in one widget</string>
     <string name="widget_summary_distance">Distance</string>
     <string name="widget_summary_calories">Calories</string>
+    <string name="band_title">Connect to the band directly</string>
+    <string name="band_hint">Get steps from a Xiaomi band without Mi Fitness</string>
+    <string name="band_step_about">How it works</string>
+    <string name="band_about_text">FitWren connects to the band over Bluetooth itself and reads the steps directly. Mi Fitness and Health Connect are not needed.\n\nFor now Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 and Redmi Watch 2 Lite are supported.\n\nThe band connects to one app at a time. After you get the key, uninstall Mi Fitness from the phone. Do not remove the band inside Mi Fitness, or the band resets and the key changes.</string>
+    <string name="band_step_key">Key</string>
+    <string name="band_key_help">The band is protected by a key tied to your Xiaomi account. You need to get the key once on a computer:\n1. On a computer, download and open token_extractor.exe from github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Sign in with the Xiaomi account you use in Mi Fitness.\n3. When it asks for a region, leave it empty and press Enter.\n4. Find your band in the list. Enter the 32-character code from the BLE KEY line here.</string>
+    <string name="band_key_label">Key (32 characters)</string>
+    <string name="band_key_save">Save</string>
+    <string name="band_key_saved">Key saved</string>
+    <string name="band_key_invalid">The key must be 32 characters (0-9, a-f)</string>
+    <string name="band_step_device">Band</string>
+    <string name="band_device_none">No band selected yet.</string>
+    <string name="band_device_selected">Selected: %1$s</string>
+    <string name="band_scan">Search for band</string>
+    <string name="band_scanning">Searching… Keep the band close to the phone.</string>
+    <string name="band_scan_empty">No band found. Is Bluetooth on? Mi Fitness may be connected to the band.</string>
+    <string name="band_scan_denied">Bluetooth permission was not granted.</string>
+    <string name="band_step_test">Connect and test</string>
+    <string name="band_test">Connect and test</string>
+    <string name="band_testing">Connecting…</string>
+    <string name="band_last_sync">Last sync: %1$s</string>
+    <string name="band_enable">Get steps from the band</string>
+    <string name="band_enable_hint">When on, FitWren connects to the band when the app opens and every 15 minutes. The Health Connect option turns off.</string>
+    <string name="band_result_ok">Connected, steps were read</string>
+    <string name="band_result_bluetooth_off">Bluetooth is off</string>
+    <string name="band_result_permission">No Bluetooth permission</string>
+    <string name="band_result_connect">Could not connect to the band. It may be out of range, or Mi Fitness may be connected.</string>
+    <string name="band_result_unsupported">This device is not supported yet</string>
+    <string name="band_result_auth">The key was not accepted. Check the key.</string>
+    <string name="band_result_timeout">The band did not respond</string>
+    <string name="log_band_synced">Band (direct): %1$d files read</string>
+    <string name="log_band_failed">Band (direct): %1$s</string>
 </resources>

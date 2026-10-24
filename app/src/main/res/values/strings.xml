@@ -316,6 +316,11 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Saate doğrudan bağlantı: Ayarlar → Saate doğrudan bağlan ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
+        <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
+        <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor</item>
         <item>Rakamlar artık sayarken kaymıyor; açılışta açık temada koyu ekran çıkmıyor</item>
@@ -639,4 +644,36 @@
     <string name="widget_summary_description">Adım, su, uyku ve nabız tek widget\'ta</string>
     <string name="widget_summary_distance">Mesafe</string>
     <string name="widget_summary_calories">Kalori</string>
+    <string name="band_title">Saate doğrudan bağlan</string>
+    <string name="band_hint">Xiaomi bileklikten adımları Mi Fitness olmadan al</string>
+    <string name="band_step_about">Nasıl çalışır</string>
+    <string name="band_about_text">FitWren bilekliğe Bluetooth ile kendisi bağlanır ve adımları doğrudan okur. Mi Fitness ve Health Connect gerekmez.\n\nŞimdilik Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 ve Redmi Watch 2 Lite destekleniyor.\n\nBileklik aynı anda tek uygulamaya bağlanır. Anahtarı aldıktan sonra Mi Fitness\'ı telefondan sil. Bilekliği Mi Fitness içinden kaldırma, yoksa bileklik sıfırlanır ve anahtar değişir.</string>
+    <string name="band_step_key">Anahtar</string>
+    <string name="band_key_help">Bileklik, Xiaomi hesabına bağlı bir anahtarla korunur. Anahtarı bilgisayarda bir kez alman gerekir:\n1. Bilgisayarda github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor sayfasından token_extractor.exe dosyasını indir ve aç.\n2. Mi Fitness\'ta kullandığın Xiaomi hesabıyla giriş yap.\n3. Bölge sorulunca boş bırakıp Enter\'a bas.\n4. Listede bilekliğini bul. BLE KEY satırındaki 32 karakterlik kodu buraya yaz.</string>
+    <string name="band_key_label">Anahtar (32 karakter)</string>
+    <string name="band_key_save">Kaydet</string>
+    <string name="band_key_saved">Anahtar kaydedildi</string>
+    <string name="band_key_invalid">Anahtar 32 karakter olmalı (0-9, a-f)</string>
+    <string name="band_step_device">Bileklik</string>
+    <string name="band_device_none">Henüz bileklik seçilmedi.</string>
+    <string name="band_device_selected">Seçili: %1$s</string>
+    <string name="band_scan">Bileklik ara</string>
+    <string name="band_scanning">Aranıyor… Bilekliği telefona yakın tut.</string>
+    <string name="band_scan_empty">Bileklik bulunamadı. Bluetooth açık mı? Mi Fitness bilekliğe bağlı olabilir.</string>
+    <string name="band_scan_denied">Bluetooth izni verilmedi.</string>
+    <string name="band_step_test">Bağlan ve dene</string>
+    <string name="band_test">Bağlan ve dene</string>
+    <string name="band_testing">Bağlanıyor…</string>
+    <string name="band_last_sync">Son eşitleme: %1$s</string>
+    <string name="band_enable">Adımları bileklikten al</string>
+    <string name="band_enable_hint">Açıkken FitWren uygulama açılınca ve 15 dakikada bir bilekliğe bağlanır. Health Connect seçeneği kapanır.</string>
+    <string name="band_result_ok">Bağlantı başarılı, adımlar okundu</string>
+    <string name="band_result_bluetooth_off">Bluetooth kapalı</string>
+    <string name="band_result_permission">Bluetooth izni yok</string>
+    <string name="band_result_connect">Bilekliğe bağlanılamadı. Bileklik uzakta olabilir ya da Mi Fitness bağlı olabilir.</string>
+    <string name="band_result_unsupported">Bu cihaz henüz desteklenmiyor</string>
+    <string name="band_result_auth">Anahtar kabul edilmedi. Anahtarı kontrol et.</string>
+    <string name="band_result_timeout">Bileklik yanıt vermedi</string>
+    <string name="log_band_synced">Bileklik (doğrudan): %1$d dosya okundu</string>
+    <string name="log_band_failed">Bileklik (doğrudan): %1$s</string>
 </resources>

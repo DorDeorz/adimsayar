@@ -128,7 +128,7 @@ object WearableSteps {
         return todaySteps
     }
 
-    private suspend fun merged(context: Context, band: Map<LocalDateTime, Long>, from: LocalDate): Map<LocalDate, Long> {
+    suspend fun merged(context: Context, band: Map<LocalDateTime, Long>, from: LocalDate): Map<LocalDate, Long> {
         val phoneHours = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.hourlyTotals(context, from) else null
         if (phoneHours != null) return StepMath.mergeHourly(band, phoneHours)
         val bandDays = HashMap<LocalDate, Long>()

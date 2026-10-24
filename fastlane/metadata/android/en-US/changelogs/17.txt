@@ -1,0 +1,3 @@
+- Direct band connection: read Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect
+- The last 7 days are read again from Health Connect, so late band steps are not missed; "Resync band data" in Settings
+- License changed to AGPL-3.0 (band connection based on Gadgetbridge)

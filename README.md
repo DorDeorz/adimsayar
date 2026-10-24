@@ -12,7 +12,7 @@
 <p align="center">
   <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/DorDeorz/adimsayar?label=download&amp;color=2E7D32" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/Android-6.0%2B-2E7D32" alt="Android 6.0+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?color=2E7D32" alt="MIT license"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?color=2E7D32" alt="AGPL-3.0 license"></a>
 </p>
 
 <p align="center">
@@ -202,6 +202,7 @@ Built with Kotlin, Jetpack Compose, Material 3, Glance and Room. `minSdk 23`, `t
 ```
 app/src/main/java/com/dordeorz/adimsayar/
 ├── sensor/       step sensors, live counter, frozen sensor check
+├── band/         direct Bluetooth connection to Xiaomi bands (based on Gadgetbridge)
 ├── data/         Room database, step math, HyperOS and Health Connect sources, medals, routes
 ├── background/   periodic reading, midnight alarm, services, reminders
 ├── widget/       13 Glance widgets
@@ -212,6 +213,6 @@ Release APKs are built and signed by GitHub Actions with a key kept in repositor
 
 ## License
 
-[MIT](LICENSE). FitWren was formerly called AdımSayar; the package name `com.dordeorz.adimsayar` stays the same, so updates and your data are not affected.
+[AGPL-3.0](LICENSE). FitWren was MIT licensed up to 0.9.6. From 0.10.0 it is AGPL-3.0, because the direct band connection (`app/src/main/java/com/dordeorz/adimsayar/band/`) is a Kotlin rewrite of [Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge)'s Xiaomi support (Copyright © Gadgetbridge contributors, AGPL-3.0). FitWren was formerly called AdımSayar; the package name `com.dordeorz.adimsayar` stays the same, so updates and your data are not affected.
 
 Built with [Claude Code](https://claude.com/claude-code). Sister project: [Kronometre](https://github.com/DorDeorz/kronometre).

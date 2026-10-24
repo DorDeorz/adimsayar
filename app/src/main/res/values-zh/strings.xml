@@ -316,6 +316,11 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>直接连接手环:设置 → 直接连接手环,无需 Mi Fitness 或 Health Connect 即可读取 Xiaomi Smart Band 8 的步数</item>
+        <item>重新读取 Health Connect 中最近 7 天的数据,迟到的手环步数不再丢失。设置中新增“重新同步”</item>
+        <item>许可证改为 AGPL-3.0:手环连接基于 Gadgetbridge 的代码</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>完整配色：关闭动态配色时不再出现紫色，深色主题下按钮文字清晰可读</item>
         <item>计数时数字不再跳动；浅色主题启动时不再闪现深色屏幕</item>
@@ -638,4 +643,36 @@
     <string name="widget_summary_description">步数、饮水、睡眠和心率尽在一个小组件</string>
     <string name="widget_summary_distance">距离</string>
     <string name="widget_summary_calories">卡路里</string>
+    <string name="band_title">直接连接手环</string>
+    <string name="band_hint">无需 Mi Fitness,直接从小米手环获取步数</string>
+    <string name="band_step_about">工作原理</string>
+    <string name="band_about_text">FitWren 会通过蓝牙自行连接手环并直接读取步数,无需 Mi Fitness 和 Health Connect。\n\n目前支持 Xiaomi Smart Band 8、Band 8 Active、Redmi Smart Band 2 和 Redmi Watch 2 Lite。\n\n手环同一时间只能连接一个应用。获取密钥后,请从手机上卸载 Mi Fitness。不要在 Mi Fitness 中移除手环,否则手环会被重置,密钥也会改变。</string>
+    <string name="band_step_key">密钥</string>
+    <string name="band_key_help">手环受与你的小米账号关联的密钥保护。你需要在电脑上获取一次密钥:\n1. 在电脑上从 github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor 下载并打开 token_extractor.exe。\n2. 使用你在 Mi Fitness 中使用的小米账号登录。\n3. 询问地区时留空并按回车。\n4. 在列表中找到你的手环,将 BLE KEY 行中的 32 位代码填写到这里。</string>
+    <string name="band_key_label">密钥(32 个字符)</string>
+    <string name="band_key_save">保存</string>
+    <string name="band_key_saved">密钥已保存</string>
+    <string name="band_key_invalid">密钥必须为 32 个字符(0-9、a-f)</string>
+    <string name="band_step_device">手环</string>
+    <string name="band_device_none">尚未选择手环。</string>
+    <string name="band_device_selected">已选择:%1$s</string>
+    <string name="band_scan">搜索手环</string>
+    <string name="band_scanning">正在搜索… 请让手环靠近手机。</string>
+    <string name="band_scan_empty">未找到手环。蓝牙已打开吗?Mi Fitness 可能正连接着手环。</string>
+    <string name="band_scan_denied">未授予蓝牙权限。</string>
+    <string name="band_step_test">连接并测试</string>
+    <string name="band_test">连接并测试</string>
+    <string name="band_testing">正在连接…</string>
+    <string name="band_last_sync">上次同步:%1$s</string>
+    <string name="band_enable">从手环获取步数</string>
+    <string name="band_enable_hint">开启后,FitWren 会在打开应用时以及每 15 分钟连接一次手环。Health Connect 选项将关闭。</string>
+    <string name="band_result_ok">已连接,步数已读取</string>
+    <string name="band_result_bluetooth_off">蓝牙已关闭</string>
+    <string name="band_result_permission">没有蓝牙权限</string>
+    <string name="band_result_connect">无法连接手环。手环可能离得太远,或 Mi Fitness 正在连接。</string>
+    <string name="band_result_unsupported">暂不支持此设备</string>
+    <string name="band_result_auth">密钥未被接受。请检查密钥。</string>
+    <string name="band_result_timeout">手环没有响应</string>
+    <string name="log_band_synced">手环(直连):已读取 %1$d 个文件</string>
+    <string name="log_band_failed">手环(直连):%1$s</string>
 </resources>

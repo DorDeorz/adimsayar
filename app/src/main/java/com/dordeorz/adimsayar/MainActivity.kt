@@ -42,6 +42,7 @@ import com.dordeorz.adimsayar.data.NO_ROUTE
 import com.dordeorz.adimsayar.data.NO_ROUTE_START
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
+import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -108,6 +109,7 @@ class MainActivity : ComponentActivity() {
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
         onWearableResync = ::resyncWearable,
+        onBandDirectChange = ::changeBandDirect,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = {
             settingsStore.setDynamicColor(it)
@@ -379,6 +381,12 @@ class MainActivity : ComponentActivity() {
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
+        if (BandDirect.isEnabled(this)) {
+            AppScope.launch(Dispatchers.IO) {
+                BandDirect.sync(appContext, ReadSource.App)
+                Widgets.updateAll(appContext)
+            }
+        }
     }
 
     override fun onResume() {
@@ -509,6 +517,19 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private suspend fun changeBandDirect(enabled: Boolean) {
+        if (enabled) {
+            wearableEnabled = false
+            wearableSync?.cancel()
+            wearableSync = null
+        }
+        val appContext = applicationContext
+        withContext(Dispatchers.IO) {
+            BandDirect.setEnabled(appContext, enabled)
+            Widgets.updateAll(appContext)
+        }
+    }
+
     private fun resyncWearable() {
         val appContext = applicationContext
         val strings = Locales.wrap(appContext)
@@ -527,6 +548,7 @@ class MainActivity : ComponentActivity() {
         wearableEnabled = true
         val appContext = applicationContext
         AppScope.launch(Dispatchers.IO) {
+            if (BandDirect.isEnabled(appContext)) BandDirect.setEnabled(appContext, false)
             WearableSteps.setEnabled(appContext, true)
             withContext(Dispatchers.Main) { startWearableSync() }
         }
