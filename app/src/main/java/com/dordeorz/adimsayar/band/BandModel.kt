@@ -89,6 +89,9 @@ object BandModels {
         huami("Zepp E", BandShape.RoundWatch, "^Zepp E$", sampleSize = 8),
     )
 
+    /** Used for a band whose key came from the Zepp account before its Bluetooth name is known. */
+    val GENERIC_HUAMI: BandModel = huami("Mi Band / Amazfit", BandShape.Band, "^$")
+
     fun find(deviceName: String?): BandModel? {
         val name = deviceName?.trim()?.takeIf { it.isNotEmpty() } ?: return null
         return ALL.firstOrNull { it.matches(name) }

@@ -660,6 +660,12 @@
     <string name="band_cloud_none">此账号中未找到手环。</string>
     <string name="band_cloud_failed">小米登录未完成。请检查网络连接后重试。</string>
     <string name="band_cloud_done">已保存 %1$s 的密钥和地址。</string>
+    <string name="band_zepp_title">用 Zepp Life / Amazfit 账户获取</string>
+    <string name="band_zepp_help">适用于 Mi Band 2–6 和 Amazfit。输入你在 Zepp Life 使用的邮箱和密码。密码只发送到 Zepp 服务器，FitWren 不会保存。如果你用小米账户登录 Zepp Life，此方法无效。</string>
+    <string name="band_zepp_email">邮箱</string>
+    <string name="band_zepp_password">密码</string>
+    <string name="band_zepp_button">用 Zepp 获取密钥</string>
+    <string name="band_zepp_failed">Zepp 登录失败。请检查邮箱和密码后重试。</string>
     <string name="band_key_manual">或者手动输入密钥:</string>
     <string name="band_key_help">手环受与你的小米账号关联的密钥保护。你需要在电脑上获取一次密钥:\n1. 在电脑上从 github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor 下载并打开 token_extractor.exe。\n2. 使用你在 Mi Fitness 中使用的小米账号登录。\n3. 询问地区时留空并按回车。\n4. 在列表中找到你的手环,将 TOKEN 行中的 32 位代码填写到这里。</string>
     <string name="band_key_label">密钥(32 个字符)</string>

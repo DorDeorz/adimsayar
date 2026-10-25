@@ -53,7 +53,12 @@ import com.dordeorz.adimsayar.band.BandResult
 import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.BandScanner
 import com.dordeorz.adimsayar.band.FoundBand
+import com.dordeorz.adimsayar.band.BandFamily
 import com.dordeorz.adimsayar.band.XiaomiCloud
+import com.dordeorz.adimsayar.band.ZeppCloud
+import com.dordeorz.adimsayar.band.ZeppCloudDevice
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.dordeorz.adimsayar.band.XiaomiCloudDevice
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.ReadSource
@@ -82,6 +87,9 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
     var scanMessage by remember { mutableStateOf<Int?>(null) }
     val found = remember { mutableStateListOf<FoundBand>() }
     var cloud by remember { mutableStateOf<CloudState>(CloudState.Idle) }
+    var zeppEmail by rememberSaveable { mutableStateOf("") }
+    var zeppPassword by remember { mutableStateOf("") }
+    var zepp by remember { mutableStateOf<ZeppState>(ZeppState.Idle) }
     var testing by remember { mutableStateOf(false) }
     var testResult by remember { mutableStateOf<BandResult?>(null) }
     val scanner = remember { BandScanner(context.applicationContext) }
@@ -100,6 +108,12 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
         BandDirect.setKey(context, device.key)
         BandDirect.setDevice(context, device.address, device.name)
         return CloudState.Message(R.string.band_cloud_done, device.name)
+    }
+
+    fun saveZeppDevice(device: ZeppCloudDevice): ZeppState {
+        BandDirect.setKey(context, device.key)
+        BandDirect.setDevice(context, device.address, null, BandFamily.Huami)
+        return ZeppState.Message(R.string.band_cloud_done, device.address)
     }
 
     LaunchedEffect(scanning) {
@@ -193,6 +207,63 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                         }
                     }
                     is CloudState.Message -> BandText(state.arg?.let { stringResource(state.text, it) } ?: stringResource(state.text))
+                }
+                Text(stringResource(R.string.band_zepp_title), style = MaterialTheme.typography.bodyLarge)
+                BandText(stringResource(R.string.band_zepp_help))
+                OutlinedTextField(
+                    value = zeppEmail,
+                    onValueChange = { zeppEmail = it.trim() },
+                    label = { Text(stringResource(R.string.band_zepp_email)) },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = zeppPassword,
+                    onValueChange = { zeppPassword = it },
+                    label = { Text(stringResource(R.string.band_zepp_password)) },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedButton(
+                    enabled = zepp != ZeppState.Loading && zeppEmail.isNotEmpty() && zeppPassword.isNotEmpty(),
+                    onClick = {
+                        scope.launch {
+                            zepp = ZeppState.Loading
+                            val client = ZeppCloud()
+                            val email = zeppEmail
+                            val password = zeppPassword
+                            val devices = withContext(Dispatchers.IO) { if (client.login(email, password)) client.devices() else null }
+                            zeppPassword = ""
+                            zepp = when {
+                                devices == null -> ZeppState.Message(R.string.band_zepp_failed)
+                                devices.isEmpty() -> ZeppState.Message(R.string.band_cloud_none)
+                                devices.size == 1 -> saveZeppDevice(devices.first())
+                                else -> ZeppState.Devices(devices.sortedByDescending { it.active })
+                            }
+                            refresh++
+                        }
+                    },
+                ) { Text(stringResource(R.string.band_zepp_button)) }
+                when (val state = zepp) {
+                    ZeppState.Idle -> Unit
+                    ZeppState.Loading -> BandText(stringResource(R.string.band_cloud_loading))
+                    is ZeppState.Devices -> state.devices.forEach { device ->
+                        Text(
+                            device.address,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    zepp = saveZeppDevice(device)
+                                    refresh++
+                                }
+                                .padding(vertical = 8.dp),
+                        )
+                    }
+                    is ZeppState.Message -> BandText(state.arg?.let { stringResource(state.text, it) } ?: stringResource(state.text))
                 }
                 Text(stringResource(R.string.band_key_manual), style = MaterialTheme.typography.bodyLarge)
                 BandText(stringResource(R.string.band_key_help))
@@ -337,6 +408,13 @@ private sealed interface CloudState {
     data object Loading : CloudState
     class Devices(val devices: List<XiaomiCloudDevice>) : CloudState
     class Message(val text: Int, val arg: String? = null) : CloudState
+}
+
+private sealed interface ZeppState {
+    data object Idle : ZeppState
+    data object Loading : ZeppState
+    class Devices(val devices: List<ZeppCloudDevice>) : ZeppState
+    class Message(val text: Int, val arg: String? = null) : ZeppState
 }
 
 @Composable

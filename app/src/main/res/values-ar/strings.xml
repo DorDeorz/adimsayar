@@ -660,6 +660,12 @@
     <string name="band_cloud_none">لم يتم العثور على سوار في هذا الحساب.</string>
     <string name="band_cloud_failed">لم يكتمل تسجيل الدخول إلى Xiaomi. تحقّق من الاتصال بالإنترنت وحاول مجددًا.</string>
     <string name="band_cloud_done">تم حفظ المفتاح والعنوان لـ %1$s.</string>
+    <string name="band_zepp_title">الحصول عليه بحساب Zepp Life / Amazfit</string>
+    <string name="band_zepp_help">لـ Mi Band 2–6 وAmazfit. أدخل البريد وكلمة المرور اللذين تستخدمهما في Zepp Life. تُرسل كلمة المرور إلى خادم Zepp فقط ولا يحفظها FitWren. لا يعمل هذا إذا كنت تدخل إلى Zepp Life بحساب Xiaomi.</string>
+    <string name="band_zepp_email">البريد الإلكتروني</string>
+    <string name="band_zepp_password">كلمة المرور</string>
+    <string name="band_zepp_button">الحصول على المفتاح من Zepp</string>
+    <string name="band_zepp_failed">تعذّر تسجيل الدخول إلى Zepp. تحقق من البريد وكلمة المرور ثم أعد المحاولة.</string>
     <string name="band_key_manual">أو أدخل المفتاح بنفسك:</string>
     <string name="band_key_help">السوار محمي بمفتاح مرتبط بحساب Xiaomi الخاص بك. عليك الحصول على المفتاح مرة واحدة على حاسوب:\n1. على الحاسوب، نزّل token_extractor.exe من github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor وافتحه.\n2. سجّل الدخول بحساب Xiaomi الذي تستخدمه في Mi Fitness.\n3. عندما يسأل عن المنطقة، اتركها فارغة واضغط Enter.\n4. ابحث عن سوارك في القائمة. اكتب هنا الرمز المكوّن من 32 حرفًا من سطر TOKEN.</string>
     <string name="band_key_label">المفتاح (32 حرفًا)</string>

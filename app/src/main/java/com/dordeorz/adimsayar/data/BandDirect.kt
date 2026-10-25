@@ -35,6 +35,7 @@ object BandDirect {
     private const val KEY_NEXT_APP = "band_direct_next_app"
     private const val KEY_NEXT_JOB = "band_direct_next_job"
     private const val KEY_HUAMI_SINCE = "band_direct_huami_since"
+    private const val KEY_FAMILY = "band_direct_family"
     private const val HUAMI_FIRST_DAYS = 7L
     private const val APP_INTERVAL_MS = 5 * 60 * 1000L
     private const val JOB_INTERVAL_MS = 15 * 60 * 1000L - 60 * 1000L
@@ -69,12 +70,18 @@ object BandDirect {
     fun granted(context: Context, permissions: Array<String>): Boolean =
         permissions.all { ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
 
-    fun setDevice(context: Context, address: String, name: String?) {
-        prefs(context).edit {
+    fun setDevice(context: Context, address: String, name: String?, family: BandFamily? = null) {
+        val p = prefs(context)
+        val same = p.getString(KEY_ADDRESS, null).equals(address, ignoreCase = true)
+        p.edit {
             putString(KEY_ADDRESS, address)
-            putString(KEY_NAME, name)
+            putString(KEY_NAME, name ?: if (same) p.getString(KEY_NAME, null) else null)
             remove(KEY_LAST_RESULT)
-            remove(KEY_HUAMI_SINCE)
+            if (!same) remove(KEY_HUAMI_SINCE)
+            when {
+                family != null -> putString(KEY_FAMILY, family.name)
+                !same -> remove(KEY_FAMILY)
+            }
         }
     }
 
@@ -119,6 +126,7 @@ object BandDirect {
             var files = 0
             val name = p.getString(KEY_NAME, null)
             val model = BandModels.find(name)
+                ?: BandModels.GENERIC_HUAMI.takeIf { p.getString(KEY_FAMILY, null) == BandFamily.Huami.name }
             val save: suspend (BandFile) -> Boolean = { file ->
                 val sleep = file.sleep
                 if (sleep != null) {

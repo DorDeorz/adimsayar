@@ -660,6 +660,12 @@
     <string name="band_cloud_none">Nenhuma pulseira encontrada nesta conta.</string>
     <string name="band_cloud_failed">O início de sessão Xiaomi não terminou. Verifica a ligação à internet e tenta de novo.</string>
     <string name="band_cloud_done">Chave e endereço guardados para %1$s.</string>
+    <string name="band_zepp_title">Obter com uma conta Zepp Life / Amazfit</string>
+    <string name="band_zepp_help">Para Mi Band 2–6 e Amazfit. Escreva o e-mail e a palavra-passe que usa no Zepp Life. A palavra-passe vai só para o servidor da Zepp; o FitWren não a guarda. Não funciona se entrar no Zepp Life com uma conta Xiaomi.</string>
+    <string name="band_zepp_email">E-mail</string>
+    <string name="band_zepp_password">Palavra-passe</string>
+    <string name="band_zepp_button">Obter a chave com a Zepp</string>
+    <string name="band_zepp_failed">O início de sessão na Zepp falhou. Verifique o e-mail e a palavra-passe e tente de novo.</string>
     <string name="band_key_manual">Ou escreve a chave manualmente:</string>
     <string name="band_key_help">A pulseira está protegida por uma chave ligada à sua conta Xiaomi. Tem de a obter uma vez num computador:\n1. Num computador, transfira e abra token_extractor.exe em github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Inicie sessão com a conta Xiaomi que usa no Mi Fitness.\n3. Quando pedir uma região, deixe em branco e prima Enter.\n4. Encontre a sua pulseira na lista. Escreva aqui o código de 32 caracteres da linha TOKEN.</string>
     <string name="band_key_label">Chave (32 caracteres)</string>

@@ -660,6 +660,12 @@
     <string name="band_cloud_none">이 계정에서 밴드를 찾지 못했습니다.</string>
     <string name="band_cloud_failed">Xiaomi 로그인이 완료되지 않았습니다. 인터넷 연결을 확인하고 다시 시도하세요.</string>
     <string name="band_cloud_done">%1$s의 키와 주소를 저장했습니다.</string>
+    <string name="band_zepp_title">Zepp Life / Amazfit 계정으로 받기</string>
+    <string name="band_zepp_help">Mi Band 2–6과 Amazfit용입니다. Zepp Life에서 쓰는 이메일과 비밀번호를 입력하세요. 비밀번호는 Zepp 서버로만 가며 FitWren은 저장하지 않습니다. Zepp Life에 Xiaomi 계정으로 로그인한다면 이 방법은 안 됩니다.</string>
+    <string name="band_zepp_email">이메일</string>
+    <string name="band_zepp_password">비밀번호</string>
+    <string name="band_zepp_button">Zepp으로 키 받기</string>
+    <string name="band_zepp_failed">Zepp 로그인에 실패했습니다. 이메일과 비밀번호를 확인하고 다시 시도하세요.</string>
     <string name="band_key_manual">또는 키를 직접 입력하세요:</string>
     <string name="band_key_help">밴드는 Xiaomi 계정에 연결된 키로 보호됩니다. 컴퓨터에서 키를 한 번 받아야 합니다:\n1. 컴퓨터에서 github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor 에서 token_extractor.exe를 다운로드해 엽니다.\n2. Mi Fitness에서 쓰는 Xiaomi 계정으로 로그인합니다.\n3. 지역을 물으면 비워 두고 Enter를 누릅니다.\n4. 목록에서 밴드를 찾아 TOKEN 줄의 32자 코드를 여기에 입력합니다.</string>
     <string name="band_key_label">키(32자)</string>
