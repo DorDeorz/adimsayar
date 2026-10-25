@@ -660,6 +660,10 @@
     <string name="band_scan">Bileklik ara</string>
     <string name="band_scanning">Aranıyor… Bilekliği telefona yakın tut.</string>
     <string name="band_scan_empty">Bileklik bulunamadı. Bluetooth açık mı? Mi Fitness bilekliğe bağlı olabilir.</string>
+    <string name="band_address_help">Ya da adresi elle yaz (Mi Fitness\'ta veya anahtar aracında görünür)</string>
+    <string name="band_address_label">Bileklik adresi</string>
+    <string name="band_address_save">Adresi kaydet</string>
+    <string name="band_address_invalid">Adres geçersiz. Örnek: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">Bluetooth izni verilmedi.</string>
     <string name="band_step_test">Bağlan ve dene</string>
     <string name="band_test">Bağlan ve dene</string>

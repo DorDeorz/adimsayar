@@ -659,6 +659,10 @@
     <string name="band_scan">搜索手环</string>
     <string name="band_scanning">正在搜索… 请让手环靠近手机。</string>
     <string name="band_scan_empty">未找到手环。蓝牙已打开吗?Mi Fitness 可能正连接着手环。</string>
+    <string name="band_address_help">或手动输入地址(可在 Mi Fitness 或密钥工具中找到)</string>
+    <string name="band_address_label">手环地址</string>
+    <string name="band_address_save">保存地址</string>
+    <string name="band_address_invalid">地址无效。示例:D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">未授予蓝牙权限。</string>
     <string name="band_step_test">连接并测试</string>
     <string name="band_test">连接并测试</string>

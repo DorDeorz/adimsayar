@@ -659,6 +659,10 @@
     <string name="band_scan">バンドを検索</string>
     <string name="band_scanning">検索中… バンドをスマートフォンの近くに置いてください。</string>
     <string name="band_scan_empty">バンドが見つかりません。Bluetooth はオンですか?Mi Fitness がバンドに接続している可能性があります。</string>
+    <string name="band_address_help">またはアドレスを直接入力(Mi Fitness またはキー取得ツールに表示)</string>
+    <string name="band_address_label">バンドのアドレス</string>
+    <string name="band_address_save">アドレスを保存</string>
+    <string name="band_address_invalid">アドレスが無効です。例: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">Bluetooth の権限が許可されませんでした。</string>
     <string name="band_step_test">接続してテスト</string>
     <string name="band_test">接続してテスト</string>

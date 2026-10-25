@@ -1,5 +1,6 @@
 package com.dordeorz.adimsayar.ui
 
+import android.bluetooth.BluetoothAdapter
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -65,6 +66,8 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
     val status = remember(refresh) { BandDirect.status(context) }
     var keyText by rememberSaveable { mutableStateOf("") }
     var keyMessage by rememberSaveable { mutableStateOf<Int?>(null) }
+    var addressText by rememberSaveable { mutableStateOf("") }
+    var addressInvalid by rememberSaveable { mutableStateOf(false) }
     var scanning by remember { mutableStateOf(false) }
     var scanMessage by remember { mutableStateOf<Int?>(null) }
     val found = remember { mutableStateListOf<FoundBand>() }
@@ -164,6 +167,24 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                         Text(band.address, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
+                BandText(stringResource(R.string.band_address_help))
+                OutlinedTextField(
+                    value = addressText,
+                    onValueChange = { addressText = it.trim().uppercase() },
+                    label = { Text(stringResource(R.string.band_address_label)) },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters, autoCorrectEnabled = false),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedButton(enabled = addressText.isNotEmpty(), onClick = {
+                    addressInvalid = !BluetoothAdapter.checkBluetoothAddress(addressText)
+                    if (!addressInvalid) {
+                        BandDirect.setDevice(context, addressText, null)
+                        addressText = ""
+                        refresh++
+                    }
+                }) { Text(stringResource(R.string.band_address_save)) }
+                if (addressInvalid) BandText(stringResource(R.string.band_address_invalid))
             }
         }
         item {

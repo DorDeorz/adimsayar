@@ -659,6 +659,10 @@
     <string name="band_scan">البحث عن السوار</string>
     <string name="band_scanning">جارٍ البحث… أبقِ السوار قريبًا من الهاتف.</string>
     <string name="band_scan_empty">لم يتم العثور على سوار. هل البلوتوث مفعّل؟ قد يكون Mi Fitness متصلًا بالسوار.</string>
+    <string name="band_address_help">أو اكتب العنوان بنفسك (يظهر في Mi Fitness أو في أداة المفتاح)</string>
+    <string name="band_address_label">عنوان السوار</string>
+    <string name="band_address_save">حفظ العنوان</string>
+    <string name="band_address_invalid">عنوان غير صالح. مثال: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">لم يتم منح إذن البلوتوث.</string>
     <string name="band_step_test">اتصال واختبار</string>
     <string name="band_test">اتصال واختبار</string>

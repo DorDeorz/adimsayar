@@ -659,6 +659,10 @@
     <string name="band_scan">Rechercher le bracelet</string>
     <string name="band_scanning">Recherche… Gardez le bracelet près du téléphone.</string>
     <string name="band_scan_empty">Aucun bracelet trouvé. Le Bluetooth est-il activé ? Mi Fitness est peut-être connecté au bracelet.</string>
+    <string name="band_address_help">Ou saisissez l\'adresse vous-même (visible dans Mi Fitness ou l\'outil de clé)</string>
+    <string name="band_address_label">Adresse du bracelet</string>
+    <string name="band_address_save">Enregistrer l\'adresse</string>
+    <string name="band_address_invalid">Adresse non valide. Exemple : D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">L\'autorisation Bluetooth n\'a pas été accordée.</string>
     <string name="band_step_test">Connecter et tester</string>
     <string name="band_test">Connecter et tester</string>

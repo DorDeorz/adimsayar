@@ -659,6 +659,10 @@
     <string name="band_scan">Найти браслет</string>
     <string name="band_scanning">Поиск… Держите браслет рядом с телефоном.</string>
     <string name="band_scan_empty">Браслет не найден. Включён ли Bluetooth? Возможно, к браслету подключён Mi Fitness.</string>
+    <string name="band_address_help">Или введите адрес вручную (он есть в Mi Fitness или в утилите ключа)</string>
+    <string name="band_address_label">Адрес браслета</string>
+    <string name="band_address_save">Сохранить адрес</string>
+    <string name="band_address_invalid">Неверный адрес. Пример: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">Разрешение Bluetooth не выдано.</string>
     <string name="band_step_test">Подключить и проверить</string>
     <string name="band_test">Подключить и проверить</string>

@@ -659,6 +659,10 @@
     <string name="band_scan">Search for band</string>
     <string name="band_scanning">Searching… Keep the band close to the phone.</string>
     <string name="band_scan_empty">No band found. Is Bluetooth on? Mi Fitness may be connected to the band.</string>
+    <string name="band_address_help">Or type the address yourself (shown in Mi Fitness or the key tool)</string>
+    <string name="band_address_label">Band address</string>
+    <string name="band_address_save">Save address</string>
+    <string name="band_address_invalid">Invalid address. Example: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">Bluetooth permission was not granted.</string>
     <string name="band_step_test">Connect and test</string>
     <string name="band_test">Connect and test</string>

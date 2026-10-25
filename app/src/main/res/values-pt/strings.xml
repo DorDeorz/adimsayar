@@ -659,6 +659,10 @@
     <string name="band_scan">Procurar pulseira</string>
     <string name="band_scanning">A procurar… Mantenha a pulseira perto do telefone.</string>
     <string name="band_scan_empty">Nenhuma pulseira encontrada. O Bluetooth está ligado? O Mi Fitness pode estar ligado à pulseira.</string>
+    <string name="band_address_help">Ou escreve o endereço manualmente (aparece no Mi Fitness ou na ferramenta da chave)</string>
+    <string name="band_address_label">Endereço da pulseira</string>
+    <string name="band_address_save">Guardar endereço</string>
+    <string name="band_address_invalid">Endereço inválido. Exemplo: D0:62:2C:F7:01:6B</string>
     <string name="band_scan_denied">A permissão de Bluetooth não foi concedida.</string>
     <string name="band_step_test">Ligar e testar</string>
     <string name="band_test">Ligar e testar</string>
