@@ -136,6 +136,15 @@ class StepMathTest {
     }
 
     @Test
+    fun mergeHourlyKeepsWornBandHoursWithoutSteps() {
+        val morning = LocalDateTime.parse("2026-10-11T09:00")
+        val evening = LocalDateTime.parse("2026-10-11T21:00")
+        val band = mapOf(morning to 0L, evening to 200L)
+        val phone = mapOf(morning to 120L, evening to 260L)
+        assertEquals(mapOf(LocalDate.parse("2026-10-11") to 200L), StepMath.mergeHourly(band, phone))
+    }
+
+    @Test
     fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
         val day = LocalDate.parse("2026-10-11")
         assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))

@@ -58,9 +58,13 @@ class XiaomiFileAssembler {
     private fun u16(b: ByteArray, i: Int) = (b[i].toInt() and 0xff) or ((b[i + 1].toInt() and 0xff) shl 8)
 }
 
+class BandMinute(val epochSeconds: Long, val steps: Int, val heartRate: Int) {
+    val worn: Boolean get() = steps > 0 || heartRate in 30..220
+}
+
 object XiaomiDailyDetails {
 
-    fun minuteSteps(fileId: XiaomiFileId, data: ByteArray): List<Pair<Long, Int>>? {
+    fun minutes(fileId: XiaomiFileId, data: ByteArray): List<BandMinute>? {
         val headerSize = when (fileId.version) {
             1, 2 -> 4
             3 -> 5
@@ -73,13 +77,14 @@ object XiaomiDailyDetails {
         buf.position(XiaomiFileId.SIZE + 1)
         val header = ByteArray(headerSize).also { buf.get(it) }
         val parser = ComplexParser(header, buf)
-        val result = ArrayList<Pair<Long, Int>>()
+        val result = ArrayList<BandMinute>()
         var time = fileId.epochSeconds
         try {
             while (buf.hasRemaining()) {
                 parser.reset()
                 var steps = 0
                 var extra = 0
+                var heartRate = 0
                 if (parser.next(16)) {
                     if (parser.has(1)) extra = parser.get(1, 1)
                     if (parser.has(2)) steps = parser.get(2, 14)
@@ -87,7 +92,7 @@ object XiaomiDailyDetails {
                 parser.next(8)
                 parser.next(8)
                 parser.next(16)
-                parser.next(8)
+                if (parser.next(8) && parser.has(0)) heartRate = parser.get(0, 8)
                 parser.next(8)
                 parser.next(16)
                 if (fileId.version >= 3) {
@@ -99,7 +104,7 @@ object XiaomiDailyDetails {
                     parser.next(16)
                     parser.next(16)
                 }
-                result.add(time to steps)
+                result.add(BandMinute(time, steps, heartRate))
                 time += 60
             }
         } catch (e: java.nio.BufferUnderflowException) {

@@ -168,9 +168,11 @@ class XiaomiBandTest {
         assertNotNull(file)
         val id = XiaomiFileId.from(file!!)
         assertEquals(true, id.isDailyDetails)
-        val minutes = XiaomiDailyDetails.minuteSteps(id, file)!!
-        assertEquals(listOf(10, 300, 0), minutes.map { it.second })
-        assertEquals(listOf(id.epochSeconds, id.epochSeconds + 60, id.epochSeconds + 120), minutes.map { it.first })
+        val minutes = XiaomiDailyDetails.minutes(id, file)!!
+        assertEquals(listOf(10, 300, 0), minutes.map { it.steps })
+        assertEquals(listOf(70, 80, 90), minutes.map { it.heartRate })
+        assertEquals(listOf(true, true, true), minutes.map { it.worn })
+        assertEquals(listOf(id.epochSeconds, id.epochSeconds + 60, id.epochSeconds + 120), minutes.map { it.epochSeconds })
     }
 
     @Test

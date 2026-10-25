@@ -4,7 +4,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.10.0
 
-- Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar uygulama içinden Xiaomi hesabıyla giriş yapılarak alınır (QR kodlu giriş, şifre FitWren'e girilmez); elle girmek de mümkün. Bileklik aramada bulunmazsa adres elle yazılabilir. Şimdilik yalnızca adımlar okunur.
+- Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar uygulama içinden Xiaomi hesabıyla giriş yapılarak alınır (QR kodlu giriş, şifre FitWren'e girilmez); elle girmek de mümkün. Bileklik aramada bulunmazsa adres elle yazılabilir. Bilekliğin takılı olduğu saatler (adım ya da nabız kaydı olan) adımsız olsa bile bileklikten sayılır; telefonun o saatlerde saydığı adımlar eklenmez. Şimdilik yalnızca adımlar okunur.
 - Health Connect seçeneği ayrı olarak duruyor (Samsung ve diğer saatler için). İkisi aynı anda açık olmaz.
 - Health Connect'ten her okumada son 7 gün yeniden okunuyor; Mi Fitness'ın geç yazdığı adımlar kaçmıyor. Ayarlar'a "Bileklik verilerini yeniden eşitle" eklendi.
 - Lisans MIT'den AGPL-3.0'a geçti: bileklik bağlantısı Gadgetbridge'in Xiaomi koduna dayanıyor.

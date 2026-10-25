@@ -134,10 +134,10 @@ object BandDirect {
     private fun hourly(file: BandFile): Map<LocalDateTime, Long> {
         val zone = ZoneId.systemDefault()
         val hours = HashMap<LocalDateTime, Long>()
-        for ((seconds, steps) in file.minutes) {
-            if (steps <= 0) continue
-            val hour = Instant.ofEpochSecond(seconds).atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS)
-            hours[hour] = (hours[hour] ?: 0L) + steps
+        for (minute in file.minutes) {
+            if (!minute.worn) continue
+            val hour = Instant.ofEpochSecond(minute.epochSeconds).atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS)
+            hours[hour] = (hours[hour] ?: 0L) + minute.steps
         }
         return hours
     }
