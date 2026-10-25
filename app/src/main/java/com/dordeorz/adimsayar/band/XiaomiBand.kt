@@ -23,7 +23,7 @@ import java.util.UUID
 
 enum class BandResult { Ok, BluetoothOff, NoPermission, ConnectFailed, Unsupported, AuthFailed, Timeout }
 
-class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>, val sleep: BandSleepRecord? = null)
+class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>, val sleep: BandSleepRecord? = null, val samplesOnly: Boolean = false)
 
 @SuppressLint("MissingPermission")
 class XiaomiBand(private val context: Context, private val address: String, private val secret: ByteArray) {
@@ -260,6 +260,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         val file = when {
             id == null -> null
             id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
+            id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(data), samplesOnly = true)
             else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
         }
         if (file == null) {

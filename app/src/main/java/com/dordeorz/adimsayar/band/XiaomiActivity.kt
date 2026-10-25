@@ -11,7 +11,9 @@ data class XiaomiFileId(val epochSeconds: Long, val timezone: Int, val version: 
 
     val isSleep: Boolean get() = flags shr 7 == 0 && (flags shr 2) and 0x1f == SUBTYPE_SLEEP && version <= 4
 
-    val isWanted: Boolean get() = isDailyDetails || isSleep
+    val isManualSamples: Boolean get() = flags == SUBTYPE_MANUAL shl 2 && version == 2
+
+    val isWanted: Boolean get() = isDailyDetails || isSleep || isManualSamples
 
     fun toBytes(): ByteArray = ByteBuffer.allocate(SIZE).order(ByteOrder.LITTLE_ENDIAN)
         .putInt(epochSeconds.toInt())
@@ -23,6 +25,7 @@ data class XiaomiFileId(val epochSeconds: Long, val timezone: Int, val version: 
     companion object {
         const val SIZE = 7
         private const val SUBTYPE_SLEEP = 8
+        private const val SUBTYPE_MANUAL = 6
 
         fun from(bytes: ByteArray, offset: Int = 0): XiaomiFileId {
             val buf = ByteBuffer.wrap(bytes, offset, SIZE).order(ByteOrder.LITTLE_ENDIAN)
@@ -172,7 +175,39 @@ class BandSleepRecord(
     val light: Int,
     val rem: Int,
     val awake: Int,
+    val samples: List<BandMinute> = emptyList(),
 )
+
+object XiaomiManualSamples {
+
+    private const val TYPE_HEART = 0x11
+    private const val TYPE_OXYGEN = 0x12
+    private const val TYPE_STRESS = 0x13
+    private const val TYPE_TEMPERATURE = 0x44
+
+    fun parse(data: ByteArray): List<BandMinute> {
+        val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
+        if (data.size < XiaomiFileId.SIZE + 5) return emptyList()
+        buf.limit(buf.limit() - 4)
+        buf.position(XiaomiFileId.SIZE + 1)
+        val result = ArrayList<BandMinute>()
+        try {
+            while (buf.remaining() >= 5) {
+                val time = buf.int.toLong() and 0xffffffffL
+                when (buf.get().toInt() and 0xff) {
+                    TYPE_HEART -> result.add(BandMinute(time, 0, buf.get().toInt() and 0xff))
+                    TYPE_OXYGEN -> result.add(BandMinute(time, 0, 0, spo2 = buf.get().toInt() and 0xff))
+                    TYPE_STRESS -> result.add(BandMinute(time, 0, 0, stress = buf.get().toInt() and 0xff))
+                    TYPE_TEMPERATURE -> buf.int
+                    else -> break
+                }
+            }
+        } catch (e: java.nio.BufferUnderflowException) {
+            return result
+        }
+        return result
+    }
+}
 
 object XiaomiSleepDetails {
 
@@ -195,8 +230,13 @@ object XiaomiSleepDetails {
                 shift = 1
                 buf.get()
             }
-            if (header and (1 shl (5 - shift)) != 0) skipSamples(buf, fileId.version, 1)
-            if (header and (1 shl (4 - shift)) != 0) skipSamples(buf, fileId.version, 1)
+            val samples = ArrayList<BandMinute>()
+            if (header and (1 shl (5 - shift)) != 0) {
+                readSamples(buf, fileId.version, bed).forEach { (time, value) -> samples.add(BandMinute(time, 0, value)) }
+            }
+            if (header and (1 shl (4 - shift)) != 0) {
+                readSamples(buf, fileId.version, bed).forEach { (time, value) -> samples.add(BandMinute(time, 0, 0, spo2 = value)) }
+            }
             if (fileId.version >= 3 && header and (1 shl (3 - shift)) != 0) skipSamples(buf, fileId.version, 4)
             var summary: BandSleepRecord? = null
             while (buf.remaining() >= 17) {
@@ -217,15 +257,23 @@ object XiaomiSleepDetails {
                     val light = b.short.toInt() and 0xffff
                     val rem = b.short.toInt() and 0xffff
                     val deep = b.short.toInt() and 0xffff
-                    summary = BandSleepRecord(bed, wake, total, deep, light, rem, awake)
+                    summary = BandSleepRecord(bed, wake, total, deep, light, rem, awake, samples)
                 }
             }
-            return summary ?: BandSleepRecord(bed, wake, ((wake - bed) / 60).toInt(), 0, 0, 0, 0)
+            return summary ?: BandSleepRecord(bed, wake, ((wake - bed) / 60).toInt(), 0, 0, 0, 0, samples)
         } catch (e: java.nio.BufferUnderflowException) {
             return null
         } catch (e: IllegalArgumentException) {
             return null
         }
+    }
+
+    private fun readSamples(buf: ByteBuffer, version: Int, bed: Long): List<Pair<Long, Int>> {
+        val unit = (buf.short.toInt() and 0xffff).takeIf { it > 0 } ?: 60
+        val count = buf.short.toInt() and 0xffff
+        if (count == 0) return emptyList()
+        val first = if (version >= 2) buf.int.toLong() and 0xffffffffL else bed
+        return (0 until count).map { index -> first + unit.toLong() * index to (buf.get().toInt() and 0xff) }
     }
 
     private fun skipSamples(buf: ByteBuffer, version: Int, size: Int) {

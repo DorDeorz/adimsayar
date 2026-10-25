@@ -115,6 +115,9 @@ object BandDirect {
                 val sleep = file.sleep
                 if (sleep != null) {
                     BandHealth.saveSleep(context, sleep)
+                    BandHealth.saveMinutes(context, sleep.samples)
+                } else if (file.samplesOnly) {
+                    BandHealth.saveMinutes(context, file.minutes)
                 } else {
                     repository.saveBandHours(file.id.epochSeconds, hourly(file))
                     BandHealth.saveMinutes(context, file.minutes)

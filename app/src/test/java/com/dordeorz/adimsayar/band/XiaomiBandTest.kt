@@ -195,6 +195,35 @@ class XiaomiBandTest {
     }
 
     @Test
+    fun sleepOxygenSamples() {
+        val bed = 1_761_350_400L
+        val wake = bed + 7 * 3600
+        val id = XiaomiFileId(bed, 12, 2, 8 shl 2)
+        val head = ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN).put(0x10).put(0).putInt(bed.toInt()).putInt(wake.toInt()).array()
+        val oxygen = ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN)
+            .putShort(60).putShort(2).putInt((bed + 600).toInt()).put(96).put(94).array()
+        val body = id.toBytes() + byteArrayOf(0) + head + oxygen
+        val sleep = XiaomiSleepDetails.parse(id, body + ByteArray(4))!!
+        assertEquals(listOf(bed + 600, bed + 660), sleep.samples.map { it.epochSeconds })
+        assertEquals(listOf(96, 94), sleep.samples.map { it.spo2 })
+    }
+
+    @Test
+    fun manualSamples() {
+        val id = XiaomiFileId(1_761_350_400L, 12, 2, 6 shl 2)
+        val body = ByteBuffer.allocate(23).order(ByteOrder.LITTLE_ENDIAN)
+            .put(id.toBytes()).put(0)
+            .putInt(1_761_350_500).put(0x12).put(97)
+            .putInt(1_761_350_560).put(0x13).put(28)
+            .array()
+        assertEquals(true, id.isManualSamples)
+        assertEquals(true, id.isWanted)
+        val samples = XiaomiManualSamples.parse(body + ByteArray(4))
+        assertEquals(listOf(97, 0), samples.map { it.spo2 })
+        assertEquals(listOf(0, 28), samples.map { it.stress })
+    }
+
+    @Test
     fun assemblerRejectsBadCrc() {
         val data = dailyFile(4, ByteArray(6), ByteArray(0))
         data[data.size - 1] = (data[data.size - 1] + 1).toByte()

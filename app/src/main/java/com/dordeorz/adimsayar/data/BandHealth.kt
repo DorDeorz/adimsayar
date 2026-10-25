@@ -16,14 +16,27 @@ object BandHealth {
     private const val MAX_BEFORE_DAYS = 30L
 
     suspend fun saveMinutes(context: Context, minutes: List<BandMinute>) {
-        val rows = minutes.mapNotNull { minute ->
+        val rows = mergeSamples(minutes.mapNotNull { minute ->
             val heart = minute.heartRate.takeIf { it in HEART } ?: 0
             val spo2 = minute.spo2.takeIf { it in OXYGEN } ?: 0
             val stress = minute.stress.takeIf { it in STRESS } ?: 0
-            if (heart == 0 && spo2 == 0 && stress == 0) null else BandSample(minute.epochSeconds, heart, spo2, stress)
-        }
-        if (rows.isNotEmpty()) dao(context).upsertSamples(rows)
+            if (heart == 0 && spo2 == 0 && stress == 0) null else BandSample(minute.epochSeconds - minute.epochSeconds % 60L, heart, spo2, stress)
+        })
+        if (rows.isEmpty()) return
+        val dao = dao(context)
+        val existing = dao.samples(rows.first().minute, rows.last().minute + 60L)
+        dao.upsertSamples(mergeSamples(existing + rows))
     }
+
+    fun mergeSamples(rows: List<BandSample>): List<BandSample> =
+        rows.groupBy { it.minute }.map { (minute, list) ->
+            BandSample(
+                minute,
+                list.lastOrNull { it.heart > 0 }?.heart ?: 0,
+                list.lastOrNull { it.spo2 > 0 }?.spo2 ?: 0,
+                list.lastOrNull { it.stress > 0 }?.stress ?: 0,
+            )
+        }.sortedBy { it.minute }
 
     suspend fun saveSleep(context: Context, sleep: BandSleepRecord) {
         dao(context).upsertSleep(BandSleep(sleep.bedtime, sleep.wake, sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
