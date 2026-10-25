@@ -39,7 +39,7 @@ object BandNotify {
         CALL_PERMISSIONS.all { ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
 
     /** Only the Xiaomi family supports notifications for now. */
-    fun supported(context: Context): Boolean = BandDirect.model(context)?.family != BandFamily.Huami
+    fun supported(context: Context): Boolean = (BandDirect.model(context)?.family ?: BandFamily.Xiaomi) == BandFamily.Xiaomi
 
     /** True when the connection should stay open. */
     fun wanted(context: Context): Boolean =
