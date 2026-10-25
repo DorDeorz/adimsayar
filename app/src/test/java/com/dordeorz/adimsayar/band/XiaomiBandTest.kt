@@ -218,9 +218,19 @@ class XiaomiBandTest {
             .array()
         assertEquals(true, id.isManualSamples)
         assertEquals(true, id.isWanted)
-        val samples = XiaomiManualSamples.parse(body + ByteArray(4))
+        val samples = XiaomiManualSamples.parse(id, body + ByteArray(4))
         assertEquals(listOf(97, 0), samples.map { it.spo2 })
         assertEquals(listOf(0, 28), samples.map { it.stress })
+    }
+
+    @Test
+    fun manualSamplesVersionOneFromBand8() {
+        val data = hex("03fbdd6a0c011800f096f6dd6a026203fbdd6a025d370ab8d0")
+        val id = XiaomiFileId.from(data)
+        assertEquals(true, id.isManualSamples)
+        val samples = XiaomiManualSamples.parse(id, data)
+        assertEquals(listOf(0x6addf696L, 0x6addfb03L), samples.map { it.epochSeconds })
+        assertEquals(listOf(98, 93), samples.map { it.spo2 })
     }
 
     @Test

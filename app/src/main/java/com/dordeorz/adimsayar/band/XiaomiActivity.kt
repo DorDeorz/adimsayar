@@ -180,26 +180,33 @@ class BandSleepRecord(
 
 object XiaomiManualSamples {
 
-    private const val TYPE_HEART = 0x11
-    private const val TYPE_OXYGEN = 0x12
-    private const val TYPE_STRESS = 0x13
-    private const val TYPE_TEMPERATURE = 0x44
+    private const val KIND_HEART = 1
+    private const val KIND_OXYGEN = 2
+    private const val KIND_STRESS = 3
 
-    fun parse(data: ByteArray): List<BandMinute> {
+    fun parse(fileId: XiaomiFileId, data: ByteArray): List<BandMinute> {
         val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
-        if (data.size < XiaomiFileId.SIZE + 5) return emptyList()
+        val start = XiaomiFileId.SIZE + 1 + if (fileId.version == 1) 1 else 0
+        if (data.size < start + 4) return emptyList()
         buf.limit(buf.limit() - 4)
-        buf.position(XiaomiFileId.SIZE + 1)
+        buf.position(start)
         val result = ArrayList<BandMinute>()
         try {
             while (buf.remaining() >= 5) {
                 val time = buf.int.toLong() and 0xffffffffL
-                when (buf.get().toInt() and 0xff) {
-                    TYPE_HEART -> result.add(BandMinute(time, 0, buf.get().toInt() and 0xff))
-                    TYPE_OXYGEN -> result.add(BandMinute(time, 0, 0, spo2 = buf.get().toInt() and 0xff))
-                    TYPE_STRESS -> result.add(BandMinute(time, 0, 0, stress = buf.get().toInt() and 0xff))
-                    TYPE_TEMPERATURE -> buf.int
+                val type = buf.get().toInt() and 0xff
+                val size = (type shr 4).takeIf { it > 0 } ?: 1
+                if (size > buf.remaining()) break
+                val value = when (size) {
+                    1 -> buf.get().toInt() and 0xff
+                    2 -> buf.short.toInt() and 0xffff
+                    4 -> buf.int
                     else -> break
+                }
+                when (type and 0x0f) {
+                    KIND_HEART -> result.add(BandMinute(time, 0, value))
+                    KIND_OXYGEN -> result.add(BandMinute(time, 0, 0, spo2 = value))
+                    KIND_STRESS -> result.add(BandMinute(time, 0, 0, stress = value))
                 }
             }
         } catch (e: java.nio.BufferUnderflowException) {

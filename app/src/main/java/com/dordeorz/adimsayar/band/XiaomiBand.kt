@@ -269,7 +269,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         val file = when {
             id == null -> null
             id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
-            id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(data), samplesOnly = true)
+            id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(id, data), samplesOnly = true)
             else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
         }
         if (file == null) {
