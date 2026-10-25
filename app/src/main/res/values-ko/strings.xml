@@ -322,6 +322,7 @@
         <item>내 휴대폰 찾기(밴드로 휴대폰 울리기)와 내 밴드 찾기, 밴드 연결이 끊기면 휴대폰 알림</item>
         <item>빠른 답장(밴드에서 거절할 때 SMS)과 밴드 날씨(Open-Meteo, 도시 또는 위치)</item>
         <item>밴드 알람을 FitWren에서 보고 편집, 캘린더 일정이 밴드로 전송</item>
+        <item>설정 재구성: 항목마다 별도 페이지가 있고 메인 페이지에 각 항목의 요약이 표시됩니다</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
@@ -819,4 +820,13 @@
     <string name="band_language">밴드 언어</string>
     <string name="band_language_hint">밴드 메뉴 언어를 FitWren 언어(%1$s)로 설정합니다</string>
     <string name="band_language_sent">밴드 언어가 설정되었습니다</string>
+    <string name="settings_band">밴드</string>
+    <string name="settings_band_summary">알림, 날씨, 알람 및 캘린더</string>
+    <string name="settings_goals_summary">하루 %1$s, 주간 %2$s 걸음</string>
+    <string name="settings_water_summary_on">%1$s, 알림 켜짐</string>
+    <string name="settings_water_summary_off">%1$s, 알림 꺼짐</string>
+    <string name="settings_notifications_summary">%2$d개 중 %1$d개 켜짐</string>
+    <string name="settings_data_summary">CSV로 내보내기 및 가져오기</string>
+    <string name="band_group_features">밴드 기능</string>
+    <string name="band_group_alerts">경고</string>
 </resources>

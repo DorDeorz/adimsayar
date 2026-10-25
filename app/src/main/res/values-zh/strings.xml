@@ -322,6 +322,7 @@
         <item>查找手机（手环让手机响铃）和查找手环；手环断开时手机提醒</item>
         <item>快捷回复（在手环上拒接时发短信）和手环天气（Open-Meteo，按城市或位置）</item>
         <item>在 FitWren 中查看和编辑手环闹钟；日历日程发送到手环</item>
+        <item>设置已重新整理：每个主题都有单独页面，主页面显示各项简要摘要</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
@@ -819,4 +820,13 @@
     <string name="band_language">手环语言</string>
     <string name="band_language_hint">将手环菜单语言设为与 FitWren 相同（%1$s）</string>
     <string name="band_language_sent">已设置手环语言</string>
+    <string name="settings_band">手环</string>
+    <string name="settings_band_summary">通知、天气、闹钟和日历</string>
+    <string name="settings_goals_summary">每日 %1$s 步，每周 %2$s 步</string>
+    <string name="settings_water_summary_on">%1$s，提醒已开启</string>
+    <string name="settings_water_summary_off">%1$s，提醒已关闭</string>
+    <string name="settings_notifications_summary">已开启 %1$d / %2$d</string>
+    <string name="settings_data_summary">以 CSV 导出和导入</string>
+    <string name="band_group_features">手环功能</string>
+    <string name="band_group_alerts">提醒</string>
 </resources>

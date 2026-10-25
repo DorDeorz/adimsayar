@@ -322,6 +322,7 @@
         <item>العثور على هاتفي (السوار يجعل الهاتف يرن) والعثور على سواري، وتنبيه على الهاتف عند انقطاع اتصال السوار</item>
         <item>ردود سريعة (رسالة SMS عند الرفض من السوار) والطقس على السوار (Open-Meteo، حسب المدينة أو الموقع)</item>
         <item>عرض منبهات السوار وتعديلها في FitWren، وإرسال أحداث التقويم إلى السوار</item>
+        <item>إعادة تنظيم الإعدادات: لكل موضوع صفحته الخاصة مع ملخص قصير في الصفحة الرئيسية</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
@@ -819,4 +820,13 @@
     <string name="band_language">لغة السوار</string>
     <string name="band_language_hint">يضبط لغة قائمة السوار على لغة FitWren (%1$s)</string>
     <string name="band_language_sent">تم ضبط لغة السوار</string>
+    <string name="settings_band">السوار</string>
+    <string name="settings_band_summary">الإشعارات والطقس والمنبهات والتقويم</string>
+    <string name="settings_goals_summary">يوميًا %1$s، أسبوعيًا %2$s خطوة</string>
+    <string name="settings_water_summary_on">%1$s، التذكير مفعّل</string>
+    <string name="settings_water_summary_off">%1$s، التذكير متوقف</string>
+    <string name="settings_notifications_summary">%1$d من %2$d مفعّلة</string>
+    <string name="settings_data_summary">التصدير والاستيراد بصيغة CSV</string>
+    <string name="band_group_features">ميزات السوار</string>
+    <string name="band_group_alerts">التنبيهات</string>
 </resources>

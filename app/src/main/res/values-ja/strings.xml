@@ -322,6 +322,7 @@
         <item>スマホを探す(バンドからスマホを鳴らす)とバンドを探す。バンドの接続が切れるとスマホに通知</item>
         <item>クイック返信(バンドで拒否したときにSMS)とバンドの天気(Open-Meteo、都市または現在地)</item>
         <item>バンドのアラームをFitWrenで確認・編集。カレンダーの予定をバンドに送信</item>
+        <item>設定を再構成:項目ごとに専用ページがあり、メインページに各項目の概要を表示</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>バンドへの通知: アプリの通知、着信、音楽の操作に対応 (Xiaomi)。常駐通知なし、通知へのアクセスで動作</item>
@@ -819,4 +820,13 @@
     <string name="band_language">バンドの言語</string>
     <string name="band_language_hint">バンドのメニュー言語をFitWrenと同じ(%1$s)にします</string>
     <string name="band_language_sent">バンドの言語を設定しました</string>
+    <string name="settings_band">バンド</string>
+    <string name="settings_band_summary">通知、天気、アラーム、カレンダー</string>
+    <string name="settings_goals_summary">1日 %1$s 歩、1週間 %2$s 歩</string>
+    <string name="settings_water_summary_on">%1$s、リマインダー オン</string>
+    <string name="settings_water_summary_off">%1$s、リマインダー オフ</string>
+    <string name="settings_notifications_summary">%2$d 件中 %1$d 件オン</string>
+    <string name="settings_data_summary">CSV でエクスポート・インポート</string>
+    <string name="band_group_features">バンドの機能</string>
+    <string name="band_group_alerts">アラート</string>
 </resources>

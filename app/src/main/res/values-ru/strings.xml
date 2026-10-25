@@ -322,6 +322,7 @@
         <item>Найти телефон (браслет заставляет телефон звонить) и Найти браслет; предупреждение на телефоне при отключении браслета</item>
         <item>Быстрые ответы (SMS при отклонении на браслете) и погода на браслете (Open-Meteo, по городу или местоположению)</item>
         <item>Будильники браслета можно смотреть и менять в FitWren; события календаря отправляются на браслет</item>
+        <item>Настройки переработаны: у каждой темы своя страница, на главной — краткая сводка</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
@@ -819,4 +820,13 @@
     <string name="band_language">Язык браслета</string>
     <string name="band_language_hint">Устанавливает язык меню браслета как в FitWren (%1$s)</string>
     <string name="band_language_sent">Язык браслета установлен</string>
+    <string name="settings_band">Браслет</string>
+    <string name="settings_band_summary">Уведомления, погода, будильники и календарь</string>
+    <string name="settings_goals_summary">В день %1$s, в неделю %2$s шагов</string>
+    <string name="settings_water_summary_on">%1$s, напоминание вкл.</string>
+    <string name="settings_water_summary_off">%1$s, напоминание выкл.</string>
+    <string name="settings_notifications_summary">Включено %1$d из %2$d</string>
+    <string name="settings_data_summary">Экспорт и импорт в CSV</string>
+    <string name="band_group_features">Функции браслета</string>
+    <string name="band_group_alerts">Оповещения</string>
 </resources>

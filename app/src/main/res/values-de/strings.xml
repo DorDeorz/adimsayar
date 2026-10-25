@@ -322,6 +322,7 @@
         <item>Handy finden (das Band lässt das Handy klingeln) und Band finden; Warnung am Handy, wenn das Band getrennt wird</item>
         <item>Schnellantworten (SMS beim Ablehnen am Band) und Wetter am Band (Open-Meteo, per Stadt oder Standort)</item>
         <item>Band-Wecker in FitWren ansehen und bearbeiten; Kalendertermine gehen ans Band</item>
+        <item>Einstellungen neu geordnet: jedes Thema hat eine eigene Seite, mit kurzer Übersicht auf der Hauptseite</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
@@ -819,4 +820,13 @@
     <string name="band_language">Band-Sprache</string>
     <string name="band_language_hint">Stellt die Menüsprache des Bands auf die von FitWren (%1$s)</string>
     <string name="band_language_sent">Band-Sprache eingestellt</string>
+    <string name="settings_band">Armband</string>
+    <string name="settings_band_summary">Benachrichtigungen, Wetter, Wecker und Kalender</string>
+    <string name="settings_goals_summary">Täglich %1$s, wöchentlich %2$s Schritte</string>
+    <string name="settings_water_summary_on">%1$s, Erinnerung an</string>
+    <string name="settings_water_summary_off">%1$s, Erinnerung aus</string>
+    <string name="settings_notifications_summary">%1$d von %2$d an</string>
+    <string name="settings_data_summary">Als CSV exportieren und importieren</string>
+    <string name="band_group_features">Armband-Funktionen</string>
+    <string name="band_group_alerts">Warnungen</string>
 </resources>

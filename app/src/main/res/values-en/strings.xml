@@ -322,6 +322,7 @@
         <item>Find my phone (the band rings the phone) and Find my band; a phone alert when the band disconnects</item>
         <item>Quick replies (text the caller when rejecting on the band) and weather on the band (Open-Meteo, by city or location)</item>
         <item>Band alarms can be seen and edited in FitWren; calendar events go to the band</item>
+        <item>Settings reorganized: each topic has its own page, with a short summary of each on the main page</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band notifications: app notifications, incoming calls and music control on the band (Xiaomi). No ongoing notification; works with notification access</item>
@@ -819,4 +820,13 @@
     <string name="band_language">Band language</string>
     <string name="band_language_hint">Sets the band\'s menu language to FitWren\'s (%1$s)</string>
     <string name="band_language_sent">Band language set</string>
+    <string name="settings_band">Band</string>
+    <string name="settings_band_summary">Notifications, weather, alarms and calendar</string>
+    <string name="settings_goals_summary">Daily %1$s, weekly %2$s steps</string>
+    <string name="settings_water_summary_on">%1$s, reminder on</string>
+    <string name="settings_water_summary_off">%1$s, reminder off</string>
+    <string name="settings_notifications_summary">%1$d of %2$d on</string>
+    <string name="settings_data_summary">Export and import as CSV</string>
+    <string name="band_group_features">Band features</string>
+    <string name="band_group_alerts">Alerts</string>
 </resources>

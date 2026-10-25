@@ -322,6 +322,7 @@
         <item>Telefonumu bul (bileklikten telefon çalar) ve Bilekliği bul; bileklik bağlantısı kopunca telefonda uyarı</item>
         <item>Hazır yanıtlar (bileklikten reddedilen aramaya SMS) ve bileklikte hava durumu (Open-Meteo, şehir ya da konum)</item>
         <item>Bileklik alarmları FitWren\'den görülür ve düzenlenir; takvim etkinlikleri bilekliğe gider</item>
+        <item>Ayarlar yeniden düzenlendi: konular ayrı sayfalarda, ana sayfada her birinin kısa özeti görünür</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Bileklik bildirimleri: uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider (Xiaomi). Kalıcı bildirim yok; bildirim erişimi izniyle çalışır</item>
@@ -820,4 +821,13 @@
     <string name="band_language">Bileklik dili</string>
     <string name="band_language_hint">Bilekliğin menü dilini FitWren\'in diline (%1$s) ayarlar</string>
     <string name="band_language_sent">Bileklik dili ayarlandı</string>
+    <string name="settings_band">Bileklik</string>
+    <string name="settings_band_summary">Bildirimler, hava durumu, alarmlar ve takvim</string>
+    <string name="settings_goals_summary">Günlük %1$s, haftalık %2$s adım</string>
+    <string name="settings_water_summary_on">%1$s, hatırlatma açık</string>
+    <string name="settings_water_summary_off">%1$s, hatırlatma kapalı</string>
+    <string name="settings_notifications_summary">%1$d / %2$d açık</string>
+    <string name="settings_data_summary">CSV olarak dışa ve içe aktar</string>
+    <string name="band_group_features">Bileklik özellikleri</string>
+    <string name="band_group_alerts">Uyarılar</string>
 </resources>

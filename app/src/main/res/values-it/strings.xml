@@ -322,6 +322,7 @@
         <item>Trova il mio telefono (il bracciale fa squillare il telefono) e Trova il mio bracciale; avviso sul telefono quando il bracciale si disconnette</item>
         <item>Risposte rapide (SMS quando rifiuti dal bracciale) e meteo sul bracciale (Open-Meteo, per città o posizione)</item>
         <item>Le sveglie del bracciale si vedono e modificano in FitWren; gli eventi del calendario vanno al bracciale</item>
+        <item>Impostazioni riorganizzate: ogni argomento ha la sua pagina, con un breve riepilogo nella pagina principale</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifiche sul braccialetto: notifiche delle app, chiamate e controllo musica (Xiaomi). Nessuna notifica fissa; usa l\'accesso alle notifiche</item>
@@ -819,4 +820,13 @@
     <string name="band_language">Lingua del bracciale</string>
     <string name="band_language_hint">Imposta la lingua del bracciale come quella di FitWren (%1$s)</string>
     <string name="band_language_sent">Lingua del bracciale impostata</string>
+    <string name="settings_band">Braccialetto</string>
+    <string name="settings_band_summary">Notifiche, meteo, sveglie e calendario</string>
+    <string name="settings_goals_summary">Giornaliero %1$s, settimanale %2$s passi</string>
+    <string name="settings_water_summary_on">%1$s, promemoria attivo</string>
+    <string name="settings_water_summary_off">%1$s, promemoria disattivato</string>
+    <string name="settings_notifications_summary">%1$d di %2$d attive</string>
+    <string name="settings_data_summary">Esporta e importa come CSV</string>
+    <string name="band_group_features">Funzioni del braccialetto</string>
+    <string name="band_group_alerts">Avvisi</string>
 </resources>

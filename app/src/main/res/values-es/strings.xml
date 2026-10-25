@@ -322,6 +322,7 @@
         <item>Buscar mi teléfono (la pulsera hace sonar el teléfono) y Buscar mi pulsera; aviso en el teléfono cuando la pulsera se desconecta</item>
         <item>Respuestas rápidas (SMS al rechazar en la pulsera) y el tiempo en la pulsera (Open-Meteo, por ciudad o ubicación)</item>
         <item>Las alarmas de la pulsera se ven y editan en FitWren; los eventos del calendario van a la pulsera</item>
+        <item>Ajustes reorganizados: cada tema tiene su propia página, con un breve resumen en la página principal</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificaciones en la pulsera: notificaciones de apps, llamadas y control de música (Xiaomi). Sin notificación permanente; usa el acceso a notificaciones</item>
@@ -819,4 +820,13 @@
     <string name="band_language">Idioma de la pulsera</string>
     <string name="band_language_hint">Pone el idioma de la pulsera igual que FitWren (%1$s)</string>
     <string name="band_language_sent">Idioma de la pulsera configurado</string>
+    <string name="settings_band">Pulsera</string>
+    <string name="settings_band_summary">Notificaciones, tiempo, alarmas y calendario</string>
+    <string name="settings_goals_summary">Diario %1$s, semanal %2$s pasos</string>
+    <string name="settings_water_summary_on">%1$s, recordatorio activado</string>
+    <string name="settings_water_summary_off">%1$s, recordatorio desactivado</string>
+    <string name="settings_notifications_summary">%1$d de %2$d activadas</string>
+    <string name="settings_data_summary">Exportar e importar como CSV</string>
+    <string name="band_group_features">Funciones de la pulsera</string>
+    <string name="band_group_alerts">Avisos</string>
 </resources>
