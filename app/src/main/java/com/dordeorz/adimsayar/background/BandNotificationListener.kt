@@ -139,6 +139,7 @@ class BandNotificationListener : NotificationListenerService() {
     }
 
     private fun loud(sbn: StatusBarNotification): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return sbn.notification.priority >= Notification.PRIORITY_DEFAULT
         val ranking = Ranking()
         if (!currentRanking.getRanking(sbn.key, ranking)) return true
         return ranking.importance >= android.app.NotificationManager.IMPORTANCE_DEFAULT
