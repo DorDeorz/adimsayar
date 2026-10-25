@@ -163,6 +163,14 @@ object BandLive {
 
     fun requestAlarms(): Boolean = onConnection { session?.requestAlarms() }
 
+    /** Sets the band's language to [locale]'s; false when the band is not connected. */
+    fun setLanguage(locale: java.util.Locale): Boolean {
+        val country = locale.country.ifEmpty { locale.language }
+        val code = (locale.language + "_" + country).lowercase(java.util.Locale.ROOT)
+        Log.i(XiaomiBand.TAG, "language $code")
+        return onConnection { session?.setLanguage(code) }
+    }
+
     fun calendar(events: List<BandCalendarEvent>?): Boolean = onConnection { session?.sendCalendar(events) }
 
     /** Runs [action] on the connection; false when the band is not connected. */

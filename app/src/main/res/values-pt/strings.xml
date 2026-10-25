@@ -816,4 +816,7 @@
     <string name="band_alarm_days">Dias</string>
     <string name="band_calendar">Agenda</string>
     <string name="band_calendar_hint">Eventos dos próximos 7 dias vão para a pulseira. Pede permissão de agenda.</string>
+    <string name="band_language">Idioma da pulseira</string>
+    <string name="band_language_hint">Define o idioma da pulseira igual ao do FitWren (%1$s)</string>
+    <string name="band_language_sent">Idioma da pulseira definido</string>
 </resources>

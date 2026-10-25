@@ -816,4 +816,7 @@
     <string name="band_alarm_days">Tage</string>
     <string name="band_calendar">Kalender</string>
     <string name="band_calendar_hint">Kalendertermine der nächsten 7 Tage gehen ans Band. Fragt nach der Kalenderberechtigung.</string>
+    <string name="band_language">Band-Sprache</string>
+    <string name="band_language_hint">Stellt die Menüsprache des Bands auf die von FitWren (%1$s)</string>
+    <string name="band_language_sent">Band-Sprache eingestellt</string>
 </resources>

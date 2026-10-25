@@ -816,4 +816,7 @@
     <string name="band_alarm_days">الأيام</string>
     <string name="band_calendar">التقويم</string>
     <string name="band_calendar_hint">تُرسل أحداث التقويم للأيام السبعة القادمة إلى السوار. يطلب إذن التقويم.</string>
+    <string name="band_language">لغة السوار</string>
+    <string name="band_language_hint">يضبط لغة قائمة السوار على لغة FitWren (%1$s)</string>
+    <string name="band_language_sent">تم ضبط لغة السوار</string>
 </resources>

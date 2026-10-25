@@ -12,6 +12,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Bileklikte hava durumu (varsayılan kapalı): Open-Meteo'dan (anahtarsız) saatte bir anlık durum, 7 günlük ve 24 saatlik tahmin çekilip bilekliğe gönderilir (komut 10/0, 10/1, 10/2; yer 10/7). Yer şehir aramasıyla ya da uygulama açıkken telefonun son konumuyla seçilir. Bileklik isteyince (10/3) son veri yeniden gönderilir.
 - Bileklik alarmları (Ayarlar → Bileklik bildirimleri → Bileklik alarmları): alarmlar bileklikte kalır; FitWren listeyi okur (17/0), açıp kapatır, ekler (17/1), değiştirir (17/2), siler (17/4). Bir kez, her gün ya da seçilen günler.
 - Takvim (varsayılan kapalı): önümüzdeki 7 günün etkinlikleri (en fazla 50, ilk hatırlatıcısıyla) her eşitlemede, değiştiyse bilekliğe gönderilir (12/1). Kapatınca bileklikteki takvim de kapatılır.
+- Bileklik dili: tek dokunuşla bilekliğin menü dili FitWren'in diline ayarlanır (2/6, örneğin `tr_tr`). Saat biçimi (12/24) zaten her bağlantıda telefondan gidiyor.
 - Bağlantı koptu uyarısı (varsayılan kapalı): bileklik bağlıyken bağlantı kopar ve 1 dakika içinde geri gelmezse telefonda uyarı çıkar; geri gelince uyarı kalkar. Bluetooth kapalıysa uyarı verilmez.
 
 ## 0.11.0

@@ -817,4 +817,7 @@
     <string name="band_alarm_days">Günler</string>
     <string name="band_calendar">Takvim</string>
     <string name="band_calendar_hint">Önümüzdeki 7 günün takvim etkinlikleri bilekliğe gider. Takvim izni istenir.</string>
+    <string name="band_language">Bileklik dili</string>
+    <string name="band_language_hint">Bilekliğin menü dilini FitWren\'in diline (%1$s) ayarlar</string>
+    <string name="band_language_sent">Bileklik dili ayarlandı</string>
 </resources>

@@ -19,6 +19,7 @@ import com.dordeorz.adimsayar.band.BandAlarm
 import java.time.DayOfWeek
 import com.dordeorz.adimsayar.data.WeatherPlace
 import android.Manifest
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import android.app.TimePickerDialog
 import androidx.compose.foundation.lazy.LazyColumn
@@ -828,6 +829,12 @@ private fun BandNotifyGroup() {
             ClickRow(stringResource(R.string.band_weather_place), weatherPlace?.name ?: stringResource(R.string.band_weather_place_none)) { pickPlace = true }
         }
         ClickRow(stringResource(R.string.band_alarms), stringResource(R.string.band_alarms_hint)) { showAlarms = true }
+        val languageSent = stringResource(R.string.band_language_sent)
+        val languageOffline = stringResource(R.string.band_alarms_offline)
+        ClickRow(stringResource(R.string.band_language), stringResource(R.string.band_language_hint, Locales.current.getDisplayLanguage(Locales.current))) {
+            val ok = BandLive.setLanguage(Locales.current)
+            Toast.makeText(context, if (ok) languageSent else languageOffline, Toast.LENGTH_SHORT).show()
+        }
         SwitchRow(stringResource(R.string.band_calendar), stringResource(R.string.band_calendar_hint), calendar) { on ->
             if (on && !BandSchedule.hasCalendarPermission(context)) {
                 calendarPermission.launch(Manifest.permission.READ_CALENDAR)

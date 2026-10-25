@@ -222,6 +222,12 @@ class XiaomiSession(
         sendNotificationCommand(NOTIFICATION_REPLY_ACK, ProtoWriter().uint(13, if (success) 0 else 1))
     }
 
+    /** Sets the band's menu language, e.g. "tr_tr". */
+    fun setLanguage(code: String) {
+        if (!authenticated) return
+        send(command(TYPE_SYSTEM, SYSTEM_LANGUAGE).message(4, ProtoWriter().message(20, ProtoWriter().string(1, code))).toByteArray(), false)
+    }
+
     /** Tells the band the phone stopped ringing, so its find phone screen closes. */
     fun findPhoneStopped() {
         if (!authenticated) return
@@ -480,6 +486,7 @@ class XiaomiSession(
         private const val AUTH_STEP3 = 27
         private const val SYSTEM_BATTERY = 1
         private const val SYSTEM_CLOCK = 3
+        private const val SYSTEM_LANGUAGE = 6
         private const val SYSTEM_FIND_PHONE = 17
         private const val SYSTEM_FIND_BAND = 18
         private const val SYSTEM_DEVICE_STATE_GET = 78

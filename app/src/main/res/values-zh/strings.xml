@@ -816,4 +816,7 @@
     <string name="band_alarm_days">按天</string>
     <string name="band_calendar">日历</string>
     <string name="band_calendar_hint">未来 7 天的日程会发送到手环，需要日历权限。</string>
+    <string name="band_language">手环语言</string>
+    <string name="band_language_hint">将手环菜单语言设为与 FitWren 相同（%1$s）</string>
+    <string name="band_language_sent">已设置手环语言</string>
 </resources>

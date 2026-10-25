@@ -816,4 +816,7 @@
     <string name="band_alarm_days">曜日</string>
     <string name="band_calendar">カレンダー</string>
     <string name="band_calendar_hint">今後7日間の予定をバンドに送ります。カレンダーの権限が必要です。</string>
+    <string name="band_language">バンドの言語</string>
+    <string name="band_language_hint">バンドのメニュー言語をFitWrenと同じ(%1$s)にします</string>
+    <string name="band_language_sent">バンドの言語を設定しました</string>
 </resources>

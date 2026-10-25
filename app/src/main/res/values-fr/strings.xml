@@ -816,4 +816,7 @@
     <string name="band_alarm_days">Jours</string>
     <string name="band_calendar">Agenda</string>
     <string name="band_calendar_hint">Les événements des 7 prochains jours vont au bracelet. Demande l\'accès à l\'agenda.</string>
+    <string name="band_language">Langue du bracelet</string>
+    <string name="band_language_hint">Règle la langue du bracelet sur celle de FitWren (%1$s)</string>
+    <string name="band_language_sent">Langue du bracelet réglée</string>
 </resources>
