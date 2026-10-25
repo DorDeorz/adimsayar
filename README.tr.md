@@ -38,7 +38,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 
 - **Doğru sayar.** Donanım adım sayacını okur ve adım dedektörüyle karşılaştırır. Sensör donarsa bunu fark eder ve telefonu yeniden başlatmana gerek kalmadan düzeltir.
 - **Pili yormaz.** Varsayılan olarak sürekli çalışan bir servis yoktur. Sayaç ara ara okunur ve fark kaydedilir.
-- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca "Güncellemeleri kontrol et"e dokunduğunda kullanılır.
+- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca "Güncellemeleri kontrol et"e dokunduğunda ya da bilekliğin anahtarı için Xiaomi'ye giriş yaptığında kullanılır.
 - **Her Android telefonda çalışır.** Arka plan uygulamalarına en sert davranan iki markada, Xiaomi (HyperOS) ve Samsung'da (One UI) test edildi.
 
 ## Özellikler
@@ -148,6 +148,8 @@ FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda sa
 
 Tek ağ isteği "Güncellemeleri kontrol et"e dokunduğunda yapılır: uygulama son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir. Bu isteklerle senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.
 
+Bileklik kurulum ekranında "Xiaomi hesabıyla anahtarı al"a dokunursan uygulama Xiaomi'nin kendi giriş sayfasını (`account.xiaomi.com`) açar, sonra bilekliğin adresini ve anahtarını okumak için Xiaomi sunucusundan (`api.io.mi.com`) cihaz listeni ister. Şifreni FitWren görmez. Anahtar yalnızca telefonda saklanır, adımlarınla ilgili hiçbir şey gönderilmez.
+
 Health Connect yalnızca "Bileklik adımlarını kullan" açıksa ve yalnızca okumak için kullanılır. FitWren Health Connect'e hiçbir şey yazmaz.
 
 <details>
@@ -161,7 +163,8 @@ Health Connect yalnızca "Bileklik adımlarını kullan" açıksa ve yalnızca o
 | `POST_NOTIFICATIONS` | İsteğe bağlı hatırlatmalar ve hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gece yarısı yeni güne geçmek |
-| `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi |
+| `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi, bir de bileklik anahtarı için Xiaomi girişi |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | İsteğe bağlı Xiaomi bileklik bağlantısı |
 | `REQUEST_INSTALL_PACKAGES` | İndirilen güncelleme için Android'in kurulum ekranını açmak |
 | `health.READ_*` | İsteğe bağlı bileklik verisi, yalnızca okuma |
 

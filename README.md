@@ -38,7 +38,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 
 - **Accurate.** Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.
 - **Battery friendly.** No always-on service by default. The counter is read now and then and the difference is saved.
-- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates".
+- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates" or sign in to Xiaomi to get your band's key.
 - **Works on every Android phone.** Tested on Xiaomi (HyperOS) and Samsung (One UI), the two brands that are hardest on background apps.
 
 ## Features
@@ -148,6 +148,8 @@ FitWren stores daily step totals, water, weight and your settings on the phone. 
 
 The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
 
+If you tap "Get the key with your Xiaomi account" on the band setup screen, the app opens Xiaomi's own sign-in page (`account.xiaomi.com`) and then asks Xiaomi's server (`api.io.mi.com`) for the list of your devices, to read the band's address and key. FitWren never sees your password. The key is stored only on the phone, and nothing about your steps is sent.
+
 Health Connect is used only if you turn on "Use band steps", and only for reading. FitWren never writes to Health Connect.
 
 <details>
@@ -161,7 +163,8 @@ Health Connect is used only if you turn on "Use band steps", and only for readin
 | `POST_NOTIFICATIONS` | Optional reminders and goal notifications |
 | `RECEIVE_BOOT_COMPLETED` | Restore schedules after a reboot |
 | `SCHEDULE_EXACT_ALARM` | Switch to the new day at midnight |
-| `INTERNET` | Only the update check and download you start yourself |
+| `INTERNET` | Only the update check and download, and the Xiaomi sign-in for the band key, both started by you |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | Optional direct connection to a Xiaomi band |
 | `REQUEST_INSTALL_PACKAGES` | Open Android's installer for a downloaded update |
 | `health.READ_*` | Optional band data from Health Connect, read only |
 

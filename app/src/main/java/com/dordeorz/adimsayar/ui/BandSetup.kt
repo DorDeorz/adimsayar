@@ -1,9 +1,12 @@
 package com.dordeorz.adimsayar.ui
 
 import android.bluetooth.BluetoothAdapter
+import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +15,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -36,15 +40,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.band.BandResult
 import com.dordeorz.adimsayar.band.BandScanner
 import com.dordeorz.adimsayar.band.FoundBand
+import com.dordeorz.adimsayar.band.XiaomiCloud
+import com.dordeorz.adimsayar.band.XiaomiCloudDevice
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.widget.Widgets
@@ -71,6 +80,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
     var scanning by remember { mutableStateOf(false) }
     var scanMessage by remember { mutableStateOf<Int?>(null) }
     val found = remember { mutableStateListOf<FoundBand>() }
+    var cloud by remember { mutableStateOf<CloudState>(CloudState.Idle) }
     var testing by remember { mutableStateOf(false) }
     var testResult by remember { mutableStateOf<BandResult?>(null) }
     val scanner = remember { BandScanner(context.applicationContext) }
@@ -83,6 +93,12 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
             if (found.none { it.address == band.address }) found.add(band)
         }
         if (!scanning) scanMessage = R.string.band_result_bluetooth_off
+    }
+
+    fun saveCloudDevice(device: XiaomiCloudDevice): String {
+        BandDirect.setKey(context, device.key)
+        BandDirect.setDevice(context, device.address, device.name)
+        return context.getString(R.string.band_cloud_done, device.name)
     }
 
     LaunchedEffect(scanning) {
@@ -118,6 +134,66 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
         }
         item {
             BandStep(2, stringResource(R.string.band_step_key)) {
+                val busy = cloud is CloudState.Starting || cloud is CloudState.Waiting || cloud is CloudState.Loading
+                Button(enabled = !busy, onClick = {
+                    scope.launch {
+                        cloud = CloudState.Starting
+                        val client = XiaomiCloud()
+                        val login = withContext(Dispatchers.IO) { client.startLogin() }
+                        if (login == null) {
+                            cloud = CloudState.Message(context.getString(R.string.band_cloud_failed))
+                            return@launch
+                        }
+                        val qr = withContext(Dispatchers.IO) {
+                            client.qrImage(login)?.let { BitmapFactory.decodeByteArray(it, 0, it.size)?.asImageBitmap() }
+                        }
+                        cloud = CloudState.Waiting(login.loginUrl, qr)
+                        if (!withContext(Dispatchers.IO) { client.waitForLogin(login) }) {
+                            cloud = CloudState.Message(context.getString(R.string.band_cloud_failed))
+                            return@launch
+                        }
+                        cloud = CloudState.Loading
+                        val devices = withContext(Dispatchers.IO) { client.devices() }
+                        cloud = when (devices.size) {
+                            0 -> CloudState.Message(context.getString(R.string.band_cloud_none))
+                            1 -> CloudState.Message(saveCloudDevice(devices.first()))
+                            else -> CloudState.Devices(devices)
+                        }
+                        refresh++
+                    }
+                }) { Text(stringResource(R.string.band_cloud_button)) }
+                when (val state = cloud) {
+                    CloudState.Idle -> Unit
+                    CloudState.Starting -> BandText(stringResource(R.string.band_cloud_waiting))
+                    is CloudState.Waiting -> {
+                        BandText(stringResource(R.string.band_cloud_help))
+                        OutlinedButton(onClick = {
+                            runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, state.loginUrl.toUri())) }
+                        }) { Text(stringResource(R.string.band_cloud_open)) }
+                        state.qr?.let { qr ->
+                            Image(qr, contentDescription = null, modifier = Modifier.size(180.dp))
+                            BandText(stringResource(R.string.band_cloud_qr))
+                        }
+                        BandText(stringResource(R.string.band_cloud_waiting))
+                    }
+                    CloudState.Loading -> BandText(stringResource(R.string.band_cloud_loading))
+                    is CloudState.Devices -> state.devices.forEach { device ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    cloud = CloudState.Message(saveCloudDevice(device))
+                                    refresh++
+                                }
+                                .padding(vertical = 8.dp),
+                        ) {
+                            Text(device.name, style = MaterialTheme.typography.bodyLarge)
+                            Text(device.address, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    }
+                    is CloudState.Message -> BandText(state.text)
+                }
+                Text(stringResource(R.string.band_key_manual), style = MaterialTheme.typography.bodyLarge)
                 BandText(stringResource(R.string.band_key_help))
                 OutlinedTextField(
                     value = keyText,
@@ -237,6 +313,15 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
             }
         }
     }
+}
+
+private sealed interface CloudState {
+    data object Idle : CloudState
+    data object Starting : CloudState
+    class Waiting(val loginUrl: String, val qr: ImageBitmap?) : CloudState
+    data object Loading : CloudState
+    class Devices(val devices: List<XiaomiCloudDevice>) : CloudState
+    class Message(val text: String) : CloudState
 }
 
 @Composable
