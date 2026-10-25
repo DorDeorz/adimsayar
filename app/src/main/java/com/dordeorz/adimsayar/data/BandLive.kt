@@ -67,6 +67,7 @@ object BandLive {
     fun refresh(context: Context) {
         val app = context.applicationContext
         val wanted = BandNotify.wanted(app)
+        Log.i(XiaomiBand.TAG, "live refresh: wanted=$wanted running=${job?.isActive == true}")
         if (wanted && job?.isActive != true) {
             isRunning = true
             job = scope.launch { run(app) }
@@ -103,7 +104,10 @@ object BandLive {
         return withTimeoutOrNull(SYNC_WAIT_MS) { done.await() }
     }
 
-    fun notify(notice: BandNotice) = post?.invoke { session?.sendNotification(notice) }
+    fun notify(notice: BandNotice) {
+        Log.i(XiaomiBand.TAG, "notify ${notice.id} ${notice.packageName} connected=$connected")
+        post?.invoke { session?.sendNotification(notice) }
+    }
 
     fun dismiss(id: Int, packageName: String, key: String?) = post?.invoke { session?.dismissNotification(id, packageName, key) }
 
@@ -115,11 +119,15 @@ object BandLive {
 
     private suspend fun run(context: Context) {
         var retry = RETRY_MIN_MS
+        var failures = 0
         while (coroutineContext.isActive) {
             val (address, name, secret) = BandDirect.device(context) ?: break
             val saver = BandDirect.BandSaver(context)
             var nextSync = 0L
             val band = XiaomiBand(context, address, name, secret)
+            // A quick direct connect first; once that fails the band is away, so let Android wait for it.
+            val autoConnect = failures > 0
+            Log.i(XiaomiBand.TAG, "live start, autoConnect=$autoConnect")
             val result = band.live(
                 store = saver::save,
                 hooks = XiaomiLive(
@@ -130,9 +138,11 @@ object BandLive {
                         BandDirect.finish(context, ReadSource.Service, result, saver.files, session?.fileSummary.orEmpty())
                         saver.reset()
                         complete(result)
+                        Log.i(XiaomiBand.TAG, "live synced: $result")
                         onConnected()
                     },
                 ),
+                autoConnect = autoConnect,
             ) { s, p ->
                 s.onEvent = { onEvent(it) }
                 session = s
@@ -143,8 +153,15 @@ object BandLive {
             post = null
             complete(if (result == BandResult.Ok) BandResult.ConnectFailed else result)
             Log.i(XiaomiBand.TAG, "live ended: $result, retry in ${retry / 1000}s")
-            retry = if (result == BandResult.Ok) RETRY_MIN_MS else minOf(retry * 2, RETRY_MAX_MS)
-            delay(retry)
+            if (result == BandResult.Ok) {
+                failures = 0
+                retry = RETRY_MIN_MS
+            } else {
+                failures++
+                retry = minOf(retry * 2, RETRY_MAX_MS)
+            }
+            // autoConnect waits by itself, so retry it right away; a quick connect waits [retry] first.
+            delay(if (failures == 1) 0L else retry)
         }
         isRunning = false
     }

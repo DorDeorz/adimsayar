@@ -51,6 +51,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
     suspend fun live(
         store: suspend (BandFile) -> Boolean,
         hooks: XiaomiLive,
+        autoConnect: Boolean,
         attach: (XiaomiSession, post: (() -> Unit) -> Unit) -> Unit,
     ): BandResult {
         val manager = context.getSystemService(BluetoothManager::class.java) ?: return BandResult.BluetoothOff
@@ -69,7 +70,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         } else {
             val link = XiaomiBle(context, device, session)
             attach(session, link::post)
-            link.live(store, hooks)
+            link.live(store, hooks, autoConnect)
         }
         fileSummary = session.fileSummary
         Log.i(TAG, "live: $result")
