@@ -44,6 +44,38 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         return result
     }
 
+    /**
+     * Connects and stays connected after the first sync until the band goes away. [attach] gets the
+     * session and a way to run code on the connection, for notifications and music.
+     */
+    suspend fun live(
+        store: suspend (BandFile) -> Boolean,
+        hooks: XiaomiLive,
+        attach: (XiaomiSession, post: (() -> Unit) -> Unit) -> Unit,
+    ): BandResult {
+        val manager = context.getSystemService(BluetoothManager::class.java) ?: return BandResult.BluetoothOff
+        val adapter = manager.adapter ?: return BandResult.BluetoothOff
+        if (!adapter.isEnabled) return BandResult.BluetoothOff
+        val device = try {
+            adapter.getRemoteDevice(address)
+        } catch (e: IllegalArgumentException) {
+            return BandResult.ConnectFailed
+        }
+        val session = newSession()
+        val result = if (BandModels.find(name)?.link == BandLink.Classic) {
+            val link = XiaomiSpp(device, session)
+            attach(session, link::post)
+            link.live(store, hooks)
+        } else {
+            val link = XiaomiBle(context, device, session)
+            attach(session, link::post)
+            link.live(store, hooks)
+        }
+        fileSummary = session.fileSummary
+        Log.i(TAG, "live: $result")
+        return result
+    }
+
     private fun newSession() = XiaomiSession(
         secret = secret,
         userId = secret?.joinToString("") { "%02x".format(it) },

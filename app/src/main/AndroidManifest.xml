@@ -29,6 +29,7 @@
         android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
     <uses-permission android:name="miui.permission.READ_STEPS" />
     <uses-permission android:name="android.permission.health.READ_STEPS" />
     <uses-permission android:name="android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND" />
@@ -111,6 +112,16 @@
             android:name=".background.ReadOnceService"
             android:exported="false"
             android:foregroundServiceType="health" />
+
+        <service
+            android:name=".background.BandNotificationListener"
+            android:exported="true"
+            android:label="@string/band_notify_service"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
 
         <service
             android:name=".background.StepCounterService"

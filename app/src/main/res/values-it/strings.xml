@@ -316,6 +316,10 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_11_0">
+        <item>Notifiche sul braccialetto: notifiche delle app, chiamate e controllo musica (Xiaomi). Nessuna notifica fissa; usa l\'accesso alle notifiche</item>
+        <item>Mentre è connesso, passi e dati di salute si sincronizzano sulla stessa connessione ogni 15 minuti</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Salute ridisegnata: sonno dell\'ultima notte, una scheda per ogni dato e storico giornaliero (7, 30, 90 giorni). Impostazioni raggruppate; bracciale collegato in alto, pulsante \"Sincronizza\" in Oggi</item>
         <item>Collegamento diretto al braccialetto: Impostazioni → Collegati direttamente al braccialetto legge i passi di Xiaomi Smart Band 8 senza Mi Fitness né Health Connect</item>
@@ -667,6 +671,21 @@
     <string name="band_zepp_password">Password</string>
     <string name="band_zepp_button">Ottieni la chiave con Zepp</string>
     <string name="band_zepp_failed">Accesso a Zepp non riuscito. Controlla e-mail e password e riprova.</string>
+    <string name="band_notify_service">Connessione braccialetto FitWren</string>
+    <string name="band_notify_title">Notifiche sul braccialetto</string>
+    <string name="band_notify_text">La connessione resta aperta senza notifica fissa. Per questo FitWren ha bisogno dell\'accesso alle notifiche.</string>
+    <string name="band_notify_apps">Notifiche delle app</string>
+    <string name="band_notify_apps_hint">Le notifiche con suono vanno al braccialetto. Una notifica cancellata sul braccialetto sparisce anche dal telefono.</string>
+    <string name="band_notify_calls">Chiamate in arrivo</string>
+    <string name="band_notify_calls_hint">Chi chiama appare sul braccialetto. Per rifiutare dal braccialetto viene chiesto il permesso delle chiamate.</string>
+    <string name="band_notify_music">Controllo musica</string>
+    <string name="band_notify_music_hint">Il brano in riproduzione appare sul braccialetto; play, pausa, salto e volume dal braccialetto.</string>
+    <string name="band_notify_access">Attiva accesso alle notifiche</string>
+    <string name="band_notify_access_hint">L\'accesso alle notifiche è disattivato. Attiva FitWren nelle impostazioni di Android.</string>
+    <string name="band_notify_state_connected">Braccialetto connesso</string>
+    <string name="band_notify_state_waiting">In attesa del braccialetto</string>
+    <string name="band_notify_autostart">Se la connessione cade sui telefoni Xiaomi: Impostazioni → App → FitWren → attiva l\'avvio automatico e togli le limitazioni della batteria.</string>
+    <string name="band_notify_huami">Per ora funziona solo con braccialetti e orologi Xiaomi.</string>
     <string name="band_key_manual">Oppure inserisci la chiave a mano:</string>
     <string name="band_key_help">Il braccialetto è protetto da una chiave legata al tuo account Xiaomi. Devi ottenerla una volta su un computer:\n1. Sul computer, scarica e apri token_extractor.exe da github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Accedi con l\'account Xiaomi che usi in Mi Fitness.\n3. Quando chiede la regione, lascia vuoto e premi Invio.\n4. Trova il tuo braccialetto nell\'elenco. Inserisci qui il codice di 32 caratteri della riga TOKEN.</string>
     <string name="band_key_label">Chiave (32 caratteri)</string>

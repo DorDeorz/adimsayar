@@ -316,6 +316,10 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_11_0">
+        <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
+        <item>Enquanto ligada, passos e dados de saúde sincronizam pela mesma ligação a cada 15 minutos</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Saúde redesenhada: sono da última noite, um cartão por dado e histórico diário (7, 30, 90 dias). Configurações agrupadas; pulseira conectada no topo e botão \"Sincronizar\" em Hoje</item>
         <item>Ligação direta à pulseira: Definições → Ligar diretamente à pulseira lê os passos da Xiaomi Smart Band 8 sem Mi Fitness nem Health Connect</item>
@@ -667,6 +671,21 @@
     <string name="band_zepp_password">Palavra-passe</string>
     <string name="band_zepp_button">Obter a chave com a Zepp</string>
     <string name="band_zepp_failed">O início de sessão na Zepp falhou. Verifique o e-mail e a palavra-passe e tente de novo.</string>
+    <string name="band_notify_service">Ligação da pulseira FitWren</string>
+    <string name="band_notify_title">Notificações na pulseira</string>
+    <string name="band_notify_text">A ligação fica aberta sem notificação permanente. Para isso o FitWren precisa de acesso às notificações.</string>
+    <string name="band_notify_apps">Notificações das apps</string>
+    <string name="band_notify_apps_hint">As notificações com som vão para a pulseira. Uma notificação apagada na pulseira também é apagada no telemóvel.</string>
+    <string name="band_notify_calls">Chamadas recebidas</string>
+    <string name="band_notify_calls_hint">Quem liga aparece na pulseira. Para rejeitar na pulseira é pedida a permissão de chamadas.</string>
+    <string name="band_notify_music">Controlo de música</string>
+    <string name="band_notify_music_hint">A música a tocar aparece na pulseira; reproduzir, pausar, saltar e volume na pulseira.</string>
+    <string name="band_notify_access">Ativar acesso às notificações</string>
+    <string name="band_notify_access_hint">O acesso às notificações está desligado. Ative o FitWren nas definições do Android.</string>
+    <string name="band_notify_state_connected">Pulseira ligada</string>
+    <string name="band_notify_state_waiting">À espera da pulseira</string>
+    <string name="band_notify_autostart">Se a ligação cair em telemóveis Xiaomi: Definições → Apps → FitWren → ative o arranque automático e retire as restrições de bateria.</string>
+    <string name="band_notify_huami">Por agora só funciona com pulseiras e relógios Xiaomi.</string>
     <string name="band_key_manual">Ou escreve a chave manualmente:</string>
     <string name="band_key_help">A pulseira está protegida por uma chave ligada à sua conta Xiaomi. Tem de a obter uma vez num computador:\n1. Num computador, transfira e abra token_extractor.exe em github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Inicie sessão com a conta Xiaomi que usa no Mi Fitness.\n3. Quando pedir uma região, deixe em branco e prima Enter.\n4. Encontre a sua pulseira na lista. Escreva aqui o código de 32 caracteres da linha TOKEN.</string>
     <string name="band_key_label">Chave (32 caracteres)</string>

@@ -56,6 +56,10 @@ class ProtoMessage private constructor(private val fields: Map<Int, List<Any>>) 
 
     fun message(field: Int): ProtoMessage? = bytes(field)?.let { parse(it) }
 
+    fun messages(field: Int): List<ProtoMessage> = fields[field].orEmpty().mapNotNull { (it as? ByteArray)?.let(::parse) }
+
+    fun string(field: Int): String? = bytes(field)?.toString(Charsets.UTF_8)
+
     companion object {
         fun parse(data: ByteArray): ProtoMessage? {
             val fields = HashMap<Int, MutableList<Any>>()

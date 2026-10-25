@@ -2,6 +2,12 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.11.0
+
+- Bileklik bildirimleri (Ayarlar → Bileklik bildirimleri, şimdilik Xiaomi ailesi): uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider. Sesli gelen bildirimler gönderilir; bileklikte silinen bildirim telefondan da silinir. Arayan bileklikte görünür, bileklikten reddedilebilir (arama izniyle). Çalan şarkı bileklikte görünür; oynat, durdur, geç ve ses bileklikten yönetilir.
+- Bunun için bağlantı açık kalır (`BandLive`). Kalıcı bildirim yok: FitWren bildirim erişimi iznini alır (`BandNotificationListener`) ve Android uygulamayı bu sayede açık tutar. Bileklik uzaklaşınca Android onu arka planda bekler (autoConnect), geri gelince yeniden bağlanılır.
+- Bağlantı açıkken adımlar ve sağlık verileri aynı bağlantıdan 15 dakikada bir eşitlenir. "Eşitle" ve arka plan okumaları da bu bağlantıyı kullanır.
+
 ## 0.10.0
 
 - Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar uygulama içinden Xiaomi hesabıyla giriş yapılarak alınır (QR kodlu giriş, şifre FitWren'e girilmez); elle girmek de mümkün. Bileklik aramada bulunmazsa adres elle yazılabilir. Bilekliğin takılı olduğu saatler (adım ya da nabız kaydı olan) adımsız olsa bile bileklikten sayılır; telefonun o saatlerde saydığı adımlar eklenmez. Şimdilik yalnızca adımlar okunur.

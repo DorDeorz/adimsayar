@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.band.BandFamily
 import com.dordeorz.adimsayar.band.BandFile
+import com.dordeorz.adimsayar.band.BandModel
 import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.HuamiBand
 import com.dordeorz.adimsayar.band.BandResult
@@ -83,6 +84,7 @@ object BandDirect {
                 !same -> remove(KEY_FAMILY)
             }
         }
+        BandLive.restart(context)
     }
 
     fun setKey(context: Context, text: String): Boolean {
@@ -91,6 +93,7 @@ object BandDirect {
             putString(KEY_SECRET, key.joinToString("") { "%02x".format(it) })
             remove(KEY_LAST_RESULT)
         }
+        BandLive.restart(context)
         return true
     }
 
@@ -106,6 +109,7 @@ object BandDirect {
         } else {
             StepRepository.get(context).clearBandDays()
         }
+        BandLive.refresh(context)
     }
 
     suspend fun sync(context: Context, source: ReadSource, force: Boolean = false): BandResult? {
@@ -116,31 +120,17 @@ object BandDirect {
         val now = System.currentTimeMillis()
         if (!force && now < p.getLong(if (foreground) KEY_NEXT_APP else KEY_NEXT_JOB, 0L)) return null
         if (!granted(context, CONNECT_PERMISSIONS)) return record(context, source, BandResult.NoPermission)
+        if (BandLive.isRunning) return BandLive.syncNow()
         if (!running.tryLock()) return null
         return try {
             p.edit(commit = true) {
                 putLong(KEY_NEXT_APP, now + APP_INTERVAL_MS)
                 putLong(KEY_NEXT_JOB, now + JOB_INTERVAL_MS)
             }
-            val repository = StepRepository.get(context)
-            var files = 0
+            val saver = BandSaver(context)
+            val save = saver::save
             val name = p.getString(KEY_NAME, null)
-            val model = BandModels.find(name)
-                ?: BandModels.GENERIC_HUAMI.takeIf { p.getString(KEY_FAMILY, null) == BandFamily.Huami.name }
-            val save: suspend (BandFile) -> Boolean = { file ->
-                val sleep = file.sleep
-                if (sleep != null) {
-                    BandHealth.saveSleep(context, sleep)
-                    BandHealth.saveMinutes(context, sleep.samples)
-                } else if (file.samplesOnly) {
-                    BandHealth.saveMinutes(context, file.minutes)
-                } else {
-                    repository.saveBandHours(file.id.epochSeconds, hourly(file))
-                    BandHealth.saveMinutes(context, file.minutes)
-                }
-                files++
-                !(file.samplesOnly && file.minutes.isEmpty())
-            }
+            val model = model(context)
             val result: BandResult
             val summary: String
             if (model?.family == BandFamily.Huami) {
@@ -155,12 +145,56 @@ object BandDirect {
                 result = band.sync(save)
                 summary = band.fileSummary
             }
-            if (isEnabled(context) && files > 0) remerge(context)
-            if (result == BandResult.Ok) p.edit { putLong(KEY_LAST_SYNC, System.currentTimeMillis()) }
-            record(context, source, result, files, summary)
+            finish(context, source, result, saver.files, summary)
         } finally {
             running.unlock()
         }
+    }
+
+    /** The saved band's model; null for an unknown Xiaomi name. */
+    fun model(context: Context): BandModel? {
+        val p = prefs(context)
+        return BandModels.find(p.getString(KEY_NAME, null))
+            ?: BandModels.GENERIC_HUAMI.takeIf { p.getString(KEY_FAMILY, null) == BandFamily.Huami.name }
+    }
+
+    /** Address, name and key of the saved band, when it is complete. */
+    fun device(context: Context): Triple<String, String?, ByteArray>? {
+        val p = prefs(context)
+        val address = p.getString(KEY_ADDRESS, null) ?: return null
+        val secret = p.getString(KEY_SECRET, null)?.let { XiaomiCrypto.parseKey(it) } ?: return null
+        return Triple(address, p.getString(KEY_NAME, null), secret)
+    }
+
+    /** Stores what one sync brought: band hours, health samples and sleep. */
+    class BandSaver(private val context: Context) {
+        var files = 0
+            private set
+
+        suspend fun save(file: BandFile): Boolean {
+            val sleep = file.sleep
+            if (sleep != null) {
+                BandHealth.saveSleep(context, sleep)
+                BandHealth.saveMinutes(context, sleep.samples)
+            } else if (file.samplesOnly) {
+                BandHealth.saveMinutes(context, file.minutes)
+            } else {
+                StepRepository.get(context).saveBandHours(file.id.epochSeconds, hourly(file))
+                BandHealth.saveMinutes(context, file.minutes)
+            }
+            files++
+            return !(file.samplesOnly && file.minutes.isEmpty())
+        }
+
+        fun reset() {
+            files = 0
+        }
+    }
+
+    suspend fun finish(context: Context, source: ReadSource, result: BandResult, files: Int, summary: String): BandResult {
+        if (isEnabled(context) && files > 0) remerge(context)
+        if (result == BandResult.Ok) prefs(context).edit { putLong(KEY_LAST_SYNC, System.currentTimeMillis()) }
+        return record(context, source, result, files, summary)
     }
 
     private suspend fun remerge(context: Context) {

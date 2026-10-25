@@ -316,6 +316,10 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_11_0">
+        <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
+        <item>Solange verbunden, werden Schritte und Gesundheitsdaten alle 15 Minuten über dieselbe Verbindung synchronisiert</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Gesundheit neu gestaltet: Schlaf der letzten Nacht, eigene Karte je Wert und tägliche Verlaufsdiagramme (7, 30, 90 Tage). Einstellungen gruppiert; verbundenes Armband oben, \"Synchronisieren\" auf Heute</item>
         <item>Direkte Band-Verbindung: Einstellungen → Direkt mit dem Band verbinden liest Schritte des Xiaomi Smart Band 8 ohne Mi Fitness oder Health Connect</item>
@@ -667,6 +671,21 @@
     <string name="band_zepp_password">Passwort</string>
     <string name="band_zepp_button">Schlüssel mit Zepp abrufen</string>
     <string name="band_zepp_failed">Zepp-Anmeldung fehlgeschlagen. Prüfe E-Mail und Passwort und versuche es erneut.</string>
+    <string name="band_notify_service">FitWren-Bandverbindung</string>
+    <string name="band_notify_title">Band-Benachrichtigungen</string>
+    <string name="band_notify_text">Die Verbindung bleibt ohne dauerhafte Benachrichtigung offen. Dafür braucht FitWren Benachrichtigungszugriff.</string>
+    <string name="band_notify_apps">App-Benachrichtigungen</string>
+    <string name="band_notify_apps_hint">Benachrichtigungen mit Ton gehen ans Band. Am Band gelöschte Benachrichtigungen verschwinden auch am Handy.</string>
+    <string name="band_notify_calls">Eingehende Anrufe</string>
+    <string name="band_notify_calls_hint">Der Anrufer erscheint am Band. Zum Ablehnen am Band wird die Anrufberechtigung angefragt.</string>
+    <string name="band_notify_music">Musiksteuerung</string>
+    <string name="band_notify_music_hint">Der laufende Titel erscheint am Band; Wiedergabe, Pause, Weiter und Lautstärke am Band.</string>
+    <string name="band_notify_access">Benachrichtigungszugriff einschalten</string>
+    <string name="band_notify_access_hint">Benachrichtigungszugriff ist aus. Schalte FitWren in den Android-Einstellungen ein.</string>
+    <string name="band_notify_state_connected">Band verbunden</string>
+    <string name="band_notify_state_waiting">Warte auf das Band</string>
+    <string name="band_notify_autostart">Wenn die Verbindung auf Xiaomi-Handys abbricht: Einstellungen → Apps → FitWren → Autostart einschalten und Akku-Einschränkungen entfernen.</string>
+    <string name="band_notify_huami">Funktioniert vorerst nur mit Xiaomi-Bändern und -Uhren.</string>
     <string name="band_key_manual">Oder gib den Schlüssel selbst ein:</string>
     <string name="band_key_help">Das Band ist mit einem Schlüssel geschützt, der an dein Xiaomi-Konto gebunden ist. Du musst ihn einmal am Computer abrufen:\n1. Lade am Computer token_extractor.exe von github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor herunter und öffne es.\n2. Melde dich mit dem Xiaomi-Konto an, das du in Mi Fitness verwendest.\n3. Wenn nach der Region gefragt wird, lass das Feld leer und drücke Enter.\n4. Suche dein Band in der Liste. Gib hier den 32-stelligen Code aus der Zeile TOKEN ein.</string>
     <string name="band_key_label">Schlüssel (32 Zeichen)</string>

@@ -1,6 +1,17 @@
 package com.dordeorz.adimsayar.ui
 
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Build
+import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import com.dordeorz.adimsayar.background.BandNotificationListener
+import com.dordeorz.adimsayar.data.BandLive
+import com.dordeorz.adimsayar.data.BandNotify
+import kotlinx.coroutines.delay
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
@@ -99,6 +110,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
     ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
     ReleaseNote("0.9.5", R.array.release_notes_0_9_5),
@@ -195,6 +207,8 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             }
+
+            if (state.bandDirectEnabled) BandNotifyGroup()
 
             SettingsGroup(stringResource(R.string.settings_goals)) {
                 ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
@@ -681,6 +695,84 @@ private fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedCh
         Switch(checked = checked, onCheckedChange = null)
     }
 }
+
+@Composable
+private fun BandNotifyGroup() {
+    val context = LocalContext.current
+    var tick by remember { mutableIntStateOf(0) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(NOTIFY_POLL_MS)
+            tick++
+        }
+    }
+    val callPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        BandLive.refresh(context)
+        tick++
+    }
+    val access = remember(tick) { BandNotify.hasAccess(context) }
+    val supported = remember(tick) { BandNotify.supported(context) }
+    val apps = remember(tick) { BandNotify.apps(context) }
+    val calls = remember(tick) { BandNotify.calls(context) }
+    val music = remember(tick) { BandNotify.music(context) }
+    val connected = remember(tick) { BandLive.connected }
+    fun openAccess() {
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Intent(Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS)
+                .putExtra(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME, ComponentName(context, BandNotificationListener::class.java).flattenToString())
+        } else {
+            Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+        }
+        runCatching { context.startActivity(intent) }.onFailure {
+            runCatching { context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+        }
+    }
+    fun change(on: Boolean, set: (Boolean) -> Unit) {
+        set(on)
+        tick++
+        if (on && !access) openAccess()
+    }
+    SettingsGroup(stringResource(R.string.band_notify_title)) {
+        Text(
+            stringResource(if (supported) R.string.band_notify_text else R.string.band_notify_huami),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        )
+        if (supported) {
+        SwitchRow(stringResource(R.string.band_notify_apps), stringResource(R.string.band_notify_apps_hint), apps) {
+            change(it) { on -> BandNotify.setApps(context, on) }
+        }
+        SwitchRow(stringResource(R.string.band_notify_calls), stringResource(R.string.band_notify_calls_hint), calls) {
+            change(it) { on -> BandNotify.setCalls(context, on) }
+            if (it && !BandNotify.canRejectCalls(context) && BandNotify.CALL_PERMISSIONS.isNotEmpty()) callPermission.launch(BandNotify.CALL_PERMISSIONS)
+        }
+        SwitchRow(stringResource(R.string.band_notify_music), stringResource(R.string.band_notify_music_hint), music) {
+            change(it) { on -> BandNotify.setMusic(context, on) }
+        }
+        if (apps || calls || music) {
+            if (!access) {
+                ClickRow(stringResource(R.string.band_notify_access), stringResource(R.string.band_notify_access_hint), ::openAccess)
+            } else {
+                Text(
+                    stringResource(if (connected) R.string.band_notify_state_connected else R.string.band_notify_state_waiting),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
+            Text(
+                stringResource(R.string.band_notify_autostart),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+        }
+        }
+    }
+}
+
+private const val NOTIFY_POLL_MS = 1_000L
 
 @Composable
 private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> Unit) {
