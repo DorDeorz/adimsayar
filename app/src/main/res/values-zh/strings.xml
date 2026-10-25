@@ -317,6 +317,7 @@
     <string name="device_other">其他设备</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>健康页重新设计：昨晚睡眠、每项数据单独卡片和每日历史图表（7、30、90 天）。设置已分组；已连接手环显示在顶部，今日页新增“同步”按钮</item>
         <item>直接连接手环:设置 → 直接连接手环,无需 Mi Fitness 或 Health Connect 即可读取 Xiaomi Smart Band 8 的步数</item>
         <item>直接连接时,心率、血氧和睡眠阶段也从手环读取,并显示在健康标签页</item>
         <item>重新读取 Health Connect 中最近 7 天的数据,迟到的手环步数不再丢失。设置中新增“重新同步”</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">手环没有响应</string>
     <string name="log_band_synced">手环(直连):已读取 %1$d 个文件</string>
     <string name="log_band_failed">手环(直连):%1$s</string>
+    <string name="yesterday">昨天</string>
+    <string name="health_sleep_title">睡眠</string>
+    <string name="health_last_night">昨晚</string>
+    <string name="health_sleep_shortest">最短睡眠</string>
+    <string name="health_tap_hint">点按柱条即可在上方查看当天数值</string>
+    <string name="health_oxygen_average">平均血氧</string>
+    <string name="health_stress_title">压力</string>
+    <string name="health_stress_average">平均压力</string>
+    <string name="health_stress_hint">手环按 1–100 测量压力：0–39 放松，40–59 正常，60–79 中等，80–100 偏高。</string>
+    <string name="stress_relaxed">放松</string>
+    <string name="stress_normal">正常</string>
+    <string name="stress_medium">中等</string>
+    <string name="stress_high">偏高</string>
+    <string name="health_exercise_title">运动</string>
+    <string name="health_exercise_recent">最近锻炼</string>
+    <string name="health_activity_title">活动</string>
+    <string name="settings_phone_source">手机</string>
+    <string name="settings_wearable_source">手环或手表</string>
+    <string name="settings_appearance">外观和语言</string>
+    <string name="source_sensor">手机计步传感器</string>
+    <string name="source_sensor_hint">由手机自带传感器计步。</string>
+    <string name="source_none">不使用</string>
+    <string name="source_none_hint">只统计手机的步数。</string>
+    <string name="source_direct">直接连接（小米）</string>
+    <string name="source_connect">通过 Health Connect</string>
+    <string name="source_merge_hint">使用手环时，佩戴的时段用手环步数，其他时段用手机步数。</string>
+    <string name="source_direct_manage">手环设置</string>
+    <string name="device_connect_hint">正在从 Health Connect 读取数据</string>
+    <string name="band_reconnect">重新连接</string>
+    <string name="band_sync_now">同步</string>
 </resources>

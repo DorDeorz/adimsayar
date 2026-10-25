@@ -317,6 +317,7 @@
     <string name="device_other">Otro dispositivo</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>Salud rediseñada: sueño de anoche, una tarjeta por dato e historial diario (7, 30, 90 días). Ajustes agrupados; la pulsera conectada arriba y botón \"Sincronizar\" en Hoy</item>
         <item>Conexión directa con la pulsera: Ajustes → Conectar directamente a la pulsera lee los pasos de Xiaomi Smart Band 8 sin Mi Fitness ni Health Connect</item>
         <item>Con la conexión directa, el pulso, el SpO₂ y las fases del sueño también llegan de la pulsera y aparecen en la pestaña Salud</item>
         <item>Se vuelven a leer los últimos 7 días de Health Connect, así no se pierden pasos de la pulsera que llegan tarde. Se añadió \"Volver a sincronizar\" en Ajustes</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">La pulsera no respondió</string>
     <string name="log_band_synced">Pulsera (directa): %1$d archivos leídos</string>
     <string name="log_band_failed">Pulsera (directa): %1$s</string>
+    <string name="yesterday">Ayer</string>
+    <string name="health_sleep_title">Sueño</string>
+    <string name="health_last_night">Anoche</string>
+    <string name="health_sleep_shortest">Sueño más corto</string>
+    <string name="health_tap_hint">Toca una barra para ver arriba el valor de ese día</string>
+    <string name="health_oxygen_average">SpO₂ media</string>
+    <string name="health_stress_title">Estrés</string>
+    <string name="health_stress_average">Estrés medio</string>
+    <string name="health_stress_hint">La pulsera mide el estrés de 1 a 100: 0–39 relajado, 40–59 normal, 60–79 medio, 80–100 alto.</string>
+    <string name="stress_relaxed">Relajado</string>
+    <string name="stress_normal">Normal</string>
+    <string name="stress_medium">Medio</string>
+    <string name="stress_high">Alto</string>
+    <string name="health_exercise_title">Ejercicio</string>
+    <string name="health_exercise_recent">Últimos entrenamientos</string>
+    <string name="health_activity_title">Actividad</string>
+    <string name="settings_phone_source">Teléfono</string>
+    <string name="settings_wearable_source">Pulsera o reloj</string>
+    <string name="settings_appearance">Apariencia e idioma</string>
+    <string name="source_sensor">Sensor de pasos del teléfono</string>
+    <string name="source_sensor_hint">El propio sensor del teléfono cuenta tus pasos.</string>
+    <string name="source_none">No usar</string>
+    <string name="source_none_hint">Solo se cuentan los pasos del teléfono.</string>
+    <string name="source_direct">Conexión directa (Xiaomi)</string>
+    <string name="source_connect">A través de Health Connect</string>
+    <string name="source_merge_hint">Si usas una pulsera, en las horas que la llevas se usa su recuento y en las demás el del teléfono.</string>
+    <string name="source_direct_manage">Ajustes de la pulsera</string>
+    <string name="device_connect_hint">Los datos se leen de Health Connect</string>
+    <string name="band_reconnect">Volver a conectar</string>
+    <string name="band_sync_now">Sincronizar</string>
 </resources>

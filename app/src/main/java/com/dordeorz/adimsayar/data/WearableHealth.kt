@@ -51,6 +51,8 @@ class BandPeriod(
     val distanceKm: Double?,
     val activeKcal: Map<LocalDate, Long>,
     val oxygen: OxygenSummary?,
+    val oxygenDaily: Map<LocalDate, Double>,
+    val stressDaily: Map<LocalDate, Long>,
     val sleepAllowed: Boolean,
     val exerciseAllowed: Boolean,
     val oxygenAllowed: Boolean,
@@ -130,6 +132,8 @@ object WearableHealth {
             distanceKm = old.distanceKm,
             activeKcal = old.activeKcal,
             oxygen = band.oxygen ?: old.oxygen,
+            oxygenDaily = old.oxygenDaily + band.oxygenDaily,
+            stressDaily = band.stressDaily,
             sleepAllowed = true,
             exerciseAllowed = true,
             oxygenAllowed = true,
@@ -364,15 +368,16 @@ object WearableHealth {
             }
         }
 
-        val oxygen = if (allowed(OxygenSaturationRecord::class)) {
-            readAll(client, OxygenSaturationRecord::class, start, end)
-                .map { it.percentage.value }
-                .filter { it > 0.0 }
-                .takeIf { it.isNotEmpty() }
-                ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        val oxygenReadings = if (allowed(OxygenSaturationRecord::class)) {
+            readAll(client, OxygenSaturationRecord::class, start, end).filter { it.percentage.value > 0.0 }
         } else {
-            null
+            emptyList()
         }
+        val oxygen = oxygenReadings.map { it.percentage.value }
+            .takeIf { it.isNotEmpty() }
+            ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        val oxygenDaily = oxygenReadings.groupBy { it.time.atZone(zone).toLocalDate() }
+            .mapValues { (_, list) -> list.map { it.percentage.value }.average() }
 
         return BandPeriod(
             days = days,
@@ -383,6 +388,8 @@ object WearableHealth {
             distanceKm = distance,
             activeKcal = activeKcal,
             oxygen = oxygen,
+            oxygenDaily = oxygenDaily,
+            stressDaily = emptyMap(),
             sleepAllowed = allowed(SleepSessionRecord::class),
             exerciseAllowed = allowed(ExerciseSessionRecord::class),
             oxygenAllowed = allowed(OxygenSaturationRecord::class),

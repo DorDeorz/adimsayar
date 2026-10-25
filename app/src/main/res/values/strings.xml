@@ -199,7 +199,7 @@
     <string name="year_medals">Kazanılan madalya</string>
 
     <string name="health_off_title">Bileklik kapalı</string>
-    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar\'da "Bileklik adımlarını kullan"ı aç.</string>
+    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar → Adım kaynağı\'ndan bir bileklik ya da saat seç.</string>
     <string name="health_title">Sağlık özeti (bileklik)</string>
     <string name="health_last_days">Son %1$d gün</string>
     <string name="health_loading">Health Connect\'ten okunuyor…</string>
@@ -317,7 +317,8 @@
     <string name="device_other">Diğer cihaz</string>
 
     <string-array name="release_notes_0_10_0">
-        <item>Saate doğrudan bağlantı: Ayarlar → Saate doğrudan bağlan ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
+        <item>Sağlık sekmesi yenilendi: son gece uykusu, her veri için ayrı kart ve günlük geçmiş grafiği (7, 30, 90 gün). Ayarlar gruplandı; bağlı bileklik en üstte, Bugün\'de \"Eşitle\" tuşu</item>
+        <item>Saate doğrudan bağlantı: Ayarlar → Adım kaynağı → Doğrudan bağlantı ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
         <item>Saate doğrudan bağlıyken nabız, SpO₂ ve uyku evreleri de bileklikten alınıyor ve Sağlık sekmesinde görünüyor</item>
         <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
         <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
@@ -691,4 +692,34 @@
     <string name="band_result_timeout">Bileklik yanıt vermedi</string>
     <string name="log_band_synced">Bileklik (doğrudan): %1$d dosya okundu</string>
     <string name="log_band_failed">Bileklik (doğrudan): %1$s</string>
+    <string name="yesterday">Dün</string>
+    <string name="health_sleep_title">Uyku</string>
+    <string name="health_last_night">Son gece</string>
+    <string name="health_sleep_shortest">En kısa uyku</string>
+    <string name="health_tap_hint">Bir çubuğa dokununca o günün değeri yukarıda görünür</string>
+    <string name="health_oxygen_average">Ortalama SpO₂</string>
+    <string name="health_stress_title">Stres</string>
+    <string name="health_stress_average">Ortalama stres</string>
+    <string name="health_stress_hint">Bileklik stresi 1–100 arası ölçer: 0–39 rahat, 40–59 normal, 60–79 orta, 80–100 yüksek.</string>
+    <string name="stress_relaxed">Rahat</string>
+    <string name="stress_normal">Normal</string>
+    <string name="stress_medium">Orta</string>
+    <string name="stress_high">Yüksek</string>
+    <string name="health_exercise_title">Egzersiz</string>
+    <string name="health_exercise_recent">Son egzersizler</string>
+    <string name="health_activity_title">Aktivite</string>
+    <string name="settings_phone_source">Telefon</string>
+    <string name="settings_wearable_source">Bileklik veya saat</string>
+    <string name="settings_appearance">Görünüm ve dil</string>
+    <string name="source_sensor">Telefonun adım sensörü</string>
+    <string name="source_sensor_hint">Adımları telefonun kendi sensörü sayar.</string>
+    <string name="source_none">Kullanma</string>
+    <string name="source_none_hint">Yalnızca telefonun adımları sayılır.</string>
+    <string name="source_direct">Doğrudan bağlantı (Xiaomi)</string>
+    <string name="source_connect">Health Connect üzerinden</string>
+    <string name="source_merge_hint">Bileklik kullanıyorsan, onu taktığın saatlerde bilekliğin sayısı, diğer saatlerde telefonun sayısı kullanılır.</string>
+    <string name="source_direct_manage">Bileklik ayarları</string>
+    <string name="device_connect_hint">Veriler Health Connect\'ten okunuyor</string>
+    <string name="band_reconnect">Yeniden bağlan</string>
+    <string name="band_sync_now">Eşitle</string>
 </resources>

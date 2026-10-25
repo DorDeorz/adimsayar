@@ -317,6 +317,7 @@
     <string name="device_other">기타 기기</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>건강 탭 개편: 지난밤 수면, 항목별 카드, 일별 기록 차트(7·30·90일). 설정을 묶고 연결된 밴드를 맨 위에, 오늘 화면에 \"동기화\" 버튼</item>
         <item>밴드 직접 연결: 설정 → 밴드에 직접 연결에서 Mi Fitness나 Health Connect 없이 Xiaomi Smart Band 8 걸음 수를 읽습니다</item>
         <item>직접 연결 시 심박수, SpO₂, 수면 단계도 밴드에서 받아 건강 탭에 표시됩니다</item>
         <item>Health Connect에서 최근 7일을 다시 읽어 늦게 들어온 밴드 걸음 수를 놓치지 않습니다. 설정에 \"다시 동기화\" 추가</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">밴드가 응답하지 않았습니다</string>
     <string name="log_band_synced">밴드(직접): 파일 %1$d개 읽음</string>
     <string name="log_band_failed">밴드(직접): %1$s</string>
+    <string name="yesterday">어제</string>
+    <string name="health_sleep_title">수면</string>
+    <string name="health_last_night">지난밤</string>
+    <string name="health_sleep_shortest">가장 짧은 수면</string>
+    <string name="health_tap_hint">막대를 누르면 그날의 값이 위에 표시됩니다</string>
+    <string name="health_oxygen_average">평균 SpO₂</string>
+    <string name="health_stress_title">스트레스</string>
+    <string name="health_stress_average">평균 스트레스</string>
+    <string name="health_stress_hint">밴드는 스트레스를 1~100으로 측정합니다: 0~39 편안함, 40~59 보통, 60~79 중간, 80~100 높음.</string>
+    <string name="stress_relaxed">편안함</string>
+    <string name="stress_normal">보통</string>
+    <string name="stress_medium">중간</string>
+    <string name="stress_high">높음</string>
+    <string name="health_exercise_title">운동</string>
+    <string name="health_exercise_recent">최근 운동</string>
+    <string name="health_activity_title">활동</string>
+    <string name="settings_phone_source">휴대폰</string>
+    <string name="settings_wearable_source">밴드 또는 시계</string>
+    <string name="settings_appearance">화면 및 언어</string>
+    <string name="source_sensor">휴대폰 걸음 센서</string>
+    <string name="source_sensor_hint">휴대폰 자체 센서가 걸음을 셉니다.</string>
+    <string name="source_none">사용 안 함</string>
+    <string name="source_none_hint">휴대폰 걸음만 셉니다.</string>
+    <string name="source_direct">직접 연결(Xiaomi)</string>
+    <string name="source_connect">Health Connect 사용</string>
+    <string name="source_merge_hint">밴드를 쓰면 착용한 시간에는 밴드 걸음 수, 나머지 시간에는 휴대폰 걸음 수를 씁니다.</string>
+    <string name="source_direct_manage">밴드 설정</string>
+    <string name="device_connect_hint">Health Connect에서 데이터를 읽는 중</string>
+    <string name="band_reconnect">다시 연결</string>
+    <string name="band_sync_now">동기화</string>
 </resources>

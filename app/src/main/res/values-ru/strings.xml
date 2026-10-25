@@ -317,6 +317,7 @@
     <string name="device_other">Другое устройство</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>Раздел «Здоровье» переработан: сон прошлой ночи, отдельная карточка для каждого показателя и графики по дням (7, 30, 90 дней). Настройки сгруппированы; подключённый браслет вверху, кнопка «Синхронизировать» на экране «Сегодня»</item>
         <item>Прямое подключение браслета: Настройки → Подключиться к браслету напрямую читает шаги Xiaomi Smart Band 8 без Mi Fitness и Health Connect</item>
         <item>При прямом подключении пульс, SpO₂ и фазы сна тоже берутся с браслета и видны на вкладке «Здоровье»</item>
         <item>Последние 7 дней снова читаются из Health Connect, поэтому опоздавшие шаги браслета больше не теряются. В Настройки добавлено «Синхронизировать заново»</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">Браслет не ответил</string>
     <string name="log_band_synced">Браслет (напрямую): прочитано файлов: %1$d</string>
     <string name="log_band_failed">Браслет (напрямую): %1$s</string>
+    <string name="yesterday">Вчера</string>
+    <string name="health_sleep_title">Сон</string>
+    <string name="health_last_night">Прошлая ночь</string>
+    <string name="health_sleep_shortest">Самый короткий сон</string>
+    <string name="health_tap_hint">Нажмите на столбец, чтобы увидеть значение за этот день</string>
+    <string name="health_oxygen_average">Средний SpO₂</string>
+    <string name="health_stress_title">Стресс</string>
+    <string name="health_stress_average">Средний стресс</string>
+    <string name="health_stress_hint">Браслет измеряет стресс от 1 до 100: 0–39 расслаблен, 40–59 норма, 60–79 средний, 80–100 высокий.</string>
+    <string name="stress_relaxed">Расслаблен</string>
+    <string name="stress_normal">Норма</string>
+    <string name="stress_medium">Средний</string>
+    <string name="stress_high">Высокий</string>
+    <string name="health_exercise_title">Тренировки</string>
+    <string name="health_exercise_recent">Последние тренировки</string>
+    <string name="health_activity_title">Активность</string>
+    <string name="settings_phone_source">Телефон</string>
+    <string name="settings_wearable_source">Браслет или часы</string>
+    <string name="settings_appearance">Оформление и язык</string>
+    <string name="source_sensor">Датчик шагов телефона</string>
+    <string name="source_sensor_hint">Шаги считает датчик телефона.</string>
+    <string name="source_none">Не использовать</string>
+    <string name="source_none_hint">Считаются только шаги телефона.</string>
+    <string name="source_direct">Прямое подключение (Xiaomi)</string>
+    <string name="source_connect">Через Health Connect</string>
+    <string name="source_merge_hint">Если вы носите браслет, в эти часы используется его счёт, в остальные часы — счёт телефона.</string>
+    <string name="source_direct_manage">Настройки браслета</string>
+    <string name="device_connect_hint">Данные читаются из Health Connect</string>
+    <string name="band_reconnect">Переподключить</string>
+    <string name="band_sync_now">Синхронизировать</string>
 </resources>

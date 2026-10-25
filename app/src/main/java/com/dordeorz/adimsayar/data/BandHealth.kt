@@ -13,6 +13,7 @@ object BandHealth {
     private val HEART = 30..220
     private val OXYGEN = 70..100
     private val STRESS = 1..100
+    private const val MAX_BEFORE_DAYS = 30L
 
     suspend fun saveMinutes(context: Context, minutes: List<BandMinute>) {
         val rows = minutes.mapNotNull { minute ->
@@ -53,15 +54,22 @@ object BandHealth {
     suspend fun period(context: Context, to: LocalDate, days: Long): BandPeriod {
         val zone = ZoneId.systemDefault()
         val from = to.minusDays(days - 1)
-        val before = from.minusDays(days)
+        val before = from.minusDays(minOf(days, MAX_BEFORE_DAYS))
         val dates = generateSequence(from) { it.plusDays(1) }.takeWhile { !it.isAfter(to) }.toList()
         val (start, end) = bounds(before, to, zone)
         val byDay = dao(context).samples(start, end).groupBy { Instant.ofEpochSecond(it.minute).atZone(zone).toLocalDate() }
         val restingByDay = byDay.mapValues { resting(it.value) }
         val restingBefore = HealthMath.average(restingByDay.filterKeys { it < from }.values.filterNotNull())
-        val oxygen = byDay.filterKeys { it >= from }.values.flatten().map { it.spo2.toDouble() }.filter { it > 0.0 }
+        val current = byDay.filterKeys { it >= from }
+        val oxygen = current.values.flatten().map { it.spo2.toDouble() }.filter { it > 0.0 }
             .takeIf { it.isNotEmpty() }
             ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        val oxygenDaily = current.mapValues { (_, rows) -> rows.map { it.spo2.toDouble() }.filter { it > 0.0 } }
+            .filterValues { it.isNotEmpty() }
+            .mapValues { it.value.average() }
+        val stressDaily = current.mapValues { (_, rows) -> rows.map { it.stress.toLong() }.filter { it > 0L } }
+            .filterValues { it.isNotEmpty() }
+            .mapValues { HealthMath.average(it.value) ?: 0L }
         return BandPeriod(
             days = dates,
             nights = nights(context, from, to, zone),
@@ -71,6 +79,8 @@ object BandHealth {
             distanceKm = null,
             activeKcal = emptyMap(),
             oxygen = oxygen,
+            oxygenDaily = oxygenDaily,
+            stressDaily = stressDaily,
             sleepAllowed = true,
             exerciseAllowed = true,
             oxygenAllowed = true,

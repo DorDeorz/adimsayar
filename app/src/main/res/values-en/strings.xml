@@ -199,7 +199,7 @@
     <string name="year_medals">Medals earned</string>
 
     <string name="health_off_title">Band is off</string>
-    <string name="health_off_text">Turn on "Use band steps" in Settings to see your sleep, heart rate and workout summary.</string>
+    <string name="health_off_text">Pick a band or watch in Settings → Step source to see your sleep, heart rate and workout summary.</string>
     <string name="health_title">Health summary (band)</string>
     <string name="health_last_days">Last %1$d days</string>
     <string name="health_loading">Reading from Health Connect…</string>
@@ -317,7 +317,8 @@
     <string name="device_other">Other device</string>
 
     <string-array name="release_notes_0_10_0">
-        <item>Direct band connection: Settings → Connect to the band directly reads Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect</item>
+        <item>Health tab redesigned: last night\'s sleep, a separate card for each metric and daily history charts (7, 30, 90 days). Settings are grouped; the connected band is at the top and Today has a \"Sync\" button</item>
+        <item>Direct band connection: Settings → Step source → Direct connection reads Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect</item>
         <item>With the direct band connection, heart rate, SpO₂ and sleep stages also come from the band and show on the Health tab</item>
         <item>The last 7 days are read again from Health Connect, so late band steps are no longer missed. \"Resync\" added to Settings</item>
         <item>The license is now AGPL-3.0: the band connection is based on Gadgetbridge\'s code</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">The band did not respond</string>
     <string name="log_band_synced">Band (direct): %1$d files read</string>
     <string name="log_band_failed">Band (direct): %1$s</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="health_sleep_title">Sleep</string>
+    <string name="health_last_night">Last night</string>
+    <string name="health_sleep_shortest">Shortest sleep</string>
+    <string name="health_tap_hint">Tap a bar to see that day\'s value above</string>
+    <string name="health_oxygen_average">Average SpO₂</string>
+    <string name="health_stress_title">Stress</string>
+    <string name="health_stress_average">Average stress</string>
+    <string name="health_stress_hint">The band measures stress from 1 to 100: 0–39 relaxed, 40–59 normal, 60–79 medium, 80–100 high.</string>
+    <string name="stress_relaxed">Relaxed</string>
+    <string name="stress_normal">Normal</string>
+    <string name="stress_medium">Medium</string>
+    <string name="stress_high">High</string>
+    <string name="health_exercise_title">Exercise</string>
+    <string name="health_exercise_recent">Recent workouts</string>
+    <string name="health_activity_title">Activity</string>
+    <string name="settings_phone_source">Phone</string>
+    <string name="settings_wearable_source">Band or watch</string>
+    <string name="settings_appearance">Appearance and language</string>
+    <string name="source_sensor">Phone step sensor</string>
+    <string name="source_sensor_hint">The phone\'s own sensor counts your steps.</string>
+    <string name="source_none">Don\'t use</string>
+    <string name="source_none_hint">Only the phone\'s steps are counted.</string>
+    <string name="source_direct">Direct connection (Xiaomi)</string>
+    <string name="source_connect">Via Health Connect</string>
+    <string name="source_merge_hint">If you use a band, its count is used in the hours you wear it and the phone\'s count in the other hours.</string>
+    <string name="source_direct_manage">Band settings</string>
+    <string name="device_connect_hint">Data is read from Health Connect</string>
+    <string name="band_reconnect">Reconnect</string>
+    <string name="band_sync_now">Sync</string>
 </resources>

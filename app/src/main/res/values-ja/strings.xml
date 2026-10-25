@@ -317,6 +317,7 @@
     <string name="device_other">その他のデバイス</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>健康タブを刷新：昨夜の睡眠、データごとのカード、日別履歴グラフ（7・30・90日）。設定をグループ化し、接続中のバンドを上部に、今日に「同期」ボタン</item>
         <item>バンドへの直接接続: 設定 → バンドに直接接続 で、Mi Fitness や Health Connect なしで Xiaomi Smart Band 8 の歩数を読み取ります</item>
         <item>直接接続では心拍数、SpO₂、睡眠ステージもバンドから取得され、健康タブに表示されます</item>
         <item>Health Connect から直近 7 日分を読み直すため、遅れて届いたバンドの歩数を取りこぼしません。設定に「再同期」を追加</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">バンドが応答しませんでした</string>
     <string name="log_band_synced">バンド(直接): %1$d 件のファイルを読み取り</string>
     <string name="log_band_failed">バンド(直接): %1$s</string>
+    <string name="yesterday">昨日</string>
+    <string name="health_sleep_title">睡眠</string>
+    <string name="health_last_night">昨夜</string>
+    <string name="health_sleep_shortest">最短の睡眠</string>
+    <string name="health_tap_hint">バーをタップするとその日の値が上に表示されます</string>
+    <string name="health_oxygen_average">平均SpO₂</string>
+    <string name="health_stress_title">ストレス</string>
+    <string name="health_stress_average">平均ストレス</string>
+    <string name="health_stress_hint">バンドはストレスを1〜100で測ります：0〜39 リラックス、40〜59 普通、60〜79 中程度、80〜100 高い。</string>
+    <string name="stress_relaxed">リラックス</string>
+    <string name="stress_normal">普通</string>
+    <string name="stress_medium">中程度</string>
+    <string name="stress_high">高い</string>
+    <string name="health_exercise_title">運動</string>
+    <string name="health_exercise_recent">最近のワークアウト</string>
+    <string name="health_activity_title">アクティビティ</string>
+    <string name="settings_phone_source">スマートフォン</string>
+    <string name="settings_wearable_source">バンドまたはウォッチ</string>
+    <string name="settings_appearance">表示と言語</string>
+    <string name="source_sensor">スマートフォンの歩数センサー</string>
+    <string name="source_sensor_hint">スマートフォンのセンサーが歩数を数えます。</string>
+    <string name="source_none">使用しない</string>
+    <string name="source_none_hint">スマートフォンの歩数だけを数えます。</string>
+    <string name="source_direct">直接接続（Xiaomi）</string>
+    <string name="source_connect">Health Connect経由</string>
+    <string name="source_merge_hint">バンドを使う場合、着けている時間はバンドの歩数、それ以外はスマートフォンの歩数を使います。</string>
+    <string name="source_direct_manage">バンドの設定</string>
+    <string name="device_connect_hint">Health Connectからデータを読み込み中</string>
+    <string name="band_reconnect">再接続</string>
+    <string name="band_sync_now">同期</string>
 </resources>

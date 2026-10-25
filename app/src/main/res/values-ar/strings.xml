@@ -317,6 +317,7 @@
     <string name="device_other">جهاز آخر</string>
 
     <string-array name="release_notes_0_10_0">
+        <item>إعادة تصميم قسم الصحة: نوم الليلة الماضية، بطاقة لكل قياس ورسوم يومية (7 و30 و90 يومًا). الإعدادات مجمّعة؛ السوار المتصل في الأعلى وزر \"مزامنة\" في اليوم</item>
         <item>اتصال مباشر بالسوار: الإعدادات ← الاتصال بالسوار مباشرة يقرأ خطوات Xiaomi Smart Band 8 دون Mi Fitness أو Health Connect</item>
         <item>مع الاتصال المباشر تأتي أيضًا نبضات القلب وSpO₂ ومراحل النوم من السوار وتظهر في تبويب الصحة</item>
         <item>تُقرأ آخر 7 أيام من Health Connect من جديد، فلا تضيع خطوات السوار المتأخرة. أُضيف \"إعادة المزامنة\" إلى الإعدادات</item>
@@ -690,4 +691,34 @@
     <string name="band_result_timeout">لم يستجب السوار</string>
     <string name="log_band_synced">السوار (مباشر): تمت قراءة %1$d ملفات</string>
     <string name="log_band_failed">السوار (مباشر): %1$s</string>
+    <string name="yesterday">أمس</string>
+    <string name="health_sleep_title">النوم</string>
+    <string name="health_last_night">الليلة الماضية</string>
+    <string name="health_sleep_shortest">أقصر نوم</string>
+    <string name="health_tap_hint">اضغط على عمود لترى قيمة ذلك اليوم في الأعلى</string>
+    <string name="health_oxygen_average">متوسط SpO₂</string>
+    <string name="health_stress_title">التوتر</string>
+    <string name="health_stress_average">متوسط التوتر</string>
+    <string name="health_stress_hint">يقيس السوار التوتر من 1 إلى 100: 0–39 مسترخٍ، 40–59 طبيعي، 60–79 متوسط، 80–100 مرتفع.</string>
+    <string name="stress_relaxed">مسترخٍ</string>
+    <string name="stress_normal">طبيعي</string>
+    <string name="stress_medium">متوسط</string>
+    <string name="stress_high">مرتفع</string>
+    <string name="health_exercise_title">التمارين</string>
+    <string name="health_exercise_recent">آخر التمارين</string>
+    <string name="health_activity_title">النشاط</string>
+    <string name="settings_phone_source">الهاتف</string>
+    <string name="settings_wearable_source">سوار أو ساعة</string>
+    <string name="settings_appearance">المظهر واللغة</string>
+    <string name="source_sensor">مستشعر خطوات الهاتف</string>
+    <string name="source_sensor_hint">يحسب مستشعر الهاتف خطواتك.</string>
+    <string name="source_none">عدم الاستخدام</string>
+    <string name="source_none_hint">تُحسب خطوات الهاتف فقط.</string>
+    <string name="source_direct">اتصال مباشر (Xiaomi)</string>
+    <string name="source_connect">عبر Health Connect</string>
+    <string name="source_merge_hint">إذا كنت تستخدم سوارًا، يُستخدم عدّه في الساعات التي ترتديه فيها وعدّ الهاتف في بقية الساعات.</string>
+    <string name="source_direct_manage">إعدادات السوار</string>
+    <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
+    <string name="band_reconnect">إعادة الاتصال</string>
+    <string name="band_sync_now">مزامنة</string>
 </resources>

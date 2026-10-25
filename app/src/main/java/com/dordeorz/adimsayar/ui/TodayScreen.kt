@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -86,7 +87,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item { TodayRing(state, steps, goal) }
-        item { ShareButton(state, steps, goal) }
+        item { ShareButton(state, actions, steps, goal) }
         freezeOffer(state)?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
@@ -486,7 +487,7 @@ private fun WaterCard(state: MainUiState, onAddWater: (Int) -> Unit) {
 }
 
 @Composable
-private fun ShareButton(state: MainUiState, steps: Long, goal: Long) {
+private fun ShareButton(state: MainUiState, actions: MainActions, steps: Long, goal: Long) {
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
     val title = stringResource(R.string.app_name)
@@ -501,7 +502,7 @@ private fun ShareButton(state: MainUiState, steps: Long, goal: Long) {
     val streakValue = stringResource(R.string.days_count, state.achievements.records.currentStreak)
     val chooser = stringResource(R.string.share_title)
     val failed = stringResource(R.string.share_failed)
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)) {
         OutlinedButton(onClick = {
             val km = Distance.inUnit(Distance.km(steps, state.settings.heightCm), state.settings.distanceUnit)
             val kcal = Distance.kcal(steps, state.settings.heightCm, state.settings.weightKg)
@@ -533,6 +534,16 @@ private fun ShareButton(state: MainUiState, steps: Long, goal: Long) {
         }) {
             Icon(painterResource(R.drawable.ic_share), contentDescription = null, modifier = Modifier.size(18.dp))
             Text(stringResource(R.string.share_button), modifier = Modifier.padding(start = 8.dp))
+        }
+        if (state.healthEnabled) {
+            OutlinedButton(onClick = actions.onSyncBand, enabled = !state.bandSyncing) {
+                if (state.bandSyncing) {
+                    CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
+                } else {
+                    Icon(painterResource(R.drawable.ic_sync), contentDescription = null, modifier = Modifier.size(18.dp))
+                }
+                Text(stringResource(R.string.band_sync_now), modifier = Modifier.padding(start = 8.dp))
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -83,6 +84,11 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
     val sources by produceState<SourceReport?>(null, state.healthEnabled, state.healthRefresh) {
         value = if (state.healthEnabled) withContext(Dispatchers.IO) { actions.loadSources() } else null
     }
+    var daysValue by rememberSaveable { mutableIntStateOf(WEEK_DAYS) }
+    val period by produceState<BandPeriod?>(null, state.healthEnabled, state.today, daysValue, state.healthRefresh) {
+        value = null
+        if (state.healthEnabled) value = withContext(Dispatchers.IO) { actions.loadBandPeriod(state.today, daysValue.toLong()) }
+    }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -90,8 +96,53 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
     ) {
         if (state.healthEnabled) {
             if (sources?.hasWearable == false) item { SourceWarningCard(onSetup = { setup = true }) }
-            item { HealthCard(state.today, state.healthRefresh, actions) }
-            item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
+            item {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PERIOD_OPTIONS.forEach { option ->
+                        FilterChip(
+                            selected = option == daysValue,
+                            onClick = { daysValue = option },
+                            label = { Text(stringResource(R.string.health_last_days, option)) },
+                        )
+                    }
+                }
+            }
+            val data = period
+            if (data?.missingPermissions == true) {
+                item {
+                    Card {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(
+                                stringResource(R.string.health_permissions_missing),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.error,
+                                modifier = Modifier.weight(1f),
+                            )
+                            TextButton(onClick = actions.onGrantHealthPermissions) { Text(stringResource(R.string.health_grant)) }
+                        }
+                    }
+                }
+            }
+            if (data == null) {
+                item {
+                    Text(
+                        stringResource(R.string.health_loading),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            } else {
+                item { SleepCard(data) }
+                item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
+                item { RestingCard(data, daysValue) }
+                item { OxygenCard(data) }
+                if (data.stressDaily.isNotEmpty()) item { StressCard(data) }
+                item { ExerciseCard(data) }
+                if (data.activeKcal.values.any { it > 0L } || data.distanceKm != null) item { ActivityCard(data) }
+            }
         } else {
             item {
                 Card {
@@ -121,32 +172,83 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
 }
 
 @Composable
-private fun RestingChart(title: String, days: List<Pair<LocalDate, Long?>>) {
-    val values = days.mapNotNull { it.second }
-    if (values.isEmpty()) return
-    val max = values.max()
-    val min = (values.min() - RESTING_CHART_FLOOR).coerceAtLeast(0L)
-    val range = (max - min).coerceAtLeast(1L)
-    val color = MaterialTheme.colorScheme.tertiary
+private fun MetricCard(title: String, content: @Composable () -> Unit) {
+    Card {
+        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)) {
+            Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(horizontal = 16.dp))
+            content()
+        }
+    }
+}
+
+@Composable
+private fun MetricHeadline(value: String, caption: String?) {
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Text(value, style = MaterialTheme.typography.headlineMedium)
+        if (caption != null) {
+            Text(caption, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun EmptyMetric(allowed: Boolean) {
+    Text(
+        stringResource(if (allowed) R.string.health_no_records else R.string.health_no_permission),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+    )
+}
+
+@Composable
+private fun dayCaption(date: LocalDate, today: LocalDate = LocalDate.now()): String = when (date) {
+    today -> stringResource(R.string.today)
+    today.minusDays(1) -> stringResource(R.string.yesterday)
+    else -> FULL_DATE_FORMAT.format(date)
+}
+
+@Composable
+private fun DailyBars(
+    days: List<LocalDate>,
+    values: Map<LocalDate, Double>,
+    selected: LocalDate?,
+    onSelect: (LocalDate) -> Unit,
+    color: Color,
+    floor: Double = 0.0,
+    label: (Double) -> String,
+) {
+    val present = days.mapNotNull { values[it] }
+    if (present.isEmpty()) return
+    val low = floor.coerceAtMost(present.min())
+    val range = (present.max() - low).coerceAtLeast(1.0)
     val wide = days.size <= WEEK_DAYS
-    val spacing = if (wide) 6.dp else 2.dp
-    Column(modifier = Modifier.padding(top = 16.dp)) {
-        Text(title, style = MaterialTheme.typography.labelLarge)
+    val spacing = if (wide) 6.dp else if (days.size <= MONTH_DAYS) 2.dp else 1.dp
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
         Row(
-            modifier = Modifier.fillMaxWidth().height(CHART_HEIGHT).padding(top = 8.dp),
+            modifier = Modifier.fillMaxWidth().height(BAR_CHART_HEIGHT),
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.spacedBy(spacing),
         ) {
-            days.forEach { (_, bpm) ->
-                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    if (bpm != null) {
-                        if (wide) Text(bpm.toString(), style = MaterialTheme.typography.labelSmall)
+            days.forEach { date ->
+                val value = values[date]
+                val active = selected == null || selected == date
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .clickable(enabled = value != null) { onSelect(date) },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom,
+                ) {
+                    if (value != null) {
+                        if (wide) Text(label(value), style = MaterialTheme.typography.labelSmall, maxLines = 1)
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height((CHART_HEIGHT - 28.dp) * ((bpm - min).toFloat() / range))
-                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                                .background(color),
+                                .height(((BAR_CHART_HEIGHT - 28.dp) * ((value - low) / range).toFloat()).coerceAtLeast(3.dp))
+                                .clip(RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
+                                .background(if (active) color else color.copy(alpha = 0.35f)),
                         )
                     }
                 }
@@ -154,11 +256,11 @@ private fun RestingChart(title: String, days: List<Pair<LocalDate, Long?>>) {
         }
         if (wide) {
             Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(spacing)) {
-                days.forEach { (date, _) ->
+                days.forEach { date ->
                     Text(
                         date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = if (date == selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.weight(1f),
                     )
@@ -167,20 +269,13 @@ private fun RestingChart(title: String, days: List<Pair<LocalDate, Long?>>) {
         } else {
             Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
                 Text(
-                    DAY_FORMAT.format(days.first().first),
+                    DAY_FORMAT.format(days.first()),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f),
                 )
                 Text(
-                    stringResource(R.string.health_min_max, values.min(), values.max()),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f),
-                )
-                Text(
-                    DAY_FORMAT.format(days.last().first),
+                    DAY_FORMAT.format(days.last()),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.End,
@@ -188,166 +283,242 @@ private fun RestingChart(title: String, days: List<Pair<LocalDate, Long?>>) {
                 )
             }
         }
+        Text(
+            stringResource(R.string.health_tap_hint),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 4.dp),
+        )
     }
 }
 
 @Composable
-private fun HealthCard(today: LocalDate, refresh: Int, actions: MainActions) {
-    var daysValue by rememberSaveable { mutableIntStateOf(WEEK_DAYS) }
-    val days = daysValue.toLong()
-    val period by produceState<BandPeriod?>(null, today, days, refresh) {
-        value = null
-        value = withContext(Dispatchers.IO) { actions.loadBandPeriod(today, days) }
-    }
-    Card {
-        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-            Text(
-                stringResource(R.string.health_title),
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+private fun SleepCard(data: BandPeriod) {
+    val nights = data.nights.filterKeys { it in data.days }
+    MetricCard(stringResource(R.string.health_sleep_title)) {
+        if (nights.isEmpty()) {
+            EmptyMetric(data.sleepAllowed)
+            return@MetricCard
+        }
+        val zone = ZoneId.systemDefault()
+        val latest = nights.keys.max()
+        var selectedText by rememberSaveable(latest.toString()) { mutableStateOf(latest.toString()) }
+        val selected = LocalDate.parse(selectedText).takeIf { it in nights } ?: latest
+        val night = nights.getValue(selected)
+        val caption = (if (selected == latest) stringResource(R.string.health_last_night) + " · " else "") + dayCaption(selected) + " · " +
+            stringResource(
+                R.string.health_time_range,
+                CLOCK_FORMAT.format(night.bedtime.atZone(zone).toLocalTime()),
+                CLOCK_FORMAT.format(night.wake.atZone(zone).toLocalTime()),
             )
-            Row(modifier = Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(WEEK_DAYS, MONTH_DAYS).forEach { option ->
-                    FilterChip(
-                        selected = option == daysValue,
-                        onClick = { daysValue = option },
-                        label = { Text(stringResource(R.string.health_last_days, option)) },
-                    )
-                }
-            }
-            val data = period
-            if (data?.missingPermissions == true) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 8.dp, top = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        stringResource(R.string.health_permissions_missing),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.weight(1f),
-                    )
-                    TextButton(onClick = actions.onGrantHealthPermissions) { Text(stringResource(R.string.health_grant)) }
-                }
-            }
-            val nights = data?.nights.orEmpty()
-            val resting = data?.resting?.mapNotNull { it.second }.orEmpty()
-            val exercises = data?.exercises.orEmpty()
-            val kcal = data?.activeKcal.orEmpty().filterValues { it > 0L }
-            if (data == null || (nights.isEmpty() && resting.isEmpty() && exercises.isEmpty() && data.distanceKm == null && kcal.isEmpty() && data.oxygen == null)) {
-                Text(
-                    stringResource(if (data == null) R.string.health_loading else R.string.health_empty),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(16.dp),
-                )
-                return@Column
-            }
-            val zone = ZoneId.systemDefault()
+        MetricHeadline(sleepText(night.minutes), caption)
+        SleepStages(SleepStage.entries.mapNotNull { stage -> night.stages[stage]?.let { stage to it } }.toMap(), null)
+        DailyBars(
+            days = data.days,
+            values = nights.mapValues { it.value.minutes.toDouble() },
+            selected = selected,
+            onSelect = { selectedText = it.toString() },
+            color = MaterialTheme.colorScheme.primary,
+            label = { formatDecimal(it / 60.0) },
+        )
+        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
+        val average = HealthMath.average(nights.values.map { it.minutes }) ?: 0L
+        val longest = nights.entries.maxBy { it.value.minutes }
+        val shortest = nights.entries.minBy { it.value.minutes }
+        RecordRow(stringResource(R.string.health_sleep_average), sleepText(average), stringResource(R.string.health_nights, nights.size))
+        RecordRow(stringResource(R.string.health_sleep_longest), sleepText(longest.value.minutes), FULL_DATE_FORMAT.format(longest.key))
+        if (nights.size > 1) {
+            RecordRow(stringResource(R.string.health_sleep_shortest), sleepText(shortest.value.minutes), FULL_DATE_FORMAT.format(shortest.key))
+        }
+        val bed = HealthMath.averageBedtime(nights.values.map { it.bedtime }, zone)
+        val wake = HealthMath.averageWake(nights.values.map { it.wake }, zone)
+        if (bed != null && wake != null) {
+            RecordRow(
+                stringResource(R.string.health_bed_wake),
+                stringResource(R.string.health_time_range, CLOCK_FORMAT.format(bed), CLOCK_FORMAT.format(wake)),
+                null,
+            )
+        }
+        val staged = nights.values.filter { it.stages.isNotEmpty() }
+        if (staged.size > 1) {
+            val averages = SleepStage.entries.associateWith { stage -> staged.sumOf { it.stages[stage] ?: 0L } / staged.size }
+                .filterValues { it > 0L }
+            SleepStages(averages, staged.size)
+        }
+    }
+}
 
-            if (nights.isNotEmpty()) {
-                val average = HealthMath.average(nights.values.map { it.minutes }) ?: 0L
-                val longest = nights.entries.maxBy { it.value.minutes }
-                RecordRow(
-                    stringResource(R.string.health_sleep_average),
-                    sleepText(average),
-                    stringResource(R.string.health_nights, nights.size),
-                )
-                RecordRow(stringResource(R.string.health_sleep_longest), sleepText(longest.value.minutes), FULL_DATE_FORMAT.format(longest.key))
-                val bed = HealthMath.averageBedtime(nights.values.map { it.bedtime }, zone)
-                val wake = HealthMath.averageWake(nights.values.map { it.wake }, zone)
-                if (bed != null && wake != null) {
-                    RecordRow(
-                        stringResource(R.string.health_bed_wake),
-                        stringResource(R.string.health_time_range, CLOCK_FORMAT.format(bed), CLOCK_FORMAT.format(wake)),
-                        null,
-                    )
-                }
-                val staged = nights.values.filter { it.stages.isNotEmpty() }
-                if (staged.isNotEmpty()) {
-                    val averages = SleepStage.entries.associateWith { stage -> staged.sumOf { it.stages[stage] ?: 0L } / staged.size }
-                        .filterValues { it > 0L }
-                    SleepStages(averages, staged.size)
-                }
-            } else {
-                RecordRow(
-                    stringResource(R.string.health_sleep_average),
-                    "-",
-                    stringResource(if (data.sleepAllowed) R.string.health_no_records else R.string.health_no_permission),
-                )
-            }
+@Composable
+private fun RestingCard(data: BandPeriod, days: Int) {
+    val values = data.resting.mapNotNull { (date, bpm) -> bpm?.let { date to it.toDouble() } }.toMap()
+    MetricCard(stringResource(R.string.health_resting_chart)) {
+        if (values.isEmpty()) {
+            EmptyMetric(true)
+            return@MetricCard
+        }
+        val latest = values.keys.max()
+        var selectedText by rememberSaveable(latest.toString()) { mutableStateOf(latest.toString()) }
+        val selected = LocalDate.parse(selectedText).takeIf { it in values } ?: latest
+        MetricHeadline(stringResource(R.string.health_bpm, values.getValue(selected).toLong()), dayCaption(selected))
+        DailyBars(
+            days = data.days,
+            values = values,
+            selected = selected,
+            onSelect = { selectedText = it.toString() },
+            color = MaterialTheme.colorScheme.error,
+            floor = values.values.min() - RESTING_CHART_FLOOR,
+            label = { it.toLong().toString() },
+        )
+        val average = HealthMath.average(values.values.map { it.toLong() }) ?: 0L
+        val before = data.restingBefore
+        val trend = when {
+            before == null -> null
+            average < before -> stringResource(R.string.health_resting_down, days, before - average)
+            average > before -> stringResource(R.string.health_resting_up, days, average - before)
+            else -> stringResource(R.string.health_resting_same, days)
+        }
+        RecordRow(stringResource(R.string.health_resting_average), stringResource(R.string.health_bpm, average), trend)
+        RecordRow(
+            stringResource(R.string.heart_lowest),
+            stringResource(R.string.health_bpm, values.values.min().toLong()),
+            FULL_DATE_FORMAT.format(values.entries.minBy { it.value }.key),
+        )
+    }
+}
 
-            HealthMath.average(resting)?.let { average ->
-                val before = data.restingBefore
-                val trend = when {
-                    before == null -> null
-                    average < before -> stringResource(R.string.health_resting_down, daysValue, before - average)
-                    average > before -> stringResource(R.string.health_resting_up, daysValue, average - before)
-                    else -> stringResource(R.string.health_resting_same, daysValue)
-                }
-                RecordRow(stringResource(R.string.health_resting_average), stringResource(R.string.health_bpm, average), trend)
-            }
+@Composable
+private fun OxygenCard(data: BandPeriod) {
+    val values = data.oxygenDaily.filterKeys { it in data.days }
+    MetricCard(stringResource(R.string.health_oxygen)) {
+        val oxygen = data.oxygen
+        if (values.isEmpty() || oxygen == null) {
+            EmptyMetric(data.oxygenAllowed)
+            return@MetricCard
+        }
+        val latest = values.keys.max()
+        var selectedText by rememberSaveable(latest.toString()) { mutableStateOf(latest.toString()) }
+        val selected = LocalDate.parse(selectedText).takeIf { it in values } ?: latest
+        MetricHeadline(stringResource(R.string.health_percent, formatDecimal(values.getValue(selected))), dayCaption(selected))
+        DailyBars(
+            days = data.days,
+            values = values,
+            selected = selected,
+            onSelect = { selectedText = it.toString() },
+            color = MaterialTheme.colorScheme.tertiary,
+            floor = values.values.min() - 2.0,
+            label = { it.toLong().toString() },
+        )
+        RecordRow(
+            stringResource(R.string.health_oxygen_average),
+            stringResource(R.string.health_percent, formatDecimal(oxygen.average)),
+            stringResource(R.string.health_oxygen_hint, stringResource(R.string.health_percent, formatDecimal(oxygen.min)), oxygen.count),
+        )
+    }
+}
 
-            val oxygen = data.oxygen
-            if (oxygen != null) {
-                RecordRow(
-                    stringResource(R.string.health_oxygen),
-                    stringResource(R.string.health_percent, formatDecimal(oxygen.average)),
-                    stringResource(R.string.health_oxygen_hint, stringResource(R.string.health_percent, formatDecimal(oxygen.min)), oxygen.count),
-                )
-            } else {
-                RecordRow(
-                    stringResource(R.string.health_oxygen),
-                    "-",
-                    stringResource(if (data.oxygenAllowed) R.string.health_no_records else R.string.health_no_permission),
-                )
-            }
+private fun stressLevel(value: Long): Int = when {
+    value < 40L -> R.string.stress_relaxed
+    value < 60L -> R.string.stress_normal
+    value < 80L -> R.string.stress_medium
+    else -> R.string.stress_high
+}
 
-            if (exercises.isNotEmpty()) {
-                val longest = exercises.maxBy { it.minutes }
-                RecordRow(
-                    stringResource(R.string.health_exercise_total),
-                    stringResource(R.string.duration_minutes, exercises.sumOf { it.minutes }),
-                    stringResource(R.string.health_exercise_count, exercises.size),
-                )
-                RecordRow(
-                    stringResource(R.string.health_exercise_longest),
-                    stringResource(R.string.duration_minutes, longest.minutes),
-                    (longest.title?.takeIf { it.isNotBlank() } ?: stringResource(exerciseLabel(longest.kind))) + " · " +
-                        FULL_DATE_FORMAT.format(longest.start.atZone(zone).toLocalDate()),
-                )
-                exercises.groupBy { it.kind }.entries.sortedByDescending { (_, list) -> list.sumOf { it.minutes } }.forEach { (kind, list) ->
-                    RecordRow(
-                        "· " + stringResource(exerciseLabel(kind)),
-                        stringResource(R.string.duration_minutes, list.sumOf { it.minutes }),
-                        stringResource(R.string.health_exercise_count, list.size),
-                    )
-                }
-                ExerciseDays(data.days, exercises.map { it.start.atZone(zone).toLocalDate() }.toSet())
-            } else {
-                RecordRow(
-                    stringResource(R.string.health_exercise_total),
-                    "-",
-                    stringResource(if (data.exerciseAllowed) R.string.health_no_records else R.string.health_no_permission),
-                )
-            }
+@Composable
+private fun StressCard(data: BandPeriod) {
+    val values = data.stressDaily.filterKeys { it in data.days }
+    MetricCard(stringResource(R.string.health_stress_title)) {
+        if (values.isEmpty()) {
+            EmptyMetric(true)
+            return@MetricCard
+        }
+        val latest = values.keys.max()
+        var selectedText by rememberSaveable(latest.toString()) { mutableStateOf(latest.toString()) }
+        val selected = LocalDate.parse(selectedText).takeIf { it in values } ?: latest
+        val value = values.getValue(selected)
+        MetricHeadline("$value · ${stringResource(stressLevel(value))}", dayCaption(selected))
+        DailyBars(
+            days = data.days,
+            values = values.mapValues { it.value.toDouble() },
+            selected = selected,
+            onSelect = { selectedText = it.toString() },
+            color = MaterialTheme.colorScheme.secondary,
+            label = { it.toLong().toString() },
+        )
+        val average = HealthMath.average(values.values.toList()) ?: 0L
+        RecordRow(stringResource(R.string.health_stress_average), average.toString(), stringResource(stressLevel(average)))
+        Text(
+            stringResource(R.string.health_stress_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        )
+    }
+}
 
-            if (kcal.isNotEmpty()) {
-                val total = kcal.values.sum()
-                RecordRow(
-                    stringResource(R.string.band_active_kcal),
-                    stringResource(R.string.band_kcal_value, format(total)),
-                    stringResource(R.string.health_kcal_daily, format(total / kcal.size)),
-                )
-            }
-            data.distanceKm?.let { km ->
-                RecordRow(stringResource(R.string.health_distance), stringResource(R.string.health_km, formatDecimal(km)), null)
-            }
-            if (resting.isNotEmpty()) {
-                Box(modifier = Modifier.padding(horizontal = 16.dp)) {
-                    RestingChart(stringResource(R.string.health_resting_chart), data.resting)
-                }
-            }
+@Composable
+private fun ExerciseCard(data: BandPeriod) {
+    val exercises = data.exercises
+    MetricCard(stringResource(R.string.health_exercise_title)) {
+        if (exercises.isEmpty()) {
+            EmptyMetric(data.exerciseAllowed)
+            return@MetricCard
+        }
+        val zone = ZoneId.systemDefault()
+        MetricHeadline(
+            stringResource(R.string.duration_minutes, exercises.sumOf { it.minutes }),
+            stringResource(R.string.health_exercise_count, exercises.size),
+        )
+        ExerciseDays(data.days, exercises.map { it.start.atZone(zone).toLocalDate() }.toSet())
+        exercises.groupBy { it.kind }.entries.sortedByDescending { (_, list) -> list.sumOf { it.minutes } }.forEach { (kind, list) ->
+            RecordRow(
+                stringResource(exerciseLabel(kind)),
+                stringResource(R.string.duration_minutes, list.sumOf { it.minutes }),
+                stringResource(R.string.health_exercise_count, list.size),
+            )
+        }
+        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
+        Text(
+            stringResource(R.string.health_exercise_recent),
+            style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        )
+        exercises.sortedByDescending { it.start }.take(RECENT_EXERCISES).forEach { exercise ->
+            val start = exercise.start.atZone(zone)
+            RecordRow(
+                exercise.title?.takeIf { it.isNotBlank() } ?: stringResource(exerciseLabel(exercise.kind)),
+                stringResource(R.string.duration_minutes, exercise.minutes),
+                dayCaption(start.toLocalDate()) + " · " + CLOCK_FORMAT.format(start.toLocalTime()),
+            )
+        }
+    }
+}
+
+@Composable
+private fun ActivityCard(data: BandPeriod) {
+    val kcal = data.activeKcal.filterValues { it > 0L }.filterKeys { it in data.days }
+    MetricCard(stringResource(R.string.health_activity_title)) {
+        if (kcal.isNotEmpty()) {
+            val latest = kcal.keys.max()
+            var selectedText by rememberSaveable(latest.toString()) { mutableStateOf(latest.toString()) }
+            val selected = LocalDate.parse(selectedText).takeIf { it in kcal } ?: latest
+            MetricHeadline(stringResource(R.string.band_kcal_value, format(kcal.getValue(selected))), dayCaption(selected))
+            DailyBars(
+                days = data.days,
+                values = kcal.mapValues { it.value.toDouble() },
+                selected = selected,
+                onSelect = { selectedText = it.toString() },
+                color = MaterialTheme.colorScheme.primary,
+                label = { formatCompact(it.toLong()) },
+            )
+            val total = kcal.values.sum()
+            RecordRow(
+                stringResource(R.string.band_active_kcal),
+                stringResource(R.string.band_kcal_value, format(total)),
+                stringResource(R.string.health_kcal_daily, format(total / kcal.size)),
+            )
+        }
+        data.distanceKm?.let { km ->
+            RecordRow(stringResource(R.string.health_distance), stringResource(R.string.health_km, formatDecimal(km)), null)
         }
     }
 }
@@ -371,16 +542,18 @@ private fun stageLabel(stage: SleepStage): Int = when (stage) {
 }
 
 @Composable
-private fun SleepStages(averages: Map<SleepStage, Long>, nights: Int) {
+private fun SleepStages(averages: Map<SleepStage, Long>, nights: Int?) {
     if (averages.isEmpty()) return
     val total = averages.values.sum().coerceAtLeast(1L)
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
-        Text(stringResource(R.string.health_sleep_stages), style = MaterialTheme.typography.bodyLarge)
-        Text(
-            stringResource(R.string.health_nights_average, nights),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        if (nights != null) {
+            Text(stringResource(R.string.health_sleep_stages), style = MaterialTheme.typography.bodyLarge)
+            Text(
+                stringResource(R.string.health_nights_average, nights),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
         Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).height(STAGE_BAR_HEIGHT).clip(RoundedCornerShape(6.dp))) {
             averages.forEach { (stage, minutes) ->
                 Box(modifier = Modifier.weight(minutes.toFloat() / total).fillMaxSize().background(stageColor(stage)))
@@ -932,6 +1105,12 @@ private const val HOURS = 24
 private const val WEEK_DAYS = 7
 
 private const val MONTH_DAYS = 30
+
+private val PERIOD_OPTIONS = listOf(WEEK_DAYS, MONTH_DAYS, 90)
+
+private const val RECENT_EXERCISES = 5
+
+private val BAR_CHART_HEIGHT = 96.dp
 
 private const val WEIGHT_CHART_ENTRIES = 12
 
