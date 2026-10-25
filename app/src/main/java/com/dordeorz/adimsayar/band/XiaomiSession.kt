@@ -91,8 +91,8 @@ class XiaomiSession(
     private var fetching: XiaomiFileId? = null
     private val pendingStore = ArrayDeque<BandFile>()
     private var plainTries = 0
-    // Weather places already on the band; null until it answered, empty when it keeps only one.
-    private var weatherKeys: Set<String>? = null
+    // Weather places on the band (key to name); null until it answered, empty when it keeps only one.
+    private var weatherPlaces: List<Pair<String, String>>? = null
     private var reported = false
 
     fun startEncrypted() {
@@ -171,38 +171,23 @@ class XiaomiSession(
     /** Sends current weather and the daily and hourly forecast for one place. */
     fun sendWeather(report: BandWeatherReport) {
         if (!authenticated) return
-        if (weatherKeys?.contains(report.key) != true) {
-            send(command(XiaomiWeather.TYPE, XiaomiWeather.ADD_LOCATION).message(12, ProtoWriter().message(5, XiaomiWeather.location(report))).toByteArray(), false)
-            weatherKeys = weatherKeys.orEmpty() + report.key
+        val places = weatherPlaces.orEmpty()
+        // Other places (for example left by Mi Fitness) would have no data and show "turn on Bluetooth".
+        val others = places.filter { it.first != report.key }
+        if (others.isNotEmpty()) {
+            send(command(XiaomiWeather.TYPE, XiaomiWeather.REMOVE_LOCATIONS).message(12, XiaomiWeather.locationList(others)).toByteArray(), false)
         }
+        if (places.none { it.first == report.key }) {
+            send(command(XiaomiWeather.TYPE, XiaomiWeather.ADD_LOCATION).message(12, ProtoWriter().message(5, XiaomiWeather.location(report))).toByteArray(), false)
+        }
+        if (weatherPlaces != null && weatherPlaces != listOf(report.key to report.place)) {
+            send(command(XiaomiWeather.TYPE, XiaomiWeather.SET_LOCATIONS).message(12, XiaomiWeather.locationList(listOf(report.key to report.place))).toByteArray(), false)
+        }
+        weatherPlaces = listOf(report.key to report.place)
         send(command(XiaomiWeather.TYPE, XiaomiWeather.CURRENT).message(12, XiaomiWeather.current(report)).toByteArray(), false)
         send(command(XiaomiWeather.TYPE, XiaomiWeather.DAILY).message(12, XiaomiWeather.daily(report)).toByteArray(), false)
         send(command(XiaomiWeather.TYPE, XiaomiWeather.HOURLY).message(12, XiaomiWeather.hourly(report)).toByteArray(), false)
-    }
-
-    fun requestAlarms() {
-        if (!authenticated) return
-        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_GET).toByteArray(), false)
-    }
-
-    /** Creates the alarm when its id is 0, otherwise changes it; the list is read again after. */
-    fun saveAlarm(alarm: BandAlarm) {
-        if (!authenticated) return
-        val (subtype, body) = if (alarm.id == 0) XiaomiSchedule.ALARMS_CREATE to XiaomiSchedule.create(alarm) else XiaomiSchedule.ALARMS_EDIT to XiaomiSchedule.edit(alarm)
-        send(command(XiaomiSchedule.TYPE, subtype).message(19, body).toByteArray(), false)
-        requestAlarms()
-    }
-
-    fun deleteAlarms(ids: List<Int>) {
-        if (!authenticated || ids.isEmpty()) return
-        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_DELETE).message(19, XiaomiSchedule.delete(ids)).toByteArray(), false)
-        requestAlarms()
-    }
-
-    /** Replaces the band's calendar with [events]; null turns the band's calendar off. */
-    fun sendCalendar(events: List<BandCalendarEvent>?) {
-        if (!authenticated) return
-        send(command(XiaomiSchedule.CALENDAR_TYPE, XiaomiSchedule.CALENDAR_SET).message(14, XiaomiSchedule.calendar(events)).toByteArray(), false)
+        log("weather sent: ${report.key} removed ${others.map { it.first }}")
     }
 
     /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
@@ -340,9 +325,10 @@ class XiaomiSession(
             type == TYPE_SYSTEM && subtype == SYSTEM_FIND_BAND -> if (cmd.message(4)?.uint(5) == 1L) onEvent(BandEvent.BandFound)
             type == XiaomiWeather.TYPE && subtype == XiaomiWeather.REQUEST -> onEvent(BandEvent.WeatherRequest)
             type == XiaomiWeather.TYPE && subtype == XiaomiWeather.GET_LOCATIONS -> {
-                weatherKeys = if (cmd.uint(STATUS) == 1L) emptySet() else XiaomiWeather.locationKeys(cmd.message(12))
-                log("weather places: $weatherKeys")
+                weatherPlaces = if (cmd.uint(STATUS) == 1L) emptyList() else XiaomiWeather.locations(cmd.message(12))
+                log("weather places: $weatherPlaces")
             }
+            type == XiaomiWeather.TYPE -> log("weather $subtype status ${cmd.uint(STATUS)}")
             type == XiaomiSchedule.TYPE && subtype == XiaomiSchedule.ALARMS_GET -> {
                 val (alarms, max) = XiaomiSchedule.alarms(cmd.message(19))
                 onAlarms(alarms, max)

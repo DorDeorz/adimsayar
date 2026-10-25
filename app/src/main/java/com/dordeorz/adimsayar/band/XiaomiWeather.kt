@@ -32,7 +32,9 @@ object XiaomiWeather {
     const val HOURLY = 2
     const val REQUEST = 3
     const val GET_LOCATIONS = 5
+    const val SET_LOCATIONS = 6
     const val ADD_LOCATION = 7
+    const val REMOVE_LOCATIONS = 8
     private const val MAX_DAYS = 7
     private const val MAX_HOURS = 23
     private const val CELSIUS = "℃"
@@ -85,9 +87,16 @@ object XiaomiWeather {
         return forecast(report, entries)
     }
 
-    /** Place keys the band already has, from a get-locations answer; null when it keeps only one place. */
-    fun locationKeys(weather: ProtoMessage?): Set<String> =
-        weather?.message(4)?.messages(1).orEmpty().mapNotNull { it.string(1) }.toSet()
+    /** Places (key to name) the band already has, from a get-locations answer. */
+    fun locations(weather: ProtoMessage?): List<Pair<String, String>> =
+        weather?.message(4)?.messages(1).orEmpty().mapNotNull { l -> l.string(1)?.let { it to l.string(2).orEmpty() } }
+
+    /** A Weather.locations list, for setting the order or removing places. */
+    fun locationList(places: List<Pair<String, String>>): ProtoWriter {
+        val list = ProtoWriter()
+        places.forEach { (key, name) -> list.message(1, ProtoWriter().string(1, key).string(2, name)) }
+        return ProtoWriter().message(4, list)
+    }
 
     /** WMO weather code (Open-Meteo) to the band's condition code. */
     fun fromWmo(code: Int): Int = when (code) {

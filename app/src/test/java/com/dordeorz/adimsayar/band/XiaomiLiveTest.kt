@@ -144,7 +144,8 @@ class XiaomiLiveTest {
     fun weatherGoesOutOnce() {
         val sent = ArrayList<ByteArray>()
         val s = plainSession(sent, ArrayList())
-        s.onCommand(ProtoWriter().uint(1, 10).uint(2, 5).message(12, ProtoWriter().message(4, ProtoWriter())).toByteArray())
+        val old = ProtoWriter().message(1, ProtoWriter().string(1, "accu:3558654").string(2, "Kartal"))
+        s.onCommand(ProtoWriter().uint(1, 10).uint(2, 5).message(12, ProtoWriter().message(4, old)).toByteArray())
         val report = BandWeatherReport(
             "İstanbul", "2026-10-26T01:00:00+03:00", 7, 14, 80, 3, 200, 2, 1012f,
             listOf(BandWeatherReport.Day(11, 17, 7, "2026-10-26T07:20:00+03:00", "2026-10-26T18:10:00+03:00")),
@@ -152,8 +153,10 @@ class XiaomiLiveTest {
         )
         sent.clear()
         s.sendWeather(report)
-        assertEquals(listOf(7L, 0L, 1L, 2L), sent.map { ProtoMessage.parse(it)!!.uint(2) })
-        val current = ProtoMessage.parse(sent[1])!!.message(12)!!.message(1)!!
+        assertEquals(listOf(8L, 7L, 6L, 0L, 1L, 2L), sent.map { ProtoMessage.parse(it)!!.uint(2) })
+        val removed = ProtoMessage.parse(sent[0])!!.message(12)!!.message(4)!!.messages(1).map { it.string(1) }
+        assertEquals(listOf("accu:3558654"), removed)
+        val current = ProtoMessage.parse(sent[3])!!.message(12)!!.message(1)!!
         assertEquals(7L, current.uint(2))
         assertEquals("İstanbul", current.message(1)!!.string(3))
         assertEquals(report.key, current.message(1)!!.string(4))
