@@ -222,7 +222,8 @@ object WearableHealth {
                     .filter { it.endTime >= from && it.endTime < to }
                     .groupBy { it.metadata.dataOrigin.packageName }
                     .values
-                    .maxOfOrNull { sessions -> sessions.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                    .mapNotNull { sessions -> HealthMath.night(sessions.map(::span))?.minutes }
+                    .maxOrNull()
             } else {
                 null
             }
@@ -448,7 +449,8 @@ object WearableHealth {
                 .filter { it.endTime >= from && it.endTime < to }
                 .groupBy { it.metadata.dataOrigin.packageName }
                 .values
-                .maxOfOrNull { sessions -> sessions.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                .mapNotNull { sessions -> HealthMath.night(sessions.map(::span))?.minutes }
+                .maxOrNull()
         } else {
             null
         }

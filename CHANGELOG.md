@@ -8,6 +8,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Saate doğrudan bağlıyken nabız (dakikalık), SpO₂, stres ve uyku (süre ve evreler) de bileklikten okunur, `band_samples` ve `band_sleep` tablolarında saklanır; Sağlık sekmesi, geçmiş günler, Sağlık ve Özet widget'ları bu verileri gösterir. Bileklikte verisi olmayan eski günler için Health Connect'te kayıtlı veriler (örneğin Mi Fitness'ın yazdıkları) kullanılır.
 - Health Connect seçeneği ayrı olarak duruyor (Samsung ve diğer saatler için). İkisi aynı anda açık olmaz.
 - Health Connect'ten her okumada son 7 gün yeniden okunuyor; Mi Fitness'ın geç yazdığı adımlar kaçmıyor. Ayarlar'a "Bileklik verilerini yeniden eşitle" eklendi.
+- Health Connect uykusu: üst üste binen ya da iki kez yazılmış uyku kayıtları artık bir kez sayılıyor ve uyku süresine uyanık geçen dakikalar katılmıyor. Bugün kartı, geçmiş günler ve Sağlık özeti aynı hesabı kullanıyor.
 - Lisans MIT'den AGPL-3.0'a geçti: bileklik bağlantısı Gadgetbridge'in Xiaomi koduna dayanıyor.
 - Veritabanı sürümü 6 (yeni `band_hours`, `band_samples`, `band_sleep` tabloları).
 

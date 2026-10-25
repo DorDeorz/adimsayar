@@ -41,6 +41,28 @@ class HealthMathTest {
     }
 
     @Test
+    fun nightCountsOverlappingSessionsOnce() {
+        val full = SleepSpan(at(1, 23), at(2, 7), listOf(Triple(SleepStage.Deep, at(1, 23), at(2, 1))))
+        val copy = SleepSpan(at(1, 23), at(2, 7), listOf(Triple(SleepStage.Deep, at(1, 23), at(2, 1))))
+        val part = SleepSpan(at(2, 2), at(2, 5), emptyList())
+        val night = requireNotNull(HealthMath.night(listOf(full, copy, part)))
+        assertEquals(480L, night.minutes)
+        assertEquals(mapOf(SleepStage.Deep to 120L), night.stages)
+    }
+
+    @Test
+    fun nightLeavesOutAwakeTime() {
+        val span = SleepSpan(
+            at(1, 23),
+            at(2, 7),
+            listOf(Triple(SleepStage.Light, at(1, 23), at(2, 6)), Triple(SleepStage.Awake, at(2, 6), at(2, 7))),
+        )
+        val night = requireNotNull(HealthMath.night(listOf(span)))
+        assertEquals(420L, night.minutes)
+        assertEquals(60L, night.stages[SleepStage.Awake])
+    }
+
+    @Test
     fun emptyNightIsNull() {
         assertNull(HealthMath.night(emptyList()))
     }

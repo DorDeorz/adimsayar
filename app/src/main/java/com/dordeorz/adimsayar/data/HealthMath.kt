@@ -30,16 +30,30 @@ object HealthMath {
 
     fun night(spans: List<SleepSpan>): SleepNight? {
         if (spans.isEmpty()) return null
-        val minutes = spans.sumOf { Duration.between(it.start, it.end).toMinutes() }
-        if (minutes <= 0L) return null
-        val stages = HashMap<SleepStage, Long>()
-        for (span in spans) {
-            for ((stage, start, end) in span.stages) {
-                stages[stage] = (stages[stage] ?: 0L) + Duration.between(start, end).toMinutes()
+        val inBed = minutes(union(spans.map { it.start to it.end }))
+        if (inBed <= 0L) return null
+        val stages = spans.flatMap { it.stages }
+            .groupBy({ it.first }, { it.second to it.third })
+            .mapValues { (_, ranges) -> minutes(union(ranges)) }
+            .filterValues { it > 0L }
+        val asleep = (inBed - (stages[SleepStage.Awake] ?: 0L)).takeIf { it > 0L } ?: inBed
+        return SleepNight(asleep, stages, spans.minOf { it.start }, spans.maxOf { it.end })
+    }
+
+    private fun union(ranges: List<Pair<Instant, Instant>>): List<Pair<Instant, Instant>> {
+        val merged = ArrayList<Pair<Instant, Instant>>()
+        for ((start, end) in ranges.filter { it.second > it.first }.sortedBy { it.first }) {
+            val last = merged.lastOrNull()
+            if (last != null && start <= last.second) {
+                if (end > last.second) merged[merged.size - 1] = last.first to end
+            } else {
+                merged.add(start to end)
             }
         }
-        return SleepNight(minutes, stages.filterValues { it > 0L }, spans.minOf { it.start }, spans.maxOf { it.end })
+        return merged
     }
+
+    private fun minutes(ranges: List<Pair<Instant, Instant>>): Long = ranges.sumOf { Duration.between(it.first, it.second).toMinutes() }
 
     fun averageBedtime(times: List<Instant>, zone: ZoneId): LocalTime? = averageClock(times, zone, NOON)
 
