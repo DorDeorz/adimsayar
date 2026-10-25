@@ -13,6 +13,7 @@ import android.content.Context
 import android.os.Build
 import android.text.format.DateFormat
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeoutOrNull
 import java.security.SecureRandom
 import java.util.Calendar
@@ -120,9 +121,9 @@ class XiaomiBand(private val context: Context, private val address: String, priv
 
     private suspend fun run(store: suspend (BandFile) -> Boolean): BandResult {
         if ((withTimeoutOrNull(STEP_TIMEOUT_MS) { next<Event.Connection>() })?.connected != true) return BandResult.ConnectFailed
+        delay(SETTLE_MS)
+        if (!discover()) return BandResult.ConnectFailed
         if (gatt.requestMtu(512)) withTimeoutOrNull(MTU_TIMEOUT_MS) { next<Event.Mtu>() }
-        if (!gatt.discoverServices()) return BandResult.ConnectFailed
-        if (withTimeoutOrNull(STEP_TIMEOUT_MS) { next<Event.Services>() }?.ok != true) return BandResult.ConnectFailed
         val service = gatt.getService(SERVICE) ?: return BandResult.Unsupported
         val readChar = service.getCharacteristic(CHAR_READ) ?: return BandResult.Unsupported
         val writeChar = service.getCharacteristic(CHAR_WRITE) ?: return BandResult.Unsupported
@@ -185,6 +186,18 @@ class XiaomiBand(private val context: Context, private val address: String, priv
             }
         }
         return result ?: BandResult.Ok
+    }
+
+    private suspend fun discover(): Boolean {
+        repeat(DISCOVER_TRIES) {
+            if (gatt.discoverServices()) {
+                val event = withTimeoutOrNull(DISCOVER_TIMEOUT_MS) { next<Event.Services>() }
+                if (event?.ok == true) return true
+            }
+            if (gatt.getService(SERVICE) != null) return true
+            delay(SETTLE_MS)
+        }
+        return false
     }
 
     private fun handleCommand(bytes: ByteArray, writeChannel: XiaomiChannel) {
@@ -352,5 +365,8 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         private const val STEP_TIMEOUT_MS = 15_000L
         private const val MTU_TIMEOUT_MS = 5_000L
         private const val FLUSH_TIMEOUT_MS = 3_000L
+        private const val SETTLE_MS = 600L
+        private const val DISCOVER_TIMEOUT_MS = 6_000L
+        private const val DISCOVER_TRIES = 3
     }
 }
