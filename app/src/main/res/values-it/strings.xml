@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">Il telefono avvisa quando la batteria del bracciale scende sotto il %1$d%%.</string>
     <string name="band_find">Trova il mio bracciale</string>
     <string name="band_find_stop">Ferma la vibrazione</string>
+    <string name="band_replies">Risposte rapide</string>
+    <string name="band_replies_hint">Invia un SMS a chi chiama quando rifiuti dal bracciale</string>
+    <string name="band_replies_text">Quando rifiuti una chiamata dal bracciale ne scegli una e va come SMS. Quelle vuote vengono rimosse.</string>
+    <string name="band_replies_permission">Concedi i permessi SMS e telefono</string>
+    <string name="band_replies_not_sent">Il bracciale non è connesso. Le risposte sono salvate; salva di nuovo quando si connette.</string>
 </resources>

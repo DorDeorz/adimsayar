@@ -110,4 +110,33 @@ class XiaomiLiveTest {
         assertEquals(17L, stop.uint(2))
         assertEquals(1L, stop.message(4)!!.uint(5))
     }
+
+    @Test
+    fun quickReplies() {
+        val sent = ArrayList<ByteArray>()
+        val events = ArrayList<BandEvent>()
+        val s = plainSession(sent, events)
+        assertTrue(sent.any { ProtoMessage.parse(it)!!.let { c -> c.uint(1) == 7L && c.uint(2) == 9L } })
+        var got: Triple<List<String>, Int, Int>? = null
+        s.onReplies = { list, min, max -> got = Triple(list, min, max) }
+        val canned = ProtoWriter().uint(1, 3).string(2, "Sonra ararım").string(2, "Toplantıdayım").uint(3, 8)
+        s.onCommand(ProtoWriter().uint(1, 7).uint(2, 9).message(9, ProtoWriter().message(9, canned)).toByteArray())
+        assertEquals(Triple(listOf("Sonra ararım", "Toplantıdayım"), 3, 8), got)
+
+        s.setReplies(listOf("Bir", "", "İki"), 3, 8)
+        val set = ProtoMessage.parse(sent.last())!!
+        assertEquals(12L, set.uint(2))
+        assertEquals(listOf("Bir", "İki", "-"), set.message(9)!!.message(9)!!.strings(2))
+
+        val reply = ProtoWriter().uint(1, 1).string(2, "Sonra ararım").uint(3, 1).string(4, "+905551112233")
+        s.onCommand(ProtoWriter().uint(1, 7).uint(2, 13).message(9, ProtoWriter().message(12, reply)).toByteArray())
+        val event = events.last() as BandEvent.CallReply
+        assertEquals("+905551112233", event.number)
+        assertEquals("Sonra ararım", event.message)
+
+        s.replySent(true)
+        val ack = ProtoMessage.parse(sent.last())!!
+        assertEquals(14L, ack.uint(2))
+        assertEquals(0L, ack.message(9)!!.uint(13))
+    }
 }

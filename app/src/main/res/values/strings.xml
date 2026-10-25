@@ -788,4 +788,9 @@
     <string name="band_battery_alert_hint">Bileklik pili %%%1$d altına inince telefonda uyarı çıkar.</string>
     <string name="band_find">Bilekliği bul</string>
     <string name="band_find_stop">Titreşimi durdur</string>
+    <string name="band_replies">Hazır yanıtlar</string>
+    <string name="band_replies_hint">Aramayı bileklikten reddederken arayana SMS gönder</string>
+    <string name="band_replies_text">Bileklikte aramayı reddederken bunlardan birini seçersin, arayana SMS olarak gider. Boş bıraktıkların silinir.</string>
+    <string name="band_replies_permission">SMS ve arama izinlerini ver</string>
+    <string name="band_replies_not_sent">Bileklik bağlı değil. Yanıtlar kaydedildi, bileklik bağlanınca yeniden kaydet.</string>
 </resources>

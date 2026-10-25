@@ -60,6 +60,8 @@ class ProtoMessage private constructor(private val fields: Map<Int, List<Any>>) 
 
     fun string(field: Int): String? = bytes(field)?.toString(Charsets.UTF_8)
 
+    fun strings(field: Int): List<String> = fields[field].orEmpty().mapNotNull { (it as? ByteArray)?.toString(Charsets.UTF_8) }
+
     companion object {
         fun parse(data: ByteArray): ProtoMessage? {
             val fields = HashMap<Int, MutableList<Any>>()

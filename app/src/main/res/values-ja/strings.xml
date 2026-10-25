@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">バンドの電池が%1$d%%を下回るとスマホに通知します。</string>
     <string name="band_find">バンドを探す</string>
     <string name="band_find_stop">振動を止める</string>
+    <string name="band_replies">クイック返信</string>
+    <string name="band_replies_hint">バンドで着信を拒否したとき相手にSMSを送信</string>
+    <string name="band_replies_text">バンドで着信を拒否するときにこの中から選ぶと、相手にSMSで送られます。空欄は削除されます。</string>
+    <string name="band_replies_permission">SMSと電話の権限を許可</string>
+    <string name="band_replies_not_sent">バンドが接続されていません。返信は保存されました。接続後にもう一度保存してください。</string>
 </resources>

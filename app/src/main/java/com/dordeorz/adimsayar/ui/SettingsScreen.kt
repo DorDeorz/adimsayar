@@ -12,6 +12,8 @@ import com.dordeorz.adimsayar.background.BandNotificationListener
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
+import com.dordeorz.adimsayar.data.BandReplies
+import androidx.compose.runtime.mutableStateListOf
 import android.app.TimePickerDialog
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -732,6 +734,7 @@ private fun BandNotifyGroup() {
     val blockedCount = remember(tick) { BandNotify.blocked(context).size }
     val connected = remember(tick) { BandLive.connected }
     var pickApps by remember { mutableStateOf(false) }
+    var editReplies by remember { mutableStateOf(false) }
     fun pickTime(current: Int, onPicked: (Int) -> Unit) {
         TimePickerDialog(
             context,
@@ -778,6 +781,9 @@ private fun BandNotifyGroup() {
             change(it) { on -> BandNotify.setCalls(context, on) }
             if (it && !BandNotify.canRejectCalls(context) && BandNotify.CALL_PERMISSIONS.isNotEmpty()) callPermission.launch(BandNotify.CALL_PERMISSIONS)
         }
+        if (calls) {
+            ClickRow(stringResource(R.string.band_replies), stringResource(R.string.band_replies_hint)) { editReplies = true }
+        }
         SwitchRow(stringResource(R.string.band_notify_music), stringResource(R.string.band_notify_music_hint), music) {
             change(it) { on -> BandNotify.setMusic(context, on) }
         }
@@ -823,6 +829,7 @@ private fun BandNotifyGroup() {
         }
         }
     }
+    if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
     if (pickApps) {
         AppPickerDialog(onDismiss = {
             pickApps = false
@@ -834,6 +841,56 @@ private fun BandNotifyGroup() {
 private const val NOTIFY_POLL_MS = 1_000L
 
 private fun minuteLabel(minute: Int): String = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+
+private const val DEFAULT_REPLY_SLOTS = 5
+
+/** Edits the texts the band offers when a call is rejected; they go out as SMS. */
+@Composable
+private fun RepliesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val slots = BandReplies.max(context).takeIf { it > 0 } ?: DEFAULT_REPLY_SLOTS
+    val texts = remember {
+        val saved = BandReplies.replies(context)
+        mutableStateListOf<String>().apply { repeat(slots) { add(saved.getOrElse(it) { "" }) } }
+    }
+    var granted by remember { mutableStateOf(BandReplies.granted(context)) }
+    var notSent by remember { mutableStateOf(false) }
+    val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        granted = BandReplies.granted(context)
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_replies)) },
+        text = {
+            Column(
+                modifier = Modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text(stringResource(R.string.band_replies_text), style = MaterialTheme.typography.bodyMedium)
+                if (!granted) {
+                    TextButton(onClick = { permission.launch(BandReplies.PERMISSIONS) }) { Text(stringResource(R.string.band_replies_permission)) }
+                }
+                texts.forEachIndexed { index, text ->
+                    OutlinedTextField(
+                        value = text,
+                        onValueChange = { texts[index] = it.take(MAX_REPLY_LENGTH) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                if (notSent) Text(stringResource(R.string.band_replies_not_sent), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                if (BandReplies.save(context, texts.toList())) onDismiss() else notSent = true
+            }) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+}
+
+private const val MAX_REPLY_LENGTH = 60
 
 private class PhoneApp(val packageName: String, val label: String)
 

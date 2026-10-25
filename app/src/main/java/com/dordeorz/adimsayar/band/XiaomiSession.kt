@@ -27,6 +27,8 @@ sealed interface BandEvent {
     class FindPhone(val start: Boolean) : BandEvent
     /** "Found it" pressed on the band while it was ringing for us. */
     data object BandFound : BandEvent
+    /** Reject the call with this text message, chosen on the band. */
+    class CallReply(val number: String, val message: String) : BandEvent
 
     companion object {
         const val PLAY = 0
@@ -60,6 +62,9 @@ class XiaomiSession(
 
     /** Band-side actions (dismissed notification, music button, call reject) on a live connection. */
     var onEvent: (BandEvent) -> Unit = {}
+
+    /** The band's quick replies for rejected calls, with how many it needs and allows. */
+    var onReplies: (replies: List<String>, min: Int, max: Int) -> Unit = { _, _, _ -> }
 
     /** Battery level 0–100 and whether it is charging (null when the band did not say). */
     var onBattery: (level: Int, charging: Boolean?) -> Unit = { _, _ -> }
@@ -156,6 +161,23 @@ class XiaomiSession(
         send(command(TYPE_SYSTEM, SYSTEM_FIND_BAND).message(4, ProtoWriter().uint(5, if (start) 0 else 1)).toByteArray(), false)
     }
 
+    /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
+    fun setReplies(replies: List<String>, min: Int, max: Int) {
+        if (!authenticated || max <= 0) return
+        val list = replies.filter { it.isNotBlank() }.take(max).toMutableList()
+        while (list.size < min) list += "-"
+        val canned = ProtoWriter().uint(1, min.toLong())
+        list.forEach { canned.string(2, it) }
+        canned.uint(3, max.toLong())
+        sendNotificationCommand(NOTIFICATION_REPLIES_SET, ProtoWriter().message(9, canned))
+    }
+
+    /** Tells the band whether the text message for a rejected call went out. */
+    fun replySent(success: Boolean) {
+        if (!authenticated) return
+        sendNotificationCommand(NOTIFICATION_REPLY_ACK, ProtoWriter().uint(13, if (success) 0 else 1))
+    }
+
     /** Tells the band the phone stopped ringing, so its find phone screen closes. */
     fun findPhoneStopped() {
         if (!authenticated) return
@@ -243,6 +265,12 @@ class XiaomiSession(
             }
             type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_REJECT -> onEvent(BandEvent.RejectCall)
             type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_IGNORE -> onEvent(BandEvent.IgnoreCall)
+            type == TYPE_NOTIFICATION && subtype == NOTIFICATION_REPLIES_GET -> cmd.message(9)?.message(9)?.let { canned ->
+                onReplies(canned.strings(2), canned.uint(1)?.toInt() ?: 0, canned.uint(3)?.toInt() ?: 0)
+            }
+            type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_REPLY -> cmd.message(9)?.message(12)?.let { reply ->
+                onEvent(BandEvent.CallReply(reply.string(4).orEmpty(), reply.string(2).orEmpty()))
+            }
             type == TYPE_SYSTEM && subtype == SYSTEM_BATTERY -> cmd.message(4)?.message(2)?.message(1)?.let { battery ->
                 val level = battery.uint(1)?.toInt() ?: return@let
                 val charging = when (battery.uint(2)?.toInt()) {
@@ -313,6 +341,7 @@ class XiaomiSession(
         onAuthenticated()
         send(timeCommand(), false)
         send(command(TYPE_SYSTEM, SYSTEM_DEVICE_STATE_GET).toByteArray(), false)
+        sendNotificationCommand(NOTIFICATION_REPLIES_GET, ProtoWriter().uint(8, 1))
         send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
     }
 
@@ -383,6 +412,10 @@ class XiaomiSession(
         private const val NOTIFICATION_DISMISS = 1
         private const val NOTIFICATION_CALL_REJECT = 2
         private const val NOTIFICATION_CALL_IGNORE = 5
+        private const val NOTIFICATION_REPLIES_GET = 9
+        private const val NOTIFICATION_REPLIES_SET = 12
+        private const val NOTIFICATION_CALL_REPLY = 13
+        private const val NOTIFICATION_REPLY_ACK = 14
         private const val MUSIC_GET = 0
         private const val MUSIC_SEND = 1
         private const val MUSIC_BUTTON = 2

@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">O celular avisa quando a bateria da pulseira fica abaixo de %1$d%%.</string>
     <string name="band_find">Encontrar minha pulseira</string>
     <string name="band_find_stop">Parar vibração</string>
+    <string name="band_replies">Respostas rápidas</string>
+    <string name="band_replies_hint">Enviar SMS a quem liga ao recusar na pulseira</string>
+    <string name="band_replies_text">Ao recusar uma chamada na pulseira você escolhe uma destas e ela vai por SMS. As vazias são removidas.</string>
+    <string name="band_replies_permission">Conceder permissões de SMS e telefone</string>
+    <string name="band_replies_not_sent">A pulseira não está conectada. As respostas foram salvas; salve de novo quando conectar.</string>
 </resources>

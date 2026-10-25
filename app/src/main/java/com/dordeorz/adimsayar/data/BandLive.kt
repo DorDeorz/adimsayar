@@ -146,6 +146,16 @@ object BandLive {
 
     fun findPhoneStopped() = post?.invoke { session?.findPhoneStopped() }
 
+    /** Sends the quick replies to the band; false when it is not connected. */
+    fun setReplies(replies: List<String>, min: Int, max: Int): Boolean {
+        val send = post ?: return false
+        if (!connected) return false
+        send { session?.setReplies(replies, min, max) }
+        return true
+    }
+
+    fun replySent(success: Boolean) = post?.invoke { session?.replySent(success) }
+
     private fun onBandEvent(context: Context, event: BandEvent) {
         when (event) {
             is BandEvent.FindPhone -> if (event.start) BandAlerts.startRinging(context) else BandAlerts.stopRinging(context, tellBand = false)

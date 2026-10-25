@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">手环电量低于 %1$d%% 时手机会提醒你。</string>
     <string name="band_find">查找手环</string>
     <string name="band_find_stop">停止振动</string>
+    <string name="band_replies">快捷回复</string>
+    <string name="band_replies_hint">在手环上拒接来电时给对方发短信</string>
+    <string name="band_replies_text">在手环上拒接来电时选择其中一条，会以短信发给对方。空白项会被删除。</string>
+    <string name="band_replies_permission">授予短信和电话权限</string>
+    <string name="band_replies_not_sent">手环未连接。回复已保存，连接后请再保存一次。</string>
 </resources>

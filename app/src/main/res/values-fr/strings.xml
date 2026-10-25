@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">Le téléphone t\'alerte quand la batterie du bracelet passe sous %1$d %%.</string>
     <string name="band_find">Trouver mon bracelet</string>
     <string name="band_find_stop">Arrêter la vibration</string>
+    <string name="band_replies">Réponses rapides</string>
+    <string name="band_replies_hint">Envoyer un SMS à l\'appelant quand tu refuses sur le bracelet</string>
+    <string name="band_replies_text">Quand tu refuses un appel sur le bracelet, tu choisis l\'une d\'elles et elle part par SMS. Les vides sont supprimées.</string>
+    <string name="band_replies_permission">Accorder les autorisations SMS et téléphone</string>
+    <string name="band_replies_not_sent">Le bracelet n\'est pas connecté. Les réponses sont enregistrées ; enregistre à nouveau une fois connecté.</string>
 </resources>

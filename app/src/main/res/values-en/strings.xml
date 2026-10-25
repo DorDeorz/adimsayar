@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">A phone alert shows when the band battery drops below %1$d%%.</string>
     <string name="band_find">Find my band</string>
     <string name="band_find_stop">Stop vibrating</string>
+    <string name="band_replies">Quick replies</string>
+    <string name="band_replies_hint">Text the caller when you reject a call on the band</string>
+    <string name="band_replies_text">When you reject a call on the band you pick one of these and it goes to the caller as a text message. Empty ones are removed.</string>
+    <string name="band_replies_permission">Grant SMS and phone permissions</string>
+    <string name="band_replies_not_sent">The band is not connected. Replies are saved; save again once it connects.</string>
 </resources>

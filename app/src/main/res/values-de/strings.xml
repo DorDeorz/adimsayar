@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">Das Handy warnt, wenn der Band-Akku unter %1$d %% fällt.</string>
     <string name="band_find">Band finden</string>
     <string name="band_find_stop">Vibration stoppen</string>
+    <string name="band_replies">Schnellantworten</string>
+    <string name="band_replies_hint">Dem Anrufer eine SMS schicken, wenn du am Band ablehnst</string>
+    <string name="band_replies_text">Beim Ablehnen eines Anrufs am Band wählst du eine davon; sie geht als SMS an den Anrufer. Leere werden entfernt.</string>
+    <string name="band_replies_permission">SMS- und Telefonberechtigungen erteilen</string>
+    <string name="band_replies_not_sent">Das Band ist nicht verbunden. Die Antworten sind gespeichert; speichere erneut, sobald es verbunden ist.</string>
 </resources>

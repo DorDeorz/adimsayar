@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">Телефон предупредит, когда заряд браслета упадёт ниже %1$d%%.</string>
     <string name="band_find">Найти браслет</string>
     <string name="band_find_stop">Остановить вибрацию</string>
+    <string name="band_replies">Быстрые ответы</string>
+    <string name="band_replies_hint">Отправлять SMS звонящему при отклонении на браслете</string>
+    <string name="band_replies_text">Отклоняя звонок на браслете, вы выбираете один из ответов, и он уходит звонящему по SMS. Пустые удаляются.</string>
+    <string name="band_replies_permission">Дать разрешения на SMS и телефон</string>
+    <string name="band_replies_not_sent">Браслет не подключён. Ответы сохранены; сохраните ещё раз после подключения.</string>
 </resources>

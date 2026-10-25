@@ -23,6 +23,7 @@ import com.dordeorz.adimsayar.band.BandNotice
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
+import com.dordeorz.adimsayar.data.BandReplies
 
 /**
  * Forwards phone notifications, incoming calls and the playing track to the band, and carries out
@@ -119,7 +120,7 @@ class BandNotificationListener : NotificationListenerService() {
             ringing && callKey == null -> {
                 callKey = sbn.key
                 val name = n.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString().orEmpty()
-                val number = n.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString().orEmpty()
+                val number = BandReplies.ringingNumber ?: n.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString().orEmpty()
                 BandLive.call(name, number)
             }
             !ringing && callKey == sbn.key -> {
@@ -145,6 +146,15 @@ class BandNotificationListener : NotificationListenerService() {
                 }
             }
             BandEvent.IgnoreCall -> callKey = null
+            is BandEvent.CallReply -> {
+                val sent = BandReplies.send(this, event.number, event.message)
+                BandLive.replySent(sent)
+                callKey = null
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && BandNotify.canRejectCalls(this)) {
+                    @Suppress("DEPRECATION")
+                    runCatching { getSystemService(TelecomManager::class.java)?.endCall() }
+                }
+            }
             BandEvent.MusicRequest -> pushMusic()
             is BandEvent.MusicButton -> onMusicButton(event)
             is BandEvent.FindPhone, BandEvent.BandFound -> Unit

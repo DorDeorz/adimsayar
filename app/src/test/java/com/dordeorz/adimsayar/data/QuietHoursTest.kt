@@ -22,4 +22,12 @@ class QuietHoursTest {
         assertFalse(inQuietHours(14 * 60, 12 * 60, 14 * 60))
         assertFalse(inQuietHours(8 * 60, 8 * 60, 8 * 60))
     }
+
+    @Test
+    fun phoneNumbers() {
+        assertTrue(looksLikeNumber("+90 555 111 22 33"))
+        assertTrue(looksLikeNumber("(0212) 555-1122"))
+        assertFalse(looksLikeNumber("Gelen arama"))
+        assertFalse(looksLikeNumber("12"))
+    }
 }

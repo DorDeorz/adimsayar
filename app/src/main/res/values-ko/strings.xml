@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">밴드 배터리가 %1$d%% 아래로 내려가면 휴대폰에 알림이 표시됩니다.</string>
     <string name="band_find">내 밴드 찾기</string>
     <string name="band_find_stop">진동 멈추기</string>
+    <string name="band_replies">빠른 답장</string>
+    <string name="band_replies_hint">밴드에서 전화를 거절할 때 상대에게 SMS 보내기</string>
+    <string name="band_replies_text">밴드에서 전화를 거절할 때 이 중 하나를 고르면 상대에게 SMS로 전송됩니다. 빈 항목은 삭제됩니다.</string>
+    <string name="band_replies_permission">SMS 및 전화 권한 허용</string>
+    <string name="band_replies_not_sent">밴드가 연결되어 있지 않습니다. 답장은 저장되었으니 연결되면 다시 저장하세요.</string>
 </resources>

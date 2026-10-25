@@ -787,4 +787,9 @@
     <string name="band_battery_alert_hint">يظهر تنبيه على الهاتف عندما تنخفض بطارية السوار عن %1$d%%.</string>
     <string name="band_find">العثور على سواري</string>
     <string name="band_find_stop">إيقاف الاهتزاز</string>
+    <string name="band_replies">ردود سريعة</string>
+    <string name="band_replies_hint">أرسل رسالة SMS للمتصل عند الرفض من السوار</string>
+    <string name="band_replies_text">عند رفض مكالمة من السوار تختار أحد هذه الردود فيُرسل للمتصل كرسالة SMS. الفارغة تُحذف.</string>
+    <string name="band_replies_permission">امنح أذونات الرسائل والهاتف</string>
+    <string name="band_replies_not_sent">السوار غير متصل. حُفظت الردود؛ احفظ مرة أخرى عند اتصاله.</string>
 </resources>
