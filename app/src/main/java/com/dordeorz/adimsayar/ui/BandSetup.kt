@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.band.BandResult
+import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.BandScanner
 import com.dordeorz.adimsayar.band.FoundBand
 import com.dordeorz.adimsayar.band.XiaomiCloud
@@ -218,7 +219,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                     if (status.address == null) {
                         stringResource(R.string.band_device_none)
                     } else {
-                        stringResource(R.string.band_device_selected, status.name ?: status.address)
+                        stringResource(R.string.band_device_selected, BandModels.displayName(status.name) ?: status.address)
                     },
                 )
                 OutlinedButton(enabled = !scanning, onClick = {
@@ -239,8 +240,22 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                             }
                             .padding(vertical = 8.dp),
                     ) {
-                        Text(band.name, style = MaterialTheme.typography.bodyLarge)
-                        Text(band.address, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        val model = BandModels.find(band.name)
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Image(
+                                painterResource(deviceImage(model?.shape ?: BandModels.shapeOf(band.name))),
+                                contentDescription = null,
+                                modifier = Modifier.size(32.dp),
+                            )
+                            Column {
+                                Text(model?.name ?: band.name, style = MaterialTheme.typography.bodyLarge)
+                                Text(
+                                    if (model != null && !model.tested) stringResource(R.string.band_model_experimental, band.address) else band.address,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
+                        }
                     }
                 }
                 BandText(stringResource(R.string.band_address_help))

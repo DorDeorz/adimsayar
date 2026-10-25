@@ -24,6 +24,7 @@ class XiaomiChannel(
     private val cipher: XiaomiCipher,
     private val write: (ByteArray) -> Unit,
     private val onMessage: (ByteArray) -> Unit,
+    private val encrypted: Boolean = true,
 ) {
 
     private class Outgoing(val bytes: ByteArray, val done: (Boolean) -> Unit)
@@ -72,9 +73,9 @@ class XiaomiChannel(
             TYPE_SINGLE -> {
                 write(PAYLOAD_ACK)
                 if (!buf.hasRemaining()) return
-                val encrypted = buf.get().toInt() == 1
+                val sealed = buf.get().toInt() == 1
                 val rest = ByteArray(buf.remaining()).also { buf.get(it) }
-                val plain = if (encrypted) cipher.decrypt(rest) else rest
+                val plain = if (sealed) cipher.decrypt(rest) else rest
                 if (plain != null) onMessage(plain)
             }
             TYPE_ACK -> finish(buf.hasRemaining() && buf.get().toInt() == 0)
@@ -90,7 +91,8 @@ class XiaomiChannel(
         for (i in 1..expectedChunks) out.write(chunks[i] ?: return)
         expectedChunks = 0
         chunks.clear()
-        cipher.decrypt(out.toByteArray())?.let(onMessage)
+        val payload = out.toByteArray()
+        (if (encrypted) cipher.decrypt(payload) else payload)?.let(onMessage)
     }
 
     private fun onChunkAck(subtype: Int, buf: ByteBuffer) {
@@ -136,7 +138,7 @@ class XiaomiChannel(
         val encrypt = cipher.sending
         val index = counter
         val body = if (encrypt) cipher.encrypt(next.bytes, index) else next.bytes
-        if (body.size + 6 > maxWrite) {
+        if (!encrypted || body.size + 6 > maxWrite) {
             if (encrypt) counter++
             currentBytes = if (encrypt) {
                 ByteBuffer.allocate(2 + body.size).order(ByteOrder.LITTLE_ENDIAN).putShort(index.toShort()).put(body).array()

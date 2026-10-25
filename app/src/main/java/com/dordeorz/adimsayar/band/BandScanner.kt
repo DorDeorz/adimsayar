@@ -47,7 +47,7 @@ class BandScanner(private val context: Context) {
         } catch (e: SecurityException) {
             null
         } ?: return
-        if (NAMES.any { name.startsWith(it, ignoreCase = true) }) onFound(FoundBand(device.address, name))
+        if (BandModels.find(name) != null || NAMES.any { name.startsWith(it, ignoreCase = true) }) onFound(FoundBand(device.address, name))
     }
 
     fun stop() {

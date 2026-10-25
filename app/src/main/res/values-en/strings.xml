@@ -322,6 +322,7 @@
         <item>With the direct band connection, heart rate, SpO₂ and sleep stages also come from the band and show on the Health tab</item>
         <item>The last 7 days are read again from Health Connect, so late band steps are no longer missed. \"Resync\" added to Settings</item>
         <item>The license is now AGPL-3.0: the band connection is based on Gadgetbridge\'s code</item>
+        <item>Direct connection now supports more Xiaomi bands and watches (Band 9, Redmi Watch 4 and others, experimental); the Settings card shows the connected model\'s name and picture</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Complete color palette: no more purple tones with dynamic color off, readable button text in dark theme</item>
@@ -648,7 +649,7 @@
     <string name="band_title">Connect to the band directly</string>
     <string name="band_hint">Get steps from a Xiaomi band without Mi Fitness</string>
     <string name="band_step_about">How it works</string>
-    <string name="band_about_text">FitWren connects to the band over Bluetooth itself and reads the steps directly. Mi Fitness and Health Connect are not needed.\n\nFor now Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 and Redmi Watch 2 Lite are supported.\n\nThe band connects to one app at a time. After you get the key, uninstall Mi Fitness from the phone. Do not remove the band inside Mi Fitness, or the band resets and the key changes.</string>
+    <string name="band_about_text">FitWren connects to the band over Bluetooth itself and reads the steps directly. Mi Fitness and Health Connect are not needed.\n\nTested: Xiaomi Smart Band 8. Experimental (not tried yet): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\nThe band connects to one app at a time. After you get the key, uninstall Mi Fitness from the phone. Do not remove the band inside Mi Fitness, or the band resets and the key changes.</string>
     <string name="band_step_key">Key</string>
     <string name="band_cloud_button">Get the key with your Xiaomi account</string>
     <string name="band_cloud_help">Xiaomi\'s own sign-in page opens. Sign in with the account you use in Mi Fitness and confirm. FitWren never sees your password.</string>
@@ -714,6 +715,7 @@
     <string name="source_sensor_hint">The phone\'s own sensor counts your steps.</string>
     <string name="source_none">Don\'t use</string>
     <string name="source_none_hint">Only the phone\'s steps are counted.</string>
+    <string name="band_model_experimental">%1$s · experimental</string>
     <string name="source_direct">Direct connection (Xiaomi)</string>
     <string name="source_connect">Via Health Connect</string>
     <string name="source_merge_hint">If you use a band, its count is used in the hours you wear it and the phone\'s count in the other hours.</string>

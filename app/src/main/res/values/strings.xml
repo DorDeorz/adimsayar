@@ -322,6 +322,7 @@
         <item>Saate doğrudan bağlıyken nabız, SpO₂ ve uyku evreleri de bileklikten alınıyor ve Sağlık sekmesinde görünüyor</item>
         <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
         <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
+        <item>Doğrudan bağlantı daha çok Xiaomi bileklik ve saatini destekliyor (Band 9, Redmi Watch 4 ve diğerleri, deneysel); Ayarlar\'daki kart bağlı modelin adını ve resmini gösteriyor</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor</item>
@@ -649,7 +650,7 @@
     <string name="band_title">Saate doğrudan bağlan</string>
     <string name="band_hint">Xiaomi bileklikten adımları Mi Fitness olmadan al</string>
     <string name="band_step_about">Nasıl çalışır</string>
-    <string name="band_about_text">FitWren bilekliğe Bluetooth ile kendisi bağlanır ve adımları doğrudan okur. Mi Fitness ve Health Connect gerekmez.\n\nŞimdilik Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 ve Redmi Watch 2 Lite destekleniyor.\n\nBileklik aynı anda tek uygulamaya bağlanır. Anahtarı aldıktan sonra Mi Fitness\'ı telefondan sil. Bilekliği Mi Fitness içinden kaldırma, yoksa bileklik sıfırlanır ve anahtar değişir.</string>
+    <string name="band_about_text">FitWren bilekliğe Bluetooth ile kendisi bağlanır ve adımları doğrudan okur. Mi Fitness ve Health Connect gerekmez.\n\nDenenmiş model: Xiaomi Smart Band 8. Deneysel (henüz denenmedi): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\nBileklik aynı anda tek uygulamaya bağlanır. Anahtarı aldıktan sonra Mi Fitness\'ı telefondan sil. Bilekliği Mi Fitness içinden kaldırma, yoksa bileklik sıfırlanır ve anahtar değişir.</string>
     <string name="band_step_key">Anahtar</string>
     <string name="band_cloud_button">Xiaomi hesabıyla anahtarı al</string>
     <string name="band_cloud_help">Xiaomi\'nin kendi giriş sayfası açılır. Mi Fitness\'ta kullandığın hesapla giriş yap ve girişi onayla. Şifreni FitWren görmez.</string>
@@ -715,6 +716,7 @@
     <string name="source_sensor_hint">Adımları telefonun kendi sensörü sayar.</string>
     <string name="source_none">Kullanma</string>
     <string name="source_none_hint">Yalnızca telefonun adımları sayılır.</string>
+    <string name="band_model_experimental">%1$s · deneysel</string>
     <string name="source_direct">Doğrudan bağlantı (Xiaomi)</string>
     <string name="source_connect">Health Connect üzerinden</string>
     <string name="source_merge_hint">Bileklik kullanıyorsan, onu taktığın saatlerde bilekliğin sayısı, diğer saatlerde telefonun sayısı kullanılır.</string>

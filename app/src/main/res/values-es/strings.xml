@@ -322,6 +322,7 @@
         <item>Con la conexión directa, el pulso, el SpO₂ y las fases del sueño también llegan de la pulsera y aparecen en la pestaña Salud</item>
         <item>Se vuelven a leer los últimos 7 días de Health Connect, así no se pierden pasos de la pulsera que llegan tarde. Se añadió \"Volver a sincronizar\" en Ajustes</item>
         <item>La licencia ahora es AGPL-3.0: la conexión con la pulsera se basa en el código de Gadgetbridge</item>
+        <item>La conexión directa ahora admite más pulseras y relojes Xiaomi (Band 9, Redmi Watch 4 y otros, experimental); la tarjeta de Ajustes muestra el nombre y la imagen del modelo conectado</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Paleta de colores completa: sin tonos morados con el color dinámico desactivado, texto de botones legible en tema oscuro</item>
@@ -648,7 +649,7 @@
     <string name="band_title">Conectar directamente a la pulsera</string>
     <string name="band_hint">Obtén los pasos de una pulsera Xiaomi sin Mi Fitness</string>
     <string name="band_step_about">Cómo funciona</string>
-    <string name="band_about_text">FitWren se conecta por sí misma a la pulsera por Bluetooth y lee los pasos directamente. No hacen falta Mi Fitness ni Health Connect.\n\nPor ahora son compatibles Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2 y Redmi Watch 2 Lite.\n\nLa pulsera se conecta a una sola app a la vez. Cuando tengas la clave, desinstala Mi Fitness del teléfono. No quites la pulsera dentro de Mi Fitness: la pulsera se restablece y la clave cambia.</string>
+    <string name="band_about_text">FitWren se conecta por sí misma a la pulsera por Bluetooth y lee los pasos directamente. No hacen falta Mi Fitness ni Health Connect.\n\nProbado: Xiaomi Smart Band 8. Experimental (aún sin probar): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\nLa pulsera se conecta a una sola app a la vez. Cuando tengas la clave, desinstala Mi Fitness del teléfono. No quites la pulsera dentro de Mi Fitness: la pulsera se restablece y la clave cambia.</string>
     <string name="band_step_key">Clave</string>
     <string name="band_cloud_button">Obtener la clave con tu cuenta Xiaomi</string>
     <string name="band_cloud_help">Se abre la página de inicio de sesión de Xiaomi. Inicia sesión con la cuenta que usas en Mi Fitness y confirma. FitWren nunca ve tu contraseña.</string>
@@ -714,6 +715,7 @@
     <string name="source_sensor_hint">El propio sensor del teléfono cuenta tus pasos.</string>
     <string name="source_none">No usar</string>
     <string name="source_none_hint">Solo se cuentan los pasos del teléfono.</string>
+    <string name="band_model_experimental">%1$s · experimental</string>
     <string name="source_direct">Conexión directa (Xiaomi)</string>
     <string name="source_connect">A través de Health Connect</string>
     <string name="source_merge_hint">Si usas una pulsera, en las horas que la llevas se usa su recuento y en las demás el del teléfono.</string>

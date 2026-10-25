@@ -111,7 +111,7 @@ object BandDirect {
             }
             val repository = StepRepository.get(context)
             var files = 0
-            val band = XiaomiBand(context, address, secret)
+            val band = XiaomiBand(context, address, p.getString(KEY_NAME, null), secret)
             val result = band.sync { file ->
                 val sleep = file.sleep
                 if (sleep != null) {

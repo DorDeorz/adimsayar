@@ -322,6 +322,7 @@
         <item>مع الاتصال المباشر تأتي أيضًا نبضات القلب وSpO₂ ومراحل النوم من السوار وتظهر في تبويب الصحة</item>
         <item>تُقرأ آخر 7 أيام من Health Connect من جديد، فلا تضيع خطوات السوار المتأخرة. أُضيف \"إعادة المزامنة\" إلى الإعدادات</item>
         <item>أصبح الترخيص AGPL-3.0: يعتمد اتصال السوار على شيفرة Gadgetbridge</item>
+        <item>الاتصال المباشر يدعم الآن المزيد من أساور وساعات Xiaomi (Band 9 وRedmi Watch 4 وغيرها، تجريبي)؛ وتعرض بطاقة الإعدادات اسم الطراز المتصل وصورته</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>لوحة ألوان كاملة: لا ألوان بنفسجية عند إيقاف الألوان الديناميكية، ونص الأزرار مقروء في الوضع الداكن</item>
@@ -648,7 +649,7 @@
     <string name="band_title">الاتصال بالسوار مباشرة</string>
     <string name="band_hint">احصل على الخطوات من سوار Xiaomi دون Mi Fitness</string>
     <string name="band_step_about">كيف يعمل</string>
-    <string name="band_about_text">يتصل FitWren بالسوار عبر البلوتوث بنفسه ويقرأ الخطوات مباشرة. لا حاجة إلى Mi Fitness أو Health Connect.\n\nالأجهزة المدعومة حاليًا: Xiaomi Smart Band 8 وBand 8 Active وRedmi Smart Band 2 وRedmi Watch 2 Lite.\n\nيتصل السوار بتطبيق واحد فقط في كل مرة. بعد الحصول على المفتاح، احذف Mi Fitness من الهاتف. لا تُزل السوار من داخل Mi Fitness، وإلا ستتم إعادة ضبط السوار ويتغير المفتاح.</string>
+    <string name="band_about_text">يتصل FitWren بالسوار عبر البلوتوث بنفسه ويقرأ الخطوات مباشرة. لا حاجة إلى Mi Fitness أو Health Connect.\n\nتم اختباره: Xiaomi Smart Band 8. تجريبي (لم يُجرَّب بعد): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\nيتصل السوار بتطبيق واحد فقط في كل مرة. بعد الحصول على المفتاح، احذف Mi Fitness من الهاتف. لا تُزل السوار من داخل Mi Fitness، وإلا ستتم إعادة ضبط السوار ويتغير المفتاح.</string>
     <string name="band_step_key">المفتاح</string>
     <string name="band_cloud_button">احصل على المفتاح بحساب Xiaomi</string>
     <string name="band_cloud_help">تفتح صفحة تسجيل الدخول الخاصة بـ Xiaomi. سجّل الدخول بالحساب الذي تستخدمه في Mi Fitness ثم أكّد. لا يرى FitWren كلمة المرور أبدًا.</string>
@@ -714,6 +715,7 @@
     <string name="source_sensor_hint">يحسب مستشعر الهاتف خطواتك.</string>
     <string name="source_none">عدم الاستخدام</string>
     <string name="source_none_hint">تُحسب خطوات الهاتف فقط.</string>
+    <string name="band_model_experimental">%1$s · تجريبي</string>
     <string name="source_direct">اتصال مباشر (Xiaomi)</string>
     <string name="source_connect">عبر Health Connect</string>
     <string name="source_merge_hint">إذا كنت تستخدم سوارًا، يُستخدم عدّه في الساعات التي ترتديه فيها وعدّ الهاتف في بقية الساعات.</string>

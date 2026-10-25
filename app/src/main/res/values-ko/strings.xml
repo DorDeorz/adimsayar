@@ -322,6 +322,7 @@
         <item>직접 연결 시 심박수, SpO₂, 수면 단계도 밴드에서 받아 건강 탭에 표시됩니다</item>
         <item>Health Connect에서 최근 7일을 다시 읽어 늦게 들어온 밴드 걸음 수를 놓치지 않습니다. 설정에 \"다시 동기화\" 추가</item>
         <item>라이선스가 AGPL-3.0으로 바뀌었습니다: 밴드 연결은 Gadgetbridge 코드를 바탕으로 합니다</item>
+        <item>직접 연결이 더 많은 Xiaomi 밴드와 시계를 지원합니다(Band 9, Redmi Watch 4 등, 실험적). 설정 카드에 연결된 모델의 이름과 그림이 표시됩니다</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>색상 팔레트 완성: 동적 색상을 꺼도 보라색이 나오지 않고, 다크 테마에서 버튼 글자가 잘 보임</item>
@@ -648,7 +649,7 @@
     <string name="band_title">밴드에 직접 연결</string>
     <string name="band_hint">Mi Fitness 없이 Xiaomi 밴드에서 걸음 수 가져오기</string>
     <string name="band_step_about">작동 방식</string>
-    <string name="band_about_text">FitWren이 블루투스로 밴드에 직접 연결해 걸음 수를 읽습니다. Mi Fitness와 Health Connect가 필요 없습니다.\n\n현재 Xiaomi Smart Band 8, Band 8 Active, Redmi Smart Band 2, Redmi Watch 2 Lite를 지원합니다.\n\n밴드는 한 번에 하나의 앱에만 연결됩니다. 키를 받은 후 휴대폰에서 Mi Fitness를 삭제하세요. Mi Fitness 안에서 밴드를 제거하지 마세요. 밴드가 초기화되고 키가 바뀝니다.</string>
+    <string name="band_about_text">FitWren이 블루투스로 밴드에 직접 연결해 걸음 수를 읽습니다. Mi Fitness와 Health Connect가 필요 없습니다.\n\n테스트 완료: Xiaomi Smart Band 8. 실험적(아직 시험 안 됨): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\n밴드는 한 번에 하나의 앱에만 연결됩니다. 키를 받은 후 휴대폰에서 Mi Fitness를 삭제하세요. Mi Fitness 안에서 밴드를 제거하지 마세요. 밴드가 초기화되고 키가 바뀝니다.</string>
     <string name="band_step_key">키</string>
     <string name="band_cloud_button">Xiaomi 계정으로 키 받기</string>
     <string name="band_cloud_help">Xiaomi 로그인 페이지가 열립니다. Mi Fitness에서 쓰는 계정으로 로그인하고 확인하세요. FitWren은 비밀번호를 볼 수 없습니다.</string>
@@ -714,6 +715,7 @@
     <string name="source_sensor_hint">휴대폰 자체 센서가 걸음을 셉니다.</string>
     <string name="source_none">사용 안 함</string>
     <string name="source_none_hint">휴대폰 걸음만 셉니다.</string>
+    <string name="band_model_experimental">%1$s · 실험적</string>
     <string name="source_direct">직접 연결(Xiaomi)</string>
     <string name="source_connect">Health Connect 사용</string>
     <string name="source_merge_hint">밴드를 쓰면 착용한 시간에는 밴드 걸음 수, 나머지 시간에는 휴대폰 걸음 수를 씁니다.</string>

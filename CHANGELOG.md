@@ -13,6 +13,8 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Ayarlar kartlı gruplara ayrıldı. "Adım kaynağı" iki seçim oldu: telefon (sensör ya da HyperOS kaydı) ve bileklik (kullanma, doğrudan bağlantı, Health Connect). Bileklik bağlıyken en üstte resmi, adı, son eşitleme ve "Yeniden bağlan" tuşu var. Tema, widget ve dil "Görünüm ve dil" altında.
 - Bugün sayfasında Paylaş'ın yanına "Eşitle" tuşu: doğrudan bağlantıda bilekliği hemen okur, Health Connect'te son 7 günü yeniden okur.
 - SpO₂ artık iki yerden daha okunuyor: elle yapılan ölçümler (bileklikte "manuel ölçüm" dosyası, nabız ve stres de içinde) ve uyku sırasında alınan SpO₂ ve nabız örnekleri. Aynı dakikaya gelen değerler birleştiriliyor, biri diğerini silmiyor.
+- Doğrudan bağlantı Xiaomi ailesine genişledi (deneysel, yalnızca Band 8 denendi): şifresiz BLE kullanan eski modeller (Mi Watch Lite, Redmi Watch, Mi Watch Color Sport, Redmi Band, 4C) ve klasik Bluetooth (SPP v1/v2) kullanan yeniler (Band 8 Pro, Band 9/9 Pro, Redmi Watch 4/5, Watch S1 Pro/S3). Model Bluetooth adından tanınır; ikisini de destekleyenlerde önce BLE denenir. Protokol kodu (`XiaomiSession`) bağlantı türünden ayrıldı.
+- Ayarlar'daki cihaz kartı ve kurulumdaki arama listesi bağlı modele göre ad ve resim gösteriyor (bileklik, kare saat, yuvarlak saat); denenmemiş modellerde "deneysel" yazıyor. Health Connect'te son 7 günde veri yazan saat/bilekliğin adı gösteriliyor.
 - Lisans MIT'den AGPL-3.0'a geçti: bileklik bağlantısı Gadgetbridge'in Xiaomi koduna dayanıyor.
 - Veritabanı sürümü 6 (yeni `band_hours`, `band_samples`, `band_sleep` tabloları).
 

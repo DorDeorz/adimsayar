@@ -4,6 +4,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import javax.crypto.Cipher
 import javax.crypto.Mac
+import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 class XiaomiKeys(
@@ -78,6 +79,10 @@ object XiaomiCrypto {
         for (i in 0 until TAG) diff = diff or ((tag[i].toInt() xor s0[i].toInt()) xor data[plain.size + i].toInt())
         return if (diff and 0xff == 0) plain else null
     }
+
+    /** AES-CTR with the key doubling as the IV, used by the classic Bluetooth (SPP v2) link. */
+    fun ctr(key: ByteArray, data: ByteArray): ByteArray =
+        Cipher.getInstance("AES/CTR/NoPadding").apply { init(Cipher.ENCRYPT_MODE, SecretKeySpec(key, "AES"), IvParameterSpec(key)) }.doFinal(data)
 
     private fun aes(key: ByteArray): Cipher =
         Cipher.getInstance("AES/ECB/NoPadding").apply { init(Cipher.ENCRYPT_MODE, SecretKeySpec(key, "AES")) }

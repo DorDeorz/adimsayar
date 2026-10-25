@@ -322,6 +322,7 @@
         <item>直接连接时,心率、血氧和睡眠阶段也从手环读取,并显示在健康标签页</item>
         <item>重新读取 Health Connect 中最近 7 天的数据,迟到的手环步数不再丢失。设置中新增“重新同步”</item>
         <item>许可证改为 AGPL-3.0:手环连接基于 Gadgetbridge 的代码</item>
+        <item>直接连接现在支持更多小米手环和手表（Band 9、Redmi Watch 4 等，实验性）；设置中的卡片显示已连接型号的名称和图片</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>完整配色：关闭动态配色时不再出现紫色，深色主题下按钮文字清晰可读</item>
@@ -648,7 +649,7 @@
     <string name="band_title">直接连接手环</string>
     <string name="band_hint">无需 Mi Fitness,直接从小米手环获取步数</string>
     <string name="band_step_about">工作原理</string>
-    <string name="band_about_text">FitWren 会通过蓝牙自行连接手环并直接读取步数,无需 Mi Fitness 和 Health Connect。\n\n目前支持 Xiaomi Smart Band 8、Band 8 Active、Redmi Smart Band 2 和 Redmi Watch 2 Lite。\n\n手环同一时间只能连接一个应用。获取密钥后,请从手机上卸载 Mi Fitness。不要在 Mi Fitness 中移除手环,否则手环会被重置,密钥也会改变。</string>
+    <string name="band_about_text">FitWren 会通过蓝牙自行连接手环并直接读取步数,无需 Mi Fitness 和 Health Connect。\n\n已测试：Xiaomi Smart Band 8。实验性（尚未测试）：Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3。\n\n手环同一时间只能连接一个应用。获取密钥后,请从手机上卸载 Mi Fitness。不要在 Mi Fitness 中移除手环,否则手环会被重置,密钥也会改变。</string>
     <string name="band_step_key">密钥</string>
     <string name="band_cloud_button">用小米账号获取密钥</string>
     <string name="band_cloud_help">将打开小米自己的登录页面。用你在 Mi Fitness 中使用的账号登录并确认。FitWren 不会看到你的密码。</string>
@@ -714,6 +715,7 @@
     <string name="source_sensor_hint">由手机自带传感器计步。</string>
     <string name="source_none">不使用</string>
     <string name="source_none_hint">只统计手机的步数。</string>
+    <string name="band_model_experimental">%1$s · 实验性</string>
     <string name="source_direct">直接连接（小米）</string>
     <string name="source_connect">通过 Health Connect</string>
     <string name="source_merge_hint">使用手环时，佩戴的时段用手环步数，其他时段用手机步数。</string>

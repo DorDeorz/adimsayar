@@ -15,7 +15,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.BandResult
+import com.dordeorz.adimsayar.band.BandShape
+import com.dordeorz.adimsayar.data.DeviceKind
+import com.dordeorz.adimsayar.data.SourceDevice
+import com.dordeorz.adimsayar.data.WearableHealth
+import androidx.compose.runtime.produceState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.BandStatus
 import java.time.Instant
@@ -718,6 +726,29 @@ private fun RadioRow(title: String, hint: String, selected: Boolean, onClick: ()
 @Composable
 private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActions, onManage: () -> Unit) {
     val direct = state.bandDirectEnabled
+    val context = LocalContext.current
+    val connected by produceState<SourceDevice?>(null, direct, state.wearableEnabled) {
+        value = if (direct || !state.wearableEnabled) {
+            null
+        } else {
+            withContext(Dispatchers.IO) {
+                runCatching { WearableHealth.sources(context.applicationContext, DEVICE_LOOKUP_DAYS) }.getOrNull()
+                    ?.apps?.flatMap { it.devices }
+                    ?.firstOrNull { it.kind != DeviceKind.Phone && !it.name.isNullOrBlank() }
+            }
+        }
+    }
+    val model = if (direct) BandModels.find(status.name) else BandModels.find(connected?.name)
+    val shape = when {
+        model != null -> model.shape
+        direct -> BandModels.shapeOf(status.name)
+        connected?.kind == DeviceKind.Watch -> BandShape.SquareWatch
+        else -> BandShape.Band
+    }
+    val title = when {
+        direct -> BandModels.displayName(status.name) ?: status.address ?: stringResource(R.string.source_direct)
+        else -> model?.name ?: connected?.name ?: stringResource(R.string.source_connect)
+    }
     Card(
         modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -731,16 +762,17 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
                 modifier = Modifier.size(DEVICE_IMAGE_SIZE).clip(CircleShape).background(MaterialTheme.colorScheme.surface),
                 contentAlignment = Alignment.Center,
             ) {
-                Image(painterResource(R.drawable.ic_band), contentDescription = null, modifier = Modifier.size(48.dp))
+                Image(painterResource(deviceImage(shape)), contentDescription = null, modifier = Modifier.size(48.dp))
             }
             Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                val via = stringResource(if (direct) R.string.source_direct else R.string.source_connect)
                 Text(
-                    if (direct) status.name ?: status.address ?: stringResource(R.string.source_direct) else stringResource(R.string.source_connect),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                )
-                Text(
-                    stringResource(if (direct) R.string.source_direct else R.string.device_connect_hint),
+                    when {
+                        direct && model != null && !model.tested -> stringResource(R.string.band_model_experimental, via)
+                        direct || connected != null -> via
+                        else -> stringResource(R.string.device_connect_hint)
+                    },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
@@ -773,6 +805,13 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
 }
 
 private val DEVICE_IMAGE_SIZE = 64.dp
+private const val DEVICE_LOOKUP_DAYS = 7L
+
+fun deviceImage(shape: BandShape): Int = when (shape) {
+    BandShape.Band -> R.drawable.ic_band
+    BandShape.SquareWatch -> R.drawable.ic_watch_square
+    BandShape.RoundWatch -> R.drawable.ic_watch_round
+}
 
 private fun themeLabel(mode: ThemeMode) = when (mode) {
     ThemeMode.System -> R.string.theme_system
