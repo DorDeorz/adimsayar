@@ -11,7 +11,7 @@
 
 <p><b>Geçmiş</b>: aylık takvim, saat saat grafik, rekorlar, yıllık özet ve seri jokeri.</p>
 
-<p><b>Sağlık (isteğe bağlı)</b>: Mi Band gibi bilekliklerin Health Connect'e yazdığı adımları, uyku evrelerini, nabzı, kan oksijenini, egzersizleri ve aktif kaloriyi okur. Yalnızca okur, hiçbir şey yazmaz. Vücut kitle endeksiyle kilo kaydı.</p>
+<p><b>Sağlık (isteğe bağlı)</b>: Xiaomi ve Amazfit bilekliklere Bluetooth ile doğrudan bağlanır ya da Mi Band gibi bilekliklerin Health Connect'e yazdığı adımları, uyku evrelerini, nabzı, kan oksijenini, egzersizleri ve aktif kaloriyi okur. Yalnızca okur, hiçbir şey yazmaz. Vücut kitle endeksiyle kilo kaydı.</p>
 
 <p><b>Madalyalar ve hedefler</b>: kalıcı madalyalar, seviyeler, haftalık görevler ve İstanbul'dan Ankara'ya gibi sanal rotalar.</p>
 

@@ -323,6 +323,7 @@
         <item>重新读取 Health Connect 中最近 7 天的数据,迟到的手环步数不再丢失。设置中新增“重新同步”</item>
         <item>许可证改为 AGPL-3.0:手环连接基于 Gadgetbridge 的代码</item>
         <item>直接连接现在支持更多小米手环和手表（Band 9、Redmi Watch 4 等，实验性）；设置中的卡片显示已连接型号的名称和图片</item>
+        <item>Mi Band 2–6 和 Amazfit(Bip、GTS、GTR 等)也可直接连接(实验性);密钥可在应用内用 Zepp Life / Amazfit 账户获取</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>完整配色：关闭动态配色时不再出现紫色，深色主题下按钮文字清晰可读</item>

@@ -323,6 +323,7 @@
         <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
         <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
         <item>Doğrudan bağlantı daha çok Xiaomi bileklik ve saatini destekliyor (Band 9, Redmi Watch 4 ve diğerleri, deneysel); Ayarlar\'daki kart bağlı modelin adını ve resmini gösteriyor</item>
+        <item>Mi Band 2–6 ve Amazfit (Bip, GTS, GTR ve diğerleri) de doğrudan bağlanıyor (deneysel); anahtar Zepp Life / Amazfit hesabıyla uygulama içinden alınır</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor</item>

@@ -323,6 +323,7 @@
         <item>Health Connect から直近 7 日分を読み直すため、遅れて届いたバンドの歩数を取りこぼしません。設定に「再同期」を追加</item>
         <item>ライセンスが AGPL-3.0 になりました: バンド接続は Gadgetbridge のコードに基づいています</item>
         <item>直接接続がより多くの Xiaomi バンドと時計に対応（Band 9、Redmi Watch 4 など、試験的）。設定のカードに接続中のモデル名と画像を表示</item>
+        <item>Mi Band 2〜6 と Amazfit(Bip、GTS、GTR など)も直接接続できます(試験的)。キーは Zepp Life / Amazfit アカウントでアプリ内から取得します</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>カラーパレットを完成：ダイナミックカラーがオフでも紫色が出ず、ダークテーマでボタンの文字が読みやすく</item>

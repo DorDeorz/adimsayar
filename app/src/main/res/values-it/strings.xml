@@ -323,6 +323,7 @@
         <item>Gli ultimi 7 giorni vengono riletti da Health Connect, così i passi del braccialetto arrivati in ritardo non si perdono. Aggiunto \"Risincronizza\" nelle Impostazioni</item>
         <item>La licenza ora è AGPL-3.0: il collegamento al braccialetto si basa sul codice di Gadgetbridge</item>
         <item>La connessione diretta ora supporta più braccialetti e orologi Xiaomi (Band 9, Redmi Watch 4 e altri, sperimentale); la scheda nelle Impostazioni mostra nome e immagine del modello collegato</item>
+        <item>Anche Mi Band 2–6 e Amazfit (Bip, GTS, GTR e altri) si collegano direttamente (sperimentale); la chiave si ottiene nell\'app con l\'account Zepp Life / Amazfit</item>
     </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Tavolozza colori completa: niente più toni viola con i colori dinamici spenti, testo dei pulsanti leggibile nel tema scuro</item>
