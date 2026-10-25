@@ -149,6 +149,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
         }
         item {
             BandStep(2, stringResource(R.string.band_step_key)) {
+                BandText(stringResource(R.string.band_key_not_needed))
                 val busy = cloud is CloudState.Starting || cloud is CloudState.Waiting || cloud is CloudState.Loading
                 Button(enabled = !busy, onClick = {
                     scope.launch {
@@ -351,7 +352,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
         }
         item {
             BandStep(4, stringResource(R.string.band_step_test)) {
-                val ready = status.address != null && status.hasKey
+                val ready = status.ready
                 Button(enabled = ready && !testing, onClick = {
                     if (!BandDirect.granted(context, BandDirect.CONNECT_PERMISSIONS)) {
                         connectPermission.launch(BandDirect.CONNECT_PERMISSIONS)

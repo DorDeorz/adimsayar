@@ -316,6 +316,9 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_10_1">
+        <item>Deneysel: HK serisi WearFit Pro saatleri (örneğin HK10 Pro+) doğrudan bağlanabiliyor. Anahtar gerekmez; saatten saatlik adım ve nabız geçmişi okunur.</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Sağlık sekmesi yenilendi: son gece uykusu, her veri için ayrı kart ve günlük geçmiş grafiği (7, 30, 90 gün). Ayarlar gruplandı; bağlı bileklik en üstte, Bugün\'de \"Eşitle\" tuşu</item>
         <item>Saate doğrudan bağlantı: Ayarlar → Adım kaynağı → Doğrudan bağlantı ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
@@ -653,6 +656,7 @@
     <string name="band_step_about">Nasıl çalışır</string>
     <string name="band_about_text">FitWren bilekliğe Bluetooth ile kendisi bağlanır ve adımları doğrudan okur. Mi Fitness ve Health Connect gerekmez.\n\nDenenmiş model: Xiaomi Smart Band 8. Deneysel (henüz denenmedi): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Zepp Life ile kullanılan eski modeller de deneysel: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. Bunların anahtarı Zepp Life hesabından alınır (bilgisayarda github.com/argrento/huami-token).\n\nBileklik aynı anda tek uygulamaya bağlanır. Anahtarı aldıktan sonra Mi Fitness\'ı telefondan sil. Bilekliği Mi Fitness içinden kaldırma, yoksa bileklik sıfırlanır ve anahtar değişir.</string>
     <string name="band_step_key">Anahtar</string>
+    <string name="band_key_not_needed">HK serisi (WearFit Pro) saatler anahtar istemez. Bu adımı geç, 3. adımda saati seç. Önce WearFit Pro\'nun \"Yakındaki cihazlar\" iznini kapat, yoksa saat ona bağlı kalır.</string>
     <string name="band_cloud_button">Xiaomi hesabıyla anahtarı al</string>
     <string name="band_cloud_help">Xiaomi\'nin kendi giriş sayfası açılır. Mi Fitness\'ta kullandığın hesapla giriş yap ve girişi onayla. Şifreni FitWren görmez.</string>
     <string name="band_cloud_open">Giriş sayfasını aç</string>

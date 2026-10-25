@@ -99,6 +99,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.10.1", R.array.release_notes_0_10_1),
     ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
     ReleaseNote("0.9.5", R.array.release_notes_0_9_5),
@@ -179,7 +180,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 RadioRow(stringResource(R.string.source_direct), stringResource(R.string.band_hint), selected = state.bandDirectEnabled) {
                     when {
                         state.bandDirectEnabled -> Unit
-                        bandStatus.address != null && bandStatus.hasKey -> scope.launch { actions.onBandDirectChange(true) }
+                        bandStatus.ready -> scope.launch { actions.onBandDirectChange(true) }
                         else -> bandSetup = true
                     }
                 }

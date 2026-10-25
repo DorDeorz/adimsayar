@@ -316,6 +316,9 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_10_1">
+        <item>Sperimentale: gli orologi WearFit Pro della serie HK (ad esempio HK10 Pro+) possono collegarsi direttamente. Non serve una chiave; dall\'orologio si leggono i passi orari e lo storico del battito.</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Salute ridisegnata: sonno dell\'ultima notte, una scheda per ogni dato e storico giornaliero (7, 30, 90 giorni). Impostazioni raggruppate; bracciale collegato in alto, pulsante \"Sincronizza\" in Oggi</item>
         <item>Collegamento diretto al braccialetto: Impostazioni → Collegati direttamente al braccialetto legge i passi di Xiaomi Smart Band 8 senza Mi Fitness né Health Connect</item>
@@ -652,6 +655,7 @@
     <string name="band_step_about">Come funziona</string>
     <string name="band_about_text">FitWren si collega da sola al braccialetto via Bluetooth e legge i passi direttamente. Mi Fitness e Health Connect non servono.\n\nTestato: Xiaomi Smart Band 8. Sperimentale (non ancora provato): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Anche i modelli più vecchi usati con Zepp Life sono sperimentali: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. La loro chiave viene dall\'account Zepp Life (su un computer: github.com/argrento/huami-token).\n\nIl braccialetto si collega a una sola app alla volta. Dopo aver ottenuto la chiave, disinstalla Mi Fitness dal telefono. Non rimuovere il braccialetto dentro Mi Fitness, altrimenti si ripristina e la chiave cambia.</string>
     <string name="band_step_key">Chiave</string>
+    <string name="band_key_not_needed">Gli orologi della serie HK (WearFit Pro) non richiedono una chiave. Salta questo passaggio e scegli l\'orologio al passaggio 3. Prima togli a WearFit Pro il permesso \"Dispositivi nelle vicinanze\", altrimenti l\'orologio resta collegato all\'app.</string>
     <string name="band_cloud_button">Ottieni la chiave con l\'account Xiaomi</string>
     <string name="band_cloud_help">Si apre la pagina di accesso di Xiaomi. Accedi con l\'account che usi in Mi Fitness e conferma. FitWren non vede mai la tua password.</string>
     <string name="band_cloud_open">Apri pagina di accesso</string>

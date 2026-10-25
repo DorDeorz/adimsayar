@@ -1,0 +1,1 @@
+- Experimental: HK series WearFit Pro watches (for example HK10 Pro+) connect directly; no key needed, hourly steps and heart rate are read
