@@ -4,8 +4,11 @@ enum class BandShape { Band, SquareWatch, RoundWatch }
 
 enum class BandLink { Ble, Classic, Both }
 
-/** Xiaomi: protobuf protocol (Mi Fitness devices). Huami: older Mi Band 2–6 and Amazfit protocol (Zepp Life devices). */
-enum class BandFamily { Xiaomi, Huami }
+/**
+ * Xiaomi: protobuf protocol (Mi Fitness devices). Huami: older Mi Band 2–6 and Amazfit protocol (Zepp Life devices).
+ * WearFit: WearFit Pro clone watches (HK series), no key needed.
+ */
+enum class BandFamily { Xiaomi, Huami, WearFit }
 
 class BandModel(
     val name: String,
@@ -18,6 +21,8 @@ class BandModel(
     val huamiCrypt: Int = 0,
     val huamiSampleSize: Int = 4,
 ) {
+
+    val needsKey: Boolean get() = family != BandFamily.WearFit
 
     fun matches(deviceName: String): Boolean = pattern.matches(deviceName.trim())
 }
@@ -87,6 +92,7 @@ object BandModels {
         huami("Amazfit T-Rex", BandShape.RoundWatch, "^Amazfit T-Rex$", sampleSize = 8),
         huami("Amazfit Verge Lite", BandShape.RoundWatch, "^Amazfit Verge L$"),
         huami("Zepp E", BandShape.RoundWatch, "^Zepp E$", sampleSize = 8),
+        BandModel("WearFit Pro (HK)", BandShape.SquareWatch, BandLink.Ble, false, Regex("^HK.*"), BandFamily.WearFit),
     )
 
     /** Used for a band whose key came from the Zepp account before its Bluetooth name is known. */
@@ -97,7 +103,12 @@ object BandModels {
         return ALL.firstOrNull { it.matches(name) }
     }
 
-    fun displayName(deviceName: String?): String? = find(deviceName)?.name ?: deviceName?.trim()?.takeIf { it.isNotEmpty() }
+    fun displayName(deviceName: String?): String? {
+        val name = deviceName?.trim()?.takeIf { it.isNotEmpty() }
+        val model = find(name)
+        // Clone watches share one protocol under many names; their own name says more.
+        return if (model == null || model.family == BandFamily.WearFit) name else model.name
+    }
 
     fun shapeOf(deviceName: String?): BandShape {
         find(deviceName)?.let { return it.shape }

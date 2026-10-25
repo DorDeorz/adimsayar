@@ -1,0 +1,1 @@
+- Deneysel: HK serisi WearFit Pro saatleri (örneğin HK10 Pro+) doğrudan bağlanıyor; anahtar gerekmez, saatlik adım ve nabız okunur

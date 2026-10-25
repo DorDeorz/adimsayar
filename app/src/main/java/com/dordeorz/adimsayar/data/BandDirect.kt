@@ -12,6 +12,7 @@ import com.dordeorz.adimsayar.band.BandFile
 import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.HuamiBand
 import com.dordeorz.adimsayar.band.BandResult
+import com.dordeorz.adimsayar.band.WearFitBand
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiCrypto
 import kotlinx.coroutines.sync.Mutex
@@ -21,7 +22,13 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
-class BandStatus(val enabled: Boolean, val address: String?, val name: String?, val hasKey: Boolean, val lastSyncMs: Long, val lastResult: BandResult?)
+class BandStatus(val enabled: Boolean, val address: String?, val name: String?, val hasKey: Boolean, val lastSyncMs: Long, val lastResult: BandResult?) {
+
+    /** WearFit watches connect without a key. */
+    val needsKey: Boolean get() = BandModels.find(name)?.needsKey ?: true
+
+    val ready: Boolean get() = address != null && (hasKey || !needsKey)
+}
 
 object BandDirect {
 
@@ -36,6 +43,7 @@ object BandDirect {
     private const val KEY_NEXT_JOB = "band_direct_next_job"
     private const val KEY_HUAMI_SINCE = "band_direct_huami_since"
     private const val KEY_FAMILY = "band_direct_family"
+    private const val KEY_WEARFIT_SINCE = "band_direct_wearfit_since"
     private const val HUAMI_FIRST_DAYS = 7L
     private const val APP_INTERVAL_MS = 5 * 60 * 1000L
     private const val JOB_INTERVAL_MS = 15 * 60 * 1000L - 60 * 1000L
@@ -77,7 +85,10 @@ object BandDirect {
             putString(KEY_ADDRESS, address)
             putString(KEY_NAME, name ?: if (same) p.getString(KEY_NAME, null) else null)
             remove(KEY_LAST_RESULT)
-            if (!same) remove(KEY_HUAMI_SINCE)
+            if (!same) {
+                remove(KEY_HUAMI_SINCE)
+                remove(KEY_WEARFIT_SINCE)
+            }
             when {
                 family != null -> putString(KEY_FAMILY, family.name)
                 !same -> remove(KEY_FAMILY)
@@ -111,7 +122,11 @@ object BandDirect {
     suspend fun sync(context: Context, source: ReadSource, force: Boolean = false): BandResult? {
         val p = prefs(context)
         val address = p.getString(KEY_ADDRESS, null) ?: return null
-        val secret = p.getString(KEY_SECRET, null)?.let { XiaomiCrypto.parseKey(it) } ?: return null
+        val name = p.getString(KEY_NAME, null)
+        val model = BandModels.find(name)
+            ?: BandModels.GENERIC_HUAMI.takeIf { p.getString(KEY_FAMILY, null) == BandFamily.Huami.name }
+        val secret = p.getString(KEY_SECRET, null)?.let { XiaomiCrypto.parseKey(it) }
+        if (secret == null && model?.needsKey != false) return null
         val foreground = source == ReadSource.App
         val now = System.currentTimeMillis()
         if (!force && now < p.getLong(if (foreground) KEY_NEXT_APP else KEY_NEXT_JOB, 0L)) return null
@@ -124,9 +139,6 @@ object BandDirect {
             }
             val repository = StepRepository.get(context)
             var files = 0
-            val name = p.getString(KEY_NAME, null)
-            val model = BandModels.find(name)
-                ?: BandModels.GENERIC_HUAMI.takeIf { p.getString(KEY_FAMILY, null) == BandFamily.Huami.name }
             val save: suspend (BandFile) -> Boolean = { file ->
                 val sleep = file.sleep
                 if (sleep != null) {
@@ -143,7 +155,18 @@ object BandDirect {
             }
             val result: BandResult
             val summary: String
-            if (model?.family == BandFamily.Huami) {
+            if (model?.family == BandFamily.WearFit) {
+                // The watch may send running day totals, so always read from the start of a day.
+                val today = LocalDate.now()
+                val since = p.getString(KEY_WEARFIT_SINCE, null)?.let { runCatching { LocalDate.parse(it) }.getOrNull() }
+                    ?: today.minusDays(HUAMI_FIRST_DAYS)
+                val band = WearFitBand(context, address, since.atStartOfDay())
+                result = band.sync(save)
+                if (result == BandResult.Ok) p.edit { putString(KEY_WEARFIT_SINCE, today.toString()) }
+                summary = band.summary
+            } else if (secret == null) {
+                return record(context, source, BandResult.AuthFailed)
+            } else if (model?.family == BandFamily.Huami) {
                 val since = p.getLong(KEY_HUAMI_SINCE, 0L).takeIf { it > 0L }
                     ?: LocalDate.now().minusDays(HUAMI_FIRST_DAYS).atStartOfDay(ZoneId.systemDefault()).toEpochSecond()
                 val band = HuamiBand(context, address, model, secret, since)

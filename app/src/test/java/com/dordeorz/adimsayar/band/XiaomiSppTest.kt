@@ -157,7 +157,8 @@ class XiaomiSppTest {
         assertEquals("Redmi Watch 3 Active", BandModels.find("Redmi Watch 3 Active A1B2")?.name)
         assertEquals("Mi Watch Lite", BandModels.find("Mi Watch Lite_A1B2")?.name)
         assertEquals(BandShape.RoundWatch, BandModels.find("Xiaomi Watch S3 eSIM 12AB")?.shape)
-        assertNull(BandModels.find("HK10 Pro Max"))
+        assertEquals(BandFamily.WearFit, BandModels.find("HK10 Pro Max")?.family)
+        assertEquals("HK10 Pro+", BandModels.displayName("HK10 Pro+"))
         assertEquals(BandShape.SquareWatch, BandModels.shapeOf("Some Watch"))
     }
 }

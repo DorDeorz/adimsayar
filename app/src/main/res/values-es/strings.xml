@@ -316,6 +316,9 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_10_1">
+        <item>Experimental: los relojes WearFit Pro de la serie HK (por ejemplo HK10 Pro+) pueden conectarse directamente. No hace falta clave; se leen del reloj los pasos por hora y el historial de pulso.</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Salud rediseñada: sueño de anoche, una tarjeta por dato e historial diario (7, 30, 90 días). Ajustes agrupados; la pulsera conectada arriba y botón \"Sincronizar\" en Hoy</item>
         <item>Conexión directa con la pulsera: Ajustes → Conectar directamente a la pulsera lee los pasos de Xiaomi Smart Band 8 sin Mi Fitness ni Health Connect</item>
@@ -652,6 +655,7 @@
     <string name="band_step_about">Cómo funciona</string>
     <string name="band_about_text">FitWren se conecta por sí misma a la pulsera por Bluetooth y lee los pasos directamente. No hacen falta Mi Fitness ni Health Connect.\n\nProbado: Xiaomi Smart Band 8. Experimental (aún sin probar): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Los modelos antiguos usados con Zepp Life también son experimentales: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. Su clave se obtiene de la cuenta de Zepp Life (en un ordenador: github.com/argrento/huami-token).\n\nLa pulsera se conecta a una sola app a la vez. Cuando tengas la clave, desinstala Mi Fitness del teléfono. No quites la pulsera dentro de Mi Fitness: la pulsera se restablece y la clave cambia.</string>
     <string name="band_step_key">Clave</string>
+    <string name="band_key_not_needed">Los relojes de la serie HK (WearFit Pro) no necesitan clave. Salta este paso y elige el reloj en el paso 3. Antes quita a WearFit Pro el permiso \"Dispositivos cercanos\"; si no, el reloj sigue conectado a ella.</string>
     <string name="band_cloud_button">Obtener la clave con tu cuenta Xiaomi</string>
     <string name="band_cloud_help">Se abre la página de inicio de sesión de Xiaomi. Inicia sesión con la cuenta que usas en Mi Fitness y confirma. FitWren nunca ve tu contraseña.</string>
     <string name="band_cloud_open">Abrir página de inicio de sesión</string>

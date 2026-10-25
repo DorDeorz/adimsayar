@@ -2,6 +2,10 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.10.1
+
+- WearFit Pro saatleri (HK serisi, örneğin HK10 Pro+) doğrudan bağlanıyor (deneysel). Protokol Gadgetbridge'in MakibesHR3/WearFit koduna dayanıyor: Nordic UART tarzı servis (`6e400002` yazma, `6e400003` bildirim), anahtar ve eşleştirme yok. Saate yalnızca geçmiş isteği (`0x51`) gider; saat, ayar ve firmware komutu gönderilmez. Saatlik adımlar ve nabız örnekleri okunur; bugünün toplamı içinde bulunulan saate eklenir. Kurulum ekranında anahtar adımı bu saatler için atlanabilir.
+
 ## 0.10.0
 
 - Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar uygulama içinden Xiaomi hesabıyla giriş yapılarak alınır (QR kodlu giriş, şifre FitWren'e girilmez); elle girmek de mümkün. Bileklik aramada bulunmazsa adres elle yazılabilir. Bilekliğin takılı olduğu saatler (adım ya da nabız kaydı olan) adımsız olsa bile bileklikten sayılır; telefonun o saatlerde saydığı adımlar eklenmez. Şimdilik yalnızca adımlar okunur.

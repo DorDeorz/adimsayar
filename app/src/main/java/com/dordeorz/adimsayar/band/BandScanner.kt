@@ -63,6 +63,6 @@ class BandScanner(private val context: Context) {
     }
 
     companion object {
-        private val NAMES = listOf("Xiaomi", "Redmi", "Mi ", "Smart Band", "Amazfit", "Zepp")
+        private val NAMES = listOf("Xiaomi", "Redmi", "Mi ", "Smart Band", "Amazfit", "Zepp", "HK")
     }
 }
