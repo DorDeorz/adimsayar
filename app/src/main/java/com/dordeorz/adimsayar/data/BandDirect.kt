@@ -7,7 +7,10 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.band.BandFamily
 import com.dordeorz.adimsayar.band.BandFile
+import com.dordeorz.adimsayar.band.BandModels
+import com.dordeorz.adimsayar.band.HuamiBand
 import com.dordeorz.adimsayar.band.BandResult
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiCrypto
@@ -31,6 +34,8 @@ object BandDirect {
     private const val KEY_LAST_RESULT = "band_direct_last_result"
     private const val KEY_NEXT_APP = "band_direct_next_app"
     private const val KEY_NEXT_JOB = "band_direct_next_job"
+    private const val KEY_HUAMI_SINCE = "band_direct_huami_since"
+    private const val HUAMI_FIRST_DAYS = 7L
     private const val APP_INTERVAL_MS = 5 * 60 * 1000L
     private const val JOB_INTERVAL_MS = 15 * 60 * 1000L - 60 * 1000L
     private const val MERGE_DAYS = 30L
@@ -69,6 +74,7 @@ object BandDirect {
             putString(KEY_ADDRESS, address)
             putString(KEY_NAME, name)
             remove(KEY_LAST_RESULT)
+            remove(KEY_HUAMI_SINCE)
         }
     }
 
@@ -111,8 +117,9 @@ object BandDirect {
             }
             val repository = StepRepository.get(context)
             var files = 0
-            val band = XiaomiBand(context, address, p.getString(KEY_NAME, null), secret)
-            val result = band.sync { file ->
+            val name = p.getString(KEY_NAME, null)
+            val model = BandModels.find(name)
+            val save: suspend (BandFile) -> Boolean = { file ->
                 val sleep = file.sleep
                 if (sleep != null) {
                     BandHealth.saveSleep(context, sleep)
@@ -126,9 +133,23 @@ object BandDirect {
                 files++
                 !(file.samplesOnly && file.minutes.isEmpty())
             }
+            val result: BandResult
+            val summary: String
+            if (model?.family == BandFamily.Huami) {
+                val since = p.getLong(KEY_HUAMI_SINCE, 0L).takeIf { it > 0L }
+                    ?: LocalDate.now().minusDays(HUAMI_FIRST_DAYS).atStartOfDay(ZoneId.systemDefault()).toEpochSecond()
+                val band = HuamiBand(context, address, model, secret, since)
+                result = band.sync(save)
+                if (band.nextSince != since) p.edit { putLong(KEY_HUAMI_SINCE, band.nextSince) }
+                summary = band.summary
+            } else {
+                val band = XiaomiBand(context, address, name, secret)
+                result = band.sync(save)
+                summary = band.fileSummary
+            }
             if (isEnabled(context) && files > 0) remerge(context)
             if (result == BandResult.Ok) p.edit { putLong(KEY_LAST_SYNC, System.currentTimeMillis()) }
-            record(context, source, result, files, band.fileSummary)
+            record(context, source, result, files, summary)
         } finally {
             running.unlock()
         }

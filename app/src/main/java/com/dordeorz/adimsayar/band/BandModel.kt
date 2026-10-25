@@ -4,7 +4,20 @@ enum class BandShape { Band, SquareWatch, RoundWatch }
 
 enum class BandLink { Ble, Classic, Both }
 
-class BandModel(val name: String, val shape: BandShape, val link: BandLink, val tested: Boolean, private val pattern: Regex) {
+/** Xiaomi: protobuf protocol (Mi Fitness devices). Huami: older Mi Band 2–6 and Amazfit protocol (Zepp Life devices). */
+enum class BandFamily { Xiaomi, Huami }
+
+class BandModel(
+    val name: String,
+    val shape: BandShape,
+    val link: BandLink,
+    val tested: Boolean,
+    private val pattern: Regex,
+    val family: BandFamily = BandFamily.Xiaomi,
+    /** Huami only: authentication crypt flags and bytes per minute in the activity data. */
+    val huamiCrypt: Int = 0,
+    val huamiSampleSize: Int = 4,
+) {
 
     fun matches(deviceName: String): Boolean = pattern.matches(deviceName.trim())
 }
@@ -13,6 +26,9 @@ object BandModels {
 
     private fun model(name: String, shape: BandShape, link: BandLink, pattern: String, tested: Boolean = false) =
         BandModel(name, shape, link, tested, Regex(pattern))
+
+    private fun huami(name: String, shape: BandShape, pattern: String, crypt: Int = 0x80, sampleSize: Int = 4) =
+        BandModel(name, shape, BandLink.Ble, false, Regex(pattern, RegexOption.IGNORE_CASE), BandFamily.Huami, crypt, sampleSize)
 
     private const val SUFFIX = "( ?[0-9A-Za-z]{4})?"
 
@@ -39,6 +55,38 @@ object BandModels {
         model("Xiaomi Watch S1 Pro", BandShape.RoundWatch, BandLink.Classic, "^(Xiaomi Watch S1 Pro$SUFFIX|[Ll]61.*[0-9A-F]{4})$"),
         model("Xiaomi Watch S1", BandShape.RoundWatch, BandLink.Both, "^Xiaomi Watch S1$SUFFIX$"),
         model("Xiaomi Watch S3", BandShape.RoundWatch, BandLink.Classic, "^Xiaomi Watch S3( eSIM)?$SUFFIX$"),
+        huami("Mi Band 2", BandShape.Band, "^MI Band 2$", crypt = 0),
+        huami("Mi Band 3", BandShape.Band, "^Mi Band 3$", crypt = 0),
+        huami("Mi Smart Band 4", BandShape.Band, "^Mi Smart Band 4$"),
+        huami("Mi Smart Band 5", BandShape.Band, "^Mi Smart Band 5$"),
+        huami("Mi Smart Band 6", BandShape.Band, "^Mi Smart Band 6$"),
+        huami("Amazfit Band 5", BandShape.Band, "^Amazfit Band 5$"),
+        huami("Amazfit Band 2", BandShape.Band, "^Amazfit (Band 2|Cor 2)$", crypt = 0),
+        huami("Amazfit Band", BandShape.Band, "^Amazfit (Band|Cor)$", crypt = 0),
+        huami("Amazfit Neo", BandShape.SquareWatch, "^Amazfit Neo$"),
+        huami("Amazfit X", BandShape.SquareWatch, "^Amazfit X$"),
+        huami("Amazfit Bip", BandShape.SquareWatch, "^Amazfit Bip Watch$", crypt = 0),
+        huami("Amazfit Bip Lite", BandShape.SquareWatch, "^Amazfit Bip Lite$"),
+        huami("Amazfit Bip S Lite", BandShape.SquareWatch, "^(Amazfit )?Bip S Lite$"),
+        huami("Amazfit Bip S", BandShape.SquareWatch, "^Amazfit Bip S$"),
+        huami("Amazfit Bip U Pro", BandShape.SquareWatch, "^Amazfit Bip U Pro$"),
+        huami("Amazfit Bip U", BandShape.SquareWatch, "^Amazfit Bip U$"),
+        huami("Amazfit Bip 3 Pro", BandShape.SquareWatch, "^Amazfit Bip 3 Pro$"),
+        huami("Amazfit Bip 3", BandShape.SquareWatch, "^Amazfit Bip 3$"),
+        huami("Amazfit Pop Pro", BandShape.SquareWatch, "^Amazfit Pop Pro$"),
+        huami("Amazfit Pop", BandShape.SquareWatch, "^Amazfit Pop$"),
+        huami("Amazfit GTS 2 mini", BandShape.SquareWatch, "^Amazfit GTS ?2 mini$", sampleSize = 8),
+        huami("Amazfit GTS 2e", BandShape.SquareWatch, "^Amazfit GTS 2e$", sampleSize = 8),
+        huami("Amazfit GTS 2", BandShape.SquareWatch, "^Amazfit GTS 2$", sampleSize = 8),
+        huami("Amazfit GTS", BandShape.SquareWatch, "^Amazfit GTS$", sampleSize = 8),
+        huami("Amazfit GTR 2e", BandShape.RoundWatch, "^Amazfit GTR 2e$", sampleSize = 8),
+        huami("Amazfit GTR 2", BandShape.RoundWatch, "^Amazfit GTR 2$", sampleSize = 8),
+        huami("Amazfit GTR Lite", BandShape.RoundWatch, "^Amazfit GTR L$", sampleSize = 8),
+        huami("Amazfit GTR", BandShape.RoundWatch, "^Amazfit GTR$", sampleSize = 8),
+        huami("Amazfit T-Rex Pro", BandShape.RoundWatch, "^Amazfit T-Rex Pro$", sampleSize = 8),
+        huami("Amazfit T-Rex", BandShape.RoundWatch, "^Amazfit T-Rex$", sampleSize = 8),
+        huami("Amazfit Verge Lite", BandShape.RoundWatch, "^Amazfit Verge L$"),
+        huami("Zepp E", BandShape.RoundWatch, "^Zepp E$", sampleSize = 8),
     )
 
     fun find(deviceName: String?): BandModel? {

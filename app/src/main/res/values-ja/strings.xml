@@ -647,9 +647,9 @@
     <string name="widget_summary_distance">距離</string>
     <string name="widget_summary_calories">カロリー</string>
     <string name="band_title">バンドに直接接続</string>
-    <string name="band_hint">Mi Fitness なしで Xiaomi バンドから歩数を取得</string>
+    <string name="band_hint">専用アプリなしで Xiaomi または Amazfit のバンドから歩数を取得</string>
     <string name="band_step_about">しくみ</string>
-    <string name="band_about_text">FitWren が Bluetooth でバンドに直接接続し、歩数を読み取ります。Mi Fitness と Health Connect は不要です。\n\n動作確認済み: Xiaomi Smart Band 8。試験的（未確認）: Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3。\n\nバンドは同時に 1 つのアプリにしか接続できません。キーを取得したら、スマートフォンから Mi Fitness をアンインストールしてください。Mi Fitness 内でバンドを削除しないでください。バンドがリセットされ、キーが変わります。</string>
+    <string name="band_about_text">FitWren が Bluetooth でバンドに直接接続し、歩数を読み取ります。Mi Fitness と Health Connect は不要です。\n\n動作確認済み: Xiaomi Smart Band 8。試験的（未確認）: Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3。 Zepp Life で使う旧モデルも試験的に対応: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E。キーは Zepp Life アカウントから取得します（パソコンで github.com/argrento/huami-token）。\n\nバンドは同時に 1 つのアプリにしか接続できません。キーを取得したら、スマートフォンから Mi Fitness をアンインストールしてください。Mi Fitness 内でバンドを削除しないでください。バンドがリセットされ、キーが変わります。</string>
     <string name="band_step_key">キー</string>
     <string name="band_cloud_button">Xiaomi アカウントでキーを取得</string>
     <string name="band_cloud_help">Xiaomi のログインページが開きます。Mi Fitness で使っているアカウントでログインして確認してください。FitWren がパスワードを見ることはありません。</string>
@@ -716,7 +716,7 @@
     <string name="source_none">使用しない</string>
     <string name="source_none_hint">スマートフォンの歩数だけを数えます。</string>
     <string name="band_model_experimental">%1$s · 試験的</string>
-    <string name="source_direct">直接接続（Xiaomi）</string>
+    <string name="source_direct">直接接続（Xiaomi、Amazfit）</string>
     <string name="source_connect">Health Connect経由</string>
     <string name="source_merge_hint">バンドを使う場合、着けている時間はバンドの歩数、それ以外はスマートフォンの歩数を使います。</string>
     <string name="source_direct_manage">バンドの設定</string>

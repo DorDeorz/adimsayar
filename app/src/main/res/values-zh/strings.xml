@@ -647,9 +647,9 @@
     <string name="widget_summary_distance">距离</string>
     <string name="widget_summary_calories">卡路里</string>
     <string name="band_title">直接连接手环</string>
-    <string name="band_hint">无需 Mi Fitness,直接从小米手环获取步数</string>
+    <string name="band_hint">无需官方应用,直接从小米或 Amazfit 手环获取步数</string>
     <string name="band_step_about">工作原理</string>
-    <string name="band_about_text">FitWren 会通过蓝牙自行连接手环并直接读取步数,无需 Mi Fitness 和 Health Connect。\n\n已测试：Xiaomi Smart Band 8。实验性（尚未测试）：Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3。\n\n手环同一时间只能连接一个应用。获取密钥后,请从手机上卸载 Mi Fitness。不要在 Mi Fitness 中移除手环,否则手环会被重置,密钥也会改变。</string>
+    <string name="band_about_text">FitWren 会通过蓝牙自行连接手环并直接读取步数,无需 Mi Fitness 和 Health Connect。\n\n已测试：Xiaomi Smart Band 8。实验性（尚未测试）：Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3。 用于 Zepp Life 的旧款也以实验方式支持：Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E。其密钥来自 Zepp Life 账户（在电脑上使用 github.com/argrento/huami-token）。\n\n手环同一时间只能连接一个应用。获取密钥后,请从手机上卸载 Mi Fitness。不要在 Mi Fitness 中移除手环,否则手环会被重置,密钥也会改变。</string>
     <string name="band_step_key">密钥</string>
     <string name="band_cloud_button">用小米账号获取密钥</string>
     <string name="band_cloud_help">将打开小米自己的登录页面。用你在 Mi Fitness 中使用的账号登录并确认。FitWren 不会看到你的密码。</string>
@@ -716,7 +716,7 @@
     <string name="source_none">不使用</string>
     <string name="source_none_hint">只统计手机的步数。</string>
     <string name="band_model_experimental">%1$s · 实验性</string>
-    <string name="source_direct">直接连接（小米）</string>
+    <string name="source_direct">直接连接（小米、Amazfit）</string>
     <string name="source_connect">通过 Health Connect</string>
     <string name="source_merge_hint">使用手环时，佩戴的时段用手环步数，其他时段用手机步数。</string>
     <string name="source_direct_manage">手环设置</string>

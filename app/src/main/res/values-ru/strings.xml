@@ -647,9 +647,9 @@
     <string name="widget_summary_distance">Расстояние</string>
     <string name="widget_summary_calories">Калории</string>
     <string name="band_title">Подключиться к браслету напрямую</string>
-    <string name="band_hint">Получать шаги с браслета Xiaomi без Mi Fitness</string>
+    <string name="band_hint">Получать шаги с браслета Xiaomi или Amazfit без его приложения</string>
     <string name="band_step_about">Как это работает</string>
-    <string name="band_about_text">FitWren сам подключается к браслету по Bluetooth и читает шаги напрямую. Mi Fitness и Health Connect не нужны.\n\nПроверено: Xiaomi Smart Band 8. Экспериментально (ещё не проверялось): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3.\n\nБраслет подключается только к одному приложению. Получив ключ, удалите Mi Fitness с телефона. Не удаляйте браслет внутри Mi Fitness, иначе браслет сбросится и ключ изменится.</string>
+    <string name="band_about_text">FitWren сам подключается к браслету по Bluetooth и читает шаги напрямую. Mi Fitness и Health Connect не нужны.\n\nПроверено: Xiaomi Smart Band 8. Экспериментально (ещё не проверялось): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Старые модели для Zepp Life тоже экспериментально: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. Их ключ берётся из аккаунта Zepp Life (на компьютере: github.com/argrento/huami-token).\n\nБраслет подключается только к одному приложению. Получив ключ, удалите Mi Fitness с телефона. Не удаляйте браслет внутри Mi Fitness, иначе браслет сбросится и ключ изменится.</string>
     <string name="band_step_key">Ключ</string>
     <string name="band_cloud_button">Получить ключ через аккаунт Xiaomi</string>
     <string name="band_cloud_help">Откроется страница входа Xiaomi. Войдите в аккаунт, который используете в Mi Fitness, и подтвердите вход. FitWren не видит ваш пароль.</string>
@@ -716,7 +716,7 @@
     <string name="source_none">Не использовать</string>
     <string name="source_none_hint">Считаются только шаги телефона.</string>
     <string name="band_model_experimental">%1$s · экспериментально</string>
-    <string name="source_direct">Прямое подключение (Xiaomi)</string>
+    <string name="source_direct">Прямое подключение (Xiaomi, Amazfit)</string>
     <string name="source_connect">Через Health Connect</string>
     <string name="source_merge_hint">Если вы носите браслет, в эти часы используется его счёт, в остальные часы — счёт телефона.</string>
     <string name="source_direct_manage">Настройки браслета</string>
