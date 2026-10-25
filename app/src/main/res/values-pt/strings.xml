@@ -321,6 +321,7 @@
         <item>Bateria da pulseira: no cartão do dispositivo, no novo widget \"Bateria da pulseira\" e alerta no celular quando estiver fraca</item>
         <item>Encontrar meu celular (a pulseira faz o celular tocar) e Encontrar minha pulseira; alerta no celular quando a pulseira desconecta</item>
         <item>Respostas rápidas (SMS ao recusar na pulseira) e clima na pulseira (Open-Meteo, por cidade ou localização)</item>
+        <item>Alarmes da pulseira podem ser vistos e editados no FitWren; eventos da agenda vão para a pulseira</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">Buscar</string>
     <string name="band_weather_use_location">Usar localização atual</string>
     <string name="band_weather_not_found">Nada encontrado. Tente outro nome ou permita a localização.</string>
+    <string name="band_alarms">Alarmes da pulseira</string>
+    <string name="band_alarms_hint">Ver, ligar e adicionar alarmes na pulseira</string>
+    <string name="band_alarms_offline">A pulseira não está conectada. Os alarmes aparecem aqui quando conectar.</string>
+    <string name="band_alarms_empty">Nenhum alarme na pulseira.</string>
+    <string name="band_alarm_add">Adicionar alarme</string>
+    <string name="band_alarm_edit">Editar alarme</string>
+    <string name="band_alarm_delete">Excluir</string>
+    <string name="band_alarm_once">Uma vez</string>
+    <string name="band_alarm_daily">Todos os dias</string>
+    <string name="band_alarm_weekdays">Dias úteis</string>
+    <string name="band_alarm_days">Dias</string>
+    <string name="band_calendar">Agenda</string>
+    <string name="band_calendar_hint">Eventos dos próximos 7 dias vão para a pulseira. Pede permissão de agenda.</string>
 </resources>

@@ -321,6 +321,7 @@
         <item>Заряд браслета: на карточке устройства, в новом виджете «Заряд браслета» и предупреждение на телефоне при низком заряде</item>
         <item>Найти телефон (браслет заставляет телефон звонить) и Найти браслет; предупреждение на телефоне при отключении браслета</item>
         <item>Быстрые ответы (SMS при отклонении на браслете) и погода на браслете (Open-Meteo, по городу или местоположению)</item>
+        <item>Будильники браслета можно смотреть и менять в FitWren; события календаря отправляются на браслет</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">Найти</string>
     <string name="band_weather_use_location">Текущее местоположение</string>
     <string name="band_weather_not_found">Ничего не найдено. Попробуйте другое название или разрешите геолокацию.</string>
+    <string name="band_alarms">Будильники браслета</string>
+    <string name="band_alarms_hint">Просмотр, включение и добавление будильников на браслете</string>
+    <string name="band_alarms_offline">Браслет не подключён. Будильники появятся здесь после подключения.</string>
+    <string name="band_alarms_empty">На браслете нет будильников.</string>
+    <string name="band_alarm_add">Добавить будильник</string>
+    <string name="band_alarm_edit">Изменить будильник</string>
+    <string name="band_alarm_delete">Удалить</string>
+    <string name="band_alarm_once">Один раз</string>
+    <string name="band_alarm_daily">Каждый день</string>
+    <string name="band_alarm_weekdays">По будням</string>
+    <string name="band_alarm_days">Дни</string>
+    <string name="band_calendar">Календарь</string>
+    <string name="band_calendar_hint">События календаря на 7 дней вперёд отправляются на браслет. Нужно разрешение на календарь.</string>
 </resources>

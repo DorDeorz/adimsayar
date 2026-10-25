@@ -9,6 +9,8 @@ import com.dordeorz.adimsayar.background.BandAlerts
 import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
+import com.dordeorz.adimsayar.band.BandAlarm
+import com.dordeorz.adimsayar.band.BandCalendarEvent
 import com.dordeorz.adimsayar.band.BandResult
 import com.dordeorz.adimsayar.band.BandWeatherReport
 import com.dordeorz.adimsayar.band.XiaomiBand
@@ -155,6 +157,22 @@ object BandLive {
         return true
     }
 
+    fun saveAlarm(alarm: BandAlarm): Boolean = onConnection { session?.saveAlarm(alarm) }
+
+    fun deleteAlarm(id: Int): Boolean = onConnection { session?.deleteAlarms(listOf(id)) }
+
+    fun requestAlarms(): Boolean = onConnection { session?.requestAlarms() }
+
+    fun calendar(events: List<BandCalendarEvent>?): Boolean = onConnection { session?.sendCalendar(events) }
+
+    /** Runs [action] on the connection; false when the band is not connected. */
+    private fun onConnection(action: () -> Unit): Boolean {
+        val send = post ?: return false
+        if (!connected) return false
+        send(action)
+        return true
+    }
+
     fun weather(report: BandWeatherReport) = post?.invoke { session?.sendWeather(report) }
 
     fun replySent(success: Boolean) = post?.invoke { session?.replySent(success) }
@@ -214,6 +232,7 @@ object BandLive {
                         Log.i(XiaomiBand.TAG, "live synced: $result")
                         onConnected()
                         BandWeather.refresh(context)
+                        BandSchedule.syncCalendar(context)
                     },
                 ),
                 autoConnect = autoConnect,
@@ -227,6 +246,7 @@ object BandLive {
             session = null
             post = null
             findingBand = false
+            BandSchedule.onDisconnected()
             if (wasConnected) watchLost(context)
             complete(if (result == BandResult.Ok) BandResult.ConnectFailed else result)
             Log.i(XiaomiBand.TAG, "live ended: $result, retry in ${retry / 1000}s")

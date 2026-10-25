@@ -321,6 +321,7 @@
         <item>Batteria del bracciale: nella scheda del dispositivo, nel nuovo widget \"Batteria del bracciale\" e avviso sul telefono quando è scarica</item>
         <item>Trova il mio telefono (il bracciale fa squillare il telefono) e Trova il mio bracciale; avviso sul telefono quando il bracciale si disconnette</item>
         <item>Risposte rapide (SMS quando rifiuti dal bracciale) e meteo sul bracciale (Open-Meteo, per città o posizione)</item>
+        <item>Le sveglie del bracciale si vedono e modificano in FitWren; gli eventi del calendario vanno al bracciale</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifiche sul braccialetto: notifiche delle app, chiamate e controllo musica (Xiaomi). Nessuna notifica fissa; usa l\'accesso alle notifiche</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">Cerca</string>
     <string name="band_weather_use_location">Usa posizione attuale</string>
     <string name="band_weather_not_found">Nessun risultato. Prova un altro nome o consenti la posizione.</string>
+    <string name="band_alarms">Sveglie del bracciale</string>
+    <string name="band_alarms_hint">Vedi, attiva e aggiungi sveglie sul bracciale</string>
+    <string name="band_alarms_offline">Il bracciale non è connesso. Le sveglie appaiono qui quando si connette.</string>
+    <string name="band_alarms_empty">Nessuna sveglia sul bracciale.</string>
+    <string name="band_alarm_add">Aggiungi sveglia</string>
+    <string name="band_alarm_edit">Modifica sveglia</string>
+    <string name="band_alarm_delete">Elimina</string>
+    <string name="band_alarm_once">Una volta</string>
+    <string name="band_alarm_daily">Ogni giorno</string>
+    <string name="band_alarm_weekdays">Giorni feriali</string>
+    <string name="band_alarm_days">Giorni</string>
+    <string name="band_calendar">Calendario</string>
+    <string name="band_calendar_hint">Gli eventi dei prossimi 7 giorni vanno al bracciale. Richiede il permesso del calendario.</string>
 </resources>

@@ -321,6 +321,7 @@
         <item>Bileklik pili: cihaz kartında, yeni \"Bileklik pili\" widget\'ında ve azalınca telefonda uyarı</item>
         <item>Telefonumu bul (bileklikten telefon çalar) ve Bilekliği bul; bileklik bağlantısı kopunca telefonda uyarı</item>
         <item>Hazır yanıtlar (bileklikten reddedilen aramaya SMS) ve bileklikte hava durumu (Open-Meteo, şehir ya da konum)</item>
+        <item>Bileklik alarmları FitWren\'den görülür ve düzenlenir; takvim etkinlikleri bilekliğe gider</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Bileklik bildirimleri: uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider (Xiaomi). Kalıcı bildirim yok; bildirim erişimi izniyle çalışır</item>
@@ -803,4 +804,17 @@
     <string name="band_weather_find">Ara</string>
     <string name="band_weather_use_location">Şu anki konumu kullan</string>
     <string name="band_weather_not_found">Bulunamadı. Başka bir ad dene ya da konum iznini aç.</string>
+    <string name="band_alarms">Bileklik alarmları</string>
+    <string name="band_alarms_hint">Bileklikteki alarmları gör, aç, kapat ve yenisini kur</string>
+    <string name="band_alarms_offline">Bileklik bağlı değil. Bağlanınca alarmlar burada görünür.</string>
+    <string name="band_alarms_empty">Bileklikte alarm yok.</string>
+    <string name="band_alarm_add">Alarm ekle</string>
+    <string name="band_alarm_edit">Alarmı düzenle</string>
+    <string name="band_alarm_delete">Sil</string>
+    <string name="band_alarm_once">Bir kez</string>
+    <string name="band_alarm_daily">Her gün</string>
+    <string name="band_alarm_weekdays">Hafta içi</string>
+    <string name="band_alarm_days">Günler</string>
+    <string name="band_calendar">Takvim</string>
+    <string name="band_calendar_hint">Önümüzdeki 7 günün takvim etkinlikleri bilekliğe gider. Takvim izni istenir.</string>
 </resources>

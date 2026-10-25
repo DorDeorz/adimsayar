@@ -321,6 +321,7 @@
         <item>밴드 배터리: 기기 카드와 새 \"밴드 배터리\" 위젯에 표시, 부족하면 휴대폰 알림</item>
         <item>내 휴대폰 찾기(밴드로 휴대폰 울리기)와 내 밴드 찾기, 밴드 연결이 끊기면 휴대폰 알림</item>
         <item>빠른 답장(밴드에서 거절할 때 SMS)과 밴드 날씨(Open-Meteo, 도시 또는 위치)</item>
+        <item>밴드 알람을 FitWren에서 보고 편집, 캘린더 일정이 밴드로 전송</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">검색</string>
     <string name="band_weather_use_location">현재 위치 사용</string>
     <string name="band_weather_not_found">찾을 수 없습니다. 다른 이름을 입력하거나 위치를 허용하세요.</string>
+    <string name="band_alarms">밴드 알람</string>
+    <string name="band_alarms_hint">밴드의 알람 보기, 켜기/끄기, 추가</string>
+    <string name="band_alarms_offline">밴드가 연결되어 있지 않습니다. 연결되면 알람이 여기에 표시됩니다.</string>
+    <string name="band_alarms_empty">밴드에 알람이 없습니다.</string>
+    <string name="band_alarm_add">알람 추가</string>
+    <string name="band_alarm_edit">알람 편집</string>
+    <string name="band_alarm_delete">삭제</string>
+    <string name="band_alarm_once">한 번</string>
+    <string name="band_alarm_daily">매일</string>
+    <string name="band_alarm_weekdays">평일</string>
+    <string name="band_alarm_days">요일</string>
+    <string name="band_calendar">캘린더</string>
+    <string name="band_calendar_hint">앞으로 7일간의 일정이 밴드로 전송됩니다. 캘린더 권한을 요청합니다.</string>
 </resources>

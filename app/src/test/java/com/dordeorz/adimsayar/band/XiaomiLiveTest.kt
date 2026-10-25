@@ -171,4 +171,34 @@ class XiaomiLiveTest {
         assertEquals(3, XiaomiWeather.beaufort(15.0))
         assertEquals(12, XiaomiWeather.beaufort(130.0))
     }
+
+    @Test
+    fun alarmsAndCalendar() {
+        val sent = ArrayList<ByteArray>()
+        val s = plainSession(sent, ArrayList())
+        assertTrue(sent.any { ProtoMessage.parse(it)!!.let { c -> c.uint(1) == 17L && c.uint(2) == 0L } })
+        var got: List<BandAlarm> = emptyList()
+        s.onAlarms = { list, _ -> got = list }
+        val details = XiaomiSchedule.details(BandAlarm(0, 6, 30, BandAlarm.Repeat.Weekly, BandAlarm.WEEKDAYS, true))
+        val alarms = ProtoWriter().message(1, ProtoWriter().uint(1, 2).message(2, details)).uint(2, 10)
+        s.onCommand(ProtoWriter().uint(1, 17).uint(2, 0).message(19, ProtoWriter().message(1, alarms)).toByteArray())
+        assertEquals(listOf(BandAlarm(2, 6, 30, BandAlarm.Repeat.Weekly, 31, true)), got)
+
+        sent.clear()
+        s.saveAlarm(got[0].copy(enabled = false))
+        val edit = ProtoMessage.parse(sent[0])!!
+        assertEquals(2L, edit.uint(2))
+        assertEquals(2L, edit.message(19)!!.message(3)!!.uint(1))
+        assertEquals(0L, edit.message(19)!!.message(3)!!.message(2)!!.uint(5))
+        assertEquals(0L, ProtoMessage.parse(sent[1])!!.uint(2))
+
+        s.sendCalendar(listOf(BandCalendarEvent("Maç", "Saha", 100L, 200L, false, 15)))
+        val cal = ProtoMessage.parse(sent.last())!!
+        assertEquals(12L, cal.uint(1))
+        val event = cal.message(14)!!.message(2)!!.message(1)!!
+        assertEquals("Maç", event.string(1))
+        assertEquals(15L, event.uint(7))
+        s.sendCalendar(null)
+        assertEquals(1L, ProtoMessage.parse(sent.last())!!.message(14)!!.message(2)!!.uint(2))
+    }
 }

@@ -68,6 +68,9 @@ class XiaomiSession(
     /** The band's quick replies for rejected calls, with how many it needs and allows. */
     var onReplies: (replies: List<String>, min: Int, max: Int) -> Unit = { _, _, _ -> }
 
+    /** The band's alarms and how many it can hold, after a get or any change. */
+    var onAlarms: (alarms: List<BandAlarm>, max: Int) -> Unit = { _, _ -> }
+
     /** Battery level 0–100 and whether it is charging (null when the band did not say). */
     var onBattery: (level: Int, charging: Boolean?) -> Unit = { _, _ -> }
 
@@ -175,6 +178,31 @@ class XiaomiSession(
         send(command(XiaomiWeather.TYPE, XiaomiWeather.CURRENT).message(12, XiaomiWeather.current(report)).toByteArray(), false)
         send(command(XiaomiWeather.TYPE, XiaomiWeather.DAILY).message(12, XiaomiWeather.daily(report)).toByteArray(), false)
         send(command(XiaomiWeather.TYPE, XiaomiWeather.HOURLY).message(12, XiaomiWeather.hourly(report)).toByteArray(), false)
+    }
+
+    fun requestAlarms() {
+        if (!authenticated) return
+        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_GET).toByteArray(), false)
+    }
+
+    /** Creates the alarm when its id is 0, otherwise changes it; the list is read again after. */
+    fun saveAlarm(alarm: BandAlarm) {
+        if (!authenticated) return
+        val (subtype, body) = if (alarm.id == 0) XiaomiSchedule.ALARMS_CREATE to XiaomiSchedule.create(alarm) else XiaomiSchedule.ALARMS_EDIT to XiaomiSchedule.edit(alarm)
+        send(command(XiaomiSchedule.TYPE, subtype).message(19, body).toByteArray(), false)
+        requestAlarms()
+    }
+
+    fun deleteAlarms(ids: List<Int>) {
+        if (!authenticated || ids.isEmpty()) return
+        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_DELETE).message(19, XiaomiSchedule.delete(ids)).toByteArray(), false)
+        requestAlarms()
+    }
+
+    /** Replaces the band's calendar with [events]; null turns the band's calendar off. */
+    fun sendCalendar(events: List<BandCalendarEvent>?) {
+        if (!authenticated) return
+        send(command(XiaomiSchedule.CALENDAR_TYPE, XiaomiSchedule.CALENDAR_SET).message(14, XiaomiSchedule.calendar(events)).toByteArray(), false)
     }
 
     /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
@@ -309,6 +337,10 @@ class XiaomiSession(
                 weatherKeys = if (cmd.uint(STATUS) == 1L) emptySet() else XiaomiWeather.locationKeys(cmd.message(12))
                 log("weather places: $weatherKeys")
             }
+            type == XiaomiSchedule.TYPE && subtype == XiaomiSchedule.ALARMS_GET -> {
+                val (alarms, max) = XiaomiSchedule.alarms(cmd.message(19))
+                onAlarms(alarms, max)
+            }
             type == TYPE_MUSIC && subtype == MUSIC_GET -> onEvent(BandEvent.MusicRequest)
             type == TYPE_MUSIC && subtype == MUSIC_BUTTON -> {
                 val key = cmd.message(20)?.message(2)
@@ -364,6 +396,7 @@ class XiaomiSession(
         send(command(TYPE_SYSTEM, SYSTEM_DEVICE_STATE_GET).toByteArray(), false)
         sendNotificationCommand(NOTIFICATION_REPLIES_GET, ProtoWriter().uint(8, 1))
         send(command(XiaomiWeather.TYPE, XiaomiWeather.GET_LOCATIONS).toByteArray(), false)
+        requestAlarms()
         send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
     }
 

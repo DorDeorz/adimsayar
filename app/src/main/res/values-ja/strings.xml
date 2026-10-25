@@ -321,6 +321,7 @@
         <item>バンドの電池: デバイスカード、新しい「バンドの電池」ウィジェット、残量低下時にスマホへ通知</item>
         <item>スマホを探す(バンドからスマホを鳴らす)とバンドを探す。バンドの接続が切れるとスマホに通知</item>
         <item>クイック返信(バンドで拒否したときにSMS)とバンドの天気(Open-Meteo、都市または現在地)</item>
+        <item>バンドのアラームをFitWrenで確認・編集。カレンダーの予定をバンドに送信</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>バンドへの通知: アプリの通知、着信、音楽の操作に対応 (Xiaomi)。常駐通知なし、通知へのアクセスで動作</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">検索</string>
     <string name="band_weather_use_location">現在地を使う</string>
     <string name="band_weather_not_found">見つかりません。別の名前を試すか、位置情報を許可してください。</string>
+    <string name="band_alarms">バンドのアラーム</string>
+    <string name="band_alarms_hint">バンドのアラームを確認、オンオフ、追加</string>
+    <string name="band_alarms_offline">バンドが接続されていません。接続するとここにアラームが表示されます。</string>
+    <string name="band_alarms_empty">バンドにアラームはありません。</string>
+    <string name="band_alarm_add">アラームを追加</string>
+    <string name="band_alarm_edit">アラームを編集</string>
+    <string name="band_alarm_delete">削除</string>
+    <string name="band_alarm_once">1回</string>
+    <string name="band_alarm_daily">毎日</string>
+    <string name="band_alarm_weekdays">平日</string>
+    <string name="band_alarm_days">曜日</string>
+    <string name="band_calendar">カレンダー</string>
+    <string name="band_calendar_hint">今後7日間の予定をバンドに送ります。カレンダーの権限が必要です。</string>
 </resources>

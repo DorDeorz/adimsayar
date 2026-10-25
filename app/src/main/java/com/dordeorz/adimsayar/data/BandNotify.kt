@@ -68,7 +68,7 @@ object BandNotify {
         return inQuietHours(minuteOfDay, quietFrom(context), quietTo(context))
     }
 
-    fun anyOn(context: Context): Boolean = apps(context) || calls(context) || music(context) || reminders(context) || lostAlert(context) || BandWeather.isOn(context)
+    fun anyOn(context: Context): Boolean = apps(context) || calls(context) || music(context) || reminders(context) || lostAlert(context) || BandWeather.isOn(context) || BandSchedule.calendarOn(context)
 
     /** Notification access: Android keeps FitWren running while it has it, so no ongoing notification is needed. */
     fun hasAccess(context: Context): Boolean =

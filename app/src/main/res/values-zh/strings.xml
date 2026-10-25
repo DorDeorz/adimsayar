@@ -321,6 +321,7 @@
         <item>手环电量：显示在设备卡片和新的“手环电量”小组件中，电量低时手机提醒</item>
         <item>查找手机（手环让手机响铃）和查找手环；手环断开时手机提醒</item>
         <item>快捷回复（在手环上拒接时发短信）和手环天气（Open-Meteo，按城市或位置）</item>
+        <item>在 FitWren 中查看和编辑手环闹钟；日历日程发送到手环</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">搜索</string>
     <string name="band_weather_use_location">使用当前位置</string>
     <string name="band_weather_not_found">未找到。换个名称或允许定位。</string>
+    <string name="band_alarms">手环闹钟</string>
+    <string name="band_alarms_hint">查看、开关和添加手环上的闹钟</string>
+    <string name="band_alarms_offline">手环未连接。连接后闹钟会显示在这里。</string>
+    <string name="band_alarms_empty">手环上没有闹钟。</string>
+    <string name="band_alarm_add">添加闹钟</string>
+    <string name="band_alarm_edit">编辑闹钟</string>
+    <string name="band_alarm_delete">删除</string>
+    <string name="band_alarm_once">一次</string>
+    <string name="band_alarm_daily">每天</string>
+    <string name="band_alarm_weekdays">工作日</string>
+    <string name="band_alarm_days">按天</string>
+    <string name="band_calendar">日历</string>
+    <string name="band_calendar_hint">未来 7 天的日程会发送到手环，需要日历权限。</string>
 </resources>

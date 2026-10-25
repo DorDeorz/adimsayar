@@ -14,6 +14,9 @@ import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandReplies
 import com.dordeorz.adimsayar.data.BandWeather
+import com.dordeorz.adimsayar.data.BandSchedule
+import com.dordeorz.adimsayar.band.BandAlarm
+import java.time.DayOfWeek
 import com.dordeorz.adimsayar.data.WeatherPlace
 import android.Manifest
 import androidx.compose.runtime.mutableStateListOf
@@ -739,6 +742,12 @@ private fun BandNotifyGroup() {
     var pickApps by remember { mutableStateOf(false) }
     var editReplies by remember { mutableStateOf(false) }
     var pickPlace by remember { mutableStateOf(false) }
+    var showAlarms by remember { mutableStateOf(false) }
+    val calendar = remember(tick) { BandSchedule.calendarOn(context) }
+    val calendarPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
+        BandSchedule.setCalendar(context, ok)
+        tick++
+    }
     val weather = remember(tick) { BandWeather.isOn(context) }
     val weatherPlace = remember(tick) { BandWeather.place(context) }
     fun pickTime(current: Int, onPicked: (Int) -> Unit) {
@@ -818,6 +827,14 @@ private fun BandNotifyGroup() {
         if (weather) {
             ClickRow(stringResource(R.string.band_weather_place), weatherPlace?.name ?: stringResource(R.string.band_weather_place_none)) { pickPlace = true }
         }
+        ClickRow(stringResource(R.string.band_alarms), stringResource(R.string.band_alarms_hint)) { showAlarms = true }
+        SwitchRow(stringResource(R.string.band_calendar), stringResource(R.string.band_calendar_hint), calendar) { on ->
+            if (on && !BandSchedule.hasCalendarPermission(context)) {
+                calendarPermission.launch(Manifest.permission.READ_CALENDAR)
+            } else {
+                change(on) { BandSchedule.setCalendar(context, it) }
+            }
+        }
         SwitchRow(stringResource(R.string.band_battery_alert), stringResource(R.string.band_battery_alert_hint, BandBattery.LOW_LEVEL), batteryAlert) {
             BandBattery.setAlert(context, it)
             tick++
@@ -843,6 +860,7 @@ private fun BandNotifyGroup() {
         }
     }
     if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
+    if (showAlarms) AlarmsDialog(onDismiss = { showAlarms = false })
     if (pickPlace) {
         WeatherPlaceDialog(onDismiss = {
             pickPlace = false
@@ -937,6 +955,123 @@ private fun WeatherPlaceDialog(onDismiss: () -> Unit) {
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+    )
+}
+
+/** The band's alarms: switch on/off, tap to edit, add new ones. Needs the open connection. */
+@Composable
+private fun AlarmsDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val alarms by remember { BandSchedule.alarms() }.collectAsState()
+    var editing by remember { mutableStateOf<BandAlarm?>(null) }
+    val connected by produceState(BandLive.connected) {
+        BandLive.requestAlarms()
+        while (true) {
+            value = BandLive.connected
+            delay(NOTIFY_POLL_MS)
+        }
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_alarms)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                val current = alarms
+                when {
+                    !connected -> Text(stringResource(R.string.band_alarms_offline), style = MaterialTheme.typography.bodyMedium)
+                    current == null -> Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodyMedium)
+                    current.list.isEmpty() -> Text(stringResource(R.string.band_alarms_empty), style = MaterialTheme.typography.bodyMedium)
+                }
+                LazyColumn(Modifier.heightIn(max = 380.dp)) {
+                    items(current?.list.orEmpty(), key = { it.id }) { alarm ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth().clickable { editing = alarm }.padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Text(minuteLabel(alarm.hour * 60 + alarm.minute), style = MaterialTheme.typography.titleLarge)
+                                Text(repeatLabel(alarm), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            Switch(checked = alarm.enabled, onCheckedChange = { BandSchedule.save(alarm.copy(enabled = it)) })
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            val current = alarms
+            TextButton(
+                enabled = connected && current != null && (current.max == 0 || current.list.size < current.max),
+                onClick = { editing = BandAlarm(0, 7, 0, BandAlarm.Repeat.Once, 0, enabled = true) },
+            ) { Text(stringResource(R.string.band_alarm_add)) }
+        },
+    )
+    editing?.let { alarm ->
+        AlarmEditDialog(alarm, onDismiss = { editing = null }, onSave = {
+            BandSchedule.save(it)
+            editing = null
+        }, onDelete = {
+            BandSchedule.delete(alarm)
+            editing = null
+        })
+    }
+}
+
+@Composable
+private fun repeatLabel(alarm: BandAlarm): String = when {
+    alarm.repeat == BandAlarm.Repeat.Once -> stringResource(R.string.band_alarm_once)
+    alarm.repeat == BandAlarm.Repeat.Daily -> stringResource(R.string.band_alarm_daily)
+    alarm.days == BandAlarm.WEEKDAYS -> stringResource(R.string.band_alarm_weekdays)
+    else -> DayOfWeek.entries.filter { alarm.days and (1 shl (it.value - 1)) != 0 }
+        .joinToString(" ") { it.getDisplayName(TextStyle.SHORT, Locales.current) }
+}
+
+@Composable
+private fun AlarmEditDialog(alarm: BandAlarm, onDismiss: () -> Unit, onSave: (BandAlarm) -> Unit, onDelete: () -> Unit) {
+    val context = LocalContext.current
+    var minute by remember { mutableIntStateOf(alarm.hour * 60 + alarm.minute) }
+    var repeat by remember { mutableStateOf(alarm.repeat) }
+    var days by remember { mutableIntStateOf(if (alarm.repeat == BandAlarm.Repeat.Weekly) alarm.days else BandAlarm.WEEKDAYS) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(if (alarm.id == 0) R.string.band_alarm_add else R.string.band_alarm_edit)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                TextButton(onClick = {
+                    TimePickerDialog(context, { _, h, m -> minute = h * 60 + m }, minute / 60, minute % 60, android.text.format.DateFormat.is24HourFormat(context)).show()
+                }) { Text(minuteLabel(minute), style = MaterialTheme.typography.displaySmall) }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(repeat == BandAlarm.Repeat.Once, onClick = { repeat = BandAlarm.Repeat.Once }, label = { Text(stringResource(R.string.band_alarm_once)) })
+                    FilterChip(repeat == BandAlarm.Repeat.Daily, onClick = { repeat = BandAlarm.Repeat.Daily }, label = { Text(stringResource(R.string.band_alarm_daily)) })
+                    FilterChip(repeat == BandAlarm.Repeat.Weekly, onClick = { repeat = BandAlarm.Repeat.Weekly }, label = { Text(stringResource(R.string.band_alarm_days)) })
+                }
+                if (repeat == BandAlarm.Repeat.Weekly) {
+                    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        DayOfWeek.entries.forEach { day ->
+                            val bit = 1 shl (day.value - 1)
+                            FilterChip(
+                                selected = days and bit != 0,
+                                onClick = { days = days xor bit },
+                                label = { Text(day.getDisplayName(TextStyle.NARROW, Locales.current)) },
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                enabled = repeat != BandAlarm.Repeat.Weekly || days != 0,
+                onClick = { onSave(alarm.copy(hour = minute / 60, minute = minute % 60, repeat = repeat, days = if (repeat == BandAlarm.Repeat.Weekly) days else 0)) },
+            ) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = {
+            Row {
+                if (alarm.id != 0) TextButton(onClick = onDelete) { Text(stringResource(R.string.band_alarm_delete), color = MaterialTheme.colorScheme.error) }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
+            }
+        },
     )
 }
 

@@ -321,6 +321,7 @@
         <item>بطارية السوار: في بطاقة الجهاز وفي أداة \"بطارية السوار\" الجديدة، وتنبيه على الهاتف عند انخفاضها</item>
         <item>العثور على هاتفي (السوار يجعل الهاتف يرن) والعثور على سواري، وتنبيه على الهاتف عند انقطاع اتصال السوار</item>
         <item>ردود سريعة (رسالة SMS عند الرفض من السوار) والطقس على السوار (Open-Meteo، حسب المدينة أو الموقع)</item>
+        <item>عرض منبهات السوار وتعديلها في FitWren، وإرسال أحداث التقويم إلى السوار</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">بحث</string>
     <string name="band_weather_use_location">استخدم الموقع الحالي</string>
     <string name="band_weather_not_found">لم يُعثر على شيء. جرّب اسمًا آخر أو اسمح بالموقع.</string>
+    <string name="band_alarms">منبهات السوار</string>
+    <string name="band_alarms_hint">عرض منبهات السوار وتشغيلها وإضافتها</string>
+    <string name="band_alarms_offline">السوار غير متصل. تظهر المنبهات هنا عند اتصاله.</string>
+    <string name="band_alarms_empty">لا توجد منبهات على السوار.</string>
+    <string name="band_alarm_add">إضافة منبه</string>
+    <string name="band_alarm_edit">تعديل المنبه</string>
+    <string name="band_alarm_delete">حذف</string>
+    <string name="band_alarm_once">مرة واحدة</string>
+    <string name="band_alarm_daily">كل يوم</string>
+    <string name="band_alarm_weekdays">أيام الأسبوع</string>
+    <string name="band_alarm_days">الأيام</string>
+    <string name="band_calendar">التقويم</string>
+    <string name="band_calendar_hint">تُرسل أحداث التقويم للأيام السبعة القادمة إلى السوار. يطلب إذن التقويم.</string>
 </resources>

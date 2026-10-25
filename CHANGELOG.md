@@ -10,6 +10,8 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Telefonumu bul: bileklikteki "Telefonu bul" telefonu alarm sesiyle en yüksek seste çaldırır ve titretir; bildirimdeki "Buldum", bileklikten durdurmak ya da 1 dakika bitince durur. Bilekliği bul: cihaz kartındaki tuş bilekliği titretir (bağlantı açıkken).
 - Hazır yanıtlar: bileklikte aramayı reddederken seçilen yanıt arayana SMS olarak gider (7/13, onay 7/14). Liste bağlanınca bileklikten okunur (7/9), Ayarlar'dan düzenlenip gönderilir (7/12). Arayanın numarası telefon durumu yayınından alınır (SMS, telefon durumu ve arama kaydı izinleri).
 - Bileklikte hava durumu (varsayılan kapalı): Open-Meteo'dan (anahtarsız) saatte bir anlık durum, 7 günlük ve 24 saatlik tahmin çekilip bilekliğe gönderilir (komut 10/0, 10/1, 10/2; yer 10/7). Yer şehir aramasıyla ya da uygulama açıkken telefonun son konumuyla seçilir. Bileklik isteyince (10/3) son veri yeniden gönderilir.
+- Bileklik alarmları (Ayarlar → Bileklik bildirimleri → Bileklik alarmları): alarmlar bileklikte kalır; FitWren listeyi okur (17/0), açıp kapatır, ekler (17/1), değiştirir (17/2), siler (17/4). Bir kez, her gün ya da seçilen günler.
+- Takvim (varsayılan kapalı): önümüzdeki 7 günün etkinlikleri (en fazla 50, ilk hatırlatıcısıyla) her eşitlemede, değiştiyse bilekliğe gönderilir (12/1). Kapatınca bileklikteki takvim de kapatılır.
 - Bağlantı koptu uyarısı (varsayılan kapalı): bileklik bağlıyken bağlantı kopar ve 1 dakika içinde geri gelmezse telefonda uyarı çıkar; geri gelince uyarı kalkar. Bluetooth kapalıysa uyarı verilmez.
 
 ## 0.11.0

@@ -321,6 +321,7 @@
         <item>Batterie du bracelet : sur la carte de l\'appareil, dans le nouveau widget \"Batterie du bracelet\" et alerte sur le téléphone quand elle est faible</item>
         <item>Trouver mon téléphone (le bracelet fait sonner le téléphone) et Trouver mon bracelet ; alerte sur le téléphone quand le bracelet se déconnecte</item>
         <item>Réponses rapides (SMS en refusant sur le bracelet) et météo sur le bracelet (Open-Meteo, par ville ou position)</item>
+        <item>Les alarmes du bracelet se voient et se modifient dans FitWren ; les événements de l\'agenda vont au bracelet</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifications sur le bracelet : notifications des apps, appels et contrôle de la musique (Xiaomi). Pas de notification permanente ; utilise l\'accès aux notifications</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">Chercher</string>
     <string name="band_weather_use_location">Utiliser la position actuelle</string>
     <string name="band_weather_not_found">Rien trouvé. Essaie un autre nom ou autorise la localisation.</string>
+    <string name="band_alarms">Alarmes du bracelet</string>
+    <string name="band_alarms_hint">Voir, activer et ajouter des alarmes sur le bracelet</string>
+    <string name="band_alarms_offline">Le bracelet n\'est pas connecté. Les alarmes s\'affichent ici une fois connecté.</string>
+    <string name="band_alarms_empty">Aucune alarme sur le bracelet.</string>
+    <string name="band_alarm_add">Ajouter une alarme</string>
+    <string name="band_alarm_edit">Modifier l\'alarme</string>
+    <string name="band_alarm_delete">Supprimer</string>
+    <string name="band_alarm_once">Une fois</string>
+    <string name="band_alarm_daily">Tous les jours</string>
+    <string name="band_alarm_weekdays">En semaine</string>
+    <string name="band_alarm_days">Jours</string>
+    <string name="band_calendar">Agenda</string>
+    <string name="band_calendar_hint">Les événements des 7 prochains jours vont au bracelet. Demande l\'accès à l\'agenda.</string>
 </resources>

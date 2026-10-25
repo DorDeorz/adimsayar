@@ -321,6 +321,7 @@
         <item>Band-Akku: auf der Gerätekarte, im neuen Widget \"Band-Akku\" und Warnung am Handy bei schwachem Akku</item>
         <item>Handy finden (das Band lässt das Handy klingeln) und Band finden; Warnung am Handy, wenn das Band getrennt wird</item>
         <item>Schnellantworten (SMS beim Ablehnen am Band) und Wetter am Band (Open-Meteo, per Stadt oder Standort)</item>
+        <item>Band-Wecker in FitWren ansehen und bearbeiten; Kalendertermine gehen ans Band</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
@@ -802,4 +803,17 @@
     <string name="band_weather_find">Suchen</string>
     <string name="band_weather_use_location">Aktuellen Standort verwenden</string>
     <string name="band_weather_not_found">Nichts gefunden. Anderen Namen versuchen oder Standort erlauben.</string>
+    <string name="band_alarms">Band-Wecker</string>
+    <string name="band_alarms_hint">Wecker am Band ansehen, schalten und hinzufügen</string>
+    <string name="band_alarms_offline">Das Band ist nicht verbunden. Wecker erscheinen hier, sobald es verbunden ist.</string>
+    <string name="band_alarms_empty">Keine Wecker am Band.</string>
+    <string name="band_alarm_add">Wecker hinzufügen</string>
+    <string name="band_alarm_edit">Wecker bearbeiten</string>
+    <string name="band_alarm_delete">Löschen</string>
+    <string name="band_alarm_once">Einmal</string>
+    <string name="band_alarm_daily">Täglich</string>
+    <string name="band_alarm_weekdays">Werktags</string>
+    <string name="band_alarm_days">Tage</string>
+    <string name="band_calendar">Kalender</string>
+    <string name="band_calendar_hint">Kalendertermine der nächsten 7 Tage gehen ans Band. Fragt nach der Kalenderberechtigung.</string>
 </resources>
