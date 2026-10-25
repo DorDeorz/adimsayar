@@ -190,6 +190,31 @@ class XiaomiSession(
         log("weather sent: ${report.key} removed ${others.map { it.first }}")
     }
 
+    fun requestAlarms() {
+        if (!authenticated) return
+        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_GET).toByteArray(), false)
+    }
+
+    /** Creates the alarm when its id is 0, otherwise changes it; the list is read again after. */
+    fun saveAlarm(alarm: BandAlarm) {
+        if (!authenticated) return
+        val (subtype, body) = if (alarm.id == 0) XiaomiSchedule.ALARMS_CREATE to XiaomiSchedule.create(alarm) else XiaomiSchedule.ALARMS_EDIT to XiaomiSchedule.edit(alarm)
+        send(command(XiaomiSchedule.TYPE, subtype).message(19, body).toByteArray(), false)
+        requestAlarms()
+    }
+
+    fun deleteAlarms(ids: List<Int>) {
+        if (!authenticated || ids.isEmpty()) return
+        send(command(XiaomiSchedule.TYPE, XiaomiSchedule.ALARMS_DELETE).message(19, XiaomiSchedule.delete(ids)).toByteArray(), false)
+        requestAlarms()
+    }
+
+    /** Replaces the band's calendar with [events]; null turns the band's calendar off. */
+    fun sendCalendar(events: List<BandCalendarEvent>?) {
+        if (!authenticated) return
+        send(command(XiaomiSchedule.CALENDAR_TYPE, XiaomiSchedule.CALENDAR_SET).message(14, XiaomiSchedule.calendar(events)).toByteArray(), false)
+    }
+
     /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
     fun setReplies(replies: List<String>, min: Int, max: Int) {
         if (!authenticated || max <= 0) return
