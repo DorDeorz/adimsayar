@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>Ligação direta à pulseira: Definições → Ligar diretamente à pulseira lê os passos da Xiaomi Smart Band 8 sem Mi Fitness nem Health Connect</item>
+        <item>Com a ligação direta, o ritmo cardíaco, o SpO₂ e as fases do sono também vêm da pulseira e aparecem no separador Saúde</item>
         <item>Os últimos 7 dias voltam a ser lidos do Health Connect, assim os passos da pulseira que chegam tarde não se perdem. \"Sincronizar novamente\" adicionado às Definições</item>
         <item>A licença agora é AGPL-3.0: a ligação à pulseira baseia-se no código do Gadgetbridge</item>
     </string-array>

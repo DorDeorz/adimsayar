@@ -96,7 +96,10 @@ object WearableHealth {
         HealthPermission.getReadPermission(OxygenSaturationRecord::class),
     )
 
+    fun isEnabled(context: Context): Boolean = WearableSteps.isEnabled(context) || BandDirect.isEnabled(context)
+
     suspend fun day(context: Context, date: LocalDate): BandDay? {
+        if (BandDirect.isEnabled(context)) return BandHealth.day(context, date)
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             read(HealthConnectClient.getOrCreate(context), date, ZoneId.systemDefault())
@@ -108,6 +111,7 @@ object WearableHealth {
     }
 
     suspend fun period(context: Context, to: LocalDate, days: Long): BandPeriod? {
+        if (BandDirect.isEnabled(context)) return BandHealth.period(context, to, days)
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             readPeriod(HealthConnectClient.getOrCreate(context), to.minusDays(days - 1), to, ZoneId.systemDefault())
@@ -119,6 +123,7 @@ object WearableHealth {
     }
 
     suspend fun sources(context: Context, days: Long): SourceReport? {
+        if (BandDirect.isEnabled(context)) return null
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
@@ -176,6 +181,7 @@ object WearableHealth {
     }
 
     suspend fun snapshot(context: Context): HealthSnapshot? {
+        if (BandDirect.isEnabled(context)) return BandHealth.snapshot(context)
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
@@ -221,6 +227,7 @@ object WearableHealth {
     }
 
     suspend fun heartDay(context: Context, date: LocalDate): HeartDay? {
+        if (BandDirect.isEnabled(context)) return BandHealth.heartDay(context, date)
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)

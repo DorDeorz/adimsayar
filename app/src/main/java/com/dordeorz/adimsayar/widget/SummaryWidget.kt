@@ -30,7 +30,7 @@ import com.dordeorz.adimsayar.data.HealthSnapshot
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.Water
-import com.dordeorz.adimsayar.data.WearableSteps
+import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.ui.format
 import com.dordeorz.adimsayar.ui.formatDecimal
@@ -46,7 +46,7 @@ class SummaryWidget : GlanceAppWidget() {
         val today = LocalDate.now()
         val initialWeek = repository.loadWeek(today)
         val initialWater = Water.today(context)
-        val health = if (WearableSteps.isEnabled(context)) HealthCache.load(context) else null
+        val health = if (WearableHealth.isEnabled(context)) HealthCache.load(context) else null
         provideContent {
             val week by remember { repository.observeWeek(today) }.collectAsState(initialWeek)
             val water by remember { Water.observe(context) }.collectAsState(null)

@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>直接连接手环:设置 → 直接连接手环,无需 Mi Fitness 或 Health Connect 即可读取 Xiaomi Smart Band 8 的步数</item>
+        <item>直接连接时,心率、血氧和睡眠阶段也从手环读取,并显示在健康标签页</item>
         <item>重新读取 Health Connect 中最近 7 天的数据,迟到的手环步数不再丢失。设置中新增“重新同步”</item>
         <item>许可证改为 AGPL-3.0:手环连接基于 Gadgetbridge 的代码</item>
     </string-array>

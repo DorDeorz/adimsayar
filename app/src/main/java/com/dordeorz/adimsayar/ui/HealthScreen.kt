@@ -80,15 +80,15 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
         WearableSetupScreen(state, actions, onClose = { setup = false })
         return
     }
-    val sources by produceState<SourceReport?>(null, state.wearableEnabled, state.healthRefresh) {
-        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { actions.loadSources() } else null
+    val sources by produceState<SourceReport?>(null, state.healthEnabled, state.healthRefresh) {
+        value = if (state.healthEnabled) withContext(Dispatchers.IO) { actions.loadSources() } else null
     }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        if (state.wearableEnabled) {
+        if (state.healthEnabled) {
             if (sources?.hasWearable == false) item { SourceWarningCard(onSetup = { setup = true }) }
             item { HealthCard(state.today, state.healthRefresh, actions) }
             item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
@@ -112,7 +112,7 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
         }
         item { WaterWeekCard(state) }
         item { WeightCard(state, actions) }
-        if (state.wearableEnabled) {
+        if (state.healthEnabled) {
             item {
                 TextButton(onClick = { setup = true }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.setup_title)) }
             }

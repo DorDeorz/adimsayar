@@ -112,7 +112,13 @@ object BandDirect {
             val repository = StepRepository.get(context)
             var files = 0
             val result = XiaomiBand(context, address, secret).sync { file ->
-                repository.saveBandHours(file.id.epochSeconds, hourly(file))
+                val sleep = file.sleep
+                if (sleep != null) {
+                    BandHealth.saveSleep(context, sleep)
+                } else {
+                    repository.saveBandHours(file.id.epochSeconds, hourly(file))
+                    BandHealth.saveMinutes(context, file.minutes)
+                }
                 files++
                 true
             }

@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>Direkte Band-Verbindung: Einstellungen → Direkt mit dem Band verbinden liest Schritte des Xiaomi Smart Band 8 ohne Mi Fitness oder Health Connect</item>
+        <item>Mit der direkten Verbindung kommen auch Puls, SpO₂ und Schlafphasen vom Band und erscheinen im Tab Gesundheit</item>
         <item>Die letzten 7 Tage werden erneut aus Health Connect gelesen, verspätete Band-Schritte gehen nicht mehr verloren. \"Neu synchronisieren\" in den Einstellungen</item>
         <item>Die Lizenz ist jetzt AGPL-3.0: die Band-Verbindung basiert auf dem Code von Gadgetbridge</item>
     </string-array>

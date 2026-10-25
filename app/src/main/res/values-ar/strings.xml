@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>اتصال مباشر بالسوار: الإعدادات ← الاتصال بالسوار مباشرة يقرأ خطوات Xiaomi Smart Band 8 دون Mi Fitness أو Health Connect</item>
+        <item>مع الاتصال المباشر تأتي أيضًا نبضات القلب وSpO₂ ومراحل النوم من السوار وتظهر في تبويب الصحة</item>
         <item>تُقرأ آخر 7 أيام من Health Connect من جديد، فلا تضيع خطوات السوار المتأخرة. أُضيف \"إعادة المزامنة\" إلى الإعدادات</item>
         <item>أصبح الترخيص AGPL-3.0: يعتمد اتصال السوار على شيفرة Gadgetbridge</item>
     </string-array>

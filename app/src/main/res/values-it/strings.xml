@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>Collegamento diretto al braccialetto: Impostazioni → Collegati direttamente al braccialetto legge i passi di Xiaomi Smart Band 8 senza Mi Fitness né Health Connect</item>
+        <item>Con il collegamento diretto anche battito, SpO₂ e fasi del sonno arrivano dal braccialetto e compaiono nella scheda Salute</item>
         <item>Gli ultimi 7 giorni vengono riletti da Health Connect, così i passi del braccialetto arrivati in ritardo non si perdono. Aggiunto \"Risincronizza\" nelle Impostazioni</item>
         <item>La licenza ora è AGPL-3.0: il collegamento al braccialetto si basa sul codice di Gadgetbridge</item>
     </string-array>

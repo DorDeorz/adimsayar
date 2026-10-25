@@ -84,6 +84,7 @@ data class MainUiState(
     val xiaomiProblem: XiaomiProblem?,
     val wearableAvailable: Boolean,
     val wearableEnabled: Boolean,
+    val bandDirectEnabled: Boolean,
     val logLines: List<String>,
     val version: String,
     val weights: List<Weight>,
@@ -92,7 +93,9 @@ data class MainUiState(
     val water: Map<LocalDate, Int>,
     val freezes: Set<LocalDate>,
     val challenges: ChallengeSummary,
-)
+) {
+    val healthEnabled: Boolean get() = wearableEnabled || bandDirectEnabled
+}
 
 class MainActions(
     val onRequestPermission: () -> Unit,

@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>밴드 직접 연결: 설정 → 밴드에 직접 연결에서 Mi Fitness나 Health Connect 없이 Xiaomi Smart Band 8 걸음 수를 읽습니다</item>
+        <item>직접 연결 시 심박수, SpO₂, 수면 단계도 밴드에서 받아 건강 탭에 표시됩니다</item>
         <item>Health Connect에서 최근 7일을 다시 읽어 늦게 들어온 밴드 걸음 수를 놓치지 않습니다. 설정에 \"다시 동기화\" 추가</item>
         <item>라이선스가 AGPL-3.0으로 바뀌었습니다: 밴드 연결은 Gadgetbridge 코드를 바탕으로 합니다</item>
     </string-array>

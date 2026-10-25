@@ -92,6 +92,7 @@ class MainActivity : ComponentActivity() {
     private var xiaomiProblem by mutableStateOf<XiaomiProblem?>(null)
     private var wearableAvailable by mutableStateOf(false)
     private var wearableEnabled by mutableStateOf(false)
+    private var bandDirectEnabled by mutableStateOf(false)
     private var wearableSync: Job? = null
     private var healthRefresh by mutableIntStateOf(0)
     private var requestedTab by mutableStateOf<Tab?>(null)
@@ -337,6 +338,7 @@ class MainActivity : ComponentActivity() {
                             xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
                             wearableAvailable = wearableAvailable,
                             wearableEnabled = wearableEnabled,
+                            bandDirectEnabled = bandDirectEnabled,
                             logLines = logLines,
                             version = BuildConfig.VERSION_NAME,
                             weights = weights,
@@ -381,10 +383,12 @@ class MainActivity : ComponentActivity() {
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
-        if (BandDirect.isEnabled(this)) {
+        bandDirectEnabled = BandDirect.isEnabled(this)
+        if (bandDirectEnabled) {
             AppScope.launch(Dispatchers.IO) {
-                BandDirect.sync(appContext, ReadSource.App)
+                val result = BandDirect.sync(appContext, ReadSource.App)
                 Widgets.updateAll(appContext)
+                if (result != null) withContext(Dispatchers.Main) { healthRefresh++ }
             }
         }
     }
@@ -528,6 +532,8 @@ class MainActivity : ComponentActivity() {
             BandDirect.setEnabled(appContext, enabled)
             Widgets.updateAll(appContext)
         }
+        bandDirectEnabled = enabled
+        healthRefresh++
     }
 
     private fun resyncWearable() {
@@ -549,6 +555,7 @@ class MainActivity : ComponentActivity() {
         val appContext = applicationContext
         AppScope.launch(Dispatchers.IO) {
             if (BandDirect.isEnabled(appContext)) BandDirect.setEnabled(appContext, false)
+            withContext(Dispatchers.Main) { bandDirectEnabled = false }
             WearableSteps.setEnabled(appContext, true)
             withContext(Dispatchers.Main) { startWearableSync() }
         }

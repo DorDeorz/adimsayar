@@ -35,6 +35,25 @@ data class BandHour(
 
 data class HourTotal(val hour: String, val steps: Long)
 
+@Entity(tableName = "band_samples")
+data class BandSample(
+    @PrimaryKey val minute: Long,
+    val heart: Int,
+    val spo2: Int,
+    val stress: Int,
+)
+
+@Entity(tableName = "band_sleep")
+data class BandSleep(
+    @PrimaryKey val bedtime: Long,
+    val wake: Long,
+    val minutes: Int,
+    val deep: Int,
+    val light: Int,
+    val rem: Int,
+    val awake: Int,
+)
+
 @Entity(tableName = "weights")
 data class WeightEntry(
     @PrimaryKey val date: String,
@@ -63,6 +82,24 @@ data class KeptMedal(
     @PrimaryKey val id: String,
     val date: String,
 )
+
+@Dao
+interface BandHealthDao {
+    @Upsert
+    suspend fun upsertSamples(samples: List<BandSample>)
+
+    @Query("SELECT * FROM band_samples WHERE minute >= :from AND minute < :to ORDER BY minute")
+    suspend fun samples(from: Long, to: Long): List<BandSample>
+
+    @Query("SELECT * FROM band_samples WHERE heart > 0 ORDER BY minute DESC LIMIT 1")
+    suspend fun latestHeart(): BandSample?
+
+    @Upsert
+    suspend fun upsertSleep(sleep: BandSleep)
+
+    @Query("SELECT * FROM band_sleep WHERE wake >= :from AND wake < :to ORDER BY wake")
+    suspend fun sleep(from: Long, to: Long): List<BandSleep>
+}
 
 @Dao
 interface WaterDao {
@@ -196,13 +233,15 @@ abstract class DailyStepsDao {
         DailySteps::class,
         BandSteps::class,
         BandHour::class,
+        BandSample::class,
+        BandSleep::class,
         WeightEntry::class,
         HourlySteps::class,
         WaterDay::class,
         StreakFreeze::class,
         KeptMedal::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = false,
 )
 abstract class StepDatabase : RoomDatabase() {
@@ -213,6 +252,8 @@ abstract class StepDatabase : RoomDatabase() {
     abstract fun water(): WaterDao
 
     abstract fun keep(): KeepDao
+
+    abstract fun bandHealth(): BandHealthDao
 
     companion object {
         @Volatile
@@ -245,9 +286,16 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `band_samples` (`minute` INTEGER NOT NULL, `heart` INTEGER NOT NULL, `spo2` INTEGER NOT NULL, `stress` INTEGER NOT NULL, PRIMARY KEY(`minute`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `band_sleep` (`bedtime` INTEGER NOT NULL, `wake` INTEGER NOT NULL, `minutes` INTEGER NOT NULL, `deep` INTEGER NOT NULL, `light` INTEGER NOT NULL, `rem` INTEGER NOT NULL, `awake` INTEGER NOT NULL, PRIMARY KEY(`bedtime`))")
+            }
+        }
+
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
                 .build()
                 .also { instance = it }
         }

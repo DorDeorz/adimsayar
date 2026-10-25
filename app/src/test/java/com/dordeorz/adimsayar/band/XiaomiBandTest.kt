@@ -176,6 +176,25 @@ class XiaomiBandTest {
     }
 
     @Test
+    fun sleepSummary() {
+        val bed = 1_761_350_400L
+        val wake = bed + 7 * 3600
+        val id = XiaomiFileId(bed, 12, 2, 8 shl 2)
+        val head = ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN).put(0).put(0).putInt(bed.toInt()).putInt(wake.toInt()).array()
+        val data = ByteBuffer.allocate(13).order(ByteOrder.BIG_ENDIAN)
+            .put(0x21).putShort(400).putShort(20).putShort(250).putShort(70).putShort(80).put(0x10).put(0).array()
+        val packet = ByteBuffer.allocate(17).order(ByteOrder.LITTLE_ENDIAN)
+            .putInt(0xfffcfafb.toInt()).put(17).putLong(bed).put(1).put(16).put(0).put(13).array()
+        val body = id.toBytes() + byteArrayOf(0) + head + packet + data
+        val sleep = XiaomiSleepDetails.parse(id, body + ByteArray(4))!!
+        assertEquals(true, id.isSleep)
+        assertEquals(false, id.isDailyDetails)
+        assertEquals(bed, sleep.bedtime)
+        assertEquals(wake, sleep.wake)
+        assertEquals(listOf(400, 80, 250, 70, 20), listOf(sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
+    }
+
+    @Test
     fun assemblerRejectsBadCrc() {
         val data = dailyFile(4, ByteArray(6), ByteArray(0))
         data[data.size - 1] = (data[data.size - 1] + 1).toByte()

@@ -9,6 +9,10 @@ data class XiaomiFileId(val epochSeconds: Long, val timezone: Int, val version: 
 
     val isDailyDetails: Boolean get() = flags == 0
 
+    val isSleep: Boolean get() = flags shr 7 == 0 && (flags shr 2) and 0x1f == SUBTYPE_SLEEP && version <= 4
+
+    val isWanted: Boolean get() = isDailyDetails || isSleep
+
     fun toBytes(): ByteArray = ByteBuffer.allocate(SIZE).order(ByteOrder.LITTLE_ENDIAN)
         .putInt(epochSeconds.toInt())
         .put(timezone.toByte())
@@ -18,6 +22,7 @@ data class XiaomiFileId(val epochSeconds: Long, val timezone: Int, val version: 
 
     companion object {
         const val SIZE = 7
+        private const val SUBTYPE_SLEEP = 8
 
         fun from(bytes: ByteArray, offset: Int = 0): XiaomiFileId {
             val buf = ByteBuffer.wrap(bytes, offset, SIZE).order(ByteOrder.LITTLE_ENDIAN)
@@ -58,7 +63,7 @@ class XiaomiFileAssembler {
     private fun u16(b: ByteArray, i: Int) = (b[i].toInt() and 0xff) or ((b[i + 1].toInt() and 0xff) shl 8)
 }
 
-class BandMinute(val epochSeconds: Long, val steps: Int, val heartRate: Int) {
+class BandMinute(val epochSeconds: Long, val steps: Int, val heartRate: Int, val spo2: Int = 0, val stress: Int = 0) {
     val worn: Boolean get() = steps > 0 || heartRate in 30..220
 }
 
@@ -85,6 +90,8 @@ object XiaomiDailyDetails {
                 var steps = 0
                 var extra = 0
                 var heartRate = 0
+                var spo2 = 0
+                var stress = 0
                 if (parser.next(16)) {
                     if (parser.has(1)) extra = parser.get(1, 1)
                     if (parser.has(2)) steps = parser.get(2, 14)
@@ -96,15 +103,15 @@ object XiaomiDailyDetails {
                 parser.next(8)
                 parser.next(16)
                 if (fileId.version >= 3) {
-                    parser.next(8)
-                    parser.next(8)
+                    if (parser.next(8) && parser.has(0)) spo2 = parser.get(0, 8)
+                    if (parser.next(8) && parser.has(0)) stress = parser.get(0, 8).takeIf { it != 255 } ?: 0
                 }
                 if (extra == 1) parser.next(8)
                 if (fileId.version >= 4) {
                     parser.next(16)
                     parser.next(16)
                 }
-                result.add(BandMinute(time, steps, heartRate))
+                result.add(BandMinute(time, steps, heartRate, spo2, stress))
                 time += 60
             }
         } catch (e: java.nio.BufferUnderflowException) {
@@ -154,5 +161,87 @@ object XiaomiDailyDetails {
             val b = header[group / 2].toInt()
             return if (group % 2 == 0) (b and 0xf0) shr 4 else b and 0x0f
         }
+    }
+}
+
+class BandSleepRecord(
+    val bedtime: Long,
+    val wake: Long,
+    val minutes: Int,
+    val deep: Int,
+    val light: Int,
+    val rem: Int,
+    val awake: Int,
+)
+
+object XiaomiSleepDetails {
+
+    private const val STAGE_MAGIC = 0xfffcfafb.toInt()
+    private const val TYPE_SUMMARY = 16
+    private val EMPTY_TYPES = setOf(0x2, 0x3, 0x9, 0xc, 0xd, 0xe, 0xf)
+
+    fun parse(fileId: XiaomiFileId, data: ByteArray): BandSleepRecord? {
+        val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
+        buf.limit(buf.limit() - 4)
+        try {
+            buf.position(XiaomiFileId.SIZE + 1)
+            val header = buf.get().toInt()
+            buf.get()
+            val bed = buf.int.toLong() and 0xffffffffL
+            val wake = buf.int.toLong() and 0xffffffffL
+            if (wake <= bed) return null
+            var shift = 0
+            if (fileId.version >= 4) {
+                shift = 1
+                buf.get()
+            }
+            if (header and (1 shl (5 - shift)) != 0) skipSamples(buf, fileId.version, 1)
+            if (header and (1 shl (4 - shift)) != 0) skipSamples(buf, fileId.version, 1)
+            if (fileId.version >= 3 && header and (1 shl (3 - shift)) != 0) skipSamples(buf, fileId.version, 4)
+            var summary: BandSleepRecord? = null
+            while (buf.remaining() >= 17) {
+                if (!seekStage(buf)) break
+                buf.get()
+                buf.long
+                buf.get()
+                val type = buf.get().toInt() and 0xff
+                val length = ((buf.get().toInt() and 0xff) shl 8) or (buf.get().toInt() and 0xff)
+                if (type in EMPTY_TYPES) continue
+                if (length > buf.remaining()) break
+                val block = ByteArray(length).also { buf.get(it) }
+                if (type == TYPE_SUMMARY && length >= 11) {
+                    val b = ByteBuffer.wrap(block).order(ByteOrder.BIG_ENDIAN)
+                    b.get()
+                    val total = b.short.toInt() and 0xffff
+                    val awake = b.short.toInt() and 0xffff
+                    val light = b.short.toInt() and 0xffff
+                    val rem = b.short.toInt() and 0xffff
+                    val deep = b.short.toInt() and 0xffff
+                    summary = BandSleepRecord(bed, wake, total, deep, light, rem, awake)
+                }
+            }
+            return summary ?: BandSleepRecord(bed, wake, ((wake - bed) / 60).toInt(), 0, 0, 0, 0)
+        } catch (e: java.nio.BufferUnderflowException) {
+            return null
+        } catch (e: IllegalArgumentException) {
+            return null
+        }
+    }
+
+    private fun skipSamples(buf: ByteBuffer, version: Int, size: Int) {
+        buf.short
+        val count = buf.short.toInt() and 0xffff
+        if (count > 0) {
+            if (version >= 2) buf.int
+            buf.position(buf.position() + count * size)
+        }
+    }
+
+    private fun seekStage(buf: ByteBuffer): Boolean {
+        while (buf.remaining() >= 17) {
+            if (buf.int == STAGE_MAGIC) return true
+            buf.position(buf.position() - 3)
+        }
+        return false
     }
 }

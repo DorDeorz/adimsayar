@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>Direct band connection: Settings → Connect to the band directly reads Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect</item>
+        <item>With the direct band connection, heart rate, SpO₂ and sleep stages also come from the band and show on the Health tab</item>
         <item>The last 7 days are read again from Health Connect, so late band steps are no longer missed. \"Resync\" added to Settings</item>
         <item>The license is now AGPL-3.0: the band connection is based on Gadgetbridge\'s code</item>
     </string-array>

@@ -23,7 +23,7 @@ import java.util.UUID
 
 enum class BandResult { Ok, BluetoothOff, NoPermission, ConnectFailed, Unsupported, AuthFailed, Timeout }
 
-class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>)
+class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>, val sleep: BandSleepRecord? = null)
 
 @SuppressLint("MissingPermission")
 class XiaomiBand(private val context: Context, private val address: String, private val secret: ByteArray) {
@@ -256,17 +256,22 @@ class XiaomiBand(private val context: Context, private val address: String, priv
 
     private fun onFile(data: ByteArray, writeChannel: XiaomiChannel) {
         val requested = fetching ?: return
-        val minutes = if (data.size >= XiaomiFileId.SIZE) XiaomiDailyDetails.minutes(XiaomiFileId.from(data), data) else null
-        if (minutes == null) {
+        val id = if (data.size >= XiaomiFileId.SIZE) XiaomiFileId.from(data) else null
+        val file = when {
+            id == null -> null
+            id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
+            else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
+        }
+        if (file == null) {
             fetchNext(writeChannel)
             return
         }
         fetching = null
-        pendingStore.addLast(BandFile(requested, minutes))
+        pendingStore.addLast(file)
     }
 
     private fun fetchNext(writeChannel: XiaomiChannel) {
-        val id = fileIds.filter { it.isDailyDetails }.minByOrNull { it.epochSeconds }
+        val id = fileIds.filter { it.isWanted }.minByOrNull { it.epochSeconds }
         fetching = id
         if (id == null) {
             result = BandResult.Ok

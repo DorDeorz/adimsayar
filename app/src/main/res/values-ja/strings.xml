@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>バンドへの直接接続: 設定 → バンドに直接接続 で、Mi Fitness や Health Connect なしで Xiaomi Smart Band 8 の歩数を読み取ります</item>
+        <item>直接接続では心拍数、SpO₂、睡眠ステージもバンドから取得され、健康タブに表示されます</item>
         <item>Health Connect から直近 7 日分を読み直すため、遅れて届いたバンドの歩数を取りこぼしません。設定に「再同期」を追加</item>
         <item>ライセンスが AGPL-3.0 になりました: バンド接続は Gadgetbridge のコードに基づいています</item>
     </string-array>

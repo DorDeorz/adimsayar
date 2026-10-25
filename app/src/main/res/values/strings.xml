@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_10_0">
         <item>Saate doğrudan bağlantı: Ayarlar → Saate doğrudan bağlan ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
+        <item>Saate doğrudan bağlıyken nabız, SpO₂ ve uyku evreleri de bileklikten alınıyor ve Sağlık sekmesinde görünüyor</item>
         <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
         <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
     </string-array>
