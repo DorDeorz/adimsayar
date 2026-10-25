@@ -10,6 +10,32 @@ class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>, val sleep: B
 
 class XiaomiPhoneInfo(val apiLevel: Int, val model: String, val region: String, val use12Hour: Boolean)
 
+/** A phone notification as the band shows it. [id] is ours; [key] is the Android notification key. */
+class BandNotice(val id: Int, val packageName: String, val appName: String, val title: String, val body: String, val whenMs: Long, val key: String?)
+
+/** Now-playing state sent to the band. [state] is 0 nothing, 1 playing, 2 paused; [volume] is 0–100. */
+class BandMusic(val state: Int, val volume: Int, val track: String = "", val artist: String = "", val positionSec: Int = 0, val durationSec: Int = 0)
+
+/** Something the user did on the band while the connection stays open. */
+sealed interface BandEvent {
+    class Dismiss(val ids: List<Int>) : BandEvent
+    data object RejectCall : BandEvent
+    data object IgnoreCall : BandEvent
+    data object MusicRequest : BandEvent
+    class MusicButton(val button: Int, val volume: Int) : BandEvent
+
+    companion object {
+        const val PLAY = 0
+        const val PAUSE = 1
+        const val PREVIOUS = 3
+        const val NEXT = 4
+        const val VOLUME = 5
+    }
+}
+
+/** Hooks for a connection that stays open after the first sync. */
+class XiaomiLive(val shouldSync: () -> Boolean, val onSynced: suspend (BandResult) -> Unit)
+
 /**
  * Transport-independent part of the Xiaomi protocol: authentication, clock, and the activity file
  * list/fetch/ack cycle. A link (BLE or classic Bluetooth) feeds it decoded commands and activity
@@ -28,6 +54,9 @@ class XiaomiSession(
     /** Called once the band accepted us, before any other command goes out. */
     var onAuthenticated: () -> Unit = {}
 
+    /** Band-side actions (dismissed notification, music button, call reject) on a live connection. */
+    var onEvent: (BandEvent) -> Unit = {}
+
     val cipher = XiaomiCipher()
     var authenticated = false
         private set
@@ -45,6 +74,7 @@ class XiaomiSession(
     private var fetching: XiaomiFileId? = null
     private val pendingStore = ArrayDeque<BandFile>()
     private var plainTries = 0
+    private var reported = false
 
     fun startEncrypted() {
         if (secret == null) {
@@ -64,8 +94,19 @@ class XiaomiSession(
      * Drives the session until every wanted file is stored. [pump] waits for and handles the next
      * incoming event: true when something arrived, false on a quiet period, null when the link dropped.
      */
-    suspend fun loop(pump: suspend () -> Boolean?, store: suspend (BandFile) -> Boolean): BandResult {
-        while (result == null) {
+    suspend fun loop(pump: suspend () -> Boolean?, store: suspend (BandFile) -> Boolean, live: XiaomiLive? = null): BandResult {
+        while (true) {
+            val done = result
+            if (done != null) {
+                if (live == null || done != BandResult.Ok) return done
+                if (!reported) {
+                    reported = true
+                    live.onSynced(done)
+                }
+                if (pump() == null) return BandResult.Ok
+                if (live.shouldSync()) requestSync()
+                continue
+            }
             when (pump()) {
                 null -> return if (authenticated) BandResult.Timeout else BandResult.ConnectFailed
                 false -> {
@@ -83,8 +124,70 @@ class XiaomiSession(
             }
             fetchNext()
         }
-        return result ?: BandResult.Ok
     }
+
+    /** Starts another file list/fetch cycle on an open connection; no-op while one runs. */
+    fun requestSync() {
+        if (!authenticated || result == null) return
+        result = null
+        reported = false
+        fileIds.clear()
+        todayIds.clear()
+        fetching = null
+        send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
+    }
+
+    fun sendNotification(notice: BandNotice) {
+        if (!authenticated) return
+        val n3 = ProtoWriter()
+            .string(1, notice.packageName)
+            .string(2, notice.appName.ifEmpty { notice.packageName })
+        if (notice.title.isNotEmpty()) n3.string(3, notice.title)
+        n3.string(4, "")
+        if (notice.body.isNotEmpty()) n3.string(5, notice.body)
+        n3.string(6, timestamp(notice.whenMs)).uint(7, notice.id.toLong())
+        notice.key?.let { n3.string(12, it) }
+        sendNotificationCommand(NOTIFICATION_SEND, ProtoWriter().message(3, ProtoWriter().message(1, n3)))
+    }
+
+    fun dismissNotification(id: Int, packageName: String, key: String?) {
+        if (!authenticated) return
+        val nid = ProtoWriter().uint(1, id.toLong()).string(2, packageName)
+        key?.let { nid.string(4, it) }
+        sendNotificationCommand(NOTIFICATION_DISMISS, ProtoWriter().message(4, ProtoWriter().message(1, nid)))
+    }
+
+    fun sendCall(name: String, number: String) {
+        if (!authenticated) return
+        val n3 = ProtoWriter()
+            .string(1, CALL_PACKAGE)
+            .string(2, CALL_PACKAGE)
+            .string(3, name.ifEmpty { "?" })
+            .string(4, "")
+            .string(5, number.ifEmpty { " " })
+            .string(6, timestamp(System.currentTimeMillis()))
+            .uint(7, 0)
+            .bool(8, true)
+            .bool(11, false)
+        sendNotificationCommand(NOTIFICATION_SEND, ProtoWriter().message(3, ProtoWriter().message(1, n3)))
+    }
+
+    fun endCall() = dismissNotification(0, CALL_PACKAGE, null)
+
+    fun sendMusic(music: BandMusic) {
+        if (!authenticated) return
+        val info = ProtoWriter().uint(1, music.state.toLong()).uint(2, music.volume.toLong())
+        if (music.state != 0) {
+            info.string(4, music.track).string(5, music.artist).uint(6, music.positionSec.toLong()).uint(7, music.durationSec.toLong())
+        }
+        send(command(TYPE_MUSIC, MUSIC_SEND).message(20, ProtoWriter().message(1, info)).toByteArray(), false)
+    }
+
+    private fun sendNotificationCommand(subtype: Int, notification: ProtoWriter) {
+        send(command(TYPE_NOTIFICATION, subtype).message(9, notification).toByteArray(), false)
+    }
+
+    private fun timestamp(ms: Long): String = java.text.SimpleDateFormat("yyyyMMdd'T'HHmmss", java.util.Locale.ROOT).format(java.util.Date(ms))
 
     fun onCommand(bytes: ByteArray) {
         val cmd = ProtoMessage.parse(bytes) ?: return
@@ -108,6 +211,17 @@ class XiaomiSession(
                     todayIds += ids
                 }
                 send(command(TYPE_HEALTH, HEALTH_PAST).toByteArray(), false)
+            }
+            type == TYPE_NOTIFICATION && subtype == NOTIFICATION_DISMISS -> {
+                val ids = cmd.message(9)?.message(4)?.messages(1).orEmpty().mapNotNull { it.uint(1)?.toInt() }
+                onEvent(BandEvent.Dismiss(ids))
+            }
+            type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_REJECT -> onEvent(BandEvent.RejectCall)
+            type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_IGNORE -> onEvent(BandEvent.IgnoreCall)
+            type == TYPE_MUSIC && subtype == MUSIC_GET -> onEvent(BandEvent.MusicRequest)
+            type == TYPE_MUSIC && subtype == MUSIC_BUTTON -> {
+                val key = cmd.message(20)?.message(2)
+                key?.uint(1)?.let { onEvent(BandEvent.MusicButton(it.toInt(), key.uint(2)?.toInt() ?: 0)) }
             }
             type == TYPE_HEALTH && subtype == HEALTH_PAST -> {
                 cmd.message(10)?.bytes(2)?.let { fileIds += XiaomiFileId.list(it) }
@@ -219,7 +333,17 @@ class XiaomiSession(
     companion object {
         const val TYPE_AUTH = 1
         private const val TYPE_SYSTEM = 2
+        private const val TYPE_NOTIFICATION = 7
         private const val TYPE_HEALTH = 8
+        private const val TYPE_MUSIC = 18
+        private const val NOTIFICATION_SEND = 0
+        private const val NOTIFICATION_DISMISS = 1
+        private const val NOTIFICATION_CALL_REJECT = 2
+        private const val NOTIFICATION_CALL_IGNORE = 5
+        private const val MUSIC_GET = 0
+        private const val MUSIC_SEND = 1
+        private const val MUSIC_BUTTON = 2
+        private const val CALL_PACKAGE = "phone"
         private const val AUTH_USER_ID = 5
         private const val AUTH_NONCE = 26
         private const val AUTH_STEP3 = 27

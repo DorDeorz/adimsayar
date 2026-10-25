@@ -43,6 +43,7 @@ import com.dordeorz.adimsayar.data.NO_ROUTE_START
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.BandDirect
+import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -388,6 +389,7 @@ class MainActivity : ComponentActivity() {
         startWearableSync()
         bandDirectEnabled = BandDirect.isEnabled(this)
         if (bandDirectEnabled) {
+            BandLive.refresh(appContext)
             AppScope.launch(Dispatchers.IO) {
                 val result = BandDirect.sync(appContext, ReadSource.App)
                 Widgets.updateAll(appContext)

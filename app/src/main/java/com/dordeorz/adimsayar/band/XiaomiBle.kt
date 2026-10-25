@@ -26,6 +26,7 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
         data class Services(val ok: Boolean) : Event
         data object Written : Event
         data class Changed(val uuid: UUID, val value: ByteArray) : Event
+        class Run(val block: () -> Unit) : Event
     }
 
     private sealed interface Op {
@@ -76,14 +77,28 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
 
     private var maxWrite = XiaomiChannel.DEFAULT_MAX_WRITE
 
-    suspend fun sync(store: suspend (BandFile) -> Boolean): BandResult {
+    /** Runs [block] on the connection's own coroutine, where the session may be used. */
+    fun post(block: () -> Unit) {
+        events.trySend(Event.Run(block))
+    }
+
+    suspend fun sync(store: suspend (BandFile) -> Boolean): BandResult = connect(store, null, false)
+
+    /**
+     * Keeps the connection open after the first sync until the band goes away. With [autoConnect]
+     * Android waits for the band in the background without the app scanning; without it the first
+     * connection is quick but gives up when the band is not around.
+     */
+    suspend fun live(store: suspend (BandFile) -> Boolean, live: XiaomiLive, autoConnect: Boolean): BandResult = connect(store, live, autoConnect)
+
+    private suspend fun connect(store: suspend (BandFile) -> Boolean, live: XiaomiLive?, autoConnect: Boolean): BandResult {
         gatt = try {
-            device.connectGatt(context, false, callback, BluetoothDevice.TRANSPORT_LE)
+            device.connectGatt(context, autoConnect, callback, BluetoothDevice.TRANSPORT_LE)
         } catch (e: SecurityException) {
             return BandResult.NoPermission
         } ?: return BandResult.ConnectFailed
         return try {
-            withTimeoutOrNull(TOTAL_TIMEOUT_MS) { run(store) } ?: BandResult.Timeout
+            if (live != null) run(store, live, autoConnect) else withTimeoutOrNull(TOTAL_TIMEOUT_MS) { run(store, null, false) } ?: BandResult.Timeout
         } catch (e: SecurityException) {
             BandResult.NoPermission
         } catch (e: IllegalStateException) {
@@ -95,8 +110,9 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
         }
     }
 
-    private suspend fun run(store: suspend (BandFile) -> Boolean): BandResult {
-        if ((withTimeoutOrNull(STEP_TIMEOUT_MS) { next<Event.Connection>() })?.connected != true) return BandResult.ConnectFailed
+    private suspend fun run(store: suspend (BandFile) -> Boolean, live: XiaomiLive?, autoConnect: Boolean): BandResult {
+        val connected = if (autoConnect) next<Event.Connection>() else withTimeoutOrNull(STEP_TIMEOUT_MS) { next<Event.Connection>() }
+        if (connected?.connected != true) return BandResult.ConnectFailed
         delay(SETTLE_MS)
         if (!discover()) return BandResult.ConnectFailed
         if (gatt.requestMtu(512)) withTimeoutOrNull(MTU_TIMEOUT_MS) { next<Event.Mtu>() }
@@ -141,12 +157,17 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
                         true
                     }
                     is Event.Connection -> if (event.connected) true else null
+                    is Event.Run -> {
+                        event.block()
+                        true
+                    }
                     else -> true
                 }
             },
             store = store,
+            live = live,
         )
-        if (result != BandResult.Ok) return result
+        if (result != BandResult.Ok || live != null) return result
         withTimeoutOrNull(FLUSH_TIMEOUT_MS) {
             while (busy || ops.isNotEmpty() || !writeChannel.idle) {
                 when (val event = events.receive()) {
@@ -156,6 +177,7 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
                     }
                     is Event.Changed -> channels[event.uuid]?.onNotification(event.value)
                     is Event.Connection -> if (!event.connected) break
+                    is Event.Run -> event.block()
                     else -> Unit
                 }
             }

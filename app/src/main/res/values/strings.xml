@@ -316,6 +316,10 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_11_0">
+        <item>Bileklik bildirimleri: uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider (Xiaomi). Kalıcı bildirim yok; bildirim erişimi izniyle çalışır</item>
+        <item>Bağlantı açıkken adım ve sağlık verileri aynı bağlantıdan 15 dakikada bir eşitlenir</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Sağlık sekmesi yenilendi: son gece uykusu, her veri için ayrı kart ve günlük geçmiş grafiği (7, 30, 90 gün). Ayarlar gruplandı; bağlı bileklik en üstte, Bugün\'de \"Eşitle\" tuşu</item>
         <item>Saate doğrudan bağlantı: Ayarlar → Adım kaynağı → Doğrudan bağlantı ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
@@ -668,6 +672,21 @@
     <string name="band_zepp_password">Şifre</string>
     <string name="band_zepp_button">Zepp hesabıyla anahtarı al</string>
     <string name="band_zepp_failed">Zepp girişi olmadı. E-posta ve şifreyi kontrol edip tekrar dene.</string>
+    <string name="band_notify_service">FitWren bileklik bağlantısı</string>
+    <string name="band_notify_title">Bileklik bildirimleri</string>
+    <string name="band_notify_text">Bağlantı açık kalır, kalıcı bildirim gösterilmez. Bunun için FitWren\'e bildirim erişimi vermen gerekir.</string>
+    <string name="band_notify_apps">Uygulama bildirimleri</string>
+    <string name="band_notify_apps_hint">Sesli gelen bildirimler bilekliğe gider. Bileklikte silinen bildirim telefondan da silinir.</string>
+    <string name="band_notify_calls">Gelen aramalar</string>
+    <string name="band_notify_calls_hint">Arayan bileklikte görünür. Bileklikten reddetmek için arama izni istenir.</string>
+    <string name="band_notify_music">Müzik kontrolü</string>
+    <string name="band_notify_music_hint">Çalan şarkı bileklikte görünür; oynat, durdur, geç ve ses bileklikten yönetilir.</string>
+    <string name="band_notify_access">Bildirim erişimini aç</string>
+    <string name="band_notify_access_hint">Bildirim erişimi kapalı. Android ayarlarında FitWren\'i aç.</string>
+    <string name="band_notify_state_connected">Bileklik bağlı</string>
+    <string name="band_notify_state_waiting">Bileklik bekleniyor</string>
+    <string name="band_notify_autostart">Xiaomi telefonlarda bağlantı kopuyorsa: Ayarlar → Uygulamalar → FitWren → Otomatik başlatma\'yı aç ve pil kısıtlamasını kaldır.</string>
+    <string name="band_notify_huami">Şimdilik yalnızca Xiaomi bileklik ve saatlerde çalışır.</string>
     <string name="band_key_manual">Ya da anahtarı elle gir:</string>
     <string name="band_key_help">Bileklik, Xiaomi hesabına bağlı bir anahtarla korunur. Anahtarı bilgisayarda bir kez alman gerekir:\n1. Bilgisayarda github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor sayfasından token_extractor.exe dosyasını indir ve aç.\n2. Mi Fitness\'ta kullandığın Xiaomi hesabıyla giriş yap.\n3. Bölge sorulunca boş bırakıp Enter\'a bas.\n4. Listede bilekliğini bul. TOKEN satırındaki 32 karakterlik kodu buraya yaz.</string>
     <string name="band_key_label">Anahtar (32 karakter)</string>

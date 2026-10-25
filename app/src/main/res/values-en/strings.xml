@@ -316,6 +316,10 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_11_0">
+        <item>Band notifications: app notifications, incoming calls and music control on the band (Xiaomi). No ongoing notification; works with notification access</item>
+        <item>While connected, steps and health data sync over the same connection every 15 minutes</item>
+    </string-array>
     <string-array name="release_notes_0_10_0">
         <item>Health tab redesigned: last night\'s sleep, a separate card for each metric and daily history charts (7, 30, 90 days). Settings are grouped; the connected band is at the top and Today has a \"Sync\" button</item>
         <item>Direct band connection: Settings → Step source → Direct connection reads Xiaomi Smart Band 8 steps without Mi Fitness or Health Connect</item>
@@ -667,6 +671,21 @@
     <string name="band_zepp_password">Password</string>
     <string name="band_zepp_button">Get the key with Zepp</string>
     <string name="band_zepp_failed">Zepp sign-in failed. Check the e-mail and password and try again.</string>
+    <string name="band_notify_service">FitWren band connection</string>
+    <string name="band_notify_title">Band notifications</string>
+    <string name="band_notify_text">The connection stays open without an ongoing notification. FitWren needs notification access for this.</string>
+    <string name="band_notify_apps">App notifications</string>
+    <string name="band_notify_apps_hint">Notifications that make a sound go to the band. A notification cleared on the band is also cleared on the phone.</string>
+    <string name="band_notify_calls">Incoming calls</string>
+    <string name="band_notify_calls_hint">The caller shows on the band. Rejecting from the band asks for the phone call permission.</string>
+    <string name="band_notify_music">Music control</string>
+    <string name="band_notify_music_hint">The playing track shows on the band; play, pause, skip and volume from the band.</string>
+    <string name="band_notify_access">Turn on notification access</string>
+    <string name="band_notify_access_hint">Notification access is off. Turn on FitWren in Android settings.</string>
+    <string name="band_notify_state_connected">Band connected</string>
+    <string name="band_notify_state_waiting">Waiting for the band</string>
+    <string name="band_notify_autostart">If the connection drops on Xiaomi phones: Settings → Apps → FitWren → turn on Autostart and remove battery restrictions.</string>
+    <string name="band_notify_huami">Works only with Xiaomi bands and watches for now.</string>
     <string name="band_key_manual">Or enter the key yourself:</string>
     <string name="band_key_help">The band is protected by a key tied to your Xiaomi account. You need to get the key once on a computer:\n1. On a computer, download and open token_extractor.exe from github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Sign in with the Xiaomi account you use in Mi Fitness.\n3. When it asks for a region, leave it empty and press Enter.\n4. Find your band in the list. Enter the 32-character code from the TOKEN line here.</string>
     <string name="band_key_label">Key (32 characters)</string>

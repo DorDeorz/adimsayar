@@ -17,7 +17,19 @@ import kotlin.concurrent.thread
 @SuppressLint("MissingPermission")
 class XiaomiSpp(private val device: BluetoothDevice, private val session: XiaomiSession) {
 
-    suspend fun sync(store: suspend (BandFile) -> Boolean): BandResult = withContext(Dispatchers.IO) {
+    private val incoming = Channel<Any>(Channel.UNLIMITED)
+
+    /** Runs [block] on the connection's own coroutine, where the session may be used. */
+    fun post(block: () -> Unit) {
+        incoming.trySend(block)
+    }
+
+    suspend fun sync(store: suspend (BandFile) -> Boolean): BandResult = connect(store, null)
+
+    /** Keeps the connection open after the first sync until the band goes away. */
+    suspend fun live(store: suspend (BandFile) -> Boolean, live: XiaomiLive): BandResult = connect(store, live)
+
+    private suspend fun connect(store: suspend (BandFile) -> Boolean, live: XiaomiLive?): BandResult = withContext(Dispatchers.IO) {
         val socket = try {
             device.createRfcommSocketToServiceRecord(SPP_UUID)
         } catch (e: SecurityException) {
@@ -26,7 +38,7 @@ class XiaomiSpp(private val device: BluetoothDevice, private val session: Xiaomi
             return@withContext BandResult.ConnectFailed
         }
         try {
-            withTimeoutOrNull(TOTAL_TIMEOUT_MS) { run(socket, store) } ?: BandResult.Timeout
+            if (live != null) run(socket, store, live) else withTimeoutOrNull(TOTAL_TIMEOUT_MS) { run(socket, store, null) } ?: BandResult.Timeout
         } catch (e: SecurityException) {
             BandResult.NoPermission
         } catch (e: IOException) {
@@ -36,11 +48,10 @@ class XiaomiSpp(private val device: BluetoothDevice, private val session: Xiaomi
         }
     }
 
-    private suspend fun run(socket: BluetoothSocket, store: suspend (BandFile) -> Boolean): BandResult {
+    private suspend fun run(socket: BluetoothSocket, store: suspend (BandFile) -> Boolean, live: XiaomiLive?): BandResult {
         runInterruptible { socket.connect() }
         val input = socket.inputStream
         val output = socket.outputStream
-        val incoming = Channel<ByteArray>(Channel.UNLIMITED)
         thread(isDaemon = true, name = "FitWrenSpp") {
             val buf = ByteArray(READ_SIZE)
             try {
@@ -67,12 +78,17 @@ class XiaomiSpp(private val device: BluetoothDevice, private val session: Xiaomi
         session.send = protocol::send
 
         suspend fun pump(timeoutMs: Long): Boolean? = try {
-            val data = withTimeoutOrNull(timeoutMs) { incoming.receive() }
-            if (data == null) {
-                false
-            } else {
-                protocol.onBytes(data)
-                true
+            when (val data = withTimeoutOrNull(timeoutMs) { incoming.receive() }) {
+                null -> false
+                is ByteArray -> {
+                    protocol.onBytes(data)
+                    true
+                }
+                else -> {
+                    @Suppress("UNCHECKED_CAST")
+                    (data as () -> Unit)()
+                    true
+                }
             }
         } catch (e: ClosedReceiveChannelException) {
             null
@@ -86,7 +102,7 @@ class XiaomiSpp(private val device: BluetoothDevice, private val session: Xiaomi
                 true -> Unit
             }
         }
-        return session.loop(pump = { pump(XiaomiBle.STEP_TIMEOUT_MS) }, store = store)
+        return session.loop(pump = { pump(XiaomiBle.STEP_TIMEOUT_MS) }, store = store, live = live)
     }
 
     companion object {
