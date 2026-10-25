@@ -95,10 +95,10 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
         if (!scanning) scanMessage = R.string.band_result_bluetooth_off
     }
 
-    fun saveCloudDevice(device: XiaomiCloudDevice): String {
+    fun saveCloudDevice(device: XiaomiCloudDevice): CloudState {
         BandDirect.setKey(context, device.key)
         BandDirect.setDevice(context, device.address, device.name)
-        return context.getString(R.string.band_cloud_done, device.name)
+        return CloudState.Message(R.string.band_cloud_done, device.name)
     }
 
     LaunchedEffect(scanning) {
@@ -141,7 +141,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                         val client = XiaomiCloud()
                         val login = withContext(Dispatchers.IO) { client.startLogin() }
                         if (login == null) {
-                            cloud = CloudState.Message(context.getString(R.string.band_cloud_failed))
+                            cloud = CloudState.Message(R.string.band_cloud_failed)
                             return@launch
                         }
                         val qr = withContext(Dispatchers.IO) {
@@ -149,14 +149,14 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                         }
                         cloud = CloudState.Waiting(login.loginUrl, qr)
                         if (!withContext(Dispatchers.IO) { client.waitForLogin(login) }) {
-                            cloud = CloudState.Message(context.getString(R.string.band_cloud_failed))
+                            cloud = CloudState.Message(R.string.band_cloud_failed)
                             return@launch
                         }
                         cloud = CloudState.Loading
                         val devices = withContext(Dispatchers.IO) { client.devices() }
                         cloud = when (devices.size) {
-                            0 -> CloudState.Message(context.getString(R.string.band_cloud_none))
-                            1 -> CloudState.Message(saveCloudDevice(devices.first()))
+                            0 -> CloudState.Message(R.string.band_cloud_none)
+                            1 -> saveCloudDevice(devices.first())
                             else -> CloudState.Devices(devices)
                         }
                         refresh++
@@ -182,7 +182,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    cloud = CloudState.Message(saveCloudDevice(device))
+                                    cloud = saveCloudDevice(device)
                                     refresh++
                                 }
                                 .padding(vertical = 8.dp),
@@ -191,7 +191,7 @@ fun BandSetupScreen(actions: MainActions, onClose: () -> Unit) {
                             Text(device.address, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
-                    is CloudState.Message -> BandText(state.text)
+                    is CloudState.Message -> BandText(state.arg?.let { stringResource(state.text, it) } ?: stringResource(state.text))
                 }
                 Text(stringResource(R.string.band_key_manual), style = MaterialTheme.typography.bodyLarge)
                 BandText(stringResource(R.string.band_key_help))
@@ -321,7 +321,7 @@ private sealed interface CloudState {
     class Waiting(val loginUrl: String, val qr: ImageBitmap?) : CloudState
     data object Loading : CloudState
     class Devices(val devices: List<XiaomiCloudDevice>) : CloudState
-    class Message(val text: String) : CloudState
+    class Message(val text: Int, val arg: String? = null) : CloudState
 }
 
 @Composable
