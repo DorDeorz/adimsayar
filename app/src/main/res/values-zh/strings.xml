@@ -316,6 +316,11 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>手环通知：选择应用和免打扰时段；FitWren 提醒也会在手环上振动</item>
+        <item>手环电量：显示在设备卡片和新的“手环电量”小组件中，电量低时手机提醒</item>
+        <item>查找手机（手环让手机响铃）和查找手环；手环断开时手机提醒</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
         <item>连接期间，步数和健康数据通过同一连接每 15 分钟同步一次</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">正在从 Health Connect 读取数据</string>
     <string name="band_reconnect">重新连接</string>
     <string name="band_sync_now">同步</string>
+    <string name="band_alert_channel">手环提醒</string>
+    <string name="band_battery_low_title">手环电量低</string>
+    <string name="band_battery_low_text">手环剩余 %1$d%% 电量，记得充电。</string>
+    <string name="band_lost_title">手环已断开</string>
+    <string name="band_lost_text">手环已断开连接一分钟，你可能把手机落下了。</string>
+    <string name="find_phone_channel">查找手机</string>
+    <string name="find_phone_title">正在查找手机</string>
+    <string name="find_phone_text">手环正在查找你的手机，找到后请点按。</string>
+    <string name="find_phone_found">找到了</string>
+    <string name="widget_band_label">手环电量</string>
+    <string name="widget_band_description">手环的电池电量</string>
+    <string name="widget_band_empty">手环连接后，电量会显示在这里。</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">正在充电</string>
+    <string name="band_battery_line">电量：%1$d%%</string>
+    <string name="band_notify_pick_apps">选择应用</string>
+    <string name="band_notify_pick_apps_all">所有应用都会发送到手环</string>
+    <string name="band_notify_pick_apps_off">已关闭 %1$d 个应用</string>
+    <string name="band_notify_pick_loading">正在加载应用…</string>
+    <string name="band_notify_pick_none">全不选</string>
+    <string name="band_notify_pick_all">全选</string>
+    <string name="band_notify_reminders">FitWren 提醒</string>
+    <string name="band_notify_reminders_hint">目标、连续、喝水和体重提醒也会在手环上振动。</string>
+    <string name="band_notify_quiet">免打扰时段</string>
+    <string name="band_notify_quiet_hint">此时段内通知和提醒不会发送到手环，来电仍会提醒。</string>
+    <string name="band_notify_quiet_from">开始</string>
+    <string name="band_notify_quiet_to">结束</string>
+    <string name="band_notify_lost">断开提醒</string>
+    <string name="band_notify_lost_hint">手环断开一分钟后手机会提醒你，避免忘带手机。</string>
+    <string name="band_battery_alert">低电量提醒</string>
+    <string name="band_battery_alert_hint">手环电量低于 %1$d%% 时手机会提醒你。</string>
+    <string name="band_find">查找手环</string>
+    <string name="band_find_stop">停止振动</string>
 </resources>

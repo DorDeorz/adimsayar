@@ -1,7 +1,11 @@
 package com.dordeorz.adimsayar.data
 
+import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import com.dordeorz.adimsayar.background.BandAlerts
 import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
@@ -32,6 +36,8 @@ object BandLive {
     private const val SYNC_WAIT_MS = 60_000L
     private const val RETRY_MIN_MS = 30_000L
     private const val RETRY_MAX_MS = 10 * 60 * 1000L
+    private const val LOST_AFTER_MS = 60_000L
+    private const val FIND_BAND_MS = 30_000L
 
     private val scope = CoroutineScope(
         SupervisorJob() + Executors.newSingleThreadExecutor { Thread(it, "FitWrenBandLive") }.asCoroutineDispatcher(),
@@ -53,6 +59,14 @@ object BandLive {
     private var post: ((() -> Unit) -> Unit)? = null
 
     private val waiters = ArrayList<CompletableDeferred<BandResult>>()
+    private val main = Handler(Looper.getMainLooper())
+    private var lostCheck: Runnable? = null
+    private val bandFound = Runnable { findingBand = false }
+
+    /** True while the band vibrates because the user pressed "Find band" in the app. */
+    @Volatile
+    var findingBand = false
+        private set
 
     /** Band-side actions; set by the notification listener. Called on the connection thread. */
     @Volatile
@@ -85,6 +99,8 @@ object BandLive {
 
     @Synchronized
     private fun stop() {
+        lostCheck?.let { main.removeCallbacks(it) }
+        lostCheck = null
         job?.cancel()
         job = null
         isRunning = false
@@ -117,6 +133,48 @@ object BandLive {
 
     fun music(music: BandMusic) = post?.invoke { session?.sendMusic(music) }
 
+    /** Starts or stops the band's vibration; false when the band is not connected. */
+    fun findBand(start: Boolean): Boolean {
+        val send = post ?: return false
+        if (!connected) return false
+        send { session?.findBand(start) }
+        findingBand = start
+        main.removeCallbacks(bandFound)
+        if (start) main.postDelayed(bandFound, FIND_BAND_MS)
+        return true
+    }
+
+    fun findPhoneStopped() = post?.invoke { session?.findPhoneStopped() }
+
+    private fun onBandEvent(context: Context, event: BandEvent) {
+        when (event) {
+            is BandEvent.FindPhone -> if (event.start) BandAlerts.startRinging(context) else BandAlerts.stopRinging(context, tellBand = false)
+            BandEvent.BandFound -> {
+                findingBand = false
+                main.removeCallbacks(bandFound)
+            }
+            else -> onEvent(event)
+        }
+    }
+
+    /** Warns on the phone when the band stays away for a minute after being connected. */
+    private fun watchLost(context: Context) {
+        lostCheck?.let { main.removeCallbacks(it) }
+        val check = Runnable {
+            lostCheck = null
+            val bluetoothOn = context.getSystemService(BluetoothManager::class.java)?.adapter?.isEnabled == true
+            if (isRunning && !connected && bluetoothOn && BandNotify.lostAlert(context)) BandAlerts.lost(context)
+        }
+        lostCheck = check
+        main.postDelayed(check, LOST_AFTER_MS)
+    }
+
+    private fun onBack(context: Context) {
+        lostCheck?.let { main.removeCallbacks(it) }
+        lostCheck = null
+        BandAlerts.cancelLost(context)
+    }
+
     private suspend fun run(context: Context) {
         var retry = RETRY_MIN_MS
         var failures = 0
@@ -134,6 +192,7 @@ object BandLive {
                     shouldSync = { System.currentTimeMillis() >= nextSync },
                     onSynced = { result ->
                         nextSync = System.currentTimeMillis() + SYNC_INTERVAL_MS
+                        if (!connected) onBack(context)
                         connected = true
                         BandDirect.finish(context, ReadSource.Service, result, saver.files, session?.fileSummary.orEmpty())
                         saver.reset()
@@ -144,13 +203,16 @@ object BandLive {
                 ),
                 autoConnect = autoConnect,
             ) { s, p ->
-                s.onEvent = { onEvent(it) }
+                s.onEvent = { onBandEvent(context, it) }
                 session = s
                 post = p
             }
+            val wasConnected = connected
             connected = false
             session = null
             post = null
+            findingBand = false
+            if (wasConnected) watchLost(context)
             complete(if (result == BandResult.Ok) BandResult.ConnectFailed else result)
             Log.i(XiaomiBand.TAG, "live ended: $result, retry in ${retry / 1000}s")
             if (result == BandResult.Ok) {

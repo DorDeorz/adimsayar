@@ -66,6 +66,7 @@ object Widgets {
         ChallengeWidget().updateAll(context)
         WeightWidget().updateAll(context)
         SummaryWidget().updateAll(context)
+        BandWidget().updateAll(context)
     }
 
     suspend fun updateWeight(context: Context) {

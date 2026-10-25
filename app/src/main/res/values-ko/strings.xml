@@ -316,6 +316,11 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>밴드 알림: 앱 선택과 방해 금지 시간, FitWren 알림도 밴드에서 진동</item>
+        <item>밴드 배터리: 기기 카드와 새 \"밴드 배터리\" 위젯에 표시, 부족하면 휴대폰 알림</item>
+        <item>내 휴대폰 찾기(밴드로 휴대폰 울리기)와 내 밴드 찾기, 밴드 연결이 끊기면 휴대폰 알림</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
         <item>연결된 동안 걸음 수와 건강 데이터를 같은 연결로 15분마다 동기화</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Health Connect에서 데이터를 읽는 중</string>
     <string name="band_reconnect">다시 연결</string>
     <string name="band_sync_now">동기화</string>
+    <string name="band_alert_channel">밴드 알림</string>
+    <string name="band_battery_low_title">밴드 배터리 부족</string>
+    <string name="band_battery_low_text">밴드 배터리가 %1$d%% 남았습니다. 충전을 잊지 마세요.</string>
+    <string name="band_lost_title">밴드 연결 끊김</string>
+    <string name="band_lost_text">밴드가 1분 동안 연결되지 않았습니다. 휴대폰을 두고 왔을 수 있습니다.</string>
+    <string name="find_phone_channel">내 휴대폰 찾기</string>
+    <string name="find_phone_title">휴대폰 찾는 중</string>
+    <string name="find_phone_text">밴드가 휴대폰을 찾고 있습니다. 찾으면 탭하세요.</string>
+    <string name="find_phone_found">찾았어요</string>
+    <string name="widget_band_label">밴드 배터리</string>
+    <string name="widget_band_description">밴드 배터리 잔량</string>
+    <string name="widget_band_empty">밴드가 연결되면 배터리 잔량이 여기에 표시됩니다.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">충전 중</string>
+    <string name="band_battery_line">배터리: %1$d%%</string>
+    <string name="band_notify_pick_apps">대상 앱</string>
+    <string name="band_notify_pick_apps_all">모든 앱을 밴드로 보냅니다</string>
+    <string name="band_notify_pick_apps_off">앱 %1$d개 꺼짐</string>
+    <string name="band_notify_pick_loading">앱 불러오는 중…</string>
+    <string name="band_notify_pick_none">없음</string>
+    <string name="band_notify_pick_all">전체</string>
+    <string name="band_notify_reminders">FitWren 알림</string>
+    <string name="band_notify_reminders_hint">목표, 연속 기록, 물, 체중 알림도 밴드에서 진동합니다.</string>
+    <string name="band_notify_quiet">방해 금지 시간</string>
+    <string name="band_notify_quiet_hint">이 시간에는 알림과 리마인더를 밴드로 보내지 않습니다. 전화는 계속 옵니다.</string>
+    <string name="band_notify_quiet_from">시작</string>
+    <string name="band_notify_quiet_to">종료</string>
+    <string name="band_notify_lost">연결 끊김 알림</string>
+    <string name="band_notify_lost_hint">밴드가 1분 동안 연결되지 않으면 휴대폰에 알림이 표시됩니다. 두고 온 휴대폰을 알 수 있습니다.</string>
+    <string name="band_battery_alert">배터리 부족 알림</string>
+    <string name="band_battery_alert_hint">밴드 배터리가 %1$d%% 아래로 내려가면 휴대폰에 알림이 표시됩니다.</string>
+    <string name="band_find">내 밴드 찾기</string>
+    <string name="band_find_stop">진동 멈추기</string>
 </resources>

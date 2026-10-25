@@ -316,6 +316,11 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>バンド通知: アプリの選択とおやすみ時間。FitWrenのリマインダーもバンドで振動</item>
+        <item>バンドの電池: デバイスカード、新しい「バンドの電池」ウィジェット、残量低下時にスマホへ通知</item>
+        <item>スマホを探す(バンドからスマホを鳴らす)とバンドを探す。バンドの接続が切れるとスマホに通知</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>バンドへの通知: アプリの通知、着信、音楽の操作に対応 (Xiaomi)。常駐通知なし、通知へのアクセスで動作</item>
         <item>接続中は歩数と健康データを同じ接続で 15 分ごとに同期</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Health Connectからデータを読み込み中</string>
     <string name="band_reconnect">再接続</string>
     <string name="band_sync_now">同期</string>
+    <string name="band_alert_channel">バンドの通知</string>
+    <string name="band_battery_low_title">バンドの電池残量低下</string>
+    <string name="band_battery_low_text">バンドの電池残量は%1$d%%です。充電を忘れずに。</string>
+    <string name="band_lost_title">バンドの接続が切れました</string>
+    <string name="band_lost_text">バンドが1分間接続されていません。スマホを置き忘れたかもしれません。</string>
+    <string name="find_phone_channel">スマホを探す</string>
+    <string name="find_phone_title">スマホを探しています</string>
+    <string name="find_phone_text">バンドがスマホを探しています。見つけたらタップしてください。</string>
+    <string name="find_phone_found">見つけた</string>
+    <string name="widget_band_label">バンドの電池</string>
+    <string name="widget_band_description">バンドの電池残量</string>
+    <string name="widget_band_empty">バンドが接続されると電池残量がここに表示されます。</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">充電中</string>
+    <string name="band_battery_line">電池: %1$d%%</string>
+    <string name="band_notify_pick_apps">対象アプリ</string>
+    <string name="band_notify_pick_apps_all">すべてのアプリをバンドに送信</string>
+    <string name="band_notify_pick_apps_off">%1$d個のアプリでオフ</string>
+    <string name="band_notify_pick_loading">アプリを読み込み中…</string>
+    <string name="band_notify_pick_none">なし</string>
+    <string name="band_notify_pick_all">すべて</string>
+    <string name="band_notify_reminders">FitWrenのリマインダー</string>
+    <string name="band_notify_reminders_hint">目標・連続記録・水分・体重のリマインダーもバンドで振動します。</string>
+    <string name="band_notify_quiet">おやすみ時間</string>
+    <string name="band_notify_quiet_hint">この時間帯は通知とリマインダーをバンドに送りません。着信は届きます。</string>
+    <string name="band_notify_quiet_from">開始</string>
+    <string name="band_notify_quiet_to">終了</string>
+    <string name="band_notify_lost">切断アラート</string>
+    <string name="band_notify_lost_hint">バンドが1分間接続されないとスマホに通知します。スマホの置き忘れに気づけます。</string>
+    <string name="band_battery_alert">電池残量低下アラート</string>
+    <string name="band_battery_alert_hint">バンドの電池が%1$d%%を下回るとスマホに通知します。</string>
+    <string name="band_find">バンドを探す</string>
+    <string name="band_find_stop">振動を止める</string>
 </resources>

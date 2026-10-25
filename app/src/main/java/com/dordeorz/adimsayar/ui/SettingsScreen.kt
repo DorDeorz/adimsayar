@@ -11,6 +11,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import com.dordeorz.adimsayar.background.BandNotificationListener
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
+import com.dordeorz.adimsayar.data.BandBattery
+import android.app.TimePickerDialog
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Checkbox
+import java.time.LocalTime
 import kotlinx.coroutines.delay
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
@@ -64,6 +70,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -110,6 +117,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.12.0", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
     ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
@@ -715,7 +723,24 @@ private fun BandNotifyGroup() {
     val apps = remember(tick) { BandNotify.apps(context) }
     val calls = remember(tick) { BandNotify.calls(context) }
     val music = remember(tick) { BandNotify.music(context) }
+    val reminders = remember(tick) { BandNotify.reminders(context) }
+    val lost = remember(tick) { BandNotify.lostAlert(context) }
+    val quiet = remember(tick) { BandNotify.quiet(context) }
+    val quietFrom = remember(tick) { BandNotify.quietFrom(context) }
+    val quietTo = remember(tick) { BandNotify.quietTo(context) }
+    val batteryAlert = remember(tick) { BandBattery.alertOn(context) }
+    val blockedCount = remember(tick) { BandNotify.blocked(context).size }
     val connected = remember(tick) { BandLive.connected }
+    var pickApps by remember { mutableStateOf(false) }
+    fun pickTime(current: Int, onPicked: (Int) -> Unit) {
+        TimePickerDialog(
+            context,
+            { _, hour, minute -> onPicked(hour * 60 + minute) },
+            current / 60,
+            current % 60,
+            android.text.format.DateFormat.is24HourFormat(context),
+        ).show()
+    }
     fun openAccess() {
         val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Intent(Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS)
@@ -743,6 +768,12 @@ private fun BandNotifyGroup() {
         SwitchRow(stringResource(R.string.band_notify_apps), stringResource(R.string.band_notify_apps_hint), apps) {
             change(it) { on -> BandNotify.setApps(context, on) }
         }
+        if (apps) {
+            ClickRow(
+                stringResource(R.string.band_notify_pick_apps),
+                if (blockedCount == 0) stringResource(R.string.band_notify_pick_apps_all) else stringResource(R.string.band_notify_pick_apps_off, blockedCount),
+            ) { pickApps = true }
+        }
         SwitchRow(stringResource(R.string.band_notify_calls), stringResource(R.string.band_notify_calls_hint), calls) {
             change(it) { on -> BandNotify.setCalls(context, on) }
             if (it && !BandNotify.canRejectCalls(context) && BandNotify.CALL_PERMISSIONS.isNotEmpty()) callPermission.launch(BandNotify.CALL_PERMISSIONS)
@@ -750,7 +781,29 @@ private fun BandNotifyGroup() {
         SwitchRow(stringResource(R.string.band_notify_music), stringResource(R.string.band_notify_music_hint), music) {
             change(it) { on -> BandNotify.setMusic(context, on) }
         }
-        if (apps || calls || music) {
+        SwitchRow(stringResource(R.string.band_notify_reminders), stringResource(R.string.band_notify_reminders_hint), reminders) {
+            change(it) { on -> BandNotify.setReminders(context, on) }
+        }
+        SwitchRow(stringResource(R.string.band_notify_quiet), stringResource(R.string.band_notify_quiet_hint), quiet) {
+            BandNotify.setQuiet(context, it)
+            tick++
+        }
+        if (quiet) {
+            ValueRow(stringResource(R.string.band_notify_quiet_from), minuteLabel(quietFrom)) {
+                pickTime(quietFrom) { BandNotify.setQuietHours(context, it, quietTo); tick++ }
+            }
+            ValueRow(stringResource(R.string.band_notify_quiet_to), minuteLabel(quietTo)) {
+                pickTime(quietTo) { BandNotify.setQuietHours(context, quietFrom, it); tick++ }
+            }
+        }
+        SwitchRow(stringResource(R.string.band_notify_lost), stringResource(R.string.band_notify_lost_hint), lost) {
+            change(it) { on -> BandNotify.setLostAlert(context, on) }
+        }
+        SwitchRow(stringResource(R.string.band_battery_alert), stringResource(R.string.band_battery_alert_hint, BandBattery.LOW_LEVEL), batteryAlert) {
+            BandBattery.setAlert(context, it)
+            tick++
+        }
+        if (BandNotify.anyOn(context)) {
             if (!access) {
                 ClickRow(stringResource(R.string.band_notify_access), stringResource(R.string.band_notify_access_hint), ::openAccess)
             } else {
@@ -770,9 +823,75 @@ private fun BandNotifyGroup() {
         }
         }
     }
+    if (pickApps) {
+        AppPickerDialog(onDismiss = {
+            pickApps = false
+            tick++
+        })
+    }
 }
 
 private const val NOTIFY_POLL_MS = 1_000L
+
+private fun minuteLabel(minute: Int): String = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+
+private class PhoneApp(val packageName: String, val label: String)
+
+/** Lets the user turn off band notifications for single apps. */
+@Composable
+private fun AppPickerDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    var blocked by remember { mutableStateOf(BandNotify.blocked(context)) }
+    val apps by produceState<List<PhoneApp>?>(null) {
+        value = withContext(Dispatchers.IO) {
+            val pm = context.packageManager
+            val launcher = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
+            pm.queryIntentActivities(launcher, 0)
+                .map { it.activityInfo.packageName }
+                .distinct()
+                .filter { it != context.packageName }
+                .map { pkg -> PhoneApp(pkg, runCatching { pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString() }.getOrDefault(pkg)) }
+                .sortedBy { it.label.lowercase(Locales.current) }
+        }
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_notify_pick_apps)) },
+        text = {
+            val list = apps
+            if (list == null) {
+                Text(stringResource(R.string.band_notify_pick_loading))
+            } else {
+                LazyColumn(Modifier.heightIn(max = 460.dp)) {
+                    items(list, key = { it.packageName }) { app ->
+                        val on = app.packageName !in blocked
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .toggleable(value = on, role = Role.Checkbox, onValueChange = { checked ->
+                                    blocked = if (checked) blocked - app.packageName else blocked + app.packageName
+                                    BandNotify.setBlocked(context, blocked)
+                                })
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            Checkbox(checked = on, onCheckedChange = null)
+                            Text(app.label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(onClick = {
+                blocked = if (blocked.isEmpty()) apps.orEmpty().map { it.packageName }.toSet() else emptySet()
+                BandNotify.setBlocked(context, blocked)
+            }) { Text(stringResource(if (blocked.isEmpty()) R.string.band_notify_pick_none else R.string.band_notify_pick_all)) }
+        },
+    )
+}
 
 @Composable
 private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> Unit) {
@@ -830,6 +949,14 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
             }
         }
     }
+    val battery by remember { BandBattery.observe(context) }.collectAsState()
+    // (connected, finding) of the always-open connection; the find band button needs it.
+    val live by produceState(BandLive.connected to BandLive.findingBand, direct) {
+        while (direct) {
+            value = BandLive.connected to BandLive.findingBand
+            delay(NOTIFY_POLL_MS)
+        }
+    }
     val model = if (direct) BandModels.find(status.name) else BandModels.find(connected?.name)
     val shape = when {
         model != null -> model.shape
@@ -881,6 +1008,16 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
                     status.lastResult?.takeIf { it != BandResult.Ok && !state.bandSyncing }?.let {
                         Text(stringResource(BandDirect.resultText(it)), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                     }
+                    battery?.let { b ->
+                        val low = b.level <= BandBattery.LOW_LEVEL && b.charging != true
+                        Text(
+                            stringResource(R.string.band_battery_line, b.level) +
+                                if (b.charging == true) " · " + stringResource(R.string.band_battery_charging) else "",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = if (low) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
                 }
             }
         }
@@ -892,6 +1029,13 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
                 Text(stringResource(if (direct) R.string.band_reconnect else R.string.band_sync_now))
             }
             if (direct) OutlinedButton(onClick = onManage) { Text(stringResource(R.string.source_direct_manage)) }
+        }
+        if (direct && live.first) {
+            Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp)) {
+                OutlinedButton(onClick = { BandLive.findBand(!live.second) }) {
+                    Text(stringResource(if (live.second) R.string.band_find_stop else R.string.band_find))
+                }
+            }
         }
     }
 }

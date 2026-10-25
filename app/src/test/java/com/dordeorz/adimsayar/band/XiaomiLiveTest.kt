@@ -69,4 +69,45 @@ class XiaomiLiveTest {
         assertEquals(BandEvent.RejectCall, events[1])
         assertEquals(listOf(5, 6), (events[2] as BandEvent.Dismiss).ids)
     }
+
+    @Test
+    fun batteryIsAskedAndRead() {
+        val sent = ArrayList<ByteArray>()
+        val s = plainSession(sent, ArrayList())
+        assertTrue(sent.any { ProtoMessage.parse(it)!!.let { c -> c.uint(1) == 2L && c.uint(2) == 78L } })
+        val levels = ArrayList<Pair<Int, Boolean?>>()
+        s.onBattery = { level, charging -> levels += level to charging }
+        val battery = ProtoWriter().uint(1, 64).uint(2, 2)
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 1).message(4, ProtoWriter().message(2, ProtoWriter().message(1, battery))).toByteArray())
+        val state = ProtoWriter().bool(1, true).uint(2, 15).bool(3, true).bool(4, false)
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 78).message(4, ProtoWriter().message(48, state)).toByteArray())
+        assertEquals(listOf(64 to false, 15 to true), levels)
+        // A device state without a level asks for the battery instead.
+        sent.clear()
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 78).message(4, ProtoWriter().message(48, ProtoWriter().bool(1, false))).toByteArray())
+        val ask = ProtoMessage.parse(sent.single())!!
+        assertEquals(2L, ask.uint(1))
+        assertEquals(1L, ask.uint(2))
+    }
+
+    @Test
+    fun findPhoneAndFindBand() {
+        val sent = ArrayList<ByteArray>()
+        val events = ArrayList<BandEvent>()
+        val s = plainSession(sent, events)
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 17).message(4, ProtoWriter().uint(5, 0)).toByteArray())
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 17).message(4, ProtoWriter().uint(5, 1)).toByteArray())
+        s.onCommand(ProtoWriter().uint(1, 2).uint(2, 18).message(4, ProtoWriter().uint(5, 1)).toByteArray())
+        assertTrue((events[0] as BandEvent.FindPhone).start)
+        assertTrue(!(events[1] as BandEvent.FindPhone).start)
+        assertEquals(BandEvent.BandFound, events[2])
+        s.findBand(true)
+        val find = ProtoMessage.parse(sent.last())!!
+        assertEquals(18L, find.uint(2))
+        assertEquals(0L, find.message(4)!!.uint(5))
+        s.findPhoneStopped()
+        val stop = ProtoMessage.parse(sent.last())!!
+        assertEquals(17L, stop.uint(2))
+        assertEquals(1L, stop.message(4)!!.uint(5))
+    }
 }

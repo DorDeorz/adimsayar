@@ -316,6 +316,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Notificações da pulseira: escolha apps e horário silencioso; lembretes do FitWren também vibram na pulseira</item>
+        <item>Bateria da pulseira: no cartão do dispositivo, no novo widget \"Bateria da pulseira\" e alerta no celular quando estiver fraca</item>
+        <item>Encontrar meu celular (a pulseira faz o celular tocar) e Encontrar minha pulseira; alerta no celular quando a pulseira desconecta</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
         <item>Enquanto ligada, passos e dados de saúde sincronizam pela mesma ligação a cada 15 minutos</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Os dados são lidos do Health Connect</string>
     <string name="band_reconnect">Reconectar</string>
     <string name="band_sync_now">Sincronizar</string>
+    <string name="band_alert_channel">Alertas da pulseira</string>
+    <string name="band_battery_low_title">Bateria da pulseira fraca</string>
+    <string name="band_battery_low_text">Resta %1$d%% de bateria na pulseira. Lembre-se de carregar.</string>
+    <string name="band_lost_title">Pulseira desconectada</string>
+    <string name="band_lost_text">A pulseira está sem conexão há um minuto. Talvez você tenha esquecido o celular.</string>
+    <string name="find_phone_channel">Encontrar meu celular</string>
+    <string name="find_phone_title">Procurando o celular</string>
+    <string name="find_phone_text">A pulseira está procurando seu celular. Toque quando encontrar.</string>
+    <string name="find_phone_found">Encontrei</string>
+    <string name="widget_band_label">Bateria da pulseira</string>
+    <string name="widget_band_description">Nível de bateria da sua pulseira</string>
+    <string name="widget_band_empty">O nível de bateria aparece aqui quando a pulseira conecta.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">Carregando</string>
+    <string name="band_battery_line">Bateria: %1$d%%</string>
+    <string name="band_notify_pick_apps">Quais apps</string>
+    <string name="band_notify_pick_apps_all">Todos os apps vão para a pulseira</string>
+    <string name="band_notify_pick_apps_off">Desligado em %1$d apps</string>
+    <string name="band_notify_pick_loading">Carregando apps…</string>
+    <string name="band_notify_pick_none">Nenhum</string>
+    <string name="band_notify_pick_all">Todos</string>
+    <string name="band_notify_reminders">Lembretes do FitWren</string>
+    <string name="band_notify_reminders_hint">Lembretes de meta, sequência, água e peso também vibram na pulseira.</string>
+    <string name="band_notify_quiet">Horário silencioso</string>
+    <string name="band_notify_quiet_hint">Nesse horário, notificações e lembretes não vão para a pulseira. Chamadas ainda chegam.</string>
+    <string name="band_notify_quiet_from">Início</string>
+    <string name="band_notify_quiet_to">Fim</string>
+    <string name="band_notify_lost">Alerta de desconexão</string>
+    <string name="band_notify_lost_hint">O celular avisa se a pulseira ficar desconectada por um minuto, para você notar um celular esquecido.</string>
+    <string name="band_battery_alert">Alerta de bateria fraca</string>
+    <string name="band_battery_alert_hint">O celular avisa quando a bateria da pulseira fica abaixo de %1$d%%.</string>
+    <string name="band_find">Encontrar minha pulseira</string>
+    <string name="band_find_stop">Parar vibração</string>
 </resources>

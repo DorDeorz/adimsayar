@@ -316,6 +316,11 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Band notifications: pick apps and set quiet hours; FitWren reminders also vibrate on the band</item>
+        <item>Band battery: on the device card, in the new \"Band battery\" widget and a phone alert when low</item>
+        <item>Find my phone (the band rings the phone) and Find my band; a phone alert when the band disconnects</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band notifications: app notifications, incoming calls and music control on the band (Xiaomi). No ongoing notification; works with notification access</item>
         <item>While connected, steps and health data sync over the same connection every 15 minutes</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Data is read from Health Connect</string>
     <string name="band_reconnect">Reconnect</string>
     <string name="band_sync_now">Sync</string>
+    <string name="band_alert_channel">Band alerts</string>
+    <string name="band_battery_low_title">Band battery low</string>
+    <string name="band_battery_low_text">%1$d%% battery left on the band. Remember to charge it.</string>
+    <string name="band_lost_title">Band disconnected</string>
+    <string name="band_lost_text">The band has not been connected for a minute. You may have left your phone behind.</string>
+    <string name="find_phone_channel">Find my phone</string>
+    <string name="find_phone_title">Finding your phone</string>
+    <string name="find_phone_text">The band is looking for your phone. Tap when you find it.</string>
+    <string name="find_phone_found">Found it</string>
+    <string name="widget_band_label">Band battery</string>
+    <string name="widget_band_description">Your band\'s battery level</string>
+    <string name="widget_band_empty">The battery level shows here once the band connects.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">Charging</string>
+    <string name="band_battery_line">Battery: %1$d%%</string>
+    <string name="band_notify_pick_apps">Which apps</string>
+    <string name="band_notify_pick_apps_all">All apps go to the band</string>
+    <string name="band_notify_pick_apps_off">Off for %1$d apps</string>
+    <string name="band_notify_pick_loading">Loading apps…</string>
+    <string name="band_notify_pick_none">None</string>
+    <string name="band_notify_pick_all">All</string>
+    <string name="band_notify_reminders">FitWren reminders</string>
+    <string name="band_notify_reminders_hint">Goal, streak, water and weight reminders also vibrate on the band.</string>
+    <string name="band_notify_quiet">Quiet hours</string>
+    <string name="band_notify_quiet_hint">No notifications or reminders go to the band during these hours. Calls still come through.</string>
+    <string name="band_notify_quiet_from">Start</string>
+    <string name="band_notify_quiet_to">End</string>
+    <string name="band_notify_lost">Disconnect alert</string>
+    <string name="band_notify_lost_hint">A phone alert shows when the band stays disconnected for a minute, so you notice a forgotten phone.</string>
+    <string name="band_battery_alert">Low battery alert</string>
+    <string name="band_battery_alert_hint">A phone alert shows when the band battery drops below %1$d%%.</string>
+    <string name="band_find">Find my band</string>
+    <string name="band_find_stop">Stop vibrating</string>
 </resources>

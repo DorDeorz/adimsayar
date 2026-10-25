@@ -84,6 +84,7 @@ object BandDirect {
                 !same -> remove(KEY_FAMILY)
             }
         }
+        if (!same) BandBattery.clear(context)
         BandLive.restart(context)
     }
 

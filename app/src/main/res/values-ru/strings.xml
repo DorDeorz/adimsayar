@@ -316,6 +316,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Уведомления браслета: выбор приложений и тихие часы; напоминания FitWren тоже вибрируют на браслете</item>
+        <item>Заряд браслета: на карточке устройства, в новом виджете «Заряд браслета» и предупреждение на телефоне при низком заряде</item>
+        <item>Найти телефон (браслет заставляет телефон звонить) и Найти браслет; предупреждение на телефоне при отключении браслета</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
         <item>Пока браслет подключён, шаги и данные здоровья синхронизируются по тому же соединению каждые 15 минут</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Данные читаются из Health Connect</string>
     <string name="band_reconnect">Переподключить</string>
     <string name="band_sync_now">Синхронизировать</string>
+    <string name="band_alert_channel">Уведомления браслета</string>
+    <string name="band_battery_low_title">Низкий заряд браслета</string>
+    <string name="band_battery_low_text">На браслете осталось %1$d%% заряда. Не забудьте зарядить.</string>
+    <string name="band_lost_title">Браслет отключён</string>
+    <string name="band_lost_text">Браслет не подключён уже минуту. Возможно, вы забыли телефон.</string>
+    <string name="find_phone_channel">Найти телефон</string>
+    <string name="find_phone_title">Поиск телефона</string>
+    <string name="find_phone_text">Браслет ищет ваш телефон. Нажмите, когда найдёте.</string>
+    <string name="find_phone_found">Нашёл</string>
+    <string name="widget_band_label">Заряд браслета</string>
+    <string name="widget_band_description">Уровень заряда браслета</string>
+    <string name="widget_band_empty">Заряд появится здесь после подключения браслета.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">Заряжается</string>
+    <string name="band_battery_line">Заряд: %1$d%%</string>
+    <string name="band_notify_pick_apps">Какие приложения</string>
+    <string name="band_notify_pick_apps_all">Все приложения отправляются на браслет</string>
+    <string name="band_notify_pick_apps_off">Выключено для %1$d прил.</string>
+    <string name="band_notify_pick_loading">Загрузка приложений…</string>
+    <string name="band_notify_pick_none">Ни одного</string>
+    <string name="band_notify_pick_all">Все</string>
+    <string name="band_notify_reminders">Напоминания FitWren</string>
+    <string name="band_notify_reminders_hint">Напоминания о цели, серии, воде и весе также вибрируют на браслете.</string>
+    <string name="band_notify_quiet">Тихие часы</string>
+    <string name="band_notify_quiet_hint">В эти часы уведомления и напоминания не отправляются на браслет. Звонки приходят.</string>
+    <string name="band_notify_quiet_from">Начало</string>
+    <string name="band_notify_quiet_to">Конец</string>
+    <string name="band_notify_lost">Оповещение об отключении</string>
+    <string name="band_notify_lost_hint">Если браслет не подключён минуту, телефон предупредит. Так вы заметите забытый телефон.</string>
+    <string name="band_battery_alert">Оповещение о низком заряде</string>
+    <string name="band_battery_alert_hint">Телефон предупредит, когда заряд браслета упадёт ниже %1$d%%.</string>
+    <string name="band_find">Найти браслет</string>
+    <string name="band_find_stop">Остановить вибрацию</string>
 </resources>

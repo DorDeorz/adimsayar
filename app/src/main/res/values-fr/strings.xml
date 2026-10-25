@@ -316,6 +316,11 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Notifications du bracelet : choix des applis et heures calmes ; les rappels FitWren vibrent aussi sur le bracelet</item>
+        <item>Batterie du bracelet : sur la carte de l\'appareil, dans le nouveau widget \"Batterie du bracelet\" et alerte sur le téléphone quand elle est faible</item>
+        <item>Trouver mon téléphone (le bracelet fait sonner le téléphone) et Trouver mon bracelet ; alerte sur le téléphone quand le bracelet se déconnecte</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifications sur le bracelet : notifications des apps, appels et contrôle de la musique (Xiaomi). Pas de notification permanente ; utilise l\'accès aux notifications</item>
         <item>Une fois connecté, les pas et les données de santé se synchronisent par la même connexion toutes les 15 minutes</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">Les données sont lues depuis Health Connect</string>
     <string name="band_reconnect">Reconnecter</string>
     <string name="band_sync_now">Synchroniser</string>
+    <string name="band_alert_channel">Alertes du bracelet</string>
+    <string name="band_battery_low_title">Batterie du bracelet faible</string>
+    <string name="band_battery_low_text">Il reste %1$d %% de batterie au bracelet. Pense à le recharger.</string>
+    <string name="band_lost_title">Bracelet déconnecté</string>
+    <string name="band_lost_text">Le bracelet n\'est plus connecté depuis une minute. Tu as peut-être oublié ton téléphone.</string>
+    <string name="find_phone_channel">Trouver mon téléphone</string>
+    <string name="find_phone_title">Recherche du téléphone</string>
+    <string name="find_phone_text">Le bracelet cherche ton téléphone. Touche quand tu l\'as trouvé.</string>
+    <string name="find_phone_found">Trouvé</string>
+    <string name="widget_band_label">Batterie du bracelet</string>
+    <string name="widget_band_description">Niveau de batterie de ton bracelet</string>
+    <string name="widget_band_empty">Le niveau de batterie s\'affiche ici dès que le bracelet est connecté.</string>
+    <string name="band_battery_percent">%1$d %%</string>
+    <string name="band_battery_charging">En charge</string>
+    <string name="band_battery_line">Batterie : %1$d %%</string>
+    <string name="band_notify_pick_apps">Quelles applis</string>
+    <string name="band_notify_pick_apps_all">Toutes les applis vont au bracelet</string>
+    <string name="band_notify_pick_apps_off">Désactivé pour %1$d applis</string>
+    <string name="band_notify_pick_loading">Chargement des applis…</string>
+    <string name="band_notify_pick_none">Aucune</string>
+    <string name="band_notify_pick_all">Toutes</string>
+    <string name="band_notify_reminders">Rappels FitWren</string>
+    <string name="band_notify_reminders_hint">Les rappels d\'objectif, de série, d\'eau et de poids vibrent aussi sur le bracelet.</string>
+    <string name="band_notify_quiet">Heures calmes</string>
+    <string name="band_notify_quiet_hint">Pendant ces heures, aucune notification ni rappel ne va au bracelet. Les appels passent toujours.</string>
+    <string name="band_notify_quiet_from">Début</string>
+    <string name="band_notify_quiet_to">Fin</string>
+    <string name="band_notify_lost">Alerte de déconnexion</string>
+    <string name="band_notify_lost_hint">Le téléphone t\'alerte si le bracelet reste déconnecté une minute, pour ne pas oublier ton téléphone.</string>
+    <string name="band_battery_alert">Alerte de batterie faible</string>
+    <string name="band_battery_alert_hint">Le téléphone t\'alerte quand la batterie du bracelet passe sous %1$d %%.</string>
+    <string name="band_find">Trouver mon bracelet</string>
+    <string name="band_find_stop">Arrêter la vibration</string>
 </resources>

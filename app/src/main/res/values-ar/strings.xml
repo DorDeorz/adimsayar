@@ -316,6 +316,11 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>إشعارات السوار: اختيار التطبيقات وساعات الهدوء، وتذكيرات FitWren تهتز على السوار أيضًا</item>
+        <item>بطارية السوار: في بطاقة الجهاز وفي أداة \"بطارية السوار\" الجديدة، وتنبيه على الهاتف عند انخفاضها</item>
+        <item>العثور على هاتفي (السوار يجعل الهاتف يرن) والعثور على سواري، وتنبيه على الهاتف عند انقطاع اتصال السوار</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
         <item>أثناء الاتصال تُزامَن الخطوات والبيانات الصحية عبر الاتصال نفسه كل 15 دقيقة</item>
@@ -749,4 +754,37 @@
     <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
     <string name="band_reconnect">إعادة الاتصال</string>
     <string name="band_sync_now">مزامنة</string>
+    <string name="band_alert_channel">تنبيهات السوار</string>
+    <string name="band_battery_low_title">بطارية السوار منخفضة</string>
+    <string name="band_battery_low_text">تبقّى %1$d%% من بطارية السوار. لا تنسَ شحنه.</string>
+    <string name="band_lost_title">انقطع اتصال السوار</string>
+    <string name="band_lost_text">السوار غير متصل منذ دقيقة. ربما نسيت هاتفك.</string>
+    <string name="find_phone_channel">العثور على هاتفي</string>
+    <string name="find_phone_title">جارٍ البحث عن الهاتف</string>
+    <string name="find_phone_text">السوار يبحث عن هاتفك. اضغط عندما تجده.</string>
+    <string name="find_phone_found">وجدته</string>
+    <string name="widget_band_label">بطارية السوار</string>
+    <string name="widget_band_description">مستوى بطارية السوار</string>
+    <string name="widget_band_empty">يظهر مستوى البطارية هنا عند اتصال السوار.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">يشحن</string>
+    <string name="band_battery_line">البطارية: %1$d%%</string>
+    <string name="band_notify_pick_apps">أي التطبيقات</string>
+    <string name="band_notify_pick_apps_all">كل التطبيقات تُرسل إلى السوار</string>
+    <string name="band_notify_pick_apps_off">متوقف في %1$d تطبيقات</string>
+    <string name="band_notify_pick_loading">جارٍ تحميل التطبيقات…</string>
+    <string name="band_notify_pick_none">لا شيء</string>
+    <string name="band_notify_pick_all">الكل</string>
+    <string name="band_notify_reminders">تذكيرات FitWren</string>
+    <string name="band_notify_reminders_hint">تذكيرات الهدف والسلسلة والماء والوزن تهتز على السوار أيضًا.</string>
+    <string name="band_notify_quiet">ساعات الهدوء</string>
+    <string name="band_notify_quiet_hint">في هذه الساعات لا تُرسل الإشعارات والتذكيرات إلى السوار. المكالمات تصل كالمعتاد.</string>
+    <string name="band_notify_quiet_from">البداية</string>
+    <string name="band_notify_quiet_to">النهاية</string>
+    <string name="band_notify_lost">تنبيه انقطاع الاتصال</string>
+    <string name="band_notify_lost_hint">يظهر تنبيه على الهاتف إذا بقي السوار غير متصل لدقيقة، لتنتبه إلى هاتف منسي.</string>
+    <string name="band_battery_alert">تنبيه البطارية المنخفضة</string>
+    <string name="band_battery_alert_hint">يظهر تنبيه على الهاتف عندما تنخفض بطارية السوار عن %1$d%%.</string>
+    <string name="band_find">العثور على سواري</string>
+    <string name="band_find_stop">إيقاف الاهتزاز</string>
 </resources>

@@ -23,6 +23,10 @@ sealed interface BandEvent {
     data object IgnoreCall : BandEvent
     data object MusicRequest : BandEvent
     class MusicButton(val button: Int, val volume: Int) : BandEvent
+    /** Find phone pressed on the band: [start] true to ring, false to stop. */
+    class FindPhone(val start: Boolean) : BandEvent
+    /** "Found it" pressed on the band while it was ringing for us. */
+    data object BandFound : BandEvent
 
     companion object {
         const val PLAY = 0
@@ -56,6 +60,9 @@ class XiaomiSession(
 
     /** Band-side actions (dismissed notification, music button, call reject) on a live connection. */
     var onEvent: (BandEvent) -> Unit = {}
+
+    /** Battery level 0–100 and whether it is charging (null when the band did not say). */
+    var onBattery: (level: Int, charging: Boolean?) -> Unit = { _, _ -> }
 
     val cipher = XiaomiCipher()
     var authenticated = false
@@ -134,7 +141,25 @@ class XiaomiSession(
         fileIds.clear()
         todayIds.clear()
         fetching = null
+        requestBattery()
         send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
+    }
+
+    fun requestBattery() {
+        if (!authenticated) return
+        send(command(TYPE_SYSTEM, SYSTEM_BATTERY).toByteArray(), false)
+    }
+
+    /** Makes the band vibrate until "found" is pressed on it, or stops that. */
+    fun findBand(start: Boolean) {
+        if (!authenticated) return
+        send(command(TYPE_SYSTEM, SYSTEM_FIND_BAND).message(4, ProtoWriter().uint(5, if (start) 0 else 1)).toByteArray(), false)
+    }
+
+    /** Tells the band the phone stopped ringing, so its find phone screen closes. */
+    fun findPhoneStopped() {
+        if (!authenticated) return
+        send(command(TYPE_SYSTEM, SYSTEM_FIND_PHONE).message(4, ProtoWriter().uint(5, 1)).toByteArray(), false)
     }
 
     fun sendNotification(notice: BandNotice) {
@@ -218,6 +243,23 @@ class XiaomiSession(
             }
             type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_REJECT -> onEvent(BandEvent.RejectCall)
             type == TYPE_NOTIFICATION && subtype == NOTIFICATION_CALL_IGNORE -> onEvent(BandEvent.IgnoreCall)
+            type == TYPE_SYSTEM && subtype == SYSTEM_BATTERY -> cmd.message(4)?.message(2)?.message(1)?.let { battery ->
+                val level = battery.uint(1)?.toInt() ?: return@let
+                val charging = when (battery.uint(2)?.toInt()) {
+                    1 -> true
+                    2, 3 -> false
+                    else -> null
+                }
+                onBattery(level.coerceIn(0, 100), charging)
+            }
+            type == TYPE_SYSTEM && subtype == SYSTEM_DEVICE_STATE_GET -> {
+                val state = cmd.message(4)?.message(48)
+                val level = state?.uint(2)?.toInt()
+                if (level != null) onBattery(level.coerceIn(0, 100), state?.uint(1) == 1L) else requestBattery()
+            }
+            type == TYPE_SYSTEM && subtype == SYSTEM_DEVICE_STATE -> requestBattery()
+            type == TYPE_SYSTEM && subtype == SYSTEM_FIND_PHONE -> cmd.message(4)?.uint(5)?.let { onEvent(BandEvent.FindPhone(it == 0L)) }
+            type == TYPE_SYSTEM && subtype == SYSTEM_FIND_BAND -> if (cmd.message(4)?.uint(5) == 1L) onEvent(BandEvent.BandFound)
             type == TYPE_MUSIC && subtype == MUSIC_GET -> onEvent(BandEvent.MusicRequest)
             type == TYPE_MUSIC && subtype == MUSIC_BUTTON -> {
                 val key = cmd.message(20)?.message(2)
@@ -270,6 +312,7 @@ class XiaomiSession(
         authenticated = true
         onAuthenticated()
         send(timeCommand(), false)
+        send(command(TYPE_SYSTEM, SYSTEM_DEVICE_STATE_GET).toByteArray(), false)
         send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
     }
 
@@ -347,7 +390,12 @@ class XiaomiSession(
         private const val AUTH_USER_ID = 5
         private const val AUTH_NONCE = 26
         private const val AUTH_STEP3 = 27
+        private const val SYSTEM_BATTERY = 1
         private const val SYSTEM_CLOCK = 3
+        private const val SYSTEM_FIND_PHONE = 17
+        private const val SYSTEM_FIND_BAND = 18
+        private const val SYSTEM_DEVICE_STATE_GET = 78
+        private const val SYSTEM_DEVICE_STATE = 79
         private const val HEALTH_TODAY = 1
         private const val HEALTH_PAST = 2
         private const val HEALTH_REQUEST = 3

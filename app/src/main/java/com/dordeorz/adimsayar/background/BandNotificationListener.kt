@@ -16,6 +16,7 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.telecom.TelecomManager
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
@@ -62,13 +63,19 @@ class BandNotificationListener : NotificationListenerService() {
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        if (!BandLive.connected || sbn.packageName == packageName) return
+        if (!BandLive.connected) return
         val n = sbn.notification
-        if (n.category == Notification.CATEGORY_CALL) {
-            onCall(sbn)
-            return
+        if (sbn.packageName == packageName) {
+            // FitWren's own reminders go to the band as well, so the band vibrates for them.
+            if (!BandNotify.reminders(this) || NotificationCompat.getChannelId(n) !in BandNotify.REMINDER_CHANNELS) return
+        } else {
+            if (n.category == Notification.CATEGORY_CALL) {
+                onCall(sbn)
+                return
+            }
+            if (!BandNotify.apps(this) || !BandNotify.allowed(this, sbn.packageName)) return
         }
-        if (!BandNotify.apps(this)) return
+        if (BandNotify.quietNow(this)) return
         if (sbn.isOngoing || n.flags and (Notification.FLAG_GROUP_SUMMARY or Notification.FLAG_LOCAL_ONLY or Notification.FLAG_FOREGROUND_SERVICE) != 0) return
         if (!loud(sbn)) return
         val extras = n.extras
@@ -78,6 +85,11 @@ class BandNotificationListener : NotificationListenerService() {
         val text = "$title\n$body"
         val previous = sent[sbn.key]
         if (previous?.text == text) return
+        // A silent update of our own reminder (water added) should not vibrate the band again.
+        if (previous != null && sbn.packageName == packageName && n.flags and Notification.FLAG_ONLY_ALERT_ONCE != 0) {
+            sent[sbn.key] = Sent(previous.id, previous.packageName, text)
+            return
+        }
         val id = previous?.id ?: nextId++
         BandLive.notify(BandNotice(id, sbn.packageName, appName(sbn.packageName), title, body.take(MAX_BODY), sbn.postTime, sbn.key))
         sent.remove(sbn.key)
@@ -135,6 +147,7 @@ class BandNotificationListener : NotificationListenerService() {
             BandEvent.IgnoreCall -> callKey = null
             BandEvent.MusicRequest -> pushMusic()
             is BandEvent.MusicButton -> onMusicButton(event)
+            is BandEvent.FindPhone, BandEvent.BandFound -> Unit
         }
     }
 
