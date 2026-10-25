@@ -320,6 +320,7 @@
         <item>밴드 알림: 앱 선택과 방해 금지 시간, FitWren 알림도 밴드에서 진동</item>
         <item>밴드 배터리: 기기 카드와 새 \"밴드 배터리\" 위젯에 표시, 부족하면 휴대폰 알림</item>
         <item>내 휴대폰 찾기(밴드로 휴대폰 울리기)와 내 밴드 찾기, 밴드 연결이 끊기면 휴대폰 알림</item>
+        <item>빠른 답장(밴드에서 거절할 때 SMS)과 밴드 날씨(Open-Meteo, 도시 또는 위치)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">밴드에서 전화를 거절할 때 이 중 하나를 고르면 상대에게 SMS로 전송됩니다. 빈 항목은 삭제됩니다.</string>
     <string name="band_replies_permission">SMS 및 전화 권한 허용</string>
     <string name="band_replies_not_sent">밴드가 연결되어 있지 않습니다. 답장은 저장되었으니 연결되면 다시 저장하세요.</string>
+    <string name="band_weather">날씨</string>
+    <string name="band_weather_hint">밴드의 날씨 화면을 채웁니다. 매시간 Open-Meteo에서 가져오며 인터넷을 사용합니다.</string>
+    <string name="band_weather_place">날씨 위치</string>
+    <string name="band_weather_place_none">설정 안 됨</string>
+    <string name="band_weather_my_place">내 위치</string>
+    <string name="band_weather_search">도시 검색</string>
+    <string name="band_weather_find">검색</string>
+    <string name="band_weather_use_location">현재 위치 사용</string>
+    <string name="band_weather_not_found">찾을 수 없습니다. 다른 이름을 입력하거나 위치를 허용하세요.</string>
 </resources>

@@ -320,6 +320,7 @@
         <item>إشعارات السوار: اختيار التطبيقات وساعات الهدوء، وتذكيرات FitWren تهتز على السوار أيضًا</item>
         <item>بطارية السوار: في بطاقة الجهاز وفي أداة \"بطارية السوار\" الجديدة، وتنبيه على الهاتف عند انخفاضها</item>
         <item>العثور على هاتفي (السوار يجعل الهاتف يرن) والعثور على سواري، وتنبيه على الهاتف عند انقطاع اتصال السوار</item>
+        <item>ردود سريعة (رسالة SMS عند الرفض من السوار) والطقس على السوار (Open-Meteo، حسب المدينة أو الموقع)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">عند رفض مكالمة من السوار تختار أحد هذه الردود فيُرسل للمتصل كرسالة SMS. الفارغة تُحذف.</string>
     <string name="band_replies_permission">امنح أذونات الرسائل والهاتف</string>
     <string name="band_replies_not_sent">السوار غير متصل. حُفظت الردود؛ احفظ مرة أخرى عند اتصاله.</string>
+    <string name="band_weather">الطقس</string>
+    <string name="band_weather_hint">يملأ شاشة الطقس في السوار. يُجلب كل ساعة من Open-Meteo ويستخدم الإنترنت.</string>
+    <string name="band_weather_place">مكان الطقس</string>
+    <string name="band_weather_place_none">غير محدد</string>
+    <string name="band_weather_my_place">موقعي</string>
+    <string name="band_weather_search">ابحث عن مدينة</string>
+    <string name="band_weather_find">بحث</string>
+    <string name="band_weather_use_location">استخدم الموقع الحالي</string>
+    <string name="band_weather_not_found">لم يُعثر على شيء. جرّب اسمًا آخر أو اسمح بالموقع.</string>
 </resources>

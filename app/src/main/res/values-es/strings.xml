@@ -320,6 +320,7 @@
         <item>Notificaciones de la pulsera: elige apps y horas de silencio; los recordatorios de FitWren también vibran en la pulsera</item>
         <item>Batería de la pulsera: en la tarjeta del dispositivo, en el nuevo widget \"Batería de la pulsera\" y aviso en el teléfono si baja</item>
         <item>Buscar mi teléfono (la pulsera hace sonar el teléfono) y Buscar mi pulsera; aviso en el teléfono cuando la pulsera se desconecta</item>
+        <item>Respuestas rápidas (SMS al rechazar en la pulsera) y el tiempo en la pulsera (Open-Meteo, por ciudad o ubicación)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificaciones en la pulsera: notificaciones de apps, llamadas y control de música (Xiaomi). Sin notificación permanente; usa el acceso a notificaciones</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">Al rechazar una llamada en la pulsera eliges una de estas y se envía por SMS. Las vacías se eliminan.</string>
     <string name="band_replies_permission">Conceder permisos de SMS y teléfono</string>
     <string name="band_replies_not_sent">La pulsera no está conectada. Las respuestas se guardaron; vuelve a guardar cuando se conecte.</string>
+    <string name="band_weather">Tiempo</string>
+    <string name="band_weather_hint">Rellena la pantalla del tiempo de la pulsera. Se obtiene cada hora de Open-Meteo; usa internet.</string>
+    <string name="band_weather_place">Lugar del tiempo</string>
+    <string name="band_weather_place_none">Sin definir</string>
+    <string name="band_weather_my_place">Mi ubicación</string>
+    <string name="band_weather_search">Buscar ciudad</string>
+    <string name="band_weather_find">Buscar</string>
+    <string name="band_weather_use_location">Usar ubicación actual</string>
+    <string name="band_weather_not_found">No se encontró nada. Prueba otro nombre o permite la ubicación.</string>
 </resources>

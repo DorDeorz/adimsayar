@@ -320,6 +320,7 @@
         <item>Уведомления браслета: выбор приложений и тихие часы; напоминания FitWren тоже вибрируют на браслете</item>
         <item>Заряд браслета: на карточке устройства, в новом виджете «Заряд браслета» и предупреждение на телефоне при низком заряде</item>
         <item>Найти телефон (браслет заставляет телефон звонить) и Найти браслет; предупреждение на телефоне при отключении браслета</item>
+        <item>Быстрые ответы (SMS при отклонении на браслете) и погода на браслете (Open-Meteo, по городу или местоположению)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">Отклоняя звонок на браслете, вы выбираете один из ответов, и он уходит звонящему по SMS. Пустые удаляются.</string>
     <string name="band_replies_permission">Дать разрешения на SMS и телефон</string>
     <string name="band_replies_not_sent">Браслет не подключён. Ответы сохранены; сохраните ещё раз после подключения.</string>
+    <string name="band_weather">Погода</string>
+    <string name="band_weather_hint">Заполняет экран погоды на браслете. Загружается раз в час из Open-Meteo, нужен интернет.</string>
+    <string name="band_weather_place">Место для погоды</string>
+    <string name="band_weather_place_none">Не выбрано</string>
+    <string name="band_weather_my_place">Моё местоположение</string>
+    <string name="band_weather_search">Найти город</string>
+    <string name="band_weather_find">Найти</string>
+    <string name="band_weather_use_location">Текущее местоположение</string>
+    <string name="band_weather_not_found">Ничего не найдено. Попробуйте другое название или разрешите геолокацию.</string>
 </resources>

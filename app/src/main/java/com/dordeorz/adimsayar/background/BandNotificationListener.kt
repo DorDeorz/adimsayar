@@ -157,7 +157,7 @@ class BandNotificationListener : NotificationListenerService() {
             }
             BandEvent.MusicRequest -> pushMusic()
             is BandEvent.MusicButton -> onMusicButton(event)
-            is BandEvent.FindPhone, BandEvent.BandFound -> Unit
+            is BandEvent.FindPhone, BandEvent.BandFound, BandEvent.WeatherRequest -> Unit
         }
     }
 

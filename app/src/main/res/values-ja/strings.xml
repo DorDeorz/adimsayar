@@ -320,6 +320,7 @@
         <item>バンド通知: アプリの選択とおやすみ時間。FitWrenのリマインダーもバンドで振動</item>
         <item>バンドの電池: デバイスカード、新しい「バンドの電池」ウィジェット、残量低下時にスマホへ通知</item>
         <item>スマホを探す(バンドからスマホを鳴らす)とバンドを探す。バンドの接続が切れるとスマホに通知</item>
+        <item>クイック返信(バンドで拒否したときにSMS)とバンドの天気(Open-Meteo、都市または現在地)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>バンドへの通知: アプリの通知、着信、音楽の操作に対応 (Xiaomi)。常駐通知なし、通知へのアクセスで動作</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">バンドで着信を拒否するときにこの中から選ぶと、相手にSMSで送られます。空欄は削除されます。</string>
     <string name="band_replies_permission">SMSと電話の権限を許可</string>
     <string name="band_replies_not_sent">バンドが接続されていません。返信は保存されました。接続後にもう一度保存してください。</string>
+    <string name="band_weather">天気</string>
+    <string name="band_weather_hint">バンドの天気画面に表示します。1時間ごとにOpen-Meteoから取得し、インターネットを使います。</string>
+    <string name="band_weather_place">天気の場所</string>
+    <string name="band_weather_place_none">未設定</string>
+    <string name="band_weather_my_place">現在地</string>
+    <string name="band_weather_search">都市を検索</string>
+    <string name="band_weather_find">検索</string>
+    <string name="band_weather_use_location">現在地を使う</string>
+    <string name="band_weather_not_found">見つかりません。別の名前を試すか、位置情報を許可してください。</string>
 </resources>

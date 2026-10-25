@@ -139,4 +139,36 @@ class XiaomiLiveTest {
         assertEquals(14L, ack.uint(2))
         assertEquals(0L, ack.message(9)!!.uint(13))
     }
+
+    @Test
+    fun weatherGoesOutOnce() {
+        val sent = ArrayList<ByteArray>()
+        val s = plainSession(sent, ArrayList())
+        s.onCommand(ProtoWriter().uint(1, 10).uint(2, 5).message(12, ProtoWriter().message(4, ProtoWriter())).toByteArray())
+        val report = BandWeatherReport(
+            "İstanbul", "2026-10-26T01:00:00+03:00", 7, 14, 80, 3, 200, 2, 1012f,
+            listOf(BandWeatherReport.Day(11, 17, 7, "2026-10-26T07:20:00+03:00", "2026-10-26T18:10:00+03:00")),
+            listOf(BandWeatherReport.Hour(14, 7, 3, 200)),
+        )
+        sent.clear()
+        s.sendWeather(report)
+        assertEquals(listOf(7L, 0L, 1L, 2L), sent.map { ProtoMessage.parse(it)!!.uint(2) })
+        val current = ProtoMessage.parse(sent[1])!!.message(12)!!.message(1)!!
+        assertEquals(7L, current.uint(2))
+        assertEquals("İstanbul", current.message(1)!!.string(3))
+        assertEquals(report.key, current.message(1)!!.string(4))
+        sent.clear()
+        s.sendWeather(report)
+        assertEquals(listOf(0L, 1L, 2L), sent.map { ProtoMessage.parse(it)!!.uint(2) })
+    }
+
+    @Test
+    fun weatherCodesAndWind() {
+        assertEquals(0, XiaomiWeather.fromWmo(0))
+        assertEquals(2, XiaomiWeather.fromWmo(3))
+        assertEquals(4, XiaomiWeather.fromWmo(95))
+        assertEquals(0, XiaomiWeather.beaufort(0.5))
+        assertEquals(3, XiaomiWeather.beaufort(15.0))
+        assertEquals(12, XiaomiWeather.beaufort(130.0))
+    }
 }

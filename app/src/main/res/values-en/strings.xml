@@ -320,6 +320,7 @@
         <item>Band notifications: pick apps and set quiet hours; FitWren reminders also vibrate on the band</item>
         <item>Band battery: on the device card, in the new \"Band battery\" widget and a phone alert when low</item>
         <item>Find my phone (the band rings the phone) and Find my band; a phone alert when the band disconnects</item>
+        <item>Quick replies (text the caller when rejecting on the band) and weather on the band (Open-Meteo, by city or location)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band notifications: app notifications, incoming calls and music control on the band (Xiaomi). No ongoing notification; works with notification access</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">When you reject a call on the band you pick one of these and it goes to the caller as a text message. Empty ones are removed.</string>
     <string name="band_replies_permission">Grant SMS and phone permissions</string>
     <string name="band_replies_not_sent">The band is not connected. Replies are saved; save again once it connects.</string>
+    <string name="band_weather">Weather</string>
+    <string name="band_weather_hint">Fills the band\'s weather screen. Fetched hourly from Open-Meteo; uses the internet.</string>
+    <string name="band_weather_place">Weather place</string>
+    <string name="band_weather_place_none">Not set</string>
+    <string name="band_weather_my_place">My location</string>
+    <string name="band_weather_search">Search city</string>
+    <string name="band_weather_find">Search</string>
+    <string name="band_weather_use_location">Use current location</string>
+    <string name="band_weather_not_found">Nothing found. Try another name or allow location.</string>
 </resources>

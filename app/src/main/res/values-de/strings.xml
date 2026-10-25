@@ -320,6 +320,7 @@
         <item>Band-Benachrichtigungen: Apps wählen und Ruhezeiten; FitWren-Erinnerungen vibrieren auch am Band</item>
         <item>Band-Akku: auf der Gerätekarte, im neuen Widget \"Band-Akku\" und Warnung am Handy bei schwachem Akku</item>
         <item>Handy finden (das Band lässt das Handy klingeln) und Band finden; Warnung am Handy, wenn das Band getrennt wird</item>
+        <item>Schnellantworten (SMS beim Ablehnen am Band) und Wetter am Band (Open-Meteo, per Stadt oder Standort)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">Beim Ablehnen eines Anrufs am Band wählst du eine davon; sie geht als SMS an den Anrufer. Leere werden entfernt.</string>
     <string name="band_replies_permission">SMS- und Telefonberechtigungen erteilen</string>
     <string name="band_replies_not_sent">Das Band ist nicht verbunden. Die Antworten sind gespeichert; speichere erneut, sobald es verbunden ist.</string>
+    <string name="band_weather">Wetter</string>
+    <string name="band_weather_hint">Füllt den Wetterbildschirm des Bands. Stündlich von Open-Meteo abgerufen; nutzt das Internet.</string>
+    <string name="band_weather_place">Wetterort</string>
+    <string name="band_weather_place_none">Nicht festgelegt</string>
+    <string name="band_weather_my_place">Mein Standort</string>
+    <string name="band_weather_search">Stadt suchen</string>
+    <string name="band_weather_find">Suchen</string>
+    <string name="band_weather_use_location">Aktuellen Standort verwenden</string>
+    <string name="band_weather_not_found">Nichts gefunden. Anderen Namen versuchen oder Standort erlauben.</string>
 </resources>

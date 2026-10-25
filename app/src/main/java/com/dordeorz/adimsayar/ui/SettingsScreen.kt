@@ -13,6 +13,9 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandReplies
+import com.dordeorz.adimsayar.data.BandWeather
+import com.dordeorz.adimsayar.data.WeatherPlace
+import android.Manifest
 import androidx.compose.runtime.mutableStateListOf
 import android.app.TimePickerDialog
 import androidx.compose.foundation.lazy.LazyColumn
@@ -735,6 +738,9 @@ private fun BandNotifyGroup() {
     val connected = remember(tick) { BandLive.connected }
     var pickApps by remember { mutableStateOf(false) }
     var editReplies by remember { mutableStateOf(false) }
+    var pickPlace by remember { mutableStateOf(false) }
+    val weather = remember(tick) { BandWeather.isOn(context) }
+    val weatherPlace = remember(tick) { BandWeather.place(context) }
     fun pickTime(current: Int, onPicked: (Int) -> Unit) {
         TimePickerDialog(
             context,
@@ -805,6 +811,13 @@ private fun BandNotifyGroup() {
         SwitchRow(stringResource(R.string.band_notify_lost), stringResource(R.string.band_notify_lost_hint), lost) {
             change(it) { on -> BandNotify.setLostAlert(context, on) }
         }
+        SwitchRow(stringResource(R.string.band_weather), stringResource(R.string.band_weather_hint), weather) {
+            change(it) { on -> BandWeather.setOn(context, on) }
+            if (it && weatherPlace == null) pickPlace = true
+        }
+        if (weather) {
+            ClickRow(stringResource(R.string.band_weather_place), weatherPlace?.name ?: stringResource(R.string.band_weather_place_none)) { pickPlace = true }
+        }
         SwitchRow(stringResource(R.string.band_battery_alert), stringResource(R.string.band_battery_alert_hint, BandBattery.LOW_LEVEL), batteryAlert) {
             BandBattery.setAlert(context, it)
             tick++
@@ -830,6 +843,12 @@ private fun BandNotifyGroup() {
         }
     }
     if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
+    if (pickPlace) {
+        WeatherPlaceDialog(onDismiss = {
+            pickPlace = false
+            tick++
+        })
+    }
     if (pickApps) {
         AppPickerDialog(onDismiss = {
             pickApps = false
@@ -841,6 +860,85 @@ private fun BandNotifyGroup() {
 private const val NOTIFY_POLL_MS = 1_000L
 
 private fun minuteLabel(minute: Int): String = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+
+/** Picks the weather place: a city search, or the phone's position while the app is open. */
+@Composable
+private fun WeatherPlaceDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var query by rememberSaveable { mutableStateOf("") }
+    var results by remember { mutableStateOf<List<WeatherPlace>?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    val myPlace = stringResource(R.string.band_weather_my_place)
+    fun useHere() {
+        scope.launch {
+            busy = true
+            val place = BandWeather.currentPlace(context, myPlace)
+            busy = false
+            if (place != null) {
+                BandWeather.setPlace(context, place)
+                onDismiss()
+            } else {
+                results = emptyList()
+            }
+        }
+    }
+    val locationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok -> if (ok) useHere() }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_weather_place)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it.take(60) },
+                    singleLine = true,
+                    label = { Text(stringResource(R.string.band_weather_search)) },
+                    trailingIcon = {
+                        TextButton(
+                            enabled = query.isNotBlank() && !busy,
+                            onClick = {
+                                scope.launch {
+                                    busy = true
+                                    results = BandWeather.search(query)
+                                    busy = false
+                                }
+                            },
+                        ) { Text(stringResource(R.string.band_weather_find)) }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                TextButton(enabled = !busy, onClick = {
+                    if (BandWeather.hasLocationPermission(context)) useHere() else locationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                }) { Text(stringResource(R.string.band_weather_use_location)) }
+                if (busy) Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodySmall)
+                val list = results
+                if (list != null && list.isEmpty() && !busy) {
+                    Text(stringResource(R.string.band_weather_not_found), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                }
+                LazyColumn(Modifier.heightIn(max = 300.dp)) {
+                    items(list.orEmpty()) { place ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    BandWeather.setPlace(context, place)
+                                    onDismiss()
+                                }
+                                .padding(vertical = 8.dp),
+                        ) {
+                            Text(place.name, style = MaterialTheme.typography.bodyLarge)
+                            if (place.detail.isNotEmpty()) {
+                                Text(place.detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+    )
+}
 
 private const val DEFAULT_REPLY_SLOTS = 5
 

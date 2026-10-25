@@ -320,6 +320,7 @@
         <item>手环通知：选择应用和免打扰时段；FitWren 提醒也会在手环上振动</item>
         <item>手环电量：显示在设备卡片和新的“手环电量”小组件中，电量低时手机提醒</item>
         <item>查找手机（手环让手机响铃）和查找手环；手环断开时手机提醒</item>
+        <item>快捷回复（在手环上拒接时发短信）和手环天气（Open-Meteo，按城市或位置）</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">在手环上拒接来电时选择其中一条，会以短信发给对方。空白项会被删除。</string>
     <string name="band_replies_permission">授予短信和电话权限</string>
     <string name="band_replies_not_sent">手环未连接。回复已保存，连接后请再保存一次。</string>
+    <string name="band_weather">天气</string>
+    <string name="band_weather_hint">填充手环的天气界面。每小时从 Open-Meteo 获取，需要联网。</string>
+    <string name="band_weather_place">天气位置</string>
+    <string name="band_weather_place_none">未设置</string>
+    <string name="band_weather_my_place">我的位置</string>
+    <string name="band_weather_search">搜索城市</string>
+    <string name="band_weather_find">搜索</string>
+    <string name="band_weather_use_location">使用当前位置</string>
+    <string name="band_weather_not_found">未找到。换个名称或允许定位。</string>
 </resources>

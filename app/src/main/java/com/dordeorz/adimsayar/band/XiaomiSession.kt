@@ -27,6 +27,8 @@ sealed interface BandEvent {
     class FindPhone(val start: Boolean) : BandEvent
     /** "Found it" pressed on the band while it was ringing for us. */
     data object BandFound : BandEvent
+    /** The band asks for fresh weather. */
+    data object WeatherRequest : BandEvent
     /** Reject the call with this text message, chosen on the band. */
     class CallReply(val number: String, val message: String) : BandEvent
 
@@ -86,6 +88,8 @@ class XiaomiSession(
     private var fetching: XiaomiFileId? = null
     private val pendingStore = ArrayDeque<BandFile>()
     private var plainTries = 0
+    // Weather places already on the band; null until it answered, empty when it keeps only one.
+    private var weatherKeys: Set<String>? = null
     private var reported = false
 
     fun startEncrypted() {
@@ -159,6 +163,18 @@ class XiaomiSession(
     fun findBand(start: Boolean) {
         if (!authenticated) return
         send(command(TYPE_SYSTEM, SYSTEM_FIND_BAND).message(4, ProtoWriter().uint(5, if (start) 0 else 1)).toByteArray(), false)
+    }
+
+    /** Sends current weather and the daily and hourly forecast for one place. */
+    fun sendWeather(report: BandWeatherReport) {
+        if (!authenticated) return
+        if (weatherKeys?.contains(report.key) != true) {
+            send(command(XiaomiWeather.TYPE, XiaomiWeather.ADD_LOCATION).message(12, ProtoWriter().message(5, XiaomiWeather.location(report))).toByteArray(), false)
+            weatherKeys = weatherKeys.orEmpty() + report.key
+        }
+        send(command(XiaomiWeather.TYPE, XiaomiWeather.CURRENT).message(12, XiaomiWeather.current(report)).toByteArray(), false)
+        send(command(XiaomiWeather.TYPE, XiaomiWeather.DAILY).message(12, XiaomiWeather.daily(report)).toByteArray(), false)
+        send(command(XiaomiWeather.TYPE, XiaomiWeather.HOURLY).message(12, XiaomiWeather.hourly(report)).toByteArray(), false)
     }
 
     /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
@@ -288,6 +304,11 @@ class XiaomiSession(
             type == TYPE_SYSTEM && subtype == SYSTEM_DEVICE_STATE -> requestBattery()
             type == TYPE_SYSTEM && subtype == SYSTEM_FIND_PHONE -> cmd.message(4)?.uint(5)?.let { onEvent(BandEvent.FindPhone(it == 0L)) }
             type == TYPE_SYSTEM && subtype == SYSTEM_FIND_BAND -> if (cmd.message(4)?.uint(5) == 1L) onEvent(BandEvent.BandFound)
+            type == XiaomiWeather.TYPE && subtype == XiaomiWeather.REQUEST -> onEvent(BandEvent.WeatherRequest)
+            type == XiaomiWeather.TYPE && subtype == XiaomiWeather.GET_LOCATIONS -> {
+                weatherKeys = if (cmd.uint(STATUS) == 1L) emptySet() else XiaomiWeather.locationKeys(cmd.message(12))
+                log("weather places: $weatherKeys")
+            }
             type == TYPE_MUSIC && subtype == MUSIC_GET -> onEvent(BandEvent.MusicRequest)
             type == TYPE_MUSIC && subtype == MUSIC_BUTTON -> {
                 val key = cmd.message(20)?.message(2)
@@ -342,6 +363,7 @@ class XiaomiSession(
         send(timeCommand(), false)
         send(command(TYPE_SYSTEM, SYSTEM_DEVICE_STATE_GET).toByteArray(), false)
         sendNotificationCommand(NOTIFICATION_REPLIES_GET, ProtoWriter().uint(8, 1))
+        send(command(XiaomiWeather.TYPE, XiaomiWeather.GET_LOCATIONS).toByteArray(), false)
         send(command(TYPE_HEALTH, HEALTH_TODAY).message(10, ProtoWriter().message(5, ProtoWriter().uint(1, 0))).toByteArray(), false)
     }
 
@@ -434,6 +456,7 @@ class XiaomiSession(
         private const val HEALTH_REQUEST = 3
         private const val HEALTH_ACK = 5
         private const val HEX_BYTES = 160
+        private const val STATUS = 100
         private const val DEFAULT_USER_ID = "0000000000"
     }
 }

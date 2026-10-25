@@ -320,6 +320,7 @@
         <item>Notifications du bracelet : choix des applis et heures calmes ; les rappels FitWren vibrent aussi sur le bracelet</item>
         <item>Batterie du bracelet : sur la carte de l\'appareil, dans le nouveau widget \"Batterie du bracelet\" et alerte sur le téléphone quand elle est faible</item>
         <item>Trouver mon téléphone (le bracelet fait sonner le téléphone) et Trouver mon bracelet ; alerte sur le téléphone quand le bracelet se déconnecte</item>
+        <item>Réponses rapides (SMS en refusant sur le bracelet) et météo sur le bracelet (Open-Meteo, par ville ou position)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifications sur le bracelet : notifications des apps, appels et contrôle de la musique (Xiaomi). Pas de notification permanente ; utilise l\'accès aux notifications</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">Quand tu refuses un appel sur le bracelet, tu choisis l\'une d\'elles et elle part par SMS. Les vides sont supprimées.</string>
     <string name="band_replies_permission">Accorder les autorisations SMS et téléphone</string>
     <string name="band_replies_not_sent">Le bracelet n\'est pas connecté. Les réponses sont enregistrées ; enregistre à nouveau une fois connecté.</string>
+    <string name="band_weather">Météo</string>
+    <string name="band_weather_hint">Remplit l\'écran météo du bracelet. Récupérée chaque heure depuis Open-Meteo ; utilise Internet.</string>
+    <string name="band_weather_place">Lieu météo</string>
+    <string name="band_weather_place_none">Non défini</string>
+    <string name="band_weather_my_place">Ma position</string>
+    <string name="band_weather_search">Chercher une ville</string>
+    <string name="band_weather_find">Chercher</string>
+    <string name="band_weather_use_location">Utiliser la position actuelle</string>
+    <string name="band_weather_not_found">Rien trouvé. Essaie un autre nom ou autorise la localisation.</string>
 </resources>

@@ -320,6 +320,7 @@
         <item>Notificações da pulseira: escolha apps e horário silencioso; lembretes do FitWren também vibram na pulseira</item>
         <item>Bateria da pulseira: no cartão do dispositivo, no novo widget \"Bateria da pulseira\" e alerta no celular quando estiver fraca</item>
         <item>Encontrar meu celular (a pulseira faz o celular tocar) e Encontrar minha pulseira; alerta no celular quando a pulseira desconecta</item>
+        <item>Respostas rápidas (SMS ao recusar na pulseira) e clima na pulseira (Open-Meteo, por cidade ou localização)</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
@@ -792,4 +793,13 @@
     <string name="band_replies_text">Ao recusar uma chamada na pulseira você escolhe uma destas e ela vai por SMS. As vazias são removidas.</string>
     <string name="band_replies_permission">Conceder permissões de SMS e telefone</string>
     <string name="band_replies_not_sent">A pulseira não está conectada. As respostas foram salvas; salve de novo quando conectar.</string>
+    <string name="band_weather">Clima</string>
+    <string name="band_weather_hint">Preenche a tela de clima da pulseira. Atualizado a cada hora pelo Open-Meteo; usa a internet.</string>
+    <string name="band_weather_place">Local do clima</string>
+    <string name="band_weather_place_none">Não definido</string>
+    <string name="band_weather_my_place">Minha localização</string>
+    <string name="band_weather_search">Buscar cidade</string>
+    <string name="band_weather_find">Buscar</string>
+    <string name="band_weather_use_location">Usar localização atual</string>
+    <string name="band_weather_not_found">Nada encontrado. Tente outro nome ou permita a localização.</string>
 </resources>

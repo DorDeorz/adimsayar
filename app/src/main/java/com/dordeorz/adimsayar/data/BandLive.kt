@@ -10,6 +10,7 @@ import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
 import com.dordeorz.adimsayar.band.BandResult
+import com.dordeorz.adimsayar.band.BandWeatherReport
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiLive
 import com.dordeorz.adimsayar.band.XiaomiSession
@@ -154,11 +155,14 @@ object BandLive {
         return true
     }
 
+    fun weather(report: BandWeatherReport) = post?.invoke { session?.sendWeather(report) }
+
     fun replySent(success: Boolean) = post?.invoke { session?.replySent(success) }
 
     private fun onBandEvent(context: Context, event: BandEvent) {
         when (event) {
             is BandEvent.FindPhone -> if (event.start) BandAlerts.startRinging(context) else BandAlerts.stopRinging(context, tellBand = false)
+            BandEvent.WeatherRequest -> BandWeather.refresh(context)
             BandEvent.BandFound -> {
                 findingBand = false
                 main.removeCallbacks(bandFound)
@@ -209,6 +213,7 @@ object BandLive {
                         complete(result)
                         Log.i(XiaomiBand.TAG, "live synced: $result")
                         onConnected()
+                        BandWeather.refresh(context)
                     },
                 ),
                 autoConnect = autoConnect,
