@@ -323,6 +323,7 @@
         <item>Быстрые ответы (SMS при отклонении на браслете) и погода на браслете (Open-Meteo, по городу или местоположению)</item>
         <item>Будильники браслета можно смотреть и менять в FitWren; события календаря отправляются на браслет</item>
         <item>Настройки переработаны: у каждой темы своя страница, на главной — краткая сводка</item>
+        <item>Циферблаты: смена и удаление циферблата браслета в FitWren, загрузка нового из файла .bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Экспорт и импорт в CSV</string>
     <string name="band_group_features">Функции браслета</string>
     <string name="band_group_alerts">Оповещения</string>
+    <string name="band_faces">Циферблаты</string>
+    <string name="band_faces_hint">Смените или удалите циферблат либо загрузите новый из файла .bin</string>
+    <string name="band_faces_install">Загрузить из файла</string>
+    <string name="band_faces_install_hint">Загружайте только циферблаты .bin, сделанные для этой модели браслета. Загрузка может занять несколько минут; держите браслет рядом с телефоном.</string>
+    <string name="band_faces_invalid">Этот файл не является циферблатом Xiaomi.</string>
+    <string name="band_faces_sending">Загрузка: %d%%</string>
+    <string name="band_faces_done">Циферблат загружен и выбран.</string>
+    <string name="band_faces_failed">Не удалось загрузить циферблат. Поднесите браслет ближе и повторите.</string>
+    <string name="band_faces_delete">Удалить</string>
 </resources>

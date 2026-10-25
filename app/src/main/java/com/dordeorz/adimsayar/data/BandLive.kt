@@ -6,6 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.dordeorz.adimsayar.background.BandAlerts
+import com.dordeorz.adimsayar.band.WatchfaceFile
+import com.dordeorz.adimsayar.band.WatchfaceUpload
 import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
@@ -173,6 +175,17 @@ object BandLive {
 
     fun calendar(events: List<BandCalendarEvent>?): Boolean = onConnection { session?.sendCalendar(events) }
 
+    fun requestWatchfaces(): Boolean = onConnection { session?.requestWatchfaces() }
+
+    fun setWatchface(id: String): Boolean = onConnection { session?.setWatchface(id) }
+
+    fun deleteWatchface(id: String): Boolean = onConnection { session?.deleteWatchface(id) }
+
+    /** Starts the upload on the connection; false when the band is not connected. */
+    fun installWatchface(file: WatchfaceFile): Boolean = onConnection {
+        if (session?.installWatchface(file) != true) BandFaces.onUpload(WatchfaceUpload.Done(false))
+    }
+
     /** Runs [action] on the connection; false when the band is not connected. */
     private fun onConnection(action: () -> Unit): Boolean {
         val send = post ?: return false
@@ -255,6 +268,7 @@ object BandLive {
             post = null
             findingBand = false
             BandSchedule.onDisconnected()
+            BandFaces.onDisconnected()
             if (wasConnected) watchLost(context)
             complete(if (result == BandResult.Ok) BandResult.ConnectFailed else result)
             Log.i(XiaomiBand.TAG, "live ended: $result, retry in ${retry / 1000}s")

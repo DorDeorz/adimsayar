@@ -323,6 +323,7 @@
         <item>Quick replies (text the caller when rejecting on the band) and weather on the band (Open-Meteo, by city or location)</item>
         <item>Band alarms can be seen and edited in FitWren; calendar events go to the band</item>
         <item>Settings reorganized: each topic has its own page, with a short summary of each on the main page</item>
+        <item>Watch faces: change or delete the band\'s face from FitWren, or upload a new one from a .bin file</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band notifications: app notifications, incoming calls and music control on the band (Xiaomi). No ongoing notification; works with notification access</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Export and import as CSV</string>
     <string name="band_group_features">Band features</string>
     <string name="band_group_alerts">Alerts</string>
+    <string name="band_faces">Watch faces</string>
+    <string name="band_faces_hint">Change or delete faces, or upload a new one from a .bin file</string>
+    <string name="band_faces_install">Upload from file</string>
+    <string name="band_faces_install_hint">Only upload .bin face files made for this band model. Uploading can take a few minutes; keep the band near the phone.</string>
+    <string name="band_faces_invalid">This file is not a Xiaomi watch face.</string>
+    <string name="band_faces_sending">Uploading: %d%%</string>
+    <string name="band_faces_done">Watch face uploaded and selected.</string>
+    <string name="band_faces_failed">The watch face could not be uploaded. Bring the band closer and try again.</string>
+    <string name="band_faces_delete">Delete</string>
 </resources>

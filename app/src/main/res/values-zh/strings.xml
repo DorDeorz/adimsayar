@@ -323,6 +323,7 @@
         <item>快捷回复（在手环上拒接时发短信）和手环天气（Open-Meteo，按城市或位置）</item>
         <item>在 FitWren 中查看和编辑手环闹钟；日历日程发送到手环</item>
         <item>设置已重新整理：每个主题都有单独页面，主页面显示各项简要摘要</item>
+        <item>表盘：在 FitWren 中更换或删除手环表盘，或从 .bin 文件上传新表盘</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">以 CSV 导出和导入</string>
     <string name="band_group_features">手环功能</string>
     <string name="band_group_alerts">提醒</string>
+    <string name="band_faces">表盘</string>
+    <string name="band_faces_hint">更换或删除表盘，或从 .bin 文件上传新表盘</string>
+    <string name="band_faces_install">从文件上传</string>
+    <string name="band_faces_install_hint">只上传为此手环型号制作的 .bin 表盘文件。上传可能需要几分钟，请让手环靠近手机。</string>
+    <string name="band_faces_invalid">此文件不是小米表盘。</string>
+    <string name="band_faces_sending">正在上传：%d%%</string>
+    <string name="band_faces_done">表盘已上传并选用。</string>
+    <string name="band_faces_failed">表盘上传失败。请让手环靠近后重试。</string>
+    <string name="band_faces_delete">删除</string>
 </resources>

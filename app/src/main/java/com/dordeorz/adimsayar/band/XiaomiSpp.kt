@@ -76,6 +76,11 @@ class XiaomiSpp(private val device: BluetoothDevice, private val session: Xiaomi
             onReady = session::startEncrypted,
         )
         session.send = protocol::send
+        // Parts are written right away; the next one waits a turn so incoming data is still read.
+        session.sendData = { bytes, done ->
+            protocol.sendData(bytes)
+            post { done(true) }
+        }
 
         suspend fun pump(timeoutMs: Long): Boolean? = try {
             when (val data = withTimeoutOrNull(timeoutMs) { incoming.receive() }) {

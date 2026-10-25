@@ -323,6 +323,7 @@
         <item>Risposte rapide (SMS quando rifiuti dal bracciale) e meteo sul bracciale (Open-Meteo, per città o posizione)</item>
         <item>Le sveglie del bracciale si vedono e modificano in FitWren; gli eventi del calendario vanno al bracciale</item>
         <item>Impostazioni riorganizzate: ogni argomento ha la sua pagina, con un breve riepilogo nella pagina principale</item>
+        <item>Quadranti: cambia o elimina il quadrante da FitWren, o caricane uno nuovo da un file .bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifiche sul braccialetto: notifiche delle app, chiamate e controllo musica (Xiaomi). Nessuna notifica fissa; usa l\'accesso alle notifiche</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Esporta e importa come CSV</string>
     <string name="band_group_features">Funzioni del braccialetto</string>
     <string name="band_group_alerts">Avvisi</string>
+    <string name="band_faces">Quadranti</string>
+    <string name="band_faces_hint">Cambia o elimina i quadranti, o caricane uno nuovo da un file .bin</string>
+    <string name="band_faces_install">Carica da file</string>
+    <string name="band_faces_install_hint">Carica solo quadranti .bin fatti per questo modello di braccialetto. Il caricamento può richiedere alcuni minuti; tieni il braccialetto vicino al telefono.</string>
+    <string name="band_faces_invalid">Questo file non è un quadrante Xiaomi.</string>
+    <string name="band_faces_sending">Caricamento: %d%%</string>
+    <string name="band_faces_done">Quadrante caricato e selezionato.</string>
+    <string name="band_faces_failed">Impossibile caricare il quadrante. Avvicina il braccialetto e riprova.</string>
+    <string name="band_faces_delete">Elimina</string>
 </resources>

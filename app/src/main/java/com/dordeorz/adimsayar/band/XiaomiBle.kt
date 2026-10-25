@@ -18,7 +18,7 @@ import java.util.UUID
 @SuppressLint("MissingPermission")
 class XiaomiBle(private val context: Context, private val device: BluetoothDevice, private val session: XiaomiSession) {
 
-    private class UuidSet(val service: UUID, val read: UUID, val write: UUID, val activity: UUID, val encrypted: Boolean)
+    private class UuidSet(val service: UUID, val read: UUID, val write: UUID, val activity: UUID, val upload: UUID?, val encrypted: Boolean)
 
     private sealed interface Event {
         data class Connection(val connected: Boolean) : Event
@@ -123,18 +123,26 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
         val readChar = service.getCharacteristic(set.read)
         val writeChar = service.getCharacteristic(set.write)
         val activityChar = service.getCharacteristic(set.activity)
+        val uploadChar = set.upload?.let { service.getCharacteristic(it) }
         val cipher = session.cipher
 
         val writeChannel = XiaomiChannel(cipher, { enqueue(Op.Write(writeChar, it)) }, {}, set.encrypted)
         val readChannel = XiaomiChannel(cipher, { enqueue(Op.Write(readChar, it)) }, session::onCommand, set.encrypted)
         val activityChannel = XiaomiChannel(cipher, { enqueue(Op.Write(activityChar, it)) }, session::onActivity, set.encrypted)
-        val channels = mapOf(readChar.uuid to readChannel, writeChar.uuid to writeChannel, activityChar.uuid to activityChannel)
+        val uploadChannel = uploadChar?.let { c -> XiaomiChannel(cipher, { enqueue(Op.Write(c, it)) }, {}, set.encrypted, incrementNonce = false) }
+        val channels = buildMap {
+            put(readChar.uuid, readChannel)
+            put(writeChar.uuid, writeChannel)
+            put(activityChar.uuid, activityChannel)
+            if (uploadChar != null && uploadChannel != null) put(uploadChar.uuid, uploadChannel)
+        }
         channels.values.forEach { it.maxWrite = maxWrite }
-        for (c in listOf(writeChar, readChar, activityChar)) {
+        for (c in listOfNotNull(writeChar, readChar, activityChar, uploadChar)) {
             gatt.setCharacteristicNotification(c, true)
             c.getDescriptor(CCCD)?.let { enqueue(Op.Descriptor(it)) }
         }
         session.send = { bytes, _ -> writeChannel.send(bytes) }
+        session.sendData = uploadChannel?.let { channel -> { bytes: ByteArray, done: (Boolean) -> Unit -> channel.send(bytes, done) } }
         session.onAuthenticated = {
             if (set.encrypted) {
                 cipher.sending = true
@@ -243,12 +251,13 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
     companion object {
         private fun uuid(short: String) = UUID.fromString("0000$short-0000-1000-8000-00805f9b34fb")
         private val UUID_SETS = listOf(
-            UuidSet(uuid("fe95"), uuid("0051"), uuid("0052"), uuid("0053"), encrypted = true),
+            UuidSet(uuid("fe95"), uuid("0051"), uuid("0052"), uuid("0053"), uuid("0055"), encrypted = true),
             UuidSet(
                 UUID.fromString("16186f00-0000-1000-8000-00807f9b34fb"),
                 UUID.fromString("16186f01-0000-1000-8000-00807f9b34fb"),
                 UUID.fromString("16186f02-0000-1000-8000-00807f9b34fb"),
                 UUID.fromString("16186f03-0000-1000-8000-00807f9b34fb"),
+                UUID.fromString("16186f04-0000-1000-8000-00807f9b34fb"),
                 encrypted = false,
             ),
             UuidSet(
@@ -256,6 +265,7 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
                 UUID.fromString("16187f02-0000-1000-8000-00807f9b34fb"),
                 UUID.fromString("16187f01-0000-1000-8000-00807f9b34fb"),
                 UUID.fromString("16187f03-0000-1000-8000-00807f9b34fb"),
+                UUID.fromString("16187f04-0000-1000-8000-00807f9b34fb"),
                 encrypted = false,
             ),
             UuidSet(
@@ -263,6 +273,7 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
                 UUID.fromString("1314f005-1000-9000-7000-301291e21220"),
                 UUID.fromString("1314f001-1000-9000-7000-301291e21220"),
                 UUID.fromString("1314f002-1000-9000-7000-301291e21220"),
+                UUID.fromString("1314f007-1000-9000-7000-301291e21220"),
                 encrypted = false,
             ),
             UuidSet(
@@ -270,6 +281,7 @@ class XiaomiBle(private val context: Context, private val device: BluetoothDevic
                 UUID.fromString("74950002-a7f3-424b-92dd-4a006a3aef56"),
                 UUID.fromString("74950001-a7f3-424b-92dd-4a006a3aef56"),
                 UUID.fromString("74950003-a7f3-424b-92dd-4a006a3aef56"),
+                null,
                 encrypted = false,
             ),
         )

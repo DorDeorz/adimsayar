@@ -323,6 +323,7 @@
         <item>Réponses rapides (SMS en refusant sur le bracelet) et météo sur le bracelet (Open-Meteo, par ville ou position)</item>
         <item>Les alarmes du bracelet se voient et se modifient dans FitWren ; les événements de l\'agenda vont au bracelet</item>
         <item>Réglages réorganisés : chaque thème a sa propre page, avec un court résumé sur la page principale</item>
+        <item>Cadrans : change ou supprime le cadran du bracelet depuis FitWren, ou envoie-en un nouveau depuis un fichier .bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notifications sur le bracelet : notifications des apps, appels et contrôle de la musique (Xiaomi). Pas de notification permanente ; utilise l\'accès aux notifications</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Exporter et importer en CSV</string>
     <string name="band_group_features">Fonctions du bracelet</string>
     <string name="band_group_alerts">Alertes</string>
+    <string name="band_faces">Cadrans</string>
+    <string name="band_faces_hint">Changer ou supprimer un cadran, ou en envoyer un nouveau depuis un fichier .bin</string>
+    <string name="band_faces_install">Envoyer un fichier</string>
+    <string name="band_faces_install_hint">N’envoie que des cadrans .bin faits pour ce modèle de bracelet. L’envoi peut prendre quelques minutes ; garde le bracelet près du téléphone.</string>
+    <string name="band_faces_invalid">Ce fichier n’est pas un cadran Xiaomi.</string>
+    <string name="band_faces_sending">Envoi : %d%%</string>
+    <string name="band_faces_done">Cadran envoyé et sélectionné.</string>
+    <string name="band_faces_failed">Le cadran n’a pas pu être envoyé. Rapproche le bracelet et réessaie.</string>
+    <string name="band_faces_delete">Supprimer</string>
 </resources>

@@ -57,6 +57,17 @@ class XiaomiSppProtocol(
         write(encodeV1(CHANNEL_PROTO_TX, FLAG_DEFAULT, OPCODE_SEND, serial, DATA_ENCRYPTED, body))
     }
 
+    /** One watch face upload part on the data channel: plain on version 2, sealed with counter 0 on version 1. */
+    fun sendData(chunk: ByteArray) {
+        if (version >= 2) {
+            write(encodeV2(PACKET_DATA, sequence++, byteArrayOf(V2_CHANNEL_DATA.toByte(), OPCODE_PLAIN.toByte()) + chunk))
+            return
+        }
+        val keys = checkNotNull(cipher.keys)
+        val sealed = XiaomiCrypto.encrypt(keys.encryptionKey, XiaomiCrypto.packetNonce(keys.encryptionNonce, 0), chunk)
+        write(encodeV1(CHANNEL_MASS, FLAG_DEFAULT, OPCODE_SEND, frameSerial++, DATA_ENCRYPTED, sealed))
+    }
+
     fun onBytes(data: ByteArray) {
         buffer += data
         while (buffer.isNotEmpty()) {
@@ -165,6 +176,7 @@ class XiaomiSppProtocol(
         const val CHANNEL_PROTO_RX = 1
         const val CHANNEL_PROTO_TX = 2
         const val CHANNEL_FITNESS = 3
+        const val CHANNEL_MASS = 5
         const val DATA_PLAIN = 0
         const val DATA_ENCRYPTED = 1
         const val DATA_AUTH = 2
@@ -177,6 +189,7 @@ class XiaomiSppProtocol(
         const val PACKET_SESSION_CONFIG = 2
         const val PACKET_DATA = 3
         const val V2_CHANNEL_PROTOBUF = 1
+        const val V2_CHANNEL_DATA = 2
         const val V2_CHANNEL_ACTIVITY = 5
         const val OPCODE_PLAIN = 1
         const val OPCODE_ENCRYPTED = 2

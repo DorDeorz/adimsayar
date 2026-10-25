@@ -323,6 +323,7 @@
         <item>Respostas rápidas (SMS ao recusar na pulseira) e clima na pulseira (Open-Meteo, por cidade ou localização)</item>
         <item>Alarmes da pulseira podem ser vistos e editados no FitWren; eventos da agenda vão para a pulseira</item>
         <item>Configurações reorganizadas: cada tema tem sua própria página, com um breve resumo na página principal</item>
+        <item>Mostradores: troque ou apague o mostrador da pulseira no FitWren, ou envie um novo de um arquivo .bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Exportar e importar como CSV</string>
     <string name="band_group_features">Funções da pulseira</string>
     <string name="band_group_alerts">Alertas</string>
+    <string name="band_faces">Mostradores</string>
+    <string name="band_faces_hint">Troque ou apague mostradores, ou envie um novo de um arquivo .bin</string>
+    <string name="band_faces_install">Enviar arquivo</string>
+    <string name="band_faces_install_hint">Envie apenas mostradores .bin feitos para este modelo de pulseira. O envio pode levar alguns minutos; mantenha a pulseira perto do telefone.</string>
+    <string name="band_faces_invalid">Este arquivo não é um mostrador Xiaomi.</string>
+    <string name="band_faces_sending">Enviando: %d%%</string>
+    <string name="band_faces_done">Mostrador enviado e selecionado.</string>
+    <string name="band_faces_failed">Não foi possível enviar o mostrador. Aproxime a pulseira e tente de novo.</string>
+    <string name="band_faces_delete">Apagar</string>
 </resources>

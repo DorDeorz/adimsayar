@@ -323,6 +323,7 @@
         <item>빠른 답장(밴드에서 거절할 때 SMS)과 밴드 날씨(Open-Meteo, 도시 또는 위치)</item>
         <item>밴드 알람을 FitWren에서 보고 편집, 캘린더 일정이 밴드로 전송</item>
         <item>설정 재구성: 항목마다 별도 페이지가 있고 메인 페이지에 각 항목의 요약이 표시됩니다</item>
+        <item>워치 페이스: FitWren에서 밴드 워치 페이스를 바꾸거나 삭제하고, .bin 파일에서 새로 올리기</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">CSV로 내보내기 및 가져오기</string>
     <string name="band_group_features">밴드 기능</string>
     <string name="band_group_alerts">경고</string>
+    <string name="band_faces">워치 페이스</string>
+    <string name="band_faces_hint">워치 페이스를 바꾸거나 삭제하고, .bin 파일에서 새로 올리기</string>
+    <string name="band_faces_install">파일에서 올리기</string>
+    <string name="band_faces_install_hint">이 밴드 모델용으로 만든 .bin 워치 페이스만 올리세요. 몇 분 걸릴 수 있으니 밴드를 휴대폰 가까이에 두세요.</string>
+    <string name="band_faces_invalid">이 파일은 Xiaomi 워치 페이스가 아닙니다.</string>
+    <string name="band_faces_sending">올리는 중: %d%%</string>
+    <string name="band_faces_done">워치 페이스를 올리고 선택했습니다.</string>
+    <string name="band_faces_failed">워치 페이스를 올리지 못했습니다. 밴드를 가까이 두고 다시 시도하세요.</string>
+    <string name="band_faces_delete">삭제</string>
 </resources>

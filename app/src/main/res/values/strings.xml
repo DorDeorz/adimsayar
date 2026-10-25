@@ -323,6 +323,7 @@
         <item>Hazır yanıtlar (bileklikten reddedilen aramaya SMS) ve bileklikte hava durumu (Open-Meteo, şehir ya da konum)</item>
         <item>Bileklik alarmları FitWren\'den görülür ve düzenlenir; takvim etkinlikleri bilekliğe gider</item>
         <item>Ayarlar yeniden düzenlendi: konular ayrı sayfalarda, ana sayfada her birinin kısa özeti görünür</item>
+        <item>Saat kadranları: bileklikteki kadranı FitWren\'den değiştir, sil ya da .bin dosyasından yeni kadran yükle</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Bileklik bildirimleri: uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider (Xiaomi). Kalıcı bildirim yok; bildirim erişimi izniyle çalışır</item>
@@ -830,4 +831,13 @@
     <string name="settings_data_summary">CSV olarak dışa ve içe aktar</string>
     <string name="band_group_features">Bileklik özellikleri</string>
     <string name="band_group_alerts">Uyarılar</string>
+    <string name="band_faces">Saat kadranları</string>
+    <string name="band_faces_hint">Kadranı değiştir, sil ya da .bin dosyasından yenisini yükle</string>
+    <string name="band_faces_install">Dosyadan yükle</string>
+    <string name="band_faces_install_hint">Yalnızca bu bileklik modeli için yapılmış .bin kadran dosyalarını yükle. Yükleme birkaç dakika sürebilir, bu sırada bilekliği telefona yakın tut.</string>
+    <string name="band_faces_invalid">Bu dosya bir Xiaomi saat kadranı değil.</string>
+    <string name="band_faces_sending">Yükleniyor: %d%%</string>
+    <string name="band_faces_done">Kadran yüklendi ve seçildi.</string>
+    <string name="band_faces_failed">Kadran yüklenemedi. Bilekliği yaklaştırıp yeniden dene.</string>
+    <string name="band_faces_delete">Sil</string>
 </resources>

@@ -323,6 +323,7 @@
         <item>Respuestas rápidas (SMS al rechazar en la pulsera) y el tiempo en la pulsera (Open-Meteo, por ciudad o ubicación)</item>
         <item>Las alarmas de la pulsera se ven y editan en FitWren; los eventos del calendario van a la pulsera</item>
         <item>Ajustes reorganizados: cada tema tiene su propia página, con un breve resumen en la página principal</item>
+        <item>Esferas: cambia o borra la esfera de la pulsera desde FitWren, o sube una nueva desde un archivo .bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificaciones en la pulsera: notificaciones de apps, llamadas y control de música (Xiaomi). Sin notificación permanente; usa el acceso a notificaciones</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Exportar e importar como CSV</string>
     <string name="band_group_features">Funciones de la pulsera</string>
     <string name="band_group_alerts">Avisos</string>
+    <string name="band_faces">Esferas</string>
+    <string name="band_faces_hint">Cambia o borra esferas, o sube una nueva desde un archivo .bin</string>
+    <string name="band_faces_install">Subir desde archivo</string>
+    <string name="band_faces_install_hint">Sube solo esferas .bin hechas para este modelo de pulsera. La subida puede tardar unos minutos; mantén la pulsera cerca del teléfono.</string>
+    <string name="band_faces_invalid">Este archivo no es una esfera de Xiaomi.</string>
+    <string name="band_faces_sending">Subiendo: %d%%</string>
+    <string name="band_faces_done">Esfera subida y seleccionada.</string>
+    <string name="band_faces_failed">No se pudo subir la esfera. Acerca la pulsera e inténtalo de nuevo.</string>
+    <string name="band_faces_delete">Borrar</string>
 </resources>

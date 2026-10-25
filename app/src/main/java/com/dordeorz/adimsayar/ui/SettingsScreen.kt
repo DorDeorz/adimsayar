@@ -19,6 +19,9 @@ import com.dordeorz.adimsayar.background.BandNotificationListener
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
+import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.band.WatchfaceUpload
+import androidx.compose.material3.LinearProgressIndicator
 import com.dordeorz.adimsayar.data.BandReplies
 import com.dordeorz.adimsayar.data.BandWeather
 import com.dordeorz.adimsayar.data.BandSchedule
@@ -775,6 +778,7 @@ private fun BandNotifyGroup() {
     var editReplies by remember { mutableStateOf(false) }
     var pickPlace by remember { mutableStateOf(false) }
     var showAlarms by remember { mutableStateOf(false) }
+    var showFaces by remember { mutableStateOf(false) }
     val calendar = remember(tick) { BandSchedule.calendarOn(context) }
     val calendarPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
         BandSchedule.setCalendar(context, ok)
@@ -879,6 +883,7 @@ private fun BandNotifyGroup() {
                 ClickRow(stringResource(R.string.band_weather_place), weatherPlace?.name ?: stringResource(R.string.band_weather_place_none)) { pickPlace = true }
             }
             ClickRow(stringResource(R.string.band_alarms), stringResource(R.string.band_alarms_hint)) { showAlarms = true }
+            ClickRow(stringResource(R.string.band_faces), stringResource(R.string.band_faces_hint)) { showFaces = true }
             val languageSent = stringResource(R.string.band_language_sent)
             val languageOffline = stringResource(R.string.band_alarms_offline)
             ClickRow(stringResource(R.string.band_language), stringResource(R.string.band_language_hint, Locales.current.getDisplayLanguage(Locales.current))) {
@@ -905,6 +910,7 @@ private fun BandNotifyGroup() {
     }
     if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
     if (showAlarms) AlarmsDialog(onDismiss = { showAlarms = false })
+    if (showFaces) WatchfacesDialog(onDismiss = { showFaces = false })
     if (pickPlace) {
         WeatherPlaceDialog(onDismiss = {
             pickPlace = false
@@ -1060,6 +1066,93 @@ private fun AlarmsDialog(onDismiss: () -> Unit) {
             editing = null
         })
     }
+}
+
+/** The band's watch faces: pick one, delete own ones, or upload a .bin file. */
+@Composable
+private fun WatchfacesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val faces by remember { BandFaces.faces() }.collectAsState()
+    val upload by remember { BandFaces.upload() }.collectAsState()
+    val connected by produceState(BandLive.connected) {
+        BandFaces.clearUpload()
+        BandFaces.refresh()
+        while (true) {
+            value = BandLive.connected
+            delay(NOTIFY_POLL_MS)
+        }
+    }
+    val invalid = stringResource(R.string.band_faces_invalid)
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val file = BandFaces.read(context, uri)
+            if (file == null) {
+                Toast.makeText(context, invalid, Toast.LENGTH_LONG).show()
+            } else {
+                BandFaces.install(file)
+            }
+        }
+    }
+    val sending = upload as? WatchfaceUpload.Sending
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_faces)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                val list = faces
+                when {
+                    !connected -> Text(stringResource(R.string.band_alarms_offline), style = MaterialTheme.typography.bodyMedium)
+                    list == null -> Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodyMedium)
+                }
+                when (val state = upload) {
+                    is WatchfaceUpload.Sending -> {
+                        Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
+                        LinearProgressIndicator(progress = { state.percent / 100f }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp))
+                    }
+                    is WatchfaceUpload.Done -> Text(
+                        stringResource(if (state.success) R.string.band_faces_done else R.string.band_faces_failed),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (state.success) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    )
+                    null -> Unit
+                }
+                LazyColumn(Modifier.heightIn(max = 340.dp)) {
+                    items(list.orEmpty(), key = { it.id }) { face ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectable(selected = face.active, enabled = sending == null, role = Role.RadioButton) { BandFaces.select(face) }
+                                .padding(vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            RadioButton(selected = face.active, onClick = null)
+                            Text(face.name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                            if (face.canDelete && !face.active) {
+                                TextButton(enabled = sending == null, onClick = { BandFaces.delete(face) }) {
+                                    Text(stringResource(R.string.band_faces_delete))
+                                }
+                            }
+                        }
+                    }
+                }
+                Text(
+                    stringResource(R.string.band_faces_install_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(
+                enabled = connected && sending == null,
+                onClick = { runCatching { picker.launch(arrayOf("application/octet-stream", "*/*")) } },
+            ) { Text(stringResource(R.string.band_faces_install)) }
+        },
+    )
 }
 
 @Composable

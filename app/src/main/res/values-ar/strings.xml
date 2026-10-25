@@ -323,6 +323,7 @@
         <item>ردود سريعة (رسالة SMS عند الرفض من السوار) والطقس على السوار (Open-Meteo، حسب المدينة أو الموقع)</item>
         <item>عرض منبهات السوار وتعديلها في FitWren، وإرسال أحداث التقويم إلى السوار</item>
         <item>إعادة تنظيم الإعدادات: لكل موضوع صفحته الخاصة مع ملخص قصير في الصفحة الرئيسية</item>
+        <item>واجهات الساعة: غيّر واجهة السوار أو احذفها من FitWren، أو ارفع واجهة جديدة من ملف ‎.bin</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">التصدير والاستيراد بصيغة CSV</string>
     <string name="band_group_features">ميزات السوار</string>
     <string name="band_group_alerts">التنبيهات</string>
+    <string name="band_faces">واجهات الساعة</string>
+    <string name="band_faces_hint">غيّر الواجهة أو احذفها أو ارفع واجهة جديدة من ملف ‎.bin</string>
+    <string name="band_faces_install">رفع من ملف</string>
+    <string name="band_faces_install_hint">ارفع فقط واجهات ‎.bin المصممة لطراز هذا السوار. قد يستغرق الرفع بضع دقائق؛ أبقِ السوار قرب الهاتف.</string>
+    <string name="band_faces_invalid">هذا الملف ليس واجهة ساعة من Xiaomi.</string>
+    <string name="band_faces_sending">جارٍ الرفع: %d%%</string>
+    <string name="band_faces_done">تم رفع الواجهة واختيارها.</string>
+    <string name="band_faces_failed">تعذّر رفع الواجهة. قرّب السوار وحاول مرة أخرى.</string>
+    <string name="band_faces_delete">حذف</string>
 </resources>

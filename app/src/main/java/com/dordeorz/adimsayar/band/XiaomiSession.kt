@@ -41,6 +41,12 @@ sealed interface BandEvent {
     }
 }
 
+/** Watch face upload progress: [percent] while sending, then [done] with the outcome. */
+sealed interface WatchfaceUpload {
+    class Sending(val percent: Int) : WatchfaceUpload
+    class Done(val success: Boolean) : WatchfaceUpload
+}
+
 /** Hooks for a connection that stays open after the first sync. */
 class XiaomiLive(val shouldSync: () -> Boolean, val onSynced: suspend (BandResult) -> Unit)
 
@@ -74,6 +80,17 @@ class XiaomiSession(
     /** Battery level 0–100 and whether it is charging (null when the band did not say). */
     var onBattery: (level: Int, charging: Boolean?) -> Unit = { _, _ -> }
 
+    /**
+     * Sends one data upload part on the link's upload channel and reports whether the band took it.
+     * Null when the link has no upload channel.
+     */
+    var sendData: ((ByteArray, (Boolean) -> Unit) -> Unit)? = null
+
+    /** The band's watch faces, after a list request or any change. */
+    var onWatchfaces: (List<BandWatchface>) -> Unit = {}
+
+    var onUpload: (WatchfaceUpload) -> Unit = {}
+
     val cipher = XiaomiCipher()
     var authenticated = false
         private set
@@ -94,6 +111,12 @@ class XiaomiSession(
     // Weather places on the band (key to name); null until it answered, empty when it keeps only one.
     private var weatherPlaces: List<Pair<String, String>>? = null
     private var reported = false
+    private var installing: WatchfaceFile? = null
+    private var uploadParts: List<ByteArray> = emptyList()
+    private var nextPart = 0
+    private var waitingPart = false
+    private var pumpingParts = false
+    private var lastPercent = -1
 
     fun startEncrypted() {
         if (secret == null) {
@@ -213,6 +236,32 @@ class XiaomiSession(
     fun sendCalendar(events: List<BandCalendarEvent>?) {
         if (!authenticated) return
         send(command(XiaomiSchedule.CALENDAR_TYPE, XiaomiSchedule.CALENDAR_SET).message(14, XiaomiSchedule.calendar(events)).toByteArray(), false)
+    }
+
+    fun requestWatchfaces() {
+        if (!authenticated) return
+        send(command(XiaomiWatchface.TYPE, XiaomiWatchface.LIST).toByteArray(), false)
+    }
+
+    fun setWatchface(id: String) {
+        if (!authenticated) return
+        send(command(XiaomiWatchface.TYPE, XiaomiWatchface.SET).message(6, XiaomiWatchface.byId(id)).toByteArray(), false)
+    }
+
+    fun deleteWatchface(id: String) {
+        if (!authenticated) return
+        send(command(XiaomiWatchface.TYPE, XiaomiWatchface.DELETE).message(6, XiaomiWatchface.byId(id)).toByteArray(), false)
+    }
+
+    /** Starts installing [file]; false when the link cannot upload or another upload runs. */
+    fun installWatchface(file: WatchfaceFile): Boolean {
+        if (!authenticated || sendData == null || installing != null) return false
+        installing = file
+        lastPercent = -1
+        onUpload(WatchfaceUpload.Sending(0))
+        log("watchface install ${file.id} (${file.bytes.size} bytes)")
+        send(command(XiaomiWatchface.TYPE, XiaomiWatchface.INSTALL).message(6, XiaomiWatchface.installStart(file)).toByteArray(), false)
+        return true
     }
 
     /** Replaces the band's quick replies; padded to [min] and cut to [max] as the band requires. */
@@ -353,6 +402,8 @@ class XiaomiSession(
                 weatherPlaces = if (cmd.uint(STATUS) == 1L) emptyList() else XiaomiWeather.locations(cmd.message(12))
                 log("weather places: $weatherPlaces")
             }
+            type == XiaomiWatchface.TYPE -> onWatchfaceCommand(subtype, cmd)
+            type == XiaomiWatchface.UPLOAD_TYPE && subtype == XiaomiWatchface.UPLOAD_START -> onUploadStart(cmd)
             type == XiaomiWeather.TYPE -> log("weather $subtype status ${cmd.uint(STATUS)}")
             type == XiaomiSchedule.TYPE && subtype == XiaomiSchedule.ALARMS_GET -> {
                 val (alarms, max) = XiaomiSchedule.alarms(cmd.message(19))
@@ -374,6 +425,81 @@ class XiaomiSession(
 
     fun onActivity(chunk: ByteArray) {
         assembler.add(chunk)?.let(::onFile)
+    }
+
+    private fun onWatchfaceCommand(subtype: Int?, cmd: ProtoMessage) {
+        when (subtype) {
+            XiaomiWatchface.LIST -> onWatchfaces(XiaomiWatchface.list(cmd))
+            XiaomiWatchface.SET, XiaomiWatchface.DELETE -> requestWatchfaces()
+            XiaomiWatchface.INSTALL -> {
+                val file = installing ?: return
+                when (val status = cmd.message(6)?.uint(5)?.toInt()) {
+                    0 -> send(command(XiaomiWatchface.UPLOAD_TYPE, XiaomiWatchface.UPLOAD_START).message(24, XiaomiWatchface.uploadRequest(file.bytes)).toByteArray(), false)
+                    // Already on the band: just switch to it.
+                    2 -> finishUpload(true)
+                    else -> {
+                        log("watchface install status $status")
+                        finishUpload(false)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun onUploadStart(cmd: ProtoMessage) {
+        val file = installing ?: return
+        val ack = cmd.message(24)?.message(2)
+        if (ack == null || (ack.uint(2) ?: 0L) != 0L || (ack.uint(4) ?: 0L) != 0L) {
+            log("upload refused: ${ack?.uint(2)} ${ack?.uint(4)}")
+            finishUpload(false)
+            return
+        }
+        val chunk = ack.uint(5)?.toInt()?.takeIf { it > 4 } ?: XiaomiWatchface.DEFAULT_CHUNK
+        uploadParts = XiaomiWatchface.parts(XiaomiWatchface.UPLOAD_WATCHFACE, file.bytes, chunk)
+        nextPart = 0
+        waitingPart = false
+        log("upload ${uploadParts.size} parts of $chunk")
+        pumpParts()
+    }
+
+    // A link may report a part as sent right away, so parts go out in a loop rather than recursively.
+    private fun pumpParts() {
+        val sender = sendData ?: return finishUpload(false)
+        if (pumpingParts) return
+        pumpingParts = true
+        while (installing != null && !waitingPart && nextPart < uploadParts.size) {
+            val index = nextPart++
+            waitingPart = true
+            sender(uploadParts[index]) { ok -> onPartSent(index, ok) }
+        }
+        pumpingParts = false
+    }
+
+    private fun onPartSent(index: Int, ok: Boolean) {
+        waitingPart = false
+        if (installing == null) return
+        if (!ok) {
+            log("upload part ${index + 1} refused")
+            finishUpload(false)
+            return
+        }
+        val percent = (index + 1) * 100 / uploadParts.size
+        if (percent != lastPercent) {
+            lastPercent = percent
+            onUpload(WatchfaceUpload.Sending(percent))
+        }
+        if (index == uploadParts.lastIndex) finishUpload(true) else pumpParts()
+    }
+
+    private fun finishUpload(success: Boolean) {
+        val file = installing ?: return
+        installing = null
+        uploadParts = emptyList()
+        nextPart = 0
+        waitingPart = false
+        log("watchface ${file.id} ${if (success) "installed" else "failed"}")
+        if (success) setWatchface(file.id)
+        onUpload(WatchfaceUpload.Done(success))
     }
 
     private fun onWatchNonce(cmd: ProtoMessage) {

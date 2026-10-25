@@ -323,6 +323,7 @@
         <item>Schnellantworten (SMS beim Ablehnen am Band) und Wetter am Band (Open-Meteo, per Stadt oder Standort)</item>
         <item>Band-Wecker in FitWren ansehen und bearbeiten; Kalendertermine gehen ans Band</item>
         <item>Einstellungen neu geordnet: jedes Thema hat eine eigene Seite, mit kurzer Übersicht auf der Hauptseite</item>
+        <item>Zifferblätter: in FitWren wechseln oder löschen, oder ein neues aus einer .bin-Datei laden</item>
     </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
@@ -829,4 +830,13 @@
     <string name="settings_data_summary">Als CSV exportieren und importieren</string>
     <string name="band_group_features">Armband-Funktionen</string>
     <string name="band_group_alerts">Warnungen</string>
+    <string name="band_faces">Zifferblätter</string>
+    <string name="band_faces_hint">Zifferblatt wechseln, löschen oder ein neues aus einer .bin-Datei laden</string>
+    <string name="band_faces_install">Aus Datei laden</string>
+    <string name="band_faces_install_hint">Lade nur .bin-Zifferblätter, die für dieses Armbandmodell gemacht sind. Das Hochladen kann einige Minuten dauern; halte das Armband in der Nähe des Telefons.</string>
+    <string name="band_faces_invalid">Diese Datei ist kein Xiaomi-Zifferblatt.</string>
+    <string name="band_faces_sending">Wird hochgeladen: %d%%</string>
+    <string name="band_faces_done">Zifferblatt hochgeladen und ausgewählt.</string>
+    <string name="band_faces_failed">Das Zifferblatt konnte nicht hochgeladen werden. Bring das Armband näher und versuche es erneut.</string>
+    <string name="band_faces_delete">Löschen</string>
 </resources>
