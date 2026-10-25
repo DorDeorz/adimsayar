@@ -124,7 +124,7 @@ object BandDirect {
                     BandHealth.saveMinutes(context, file.minutes)
                 }
                 files++
-                true
+                !(file.samplesOnly && file.minutes.isEmpty())
             }
             if (isEnabled(context) && files > 0) remerge(context)
             if (result == BandResult.Ok) p.edit { putLong(KEY_LAST_SYNC, System.currentTimeMillis()) }

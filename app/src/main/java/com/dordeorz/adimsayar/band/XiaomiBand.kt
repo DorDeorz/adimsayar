@@ -263,6 +263,9 @@ class XiaomiBand(private val context: Context, private val address: String, priv
     private fun onFile(data: ByteArray, writeChannel: XiaomiChannel) {
         val requested = fetching ?: return
         val id = if (data.size >= XiaomiFileId.SIZE) XiaomiFileId.from(data) else null
+        if (id != null && !id.isDailyDetails) {
+            Log.i(TAG, "file ${id.flags}v${id.version} ${data.size}B: " + data.take(HEX_BYTES).joinToString("") { "%02x".format(it) })
+        }
         val file = when {
             id == null -> null
             id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
@@ -366,6 +369,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         private const val TYPE_AUTH = 1
         private const val TYPE_SYSTEM = 2
         private const val TAG = "FitWrenBand"
+        private const val HEX_BYTES = 160
         private const val TYPE_HEALTH = 8
         private const val AUTH_NONCE = 26
         private const val AUTH_STEP3 = 27
