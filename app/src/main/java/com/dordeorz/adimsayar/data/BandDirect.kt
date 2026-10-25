@@ -111,7 +111,8 @@ object BandDirect {
             }
             val repository = StepRepository.get(context)
             var files = 0
-            val result = XiaomiBand(context, address, secret).sync { file ->
+            val band = XiaomiBand(context, address, secret)
+            val result = band.sync { file ->
                 val sleep = file.sleep
                 if (sleep != null) {
                     BandHealth.saveSleep(context, sleep)
@@ -127,7 +128,7 @@ object BandDirect {
             }
             if (isEnabled(context) && files > 0) remerge(context)
             if (result == BandResult.Ok) p.edit { putLong(KEY_LAST_SYNC, System.currentTimeMillis()) }
-            record(context, source, result, files)
+            record(context, source, result, files, band.fileSummary)
         } finally {
             running.unlock()
         }
@@ -151,10 +152,10 @@ object BandDirect {
         return hours
     }
 
-    private fun record(context: Context, source: ReadSource, result: BandResult, files: Int = 0): BandResult {
+    private fun record(context: Context, source: ReadSource, result: BandResult, files: Int = 0, summary: String = ""): BandResult {
         prefs(context).edit { putString(KEY_LAST_RESULT, result.name) }
         val text = if (result == BandResult.Ok) {
-            context.getString(R.string.log_band_synced, files)
+            context.getString(R.string.log_band_synced, files) + if (summary.isEmpty()) "" else " ($summary)"
         } else {
             context.getString(R.string.log_band_failed, context.getString(resultText(result)))
         }

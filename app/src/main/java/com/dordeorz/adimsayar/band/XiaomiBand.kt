@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
+import android.util.Log
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothManager
@@ -88,6 +89,9 @@ class XiaomiBand(private val context: Context, private val address: String, priv
     private val assembler = XiaomiFileAssembler()
     private val fileIds = ArrayList<XiaomiFileId>()
     private val todayIds = HashSet<XiaomiFileId>()
+
+    var fileSummary: String = ""
+        private set
     private var fetching: XiaomiFileId? = null
     private var result: BandResult? = null
     private val pendingStore = ArrayDeque<BandFile>()
@@ -249,6 +253,8 @@ class XiaomiBand(private val context: Context, private val address: String, priv
             }
             type == TYPE_HEALTH && subtype == HEALTH_PAST -> {
                 cmd.message(10)?.bytes(2)?.let { fileIds += XiaomiFileId.list(it) }
+                fileSummary = fileIds.groupBy { "${it.flags}v${it.version}" }.entries.joinToString(" ") { "${it.key}×${it.value.size}" }
+                Log.i(TAG, "files: $fileSummary")
                 fetchNext(writeChannel)
             }
         }
@@ -359,6 +365,7 @@ class XiaomiBand(private val context: Context, private val address: String, priv
         private val CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
         private const val TYPE_AUTH = 1
         private const val TYPE_SYSTEM = 2
+        private const val TAG = "FitWrenBand"
         private const val TYPE_HEALTH = 8
         private const val AUTH_NONCE = 26
         private const val AUTH_STEP3 = 27

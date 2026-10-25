@@ -11,7 +11,7 @@ data class XiaomiFileId(val epochSeconds: Long, val timezone: Int, val version: 
 
     val isSleep: Boolean get() = flags shr 7 == 0 && (flags shr 2) and 0x1f == SUBTYPE_SLEEP && version <= 4
 
-    val isManualSamples: Boolean get() = flags == SUBTYPE_MANUAL shl 2 && version == 2
+    val isManualSamples: Boolean get() = flags == SUBTYPE_MANUAL shl 2
 
     val isWanted: Boolean get() = isDailyDetails || isSleep || isManualSamples
 
