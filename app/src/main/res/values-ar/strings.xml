@@ -316,6 +316,15 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>إعادة تصميم قسم الصحة: نوم الليلة الماضية، بطاقة لكل قياس ورسوم يومية (7 و30 و90 يومًا). الإعدادات مجمّعة؛ السوار المتصل في الأعلى وزر \"مزامنة\" في اليوم</item>
+        <item>اتصال مباشر بالسوار: الإعدادات ← الاتصال بالسوار مباشرة يقرأ خطوات Xiaomi Smart Band 8 دون Mi Fitness أو Health Connect</item>
+        <item>مع الاتصال المباشر تأتي أيضًا نبضات القلب وSpO₂ ومراحل النوم من السوار وتظهر في تبويب الصحة</item>
+        <item>تُقرأ آخر 7 أيام من Health Connect من جديد، فلا تضيع خطوات السوار المتأخرة. أُضيف \"إعادة المزامنة\" إلى الإعدادات</item>
+        <item>أصبح الترخيص AGPL-3.0: يعتمد اتصال السوار على شيفرة Gadgetbridge</item>
+        <item>الاتصال المباشر يدعم الآن المزيد من أساور وساعات Xiaomi (Band 9 وRedmi Watch 4 وغيرها، تجريبي)؛ وتعرض بطاقة الإعدادات اسم الطراز المتصل وصورته</item>
+        <item>يمكن أيضًا توصيل Mi Band 2–6 وAmazfit (Bip وGTS وGTR وغيرها) مباشرة (تجريبي)؛ يُجلب المفتاح داخل التطبيق بحساب Zepp Life / Amazfit</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>لوحة ألوان كاملة: لا ألوان بنفسجية عند إيقاف الألوان الديناميكية، ونص الأزرار مقروء في الوضع الداكن</item>
         <item>لم تعد الأرقام تقفز أثناء العد؛ لا وميض داكن عند الفتح في الوضع الفاتح</item>
@@ -453,6 +462,11 @@
 
     <string name="oem_transsion_1">الإدارة التلقائية ← اختر FitWren من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
     <string name="wearable_card_title">استخدام خطوات السوار</string>
+    <string name="wearable_resync">إعادة مزامنة السوار</string>
+    <string name="wearable_resync_hint">يعيد قراءة بيانات السوار لآخر 30 يومًا من Health Connect، بما فيها الساعات التي كتبها تطبيقه متأخرًا.</string>
+    <string name="wearable_resync_started">جارٍ إعادة قراءة بيانات السوار…</string>
+    <string name="wearable_resync_done">أُعيدت قراءة بيانات السوار</string>
+    <string name="wearable_resync_failed">تعذّرت قراءة بيانات السوار، حاول مجددًا بعد قليل</string>
     <string name="wearable_card_text">تُقرأ الخطوات التي تكتبها تطبيقات الأساور مثل Mi Fitness في Health Connect. في الساعات التي عدّ فيها السوار يُستخدم عدّه، وفي غيرها عدّ الهاتف. إذا سمحت بذلك، يعرض السجل أيضًا التمارين والمسافة والسعرات ونبض القلب والنوم.</string>
     <string name="wearable_permission_denied">لم يُمنح إذن قراءة الخطوات من Health Connect.</string>
     <string name="wearable_unavailable">تطبيق Health Connect غير موجود على هذا الهاتف. على Android 13 وما قبله، ثبّت تطبيق Health Connect من متجر Play.</string>
@@ -633,4 +647,87 @@
     <string name="widget_summary_description">الخطوات والماء والنوم والنبض في أداة واحدة</string>
     <string name="widget_summary_distance">المسافة</string>
     <string name="widget_summary_calories">السعرات</string>
+    <string name="band_title">الاتصال بالسوار مباشرة</string>
+    <string name="band_hint">احصل على الخطوات من سوار Xiaomi أو Amazfit دون تطبيقه</string>
+    <string name="band_step_about">كيف يعمل</string>
+    <string name="band_about_text">يتصل FitWren بالسوار عبر البلوتوث بنفسه ويقرأ الخطوات مباشرة. لا حاجة إلى Mi Fitness أو Health Connect.\n\nتم اختباره: Xiaomi Smart Band 8. تجريبي (لم يُجرَّب بعد): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. الطرازات الأقدم المستخدمة مع Zepp Life مدعومة تجريبيًا أيضًا: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. يُؤخذ مفتاحها من حساب Zepp Life (على الحاسوب: github.com/argrento/huami-token).\n\nيتصل السوار بتطبيق واحد فقط في كل مرة. بعد الحصول على المفتاح، احذف Mi Fitness من الهاتف. لا تُزل السوار من داخل Mi Fitness، وإلا ستتم إعادة ضبط السوار ويتغير المفتاح.</string>
+    <string name="band_step_key">المفتاح</string>
+    <string name="band_cloud_button">احصل على المفتاح بحساب Xiaomi</string>
+    <string name="band_cloud_help">تفتح صفحة تسجيل الدخول الخاصة بـ Xiaomi. سجّل الدخول بالحساب الذي تستخدمه في Mi Fitness ثم أكّد. لا يرى FitWren كلمة المرور أبدًا.</string>
+    <string name="band_cloud_open">افتح صفحة تسجيل الدخول</string>
+    <string name="band_cloud_qr">أو امسح هذا الرمز بتطبيق Xiaomi Home على هاتف آخر.</string>
+    <string name="band_cloud_waiting">بانتظار تسجيل الدخول. عُد إلى FitWren بعد التأكيد.</string>
+    <string name="band_cloud_loading">جارٍ جلب الأساور…</string>
+    <string name="band_cloud_none">لم يتم العثور على سوار في هذا الحساب.</string>
+    <string name="band_cloud_failed">لم يكتمل تسجيل الدخول إلى Xiaomi. تحقّق من الاتصال بالإنترنت وحاول مجددًا.</string>
+    <string name="band_cloud_done">تم حفظ المفتاح والعنوان لـ %1$s.</string>
+    <string name="band_zepp_title">الحصول عليه بحساب Zepp Life / Amazfit</string>
+    <string name="band_zepp_help">لـ Mi Band 2–6 وAmazfit. أدخل البريد وكلمة المرور اللذين تستخدمهما في Zepp Life. تُرسل كلمة المرور إلى خادم Zepp فقط ولا يحفظها FitWren. لا يعمل هذا إذا كنت تدخل إلى Zepp Life بحساب Xiaomi.</string>
+    <string name="band_zepp_email">البريد الإلكتروني</string>
+    <string name="band_zepp_password">كلمة المرور</string>
+    <string name="band_zepp_button">الحصول على المفتاح من Zepp</string>
+    <string name="band_zepp_failed">تعذّر تسجيل الدخول إلى Zepp. تحقق من البريد وكلمة المرور ثم أعد المحاولة.</string>
+    <string name="band_key_manual">أو أدخل المفتاح بنفسك:</string>
+    <string name="band_key_help">السوار محمي بمفتاح مرتبط بحساب Xiaomi الخاص بك. عليك الحصول على المفتاح مرة واحدة على حاسوب:\n1. على الحاسوب، نزّل token_extractor.exe من github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor وافتحه.\n2. سجّل الدخول بحساب Xiaomi الذي تستخدمه في Mi Fitness.\n3. عندما يسأل عن المنطقة، اتركها فارغة واضغط Enter.\n4. ابحث عن سوارك في القائمة. اكتب هنا الرمز المكوّن من 32 حرفًا من سطر TOKEN.</string>
+    <string name="band_key_label">المفتاح (32 حرفًا)</string>
+    <string name="band_key_save">حفظ</string>
+    <string name="band_key_saved">تم حفظ المفتاح</string>
+    <string name="band_key_invalid">يجب أن يتكون المفتاح من 32 حرفًا (0-9، a-f)</string>
+    <string name="band_step_device">السوار</string>
+    <string name="band_device_none">لم يتم اختيار سوار بعد.</string>
+    <string name="band_device_selected">المختار: %1$s</string>
+    <string name="band_scan">البحث عن السوار</string>
+    <string name="band_scanning">جارٍ البحث… أبقِ السوار قريبًا من الهاتف.</string>
+    <string name="band_scan_empty">لم يتم العثور على سوار. هل البلوتوث مفعّل؟ قد يكون Mi Fitness متصلًا بالسوار.</string>
+    <string name="band_address_help">أو اكتب العنوان بنفسك (يظهر في Mi Fitness أو في أداة المفتاح)</string>
+    <string name="band_address_label">عنوان السوار</string>
+    <string name="band_address_save">حفظ العنوان</string>
+    <string name="band_address_invalid">عنوان غير صالح. مثال: D0:62:2C:F7:01:6B</string>
+    <string name="band_scan_denied">لم يتم منح إذن البلوتوث.</string>
+    <string name="band_step_test">اتصال واختبار</string>
+    <string name="band_test">اتصال واختبار</string>
+    <string name="band_testing">جارٍ الاتصال…</string>
+    <string name="band_last_sync">آخر مزامنة: %1$s</string>
+    <string name="band_enable">أخذ الخطوات من السوار</string>
+    <string name="band_enable_hint">عند التفعيل، يتصل FitWren بالسوار عند فتح التطبيق وكل 15 دقيقة. ويتم إيقاف خيار Health Connect.</string>
+    <string name="band_result_ok">تم الاتصال وقراءة الخطوات</string>
+    <string name="band_result_bluetooth_off">البلوتوث مغلق</string>
+    <string name="band_result_permission">لا يوجد إذن بلوتوث</string>
+    <string name="band_result_connect">تعذّر الاتصال بالسوار. قد يكون بعيدًا أو قد يكون Mi Fitness متصلًا.</string>
+    <string name="band_result_unsupported">هذا الجهاز غير مدعوم بعد</string>
+    <string name="band_result_auth">لم يتم قبول المفتاح. تحقق من المفتاح.</string>
+    <string name="band_result_timeout">لم يستجب السوار</string>
+    <string name="log_band_synced">السوار (مباشر): تمت قراءة %1$d ملفات</string>
+    <string name="log_band_failed">السوار (مباشر): %1$s</string>
+    <string name="yesterday">أمس</string>
+    <string name="health_sleep_title">النوم</string>
+    <string name="health_last_night">الليلة الماضية</string>
+    <string name="health_sleep_shortest">أقصر نوم</string>
+    <string name="health_tap_hint">اضغط على عمود لترى قيمة ذلك اليوم في الأعلى</string>
+    <string name="health_oxygen_average">متوسط SpO₂</string>
+    <string name="health_stress_title">التوتر</string>
+    <string name="health_stress_average">متوسط التوتر</string>
+    <string name="health_stress_hint">يقيس السوار التوتر من 1 إلى 100: 0–39 مسترخٍ، 40–59 طبيعي، 60–79 متوسط، 80–100 مرتفع.</string>
+    <string name="stress_relaxed">مسترخٍ</string>
+    <string name="stress_normal">طبيعي</string>
+    <string name="stress_medium">متوسط</string>
+    <string name="stress_high">مرتفع</string>
+    <string name="health_exercise_title">التمارين</string>
+    <string name="health_exercise_recent">آخر التمارين</string>
+    <string name="health_activity_title">النشاط</string>
+    <string name="settings_phone_source">الهاتف</string>
+    <string name="settings_wearable_source">سوار أو ساعة</string>
+    <string name="settings_appearance">المظهر واللغة</string>
+    <string name="source_sensor">مستشعر خطوات الهاتف</string>
+    <string name="source_sensor_hint">يحسب مستشعر الهاتف خطواتك.</string>
+    <string name="source_none">عدم الاستخدام</string>
+    <string name="source_none_hint">تُحسب خطوات الهاتف فقط.</string>
+    <string name="band_model_experimental">%1$s · تجريبي</string>
+    <string name="source_direct">اتصال مباشر (Xiaomi، Amazfit)</string>
+    <string name="source_connect">عبر Health Connect</string>
+    <string name="source_merge_hint">إذا كنت تستخدم سوارًا، يُستخدم عدّه في الساعات التي ترتديه فيها وعدّ الهاتف في بقية الساعات.</string>
+    <string name="source_direct_manage">إعدادات السوار</string>
+    <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
+    <string name="band_reconnect">إعادة الاتصال</string>
+    <string name="band_sync_now">مزامنة</string>
 </resources>

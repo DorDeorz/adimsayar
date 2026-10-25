@@ -23,7 +23,6 @@ import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.widget.Widgets
 import com.dordeorz.adimsayar.data.WearableHealth
-import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.weekStartOf
 import java.text.NumberFormat
 import java.time.LocalDate
@@ -77,7 +76,7 @@ object Reminders {
         val strings = Locales.wrap(context)
         if (settings.streakReminder) streakCheck(strings, history, StreakFreezes.load(context), today, settings)
         if (settings.weeklySummary && today.dayOfWeek == settings.weekStart.minus(1)) {
-            val health = if (WearableSteps.isEnabled(context)) healthLines(strings, WearableHealth.period(context, today, HEALTH_DAYS)) else emptyList()
+            val health = if (WearableHealth.isEnabled(context)) healthLines(strings, WearableHealth.period(context, today, HEALTH_DAYS)) else emptyList()
             weeklySummary(strings, history, today, settings, health)
         }
     }

@@ -1,0 +1,4 @@
+- Direct band connection: steps, heart rate, SpO2, stress and sleep straight from the band, without Mi Fitness or Health Connect. Tested on Xiaomi Smart Band 8; other Xiaomi and Huami/Amazfit models experimental
+- Band key from your Xiaomi or Zepp account inside the app
+- Health tab with per-metric cards and 7/30/90-day charts; regrouped Settings; "Sync" button on Today
+- License changed to AGPL-3.0 (based on Gadgetbridge)

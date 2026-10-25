@@ -11,7 +11,7 @@
 
 <p><b>History</b>: monthly calendar, hour-by-hour chart, records, yearly summary and streak freezes.</p>
 
-<p><b>Health (optional)</b>: reads steps, sleep stages, heart rate, SpO2, workouts and active calories that bands such as the Mi Band write to Health Connect. Read only, never written. Weight log with BMI.</p>
+<p><b>Health (optional)</b>: connects to Xiaomi and Amazfit bands directly over Bluetooth, or reads steps, sleep stages, heart rate, SpO2, workouts and active calories that bands such as the Mi Band write to Health Connect. Read only, never written. Weight log with BMI.</p>
 
 <p><b>Medals and goals</b>: permanent medals, levels, weekly challenges and virtual routes such as Istanbul to Ankara.</p>
 

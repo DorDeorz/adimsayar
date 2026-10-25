@@ -42,6 +42,7 @@ import com.dordeorz.adimsayar.data.NO_ROUTE
 import com.dordeorz.adimsayar.data.NO_ROUTE_START
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
+import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -91,6 +92,8 @@ class MainActivity : ComponentActivity() {
     private var xiaomiProblem by mutableStateOf<XiaomiProblem?>(null)
     private var wearableAvailable by mutableStateOf(false)
     private var wearableEnabled by mutableStateOf(false)
+    private var bandDirectEnabled by mutableStateOf(false)
+    private var bandSyncing by mutableStateOf(false)
     private var wearableSync: Job? = null
     private var healthRefresh by mutableIntStateOf(0)
     private var requestedTab by mutableStateOf<Tab?>(null)
@@ -107,6 +110,9 @@ class MainActivity : ComponentActivity() {
         onServiceEnabledChange = ::changeServiceEnabled,
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
+        onWearableResync = ::resyncWearable,
+        onBandDirectChange = ::changeBandDirect,
+        onSyncBand = ::syncBandNow,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = {
             settingsStore.setDynamicColor(it)
@@ -334,6 +340,8 @@ class MainActivity : ComponentActivity() {
                             xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
                             wearableAvailable = wearableAvailable,
                             wearableEnabled = wearableEnabled,
+                            bandDirectEnabled = bandDirectEnabled,
+                            bandSyncing = bandSyncing,
                             logLines = logLines,
                             version = BuildConfig.VERSION_NAME,
                             weights = weights,
@@ -378,6 +386,14 @@ class MainActivity : ComponentActivity() {
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
+        bandDirectEnabled = BandDirect.isEnabled(this)
+        if (bandDirectEnabled) {
+            AppScope.launch(Dispatchers.IO) {
+                val result = BandDirect.sync(appContext, ReadSource.App)
+                Widgets.updateAll(appContext)
+                if (result != null) withContext(Dispatchers.Main) { healthRefresh++ }
+            }
+        }
     }
 
     override fun onResume() {
@@ -508,10 +524,66 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private suspend fun changeBandDirect(enabled: Boolean) {
+        if (enabled) {
+            wearableEnabled = false
+            wearableSync?.cancel()
+            wearableSync = null
+        }
+        val appContext = applicationContext
+        withContext(Dispatchers.IO) {
+            BandDirect.setEnabled(appContext, enabled)
+            Widgets.updateAll(appContext)
+        }
+        bandDirectEnabled = enabled
+        healthRefresh++
+    }
+
+    private fun syncBandNow() {
+        if (!bandDirectEnabled) {
+            if (wearableEnabled) resyncWearable()
+            return
+        }
+        if (bandSyncing) return
+        val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
+        if (!BandDirect.granted(appContext, BandDirect.CONNECT_PERMISSIONS)) {
+            Toast.makeText(appContext, strings.getString(R.string.band_result_permission), Toast.LENGTH_LONG).show()
+            return
+        }
+        bandSyncing = true
+        AppScope.launch(Dispatchers.IO) {
+            val result = BandDirect.sync(appContext, ReadSource.App, force = true)
+            Widgets.updateAll(appContext)
+            withContext(Dispatchers.Main) {
+                bandSyncing = false
+                healthRefresh++
+                val text = result?.let { BandDirect.resultText(it) } ?: R.string.band_result_connect
+                Toast.makeText(appContext, strings.getString(text), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun resyncWearable() {
+        val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
+        Toast.makeText(appContext, strings.getString(R.string.wearable_resync_started), Toast.LENGTH_SHORT).show()
+        AppScope.launch(Dispatchers.IO) {
+            val today = WearableSteps.resync(appContext)
+            Widgets.updateAll(appContext)
+            withContext(Dispatchers.Main) {
+                val text = if (today == null) strings.getString(R.string.wearable_resync_failed) else strings.getString(R.string.wearable_resync_done)
+                Toast.makeText(appContext, text, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     private fun enableWearable() {
         wearableEnabled = true
         val appContext = applicationContext
         AppScope.launch(Dispatchers.IO) {
+            if (BandDirect.isEnabled(appContext)) BandDirect.setEnabled(appContext, false)
+            withContext(Dispatchers.Main) { bandDirectEnabled = false }
             WearableSteps.setEnabled(appContext, true)
             withContext(Dispatchers.Main) { startWearableSync() }
         }

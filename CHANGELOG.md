@@ -2,6 +2,23 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.10.0
+
+- Saate doğrudan bağlantı (Ayarlar → Saate doğrudan bağlan): FitWren, Xiaomi Smart Band 8 bilekliğe Bluetooth ile kendisi bağlanır ve dakikalık adımları okur. Mi Fitness ve Health Connect gerekmez. Bileklik saatleri ayrı tabloda (`band_hours`) saklanır ve telefonla saat saat birleştirilir. Uygulama açılınca ve 15 dakikada bir eşitlenir. Anahtar uygulama içinden Xiaomi hesabıyla giriş yapılarak alınır (QR kodlu giriş, şifre FitWren'e girilmez); elle girmek de mümkün. Bileklik aramada bulunmazsa adres elle yazılabilir. Bilekliğin takılı olduğu saatler (adım ya da nabız kaydı olan) adımsız olsa bile bileklikten sayılır; telefonun o saatlerde saydığı adımlar eklenmez. Şimdilik yalnızca adımlar okunur.
+- Saate doğrudan bağlıyken nabız (dakikalık), SpO₂, stres ve uyku (süre ve evreler) de bileklikten okunur, `band_samples` ve `band_sleep` tablolarında saklanır; Sağlık sekmesi, geçmiş günler, Sağlık ve Özet widget'ları bu verileri gösterir. Bileklikte verisi olmayan eski günler için Health Connect'te kayıtlı veriler (örneğin Mi Fitness'ın yazdıkları) kullanılır.
+- Health Connect seçeneği ayrı olarak duruyor (Samsung ve diğer saatler için). İkisi aynı anda açık olmaz.
+- Health Connect'ten her okumada son 7 gün yeniden okunuyor; Mi Fitness'ın geç yazdığı adımlar kaçmıyor. Ayarlar'a "Bileklik verilerini yeniden eşitle" eklendi.
+- Health Connect uykusu: üst üste binen ya da iki kez yazılmış uyku kayıtları artık bir kez sayılıyor ve uyku süresine uyanık geçen dakikalar katılmıyor. Bugün kartı, geçmiş günler ve Sağlık özeti aynı hesabı kullanıyor.
+- Sağlık sekmesi yeniden düzenlendi: uyku, dinlenme nabzı, SpO₂, stres, egzersiz ve aktivite ayrı kartlarda. Her kartta en üstte son gün (uykuda son gece, evreleriyle), altında 7/30/90 günlük günlük grafik; bir çubuğa dokununca o gün gösterilir. Stres yalnızca doğrudan bağlantıda görünür. `BandPeriod` günlük SpO₂ ve stres taşıyor.
+- Ayarlar kartlı gruplara ayrıldı. "Adım kaynağı" iki seçim oldu: telefon (sensör ya da HyperOS kaydı) ve bileklik (kullanma, doğrudan bağlantı, Health Connect). Bileklik bağlıyken en üstte resmi, adı, son eşitleme ve "Yeniden bağlan" tuşu var. Tema, widget ve dil "Görünüm ve dil" altında.
+- Bugün sayfasında Paylaş'ın yanına "Eşitle" tuşu: doğrudan bağlantıda bilekliği hemen okur, Health Connect'te son 7 günü yeniden okur.
+- SpO₂ artık iki yerden daha okunuyor: elle yapılan ölçümler (bileklikte "manuel ölçüm" dosyası, nabız ve stres de içinde) ve uyku sırasında alınan SpO₂ ve nabız örnekleri. Aynı dakikaya gelen değerler birleştiriliyor, biri diğerini silmiyor.
+- Doğrudan bağlantı Xiaomi ailesine genişledi (deneysel, yalnızca Band 8 denendi): şifresiz BLE kullanan eski modeller (Mi Watch Lite, Redmi Watch, Mi Watch Color Sport, Redmi Band, 4C) ve klasik Bluetooth (SPP v1/v2) kullanan yeniler (Band 8 Pro, Band 9/9 Pro, Redmi Watch 4/5, Watch S1 Pro/S3). Model Bluetooth adından tanınır; ikisini de destekleyenlerde önce BLE denenir. Protokol kodu (`XiaomiSession`) bağlantı türünden ayrıldı.
+- Huami/Amazfit ailesi de doğrudan bağlanıyor (deneysel): Mi Band 2–6, Amazfit Band/Bip/GTS/GTR/T-Rex/Neo, Zepp E. AES ile kimlik doğrulama, ardından dakikalık adım ve nabız okunur. Veri bileklikte bırakılır; her eşitleme son okunan saatin başından devam eder. Anahtar kurulum ekranında Zepp Life / Amazfit hesabıyla (e-posta ve şifre) giriş yapılarak uygulama içinden alınır; şifre yalnızca Zepp sunucusuna gider, kaydedilmez. Xiaomi hesabıyla açılmış Zepp Life hesaplarında çalışmaz; orada anahtar elle girilir.
+- Ayarlar'daki cihaz kartı ve kurulumdaki arama listesi bağlı modele göre ad ve resim gösteriyor (bileklik, kare saat, yuvarlak saat); denenmemiş modellerde "deneysel" yazıyor. Health Connect'te son 7 günde veri yazan saat/bilekliğin adı gösteriliyor.
+- Lisans MIT'den AGPL-3.0'a geçti: bileklik bağlantısı Gadgetbridge'in Xiaomi koduna dayanıyor.
+- Veritabanı sürümü 6 (yeni `band_hours`, `band_samples`, `band_sleep` tabloları).
+
 ## 0.9.6
 
 - Renk paleti tamamlandı: dinamik renk kapalıyken veya Android 12 öncesinde mor tonlar kalmadı, koyu temada dolgulu buton yazıları okunuyor; widget'lar da aynı paleti kullanıyor

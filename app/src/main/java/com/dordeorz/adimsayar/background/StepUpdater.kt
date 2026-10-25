@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.background
 
 import android.content.Context
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
@@ -28,6 +29,7 @@ object StepUpdater {
             }
         }
         if (WearableSteps.isEnabled(context)) WearableSteps.sync(context, source)
+        if (BandDirect.isEnabled(context)) BandDirect.sync(context, source)
         Widgets.updateAll(context)
     }
 }

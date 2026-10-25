@@ -84,6 +84,8 @@ data class MainUiState(
     val xiaomiProblem: XiaomiProblem?,
     val wearableAvailable: Boolean,
     val wearableEnabled: Boolean,
+    val bandDirectEnabled: Boolean,
+    val bandSyncing: Boolean,
     val logLines: List<String>,
     val version: String,
     val weights: List<Weight>,
@@ -92,7 +94,9 @@ data class MainUiState(
     val water: Map<LocalDate, Int>,
     val freezes: Set<LocalDate>,
     val challenges: ChallengeSummary,
-)
+) {
+    val healthEnabled: Boolean get() = wearableEnabled || bandDirectEnabled
+}
 
 class MainActions(
     val onRequestPermission: () -> Unit,
@@ -101,6 +105,9 @@ class MainActions(
     val onServiceEnabledChange: (Boolean) -> Unit,
     val onXiaomiEnabledChange: (Boolean) -> Unit,
     val onWearableEnabledChange: (Boolean) -> Unit,
+    val onWearableResync: () -> Unit,
+    val onBandDirectChange: suspend (Boolean) -> Unit,
+    val onSyncBand: () -> Unit,
     val onThemeModeChange: (ThemeMode) -> Unit,
     val onDynamicColorChange: (Boolean) -> Unit,
     val onWidgetOpacityChange: (Int) -> Unit,

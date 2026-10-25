@@ -316,6 +316,15 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Saúde redesenhada: sono da última noite, um cartão por dado e histórico diário (7, 30, 90 dias). Configurações agrupadas; pulseira conectada no topo e botão \"Sincronizar\" em Hoje</item>
+        <item>Ligação direta à pulseira: Definições → Ligar diretamente à pulseira lê os passos da Xiaomi Smart Band 8 sem Mi Fitness nem Health Connect</item>
+        <item>Com a ligação direta, o ritmo cardíaco, o SpO₂ e as fases do sono também vêm da pulseira e aparecem no separador Saúde</item>
+        <item>Os últimos 7 dias voltam a ser lidos do Health Connect, assim os passos da pulseira que chegam tarde não se perdem. \"Sincronizar novamente\" adicionado às Definições</item>
+        <item>A licença agora é AGPL-3.0: a ligação à pulseira baseia-se no código do Gadgetbridge</item>
+        <item>A ligação direta agora suporta mais pulseiras e relógios Xiaomi (Band 9, Redmi Watch 4 e outros, experimental); o cartão nas Definições mostra o nome e a imagem do modelo ligado</item>
+        <item>Mi Band 2–6 e Amazfit (Bip, GTS, GTR e outros) também se ligam diretamente (experimental); a chave é obtida na app com a conta Zepp Life / Amazfit</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Paleta de cores completa: sem tons roxos com cor dinâmica desligada, texto dos botões legível no tema escuro</item>
         <item>Os números não pulam mais ao contar; sem flash escuro ao abrir no tema claro</item>
@@ -453,6 +462,11 @@
 
     <string name="oem_transsion_1">Gerenciamento automático → selecione FitWren na lista de apps e ative as três permissões</string>
     <string name="wearable_card_title">Usar passos da pulseira</string>
+    <string name="wearable_resync">Ressincronizar a pulseira</string>
+    <string name="wearable_resync_hint">Lê de novo no Health Connect os dados da pulseira dos últimos 30 dias, incluindo horas que o app dela gravou com atraso.</string>
+    <string name="wearable_resync_started">Lendo de novo os dados da pulseira…</string>
+    <string name="wearable_resync_done">Dados da pulseira lidos de novo</string>
+    <string name="wearable_resync_failed">Não foi possível ler os dados da pulseira, tente de novo daqui a pouco</string>
     <string name="wearable_card_text">Lê os passos que apps de pulseira como o Mi Fitness gravam no Health Connect. Nas horas contadas pela pulseira, é usada a contagem dela; nas outras, a do telefone. Se você permitir, o histórico também mostra treinos, distância, calorias, frequência cardíaca e sono.</string>
     <string name="wearable_permission_denied">A permissão para ler passos do Health Connect não foi concedida.</string>
     <string name="wearable_unavailable">O Health Connect não está neste telefone. No Android 13 ou anterior, instale o app Health Connect pela Play Store.</string>
@@ -633,4 +647,87 @@
     <string name="widget_summary_description">Passos, água, sono e pulso em um widget</string>
     <string name="widget_summary_distance">Distância</string>
     <string name="widget_summary_calories">Calorias</string>
+    <string name="band_title">Ligar diretamente à pulseira</string>
+    <string name="band_hint">Obter os passos de uma pulseira Xiaomi ou Amazfit sem a sua app</string>
+    <string name="band_step_about">Como funciona</string>
+    <string name="band_about_text">O FitWren liga-se sozinho à pulseira por Bluetooth e lê os passos diretamente. Não é preciso o Mi Fitness nem o Health Connect.\n\nTestado: Xiaomi Smart Band 8. Experimental (ainda não testado): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Os modelos antigos usados com o Zepp Life também são experimentais: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. A chave vem da conta Zepp Life (num computador: github.com/argrento/huami-token).\n\nA pulseira liga-se a uma app de cada vez. Depois de obter a chave, desinstale o Mi Fitness do telefone. Não remova a pulseira dentro do Mi Fitness, senão a pulseira é reposta e a chave muda.</string>
+    <string name="band_step_key">Chave</string>
+    <string name="band_cloud_button">Obter a chave com a conta Xiaomi</string>
+    <string name="band_cloud_help">Abre-se a página de início de sessão da Xiaomi. Inicia sessão com a conta que usas no Mi Fitness e confirma. O FitWren nunca vê a tua palavra-passe.</string>
+    <string name="band_cloud_open">Abrir página de início de sessão</string>
+    <string name="band_cloud_qr">Ou lê este código com a app Xiaomi Home noutro telemóvel.</string>
+    <string name="band_cloud_waiting">A aguardar o início de sessão. Volta ao FitWren depois de confirmar.</string>
+    <string name="band_cloud_loading">A obter as tuas pulseiras…</string>
+    <string name="band_cloud_none">Nenhuma pulseira encontrada nesta conta.</string>
+    <string name="band_cloud_failed">O início de sessão Xiaomi não terminou. Verifica a ligação à internet e tenta de novo.</string>
+    <string name="band_cloud_done">Chave e endereço guardados para %1$s.</string>
+    <string name="band_zepp_title">Obter com uma conta Zepp Life / Amazfit</string>
+    <string name="band_zepp_help">Para Mi Band 2–6 e Amazfit. Escreva o e-mail e a palavra-passe que usa no Zepp Life. A palavra-passe vai só para o servidor da Zepp; o FitWren não a guarda. Não funciona se entrar no Zepp Life com uma conta Xiaomi.</string>
+    <string name="band_zepp_email">E-mail</string>
+    <string name="band_zepp_password">Palavra-passe</string>
+    <string name="band_zepp_button">Obter a chave com a Zepp</string>
+    <string name="band_zepp_failed">O início de sessão na Zepp falhou. Verifique o e-mail e a palavra-passe e tente de novo.</string>
+    <string name="band_key_manual">Ou escreve a chave manualmente:</string>
+    <string name="band_key_help">A pulseira está protegida por uma chave ligada à sua conta Xiaomi. Tem de a obter uma vez num computador:\n1. Num computador, transfira e abra token_extractor.exe em github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Inicie sessão com a conta Xiaomi que usa no Mi Fitness.\n3. Quando pedir uma região, deixe em branco e prima Enter.\n4. Encontre a sua pulseira na lista. Escreva aqui o código de 32 caracteres da linha TOKEN.</string>
+    <string name="band_key_label">Chave (32 caracteres)</string>
+    <string name="band_key_save">Guardar</string>
+    <string name="band_key_saved">Chave guardada</string>
+    <string name="band_key_invalid">A chave deve ter 32 caracteres (0-9, a-f)</string>
+    <string name="band_step_device">Pulseira</string>
+    <string name="band_device_none">Ainda não escolheu uma pulseira.</string>
+    <string name="band_device_selected">Escolhida: %1$s</string>
+    <string name="band_scan">Procurar pulseira</string>
+    <string name="band_scanning">A procurar… Mantenha a pulseira perto do telefone.</string>
+    <string name="band_scan_empty">Nenhuma pulseira encontrada. O Bluetooth está ligado? O Mi Fitness pode estar ligado à pulseira.</string>
+    <string name="band_address_help">Ou escreve o endereço manualmente (aparece no Mi Fitness ou na ferramenta da chave)</string>
+    <string name="band_address_label">Endereço da pulseira</string>
+    <string name="band_address_save">Guardar endereço</string>
+    <string name="band_address_invalid">Endereço inválido. Exemplo: D0:62:2C:F7:01:6B</string>
+    <string name="band_scan_denied">A permissão de Bluetooth não foi concedida.</string>
+    <string name="band_step_test">Ligar e testar</string>
+    <string name="band_test">Ligar e testar</string>
+    <string name="band_testing">A ligar…</string>
+    <string name="band_last_sync">Última sincronização: %1$s</string>
+    <string name="band_enable">Usar os passos da pulseira</string>
+    <string name="band_enable_hint">Quando ativo, o FitWren liga-se à pulseira ao abrir a app e a cada 15 minutos. A opção Health Connect é desligada.</string>
+    <string name="band_result_ok">Ligado, os passos foram lidos</string>
+    <string name="band_result_bluetooth_off">O Bluetooth está desligado</string>
+    <string name="band_result_permission">Sem permissão de Bluetooth</string>
+    <string name="band_result_connect">Não foi possível ligar à pulseira. Pode estar longe ou o Mi Fitness pode estar ligado.</string>
+    <string name="band_result_unsupported">Este dispositivo ainda não é suportado</string>
+    <string name="band_result_auth">A chave não foi aceite. Verifique a chave.</string>
+    <string name="band_result_timeout">A pulseira não respondeu</string>
+    <string name="log_band_synced">Pulseira (direta): %1$d ficheiros lidos</string>
+    <string name="log_band_failed">Pulseira (direta): %1$s</string>
+    <string name="yesterday">Ontem</string>
+    <string name="health_sleep_title">Sono</string>
+    <string name="health_last_night">Última noite</string>
+    <string name="health_sleep_shortest">Sono mais curto</string>
+    <string name="health_tap_hint">Toque numa barra para ver acima o valor desse dia</string>
+    <string name="health_oxygen_average">SpO₂ média</string>
+    <string name="health_stress_title">Estresse</string>
+    <string name="health_stress_average">Estresse médio</string>
+    <string name="health_stress_hint">A pulseira mede o estresse de 1 a 100: 0–39 relaxado, 40–59 normal, 60–79 médio, 80–100 alto.</string>
+    <string name="stress_relaxed">Relaxado</string>
+    <string name="stress_normal">Normal</string>
+    <string name="stress_medium">Médio</string>
+    <string name="stress_high">Alto</string>
+    <string name="health_exercise_title">Exercício</string>
+    <string name="health_exercise_recent">Treinos recentes</string>
+    <string name="health_activity_title">Atividade</string>
+    <string name="settings_phone_source">Telefone</string>
+    <string name="settings_wearable_source">Pulseira ou relógio</string>
+    <string name="settings_appearance">Aparência e idioma</string>
+    <string name="source_sensor">Sensor de passos do telefone</string>
+    <string name="source_sensor_hint">O próprio sensor do telefone conta seus passos.</string>
+    <string name="source_none">Não usar</string>
+    <string name="source_none_hint">Apenas os passos do telefone são contados.</string>
+    <string name="band_model_experimental">%1$s · experimental</string>
+    <string name="source_direct">Conexão direta (Xiaomi, Amazfit)</string>
+    <string name="source_connect">Pelo Health Connect</string>
+    <string name="source_merge_hint">Se você usa uma pulseira, nas horas em que a usa vale a contagem dela e nas outras a do telefone.</string>
+    <string name="source_direct_manage">Configurações da pulseira</string>
+    <string name="device_connect_hint">Os dados são lidos do Health Connect</string>
+    <string name="band_reconnect">Reconectar</string>
+    <string name="band_sync_now">Sincronizar</string>
 </resources>

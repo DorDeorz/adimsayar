@@ -1,0 +1,4 @@
+- Saate doğrudan bağlantı: adım, nabız, SpO2, stres ve uyku Mi Fitness ve Health Connect olmadan bileklikten okunur. Xiaomi Smart Band 8 ile denendi; diğer Xiaomi ve Huami/Amazfit modelleri deneysel
+- Bileklik anahtarı uygulama içinden Xiaomi ya da Zepp hesabıyla alınır
+- Sağlık sekmesinde ayrı kartlar ve 7/30/90 günlük grafikler; Ayarlar yeniden düzenlendi; Bugün'de "Eşitle"
+- Lisans AGPL-3.0 oldu (Gadgetbridge tabanlı)

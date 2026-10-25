@@ -51,6 +51,8 @@ class BandPeriod(
     val distanceKm: Double?,
     val activeKcal: Map<LocalDate, Long>,
     val oxygen: OxygenSummary?,
+    val oxygenDaily: Map<LocalDate, Double>,
+    val stressDaily: Map<LocalDate, Long>,
     val sleepAllowed: Boolean,
     val exerciseAllowed: Boolean,
     val oxygenAllowed: Boolean,
@@ -96,7 +98,16 @@ object WearableHealth {
         HealthPermission.getReadPermission(OxygenSaturationRecord::class),
     )
 
+    fun isEnabled(context: Context): Boolean = WearableSteps.isEnabled(context) || BandDirect.isEnabled(context)
+
     suspend fun day(context: Context, date: LocalDate): BandDay? {
+        if (!BandDirect.isEnabled(context)) return connectDay(context, date)
+        val band = BandHealth.day(context, date)
+        if (band.heart != null || band.sleepMinutes != null) return band
+        return connectDay(context, date) ?: band
+    }
+
+    private suspend fun connectDay(context: Context, date: LocalDate): BandDay? {
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             read(HealthConnectClient.getOrCreate(context), date, ZoneId.systemDefault())
@@ -108,6 +119,29 @@ object WearableHealth {
     }
 
     suspend fun period(context: Context, to: LocalDate, days: Long): BandPeriod? {
+        if (!BandDirect.isEnabled(context)) return connectPeriod(context, to, days)
+        val band = BandHealth.period(context, to, days)
+        val old = connectPeriod(context, to, days) ?: return band
+        val oldResting = old.resting.toMap()
+        return BandPeriod(
+            days = band.days,
+            nights = old.nights + band.nights,
+            resting = band.resting.map { (date, bpm) -> date to (bpm ?: oldResting[date]) },
+            restingBefore = band.restingBefore ?: old.restingBefore,
+            exercises = old.exercises,
+            distanceKm = old.distanceKm,
+            activeKcal = old.activeKcal,
+            oxygen = band.oxygen ?: old.oxygen,
+            oxygenDaily = old.oxygenDaily + band.oxygenDaily,
+            stressDaily = band.stressDaily,
+            sleepAllowed = true,
+            exerciseAllowed = true,
+            oxygenAllowed = true,
+            missingPermissions = false,
+        )
+    }
+
+    private suspend fun connectPeriod(context: Context, to: LocalDate, days: Long): BandPeriod? {
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             readPeriod(HealthConnectClient.getOrCreate(context), to.minusDays(days - 1), to, ZoneId.systemDefault())
@@ -119,6 +153,7 @@ object WearableHealth {
     }
 
     suspend fun sources(context: Context, days: Long): SourceReport? {
+        if (BandDirect.isEnabled(context)) return null
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
@@ -176,6 +211,7 @@ object WearableHealth {
     }
 
     suspend fun snapshot(context: Context): HealthSnapshot? {
+        if (BandDirect.isEnabled(context)) return BandHealth.snapshot(context)
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
@@ -190,7 +226,8 @@ object WearableHealth {
                     .filter { it.endTime >= from && it.endTime < to }
                     .groupBy { it.metadata.dataOrigin.packageName }
                     .values
-                    .maxOfOrNull { sessions -> sessions.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                    .mapNotNull { sessions -> HealthMath.night(sessions.map(::span))?.minutes }
+                    .maxOrNull()
             } else {
                 null
             }
@@ -221,6 +258,13 @@ object WearableHealth {
     }
 
     suspend fun heartDay(context: Context, date: LocalDate): HeartDay? {
+        if (!BandDirect.isEnabled(context)) return connectHeartDay(context, date)
+        val band = BandHealth.heartDay(context, date)
+        if (band.slots.isNotEmpty()) return band
+        return connectHeartDay(context, date) ?: band
+    }
+
+    private suspend fun connectHeartDay(context: Context, date: LocalDate): HeartDay? {
         if (!WearableSteps.isAvailable(context)) return null
         return try {
             val client = HealthConnectClient.getOrCreate(context)
@@ -324,15 +368,16 @@ object WearableHealth {
             }
         }
 
-        val oxygen = if (allowed(OxygenSaturationRecord::class)) {
-            readAll(client, OxygenSaturationRecord::class, start, end)
-                .map { it.percentage.value }
-                .filter { it > 0.0 }
-                .takeIf { it.isNotEmpty() }
-                ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        val oxygenReadings = if (allowed(OxygenSaturationRecord::class)) {
+            readAll(client, OxygenSaturationRecord::class, start, end).filter { it.percentage.value > 0.0 }
         } else {
-            null
+            emptyList()
         }
+        val oxygen = oxygenReadings.map { it.percentage.value }
+            .takeIf { it.isNotEmpty() }
+            ?.let { OxygenSummary(it.average(), it.min(), it.size) }
+        val oxygenDaily = oxygenReadings.groupBy { it.time.atZone(zone).toLocalDate() }
+            .mapValues { (_, list) -> list.map { it.percentage.value }.average() }
 
         return BandPeriod(
             days = days,
@@ -343,6 +388,8 @@ object WearableHealth {
             distanceKm = distance,
             activeKcal = activeKcal,
             oxygen = oxygen,
+            oxygenDaily = oxygenDaily,
+            stressDaily = emptyMap(),
             sleepAllowed = allowed(SleepSessionRecord::class),
             exerciseAllowed = allowed(ExerciseSessionRecord::class),
             oxygenAllowed = allowed(OxygenSaturationRecord::class),
@@ -409,7 +456,8 @@ object WearableHealth {
                 .filter { it.endTime >= from && it.endTime < to }
                 .groupBy { it.metadata.dataOrigin.packageName }
                 .values
-                .maxOfOrNull { sessions -> sessions.sumOf { Duration.between(it.startTime, it.endTime).toMinutes() } }
+                .mapNotNull { sessions -> HealthMath.night(sessions.map(::span))?.minutes }
+                .maxOrNull()
         } else {
             null
         }

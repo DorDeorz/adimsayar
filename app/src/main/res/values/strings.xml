@@ -199,7 +199,7 @@
     <string name="year_medals">Kazanılan madalya</string>
 
     <string name="health_off_title">Bileklik kapalı</string>
-    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar\'da "Bileklik adımlarını kullan"ı aç.</string>
+    <string name="health_off_text">Uyku, nabız ve egzersiz özetini görmek için Ayarlar → Adım kaynağı\'ndan bir bileklik ya da saat seç.</string>
     <string name="health_title">Sağlık özeti (bileklik)</string>
     <string name="health_last_days">Son %1$d gün</string>
     <string name="health_loading">Health Connect\'ten okunuyor…</string>
@@ -316,6 +316,15 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Sağlık sekmesi yenilendi: son gece uykusu, her veri için ayrı kart ve günlük geçmiş grafiği (7, 30, 90 gün). Ayarlar gruplandı; bağlı bileklik en üstte, Bugün\'de \"Eşitle\" tuşu</item>
+        <item>Saate doğrudan bağlantı: Ayarlar → Adım kaynağı → Doğrudan bağlantı ile Xiaomi Smart Band 8 adımları Mi Fitness ve Health Connect olmadan okunur</item>
+        <item>Saate doğrudan bağlıyken nabız, SpO₂ ve uyku evreleri de bileklikten alınıyor ve Sağlık sekmesinde görünüyor</item>
+        <item>Health Connect\'ten son 7 gün yeniden okunuyor; geç gelen bileklik adımları kaçmıyor. Ayarlar\'a \"Yeniden eşitle\" eklendi</item>
+        <item>Lisans AGPL-3.0 oldu: bileklik bağlantısı Gadgetbridge\'in koduna dayanıyor</item>
+        <item>Doğrudan bağlantı daha çok Xiaomi bileklik ve saatini destekliyor (Band 9, Redmi Watch 4 ve diğerleri, deneysel); Ayarlar\'daki kart bağlı modelin adını ve resmini gösteriyor</item>
+        <item>Mi Band 2–6 ve Amazfit (Bip, GTS, GTR ve diğerleri) de doğrudan bağlanıyor (deneysel); anahtar Zepp Life / Amazfit hesabıyla uygulama içinden alınır</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Renkler tamamlandı: dinamik renk kapalıyken mor tonlar kalmadı, koyu temada buton yazıları okunuyor</item>
         <item>Rakamlar artık sayarken kaymıyor; açılışta açık temada koyu ekran çıkmıyor</item>
@@ -454,6 +463,11 @@
 
     <string name="oem_transsion_1">Otomatik yönetim → uygulama listesinden FitWren\'i seç, üç izni de aç</string>
     <string name="wearable_card_title">Bileklik adımlarını kullan</string>
+    <string name="wearable_resync">Bileklik verilerini yeniden eşitle</string>
+    <string name="wearable_resync_hint">Son 30 günün bileklik verilerini Health Connect\'ten baştan okur. Bileklik uygulaması eksik saatleri geç yazdıysa onları da alır.</string>
+    <string name="wearable_resync_started">Bileklik verileri yeniden okunuyor…</string>
+    <string name="wearable_resync_done">Bileklik verileri yeniden okundu</string>
+    <string name="wearable_resync_failed">Bileklik verileri okunamadı, biraz sonra tekrar dene</string>
     <string name="wearable_card_text">Mi Fitness gibi bileklik uygulamalarının Health Connect\'e yazdığı adımlar okunur. Bilekliğin adım saydığı saatlerde onun sayısı, diğer saatlerde telefonun sayısı kullanılır. İzin verirsen egzersiz, mesafe, kalori, nabız ve uyku da Geçmiş\'te gösterilir.</string>
     <string name="wearable_permission_denied">Health Connect adım okuma izni verilmedi.</string>
     <string name="wearable_unavailable">Health Connect bu telefonda yok. Android 13 ve öncesinde Play Store\'dan Health Connect uygulamasını kur.</string>
@@ -634,4 +648,87 @@
     <string name="widget_summary_description">Adım, su, uyku ve nabız tek widget\'ta</string>
     <string name="widget_summary_distance">Mesafe</string>
     <string name="widget_summary_calories">Kalori</string>
+    <string name="band_title">Saate doğrudan bağlan</string>
+    <string name="band_hint">Xiaomi ve Amazfit bileklikten adımları uygulamasız al</string>
+    <string name="band_step_about">Nasıl çalışır</string>
+    <string name="band_about_text">FitWren bilekliğe Bluetooth ile kendisi bağlanır ve adımları doğrudan okur. Mi Fitness ve Health Connect gerekmez.\n\nDenenmiş model: Xiaomi Smart Band 8. Deneysel (henüz denenmedi): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Zepp Life ile kullanılan eski modeller de deneysel: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. Bunların anahtarı Zepp Life hesabından alınır (bilgisayarda github.com/argrento/huami-token).\n\nBileklik aynı anda tek uygulamaya bağlanır. Anahtarı aldıktan sonra Mi Fitness\'ı telefondan sil. Bilekliği Mi Fitness içinden kaldırma, yoksa bileklik sıfırlanır ve anahtar değişir.</string>
+    <string name="band_step_key">Anahtar</string>
+    <string name="band_cloud_button">Xiaomi hesabıyla anahtarı al</string>
+    <string name="band_cloud_help">Xiaomi\'nin kendi giriş sayfası açılır. Mi Fitness\'ta kullandığın hesapla giriş yap ve girişi onayla. Şifreni FitWren görmez.</string>
+    <string name="band_cloud_open">Giriş sayfasını aç</string>
+    <string name="band_cloud_qr">Ya da bu kodu başka bir telefondaki Xiaomi Home uygulamasıyla tara.</string>
+    <string name="band_cloud_waiting">Giriş bekleniyor. Onayladıktan sonra FitWren\'e geri dön.</string>
+    <string name="band_cloud_loading">Bileklikler alınıyor…</string>
+    <string name="band_cloud_none">Bu hesapta bileklik bulunamadı.</string>
+    <string name="band_cloud_failed">Xiaomi girişi tamamlanamadı. İnternet bağlantını kontrol edip tekrar dene.</string>
+    <string name="band_cloud_done">%1$s için anahtar ve adres kaydedildi.</string>
+    <string name="band_zepp_title">Zepp Life / Amazfit hesabıyla al</string>
+    <string name="band_zepp_help">Mi Band 2–6 ve Amazfit için. Zepp Life\'a girdiğin e-posta ve şifreyi yaz. Şifre yalnızca Zepp\'in sunucusuna gider, FitWren onu kaydetmez. Zepp Life\'a Xiaomi hesabıyla giriyorsan bu yol çalışmaz.</string>
+    <string name="band_zepp_email">E-posta</string>
+    <string name="band_zepp_password">Şifre</string>
+    <string name="band_zepp_button">Zepp hesabıyla anahtarı al</string>
+    <string name="band_zepp_failed">Zepp girişi olmadı. E-posta ve şifreyi kontrol edip tekrar dene.</string>
+    <string name="band_key_manual">Ya da anahtarı elle gir:</string>
+    <string name="band_key_help">Bileklik, Xiaomi hesabına bağlı bir anahtarla korunur. Anahtarı bilgisayarda bir kez alman gerekir:\n1. Bilgisayarda github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor sayfasından token_extractor.exe dosyasını indir ve aç.\n2. Mi Fitness\'ta kullandığın Xiaomi hesabıyla giriş yap.\n3. Bölge sorulunca boş bırakıp Enter\'a bas.\n4. Listede bilekliğini bul. TOKEN satırındaki 32 karakterlik kodu buraya yaz.</string>
+    <string name="band_key_label">Anahtar (32 karakter)</string>
+    <string name="band_key_save">Kaydet</string>
+    <string name="band_key_saved">Anahtar kaydedildi</string>
+    <string name="band_key_invalid">Anahtar 32 karakter olmalı (0-9, a-f)</string>
+    <string name="band_step_device">Bileklik</string>
+    <string name="band_device_none">Henüz bileklik seçilmedi.</string>
+    <string name="band_device_selected">Seçili: %1$s</string>
+    <string name="band_scan">Bileklik ara</string>
+    <string name="band_scanning">Aranıyor… Bilekliği telefona yakın tut.</string>
+    <string name="band_scan_empty">Bileklik bulunamadı. Bluetooth açık mı? Mi Fitness bilekliğe bağlı olabilir.</string>
+    <string name="band_address_help">Ya da adresi elle yaz (Mi Fitness\'ta veya anahtar aracında görünür)</string>
+    <string name="band_address_label">Bileklik adresi</string>
+    <string name="band_address_save">Adresi kaydet</string>
+    <string name="band_address_invalid">Adres geçersiz. Örnek: D0:62:2C:F7:01:6B</string>
+    <string name="band_scan_denied">Bluetooth izni verilmedi.</string>
+    <string name="band_step_test">Bağlan ve dene</string>
+    <string name="band_test">Bağlan ve dene</string>
+    <string name="band_testing">Bağlanıyor…</string>
+    <string name="band_last_sync">Son eşitleme: %1$s</string>
+    <string name="band_enable">Adımları bileklikten al</string>
+    <string name="band_enable_hint">Açıkken FitWren uygulama açılınca ve 15 dakikada bir bilekliğe bağlanır. Health Connect seçeneği kapanır.</string>
+    <string name="band_result_ok">Bağlantı başarılı, adımlar okundu</string>
+    <string name="band_result_bluetooth_off">Bluetooth kapalı</string>
+    <string name="band_result_permission">Bluetooth izni yok</string>
+    <string name="band_result_connect">Bilekliğe bağlanılamadı. Bileklik uzakta olabilir ya da Mi Fitness bağlı olabilir.</string>
+    <string name="band_result_unsupported">Bu cihaz henüz desteklenmiyor</string>
+    <string name="band_result_auth">Anahtar kabul edilmedi. Anahtarı kontrol et.</string>
+    <string name="band_result_timeout">Bileklik yanıt vermedi</string>
+    <string name="log_band_synced">Bileklik (doğrudan): %1$d dosya okundu</string>
+    <string name="log_band_failed">Bileklik (doğrudan): %1$s</string>
+    <string name="yesterday">Dün</string>
+    <string name="health_sleep_title">Uyku</string>
+    <string name="health_last_night">Son gece</string>
+    <string name="health_sleep_shortest">En kısa uyku</string>
+    <string name="health_tap_hint">Bir çubuğa dokununca o günün değeri yukarıda görünür</string>
+    <string name="health_oxygen_average">Ortalama SpO₂</string>
+    <string name="health_stress_title">Stres</string>
+    <string name="health_stress_average">Ortalama stres</string>
+    <string name="health_stress_hint">Bileklik stresi 1–100 arası ölçer: 0–39 rahat, 40–59 normal, 60–79 orta, 80–100 yüksek.</string>
+    <string name="stress_relaxed">Rahat</string>
+    <string name="stress_normal">Normal</string>
+    <string name="stress_medium">Orta</string>
+    <string name="stress_high">Yüksek</string>
+    <string name="health_exercise_title">Egzersiz</string>
+    <string name="health_exercise_recent">Son egzersizler</string>
+    <string name="health_activity_title">Aktivite</string>
+    <string name="settings_phone_source">Telefon</string>
+    <string name="settings_wearable_source">Bileklik veya saat</string>
+    <string name="settings_appearance">Görünüm ve dil</string>
+    <string name="source_sensor">Telefonun adım sensörü</string>
+    <string name="source_sensor_hint">Adımları telefonun kendi sensörü sayar.</string>
+    <string name="source_none">Kullanma</string>
+    <string name="source_none_hint">Yalnızca telefonun adımları sayılır.</string>
+    <string name="band_model_experimental">%1$s · deneysel</string>
+    <string name="source_direct">Doğrudan bağlantı (Xiaomi, Amazfit)</string>
+    <string name="source_connect">Health Connect üzerinden</string>
+    <string name="source_merge_hint">Bileklik kullanıyorsan, onu taktığın saatlerde bilekliğin sayısı, diğer saatlerde telefonun sayısı kullanılır.</string>
+    <string name="source_direct_manage">Bileklik ayarları</string>
+    <string name="device_connect_hint">Veriler Health Connect\'ten okunuyor</string>
+    <string name="band_reconnect">Yeniden bağlan</string>
+    <string name="band_sync_now">Eşitle</string>
 </resources>

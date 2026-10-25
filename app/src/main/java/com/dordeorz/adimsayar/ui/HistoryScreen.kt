@@ -270,8 +270,8 @@ private fun SelectedDayCard(
     val detail by produceState<DayDetail?>(null, date, steps, hourly, state.xiaomiEnabled) {
         value = if (hourly) withContext(Dispatchers.IO) { actions.loadDayDetail(date) } else null
     }
-    val band by produceState<BandDay?>(null, date, steps, state.wearableEnabled) {
-        value = if (state.wearableEnabled) withContext(Dispatchers.IO) { actions.loadBandDay(date) } else null
+    val band by produceState<BandDay?>(null, date, steps, state.healthEnabled) {
+        value = if (state.healthEnabled) withContext(Dispatchers.IO) { actions.loadBandDay(date) } else null
     }
     Card {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {

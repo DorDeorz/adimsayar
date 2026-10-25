@@ -12,7 +12,7 @@
 <p align="center">
   <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/DorDeorz/adimsayar?label=indir&amp;color=2E7D32" alt="Son sürüm"></a>
   <img src="https://img.shields.io/badge/Android-6.0%2B-2E7D32" alt="Android 6.0+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?label=lisans&amp;color=2E7D32" alt="MIT lisansı"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?label=lisans&amp;color=2E7D32" alt="AGPL-3.0 lisansı"></a>
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 
 - **Doğru sayar.** Donanım adım sayacını okur ve adım dedektörüyle karşılaştırır. Sensör donarsa bunu fark eder ve telefonu yeniden başlatmana gerek kalmadan düzeltir.
 - **Pili yormaz.** Varsayılan olarak sürekli çalışan bir servis yoktur. Sayaç ara ara okunur ve fark kaydedilir.
-- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca "Güncellemeleri kontrol et"e dokunduğunda kullanılır.
+- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca "Güncellemeleri kontrol et"e dokunduğunda ya da bilekliğin anahtarı için Xiaomi'ye giriş yaptığında kullanılır.
 - **Her Android telefonda çalışır.** Arka plan uygulamalarına en sert davranan iki markada, Xiaomi (HyperOS) ve Samsung'da (One UI) test edildi.
 
 ## Özellikler
@@ -57,8 +57,11 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Seri jokeri: ayda iki hak, kaçırdığın bir gün serini bozmaz
 
 ### Sağlık (isteğe bağlı, bileklik ya da saatle)
-- Mi Band gibi bilekliklerin adımlarını Health Connect üzerinden okur. Bilekliğin saydığı saatlerde bileklik, diğer saatlerde telefon sayılır. Hiçbir adım iki kez sayılmaz.
-- Evreleriyle uyku, bölgeleriyle nabız, dinlenme nabzı eğilimi, kan oksijeni, egzersizler ve aktif kalori
+- **Saate doğrudan bağlantı:** FitWren bilekliğe Bluetooth ile kendisi bağlanır, dakikalık adım, nabız, SpO₂, stres ve uykuyu okur. Mi Fitness, Zepp Life ya da Health Connect gerekmez. Xiaomi Smart Band 8 ile denendi; diğer Xiaomi bileklik ve saatleri (Band 8 Pro, Band 9, Redmi Watch, Watch S1…) ve Huami/Amazfit modelleri (Mi Band 2–6, Amazfit Bip, GTS, GTR…) deneysel olarak destekleniyor.
+- Bileklik anahtarı uygulamanın içinden alınır: Xiaomi hesabıyla (QR ile giriş) ya da Zepp Life / Amazfit hesabıyla. Elle de yazılabilir.
+- Ya da diğer bileklik ve saatler için (Samsung vb.) Health Connect üzerinden.
+- Bilekliğin saydığı saatlerde bileklik, diğer saatlerde telefon sayılır. Hiçbir adım iki kez sayılmaz.
+- Ayrı kartlarda, 7/30/90 günlük grafiklerle: evreleriyle uyku, bölgeleriyle nabız, dinlenme nabzı eğilimi, kan oksijeni, egzersizler ve aktif kalori
 - Vücut kitle endeksi ve grafikle kilo kaydı
 - Health Connect'e hangi uygulamaların veri yazdığını gösteren kurulum rehberi
 
@@ -148,7 +151,13 @@ FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda sa
 
 Tek ağ isteği "Güncellemeleri kontrol et"e dokunduğunda yapılır: uygulama son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir. Bu isteklerle senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.
 
-Health Connect yalnızca "Bileklik adımlarını kullan" açıksa ve yalnızca okumak için kullanılır. FitWren Health Connect'e hiçbir şey yazmaz.
+Saate doğrudan bağlantı yalnızca Bluetooth kullanır; bileklik verilerin telefondan çıkmaz.
+
+Bileklik kurulum ekranında "Xiaomi hesabıyla anahtarı al"a dokunursan uygulama Xiaomi'nin kendi giriş sayfasını (`account.xiaomi.com`) açar, sonra bilekliğin adresini ve anahtarını okumak için Xiaomi sunucusundan (`api.io.mi.com`) cihaz listeni ister. Şifreni FitWren görmez. Anahtar yalnızca telefonda saklanır, adımlarınla ilgili hiçbir şey gönderilmez.
+
+"Zepp Life / Amazfit hesabıyla al"ı kullanırsan e-posta ve şifren yalnızca bilekliğin adresini ve anahtarını okumak için Zepp'in sunucusuna (`api-user.zepp.com`, `api-mifit.zepp.com`) gider. FitWren şifreyi kaydetmez.
+
+Health Connect yalnızca bileklik kaynağı olarak seçilirse ve yalnızca okumak için kullanılır. FitWren Health Connect'e hiçbir şey yazmaz.
 
 <details>
 <summary>İzinler ve neden gerektikleri</summary>
@@ -161,7 +170,8 @@ Health Connect yalnızca "Bileklik adımlarını kullan" açıksa ve yalnızca o
 | `POST_NOTIFICATIONS` | İsteğe bağlı hatırlatmalar ve hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gece yarısı yeni güne geçmek |
-| `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi |
+| `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi, bir de bileklik anahtarı için Xiaomi ya da Zepp girişi |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | İsteğe bağlı Xiaomi ya da Amazfit bileklik bağlantısı |
 | `REQUEST_INSTALL_PACKAGES` | İndirilen güncelleme için Android'in kurulum ekranını açmak |
 | `health.READ_*` | İsteğe bağlı bileklik verisi, yalnızca okuma |
 
@@ -182,7 +192,9 @@ Tek gerçek veri **gün başına toplam adım**dır. Madalya ilerlemesi, seviyel
 
 **Arka planda sürekli say (isteğe bağlı).** Uygulama kapatılınca saymayı bırakan telefonlar için sessiz bir ön plan servisi sayacı kayıtlı tutar ve olayları 60 saniyede bir toplu alır.
 
-**Bileklik (isteğe bağlı).** Health Connect'teki her kaynaktan ayrı günlük ve saatlik toplam istenir. Her saat için en büyük kaynak alınır, toplanmaz; bilekliğin saatleri telefonun saatlerinin yerine geçer. Bileklik toplamları ayrı tabloda tutulur, anahtar kapatılınca telefonun sayıları geri gelir.
+**Saate doğrudan bağlantı (isteğe bağlı).** Xiaomi bilekliklerde FitWren etkinlik dosyalarının listesini ister, okur ve geçmiş günleri onaylar (bugünün dosyası bileklikte kalır). Huami/Amazfit bilekliklerde son okunan saatin başından dakikalık veriyi okur. Dakikalar saat saat kendi tablolarında (`band_hours`, `band_samples`, `band_sleep`) toplanır. Eşitleme uygulama açılınca (en fazla 5 dakikada bir), arka planda 15 dakikada bir ve "Eşitle"ye basınca yapılır.
+
+**Health Connect (isteğe bağlı).** Health Connect'teki her kaynaktan ayrı günlük ve saatlik toplam istenir. Her saat için en büyük kaynak alınır, toplanmaz; bilekliğin saatleri telefonun saatlerinin yerine geçer. Bileklik toplamları ayrı tabloda tutulur, anahtar kapatılınca telefonun sayıları geri gelir.
 
 **Pil yardımı.** Bazı markalar arka plan uygulamalarını agresif biçimde kapatır. FitWren pil muafiyetini zorla istemez. Marka bununla biliniyorsa ve muafiyet verilmemişse, telefonuna özel adımları gösteren kapatılabilir bir kart çıkar.
 
@@ -202,6 +214,7 @@ Kotlin, Jetpack Compose, Material 3, Glance ve Room ile yazıldı. `minSdk 23`, 
 ```
 app/src/main/java/com/dordeorz/adimsayar/
 ├── sensor/       adım sensörleri, canlı sayaç, donma kontrolü
+├── band/         Xiaomi ve Huami/Amazfit bilekliklere doğrudan Bluetooth bağlantısı (Gadgetbridge tabanlı)
 ├── data/         Room veritabanı, adım hesabı, HyperOS ve Health Connect kaynakları, madalyalar, rotalar
 ├── background/   periyodik okuma, gece yarısı alarmı, servisler, hatırlatmalar
 ├── widget/       13 Glance widget'ı
@@ -212,6 +225,6 @@ Release APK'ları GitHub Actions'ta, depo Secret'larında saklanan bir anahtarla
 
 ## Lisans
 
-[MIT](LICENSE). FitWren'in eski adı AdımSayar'dı; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve verilerin etkilenmez.
+[AGPL-3.0](LICENSE). FitWren 0.9.6'ya kadar MIT lisanslıydı. 0.10.0'dan itibaren AGPL-3.0, çünkü bilekliğe doğrudan bağlantı (`app/src/main/java/com/dordeorz/adimsayar/band/`) [Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge)'in Xiaomi ve Huami kodunun Kotlin'e yeniden yazılmış hâlidir (Telif © Gadgetbridge katkıcıları, AGPL-3.0). FitWren'in eski adı AdımSayar'dı; paket adı `com.dordeorz.adimsayar` aynı kaldı, güncellemeler ve verilerin etkilenmez.
 
 [Claude Code](https://claude.com/claude-code) ile geliştirildi. Kardeş proje: [Kronometre](https://github.com/DorDeorz/kronometre).

@@ -12,7 +12,7 @@
 <p align="center">
   <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/DorDeorz/adimsayar?label=download&amp;color=2E7D32" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/Android-6.0%2B-2E7D32" alt="Android 6.0+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?color=2E7D32" alt="MIT license"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/DorDeorz/adimsayar?color=2E7D32" alt="AGPL-3.0 license"></a>
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 
 - **Accurate.** Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.
 - **Battery friendly.** No always-on service by default. The counter is read now and then and the difference is saved.
-- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates".
+- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates" or sign in to Xiaomi to get your band's key.
 - **Works on every Android phone.** Tested on Xiaomi (HyperOS) and Samsung (One UI), the two brands that are hardest on background apps.
 
 ## Features
@@ -57,8 +57,11 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Streak freeze: two per month, so one missed day doesn't break your streak
 
 ### Health (optional, with a fitness band or watch)
-- Reads steps from bands such as the Mi Band through Health Connect. Hours the band counted use the band, other hours use the phone, so no step is counted twice.
-- Sleep with stages, heart rate with zones, resting heart rate trend, SpO₂, workouts and active calories
+- **Direct band connection:** FitWren talks to the band over Bluetooth itself and reads minute-by-minute steps, heart rate, SpO₂, stress and sleep. No Mi Fitness, Zepp Life or Health Connect needed. Tested on the Xiaomi Smart Band 8; other Xiaomi bands and watches (Band 8 Pro, Band 9, Redmi Watch, Watch S1…) and Huami/Amazfit models (Mi Band 2–6, Amazfit Bip, GTS, GTR…) are supported experimentally.
+- The band key is fetched inside the app: with your Xiaomi account (QR sign-in) or your Zepp Life / Amazfit account. It can also be typed in.
+- Or through Health Connect, for other bands and watches (Samsung and others).
+- Hours the band counted use the band, other hours use the phone, so no step is counted twice.
+- Separate cards with 7/30/90-day charts: sleep with stages, heart rate with zones, resting heart rate trend, SpO₂, workouts and active calories
 - Weight log with BMI and a chart
 - A setup guide that shows which apps write to Health Connect
 
@@ -148,7 +151,13 @@ FitWren stores daily step totals, water, weight and your settings on the phone. 
 
 The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
 
-Health Connect is used only if you turn on "Use band steps", and only for reading. FitWren never writes to Health Connect.
+The direct band connection uses Bluetooth only; your band data never leaves the phone.
+
+If you tap "Get the key with your Xiaomi account" on the band setup screen, the app opens Xiaomi's own sign-in page (`account.xiaomi.com`) and then asks Xiaomi's server (`api.io.mi.com`) for the list of your devices, to read the band's address and key. FitWren never sees your password. The key is stored only on the phone, and nothing about your steps is sent.
+
+If you use "Get it with a Zepp Life / Amazfit account", your e-mail and password are sent only to Zepp's server (`api-user.zepp.com`, `api-mifit.zepp.com`) to read the band's address and key. FitWren does not store the password.
+
+Health Connect is used only if you choose it as the band source, and only for reading. FitWren never writes to Health Connect.
 
 <details>
 <summary>Permissions and why they are needed</summary>
@@ -161,7 +170,8 @@ Health Connect is used only if you turn on "Use band steps", and only for readin
 | `POST_NOTIFICATIONS` | Optional reminders and goal notifications |
 | `RECEIVE_BOOT_COMPLETED` | Restore schedules after a reboot |
 | `SCHEDULE_EXACT_ALARM` | Switch to the new day at midnight |
-| `INTERNET` | Only the update check and download you start yourself |
+| `INTERNET` | Only the update check and download, and the Xiaomi or Zepp sign-in for the band key, all started by you |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | Optional direct connection to a Xiaomi or Amazfit band |
 | `REQUEST_INSTALL_PACKAGES` | Open Android's installer for a downloaded update |
 | `health.READ_*` | Optional band data from Health Connect, read only |
 
@@ -182,7 +192,9 @@ The only real data is the **step total per day**. Medal progress, levels, streak
 
 **Keep counting in the background (optional).** For phones that stop counting when the app is killed, a quiet foreground service keeps the counter registered and batches events every 60 seconds.
 
-**Fitness band (optional).** Each Health Connect source is asked for its own daily and hourly totals. The largest source per hour is used, never a sum, and band hours replace phone hours. Band totals live in their own table, so turning the switch off brings the phone's numbers back.
+**Direct band connection (optional).** On Xiaomi bands FitWren asks for the list of activity files, reads them and acknowledges past days (today's file is kept on the band). On Huami/Amazfit bands it reads minute data from the start of the last read hour. Minutes are summed into hours in their own tables (`band_hours`, `band_samples`, `band_sleep`). Sync runs when the app opens (at most every 5 minutes), every 15 minutes in the background, and when you tap "Sync".
+
+**Health Connect (optional).** Each Health Connect source is asked for its own daily and hourly totals. The largest source per hour is used, never a sum, and band hours replace phone hours. Band totals live in their own table, so turning the switch off brings the phone's numbers back.
 
 **Battery help.** Some brands kill background apps aggressively. FitWren never forces the battery exemption. If your brand is known for it and the exemption is not granted, a dismissible card shows the steps for your phone.
 
@@ -202,6 +214,7 @@ Built with Kotlin, Jetpack Compose, Material 3, Glance and Room. `minSdk 23`, `t
 ```
 app/src/main/java/com/dordeorz/adimsayar/
 ├── sensor/       step sensors, live counter, frozen sensor check
+├── band/         direct Bluetooth connection to Xiaomi and Huami/Amazfit bands (based on Gadgetbridge)
 ├── data/         Room database, step math, HyperOS and Health Connect sources, medals, routes
 ├── background/   periodic reading, midnight alarm, services, reminders
 ├── widget/       13 Glance widgets
@@ -212,6 +225,6 @@ Release APKs are built and signed by GitHub Actions with a key kept in repositor
 
 ## License
 
-[MIT](LICENSE). FitWren was formerly called AdımSayar; the package name `com.dordeorz.adimsayar` stays the same, so updates and your data are not affected.
+[AGPL-3.0](LICENSE). FitWren was MIT licensed up to 0.9.6. From 0.10.0 it is AGPL-3.0, because the direct band connection (`app/src/main/java/com/dordeorz/adimsayar/band/`) is a Kotlin rewrite of [Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge)'s Xiaomi and Huami support (Copyright © Gadgetbridge contributors, AGPL-3.0). FitWren was formerly called AdımSayar; the package name `com.dordeorz.adimsayar` stays the same, so updates and your data are not affected.
 
 Built with [Claude Code](https://claude.com/claude-code). Sister project: [Kronometre](https://github.com/DorDeorz/kronometre).

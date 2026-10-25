@@ -95,7 +95,7 @@ object StepMath {
         for (hour in band.keys + phone.keys) {
             val day = hour.toLocalDate()
             if (day !in bandDays) continue
-            val steps = band[hour]?.takeIf { it > 0L } ?: phone[hour] ?: 0L
+            val steps = band[hour] ?: phone[hour] ?: 0L
             result[day] = (result[day] ?: 0L) + steps
         }
         return result

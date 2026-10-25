@@ -3,6 +3,31 @@ package com.dordeorz.adimsayar.ui
 import android.os.Build
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import com.dordeorz.adimsayar.band.BandModels
+import com.dordeorz.adimsayar.band.BandResult
+import com.dordeorz.adimsayar.band.BandShape
+import com.dordeorz.adimsayar.data.DeviceKind
+import com.dordeorz.adimsayar.data.SourceDevice
+import com.dordeorz.adimsayar.data.WearableHealth
+import androidx.compose.runtime.produceState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import com.dordeorz.adimsayar.data.BandDirect
+import com.dordeorz.adimsayar.data.BandStatus
+import java.time.Instant
+import java.time.ZoneId
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -74,6 +99,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
     ReleaseNote("0.9.5", R.array.release_notes_0_9_5),
     ReleaseNote("0.9.4", R.array.release_notes_0_9_4),
@@ -100,178 +126,37 @@ private val WATER_PRESETS = listOf(1_500, 2_000, 2_500, 3_000)
 fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val settings = state.settings
     var dialog by rememberSaveable { mutableStateOf<SettingsDialog?>(null) }
+    var bandSetup by rememberSaveable { mutableStateOf(false) }
+    if (bandSetup) {
+        BandSetupScreen(actions, onClose = { bandSetup = false })
+        return
+    }
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val bandStatus = remember(state.bandSyncing, state.bandDirectEnabled) { BandDirect.status(context) }
     Box {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
-            SectionTitle(stringResource(R.string.settings_goals))
-            ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
-                dialog = SettingsDialog.DailyGoal
-            }
-            ValueRow(stringResource(R.string.weekly_goal), stringResource(R.string.steps_value, format(settings.weeklyGoal))) {
-                dialog = SettingsDialog.WeeklyGoal
-            }
-            ChoiceRow(
-                title = stringResource(R.string.week_start),
-                options = WEEK_START_OPTIONS,
-                selected = settings.weekStart,
-                label = { it.getDisplayName(TextStyle.FULL, appLocale) },
-                onSelect = actions.onWeekStartChange,
-            )
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_body))
-            ValueRow(stringResource(R.string.height), stringResource(R.string.height_value, settings.heightCm)) {
-                dialog = SettingsDialog.Height
-            }
-            ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
-                dialog = SettingsDialog.Weight
-            }
-            ValueRow(stringResource(R.string.age), stringResource(R.string.age_value, settings.age)) {
-                dialog = SettingsDialog.Age
-            }
-            ChoiceRow(
-                title = stringResource(R.string.distance_unit),
-                options = DistanceUnit.entries,
-                selected = settings.distanceUnit,
-                label = { stringResource(if (it == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km) },
-                onSelect = actions.onDistanceUnitChange,
-            )
-            Text(
-                stringResource(R.string.body_hint),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-            )
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.water_title))
-            ValueRow(stringResource(R.string.water_goal), stringResource(R.string.water_ml, format(settings.waterGoalMl.toLong()))) {
-                dialog = SettingsDialog.WaterGoal
-            }
-            ChoiceRow(
-                title = stringResource(R.string.water_glass),
-                options = GLASS_OPTIONS,
-                selected = settings.glassMl,
-                label = { stringResource(R.string.water_ml, it.toString()) },
-                onSelect = actions.onGlassChange,
-            )
-            SwitchRow(
-                title = stringResource(R.string.water_reminder),
-                hint = stringResource(R.string.water_reminder_hint),
-                checked = settings.waterReminder,
-                onCheckedChange = actions.onWaterReminderChange,
-            )
-            if (settings.waterReminder) {
-                ChoiceRow(
-                    title = stringResource(R.string.water_interval),
-                    options = WATER_INTERVAL_OPTIONS,
-                    selected = settings.waterIntervalHours,
-                    label = { stringResource(R.string.water_interval_value, it) },
-                    onSelect = actions.onWaterIntervalChange,
-                )
-            }
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_notifications))
-            SwitchRow(
-                title = stringResource(R.string.goal_notification),
-                hint = stringResource(R.string.goal_notification_hint),
-                checked = settings.goalNotification,
-                onCheckedChange = actions.onGoalNotificationChange,
-            )
-            SwitchRow(
-                title = stringResource(R.string.streak_reminder),
-                hint = stringResource(R.string.streak_reminder_hint),
-                checked = settings.streakReminder,
-                onCheckedChange = actions.onStreakReminderChange,
-            )
-            SwitchRow(
-                title = stringResource(R.string.near_goal_notification),
-                hint = stringResource(R.string.near_goal_notification_hint),
-                checked = settings.nearGoalNotification,
-                onCheckedChange = actions.onNearGoalNotificationChange,
-            )
-            SwitchRow(
-                title = stringResource(R.string.weekly_summary),
-                hint = stringResource(R.string.weekly_summary_hint) +
-                    if (state.wearableEnabled) " " + stringResource(R.string.weekly_summary_band_hint) else "",
-                checked = settings.weeklySummary,
-                onCheckedChange = actions.onWeeklySummaryChange,
-            )
-            SwitchRow(
-                title = stringResource(R.string.weight_reminder),
-                hint = stringResource(R.string.weight_reminder_hint),
-                checked = settings.weightReminder,
-                onCheckedChange = actions.onWeightReminderChange,
-            )
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_theme))
-            Column(Modifier.selectableGroup()) {
-                ThemeMode.entries.forEach { mode ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .selectable(
-                                selected = mode == settings.themeMode,
-                                onClick = { actions.onThemeModeChange(mode) },
-                                role = Role.RadioButton,
-                            )
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    ) {
-                        RadioButton(selected = mode == settings.themeMode, onClick = null)
-                        Text(stringResource(themeLabel(mode)), style = MaterialTheme.typography.bodyLarge)
-                    }
-                }
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                SwitchRow(
-                    title = stringResource(R.string.settings_dynamic_color),
-                    hint = stringResource(R.string.settings_dynamic_color_hint),
-                    checked = settings.dynamicColor,
-                    onCheckedChange = actions.onDynamicColorChange,
-                )
-            }
-            ChoiceRow(
-                title = stringResource(R.string.settings_widget_opacity),
-                options = WIDGET_OPACITY_OPTIONS,
-                selected = settings.widgetOpacity,
-                label = { stringResource(R.string.percent_of_goal, it) },
-                onSelect = actions.onWidgetOpacityChange,
-            )
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_language))
-            ValueRow(stringResource(R.string.language), languageLabel(settings.language)) {
-                dialog = SettingsDialog.Language
+            if (state.bandDirectEnabled || state.wearableEnabled) {
+                DeviceCard(state, bandStatus, actions, onManage = { bandSetup = true })
             }
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
             val showWearable = state.wearableAvailable || state.wearableEnabled
-            if (showXiaomi || showService || showWearable) {
-                HorizontalDivider(Modifier.padding(vertical = 8.dp))
-                SectionTitle(stringResource(R.string.settings_counting))
-                if (showXiaomi) {
-                    SwitchRow(
-                        title = stringResource(R.string.xiaomi_card_title),
-                        hint = stringResource(R.string.xiaomi_card_text),
-                        checked = state.xiaomiEnabled,
-                        onCheckedChange = actions.onXiaomiEnabledChange,
-                    )
+            SettingsGroup(stringResource(R.string.settings_counting)) {
+                GroupLabel(stringResource(R.string.settings_phone_source))
+                RadioRow(stringResource(R.string.source_sensor), stringResource(R.string.source_sensor_hint), selected = !state.xiaomiEnabled) {
+                    if (state.xiaomiEnabled) actions.onXiaomiEnabledChange(false)
                 }
-                if (showWearable) {
-                    SwitchRow(
-                        title = stringResource(R.string.wearable_card_title),
-                        hint = stringResource(R.string.wearable_card_text),
-                        checked = state.wearableEnabled,
-                        onCheckedChange = actions.onWearableEnabledChange,
-                    )
+                if (showXiaomi) {
+                    RadioRow(stringResource(R.string.xiaomi_card_title), stringResource(R.string.xiaomi_card_text), selected = state.xiaomiEnabled) {
+                        if (!state.xiaomiEnabled) actions.onXiaomiEnabledChange(true)
+                    }
                 }
                 if (showService) {
                     SwitchRow(
@@ -281,102 +166,271 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         onCheckedChange = actions.onServiceEnabledChange,
                     )
                 }
-            }
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_data))
-            ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
-            ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
-
-            HorizontalDivider(Modifier.padding(vertical = 8.dp))
-            SectionTitle(stringResource(R.string.settings_about))
-            ValueRow(stringResource(R.string.settings_version), state.version, onClick = null)
-            ClickRow(stringResource(R.string.release_notes), stringResource(R.string.release_notes_hint)) {
-                dialog = SettingsDialog.ReleaseNotes
-            }
-            ClickRow(stringResource(R.string.log_title), stringResource(R.string.log_hint)) {
-                dialog = SettingsDialog.Log
-            }
-            val uriHandler = LocalUriHandler.current
-            val scope = rememberCoroutineScope()
-            val context = LocalContext.current
-            var checking by remember { mutableStateOf(false) }
-            var update by remember { mutableStateOf<UpdateResult?>(null) }
-            var progress by remember { mutableStateOf<Int?>(null) }
-            var apk by remember { mutableStateOf<File?>(null) }
-            var downloadFailed by remember { mutableStateOf(false) }
-            var needsPermission by remember { mutableStateOf(false) }
-            var confirmDownload by remember { mutableStateOf(false) }
-            val available = update as? UpdateResult.Available
-            val download: (UpdateResult.Available, String) -> Unit = { release, url ->
-                scope.launch {
-                    progress = 0
-                    val downloaded = UpdateInstaller.download(context, url, release.version) { percent ->
-                        scope.launch { progress = percent }
-                    }
-                    progress = null
-                    apk = downloaded
-                    downloadFailed = downloaded == null
-                    if (downloaded != null) {
-                        val start = UpdateInstaller.install(context, downloaded)
-                        needsPermission = start == InstallStart.NeedsPermission
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+                GroupLabel(stringResource(R.string.settings_wearable_source))
+                RadioRow(
+                    stringResource(R.string.source_none),
+                    stringResource(R.string.source_none_hint),
+                    selected = !state.bandDirectEnabled && !state.wearableEnabled,
+                ) {
+                    if (state.wearableEnabled) actions.onWearableEnabledChange(false)
+                    if (state.bandDirectEnabled) scope.launch { actions.onBandDirectChange(false) }
+                }
+                RadioRow(stringResource(R.string.source_direct), stringResource(R.string.band_hint), selected = state.bandDirectEnabled) {
+                    when {
+                        state.bandDirectEnabled -> Unit
+                        bandStatus.address != null && bandStatus.hasKey -> scope.launch { actions.onBandDirectChange(true) }
+                        else -> bandSetup = true
                     }
                 }
-            }
-            ClickRow(
-                stringResource(R.string.check_updates),
-                when {
-                    checking -> stringResource(R.string.update_checking)
-                    progress != null -> stringResource(R.string.update_downloading, progress ?: 0)
-                    needsPermission -> stringResource(R.string.update_install_permission)
-                    apk != null -> stringResource(R.string.update_ready)
-                    downloadFailed -> stringResource(R.string.update_download_failed)
-                    available != null -> stringResource(R.string.update_available, available.version)
-                    update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
-                    update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
-                    update == UpdateResult.Failed -> stringResource(R.string.update_failed)
-                    else -> stringResource(R.string.check_updates_hint)
-                },
-            ) {
-                val file = apk
-                when {
-                    checking || progress != null -> Unit
-                    file != null -> {
-                        val start = UpdateInstaller.install(context, file)
-                        needsPermission = start == InstallStart.NeedsPermission
-                        if (start == InstallStart.Failed) {
-                            apk = null
-                            downloadFailed = true
-                        }
-                    }
-                    available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
-                    available?.apkUrl != null -> confirmDownload = true
-                    else -> scope.launch {
-                        checking = true
-                        update = UpdateChecker.check(state.version)
-                        checking = false
+                if (showWearable) {
+                    RadioRow(stringResource(R.string.source_connect), stringResource(R.string.wearable_card_text), selected = state.wearableEnabled) {
+                        if (!state.wearableEnabled) actions.onWearableEnabledChange(true)
                     }
                 }
-            }
-            val url = available?.apkUrl
-            if (confirmDownload && available != null && url != null) {
-                AlertDialog(
-                    onDismissRequest = { confirmDownload = false },
-                    title = { Text(stringResource(R.string.update_consent_title)) },
-                    text = { Text(stringResource(R.string.update_consent_text)) },
-                    confirmButton = {
-                        TextButton(onClick = {
-                            confirmDownload = false
-                            download(available, url)
-                        }) { Text(stringResource(R.string.update_consent_download)) }
-                    },
-                    dismissButton = {
-                        TextButton(onClick = { confirmDownload = false }) { Text(stringResource(R.string.cancel)) }
-                    },
+                Text(
+                    stringResource(R.string.source_merge_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             }
-            ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
-                runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }
+
+            SettingsGroup(stringResource(R.string.settings_goals)) {
+                ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
+                    dialog = SettingsDialog.DailyGoal
+                }
+                ValueRow(stringResource(R.string.weekly_goal), stringResource(R.string.steps_value, format(settings.weeklyGoal))) {
+                    dialog = SettingsDialog.WeeklyGoal
+                }
+                ChoiceRow(
+                    title = stringResource(R.string.week_start),
+                    options = WEEK_START_OPTIONS,
+                    selected = settings.weekStart,
+                    label = { it.getDisplayName(TextStyle.FULL, appLocale) },
+                    onSelect = actions.onWeekStartChange,
+                )
+            }
+
+            SettingsGroup(stringResource(R.string.settings_body)) {
+                ValueRow(stringResource(R.string.height), stringResource(R.string.height_value, settings.heightCm)) {
+                    dialog = SettingsDialog.Height
+                }
+                ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
+                    dialog = SettingsDialog.Weight
+                }
+                ValueRow(stringResource(R.string.age), stringResource(R.string.age_value, settings.age)) {
+                    dialog = SettingsDialog.Age
+                }
+                ChoiceRow(
+                    title = stringResource(R.string.distance_unit),
+                    options = DistanceUnit.entries,
+                    selected = settings.distanceUnit,
+                    label = { stringResource(if (it == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km) },
+                    onSelect = actions.onDistanceUnitChange,
+                )
+                Text(
+                    stringResource(R.string.body_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                )
+            }
+
+            SettingsGroup(stringResource(R.string.water_title)) {
+                ValueRow(stringResource(R.string.water_goal), stringResource(R.string.water_ml, format(settings.waterGoalMl.toLong()))) {
+                    dialog = SettingsDialog.WaterGoal
+                }
+                ChoiceRow(
+                    title = stringResource(R.string.water_glass),
+                    options = GLASS_OPTIONS,
+                    selected = settings.glassMl,
+                    label = { stringResource(R.string.water_ml, it.toString()) },
+                    onSelect = actions.onGlassChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.water_reminder),
+                    hint = stringResource(R.string.water_reminder_hint),
+                    checked = settings.waterReminder,
+                    onCheckedChange = actions.onWaterReminderChange,
+                )
+                if (settings.waterReminder) {
+                    ChoiceRow(
+                        title = stringResource(R.string.water_interval),
+                        options = WATER_INTERVAL_OPTIONS,
+                        selected = settings.waterIntervalHours,
+                        label = { stringResource(R.string.water_interval_value, it) },
+                        onSelect = actions.onWaterIntervalChange,
+                    )
+                }
+            }
+
+            SettingsGroup(stringResource(R.string.settings_notifications)) {
+                SwitchRow(
+                    title = stringResource(R.string.goal_notification),
+                    hint = stringResource(R.string.goal_notification_hint),
+                    checked = settings.goalNotification,
+                    onCheckedChange = actions.onGoalNotificationChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.streak_reminder),
+                    hint = stringResource(R.string.streak_reminder_hint),
+                    checked = settings.streakReminder,
+                    onCheckedChange = actions.onStreakReminderChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.near_goal_notification),
+                    hint = stringResource(R.string.near_goal_notification_hint),
+                    checked = settings.nearGoalNotification,
+                    onCheckedChange = actions.onNearGoalNotificationChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.weekly_summary),
+                    hint = stringResource(R.string.weekly_summary_hint) +
+                        if (state.healthEnabled) " " + stringResource(R.string.weekly_summary_band_hint) else "",
+                    checked = settings.weeklySummary,
+                    onCheckedChange = actions.onWeeklySummaryChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.weight_reminder),
+                    hint = stringResource(R.string.weight_reminder_hint),
+                    checked = settings.weightReminder,
+                    onCheckedChange = actions.onWeightReminderChange,
+                )
+            }
+
+            SettingsGroup(stringResource(R.string.settings_appearance)) {
+                Column(Modifier.selectableGroup()) {
+                    ThemeMode.entries.forEach { mode ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectable(
+                                    selected = mode == settings.themeMode,
+                                    onClick = { actions.onThemeModeChange(mode) },
+                                    role = Role.RadioButton,
+                                )
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        ) {
+                            RadioButton(selected = mode == settings.themeMode, onClick = null)
+                            Text(stringResource(themeLabel(mode)), style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    SwitchRow(
+                        title = stringResource(R.string.settings_dynamic_color),
+                        hint = stringResource(R.string.settings_dynamic_color_hint),
+                        checked = settings.dynamicColor,
+                        onCheckedChange = actions.onDynamicColorChange,
+                    )
+                }
+                ChoiceRow(
+                    title = stringResource(R.string.settings_widget_opacity),
+                    options = WIDGET_OPACITY_OPTIONS,
+                    selected = settings.widgetOpacity,
+                    label = { stringResource(R.string.percent_of_goal, it) },
+                    onSelect = actions.onWidgetOpacityChange,
+                )
+                ValueRow(stringResource(R.string.language), languageLabel(settings.language)) {
+                    dialog = SettingsDialog.Language
+                }
+            }
+
+            SettingsGroup(stringResource(R.string.settings_data)) {
+                ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
+                ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
+            }
+
+            SettingsGroup(stringResource(R.string.settings_about)) {
+                ValueRow(stringResource(R.string.settings_version), state.version, onClick = null)
+                ClickRow(stringResource(R.string.release_notes), stringResource(R.string.release_notes_hint)) {
+                    dialog = SettingsDialog.ReleaseNotes
+                }
+                ClickRow(stringResource(R.string.log_title), stringResource(R.string.log_hint)) {
+                    dialog = SettingsDialog.Log
+                }
+                val uriHandler = LocalUriHandler.current
+                var checking by remember { mutableStateOf(false) }
+                var update by remember { mutableStateOf<UpdateResult?>(null) }
+                var progress by remember { mutableStateOf<Int?>(null) }
+                var apk by remember { mutableStateOf<File?>(null) }
+                var downloadFailed by remember { mutableStateOf(false) }
+                var needsPermission by remember { mutableStateOf(false) }
+                var confirmDownload by remember { mutableStateOf(false) }
+                val available = update as? UpdateResult.Available
+                val download: (UpdateResult.Available, String) -> Unit = { release, url ->
+                    scope.launch {
+                        progress = 0
+                        val downloaded = UpdateInstaller.download(context, url, release.version) { percent ->
+                            scope.launch { progress = percent }
+                        }
+                        progress = null
+                        apk = downloaded
+                        downloadFailed = downloaded == null
+                        if (downloaded != null) {
+                            val start = UpdateInstaller.install(context, downloaded)
+                            needsPermission = start == InstallStart.NeedsPermission
+                        }
+                    }
+                }
+                ClickRow(
+                    stringResource(R.string.check_updates),
+                    when {
+                        checking -> stringResource(R.string.update_checking)
+                        progress != null -> stringResource(R.string.update_downloading, progress ?: 0)
+                        needsPermission -> stringResource(R.string.update_install_permission)
+                        apk != null -> stringResource(R.string.update_ready)
+                        downloadFailed -> stringResource(R.string.update_download_failed)
+                        available != null -> stringResource(R.string.update_available, available.version)
+                        update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
+                        update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
+                        update == UpdateResult.Failed -> stringResource(R.string.update_failed)
+                        else -> stringResource(R.string.check_updates_hint)
+                    },
+                ) {
+                    val file = apk
+                    when {
+                        checking || progress != null -> Unit
+                        file != null -> {
+                            val start = UpdateInstaller.install(context, file)
+                            needsPermission = start == InstallStart.NeedsPermission
+                            if (start == InstallStart.Failed) {
+                                apk = null
+                                downloadFailed = true
+                            }
+                        }
+                        available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
+                        available?.apkUrl != null -> confirmDownload = true
+                        else -> scope.launch {
+                            checking = true
+                            update = UpdateChecker.check(state.version)
+                            checking = false
+                        }
+                    }
+                }
+                val url = available?.apkUrl
+                if (confirmDownload && available != null && url != null) {
+                    AlertDialog(
+                        onDismissRequest = { confirmDownload = false },
+                        title = { Text(stringResource(R.string.update_consent_title)) },
+                        text = { Text(stringResource(R.string.update_consent_text)) },
+                        confirmButton = {
+                            TextButton(onClick = {
+                                confirmDownload = false
+                                download(available, url)
+                            }) { Text(stringResource(R.string.update_consent_download)) }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { confirmDownload = false }) { Text(stringResource(R.string.cancel)) }
+                        },
+                    )
+                }
+                ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
+                    runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }
+                }
             }
         }
     }
@@ -595,7 +649,10 @@ private fun LanguageDialog(selected: String, onSelect: (String) -> Unit, onDismi
 private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
         Text(title, style = MaterialTheme.typography.bodyLarge)
-        Row(modifier = Modifier.padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            modifier = Modifier.padding(top = 4.dp).horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             options.forEach { option ->
                 FilterChip(
                     selected = option == selected,
@@ -626,13 +683,134 @@ private fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedCh
 }
 
 @Composable
-private fun SectionTitle(text: String) {
+private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> Unit) {
     Text(
-        text = text,
+        text = title,
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 4.dp),
+        modifier = Modifier.padding(start = 4.dp, top = 16.dp, bottom = 8.dp),
     )
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(vertical = 4.dp), content = content)
+    }
+}
+
+@Composable
+private fun GroupLabel(text: String) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp),
+    )
+}
+
+@Composable
+private fun RadioRow(title: String, hint: String, selected: Boolean, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .selectable(selected = selected, onClick = onClick, role = Role.RadioButton)
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        RadioButton(selected = selected, onClick = null)
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(hint, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActions, onManage: () -> Unit) {
+    val direct = state.bandDirectEnabled
+    val context = LocalContext.current
+    val connected by produceState<SourceDevice?>(null, direct, state.wearableEnabled) {
+        value = if (direct || !state.wearableEnabled) {
+            null
+        } else {
+            withContext(Dispatchers.IO) {
+                runCatching { WearableHealth.sources(context.applicationContext, DEVICE_LOOKUP_DAYS) }.getOrNull()
+                    ?.apps?.flatMap { it.devices }
+                    ?.firstOrNull { it.kind != DeviceKind.Phone && !it.name.isNullOrBlank() }
+            }
+        }
+    }
+    val model = if (direct) BandModels.find(status.name) else BandModels.find(connected?.name)
+    val shape = when {
+        model != null -> model.shape
+        direct -> BandModels.shapeOf(status.name)
+        connected?.kind == DeviceKind.Watch -> BandShape.SquareWatch
+        else -> BandShape.Band
+    }
+    val title = when {
+        direct -> BandModels.displayName(status.name) ?: status.address ?: stringResource(R.string.source_direct)
+        else -> model?.name ?: connected?.name ?: stringResource(R.string.source_connect)
+    }
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Box(
+                modifier = Modifier.size(DEVICE_IMAGE_SIZE).clip(CircleShape).background(MaterialTheme.colorScheme.surface),
+                contentAlignment = Alignment.Center,
+            ) {
+                Image(painterResource(deviceImage(shape)), contentDescription = null, modifier = Modifier.size(48.dp))
+            }
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                val via = stringResource(if (direct) R.string.source_direct else R.string.source_connect)
+                Text(
+                    when {
+                        direct && model != null && !model.tested -> stringResource(R.string.band_model_experimental, via)
+                        direct || connected != null -> via
+                        else -> stringResource(R.string.device_connect_hint)
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                )
+                if (direct) {
+                    val line = when {
+                        state.bandSyncing -> stringResource(R.string.band_testing)
+                        status.lastSyncMs > 0L -> stringResource(
+                            R.string.band_last_sync,
+                            Instant.ofEpochMilli(status.lastSyncMs).atZone(ZoneId.systemDefault()).format(TIME_FORMAT),
+                        )
+                        else -> null
+                    }
+                    line?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimaryContainer) }
+                    status.lastResult?.takeIf { it != BandResult.Ok && !state.bandSyncing }?.let {
+                        Text(stringResource(BandDirect.resultText(it)), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                    }
+                }
+            }
+        }
+        Row(
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Button(onClick = if (direct) actions.onSyncBand else actions.onWearableResync, enabled = !state.bandSyncing) {
+                Text(stringResource(if (direct) R.string.band_reconnect else R.string.band_sync_now))
+            }
+            if (direct) OutlinedButton(onClick = onManage) { Text(stringResource(R.string.source_direct_manage)) }
+        }
+    }
+}
+
+private val DEVICE_IMAGE_SIZE = 64.dp
+private const val DEVICE_LOOKUP_DAYS = 7L
+
+fun deviceImage(shape: BandShape): Int = when (shape) {
+    BandShape.Band -> R.drawable.ic_band
+    BandShape.SquareWatch -> R.drawable.ic_watch_square
+    BandShape.RoundWatch -> R.drawable.ic_watch_round
 }
 
 private fun themeLabel(mode: ThemeMode) = when (mode) {

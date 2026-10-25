@@ -65,6 +65,12 @@ class StepRepository private constructor(private val context: Context) {
 
     suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
+    suspend fun saveBandHours(file: Long, hours: Map<LocalDateTime, Long>) =
+        dao.upsertBandHours(hours.map { (hour, steps) -> BandHour(hour.toString(), file, steps) })
+
+    suspend fun loadBandHours(from: LocalDate): Map<LocalDateTime, Long> =
+        dao.loadBandHours(from.atStartOfDay().toString()).associate { LocalDateTime.parse(it.hour) to it.steps }
+
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
 
     suspend fun exportCsv(output: OutputStream): Int {

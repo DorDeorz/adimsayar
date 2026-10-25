@@ -30,7 +30,6 @@ import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.HealthSnapshot
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.WearableHealth
-import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.ui.CLOCK_FORMAT
 import java.time.Instant
 import java.time.LocalDate
@@ -41,7 +40,7 @@ class HealthWidget : GlanceAppWidget() {
     override val sizeMode: SizeMode = SizeMode.Exact
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val enabled = WearableSteps.isEnabled(context)
+        val enabled = WearableHealth.isEnabled(context)
         val snapshot = if (enabled) HealthCache.load(context) else null
         provideContent {
             val settings by SettingsStore.get(context).settings.collectAsState()

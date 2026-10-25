@@ -316,6 +316,15 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_10_0">
+        <item>Раздел «Здоровье» переработан: сон прошлой ночи, отдельная карточка для каждого показателя и графики по дням (7, 30, 90 дней). Настройки сгруппированы; подключённый браслет вверху, кнопка «Синхронизировать» на экране «Сегодня»</item>
+        <item>Прямое подключение браслета: Настройки → Подключиться к браслету напрямую читает шаги Xiaomi Smart Band 8 без Mi Fitness и Health Connect</item>
+        <item>При прямом подключении пульс, SpO₂ и фазы сна тоже берутся с браслета и видны на вкладке «Здоровье»</item>
+        <item>Последние 7 дней снова читаются из Health Connect, поэтому опоздавшие шаги браслета больше не теряются. В Настройки добавлено «Синхронизировать заново»</item>
+        <item>Лицензия теперь AGPL-3.0: подключение браслета основано на коде Gadgetbridge</item>
+        <item>Прямое подключение теперь поддерживает больше браслетов и часов Xiaomi (Band 9, Redmi Watch 4 и другие, экспериментально); карточка в настройках показывает название и изображение подключённой модели</item>
+        <item>Mi Band 2–6 и Amazfit (Bip, GTS, GTR и другие) тоже подключаются напрямую (экспериментально); ключ получается в приложении через аккаунт Zepp Life / Amazfit</item>
+    </string-array>
     <string-array name="release_notes_0_9_6">
         <item>Полная цветовая палитра: без фиолетовых оттенков при выключенных динамических цветах, читаемый текст кнопок в тёмной теме</item>
         <item>Цифры больше не прыгают при подсчёте; нет тёмной вспышки при запуске в светлой теме</item>
@@ -453,6 +462,11 @@
 
     <string name="oem_transsion_1">Автоуправление → выберите FitWren в списке приложений и включите все три разрешения</string>
     <string name="wearable_card_title">Использовать шаги браслета</string>
+    <string name="wearable_resync">Пересинхронизировать браслет</string>
+    <string name="wearable_resync_hint">Заново читает из Health Connect данные браслета за последние 30 дней, включая часы, которые его приложение записало с опозданием.</string>
+    <string name="wearable_resync_started">Данные браслета читаются заново…</string>
+    <string name="wearable_resync_done">Данные браслета прочитаны заново</string>
+    <string name="wearable_resync_failed">Не удалось прочитать данные браслета, попробуйте чуть позже</string>
     <string name="wearable_card_text">Читает шаги, которые приложения браслетов, например Mi Fitness, записывают в Health Connect. В часы, когда считал браслет, используется его счёт, в остальные — счёт телефона. Если разрешить, в истории также показываются тренировки, расстояние, калории, пульс и сон.</string>
     <string name="wearable_permission_denied">Разрешение на чтение шагов из Health Connect не выдано.</string>
     <string name="wearable_unavailable">На этом телефоне нет Health Connect. На Android 13 и ниже установите приложение Health Connect из Play Маркета.</string>
@@ -633,4 +647,87 @@
     <string name="widget_summary_description">Шаги, вода, сон и пульс в одном виджете</string>
     <string name="widget_summary_distance">Расстояние</string>
     <string name="widget_summary_calories">Калории</string>
+    <string name="band_title">Подключиться к браслету напрямую</string>
+    <string name="band_hint">Получать шаги с браслета Xiaomi или Amazfit без его приложения</string>
+    <string name="band_step_about">Как это работает</string>
+    <string name="band_about_text">FitWren сам подключается к браслету по Bluetooth и читает шаги напрямую. Mi Fitness и Health Connect не нужны.\n\nПроверено: Xiaomi Smart Band 8. Экспериментально (ещё не проверялось): Band 8 Active, Band 8 Pro, Band 9, Band 9 Pro, Band 7 Pro, Redmi Smart Band 2, Redmi Band Pro, Redmi Watch 2 / 2 Lite / 3 / 3 Active / 4 / 5 Active / 5 Lite, Mi Watch Lite, Mi Watch Color Sport, Xiaomi Watch S1 / S1 Active / S1 Pro / S3. Старые модели для Zepp Life тоже экспериментально: Mi Band 2–6, Amazfit Band, Bip, GTS, GTR, T-Rex, Neo, Zepp E. Их ключ берётся из аккаунта Zepp Life (на компьютере: github.com/argrento/huami-token).\n\nБраслет подключается только к одному приложению. Получив ключ, удалите Mi Fitness с телефона. Не удаляйте браслет внутри Mi Fitness, иначе браслет сбросится и ключ изменится.</string>
+    <string name="band_step_key">Ключ</string>
+    <string name="band_cloud_button">Получить ключ через аккаунт Xiaomi</string>
+    <string name="band_cloud_help">Откроется страница входа Xiaomi. Войдите в аккаунт, который используете в Mi Fitness, и подтвердите вход. FitWren не видит ваш пароль.</string>
+    <string name="band_cloud_open">Открыть страницу входа</string>
+    <string name="band_cloud_qr">Или отсканируйте этот код приложением Xiaomi Home на другом телефоне.</string>
+    <string name="band_cloud_waiting">Ожидание входа. После подтверждения вернитесь в FitWren.</string>
+    <string name="band_cloud_loading">Получение браслетов…</string>
+    <string name="band_cloud_none">В этом аккаунте браслет не найден.</string>
+    <string name="band_cloud_failed">Вход в Xiaomi не завершён. Проверьте подключение к интернету и попробуйте снова.</string>
+    <string name="band_cloud_done">Ключ и адрес сохранены для %1$s.</string>
+    <string name="band_zepp_title">Получить через аккаунт Zepp Life / Amazfit</string>
+    <string name="band_zepp_help">Для Mi Band 2–6 и Amazfit. Введите e-mail и пароль от Zepp Life. Пароль уходит только на сервер Zepp, FitWren его не сохраняет. Не работает, если вы входите в Zepp Life через аккаунт Xiaomi.</string>
+    <string name="band_zepp_email">E-mail</string>
+    <string name="band_zepp_password">Пароль</string>
+    <string name="band_zepp_button">Получить ключ через Zepp</string>
+    <string name="band_zepp_failed">Не удалось войти в Zepp. Проверьте e-mail и пароль и попробуйте снова.</string>
+    <string name="band_key_manual">Или введите ключ вручную:</string>
+    <string name="band_key_help">Браслет защищён ключом, привязанным к вашему аккаунту Xiaomi. Ключ нужно один раз получить на компьютере:\n1. На компьютере скачайте и откройте token_extractor.exe со страницы github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor.\n2. Войдите в аккаунт Xiaomi, который используете в Mi Fitness.\n3. Когда спросят регион, оставьте поле пустым и нажмите Enter.\n4. Найдите браслет в списке. Введите здесь 32-символьный код из строки TOKEN.</string>
+    <string name="band_key_label">Ключ (32 символа)</string>
+    <string name="band_key_save">Сохранить</string>
+    <string name="band_key_saved">Ключ сохранён</string>
+    <string name="band_key_invalid">Ключ должен состоять из 32 символов (0-9, a-f)</string>
+    <string name="band_step_device">Браслет</string>
+    <string name="band_device_none">Браслет ещё не выбран.</string>
+    <string name="band_device_selected">Выбран: %1$s</string>
+    <string name="band_scan">Найти браслет</string>
+    <string name="band_scanning">Поиск… Держите браслет рядом с телефоном.</string>
+    <string name="band_scan_empty">Браслет не найден. Включён ли Bluetooth? Возможно, к браслету подключён Mi Fitness.</string>
+    <string name="band_address_help">Или введите адрес вручную (он есть в Mi Fitness или в утилите ключа)</string>
+    <string name="band_address_label">Адрес браслета</string>
+    <string name="band_address_save">Сохранить адрес</string>
+    <string name="band_address_invalid">Неверный адрес. Пример: D0:62:2C:F7:01:6B</string>
+    <string name="band_scan_denied">Разрешение Bluetooth не выдано.</string>
+    <string name="band_step_test">Подключить и проверить</string>
+    <string name="band_test">Подключить и проверить</string>
+    <string name="band_testing">Подключение…</string>
+    <string name="band_last_sync">Последняя синхронизация: %1$s</string>
+    <string name="band_enable">Брать шаги с браслета</string>
+    <string name="band_enable_hint">Если включено, FitWren подключается к браслету при открытии приложения и каждые 15 минут. Вариант Health Connect выключается.</string>
+    <string name="band_result_ok">Подключено, шаги прочитаны</string>
+    <string name="band_result_bluetooth_off">Bluetooth выключен</string>
+    <string name="band_result_permission">Нет разрешения Bluetooth</string>
+    <string name="band_result_connect">Не удалось подключиться к браслету. Он может быть далеко, или подключён Mi Fitness.</string>
+    <string name="band_result_unsupported">Это устройство пока не поддерживается</string>
+    <string name="band_result_auth">Ключ не принят. Проверьте ключ.</string>
+    <string name="band_result_timeout">Браслет не ответил</string>
+    <string name="log_band_synced">Браслет (напрямую): прочитано файлов: %1$d</string>
+    <string name="log_band_failed">Браслет (напрямую): %1$s</string>
+    <string name="yesterday">Вчера</string>
+    <string name="health_sleep_title">Сон</string>
+    <string name="health_last_night">Прошлая ночь</string>
+    <string name="health_sleep_shortest">Самый короткий сон</string>
+    <string name="health_tap_hint">Нажмите на столбец, чтобы увидеть значение за этот день</string>
+    <string name="health_oxygen_average">Средний SpO₂</string>
+    <string name="health_stress_title">Стресс</string>
+    <string name="health_stress_average">Средний стресс</string>
+    <string name="health_stress_hint">Браслет измеряет стресс от 1 до 100: 0–39 расслаблен, 40–59 норма, 60–79 средний, 80–100 высокий.</string>
+    <string name="stress_relaxed">Расслаблен</string>
+    <string name="stress_normal">Норма</string>
+    <string name="stress_medium">Средний</string>
+    <string name="stress_high">Высокий</string>
+    <string name="health_exercise_title">Тренировки</string>
+    <string name="health_exercise_recent">Последние тренировки</string>
+    <string name="health_activity_title">Активность</string>
+    <string name="settings_phone_source">Телефон</string>
+    <string name="settings_wearable_source">Браслет или часы</string>
+    <string name="settings_appearance">Оформление и язык</string>
+    <string name="source_sensor">Датчик шагов телефона</string>
+    <string name="source_sensor_hint">Шаги считает датчик телефона.</string>
+    <string name="source_none">Не использовать</string>
+    <string name="source_none_hint">Считаются только шаги телефона.</string>
+    <string name="band_model_experimental">%1$s · экспериментально</string>
+    <string name="source_direct">Прямое подключение (Xiaomi, Amazfit)</string>
+    <string name="source_connect">Через Health Connect</string>
+    <string name="source_merge_hint">Если вы носите браслет, в эти часы используется его счёт, в остальные часы — счёт телефона.</string>
+    <string name="source_direct_manage">Настройки браслета</string>
+    <string name="device_connect_hint">Данные читаются из Health Connect</string>
+    <string name="band_reconnect">Переподключить</string>
+    <string name="band_sync_now">Синхронизировать</string>
 </resources>
