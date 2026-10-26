@@ -137,6 +137,8 @@ class XiaomiSession(
      * incoming event: true when something arrived, false on a quiet period, null when the link dropped.
      */
     suspend fun loop(pump: suspend () -> Boolean?, store: suspend (BandFile) -> Boolean, live: XiaomiLive? = null): BandResult {
+        // A link can die without a disconnect event; the band then never answers a sync.
+        var quiet = 0
         while (true) {
             val done = result
             if (done != null) {
@@ -153,12 +155,16 @@ class XiaomiSession(
                 null -> return if (authenticated) BandResult.Timeout else BandResult.ConnectFailed
                 false -> {
                     if (authenticated) {
+                        if (live != null && ++quiet >= LIVE_QUIET_LIMIT) {
+                            log("live: band silent during sync, reconnecting")
+                            return BandResult.Timeout
+                        }
                         fetchNext()
                         continue
                     }
                     return if (answered) BandResult.AuthFailed else BandResult.Timeout
                 }
-                true -> Unit
+                true -> quiet = 0
             }
             val file = pendingStore.removeFirstOrNull() ?: continue
             if (store(file) && file.id !in todayIds) {
@@ -601,6 +607,8 @@ class XiaomiSession(
     private fun command(type: Int, subtype: Int) = ProtoWriter().uint(1, type.toLong()).uint(2, subtype.toLong())
 
     companion object {
+        /** Quiet periods (15 s each) in a row during a live sync before the link counts as dead. */
+        private const val LIVE_QUIET_LIMIT = 8
         const val TYPE_AUTH = 1
         private const val TYPE_SYSTEM = 2
         private const val TYPE_NOTIFICATION = 7

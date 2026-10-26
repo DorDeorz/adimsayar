@@ -17,6 +17,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Hava durumu: bileklikte Mi Fitness'tan kalan başka yerler varsa silinir (10/8) ve yer listesi FitWren'in yeriyle kurulur (10/6); yoksa bileklik "Bluetooth'u aç" diyordu. Mi Band 8 saatlik tahmini desteklemiyor (10/2 durum 1).
 - Ayarlar sayfalara bölündü: ana sayfada konular (Adım kaynağı, Bileklik, Hedefler, Vücut, Su, Bildirimler, Görünüm, Veri, Hakkında) kısa özetleriyle listelenir, her biri kendi sayfasında açılır. Bileklik sayfası bildirimler, bileklik özellikleri ve uyarılar olarak gruplandı.
 - Saat kadranları (Ayarlar → Bileklik → Saat kadranları): bileklikteki kadranlar listelenir (4/0), seçilir (4/1), kendi yüklenenler silinir (4/2). ".bin" dosyasından yeni kadran yüklenir: 4/4 ile kurulum istenir, 22/0 ile yükleme açılır, dosya `[0, 16, md5, boyut, dosya, crc32]` olarak 2048 baytlık parçalarla BLE yükleme kanalından (fe95 için 0055, sayaçsız şifreli) ya da SPP veri kanalından gönderilir, bitince kadran seçilir.
+- Bildirimlerin gece durması: açık bağlantıda eşitleme sırasında bileklik 2 dakika hiç cevap vermezse bağlantı ölü sayılır ve yeniden kurulur. Bağlantı döngüsü beklenmeyen bir hatada durmaz. Bildirim dinleyicisi sistemce ayrılırsa yeniden bağlanmayı ister; bağlantı durmuşsa ilk gelen bildirim onu yeniden başlatır.
 
 ## 0.11.0
 

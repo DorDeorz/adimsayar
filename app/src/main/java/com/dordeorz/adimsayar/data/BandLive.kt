@@ -18,6 +18,7 @@ import com.dordeorz.adimsayar.band.BandWeatherReport
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiLive
 import com.dordeorz.adimsayar.band.XiaomiSession
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -239,28 +240,36 @@ object BandLive {
             // A quick direct connect first; once that fails the band is away, so let Android wait for it.
             val autoConnect = failures > 0
             Log.i(XiaomiBand.TAG, "live start, autoConnect=$autoConnect")
-            val result = band.live(
-                store = saver::save,
-                hooks = XiaomiLive(
-                    shouldSync = { System.currentTimeMillis() >= nextSync },
-                    onSynced = { result ->
-                        nextSync = System.currentTimeMillis() + SYNC_INTERVAL_MS
-                        if (!connected) onBack(context)
-                        connected = true
-                        BandDirect.finish(context, ReadSource.Service, result, saver.files, session?.fileSummary.orEmpty())
-                        saver.reset()
-                        complete(result)
-                        Log.i(XiaomiBand.TAG, "live synced: $result")
-                        onConnected()
-                        BandWeather.refresh(context)
-                        BandSchedule.syncCalendar(context)
-                    },
-                ),
-                autoConnect = autoConnect,
-            ) { s, p ->
-                s.onEvent = { onBandEvent(context, it) }
-                session = s
-                post = p
+            val result = try {
+                band.live(
+                    store = saver::save,
+                    hooks = XiaomiLive(
+                        shouldSync = { System.currentTimeMillis() >= nextSync },
+                        onSynced = { result ->
+                            nextSync = System.currentTimeMillis() + SYNC_INTERVAL_MS
+                            if (!connected) onBack(context)
+                            connected = true
+                            BandDirect.finish(context, ReadSource.Service, result, saver.files, session?.fileSummary.orEmpty())
+                            saver.reset()
+                            complete(result)
+                            Log.i(XiaomiBand.TAG, "live synced: $result")
+                            onConnected()
+                            BandWeather.refresh(context)
+                            BandSchedule.syncCalendar(context)
+                        },
+                    ),
+                    autoConnect = autoConnect,
+                ) { s, p ->
+                    s.onEvent = { onBandEvent(context, it) }
+                    session = s
+                    post = p
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                // An unexpected error must not end the loop, or notifications stop until the app is opened.
+                Log.w(XiaomiBand.TAG, "live crashed: $e")
+                BandResult.ConnectFailed
             }
             val wasConnected = connected
             connected = false

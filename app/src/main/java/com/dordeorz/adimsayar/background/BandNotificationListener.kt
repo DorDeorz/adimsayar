@@ -61,10 +61,17 @@ class BandNotificationListener : NotificationListenerService() {
 
     override fun onListenerDisconnected() {
         stopMusic()
+        // The system can unbind us (for example after HyperOS froze the app); ask to be bound again.
+        Log.i(XiaomiBand.TAG, "listener disconnected, asking for rebind")
+        runCatching { requestRebind(ComponentName(this, BandNotificationListener::class.java)) }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        if (!BandLive.connected) return
+        if (!BandLive.connected) {
+            // The connection may have stopped without anyone restarting it.
+            BandLive.refresh(this)
+            return
+        }
         val n = sbn.notification
         if (sbn.packageName == packageName) {
             // FitWren's own reminders go to the band as well, so the band vibrates for them.
