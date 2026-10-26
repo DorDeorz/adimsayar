@@ -254,8 +254,9 @@ class Widget:
 class Face:
     """One watch face: its widgets, images and a preview drawn with sample values."""
 
-    def __init__(self, name, title):
+    def __init__(self, name, title, face_id):
         global IMAGES
+        self.face_id = face_id
         self.name = name
         self.title = title
         self.dir = os.path.join(HERE, name)
@@ -343,7 +344,7 @@ class Face:
         preview.save(os.path.join(IMAGES, "preview.png"))
         with open(os.path.join(self.dir, f"{self.name}.fprj"), "w", encoding="utf-8") as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n')
-            f.write('<FaceProject DeviceType="9" Id="">\n')
+            f.write(f'<FaceProject DeviceType="9" Id="{self.face_id}">\n')
             f.write(f'  <Screen Title={quoteattr(self.title)} Bitmap="preview.png">\n')
             for w in self.widgets:
                 f.write(w.xml() + "\n")
@@ -366,7 +367,7 @@ def health_row(face, y, digit_set):
 
 def classic():
     """Big two-line time, date, the bird inside the step goal ring, steps, heart rate and battery."""
-    f = Face("fitwren", "FitWren")
+    f = Face("fitwren", "FitWren", "166100001")
     hour = digits("hour", 64, BODY)
     minute = digits("minute", 64, WHITE)
     hx = (W - 2 * hour[1]) // 2
@@ -387,7 +388,7 @@ def classic():
 
 def night():
     """Dark blue starry sky, a sleepy bird on the moon side, one-line time and a thin goal ring."""
-    f = Face("fitwren_gece", "FitWren Gece")
+    f = Face("fitwren_gece", "FitWren Gece", "166100002")
     sky = (0x9C, 0xB4, 0xFF)
     f.file(background((0x0B, 0x10, 0x2E), (0x02, 0x03, 0x0A), stars=True), "background.png")
     f.image("background", 0, 0, "background.png")
@@ -411,7 +412,7 @@ def night():
 
 def simple():
     """Only what matters: a very big time, the date, a thin goal line and a small bird at the bottom."""
-    f = Face("fitwren_sade", "FitWren Sade")
+    f = Face("fitwren_sade", "FitWren Sade", "166100009")
     hour = digits("hour", 86, WHITE)
     minute = digits("minute", 86, BODY)
     hx = (W - 2 * hour[1]) // 2
@@ -469,7 +470,7 @@ def path_points(top, bottom, amplitude=46, turns=2.2):
 
 def road():
     """The day as a road: the bird walks up a winding path as steps add up, a flag waits at the top."""
-    f = Face("fitwren_yol", "FitWren Yol")
+    f = Face("fitwren_yol", "FitWren Yol", "166100003")
     sand = (0xE8, 0xC9, 0x8F)
     grass = (0x7C, 0xC5, 0x76)
     hour = digits("time", 36, WHITE)
@@ -525,7 +526,7 @@ def hand(length, width, color, tail=12, tip=None):
 
 def analog():
     """An analog dial with the bird in the middle; the hour ticks double as the step goal."""
-    f = Face("fitwren_analog", "FitWren Analog")
+    f = Face("fitwren_analog", "FitWren Analog", "166100004")
     size, cy = 184, 150
     dial = canvas(size, size)
     d = ImageDraw.Draw(dial)
@@ -569,7 +570,7 @@ def analog():
 
 def neon():
     """Neon on black: glowing cyan and pink time, a pink step arc and a small bird."""
-    f = Face("fitwren_neon", "FitWren Neon")
+    f = Face("fitwren_neon", "FitWren Neon", "166100005")
     cyan, pink = (0x29, 0xE6, 0xFF), (0xFF, 0x4F, 0xC3)
     hour = glow_digits("hour", 62, cyan)
     minute = glow_digits("minute", 62, pink)
@@ -591,12 +592,12 @@ def neon():
 def branch(dark=False):
     """The bird sitting on a branch with leaves: a pastel morning, or the same scene at dusk."""
     if dark:
-        f = Face("fitwren_dal_gece", "FitWren Dal Gece")
+        f = Face("fitwren_dal_gece", "FitWren Dal Gece", "166100007")
         ink, accent, done, track, soft = (0xF2, 0xE6, 0xD8), (0xFF, 0xB0, 0x6A), (0x81, 0xC7, 0x84), (0x3A, 0x30, 0x3E), (0xB8, 0xA8, 0x9C)
         sky = background((0x1E, 0x17, 0x2E), (0x07, 0x05, 0x0D), stars=True)
         brown, leaf = (0x6D, 0x52, 0x48), (0x4E, 0x8F, 0x55)
     else:
-        f = Face("fitwren_dal", "FitWren Dal")
+        f = Face("fitwren_dal", "FitWren Dal", "166100006")
         ink, accent, done, track, soft = (0x3B, 0x2A, 0x20), (0xE0, 0x7A, 0x2F), (0x43, 0xA0, 0x47), (0xF3, 0xC9, 0xB0), (0x6D, 0x5A, 0x50)
         sky = background((0xFF, 0xF1, 0xD6), (0xFF, 0xD3, 0xC2))
         brown, leaf = (0x8D, 0x6E, 0x63), (0x81, 0xC7, 0x84)
@@ -632,7 +633,7 @@ def branch(dark=False):
 
 def rings_face():
     """Two rings like an activity tracker: steps outside, active calories inside, the bird in the middle."""
-    f = Face("fitwren_halka", "FitWren Halka")
+    f = Face("fitwren_halka", "FitWren Halka", "166100008")
     green, red = (0x9C, 0xE6, 0x5A), (0xFF, 0x52, 0x6E)
     hour = digits("time", 40, WHITE)
     colon = glyph("colon.png", ":", 40, GREY)

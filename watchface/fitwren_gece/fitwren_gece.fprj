@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FaceProject DeviceType="9" Id="">
+<FaceProject DeviceType="9" Id="166100002">
   <Screen Title="FitWren Gece" Bitmap="preview.png">
     <Widget Shape="30" Name="background" Bitmap="background.png" X="0" Y="0" Width="192" Height="490" Alpha="255" Visible_Src="0" />
     <Widget Shape="30" Name="moon" Bitmap="moon.png" X="140" Y="26" Width="30" Height="30" Alpha="255" Visible_Src="0" />
