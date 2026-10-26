@@ -453,7 +453,6 @@ class XiaomiSession(
                     // Already on the band: just switch to it.
                     2 -> finishUpload(true)
                     else -> finishUpload(false)
-                    }
                 }
             }
         }
