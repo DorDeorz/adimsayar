@@ -316,7 +316,7 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
-    <string-array name="release_notes_0_12_9">
+    <string-array name="release_notes_0_12_10">
         <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
         <item>Cadrans FitWren : neuf cadrans avec l’oiseau (Nuit, Route, Analogique, Néon, Branche et plus) inclus, envoyés au Mi Band 8 en un geste</item>
     </string-array>

@@ -2,7 +2,7 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
-## 0.12.9
+## 0.12.10
 
 - Kadran mağazası (Ayarlar → Bileklik → Saat kadranları → Kadran mağazası, şimdilik Xiaomi Smart Band 8): Xiaomi'nin ücretsiz kadranları ad, resim, kategori ve açıklamayla ızgarada gösterilir; ada göre aranır, kategoriye göre süzülür. "Yükle" dosyayı Xiaomi'den indirir, MD5'ini mağazanın verdiği değerle karşılaştırır ve bilekliğe gönderir. Uygulamada yalnızca kadran numaraları var; ad, resim ve dosya her açılışta Xiaomi'den (`watch-appstore.iot.mi.com`, giriş gerekmez) gelir, her sorgu dört öneri daha getirir. Mağazadan yüklenen kadranın adı ve resmi saklanır ve kadran listesinde görünür.
 - FitWren kadranları (Mi Band 8): kuşlu dokuz kadran (FitWren, Gece, Yol, Analog, Neon, Dal, Dal Gece, Halka, Sade) uygulamayla gelir; Saat kadranları → "FitWren kadranları"ndan seçilip yüklenir. Kaynakları `watchface/make_faces.py` (Pillow) ile üretilen Mi Create projeleri; `.bin` dosyaları Windows'ta Mi Create derleyicisiyle derlenip `assets/faces/` altına konur. Dosyası olmayan kadran listede görünmez.

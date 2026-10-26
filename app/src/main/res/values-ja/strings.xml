@@ -316,7 +316,7 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
-    <string-array name="release_notes_0_12_9">
+    <string-array name="release_notes_0_12_10">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
         <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
     </string-array>

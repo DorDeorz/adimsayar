@@ -316,7 +316,7 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
-    <string-array name="release_notes_0_12_9">
+    <string-array name="release_notes_0_12_10">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
         <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
     </string-array>

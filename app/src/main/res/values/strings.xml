@@ -316,7 +316,7 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
-    <string-array name="release_notes_0_12_9">
+    <string-array name="release_notes_0_12_10">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
     </string-array>

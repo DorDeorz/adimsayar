@@ -316,7 +316,7 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
-    <string-array name="release_notes_0_12_9">
+    <string-array name="release_notes_0_12_10">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
         <item>Циферблаты FitWren: девять циферблатов с птичкой (Ночь, Дорога, Аналог, Неон, Ветка и другие) встроены и ставятся на Mi Band 8 одним нажатием</item>
     </string-array>

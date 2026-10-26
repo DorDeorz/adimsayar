@@ -9,7 +9,7 @@ import math
 import os
 from xml.sax.saxutils import quoteattr
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 W, H = 192, 490
 PREVIEW = (122, 310)
@@ -313,7 +313,40 @@ class Face:
         self.image("date_dot", x + 2 * date[1], y, dot[0])
         self.number("month", x + 2 * date[1] + dot[1], y, date, 2, SRC_MONTH, "10")
 
+    def flatten(self):
+        """The Band 8 compiler stores plain images without transparency, so their clear pixels show
+        black; lists and numbers keep it. So each plain image lying on a list is drawn into every
+        picture of that list, and every other one gets the plain images under it drawn in."""
+        below = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+        kept = []
+        for widget in self.widgets:
+            a = widget.attrs
+            if a["Shape"] != 30:
+                kept.append(widget)
+                continue
+            file, x, y = a["Bitmap"], int(a["X"]), int(a["Y"])
+            img = Image.open(os.path.join(IMAGES, file)).convert("RGBA")
+            under = [k for k in kept if k.attrs["Shape"] != 30 and overlaps(k, img, x, y)]
+            if under:
+                host = under[0]
+                hx, hy = int(host.attrs["X"]), int(host.attrs["Y"])
+                inside = hx <= x and hy <= y and x + img.width <= hx + int(host.attrs["Width"]) and y + img.height <= hy + int(host.attrs["Height"])
+                if len(under) > 1 or host.attrs["Shape"] != 31 or not inside:
+                    raise ValueError(f"{self.name}: {a['Name']} lies on {[k.attrs['Name'] for k in under]}")
+                for _, frame in host.sample[1]:
+                    picture = Image.open(os.path.join(IMAGES, frame)).convert("RGBA")
+                    picture.alpha_composite(img, (x - hx, y - hy))
+                    picture.save(os.path.join(IMAGES, frame))
+                continue
+            flat = below.crop((x, y, x + img.width, y + img.height))
+            flat.alpha_composite(img)
+            flat.save(os.path.join(IMAGES, file))
+            below.alpha_composite(img, (x, y))
+            kept.append(widget)
+        self.widgets = kept
+
     def write(self):
+        self.flatten()
         preview = Image.new("RGBA", (W, H), (0, 0, 0, 255))
 
         def paste(file, x, y):
@@ -354,6 +387,22 @@ class Face:
             for w in self.widgets:
                 f.write(w.xml() + "\n")
             f.write("  </Screen>\n</FaceProject>\n")
+
+
+def overlaps(widget, img, x, y):
+    """Whether a list, number or dial draws inside the box of [img] placed at x, y; the band shows the whole box."""
+    a = widget.attrs
+    box = (int(a["X"]), int(a["Y"]), int(a["X"]) + int(a["Width"]), int(a["Y"]) + int(a["Height"]))
+    mask = Image.new("L", (W, H), 0)
+    if a["Shape"] == 31:
+        for _, frame in widget.sample[1]:
+            alpha = Image.open(os.path.join(IMAGES, frame)).convert("RGBA").getchannel("A")
+            mask.paste(255, (box[0], box[1]), alpha.point(lambda v: 255 if v else 0))
+    else:
+        mask.paste(255, box)
+    mine = Image.new("L", (W, H), 0)
+    mine.paste(255, (x, y, x + img.width, y + img.height))
+    return ImageChops.multiply(mask, mine).getbbox() is not None
 
 
 def rings(face, size, width, **colors):
@@ -500,6 +549,7 @@ def road():
     d.polygon([(fx * SS, (fy - 26) * SS), ((fx + 16) * SS, (fy - 21) * SS), (fx * SS, (fy - 15) * SS)], fill=(0xE5, 0x39, 0x35))
     f.file(finish(bg, W, H), "road.png")
     f.image("road", 0, 0, "road.png")
+    f.widgets.insert(0, f.widgets.pop())  # the road lies under everything
     f.file(bird(46), "bird.png")
     b = Image.open(os.path.join(IMAGES, "bird.png"))
     walkers = []
