@@ -64,22 +64,30 @@ object BandFaces {
         previewFile(context, id).takeIf { it.exists() }?.let { BitmapFactory.decodeFile(it.path) }
     }
 
-    /** False when the band is not connected or another upload runs. */
-    suspend fun install(context: Context, file: WatchfaceFile, preview: Bitmap?): Boolean {
+    /** The name a face had in the store; the band itself often reports an internal Chinese one. */
+    suspend fun savedName(context: Context, id: String): String? = withContext(Dispatchers.IO) {
+        runCatching { nameFile(context, id).takeIf { it.exists() }?.readText()?.trim() }.getOrNull()?.takeIf { it.isNotEmpty() }
+    }
+
+    /** False when the band is not connected or another upload runs. [name] is kept when it came from the store. */
+    suspend fun install(context: Context, file: WatchfaceFile, preview: Bitmap?, name: String? = null): Boolean {
         if (upload.value is WatchfaceUpload.Sending) return false
-        if (preview != null) {
-            withContext(Dispatchers.IO) {
-                runCatching {
-                    val out = previewFile(context, file.id)
-                    out.parentFile?.mkdirs()
-                    out.outputStream().use { preview.compress(Bitmap.CompressFormat.PNG, 100, it) }
-                }
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val out = previewFile(context, file.id)
+                out.parentFile?.mkdirs()
+                if (preview != null) out.outputStream().use { preview.compress(Bitmap.CompressFormat.PNG, 100, it) }
+                if (name != null) nameFile(context, file.id).writeText(name)
             }
         }
         return BandLive.installWatchface(file)
     }
 
-    private fun previewFile(context: Context, id: String) = File(File(context.filesDir, "faces"), "${id.filter(Char::isDigit)}.png")
+    private fun faceDir(context: Context) = File(context.filesDir, "faces")
+
+    private fun previewFile(context: Context, id: String) = File(faceDir(context), "${id.filter(Char::isDigit)}.png")
+
+    private fun nameFile(context: Context, id: String) = File(faceDir(context), "${id.filter(Char::isDigit)}.name")
 
     fun onDisconnected() {
         faces.value = null

@@ -316,6 +316,9 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Mostradores: prévia antes de enviar; os enviados pelo FitWren mostram a imagem e o que está em uso fica destacado; apagar pede confirmação</item>
         <item>A lista de apps para notificações mostra ícones, busca e quantos apps estão ativados</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">Em uso</string>
     <string name="band_faces_own">Enviado por você</string>
     <string name="band_faces_builtin">Integrado</string>
+    <string name="face_store">Loja de mostradores</string>
+    <string name="face_store_hint">Mostradores gratuitos da Xiaomi. Nomes e imagens vêm da Xiaomi.</string>
+    <string name="face_store_loading">Carregando mostradores…</string>
+    <string name="face_store_offline">Não foi possível acessar a loja. Verifique sua conexão.</string>
+    <string name="face_store_all">Todos</string>
+    <string name="face_store_search">Buscar mostradores</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Baixando…</string>
+    <string name="face_store_failed">Não foi possível baixar o mostrador. Tente de novo.</string>
+    <string name="face_store_count">%1$d mostradores</string>
 </resources>

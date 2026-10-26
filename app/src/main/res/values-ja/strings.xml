@@ -316,6 +316,9 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>文字盤: アップロード前にプレビューを表示。FitWren からアップロードした文字盤は画像付きで表示し、使用中の文字盤を強調。削除前に確認</item>
         <item>通知アプリの一覧にアイコン、検索、オンになっているアプリ数を表示</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">使用中</string>
     <string name="band_faces_own">アップロード済み</string>
     <string name="band_faces_builtin">内蔵</string>
+    <string name="face_store">文字盤ストア</string>
+    <string name="face_store_hint">Xiaomiの無料文字盤。名前と画像はXiaomiから取得します。</string>
+    <string name="face_store_loading">文字盤を読み込み中…</string>
+    <string name="face_store_offline">ストアに接続できません。インターネット接続を確認してください。</string>
+    <string name="face_store_all">すべて</string>
+    <string name="face_store_search">文字盤を検索</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">ダウンロード中…</string>
+    <string name="face_store_failed">文字盤をダウンロードできませんでした。もう一度お試しください。</string>
+    <string name="face_store_count">%1$d 個の文字盤</string>
 </resources>

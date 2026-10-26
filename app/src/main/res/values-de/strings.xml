@@ -316,6 +316,9 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Zifferblätter: Vorschaubild vor dem Hochladen; aus FitWren geladene Zifferblätter zeigen ihr Bild, das aktive ist hervorgehoben; Löschen fragt nach</item>
         <item>Die App-Liste für Armband-Benachrichtigungen zeigt Symbole, eine Suche und wie viele Apps aktiv sind</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">Wird verwendet</string>
     <string name="band_faces_own">Von dir geladen</string>
     <string name="band_faces_builtin">Vorinstalliert</string>
+    <string name="face_store">Zifferblatt-Shop</string>
+    <string name="face_store_hint">Kostenlose Zifferblätter von Xiaomi. Namen und Bilder kommen von Xiaomi.</string>
+    <string name="face_store_loading">Zifferblätter werden geladen…</string>
+    <string name="face_store_offline">Shop nicht erreichbar. Prüfe deine Internetverbindung.</string>
+    <string name="face_store_all">Alle</string>
+    <string name="face_store_search">Zifferblatt suchen</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Wird heruntergeladen…</string>
+    <string name="face_store_failed">Zifferblatt konnte nicht geladen werden. Versuch es erneut.</string>
+    <string name="face_store_count">%1$d Zifferblätter</string>
 </resources>

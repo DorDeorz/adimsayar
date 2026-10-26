@@ -316,6 +316,9 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>워치 페이스: 올리기 전에 미리보기 표시, FitWren에서 올린 워치 페이스는 이미지와 함께 표시되고 사용 중인 것은 강조, 삭제 전에 확인</item>
         <item>알림 앱 목록에 아이콘, 검색, 켜진 앱 수 표시</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">사용 중</string>
     <string name="band_faces_own">직접 올림</string>
     <string name="band_faces_builtin">기본 제공</string>
+    <string name="face_store">워치페이스 스토어</string>
+    <string name="face_store_hint">Xiaomi의 무료 워치페이스입니다. 이름과 이미지는 Xiaomi에서 가져옵니다.</string>
+    <string name="face_store_loading">워치페이스 불러오는 중…</string>
+    <string name="face_store_offline">스토어에 연결할 수 없습니다. 인터넷 연결을 확인하세요.</string>
+    <string name="face_store_all">전체</string>
+    <string name="face_store_search">워치페이스 검색</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">다운로드 중…</string>
+    <string name="face_store_failed">워치페이스를 다운로드하지 못했습니다. 다시 시도하세요.</string>
+    <string name="face_store_count">워치페이스 %1$d개</string>
 </resources>

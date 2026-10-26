@@ -316,6 +316,9 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Cadrans : aperçu avant l’envoi ; les cadrans envoyés depuis FitWren affichent leur image et celui utilisé est mis en avant ; la suppression demande confirmation</item>
         <item>La liste des apps pour les notifications affiche les icônes, une recherche et le nombre d’apps activées</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">Utilisé</string>
     <string name="band_faces_own">Envoyé par toi</string>
     <string name="band_faces_builtin">Intégré</string>
+    <string name="face_store">Boutique de cadrans</string>
+    <string name="face_store_hint">Cadrans gratuits de Xiaomi. Les noms et images viennent de Xiaomi.</string>
+    <string name="face_store_loading">Chargement des cadrans…</string>
+    <string name="face_store_offline">Boutique inaccessible. Vérifie ta connexion internet.</string>
+    <string name="face_store_all">Tous</string>
+    <string name="face_store_search">Rechercher un cadran</string>
+    <string name="face_store_size">%1$s Mo</string>
+    <string name="face_store_downloading">Téléchargement…</string>
+    <string name="face_store_failed">Impossible de télécharger le cadran. Réessaie.</string>
+    <string name="face_store_count">%1$d cadrans</string>
 </resources>

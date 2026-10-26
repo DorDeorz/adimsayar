@@ -316,6 +316,9 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Kadranlar: yüklemeden önce önizleme resmi görünür; FitWren\'den yüklenen kadranlar listede resmiyle, kullanılan kadran renkli görünür; silmeden önce sorulur</item>
         <item>Bildirim gönderen uygulamalar listesinde simgeler, arama kutusu ve kaç uygulamanın açık olduğu görünür</item>
@@ -853,4 +856,14 @@
     <string name="band_faces_active">Şu an kullanılıyor</string>
     <string name="band_faces_own">Senin yüklediğin</string>
     <string name="band_faces_builtin">Bileklikle gelen</string>
+    <string name="face_store">Kadran mağazası</string>
+    <string name="face_store_hint">Xiaomi\'nin ücretsiz kadranları. Ad ve resimler Xiaomi\'den gelir.</string>
+    <string name="face_store_loading">Kadranlar yükleniyor…</string>
+    <string name="face_store_offline">Mağazaya ulaşılamadı. İnternet bağlantını kontrol et.</string>
+    <string name="face_store_all">Tümü</string>
+    <string name="face_store_search">Kadran ara</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">İndiriliyor…</string>
+    <string name="face_store_failed">Kadran indirilemedi. Tekrar dene.</string>
+    <string name="face_store_count">%1$d kadran</string>
 </resources>

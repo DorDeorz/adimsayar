@@ -316,6 +316,9 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Esferas: vista previa antes de subir; las esferas subidas desde FitWren muestran su imagen y la que está en uso se resalta; borrar pide confirmación</item>
         <item>La lista de apps para notificaciones muestra iconos, un buscador y cuántas apps están activadas</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">En uso</string>
     <string name="band_faces_own">Subida por ti</string>
     <string name="band_faces_builtin">Incluida</string>
+    <string name="face_store">Tienda de esferas</string>
+    <string name="face_store_hint">Esferas gratuitas de Xiaomi. Los nombres e imágenes vienen de Xiaomi.</string>
+    <string name="face_store_loading">Cargando esferas…</string>
+    <string name="face_store_offline">No se pudo acceder a la tienda. Revisa tu conexión a internet.</string>
+    <string name="face_store_all">Todas</string>
+    <string name="face_store_search">Buscar esferas</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Descargando…</string>
+    <string name="face_store_failed">No se pudo descargar la esfera. Inténtalo de nuevo.</string>
+    <string name="face_store_count">%1$d esferas</string>
 </resources>

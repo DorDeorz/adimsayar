@@ -316,6 +316,9 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>表盘：上传前显示预览图；从 FitWren 上传的表盘在列表中显示图片，正在使用的表盘高亮；删除前会确认</item>
         <item>通知应用列表显示图标、搜索框和已开启的应用数</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">使用中</string>
     <string name="band_faces_own">你上传的</string>
     <string name="band_faces_builtin">内置</string>
+    <string name="face_store">表盘商店</string>
+    <string name="face_store_hint">小米免费表盘。名称和图片来自小米。</string>
+    <string name="face_store_loading">正在加载表盘…</string>
+    <string name="face_store_offline">无法连接商店。请检查网络连接。</string>
+    <string name="face_store_all">全部</string>
+    <string name="face_store_search">搜索表盘</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">正在下载…</string>
+    <string name="face_store_failed">表盘下载失败。请重试。</string>
+    <string name="face_store_count">%1$d 个表盘</string>
 </resources>

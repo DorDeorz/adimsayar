@@ -316,6 +316,9 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Watch faces: a preview picture shows before uploading; faces uploaded from FitWren show their picture in the list and the face in use is highlighted; deleting asks first</item>
         <item>The app list for band notifications shows icons, a search box and how many apps are on</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">In use</string>
     <string name="band_faces_own">Uploaded by you</string>
     <string name="band_faces_builtin">Built in</string>
+    <string name="face_store">Watch face store</string>
+    <string name="face_store_hint">Xiaomi\'s free watch faces. Names and pictures come from Xiaomi.</string>
+    <string name="face_store_loading">Loading watch faces…</string>
+    <string name="face_store_offline">Could not reach the store. Check your internet connection.</string>
+    <string name="face_store_all">All</string>
+    <string name="face_store_search">Search faces</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Downloading…</string>
+    <string name="face_store_failed">Could not download the face. Try again.</string>
+    <string name="face_store_count">%1$d faces</string>
 </resources>

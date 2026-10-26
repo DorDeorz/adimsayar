@@ -27,6 +27,7 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.data.FaceStore
 import com.dordeorz.adimsayar.band.WatchfaceUpload
 import androidx.compose.material3.LinearProgressIndicator
 import com.dordeorz.adimsayar.data.BandReplies
@@ -155,6 +156,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.12.8", R.array.release_notes_0_12_8),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
@@ -1093,6 +1095,8 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     var pending by remember { mutableStateOf<WatchfaceFile?>(null) }
     var pendingPreview by remember { mutableStateOf<Bitmap?>(null) }
     var deleting by remember { mutableStateOf<BandWatchface?>(null) }
+    var store by remember { mutableStateOf(false) }
+    val storeModel = remember { FaceStore.model(context) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1121,6 +1125,13 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
+                }
+                if (storeModel != null) {
+                    Button(
+                        enabled = connected && sending == null,
+                        onClick = { store = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.face_store)) }
                 }
                 when (val state = upload) {
                     is WatchfaceUpload.Sending -> {
@@ -1182,6 +1193,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
             dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
         )
     }
+    if (store && storeModel != null) {
+        FaceStoreDialog(storeModel, onDismiss = { store = false })
+    }
     deleting?.let { face ->
         AlertDialog(
             onDismissRequest = { deleting = null },
@@ -1202,6 +1216,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
 private fun FaceRow(face: BandWatchface, enabled: Boolean, onSelect: () -> Unit, onDelete: () -> Unit) {
     val context = LocalContext.current
     val preview by produceState<Bitmap?>(null, face.id) { value = BandFaces.savedPreview(context, face.id) }
+    val name by produceState(face.name, face.id, face.name) { value = BandFaces.savedName(context, face.id) ?: face.name }
     val shape = MaterialTheme.shapes.medium
     Row(
         modifier = Modifier
@@ -1228,7 +1243,7 @@ private fun FaceRow(face: BandWatchface, enabled: Boolean, onSelect: () -> Unit,
             }
         }
         Column(Modifier.weight(1f)) {
-            Text(face.name, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(name, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
             Text(
                 stringResource(
                     when {

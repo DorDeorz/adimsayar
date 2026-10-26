@@ -316,6 +316,9 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Циферблаты: предпросмотр перед загрузкой; загруженные из FitWren показываются с картинкой, текущий выделен; удаление требует подтверждения</item>
         <item>В списке приложений для уведомлений есть значки, поиск и число включённых приложений</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">Используется</string>
     <string name="band_faces_own">Загружен вами</string>
     <string name="band_faces_builtin">Встроенный</string>
+    <string name="face_store">Магазин циферблатов</string>
+    <string name="face_store_hint">Бесплатные циферблаты Xiaomi. Названия и картинки загружаются с Xiaomi.</string>
+    <string name="face_store_loading">Загрузка циферблатов…</string>
+    <string name="face_store_offline">Магазин недоступен. Проверьте подключение к интернету.</string>
+    <string name="face_store_all">Все</string>
+    <string name="face_store_search">Поиск циферблатов</string>
+    <string name="face_store_size">%1$s МБ</string>
+    <string name="face_store_downloading">Загрузка…</string>
+    <string name="face_store_failed">Не удалось загрузить циферблат. Попробуйте снова.</string>
+    <string name="face_store_count">Циферблатов: %1$d</string>
 </resources>

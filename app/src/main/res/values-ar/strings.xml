@@ -316,6 +316,9 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>واجهات الساعة: معاينة قبل الرفع؛ الواجهات المرفوعة من FitWren تظهر بصورتها والواجهة المستخدمة مميزة؛ يُطلب التأكيد قبل الحذف</item>
         <item>قائمة التطبيقات للإشعارات تعرض الأيقونات ومربع بحث وعدد التطبيقات المفعّلة</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">قيد الاستخدام</string>
     <string name="band_faces_own">رفعتها أنت</string>
     <string name="band_faces_builtin">مدمجة</string>
+    <string name="face_store">متجر واجهات الساعة</string>
+    <string name="face_store_hint">واجهات مجانية من Xiaomi. الأسماء والصور تأتي من Xiaomi.</string>
+    <string name="face_store_loading">جارٍ تحميل الواجهات…</string>
+    <string name="face_store_offline">تعذر الوصول إلى المتجر. تحقق من اتصال الإنترنت.</string>
+    <string name="face_store_all">الكل</string>
+    <string name="face_store_search">ابحث عن واجهة</string>
+    <string name="face_store_size">%1$s ميغابايت</string>
+    <string name="face_store_downloading">جارٍ التنزيل…</string>
+    <string name="face_store_failed">تعذر تنزيل الواجهة. حاول مرة أخرى.</string>
+    <string name="face_store_count">%1$d واجهة</string>
 </resources>

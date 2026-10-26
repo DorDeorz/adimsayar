@@ -316,6 +316,9 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_12_8">
+        <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Quadranti: anteprima prima del caricamento; i quadranti caricati da FitWren mostrano l’immagine e quello in uso è evidenziato; l’eliminazione chiede conferma</item>
         <item>L’elenco app per le notifiche mostra icone, ricerca e quante app sono attive</item>
@@ -852,4 +855,14 @@
     <string name="band_faces_active">In uso</string>
     <string name="band_faces_own">Caricato da te</string>
     <string name="band_faces_builtin">Integrato</string>
+    <string name="face_store">Negozio quadranti</string>
+    <string name="face_store_hint">Quadranti gratuiti di Xiaomi. Nomi e immagini arrivano da Xiaomi.</string>
+    <string name="face_store_loading">Caricamento quadranti…</string>
+    <string name="face_store_offline">Impossibile raggiungere il negozio. Controlla la connessione internet.</string>
+    <string name="face_store_all">Tutti</string>
+    <string name="face_store_search">Cerca quadranti</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Download in corso…</string>
+    <string name="face_store_failed">Impossibile scaricare il quadrante. Riprova.</string>
+    <string name="face_store_count">%1$d quadranti</string>
 </resources>
