@@ -12,6 +12,7 @@ from xml.sax.saxutils import quoteattr
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H = 192, 490
+PREVIEW = (122, 310)
 SS = 4  # supersampling for smooth edges
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMAGES = HERE  # set per face by Face()
@@ -289,7 +290,7 @@ class Face:
         w, h = Image.open(os.path.join(IMAGES, files[0][1])).size
         self.widgets.append(Widget({
             "Shape": 31, "Name": name, "BitmapList": "|".join(f"({v}):{f}" for v, f in files), "X": x, "Y": y,
-            "Width": w, "Height": h, "Alpha": 255, "Alignment": 0, "DefaultIndex": 0, "Value_Src": source,
+            "Width": w, "Height": h, "Alpha": 255, "Alignment": 0, "DefaultIndex": 0, "Index_Src": source,
             "Spacing": 0, "Blanking": 0, "Visible_Src": 0,
         }, ("list", files, sample)))
 
@@ -344,7 +345,8 @@ class Face:
         assets = os.path.join(HERE, "..", "app", "src", "main", "assets", "faces")
         if os.path.isdir(assets):
             preview.convert("RGB").save(os.path.join(assets, f"{self.name}.png"))
-        preview.save(os.path.join(IMAGES, "preview.png"))
+        # the compiler wants the Band 8 store preview at 122 x 310
+        preview.resize(PREVIEW, Image.LANCZOS).save(os.path.join(IMAGES, "preview.png"))
         with open(os.path.join(self.dir, f"{self.name}.fprj"), "w", encoding="utf-8") as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n')
             f.write(f'<FaceProject DeviceType="9" Id="{self.face_id}">\n')
