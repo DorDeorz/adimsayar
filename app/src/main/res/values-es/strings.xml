@@ -316,6 +316,10 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Esferas: vista previa antes de subir; las esferas subidas desde FitWren muestran su imagen y la que está en uso se resalta; borrar pide confirmación</item>
+        <item>La lista de apps para notificaciones muestra iconos, un buscador y cuántas apps están activadas</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Notificaciones de la pulsera: elige apps y horas de silencio; los recordatorios de FitWren también vibran en la pulsera</item>
         <item>Batería de la pulsera: en la tarjeta del dispositivo, en el nuevo widget \"Batería de la pulsera\" y aviso en el teléfono si baja</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Esfera subida y seleccionada.</string>
     <string name="band_faces_failed">No se pudo subir la esfera. Acerca la pulsera e inténtalo de nuevo.</string>
     <string name="band_faces_delete">Borrar</string>
+    <string name="band_notify_pick_search">Buscar apps</string>
+    <string name="band_notify_pick_count">%1$d de %2$d apps envían a la pulsera</string>
+    <string name="band_faces_tap_hint">Toca una esfera para usarla en la pulsera al momento. La pulsera no envía imágenes: solo se ven en esferas subidas desde FitWren, y los nombres aparecen como en la pulsera.</string>
+    <string name="band_faces_no_preview">Este archivo no tiene imagen de vista previa.</string>
+    <string name="band_faces_upload">Subir</string>
+    <string name="band_faces_delete_title">¿Borrar esta esfera?</string>
+    <string name="band_faces_active">En uso</string>
+    <string name="band_faces_own">Subida por ti</string>
+    <string name="band_faces_builtin">Incluida</string>
 </resources>

@@ -316,6 +316,10 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Kadranlar: yüklemeden önce önizleme resmi görünür; FitWren\'den yüklenen kadranlar listede resmiyle, kullanılan kadran renkli görünür; silmeden önce sorulur</item>
+        <item>Bildirim gönderen uygulamalar listesinde simgeler, arama kutusu ve kaç uygulamanın açık olduğu görünür</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Bileklik bildirimlerinde uygulama seçimi ve sessiz saatler; FitWren hatırlatmaları da bileklikte titreşir</item>
         <item>Bileklik pili: cihaz kartında, yeni \"Bileklik pili\" widget\'ında ve azalınca telefonda uyarı</item>
@@ -840,4 +844,13 @@
     <string name="band_faces_done">Kadran yüklendi ve seçildi.</string>
     <string name="band_faces_failed">Kadran yüklenemedi. Bilekliği yaklaştırıp yeniden dene.</string>
     <string name="band_faces_delete">Sil</string>
+    <string name="band_notify_pick_search">Uygulama ara</string>
+    <string name="band_notify_pick_count">%1$d / %2$d uygulama bilekliğe gönderiyor</string>
+    <string name="band_faces_tap_hint">Bir kadrana dokununca bileklikte hemen açılır. Bileklik resim göndermediği için resimler yalnızca FitWren\'den yüklediğin kadranlarda görünür, isimler de bileklikteki gibi yazılır.</string>
+    <string name="band_faces_no_preview">Bu dosyada önizleme resmi yok.</string>
+    <string name="band_faces_upload">Yükle</string>
+    <string name="band_faces_delete_title">Kadran silinsin mi?</string>
+    <string name="band_faces_active">Şu an kullanılıyor</string>
+    <string name="band_faces_own">Senin yüklediğin</string>
+    <string name="band_faces_builtin">Bileklikle gelen</string>
 </resources>

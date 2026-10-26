@@ -316,6 +316,10 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>واجهات الساعة: معاينة قبل الرفع؛ الواجهات المرفوعة من FitWren تظهر بصورتها والواجهة المستخدمة مميزة؛ يُطلب التأكيد قبل الحذف</item>
+        <item>قائمة التطبيقات للإشعارات تعرض الأيقونات ومربع بحث وعدد التطبيقات المفعّلة</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>إشعارات السوار: اختيار التطبيقات وساعات الهدوء، وتذكيرات FitWren تهتز على السوار أيضًا</item>
         <item>بطارية السوار: في بطاقة الجهاز وفي أداة \"بطارية السوار\" الجديدة، وتنبيه على الهاتف عند انخفاضها</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">تم رفع الواجهة واختيارها.</string>
     <string name="band_faces_failed">تعذّر رفع الواجهة. قرّب السوار وحاول مرة أخرى.</string>
     <string name="band_faces_delete">حذف</string>
+    <string name="band_notify_pick_search">ابحث عن تطبيق</string>
+    <string name="band_notify_pick_count">%1$d من %2$d تطبيقًا ترسل إلى السوار</string>
+    <string name="band_faces_tap_hint">المس واجهة لتعمل على السوار فورًا. السوار لا يرسل صورًا، لذا تظهر الصور فقط للواجهات المرفوعة من FitWren، وتظهر الأسماء كما في السوار.</string>
+    <string name="band_faces_no_preview">لا توجد صورة معاينة في هذا الملف.</string>
+    <string name="band_faces_upload">رفع</string>
+    <string name="band_faces_delete_title">حذف هذه الواجهة؟</string>
+    <string name="band_faces_active">قيد الاستخدام</string>
+    <string name="band_faces_own">رفعتها أنت</string>
+    <string name="band_faces_builtin">مدمجة</string>
 </resources>

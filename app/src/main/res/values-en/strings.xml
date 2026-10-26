@@ -316,6 +316,10 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Watch faces: a preview picture shows before uploading; faces uploaded from FitWren show their picture in the list and the face in use is highlighted; deleting asks first</item>
+        <item>The app list for band notifications shows icons, a search box and how many apps are on</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Band notifications: pick apps and set quiet hours; FitWren reminders also vibrate on the band</item>
         <item>Band battery: on the device card, in the new \"Band battery\" widget and a phone alert when low</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Watch face uploaded and selected.</string>
     <string name="band_faces_failed">The watch face could not be uploaded. Bring the band closer and try again.</string>
     <string name="band_faces_delete">Delete</string>
+    <string name="band_notify_pick_search">Search apps</string>
+    <string name="band_notify_pick_count">%1$d of %2$d apps send to the band</string>
+    <string name="band_faces_tap_hint">Tap a face to switch to it on the band right away. The band sends no pictures, so pictures show only for faces uploaded from FitWren, and names are shown as the band has them.</string>
+    <string name="band_faces_no_preview">This file has no preview picture.</string>
+    <string name="band_faces_upload">Upload</string>
+    <string name="band_faces_delete_title">Delete this watch face?</string>
+    <string name="band_faces_active">In use</string>
+    <string name="band_faces_own">Uploaded by you</string>
+    <string name="band_faces_builtin">Built in</string>
 </resources>

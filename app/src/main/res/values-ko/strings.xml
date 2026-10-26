@@ -316,6 +316,10 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>워치 페이스: 올리기 전에 미리보기 표시, FitWren에서 올린 워치 페이스는 이미지와 함께 표시되고 사용 중인 것은 강조, 삭제 전에 확인</item>
+        <item>알림 앱 목록에 아이콘, 검색, 켜진 앱 수 표시</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>밴드 알림: 앱 선택과 방해 금지 시간, FitWren 알림도 밴드에서 진동</item>
         <item>밴드 배터리: 기기 카드와 새 \"밴드 배터리\" 위젯에 표시, 부족하면 휴대폰 알림</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">워치 페이스를 올리고 선택했습니다.</string>
     <string name="band_faces_failed">워치 페이스를 올리지 못했습니다. 밴드를 가까이 두고 다시 시도하세요.</string>
     <string name="band_faces_delete">삭제</string>
+    <string name="band_notify_pick_search">앱 검색</string>
+    <string name="band_notify_pick_count">%2$d개 중 %1$d개 앱이 밴드로 보냄</string>
+    <string name="band_faces_tap_hint">워치 페이스를 누르면 밴드에서 바로 바뀝니다. 밴드는 이미지를 보내지 않아서 FitWren에서 올린 워치 페이스만 이미지가 보이고, 이름은 밴드에 있는 그대로 표시됩니다.</string>
+    <string name="band_faces_no_preview">이 파일에는 미리보기 이미지가 없습니다.</string>
+    <string name="band_faces_upload">올리기</string>
+    <string name="band_faces_delete_title">이 워치 페이스를 삭제할까요?</string>
+    <string name="band_faces_active">사용 중</string>
+    <string name="band_faces_own">직접 올림</string>
+    <string name="band_faces_builtin">기본 제공</string>
 </resources>

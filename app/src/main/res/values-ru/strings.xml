@@ -316,6 +316,10 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Циферблаты: предпросмотр перед загрузкой; загруженные из FitWren показываются с картинкой, текущий выделен; удаление требует подтверждения</item>
+        <item>В списке приложений для уведомлений есть значки, поиск и число включённых приложений</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Уведомления браслета: выбор приложений и тихие часы; напоминания FitWren тоже вибрируют на браслете</item>
         <item>Заряд браслета: на карточке устройства, в новом виджете «Заряд браслета» и предупреждение на телефоне при низком заряде</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Циферблат загружен и выбран.</string>
     <string name="band_faces_failed">Не удалось загрузить циферблат. Поднесите браслет ближе и повторите.</string>
     <string name="band_faces_delete">Удалить</string>
+    <string name="band_notify_pick_search">Поиск приложений</string>
+    <string name="band_notify_pick_count">%1$d из %2$d приложений отправляют на браслет</string>
+    <string name="band_faces_tap_hint">Нажмите на циферблат, чтобы сразу включить его на браслете. Браслет не передаёт картинки: они видны только у циферблатов, загруженных из FitWren, а названия показаны как на браслете.</string>
+    <string name="band_faces_no_preview">В этом файле нет картинки предпросмотра.</string>
+    <string name="band_faces_upload">Загрузить</string>
+    <string name="band_faces_delete_title">Удалить циферблат?</string>
+    <string name="band_faces_active">Используется</string>
+    <string name="band_faces_own">Загружен вами</string>
+    <string name="band_faces_builtin">Встроенный</string>
 </resources>

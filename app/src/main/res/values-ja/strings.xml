@@ -316,6 +316,10 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>文字盤: アップロード前にプレビューを表示。FitWren からアップロードした文字盤は画像付きで表示し、使用中の文字盤を強調。削除前に確認</item>
+        <item>通知アプリの一覧にアイコン、検索、オンになっているアプリ数を表示</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>バンド通知: アプリの選択とおやすみ時間。FitWrenのリマインダーもバンドで振動</item>
         <item>バンドの電池: デバイスカード、新しい「バンドの電池」ウィジェット、残量低下時にスマホへ通知</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">文字盤をアップロードして選択しました。</string>
     <string name="band_faces_failed">文字盤をアップロードできませんでした。バンドを近づけてもう一度お試しください。</string>
     <string name="band_faces_delete">削除</string>
+    <string name="band_notify_pick_search">アプリを検索</string>
+    <string name="band_notify_pick_count">%2$d 件中 %1$d 件のアプリがバンドに送信</string>
+    <string name="band_faces_tap_hint">文字盤をタップするとすぐにバンドで切り替わります。バンドは画像を送らないため、画像は FitWren からアップロードした文字盤だけに表示され、名前はバンドのとおりに表示されます。</string>
+    <string name="band_faces_no_preview">このファイルにはプレビュー画像がありません。</string>
+    <string name="band_faces_upload">アップロード</string>
+    <string name="band_faces_delete_title">この文字盤を削除しますか?</string>
+    <string name="band_faces_active">使用中</string>
+    <string name="band_faces_own">アップロード済み</string>
+    <string name="band_faces_builtin">内蔵</string>
 </resources>
