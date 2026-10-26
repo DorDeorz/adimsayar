@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
+        <item>FitWren 表盘：应用自带九款小鸟表盘（夜晚、小路、指针、霓虹、树枝等），一键安装到小米手环 8</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>表盘：上传前显示预览图；从 FitWren 上传的表盘在列表中显示图片，正在使用的表盘高亮；删除前会确认</item>

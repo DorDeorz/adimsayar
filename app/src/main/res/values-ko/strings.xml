@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
+        <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>워치 페이스: 올리기 전에 미리보기 표시, FitWren에서 올린 워치 페이스는 이미지와 함께 표시되고 사용 중인 것은 강조, 삭제 전에 확인</item>

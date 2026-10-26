@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
+        <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Kadranlar: yüklemeden önce önizleme resmi görünür; FitWren\'den yüklenen kadranlar listede resmiyle, kullanılan kadran renkli görünür; silmeden önce sorulur</item>

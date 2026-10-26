@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
+        <item>Esferas FitWren: nueve esferas con el pájaro (Noche, Camino, Analógica, Neón, Rama y más) incluidas, se envían a la Mi Band 8 con un toque</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Esferas: vista previa antes de subir; las esferas subidas desde FitWren muestran su imagen y la que está en uso se resalta; borrar pide confirmación</item>

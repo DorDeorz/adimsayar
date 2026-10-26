@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
+        <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Mostradores: prévia antes de enviar; os enviados pelo FitWren mostram a imagem e o que está em uso fica destacado; apagar pede confirmação</item>

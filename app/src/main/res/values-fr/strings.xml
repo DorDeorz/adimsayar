@@ -318,6 +318,7 @@
 
     <string-array name="release_notes_0_12_8">
         <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
+        <item>Cadrans FitWren : neuf cadrans avec l’oiseau (Nuit, Route, Analogique, Néon, Branche et plus) inclus, envoyés au Mi Band 8 en un geste</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Cadrans : aperçu avant l’envoi ; les cadrans envoyés depuis FitWren affichent leur image et celui utilisé est mis en avant ; la suppression demande confirmation</item>
