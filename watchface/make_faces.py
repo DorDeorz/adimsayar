@@ -588,21 +588,28 @@ def neon():
     f.write()
 
 
-def branch():
-    """Pastel morning: soft gradient, the bird sitting on a branch with leaves, time at the top left."""
-    f = Face("fitwren_dal", "FitWren Dal")
-    ink = (0x3B, 0x2A, 0x20)
-    f.file(background((0xFF, 0xF1, 0xD6), (0xFF, 0xD3, 0xC2)), "background.png")
+def branch(dark=False):
+    """The bird sitting on a branch with leaves: a pastel morning, or the same scene at dusk."""
+    if dark:
+        f = Face("fitwren_dal_gece", "FitWren Dal Gece")
+        ink, accent, done, track, soft = (0xF2, 0xE6, 0xD8), (0xFF, 0xB0, 0x6A), (0x81, 0xC7, 0x84), (0x3A, 0x30, 0x3E), (0xB8, 0xA8, 0x9C)
+        sky = background((0x1E, 0x17, 0x2E), (0x07, 0x05, 0x0D), stars=True)
+        brown, leaf = (0x6D, 0x52, 0x48), (0x4E, 0x8F, 0x55)
+    else:
+        f = Face("fitwren_dal", "FitWren Dal")
+        ink, accent, done, track, soft = (0x3B, 0x2A, 0x20), (0xE0, 0x7A, 0x2F), (0x43, 0xA0, 0x47), (0xF3, 0xC9, 0xB0), (0x6D, 0x5A, 0x50)
+        sky = background((0xFF, 0xF1, 0xD6), (0xFF, 0xD3, 0xC2))
+        brown, leaf = (0x8D, 0x6E, 0x63), (0x81, 0xC7, 0x84)
+    f.file(sky, "background.png")
     f.image("background", 0, 0, "background.png")
     hour = digits("hour", 70, ink)
-    minute = digits("minute", 70, (0xE0, 0x7A, 0x2F))
+    minute = digits("minute", 70, accent)
     hx = (W - 2 * hour[1]) // 2
     f.number("hour", hx, 30, hour, 2, SRC_HOUR, "09")
     f.number("minute", hx, 108, minute, 2, SRC_MINUTE, "41")
-    f.date_row(190, 18, (0xE0, 0x7A, 0x2F), ink)
+    f.date_row(190, 18, accent, ink)
     art = Image.new("RGBA", (W * SS, 150 * SS), (0, 0, 0, 0))
     d = ImageDraw.Draw(art)
-    brown, leaf = (0x8D, 0x6E, 0x63), (0x81, 0xC7, 0x84)
     d.line([(0, 120 * SS), (80 * SS, 112 * SS), (150 * SS, 100 * SS), (W * SS, 92 * SS)], fill=brown, width=8 * SS, joint="curve")
     d.line([(118 * SS, 104 * SS), (150 * SS, 126 * SS)], fill=brown, width=5 * SS)
     for (x, y, a) in ((40, 104, -30), (150, 128, 30), (172, 84, -20), (20, 128, 20)):
@@ -611,15 +618,15 @@ def branch():
         lf = lf.rotate(a, expand=True)
         art.alpha_composite(lf, (int((x - 15) * SS), int((y - 8) * SS)))
     art = finish(art, W, 150)
-    b = bird(96)
+    b = bird(96, sleepy=dark)
     art.alpha_composite(b, ((W - 96) // 2, 112 - 92))
     f.file(art, "branch.png")
     f.image("branch", 0, 220, "branch.png")
-    lines = [(p, f.file(hbar(140, 8, p, color=(0xE0, 0x7A, 0x2F), done=(0x43, 0xA0, 0x47), track=(0xF3, 0xC9, 0xB0)), f"line_{p}.png")) for p in range(0, 101, 10)]
+    lines = [(p, f.file(hbar(140, 8, p, color=accent, done=done, track=track), f"line_{p}.png")) for p in range(0, 101, 10)]
     f.image_list("goal", (W - 140) // 2, 388, lines, SRC_STEP_PERCENT, 65)
     mid = digits("mid", 24, ink)
     f.number("steps", (W - mid[1] * 5) // 2, 404, mid, 5, SRC_STEPS, "5890", blanking=1)
-    health_row(f, 446, digits("small", 16, (0x6D, 0x5A, 0x50)))
+    health_row(f, 446, digits("small", 16, soft))
     f.write()
 
 
@@ -664,5 +671,6 @@ if __name__ == "__main__":
     analog()
     neon()
     branch()
+    branch(dark=True)
     rings_face()
     simple()
