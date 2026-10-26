@@ -63,7 +63,9 @@ class BandNotificationListener : NotificationListenerService() {
         stopMusic()
         // The system can unbind us (for example after HyperOS froze the app); ask to be bound again.
         Log.i(XiaomiBand.TAG, "listener disconnected, asking for rebind")
-        runCatching { requestRebind(ComponentName(this, BandNotificationListener::class.java)) }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            runCatching { requestRebind(ComponentName(this, BandNotificationListener::class.java)) }
+        }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
