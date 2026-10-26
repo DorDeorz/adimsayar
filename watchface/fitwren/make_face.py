@@ -35,6 +35,7 @@ SRC_HOUR = "0811"
 SRC_MINUTE = "1011"
 SRC_DAY = "1812"
 SRC_MONTH = "1012"
+SRC_WEEKDAY = "2012"
 SRC_STEPS = "0821"
 SRC_STEP_PERCENT = "1021"
 SRC_HEART = "0822"
@@ -73,9 +74,10 @@ def digits(prefix, height, color):
 def glyph(name, text, height, color):
     font = ImageFont.truetype(FONT, int(height * 1.32) * SS)
     box = font.getbbox(text)
+    line = font.getbbox("0")  # align on the digits' baseline and height
     width = (box[2] - box[0]) // SS + 2
     img = canvas(width, height)
-    ImageDraw.Draw(img).text(((width * SS - (box[2] - box[0])) / 2 - box[0], (height * SS - (box[3] - box[1])) / 2 - box[1]), text, font=font, fill=color)
+    ImageDraw.Draw(img).text(((width * SS - (box[2] - box[0])) / 2 - box[0], (height * SS - (line[3] - line[1])) / 2 - line[1]), text, font=font, fill=color)
     save(finish(img, width, height), name)
     return name, width, height
 
@@ -224,11 +226,27 @@ def main():
     sample["hour"] = (hx, 28, big_hour, bw, "10")
     sample["minute"] = (hx, 98, big_min, bw, "08")
 
+    # Date under the time: weekday (0 = Sunday) and day.month.
+    date_digits, ddw, ddh = digits("date", 20, WHITE)
+    days = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"]
+    day_files = [glyph(f"weekday_{i}.png", name, ddh, BODY) for i, name in enumerate(days)]
+    wd_w = max(f[1] for f in day_files)
+    dot, dw, dh = glyph("dot.png", ".", ddh, WHITE)
+    gap = 6
+    date_w = wd_w + gap + ddw * 2 + dw + ddw * 2
+    dx = (W - date_w) // 2
+    dy = 168
+    widgets.append(image_list("weekday", dx, dy, [(i, f[0]) for i, f in enumerate(day_files)], wd_w, ddh, SRC_WEEKDAY))
+    nx = dx + wd_w + gap
+    widgets.append(number("day", nx, dy, date_digits, ddw, ddh, 2, SRC_DAY))
+    widgets.append(image("date_dot", nx + 2 * ddw, dy, dot, dw, dh))
+    widgets.append(number("month", nx + 2 * ddw + dw, dy, date_digits, ddw, ddh, 2, SRC_MONTH))
+
     ring_size, ring_w = 156, 10
     rings = []
     for p in range(0, 101, 10):
         rings.append((p, save(ring(ring_size, ring_w, p), f"ring_{p}.png")))
-    ry = 172
+    ry = 196
     widgets.append(image_list("goal", (W - ring_size) // 2, ry, rings, ring_size, ring_size, SRC_STEP_PERCENT))
     bird_size = 104
     save(bird(bird_size), "bird.png")
@@ -236,16 +254,9 @@ def main():
 
     step_icon = 22
     save(icon_steps(step_icon), "icon_steps.png")
-    widgets.append(image("steps_icon", (W - step_icon) // 2, 338, "icon_steps.png", step_icon, step_icon))
+    widgets.append(image("steps_icon", (W - step_icon) // 2, 360, "icon_steps.png", step_icon, step_icon))
     steps_w = mw * 5
-    widgets.append(number("steps", (W - steps_w) // 2, 364, mid, mw, mh, 5, SRC_STEPS, align=1, blanking=1))
-
-    dot, dw, dh = glyph("dot.png", ".", sh, GREY)
-    date_w = sw * 2 + dw + sw * 2
-    dx = (W - date_w) // 2
-    widgets.append(number("day", dx, 402, small, sw, sh, 2, SRC_DAY))
-    widgets.append(image("date_dot", dx + 2 * sw, 402, dot, dw, dh))
-    widgets.append(number("month", dx + 2 * sw + dw, 402, small, sw, sh, 2, SRC_MONTH))
+    widgets.append(number("steps", (W - steps_w) // 2, 386, mid, mw, mh, 5, SRC_STEPS, align=1, blanking=1))
 
     icon = 18
     save(icon_heart(icon), "icon_heart.png")
@@ -269,11 +280,12 @@ def main():
     paste_number(big_min, hx, 98, bw, "08")
     paste("ring_80.png", (W - ring_size) // 2, ry)
     paste("bird.png", (W - bird_size) // 2, ry + (ring_size - bird_size) // 2 - 4)
-    paste("icon_steps.png", (W - step_icon) // 2, 338)
-    paste_number(mid, (W - mw * 4) // 2, 364, mw, "8421")
-    paste_number(small, dx, 402, sw, "26")
-    paste(dot, dx + 2 * sw, 402)
-    paste_number(small, dx + 2 * sw + dw, 402, sw, "10")
+    paste(day_files[1][0], dx, dy)
+    paste_number(date_digits, nx, dy, ddw, "26")
+    paste(dot, nx + 2 * ddw, dy)
+    paste_number(date_digits, nx + 2 * ddw + dw, dy, ddw, "10")
+    paste("icon_steps.png", (W - step_icon) // 2, 360)
+    paste_number(mid, (W - mw * 4) // 2, 386, mw, "8421")
     paste("icon_heart.png", 30, 438)
     paste_number(small, 30 + icon + 3, 438, sw, "72")
     paste("icon_battery.png", 104, 438)
