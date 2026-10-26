@@ -44,6 +44,7 @@ object BandLive {
     private const val RETRY_MAX_MS = 10 * 60 * 1000L
     private const val LOST_AFTER_MS = 60_000L
     private const val FIND_BAND_MS = 30_000L
+    private const val UPLOAD_STALL_MS = 30_000L
 
     private val scope = CoroutineScope(
         SupervisorJob() + Executors.newSingleThreadExecutor { Thread(it, "FitWrenBandLive") }.asCoroutineDispatcher(),
@@ -183,8 +184,27 @@ object BandLive {
     fun deleteWatchface(id: String): Boolean = onConnection { session?.deleteWatchface(id) }
 
     /** Starts the upload on the connection; false when the band is not connected. */
-    fun installWatchface(file: WatchfaceFile): Boolean = onConnection {
-        if (session?.installWatchface(file) != true) BandFaces.onUpload(WatchfaceUpload.Done(false))
+    fun installWatchface(file: WatchfaceFile): Boolean {
+        val started = onConnection {
+            if (session?.installWatchface(file) != true) BandFaces.onUpload(WatchfaceUpload.Done(false))
+        }
+        if (started) watchUpload()
+        return started
+    }
+
+    // The band may never answer an upload it does not like; give up when nothing moves for a while.
+    private fun watchUpload() = scope.launch {
+        var last: WatchfaceUpload? = null
+        while (true) {
+            delay(UPLOAD_STALL_MS)
+            val now = BandFaces.upload().value
+            if (now !is WatchfaceUpload.Sending) return@launch
+            if (now === last) {
+                post?.invoke { session?.cancelUpload() } ?: BandFaces.onUpload(WatchfaceUpload.Done(false))
+                return@launch
+            }
+            last = now
+        }
     }
 
     /** Runs [action] on the connection; false when the band is not connected. */
