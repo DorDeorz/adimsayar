@@ -16,12 +16,14 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.telecom.TelecomManager
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.dordeorz.adimsayar.band.BandEvent
 import com.dordeorz.adimsayar.band.BandMusic
 import com.dordeorz.adimsayar.band.BandNotice
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
+import com.dordeorz.adimsayar.data.BandReplies
 
 /**
  * Forwards phone notifications, incoming calls and the playing track to the band, and carries out
@@ -59,16 +61,31 @@ class BandNotificationListener : NotificationListenerService() {
 
     override fun onListenerDisconnected() {
         stopMusic()
+        // The system can unbind us (for example after HyperOS froze the app); ask to be bound again.
+        Log.i(XiaomiBand.TAG, "listener disconnected, asking for rebind")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            runCatching { requestRebind(ComponentName(this, BandNotificationListener::class.java)) }
+        }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        if (!BandLive.connected || sbn.packageName == packageName) return
-        val n = sbn.notification
-        if (n.category == Notification.CATEGORY_CALL) {
-            onCall(sbn)
+        if (!BandLive.connected) {
+            // The connection may have stopped without anyone restarting it.
+            BandLive.refresh(this)
             return
         }
-        if (!BandNotify.apps(this)) return
+        val n = sbn.notification
+        if (sbn.packageName == packageName) {
+            // FitWren's own reminders go to the band as well, so the band vibrates for them.
+            if (!BandNotify.reminders(this) || NotificationCompat.getChannelId(n) !in BandNotify.REMINDER_CHANNELS) return
+        } else {
+            if (n.category == Notification.CATEGORY_CALL) {
+                onCall(sbn)
+                return
+            }
+            if (!BandNotify.apps(this) || !BandNotify.allowed(this, sbn.packageName)) return
+        }
+        if (BandNotify.quietNow(this)) return
         if (sbn.isOngoing || n.flags and (Notification.FLAG_GROUP_SUMMARY or Notification.FLAG_LOCAL_ONLY or Notification.FLAG_FOREGROUND_SERVICE) != 0) return
         if (!loud(sbn)) return
         val extras = n.extras
@@ -78,6 +95,11 @@ class BandNotificationListener : NotificationListenerService() {
         val text = "$title\n$body"
         val previous = sent[sbn.key]
         if (previous?.text == text) return
+        // A silent update of our own reminder (water added) should not vibrate the band again.
+        if (previous != null && sbn.packageName == packageName && n.flags and Notification.FLAG_ONLY_ALERT_ONCE != 0) {
+            sent[sbn.key] = Sent(previous.id, previous.packageName, text)
+            return
+        }
         val id = previous?.id ?: nextId++
         BandLive.notify(BandNotice(id, sbn.packageName, appName(sbn.packageName), title, body.take(MAX_BODY), sbn.postTime, sbn.key))
         sent.remove(sbn.key)
@@ -107,7 +129,7 @@ class BandNotificationListener : NotificationListenerService() {
             ringing && callKey == null -> {
                 callKey = sbn.key
                 val name = n.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString().orEmpty()
-                val number = n.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString().orEmpty()
+                val number = BandReplies.ringingNumber ?: n.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString().orEmpty()
                 BandLive.call(name, number)
             }
             !ringing && callKey == sbn.key -> {
@@ -133,8 +155,18 @@ class BandNotificationListener : NotificationListenerService() {
                 }
             }
             BandEvent.IgnoreCall -> callKey = null
+            is BandEvent.CallReply -> {
+                val sent = BandReplies.send(this, event.number, event.message)
+                BandLive.replySent(sent)
+                callKey = null
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && BandNotify.canRejectCalls(this)) {
+                    @Suppress("DEPRECATION")
+                    runCatching { getSystemService(TelecomManager::class.java)?.endCall() }
+                }
+            }
             BandEvent.MusicRequest -> pushMusic()
             is BandEvent.MusicButton -> onMusicButton(event)
+            is BandEvent.FindPhone, BandEvent.BandFound, BandEvent.WeatherRequest -> Unit
         }
     }
 

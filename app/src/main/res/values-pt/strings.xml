@@ -316,6 +316,15 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Notificações da pulseira: escolha apps e horário silencioso; lembretes do FitWren também vibram na pulseira</item>
+        <item>Bateria da pulseira: no cartão do dispositivo, no novo widget \"Bateria da pulseira\" e alerta no celular quando estiver fraca</item>
+        <item>Encontrar meu celular (a pulseira faz o celular tocar) e Encontrar minha pulseira; alerta no celular quando a pulseira desconecta</item>
+        <item>Respostas rápidas (SMS ao recusar na pulseira) e clima na pulseira (Open-Meteo, por cidade ou localização)</item>
+        <item>Alarmes da pulseira podem ser vistos e editados no FitWren; eventos da agenda vão para a pulseira</item>
+        <item>Configurações reorganizadas: cada tema tem sua própria página, com um breve resumo na página principal</item>
+        <item>Mostradores: troque ou apague o mostrador da pulseira no FitWren, ou envie um novo de um arquivo .bin</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Notificações na pulseira: notificações das apps, chamadas e controlo de música (Xiaomi). Sem notificação permanente; usa o acesso às notificações</item>
         <item>Enquanto ligada, passos e dados de saúde sincronizam pela mesma ligação a cada 15 minutos</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">Os dados são lidos do Health Connect</string>
     <string name="band_reconnect">Reconectar</string>
     <string name="band_sync_now">Sincronizar</string>
+    <string name="band_alert_channel">Alertas da pulseira</string>
+    <string name="band_battery_low_title">Bateria da pulseira fraca</string>
+    <string name="band_battery_low_text">Resta %1$d%% de bateria na pulseira. Lembre-se de carregar.</string>
+    <string name="band_lost_title">Pulseira desconectada</string>
+    <string name="band_lost_text">A pulseira está sem conexão há um minuto. Talvez você tenha esquecido o celular.</string>
+    <string name="find_phone_channel">Encontrar meu celular</string>
+    <string name="find_phone_title">Procurando o celular</string>
+    <string name="find_phone_text">A pulseira está procurando seu celular. Toque quando encontrar.</string>
+    <string name="find_phone_found">Encontrei</string>
+    <string name="widget_band_label">Bateria da pulseira</string>
+    <string name="widget_band_description">Nível de bateria da sua pulseira</string>
+    <string name="widget_band_empty">O nível de bateria aparece aqui quando a pulseira conecta.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">Carregando</string>
+    <string name="band_battery_line">Bateria: %1$d%%</string>
+    <string name="band_notify_pick_apps">Quais apps</string>
+    <string name="band_notify_pick_apps_all">Todos os apps vão para a pulseira</string>
+    <string name="band_notify_pick_apps_off">Desligado em %1$d apps</string>
+    <string name="band_notify_pick_loading">Carregando apps…</string>
+    <string name="band_notify_pick_none">Nenhum</string>
+    <string name="band_notify_pick_all">Todos</string>
+    <string name="band_notify_reminders">Lembretes do FitWren</string>
+    <string name="band_notify_reminders_hint">Lembretes de meta, sequência, água e peso também vibram na pulseira.</string>
+    <string name="band_notify_quiet">Horário silencioso</string>
+    <string name="band_notify_quiet_hint">Nesse horário, notificações e lembretes não vão para a pulseira. Chamadas ainda chegam.</string>
+    <string name="band_notify_quiet_from">Início</string>
+    <string name="band_notify_quiet_to">Fim</string>
+    <string name="band_notify_lost">Alerta de desconexão</string>
+    <string name="band_notify_lost_hint">O celular avisa se a pulseira ficar desconectada por um minuto, para você notar um celular esquecido.</string>
+    <string name="band_battery_alert">Alerta de bateria fraca</string>
+    <string name="band_battery_alert_hint">O celular avisa quando a bateria da pulseira fica abaixo de %1$d%%.</string>
+    <string name="band_find">Encontrar minha pulseira</string>
+    <string name="band_find_stop">Parar vibração</string>
+    <string name="band_replies">Respostas rápidas</string>
+    <string name="band_replies_hint">Enviar SMS a quem liga ao recusar na pulseira</string>
+    <string name="band_replies_text">Ao recusar uma chamada na pulseira você escolhe uma destas e ela vai por SMS. As vazias são removidas.</string>
+    <string name="band_replies_permission">Conceder permissões de SMS e telefone</string>
+    <string name="band_replies_not_sent">A pulseira não está conectada. As respostas foram salvas; salve de novo quando conectar.</string>
+    <string name="band_weather">Clima</string>
+    <string name="band_weather_hint">Preenche a tela de clima da pulseira. Atualizado a cada hora pelo Open-Meteo; usa a internet.</string>
+    <string name="band_weather_place">Local do clima</string>
+    <string name="band_weather_place_none">Não definido</string>
+    <string name="band_weather_my_place">Minha localização</string>
+    <string name="band_weather_search">Buscar cidade</string>
+    <string name="band_weather_find">Buscar</string>
+    <string name="band_weather_use_location">Usar localização atual</string>
+    <string name="band_weather_not_found">Nada encontrado. Tente outro nome ou permita a localização.</string>
+    <string name="band_alarms">Alarmes da pulseira</string>
+    <string name="band_alarms_hint">Ver, ligar e adicionar alarmes na pulseira</string>
+    <string name="band_alarms_offline">A pulseira não está conectada. Os alarmes aparecem aqui quando conectar.</string>
+    <string name="band_alarms_empty">Nenhum alarme na pulseira.</string>
+    <string name="band_alarm_add">Adicionar alarme</string>
+    <string name="band_alarm_edit">Editar alarme</string>
+    <string name="band_alarm_delete">Excluir</string>
+    <string name="band_alarm_once">Uma vez</string>
+    <string name="band_alarm_daily">Todos os dias</string>
+    <string name="band_alarm_weekdays">Dias úteis</string>
+    <string name="band_alarm_days">Dias</string>
+    <string name="band_calendar">Agenda</string>
+    <string name="band_calendar_hint">Eventos dos próximos 7 dias vão para a pulseira. Pede permissão de agenda.</string>
+    <string name="band_language">Idioma da pulseira</string>
+    <string name="band_language_hint">Define o idioma da pulseira igual ao do FitWren (%1$s)</string>
+    <string name="band_language_sent">Idioma da pulseira definido</string>
+    <string name="settings_band">Pulseira</string>
+    <string name="settings_band_summary">Notificações, clima, alarmes e agenda</string>
+    <string name="settings_goals_summary">Diário %1$s, semanal %2$s passos</string>
+    <string name="settings_water_summary_on">%1$s, lembrete ativado</string>
+    <string name="settings_water_summary_off">%1$s, lembrete desativado</string>
+    <string name="settings_notifications_summary">%1$d de %2$d ativadas</string>
+    <string name="settings_data_summary">Exportar e importar como CSV</string>
+    <string name="band_group_features">Funções da pulseira</string>
+    <string name="band_group_alerts">Alertas</string>
+    <string name="band_faces">Mostradores</string>
+    <string name="band_faces_hint">Troque ou apague mostradores, ou envie um novo de um arquivo .bin</string>
+    <string name="band_faces_install">Enviar arquivo</string>
+    <string name="band_faces_install_hint">Envie apenas mostradores .bin feitos para este modelo de pulseira. O envio pode levar alguns minutos; mantenha a pulseira perto do telefone.</string>
+    <string name="band_faces_invalid">Este arquivo não é um mostrador Xiaomi.</string>
+    <string name="band_faces_sending">Enviando: %d%%</string>
+    <string name="band_faces_done">Mostrador enviado e selecionado.</string>
+    <string name="band_faces_failed">Não foi possível enviar o mostrador. Aproxime a pulseira e tente de novo.</string>
+    <string name="band_faces_delete">Apagar</string>
 </resources>

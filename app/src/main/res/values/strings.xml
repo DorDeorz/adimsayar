@@ -316,6 +316,15 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Bileklik bildirimlerinde uygulama seçimi ve sessiz saatler; FitWren hatırlatmaları da bileklikte titreşir</item>
+        <item>Bileklik pili: cihaz kartında, yeni \"Bileklik pili\" widget\'ında ve azalınca telefonda uyarı</item>
+        <item>Telefonumu bul (bileklikten telefon çalar) ve Bilekliği bul; bileklik bağlantısı kopunca telefonda uyarı</item>
+        <item>Hazır yanıtlar (bileklikten reddedilen aramaya SMS) ve bileklikte hava durumu (Open-Meteo, şehir ya da konum)</item>
+        <item>Bileklik alarmları FitWren\'den görülür ve düzenlenir; takvim etkinlikleri bilekliğe gider</item>
+        <item>Ayarlar yeniden düzenlendi: konular ayrı sayfalarda, ana sayfada her birinin kısa özeti görünür</item>
+        <item>Saat kadranları: bileklikteki kadranı FitWren\'den değiştir, sil ya da .bin dosyasından yeni kadran yükle</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Bileklik bildirimleri: uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider (Xiaomi). Kalıcı bildirim yok; bildirim erişimi izniyle çalışır</item>
         <item>Bağlantı açıkken adım ve sağlık verileri aynı bağlantıdan 15 dakikada bir eşitlenir</item>
@@ -750,4 +759,85 @@
     <string name="device_connect_hint">Veriler Health Connect\'ten okunuyor</string>
     <string name="band_reconnect">Yeniden bağlan</string>
     <string name="band_sync_now">Eşitle</string>
+    <string name="band_alert_channel">Bileklik uyarıları</string>
+    <string name="band_battery_low_title">Bileklik pili azaldı</string>
+    <string name="band_battery_low_text">Bileklikte %%%1$d şarj kaldı. Şarja takmayı unutma.</string>
+    <string name="band_lost_title">Bileklik bağlantısı koptu</string>
+    <string name="band_lost_text">Bileklik bir dakikadır bağlı değil. Telefonu bir yerde unutmuş olabilirsin.</string>
+    <string name="find_phone_channel">Telefonumu bul</string>
+    <string name="find_phone_title">Telefon aranıyor</string>
+    <string name="find_phone_text">Bileklikten telefonun aranıyor. Bulunca dokun.</string>
+    <string name="find_phone_found">Buldum</string>
+    <string name="widget_band_label">Bileklik pili</string>
+    <string name="widget_band_description">Bilekliğin şarj durumu</string>
+    <string name="widget_band_empty">Bileklik bağlanınca pil durumu burada görünür.</string>
+    <string name="band_battery_percent">%%%1$d</string>
+    <string name="band_battery_charging">Şarj oluyor</string>
+    <string name="band_battery_line">Pil: %%%1$d</string>
+    <string name="band_notify_pick_apps">Hangi uygulamalar</string>
+    <string name="band_notify_pick_apps_all">Tüm uygulamalar bilekliğe gider</string>
+    <string name="band_notify_pick_apps_off">%1$d uygulamada kapalı</string>
+    <string name="band_notify_pick_loading">Uygulamalar yükleniyor…</string>
+    <string name="band_notify_pick_none">Hiçbiri</string>
+    <string name="band_notify_pick_all">Hepsi</string>
+    <string name="band_notify_reminders">FitWren hatırlatmaları</string>
+    <string name="band_notify_reminders_hint">Hedef, seri, su ve kilo hatırlatmaları bileklikte de titreşir.</string>
+    <string name="band_notify_quiet">Sessiz saatler</string>
+    <string name="band_notify_quiet_hint">Bu saatlerde bildirimler ve hatırlatmalar bilekliğe gitmez. Aramalar yine gelir.</string>
+    <string name="band_notify_quiet_from">Başlangıç</string>
+    <string name="band_notify_quiet_to">Bitiş</string>
+    <string name="band_notify_lost">Bağlantı koptu uyarısı</string>
+    <string name="band_notify_lost_hint">Bileklik bir dakika bağlanmazsa telefonda uyarı çıkar. Telefonu unutursan haber verir.</string>
+    <string name="band_battery_alert">Düşük pil uyarısı</string>
+    <string name="band_battery_alert_hint">Bileklik pili %%%1$d altına inince telefonda uyarı çıkar.</string>
+    <string name="band_find">Bilekliği bul</string>
+    <string name="band_find_stop">Titreşimi durdur</string>
+    <string name="band_replies">Hazır yanıtlar</string>
+    <string name="band_replies_hint">Aramayı bileklikten reddederken arayana SMS gönder</string>
+    <string name="band_replies_text">Bileklikte aramayı reddederken bunlardan birini seçersin, arayana SMS olarak gider. Boş bıraktıkların silinir.</string>
+    <string name="band_replies_permission">SMS ve arama izinlerini ver</string>
+    <string name="band_replies_not_sent">Bileklik bağlı değil. Yanıtlar kaydedildi, bileklik bağlanınca yeniden kaydet.</string>
+    <string name="band_weather">Hava durumu</string>
+    <string name="band_weather_hint">Bileklikteki hava durumu ekranını doldurur. Saatte bir Open-Meteo\'dan çekilir, internet kullanır.</string>
+    <string name="band_weather_place">Hava durumu konumu</string>
+    <string name="band_weather_place_none">Seçilmedi</string>
+    <string name="band_weather_my_place">Konumum</string>
+    <string name="band_weather_search">Şehir ara</string>
+    <string name="band_weather_find">Ara</string>
+    <string name="band_weather_use_location">Şu anki konumu kullan</string>
+    <string name="band_weather_not_found">Bulunamadı. Başka bir ad dene ya da konum iznini aç.</string>
+    <string name="band_alarms">Bileklik alarmları</string>
+    <string name="band_alarms_hint">Bileklikteki alarmları gör, aç, kapat ve yenisini kur</string>
+    <string name="band_alarms_offline">Bileklik bağlı değil. Bağlanınca alarmlar burada görünür.</string>
+    <string name="band_alarms_empty">Bileklikte alarm yok.</string>
+    <string name="band_alarm_add">Alarm ekle</string>
+    <string name="band_alarm_edit">Alarmı düzenle</string>
+    <string name="band_alarm_delete">Sil</string>
+    <string name="band_alarm_once">Bir kez</string>
+    <string name="band_alarm_daily">Her gün</string>
+    <string name="band_alarm_weekdays">Hafta içi</string>
+    <string name="band_alarm_days">Günler</string>
+    <string name="band_calendar">Takvim</string>
+    <string name="band_calendar_hint">Önümüzdeki 7 günün takvim etkinlikleri bilekliğe gider. Takvim izni istenir.</string>
+    <string name="band_language">Bileklik dili</string>
+    <string name="band_language_hint">Bilekliğin menü dilini FitWren\'in diline (%1$s) ayarlar</string>
+    <string name="band_language_sent">Bileklik dili ayarlandı</string>
+    <string name="settings_band">Bileklik</string>
+    <string name="settings_band_summary">Bildirimler, hava durumu, alarmlar ve takvim</string>
+    <string name="settings_goals_summary">Günlük %1$s, haftalık %2$s adım</string>
+    <string name="settings_water_summary_on">%1$s, hatırlatma açık</string>
+    <string name="settings_water_summary_off">%1$s, hatırlatma kapalı</string>
+    <string name="settings_notifications_summary">%1$d / %2$d açık</string>
+    <string name="settings_data_summary">CSV olarak dışa ve içe aktar</string>
+    <string name="band_group_features">Bileklik özellikleri</string>
+    <string name="band_group_alerts">Uyarılar</string>
+    <string name="band_faces">Saat kadranları</string>
+    <string name="band_faces_hint">Kadranı değiştir, sil ya da .bin dosyasından yenisini yükle</string>
+    <string name="band_faces_install">Dosyadan yükle</string>
+    <string name="band_faces_install_hint">Yalnızca bu bileklik modeli için yapılmış .bin kadran dosyalarını yükle. Yükleme birkaç dakika sürebilir, bu sırada bilekliği telefona yakın tut.</string>
+    <string name="band_faces_invalid">Bu dosya bir Xiaomi saat kadranı değil.</string>
+    <string name="band_faces_sending">Yükleniyor: %d%%</string>
+    <string name="band_faces_done">Kadran yüklendi ve seçildi.</string>
+    <string name="band_faces_failed">Kadran yüklenemedi. Bilekliği yaklaştırıp yeniden dene.</string>
+    <string name="band_faces_delete">Sil</string>
 </resources>

@@ -316,6 +316,15 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Band-Benachrichtigungen: Apps wählen und Ruhezeiten; FitWren-Erinnerungen vibrieren auch am Band</item>
+        <item>Band-Akku: auf der Gerätekarte, im neuen Widget \"Band-Akku\" und Warnung am Handy bei schwachem Akku</item>
+        <item>Handy finden (das Band lässt das Handy klingeln) und Band finden; Warnung am Handy, wenn das Band getrennt wird</item>
+        <item>Schnellantworten (SMS beim Ablehnen am Band) und Wetter am Band (Open-Meteo, per Stadt oder Standort)</item>
+        <item>Band-Wecker in FitWren ansehen und bearbeiten; Kalendertermine gehen ans Band</item>
+        <item>Einstellungen neu geordnet: jedes Thema hat eine eigene Seite, mit kurzer Übersicht auf der Hauptseite</item>
+        <item>Zifferblätter: in FitWren wechseln oder löschen, oder ein neues aus einer .bin-Datei laden</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Band-Benachrichtigungen: App-Benachrichtigungen, Anrufe und Musiksteuerung am Band (Xiaomi). Keine dauerhafte Benachrichtigung; nutzt Benachrichtigungszugriff</item>
         <item>Solange verbunden, werden Schritte und Gesundheitsdaten alle 15 Minuten über dieselbe Verbindung synchronisiert</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">Daten werden aus Health Connect gelesen</string>
     <string name="band_reconnect">Neu verbinden</string>
     <string name="band_sync_now">Synchronisieren</string>
+    <string name="band_alert_channel">Band-Hinweise</string>
+    <string name="band_battery_low_title">Band-Akku schwach</string>
+    <string name="band_battery_low_text">Noch %1$d %% Akku am Band. Denk ans Aufladen.</string>
+    <string name="band_lost_title">Bandverbindung getrennt</string>
+    <string name="band_lost_text">Das Band ist seit einer Minute nicht verbunden. Vielleicht hast du dein Handy liegen lassen.</string>
+    <string name="find_phone_channel">Handy finden</string>
+    <string name="find_phone_title">Handy wird gesucht</string>
+    <string name="find_phone_text">Das Band sucht dein Handy. Tippe, wenn du es gefunden hast.</string>
+    <string name="find_phone_found">Gefunden</string>
+    <string name="widget_band_label">Band-Akku</string>
+    <string name="widget_band_description">Akkustand deines Bands</string>
+    <string name="widget_band_empty">Der Akkustand erscheint hier, sobald das Band verbunden ist.</string>
+    <string name="band_battery_percent">%1$d %%</string>
+    <string name="band_battery_charging">Wird geladen</string>
+    <string name="band_battery_line">Akku: %1$d %%</string>
+    <string name="band_notify_pick_apps">Welche Apps</string>
+    <string name="band_notify_pick_apps_all">Alle Apps gehen ans Band</string>
+    <string name="band_notify_pick_apps_off">Für %1$d Apps aus</string>
+    <string name="band_notify_pick_loading">Apps werden geladen…</string>
+    <string name="band_notify_pick_none">Keine</string>
+    <string name="band_notify_pick_all">Alle</string>
+    <string name="band_notify_reminders">FitWren-Erinnerungen</string>
+    <string name="band_notify_reminders_hint">Ziel-, Serien-, Wasser- und Gewichtserinnerungen vibrieren auch am Band.</string>
+    <string name="band_notify_quiet">Ruhezeiten</string>
+    <string name="band_notify_quiet_hint">In dieser Zeit gehen keine Benachrichtigungen oder Erinnerungen ans Band. Anrufe kommen trotzdem.</string>
+    <string name="band_notify_quiet_from">Beginn</string>
+    <string name="band_notify_quiet_to">Ende</string>
+    <string name="band_notify_lost">Warnung bei Verbindungsverlust</string>
+    <string name="band_notify_lost_hint">Ist das Band eine Minute nicht verbunden, warnt das Handy. So merkst du ein vergessenes Handy.</string>
+    <string name="band_battery_alert">Warnung bei schwachem Akku</string>
+    <string name="band_battery_alert_hint">Das Handy warnt, wenn der Band-Akku unter %1$d %% fällt.</string>
+    <string name="band_find">Band finden</string>
+    <string name="band_find_stop">Vibration stoppen</string>
+    <string name="band_replies">Schnellantworten</string>
+    <string name="band_replies_hint">Dem Anrufer eine SMS schicken, wenn du am Band ablehnst</string>
+    <string name="band_replies_text">Beim Ablehnen eines Anrufs am Band wählst du eine davon; sie geht als SMS an den Anrufer. Leere werden entfernt.</string>
+    <string name="band_replies_permission">SMS- und Telefonberechtigungen erteilen</string>
+    <string name="band_replies_not_sent">Das Band ist nicht verbunden. Die Antworten sind gespeichert; speichere erneut, sobald es verbunden ist.</string>
+    <string name="band_weather">Wetter</string>
+    <string name="band_weather_hint">Füllt den Wetterbildschirm des Bands. Stündlich von Open-Meteo abgerufen; nutzt das Internet.</string>
+    <string name="band_weather_place">Wetterort</string>
+    <string name="band_weather_place_none">Nicht festgelegt</string>
+    <string name="band_weather_my_place">Mein Standort</string>
+    <string name="band_weather_search">Stadt suchen</string>
+    <string name="band_weather_find">Suchen</string>
+    <string name="band_weather_use_location">Aktuellen Standort verwenden</string>
+    <string name="band_weather_not_found">Nichts gefunden. Anderen Namen versuchen oder Standort erlauben.</string>
+    <string name="band_alarms">Band-Wecker</string>
+    <string name="band_alarms_hint">Wecker am Band ansehen, schalten und hinzufügen</string>
+    <string name="band_alarms_offline">Das Band ist nicht verbunden. Wecker erscheinen hier, sobald es verbunden ist.</string>
+    <string name="band_alarms_empty">Keine Wecker am Band.</string>
+    <string name="band_alarm_add">Wecker hinzufügen</string>
+    <string name="band_alarm_edit">Wecker bearbeiten</string>
+    <string name="band_alarm_delete">Löschen</string>
+    <string name="band_alarm_once">Einmal</string>
+    <string name="band_alarm_daily">Täglich</string>
+    <string name="band_alarm_weekdays">Werktags</string>
+    <string name="band_alarm_days">Tage</string>
+    <string name="band_calendar">Kalender</string>
+    <string name="band_calendar_hint">Kalendertermine der nächsten 7 Tage gehen ans Band. Fragt nach der Kalenderberechtigung.</string>
+    <string name="band_language">Band-Sprache</string>
+    <string name="band_language_hint">Stellt die Menüsprache des Bands auf die von FitWren (%1$s)</string>
+    <string name="band_language_sent">Band-Sprache eingestellt</string>
+    <string name="settings_band">Armband</string>
+    <string name="settings_band_summary">Benachrichtigungen, Wetter, Wecker und Kalender</string>
+    <string name="settings_goals_summary">Täglich %1$s, wöchentlich %2$s Schritte</string>
+    <string name="settings_water_summary_on">%1$s, Erinnerung an</string>
+    <string name="settings_water_summary_off">%1$s, Erinnerung aus</string>
+    <string name="settings_notifications_summary">%1$d von %2$d an</string>
+    <string name="settings_data_summary">Als CSV exportieren und importieren</string>
+    <string name="band_group_features">Armband-Funktionen</string>
+    <string name="band_group_alerts">Warnungen</string>
+    <string name="band_faces">Zifferblätter</string>
+    <string name="band_faces_hint">Zifferblatt wechseln, löschen oder ein neues aus einer .bin-Datei laden</string>
+    <string name="band_faces_install">Aus Datei laden</string>
+    <string name="band_faces_install_hint">Lade nur .bin-Zifferblätter, die für dieses Armbandmodell gemacht sind. Das Hochladen kann einige Minuten dauern; halte das Armband in der Nähe des Telefons.</string>
+    <string name="band_faces_invalid">Diese Datei ist kein Xiaomi-Zifferblatt.</string>
+    <string name="band_faces_sending">Wird hochgeladen: %d%%</string>
+    <string name="band_faces_done">Zifferblatt hochgeladen und ausgewählt.</string>
+    <string name="band_faces_failed">Das Zifferblatt konnte nicht hochgeladen werden. Bring das Armband näher und versuche es erneut.</string>
+    <string name="band_faces_delete">Löschen</string>
 </resources>

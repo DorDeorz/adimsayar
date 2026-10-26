@@ -2,6 +2,23 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.12.6
+
+- Bileklik bildirimleri: "Hangi uygulamalar" ile tek tek uygulamalar kapatılabilir (varsayılan hepsi açık, `BandNotify.blocked`). "Sessiz saatler" (varsayılan 23:00–07:00) boyunca uygulama bildirimleri ve hatırlatmalar bilekliğe gitmez, aramalar yine gelir.
+- FitWren hatırlatmaları bileklikte: hedef, seri, haftalık özet, kilo ve su bildirimleri ("hedef" ve "su" kanalları) bilekliğe de gider. Su eklenince yapılan sessiz güncelleme bilekliği yeniden titretmez.
+- Bileklik pili (Xiaomi ailesi): bağlanınca ve her eşitlemede pil okunur (komut 2/78, yoksa 2/1). Ayarlar'daki cihaz kartında yüzde ve şarj durumu, yeni "Bileklik pili" widget'ı, %20'nin altında telefonda bir kez uyarı (Ayarlar'dan kapatılabilir; %30'u geçince ya da şarja takılınca yeniden kurulur).
+- Telefonumu bul: bileklikteki "Telefonu bul" telefonu alarm sesiyle en yüksek seste çaldırır ve titretir; bildirimdeki "Buldum", bileklikten durdurmak ya da 1 dakika bitince durur. Bilekliği bul: cihaz kartındaki tuş bilekliği titretir (bağlantı açıkken).
+- Hazır yanıtlar: bileklikte aramayı reddederken seçilen yanıt arayana SMS olarak gider (7/13, onay 7/14). Liste bağlanınca bileklikten okunur (7/9), Ayarlar'dan düzenlenip gönderilir (7/12). Arayanın numarası telefon durumu yayınından alınır (SMS, telefon durumu ve arama kaydı izinleri).
+- Bileklikte hava durumu (varsayılan kapalı): Open-Meteo'dan (anahtarsız) saatte bir anlık durum, 7 günlük ve 24 saatlik tahmin çekilip bilekliğe gönderilir (komut 10/0, 10/1, 10/2; yer 10/7). Yer şehir aramasıyla ya da uygulama açıkken telefonun son konumuyla seçilir. Bileklik isteyince (10/3) son veri yeniden gönderilir.
+- Bileklik alarmları (Ayarlar → Bileklik bildirimleri → Bileklik alarmları): alarmlar bileklikte kalır; FitWren listeyi okur (17/0), açıp kapatır, ekler (17/1), değiştirir (17/2), siler (17/4). Bir kez, her gün ya da seçilen günler.
+- Takvim (varsayılan kapalı): önümüzdeki 7 günün etkinlikleri (en fazla 50, ilk hatırlatıcısıyla) her eşitlemede, değiştiyse bilekliğe gönderilir (12/1). Kapatınca bileklikteki takvim de kapatılır.
+- Bileklik dili: tek dokunuşla bilekliğin menü dili FitWren'in diline ayarlanır (2/6, örneğin `tr_tr`). Saat biçimi (12/24) zaten her bağlantıda telefondan gidiyor.
+- Bağlantı koptu uyarısı (varsayılan kapalı): bileklik bağlıyken bağlantı kopar ve 1 dakika içinde geri gelmezse telefonda uyarı çıkar; geri gelince uyarı kalkar. Bluetooth kapalıysa uyarı verilmez.
+- Hava durumu: bileklikte Mi Fitness'tan kalan başka yerler varsa silinir (10/8) ve yer listesi FitWren'in yeriyle kurulur (10/6); yoksa bileklik "Bluetooth'u aç" diyordu. Mi Band 8 saatlik tahmini desteklemiyor (10/2 durum 1).
+- Ayarlar sayfalara bölündü: ana sayfada konular (Adım kaynağı, Bileklik, Hedefler, Vücut, Su, Bildirimler, Görünüm, Veri, Hakkında) kısa özetleriyle listelenir, her biri kendi sayfasında açılır. Bileklik sayfası bildirimler, bileklik özellikleri ve uyarılar olarak gruplandı.
+- Saat kadranları (Ayarlar → Bileklik → Saat kadranları): bileklikteki kadranlar listelenir (4/0), seçilir (4/1), kendi yüklenenler silinir (4/2). ".bin" dosyasından yeni kadran yüklenir: 4/4 ile kurulum istenir, 22/0 ile yükleme açılır, dosya `[0, 16, md5, boyut, dosya, crc32]` olarak 2048 baytlık parçalarla BLE yükleme kanalından (fe95 için 0055, sayaçsız şifreli) ya da SPP veri kanalından gönderilir, bitince kadran seçilir.
+- Bildirimlerin gece durması: açık bağlantıda eşitleme sırasında bileklik 2 dakika hiç cevap vermezse bağlantı ölü sayılır ve yeniden kurulur. Bağlantı döngüsü beklenmeyen bir hatada durmaz. Bildirim dinleyicisi sistemce ayrılırsa yeniden bağlanmayı ister; bağlantı durmuşsa ilk gelen bildirim onu yeniden başlatır.
+
 ## 0.11.0
 
 - Bileklik bildirimleri (Ayarlar → Bileklik bildirimleri, şimdilik Xiaomi ailesi): uygulama bildirimleri, gelen aramalar ve müzik kontrolü bilekliğe gider. Sesli gelen bildirimler gönderilir; bileklikte silinen bildirim telefondan da silinir. Arayan bileklikte görünür, bileklikten reddedilebilir (arama izniyle). Çalan şarkı bileklikte görünür; oynat, durdur, geç ve ses bileklikten yönetilir.

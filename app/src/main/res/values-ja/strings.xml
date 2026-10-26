@@ -316,6 +316,15 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>バンド通知: アプリの選択とおやすみ時間。FitWrenのリマインダーもバンドで振動</item>
+        <item>バンドの電池: デバイスカード、新しい「バンドの電池」ウィジェット、残量低下時にスマホへ通知</item>
+        <item>スマホを探す(バンドからスマホを鳴らす)とバンドを探す。バンドの接続が切れるとスマホに通知</item>
+        <item>クイック返信(バンドで拒否したときにSMS)とバンドの天気(Open-Meteo、都市または現在地)</item>
+        <item>バンドのアラームをFitWrenで確認・編集。カレンダーの予定をバンドに送信</item>
+        <item>設定を再構成:項目ごとに専用ページがあり、メインページに各項目の概要を表示</item>
+        <item>文字盤: FitWren からバンドの文字盤を変更・削除、.bin ファイルから新しい文字盤をアップロード</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>バンドへの通知: アプリの通知、着信、音楽の操作に対応 (Xiaomi)。常駐通知なし、通知へのアクセスで動作</item>
         <item>接続中は歩数と健康データを同じ接続で 15 分ごとに同期</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">Health Connectからデータを読み込み中</string>
     <string name="band_reconnect">再接続</string>
     <string name="band_sync_now">同期</string>
+    <string name="band_alert_channel">バンドの通知</string>
+    <string name="band_battery_low_title">バンドの電池残量低下</string>
+    <string name="band_battery_low_text">バンドの電池残量は%1$d%%です。充電を忘れずに。</string>
+    <string name="band_lost_title">バンドの接続が切れました</string>
+    <string name="band_lost_text">バンドが1分間接続されていません。スマホを置き忘れたかもしれません。</string>
+    <string name="find_phone_channel">スマホを探す</string>
+    <string name="find_phone_title">スマホを探しています</string>
+    <string name="find_phone_text">バンドがスマホを探しています。見つけたらタップしてください。</string>
+    <string name="find_phone_found">見つけた</string>
+    <string name="widget_band_label">バンドの電池</string>
+    <string name="widget_band_description">バンドの電池残量</string>
+    <string name="widget_band_empty">バンドが接続されると電池残量がここに表示されます。</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">充電中</string>
+    <string name="band_battery_line">電池: %1$d%%</string>
+    <string name="band_notify_pick_apps">対象アプリ</string>
+    <string name="band_notify_pick_apps_all">すべてのアプリをバンドに送信</string>
+    <string name="band_notify_pick_apps_off">%1$d個のアプリでオフ</string>
+    <string name="band_notify_pick_loading">アプリを読み込み中…</string>
+    <string name="band_notify_pick_none">なし</string>
+    <string name="band_notify_pick_all">すべて</string>
+    <string name="band_notify_reminders">FitWrenのリマインダー</string>
+    <string name="band_notify_reminders_hint">目標・連続記録・水分・体重のリマインダーもバンドで振動します。</string>
+    <string name="band_notify_quiet">おやすみ時間</string>
+    <string name="band_notify_quiet_hint">この時間帯は通知とリマインダーをバンドに送りません。着信は届きます。</string>
+    <string name="band_notify_quiet_from">開始</string>
+    <string name="band_notify_quiet_to">終了</string>
+    <string name="band_notify_lost">切断アラート</string>
+    <string name="band_notify_lost_hint">バンドが1分間接続されないとスマホに通知します。スマホの置き忘れに気づけます。</string>
+    <string name="band_battery_alert">電池残量低下アラート</string>
+    <string name="band_battery_alert_hint">バンドの電池が%1$d%%を下回るとスマホに通知します。</string>
+    <string name="band_find">バンドを探す</string>
+    <string name="band_find_stop">振動を止める</string>
+    <string name="band_replies">クイック返信</string>
+    <string name="band_replies_hint">バンドで着信を拒否したとき相手にSMSを送信</string>
+    <string name="band_replies_text">バンドで着信を拒否するときにこの中から選ぶと、相手にSMSで送られます。空欄は削除されます。</string>
+    <string name="band_replies_permission">SMSと電話の権限を許可</string>
+    <string name="band_replies_not_sent">バンドが接続されていません。返信は保存されました。接続後にもう一度保存してください。</string>
+    <string name="band_weather">天気</string>
+    <string name="band_weather_hint">バンドの天気画面に表示します。1時間ごとにOpen-Meteoから取得し、インターネットを使います。</string>
+    <string name="band_weather_place">天気の場所</string>
+    <string name="band_weather_place_none">未設定</string>
+    <string name="band_weather_my_place">現在地</string>
+    <string name="band_weather_search">都市を検索</string>
+    <string name="band_weather_find">検索</string>
+    <string name="band_weather_use_location">現在地を使う</string>
+    <string name="band_weather_not_found">見つかりません。別の名前を試すか、位置情報を許可してください。</string>
+    <string name="band_alarms">バンドのアラーム</string>
+    <string name="band_alarms_hint">バンドのアラームを確認、オンオフ、追加</string>
+    <string name="band_alarms_offline">バンドが接続されていません。接続するとここにアラームが表示されます。</string>
+    <string name="band_alarms_empty">バンドにアラームはありません。</string>
+    <string name="band_alarm_add">アラームを追加</string>
+    <string name="band_alarm_edit">アラームを編集</string>
+    <string name="band_alarm_delete">削除</string>
+    <string name="band_alarm_once">1回</string>
+    <string name="band_alarm_daily">毎日</string>
+    <string name="band_alarm_weekdays">平日</string>
+    <string name="band_alarm_days">曜日</string>
+    <string name="band_calendar">カレンダー</string>
+    <string name="band_calendar_hint">今後7日間の予定をバンドに送ります。カレンダーの権限が必要です。</string>
+    <string name="band_language">バンドの言語</string>
+    <string name="band_language_hint">バンドのメニュー言語をFitWrenと同じ(%1$s)にします</string>
+    <string name="band_language_sent">バンドの言語を設定しました</string>
+    <string name="settings_band">バンド</string>
+    <string name="settings_band_summary">通知、天気、アラーム、カレンダー</string>
+    <string name="settings_goals_summary">1日 %1$s 歩、1週間 %2$s 歩</string>
+    <string name="settings_water_summary_on">%1$s、リマインダー オン</string>
+    <string name="settings_water_summary_off">%1$s、リマインダー オフ</string>
+    <string name="settings_notifications_summary">%2$d 件中 %1$d 件オン</string>
+    <string name="settings_data_summary">CSV でエクスポート・インポート</string>
+    <string name="band_group_features">バンドの機能</string>
+    <string name="band_group_alerts">アラート</string>
+    <string name="band_faces">文字盤</string>
+    <string name="band_faces_hint">文字盤を変更・削除するか、.bin ファイルから新しい文字盤をアップロード</string>
+    <string name="band_faces_install">ファイルからアップロード</string>
+    <string name="band_faces_install_hint">このバンドのモデル用に作られた .bin 文字盤のみアップロードしてください。数分かかることがあるので、バンドをスマホの近くに置いてください。</string>
+    <string name="band_faces_invalid">このファイルは Xiaomi の文字盤ではありません。</string>
+    <string name="band_faces_sending">アップロード中: %d%%</string>
+    <string name="band_faces_done">文字盤をアップロードして選択しました。</string>
+    <string name="band_faces_failed">文字盤をアップロードできませんでした。バンドを近づけてもう一度お試しください。</string>
+    <string name="band_faces_delete">削除</string>
 </resources>

@@ -5,6 +5,10 @@ import android.content.Context
 import android.os.Build
 import android.text.format.DateFormat
 import android.util.Log
+import com.dordeorz.adimsayar.data.BandBattery
+import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.data.BandReplies
+import com.dordeorz.adimsayar.data.BandSchedule
 import java.util.Locale
 
 /**
@@ -87,7 +91,16 @@ class XiaomiBand(private val context: Context, private val address: String, priv
             use12Hour = !DateFormat.is24HourFormat(context),
         ),
         log = { Log.i(TAG, it) },
-    )
+    ).also { session ->
+        session.onBattery = { level, charging ->
+            Log.i(TAG, "battery $level% charging=$charging")
+            BandBattery.save(context, level, charging)
+        }
+        session.onReplies = { replies, min, max -> BandReplies.fromBand(context, replies, min, max) }
+        session.onAlarms = { alarms, max -> BandSchedule.onAlarms(alarms, max) }
+        session.onWatchfaces = BandFaces::onFaces
+        session.onUpload = BandFaces::onUpload
+    }
 
     companion object {
         const val TAG = "FitWrenBand"

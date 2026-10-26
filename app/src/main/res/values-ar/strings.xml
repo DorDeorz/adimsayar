@@ -316,6 +316,15 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>إشعارات السوار: اختيار التطبيقات وساعات الهدوء، وتذكيرات FitWren تهتز على السوار أيضًا</item>
+        <item>بطارية السوار: في بطاقة الجهاز وفي أداة \"بطارية السوار\" الجديدة، وتنبيه على الهاتف عند انخفاضها</item>
+        <item>العثور على هاتفي (السوار يجعل الهاتف يرن) والعثور على سواري، وتنبيه على الهاتف عند انقطاع اتصال السوار</item>
+        <item>ردود سريعة (رسالة SMS عند الرفض من السوار) والطقس على السوار (Open-Meteo، حسب المدينة أو الموقع)</item>
+        <item>عرض منبهات السوار وتعديلها في FitWren، وإرسال أحداث التقويم إلى السوار</item>
+        <item>إعادة تنظيم الإعدادات: لكل موضوع صفحته الخاصة مع ملخص قصير في الصفحة الرئيسية</item>
+        <item>واجهات الساعة: غيّر واجهة السوار أو احذفها من FitWren، أو ارفع واجهة جديدة من ملف ‎.bin</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>إشعارات السوار: إشعارات التطبيقات والمكالمات الواردة والتحكم في الموسيقى (Xiaomi). دون إشعار دائم؛ يعمل بإذن الوصول إلى الإشعارات</item>
         <item>أثناء الاتصال تُزامَن الخطوات والبيانات الصحية عبر الاتصال نفسه كل 15 دقيقة</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
     <string name="band_reconnect">إعادة الاتصال</string>
     <string name="band_sync_now">مزامنة</string>
+    <string name="band_alert_channel">تنبيهات السوار</string>
+    <string name="band_battery_low_title">بطارية السوار منخفضة</string>
+    <string name="band_battery_low_text">تبقّى %1$d%% من بطارية السوار. لا تنسَ شحنه.</string>
+    <string name="band_lost_title">انقطع اتصال السوار</string>
+    <string name="band_lost_text">السوار غير متصل منذ دقيقة. ربما نسيت هاتفك.</string>
+    <string name="find_phone_channel">العثور على هاتفي</string>
+    <string name="find_phone_title">جارٍ البحث عن الهاتف</string>
+    <string name="find_phone_text">السوار يبحث عن هاتفك. اضغط عندما تجده.</string>
+    <string name="find_phone_found">وجدته</string>
+    <string name="widget_band_label">بطارية السوار</string>
+    <string name="widget_band_description">مستوى بطارية السوار</string>
+    <string name="widget_band_empty">يظهر مستوى البطارية هنا عند اتصال السوار.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">يشحن</string>
+    <string name="band_battery_line">البطارية: %1$d%%</string>
+    <string name="band_notify_pick_apps">أي التطبيقات</string>
+    <string name="band_notify_pick_apps_all">كل التطبيقات تُرسل إلى السوار</string>
+    <string name="band_notify_pick_apps_off">متوقف في %1$d تطبيقات</string>
+    <string name="band_notify_pick_loading">جارٍ تحميل التطبيقات…</string>
+    <string name="band_notify_pick_none">لا شيء</string>
+    <string name="band_notify_pick_all">الكل</string>
+    <string name="band_notify_reminders">تذكيرات FitWren</string>
+    <string name="band_notify_reminders_hint">تذكيرات الهدف والسلسلة والماء والوزن تهتز على السوار أيضًا.</string>
+    <string name="band_notify_quiet">ساعات الهدوء</string>
+    <string name="band_notify_quiet_hint">في هذه الساعات لا تُرسل الإشعارات والتذكيرات إلى السوار. المكالمات تصل كالمعتاد.</string>
+    <string name="band_notify_quiet_from">البداية</string>
+    <string name="band_notify_quiet_to">النهاية</string>
+    <string name="band_notify_lost">تنبيه انقطاع الاتصال</string>
+    <string name="band_notify_lost_hint">يظهر تنبيه على الهاتف إذا بقي السوار غير متصل لدقيقة، لتنتبه إلى هاتف منسي.</string>
+    <string name="band_battery_alert">تنبيه البطارية المنخفضة</string>
+    <string name="band_battery_alert_hint">يظهر تنبيه على الهاتف عندما تنخفض بطارية السوار عن %1$d%%.</string>
+    <string name="band_find">العثور على سواري</string>
+    <string name="band_find_stop">إيقاف الاهتزاز</string>
+    <string name="band_replies">ردود سريعة</string>
+    <string name="band_replies_hint">أرسل رسالة SMS للمتصل عند الرفض من السوار</string>
+    <string name="band_replies_text">عند رفض مكالمة من السوار تختار أحد هذه الردود فيُرسل للمتصل كرسالة SMS. الفارغة تُحذف.</string>
+    <string name="band_replies_permission">امنح أذونات الرسائل والهاتف</string>
+    <string name="band_replies_not_sent">السوار غير متصل. حُفظت الردود؛ احفظ مرة أخرى عند اتصاله.</string>
+    <string name="band_weather">الطقس</string>
+    <string name="band_weather_hint">يملأ شاشة الطقس في السوار. يُجلب كل ساعة من Open-Meteo ويستخدم الإنترنت.</string>
+    <string name="band_weather_place">مكان الطقس</string>
+    <string name="band_weather_place_none">غير محدد</string>
+    <string name="band_weather_my_place">موقعي</string>
+    <string name="band_weather_search">ابحث عن مدينة</string>
+    <string name="band_weather_find">بحث</string>
+    <string name="band_weather_use_location">استخدم الموقع الحالي</string>
+    <string name="band_weather_not_found">لم يُعثر على شيء. جرّب اسمًا آخر أو اسمح بالموقع.</string>
+    <string name="band_alarms">منبهات السوار</string>
+    <string name="band_alarms_hint">عرض منبهات السوار وتشغيلها وإضافتها</string>
+    <string name="band_alarms_offline">السوار غير متصل. تظهر المنبهات هنا عند اتصاله.</string>
+    <string name="band_alarms_empty">لا توجد منبهات على السوار.</string>
+    <string name="band_alarm_add">إضافة منبه</string>
+    <string name="band_alarm_edit">تعديل المنبه</string>
+    <string name="band_alarm_delete">حذف</string>
+    <string name="band_alarm_once">مرة واحدة</string>
+    <string name="band_alarm_daily">كل يوم</string>
+    <string name="band_alarm_weekdays">أيام الأسبوع</string>
+    <string name="band_alarm_days">الأيام</string>
+    <string name="band_calendar">التقويم</string>
+    <string name="band_calendar_hint">تُرسل أحداث التقويم للأيام السبعة القادمة إلى السوار. يطلب إذن التقويم.</string>
+    <string name="band_language">لغة السوار</string>
+    <string name="band_language_hint">يضبط لغة قائمة السوار على لغة FitWren (%1$s)</string>
+    <string name="band_language_sent">تم ضبط لغة السوار</string>
+    <string name="settings_band">السوار</string>
+    <string name="settings_band_summary">الإشعارات والطقس والمنبهات والتقويم</string>
+    <string name="settings_goals_summary">يوميًا %1$s، أسبوعيًا %2$s خطوة</string>
+    <string name="settings_water_summary_on">%1$s، التذكير مفعّل</string>
+    <string name="settings_water_summary_off">%1$s، التذكير متوقف</string>
+    <string name="settings_notifications_summary">%1$d من %2$d مفعّلة</string>
+    <string name="settings_data_summary">التصدير والاستيراد بصيغة CSV</string>
+    <string name="band_group_features">ميزات السوار</string>
+    <string name="band_group_alerts">التنبيهات</string>
+    <string name="band_faces">واجهات الساعة</string>
+    <string name="band_faces_hint">غيّر الواجهة أو احذفها أو ارفع واجهة جديدة من ملف ‎.bin</string>
+    <string name="band_faces_install">رفع من ملف</string>
+    <string name="band_faces_install_hint">ارفع فقط واجهات ‎.bin المصممة لطراز هذا السوار. قد يستغرق الرفع بضع دقائق؛ أبقِ السوار قرب الهاتف.</string>
+    <string name="band_faces_invalid">هذا الملف ليس واجهة ساعة من Xiaomi.</string>
+    <string name="band_faces_sending">جارٍ الرفع: %d%%</string>
+    <string name="band_faces_done">تم رفع الواجهة واختيارها.</string>
+    <string name="band_faces_failed">تعذّر رفع الواجهة. قرّب السوار وحاول مرة أخرى.</string>
+    <string name="band_faces_delete">حذف</string>
 </resources>

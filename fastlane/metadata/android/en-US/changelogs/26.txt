@@ -1,0 +1,5 @@
+- Band notifications, calls and music (0.11): notifications go to the Xiaomi band, reject calls and control music from the band
+- Per-app selection, quiet hours, FitWren reminders, quick SMS replies, weather, alarms, calendar and band language on the band
+- Band battery (card, widget, low battery alert), find my phone, find my band, disconnect alert
+- Watch faces: change, delete or upload from a .bin file
+- Settings split into pages; notifications stopping overnight fixed

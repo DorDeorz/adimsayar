@@ -316,6 +316,15 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>Уведомления браслета: выбор приложений и тихие часы; напоминания FitWren тоже вибрируют на браслете</item>
+        <item>Заряд браслета: на карточке устройства, в новом виджете «Заряд браслета» и предупреждение на телефоне при низком заряде</item>
+        <item>Найти телефон (браслет заставляет телефон звонить) и Найти браслет; предупреждение на телефоне при отключении браслета</item>
+        <item>Быстрые ответы (SMS при отклонении на браслете) и погода на браслете (Open-Meteo, по городу или местоположению)</item>
+        <item>Будильники браслета можно смотреть и менять в FitWren; события календаря отправляются на браслет</item>
+        <item>Настройки переработаны: у каждой темы своя страница, на главной — краткая сводка</item>
+        <item>Циферблаты: смена и удаление циферблата браслета в FitWren, загрузка нового из файла .bin</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>Уведомления на браслете: уведомления приложений, звонки и управление музыкой (Xiaomi). Без постоянного уведомления; работает через доступ к уведомлениям</item>
         <item>Пока браслет подключён, шаги и данные здоровья синхронизируются по тому же соединению каждые 15 минут</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">Данные читаются из Health Connect</string>
     <string name="band_reconnect">Переподключить</string>
     <string name="band_sync_now">Синхронизировать</string>
+    <string name="band_alert_channel">Уведомления браслета</string>
+    <string name="band_battery_low_title">Низкий заряд браслета</string>
+    <string name="band_battery_low_text">На браслете осталось %1$d%% заряда. Не забудьте зарядить.</string>
+    <string name="band_lost_title">Браслет отключён</string>
+    <string name="band_lost_text">Браслет не подключён уже минуту. Возможно, вы забыли телефон.</string>
+    <string name="find_phone_channel">Найти телефон</string>
+    <string name="find_phone_title">Поиск телефона</string>
+    <string name="find_phone_text">Браслет ищет ваш телефон. Нажмите, когда найдёте.</string>
+    <string name="find_phone_found">Нашёл</string>
+    <string name="widget_band_label">Заряд браслета</string>
+    <string name="widget_band_description">Уровень заряда браслета</string>
+    <string name="widget_band_empty">Заряд появится здесь после подключения браслета.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">Заряжается</string>
+    <string name="band_battery_line">Заряд: %1$d%%</string>
+    <string name="band_notify_pick_apps">Какие приложения</string>
+    <string name="band_notify_pick_apps_all">Все приложения отправляются на браслет</string>
+    <string name="band_notify_pick_apps_off">Выключено для %1$d прил.</string>
+    <string name="band_notify_pick_loading">Загрузка приложений…</string>
+    <string name="band_notify_pick_none">Ни одного</string>
+    <string name="band_notify_pick_all">Все</string>
+    <string name="band_notify_reminders">Напоминания FitWren</string>
+    <string name="band_notify_reminders_hint">Напоминания о цели, серии, воде и весе также вибрируют на браслете.</string>
+    <string name="band_notify_quiet">Тихие часы</string>
+    <string name="band_notify_quiet_hint">В эти часы уведомления и напоминания не отправляются на браслет. Звонки приходят.</string>
+    <string name="band_notify_quiet_from">Начало</string>
+    <string name="band_notify_quiet_to">Конец</string>
+    <string name="band_notify_lost">Оповещение об отключении</string>
+    <string name="band_notify_lost_hint">Если браслет не подключён минуту, телефон предупредит. Так вы заметите забытый телефон.</string>
+    <string name="band_battery_alert">Оповещение о низком заряде</string>
+    <string name="band_battery_alert_hint">Телефон предупредит, когда заряд браслета упадёт ниже %1$d%%.</string>
+    <string name="band_find">Найти браслет</string>
+    <string name="band_find_stop">Остановить вибрацию</string>
+    <string name="band_replies">Быстрые ответы</string>
+    <string name="band_replies_hint">Отправлять SMS звонящему при отклонении на браслете</string>
+    <string name="band_replies_text">Отклоняя звонок на браслете, вы выбираете один из ответов, и он уходит звонящему по SMS. Пустые удаляются.</string>
+    <string name="band_replies_permission">Дать разрешения на SMS и телефон</string>
+    <string name="band_replies_not_sent">Браслет не подключён. Ответы сохранены; сохраните ещё раз после подключения.</string>
+    <string name="band_weather">Погода</string>
+    <string name="band_weather_hint">Заполняет экран погоды на браслете. Загружается раз в час из Open-Meteo, нужен интернет.</string>
+    <string name="band_weather_place">Место для погоды</string>
+    <string name="band_weather_place_none">Не выбрано</string>
+    <string name="band_weather_my_place">Моё местоположение</string>
+    <string name="band_weather_search">Найти город</string>
+    <string name="band_weather_find">Найти</string>
+    <string name="band_weather_use_location">Текущее местоположение</string>
+    <string name="band_weather_not_found">Ничего не найдено. Попробуйте другое название или разрешите геолокацию.</string>
+    <string name="band_alarms">Будильники браслета</string>
+    <string name="band_alarms_hint">Просмотр, включение и добавление будильников на браслете</string>
+    <string name="band_alarms_offline">Браслет не подключён. Будильники появятся здесь после подключения.</string>
+    <string name="band_alarms_empty">На браслете нет будильников.</string>
+    <string name="band_alarm_add">Добавить будильник</string>
+    <string name="band_alarm_edit">Изменить будильник</string>
+    <string name="band_alarm_delete">Удалить</string>
+    <string name="band_alarm_once">Один раз</string>
+    <string name="band_alarm_daily">Каждый день</string>
+    <string name="band_alarm_weekdays">По будням</string>
+    <string name="band_alarm_days">Дни</string>
+    <string name="band_calendar">Календарь</string>
+    <string name="band_calendar_hint">События календаря на 7 дней вперёд отправляются на браслет. Нужно разрешение на календарь.</string>
+    <string name="band_language">Язык браслета</string>
+    <string name="band_language_hint">Устанавливает язык меню браслета как в FitWren (%1$s)</string>
+    <string name="band_language_sent">Язык браслета установлен</string>
+    <string name="settings_band">Браслет</string>
+    <string name="settings_band_summary">Уведомления, погода, будильники и календарь</string>
+    <string name="settings_goals_summary">В день %1$s, в неделю %2$s шагов</string>
+    <string name="settings_water_summary_on">%1$s, напоминание вкл.</string>
+    <string name="settings_water_summary_off">%1$s, напоминание выкл.</string>
+    <string name="settings_notifications_summary">Включено %1$d из %2$d</string>
+    <string name="settings_data_summary">Экспорт и импорт в CSV</string>
+    <string name="band_group_features">Функции браслета</string>
+    <string name="band_group_alerts">Оповещения</string>
+    <string name="band_faces">Циферблаты</string>
+    <string name="band_faces_hint">Смените или удалите циферблат либо загрузите новый из файла .bin</string>
+    <string name="band_faces_install">Загрузить из файла</string>
+    <string name="band_faces_install_hint">Загружайте только циферблаты .bin, сделанные для этой модели браслета. Загрузка может занять несколько минут; держите браслет рядом с телефоном.</string>
+    <string name="band_faces_invalid">Этот файл не является циферблатом Xiaomi.</string>
+    <string name="band_faces_sending">Загрузка: %d%%</string>
+    <string name="band_faces_done">Циферблат загружен и выбран.</string>
+    <string name="band_faces_failed">Не удалось загрузить циферблат. Поднесите браслет ближе и повторите.</string>
+    <string name="band_faces_delete">Удалить</string>
 </resources>

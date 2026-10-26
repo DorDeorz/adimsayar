@@ -4,13 +4,38 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.key
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import com.dordeorz.adimsayar.background.BandNotificationListener
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
+import com.dordeorz.adimsayar.data.BandBattery
+import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.band.WatchfaceUpload
+import androidx.compose.material3.LinearProgressIndicator
+import com.dordeorz.adimsayar.data.BandReplies
+import com.dordeorz.adimsayar.data.BandWeather
+import com.dordeorz.adimsayar.data.BandSchedule
+import com.dordeorz.adimsayar.band.BandAlarm
+import java.time.DayOfWeek
+import com.dordeorz.adimsayar.data.WeatherPlace
+import android.Manifest
+import android.widget.Toast
+import androidx.compose.runtime.mutableStateListOf
+import android.app.TimePickerDialog
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Checkbox
+import java.time.LocalTime
 import kotlinx.coroutines.delay
 import androidx.annotation.ArrayRes
 import androidx.compose.foundation.clickable
@@ -64,6 +89,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -105,11 +131,25 @@ import java.io.File
 import java.time.format.TextStyle
 import kotlinx.coroutines.launch
 
+/** Settings are split into pages; the main page lists them with a short summary of each. */
+private enum class SettingsPage(@param:StringRes val title: Int, @param:DrawableRes val icon: Int) {
+    Counting(R.string.settings_counting, R.drawable.ic_walk),
+    Band(R.string.settings_band, R.drawable.ic_watch),
+    Goals(R.string.settings_goals, R.drawable.ic_trophy),
+    Body(R.string.settings_body, R.drawable.ic_body),
+    Water(R.string.water_title, R.drawable.ic_water),
+    Notifications(R.string.settings_notifications, R.drawable.ic_notification),
+    Appearance(R.string.settings_appearance, R.drawable.ic_palette),
+    Data(R.string.settings_data, R.drawable.ic_import_export),
+    About(R.string.settings_about, R.drawable.ic_info),
+}
+
 private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, WaterGoal, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
     ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
     ReleaseNote("0.9.6", R.array.release_notes_0_9_6),
@@ -139,6 +179,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val settings = state.settings
     var dialog by rememberSaveable { mutableStateOf<SettingsDialog?>(null) }
     var bandSetup by rememberSaveable { mutableStateOf(false) }
+    var page by rememberSaveable { mutableStateOf<SettingsPage?>(null) }
     if (bandSetup) {
         BandSetupScreen(actions, onClose = { bandSetup = false })
         return
@@ -146,21 +187,28 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val bandStatus = remember(state.bandSyncing, state.bandDirectEnabled) { BandDirect.status(context) }
+    val current = page?.takeIf { it != SettingsPage.Band || state.bandDirectEnabled }
+    if (current != null) BackHandler { page = null }
     Box {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(key(current) { rememberScrollState() })
                 .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
-            if (state.bandDirectEnabled || state.wearableEnabled) {
-                DeviceCard(state, bandStatus, actions, onManage = { bandSetup = true })
+            if (current == null) {
+                if (state.bandDirectEnabled || state.wearableEnabled) {
+                    DeviceCard(state, bandStatus, actions, onManage = { bandSetup = true })
+                }
+                SettingsMenu(state, onOpen = { page = it })
+            } else {
+                PageHeader(stringResource(current.title), onBack = { page = null })
             }
 
             val showXiaomi = state.xiaomiAvailable || state.xiaomiEnabled
             val showService = state.sensorAvailable && state.permission == PermissionState.Granted && !state.xiaomiEnabled
             val showWearable = state.wearableAvailable || state.wearableEnabled
-            SettingsGroup(stringResource(R.string.settings_counting)) {
+            if (current == SettingsPage.Counting) SettingsCard {
                 GroupLabel(stringResource(R.string.settings_phone_source))
                 RadioRow(stringResource(R.string.source_sensor), stringResource(R.string.source_sensor_hint), selected = !state.xiaomiEnabled) {
                     if (state.xiaomiEnabled) actions.onXiaomiEnabledChange(false)
@@ -208,9 +256,12 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 )
             }
 
-            if (state.bandDirectEnabled) BandNotifyGroup()
+            if (current == SettingsPage.Band) {
+                DeviceCard(state, bandStatus, actions, onManage = { bandSetup = true })
+                BandNotifyGroup()
+            }
 
-            SettingsGroup(stringResource(R.string.settings_goals)) {
+            if (current == SettingsPage.Goals) SettingsCard {
                 ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
                     dialog = SettingsDialog.DailyGoal
                 }
@@ -226,7 +277,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 )
             }
 
-            SettingsGroup(stringResource(R.string.settings_body)) {
+            if (current == SettingsPage.Body) SettingsCard {
                 ValueRow(stringResource(R.string.height), stringResource(R.string.height_value, settings.heightCm)) {
                     dialog = SettingsDialog.Height
                 }
@@ -251,7 +302,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 )
             }
 
-            SettingsGroup(stringResource(R.string.water_title)) {
+            if (current == SettingsPage.Water) SettingsCard {
                 ValueRow(stringResource(R.string.water_goal), stringResource(R.string.water_ml, format(settings.waterGoalMl.toLong()))) {
                     dialog = SettingsDialog.WaterGoal
                 }
@@ -279,7 +330,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 }
             }
 
-            SettingsGroup(stringResource(R.string.settings_notifications)) {
+            if (current == SettingsPage.Notifications) SettingsCard {
                 SwitchRow(
                     title = stringResource(R.string.goal_notification),
                     hint = stringResource(R.string.goal_notification_hint),
@@ -313,7 +364,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 )
             }
 
-            SettingsGroup(stringResource(R.string.settings_appearance)) {
+            if (current == SettingsPage.Appearance) SettingsCard {
                 Column(Modifier.selectableGroup()) {
                     ThemeMode.entries.forEach { mode ->
                         Row(
@@ -353,12 +404,12 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 }
             }
 
-            SettingsGroup(stringResource(R.string.settings_data)) {
+            if (current == SettingsPage.Data) SettingsCard {
                 ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
                 ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
             }
 
-            SettingsGroup(stringResource(R.string.settings_about)) {
+            if (current == SettingsPage.About) SettingsCard {
                 ValueRow(stringResource(R.string.settings_version), state.version, onClick = null)
                 ClickRow(stringResource(R.string.release_notes), stringResource(R.string.release_notes_hint)) {
                     dialog = SettingsDialog.ReleaseNotes
@@ -715,7 +766,35 @@ private fun BandNotifyGroup() {
     val apps = remember(tick) { BandNotify.apps(context) }
     val calls = remember(tick) { BandNotify.calls(context) }
     val music = remember(tick) { BandNotify.music(context) }
+    val reminders = remember(tick) { BandNotify.reminders(context) }
+    val lost = remember(tick) { BandNotify.lostAlert(context) }
+    val quiet = remember(tick) { BandNotify.quiet(context) }
+    val quietFrom = remember(tick) { BandNotify.quietFrom(context) }
+    val quietTo = remember(tick) { BandNotify.quietTo(context) }
+    val batteryAlert = remember(tick) { BandBattery.alertOn(context) }
+    val blockedCount = remember(tick) { BandNotify.blocked(context).size }
     val connected = remember(tick) { BandLive.connected }
+    var pickApps by remember { mutableStateOf(false) }
+    var editReplies by remember { mutableStateOf(false) }
+    var pickPlace by remember { mutableStateOf(false) }
+    var showAlarms by remember { mutableStateOf(false) }
+    var showFaces by remember { mutableStateOf(false) }
+    val calendar = remember(tick) { BandSchedule.calendarOn(context) }
+    val calendarPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
+        BandSchedule.setCalendar(context, ok)
+        tick++
+    }
+    val weather = remember(tick) { BandWeather.isOn(context) }
+    val weatherPlace = remember(tick) { BandWeather.place(context) }
+    fun pickTime(current: Int, onPicked: (Int) -> Unit) {
+        TimePickerDialog(
+            context,
+            { _, hour, minute -> onPicked(hour * 60 + minute) },
+            current / 60,
+            current % 60,
+            android.text.format.DateFormat.is24HourFormat(context),
+        ).show()
+    }
     fun openAccess() {
         val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Intent(Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS)
@@ -740,39 +819,615 @@ private fun BandNotifyGroup() {
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         )
         if (supported) {
-        SwitchRow(stringResource(R.string.band_notify_apps), stringResource(R.string.band_notify_apps_hint), apps) {
-            change(it) { on -> BandNotify.setApps(context, on) }
-        }
-        SwitchRow(stringResource(R.string.band_notify_calls), stringResource(R.string.band_notify_calls_hint), calls) {
-            change(it) { on -> BandNotify.setCalls(context, on) }
-            if (it && !BandNotify.canRejectCalls(context) && BandNotify.CALL_PERMISSIONS.isNotEmpty()) callPermission.launch(BandNotify.CALL_PERMISSIONS)
-        }
-        SwitchRow(stringResource(R.string.band_notify_music), stringResource(R.string.band_notify_music_hint), music) {
-            change(it) { on -> BandNotify.setMusic(context, on) }
-        }
-        if (apps || calls || music) {
-            if (!access) {
-                ClickRow(stringResource(R.string.band_notify_access), stringResource(R.string.band_notify_access_hint), ::openAccess)
-            } else {
+            SwitchRow(stringResource(R.string.band_notify_apps), stringResource(R.string.band_notify_apps_hint), apps) {
+                change(it) { on -> BandNotify.setApps(context, on) }
+            }
+            if (apps) {
+                ClickRow(
+                    stringResource(R.string.band_notify_pick_apps),
+                    if (blockedCount == 0) stringResource(R.string.band_notify_pick_apps_all) else stringResource(R.string.band_notify_pick_apps_off, blockedCount),
+                ) { pickApps = true }
+            }
+            SwitchRow(stringResource(R.string.band_notify_calls), stringResource(R.string.band_notify_calls_hint), calls) {
+                change(it) { on -> BandNotify.setCalls(context, on) }
+                if (it && !BandNotify.canRejectCalls(context) && BandNotify.CALL_PERMISSIONS.isNotEmpty()) callPermission.launch(BandNotify.CALL_PERMISSIONS)
+            }
+            if (calls) {
+                ClickRow(stringResource(R.string.band_replies), stringResource(R.string.band_replies_hint)) { editReplies = true }
+            }
+            SwitchRow(stringResource(R.string.band_notify_music), stringResource(R.string.band_notify_music_hint), music) {
+                change(it) { on -> BandNotify.setMusic(context, on) }
+            }
+            SwitchRow(stringResource(R.string.band_notify_reminders), stringResource(R.string.band_notify_reminders_hint), reminders) {
+                change(it) { on -> BandNotify.setReminders(context, on) }
+            }
+            SwitchRow(stringResource(R.string.band_notify_quiet), stringResource(R.string.band_notify_quiet_hint), quiet) {
+                BandNotify.setQuiet(context, it)
+                tick++
+            }
+            if (quiet) {
+                ValueRow(stringResource(R.string.band_notify_quiet_from), minuteLabel(quietFrom)) {
+                    pickTime(quietFrom) { BandNotify.setQuietHours(context, it, quietTo); tick++ }
+                }
+                ValueRow(stringResource(R.string.band_notify_quiet_to), minuteLabel(quietTo)) {
+                    pickTime(quietTo) { BandNotify.setQuietHours(context, quietFrom, it); tick++ }
+                }
+            }
+            if (BandNotify.anyOn(context)) {
+                if (!access) {
+                    ClickRow(stringResource(R.string.band_notify_access), stringResource(R.string.band_notify_access_hint), ::openAccess)
+                } else {
+                    Text(
+                        stringResource(if (connected) R.string.band_notify_state_connected else R.string.band_notify_state_waiting),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    )
+                }
                 Text(
-                    stringResource(if (connected) R.string.band_notify_state_connected else R.string.band_notify_state_waiting),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    stringResource(R.string.band_notify_autostart),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             }
-            Text(
-                stringResource(R.string.band_notify_autostart),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            )
         }
+    }
+    if (supported) {
+        SettingsGroup(stringResource(R.string.band_group_features)) {
+            SwitchRow(stringResource(R.string.band_weather), stringResource(R.string.band_weather_hint), weather) {
+                change(it) { on -> BandWeather.setOn(context, on) }
+                if (it && weatherPlace == null) pickPlace = true
+            }
+            if (weather) {
+                ClickRow(stringResource(R.string.band_weather_place), weatherPlace?.name ?: stringResource(R.string.band_weather_place_none)) { pickPlace = true }
+            }
+            ClickRow(stringResource(R.string.band_alarms), stringResource(R.string.band_alarms_hint)) { showAlarms = true }
+            ClickRow(stringResource(R.string.band_faces), stringResource(R.string.band_faces_hint)) { showFaces = true }
+            val languageSent = stringResource(R.string.band_language_sent)
+            val languageOffline = stringResource(R.string.band_alarms_offline)
+            ClickRow(stringResource(R.string.band_language), stringResource(R.string.band_language_hint, Locales.current.getDisplayLanguage(Locales.current))) {
+                val ok = BandLive.setLanguage(Locales.current)
+                Toast.makeText(context, if (ok) languageSent else languageOffline, Toast.LENGTH_SHORT).show()
+            }
+            SwitchRow(stringResource(R.string.band_calendar), stringResource(R.string.band_calendar_hint), calendar) { on ->
+                if (on && !BandSchedule.hasCalendarPermission(context)) {
+                    calendarPermission.launch(Manifest.permission.READ_CALENDAR)
+                } else {
+                    change(on) { BandSchedule.setCalendar(context, it) }
+                }
+            }
         }
+        SettingsGroup(stringResource(R.string.band_group_alerts)) {
+            SwitchRow(stringResource(R.string.band_notify_lost), stringResource(R.string.band_notify_lost_hint), lost) {
+                change(it) { on -> BandNotify.setLostAlert(context, on) }
+            }
+            SwitchRow(stringResource(R.string.band_battery_alert), stringResource(R.string.band_battery_alert_hint, BandBattery.LOW_LEVEL), batteryAlert) {
+                BandBattery.setAlert(context, it)
+                tick++
+            }
+        }
+    }
+    if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
+    if (showAlarms) AlarmsDialog(onDismiss = { showAlarms = false })
+    if (showFaces) WatchfacesDialog(onDismiss = { showFaces = false })
+    if (pickPlace) {
+        WeatherPlaceDialog(onDismiss = {
+            pickPlace = false
+            tick++
+        })
+    }
+    if (pickApps) {
+        AppPickerDialog(onDismiss = {
+            pickApps = false
+            tick++
+        })
     }
 }
 
 private const val NOTIFY_POLL_MS = 1_000L
+
+private fun minuteLabel(minute: Int): String = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+
+/** Picks the weather place: a city search, or the phone's position while the app is open. */
+@Composable
+private fun WeatherPlaceDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var query by rememberSaveable { mutableStateOf("") }
+    var results by remember { mutableStateOf<List<WeatherPlace>?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    val myPlace = stringResource(R.string.band_weather_my_place)
+    fun useHere() {
+        scope.launch {
+            busy = true
+            val place = BandWeather.currentPlace(context, myPlace)
+            busy = false
+            if (place != null) {
+                BandWeather.setPlace(context, place)
+                onDismiss()
+            } else {
+                results = emptyList()
+            }
+        }
+    }
+    val locationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok -> if (ok) useHere() }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_weather_place)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it.take(60) },
+                    singleLine = true,
+                    label = { Text(stringResource(R.string.band_weather_search)) },
+                    trailingIcon = {
+                        TextButton(
+                            enabled = query.isNotBlank() && !busy,
+                            onClick = {
+                                scope.launch {
+                                    busy = true
+                                    results = BandWeather.search(query)
+                                    busy = false
+                                }
+                            },
+                        ) { Text(stringResource(R.string.band_weather_find)) }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                TextButton(enabled = !busy, onClick = {
+                    if (BandWeather.hasLocationPermission(context)) useHere() else locationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                }) { Text(stringResource(R.string.band_weather_use_location)) }
+                if (busy) Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodySmall)
+                val list = results
+                if (list != null && list.isEmpty() && !busy) {
+                    Text(stringResource(R.string.band_weather_not_found), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                }
+                LazyColumn(Modifier.heightIn(max = 300.dp)) {
+                    items(list.orEmpty()) { place ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    BandWeather.setPlace(context, place)
+                                    onDismiss()
+                                }
+                                .padding(vertical = 8.dp),
+                        ) {
+                            Text(place.name, style = MaterialTheme.typography.bodyLarge)
+                            if (place.detail.isNotEmpty()) {
+                                Text(place.detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+    )
+}
+
+/** The band's alarms: switch on/off, tap to edit, add new ones. Needs the open connection. */
+@Composable
+private fun AlarmsDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val alarms by remember { BandSchedule.alarms() }.collectAsState()
+    var editing by remember { mutableStateOf<BandAlarm?>(null) }
+    val connected by produceState(BandLive.connected) {
+        BandLive.requestAlarms()
+        while (true) {
+            value = BandLive.connected
+            delay(NOTIFY_POLL_MS)
+        }
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_alarms)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                val current = alarms
+                when {
+                    !connected -> Text(stringResource(R.string.band_alarms_offline), style = MaterialTheme.typography.bodyMedium)
+                    current == null -> Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodyMedium)
+                    current.list.isEmpty() -> Text(stringResource(R.string.band_alarms_empty), style = MaterialTheme.typography.bodyMedium)
+                }
+                LazyColumn(Modifier.heightIn(max = 380.dp)) {
+                    items(current?.list.orEmpty(), key = { it.id }) { alarm ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth().clickable { editing = alarm }.padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Text(minuteLabel(alarm.hour * 60 + alarm.minute), style = MaterialTheme.typography.titleLarge)
+                                Text(repeatLabel(alarm), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            Switch(checked = alarm.enabled, onCheckedChange = { BandSchedule.save(alarm.copy(enabled = it)) })
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            val current = alarms
+            TextButton(
+                enabled = connected && current != null && (current.max == 0 || current.list.size < current.max),
+                onClick = { editing = BandAlarm(0, 7, 0, BandAlarm.Repeat.Once, 0, enabled = true) },
+            ) { Text(stringResource(R.string.band_alarm_add)) }
+        },
+    )
+    editing?.let { alarm ->
+        AlarmEditDialog(alarm, onDismiss = { editing = null }, onSave = {
+            BandSchedule.save(it)
+            editing = null
+        }, onDelete = {
+            BandSchedule.delete(alarm)
+            editing = null
+        })
+    }
+}
+
+/** The band's watch faces: pick one, delete own ones, or upload a .bin file. */
+@Composable
+private fun WatchfacesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val faces by remember { BandFaces.faces() }.collectAsState()
+    val upload by remember { BandFaces.upload() }.collectAsState()
+    val connected by produceState(BandLive.connected) {
+        BandFaces.clearUpload()
+        BandFaces.refresh()
+        while (true) {
+            value = BandLive.connected
+            delay(NOTIFY_POLL_MS)
+        }
+    }
+    val invalid = stringResource(R.string.band_faces_invalid)
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val file = BandFaces.read(context, uri)
+            if (file == null) {
+                Toast.makeText(context, invalid, Toast.LENGTH_LONG).show()
+            } else {
+                BandFaces.install(file)
+            }
+        }
+    }
+    val sending = upload as? WatchfaceUpload.Sending
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_faces)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                val list = faces
+                when {
+                    !connected -> Text(stringResource(R.string.band_alarms_offline), style = MaterialTheme.typography.bodyMedium)
+                    list == null -> Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodyMedium)
+                }
+                when (val state = upload) {
+                    is WatchfaceUpload.Sending -> {
+                        Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
+                        LinearProgressIndicator(progress = { state.percent / 100f }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp))
+                    }
+                    is WatchfaceUpload.Done -> Text(
+                        stringResource(if (state.success) R.string.band_faces_done else R.string.band_faces_failed),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (state.success) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    )
+                    null -> Unit
+                }
+                LazyColumn(Modifier.heightIn(max = 340.dp)) {
+                    items(list.orEmpty(), key = { it.id }) { face ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectable(selected = face.active, enabled = sending == null, role = Role.RadioButton) { BandFaces.select(face) }
+                                .padding(vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            RadioButton(selected = face.active, onClick = null)
+                            Text(face.name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                            if (face.canDelete && !face.active) {
+                                TextButton(enabled = sending == null, onClick = { BandFaces.delete(face) }) {
+                                    Text(stringResource(R.string.band_faces_delete))
+                                }
+                            }
+                        }
+                    }
+                }
+                Text(
+                    stringResource(R.string.band_faces_install_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(
+                enabled = connected && sending == null,
+                onClick = { runCatching { picker.launch(arrayOf("application/octet-stream", "*/*")) } },
+            ) { Text(stringResource(R.string.band_faces_install)) }
+        },
+    )
+}
+
+@Composable
+private fun repeatLabel(alarm: BandAlarm): String = when {
+    alarm.repeat == BandAlarm.Repeat.Once -> stringResource(R.string.band_alarm_once)
+    alarm.repeat == BandAlarm.Repeat.Daily -> stringResource(R.string.band_alarm_daily)
+    alarm.days == BandAlarm.WEEKDAYS -> stringResource(R.string.band_alarm_weekdays)
+    else -> DayOfWeek.entries.filter { alarm.days and (1 shl (it.value - 1)) != 0 }
+        .joinToString(" ") { it.getDisplayName(TextStyle.SHORT, Locales.current) }
+}
+
+@Composable
+private fun AlarmEditDialog(alarm: BandAlarm, onDismiss: () -> Unit, onSave: (BandAlarm) -> Unit, onDelete: () -> Unit) {
+    val context = LocalContext.current
+    var minute by remember { mutableIntStateOf(alarm.hour * 60 + alarm.minute) }
+    var repeat by remember { mutableStateOf(alarm.repeat) }
+    var days by remember { mutableIntStateOf(if (alarm.repeat == BandAlarm.Repeat.Weekly) alarm.days else BandAlarm.WEEKDAYS) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(if (alarm.id == 0) R.string.band_alarm_add else R.string.band_alarm_edit)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                TextButton(onClick = {
+                    TimePickerDialog(context, { _, h, m -> minute = h * 60 + m }, minute / 60, minute % 60, android.text.format.DateFormat.is24HourFormat(context)).show()
+                }) { Text(minuteLabel(minute), style = MaterialTheme.typography.displaySmall) }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(repeat == BandAlarm.Repeat.Once, onClick = { repeat = BandAlarm.Repeat.Once }, label = { Text(stringResource(R.string.band_alarm_once)) })
+                    FilterChip(repeat == BandAlarm.Repeat.Daily, onClick = { repeat = BandAlarm.Repeat.Daily }, label = { Text(stringResource(R.string.band_alarm_daily)) })
+                    FilterChip(repeat == BandAlarm.Repeat.Weekly, onClick = { repeat = BandAlarm.Repeat.Weekly }, label = { Text(stringResource(R.string.band_alarm_days)) })
+                }
+                if (repeat == BandAlarm.Repeat.Weekly) {
+                    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        DayOfWeek.entries.forEach { day ->
+                            val bit = 1 shl (day.value - 1)
+                            FilterChip(
+                                selected = days and bit != 0,
+                                onClick = { days = days xor bit },
+                                label = { Text(day.getDisplayName(TextStyle.NARROW, Locales.current)) },
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                enabled = repeat != BandAlarm.Repeat.Weekly || days != 0,
+                onClick = { onSave(alarm.copy(hour = minute / 60, minute = minute % 60, repeat = repeat, days = if (repeat == BandAlarm.Repeat.Weekly) days else 0)) },
+            ) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = {
+            Row {
+                if (alarm.id != 0) TextButton(onClick = onDelete) { Text(stringResource(R.string.band_alarm_delete), color = MaterialTheme.colorScheme.error) }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
+            }
+        },
+    )
+}
+
+private const val DEFAULT_REPLY_SLOTS = 5
+
+/** Edits the texts the band offers when a call is rejected; they go out as SMS. */
+@Composable
+private fun RepliesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val slots = BandReplies.max(context).takeIf { it > 0 } ?: DEFAULT_REPLY_SLOTS
+    val texts = remember {
+        val saved = BandReplies.replies(context)
+        mutableStateListOf<String>().apply { repeat(slots) { add(saved.getOrElse(it) { "" }) } }
+    }
+    var granted by remember { mutableStateOf(BandReplies.granted(context)) }
+    var notSent by remember { mutableStateOf(false) }
+    val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        granted = BandReplies.granted(context)
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_replies)) },
+        text = {
+            Column(
+                modifier = Modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text(stringResource(R.string.band_replies_text), style = MaterialTheme.typography.bodyMedium)
+                if (!granted) {
+                    TextButton(onClick = { permission.launch(BandReplies.PERMISSIONS) }) { Text(stringResource(R.string.band_replies_permission)) }
+                }
+                texts.forEachIndexed { index, text ->
+                    OutlinedTextField(
+                        value = text,
+                        onValueChange = { texts[index] = it.take(MAX_REPLY_LENGTH) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                if (notSent) Text(stringResource(R.string.band_replies_not_sent), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                if (BandReplies.save(context, texts.toList())) onDismiss() else notSent = true
+            }) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+}
+
+private const val MAX_REPLY_LENGTH = 60
+
+private class PhoneApp(val packageName: String, val label: String)
+
+/** Lets the user turn off band notifications for single apps. */
+@Composable
+private fun AppPickerDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    var blocked by remember { mutableStateOf(BandNotify.blocked(context)) }
+    val apps by produceState<List<PhoneApp>?>(null) {
+        value = withContext(Dispatchers.IO) {
+            val pm = context.packageManager
+            val launcher = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
+            pm.queryIntentActivities(launcher, 0)
+                .map { it.activityInfo.packageName }
+                .distinct()
+                .filter { it != context.packageName }
+                .map { pkg -> PhoneApp(pkg, runCatching { pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString() }.getOrDefault(pkg)) }
+                .sortedBy { it.label.lowercase(Locales.current) }
+        }
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.band_notify_pick_apps)) },
+        text = {
+            val list = apps
+            if (list == null) {
+                Text(stringResource(R.string.band_notify_pick_loading))
+            } else {
+                LazyColumn(Modifier.heightIn(max = 460.dp)) {
+                    items(list, key = { it.packageName }) { app ->
+                        val on = app.packageName !in blocked
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .toggleable(value = on, role = Role.Checkbox, onValueChange = { checked ->
+                                    blocked = if (checked) blocked - app.packageName else blocked + app.packageName
+                                    BandNotify.setBlocked(context, blocked)
+                                })
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            Checkbox(checked = on, onCheckedChange = null)
+                            Text(app.label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(onClick = {
+                blocked = if (blocked.isEmpty()) apps.orEmpty().map { it.packageName }.toSet() else emptySet()
+                BandNotify.setBlocked(context, blocked)
+            }) { Text(stringResource(if (blocked.isEmpty()) R.string.band_notify_pick_none else R.string.band_notify_pick_all)) }
+        },
+    )
+}
+
+@Composable
+private fun SettingsMenu(state: MainUiState, onOpen: (SettingsPage) -> Unit) {
+    val settings = state.settings
+    val on = listOf(settings.goalNotification, settings.streakReminder, settings.nearGoalNotification, settings.weeklySummary, settings.weightReminder)
+    val phone = stringResource(if (state.xiaomiEnabled) R.string.xiaomi_card_title else R.string.source_sensor)
+    val wearable = when {
+        state.bandDirectEnabled -> stringResource(R.string.source_direct)
+        state.wearableEnabled -> stringResource(R.string.source_connect)
+        else -> null
+    }
+    val water = stringResource(R.string.water_ml, format(settings.waterGoalMl.toLong()))
+    val pages = listOf(
+        listOfNotNull(
+            SettingsPage.Counting to listOfNotNull(phone, wearable).joinToString(" · "),
+            if (state.bandDirectEnabled) SettingsPage.Band to stringResource(R.string.settings_band_summary) else null,
+        ),
+        listOf(
+            SettingsPage.Goals to stringResource(
+                R.string.settings_goals_summary,
+                format(settings.dailyGoal),
+                format(settings.weeklyGoal),
+            ),
+            SettingsPage.Body to listOf(
+                stringResource(R.string.height_value, settings.heightCm),
+                stringResource(R.string.weight_value, settings.weightKg),
+                stringResource(if (settings.distanceUnit == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km),
+            ).joinToString(" · "),
+            SettingsPage.Water to stringResource(
+                if (settings.waterReminder) R.string.settings_water_summary_on else R.string.settings_water_summary_off,
+                water,
+            ),
+            SettingsPage.Notifications to stringResource(R.string.settings_notifications_summary, on.count { it }, on.size),
+        ),
+        listOf(
+            SettingsPage.Appearance to stringResource(themeLabel(settings.themeMode)) + " · " + languageLabel(settings.language),
+            SettingsPage.Data to stringResource(R.string.settings_data_summary),
+            SettingsPage.About to stringResource(R.string.settings_version) + " " + state.version,
+        ),
+    )
+    pages.forEach { group ->
+        Card(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
+            Column(modifier = Modifier.padding(vertical = 4.dp)) {
+                group.forEach { (page, summary) -> MenuRow(page, summary) { onOpen(page) } }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MenuRow(page: SettingsPage, summary: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                painterResource(page.icon),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(22.dp),
+            )
+        }
+        Column(Modifier.weight(1f)) {
+            Text(stringResource(page.title), style = MaterialTheme.typography.bodyLarge)
+            Text(
+                summary,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        Icon(
+            painterResource(R.drawable.ic_chevron_right),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(20.dp),
+        )
+    }
+}
+
+@Composable
+private fun PageHeader(title: String, onBack: () -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        IconButton(onClick = onBack) {
+            Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = stringResource(R.string.back))
+        }
+        Text(title, style = MaterialTheme.typography.titleLarge)
+    }
+}
+
+/** A page's own settings; the page title above already names them. */
+@Composable
+private fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
+    Card(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+        Column(modifier = Modifier.padding(vertical = 4.dp), content = content)
+    }
+}
 
 @Composable
 private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> Unit) {
@@ -830,6 +1485,14 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
             }
         }
     }
+    val battery by remember { BandBattery.observe(context) }.collectAsState()
+    // (connected, finding) of the always-open connection; the find band button needs it.
+    val live by produceState(BandLive.connected to BandLive.findingBand, direct) {
+        while (direct) {
+            value = BandLive.connected to BandLive.findingBand
+            delay(NOTIFY_POLL_MS)
+        }
+    }
     val model = if (direct) BandModels.find(status.name) else BandModels.find(connected?.name)
     val shape = when {
         model != null -> model.shape
@@ -881,6 +1544,16 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
                     status.lastResult?.takeIf { it != BandResult.Ok && !state.bandSyncing }?.let {
                         Text(stringResource(BandDirect.resultText(it)), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                     }
+                    battery?.let { b ->
+                        val low = b.level <= BandBattery.LOW_LEVEL && b.charging != true
+                        Text(
+                            stringResource(R.string.band_battery_line, b.level) +
+                                if (b.charging == true) " · " + stringResource(R.string.band_battery_charging) else "",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = if (low) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
                 }
             }
         }
@@ -892,6 +1565,13 @@ private fun DeviceCard(state: MainUiState, status: BandStatus, actions: MainActi
                 Text(stringResource(if (direct) R.string.band_reconnect else R.string.band_sync_now))
             }
             if (direct) OutlinedButton(onClick = onManage) { Text(stringResource(R.string.source_direct_manage)) }
+        }
+        if (direct && live.first) {
+            Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp)) {
+                OutlinedButton(onClick = { BandLive.findBand(!live.second) }) {
+                    Text(stringResource(if (live.second) R.string.band_find_stop else R.string.band_find))
+                }
+            }
         }
     }
 }

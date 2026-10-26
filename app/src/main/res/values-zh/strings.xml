@@ -316,6 +316,15 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>手环通知：选择应用和免打扰时段；FitWren 提醒也会在手环上振动</item>
+        <item>手环电量：显示在设备卡片和新的“手环电量”小组件中，电量低时手机提醒</item>
+        <item>查找手机（手环让手机响铃）和查找手环；手环断开时手机提醒</item>
+        <item>快捷回复（在手环上拒接时发短信）和手环天气（Open-Meteo，按城市或位置）</item>
+        <item>在 FitWren 中查看和编辑手环闹钟；日历日程发送到手环</item>
+        <item>设置已重新整理：每个主题都有单独页面，主页面显示各项简要摘要</item>
+        <item>表盘：在 FitWren 中更换或删除手环表盘，或从 .bin 文件上传新表盘</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>手环通知：应用通知、来电和音乐控制 (小米)。无常驻通知，通过通知使用权运行</item>
         <item>连接期间，步数和健康数据通过同一连接每 15 分钟同步一次</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">正在从 Health Connect 读取数据</string>
     <string name="band_reconnect">重新连接</string>
     <string name="band_sync_now">同步</string>
+    <string name="band_alert_channel">手环提醒</string>
+    <string name="band_battery_low_title">手环电量低</string>
+    <string name="band_battery_low_text">手环剩余 %1$d%% 电量，记得充电。</string>
+    <string name="band_lost_title">手环已断开</string>
+    <string name="band_lost_text">手环已断开连接一分钟，你可能把手机落下了。</string>
+    <string name="find_phone_channel">查找手机</string>
+    <string name="find_phone_title">正在查找手机</string>
+    <string name="find_phone_text">手环正在查找你的手机，找到后请点按。</string>
+    <string name="find_phone_found">找到了</string>
+    <string name="widget_band_label">手环电量</string>
+    <string name="widget_band_description">手环的电池电量</string>
+    <string name="widget_band_empty">手环连接后，电量会显示在这里。</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">正在充电</string>
+    <string name="band_battery_line">电量：%1$d%%</string>
+    <string name="band_notify_pick_apps">选择应用</string>
+    <string name="band_notify_pick_apps_all">所有应用都会发送到手环</string>
+    <string name="band_notify_pick_apps_off">已关闭 %1$d 个应用</string>
+    <string name="band_notify_pick_loading">正在加载应用…</string>
+    <string name="band_notify_pick_none">全不选</string>
+    <string name="band_notify_pick_all">全选</string>
+    <string name="band_notify_reminders">FitWren 提醒</string>
+    <string name="band_notify_reminders_hint">目标、连续、喝水和体重提醒也会在手环上振动。</string>
+    <string name="band_notify_quiet">免打扰时段</string>
+    <string name="band_notify_quiet_hint">此时段内通知和提醒不会发送到手环，来电仍会提醒。</string>
+    <string name="band_notify_quiet_from">开始</string>
+    <string name="band_notify_quiet_to">结束</string>
+    <string name="band_notify_lost">断开提醒</string>
+    <string name="band_notify_lost_hint">手环断开一分钟后手机会提醒你，避免忘带手机。</string>
+    <string name="band_battery_alert">低电量提醒</string>
+    <string name="band_battery_alert_hint">手环电量低于 %1$d%% 时手机会提醒你。</string>
+    <string name="band_find">查找手环</string>
+    <string name="band_find_stop">停止振动</string>
+    <string name="band_replies">快捷回复</string>
+    <string name="band_replies_hint">在手环上拒接来电时给对方发短信</string>
+    <string name="band_replies_text">在手环上拒接来电时选择其中一条，会以短信发给对方。空白项会被删除。</string>
+    <string name="band_replies_permission">授予短信和电话权限</string>
+    <string name="band_replies_not_sent">手环未连接。回复已保存，连接后请再保存一次。</string>
+    <string name="band_weather">天气</string>
+    <string name="band_weather_hint">填充手环的天气界面。每小时从 Open-Meteo 获取，需要联网。</string>
+    <string name="band_weather_place">天气位置</string>
+    <string name="band_weather_place_none">未设置</string>
+    <string name="band_weather_my_place">我的位置</string>
+    <string name="band_weather_search">搜索城市</string>
+    <string name="band_weather_find">搜索</string>
+    <string name="band_weather_use_location">使用当前位置</string>
+    <string name="band_weather_not_found">未找到。换个名称或允许定位。</string>
+    <string name="band_alarms">手环闹钟</string>
+    <string name="band_alarms_hint">查看、开关和添加手环上的闹钟</string>
+    <string name="band_alarms_offline">手环未连接。连接后闹钟会显示在这里。</string>
+    <string name="band_alarms_empty">手环上没有闹钟。</string>
+    <string name="band_alarm_add">添加闹钟</string>
+    <string name="band_alarm_edit">编辑闹钟</string>
+    <string name="band_alarm_delete">删除</string>
+    <string name="band_alarm_once">一次</string>
+    <string name="band_alarm_daily">每天</string>
+    <string name="band_alarm_weekdays">工作日</string>
+    <string name="band_alarm_days">按天</string>
+    <string name="band_calendar">日历</string>
+    <string name="band_calendar_hint">未来 7 天的日程会发送到手环，需要日历权限。</string>
+    <string name="band_language">手环语言</string>
+    <string name="band_language_hint">将手环菜单语言设为与 FitWren 相同（%1$s）</string>
+    <string name="band_language_sent">已设置手环语言</string>
+    <string name="settings_band">手环</string>
+    <string name="settings_band_summary">通知、天气、闹钟和日历</string>
+    <string name="settings_goals_summary">每日 %1$s 步，每周 %2$s 步</string>
+    <string name="settings_water_summary_on">%1$s，提醒已开启</string>
+    <string name="settings_water_summary_off">%1$s，提醒已关闭</string>
+    <string name="settings_notifications_summary">已开启 %1$d / %2$d</string>
+    <string name="settings_data_summary">以 CSV 导出和导入</string>
+    <string name="band_group_features">手环功能</string>
+    <string name="band_group_alerts">提醒</string>
+    <string name="band_faces">表盘</string>
+    <string name="band_faces_hint">更换或删除表盘，或从 .bin 文件上传新表盘</string>
+    <string name="band_faces_install">从文件上传</string>
+    <string name="band_faces_install_hint">只上传为此手环型号制作的 .bin 表盘文件。上传可能需要几分钟，请让手环靠近手机。</string>
+    <string name="band_faces_invalid">此文件不是小米表盘。</string>
+    <string name="band_faces_sending">正在上传：%d%%</string>
+    <string name="band_faces_done">表盘已上传并选用。</string>
+    <string name="band_faces_failed">表盘上传失败。请让手环靠近后重试。</string>
+    <string name="band_faces_delete">删除</string>
 </resources>

@@ -316,6 +316,15 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_12_0">
+        <item>밴드 알림: 앱 선택과 방해 금지 시간, FitWren 알림도 밴드에서 진동</item>
+        <item>밴드 배터리: 기기 카드와 새 \"밴드 배터리\" 위젯에 표시, 부족하면 휴대폰 알림</item>
+        <item>내 휴대폰 찾기(밴드로 휴대폰 울리기)와 내 밴드 찾기, 밴드 연결이 끊기면 휴대폰 알림</item>
+        <item>빠른 답장(밴드에서 거절할 때 SMS)과 밴드 날씨(Open-Meteo, 도시 또는 위치)</item>
+        <item>밴드 알람을 FitWren에서 보고 편집, 캘린더 일정이 밴드로 전송</item>
+        <item>설정 재구성: 항목마다 별도 페이지가 있고 메인 페이지에 각 항목의 요약이 표시됩니다</item>
+        <item>워치 페이스: FitWren에서 밴드 워치 페이스를 바꾸거나 삭제하고, .bin 파일에서 새로 올리기</item>
+    </string-array>
     <string-array name="release_notes_0_11_0">
         <item>밴드 알림: 앱 알림, 수신 전화, 음악 제어 지원 (Xiaomi). 상시 알림 없이 알림 접근 권한으로 작동</item>
         <item>연결된 동안 걸음 수와 건강 데이터를 같은 연결로 15분마다 동기화</item>
@@ -749,4 +758,85 @@
     <string name="device_connect_hint">Health Connect에서 데이터를 읽는 중</string>
     <string name="band_reconnect">다시 연결</string>
     <string name="band_sync_now">동기화</string>
+    <string name="band_alert_channel">밴드 알림</string>
+    <string name="band_battery_low_title">밴드 배터리 부족</string>
+    <string name="band_battery_low_text">밴드 배터리가 %1$d%% 남았습니다. 충전을 잊지 마세요.</string>
+    <string name="band_lost_title">밴드 연결 끊김</string>
+    <string name="band_lost_text">밴드가 1분 동안 연결되지 않았습니다. 휴대폰을 두고 왔을 수 있습니다.</string>
+    <string name="find_phone_channel">내 휴대폰 찾기</string>
+    <string name="find_phone_title">휴대폰 찾는 중</string>
+    <string name="find_phone_text">밴드가 휴대폰을 찾고 있습니다. 찾으면 탭하세요.</string>
+    <string name="find_phone_found">찾았어요</string>
+    <string name="widget_band_label">밴드 배터리</string>
+    <string name="widget_band_description">밴드 배터리 잔량</string>
+    <string name="widget_band_empty">밴드가 연결되면 배터리 잔량이 여기에 표시됩니다.</string>
+    <string name="band_battery_percent">%1$d%%</string>
+    <string name="band_battery_charging">충전 중</string>
+    <string name="band_battery_line">배터리: %1$d%%</string>
+    <string name="band_notify_pick_apps">대상 앱</string>
+    <string name="band_notify_pick_apps_all">모든 앱을 밴드로 보냅니다</string>
+    <string name="band_notify_pick_apps_off">앱 %1$d개 꺼짐</string>
+    <string name="band_notify_pick_loading">앱 불러오는 중…</string>
+    <string name="band_notify_pick_none">없음</string>
+    <string name="band_notify_pick_all">전체</string>
+    <string name="band_notify_reminders">FitWren 알림</string>
+    <string name="band_notify_reminders_hint">목표, 연속 기록, 물, 체중 알림도 밴드에서 진동합니다.</string>
+    <string name="band_notify_quiet">방해 금지 시간</string>
+    <string name="band_notify_quiet_hint">이 시간에는 알림과 리마인더를 밴드로 보내지 않습니다. 전화는 계속 옵니다.</string>
+    <string name="band_notify_quiet_from">시작</string>
+    <string name="band_notify_quiet_to">종료</string>
+    <string name="band_notify_lost">연결 끊김 알림</string>
+    <string name="band_notify_lost_hint">밴드가 1분 동안 연결되지 않으면 휴대폰에 알림이 표시됩니다. 두고 온 휴대폰을 알 수 있습니다.</string>
+    <string name="band_battery_alert">배터리 부족 알림</string>
+    <string name="band_battery_alert_hint">밴드 배터리가 %1$d%% 아래로 내려가면 휴대폰에 알림이 표시됩니다.</string>
+    <string name="band_find">내 밴드 찾기</string>
+    <string name="band_find_stop">진동 멈추기</string>
+    <string name="band_replies">빠른 답장</string>
+    <string name="band_replies_hint">밴드에서 전화를 거절할 때 상대에게 SMS 보내기</string>
+    <string name="band_replies_text">밴드에서 전화를 거절할 때 이 중 하나를 고르면 상대에게 SMS로 전송됩니다. 빈 항목은 삭제됩니다.</string>
+    <string name="band_replies_permission">SMS 및 전화 권한 허용</string>
+    <string name="band_replies_not_sent">밴드가 연결되어 있지 않습니다. 답장은 저장되었으니 연결되면 다시 저장하세요.</string>
+    <string name="band_weather">날씨</string>
+    <string name="band_weather_hint">밴드의 날씨 화면을 채웁니다. 매시간 Open-Meteo에서 가져오며 인터넷을 사용합니다.</string>
+    <string name="band_weather_place">날씨 위치</string>
+    <string name="band_weather_place_none">설정 안 됨</string>
+    <string name="band_weather_my_place">내 위치</string>
+    <string name="band_weather_search">도시 검색</string>
+    <string name="band_weather_find">검색</string>
+    <string name="band_weather_use_location">현재 위치 사용</string>
+    <string name="band_weather_not_found">찾을 수 없습니다. 다른 이름을 입력하거나 위치를 허용하세요.</string>
+    <string name="band_alarms">밴드 알람</string>
+    <string name="band_alarms_hint">밴드의 알람 보기, 켜기/끄기, 추가</string>
+    <string name="band_alarms_offline">밴드가 연결되어 있지 않습니다. 연결되면 알람이 여기에 표시됩니다.</string>
+    <string name="band_alarms_empty">밴드에 알람이 없습니다.</string>
+    <string name="band_alarm_add">알람 추가</string>
+    <string name="band_alarm_edit">알람 편집</string>
+    <string name="band_alarm_delete">삭제</string>
+    <string name="band_alarm_once">한 번</string>
+    <string name="band_alarm_daily">매일</string>
+    <string name="band_alarm_weekdays">평일</string>
+    <string name="band_alarm_days">요일</string>
+    <string name="band_calendar">캘린더</string>
+    <string name="band_calendar_hint">앞으로 7일간의 일정이 밴드로 전송됩니다. 캘린더 권한을 요청합니다.</string>
+    <string name="band_language">밴드 언어</string>
+    <string name="band_language_hint">밴드 메뉴 언어를 FitWren 언어(%1$s)로 설정합니다</string>
+    <string name="band_language_sent">밴드 언어가 설정되었습니다</string>
+    <string name="settings_band">밴드</string>
+    <string name="settings_band_summary">알림, 날씨, 알람 및 캘린더</string>
+    <string name="settings_goals_summary">하루 %1$s, 주간 %2$s 걸음</string>
+    <string name="settings_water_summary_on">%1$s, 알림 켜짐</string>
+    <string name="settings_water_summary_off">%1$s, 알림 꺼짐</string>
+    <string name="settings_notifications_summary">%2$d개 중 %1$d개 켜짐</string>
+    <string name="settings_data_summary">CSV로 내보내기 및 가져오기</string>
+    <string name="band_group_features">밴드 기능</string>
+    <string name="band_group_alerts">경고</string>
+    <string name="band_faces">워치 페이스</string>
+    <string name="band_faces_hint">워치 페이스를 바꾸거나 삭제하고, .bin 파일에서 새로 올리기</string>
+    <string name="band_faces_install">파일에서 올리기</string>
+    <string name="band_faces_install_hint">이 밴드 모델용으로 만든 .bin 워치 페이스만 올리세요. 몇 분 걸릴 수 있으니 밴드를 휴대폰 가까이에 두세요.</string>
+    <string name="band_faces_invalid">이 파일은 Xiaomi 워치 페이스가 아닙니다.</string>
+    <string name="band_faces_sending">올리는 중: %d%%</string>
+    <string name="band_faces_done">워치 페이스를 올리고 선택했습니다.</string>
+    <string name="band_faces_failed">워치 페이스를 올리지 못했습니다. 밴드를 가까이 두고 다시 시도하세요.</string>
+    <string name="band_faces_delete">삭제</string>
 </resources>

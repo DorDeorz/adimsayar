@@ -25,6 +25,8 @@ class XiaomiChannel(
     private val write: (ByteArray) -> Unit,
     private val onMessage: (ByteArray) -> Unit,
     private val encrypted: Boolean = true,
+    // The data upload channel encrypts every message with counter 0 and sends no counter.
+    private val incrementNonce: Boolean = true,
 ) {
 
     private class Outgoing(val bytes: ByteArray, val done: (Boolean) -> Unit)
@@ -136,11 +138,11 @@ class XiaomiChannel(
         val next = queue.removeFirstOrNull() ?: return
         current = next
         val encrypt = cipher.sending
-        val index = counter
+        val index = if (incrementNonce) counter else 0
         val body = if (encrypt) cipher.encrypt(next.bytes, index) else next.bytes
         if (!encrypted || body.size + 6 > maxWrite) {
-            if (encrypt) counter++
-            currentBytes = if (encrypt) {
+            if (encrypt && incrementNonce) counter++
+            currentBytes = if (encrypt && incrementNonce) {
                 ByteBuffer.allocate(2 + body.size).order(ByteOrder.LITTLE_ENDIAN).putShort(index.toShort()).put(body).array()
             } else {
                 body
@@ -160,7 +162,7 @@ class XiaomiChannel(
                 .putShort(0)
                 .put(TYPE_SINGLE.toByte())
                 .put((if (encrypt) 1 else 2).toByte())
-            if (encrypt) packet.putShort(counter++.toShort())
+            if (encrypt) packet.putShort((if (incrementNonce) counter++ else 0).toShort())
             packet.put(body)
             write(packet.array())
         }
