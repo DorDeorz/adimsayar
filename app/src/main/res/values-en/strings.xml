@@ -316,7 +316,7 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_12_8">
+    <string-array name="release_notes_0_12_9">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
     </string-array>

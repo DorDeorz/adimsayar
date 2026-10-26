@@ -14,8 +14,8 @@ class OwnFacesTest {
         bytes[1] = 0xA5.toByte()
         "167210065".toByteArray().copyInto(bytes, 0x28)
         "FitWren".toByteArray().copyInto(bytes, 0x68)
-        val patched = OwnFaces.withId(bytes, "166100003")!!
-        assertEquals("166100003", XiaomiWatchface.parse(patched)!!.id)
+        val patched = OwnFaces.withId(bytes, "266290003")!!
+        assertEquals("266290003", XiaomiWatchface.parse(patched)!!.id)
         assertEquals("167210065", XiaomiWatchface.parse(bytes)!!.id)
         assertNull(OwnFaces.withId(ByteArray(10), "1"))
     }

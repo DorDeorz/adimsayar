@@ -316,7 +316,7 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
-    <string-array name="release_notes_0_12_8">
+    <string-array name="release_notes_0_12_9">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
         <item>Esferas FitWren: nueve esferas con el pájaro (Noche, Camino, Analógica, Neón, Rama y más) incluidas, se envían a la Mi Band 8 con un toque</item>
     </string-array>

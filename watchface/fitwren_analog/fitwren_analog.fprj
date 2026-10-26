@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FaceProject DeviceType="9" Id="166100004">
+<FaceProject DeviceType="9" Id="266290004">
   <Screen Title="FitWren Analog" Bitmap="preview.png">
     <Widget Shape="30" Name="dial" Bitmap="dial.png" X="4" Y="58" Width="184" Height="184" Alpha="255" Visible_Src="0" />
     <Widget Shape="30" Name="bird" Bitmap="bird.png" X="61" Y="120" Width="70" Height="70" Alpha="255" Visible_Src="0" />

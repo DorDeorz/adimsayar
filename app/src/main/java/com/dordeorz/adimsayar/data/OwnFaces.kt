@@ -19,15 +19,15 @@ object OwnFaces {
     private const val ID_LENGTH = 16
 
     private val ALL = listOf(
-        OwnFace("fitwren", "FitWren", "166100001"),
-        OwnFace("fitwren_gece", "FitWren Gece", "166100002"),
-        OwnFace("fitwren_yol", "FitWren Yol", "166100003"),
-        OwnFace("fitwren_analog", "FitWren Analog", "166100004"),
-        OwnFace("fitwren_neon", "FitWren Neon", "166100005"),
-        OwnFace("fitwren_dal", "FitWren Dal", "166100006"),
-        OwnFace("fitwren_dal_gece", "FitWren Dal Gece", "166100007"),
-        OwnFace("fitwren_halka", "FitWren Halka", "166100008"),
-        OwnFace("fitwren_sade", "FitWren Sade", "166100009"),
+        OwnFace("fitwren", "FitWren", "266290001"),
+        OwnFace("fitwren_gece", "FitWren Gece", "266290002"),
+        OwnFace("fitwren_yol", "FitWren Yol", "266290003"),
+        OwnFace("fitwren_analog", "FitWren Analog", "266290004"),
+        OwnFace("fitwren_neon", "FitWren Neon", "266290005"),
+        OwnFace("fitwren_dal", "FitWren Dal", "266290006"),
+        OwnFace("fitwren_dal_gece", "FitWren Dal Gece", "266290007"),
+        OwnFace("fitwren_halka", "FitWren Halka", "266290008"),
+        OwnFace("fitwren_sade", "FitWren Sade", "266290009"),
     )
 
     /** The faces whose file is in the app; empty for any band but the Xiaomi Smart Band 8. */

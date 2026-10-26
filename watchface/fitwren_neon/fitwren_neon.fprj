@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FaceProject DeviceType="9" Id="166100005">
+<FaceProject DeviceType="9" Id="266290005">
   <Screen Title="FitWren Neon" Bitmap="preview.png">
     <Widget Shape="32" Name="hour" BitmapList="hour_0.png|hour_1.png|hour_2.png|hour_3.png|hour_4.png|hour_5.png|hour_6.png|hour_7.png|hour_8.png|hour_9.png" X="31" Y="22" Width="130" Height="78" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="0811" Spacing="-14" Blanking="0" />
     <Widget Shape="32" Name="minute" BitmapList="minute_0.png|minute_1.png|minute_2.png|minute_3.png|minute_4.png|minute_5.png|minute_6.png|minute_7.png|minute_8.png|minute_9.png" X="31" Y="96" Width="130" Height="78" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1011" Spacing="-14" Blanking="0" />

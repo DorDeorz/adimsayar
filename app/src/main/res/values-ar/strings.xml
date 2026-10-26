@@ -316,7 +316,7 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
-    <string-array name="release_notes_0_12_8">
+    <string-array name="release_notes_0_12_9">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
         <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
     </string-array>

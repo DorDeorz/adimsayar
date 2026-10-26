@@ -316,7 +316,7 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
-    <string-array name="release_notes_0_12_8">
+    <string-array name="release_notes_0_12_9">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
         <item>FitWren-Zifferblätter: neun Zifferblätter mit dem Vogel (Nacht, Weg, Analog, Neon, Ast und mehr) sind dabei und kommen mit einem Tipp aufs Mi Band 8</item>
     </string-array>

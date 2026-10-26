@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FaceProject DeviceType="9" Id="166100007">
+<FaceProject DeviceType="9" Id="266290007">
   <Screen Title="FitWren Dal Gece" Bitmap="preview.png">
     <Widget Shape="30" Name="background" Bitmap="background.png" X="0" Y="0" Width="192" Height="490" Alpha="255" Visible_Src="0" />
     <Widget Shape="32" Name="hour" BitmapList="hour_0.png|hour_1.png|hour_2.png|hour_3.png|hour_4.png|hour_5.png|hour_6.png|hour_7.png|hour_8.png|hour_9.png" X="32" Y="30" Width="128" Height="70" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="0811" Spacing="0" Blanking="0" />
