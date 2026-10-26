@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Загрузка…</string>
     <string name="face_store_failed">Не удалось загрузить циферблат. Попробуйте снова.</string>
     <string name="face_store_count">Циферблатов: %1$d</string>
+    <string name="own_faces">Циферблаты FitWren</string>
+    <string name="own_faces_hint">Циферблаты с птичкой FitWren, встроенные в приложение. Нажмите, чтобы посмотреть и установить.</string>
 </resources>

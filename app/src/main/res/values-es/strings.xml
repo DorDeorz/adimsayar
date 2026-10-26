@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Descargando…</string>
     <string name="face_store_failed">No se pudo descargar la esfera. Inténtalo de nuevo.</string>
     <string name="face_store_count">%1$d esferas</string>
+    <string name="own_faces">Esferas FitWren</string>
+    <string name="own_faces_hint">Esferas con el pájaro de FitWren incluidas en la app. Toca para verlas y subirlas.</string>
 </resources>

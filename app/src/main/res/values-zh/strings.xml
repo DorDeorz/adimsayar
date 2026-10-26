@@ -865,4 +865,6 @@
     <string name="face_store_downloading">正在下载…</string>
     <string name="face_store_failed">表盘下载失败。请重试。</string>
     <string name="face_store_count">%1$d 个表盘</string>
+    <string name="own_faces">FitWren 表盘</string>
+    <string name="own_faces_hint">应用自带的 FitWren 小鸟表盘。点按查看并安装。</string>
 </resources>

@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Download in corso…</string>
     <string name="face_store_failed">Impossibile scaricare il quadrante. Riprova.</string>
     <string name="face_store_count">%1$d quadranti</string>
+    <string name="own_faces">Quadranti FitWren</string>
+    <string name="own_faces_hint">Quadranti con l\'uccellino di FitWren inclusi nell\'app. Tocca per vedere e caricare.</string>
 </resources>

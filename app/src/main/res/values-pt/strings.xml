@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Baixando…</string>
     <string name="face_store_failed">Não foi possível baixar o mostrador. Tente de novo.</string>
     <string name="face_store_count">%1$d mostradores</string>
+    <string name="own_faces">Mostradores FitWren</string>
+    <string name="own_faces_hint">Mostradores com o pássaro do FitWren incluídos no app. Toque para ver e enviar.</string>
 </resources>

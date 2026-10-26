@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Wird heruntergeladen…</string>
     <string name="face_store_failed">Zifferblatt konnte nicht geladen werden. Versuch es erneut.</string>
     <string name="face_store_count">%1$d Zifferblätter</string>
+    <string name="own_faces">FitWren-Zifferblätter</string>
+    <string name="own_faces_hint">Zifferblätter mit dem FitWren-Vogel, die mit der App kommen. Antippen, ansehen und laden.</string>
 </resources>

@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Downloading…</string>
     <string name="face_store_failed">Could not download the face. Try again.</string>
     <string name="face_store_count">%1$d faces</string>
+    <string name="own_faces">FitWren faces</string>
+    <string name="own_faces_hint">Faces with the FitWren bird that come with the app. Tap to look and upload.</string>
 </resources>

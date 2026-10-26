@@ -55,6 +55,8 @@ import androidx.compose.ui.window.DialogProperties
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.BandFaces
 import com.dordeorz.adimsayar.data.FaceStore
+import com.dordeorz.adimsayar.data.OwnFace
+import com.dordeorz.adimsayar.data.OwnFaces
 import com.dordeorz.adimsayar.data.StoreFace
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -220,4 +222,93 @@ private fun StoreFaceDialog(face: StoreFace, onDismiss: () -> Unit, onInstall: (
         },
         dismissButton = { TextButton(enabled = !busy, onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
     )
+}
+
+/** FitWren's own faces that ship with the app. Closes once an upload starts. */
+@Composable
+internal fun OwnFacesDialog(faces: List<OwnFace>, onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var open by remember { mutableStateOf<OwnFace?>(null) }
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+            Column(Modifier.padding(horizontal = 16.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = onDismiss) {
+                        Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = stringResource(R.string.back))
+                    }
+                    Text(stringResource(R.string.own_faces), style = MaterialTheme.typography.titleLarge)
+                }
+                Text(
+                    stringResource(R.string.own_faces_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                )
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(96.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    items(faces, key = { it.name }) { face ->
+                        Column(
+                            modifier = Modifier.clip(MaterialTheme.shapes.medium).clickable { open = face }.padding(4.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            OwnFacePicture(face, Modifier.fillMaxWidth())
+                            Text(
+                                face.title,
+                                style = MaterialTheme.typography.bodySmall,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(top = 4.dp),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+    open?.let { face ->
+        var busy by remember(face) { mutableStateOf(false) }
+        AlertDialog(
+            onDismissRequest = { if (!busy) open = null },
+            title = { Text(face.title) },
+            text = {
+                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+                    OwnFacePicture(face, Modifier.heightIn(max = 300.dp))
+                }
+            },
+            confirmButton = {
+                TextButton(enabled = !busy, onClick = {
+                    busy = true
+                    scope.launch {
+                        val file = OwnFaces.file(context, face)
+                        val picture = OwnFaces.preview(context, face)
+                        open = null
+                        if (file == null || !BandFaces.install(context, file, picture, face.title)) {
+                            Toast.makeText(context, R.string.face_store_failed, Toast.LENGTH_LONG).show()
+                        } else {
+                            onDismiss()
+                        }
+                    }
+                }) { Text(stringResource(R.string.band_faces_upload)) }
+            },
+            dismissButton = { TextButton(enabled = !busy, onClick = { open = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+}
+
+@Composable
+private fun OwnFacePicture(face: OwnFace, modifier: Modifier) {
+    val context = LocalContext.current
+    val picture by produceState<Bitmap?>(null, face.name) { value = OwnFaces.preview(context, face) }
+    Box(
+        modifier = modifier.aspectRatio(FACE_RATIO).clip(MaterialTheme.shapes.medium).background(Color.Black),
+        contentAlignment = Alignment.Center,
+    ) {
+        picture?.let { Image(it.asImageBitmap(), contentDescription = face.title, contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize()) }
+    }
 }

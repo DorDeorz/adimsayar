@@ -865,4 +865,6 @@
     <string name="face_store_downloading">Téléchargement…</string>
     <string name="face_store_failed">Impossible de télécharger le cadran. Réessaie.</string>
     <string name="face_store_count">%1$d cadrans</string>
+    <string name="own_faces">Cadrans FitWren</string>
+    <string name="own_faces_hint">Cadrans avec l\'oiseau FitWren fournis avec l\'appli. Touche pour voir et envoyer.</string>
 </resources>

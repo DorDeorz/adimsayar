@@ -865,4 +865,6 @@
     <string name="face_store_downloading">다운로드 중…</string>
     <string name="face_store_failed">워치페이스를 다운로드하지 못했습니다. 다시 시도하세요.</string>
     <string name="face_store_count">워치페이스 %1$d개</string>
+    <string name="own_faces">FitWren 워치페이스</string>
+    <string name="own_faces_hint">앱에 포함된 FitWren 새 워치페이스입니다. 눌러서 보고 올리세요.</string>
 </resources>

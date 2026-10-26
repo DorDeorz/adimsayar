@@ -866,4 +866,6 @@
     <string name="face_store_downloading">İndiriliyor…</string>
     <string name="face_store_failed">Kadran indirilemedi. Tekrar dene.</string>
     <string name="face_store_count">%1$d kadran</string>
+    <string name="own_faces">FitWren kadranları</string>
+    <string name="own_faces_hint">FitWren kuşlu, uygulamayla gelen kadranlar. Dokun, bak ve yükle.</string>
 </resources>

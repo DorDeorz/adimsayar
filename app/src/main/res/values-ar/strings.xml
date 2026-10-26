@@ -865,4 +865,6 @@
     <string name="face_store_downloading">جارٍ التنزيل…</string>
     <string name="face_store_failed">تعذر تنزيل الواجهة. حاول مرة أخرى.</string>
     <string name="face_store_count">%1$d واجهة</string>
+    <string name="own_faces">واجهات FitWren</string>
+    <string name="own_faces_hint">واجهات بطائر FitWren مضمنة في التطبيق. المس للمعاينة والرفع.</string>
 </resources>

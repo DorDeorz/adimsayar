@@ -28,6 +28,7 @@ import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandFaces
 import com.dordeorz.adimsayar.data.FaceStore
+import com.dordeorz.adimsayar.data.OwnFaces
 import com.dordeorz.adimsayar.band.WatchfaceUpload
 import androidx.compose.material3.LinearProgressIndicator
 import com.dordeorz.adimsayar.data.BandReplies
@@ -1097,6 +1098,8 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     var deleting by remember { mutableStateOf<BandWatchface?>(null) }
     var store by remember { mutableStateOf(false) }
     val storeModel = remember { FaceStore.model(context) }
+    var showOwn by remember { mutableStateOf(false) }
+    val own = remember { OwnFaces.available(context) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1126,8 +1129,15 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                if (storeModel != null) {
+                if (own.isNotEmpty()) {
                     Button(
+                        enabled = connected && sending == null,
+                        onClick = { showOwn = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.own_faces)) }
+                }
+                if (storeModel != null) {
+                    OutlinedButton(
                         enabled = connected && sending == null,
                         onClick = { store = true },
                         modifier = Modifier.fillMaxWidth(),
@@ -1195,6 +1205,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     }
     if (store && storeModel != null) {
         FaceStoreDialog(storeModel, onDismiss = { store = false })
+    }
+    if (showOwn) {
+        OwnFacesDialog(own, onDismiss = { showOwn = false })
     }
     deleting?.let { face ->
         AlertDialog(

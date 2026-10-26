@@ -341,6 +341,9 @@ class Face:
                 chosen = [f for v, f in files if v <= value][-1]
                 paste(chosen, x, y)
         preview.save(os.path.join(self.dir, "preview.png"))
+        assets = os.path.join(HERE, "..", "app", "src", "main", "assets", "faces")
+        if os.path.isdir(assets):
+            preview.convert("RGB").save(os.path.join(assets, f"{self.name}.png"))
         preview.save(os.path.join(IMAGES, "preview.png"))
         with open(os.path.join(self.dir, f"{self.name}.fprj"), "w", encoding="utf-8") as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n')

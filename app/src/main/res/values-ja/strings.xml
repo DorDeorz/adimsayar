@@ -865,4 +865,6 @@
     <string name="face_store_downloading">ダウンロード中…</string>
     <string name="face_store_failed">文字盤をダウンロードできませんでした。もう一度お試しください。</string>
     <string name="face_store_count">%1$d 個の文字盤</string>
+    <string name="own_faces">FitWren 文字盤</string>
+    <string name="own_faces_hint">アプリ付属の FitWren の小鳥の文字盤。タップして確認・送信。</string>
 </resources>
