@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FaceProject DeviceType="9" Id="">
+  <Screen Title="FitWren Yol" Bitmap="preview.png">
+    <Widget Shape="32" Name="hour" BitmapList="time_0.png|time_1.png|time_2.png|time_3.png|time_4.png|time_5.png|time_6.png|time_7.png|time_8.png|time_9.png" X="21" Y="30" Width="66" Height="36" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="0811" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="colon" Bitmap="colon.png" X="87" Y="30" Width="17" Height="36" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="minute" BitmapList="time_0.png|time_1.png|time_2.png|time_3.png|time_4.png|time_5.png|time_6.png|time_7.png|time_8.png|time_9.png" X="104" Y="30" Width="66" Height="36" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1011" Spacing="0" Blanking="0" />
+    <Widget Shape="31" Name="weekday" BitmapList="(0):weekday_0.png|(1):weekday_1.png|(2):weekday_2.png|(3):weekday_3.png|(4):weekday_4.png|(5):weekday_5.png|(6):weekday_6.png" X="32" Y="76" Width="49" Height="16" Alpha="255" Alignment="0" DefaultIndex="0" Value_Src="2012" Spacing="0" Blanking="0" Visible_Src="0" />
+    <Widget Shape="32" Name="day" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="87" Y="76" Width="32" Height="16" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1812" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="date_dot" Bitmap="dot.png" X="119" Y="76" Width="9" Height="16" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="month" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="128" Y="76" Width="32" Height="16" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1012" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="road" Bitmap="road.png" X="0" Y="0" Width="192" Height="490" Alpha="255" Visible_Src="0" />
+    <Widget Shape="31" Name="walker" BitmapList="(0):walk_0.png|(10):walk_10.png|(20):walk_20.png|(30):walk_30.png|(40):walk_40.png|(50):walk_50.png|(60):walk_60.png|(70):walk_70.png|(80):walk_80.png|(90):walk_90.png|(100):walk_100.png" X="0" Y="98" Width="192" Height="282" Alpha="255" Alignment="0" DefaultIndex="0" Value_Src="1021" Spacing="0" Blanking="0" Visible_Src="0" />
+    <Widget Shape="30" Name="steps_icon" Bitmap="icon_steps.png" X="85" Y="388" Width="22" Height="22" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="steps" BitmapList="mid_0.png|mid_1.png|mid_2.png|mid_3.png|mid_4.png|mid_5.png|mid_6.png|mid_7.png|mid_8.png|mid_9.png" X="31" Y="412" Width="130" Height="28" Alpha="255" Visible_Src="0" Digits="5" Alignment="1" Value_Src="0821" Spacing="0" Blanking="1" />
+    <Widget Shape="30" Name="heart_icon" Bitmap="icon_heart.png" X="30" Y="452" Width="18" Height="18" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="heart" BitmapList="small_0.png|small_1.png|small_2.png|small_3.png|small_4.png|small_5.png|small_6.png|small_7.png|small_8.png|small_9.png" X="51" Y="452" Width="48" Height="16" Alpha="255" Visible_Src="0" Digits="3" Alignment="0" Value_Src="0822" Spacing="0" Blanking="1" />
+    <Widget Shape="30" Name="battery_icon" Bitmap="icon_battery.png" X="104" Y="452" Width="18" Height="18" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="battery" BitmapList="small_0.png|small_1.png|small_2.png|small_3.png|small_4.png|small_5.png|small_6.png|small_7.png|small_8.png|small_9.png" X="125" Y="452" Width="48" Height="16" Alpha="255" Visible_Src="0" Digits="3" Alignment="0" Value_Src="0841" Spacing="0" Blanking="1" />
+  </Screen>
+</FaceProject>

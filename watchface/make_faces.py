@@ -9,7 +9,7 @@ import math
 import os
 from xml.sax.saxutils import quoteattr
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H = 192, 490
 SS = 4  # supersampling for smooth edges
@@ -40,6 +40,8 @@ SRC_STEPS = "0821"
 SRC_STEP_PERCENT = "1021"
 SRC_HEART = "0822"
 SRC_BATTERY = "0841"
+SRC_KCAL = "0823"
+SRC_KCAL_PERCENT = "1023"
 
 
 def canvas(w, h):
@@ -274,13 +276,13 @@ class Face:
         w, h = Image.open(os.path.join(IMAGES, file)).size
         self.widgets.append(Widget({"Shape": 30, "Name": name, "Bitmap": file, "X": x, "Y": y, "Width": w, "Height": h, "Alpha": 255, "Visible_Src": 0}, None))
 
-    def number(self, name, x, y, digit_set, count, source, sample, align=1, blanking=0):
+    def number(self, name, x, y, digit_set, count, source, sample, align=1, blanking=0, spacing=0):
         files, w, h = digit_set
         self.widgets.append(Widget({
             "Shape": 32, "Name": name, "BitmapList": "|".join(files), "X": x, "Y": y,
-            "Width": w * count, "Height": h, "Alpha": 255, "Visible_Src": 0,
-            "Digits": count, "Alignment": align, "Value_Src": source, "Spacing": 0, "Blanking": blanking,
-        }, ("number", files, w, count, align, sample)))
+            "Width": w * count + spacing * (count - 1), "Height": h, "Alpha": 255, "Visible_Src": 0,
+            "Digits": count, "Alignment": align, "Value_Src": source, "Spacing": spacing, "Blanking": blanking,
+        }, ("number", files, w + spacing, count, align, sample)))
 
     def image_list(self, name, x, y, files, source, sample):
         w, h = Image.open(os.path.join(IMAGES, files[0][1])).size
@@ -325,6 +327,14 @@ class Face:
                 offset = {0: 0, 1: (count - len(text)) * w // 2, 2: (count - len(text)) * w}[align]
                 for i, ch in enumerate(text):
                     paste(files[int(ch)], x + offset + i * w, y)
+            elif widget.sample[0] == "analog":
+                cx, cy = x + int(a["Width"]) // 2, y + int(a["Height"]) // 2
+                for file, (px, py), angle in widget.sample[1]:
+                    img = Image.open(os.path.join(IMAGES, file)).convert("RGBA")
+                    big = Image.new("RGBA", (400, 400), (0, 0, 0, 0))
+                    big.alpha_composite(img, (200 - px, 200 - py))
+                    big = big.rotate(-angle, center=(200, 200), resample=Image.BICUBIC)
+                    preview.alpha_composite(big, (cx - 200, cy - 200)) if cx >= 200 and cy >= 200 else preview.paste(big, (cx - 200, cy - 200), big)
             else:
                 _, files, value = widget.sample
                 chosen = [f for v, f in files if v <= value][-1]
@@ -399,39 +409,6 @@ def night():
     f.write()
 
 
-def steps_face():
-    """Steps first: a tall goal bar with the bird climbing it, big step count, small time on top."""
-    f = Face("fitwren_adim", "FitWren Adım")
-    green = (0x7C, 0xD9, 0x6B)
-    hour = digits("time", 34, WHITE)
-    colon = glyph("colon.png", ":", 34, WHITE)
-    tw = hour[1] * 4 + colon[1]
-    tx = (W - tw) // 2
-    f.number("hour", tx, 34, hour, 2, SRC_HOUR, "07")
-    f.image("colon", tx + 2 * hour[1], 34, colon[0])
-    f.number("minute", tx + 2 * hour[1] + colon[1], 34, hour, 2, SRC_MINUTE, "35")
-    f.date_row(80, 16, green, GREY)
-    bar_w, bar_h = 26, 230
-    bars = [(p, f.file(bar(bar_w, bar_h, p, color=green), f"bar_{p}.png")) for p in range(0, 101, 10)]
-    bx, by = 34, 120
-    f.image_list("goal", bx, by, bars, SRC_STEP_PERCENT, 60)
-    # the bird sits beside the bar's level: one picture per tenth
-    f.file(bird(72), "bird.png")
-    birds = []
-    for p in range(0, 101, 10):
-        img = Image.new("RGBA", (84, bar_h + 36), (0, 0, 0, 0))
-        b = Image.open(os.path.join(IMAGES, "bird.png"))
-        img.alpha_composite(b, (6, int(bar_h - bar_h * p / 100) - 24 + 4))
-        birds.append((p, f.file(img, f"bird_{p}.png")))
-    f.image_list("bird", bx + bar_w + 6, by - 30, birds, SRC_STEP_PERCENT, 60)
-    big = digits("big", 40, WHITE)
-    f.file(icon_steps(24), "icon_steps.png")
-    f.image("steps_icon", (W - 24) // 2, 362, "icon_steps.png")
-    f.number("steps", (W - big[1] * 5) // 2, 390, big, 5, SRC_STEPS, "5120", blanking=1)
-    health_row(f, 446, digits("small", 18, GREY))
-    f.write()
-
-
 def simple():
     """Only what matters: a very big time, the date, a thin goal line and a small bird at the bottom."""
     f = Face("fitwren_sade", "FitWren Sade")
@@ -450,8 +427,242 @@ def simple():
     f.write()
 
 
+
+
+def glow_digits(prefix, height, color, blur=4):
+    """Digits with a soft neon glow; the image is padded so the glow is not cut."""
+    pad = blur * 2
+    font = ImageFont.truetype(FONT, int(height * 1.32) * SS)
+    width = max(font.getbbox(str(d))[2] - font.getbbox(str(d))[0] for d in range(10)) // SS + 2
+    names = []
+    for d in range(10):
+        img = canvas(width + 2 * pad, height + 2 * pad)
+        draw = ImageDraw.Draw(img)
+        box = font.getbbox(str(d))
+        x = (width * SS - (box[2] - box[0])) / 2 - box[0] + pad * SS
+        y = (height * SS - (box[3] - box[1])) / 2 - box[1] + pad * SS
+        draw.text((x, y), str(d), font=font, fill=color)
+        sharp = finish(img, width + 2 * pad, height + 2 * pad)
+        halo = sharp.filter(ImageFilter.GaussianBlur(blur))
+        out = Image.new("RGBA", sharp.size, (0, 0, 0, 0))
+        out.alpha_composite(halo)
+        out.alpha_composite(halo)
+        core = sharp.copy()
+        whiter = Image.new("RGBA", sharp.size, (255, 255, 255, 0))
+        whiter.putalpha(sharp.getchannel("A").point(lambda a: a * 0.45))
+        out.alpha_composite(core)
+        out.alpha_composite(whiter)
+        names.append(save(out, f"{prefix}_{d}.png"))
+    return names, width + 2 * pad, height + 2 * pad
+
+
+def path_points(top, bottom, amplitude=46, turns=2.2):
+    """A winding road from the bottom (0 %) to the top (100 %)."""
+    pts = []
+    for i in range(201):
+        t = i / 200
+        y = bottom - (bottom - top) * t
+        x = W / 2 + amplitude * math.sin(t * turns * 2 * math.pi)
+        pts.append((x, y))
+    return pts
+
+
+def road():
+    """The day as a road: the bird walks up a winding path as steps add up, a flag waits at the top."""
+    f = Face("fitwren_yol", "FitWren Yol")
+    sand = (0xE8, 0xC9, 0x8F)
+    grass = (0x7C, 0xC5, 0x76)
+    hour = digits("time", 36, WHITE)
+    colon = glyph("colon.png", ":", 36, BODY)
+    tw = hour[1] * 4 + colon[1]
+    tx = (W - tw) // 2
+    f.number("hour", tx, 30, hour, 2, SRC_HOUR, "16")
+    f.image("colon", tx + 2 * hour[1], 30, colon[0])
+    f.number("minute", tx + 2 * hour[1] + colon[1], 30, hour, 2, SRC_MINUTE, "20")
+    f.date_row(76, 16, grass, GREY)
+    top, bottom = 132, 372
+    pts = path_points(top, bottom)
+    bg = Image.new("RGBA", (W * SS, H * SS), (0, 0, 0, 0))
+    d = ImageDraw.Draw(bg)
+    d.line([(x * SS, y * SS) for x, y in pts], fill=(0x3A, 0x33, 0x28), width=16 * SS, joint="curve")
+    d.line([(x * SS, y * SS) for x, y in pts], fill=(0x55, 0x4A, 0x38), width=10 * SS, joint="curve")
+    for k in range(0, 201, 8):
+        x, y = pts[k]
+        d.ellipse([(x - 1.6) * SS, (y - 1.6) * SS, (x + 1.6) * SS, (y + 1.6) * SS], fill=sand)
+    fx, fy = pts[-1]
+    d.line([(fx * SS, fy * SS), (fx * SS, (fy - 26) * SS)], fill=WHITE, width=2 * SS)
+    d.polygon([(fx * SS, (fy - 26) * SS), ((fx + 16) * SS, (fy - 21) * SS), (fx * SS, (fy - 15) * SS)], fill=(0xE5, 0x39, 0x35))
+    f.file(finish(bg, W, H), "road.png")
+    f.image("road", 0, 0, "road.png")
+    f.file(bird(46), "bird.png")
+    b = Image.open(os.path.join(IMAGES, "bird.png"))
+    walkers = []
+    span = (top - 34, bottom + 8)
+    for p in range(0, 101, 10):
+        img = Image.new("RGBA", (W, span[1] - span[0]), (0, 0, 0, 0))
+        x, y = pts[min(200, p * 2)]
+        img.alpha_composite(b, (int(x - 23), int(y - 40 - span[0])))
+        walkers.append((p, f.file(img, f"walk_{p}.png")))
+    f.image_list("walker", 0, span[0], walkers, SRC_STEP_PERCENT, 60)
+    mid = digits("mid", 28, WHITE)
+    f.file(icon_steps(22), "icon_steps.png")
+    f.image("steps_icon", (W - 22) // 2, 388, "icon_steps.png")
+    f.number("steps", (W - mid[1] * 5) // 2, 412, mid, 5, SRC_STEPS, "6480", blanking=1)
+    health_row(f, 452, digits("small", 16, GREY))
+    f.write()
+
+
+def hand(length, width, color, tail=12, tip=None):
+    """A rounded hand pointing up; returns the image and its pivot."""
+    w, h = width + 4, length + tail
+    img = canvas(w, h)
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([2 * SS, 0, (width + 2) * SS, h * SS], radius=width * SS / 2, fill=color)
+    if tip:
+        d.rounded_rectangle([2 * SS, 0, (width + 2) * SS, length * 0.35 * SS], radius=width * SS / 2, fill=tip)
+    return finish(img, w, h), (w // 2, length)
+
+
+def analog():
+    """An analog dial with the bird in the middle; the hour ticks double as the step goal."""
+    f = Face("fitwren_analog", "FitWren Analog")
+    size, cy = 184, 150
+    dial = canvas(size, size)
+    d = ImageDraw.Draw(dial)
+    c = size * SS / 2
+    d.ellipse([2 * SS, 2 * SS, (size - 2) * SS, (size - 2) * SS], fill=(0x16, 0x16, 0x16))
+    for i in range(60):
+        a = math.radians(i * 6 - 90)
+        r1 = c - 8 * SS
+        r2 = r1 - (12 if i % 5 == 0 else 5) * SS
+        d.line([(c + r1 * math.cos(a), c + r1 * math.sin(a)), (c + r2 * math.cos(a), c + r2 * math.sin(a))],
+               fill=BODY if i % 15 == 0 else (WHITE if i % 5 == 0 else (0x60, 0x60, 0x60)), width=(3 if i % 5 == 0 else 1) * SS)
+    f.file(finish(dial, size, size), "dial.png")
+    dx = (W - size) // 2
+    f.image("dial", dx, cy - size // 2, "dial.png")
+    f.file(bird(70), "bird.png")
+    f.image("bird", (W - 70) // 2, cy - 30, "bird.png")
+    hour_img, hour_pivot = hand(46, 7, WHITE)
+    min_img, min_pivot = hand(70, 5, WHITE, tip=BODY)
+    sec_img, sec_pivot = hand(78, 2, (0xE5, 0x39, 0x35), tail=18)
+    f.file(hour_img, "hand_hour.png")
+    f.file(min_img, "hand_minute.png")
+    f.file(sec_img, "hand_second.png")
+    f.widgets.append(Widget({
+        "Shape": 27, "Name": "clock", "X": dx, "Y": cy - size // 2, "Width": size, "Height": size, "Alpha": 255,
+        "Visible_Src": 0, "HourHandCorrection_En": 1, "MinuteHandCorrection_En": 0,
+        "Background_ImageName": "", "BgImage_rotate_xc": 0, "BgImage_rotate_yc": 0,
+        "HourHand_ImageName": "hand_hour.png", "HourImage_rotate_xc": hour_pivot[0], "HourImage_rotate_yc": hour_pivot[1],
+        "MinuteHand_Image": "hand_minute.png", "MinuteImage_rotate_xc": min_pivot[0], "MinuteImage_rotate_yc": min_pivot[1],
+        "SecondHand_Image": "hand_second.png", "SecondImage_rotate_xc": sec_pivot[0], "SecondImage_rotate_yc": sec_pivot[1],
+    }, ("analog", [("hand_hour.png", hour_pivot, 10 * 30 + 9), ("hand_minute.png", min_pivot, 18 * 6), ("hand_second.png", sec_pivot, 36 * 6)])))
+    f.date_row(256, 20, BODY, WHITE)
+    size2 = 92
+    f.image_list("goal", (W - size2) // 2, 296, rings(f, size2, 7), SRC_STEP_PERCENT, 70)
+    f.file(icon_steps(26), "icon_steps.png")
+    f.image("steps_icon", (W - 26) // 2, 296 + (size2 - 26) // 2, "icon_steps.png")
+    mid = digits("mid", 26, WHITE)
+    f.number("steps", (W - mid[1] * 5) // 2, 400, mid, 5, SRC_STEPS, "7012", blanking=1)
+    health_row(f, 444, digits("small", 18, GREY))
+    f.write()
+
+
+def neon():
+    """Neon on black: glowing cyan and pink time, a pink step arc and a small bird."""
+    f = Face("fitwren_neon", "FitWren Neon")
+    cyan, pink = (0x29, 0xE6, 0xFF), (0xFF, 0x4F, 0xC3)
+    hour = glow_digits("hour", 62, cyan)
+    minute = glow_digits("minute", 62, pink)
+    tight = -14
+    hx = (W - 2 * hour[1] - tight) // 2
+    f.number("hour", hx, 22, hour, 2, SRC_HOUR, "21", spacing=tight)
+    f.number("minute", hx, 96, minute, 2, SRC_MINUTE, "15", spacing=tight)
+    f.date_row(184, 18, pink, cyan)
+    size = 150
+    f.image_list("goal", (W - size) // 2, 218, rings(f, size, 6, color=pink, done=cyan, track=(0x24, 0x10, 0x2A)), SRC_STEP_PERCENT, 55)
+    f.file(bird(90), "bird.png")
+    f.image("bird", (W - 90) // 2, 218 + (size - 90) // 2 - 4, "bird.png")
+    mid = glow_digits("mid", 24, cyan, blur=3)
+    f.number("steps", (W - mid[1] * 5 + 40) // 2, 374, mid, 5, SRC_STEPS, "5502", blanking=1, spacing=-10)
+    health_row(f, 438, digits("small", 18, (0xB0, 0x9C, 0xC8)))
+    f.write()
+
+
+def branch():
+    """Pastel morning: soft gradient, the bird sitting on a branch with leaves, time at the top left."""
+    f = Face("fitwren_dal", "FitWren Dal")
+    ink = (0x3B, 0x2A, 0x20)
+    f.file(background((0xFF, 0xF1, 0xD6), (0xFF, 0xD3, 0xC2)), "background.png")
+    f.image("background", 0, 0, "background.png")
+    hour = digits("hour", 70, ink)
+    minute = digits("minute", 70, (0xE0, 0x7A, 0x2F))
+    hx = (W - 2 * hour[1]) // 2
+    f.number("hour", hx, 30, hour, 2, SRC_HOUR, "09")
+    f.number("minute", hx, 108, minute, 2, SRC_MINUTE, "41")
+    f.date_row(190, 18, (0xE0, 0x7A, 0x2F), ink)
+    art = Image.new("RGBA", (W * SS, 150 * SS), (0, 0, 0, 0))
+    d = ImageDraw.Draw(art)
+    brown, leaf = (0x8D, 0x6E, 0x63), (0x81, 0xC7, 0x84)
+    d.line([(0, 120 * SS), (80 * SS, 112 * SS), (150 * SS, 100 * SS), (W * SS, 92 * SS)], fill=brown, width=8 * SS, joint="curve")
+    d.line([(118 * SS, 104 * SS), (150 * SS, 126 * SS)], fill=brown, width=5 * SS)
+    for (x, y, a) in ((40, 104, -30), (150, 128, 30), (172, 84, -20), (20, 128, 20)):
+        lf = Image.new("RGBA", (30 * SS, 16 * SS), (0, 0, 0, 0))
+        ImageDraw.Draw(lf).ellipse([0, 0, 30 * SS, 16 * SS], fill=leaf)
+        lf = lf.rotate(a, expand=True)
+        art.alpha_composite(lf, (int((x - 15) * SS), int((y - 8) * SS)))
+    art = finish(art, W, 150)
+    b = bird(96)
+    art.alpha_composite(b, ((W - 96) // 2, 112 - 92))
+    f.file(art, "branch.png")
+    f.image("branch", 0, 220, "branch.png")
+    lines = [(p, f.file(hbar(140, 8, p, color=(0xE0, 0x7A, 0x2F), done=(0x43, 0xA0, 0x47), track=(0xF3, 0xC9, 0xB0)), f"line_{p}.png")) for p in range(0, 101, 10)]
+    f.image_list("goal", (W - 140) // 2, 388, lines, SRC_STEP_PERCENT, 65)
+    mid = digits("mid", 24, ink)
+    f.number("steps", (W - mid[1] * 5) // 2, 404, mid, 5, SRC_STEPS, "5890", blanking=1)
+    health_row(f, 446, digits("small", 16, (0x6D, 0x5A, 0x50)))
+    f.write()
+
+
+def rings_face():
+    """Two rings like an activity tracker: steps outside, active calories inside, the bird in the middle."""
+    f = Face("fitwren_halka", "FitWren Halka")
+    green, red = (0x9C, 0xE6, 0x5A), (0xFF, 0x52, 0x6E)
+    hour = digits("time", 40, WHITE)
+    colon = glyph("colon.png", ":", 40, GREY)
+    tw = hour[1] * 4 + colon[1]
+    tx = (W - tw) // 2
+    f.number("hour", tx, 34, hour, 2, SRC_HOUR, "18")
+    f.image("colon", tx + 2 * hour[1], 34, colon[0])
+    f.number("minute", tx + 2 * hour[1] + colon[1], 34, hour, 2, SRC_MINUTE, "05")
+    f.date_row(86, 16, GREY, WHITE)
+    outer, inner = 170, 132
+    y0 = 122
+    f.image_list("steps_ring", (W - outer) // 2, y0,
+                 [(p, f.file(ring(outer, 12, p, color=green, done=green, track=(0x1E, 0x33, 0x12)), f"outer_{p}.png")) for p in range(0, 101, 10)],
+                 SRC_STEP_PERCENT, 75)
+    f.image_list("kcal_ring", (W - inner) // 2, y0 + (outer - inner) // 2,
+                 [(p, f.file(ring(inner, 12, p, color=red, done=red, track=(0x3A, 0x12, 0x1A)), f"inner_{p}.png")) for p in range(0, 101, 10)],
+                 SRC_KCAL_PERCENT, 45)
+    f.file(bird(78), "bird.png")
+    f.image("bird", (W - 78) // 2, y0 + (outer - 78) // 2 - 4, "bird.png")
+    g = digits("green", 24, green)
+    r = digits("red", 24, red)
+    f.file(icon_steps(20), "icon_steps.png")
+    f.image("steps_icon", 26, 314, "icon_steps.png")
+    f.number("steps", 52, 312, g, 5, SRC_STEPS, "7530", align=0, blanking=1)
+    kcal = glyph("kcal.png", "kcal", 14, red)
+    f.number("kcal", 52, 346, r, 4, SRC_KCAL, "245", align=0, blanking=1)
+    f.image("kcal_label", 52 + r[1] * 4 + 2, 354, kcal[0])
+    health_row(f, 400, digits("small", 18, GREY))
+    f.write()
+
+
 if __name__ == "__main__":
     classic()
     night()
-    steps_face()
+    road()
+    analog()
+    neon()
+    branch()
+    rings_face()
     simple()
