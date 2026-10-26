@@ -316,6 +316,10 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Cadrans : aperçu avant l’envoi ; les cadrans envoyés depuis FitWren affichent leur image et celui utilisé est mis en avant ; la suppression demande confirmation</item>
+        <item>La liste des apps pour les notifications affiche les icônes, une recherche et le nombre d’apps activées</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Notifications du bracelet : choix des applis et heures calmes ; les rappels FitWren vibrent aussi sur le bracelet</item>
         <item>Batterie du bracelet : sur la carte de l\'appareil, dans le nouveau widget \"Batterie du bracelet\" et alerte sur le téléphone quand elle est faible</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Cadran envoyé et sélectionné.</string>
     <string name="band_faces_failed">Le cadran n’a pas pu être envoyé. Rapproche le bracelet et réessaie.</string>
     <string name="band_faces_delete">Supprimer</string>
+    <string name="band_notify_pick_search">Rechercher une app</string>
+    <string name="band_notify_pick_count">%1$d apps sur %2$d envoient au bracelet</string>
+    <string name="band_faces_tap_hint">Touche un cadran pour l’utiliser tout de suite sur le bracelet. Le bracelet n’envoie pas d’images : elles ne s’affichent que pour les cadrans envoyés depuis FitWren, et les noms sont ceux du bracelet.</string>
+    <string name="band_faces_no_preview">Ce fichier n’a pas d’aperçu.</string>
+    <string name="band_faces_upload">Envoyer</string>
+    <string name="band_faces_delete_title">Supprimer ce cadran ?</string>
+    <string name="band_faces_active">Utilisé</string>
+    <string name="band_faces_own">Envoyé par toi</string>
+    <string name="band_faces_builtin">Intégré</string>
 </resources>

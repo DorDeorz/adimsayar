@@ -117,4 +117,34 @@ class XiaomiWatchfaceTest {
         s.onCommand(ProtoWriter().uint(1, 22).uint(2, 0).message(24, ProtoWriter().message(2, ProtoWriter().uint(2, 0))).toByteArray())
         assertEquals(false, (progress.last() as WatchfaceUpload.Done).success)
     }
+
+    @Test
+    fun previewIsDecoded() {
+        val bytes = face("7", "p", 4000)
+        val at = 3000
+        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).putInt(0x20, at)
+        val img = ByteBuffer.wrap(bytes, at, 12 + 8).order(ByteOrder.LITTLE_ENDIAN)
+        img.put(4).put(0).putShort(0).putShort(2).putShort(2).putInt(8)
+        img.putShort(0xf800.toShort()).putShort(0x07e0.toShort()).putShort(0x001f.toShort()).putShort(0)
+        val preview = XiaomiWatchface.preview(bytes)!!
+        assertEquals(2, preview.width)
+        assertEquals(0xfff80000.toInt(), preview.pixels[0])
+        assertEquals(0xff00fc00.toInt(), preview.pixels[1])
+        assertEquals(0xff0000f8.toInt(), preview.pixels[2])
+        assertEquals(0xff000000.toInt(), preview.pixels[3])
+    }
+
+    @Test
+    fun rleV2PreviewIsDecoded() {
+        val bytes = face("8", "q", 4000)
+        val at = 3000
+        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).putInt(0x20, at)
+        // 2x1 RGB565 picture, both pixels 0x001f, as one repeated 2-byte chunk.
+        val rle = byteArrayOf(0xe0.toByte(), 0x21, 0xa5.toByte(), 0x5a, 0x22, 0, 0, 0, 2, 0x1f, 0)
+        ByteBuffer.wrap(rle).order(ByteOrder.LITTLE_ENDIAN).putInt(4, (4 shl 4) or 2)
+        val img = ByteBuffer.wrap(bytes, at, 12 + rle.size).order(ByteOrder.LITTLE_ENDIAN)
+        img.put(4).put(4).putShort(0).putShort(2).putShort(1).putInt(rle.size).put(rle)
+        val preview = XiaomiWatchface.preview(bytes)!!
+        assertEquals(listOf(0xff0000f8.toInt(), 0xff0000f8.toInt()), preview.pixels.toList())
+    }
 }

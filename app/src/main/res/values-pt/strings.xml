@@ -316,6 +316,10 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Mostradores: prévia antes de enviar; os enviados pelo FitWren mostram a imagem e o que está em uso fica destacado; apagar pede confirmação</item>
+        <item>A lista de apps para notificações mostra ícones, busca e quantos apps estão ativados</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Notificações da pulseira: escolha apps e horário silencioso; lembretes do FitWren também vibram na pulseira</item>
         <item>Bateria da pulseira: no cartão do dispositivo, no novo widget \"Bateria da pulseira\" e alerta no celular quando estiver fraca</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Mostrador enviado e selecionado.</string>
     <string name="band_faces_failed">Não foi possível enviar o mostrador. Aproxime a pulseira e tente de novo.</string>
     <string name="band_faces_delete">Apagar</string>
+    <string name="band_notify_pick_search">Buscar apps</string>
+    <string name="band_notify_pick_count">%1$d de %2$d apps enviam à pulseira</string>
+    <string name="band_faces_tap_hint">Toque num mostrador para usá-lo na pulseira na hora. A pulseira não envia imagens: elas aparecem só nos mostradores enviados pelo FitWren, e os nomes são os da pulseira.</string>
+    <string name="band_faces_no_preview">Este arquivo não tem imagem de prévia.</string>
+    <string name="band_faces_upload">Enviar</string>
+    <string name="band_faces_delete_title">Apagar este mostrador?</string>
+    <string name="band_faces_active">Em uso</string>
+    <string name="band_faces_own">Enviado por você</string>
+    <string name="band_faces_builtin">Integrado</string>
 </resources>

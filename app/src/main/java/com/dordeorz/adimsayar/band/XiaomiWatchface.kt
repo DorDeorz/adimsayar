@@ -8,6 +8,9 @@ import java.util.zip.CRC32
 /** A watch face on the band. Built-in faces have [canDelete] false. */
 data class BandWatchface(val id: String, val name: String, val active: Boolean, val canDelete: Boolean)
 
+/** A decoded preview picture: ARGB pixels, row by row. */
+class FacePreview(val width: Int, val height: Int, val pixels: IntArray)
+
 /** A watch face file (.bin) read from the phone. */
 class WatchfaceFile(val id: String, val name: String, val bytes: ByteArray)
 
@@ -33,6 +36,9 @@ object XiaomiWatchface {
     private const val MAX_FILE = 16 * 1024 * 1024
     private const val ID_OFFSET = 0x28
     private const val NAME_OFFSET = 0x68
+    private const val PREVIEW_OFFSET = 0x20
+    private const val MAX_PREVIEW = 1024
+    private val RLE_MAGIC = byteArrayOf(0xe0.toByte(), 0x21, 0xa5.toByte(), 0x5a)
 
     /** Reads the face id and name from a .bin file; null when it is not a Xiaomi watch face. */
     fun parse(bytes: ByteArray): WatchfaceFile? {
@@ -87,6 +93,85 @@ object XiaomiWatchface {
                 .put(payload, start, end - start)
                 .array()
         }
+    }
+
+    /** The preview picture stored in a face file, or null when it has none or it cannot be read. */
+    fun preview(bytes: ByteArray): FacePreview? = runCatching { decodePreview(bytes) }.getOrNull()
+
+    private fun decodePreview(fw: ByteArray): FacePreview? {
+        val bb = ByteBuffer.wrap(fw).order(ByteOrder.LITTLE_ENDIAN)
+        val offset = bb.getInt(PREVIEW_OFFSET)
+        if (offset <= 0 || offset + 12 > fw.size) return null
+        bb.position(offset)
+        val format = bb.get().toInt() and 0xff
+        val compression = bb.get().toInt() and 0xff
+        bb.short
+        val width = bb.short.toInt() and 0xffff
+        val height = bb.short.toInt() and 0xffff
+        val size = bb.int
+        if (width == 0 || height == 0 || width > MAX_PREVIEW || height > MAX_PREVIEW || size <= 0 || size > bb.remaining()) return null
+        val raw = ByteArray(size).also { bb.get(it) }
+        val data = when (compression) {
+            0 -> raw
+            4 -> rle(raw, v2 = true)
+            8 -> rle(raw, v2 = false)
+            else -> null
+        } ?: return null
+        return decode(data, format, width, height)
+    }
+
+    // LVGL run-length coding as Xiaomi faces use it; v1 and v2 swap the meaning of the top bit.
+    private fun rle(data: ByteArray, v2: Boolean): ByteArray? {
+        if (data.size < 8 || !RLE_MAGIC.indices.all { data[it] == RLE_MAGIC[it] }) return null
+        val chunk = (data[4].toInt() and 0xf).coerceAtLeast(1)
+        val bb = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
+        bb.int
+        val out = ByteArray((bb.int shr 4) and 0xfffffff)
+        var at = 0
+        while (bb.hasRemaining()) {
+            val control = bb.get().toInt()
+            val n = control and 0x7f
+            val literal = (control and 0x80 != 0) == v2
+            val count = if (v2) n else n + 1
+            if (at + chunk * count > out.size) return null
+            if (literal) {
+                if (bb.remaining() < chunk * count) return null
+                bb.get(out, at, chunk * count)
+                at += chunk * count
+            } else {
+                if (bb.remaining() < chunk) return null
+                val one = ByteArray(chunk).also { bb.get(it) }
+                repeat(count) {
+                    one.copyInto(out, at)
+                    at += chunk
+                }
+            }
+        }
+        return out
+    }
+
+    private fun decode(data: ByteArray, format: Int, width: Int, height: Int): FacePreview? {
+        val count = width * height
+        val need = when (format) {
+            0 -> count * 4
+            1, 4, 7 -> count * 2
+            16 -> 256 * 4 + count
+            else -> return null
+        }
+        if (data.size < need) return null
+        val bb = ByteBuffer.wrap(data).order(if (format == 7) ByteOrder.BIG_ENDIAN else ByteOrder.LITTLE_ENDIAN)
+        val palette = if (format == 16) IntArray(256) { bb.int } else IntArray(0)
+        val pixels = IntArray(count) {
+            when (format) {
+                0 -> bb.int
+                16 -> palette[bb.get().toInt() and 0xff]
+                else -> {
+                    val c = bb.short.toInt() and 0xffff
+                    (0xff000000.toInt()) or ((c and 0xf800) shl 8) or ((c and 0x07e0) shl 5) or ((c and 0x001f) shl 3)
+                }
+            }
+        }
+        return FacePreview(width, height, pixels)
     }
 
     private fun md5(bytes: ByteArray): ByteArray = MessageDigest.getInstance("MD5").digest(bytes)

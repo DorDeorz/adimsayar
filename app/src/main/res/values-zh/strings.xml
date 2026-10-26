@@ -316,6 +316,10 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>表盘：上传前显示预览图；从 FitWren 上传的表盘在列表中显示图片，正在使用的表盘高亮；删除前会确认</item>
+        <item>通知应用列表显示图标、搜索框和已开启的应用数</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>手环通知：选择应用和免打扰时段；FitWren 提醒也会在手环上振动</item>
         <item>手环电量：显示在设备卡片和新的“手环电量”小组件中，电量低时手机提醒</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">表盘已上传并选用。</string>
     <string name="band_faces_failed">表盘上传失败。请让手环靠近后重试。</string>
     <string name="band_faces_delete">删除</string>
+    <string name="band_notify_pick_search">搜索应用</string>
+    <string name="band_notify_pick_count">%2$d 个应用中有 %1$d 个发送到手环</string>
+    <string name="band_faces_tap_hint">点按表盘即可在手环上立即切换。手环不发送图片，只有从 FitWren 上传的表盘才显示图片，名称按手环上的显示。</string>
+    <string name="band_faces_no_preview">此文件没有预览图。</string>
+    <string name="band_faces_upload">上传</string>
+    <string name="band_faces_delete_title">删除此表盘？</string>
+    <string name="band_faces_active">使用中</string>
+    <string name="band_faces_own">你上传的</string>
+    <string name="band_faces_builtin">内置</string>
 </resources>

@@ -316,6 +316,10 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Zifferblätter: Vorschaubild vor dem Hochladen; aus FitWren geladene Zifferblätter zeigen ihr Bild, das aktive ist hervorgehoben; Löschen fragt nach</item>
+        <item>Die App-Liste für Armband-Benachrichtigungen zeigt Symbole, eine Suche und wie viele Apps aktiv sind</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Band-Benachrichtigungen: Apps wählen und Ruhezeiten; FitWren-Erinnerungen vibrieren auch am Band</item>
         <item>Band-Akku: auf der Gerätekarte, im neuen Widget \"Band-Akku\" und Warnung am Handy bei schwachem Akku</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Zifferblatt hochgeladen und ausgewählt.</string>
     <string name="band_faces_failed">Das Zifferblatt konnte nicht hochgeladen werden. Bring das Armband näher und versuche es erneut.</string>
     <string name="band_faces_delete">Löschen</string>
+    <string name="band_notify_pick_search">Apps suchen</string>
+    <string name="band_notify_pick_count">%1$d von %2$d Apps senden an das Armband</string>
+    <string name="band_faces_tap_hint">Tippe auf ein Zifferblatt, um es sofort auf dem Armband zu nutzen. Das Armband sendet keine Bilder; Bilder gibt es nur für aus FitWren geladene Zifferblätter, Namen erscheinen wie auf dem Armband.</string>
+    <string name="band_faces_no_preview">Diese Datei hat kein Vorschaubild.</string>
+    <string name="band_faces_upload">Hochladen</string>
+    <string name="band_faces_delete_title">Zifferblatt löschen?</string>
+    <string name="band_faces_active">Wird verwendet</string>
+    <string name="band_faces_own">Von dir geladen</string>
+    <string name="band_faces_builtin">Vorinstalliert</string>
 </resources>

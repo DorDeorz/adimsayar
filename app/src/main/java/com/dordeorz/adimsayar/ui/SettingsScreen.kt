@@ -12,6 +12,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.key
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Color
+import android.graphics.Bitmap
+import com.dordeorz.adimsayar.band.BandWatchface
+import com.dordeorz.adimsayar.band.WatchfaceFile
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.core.graphics.drawable.toBitmap
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
@@ -34,7 +41,6 @@ import androidx.compose.runtime.mutableStateListOf
 import android.app.TimePickerDialog
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Checkbox
 import java.time.LocalTime
 import kotlinx.coroutines.delay
 import androidx.annotation.ArrayRes
@@ -149,6 +155,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
     ReleaseNote("0.10.0", R.array.release_notes_0_10_0),
@@ -1083,6 +1090,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
             delay(NOTIFY_POLL_MS)
         }
     }
+    var pending by remember { mutableStateOf<WatchfaceFile?>(null) }
+    var pendingPreview by remember { mutableStateOf<Bitmap?>(null) }
+    var deleting by remember { mutableStateOf<BandWatchface?>(null) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1091,7 +1101,8 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
             if (file == null) {
                 Toast.makeText(context, invalid, Toast.LENGTH_LONG).show()
             } else {
-                BandFaces.install(file)
+                pendingPreview = BandFaces.preview(file)
+                pending = file
             }
         }
     }
@@ -1100,16 +1111,21 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.band_faces)) },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 val list = faces
                 when {
                     !connected -> Text(stringResource(R.string.band_alarms_offline), style = MaterialTheme.typography.bodyMedium)
                     list == null -> Text(stringResource(R.string.band_notify_pick_loading), style = MaterialTheme.typography.bodyMedium)
+                    else -> Text(
+                        stringResource(R.string.band_faces_tap_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                 }
                 when (val state = upload) {
                     is WatchfaceUpload.Sending -> {
                         Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
-                        LinearProgressIndicator(progress = { state.percent / 100f }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp))
+                        LinearProgressIndicator(progress = { state.percent / 100f }, modifier = Modifier.fillMaxWidth())
                     }
                     is WatchfaceUpload.Done -> Text(
                         stringResource(if (state.success) R.string.band_faces_done else R.string.band_faces_failed),
@@ -1118,31 +1134,11 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                     )
                     null -> Unit
                 }
-                LazyColumn(Modifier.heightIn(max = 340.dp)) {
+                LazyColumn(Modifier.heightIn(max = 380.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     items(list.orEmpty(), key = { it.id }) { face ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .selectable(selected = face.active, enabled = sending == null, role = Role.RadioButton) { BandFaces.select(face) }
-                                .padding(vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            RadioButton(selected = face.active, onClick = null)
-                            Text(face.name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-                            if (face.canDelete && !face.active) {
-                                TextButton(enabled = sending == null, onClick = { BandFaces.delete(face) }) {
-                                    Text(stringResource(R.string.band_faces_delete))
-                                }
-                            }
-                        }
+                        FaceRow(face, enabled = sending == null, onSelect = { BandFaces.select(face) }, onDelete = { deleting = face })
                     }
                 }
-                Text(
-                    stringResource(R.string.band_faces_install_hint),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
@@ -1153,6 +1149,102 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
             ) { Text(stringResource(R.string.band_faces_install)) }
         },
     )
+    pending?.let { file ->
+        AlertDialog(
+            onDismissRequest = { pending = null },
+            title = { Text(file.name) },
+            text = {
+                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    val preview = pendingPreview
+                    if (preview != null) {
+                        Image(
+                            preview.asImageBitmap(),
+                            contentDescription = null,
+                            modifier = Modifier.heightIn(max = 260.dp).clip(MaterialTheme.shapes.medium),
+                        )
+                    } else {
+                        Text(stringResource(R.string.band_faces_no_preview), style = MaterialTheme.typography.bodyMedium)
+                    }
+                    Text(
+                        stringResource(R.string.band_faces_install_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    val preview = pendingPreview
+                    pending = null
+                    scope.launch { BandFaces.install(context, file, preview) }
+                }) { Text(stringResource(R.string.band_faces_upload)) }
+            },
+            dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+    deleting?.let { face ->
+        AlertDialog(
+            onDismissRequest = { deleting = null },
+            title = { Text(stringResource(R.string.band_faces_delete_title)) },
+            text = { Text(face.name) },
+            confirmButton = {
+                TextButton(onClick = {
+                    BandFaces.delete(face)
+                    deleting = null
+                }) { Text(stringResource(R.string.band_faces_delete)) }
+            },
+            dismissButton = { TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+}
+
+@Composable
+private fun FaceRow(face: BandWatchface, enabled: Boolean, onSelect: () -> Unit, onDelete: () -> Unit) {
+    val context = LocalContext.current
+    val preview by produceState<Bitmap?>(null, face.id) { value = BandFaces.savedPreview(context, face.id) }
+    val shape = MaterialTheme.shapes.medium
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .background(if (face.active) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant)
+            .selectable(selected = face.active, enabled = enabled, role = Role.RadioButton, onClick = onSelect)
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 40.dp, height = 72.dp)
+                .clip(MaterialTheme.shapes.small)
+                .background(Color.Black),
+            contentAlignment = Alignment.Center,
+        ) {
+            val image = preview
+            if (image != null) {
+                Image(image.asImageBitmap(), contentDescription = null, modifier = Modifier.fillMaxSize())
+            } else {
+                Icon(painterResource(R.drawable.ic_watch), contentDescription = null, tint = Color.White.copy(alpha = 0.7f), modifier = Modifier.size(22.dp))
+            }
+        }
+        Column(Modifier.weight(1f)) {
+            Text(face.name, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(
+                stringResource(
+                    when {
+                        face.active -> R.string.band_faces_active
+                        face.canDelete -> R.string.band_faces_own
+                        else -> R.string.band_faces_builtin
+                    },
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        if (face.canDelete && !face.active) {
+            TextButton(enabled = enabled, onClick = onDelete) { Text(stringResource(R.string.band_faces_delete)) }
+        }
+    }
 }
 
 @Composable
@@ -1264,6 +1356,22 @@ private const val MAX_REPLY_LENGTH = 60
 
 private class PhoneApp(val packageName: String, val label: String)
 
+private const val APP_ICON_PX = 96
+
+/** The app's launcher icon, loaded off the main thread; blank while it loads. */
+@Composable
+private fun AppIcon(packageName: String) {
+    val context = LocalContext.current
+    val icon by produceState<ImageBitmap?>(null, packageName) {
+        value = withContext(Dispatchers.IO) {
+            runCatching { context.packageManager.getApplicationIcon(packageName).toBitmap(APP_ICON_PX, APP_ICON_PX).asImageBitmap() }.getOrNull()
+        }
+    }
+    Box(Modifier.size(36.dp)) {
+        icon?.let { Image(it, contentDescription = null, modifier = Modifier.fillMaxSize()) }
+    }
+}
+
 /** Lets the user turn off band notifications for single apps. */
 @Composable
 private fun AppPickerDialog(onDismiss: () -> Unit) {
@@ -1281,21 +1389,38 @@ private fun AppPickerDialog(onDismiss: () -> Unit) {
                 .sortedBy { it.label.lowercase(Locales.current) }
         }
     }
+    var query by rememberSaveable { mutableStateOf("") }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.band_notify_pick_apps)) },
         text = {
-            val list = apps
-            if (list == null) {
+            val all = apps
+            if (all == null) {
                 Text(stringResource(R.string.band_notify_pick_loading))
             } else {
-                LazyColumn(Modifier.heightIn(max = 460.dp)) {
+                val needle = query.trim().lowercase(Locales.current)
+                val list = if (needle.isEmpty()) all else all.filter { it.label.lowercase(Locales.current).contains(needle) }
+                Column {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    singleLine = true,
+                    placeholder = { Text(stringResource(R.string.band_notify_pick_search)) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Text(
+                    stringResource(R.string.band_notify_pick_count, all.count { it.packageName !in blocked }, all.size),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
+                )
+                LazyColumn(Modifier.heightIn(max = 420.dp)) {
                     items(list, key = { it.packageName }) { app ->
                         val on = app.packageName !in blocked
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .toggleable(value = on, role = Role.Checkbox, onValueChange = { checked ->
+                                .toggleable(value = on, role = Role.Switch, onValueChange = { checked ->
                                     blocked = if (checked) blocked - app.packageName else blocked + app.packageName
                                     BandNotify.setBlocked(context, blocked)
                                 })
@@ -1303,10 +1428,12 @@ private fun AppPickerDialog(onDismiss: () -> Unit) {
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                         ) {
-                            Checkbox(checked = on, onCheckedChange = null)
+                            AppIcon(app.packageName)
                             Text(app.label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                            Switch(checked = on, onCheckedChange = null)
                         }
                     }
+                }
                 }
             }
         },

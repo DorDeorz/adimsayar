@@ -2,6 +2,11 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.12.7
+
+- Saat kadranları penceresi yenilendi: dosya seçilince kadranın önizleme resmi (dosyadaki LVGL resmi, RLE v1/v2 açılır) ve adı gösterilir, "Yükle" ile gönderilir. FitWren'den yüklenen kadranların resmi saklanır ve listede görünür (bileklik resim göndermez). Kullanılan kadran renkli, kadranlar "Bileklikle gelen" / "Senin yüklediğin" diye ayrılır, silmeden önce sorulur.
+- Bildirim uygulama listesinde uygulama simgeleri, arama kutusu ve kaç uygulamanın açık olduğu; onay kutuları yerine anahtarlar.
+
 ## 0.12.6
 
 - Bileklik bildirimleri: "Hangi uygulamalar" ile tek tek uygulamalar kapatılabilir (varsayılan hepsi açık, `BandNotify.blocked`). "Sessiz saatler" (varsayılan 23:00–07:00) boyunca uygulama bildirimleri ve hatırlatmalar bilekliğe gitmez, aramalar yine gelir.

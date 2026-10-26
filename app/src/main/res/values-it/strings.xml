@@ -316,6 +316,10 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_12_7">
+        <item>Quadranti: anteprima prima del caricamento; i quadranti caricati da FitWren mostrano l’immagine e quello in uso è evidenziato; l’eliminazione chiede conferma</item>
+        <item>L’elenco app per le notifiche mostra icone, ricerca e quante app sono attive</item>
+    </string-array>
     <string-array name="release_notes_0_12_0">
         <item>Notifiche del bracciale: scegli le app e le ore di silenzio; anche i promemoria FitWren vibrano sul bracciale</item>
         <item>Batteria del bracciale: nella scheda del dispositivo, nel nuovo widget \"Batteria del bracciale\" e avviso sul telefono quando è scarica</item>
@@ -839,4 +843,13 @@
     <string name="band_faces_done">Quadrante caricato e selezionato.</string>
     <string name="band_faces_failed">Impossibile caricare il quadrante. Avvicina il braccialetto e riprova.</string>
     <string name="band_faces_delete">Elimina</string>
+    <string name="band_notify_pick_search">Cerca app</string>
+    <string name="band_notify_pick_count">%1$d di %2$d app inviano al braccialetto</string>
+    <string name="band_faces_tap_hint">Tocca un quadrante per usarlo subito sul braccialetto. Il braccialetto non invia immagini: si vedono solo per i quadranti caricati da FitWren, e i nomi sono quelli del braccialetto.</string>
+    <string name="band_faces_no_preview">Questo file non ha un’anteprima.</string>
+    <string name="band_faces_upload">Carica</string>
+    <string name="band_faces_delete_title">Eliminare questo quadrante?</string>
+    <string name="band_faces_active">In uso</string>
+    <string name="band_faces_own">Caricato da te</string>
+    <string name="band_faces_builtin">Integrato</string>
 </resources>
