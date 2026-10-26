@@ -1,0 +1,5 @@
+- Bileklik bildirimleri, aramalar ve müzik (0.11): bildirimler Xiaomi bilekliğe gider, aramayı bileklikten reddet, müziği bileklikten yönet
+- Bileklikte uygulama seçimi, sessiz saatler, FitWren hatırlatmaları, hazır SMS yanıtları, hava durumu, alarmlar, takvim ve bileklik dili
+- Bileklik pili (kart, widget, düşük pil uyarısı), telefonumu bul, bilekliği bul, bağlantı koptu uyarısı
+- Saat kadranları: değiştir, sil ya da .bin dosyasından yükle
+- Ayarlar sayfalara bölündü; bildirimlerin gece durması düzeltildi

@@ -2,7 +2,7 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
-## 0.12.0
+## 0.12.6
 
 - Bileklik bildirimleri: "Hangi uygulamalar" ile tek tek uygulamalar kapatılabilir (varsayılan hepsi açık, `BandNotify.blocked`). "Sessiz saatler" (varsayılan 23:00–07:00) boyunca uygulama bildirimleri ve hatırlatmalar bilekliğe gitmez, aramalar yine gelir.
 - FitWren hatırlatmaları bileklikte: hedef, seri, haftalık özet, kilo ve su bildirimleri ("hedef" ve "su" kanalları) bilekliğe de gider. Su eklenince yapılan sessiz güncelleme bilekliği yeniden titretmez.
