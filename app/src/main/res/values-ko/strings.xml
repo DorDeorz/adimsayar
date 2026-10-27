@@ -316,6 +316,11 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>새의 기분: FitWren 워치페이스와 디자인에서 새가 걸음 목표에 따라 바뀝니다</item>
+        <item>워치페이스에 날씨: 날씨 아이콘과 기온</item>
+        <item>상시 표시: FitWren 워치페이스에 단순하고 어두운 상시 표시 화면</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
         <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">표시 항목</string>
     <string name="face_designer_undo">실행 취소</string>
     <string name="face_designer_reset">초기화</string>
+    <string name="face_designer_bird_mood">목표에 따라</string>
+    <string name="face_designer_show_weather">날씨</string>
 </resources>

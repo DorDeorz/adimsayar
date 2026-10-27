@@ -1,0 +1,3 @@
+The bird's mood: the bird on the faces changes with the step goal.
+Weather on the face: weather icon and temperature.
+Always-on display: a plain dark always-on look for FitWren faces.

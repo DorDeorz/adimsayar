@@ -316,6 +316,11 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>مزاج الطائر: يتغير الطائر في واجهات FitWren والتصاميم حسب هدف الخطوات</item>
+        <item>الطقس على الواجهة: رمز الطقس ودرجة الحرارة</item>
+        <item>الشاشة الدائمة: لواجهات FitWren مظهر داكن وبسيط</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
         <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">العناصر</string>
     <string name="face_designer_undo">تراجع</string>
     <string name="face_designer_reset">إعادة ضبط</string>
+    <string name="face_designer_bird_mood">حسب الهدف</string>
+    <string name="face_designer_show_weather">الطقس</string>
 </resources>

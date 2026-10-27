@@ -2,6 +2,12 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.14.0
+
+- Kuşun ruh hali: FitWren kadranlarında ve kadran tasarımında kuş artık adım hedefi yüzdesine bağlı bir resim listesi (`watchface/make_faces.py`, `MOODS`): %0 uykulu, %25 uyanık, %60 neşeli, %100 kutlama (konfeti). Tasarımda "Kuş" seçeneklerine "Hedefe göre" eklendi; "Neşeli" ve "Uykulu" kuşu sabit tutar.
+- Kadranda hava durumu: FitWren kadranlarında (Yol hariç) ve tasarımda hava simgesi (bilekliğin hava kodu, kaynak 3031) ve sıcaklık (°C, kaynak 2031). Bileklik hava durumunu FitWren'in gönderdiği bilgiden alır. Tasarımda "Görünüm" sekmesinden gizlenebilir.
+- Ekran kapalıyken görünüm: her FitWren kadranının içinde Mi Create'in AOD projesi (`<kadran>/AOD/AOD.fprj`): siyah üstünde sönük saat, tarih ve küçük kuş.
+
 ## 0.13.3
 
 - Kadran tasarla (Saat kadranları → "Kadran tasarla", Mi Band 8): hazır renk geçişleri ya da kendi fotoğrafın arka plan olur; saat, dakika, yazı ve hedef çubuğu renkleri ile kuş (neşeli, uykulu, yok) seçilir, önizleme anında güncellenir. Kadran telefonda üretilir: FitWren'in beyaz-siyah şablon kadranı (`assets/designer/template.bin`) açılır, resimleri değiştirilir ve dosya yeniden yazılır (`band/XiaomiFaceFile.kt`; dosya yapısı `watchface/facebin.py` ile derlenmiş kadranlarda doğrulandı). Saat ve dakika için 7 rakam stili (kalın, ince, eğik, tırnaklı, daktilo, içi boş, LCD), saatin yeri (üstte, ortada, altta; şablondaki parçaların y konumu dosyada kaydırılır), 8 hazır tema, arka planı karartma, tarih / adım / hedef çubuğu / nabız ve pil ayrı ayrı gizlenebilir (gizlenen parçanın resimleri saydam yapılır). Tasarım ekranında önizleme üstte sabit durur; seçenekler altında Tema, Saat, Arka plan, Renkler ve Görünüm sekmelerindedir, "Bilekliğe yükle" en altta sabittir, "Geri al" ve "Sıfırla" üstte. Fotoğraf önizlemede parmakla kaydırılır ve iki parmakla büyütülür; tasarım ayarları saklanır. Her tasarım yeni bir kadran numarası alır; yenisi yüklenince bir önceki tasarım bileklikten silinir.

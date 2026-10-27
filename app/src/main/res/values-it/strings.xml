@@ -316,6 +316,11 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>L\'umore dell\'uccellino: sui quadranti FitWren e nei design l\'uccellino cambia con l\'obiettivo di passi</item>
+        <item>Meteo sul quadrante: icona meteo e temperatura</item>
+        <item>Display sempre attivo: i quadranti FitWren hanno una vista scura e semplice</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
         <item>Quadranti FitWren: nove quadranti con l’uccellino (Notte, Strada, Analogico, Neon, Ramo e altri) inclusi, inviati alla Mi Band 8 con un tocco</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">Elementi</string>
     <string name="face_designer_undo">Annulla</string>
     <string name="face_designer_reset">Ripristina</string>
+    <string name="face_designer_bird_mood">Secondo obiettivo</string>
+    <string name="face_designer_show_weather">Meteo</string>
 </resources>

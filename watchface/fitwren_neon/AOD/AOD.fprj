@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FaceProject DeviceType="9" Id="">
+  <Screen Title="" Bitmap="">
+    <Widget Shape="32" Name="hour" BitmapList="aod_0.png|aod_1.png|aod_2.png|aod_3.png|aod_4.png|aod_5.png|aod_6.png|aod_7.png|aod_8.png|aod_9.png" X="9" Y="150" Width="76" Height="44" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="0811" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="colon" Bitmap="aod_colon.png" X="85" Y="150" Width="21" Height="44" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="minute" BitmapList="aod_0.png|aod_1.png|aod_2.png|aod_3.png|aod_4.png|aod_5.png|aod_6.png|aod_7.png|aod_8.png|aod_9.png" X="106" Y="150" Width="76" Height="44" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1011" Spacing="0" Blanking="0" />
+    <Widget Shape="31" Name="weekday" BitmapList="(0):weekday_0.png|(1):weekday_1.png|(2):weekday_2.png|(3):weekday_3.png|(4):weekday_4.png|(5):weekday_5.png|(6):weekday_6.png" X="32" Y="214" Width="49" Height="16" Alpha="255" Alignment="0" DefaultIndex="0" Index_Src="2012" Spacing="0" Blanking="0" Visible_Src="0" />
+    <Widget Shape="32" Name="day" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="87" Y="214" Width="32" Height="16" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1812" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="date_dot" Bitmap="dot.png" X="119" Y="214" Width="9" Height="16" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="month" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="128" Y="214" Width="32" Height="16" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1012" Spacing="0" Blanking="0" />
+    <Widget Shape="31" Name="bird" BitmapList="(0):bird_sleepy.png|(25):bird_awake.png|(60):bird_happy.png|(100):bird_party.png" X="76" Y="270" Width="40" Height="40" Alpha="255" Alignment="0" DefaultIndex="0" Index_Src="1021" Spacing="0" Blanking="0" Visible_Src="0" />
+  </Screen>
+</FaceProject>

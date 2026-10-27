@@ -316,6 +316,11 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>小鸟心情：FitWren 表盘和设计中的小鸟随步数目标变化</item>
+        <item>表盘上的天气：天气图标和温度</item>
+        <item>息屏显示：FitWren 表盘有简洁的暗色息屏界面</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
         <item>FitWren 表盘：应用自带九款小鸟表盘（夜晚、小路、指针、霓虹、树枝等），一键安装到小米手环 8</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">显示内容</string>
     <string name="face_designer_undo">撤销</string>
     <string name="face_designer_reset">重置</string>
+    <string name="face_designer_bird_mood">随目标变化</string>
+    <string name="face_designer_show_weather">天气</string>
 </resources>

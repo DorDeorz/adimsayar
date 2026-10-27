@@ -316,6 +316,11 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>The bird's mood: on FitWren faces and designs the bird changes with the step goal (asleep, awake, happy, celebrating)</item>
+        <item>Weather on the face: a weather icon and the temperature on FitWren faces and designs</item>
+        <item>Always-on display: FitWren faces get a plain dark always-on look</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">Parts</string>
     <string name="face_designer_undo">Undo</string>
     <string name="face_designer_reset">Reset</string>
+    <string name="face_designer_bird_mood">By goal</string>
+    <string name="face_designer_show_weather">Weather</string>
 </resources>

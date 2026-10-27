@@ -377,10 +377,12 @@ private fun PartsPage(design: FaceDesign, onChange: (FaceDesign) -> Unit) {
             SwitchRow(R.drawable.ic_walk, R.string.face_designer_show_steps, design.showSteps) { onChange(design.copy(showSteps = it)) }
             SwitchRow(R.drawable.ic_trophy, R.string.face_designer_show_bar, design.showBar) { onChange(design.copy(showBar = it)) }
             SwitchRow(R.drawable.ic_heart, R.string.face_designer_show_health, design.showHealth) { onChange(design.copy(showHealth = it)) }
+            SwitchRow(R.drawable.ic_snow, R.string.face_designer_show_weather, design.showWeather) { onChange(design.copy(showWeather = it)) }
         }
     }
     Label(stringResource(R.string.face_designer_bird))
     val birds = listOf(
+        DesignBird.Mood to R.string.face_designer_bird_mood,
         DesignBird.Happy to R.string.face_designer_bird_happy,
         DesignBird.Sleepy to R.string.face_designer_bird_sleepy,
         DesignBird.None to R.string.face_designer_bird_none,

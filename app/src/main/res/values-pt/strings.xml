@@ -316,6 +316,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>O humor do pássaro: nos mostradores FitWren e nos designs o pássaro muda com a meta de passos</item>
+        <item>Clima no mostrador: ícone do clima e temperatura</item>
+        <item>Tela sempre ligada: os mostradores FitWren ganham uma vista escura e simples</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
         <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">Elementos</string>
     <string name="face_designer_undo">Desfazer</string>
     <string name="face_designer_reset">Redefinir</string>
+    <string name="face_designer_bird_mood">Pela meta</string>
+    <string name="face_designer_show_weather">Clima</string>
 </resources>

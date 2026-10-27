@@ -316,6 +316,11 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>Kuşun ruh hali: FitWren kadranlarındaki ve tasarımdaki kuş adım hedefine göre değişir (uykulu, uyanık, neşeli, kutlama)</item>
+        <item>Kadranda hava durumu: FitWren kadranlarında ve tasarımda hava simgesi ve sıcaklık</item>
+        <item>Ekran kapalıyken görünüm: FitWren kadranlarına her zaman açık ekran için sade, koyu bir görünüm</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
@@ -916,4 +921,6 @@
     <string name="face_designer_tab_parts">Görünüm</string>
     <string name="face_designer_undo">Geri al</string>
     <string name="face_designer_reset">Sıfırla</string>
+    <string name="face_designer_bird_mood">Hedefe göre</string>
+    <string name="face_designer_show_weather">Hava durumu</string>
 </resources>

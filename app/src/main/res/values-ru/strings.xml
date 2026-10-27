@@ -316,6 +316,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_14_0">
+        <item>Настроение птички: на циферблатах FitWren и в дизайнах птичка меняется по цели шагов</item>
+        <item>Погода на циферблате: значок погоды и температура</item>
+        <item>Always-on: у циферблатов FitWren есть простой тёмный вид для постоянного экрана</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
         <item>Циферблаты FitWren: девять циферблатов с птичкой (Ночь, Дорога, Аналог, Неон, Ветка и другие) встроены и ставятся на Mi Band 8 одним нажатием</item>
@@ -915,4 +920,6 @@
     <string name="face_designer_tab_parts">Элементы</string>
     <string name="face_designer_undo">Отменить</string>
     <string name="face_designer_reset">Сбросить</string>
+    <string name="face_designer_bird_mood">По цели</string>
+    <string name="face_designer_show_weather">Погода</string>
 </resources>
