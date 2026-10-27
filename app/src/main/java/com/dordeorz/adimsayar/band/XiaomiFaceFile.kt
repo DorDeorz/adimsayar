@@ -97,6 +97,7 @@ class XiaomiFaceFile private constructor(
         private const val PREVIEW = -1
         private const val SECTIONS_AT = 0xb0
         private const val PREVIEW_AT = 0x20
+        private const val SCREENS_AT = 0x1c
         private const val PREVIEW_AT_TOO = 0xac
         private const val FORMAT_IMAGE = 3
         private const val FORMAT_LIST = 0
@@ -108,6 +109,8 @@ class XiaomiFaceFile private constructor(
 
         private fun read(bytes: ByteArray): XiaomiFaceFile? {
             val bb = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
+            // Faces with an always-on screen keep a second set of sections we do not rewrite.
+            if (bb.getInt(SCREENS_AT) != 1) return null
             val found = ArrayList<Piece>()
             for (section in intArrayOf(IMAGES, LISTS)) {
                 val count = bb.getInt(SECTIONS_AT + 8 * section)
