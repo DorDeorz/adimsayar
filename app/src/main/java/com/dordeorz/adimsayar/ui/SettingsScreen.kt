@@ -1171,6 +1171,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
         },
     )
     pending?.let { file ->
+        val fits = remember(file) { BandFaces.fitsBand(context, file) }
         AlertDialog(
             onDismissRequest = { pending = null },
             title = { Text(file.name) },
@@ -1186,6 +1187,13 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                     } else {
                         Text(stringResource(R.string.band_faces_no_preview), style = MaterialTheme.typography.bodyMedium)
                     }
+                    if (!fits) {
+                        Text(
+                            stringResource(R.string.band_faces_wrong_device),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.error,
+                        )
+                    }
                     Text(
                         stringResource(R.string.band_faces_install_hint),
                         style = MaterialTheme.typography.bodySmall,
@@ -1198,7 +1206,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                     val preview = pendingPreview
                     pending = null
                     scope.launch { BandFaces.install(context, file, preview) }
-                }) { Text(stringResource(R.string.band_faces_upload)) }
+                }) { Text(stringResource(if (fits) R.string.band_faces_upload else R.string.band_faces_upload_anyway)) }
             },
             dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
         )

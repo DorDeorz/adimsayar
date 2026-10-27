@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Tippe auf ein Zifferblatt, um es sofort auf dem Armband zu nutzen. Das Armband sendet keine Bilder; Bilder gibt es nur für aus FitWren geladene Zifferblätter, Namen erscheinen wie auf dem Armband.</string>
     <string name="band_faces_no_preview">Diese Datei hat kein Vorschaubild.</string>
     <string name="band_faces_upload">Hochladen</string>
+    <string name="band_faces_wrong_device">Dieses Zifferblatt scheint für ein anderes Gerät gemacht zu sein. Es kann auf dem Band fehlerhaft aussehen oder sich gar nicht installieren lassen.</string>
+    <string name="band_faces_upload_anyway">Trotzdem hochladen</string>
     <string name="band_faces_delete_title">Zifferblatt löschen?</string>
     <string name="band_faces_active">Wird verwendet</string>
     <string name="band_faces_own">Von dir geladen</string>

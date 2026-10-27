@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Tocca un quadrante per usarlo subito sul braccialetto. Il braccialetto non invia immagini: si vedono solo per i quadranti caricati da FitWren, e i nomi sono quelli del braccialetto.</string>
     <string name="band_faces_no_preview">Questo file non ha un’anteprima.</string>
     <string name="band_faces_upload">Carica</string>
+    <string name="band_faces_wrong_device">Questo quadrante sembra fatto per un altro dispositivo. Potrebbe apparire rovinato sul braccialetto o non installarsi.</string>
+    <string name="band_faces_upload_anyway">Carica comunque</string>
     <string name="band_faces_delete_title">Eliminare questo quadrante?</string>
     <string name="band_faces_active">In uso</string>
     <string name="band_faces_own">Caricato da te</string>

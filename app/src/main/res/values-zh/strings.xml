@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">点按表盘即可在手环上立即切换。手环不发送图片，只有从 FitWren 上传的表盘才显示图片，名称按手环上的显示。</string>
     <string name="band_faces_no_preview">此文件没有预览图。</string>
     <string name="band_faces_upload">上传</string>
+    <string name="band_faces_wrong_device">此表盘似乎是为其他设备制作的。在手环上可能显示异常或无法安装。</string>
+    <string name="band_faces_upload_anyway">仍然上传</string>
     <string name="band_faces_delete_title">删除此表盘？</string>
     <string name="band_faces_active">使用中</string>
     <string name="band_faces_own">你上传的</string>

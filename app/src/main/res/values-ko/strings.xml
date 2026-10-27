@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">워치 페이스를 누르면 밴드에서 바로 바뀝니다. 밴드는 이미지를 보내지 않아서 FitWren에서 올린 워치 페이스만 이미지가 보이고, 이름은 밴드에 있는 그대로 표시됩니다.</string>
     <string name="band_faces_no_preview">이 파일에는 미리보기 이미지가 없습니다.</string>
     <string name="band_faces_upload">올리기</string>
+    <string name="band_faces_wrong_device">이 워치페이스는 다른 기기용으로 보입니다. 밴드에서 깨져 보이거나 설치되지 않을 수 있습니다.</string>
+    <string name="band_faces_upload_anyway">그래도 올리기</string>
     <string name="band_faces_delete_title">이 워치 페이스를 삭제할까요?</string>
     <string name="band_faces_active">사용 중</string>
     <string name="band_faces_own">직접 올림</string>

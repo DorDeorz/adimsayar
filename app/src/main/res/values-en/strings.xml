@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Tap a face to switch to it on the band right away. The band sends no pictures, so pictures show only for faces uploaded from FitWren, and names are shown as the band has them.</string>
     <string name="band_faces_no_preview">This file has no preview picture.</string>
     <string name="band_faces_upload">Upload</string>
+    <string name="band_faces_wrong_device">This face looks like it was made for another device. It may look broken on the band or not install at all.</string>
+    <string name="band_faces_upload_anyway">Upload anyway</string>
     <string name="band_faces_delete_title">Delete this watch face?</string>
     <string name="band_faces_active">In use</string>
     <string name="band_faces_own">Uploaded by you</string>

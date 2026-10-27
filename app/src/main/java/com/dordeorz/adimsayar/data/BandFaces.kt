@@ -54,6 +54,16 @@ object BandFaces {
         }.getOrNull()?.let(XiaomiWatchface::parse)
     }
 
+    /**
+     * False when the file was clearly made for another device: its preview size differs from the
+     * saved band's. True when it fits or it cannot be told.
+     */
+    fun fitsBand(context: Context, file: WatchfaceFile): Boolean {
+        val expected = BandDirect.model(context)?.facePreview ?: return true
+        val size = XiaomiWatchface.previewSize(file.bytes) ?: return true
+        return size == expected
+    }
+
     /** The file's preview picture, or null when it has none. */
     suspend fun preview(file: WatchfaceFile): Bitmap? = withContext(Dispatchers.Default) {
         XiaomiWatchface.preview(file.bytes)?.let { Bitmap.createBitmap(it.pixels, it.width, it.height, Bitmap.Config.ARGB_8888) }

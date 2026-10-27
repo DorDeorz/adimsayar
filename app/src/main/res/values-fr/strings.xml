@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Touche un cadran pour l’utiliser tout de suite sur le bracelet. Le bracelet n’envoie pas d’images : elles ne s’affichent que pour les cadrans envoyés depuis FitWren, et les noms sont ceux du bracelet.</string>
     <string name="band_faces_no_preview">Ce fichier n’a pas d’aperçu.</string>
     <string name="band_faces_upload">Envoyer</string>
+    <string name="band_faces_wrong_device">Ce cadran semble fait pour un autre appareil. Il peut mal s\'afficher sur le bracelet ou ne pas s\'installer.</string>
+    <string name="band_faces_upload_anyway">Envoyer quand même</string>
     <string name="band_faces_delete_title">Supprimer ce cadran ?</string>
     <string name="band_faces_active">Utilisé</string>
     <string name="band_faces_own">Envoyé par toi</string>

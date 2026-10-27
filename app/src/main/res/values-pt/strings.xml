@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Toque num mostrador para usá-lo na pulseira na hora. A pulseira não envia imagens: elas aparecem só nos mostradores enviados pelo FitWren, e os nomes são os da pulseira.</string>
     <string name="band_faces_no_preview">Este arquivo não tem imagem de prévia.</string>
     <string name="band_faces_upload">Enviar</string>
+    <string name="band_faces_wrong_device">Este mostrador parece feito para outro dispositivo. Pode aparecer com erros na pulseira ou nem ser instalado.</string>
+    <string name="band_faces_upload_anyway">Enviar mesmo assim</string>
     <string name="band_faces_delete_title">Apagar este mostrador?</string>
     <string name="band_faces_active">Em uso</string>
     <string name="band_faces_own">Enviado por você</string>

@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">المس واجهة لتعمل على السوار فورًا. السوار لا يرسل صورًا، لذا تظهر الصور فقط للواجهات المرفوعة من FitWren، وتظهر الأسماء كما في السوار.</string>
     <string name="band_faces_no_preview">لا توجد صورة معاينة في هذا الملف.</string>
     <string name="band_faces_upload">رفع</string>
+    <string name="band_faces_wrong_device">يبدو أن هذه الواجهة مصممة لجهاز آخر. قد تظهر بشكل خاطئ على السوار أو لا تُثبَّت.</string>
+    <string name="band_faces_upload_anyway">رفع على أي حال</string>
     <string name="band_faces_delete_title">حذف هذه الواجهة؟</string>
     <string name="band_faces_active">قيد الاستخدام</string>
     <string name="band_faces_own">رفعتها أنت</string>

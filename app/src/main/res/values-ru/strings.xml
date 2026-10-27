@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Нажмите на циферблат, чтобы сразу включить его на браслете. Браслет не передаёт картинки: они видны только у циферблатов, загруженных из FitWren, а названия показаны как на браслете.</string>
     <string name="band_faces_no_preview">В этом файле нет картинки предпросмотра.</string>
     <string name="band_faces_upload">Загрузить</string>
+    <string name="band_faces_wrong_device">Похоже, этот циферблат сделан для другого устройства. На браслете он может выглядеть неправильно или не установиться.</string>
+    <string name="band_faces_upload_anyway">Всё равно загрузить</string>
     <string name="band_faces_delete_title">Удалить циферблат?</string>
     <string name="band_faces_active">Используется</string>
     <string name="band_faces_own">Загружен вами</string>

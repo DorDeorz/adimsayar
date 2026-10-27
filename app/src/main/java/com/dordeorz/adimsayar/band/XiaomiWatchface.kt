@@ -95,6 +95,17 @@ object XiaomiWatchface {
         }
     }
 
+    /**
+     * Width and height of the preview stored in a face file, or null when it has none. Each band
+     * has its own preview size (122 x 310 on the Smart Band 8), so this tells what a face is for.
+     */
+    fun previewSize(bytes: ByteArray): Pair<Int, Int>? = runCatching {
+        val bb = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
+        val offset = bb.getInt(PREVIEW_OFFSET)
+        if (offset <= 0 || offset + 12 > bytes.size) return null
+        (bb.getShort(offset + 4).toInt() and 0xffff) to (bb.getShort(offset + 6).toInt() and 0xffff)
+    }.getOrNull()
+
     /** The preview picture stored in a face file, or null when it has none or it cannot be read. */
     fun preview(bytes: ByteArray): FacePreview? = runCatching { decodePreview(bytes) }.getOrNull()
 

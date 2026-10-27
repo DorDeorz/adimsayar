@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">文字盤をタップするとすぐにバンドで切り替わります。バンドは画像を送らないため、画像は FitWren からアップロードした文字盤だけに表示され、名前はバンドのとおりに表示されます。</string>
     <string name="band_faces_no_preview">このファイルにはプレビュー画像がありません。</string>
     <string name="band_faces_upload">アップロード</string>
+    <string name="band_faces_wrong_device">この文字盤は別のデバイス用のようです。バンドで正しく表示されないか、インストールできない可能性があります。</string>
+    <string name="band_faces_upload_anyway">それでもアップロード</string>
     <string name="band_faces_delete_title">この文字盤を削除しますか?</string>
     <string name="band_faces_active">使用中</string>
     <string name="band_faces_own">アップロード済み</string>

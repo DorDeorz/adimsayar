@@ -853,6 +853,8 @@
     <string name="band_faces_tap_hint">Bir kadrana dokununca bileklikte hemen açılır. Bileklik resim göndermediği için resimler yalnızca FitWren\'den yüklediğin kadranlarda görünür, isimler de bileklikteki gibi yazılır.</string>
     <string name="band_faces_no_preview">Bu dosyada önizleme resmi yok.</string>
     <string name="band_faces_upload">Yükle</string>
+    <string name="band_faces_wrong_device">Bu kadran başka bir cihaz için yapılmış görünüyor. Bileklikte bozuk görünebilir ya da hiç yüklenmeyebilir.</string>
+    <string name="band_faces_upload_anyway">Yine de yükle</string>
     <string name="band_faces_delete_title">Kadran silinsin mi?</string>
     <string name="band_faces_active">Şu an kullanılıyor</string>
     <string name="band_faces_own">Senin yüklediğin</string>

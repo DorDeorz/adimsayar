@@ -852,6 +852,8 @@
     <string name="band_faces_tap_hint">Toca una esfera para usarla en la pulsera al momento. La pulsera no envía imágenes: solo se ven en esferas subidas desde FitWren, y los nombres aparecen como en la pulsera.</string>
     <string name="band_faces_no_preview">Este archivo no tiene imagen de vista previa.</string>
     <string name="band_faces_upload">Subir</string>
+    <string name="band_faces_wrong_device">Esta esfera parece hecha para otro dispositivo. Puede verse mal en la pulsera o no instalarse.</string>
+    <string name="band_faces_upload_anyway">Subir de todos modos</string>
     <string name="band_faces_delete_title">¿Borrar esta esfera?</string>
     <string name="band_faces_active">En uso</string>
     <string name="band_faces_own">Subida por ti</string>
