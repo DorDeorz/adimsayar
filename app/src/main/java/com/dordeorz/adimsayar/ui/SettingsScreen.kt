@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Color
 import android.graphics.Bitmap
 import com.dordeorz.adimsayar.band.BandWatchface
+import com.dordeorz.adimsayar.band.HuamiFaceUpload
 import com.dordeorz.adimsayar.band.WatchfaceFile
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.graphics.drawable.toBitmap
@@ -159,7 +160,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
-    ReleaseNote("0.14.0", R.array.release_notes_0_14_0),
+    ReleaseNote("0.14.1", R.array.release_notes_0_14_1),
     ReleaseNote("0.13.3", R.array.release_notes_0_13_3),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
@@ -792,6 +793,8 @@ private fun BandNotifyGroup() {
     var pickPlace by remember { mutableStateOf(false) }
     var showAlarms by remember { mutableStateOf(false) }
     var showFaces by remember { mutableStateOf(false) }
+    var showHuamiFaces by remember { mutableStateOf(false) }
+    val huamiFaces = remember { BandDirect.takesHuamiFaces(context) }
     val calendar = remember(tick) { BandSchedule.calendarOn(context) }
     val calendarPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
         BandSchedule.setCalendar(context, ok)
@@ -923,7 +926,13 @@ private fun BandNotifyGroup() {
     }
     if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
     if (showAlarms) AlarmsDialog(onDismiss = { showAlarms = false })
+    if (!supported && huamiFaces) {
+        SettingsGroup(stringResource(R.string.band_group_features)) {
+            ClickRow(stringResource(R.string.band_faces), stringResource(R.string.band_faces_install)) { showHuamiFaces = true }
+        }
+    }
     if (showFaces) WatchfacesDialog(onDismiss = { showFaces = false })
+    if (showHuamiFaces) HuamiFacesDialog(onDismiss = { showHuamiFaces = false })
     if (pickPlace) {
         WeatherPlaceDialog(onDismiss = {
             pickPlace = false
@@ -1255,6 +1264,69 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
             dismissButton = { TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.cancel)) } },
         )
     }
+}
+
+/** Mi Band 6: only a .bin upload, the older protocol has no face list to show. */
+@Composable
+private fun HuamiFacesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var percent by remember { mutableStateOf<Int?>(null) }
+    var outcome by remember { mutableStateOf<HuamiFaceUpload.Outcome?>(null) }
+    var invalid by remember { mutableStateOf(false) }
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val bytes = withContext(Dispatchers.IO) {
+                runCatching { context.contentResolver.openInputStream(uri)?.use { it.readBytes() } }.getOrNull()
+            }
+            invalid = bytes == null || !HuamiFaceUpload.isFace(bytes)
+            outcome = null
+            if (bytes == null || invalid) return@launch
+            percent = 0
+            outcome = BandDirect.uploadHuamiFace(context, bytes) { percent = it }
+            percent = null
+        }
+    }
+    val sending = percent != null
+    AlertDialog(
+        onDismissRequest = { if (!sending) onDismiss() },
+        title = { Text(stringResource(R.string.band_faces)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.string.huami_faces_hint), style = MaterialTheme.typography.bodyMedium)
+                percent?.let {
+                    Text(stringResource(R.string.band_faces_sending, it), style = MaterialTheme.typography.bodyMedium)
+                    LinearProgressIndicator(progress = { it / 100f }, modifier = Modifier.fillMaxWidth())
+                }
+                val message = when {
+                    invalid -> R.string.huami_faces_invalid
+                    else -> when (outcome) {
+                        HuamiFaceUpload.Outcome.Done -> R.string.huami_faces_done
+                        HuamiFaceUpload.Outcome.NoSpace -> R.string.huami_faces_no_space
+                        HuamiFaceUpload.Outcome.LowBattery -> R.string.huami_faces_low_battery
+                        HuamiFaceUpload.Outcome.Refused -> R.string.huami_faces_refused
+                        HuamiFaceUpload.Outcome.NotReached -> R.string.band_faces_failed
+                        null -> null
+                    }
+                }
+                if (message != null) {
+                    Text(
+                        stringResource(message),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (outcome == HuamiFaceUpload.Outcome.Done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    )
+                }
+            }
+        },
+        confirmButton = { TextButton(enabled = !sending, onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(
+                enabled = !sending,
+                onClick = { runCatching { picker.launch(arrayOf("application/octet-stream", "*/*")) } },
+            ) { Text(stringResource(R.string.band_faces_install)) }
+        },
+    )
 }
 
 /** Day and night faces, each from its own time; FitWren changes the band's face at those times. */

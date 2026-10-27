@@ -2,13 +2,15 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
-## 0.14.0
+## 0.14.1
 
 - Kuşun ruh hali: FitWren kadranlarında ve kadran tasarımında kuş artık adım hedefi yüzdesine bağlı bir resim listesi (`watchface/make_faces.py`, `MOODS`): %0 uykulu, %25 uyanık, %60 neşeli, %100 kutlama (konfeti). Tasarımda "Kuş" seçeneklerine "Hedefe göre" eklendi; "Neşeli" ve "Uykulu" kuşu sabit tutar.
 - Kadranda hava durumu: FitWren kadranlarında (Yol hariç) ve tasarımda hava simgesi (bilekliğin hava kodu, kaynak 3031) ve sıcaklık (°C, kaynak 2031). Bileklik hava durumunu FitWren'in gönderdiği bilgiden alır. Tasarımda "Görünüm" sekmesinden gizlenebilir.
 - Ekran kapalıyken görünüm: her FitWren kadranının içinde Mi Create'in AOD projesi (`<kadran>/AOD/AOD.fprj`): siyah üstünde sönük saat, tarih ve küçük kuş.
 - Tasarım paylaşma: kadran tasarımının "Tema" sekmesinde "Tasarımı paylaş" tasarımı (fotoğrafı JPEG olarak içinde) `fitwren-kadran.json` dosyasına yazar ve paylaşım menüsünü açar; "Tasarım içe al" böyle bir dosyayı açar (`FaceDesigner.export` / `importDesign`).
 - Saate göre kadran (Saat kadranları → "Saate göre kadran"): gündüz ve gece kadranı ile başlangıç saatleri seçilir; FitWren o saatlerde aktif kadranı değiştirir (`background/FaceSchedule.kt`, AlarmManager). Bileklik bağlı değilse 10 dakika sonra yeniden dener.
+- Mi Band 6 kadranı (Ayarlar → Bileklik → Saat kadranları): Mi Band 6 için yapılmış `.bin` kadran dosyası (`UIHH` başlıklı) bilekliğin ürün yazılımı kanalından gönderilir (`band/HuamiFaceUpload.kt`, Gadgetbridge'in UpdateFirmwareOperation2020'sinden): parça boyu istenir, dosya boyu ve CRC32 bildirilir, dosya bilekliğin bildirdiği yerden parça parça gönderilir. Yer yoksa ya da şarj azsa ayrı uyarı gösterilir.
+- Mi Band 5, Mi Band 6 ve Amazfit Band 5'in dakika kayıtları 8 bayt okunur (önceden 4 bayt sayılıyordu, Gadgetbridge ile aynı).
 
 ## 0.13.3
 

@@ -316,12 +316,13 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>Laune des Vogels: auf FitWren-Zifferblättern und Entwürfen ändert sich der Vogel mit dem Schrittziel</item>
         <item>Wetter auf dem Zifferblatt: Wettersymbol und Temperatur</item>
         <item>Always-on-Display: FitWren-Zifferblätter bekommen eine schlichte dunkle Always-on-Ansicht</item>
         <item>Entwürfe teilen: Zifferblatt-Entwurf mit Foto als Datei senden, Entwurf eines Freundes importieren</item>
         <item>Zifferblatt nach Tageszeit: FitWren wechselt zu gewählten Zeiten zwischen Tag- und Nacht-Zifferblatt</item>
+        <item>Mi Band 6 Zifferblätter: Zifferblatt aus einer .bin-Datei hochladen</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Wird hochgeladen: %d%%</string>
     <string name="band_faces_done">Zifferblatt hochgeladen und ausgewählt.</string>
     <string name="band_faces_failed">Das Zifferblatt konnte nicht hochgeladen werden. Bring das Armband näher und versuche es erneut.</string>
+    <string name="huami_faces_hint">Wähle eine .bin-Zifferblattdatei für das Mi Band 6. Das Hochladen kann einige Minuten dauern; lass das Armband neben dem Handy.</string>
+    <string name="huami_faces_invalid">Diese Datei ist kein Mi Band 6 Zifferblatt.</string>
+    <string name="huami_faces_done">Das Zifferblatt wurde hochgeladen. Wenn das Armband es nicht zeigt, wähle es in der Zifferblattliste des Armbands.</string>
+    <string name="huami_faces_no_space">Auf dem Armband ist kein Platz mehr. Lösche dort ein Zifferblatt und versuche es erneut.</string>
+    <string name="huami_faces_low_battery">Der Akku des Armbands ist schwach. Lade es auf und versuche es erneut.</string>
+    <string name="huami_faces_refused">Das Armband hat diese Datei nicht angenommen.</string>
     <string name="band_faces_delete">Löschen</string>
     <string name="band_notify_pick_search">Apps suchen</string>
     <string name="band_notify_pick_count">%1$d von %2$d Apps senden an das Armband</string>

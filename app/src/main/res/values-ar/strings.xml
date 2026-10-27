@@ -316,12 +316,13 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>مزاج الطائر: يتغير الطائر في واجهات FitWren والتصاميم حسب هدف الخطوات</item>
         <item>الطقس على الواجهة: رمز الطقس ودرجة الحرارة</item>
         <item>الشاشة الدائمة: لواجهات FitWren مظهر داكن وبسيط</item>
         <item>مشاركة التصاميم: أرسل التصميم مع صورته كملف واستورد تصميم صديقك</item>
         <item>واجهة حسب الوقت: يبدّل FitWren بين واجهة النهار والليل في الأوقات المختارة</item>
+        <item>واجهات Mi Band 6: رفع واجهة من ملف ‎.bin‎</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">جارٍ الرفع: %d%%</string>
     <string name="band_faces_done">تم رفع الواجهة واختيارها.</string>
     <string name="band_faces_failed">تعذّر رفع الواجهة. قرّب السوار وحاول مرة أخرى.</string>
+    <string name="huami_faces_hint">اختر ملف واجهة ‎.bin‎ مصنوعًا لـ Mi Band 6. قد يستغرق الرفع بضع دقائق، فأبقِ السوار قرب الهاتف.</string>
+    <string name="huami_faces_invalid">هذا الملف ليس واجهة لـ Mi Band 6.</string>
+    <string name="huami_faces_done">تم رفع الواجهة. إن لم يعرضها السوار فاخترها من قائمة الواجهات في السوار.</string>
+    <string name="huami_faces_no_space">لا توجد مساحة في السوار. احذف واجهة من السوار وحاول مرة أخرى.</string>
+    <string name="huami_faces_low_battery">بطارية السوار منخفضة. اشحنه وحاول مرة أخرى.</string>
+    <string name="huami_faces_refused">لم يقبل السوار هذا الملف.</string>
     <string name="band_faces_delete">حذف</string>
     <string name="band_notify_pick_search">ابحث عن تطبيق</string>
     <string name="band_notify_pick_count">%1$d من %2$d تطبيقًا ترسل إلى السوار</string>

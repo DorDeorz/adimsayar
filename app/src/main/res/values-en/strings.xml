@@ -316,12 +316,13 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>The bird\'s mood: on FitWren faces and designs the bird changes with the step goal (asleep, awake, happy, celebrating)</item>
         <item>Weather on the face: a weather icon and the temperature on FitWren faces and designs</item>
         <item>Always-on display: FitWren faces get a plain dark always-on look</item>
         <item>Share designs: send a face design with its photo as a file, import a friend\'s design</item>
         <item>Face by time of day: FitWren switches between a day and a night face at the times you pick</item>
+        <item>Mi Band 6 faces: upload a watch face from a .bin file</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Uploading: %d%%</string>
     <string name="band_faces_done">Watch face uploaded and selected.</string>
     <string name="band_faces_failed">The watch face could not be uploaded. Bring the band closer and try again.</string>
+    <string name="huami_faces_hint">Pick a .bin watch face made for the Mi Band 6. The upload can take a few minutes; keep the band next to the phone.</string>
+    <string name="huami_faces_invalid">This file is not a Mi Band 6 watch face.</string>
+    <string name="huami_faces_done">The watch face was uploaded. If the band does not show it, pick it from the band\'s face list.</string>
+    <string name="huami_faces_no_space">The band is full. Delete a face on the band and try again.</string>
+    <string name="huami_faces_low_battery">The band\'s battery is low. Charge it and try again.</string>
+    <string name="huami_faces_refused">The band did not accept this file.</string>
     <string name="band_faces_delete">Delete</string>
     <string name="band_notify_pick_search">Search apps</string>
     <string name="band_notify_pick_count">%1$d of %2$d apps send to the band</string>

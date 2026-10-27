@@ -316,12 +316,13 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>Настроение птички: на циферблатах FitWren и в дизайнах птичка меняется по цели шагов</item>
         <item>Погода на циферблате: значок погоды и температура</item>
         <item>Always-on: у циферблатов FitWren есть простой тёмный вид для постоянного экрана</item>
         <item>Обмен дизайнами: отправьте дизайн с фото файлом, импортируйте дизайн друга</item>
         <item>Циферблат по времени суток: FitWren сам меняет дневной и ночной циферблат</item>
+        <item>Циферблаты Mi Band 6: загрузка циферблата из файла .bin</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Загрузка: %d%%</string>
     <string name="band_faces_done">Циферблат загружен и выбран.</string>
     <string name="band_faces_failed">Не удалось загрузить циферблат. Поднесите браслет ближе и повторите.</string>
+    <string name="huami_faces_hint">Выберите файл циферблата .bin для Mi Band 6. Загрузка может занять несколько минут; держите браслет рядом с телефоном.</string>
+    <string name="huami_faces_invalid">Этот файл не является циферблатом Mi Band 6.</string>
+    <string name="huami_faces_done">Циферблат загружен. Если браслет его не показывает, выберите его в списке циферблатов браслета.</string>
+    <string name="huami_faces_no_space">На браслете нет места. Удалите циферблат на браслете и повторите.</string>
+    <string name="huami_faces_low_battery">Батарея браслета разряжена. Зарядите его и повторите.</string>
+    <string name="huami_faces_refused">Браслет не принял этот файл.</string>
     <string name="band_faces_delete">Удалить</string>
     <string name="band_notify_pick_search">Поиск приложений</string>
     <string name="band_notify_pick_count">%1$d из %2$d приложений отправляют на браслет</string>

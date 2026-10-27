@@ -316,12 +316,13 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>L\'humeur de l\'oiseau : sur les cadrans FitWren et les créations, l\'oiseau change selon l\'objectif de pas</item>
         <item>La météo sur le cadran : icône météo et température</item>
         <item>Affichage permanent : les cadrans FitWren ont une vue sombre et sobre</item>
         <item>Partager des créations : envoyez une création avec sa photo dans un fichier, importez celle d\'un ami</item>
         <item>Cadran selon l\'heure : FitWren passe du cadran de jour à celui de nuit aux heures choisies</item>
+        <item>Cadrans Mi Band 6 : envoyer un cadran depuis un fichier .bin</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Envoi : %d%%</string>
     <string name="band_faces_done">Cadran envoyé et sélectionné.</string>
     <string name="band_faces_failed">Le cadran n’a pas pu être envoyé. Rapproche le bracelet et réessaie.</string>
+    <string name="huami_faces_hint">Choisis un cadran .bin conçu pour le Mi Band 6. L’envoi peut prendre quelques minutes ; garde le bracelet près du téléphone.</string>
+    <string name="huami_faces_invalid">Ce fichier n’est pas un cadran Mi Band 6.</string>
+    <string name="huami_faces_done">Le cadran a été envoyé. Si le bracelet ne l’affiche pas, choisis-le dans la liste des cadrans du bracelet.</string>
+    <string name="huami_faces_no_space">Le bracelet est plein. Supprime un cadran sur le bracelet et réessaie.</string>
+    <string name="huami_faces_low_battery">La batterie du bracelet est faible. Recharge-le et réessaie.</string>
+    <string name="huami_faces_refused">Le bracelet n’a pas accepté ce fichier.</string>
     <string name="band_faces_delete">Supprimer</string>
     <string name="band_notify_pick_search">Rechercher une app</string>
     <string name="band_notify_pick_count">%1$d apps sur %2$d envoient au bracelet</string>

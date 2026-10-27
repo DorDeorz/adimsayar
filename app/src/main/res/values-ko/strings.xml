@@ -316,12 +316,13 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>새의 기분: FitWren 워치페이스와 디자인에서 새가 걸음 목표에 따라 바뀝니다</item>
         <item>워치페이스에 날씨: 날씨 아이콘과 기온</item>
         <item>상시 표시: FitWren 워치페이스에 단순하고 어두운 상시 표시 화면</item>
         <item>디자인 공유: 사진이 포함된 디자인을 파일로 보내고 친구의 디자인을 가져옵니다</item>
         <item>시간대별 워치페이스: 정한 시간에 낮/밤 워치페이스를 자동으로 바꿉니다</item>
+        <item>Mi Band 6 워치 페이스: .bin 파일에서 워치 페이스 올리기</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">올리는 중: %d%%</string>
     <string name="band_faces_done">워치 페이스를 올리고 선택했습니다.</string>
     <string name="band_faces_failed">워치 페이스를 올리지 못했습니다. 밴드를 가까이 두고 다시 시도하세요.</string>
+    <string name="huami_faces_hint">Mi Band 6용 .bin 워치 페이스 파일을 선택하세요. 업로드에 몇 분이 걸릴 수 있으니 밴드를 휴대폰 옆에 두세요.</string>
+    <string name="huami_faces_invalid">이 파일은 Mi Band 6 워치 페이스가 아닙니다.</string>
+    <string name="huami_faces_done">워치 페이스를 올렸습니다. 밴드에 보이지 않으면 밴드의 워치 페이스 목록에서 선택하세요.</string>
+    <string name="huami_faces_no_space">밴드에 공간이 없습니다. 밴드에서 워치 페이스를 지우고 다시 시도하세요.</string>
+    <string name="huami_faces_low_battery">밴드 배터리가 부족합니다. 충전한 뒤 다시 시도하세요.</string>
+    <string name="huami_faces_refused">밴드가 이 파일을 받지 않았습니다.</string>
     <string name="band_faces_delete">삭제</string>
     <string name="band_notify_pick_search">앱 검색</string>
     <string name="band_notify_pick_count">%2$d개 중 %1$d개 앱이 밴드로 보냄</string>

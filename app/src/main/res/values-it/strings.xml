@@ -316,12 +316,13 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>L\'umore dell\'uccellino: sui quadranti FitWren e nei design l\'uccellino cambia con l\'obiettivo di passi</item>
         <item>Meteo sul quadrante: icona meteo e temperatura</item>
         <item>Display sempre attivo: i quadranti FitWren hanno una vista scura e semplice</item>
         <item>Condividi design: invia un design con la foto come file, importa quello di un amico</item>
         <item>Quadrante in base all\'ora: FitWren alterna quadrante diurno e notturno agli orari scelti</item>
+        <item>Quadranti Mi Band 6: carica un quadrante da un file .bin</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Caricamento: %d%%</string>
     <string name="band_faces_done">Quadrante caricato e selezionato.</string>
     <string name="band_faces_failed">Impossibile caricare il quadrante. Avvicina il braccialetto e riprova.</string>
+    <string name="huami_faces_hint">Scegli un quadrante .bin fatto per la Mi Band 6. Il caricamento può richiedere qualche minuto; tieni il braccialetto vicino al telefono.</string>
+    <string name="huami_faces_invalid">Questo file non è un quadrante per Mi Band 6.</string>
+    <string name="huami_faces_done">Il quadrante è stato caricato. Se il braccialetto non lo mostra, sceglilo dall\'elenco dei quadranti del braccialetto.</string>
+    <string name="huami_faces_no_space">Il braccialetto è pieno. Elimina un quadrante dal braccialetto e riprova.</string>
+    <string name="huami_faces_low_battery">La batteria del braccialetto è scarica. Ricaricalo e riprova.</string>
+    <string name="huami_faces_refused">Il braccialetto non ha accettato questo file.</string>
     <string name="band_faces_delete">Elimina</string>
     <string name="band_notify_pick_search">Cerca app</string>
     <string name="band_notify_pick_count">%1$d di %2$d app inviano al braccialetto</string>

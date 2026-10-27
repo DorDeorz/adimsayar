@@ -316,12 +316,13 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>El humor del pájaro: en las esferas FitWren y los diseños el pájaro cambia con la meta de pasos</item>
         <item>El tiempo en la esfera: icono del tiempo y temperatura</item>
         <item>Pantalla siempre activa: las esferas FitWren tienen una vista oscura y sencilla</item>
         <item>Compartir diseños: envía un diseño con su foto como archivo e importa el de un amigo</item>
         <item>Esfera según la hora: FitWren cambia entre esfera de día y de noche a las horas elegidas</item>
+        <item>Esferas de Mi Band 6: sube una esfera desde un archivo .bin</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Subiendo: %d%%</string>
     <string name="band_faces_done">Esfera subida y seleccionada.</string>
     <string name="band_faces_failed">No se pudo subir la esfera. Acerca la pulsera e inténtalo de nuevo.</string>
+    <string name="huami_faces_hint">Elige un archivo de esfera .bin hecho para la Mi Band 6. La subida puede tardar unos minutos; deja la pulsera junto al teléfono.</string>
+    <string name="huami_faces_invalid">Este archivo no es una esfera de Mi Band 6.</string>
+    <string name="huami_faces_done">La esfera se subió. Si la pulsera no la muestra, elígela en la lista de esferas de la pulsera.</string>
+    <string name="huami_faces_no_space">La pulsera no tiene espacio. Borra una esfera en la pulsera e inténtalo de nuevo.</string>
+    <string name="huami_faces_low_battery">La batería de la pulsera está baja. Cárgala e inténtalo de nuevo.</string>
+    <string name="huami_faces_refused">La pulsera no aceptó este archivo.</string>
     <string name="band_faces_delete">Borrar</string>
     <string name="band_notify_pick_search">Buscar apps</string>
     <string name="band_notify_pick_count">%1$d de %2$d apps envían a la pulsera</string>

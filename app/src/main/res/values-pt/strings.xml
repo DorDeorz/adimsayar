@@ -316,12 +316,13 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>O humor do pássaro: nos mostradores FitWren e nos designs o pássaro muda com a meta de passos</item>
         <item>Clima no mostrador: ícone do clima e temperatura</item>
         <item>Tela sempre ligada: os mostradores FitWren ganham uma vista escura e simples</item>
         <item>Compartilhar designs: envie um design com a foto como arquivo e importe o de um amigo</item>
         <item>Mostrador por horário: o FitWren troca entre mostrador de dia e de noite nos horários escolhidos</item>
+        <item>Mostradores da Mi Band 6: envie um mostrador de um arquivo .bin</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
@@ -856,6 +857,12 @@
     <string name="band_faces_sending">Enviando: %d%%</string>
     <string name="band_faces_done">Mostrador enviado e selecionado.</string>
     <string name="band_faces_failed">Não foi possível enviar o mostrador. Aproxime a pulseira e tente de novo.</string>
+    <string name="huami_faces_hint">Escolha um mostrador .bin feito para a Mi Band 6. O envio pode levar alguns minutos; deixe a pulseira perto do telefone.</string>
+    <string name="huami_faces_invalid">Este arquivo não é um mostrador da Mi Band 6.</string>
+    <string name="huami_faces_done">O mostrador foi enviado. Se a pulseira não o mostrar, escolha-o na lista de mostradores da pulseira.</string>
+    <string name="huami_faces_no_space">A pulseira está cheia. Apague um mostrador na pulseira e tente de novo.</string>
+    <string name="huami_faces_low_battery">A bateria da pulseira está fraca. Carregue-a e tente de novo.</string>
+    <string name="huami_faces_refused">A pulseira não aceitou este arquivo.</string>
     <string name="band_faces_delete">Apagar</string>
     <string name="band_notify_pick_search">Buscar apps</string>
     <string name="band_notify_pick_count">%1$d de %2$d apps enviam à pulseira</string>

@@ -316,12 +316,13 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
-    <string-array name="release_notes_0_14_0">
+    <string-array name="release_notes_0_14_1">
         <item>Kuşun ruh hali: FitWren kadranlarındaki ve tasarımdaki kuş adım hedefine göre değişir (uykulu, uyanık, neşeli, kutlama)</item>
         <item>Kadranda hava durumu: FitWren kadranlarında ve tasarımda hava simgesi ve sıcaklık</item>
         <item>Ekran kapalıyken görünüm: FitWren kadranlarına her zaman açık ekran için sade, koyu bir görünüm</item>
         <item>Tasarım paylaşma: kadran tasarımını fotoğrafıyla birlikte dosya olarak gönder, arkadaşının tasarımını içe al</item>
         <item>Saate göre kadran: FitWren gündüz ve gece kadranını seçtiğin saatlerde kendisi değiştirir</item>
+        <item>Mi Band 6 kadranı: .bin dosyasından kadran yükleme</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
@@ -857,6 +858,12 @@
     <string name="band_faces_sending">Yükleniyor: %d%%</string>
     <string name="band_faces_done">Kadran yüklendi ve seçildi.</string>
     <string name="band_faces_failed">Kadran yüklenemedi. Bilekliği yaklaştırıp yeniden dene.</string>
+    <string name="huami_faces_hint">Mi Band 6 için yapılmış bir .bin kadran dosyası seç. Yükleme birkaç dakika sürebilir, bu sırada bileklik telefonun yanında dursun.</string>
+    <string name="huami_faces_invalid">Bu dosya bir Mi Band 6 kadranı değil.</string>
+    <string name="huami_faces_done">Kadran yüklendi. Bileklikte görünmezse bilekliğin kadran listesinden seç.</string>
+    <string name="huami_faces_no_space">Bileklikte yer kalmadı. Bileklikten bir kadran silip yeniden dene.</string>
+    <string name="huami_faces_low_battery">Bilekliğin şarjı az. Şarj edip yeniden dene.</string>
+    <string name="huami_faces_refused">Bileklik bu dosyayı kabul etmedi.</string>
     <string name="band_faces_delete">Sil</string>
     <string name="band_notify_pick_search">Uygulama ara</string>
     <string name="band_notify_pick_count">%1$d / %2$d uygulama bilekliğe gönderiyor</string>
