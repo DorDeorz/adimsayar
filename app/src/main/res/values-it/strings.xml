@@ -320,6 +320,8 @@
         <item>L\'umore dell\'uccellino: sui quadranti FitWren e nei design l\'uccellino cambia con l\'obiettivo di passi</item>
         <item>Meteo sul quadrante: icona meteo e temperatura</item>
         <item>Display sempre attivo: i quadranti FitWren hanno una vista scura e semplice</item>
+        <item>Condividi design: invia un design con la foto come file, importa quello di un amico</item>
+        <item>Quadrante in base all\'ora: FitWren alterna quadrante diurno e notturno agli orari scelti</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Ripristina</string>
     <string name="face_designer_bird_mood">Secondo obiettivo</string>
     <string name="face_designer_show_weather">Meteo</string>
+    <string name="face_designer_share_section">Condividi</string>
+    <string name="face_designer_share">Condividi design</string>
+    <string name="face_designer_import">Importa design</string>
+    <string name="face_designer_share_hint">Il design viene salvato in un file con la foto. Aprilo in FitWren con “Importa design”.</string>
+    <string name="face_designer_import_failed">Questo file non è un design di quadrante FitWren</string>
+    <string name="face_schedule">Quadrante in base all\'ora</string>
+    <string name="face_schedule_hint">FitWren cambia tra quadrante diurno e notturno agli orari scelti. La band deve essere connessa; altrimenti riprova poco dopo.</string>
+    <string name="face_schedule_on">Attivo</string>
+    <string name="face_schedule_day">Quadrante diurno</string>
+    <string name="face_schedule_day_start">Inizio giorno</string>
+    <string name="face_schedule_night">Quadrante notturno</string>
+    <string name="face_schedule_night_start">Inizio notte</string>
+    <string name="face_schedule_none">Non scelto</string>
 </resources>

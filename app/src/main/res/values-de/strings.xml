@@ -320,6 +320,8 @@
         <item>Laune des Vogels: auf FitWren-Zifferblättern und Entwürfen ändert sich der Vogel mit dem Schrittziel</item>
         <item>Wetter auf dem Zifferblatt: Wettersymbol und Temperatur</item>
         <item>Always-on-Display: FitWren-Zifferblätter bekommen eine schlichte dunkle Always-on-Ansicht</item>
+        <item>Entwürfe teilen: Zifferblatt-Entwurf mit Foto als Datei senden, Entwurf eines Freundes importieren</item>
+        <item>Zifferblatt nach Tageszeit: FitWren wechselt zu gewählten Zeiten zwischen Tag- und Nacht-Zifferblatt</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Zurücksetzen</string>
     <string name="face_designer_bird_mood">Nach Ziel</string>
     <string name="face_designer_show_weather">Wetter</string>
+    <string name="face_designer_share_section">Teilen</string>
+    <string name="face_designer_share">Entwurf teilen</string>
+    <string name="face_designer_import">Entwurf importieren</string>
+    <string name="face_designer_share_hint">Der Entwurf wird mit dem Foto in eine Datei geschrieben. Öffne sie in FitWren mit “Entwurf importieren”.</string>
+    <string name="face_designer_import_failed">Diese Datei ist kein FitWren-Zifferblattentwurf</string>
+    <string name="face_schedule">Zifferblatt nach Tageszeit</string>
+    <string name="face_schedule_hint">FitWren wechselt zu den gewählten Zeiten zwischen Tag- und Nacht-Zifferblatt. Das Band muss dann verbunden sein, sonst versucht es FitWren etwas später erneut.</string>
+    <string name="face_schedule_on">An</string>
+    <string name="face_schedule_day">Tag-Zifferblatt</string>
+    <string name="face_schedule_day_start">Tag beginnt</string>
+    <string name="face_schedule_night">Nacht-Zifferblatt</string>
+    <string name="face_schedule_night_start">Nacht beginnt</string>
+    <string name="face_schedule_none">Nicht gewählt</string>
 </resources>

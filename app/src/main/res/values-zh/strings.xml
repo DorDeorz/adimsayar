@@ -320,6 +320,8 @@
         <item>小鸟心情：FitWren 表盘和设计中的小鸟随步数目标变化</item>
         <item>表盘上的天气：天气图标和温度</item>
         <item>息屏显示：FitWren 表盘有简洁的暗色息屏界面</item>
+        <item>分享设计：将带照片的设计作为文件发送，导入朋友的设计</item>
+        <item>按时间切换表盘：FitWren 在你选择的时间切换白天和夜间表盘</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">重置</string>
     <string name="face_designer_bird_mood">随目标变化</string>
     <string name="face_designer_show_weather">天气</string>
+    <string name="face_designer_share_section">分享</string>
+    <string name="face_designer_share">分享设计</string>
+    <string name="face_designer_import">导入设计</string>
+    <string name="face_designer_share_hint">设计会连同照片写入一个文件。在 FitWren 中用“导入设计”打开。</string>
+    <string name="face_designer_import_failed">此文件不是 FitWren 表盘设计</string>
+    <string name="face_schedule">按时间切换表盘</string>
+    <string name="face_schedule_hint">FitWren 会在你选择的时间切换白天和夜间表盘。届时手环需已连接，否则稍后重试。</string>
+    <string name="face_schedule_on">开启</string>
+    <string name="face_schedule_day">白天表盘</string>
+    <string name="face_schedule_day_start">白天开始</string>
+    <string name="face_schedule_night">夜间表盘</string>
+    <string name="face_schedule_night_start">夜间开始</string>
+    <string name="face_schedule_none">未选择</string>
 </resources>

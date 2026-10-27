@@ -12,6 +12,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
 import android.net.Uri
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.dordeorz.adimsayar.band.FacePicture
@@ -84,6 +85,10 @@ object FaceDesigner {
     private const val KEY_DESIGN = "face_design"
     private const val KEY_NEXT = "face_design_next"
     private const val KEY_LAST = "face_design_last"
+
+    private const val SHARE_FORMAT = "fitwren-face-design"
+    private const val SHARE_FILE = "fitwren-kadran.json"
+    private const val SHARE_MAX = 8 * 1024 * 1024
 
     val DEFAULT = FaceDesign(
         top = 0xFF1E172E.toInt(),
@@ -164,37 +169,67 @@ object FaceDesigner {
 
     fun saved(context: Context): FaceDesign {
         val text = prefs(context).getString(KEY_DESIGN, null) ?: return DEFAULT
-        return runCatching {
-            val o = JSONObject(text)
-            FaceDesign(
-                o.getInt("top"), o.getInt("bottom"), o.getInt("hour"), o.getInt("minute"), o.getInt("text"), o.getInt("accent"),
-                DesignBird.valueOf(o.getString("bird")),
-                style = o.optString("style", "bold"),
-                place = runCatching { DesignPlace.valueOf(o.optString("place")) }.getOrDefault(DesignPlace.Top),
-                showDate = o.optBoolean("showDate", true),
-                showSteps = o.optBoolean("showSteps", true),
-                showBar = o.optBoolean("showBar", true),
-                showHealth = o.optBoolean("showHealth", true),
-                showWeather = o.optBoolean("showWeather", true),
-                dim = o.optInt("dim", 0),
-                photo = o.optBoolean("photo", false) && photoFile(context).exists(),
-                zoom = o.optDouble("zoom", 1.0).toFloat(),
-                panX = o.optDouble("panX", 0.0).toFloat(),
-                panY = o.optDouble("panY", 0.0).toFloat(),
-            )
-        }.getOrDefault(DEFAULT)
+        return runCatching { fromJson(JSONObject(text)) }.getOrNull()
+            ?.let { it.copy(photo = it.photo && photoFile(context).exists()) }
+            ?: DEFAULT
     }
 
     fun save(context: Context, design: FaceDesign) {
-        val o = JSONObject()
-            .put("top", design.top).put("bottom", design.bottom)
-            .put("hour", design.hour).put("minute", design.minute).put("text", design.text).put("accent", design.accent)
-            .put("bird", design.bird.name).put("style", design.style).put("place", design.place.name)
-            .put("showDate", design.showDate).put("showSteps", design.showSteps)
-            .put("showBar", design.showBar).put("showHealth", design.showHealth).put("showWeather", design.showWeather)
-            .put("dim", design.dim).put("photo", design.photo)
-            .put("zoom", design.zoom.toDouble()).put("panX", design.panX.toDouble()).put("panY", design.panY.toDouble())
-        prefs(context).edit().putString(KEY_DESIGN, o.toString()).apply()
+        prefs(context).edit().putString(KEY_DESIGN, toJson(design).toString()).apply()
+    }
+
+    private fun toJson(design: FaceDesign): JSONObject = JSONObject()
+        .put("top", design.top).put("bottom", design.bottom)
+        .put("hour", design.hour).put("minute", design.minute).put("text", design.text).put("accent", design.accent)
+        .put("bird", design.bird.name).put("style", design.style).put("place", design.place.name)
+        .put("showDate", design.showDate).put("showSteps", design.showSteps)
+        .put("showBar", design.showBar).put("showHealth", design.showHealth).put("showWeather", design.showWeather)
+        .put("dim", design.dim).put("photo", design.photo)
+        .put("zoom", design.zoom.toDouble()).put("panX", design.panX.toDouble()).put("panY", design.panY.toDouble())
+
+    private fun fromJson(o: JSONObject): FaceDesign = FaceDesign(
+        o.getInt("top"), o.getInt("bottom"), o.getInt("hour"), o.getInt("minute"), o.getInt("text"), o.getInt("accent"),
+        runCatching { DesignBird.valueOf(o.getString("bird")) }.getOrDefault(DesignBird.Mood),
+        style = o.optString("style", "bold"),
+        place = runCatching { DesignPlace.valueOf(o.optString("place")) }.getOrDefault(DesignPlace.Top),
+        showDate = o.optBoolean("showDate", true),
+        showSteps = o.optBoolean("showSteps", true),
+        showBar = o.optBoolean("showBar", true),
+        showHealth = o.optBoolean("showHealth", true),
+        showWeather = o.optBoolean("showWeather", true),
+        dim = o.optInt("dim", 0).coerceIn(0, 90),
+        photo = o.optBoolean("photo", false),
+        zoom = o.optDouble("zoom", 1.0).toFloat().coerceIn(1f, ZOOM_MAX),
+        panX = o.optDouble("panX", 0.0).toFloat(),
+        panY = o.optDouble("panY", 0.0).toFloat(),
+    )
+
+    /** Writes [design], with its photo, to a file another FitWren can read with [importDesign]; null when it fails. */
+    suspend fun export(context: Context, design: FaceDesign): File? = withContext(Dispatchers.IO) {
+        runCatching {
+            val o = toJson(design).put("format", SHARE_FORMAT).put("version", 1)
+            val photo = photoFile(context)
+            if (design.photo && photo.exists()) o.put("photoJpeg", Base64.encodeToString(photo.readBytes(), Base64.NO_WRAP))
+            else o.put("photo", false)
+            File(File(context.cacheDir, "shares").apply { mkdirs() }, SHARE_FILE).apply { writeText(o.toString()) }
+        }.onFailure { Log.w(XiaomiBand.TAG, "face designer export: $it") }.getOrNull()
+    }
+
+    /** Reads a design written by [export]; its photo becomes the kept photo. Null when the file is not one. */
+    suspend fun importDesign(context: Context, uri: Uri): Pair<FaceDesign, Bitmap?>? = withContext(Dispatchers.IO) {
+        runCatching {
+            val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: return@runCatching null
+            if (bytes.size > SHARE_MAX) return@runCatching null
+            val o = JSONObject(bytes.toString(Charsets.UTF_8))
+            if (o.optString("format") != SHARE_FORMAT) return@runCatching null
+            val design = fromJson(o)
+            val jpeg = o.optString("photoJpeg").takeIf { it.isNotEmpty() }?.let { Base64.decode(it, Base64.DEFAULT) }
+            val photo = jpeg?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+            if (photo != null) {
+                photoFile(context).apply { parentFile?.mkdirs() }.writeBytes(jpeg)
+            }
+            design.copy(photo = photo != null) to photo
+        }.onFailure { Log.w(XiaomiBand.TAG, "face designer import: $it") }.getOrNull()
     }
 
     /** Reads a photo from the phone, keeps a small copy for later designs and returns it; null when it cannot be read. */

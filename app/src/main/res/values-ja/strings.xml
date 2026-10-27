@@ -320,6 +320,8 @@
         <item>小鳥の気分：FitWrenの文字盤とデザインで、小鳥が歩数目標に応じて変わります</item>
         <item>文字盤に天気：天気アイコンと気温</item>
         <item>常時表示：FitWrenの文字盤にシンプルで暗い常時表示画面</item>
+        <item>デザインの共有：写真付きのデザインをファイルで送り、友だちのデザインを読み込めます</item>
+        <item>時間帯で文字盤を切り替え：選んだ時刻に昼と夜の文字盤を自動で切り替えます</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">リセット</string>
     <string name="face_designer_bird_mood">目標に応じて</string>
     <string name="face_designer_show_weather">天気</string>
+    <string name="face_designer_share_section">共有</string>
+    <string name="face_designer_share">デザインを共有</string>
+    <string name="face_designer_import">デザインを読み込む</string>
+    <string name="face_designer_share_hint">デザインは写真ごとファイルに保存されます。FitWrenの「デザインを読み込む」で開けます。</string>
+    <string name="face_designer_import_failed">このファイルはFitWrenの文字盤デザインではありません</string>
+    <string name="face_schedule">時間帯で文字盤を切り替え</string>
+    <string name="face_schedule_hint">FitWrenが選んだ時刻に昼と夜の文字盤を切り替えます。そのときバンドが接続されている必要があります。未接続なら少し後に再試行します。</string>
+    <string name="face_schedule_on">オン</string>
+    <string name="face_schedule_day">昼の文字盤</string>
+    <string name="face_schedule_day_start">昼の開始</string>
+    <string name="face_schedule_night">夜の文字盤</string>
+    <string name="face_schedule_night_start">夜の開始</string>
+    <string name="face_schedule_none">未選択</string>
 </resources>

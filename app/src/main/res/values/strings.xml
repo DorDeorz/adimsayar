@@ -320,6 +320,8 @@
         <item>Kuşun ruh hali: FitWren kadranlarındaki ve tasarımdaki kuş adım hedefine göre değişir (uykulu, uyanık, neşeli, kutlama)</item>
         <item>Kadranda hava durumu: FitWren kadranlarında ve tasarımda hava simgesi ve sıcaklık</item>
         <item>Ekran kapalıyken görünüm: FitWren kadranlarına her zaman açık ekran için sade, koyu bir görünüm</item>
+        <item>Tasarım paylaşma: kadran tasarımını fotoğrafıyla birlikte dosya olarak gönder, arkadaşının tasarımını içe al</item>
+        <item>Saate göre kadran: FitWren gündüz ve gece kadranını seçtiğin saatlerde kendisi değiştirir</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
@@ -923,4 +925,17 @@
     <string name="face_designer_reset">Sıfırla</string>
     <string name="face_designer_bird_mood">Hedefe göre</string>
     <string name="face_designer_show_weather">Hava durumu</string>
+    <string name="face_designer_share_section">Paylaş</string>
+    <string name="face_designer_share">Tasarımı paylaş</string>
+    <string name="face_designer_import">Tasarım içe al</string>
+    <string name="face_designer_share_hint">Tasarımın fotoğrafıyla birlikte bir dosyaya yazılır. Arkadaşın FitWren\'de “Tasarım içe al” ile açar.</string>
+    <string name="face_designer_import_failed">Bu dosya bir FitWren kadran tasarımı değil</string>
+    <string name="face_schedule">Saate göre kadran</string>
+    <string name="face_schedule_hint">FitWren seçtiğin saatlerde gündüz ve gece kadranını kendisi değiştirir. O sırada bileklik bağlı olmalı; değilse biraz sonra yeniden dener.</string>
+    <string name="face_schedule_on">Açık</string>
+    <string name="face_schedule_day">Gündüz kadranı</string>
+    <string name="face_schedule_day_start">Gündüz başlangıcı</string>
+    <string name="face_schedule_night">Gece kadranı</string>
+    <string name="face_schedule_night_start">Gece başlangıcı</string>
+    <string name="face_schedule_none">Seçilmedi</string>
 </resources>

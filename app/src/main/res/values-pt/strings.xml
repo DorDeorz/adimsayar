@@ -320,6 +320,8 @@
         <item>O humor do pássaro: nos mostradores FitWren e nos designs o pássaro muda com a meta de passos</item>
         <item>Clima no mostrador: ícone do clima e temperatura</item>
         <item>Tela sempre ligada: os mostradores FitWren ganham uma vista escura e simples</item>
+        <item>Compartilhar designs: envie um design com a foto como arquivo e importe o de um amigo</item>
+        <item>Mostrador por horário: o FitWren troca entre mostrador de dia e de noite nos horários escolhidos</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Redefinir</string>
     <string name="face_designer_bird_mood">Pela meta</string>
     <string name="face_designer_show_weather">Clima</string>
+    <string name="face_designer_share_section">Compartilhar</string>
+    <string name="face_designer_share">Compartilhar design</string>
+    <string name="face_designer_import">Importar design</string>
+    <string name="face_designer_share_hint">O design é salvo em um arquivo com a foto. Abra no FitWren com “Importar design”.</string>
+    <string name="face_designer_import_failed">Este arquivo não é um design de mostrador FitWren</string>
+    <string name="face_schedule">Mostrador por horário</string>
+    <string name="face_schedule_hint">O FitWren troca entre o mostrador de dia e o de noite nos horários escolhidos. A pulseira precisa estar conectada; se não, tenta de novo um pouco depois.</string>
+    <string name="face_schedule_on">Ligado</string>
+    <string name="face_schedule_day">Mostrador de dia</string>
+    <string name="face_schedule_day_start">Início do dia</string>
+    <string name="face_schedule_night">Mostrador de noite</string>
+    <string name="face_schedule_night_start">Início da noite</string>
+    <string name="face_schedule_none">Não escolhido</string>
 </resources>

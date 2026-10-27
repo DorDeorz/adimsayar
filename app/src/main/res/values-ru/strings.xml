@@ -320,6 +320,8 @@
         <item>Настроение птички: на циферблатах FitWren и в дизайнах птичка меняется по цели шагов</item>
         <item>Погода на циферблате: значок погоды и температура</item>
         <item>Always-on: у циферблатов FitWren есть простой тёмный вид для постоянного экрана</item>
+        <item>Обмен дизайнами: отправьте дизайн с фото файлом, импортируйте дизайн друга</item>
+        <item>Циферблат по времени суток: FitWren сам меняет дневной и ночной циферблат</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Сбросить</string>
     <string name="face_designer_bird_mood">По цели</string>
     <string name="face_designer_show_weather">Погода</string>
+    <string name="face_designer_share_section">Поделиться</string>
+    <string name="face_designer_share">Поделиться дизайном</string>
+    <string name="face_designer_import">Импорт дизайна</string>
+    <string name="face_designer_share_hint">Дизайн сохраняется в файл вместе с фото. Откройте его в FitWren через “Импорт дизайна”.</string>
+    <string name="face_designer_import_failed">Этот файл не является дизайном циферблата FitWren</string>
+    <string name="face_schedule">Циферблат по времени суток</string>
+    <string name="face_schedule_hint">FitWren сам меняет дневной и ночной циферблат в выбранное время. Браслет должен быть подключён; если нет, попробует чуть позже.</string>
+    <string name="face_schedule_on">Вкл.</string>
+    <string name="face_schedule_day">Дневной циферблат</string>
+    <string name="face_schedule_day_start">Начало дня</string>
+    <string name="face_schedule_night">Ночной циферблат</string>
+    <string name="face_schedule_night_start">Начало ночи</string>
+    <string name="face_schedule_none">Не выбран</string>
 </resources>

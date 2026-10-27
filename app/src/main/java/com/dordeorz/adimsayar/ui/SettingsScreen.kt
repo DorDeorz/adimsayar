@@ -23,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import com.dordeorz.adimsayar.background.BandNotificationListener
+import com.dordeorz.adimsayar.background.FaceSchedule
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
@@ -1104,6 +1105,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     val own = remember { OwnFaces.available(context) }
     var designing by remember { mutableStateOf(false) }
     val designer = remember { FaceDesigner.available(context) }
+    var scheduling by remember { mutableStateOf(false) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1154,6 +1156,11 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                     ) { Text(stringResource(R.string.face_store)) }
                 }
+                OutlinedButton(
+                    enabled = !list.isNullOrEmpty(),
+                    onClick = { scheduling = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text(stringResource(R.string.face_schedule)) }
                 when (val state = upload) {
                     is WatchfaceUpload.Sending -> {
                         Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
@@ -1231,6 +1238,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     if (designing) {
         FaceDesignerDialog(onDismiss = { designing = false })
     }
+    if (scheduling) {
+        FaceScheduleDialog(faces.orEmpty(), onDismiss = { scheduling = false })
+    }
     deleting?.let { face ->
         AlertDialog(
             onDismissRequest = { deleting = null },
@@ -1243,6 +1253,83 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                 }) { Text(stringResource(R.string.band_faces_delete)) }
             },
             dismissButton = { TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+}
+
+/** Day and night faces, each from its own time; FitWren changes the band's face at those times. */
+@Composable
+private fun FaceScheduleDialog(faces: List<BandWatchface>, onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    var plan by remember { mutableStateOf(FaceSchedule.plan(context)) }
+    var picking by remember { mutableStateOf<Boolean?>(null) } // true: day face, false: night face
+    val names by produceState(emptyMap<String, String>(), faces) {
+        value = faces.associate { it.id to (BandFaces.savedName(context, it.id) ?: it.name) }
+    }
+    fun pickTime(current: Int, onPicked: (Int) -> Unit) {
+        TimePickerDialog(
+            context,
+            { _, hour, minute -> onPicked(hour * 60 + minute) },
+            current / 60,
+            current % 60,
+            android.text.format.DateFormat.is24HourFormat(context),
+        ).show()
+    }
+    val none = stringResource(R.string.face_schedule_none)
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.face_schedule)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(
+                    stringResource(R.string.face_schedule_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                SwitchRow(stringResource(R.string.face_schedule_on), "", plan.on) { plan = plan.copy(on = it) }
+                ValueRow(stringResource(R.string.face_schedule_day), plan.dayId?.let { names[it] ?: it } ?: none) { picking = true }
+                ValueRow(stringResource(R.string.face_schedule_day_start), minuteLabel(plan.dayStart)) {
+                    pickTime(plan.dayStart) { plan = plan.copy(dayStart = it) }
+                }
+                ValueRow(stringResource(R.string.face_schedule_night), plan.nightId?.let { names[it] ?: it } ?: none) { picking = false }
+                ValueRow(stringResource(R.string.face_schedule_night_start), minuteLabel(plan.nightStart)) {
+                    pickTime(plan.nightStart) { plan = plan.copy(nightStart = it) }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                FaceSchedule.save(context, plan)
+                onDismiss()
+            }) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+    picking?.let { day ->
+        AlertDialog(
+            onDismissRequest = { picking = null },
+            title = { Text(stringResource(if (day) R.string.face_schedule_day else R.string.face_schedule_night)) },
+            text = {
+                LazyColumn(Modifier.heightIn(max = 380.dp)) {
+                    items(faces, key = { it.id }) { face ->
+                        val chosen = (if (day) plan.dayId else plan.nightId) == face.id
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    plan = if (day) plan.copy(dayId = face.id) else plan.copy(nightId = face.id)
+                                    picking = null
+                                }
+                                .padding(vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(selected = chosen, onClick = null)
+                            Text(names[face.id] ?: face.name, modifier = Modifier.padding(start = 12.dp))
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { picking = null }) { Text(stringResource(R.string.cancel)) } },
         )
     }
 }

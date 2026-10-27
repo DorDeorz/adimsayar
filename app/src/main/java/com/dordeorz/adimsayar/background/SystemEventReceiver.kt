@@ -25,6 +25,7 @@ class SystemEventReceiver : BroadcastReceiver() {
                 if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
                 if (intent.action == ACTION_WEIGHT) Reminders.weightCheck(appContext)
                 if (intent.action == ACTION_WATER) Reminders.waterCheck(appContext)
+                if (intent.action == ACTION_FACE) FaceSchedule.apply(appContext)
             } finally {
                 pending.finish()
             }
@@ -37,6 +38,7 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_WEIGHT = "com.dordeorz.adimsayar.WEIGHT"
         const val ACTION_WATER = "com.dordeorz.adimsayar.WATER"
         const val ACTION_WATER_ADD = "com.dordeorz.adimsayar.WATER_ADD"
+        const val ACTION_FACE = "com.dordeorz.adimsayar.FACE"
         private const val READ_TIMEOUT_MS = 5_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
@@ -44,6 +46,7 @@ class SystemEventReceiver : BroadcastReceiver() {
             ACTION_WEIGHT,
             ACTION_WATER,
             ACTION_WATER_ADD,
+            ACTION_FACE,
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,

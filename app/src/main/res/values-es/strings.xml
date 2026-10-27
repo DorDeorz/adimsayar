@@ -320,6 +320,8 @@
         <item>El humor del pájaro: en las esferas FitWren y los diseños el pájaro cambia con la meta de pasos</item>
         <item>El tiempo en la esfera: icono del tiempo y temperatura</item>
         <item>Pantalla siempre activa: las esferas FitWren tienen una vista oscura y sencilla</item>
+        <item>Compartir diseños: envía un diseño con su foto como archivo e importa el de un amigo</item>
+        <item>Esfera según la hora: FitWren cambia entre esfera de día y de noche a las horas elegidas</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Restablecer</string>
     <string name="face_designer_bird_mood">Según meta</string>
     <string name="face_designer_show_weather">Tiempo</string>
+    <string name="face_designer_share_section">Compartir</string>
+    <string name="face_designer_share">Compartir diseño</string>
+    <string name="face_designer_import">Importar diseño</string>
+    <string name="face_designer_share_hint">El diseño se guarda en un archivo con su foto. Ábrelo en FitWren con “Importar diseño”.</string>
+    <string name="face_designer_import_failed">Este archivo no es un diseño de esfera de FitWren</string>
+    <string name="face_schedule">Esfera según la hora</string>
+    <string name="face_schedule_hint">FitWren cambia entre la esfera de día y la de noche a las horas que elijas. La pulsera debe estar conectada; si no, lo intenta un poco más tarde.</string>
+    <string name="face_schedule_on">Activado</string>
+    <string name="face_schedule_day">Esfera de día</string>
+    <string name="face_schedule_day_start">Inicio del día</string>
+    <string name="face_schedule_night">Esfera de noche</string>
+    <string name="face_schedule_night_start">Inicio de la noche</string>
+    <string name="face_schedule_none">Sin elegir</string>
 </resources>

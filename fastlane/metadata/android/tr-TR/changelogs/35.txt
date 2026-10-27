@@ -1,3 +1,4 @@
 Kuşun ruh hali: kadranlardaki kuş adım hedefine göre değişir.
 Kadranda hava durumu: hava simgesi ve sıcaklık.
 Ekran kapalıyken görünüm: FitWren kadranlarına sade, koyu her zaman açık ekran.
+Tasarım paylaşma ve saate göre değişen kadran.

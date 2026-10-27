@@ -320,6 +320,8 @@
         <item>The bird's mood: on FitWren faces and designs the bird changes with the step goal (asleep, awake, happy, celebrating)</item>
         <item>Weather on the face: a weather icon and the temperature on FitWren faces and designs</item>
         <item>Always-on display: FitWren faces get a plain dark always-on look</item>
+        <item>Share designs: send a face design with its photo as a file, import a friend's design</item>
+        <item>Face by time of day: FitWren switches between a day and a night face at the times you pick</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">Reset</string>
     <string name="face_designer_bird_mood">By goal</string>
     <string name="face_designer_show_weather">Weather</string>
+    <string name="face_designer_share_section">Share</string>
+    <string name="face_designer_share">Share design</string>
+    <string name="face_designer_import">Import design</string>
+    <string name="face_designer_share_hint">The design is written to a file with its photo. Your friend opens it in FitWren with “Import design”.</string>
+    <string name="face_designer_import_failed">This file is not a FitWren face design</string>
+    <string name="face_schedule">Face by time of day</string>
+    <string name="face_schedule_hint">FitWren switches between the day and night face at the times you pick. The band has to be connected then; if not, it tries again a bit later.</string>
+    <string name="face_schedule_on">On</string>
+    <string name="face_schedule_day">Day face</string>
+    <string name="face_schedule_day_start">Day starts</string>
+    <string name="face_schedule_night">Night face</string>
+    <string name="face_schedule_night_start">Night starts</string>
+    <string name="face_schedule_none">Not chosen</string>
 </resources>

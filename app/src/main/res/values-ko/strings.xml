@@ -320,6 +320,8 @@
         <item>새의 기분: FitWren 워치페이스와 디자인에서 새가 걸음 목표에 따라 바뀝니다</item>
         <item>워치페이스에 날씨: 날씨 아이콘과 기온</item>
         <item>상시 표시: FitWren 워치페이스에 단순하고 어두운 상시 표시 화면</item>
+        <item>디자인 공유: 사진이 포함된 디자인을 파일로 보내고 친구의 디자인을 가져옵니다</item>
+        <item>시간대별 워치페이스: 정한 시간에 낮/밤 워치페이스를 자동으로 바꿉니다</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">초기화</string>
     <string name="face_designer_bird_mood">목표에 따라</string>
     <string name="face_designer_show_weather">날씨</string>
+    <string name="face_designer_share_section">공유</string>
+    <string name="face_designer_share">디자인 공유</string>
+    <string name="face_designer_import">디자인 가져오기</string>
+    <string name="face_designer_share_hint">디자인이 사진과 함께 파일로 저장됩니다. FitWren의 “디자인 가져오기”로 엽니다.</string>
+    <string name="face_designer_import_failed">이 파일은 FitWren 워치페이스 디자인이 아닙니다</string>
+    <string name="face_schedule">시간대별 워치페이스</string>
+    <string name="face_schedule_hint">FitWren이 정한 시간에 낮과 밤 워치페이스를 바꿉니다. 그때 밴드가 연결되어 있어야 하며, 아니면 잠시 후 다시 시도합니다.</string>
+    <string name="face_schedule_on">켜기</string>
+    <string name="face_schedule_day">낮 워치페이스</string>
+    <string name="face_schedule_day_start">낮 시작</string>
+    <string name="face_schedule_night">밤 워치페이스</string>
+    <string name="face_schedule_night_start">밤 시작</string>
+    <string name="face_schedule_none">선택 안 함</string>
 </resources>

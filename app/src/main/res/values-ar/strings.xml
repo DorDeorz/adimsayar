@@ -320,6 +320,8 @@
         <item>مزاج الطائر: يتغير الطائر في واجهات FitWren والتصاميم حسب هدف الخطوات</item>
         <item>الطقس على الواجهة: رمز الطقس ودرجة الحرارة</item>
         <item>الشاشة الدائمة: لواجهات FitWren مظهر داكن وبسيط</item>
+        <item>مشاركة التصاميم: أرسل التصميم مع صورته كملف واستورد تصميم صديقك</item>
+        <item>واجهة حسب الوقت: يبدّل FitWren بين واجهة النهار والليل في الأوقات المختارة</item>
     </string-array>
     <string-array name="release_notes_0_13_3">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
@@ -922,4 +924,17 @@
     <string name="face_designer_reset">إعادة ضبط</string>
     <string name="face_designer_bird_mood">حسب الهدف</string>
     <string name="face_designer_show_weather">الطقس</string>
+    <string name="face_designer_share_section">مشاركة</string>
+    <string name="face_designer_share">مشاركة التصميم</string>
+    <string name="face_designer_import">استيراد تصميم</string>
+    <string name="face_designer_share_hint">يُحفظ التصميم مع صورته في ملف. افتحه في FitWren عبر “استيراد تصميم”.</string>
+    <string name="face_designer_import_failed">هذا الملف ليس تصميم واجهة FitWren</string>
+    <string name="face_schedule">واجهة حسب الوقت</string>
+    <string name="face_schedule_hint">يبدّل FitWren بين واجهة النهار وواجهة الليل في الأوقات التي تختارها. يجب أن يكون السوار متصلاً، وإلا يحاول مجددًا بعد قليل.</string>
+    <string name="face_schedule_on">تشغيل</string>
+    <string name="face_schedule_day">واجهة النهار</string>
+    <string name="face_schedule_day_start">بداية النهار</string>
+    <string name="face_schedule_night">واجهة الليل</string>
+    <string name="face_schedule_night_start">بداية الليل</string>
+    <string name="face_schedule_none">غير محدد</string>
 </resources>
