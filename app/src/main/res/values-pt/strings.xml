@@ -316,10 +316,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
         <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
         <item>Criar mostrador (Mi Band 8): escolha o fundo (cores prontas ou sua própria foto), as cores das horas, minutos, texto e barra de meta e o pássaro, veja a prévia e envie para a pulseira. O mostrador é feito no celular, sem computador</item>
+        <item>Também: 7 estilos de dígitos, posição da hora (topo, meio, base), 8 temas, escurecer o fundo e mostrar ou ocultar data, passos, barra de meta e pulso/bateria; a foto pode ser arrastada e ampliada</item>
         <item>Um aviso aparece ao escolher um arquivo de mostrador feito para outro dispositivo</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">Enviar para a pulseira</string>
     <string name="face_designer_name">Meu design FitWren</string>
     <string name="face_designer_failed">Não foi possível criar ou enviar o mostrador</string>
+    <string name="face_style_bold">Negrito</string>
+    <string name="face_style_light">Fino</string>
+    <string name="face_style_italic">Itálico</string>
+    <string name="face_style_serif">Serifa</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temas</string>
+    <string name="face_designer_style">Estilo dos dígitos</string>
+    <string name="face_designer_place">Posição da hora</string>
+    <string name="face_designer_place_top">Topo</string>
+    <string name="face_designer_place_middle">Meio</string>
+    <string name="face_designer_place_bottom">Base</string>
+    <string name="face_designer_photo_remove">Remover foto</string>
+    <string name="face_designer_photo_hint">Arraste a foto com um dedo, belisque para ampliar</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Escurecer fundo</string>
+    <string name="face_designer_show">Mostrar</string>
+    <string name="face_designer_show_date">Data</string>
+    <string name="face_designer_show_steps">Passos</string>
+    <string name="face_designer_show_bar">Barra de meta</string>
+    <string name="face_designer_show_health">Pulso e bateria</string>
 </resources>

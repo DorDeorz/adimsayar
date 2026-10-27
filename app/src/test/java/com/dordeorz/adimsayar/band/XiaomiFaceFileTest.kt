@@ -33,6 +33,17 @@ class XiaomiFaceFileTest {
     }
 
     @Test
+    fun widgetsMove() {
+        val face = XiaomiFaceFile.parse(compiled)!!
+        assertEquals(14, face.widgets)
+        face.moveWidget(1, 40)
+        val moved = face.bytes()
+        // hour: record of widget 1 at 0x340, y 30 -> 70
+        assertEquals(70, (moved[0x346].toInt() and 0xff) or (moved[0x347].toInt() shl 8))
+        assertEquals(compiled.size, moved.size)
+    }
+
+    @Test
     fun runLengthCodingRoundTrips() {
         val raw = ByteArray(4 * 300) { i -> if (i in 400..479) (i % 7).toByte() else 9 }
         val coded = XiaomiFaceFile.rleEncode(raw, 4)

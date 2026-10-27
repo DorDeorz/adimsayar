@@ -316,10 +316,11 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
         <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
         <item>文字盤をデザイン (Mi Band 8): 背景 (用意された色または自分の写真)、時・分・文字・目標バーの色と小鳥を選び、プレビューを見てバンドに送れます。文字盤はスマホだけで作れ、パソコンは不要です</item>
+        <item>さらに数字スタイル7種、時刻の位置（上・中央・下）、テーマ8種、背景の暗さ、日付・歩数・目標バー・心拍/バッテリーの個別表示。写真は指で動かして拡大できます</item>
         <item>別のデバイス用の文字盤ファイルを選ぶと警告が表示されます</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">バンドに送る</string>
     <string name="face_designer_name">マイ FitWren デザイン</string>
     <string name="face_designer_failed">文字盤を作成または送信できませんでした</string>
+    <string name="face_style_bold">太字</string>
+    <string name="face_style_light">細字</string>
+    <string name="face_style_italic">斜体</string>
+    <string name="face_style_serif">セリフ</string>
+    <string name="face_style_mono">等幅</string>
+    <string name="face_style_outline">中抜き</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">テーマ</string>
+    <string name="face_designer_style">数字のスタイル</string>
+    <string name="face_designer_place">時刻の位置</string>
+    <string name="face_designer_place_top">上</string>
+    <string name="face_designer_place_middle">中央</string>
+    <string name="face_designer_place_bottom">下</string>
+    <string name="face_designer_photo_remove">写真を削除</string>
+    <string name="face_designer_photo_hint">指で写真を動かし、ピンチで拡大</string>
+    <string name="face_designer_zoom">ズーム</string>
+    <string name="face_designer_dim">背景を暗く</string>
+    <string name="face_designer_show">表示</string>
+    <string name="face_designer_show_date">日付</string>
+    <string name="face_designer_show_steps">歩数</string>
+    <string name="face_designer_show_bar">目標バー</string>
+    <string name="face_designer_show_health">心拍とバッテリー</string>
 </resources>

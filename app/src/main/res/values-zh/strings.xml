@@ -316,10 +316,11 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
         <item>FitWren 表盘：应用自带九款小鸟表盘（夜晚、小路、指针、霓虹、树枝等），一键安装到小米手环 8</item>
         <item>设计表盘 (Mi Band 8)：选择背景（预设颜色或你自己的照片）、小时、分钟、文字和目标条的颜色以及小鸟，查看预览并发送到手环。表盘在手机上生成，无需电脑</item>
+        <item>另有 7 种数字样式、时间位置（顶部、中间、底部）、8 个主题、背景变暗，以及日期、步数、目标条、心率/电量分别显示；照片可拖动和缩放</item>
         <item>选择为其他设备制作的表盘文件时会显示警告</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">发送到手环</string>
     <string name="face_designer_name">我的 FitWren 设计</string>
     <string name="face_designer_failed">无法生成或发送表盘</string>
+    <string name="face_style_bold">粗体</string>
+    <string name="face_style_light">细体</string>
+    <string name="face_style_italic">斜体</string>
+    <string name="face_style_serif">衬线</string>
+    <string name="face_style_mono">等宽</string>
+    <string name="face_style_outline">空心</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">主题</string>
+    <string name="face_designer_style">数字样式</string>
+    <string name="face_designer_place">时间位置</string>
+    <string name="face_designer_place_top">顶部</string>
+    <string name="face_designer_place_middle">中间</string>
+    <string name="face_designer_place_bottom">底部</string>
+    <string name="face_designer_photo_remove">移除照片</string>
+    <string name="face_designer_photo_hint">单指拖动照片，双指缩放</string>
+    <string name="face_designer_zoom">缩放</string>
+    <string name="face_designer_dim">背景变暗</string>
+    <string name="face_designer_show">显示</string>
+    <string name="face_designer_show_date">日期</string>
+    <string name="face_designer_show_steps">步数</string>
+    <string name="face_designer_show_bar">目标条</string>
+    <string name="face_designer_show_health">心率和电量</string>
 </resources>

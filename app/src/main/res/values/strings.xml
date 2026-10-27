@@ -316,10 +316,11 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
         <item>Kadran tasarla (Mi Band 8): arka planı (hazır renkler ya da kendi fotoğrafın), saat, dakika, yazı ve hedef çubuğu renklerini ve kuşu seç; önizlemesini gör ve bilekliğe gönder. Kadran telefonda, bilgisayarsız hazırlanır</item>
+        <item>Tasarımda ayrıca 7 rakam stili, saatin yeri (üst, orta, alt), 8 hazır tema, arka planı karartma, tarih, adım, hedef çubuğu ve nabız/pili ayrı ayrı gizleme; fotoğraf parmakla kaydırılıp büyütülür</item>
         <item>Başka bir cihaz için yapılmış kadran dosyası seçilince uyarı verilir</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -887,4 +888,26 @@
     <string name="face_designer_upload">Bilekliğe yükle</string>
     <string name="face_designer_name">FitWren Tasarımım</string>
     <string name="face_designer_failed">Kadran hazırlanamadı ya da yüklenemedi</string>
+    <string name="face_style_bold">Kalın</string>
+    <string name="face_style_light">İnce</string>
+    <string name="face_style_italic">Eğik</string>
+    <string name="face_style_serif">Tırnaklı</string>
+    <string name="face_style_mono">Daktilo</string>
+    <string name="face_style_outline">İçi boş</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Hazır temalar</string>
+    <string name="face_designer_style">Rakam stili</string>
+    <string name="face_designer_place">Saatin yeri</string>
+    <string name="face_designer_place_top">Üstte</string>
+    <string name="face_designer_place_middle">Ortada</string>
+    <string name="face_designer_place_bottom">Altta</string>
+    <string name="face_designer_photo_remove">Fotoğrafı kaldır</string>
+    <string name="face_designer_photo_hint">Fotoğrafı parmağınla kaydırıp iki parmakla büyütebilirsin</string>
+    <string name="face_designer_zoom">Yakınlaştır</string>
+    <string name="face_designer_dim">Arka planı karart</string>
+    <string name="face_designer_show">Göster</string>
+    <string name="face_designer_show_date">Tarih</string>
+    <string name="face_designer_show_steps">Adım</string>
+    <string name="face_designer_show_bar">Hedef çubuğu</string>
+    <string name="face_designer_show_health">Nabız ve pil</string>
 </resources>

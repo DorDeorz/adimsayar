@@ -316,10 +316,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
         <item>Циферблаты FitWren: девять циферблатов с птичкой (Ночь, Дорога, Аналог, Неон, Ветка и другие) встроены и ставятся на Mi Band 8 одним нажатием</item>
         <item>Создать циферблат (Mi Band 8): выберите фон (готовые цвета или своё фото), цвета часов, минут, текста и полосы цели и птичку, посмотрите превью и отправьте на браслет. Циферблат создаётся на телефоне, без компьютера</item>
+        <item>Также: 7 стилей цифр, положение времени (сверху, по центру, снизу), 8 тем, затемнение фона и отдельное скрытие даты, шагов, полосы цели и пульса/батареи; фото можно двигать и масштабировать</item>
         <item>Появляется предупреждение, если выбран файл циферблата для другого устройства</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">Отправить на браслет</string>
     <string name="face_designer_name">Мой дизайн FitWren</string>
     <string name="face_designer_failed">Не удалось создать или отправить циферблат</string>
+    <string name="face_style_bold">Жирный</string>
+    <string name="face_style_light">Тонкий</string>
+    <string name="face_style_italic">Курсив</string>
+    <string name="face_style_serif">С засечками</string>
+    <string name="face_style_mono">Моно</string>
+    <string name="face_style_outline">Контур</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Темы</string>
+    <string name="face_designer_style">Стиль цифр</string>
+    <string name="face_designer_place">Положение времени</string>
+    <string name="face_designer_place_top">Сверху</string>
+    <string name="face_designer_place_middle">По центру</string>
+    <string name="face_designer_place_bottom">Снизу</string>
+    <string name="face_designer_photo_remove">Убрать фото</string>
+    <string name="face_designer_photo_hint">Двигайте фото пальцем, масштабируйте двумя</string>
+    <string name="face_designer_zoom">Масштаб</string>
+    <string name="face_designer_dim">Затемнить фон</string>
+    <string name="face_designer_show">Показывать</string>
+    <string name="face_designer_show_date">Дата</string>
+    <string name="face_designer_show_steps">Шаги</string>
+    <string name="face_designer_show_bar">Полоса цели</string>
+    <string name="face_designer_show_health">Пульс и батарея</string>
 </resources>

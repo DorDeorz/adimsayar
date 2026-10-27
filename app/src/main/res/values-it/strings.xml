@@ -316,10 +316,11 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
         <item>Quadranti FitWren: nove quadranti con l’uccellino (Notte, Strada, Analogico, Neon, Ramo e altri) inclusi, inviati alla Mi Band 8 con un tocco</item>
         <item>Crea quadrante (Mi Band 8): scegli lo sfondo (colori pronti o una tua foto), i colori di ore, minuti, testo e barra obiettivo e l\'uccellino, guarda l\'anteprima e invialo al braccialetto. Il quadrante si crea sul telefono, senza computer</item>
+        <item>Inoltre: 7 stili di cifre, posizione dell\'ora (alto, centro, basso), 8 temi, sfondo scurito e interruttori separati per data, passi, barra obiettivo e battito/batteria; la foto si sposta e si ingrandisce</item>
         <item>Compare un avviso quando si sceglie un file di quadrante fatto per un altro dispositivo</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">Invia al braccialetto</string>
     <string name="face_designer_name">Il mio design FitWren</string>
     <string name="face_designer_failed">Impossibile creare o inviare il quadrante</string>
+    <string name="face_style_bold">Grassetto</string>
+    <string name="face_style_light">Sottile</string>
+    <string name="face_style_italic">Corsivo</string>
+    <string name="face_style_serif">Graziato</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temi</string>
+    <string name="face_designer_style">Stile cifre</string>
+    <string name="face_designer_place">Posizione dell\'ora</string>
+    <string name="face_designer_place_top">In alto</string>
+    <string name="face_designer_place_middle">Al centro</string>
+    <string name="face_designer_place_bottom">In basso</string>
+    <string name="face_designer_photo_remove">Rimuovi foto</string>
+    <string name="face_designer_photo_hint">Trascina la foto con un dito, pizzica per ingrandire</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Scurisci sfondo</string>
+    <string name="face_designer_show">Mostra</string>
+    <string name="face_designer_show_date">Data</string>
+    <string name="face_designer_show_steps">Passi</string>
+    <string name="face_designer_show_bar">Barra obiettivo</string>
+    <string name="face_designer_show_health">Battito e batteria</string>
 </resources>

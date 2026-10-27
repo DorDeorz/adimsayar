@@ -316,10 +316,11 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
         <item>Esferas FitWren: nueve esferas con el pájaro (Noche, Camino, Analógica, Neón, Rama y más) incluidas, se envían a la Mi Band 8 con un toque</item>
         <item>Diseñar esfera (Mi Band 8): elige el fondo (colores listos o tu propia foto), los colores de horas, minutos, texto y barra de objetivo y el pájaro, mira la vista previa y envíala a la pulsera. La esfera se crea en el móvil, sin ordenador</item>
+        <item>Además: 7 estilos de dígitos, posición de la hora (arriba, centro, abajo), 8 temas, oscurecer el fondo y mostrar u ocultar fecha, pasos, barra de meta y pulso/batería; la foto se puede mover y ampliar</item>
         <item>Aparece un aviso al elegir un archivo de esfera hecho para otro dispositivo</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">Enviar a la pulsera</string>
     <string name="face_designer_name">Mi diseño FitWren</string>
     <string name="face_designer_failed">No se pudo crear o enviar la esfera</string>
+    <string name="face_style_bold">Negrita</string>
+    <string name="face_style_light">Fina</string>
+    <string name="face_style_italic">Cursiva</string>
+    <string name="face_style_serif">Con serifa</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temas</string>
+    <string name="face_designer_style">Estilo de dígitos</string>
+    <string name="face_designer_place">Posición de la hora</string>
+    <string name="face_designer_place_top">Arriba</string>
+    <string name="face_designer_place_middle">Centro</string>
+    <string name="face_designer_place_bottom">Abajo</string>
+    <string name="face_designer_photo_remove">Quitar foto</string>
+    <string name="face_designer_photo_hint">Arrastra la foto con un dedo y pellizca para ampliar</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Oscurecer fondo</string>
+    <string name="face_designer_show">Mostrar</string>
+    <string name="face_designer_show_date">Fecha</string>
+    <string name="face_designer_show_steps">Pasos</string>
+    <string name="face_designer_show_bar">Barra de meta</string>
+    <string name="face_designer_show_health">Pulso y batería</string>
 </resources>

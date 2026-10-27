@@ -21,6 +21,25 @@ class XiaomiFaceFile private constructor(
     /** One picture: where its offset and length are written ([entry], -1 for the preview) and its bytes. */
     private class Piece(val section: Int, val index: Int, val entry: Int, val offset: Int, var bytes: ByteArray)
 
+    /** Widgets (section 0) in the order of the project; each has a 16-byte record in the head. */
+    val widgets: Int get() = section(WIDGETS).first
+
+    /** Moves widget [index] down by [dy] pixels (up when negative); its record holds x and y at +4 and +6. */
+    fun moveWidget(index: Int, dy: Int) {
+        val bb = ByteBuffer.wrap(head).order(ByteOrder.LITTLE_ENDIAN)
+        val (count, table) = section(WIDGETS)
+        require(index in 0 until count)
+        val record = bb.getInt(table + 16 * index + 8)
+        val y = bb.getShort(record + 6).toInt() + dy
+        require(y in 0..0x7fff)
+        bb.putShort(record + 6, y.toShort())
+    }
+
+    private fun section(section: Int): Pair<Int, Int> {
+        val bb = ByteBuffer.wrap(head).order(ByteOrder.LITTLE_ENDIAN)
+        return bb.getInt(SECTIONS_AT + 8 * section) to bb.getInt(SECTIONS_AT + 8 * section + 4)
+    }
+
     val images: Int get() = pieces.count { it.section == IMAGES }
     val lists: Int get() = pieces.count { it.section == LISTS }
 
@@ -72,6 +91,7 @@ class XiaomiFaceFile private constructor(
 
     companion object {
 
+        private const val WIDGETS = 0
         private const val IMAGES = 2
         private const val LISTS = 3
         private const val PREVIEW = -1

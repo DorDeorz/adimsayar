@@ -316,10 +316,11 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
         <item>Design a face (Mi Band 8): pick the background (ready colours or your own photo), the hour, minute, text and goal bar colours and the bird, see the preview and send it to the band. The face is made on the phone, no computer needed</item>
+        <item>The designer also has 7 digit styles, the time position (top, middle, bottom), 8 themes, background dimming and separate switches for date, steps, goal bar and heart rate/battery; the photo can be dragged and zoomed</item>
         <item>A warning shows when a face file made for another device is picked</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">Send to band</string>
     <string name="face_designer_name">My FitWren design</string>
     <string name="face_designer_failed">The face could not be made or sent</string>
+    <string name="face_style_bold">Bold</string>
+    <string name="face_style_light">Light</string>
+    <string name="face_style_italic">Italic</string>
+    <string name="face_style_serif">Serif</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Outline</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Themes</string>
+    <string name="face_designer_style">Digit style</string>
+    <string name="face_designer_place">Time position</string>
+    <string name="face_designer_place_top">Top</string>
+    <string name="face_designer_place_middle">Middle</string>
+    <string name="face_designer_place_bottom">Bottom</string>
+    <string name="face_designer_photo_remove">Remove photo</string>
+    <string name="face_designer_photo_hint">Drag the photo with a finger, pinch to zoom</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Dim background</string>
+    <string name="face_designer_show">Show</string>
+    <string name="face_designer_show_date">Date</string>
+    <string name="face_designer_show_steps">Steps</string>
+    <string name="face_designer_show_bar">Goal bar</string>
+    <string name="face_designer_show_health">Heart rate and battery</string>
 </resources>

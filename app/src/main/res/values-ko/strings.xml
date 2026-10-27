@@ -316,10 +316,11 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
         <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
         <item>워치페이스 디자인 (Mi Band 8): 배경(준비된 색상 또는 내 사진), 시·분·글자·목표 막대 색상과 새를 고르고 미리 보기를 확인한 뒤 밴드로 보내세요. 워치페이스는 컴퓨터 없이 휴대폰에서 만들어집니다</item>
+        <item>또한 숫자 스타일 7종, 시간 위치(위, 가운데, 아래), 테마 8종, 배경 어둡게, 날짜·걸음·목표 막대·심박/배터리 개별 표시; 사진을 옮기고 확대할 수 있습니다</item>
         <item>다른 기기용 워치페이스 파일을 고르면 경고가 표시됩니다</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">밴드로 보내기</string>
     <string name="face_designer_name">나의 FitWren 디자인</string>
     <string name="face_designer_failed">워치페이스를 만들거나 보낼 수 없습니다</string>
+    <string name="face_style_bold">굵게</string>
+    <string name="face_style_light">가늘게</string>
+    <string name="face_style_italic">기울임</string>
+    <string name="face_style_serif">세리프</string>
+    <string name="face_style_mono">고정폭</string>
+    <string name="face_style_outline">윤곽선</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">테마</string>
+    <string name="face_designer_style">숫자 스타일</string>
+    <string name="face_designer_place">시간 위치</string>
+    <string name="face_designer_place_top">위</string>
+    <string name="face_designer_place_middle">가운데</string>
+    <string name="face_designer_place_bottom">아래</string>
+    <string name="face_designer_photo_remove">사진 삭제</string>
+    <string name="face_designer_photo_hint">손가락으로 사진을 옮기고 두 손가락으로 확대</string>
+    <string name="face_designer_zoom">확대</string>
+    <string name="face_designer_dim">배경 어둡게</string>
+    <string name="face_designer_show">표시</string>
+    <string name="face_designer_show_date">날짜</string>
+    <string name="face_designer_show_steps">걸음</string>
+    <string name="face_designer_show_bar">목표 막대</string>
+    <string name="face_designer_show_health">심박수와 배터리</string>
 </resources>

@@ -316,10 +316,11 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
         <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
         <item>تصميم واجهة (Mi Band 8): اختر الخلفية (ألوان جاهزة أو صورتك)، وألوان الساعات والدقائق والنص وشريط الهدف والطائر، وشاهد المعاينة وأرسلها إلى السوار. تُصنع الواجهة على الهاتف دون حاسوب</item>
+        <item>أيضًا: 7 أنماط للأرقام، موضع الوقت (أعلى، وسط، أسفل)، 8 سمات، تعتيم الخلفية وإخفاء التاريخ والخطوات وشريط الهدف والنبض/البطارية كلٌّ على حدة؛ ويمكن سحب الصورة وتكبيرها</item>
         <item>يظهر تحذير عند اختيار ملف واجهة مصنوع لجهاز آخر</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">إرسال إلى السوار</string>
     <string name="face_designer_name">تصميمي في FitWren</string>
     <string name="face_designer_failed">تعذّر إنشاء الواجهة أو إرسالها</string>
+    <string name="face_style_bold">عريض</string>
+    <string name="face_style_light">رفيع</string>
+    <string name="face_style_italic">مائل</string>
+    <string name="face_style_serif">مذيل</string>
+    <string name="face_style_mono">أحادي</string>
+    <string name="face_style_outline">مفرغ</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">سمات</string>
+    <string name="face_designer_style">نمط الأرقام</string>
+    <string name="face_designer_place">موضع الوقت</string>
+    <string name="face_designer_place_top">أعلى</string>
+    <string name="face_designer_place_middle">وسط</string>
+    <string name="face_designer_place_bottom">أسفل</string>
+    <string name="face_designer_photo_remove">إزالة الصورة</string>
+    <string name="face_designer_photo_hint">اسحب الصورة بإصبع وقرّب بإصبعين</string>
+    <string name="face_designer_zoom">تكبير</string>
+    <string name="face_designer_dim">تعتيم الخلفية</string>
+    <string name="face_designer_show">إظهار</string>
+    <string name="face_designer_show_date">التاريخ</string>
+    <string name="face_designer_show_steps">الخطوات</string>
+    <string name="face_designer_show_bar">شريط الهدف</string>
+    <string name="face_designer_show_health">النبض والبطارية</string>
 </resources>

@@ -725,6 +725,69 @@ def rings_face():
     f.write()
 
 
+DIGIT_CELL = (64, 70)  # the designer template's hour and minute digits
+DIGIT_STYLES = {
+    "bold": "/usr/share/fonts/opentype/inter/Inter-Bold.otf",
+    "light": "/usr/share/fonts/opentype/inter/Inter-Light.otf",
+    "italic": "/usr/share/fonts/opentype/inter/Inter-BlackItalic.otf",
+    "serif": "/usr/share/fonts/truetype/crosextra/Caladea-Bold.ttf",
+    "mono": "/usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Bold.ttf",
+    "outline": "/usr/share/fonts/opentype/inter/Inter-Black.otf",
+    "lcd": None,
+}
+
+
+def segment_digit(d, w, h):
+    """A seven-segment digit, like an old digital watch."""
+    on = ["abcedf", "bc", "abged", "abgcd", "fgbc", "afgcd", "afgedc", "abc", "abcdefg", "abcdfg"][d]
+    img = canvas(w, h)
+    draw = ImageDraw.Draw(img)
+    t, m = 9 * SS, 5 * SS  # thickness, margin
+    x0, x1, y0, y1, ym = m, w * SS - m, m, h * SS - m, h * SS / 2
+    bars = {
+        "a": (x0 + t, y0, x1 - t, y0 + t), "g": (x0 + t, ym - t / 2, x1 - t, ym + t / 2), "d": (x0 + t, y1 - t, x1 - t, y1),
+        "f": (x0, y0 + t, x0 + t, ym - t / 2), "b": (x1 - t, y0 + t, x1, ym - t / 2),
+        "e": (x0, ym + t / 2, x0 + t, y1 - t), "c": (x1 - t, ym + t / 2, x1, y1 - t),
+    }
+    for k, box in bars.items():
+        grow = SS * 1.5
+        bx = (box[0] - grow, box[1], box[2] + grow, box[3]) if k in "agd" else (box[0], box[1] - grow, box[2], box[3] + grow)
+        draw.rounded_rectangle(bx, radius=t / 2, fill=WHITE + (255,) if k in on else WHITE + (34,))
+    return finish(img, w, h)
+
+
+def style_strip(style):
+    """The ten digits of [style], white, side by side in cells of DIGIT_CELL."""
+    w, h = DIGIT_CELL
+    strip = Image.new("RGBA", (w * 10, h), (0, 0, 0, 0))
+    font_file = DIGIT_STYLES[style]
+    for d in range(10):
+        if font_file is None:
+            strip.alpha_composite(segment_digit(d, w, h), (d * w, 0))
+            continue
+        size = 400
+        font = ImageFont.truetype(font_file, size)
+        zero = font.getbbox("0")
+        size = int(size * (h - 6) / (zero[3] - zero[1]))
+        widest = max(ImageFont.truetype(font_file, size).getbbox(str(k))[2] - ImageFont.truetype(font_file, size).getbbox(str(k))[0] for k in range(10))
+        if widest > w - 4:
+            size = int(size * (w - 4) / widest)
+        font = ImageFont.truetype(font_file, size * SS)
+        img = canvas(w, h)
+        draw = ImageDraw.Draw(img)
+        box = font.getbbox(str(d))
+        line = font.getbbox("0")
+        x = (w * SS - (box[2] - box[0])) / 2 - box[0]
+        y = (h * SS - (line[3] - line[1])) / 2 - line[1]
+        if style == "outline":
+            draw.text((x, y), str(d), font=font, fill=WHITE, stroke_width=3 * SS, stroke_fill=WHITE)
+            draw.text((x, y), str(d), font=font, fill=(255, 255, 255, 0))
+        else:
+            draw.text((x, y), str(d), font=font, fill=WHITE)
+        strip.alpha_composite(finish(img, w, h), (d * w, 0))
+    return strip
+
+
 def designer():
     """The template behind the app's face designer. Everything here is white on black: the app
     tints the digits, draws its own goal bars and background, and draws the layers below onto
@@ -762,32 +825,45 @@ def designer():
     f.number("heart", 30 + 18 + 3, 428, small, 3, SRC_HEART, "72", align=0, blanking=1)
     f.number("battery", 104 + 18 + 3, 428, small, 3, SRC_BATTERY, "85", align=0, blanking=1)
     f.write(shelf="designer")
-    # the layers the app draws onto the background, with their transparency
+    # the layers the app draws onto the background, with their transparency; each belongs to a
+    # part the user can hide and to a block the user can move
     shelf = os.path.join(HERE, "..", "app", "src", "main", "assets", "designer")
     layers = [
-        ("bird.png", bird(96), (W - 96) // 2, 250),
-        ("bird_sleepy.png", bird(96, sleepy=True), (W - 96) // 2, 250),
-        ("dot.png", Image.open(os.path.join(IMAGES, dot[0])), *dot_at),
-        ("icon_heart.png", icon_heart(18), 30, 428),
-        ("icon_battery.png", icon_battery(18), 104, 428),
+        ("bird.png", bird(96), (W - 96) // 2, 250, "bird", "bird"),
+        ("bird_sleepy.png", bird(96, sleepy=True), (W - 96) // 2, 250, "bird", "bird"),
+        ("dot.png", Image.open(os.path.join(IMAGES, dot[0])), *dot_at, "date", "time"),
+        ("icon_heart.png", icon_heart(18), 30, 428, "health", "stats"),
+        ("icon_battery.png", icon_battery(18), 104, 428, "health", "stats"),
     ]
-    for name, img, _, _ in layers:
+    for name, img, *_ in layers:
         img.save(os.path.join(shelf, name))
-    # the sample digits of each colour, for the app's preview
-    for role, names in (("hour", ["hour"]), ("minute", ["minute"]), ("text", ["weekday", "day", "month", "steps", "heart", "battery"])):
-        chosen = [w for w in f.widgets if w.attrs["Name"] in names]
-        f.draw(chosen, Image.new("RGBA", (W, H), (0, 0, 0, 0))).save(os.path.join(shelf, f"sample_{role}.png"))
-    roles = {"hour": "hour", "minute": "minute", "weekday": "text", "day": "text", "goal": "bar", "steps": "text", "heart": "text"}
+    for style in DIGIT_STYLES:
+        style_strip(style).save(os.path.join(shelf, f"digits_{style}.png"))
+    # each widget's part (what its digits are coloured and hidden by) and block
+    parts = {"hour": "hour", "minute": "minute", "weekday": "date", "day": "date", "month": "date",
+             "goal": "bar", "steps": "steps", "heart": "health", "battery": "health"}
+    blocks = {"hour": "time", "minute": "time", "weekday": "time", "day": "time", "month": "time"}
+    # sample text of each part, for the app's preview
+    for part in ("date", "steps", "health"):
+        chosen = [w for w in f.widgets if parts.get(w.attrs["Name"]) == part]
+        f.draw(chosen, Image.new("RGBA", (W, H), (0, 0, 0, 0))).save(os.path.join(shelf, f"sample_{part}.png"))
+    for old in ("sample_hour.png", "sample_minute.png", "sample_text.png"):
+        if os.path.exists(os.path.join(shelf, old)):
+            os.remove(os.path.join(shelf, old))
     order = []  # list pictures in the order the compiler stores them: first use in the project
     for w in f.widgets:
         files = w.attrs.get("BitmapList")
         if files and files not in [o[1] for o in order]:
-            order.append((roles.get(w.attrs["Name"], "text"), files))
+            order.append((parts[w.attrs["Name"]], files))
     with open(os.path.join(shelf, "layout.json"), "w", encoding="utf-8") as out:
         json.dump({
-            "layers": [{"file": n, "x": x, "y": y} for n, _, x, y in layers],
+            "layers": [{"file": n, "x": x, "y": y, "part": part, "block": block} for n, _, x, y, part, block in layers],
             "lists": [o[0] for o in order],
+            # widgets in the order the compiler stores them, with the block each moves with
+            "widgets": [{"name": w.attrs["Name"], "block": blocks.get(w.attrs["Name"], "stats" if w.attrs["Name"] in parts else "")} for w in f.widgets],
+            "time": {"x": hx, "hour": 34, "minute": 112, "cell": list(DIGIT_CELL)},
             "bar": {"x": (W - bar_w) // 2, "y": bar_y, "width": bar_w, "height": bar_h, "sample": 60},
+            "styles": list(DIGIT_STYLES),
         }, out, indent=1)
 
 

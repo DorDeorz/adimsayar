@@ -316,10 +316,11 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
-    <string-array name="release_notes_0_13_0">
+    <string-array name="release_notes_0_13_1">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
         <item>FitWren-Zifferblätter: neun Zifferblätter mit dem Vogel (Nacht, Weg, Analog, Neon, Ast und mehr) sind dabei und kommen mit einem Tipp aufs Mi Band 8</item>
         <item>Zifferblatt gestalten (Mi Band 8): Hintergrund (fertige Farben oder eigenes Foto), Farben für Stunden, Minuten, Text und Zielbalken sowie den Vogel wählen, Vorschau ansehen und ans Band senden. Das Zifferblatt entsteht auf dem Handy, ohne Computer</item>
+        <item>Außerdem: 7 Ziffernstile, Position der Uhrzeit (oben, Mitte, unten), 8 Themen, Abdunkeln des Hintergrunds und getrennte Schalter für Datum, Schritte, Zielbalken und Puls/Akku; das Foto lässt sich verschieben und zoomen</item>
         <item>Eine Warnung erscheint, wenn eine Zifferblatt-Datei für ein anderes Gerät gewählt wird</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
@@ -886,4 +887,26 @@
     <string name="face_designer_upload">An das Band senden</string>
     <string name="face_designer_name">Mein FitWren-Design</string>
     <string name="face_designer_failed">Das Zifferblatt konnte nicht erstellt oder gesendet werden</string>
+    <string name="face_style_bold">Fett</string>
+    <string name="face_style_light">Dünn</string>
+    <string name="face_style_italic">Kursiv</string>
+    <string name="face_style_serif">Serifen</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Kontur</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Themen</string>
+    <string name="face_designer_style">Ziffernstil</string>
+    <string name="face_designer_place">Position der Uhrzeit</string>
+    <string name="face_designer_place_top">Oben</string>
+    <string name="face_designer_place_middle">Mitte</string>
+    <string name="face_designer_place_bottom">Unten</string>
+    <string name="face_designer_photo_remove">Foto entfernen</string>
+    <string name="face_designer_photo_hint">Foto mit dem Finger verschieben, mit zwei Fingern zoomen</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Hintergrund abdunkeln</string>
+    <string name="face_designer_show">Anzeigen</string>
+    <string name="face_designer_show_date">Datum</string>
+    <string name="face_designer_show_steps">Schritte</string>
+    <string name="face_designer_show_bar">Zielbalken</string>
+    <string name="face_designer_show_health">Puls und Akku</string>
 </resources>
