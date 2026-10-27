@@ -346,14 +346,13 @@ class Face:
             kept.append(widget)
         self.widgets = kept
 
-    def write(self, shelf="faces"):
-        self.flatten()
-        preview = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    def draw(self, widgets, preview):
+        """Draws [widgets] with their sample values onto [preview]."""
 
         def paste(file, x, y):
             preview.alpha_composite(Image.open(os.path.join(IMAGES, file)).convert("RGBA"), (x, y))
 
-        for widget in self.widgets:
+        for widget in widgets:
             a = widget.attrs
             x, y = int(a["X"]), int(a["Y"])
             if widget.sample is None:
@@ -375,6 +374,11 @@ class Face:
                 _, files, value = widget.sample
                 chosen = [f for v, f in files if v <= value][-1]
                 paste(chosen, x, y)
+        return preview
+
+    def write(self, shelf="faces"):
+        self.flatten()
+        preview = self.draw(self.widgets, Image.new("RGBA", (W, H), (0, 0, 0, 255)))
         preview.save(os.path.join(self.dir, "preview.png"))
         assets = os.path.join(HERE, "..", "app", "src", "main", "assets", shelf)
         if os.path.isdir(assets):
@@ -769,6 +773,10 @@ def designer():
     ]
     for name, img, _, _ in layers:
         img.save(os.path.join(shelf, name))
+    # the sample digits of each colour, for the app's preview
+    for role, names in (("hour", ["hour"]), ("minute", ["minute"]), ("text", ["weekday", "day", "month", "steps", "heart", "battery"])):
+        chosen = [w for w in f.widgets if w.attrs["Name"] in names]
+        f.draw(chosen, Image.new("RGBA", (W, H), (0, 0, 0, 0))).save(os.path.join(shelf, f"sample_{role}.png"))
     roles = {"hour": "hour", "minute": "minute", "weekday": "text", "day": "text", "goal": "bar", "steps": "text", "heart": "text"}
     order = []  # list pictures in the order the compiler stores them: first use in the project
     for w in f.widgets:
@@ -779,7 +787,7 @@ def designer():
         json.dump({
             "layers": [{"file": n, "x": x, "y": y} for n, _, x, y in layers],
             "lists": [o[0] for o in order],
-            "bar": {"width": bar_w, "height": bar_h},
+            "bar": {"x": (W - bar_w) // 2, "y": bar_y, "width": bar_w, "height": bar_h, "sample": 60},
         }, out, indent=1)
 
 
