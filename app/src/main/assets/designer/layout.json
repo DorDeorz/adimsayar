@@ -1,0 +1,42 @@
+{
+ "layers": [
+  {
+   "file": "bird.png",
+   "x": 48,
+   "y": 250
+  },
+  {
+   "file": "bird_sleepy.png",
+   "x": 48,
+   "y": 250
+  },
+  {
+   "file": "dot.png",
+   "x": 121,
+   "y": 194
+  },
+  {
+   "file": "icon_heart.png",
+   "x": 30,
+   "y": 428
+  },
+  {
+   "file": "icon_battery.png",
+   "x": 104,
+   "y": 428
+  }
+ ],
+ "lists": [
+  "hour",
+  "minute",
+  "text",
+  "text",
+  "bar",
+  "text",
+  "text"
+ ],
+ "bar": {
+  "width": 140,
+  "height": 8
+ }
+}

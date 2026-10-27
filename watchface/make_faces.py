@@ -5,6 +5,7 @@ Run: python3 make_faces.py  (needs Pillow). Each face gets its own folder <name>
     compile.exe -b <name>\<name>.fprj <name>\output <name>.face 1461256429
 The bird is the same drawing as ui/BirdPainter.kt.
 """
+import json
 import math
 import os
 from xml.sax.saxutils import quoteattr
@@ -345,7 +346,7 @@ class Face:
             kept.append(widget)
         self.widgets = kept
 
-    def write(self):
+    def write(self, shelf="faces"):
         self.flatten()
         preview = Image.new("RGBA", (W, H), (0, 0, 0, 255))
 
@@ -375,7 +376,7 @@ class Face:
                 chosen = [f for v, f in files if v <= value][-1]
                 paste(chosen, x, y)
         preview.save(os.path.join(self.dir, "preview.png"))
-        assets = os.path.join(HERE, "..", "app", "src", "main", "assets", "faces")
+        assets = os.path.join(HERE, "..", "app", "src", "main", "assets", shelf)
         if os.path.isdir(assets):
             preview.convert("RGB").save(os.path.join(assets, f"{self.name}.png"))
         # the compiler wants the Band 8 store preview at 122 x 310
@@ -720,6 +721,68 @@ def rings_face():
     f.write()
 
 
+def designer():
+    """The template behind the app's face designer. Everything here is white on black: the app
+    tints the digits, draws its own goal bars and background, and draws the layers below onto
+    the background (the Band 8 compiler keeps no transparency in plain images)."""
+    f = Face("fitwren_tasarim", "FitWren Tasarım", "266291000")
+    f.file(Image.new("RGBA", (W, H), (0, 0, 0, 255)), "background.png")
+    f.image("background", 0, 0, "background.png")
+    hour = digits("hour", 70, WHITE)
+    minute = digits("minute", 70, WHITE)
+    hx = (W - 2 * hour[1]) // 2
+    f.number("hour", hx, 34, hour, 2, SRC_HOUR, "09")
+    f.number("minute", hx, 112, minute, 2, SRC_MINUTE, "41")
+    height, gap, y = 18, 6, 194
+    date = digits("date", height, WHITE)
+    days = [glyph(f"weekday_{i}.png", n, height, WHITE) for i, n in enumerate(WEEKDAYS)]
+    wd_w = max(d[1] for d in days)
+    for d in days:
+        img = Image.open(os.path.join(IMAGES, d[0]))
+        padded = Image.new("RGBA", (wd_w, height), (0, 0, 0, 0))
+        padded.alpha_composite(img, (wd_w - img.size[0], 0))
+        padded.save(os.path.join(IMAGES, d[0]))
+    dot = glyph("dot.png", ".", height, WHITE)
+    x = (W - (wd_w + gap + date[1] * 4 + dot[1])) // 2
+    f.image_list("weekday", x, y, [(i, d[0]) for i, d in enumerate(days)], SRC_WEEKDAY, 1)
+    x += wd_w + gap
+    f.number("day", x, y, date, 2, SRC_DAY, "26")
+    dot_at = (x + 2 * date[1], y)
+    f.number("month", x + 2 * date[1] + dot[1], y, date, 2, SRC_MONTH, "10")
+    bar_w, bar_h, bar_y = 140, 8, 356
+    lines = [(p, f.file(hbar(bar_w, bar_h, p, color=WHITE, done=WHITE, track=(0x40, 0x40, 0x40)), f"line_{p}.png")) for p in range(0, 101, 10)]
+    f.image_list("goal", (W - bar_w) // 2, bar_y, lines, SRC_STEP_PERCENT, 65)
+    mid = digits("mid", 26, WHITE)
+    f.number("steps", (W - mid[1] * 5) // 2, 372, mid, 5, SRC_STEPS, "5890", blanking=1)
+    small = digits("small", 18, WHITE)
+    f.number("heart", 30 + 18 + 3, 428, small, 3, SRC_HEART, "72", align=0, blanking=1)
+    f.number("battery", 104 + 18 + 3, 428, small, 3, SRC_BATTERY, "85", align=0, blanking=1)
+    f.write(shelf="designer")
+    # the layers the app draws onto the background, with their transparency
+    shelf = os.path.join(HERE, "..", "app", "src", "main", "assets", "designer")
+    layers = [
+        ("bird.png", bird(96), (W - 96) // 2, 250),
+        ("bird_sleepy.png", bird(96, sleepy=True), (W - 96) // 2, 250),
+        ("dot.png", Image.open(os.path.join(IMAGES, dot[0])), *dot_at),
+        ("icon_heart.png", icon_heart(18), 30, 428),
+        ("icon_battery.png", icon_battery(18), 104, 428),
+    ]
+    for name, img, _, _ in layers:
+        img.save(os.path.join(shelf, name))
+    roles = {"hour": "hour", "minute": "minute", "weekday": "text", "day": "text", "goal": "bar", "steps": "text", "heart": "text"}
+    order = []  # list pictures in the order the compiler stores them: first use in the project
+    for w in f.widgets:
+        files = w.attrs.get("BitmapList")
+        if files and files not in [o[1] for o in order]:
+            order.append((roles.get(w.attrs["Name"], "text"), files))
+    with open(os.path.join(shelf, "layout.json"), "w", encoding="utf-8") as out:
+        json.dump({
+            "layers": [{"file": n, "x": x, "y": y} for n, _, x, y in layers],
+            "lists": [o[0] for o in order],
+            "bar": {"width": bar_w, "height": bar_h},
+        }, out, indent=1)
+
+
 if __name__ == "__main__":
     classic()
     night()
@@ -730,3 +793,4 @@ if __name__ == "__main__":
     branch(dark=True)
     rings_face()
     simple()
+    designer()
