@@ -316,9 +316,11 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
         <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
+        <item>워치페이스 디자인 (Mi Band 8): 배경(준비된 색상 또는 내 사진), 시·분·글자·목표 막대 색상과 새를 고르고 미리 보기를 확인한 뒤 밴드로 보내세요. 워치페이스는 컴퓨터 없이 휴대폰에서 만들어집니다</item>
+        <item>다른 기기용 워치페이스 파일을 고르면 경고가 표시됩니다</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>워치 페이스: 올리기 전에 미리보기 표시, FitWren에서 올린 워치 페이스는 이미지와 함께 표시되고 사용 중인 것은 강조, 삭제 전에 확인</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">워치페이스 %1$d개</string>
     <string name="own_faces">FitWren 워치페이스</string>
     <string name="own_faces_hint">앱에 포함된 FitWren 새 워치페이스입니다. 눌러서 보고 올리세요.</string>
+    <string name="face_designer">워치페이스 디자인</string>
+    <string name="face_designer_background">배경</string>
+    <string name="face_designer_photo">사진 선택</string>
+    <string name="face_designer_hour">시 색상</string>
+    <string name="face_designer_minute">분 색상</string>
+    <string name="face_designer_text">글자 색상</string>
+    <string name="face_designer_accent">목표 막대 색상</string>
+    <string name="face_designer_bird">새</string>
+    <string name="face_designer_bird_happy">명랑</string>
+    <string name="face_designer_bird_sleepy">졸림</string>
+    <string name="face_designer_bird_none">없음</string>
+    <string name="face_designer_upload">밴드로 보내기</string>
+    <string name="face_designer_name">나의 FitWren 디자인</string>
+    <string name="face_designer_failed">워치페이스를 만들거나 보낼 수 없습니다</string>
 </resources>

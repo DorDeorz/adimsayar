@@ -316,9 +316,11 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
         <item>Cadrans FitWren : neuf cadrans avec l’oiseau (Nuit, Route, Analogique, Néon, Branche et plus) inclus, envoyés au Mi Band 8 en un geste</item>
+        <item>Créer un cadran (Mi Band 8) : choisis le fond (couleurs prêtes ou ta propre photo), les couleurs des heures, minutes, texte et barre d\'objectif et l\'oiseau, regarde l\'aperçu et envoie-le au bracelet. Le cadran est créé sur le téléphone, sans ordinateur</item>
+        <item>Un avertissement s\'affiche si un fichier de cadran fait pour un autre appareil est choisi</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Cadrans : aperçu avant l’envoi ; les cadrans envoyés depuis FitWren affichent leur image et celui utilisé est mis en avant ; la suppression demande confirmation</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d cadrans</string>
     <string name="own_faces">Cadrans FitWren</string>
     <string name="own_faces_hint">Cadrans avec l\'oiseau FitWren fournis avec l\'appli. Touche pour voir et envoyer.</string>
+    <string name="face_designer">Créer un cadran</string>
+    <string name="face_designer_background">Fond</string>
+    <string name="face_designer_photo">Choisir une photo</string>
+    <string name="face_designer_hour">Couleur des heures</string>
+    <string name="face_designer_minute">Couleur des minutes</string>
+    <string name="face_designer_text">Couleur du texte</string>
+    <string name="face_designer_accent">Couleur de la barre d\'objectif</string>
+    <string name="face_designer_bird">Oiseau</string>
+    <string name="face_designer_bird_happy">Joyeux</string>
+    <string name="face_designer_bird_sleepy">Endormi</string>
+    <string name="face_designer_bird_none">Aucun</string>
+    <string name="face_designer_upload">Envoyer au bracelet</string>
+    <string name="face_designer_name">Mon design FitWren</string>
+    <string name="face_designer_failed">Le cadran n\'a pas pu être créé ou envoyé</string>
 </resources>

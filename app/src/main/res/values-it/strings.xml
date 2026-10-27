@@ -316,9 +316,11 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
         <item>Quadranti FitWren: nove quadranti con l’uccellino (Notte, Strada, Analogico, Neon, Ramo e altri) inclusi, inviati alla Mi Band 8 con un tocco</item>
+        <item>Crea quadrante (Mi Band 8): scegli lo sfondo (colori pronti o una tua foto), i colori di ore, minuti, testo e barra obiettivo e l\'uccellino, guarda l\'anteprima e invialo al braccialetto. Il quadrante si crea sul telefono, senza computer</item>
+        <item>Compare un avviso quando si sceglie un file di quadrante fatto per un altro dispositivo</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Quadranti: anteprima prima del caricamento; i quadranti caricati da FitWren mostrano l’immagine e quello in uso è evidenziato; l’eliminazione chiede conferma</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d quadranti</string>
     <string name="own_faces">Quadranti FitWren</string>
     <string name="own_faces_hint">Quadranti con l\'uccellino di FitWren inclusi nell\'app. Tocca per vedere e caricare.</string>
+    <string name="face_designer">Crea quadrante</string>
+    <string name="face_designer_background">Sfondo</string>
+    <string name="face_designer_photo">Scegli foto</string>
+    <string name="face_designer_hour">Colore delle ore</string>
+    <string name="face_designer_minute">Colore dei minuti</string>
+    <string name="face_designer_text">Colore del testo</string>
+    <string name="face_designer_accent">Colore della barra obiettivo</string>
+    <string name="face_designer_bird">Uccellino</string>
+    <string name="face_designer_bird_happy">Allegro</string>
+    <string name="face_designer_bird_sleepy">Assonnato</string>
+    <string name="face_designer_bird_none">Nessuno</string>
+    <string name="face_designer_upload">Invia al braccialetto</string>
+    <string name="face_designer_name">Il mio design FitWren</string>
+    <string name="face_designer_failed">Impossibile creare o inviare il quadrante</string>
 </resources>

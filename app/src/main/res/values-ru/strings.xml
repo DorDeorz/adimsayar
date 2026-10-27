@@ -316,9 +316,11 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
         <item>Циферблаты FitWren: девять циферблатов с птичкой (Ночь, Дорога, Аналог, Неон, Ветка и другие) встроены и ставятся на Mi Band 8 одним нажатием</item>
+        <item>Создать циферблат (Mi Band 8): выберите фон (готовые цвета или своё фото), цвета часов, минут, текста и полосы цели и птичку, посмотрите превью и отправьте на браслет. Циферблат создаётся на телефоне, без компьютера</item>
+        <item>Появляется предупреждение, если выбран файл циферблата для другого устройства</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Циферблаты: предпросмотр перед загрузкой; загруженные из FitWren показываются с картинкой, текущий выделен; удаление требует подтверждения</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">Циферблатов: %1$d</string>
     <string name="own_faces">Циферблаты FitWren</string>
     <string name="own_faces_hint">Циферблаты с птичкой FitWren, встроенные в приложение. Нажмите, чтобы посмотреть и установить.</string>
+    <string name="face_designer">Создать циферблат</string>
+    <string name="face_designer_background">Фон</string>
+    <string name="face_designer_photo">Выбрать фото</string>
+    <string name="face_designer_hour">Цвет часов</string>
+    <string name="face_designer_minute">Цвет минут</string>
+    <string name="face_designer_text">Цвет текста</string>
+    <string name="face_designer_accent">Цвет полосы цели</string>
+    <string name="face_designer_bird">Птичка</string>
+    <string name="face_designer_bird_happy">Весёлая</string>
+    <string name="face_designer_bird_sleepy">Сонная</string>
+    <string name="face_designer_bird_none">Нет</string>
+    <string name="face_designer_upload">Отправить на браслет</string>
+    <string name="face_designer_name">Мой дизайн FitWren</string>
+    <string name="face_designer_failed">Не удалось создать или отправить циферблат</string>
 </resources>

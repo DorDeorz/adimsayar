@@ -27,6 +27,7 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.data.FaceDesigner
 import com.dordeorz.adimsayar.data.FaceStore
 import com.dordeorz.adimsayar.data.OwnFaces
 import com.dordeorz.adimsayar.band.WatchfaceUpload
@@ -157,7 +158,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
-    ReleaseNote("0.12.10", R.array.release_notes_0_12_10),
+    ReleaseNote("0.13.0", R.array.release_notes_0_13_0),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
@@ -1100,6 +1101,8 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     val storeModel = remember { FaceStore.model(context) }
     var showOwn by remember { mutableStateOf(false) }
     val own = remember { OwnFaces.available(context) }
+    var designing by remember { mutableStateOf(false) }
+    val designer = remember { FaceDesigner.available(context) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1135,6 +1138,13 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         onClick = { showOwn = true },
                         modifier = Modifier.fillMaxWidth(),
                     ) { Text(stringResource(R.string.own_faces)) }
+                }
+                if (designer) {
+                    OutlinedButton(
+                        enabled = connected && sending == null,
+                        onClick = { designing = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.face_designer)) }
                 }
                 if (storeModel != null) {
                     OutlinedButton(
@@ -1216,6 +1226,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     }
     if (showOwn) {
         OwnFacesDialog(own, onDismiss = { showOwn = false })
+    }
+    if (designing) {
+        FaceDesignerDialog(onDismiss = { designing = false })
     }
     deleting?.let { face ->
         AlertDialog(

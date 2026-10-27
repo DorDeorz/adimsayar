@@ -316,9 +316,11 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
+        <item>Kadran tasarla (Mi Band 8): arka planı (hazır renkler ya da kendi fotoğrafın), saat, dakika, yazı ve hedef çubuğu renklerini ve kuşu seç; önizlemesini gör ve bilekliğe gönder. Kadran telefonda, bilgisayarsız hazırlanır</item>
+        <item>Başka bir cihaz için yapılmış kadran dosyası seçilince uyarı verilir</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Kadranlar: yüklemeden önce önizleme resmi görünür; FitWren\'den yüklenen kadranlar listede resmiyle, kullanılan kadran renkli görünür; silmeden önce sorulur</item>
@@ -871,4 +873,18 @@
     <string name="face_store_count">%1$d kadran</string>
     <string name="own_faces">FitWren kadranları</string>
     <string name="own_faces_hint">FitWren kuşlu, uygulamayla gelen kadranlar. Dokun, bak ve yükle.</string>
+    <string name="face_designer">Kadran tasarla</string>
+    <string name="face_designer_background">Arka plan</string>
+    <string name="face_designer_photo">Fotoğraf seç</string>
+    <string name="face_designer_hour">Saat rengi</string>
+    <string name="face_designer_minute">Dakika rengi</string>
+    <string name="face_designer_text">Yazı rengi</string>
+    <string name="face_designer_accent">Hedef çubuğu rengi</string>
+    <string name="face_designer_bird">Kuş</string>
+    <string name="face_designer_bird_happy">Neşeli</string>
+    <string name="face_designer_bird_sleepy">Uykulu</string>
+    <string name="face_designer_bird_none">Yok</string>
+    <string name="face_designer_upload">Bilekliğe yükle</string>
+    <string name="face_designer_name">FitWren Tasarımım</string>
+    <string name="face_designer_failed">Kadran hazırlanamadı ya da yüklenemedi</string>
 </resources>

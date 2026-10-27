@@ -165,7 +165,7 @@ object XiaomiWatchface {
         val count = width * height
         val need = when (format) {
             0 -> count * 4
-            1, 4, 7 -> count * 2
+            1, 3, 4, 7 -> count * 2
             16 -> 256 * 4 + count
             else -> return null
         }

@@ -316,9 +316,11 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
         <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
+        <item>文字盤をデザイン (Mi Band 8): 背景 (用意された色または自分の写真)、時・分・文字・目標バーの色と小鳥を選び、プレビューを見てバンドに送れます。文字盤はスマホだけで作れ、パソコンは不要です</item>
+        <item>別のデバイス用の文字盤ファイルを選ぶと警告が表示されます</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>文字盤: アップロード前にプレビューを表示。FitWren からアップロードした文字盤は画像付きで表示し、使用中の文字盤を強調。削除前に確認</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d 個の文字盤</string>
     <string name="own_faces">FitWren 文字盤</string>
     <string name="own_faces_hint">アプリ付属の FitWren の小鳥の文字盤。タップして確認・送信。</string>
+    <string name="face_designer">文字盤をデザイン</string>
+    <string name="face_designer_background">背景</string>
+    <string name="face_designer_photo">写真を選ぶ</string>
+    <string name="face_designer_hour">時の色</string>
+    <string name="face_designer_minute">分の色</string>
+    <string name="face_designer_text">文字の色</string>
+    <string name="face_designer_accent">目標バーの色</string>
+    <string name="face_designer_bird">小鳥</string>
+    <string name="face_designer_bird_happy">元気</string>
+    <string name="face_designer_bird_sleepy">おねむ</string>
+    <string name="face_designer_bird_none">なし</string>
+    <string name="face_designer_upload">バンドに送る</string>
+    <string name="face_designer_name">マイ FitWren デザイン</string>
+    <string name="face_designer_failed">文字盤を作成または送信できませんでした</string>
 </resources>

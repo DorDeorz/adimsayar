@@ -316,9 +316,11 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
         <item>FitWren-Zifferblätter: neun Zifferblätter mit dem Vogel (Nacht, Weg, Analog, Neon, Ast und mehr) sind dabei und kommen mit einem Tipp aufs Mi Band 8</item>
+        <item>Zifferblatt gestalten (Mi Band 8): Hintergrund (fertige Farben oder eigenes Foto), Farben für Stunden, Minuten, Text und Zielbalken sowie den Vogel wählen, Vorschau ansehen und ans Band senden. Das Zifferblatt entsteht auf dem Handy, ohne Computer</item>
+        <item>Eine Warnung erscheint, wenn eine Zifferblatt-Datei für ein anderes Gerät gewählt wird</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Zifferblätter: Vorschaubild vor dem Hochladen; aus FitWren geladene Zifferblätter zeigen ihr Bild, das aktive ist hervorgehoben; Löschen fragt nach</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d Zifferblätter</string>
     <string name="own_faces">FitWren-Zifferblätter</string>
     <string name="own_faces_hint">Zifferblätter mit dem FitWren-Vogel, die mit der App kommen. Antippen, ansehen und laden.</string>
+    <string name="face_designer">Zifferblatt gestalten</string>
+    <string name="face_designer_background">Hintergrund</string>
+    <string name="face_designer_photo">Foto wählen</string>
+    <string name="face_designer_hour">Stundenfarbe</string>
+    <string name="face_designer_minute">Minutenfarbe</string>
+    <string name="face_designer_text">Textfarbe</string>
+    <string name="face_designer_accent">Farbe des Zielbalkens</string>
+    <string name="face_designer_bird">Vogel</string>
+    <string name="face_designer_bird_happy">Fröhlich</string>
+    <string name="face_designer_bird_sleepy">Schläfrig</string>
+    <string name="face_designer_bird_none">Keiner</string>
+    <string name="face_designer_upload">An das Band senden</string>
+    <string name="face_designer_name">Mein FitWren-Design</string>
+    <string name="face_designer_failed">Das Zifferblatt konnte nicht erstellt oder gesendet werden</string>
 </resources>

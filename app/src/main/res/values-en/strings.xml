@@ -316,9 +316,11 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
+        <item>Design a face (Mi Band 8): pick the background (ready colours or your own photo), the hour, minute, text and goal bar colours and the bird, see the preview and send it to the band. The face is made on the phone, no computer needed</item>
+        <item>A warning shows when a face file made for another device is picked</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Watch faces: a preview picture shows before uploading; faces uploaded from FitWren show their picture in the list and the face in use is highlighted; deleting asks first</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d faces</string>
     <string name="own_faces">FitWren faces</string>
     <string name="own_faces_hint">Faces with the FitWren bird that come with the app. Tap to look and upload.</string>
+    <string name="face_designer">Design a face</string>
+    <string name="face_designer_background">Background</string>
+    <string name="face_designer_photo">Pick a photo</string>
+    <string name="face_designer_hour">Hour colour</string>
+    <string name="face_designer_minute">Minute colour</string>
+    <string name="face_designer_text">Text colour</string>
+    <string name="face_designer_accent">Goal bar colour</string>
+    <string name="face_designer_bird">Bird</string>
+    <string name="face_designer_bird_happy">Cheerful</string>
+    <string name="face_designer_bird_sleepy">Sleepy</string>
+    <string name="face_designer_bird_none">None</string>
+    <string name="face_designer_upload">Send to band</string>
+    <string name="face_designer_name">My FitWren design</string>
+    <string name="face_designer_failed">The face could not be made or sent</string>
 </resources>

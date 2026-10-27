@@ -316,9 +316,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
-    <string-array name="release_notes_0_12_10">
+    <string-array name="release_notes_0_13_0">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
         <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
+        <item>Criar mostrador (Mi Band 8): escolha o fundo (cores prontas ou sua própria foto), as cores das horas, minutos, texto e barra de meta e o pássaro, veja a prévia e envie para a pulseira. O mostrador é feito no celular, sem computador</item>
+        <item>Um aviso aparece ao escolher um arquivo de mostrador feito para outro dispositivo</item>
     </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Mostradores: prévia antes de enviar; os enviados pelo FitWren mostram a imagem e o que está em uso fica destacado; apagar pede confirmação</item>
@@ -870,4 +872,18 @@
     <string name="face_store_count">%1$d mostradores</string>
     <string name="own_faces">Mostradores FitWren</string>
     <string name="own_faces_hint">Mostradores com o pássaro do FitWren incluídos no app. Toque para ver e enviar.</string>
+    <string name="face_designer">Criar mostrador</string>
+    <string name="face_designer_background">Fundo</string>
+    <string name="face_designer_photo">Escolher foto</string>
+    <string name="face_designer_hour">Cor das horas</string>
+    <string name="face_designer_minute">Cor dos minutos</string>
+    <string name="face_designer_text">Cor do texto</string>
+    <string name="face_designer_accent">Cor da barra de meta</string>
+    <string name="face_designer_bird">Pássaro</string>
+    <string name="face_designer_bird_happy">Alegre</string>
+    <string name="face_designer_bird_sleepy">Sonolento</string>
+    <string name="face_designer_bird_none">Nenhum</string>
+    <string name="face_designer_upload">Enviar para a pulseira</string>
+    <string name="face_designer_name">Meu design FitWren</string>
+    <string name="face_designer_failed">Não foi possível criar ou enviar o mostrador</string>
 </resources>
