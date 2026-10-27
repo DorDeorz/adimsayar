@@ -316,7 +316,7 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
         <item>Cadrans FitWren : neuf cadrans avec l’oiseau (Nuit, Route, Analogique, Néon, Branche et plus) inclus, envoyés au Mi Band 8 en un geste</item>
         <item>Créer un cadran (Mi Band 8) : choisis le fond (couleurs prêtes ou ta propre photo), les couleurs des heures, minutes, texte et barre d\'objectif et l\'oiseau, regarde l\'aperçu et envoie-le au bracelet. Le cadran est créé sur le téléphone, sans ordinateur</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">Pas</string>
     <string name="face_designer_show_bar">Barre d\'objectif</string>
     <string name="face_designer_show_health">Pouls et batterie</string>
+    <string name="face_designer_tab_theme">Thème</string>
+    <string name="face_designer_tab_time">Heure</string>
+    <string name="face_designer_tab_colors">Couleurs</string>
+    <string name="face_designer_tab_parts">Éléments</string>
+    <string name="face_designer_undo">Annuler</string>
+    <string name="face_designer_reset">Réinitialiser</string>
 </resources>

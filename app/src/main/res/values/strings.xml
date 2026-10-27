@@ -316,7 +316,7 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
         <item>Kadran tasarla (Mi Band 8): arka planı (hazır renkler ya da kendi fotoğrafın), saat, dakika, yazı ve hedef çubuğu renklerini ve kuşu seç; önizlemesini gör ve bilekliğe gönder. Kadran telefonda, bilgisayarsız hazırlanır</item>
@@ -910,4 +910,10 @@
     <string name="face_designer_show_steps">Adım</string>
     <string name="face_designer_show_bar">Hedef çubuğu</string>
     <string name="face_designer_show_health">Nabız ve pil</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Saat</string>
+    <string name="face_designer_tab_colors">Renkler</string>
+    <string name="face_designer_tab_parts">Görünüm</string>
+    <string name="face_designer_undo">Geri al</string>
+    <string name="face_designer_reset">Sıfırla</string>
 </resources>

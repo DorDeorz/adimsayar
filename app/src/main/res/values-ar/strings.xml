@@ -316,7 +316,7 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
         <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
         <item>تصميم واجهة (Mi Band 8): اختر الخلفية (ألوان جاهزة أو صورتك)، وألوان الساعات والدقائق والنص وشريط الهدف والطائر، وشاهد المعاينة وأرسلها إلى السوار. تُصنع الواجهة على الهاتف دون حاسوب</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">الخطوات</string>
     <string name="face_designer_show_bar">شريط الهدف</string>
     <string name="face_designer_show_health">النبض والبطارية</string>
+    <string name="face_designer_tab_theme">السمة</string>
+    <string name="face_designer_tab_time">الوقت</string>
+    <string name="face_designer_tab_colors">الألوان</string>
+    <string name="face_designer_tab_parts">العناصر</string>
+    <string name="face_designer_undo">تراجع</string>
+    <string name="face_designer_reset">إعادة ضبط</string>
 </resources>

@@ -316,7 +316,7 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
         <item>Design a face (Mi Band 8): pick the background (ready colours or your own photo), the hour, minute, text and goal bar colours and the bird, see the preview and send it to the band. The face is made on the phone, no computer needed</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">Steps</string>
     <string name="face_designer_show_bar">Goal bar</string>
     <string name="face_designer_show_health">Heart rate and battery</string>
+    <string name="face_designer_tab_theme">Theme</string>
+    <string name="face_designer_tab_time">Time</string>
+    <string name="face_designer_tab_colors">Colours</string>
+    <string name="face_designer_tab_parts">Parts</string>
+    <string name="face_designer_undo">Undo</string>
+    <string name="face_designer_reset">Reset</string>
 </resources>

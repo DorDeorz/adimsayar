@@ -316,7 +316,7 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
         <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
         <item>Criar mostrador (Mi Band 8): escolha o fundo (cores prontas ou sua própria foto), as cores das horas, minutos, texto e barra de meta e o pássaro, veja a prévia e envie para a pulseira. O mostrador é feito no celular, sem computador</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">Passos</string>
     <string name="face_designer_show_bar">Barra de meta</string>
     <string name="face_designer_show_health">Pulso e bateria</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Hora</string>
+    <string name="face_designer_tab_colors">Cores</string>
+    <string name="face_designer_tab_parts">Elementos</string>
+    <string name="face_designer_undo">Desfazer</string>
+    <string name="face_designer_reset">Redefinir</string>
 </resources>

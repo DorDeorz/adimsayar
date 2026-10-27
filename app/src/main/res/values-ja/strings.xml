@@ -316,7 +316,7 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
         <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
         <item>文字盤をデザイン (Mi Band 8): 背景 (用意された色または自分の写真)、時・分・文字・目標バーの色と小鳥を選び、プレビューを見てバンドに送れます。文字盤はスマホだけで作れ、パソコンは不要です</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">歩数</string>
     <string name="face_designer_show_bar">目標バー</string>
     <string name="face_designer_show_health">心拍とバッテリー</string>
+    <string name="face_designer_tab_theme">テーマ</string>
+    <string name="face_designer_tab_time">時刻</string>
+    <string name="face_designer_tab_colors">色</string>
+    <string name="face_designer_tab_parts">表示項目</string>
+    <string name="face_designer_undo">元に戻す</string>
+    <string name="face_designer_reset">リセット</string>
 </resources>

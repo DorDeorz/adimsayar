@@ -316,7 +316,7 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>Zifferblatt-Shop: kostenlose Mi Band 8 Zifferblätter von Xiaomi mit Bildern ansehen, suchen und mit einem Tipp aufs Band laden</item>
         <item>FitWren-Zifferblätter: neun Zifferblätter mit dem Vogel (Nacht, Weg, Analog, Neon, Ast und mehr) sind dabei und kommen mit einem Tipp aufs Mi Band 8</item>
         <item>Zifferblatt gestalten (Mi Band 8): Hintergrund (fertige Farben oder eigenes Foto), Farben für Stunden, Minuten, Text und Zielbalken sowie den Vogel wählen, Vorschau ansehen und ans Band senden. Das Zifferblatt entsteht auf dem Handy, ohne Computer</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">Schritte</string>
     <string name="face_designer_show_bar">Zielbalken</string>
     <string name="face_designer_show_health">Puls und Akku</string>
+    <string name="face_designer_tab_theme">Thema</string>
+    <string name="face_designer_tab_time">Uhrzeit</string>
+    <string name="face_designer_tab_colors">Farben</string>
+    <string name="face_designer_tab_parts">Elemente</string>
+    <string name="face_designer_undo">Rückgängig</string>
+    <string name="face_designer_reset">Zurücksetzen</string>
 </resources>

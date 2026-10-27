@@ -316,7 +316,7 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
-    <string-array name="release_notes_0_13_2">
+    <string-array name="release_notes_0_13_3">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
         <item>FitWren 表盘：应用自带九款小鸟表盘（夜晚、小路、指针、霓虹、树枝等），一键安装到小米手环 8</item>
         <item>设计表盘 (Mi Band 8)：选择背景（预设颜色或你自己的照片）、小时、分钟、文字和目标条的颜色以及小鸟，查看预览并发送到手环。表盘在手机上生成，无需电脑</item>
@@ -909,4 +909,10 @@
     <string name="face_designer_show_steps">步数</string>
     <string name="face_designer_show_bar">目标条</string>
     <string name="face_designer_show_health">心率和电量</string>
+    <string name="face_designer_tab_theme">主题</string>
+    <string name="face_designer_tab_time">时间</string>
+    <string name="face_designer_tab_colors">颜色</string>
+    <string name="face_designer_tab_parts">显示内容</string>
+    <string name="face_designer_undo">撤销</string>
+    <string name="face_designer_reset">重置</string>
 </resources>
