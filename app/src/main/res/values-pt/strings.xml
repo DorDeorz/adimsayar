@@ -316,6 +316,13 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
+        <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
+        <item>Criar mostrador (Mi Band 8): escolha o fundo (cores prontas ou sua própria foto), as cores das horas, minutos, texto e barra de meta e o pássaro, veja a prévia e envie para a pulseira. O mostrador é feito no celular, sem computador</item>
+        <item>Também: 7 estilos de dígitos, posição da hora (topo, meio, base), 8 temas, escurecer o fundo e mostrar ou ocultar data, passos, barra de meta e pulso/bateria; a foto pode ser arrastada e ampliada</item>
+        <item>Um aviso aparece ao escolher um arquivo de mostrador feito para outro dispositivo</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Mostradores: prévia antes de enviar; os enviados pelo FitWren mostram a imagem e o que está em uso fica destacado; apagar pede confirmação</item>
         <item>A lista de apps para notificações mostra ícones, busca e quantos apps estão ativados</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">Toque num mostrador para usá-lo na pulseira na hora. A pulseira não envia imagens: elas aparecem só nos mostradores enviados pelo FitWren, e os nomes são os da pulseira.</string>
     <string name="band_faces_no_preview">Este arquivo não tem imagem de prévia.</string>
     <string name="band_faces_upload">Enviar</string>
+    <string name="band_faces_wrong_device">Este mostrador parece feito para outro dispositivo. Pode aparecer com erros na pulseira ou nem ser instalado.</string>
+    <string name="band_faces_upload_anyway">Enviar mesmo assim</string>
     <string name="band_faces_delete_title">Apagar este mostrador?</string>
     <string name="band_faces_active">Em uso</string>
     <string name="band_faces_own">Enviado por você</string>
     <string name="band_faces_builtin">Integrado</string>
+    <string name="face_store">Loja de mostradores</string>
+    <string name="face_store_hint">Mostradores gratuitos da Xiaomi. Nomes e imagens vêm da Xiaomi.</string>
+    <string name="face_store_loading">Carregando mostradores…</string>
+    <string name="face_store_offline">Não foi possível acessar a loja. Verifique sua conexão.</string>
+    <string name="face_store_all">Todos</string>
+    <string name="face_store_search">Buscar mostradores</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Baixando…</string>
+    <string name="face_store_failed">Não foi possível baixar o mostrador. Tente de novo.</string>
+    <string name="face_store_count">%1$d mostradores</string>
+    <string name="own_faces">Mostradores FitWren</string>
+    <string name="own_faces_hint">Mostradores com o pássaro do FitWren incluídos no app. Toque para ver e enviar.</string>
+    <string name="face_designer">Criar mostrador</string>
+    <string name="face_designer_background">Fundo</string>
+    <string name="face_designer_photo">Escolher foto</string>
+    <string name="face_designer_hour">Cor das horas</string>
+    <string name="face_designer_minute">Cor dos minutos</string>
+    <string name="face_designer_text">Cor do texto</string>
+    <string name="face_designer_accent">Cor da barra de meta</string>
+    <string name="face_designer_bird">Pássaro</string>
+    <string name="face_designer_bird_happy">Alegre</string>
+    <string name="face_designer_bird_sleepy">Sonolento</string>
+    <string name="face_designer_bird_none">Nenhum</string>
+    <string name="face_designer_upload">Enviar para a pulseira</string>
+    <string name="face_designer_name">Meu design FitWren</string>
+    <string name="face_designer_failed">Não foi possível criar ou enviar o mostrador</string>
+    <string name="face_style_bold">Negrito</string>
+    <string name="face_style_light">Fino</string>
+    <string name="face_style_italic">Itálico</string>
+    <string name="face_style_serif">Serifa</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temas</string>
+    <string name="face_designer_style">Estilo dos dígitos</string>
+    <string name="face_designer_place">Posição da hora</string>
+    <string name="face_designer_place_top">Topo</string>
+    <string name="face_designer_place_middle">Meio</string>
+    <string name="face_designer_place_bottom">Base</string>
+    <string name="face_designer_photo_remove">Remover foto</string>
+    <string name="face_designer_photo_hint">Arraste a foto com um dedo, belisque para ampliar</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Escurecer fundo</string>
+    <string name="face_designer_show">Mostrar</string>
+    <string name="face_designer_show_date">Data</string>
+    <string name="face_designer_show_steps">Passos</string>
+    <string name="face_designer_show_bar">Barra de meta</string>
+    <string name="face_designer_show_health">Pulso e bateria</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Hora</string>
+    <string name="face_designer_tab_colors">Cores</string>
+    <string name="face_designer_tab_parts">Elementos</string>
+    <string name="face_designer_undo">Desfazer</string>
+    <string name="face_designer_reset">Redefinir</string>
 </resources>

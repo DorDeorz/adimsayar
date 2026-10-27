@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FaceProject DeviceType="9" Id="266290002">
+  <Screen Title="FitWren Gece" Bitmap="preview.png">
+    <Widget Shape="30" Name="background" Bitmap="background.png" X="0" Y="0" Width="192" Height="490" Alpha="255" Visible_Src="0" />
+    <Widget Shape="30" Name="moon" Bitmap="moon.png" X="140" Y="26" Width="30" Height="30" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="hour" BitmapList="hour_0.png|hour_1.png|hour_2.png|hour_3.png|hour_4.png|hour_5.png|hour_6.png|hour_7.png|hour_8.png|hour_9.png" X="43" Y="60" Width="106" Height="58" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="0811" Spacing="0" Blanking="0" />
+    <Widget Shape="32" Name="minute" BitmapList="minute_0.png|minute_1.png|minute_2.png|minute_3.png|minute_4.png|minute_5.png|minute_6.png|minute_7.png|minute_8.png|minute_9.png" X="43" Y="124" Width="106" Height="58" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1011" Spacing="0" Blanking="0" />
+    <Widget Shape="31" Name="weekday" BitmapList="(0):weekday_0.png|(1):weekday_1.png|(2):weekday_2.png|(3):weekday_3.png|(4):weekday_4.png|(5):weekday_5.png|(6):weekday_6.png" X="27" Y="192" Width="54" Height="18" Alpha="255" Alignment="0" DefaultIndex="0" Index_Src="2012" Spacing="0" Blanking="0" Visible_Src="0" />
+    <Widget Shape="32" Name="day" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="87" Y="192" Width="34" Height="18" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1812" Spacing="0" Blanking="0" />
+    <Widget Shape="30" Name="date_dot" Bitmap="dot.png" X="121" Y="192" Width="9" Height="18" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="month" BitmapList="date_0.png|date_1.png|date_2.png|date_3.png|date_4.png|date_5.png|date_6.png|date_7.png|date_8.png|date_9.png" X="130" Y="192" Width="34" Height="18" Alpha="255" Visible_Src="0" Digits="2" Alignment="1" Value_Src="1012" Spacing="0" Blanking="0" />
+    <Widget Shape="31" Name="goal" BitmapList="(0):ring_0.png|(10):ring_10.png|(20):ring_20.png|(30):ring_30.png|(40):ring_40.png|(50):ring_50.png|(60):ring_60.png|(70):ring_70.png|(80):ring_80.png|(90):ring_90.png|(100):ring_100.png" X="26" Y="228" Width="140" Height="140" Alpha="255" Alignment="0" DefaultIndex="0" Index_Src="1021" Spacing="0" Blanking="0" Visible_Src="0" />
+    <Widget Shape="32" Name="steps" BitmapList="mid_0.png|mid_1.png|mid_2.png|mid_3.png|mid_4.png|mid_5.png|mid_6.png|mid_7.png|mid_8.png|mid_9.png" X="38" Y="384" Width="115" Height="24" Alpha="255" Visible_Src="0" Digits="5" Alignment="1" Value_Src="0821" Spacing="0" Blanking="1" />
+    <Widget Shape="30" Name="heart_icon" Bitmap="icon_heart.png" X="30" Y="432" Width="18" Height="18" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="heart" BitmapList="small_0.png|small_1.png|small_2.png|small_3.png|small_4.png|small_5.png|small_6.png|small_7.png|small_8.png|small_9.png" X="51" Y="432" Width="51" Height="18" Alpha="255" Visible_Src="0" Digits="3" Alignment="0" Value_Src="0822" Spacing="0" Blanking="1" />
+    <Widget Shape="30" Name="battery_icon" Bitmap="icon_battery.png" X="104" Y="432" Width="18" Height="18" Alpha="255" Visible_Src="0" />
+    <Widget Shape="32" Name="battery" BitmapList="small_0.png|small_1.png|small_2.png|small_3.png|small_4.png|small_5.png|small_6.png|small_7.png|small_8.png|small_9.png" X="125" Y="432" Width="51" Height="18" Alpha="255" Visible_Src="0" Digits="3" Alignment="0" Value_Src="0841" Spacing="0" Blanking="1" />
+  </Screen>
+</FaceProject>

@@ -316,6 +316,13 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
+        <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
+        <item>文字盤をデザイン (Mi Band 8): 背景 (用意された色または自分の写真)、時・分・文字・目標バーの色と小鳥を選び、プレビューを見てバンドに送れます。文字盤はスマホだけで作れ、パソコンは不要です</item>
+        <item>さらに数字スタイル7種、時刻の位置（上・中央・下）、テーマ8種、背景の暗さ、日付・歩数・目標バー・心拍/バッテリーの個別表示。写真は指で動かして拡大できます</item>
+        <item>別のデバイス用の文字盤ファイルを選ぶと警告が表示されます</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>文字盤: アップロード前にプレビューを表示。FitWren からアップロードした文字盤は画像付きで表示し、使用中の文字盤を強調。削除前に確認</item>
         <item>通知アプリの一覧にアイコン、検索、オンになっているアプリ数を表示</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">文字盤をタップするとすぐにバンドで切り替わります。バンドは画像を送らないため、画像は FitWren からアップロードした文字盤だけに表示され、名前はバンドのとおりに表示されます。</string>
     <string name="band_faces_no_preview">このファイルにはプレビュー画像がありません。</string>
     <string name="band_faces_upload">アップロード</string>
+    <string name="band_faces_wrong_device">この文字盤は別のデバイス用のようです。バンドで正しく表示されないか、インストールできない可能性があります。</string>
+    <string name="band_faces_upload_anyway">それでもアップロード</string>
     <string name="band_faces_delete_title">この文字盤を削除しますか?</string>
     <string name="band_faces_active">使用中</string>
     <string name="band_faces_own">アップロード済み</string>
     <string name="band_faces_builtin">内蔵</string>
+    <string name="face_store">文字盤ストア</string>
+    <string name="face_store_hint">Xiaomiの無料文字盤。名前と画像はXiaomiから取得します。</string>
+    <string name="face_store_loading">文字盤を読み込み中…</string>
+    <string name="face_store_offline">ストアに接続できません。インターネット接続を確認してください。</string>
+    <string name="face_store_all">すべて</string>
+    <string name="face_store_search">文字盤を検索</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">ダウンロード中…</string>
+    <string name="face_store_failed">文字盤をダウンロードできませんでした。もう一度お試しください。</string>
+    <string name="face_store_count">%1$d 個の文字盤</string>
+    <string name="own_faces">FitWren 文字盤</string>
+    <string name="own_faces_hint">アプリ付属の FitWren の小鳥の文字盤。タップして確認・送信。</string>
+    <string name="face_designer">文字盤をデザイン</string>
+    <string name="face_designer_background">背景</string>
+    <string name="face_designer_photo">写真を選ぶ</string>
+    <string name="face_designer_hour">時の色</string>
+    <string name="face_designer_minute">分の色</string>
+    <string name="face_designer_text">文字の色</string>
+    <string name="face_designer_accent">目標バーの色</string>
+    <string name="face_designer_bird">小鳥</string>
+    <string name="face_designer_bird_happy">元気</string>
+    <string name="face_designer_bird_sleepy">おねむ</string>
+    <string name="face_designer_bird_none">なし</string>
+    <string name="face_designer_upload">バンドに送る</string>
+    <string name="face_designer_name">マイ FitWren デザイン</string>
+    <string name="face_designer_failed">文字盤を作成または送信できませんでした</string>
+    <string name="face_style_bold">太字</string>
+    <string name="face_style_light">細字</string>
+    <string name="face_style_italic">斜体</string>
+    <string name="face_style_serif">セリフ</string>
+    <string name="face_style_mono">等幅</string>
+    <string name="face_style_outline">中抜き</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">テーマ</string>
+    <string name="face_designer_style">数字のスタイル</string>
+    <string name="face_designer_place">時刻の位置</string>
+    <string name="face_designer_place_top">上</string>
+    <string name="face_designer_place_middle">中央</string>
+    <string name="face_designer_place_bottom">下</string>
+    <string name="face_designer_photo_remove">写真を削除</string>
+    <string name="face_designer_photo_hint">指で写真を動かし、ピンチで拡大</string>
+    <string name="face_designer_zoom">ズーム</string>
+    <string name="face_designer_dim">背景を暗く</string>
+    <string name="face_designer_show">表示</string>
+    <string name="face_designer_show_date">日付</string>
+    <string name="face_designer_show_steps">歩数</string>
+    <string name="face_designer_show_bar">目標バー</string>
+    <string name="face_designer_show_health">心拍とバッテリー</string>
+    <string name="face_designer_tab_theme">テーマ</string>
+    <string name="face_designer_tab_time">時刻</string>
+    <string name="face_designer_tab_colors">色</string>
+    <string name="face_designer_tab_parts">表示項目</string>
+    <string name="face_designer_undo">元に戻す</string>
+    <string name="face_designer_reset">リセット</string>
 </resources>

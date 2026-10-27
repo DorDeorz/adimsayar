@@ -27,6 +27,9 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
 import com.dordeorz.adimsayar.data.BandFaces
+import com.dordeorz.adimsayar.data.FaceDesigner
+import com.dordeorz.adimsayar.data.FaceStore
+import com.dordeorz.adimsayar.data.OwnFaces
 import com.dordeorz.adimsayar.band.WatchfaceUpload
 import androidx.compose.material3.LinearProgressIndicator
 import com.dordeorz.adimsayar.data.BandReplies
@@ -155,6 +158,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.13.3", R.array.release_notes_0_13_3),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
     ReleaseNote("0.11.0", R.array.release_notes_0_11_0),
@@ -1093,6 +1097,12 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     var pending by remember { mutableStateOf<WatchfaceFile?>(null) }
     var pendingPreview by remember { mutableStateOf<Bitmap?>(null) }
     var deleting by remember { mutableStateOf<BandWatchface?>(null) }
+    var store by remember { mutableStateOf(false) }
+    val storeModel = remember { FaceStore.model(context) }
+    var showOwn by remember { mutableStateOf(false) }
+    val own = remember { OwnFaces.available(context) }
+    var designing by remember { mutableStateOf(false) }
+    val designer = remember { FaceDesigner.available(context) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1122,6 +1132,27 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
+                if (own.isNotEmpty()) {
+                    Button(
+                        enabled = connected && sending == null,
+                        onClick = { showOwn = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.own_faces)) }
+                }
+                if (designer) {
+                    OutlinedButton(
+                        enabled = connected && sending == null,
+                        onClick = { designing = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.face_designer)) }
+                }
+                if (storeModel != null) {
+                    OutlinedButton(
+                        enabled = connected && sending == null,
+                        onClick = { store = true },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(stringResource(R.string.face_store)) }
+                }
                 when (val state = upload) {
                     is WatchfaceUpload.Sending -> {
                         Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
@@ -1150,6 +1181,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
         },
     )
     pending?.let { file ->
+        val fits = remember(file) { BandFaces.fitsBand(context, file) }
         AlertDialog(
             onDismissRequest = { pending = null },
             title = { Text(file.name) },
@@ -1165,6 +1197,13 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                     } else {
                         Text(stringResource(R.string.band_faces_no_preview), style = MaterialTheme.typography.bodyMedium)
                     }
+                    if (!fits) {
+                        Text(
+                            stringResource(R.string.band_faces_wrong_device),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.error,
+                        )
+                    }
                     Text(
                         stringResource(R.string.band_faces_install_hint),
                         style = MaterialTheme.typography.bodySmall,
@@ -1177,10 +1216,19 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                     val preview = pendingPreview
                     pending = null
                     scope.launch { BandFaces.install(context, file, preview) }
-                }) { Text(stringResource(R.string.band_faces_upload)) }
+                }) { Text(stringResource(if (fits) R.string.band_faces_upload else R.string.band_faces_upload_anyway)) }
             },
             dismissButton = { TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) } },
         )
+    }
+    if (store && storeModel != null) {
+        FaceStoreDialog(storeModel, onDismiss = { store = false })
+    }
+    if (showOwn) {
+        OwnFacesDialog(own, onDismiss = { showOwn = false })
+    }
+    if (designing) {
+        FaceDesignerDialog(onDismiss = { designing = false })
     }
     deleting?.let { face ->
         AlertDialog(
@@ -1202,6 +1250,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
 private fun FaceRow(face: BandWatchface, enabled: Boolean, onSelect: () -> Unit, onDelete: () -> Unit) {
     val context = LocalContext.current
     val preview by produceState<Bitmap?>(null, face.id) { value = BandFaces.savedPreview(context, face.id) }
+    val name by produceState(face.name, face.id, face.name) { value = BandFaces.savedName(context, face.id) ?: face.name }
     val shape = MaterialTheme.shapes.medium
     Row(
         modifier = Modifier
@@ -1228,7 +1277,7 @@ private fun FaceRow(face: BandWatchface, enabled: Boolean, onSelect: () -> Unit,
             }
         }
         Column(Modifier.weight(1f)) {
-            Text(face.name, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(name, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
             Text(
                 stringResource(
                     when {

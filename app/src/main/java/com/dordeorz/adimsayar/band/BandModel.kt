@@ -17,6 +17,10 @@ class BandModel(
     /** Huami only: authentication crypt flags and bytes per minute in the activity data. */
     val huamiCrypt: Int = 0,
     val huamiSampleSize: Int = 4,
+    /** Xiaomi only: the model id of Xiaomi's watch face store, when its faces are known to work. */
+    val storeModel: String? = null,
+    /** Xiaomi only: the size of the preview inside face files made for this model. */
+    val facePreview: Pair<Int, Int>? = null,
 ) {
 
     fun matches(deviceName: String): Boolean = pattern.matches(deviceName.trim())
@@ -24,8 +28,15 @@ class BandModel(
 
 object BandModels {
 
-    private fun model(name: String, shape: BandShape, link: BandLink, pattern: String, tested: Boolean = false) =
-        BandModel(name, shape, link, tested, Regex(pattern))
+    private fun model(
+        name: String,
+        shape: BandShape,
+        link: BandLink,
+        pattern: String,
+        tested: Boolean = false,
+        store: String? = null,
+        preview: Pair<Int, Int>? = null,
+    ) = BandModel(name, shape, link, tested, Regex(pattern), storeModel = store, facePreview = preview)
 
     private fun huami(name: String, shape: BandShape, pattern: String, crypt: Int = 0x80, sampleSize: Int = 4) =
         BandModel(name, shape, BandLink.Ble, false, Regex(pattern, RegexOption.IGNORE_CASE), BandFamily.Huami, crypt, sampleSize)
@@ -35,7 +46,7 @@ object BandModels {
     val ALL: List<BandModel> = listOf(
         model("Xiaomi Smart Band 8 Active", BandShape.Band, BandLink.Ble, "^Xiaomi( Smart)? Band 8 Active$SUFFIX$"),
         model("Xiaomi Smart Band 8 Pro", BandShape.SquareWatch, BandLink.Classic, "^Xiaomi Smart Band 8 Pro$SUFFIX$"),
-        model("Xiaomi Smart Band 8", BandShape.Band, BandLink.Ble, "^Xiaomi Smart Band 8$SUFFIX$", tested = true),
+        model("Xiaomi Smart Band 8", BandShape.Band, BandLink.Ble, "^Xiaomi Smart Band 8$SUFFIX$", tested = true, store = "miwear.watch.m66gl", preview = 122 to 310),
         model("Xiaomi Smart Band 9 Pro", BandShape.SquareWatch, BandLink.Classic, "^Xiaomi Smart Band 9 Pro$SUFFIX$"),
         model("Xiaomi Smart Band 9", BandShape.Band, BandLink.Classic, "^Xiaomi Smart Band 9$SUFFIX$"),
         model("Xiaomi Smart Band 7 Pro", BandShape.SquareWatch, BandLink.Ble, "^Xiaomi Smart Band 7 Pro.*$"),

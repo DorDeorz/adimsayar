@@ -1,0 +1,115 @@
+{
+ "layers": [
+  {
+   "file": "bird.png",
+   "x": 48,
+   "y": 250,
+   "part": "bird",
+   "block": "bird"
+  },
+  {
+   "file": "bird_sleepy.png",
+   "x": 48,
+   "y": 250,
+   "part": "bird",
+   "block": "bird"
+  },
+  {
+   "file": "dot.png",
+   "x": 121,
+   "y": 194,
+   "part": "date",
+   "block": "time"
+  },
+  {
+   "file": "icon_heart.png",
+   "x": 30,
+   "y": 428,
+   "part": "health",
+   "block": "stats"
+  },
+  {
+   "file": "icon_battery.png",
+   "x": 104,
+   "y": 428,
+   "part": "health",
+   "block": "stats"
+  }
+ ],
+ "lists": [
+  "hour",
+  "minute",
+  "date",
+  "date",
+  "bar",
+  "steps",
+  "health"
+ ],
+ "widgets": [
+  {
+   "name": "background",
+   "block": ""
+  },
+  {
+   "name": "hour",
+   "block": "time"
+  },
+  {
+   "name": "minute",
+   "block": "time"
+  },
+  {
+   "name": "weekday",
+   "block": "time"
+  },
+  {
+   "name": "day",
+   "block": "time"
+  },
+  {
+   "name": "month",
+   "block": "time"
+  },
+  {
+   "name": "goal",
+   "block": "stats"
+  },
+  {
+   "name": "steps",
+   "block": "stats"
+  },
+  {
+   "name": "heart",
+   "block": "stats"
+  },
+  {
+   "name": "battery",
+   "block": "stats"
+  }
+ ],
+ "time": {
+  "x": 32,
+  "hour": 34,
+  "minute": 112,
+  "cell": [
+   64,
+   70
+  ]
+ },
+ "bar": {
+  "x": 26,
+  "y": 356,
+  "width": 140,
+  "height": 8,
+  "sample": 60
+ },
+ "styles": [
+  "bold",
+  "light",
+  "italic",
+  "serif",
+  "mono",
+  "outline",
+  "lcd"
+ ]
+}

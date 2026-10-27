@@ -316,6 +316,13 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
+        <item>Esferas FitWren: nueve esferas con el pájaro (Noche, Camino, Analógica, Neón, Rama y más) incluidas, se envían a la Mi Band 8 con un toque</item>
+        <item>Diseñar esfera (Mi Band 8): elige el fondo (colores listos o tu propia foto), los colores de horas, minutos, texto y barra de objetivo y el pájaro, mira la vista previa y envíala a la pulsera. La esfera se crea en el móvil, sin ordenador</item>
+        <item>Además: 7 estilos de dígitos, posición de la hora (arriba, centro, abajo), 8 temas, oscurecer el fondo y mostrar u ocultar fecha, pasos, barra de meta y pulso/batería; la foto se puede mover y ampliar</item>
+        <item>Aparece un aviso al elegir un archivo de esfera hecho para otro dispositivo</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Esferas: vista previa antes de subir; las esferas subidas desde FitWren muestran su imagen y la que está en uso se resalta; borrar pide confirmación</item>
         <item>La lista de apps para notificaciones muestra iconos, un buscador y cuántas apps están activadas</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">Toca una esfera para usarla en la pulsera al momento. La pulsera no envía imágenes: solo se ven en esferas subidas desde FitWren, y los nombres aparecen como en la pulsera.</string>
     <string name="band_faces_no_preview">Este archivo no tiene imagen de vista previa.</string>
     <string name="band_faces_upload">Subir</string>
+    <string name="band_faces_wrong_device">Esta esfera parece hecha para otro dispositivo. Puede verse mal en la pulsera o no instalarse.</string>
+    <string name="band_faces_upload_anyway">Subir de todos modos</string>
     <string name="band_faces_delete_title">¿Borrar esta esfera?</string>
     <string name="band_faces_active">En uso</string>
     <string name="band_faces_own">Subida por ti</string>
     <string name="band_faces_builtin">Incluida</string>
+    <string name="face_store">Tienda de esferas</string>
+    <string name="face_store_hint">Esferas gratuitas de Xiaomi. Los nombres e imágenes vienen de Xiaomi.</string>
+    <string name="face_store_loading">Cargando esferas…</string>
+    <string name="face_store_offline">No se pudo acceder a la tienda. Revisa tu conexión a internet.</string>
+    <string name="face_store_all">Todas</string>
+    <string name="face_store_search">Buscar esferas</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Descargando…</string>
+    <string name="face_store_failed">No se pudo descargar la esfera. Inténtalo de nuevo.</string>
+    <string name="face_store_count">%1$d esferas</string>
+    <string name="own_faces">Esferas FitWren</string>
+    <string name="own_faces_hint">Esferas con el pájaro de FitWren incluidas en la app. Toca para verlas y subirlas.</string>
+    <string name="face_designer">Diseñar esfera</string>
+    <string name="face_designer_background">Fondo</string>
+    <string name="face_designer_photo">Elegir foto</string>
+    <string name="face_designer_hour">Color de la hora</string>
+    <string name="face_designer_minute">Color de los minutos</string>
+    <string name="face_designer_text">Color del texto</string>
+    <string name="face_designer_accent">Color de la barra de objetivo</string>
+    <string name="face_designer_bird">Pájaro</string>
+    <string name="face_designer_bird_happy">Alegre</string>
+    <string name="face_designer_bird_sleepy">Dormido</string>
+    <string name="face_designer_bird_none">Ninguno</string>
+    <string name="face_designer_upload">Enviar a la pulsera</string>
+    <string name="face_designer_name">Mi diseño FitWren</string>
+    <string name="face_designer_failed">No se pudo crear o enviar la esfera</string>
+    <string name="face_style_bold">Negrita</string>
+    <string name="face_style_light">Fina</string>
+    <string name="face_style_italic">Cursiva</string>
+    <string name="face_style_serif">Con serifa</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temas</string>
+    <string name="face_designer_style">Estilo de dígitos</string>
+    <string name="face_designer_place">Posición de la hora</string>
+    <string name="face_designer_place_top">Arriba</string>
+    <string name="face_designer_place_middle">Centro</string>
+    <string name="face_designer_place_bottom">Abajo</string>
+    <string name="face_designer_photo_remove">Quitar foto</string>
+    <string name="face_designer_photo_hint">Arrastra la foto con un dedo y pellizca para ampliar</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Oscurecer fondo</string>
+    <string name="face_designer_show">Mostrar</string>
+    <string name="face_designer_show_date">Fecha</string>
+    <string name="face_designer_show_steps">Pasos</string>
+    <string name="face_designer_show_bar">Barra de meta</string>
+    <string name="face_designer_show_health">Pulso y batería</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Hora</string>
+    <string name="face_designer_tab_colors">Colores</string>
+    <string name="face_designer_tab_parts">Elementos</string>
+    <string name="face_designer_undo">Deshacer</string>
+    <string name="face_designer_reset">Restablecer</string>
 </resources>

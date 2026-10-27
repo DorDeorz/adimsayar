@@ -316,6 +316,13 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Boutique de cadrans : parcours les cadrans gratuits Xiaomi pour Mi Band 8 avec images, cherche-les et envoie-les au bracelet en un geste</item>
+        <item>Cadrans FitWren : neuf cadrans avec l’oiseau (Nuit, Route, Analogique, Néon, Branche et plus) inclus, envoyés au Mi Band 8 en un geste</item>
+        <item>Créer un cadran (Mi Band 8) : choisis le fond (couleurs prêtes ou ta propre photo), les couleurs des heures, minutes, texte et barre d\'objectif et l\'oiseau, regarde l\'aperçu et envoie-le au bracelet. Le cadran est créé sur le téléphone, sans ordinateur</item>
+        <item>Aussi : 7 styles de chiffres, position de l\'heure (haut, milieu, bas), 8 thèmes, assombrissement du fond et affichage séparé de la date, des pas, de la barre d\'objectif et du pouls/batterie ; la photo se déplace et se zoome</item>
+        <item>Un avertissement s\'affiche si un fichier de cadran fait pour un autre appareil est choisi</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Cadrans : aperçu avant l’envoi ; les cadrans envoyés depuis FitWren affichent leur image et celui utilisé est mis en avant ; la suppression demande confirmation</item>
         <item>La liste des apps pour les notifications affiche les icônes, une recherche et le nombre d’apps activées</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">Touche un cadran pour l’utiliser tout de suite sur le bracelet. Le bracelet n’envoie pas d’images : elles ne s’affichent que pour les cadrans envoyés depuis FitWren, et les noms sont ceux du bracelet.</string>
     <string name="band_faces_no_preview">Ce fichier n’a pas d’aperçu.</string>
     <string name="band_faces_upload">Envoyer</string>
+    <string name="band_faces_wrong_device">Ce cadran semble fait pour un autre appareil. Il peut mal s\'afficher sur le bracelet ou ne pas s\'installer.</string>
+    <string name="band_faces_upload_anyway">Envoyer quand même</string>
     <string name="band_faces_delete_title">Supprimer ce cadran ?</string>
     <string name="band_faces_active">Utilisé</string>
     <string name="band_faces_own">Envoyé par toi</string>
     <string name="band_faces_builtin">Intégré</string>
+    <string name="face_store">Boutique de cadrans</string>
+    <string name="face_store_hint">Cadrans gratuits de Xiaomi. Les noms et images viennent de Xiaomi.</string>
+    <string name="face_store_loading">Chargement des cadrans…</string>
+    <string name="face_store_offline">Boutique inaccessible. Vérifie ta connexion internet.</string>
+    <string name="face_store_all">Tous</string>
+    <string name="face_store_search">Rechercher un cadran</string>
+    <string name="face_store_size">%1$s Mo</string>
+    <string name="face_store_downloading">Téléchargement…</string>
+    <string name="face_store_failed">Impossible de télécharger le cadran. Réessaie.</string>
+    <string name="face_store_count">%1$d cadrans</string>
+    <string name="own_faces">Cadrans FitWren</string>
+    <string name="own_faces_hint">Cadrans avec l\'oiseau FitWren fournis avec l\'appli. Touche pour voir et envoyer.</string>
+    <string name="face_designer">Créer un cadran</string>
+    <string name="face_designer_background">Fond</string>
+    <string name="face_designer_photo">Choisir une photo</string>
+    <string name="face_designer_hour">Couleur des heures</string>
+    <string name="face_designer_minute">Couleur des minutes</string>
+    <string name="face_designer_text">Couleur du texte</string>
+    <string name="face_designer_accent">Couleur de la barre d\'objectif</string>
+    <string name="face_designer_bird">Oiseau</string>
+    <string name="face_designer_bird_happy">Joyeux</string>
+    <string name="face_designer_bird_sleepy">Endormi</string>
+    <string name="face_designer_bird_none">Aucun</string>
+    <string name="face_designer_upload">Envoyer au bracelet</string>
+    <string name="face_designer_name">Mon design FitWren</string>
+    <string name="face_designer_failed">Le cadran n\'a pas pu être créé ou envoyé</string>
+    <string name="face_style_bold">Gras</string>
+    <string name="face_style_light">Fin</string>
+    <string name="face_style_italic">Italique</string>
+    <string name="face_style_serif">Serif</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contour</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Thèmes</string>
+    <string name="face_designer_style">Style des chiffres</string>
+    <string name="face_designer_place">Position de l\'heure</string>
+    <string name="face_designer_place_top">Haut</string>
+    <string name="face_designer_place_middle">Milieu</string>
+    <string name="face_designer_place_bottom">Bas</string>
+    <string name="face_designer_photo_remove">Retirer la photo</string>
+    <string name="face_designer_photo_hint">Faites glisser la photo avec un doigt, pincez pour zoomer</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Assombrir le fond</string>
+    <string name="face_designer_show">Afficher</string>
+    <string name="face_designer_show_date">Date</string>
+    <string name="face_designer_show_steps">Pas</string>
+    <string name="face_designer_show_bar">Barre d\'objectif</string>
+    <string name="face_designer_show_health">Pouls et batterie</string>
+    <string name="face_designer_tab_theme">Thème</string>
+    <string name="face_designer_tab_time">Heure</string>
+    <string name="face_designer_tab_colors">Couleurs</string>
+    <string name="face_designer_tab_parts">Éléments</string>
+    <string name="face_designer_undo">Annuler</string>
+    <string name="face_designer_reset">Réinitialiser</string>
 </resources>

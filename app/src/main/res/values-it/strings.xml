@@ -316,6 +316,13 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
+        <item>Quadranti FitWren: nove quadranti con l’uccellino (Notte, Strada, Analogico, Neon, Ramo e altri) inclusi, inviati alla Mi Band 8 con un tocco</item>
+        <item>Crea quadrante (Mi Band 8): scegli lo sfondo (colori pronti o una tua foto), i colori di ore, minuti, testo e barra obiettivo e l\'uccellino, guarda l\'anteprima e invialo al braccialetto. Il quadrante si crea sul telefono, senza computer</item>
+        <item>Inoltre: 7 stili di cifre, posizione dell\'ora (alto, centro, basso), 8 temi, sfondo scurito e interruttori separati per data, passi, barra obiettivo e battito/batteria; la foto si sposta e si ingrandisce</item>
+        <item>Compare un avviso quando si sceglie un file di quadrante fatto per un altro dispositivo</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Quadranti: anteprima prima del caricamento; i quadranti caricati da FitWren mostrano l’immagine e quello in uso è evidenziato; l’eliminazione chiede conferma</item>
         <item>L’elenco app per le notifiche mostra icone, ricerca e quante app sono attive</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">Tocca un quadrante per usarlo subito sul braccialetto. Il braccialetto non invia immagini: si vedono solo per i quadranti caricati da FitWren, e i nomi sono quelli del braccialetto.</string>
     <string name="band_faces_no_preview">Questo file non ha un’anteprima.</string>
     <string name="band_faces_upload">Carica</string>
+    <string name="band_faces_wrong_device">Questo quadrante sembra fatto per un altro dispositivo. Potrebbe apparire rovinato sul braccialetto o non installarsi.</string>
+    <string name="band_faces_upload_anyway">Carica comunque</string>
     <string name="band_faces_delete_title">Eliminare questo quadrante?</string>
     <string name="band_faces_active">In uso</string>
     <string name="band_faces_own">Caricato da te</string>
     <string name="band_faces_builtin">Integrato</string>
+    <string name="face_store">Negozio quadranti</string>
+    <string name="face_store_hint">Quadranti gratuiti di Xiaomi. Nomi e immagini arrivano da Xiaomi.</string>
+    <string name="face_store_loading">Caricamento quadranti…</string>
+    <string name="face_store_offline">Impossibile raggiungere il negozio. Controlla la connessione internet.</string>
+    <string name="face_store_all">Tutti</string>
+    <string name="face_store_search">Cerca quadranti</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Download in corso…</string>
+    <string name="face_store_failed">Impossibile scaricare il quadrante. Riprova.</string>
+    <string name="face_store_count">%1$d quadranti</string>
+    <string name="own_faces">Quadranti FitWren</string>
+    <string name="own_faces_hint">Quadranti con l\'uccellino di FitWren inclusi nell\'app. Tocca per vedere e caricare.</string>
+    <string name="face_designer">Crea quadrante</string>
+    <string name="face_designer_background">Sfondo</string>
+    <string name="face_designer_photo">Scegli foto</string>
+    <string name="face_designer_hour">Colore delle ore</string>
+    <string name="face_designer_minute">Colore dei minuti</string>
+    <string name="face_designer_text">Colore del testo</string>
+    <string name="face_designer_accent">Colore della barra obiettivo</string>
+    <string name="face_designer_bird">Uccellino</string>
+    <string name="face_designer_bird_happy">Allegro</string>
+    <string name="face_designer_bird_sleepy">Assonnato</string>
+    <string name="face_designer_bird_none">Nessuno</string>
+    <string name="face_designer_upload">Invia al braccialetto</string>
+    <string name="face_designer_name">Il mio design FitWren</string>
+    <string name="face_designer_failed">Impossibile creare o inviare il quadrante</string>
+    <string name="face_style_bold">Grassetto</string>
+    <string name="face_style_light">Sottile</string>
+    <string name="face_style_italic">Corsivo</string>
+    <string name="face_style_serif">Graziato</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Contorno</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Temi</string>
+    <string name="face_designer_style">Stile cifre</string>
+    <string name="face_designer_place">Posizione dell\'ora</string>
+    <string name="face_designer_place_top">In alto</string>
+    <string name="face_designer_place_middle">Al centro</string>
+    <string name="face_designer_place_bottom">In basso</string>
+    <string name="face_designer_photo_remove">Rimuovi foto</string>
+    <string name="face_designer_photo_hint">Trascina la foto con un dito, pizzica per ingrandire</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Scurisci sfondo</string>
+    <string name="face_designer_show">Mostra</string>
+    <string name="face_designer_show_date">Data</string>
+    <string name="face_designer_show_steps">Passi</string>
+    <string name="face_designer_show_bar">Barra obiettivo</string>
+    <string name="face_designer_show_health">Battito e batteria</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Ora</string>
+    <string name="face_designer_tab_colors">Colori</string>
+    <string name="face_designer_tab_parts">Elementi</string>
+    <string name="face_designer_undo">Annulla</string>
+    <string name="face_designer_reset">Ripristina</string>
 </resources>

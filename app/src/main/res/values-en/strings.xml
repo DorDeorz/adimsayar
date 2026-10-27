@@ -316,6 +316,13 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
+        <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
+        <item>Design a face (Mi Band 8): pick the background (ready colours or your own photo), the hour, minute, text and goal bar colours and the bird, see the preview and send it to the band. The face is made on the phone, no computer needed</item>
+        <item>The designer also has 7 digit styles, the time position (top, middle, bottom), 8 themes, background dimming and separate switches for date, steps, goal bar and heart rate/battery; the photo can be dragged and zoomed</item>
+        <item>A warning shows when a face file made for another device is picked</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Watch faces: a preview picture shows before uploading; faces uploaded from FitWren show their picture in the list and the face in use is highlighted; deleting asks first</item>
         <item>The app list for band notifications shows icons, a search box and how many apps are on</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">Tap a face to switch to it on the band right away. The band sends no pictures, so pictures show only for faces uploaded from FitWren, and names are shown as the band has them.</string>
     <string name="band_faces_no_preview">This file has no preview picture.</string>
     <string name="band_faces_upload">Upload</string>
+    <string name="band_faces_wrong_device">This face looks like it was made for another device. It may look broken on the band or not install at all.</string>
+    <string name="band_faces_upload_anyway">Upload anyway</string>
     <string name="band_faces_delete_title">Delete this watch face?</string>
     <string name="band_faces_active">In use</string>
     <string name="band_faces_own">Uploaded by you</string>
     <string name="band_faces_builtin">Built in</string>
+    <string name="face_store">Watch face store</string>
+    <string name="face_store_hint">Xiaomi\'s free watch faces. Names and pictures come from Xiaomi.</string>
+    <string name="face_store_loading">Loading watch faces…</string>
+    <string name="face_store_offline">Could not reach the store. Check your internet connection.</string>
+    <string name="face_store_all">All</string>
+    <string name="face_store_search">Search faces</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">Downloading…</string>
+    <string name="face_store_failed">Could not download the face. Try again.</string>
+    <string name="face_store_count">%1$d faces</string>
+    <string name="own_faces">FitWren faces</string>
+    <string name="own_faces_hint">Faces with the FitWren bird that come with the app. Tap to look and upload.</string>
+    <string name="face_designer">Design a face</string>
+    <string name="face_designer_background">Background</string>
+    <string name="face_designer_photo">Pick a photo</string>
+    <string name="face_designer_hour">Hour colour</string>
+    <string name="face_designer_minute">Minute colour</string>
+    <string name="face_designer_text">Text colour</string>
+    <string name="face_designer_accent">Goal bar colour</string>
+    <string name="face_designer_bird">Bird</string>
+    <string name="face_designer_bird_happy">Cheerful</string>
+    <string name="face_designer_bird_sleepy">Sleepy</string>
+    <string name="face_designer_bird_none">None</string>
+    <string name="face_designer_upload">Send to band</string>
+    <string name="face_designer_name">My FitWren design</string>
+    <string name="face_designer_failed">The face could not be made or sent</string>
+    <string name="face_style_bold">Bold</string>
+    <string name="face_style_light">Light</string>
+    <string name="face_style_italic">Italic</string>
+    <string name="face_style_serif">Serif</string>
+    <string name="face_style_mono">Mono</string>
+    <string name="face_style_outline">Outline</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Themes</string>
+    <string name="face_designer_style">Digit style</string>
+    <string name="face_designer_place">Time position</string>
+    <string name="face_designer_place_top">Top</string>
+    <string name="face_designer_place_middle">Middle</string>
+    <string name="face_designer_place_bottom">Bottom</string>
+    <string name="face_designer_photo_remove">Remove photo</string>
+    <string name="face_designer_photo_hint">Drag the photo with a finger, pinch to zoom</string>
+    <string name="face_designer_zoom">Zoom</string>
+    <string name="face_designer_dim">Dim background</string>
+    <string name="face_designer_show">Show</string>
+    <string name="face_designer_show_date">Date</string>
+    <string name="face_designer_show_steps">Steps</string>
+    <string name="face_designer_show_bar">Goal bar</string>
+    <string name="face_designer_show_health">Heart rate and battery</string>
+    <string name="face_designer_tab_theme">Theme</string>
+    <string name="face_designer_tab_time">Time</string>
+    <string name="face_designer_tab_colors">Colours</string>
+    <string name="face_designer_tab_parts">Parts</string>
+    <string name="face_designer_undo">Undo</string>
+    <string name="face_designer_reset">Reset</string>
 </resources>

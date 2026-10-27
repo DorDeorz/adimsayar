@@ -316,6 +316,13 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>워치페이스 스토어: Xiaomi의 무료 Mi Band 8 워치페이스를 이미지로 보고 검색하고 한 번에 밴드로 보내기</item>
+        <item>FitWren 워치페이스: 새가 있는 9가지 워치페이스(밤, 길, 아날로그, 네온, 나뭇가지 등)가 포함되어 한 번에 Mi Band 8로 보내기</item>
+        <item>워치페이스 디자인 (Mi Band 8): 배경(준비된 색상 또는 내 사진), 시·분·글자·목표 막대 색상과 새를 고르고 미리 보기를 확인한 뒤 밴드로 보내세요. 워치페이스는 컴퓨터 없이 휴대폰에서 만들어집니다</item>
+        <item>또한 숫자 스타일 7종, 시간 위치(위, 가운데, 아래), 테마 8종, 배경 어둡게, 날짜·걸음·목표 막대·심박/배터리 개별 표시; 사진을 옮기고 확대할 수 있습니다</item>
+        <item>다른 기기용 워치페이스 파일을 고르면 경고가 표시됩니다</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>워치 페이스: 올리기 전에 미리보기 표시, FitWren에서 올린 워치 페이스는 이미지와 함께 표시되고 사용 중인 것은 강조, 삭제 전에 확인</item>
         <item>알림 앱 목록에 아이콘, 검색, 켜진 앱 수 표시</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">워치 페이스를 누르면 밴드에서 바로 바뀝니다. 밴드는 이미지를 보내지 않아서 FitWren에서 올린 워치 페이스만 이미지가 보이고, 이름은 밴드에 있는 그대로 표시됩니다.</string>
     <string name="band_faces_no_preview">이 파일에는 미리보기 이미지가 없습니다.</string>
     <string name="band_faces_upload">올리기</string>
+    <string name="band_faces_wrong_device">이 워치페이스는 다른 기기용으로 보입니다. 밴드에서 깨져 보이거나 설치되지 않을 수 있습니다.</string>
+    <string name="band_faces_upload_anyway">그래도 올리기</string>
     <string name="band_faces_delete_title">이 워치 페이스를 삭제할까요?</string>
     <string name="band_faces_active">사용 중</string>
     <string name="band_faces_own">직접 올림</string>
     <string name="band_faces_builtin">기본 제공</string>
+    <string name="face_store">워치페이스 스토어</string>
+    <string name="face_store_hint">Xiaomi의 무료 워치페이스입니다. 이름과 이미지는 Xiaomi에서 가져옵니다.</string>
+    <string name="face_store_loading">워치페이스 불러오는 중…</string>
+    <string name="face_store_offline">스토어에 연결할 수 없습니다. 인터넷 연결을 확인하세요.</string>
+    <string name="face_store_all">전체</string>
+    <string name="face_store_search">워치페이스 검색</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">다운로드 중…</string>
+    <string name="face_store_failed">워치페이스를 다운로드하지 못했습니다. 다시 시도하세요.</string>
+    <string name="face_store_count">워치페이스 %1$d개</string>
+    <string name="own_faces">FitWren 워치페이스</string>
+    <string name="own_faces_hint">앱에 포함된 FitWren 새 워치페이스입니다. 눌러서 보고 올리세요.</string>
+    <string name="face_designer">워치페이스 디자인</string>
+    <string name="face_designer_background">배경</string>
+    <string name="face_designer_photo">사진 선택</string>
+    <string name="face_designer_hour">시 색상</string>
+    <string name="face_designer_minute">분 색상</string>
+    <string name="face_designer_text">글자 색상</string>
+    <string name="face_designer_accent">목표 막대 색상</string>
+    <string name="face_designer_bird">새</string>
+    <string name="face_designer_bird_happy">명랑</string>
+    <string name="face_designer_bird_sleepy">졸림</string>
+    <string name="face_designer_bird_none">없음</string>
+    <string name="face_designer_upload">밴드로 보내기</string>
+    <string name="face_designer_name">나의 FitWren 디자인</string>
+    <string name="face_designer_failed">워치페이스를 만들거나 보낼 수 없습니다</string>
+    <string name="face_style_bold">굵게</string>
+    <string name="face_style_light">가늘게</string>
+    <string name="face_style_italic">기울임</string>
+    <string name="face_style_serif">세리프</string>
+    <string name="face_style_mono">고정폭</string>
+    <string name="face_style_outline">윤곽선</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">테마</string>
+    <string name="face_designer_style">숫자 스타일</string>
+    <string name="face_designer_place">시간 위치</string>
+    <string name="face_designer_place_top">위</string>
+    <string name="face_designer_place_middle">가운데</string>
+    <string name="face_designer_place_bottom">아래</string>
+    <string name="face_designer_photo_remove">사진 삭제</string>
+    <string name="face_designer_photo_hint">손가락으로 사진을 옮기고 두 손가락으로 확대</string>
+    <string name="face_designer_zoom">확대</string>
+    <string name="face_designer_dim">배경 어둡게</string>
+    <string name="face_designer_show">표시</string>
+    <string name="face_designer_show_date">날짜</string>
+    <string name="face_designer_show_steps">걸음</string>
+    <string name="face_designer_show_bar">목표 막대</string>
+    <string name="face_designer_show_health">심박수와 배터리</string>
+    <string name="face_designer_tab_theme">테마</string>
+    <string name="face_designer_tab_time">시간</string>
+    <string name="face_designer_tab_colors">색상</string>
+    <string name="face_designer_tab_parts">표시 항목</string>
+    <string name="face_designer_undo">실행 취소</string>
+    <string name="face_designer_reset">초기화</string>
 </resources>

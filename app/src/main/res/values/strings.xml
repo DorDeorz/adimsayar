@@ -316,6 +316,13 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
+        <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
+        <item>Kadran tasarla (Mi Band 8): arka planı (hazır renkler ya da kendi fotoğrafın), saat, dakika, yazı ve hedef çubuğu renklerini ve kuşu seç; önizlemesini gör ve bilekliğe gönder. Kadran telefonda, bilgisayarsız hazırlanır</item>
+        <item>Tasarımda ayrıca 7 rakam stili, saatin yeri (üst, orta, alt), 8 hazır tema, arka planı karartma, tarih, adım, hedef çubuğu ve nabız/pili ayrı ayrı gizleme; fotoğraf parmakla kaydırılıp büyütülür</item>
+        <item>Başka bir cihaz için yapılmış kadran dosyası seçilince uyarı verilir</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>Kadranlar: yüklemeden önce önizleme resmi görünür; FitWren\'den yüklenen kadranlar listede resmiyle, kullanılan kadran renkli görünür; silmeden önce sorulur</item>
         <item>Bildirim gönderen uygulamalar listesinde simgeler, arama kutusu ve kaç uygulamanın açık olduğu görünür</item>
@@ -849,8 +856,64 @@
     <string name="band_faces_tap_hint">Bir kadrana dokununca bileklikte hemen açılır. Bileklik resim göndermediği için resimler yalnızca FitWren\'den yüklediğin kadranlarda görünür, isimler de bileklikteki gibi yazılır.</string>
     <string name="band_faces_no_preview">Bu dosyada önizleme resmi yok.</string>
     <string name="band_faces_upload">Yükle</string>
+    <string name="band_faces_wrong_device">Bu kadran başka bir cihaz için yapılmış görünüyor. Bileklikte bozuk görünebilir ya da hiç yüklenmeyebilir.</string>
+    <string name="band_faces_upload_anyway">Yine de yükle</string>
     <string name="band_faces_delete_title">Kadran silinsin mi?</string>
     <string name="band_faces_active">Şu an kullanılıyor</string>
     <string name="band_faces_own">Senin yüklediğin</string>
     <string name="band_faces_builtin">Bileklikle gelen</string>
+    <string name="face_store">Kadran mağazası</string>
+    <string name="face_store_hint">Xiaomi\'nin ücretsiz kadranları. Ad ve resimler Xiaomi\'den gelir.</string>
+    <string name="face_store_loading">Kadranlar yükleniyor…</string>
+    <string name="face_store_offline">Mağazaya ulaşılamadı. İnternet bağlantını kontrol et.</string>
+    <string name="face_store_all">Tümü</string>
+    <string name="face_store_search">Kadran ara</string>
+    <string name="face_store_size">%1$s MB</string>
+    <string name="face_store_downloading">İndiriliyor…</string>
+    <string name="face_store_failed">Kadran indirilemedi. Tekrar dene.</string>
+    <string name="face_store_count">%1$d kadran</string>
+    <string name="own_faces">FitWren kadranları</string>
+    <string name="own_faces_hint">FitWren kuşlu, uygulamayla gelen kadranlar. Dokun, bak ve yükle.</string>
+    <string name="face_designer">Kadran tasarla</string>
+    <string name="face_designer_background">Arka plan</string>
+    <string name="face_designer_photo">Fotoğraf seç</string>
+    <string name="face_designer_hour">Saat rengi</string>
+    <string name="face_designer_minute">Dakika rengi</string>
+    <string name="face_designer_text">Yazı rengi</string>
+    <string name="face_designer_accent">Hedef çubuğu rengi</string>
+    <string name="face_designer_bird">Kuş</string>
+    <string name="face_designer_bird_happy">Neşeli</string>
+    <string name="face_designer_bird_sleepy">Uykulu</string>
+    <string name="face_designer_bird_none">Yok</string>
+    <string name="face_designer_upload">Bilekliğe yükle</string>
+    <string name="face_designer_name">FitWren Tasarımım</string>
+    <string name="face_designer_failed">Kadran hazırlanamadı ya da yüklenemedi</string>
+    <string name="face_style_bold">Kalın</string>
+    <string name="face_style_light">İnce</string>
+    <string name="face_style_italic">Eğik</string>
+    <string name="face_style_serif">Tırnaklı</string>
+    <string name="face_style_mono">Daktilo</string>
+    <string name="face_style_outline">İçi boş</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">Hazır temalar</string>
+    <string name="face_designer_style">Rakam stili</string>
+    <string name="face_designer_place">Saatin yeri</string>
+    <string name="face_designer_place_top">Üstte</string>
+    <string name="face_designer_place_middle">Ortada</string>
+    <string name="face_designer_place_bottom">Altta</string>
+    <string name="face_designer_photo_remove">Fotoğrafı kaldır</string>
+    <string name="face_designer_photo_hint">Fotoğrafı parmağınla kaydırıp iki parmakla büyütebilirsin</string>
+    <string name="face_designer_zoom">Yakınlaştır</string>
+    <string name="face_designer_dim">Arka planı karart</string>
+    <string name="face_designer_show">Göster</string>
+    <string name="face_designer_show_date">Tarih</string>
+    <string name="face_designer_show_steps">Adım</string>
+    <string name="face_designer_show_bar">Hedef çubuğu</string>
+    <string name="face_designer_show_health">Nabız ve pil</string>
+    <string name="face_designer_tab_theme">Tema</string>
+    <string name="face_designer_tab_time">Saat</string>
+    <string name="face_designer_tab_colors">Renkler</string>
+    <string name="face_designer_tab_parts">Görünüm</string>
+    <string name="face_designer_undo">Geri al</string>
+    <string name="face_designer_reset">Sıfırla</string>
 </resources>

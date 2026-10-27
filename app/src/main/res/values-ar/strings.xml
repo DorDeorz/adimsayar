@@ -316,6 +316,13 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_13_3">
+        <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
+        <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
+        <item>تصميم واجهة (Mi Band 8): اختر الخلفية (ألوان جاهزة أو صورتك)، وألوان الساعات والدقائق والنص وشريط الهدف والطائر، وشاهد المعاينة وأرسلها إلى السوار. تُصنع الواجهة على الهاتف دون حاسوب</item>
+        <item>أيضًا: 7 أنماط للأرقام، موضع الوقت (أعلى، وسط، أسفل)، 8 سمات، تعتيم الخلفية وإخفاء التاريخ والخطوات وشريط الهدف والنبض/البطارية كلٌّ على حدة؛ ويمكن سحب الصورة وتكبيرها</item>
+        <item>يظهر تحذير عند اختيار ملف واجهة مصنوع لجهاز آخر</item>
+    </string-array>
     <string-array name="release_notes_0_12_7">
         <item>واجهات الساعة: معاينة قبل الرفع؛ الواجهات المرفوعة من FitWren تظهر بصورتها والواجهة المستخدمة مميزة؛ يُطلب التأكيد قبل الحذف</item>
         <item>قائمة التطبيقات للإشعارات تعرض الأيقونات ومربع بحث وعدد التطبيقات المفعّلة</item>
@@ -848,8 +855,64 @@
     <string name="band_faces_tap_hint">المس واجهة لتعمل على السوار فورًا. السوار لا يرسل صورًا، لذا تظهر الصور فقط للواجهات المرفوعة من FitWren، وتظهر الأسماء كما في السوار.</string>
     <string name="band_faces_no_preview">لا توجد صورة معاينة في هذا الملف.</string>
     <string name="band_faces_upload">رفع</string>
+    <string name="band_faces_wrong_device">يبدو أن هذه الواجهة مصممة لجهاز آخر. قد تظهر بشكل خاطئ على السوار أو لا تُثبَّت.</string>
+    <string name="band_faces_upload_anyway">رفع على أي حال</string>
     <string name="band_faces_delete_title">حذف هذه الواجهة؟</string>
     <string name="band_faces_active">قيد الاستخدام</string>
     <string name="band_faces_own">رفعتها أنت</string>
     <string name="band_faces_builtin">مدمجة</string>
+    <string name="face_store">متجر واجهات الساعة</string>
+    <string name="face_store_hint">واجهات مجانية من Xiaomi. الأسماء والصور تأتي من Xiaomi.</string>
+    <string name="face_store_loading">جارٍ تحميل الواجهات…</string>
+    <string name="face_store_offline">تعذر الوصول إلى المتجر. تحقق من اتصال الإنترنت.</string>
+    <string name="face_store_all">الكل</string>
+    <string name="face_store_search">ابحث عن واجهة</string>
+    <string name="face_store_size">%1$s ميغابايت</string>
+    <string name="face_store_downloading">جارٍ التنزيل…</string>
+    <string name="face_store_failed">تعذر تنزيل الواجهة. حاول مرة أخرى.</string>
+    <string name="face_store_count">%1$d واجهة</string>
+    <string name="own_faces">واجهات FitWren</string>
+    <string name="own_faces_hint">واجهات بطائر FitWren مضمنة في التطبيق. المس للمعاينة والرفع.</string>
+    <string name="face_designer">تصميم واجهة</string>
+    <string name="face_designer_background">الخلفية</string>
+    <string name="face_designer_photo">اختيار صورة</string>
+    <string name="face_designer_hour">لون الساعات</string>
+    <string name="face_designer_minute">لون الدقائق</string>
+    <string name="face_designer_text">لون النص</string>
+    <string name="face_designer_accent">لون شريط الهدف</string>
+    <string name="face_designer_bird">الطائر</string>
+    <string name="face_designer_bird_happy">مبتهج</string>
+    <string name="face_designer_bird_sleepy">نعسان</string>
+    <string name="face_designer_bird_none">بدون</string>
+    <string name="face_designer_upload">إرسال إلى السوار</string>
+    <string name="face_designer_name">تصميمي في FitWren</string>
+    <string name="face_designer_failed">تعذّر إنشاء الواجهة أو إرسالها</string>
+    <string name="face_style_bold">عريض</string>
+    <string name="face_style_light">رفيع</string>
+    <string name="face_style_italic">مائل</string>
+    <string name="face_style_serif">مذيل</string>
+    <string name="face_style_mono">أحادي</string>
+    <string name="face_style_outline">مفرغ</string>
+    <string name="face_style_lcd">LCD</string>
+    <string name="face_designer_theme">سمات</string>
+    <string name="face_designer_style">نمط الأرقام</string>
+    <string name="face_designer_place">موضع الوقت</string>
+    <string name="face_designer_place_top">أعلى</string>
+    <string name="face_designer_place_middle">وسط</string>
+    <string name="face_designer_place_bottom">أسفل</string>
+    <string name="face_designer_photo_remove">إزالة الصورة</string>
+    <string name="face_designer_photo_hint">اسحب الصورة بإصبع وقرّب بإصبعين</string>
+    <string name="face_designer_zoom">تكبير</string>
+    <string name="face_designer_dim">تعتيم الخلفية</string>
+    <string name="face_designer_show">إظهار</string>
+    <string name="face_designer_show_date">التاريخ</string>
+    <string name="face_designer_show_steps">الخطوات</string>
+    <string name="face_designer_show_bar">شريط الهدف</string>
+    <string name="face_designer_show_health">النبض والبطارية</string>
+    <string name="face_designer_tab_theme">السمة</string>
+    <string name="face_designer_tab_time">الوقت</string>
+    <string name="face_designer_tab_colors">الألوان</string>
+    <string name="face_designer_tab_parts">العناصر</string>
+    <string name="face_designer_undo">تراجع</string>
+    <string name="face_designer_reset">إعادة ضبط</string>
 </resources>

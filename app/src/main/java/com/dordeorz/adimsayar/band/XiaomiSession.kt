@@ -433,20 +433,26 @@ class XiaomiSession(
         assembler.add(chunk)?.let(::onFile)
     }
 
+    /** Gives up the running upload; the band stopped answering. */
+    fun cancelUpload() {
+        if (installing == null) return
+        log("watchface upload timed out")
+        finishUpload(false)
+    }
+
     private fun onWatchfaceCommand(subtype: Int?, cmd: ProtoMessage) {
         when (subtype) {
             XiaomiWatchface.LIST -> onWatchfaces(XiaomiWatchface.list(cmd))
             XiaomiWatchface.SET, XiaomiWatchface.DELETE -> requestWatchfaces()
             XiaomiWatchface.INSTALL -> {
                 val file = installing ?: return
-                when (val status = cmd.message(6)?.uint(5)?.toInt()) {
+                val status = cmd.message(6)?.uint(5)?.toInt()
+                log("watchface install ${file.id} answer $status")
+                when (status) {
                     0 -> send(command(XiaomiWatchface.UPLOAD_TYPE, XiaomiWatchface.UPLOAD_START).message(24, XiaomiWatchface.uploadRequest(file.bytes)).toByteArray(), false)
                     // Already on the band: just switch to it.
                     2 -> finishUpload(true)
-                    else -> {
-                        log("watchface install status $status")
-                        finishUpload(false)
-                    }
+                    else -> finishUpload(false)
                 }
             }
         }
