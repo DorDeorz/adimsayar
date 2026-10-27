@@ -2,7 +2,7 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
-## 0.13.1
+## 0.13.2
 
 - Kadran tasarla (Saat kadranları → "Kadran tasarla", Mi Band 8): hazır renk geçişleri ya da kendi fotoğrafın arka plan olur; saat, dakika, yazı ve hedef çubuğu renkleri ile kuş (neşeli, uykulu, yok) seçilir, önizleme anında güncellenir. Kadran telefonda üretilir: FitWren'in beyaz-siyah şablon kadranı (`assets/designer/template.bin`) açılır, resimleri değiştirilir ve dosya yeniden yazılır (`band/XiaomiFaceFile.kt`; dosya yapısı `watchface/facebin.py` ile derlenmiş kadranlarda doğrulandı). Saat ve dakika için 7 rakam stili (kalın, ince, eğik, tırnaklı, daktilo, içi boş, LCD), saatin yeri (üstte, ortada, altta; şablondaki parçaların y konumu dosyada kaydırılır), 8 hazır tema, arka planı karartma, tarih / adım / hedef çubuğu / nabız ve pil ayrı ayrı gizlenebilir (gizlenen parçanın resimleri saydam yapılır). Fotoğraf önizlemede parmakla kaydırılır ve iki parmakla büyütülür; tasarım ayarları saklanır. Her tasarım yeni bir kadran numarası alır; yenisi yüklenince bir önceki tasarım bileklikten silinir.
 - Başka bir cihaz için yapılmış kadran dosyası seçilince uyarı: dosyadaki önizleme boyutu bilekliğinkine (Mi Band 8: 122 x 310) uymuyorsa "Yine de yükle" sorulur.

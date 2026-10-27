@@ -131,7 +131,7 @@ internal fun FaceDesignerDialog(onDismiss: () -> Unit) {
     val current by rememberUpdatedState(design)
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            Column(Modifier.padding(horizontal = 16.dp).verticalScroll(rememberScrollState())) {
+            Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = onDismiss) {
                         Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = stringResource(R.string.back))
@@ -141,7 +141,7 @@ internal fun FaceDesignerDialog(onDismiss: () -> Unit) {
                 Box(Modifier.fillMaxWidth().padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
                     Box(
                         Modifier
-                            .height(320.dp)
+                            .height(260.dp)
                             .aspectRatio(DESIGN_RATIO)
                             .clip(MaterialTheme.shapes.large)
                             .background(Color.Black)
@@ -164,112 +164,115 @@ internal fun FaceDesignerDialog(onDismiss: () -> Unit) {
                     }
                 }
 
-                Section(stringResource(R.string.face_designer_theme))
-                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FaceDesigner.THEMES.forEach { theme ->
-                        ThemeTile(theme) {
-                            design = design.copy(
-                                top = theme.top, bottom = theme.bottom, hour = theme.hour, minute = theme.minute,
-                                text = theme.text, accent = theme.accent, photo = false,
+                // Only the options scroll, so the preview stays in sight while they change.
+                Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+                    Section(stringResource(R.string.face_designer_theme))
+                    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FaceDesigner.THEMES.forEach { theme ->
+                            ThemeTile(theme) {
+                                design = design.copy(
+                                    top = theme.top, bottom = theme.bottom, hour = theme.hour, minute = theme.minute,
+                                    text = theme.text, accent = theme.accent, photo = false,
+                                )
+                            }
+                        }
+                    }
+
+                    Section(stringResource(R.string.face_designer_style))
+                    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        styles.forEach { style ->
+                            StyleTile(style, chosen = design.style == style, hour = design.hour) { design = design.copy(style = style) }
+                        }
+                    }
+
+                    Section(stringResource(R.string.face_designer_place))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf(
+                            DesignPlace.Top to R.string.face_designer_place_top,
+                            DesignPlace.Middle to R.string.face_designer_place_middle,
+                            DesignPlace.Bottom to R.string.face_designer_place_bottom,
+                        ).forEach { (place, label) ->
+                            FilterChip(selected = design.place == place, onClick = { design = design.copy(place = place) }, label = { Text(stringResource(label)) })
+                        }
+                    }
+
+                    Section(stringResource(R.string.face_designer_background))
+                    Row(
+                        Modifier.horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        GRADIENTS.forEach { (top, bottom) ->
+                            val chosen = !design.photo && design.top == top && design.bottom == bottom
+                            Box(
+                                Modifier
+                                    .size(width = 30.dp, height = 48.dp)
+                                    .clip(MaterialTheme.shapes.small)
+                                    .background(Brush.verticalGradient(listOf(Color(top), Color(bottom))))
+                                    .border(outline(chosen), MaterialTheme.shapes.small)
+                                    .clickable { design = design.copy(top = top, bottom = bottom, photo = false) },
                             )
                         }
                     }
-                }
-
-                Section(stringResource(R.string.face_designer_style))
-                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    styles.forEach { style ->
-                        StyleTile(style, chosen = design.style == style, hour = design.hour) { design = design.copy(style = style) }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 8.dp)) {
+                        OutlinedButton(onClick = {
+                            runCatching { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }
+                        }) { Text(stringResource(R.string.face_designer_photo)) }
+                        if (design.photo) {
+                            TextButton(onClick = { design = design.copy(photo = false) }) { Text(stringResource(R.string.face_designer_photo_remove)) }
+                        }
                     }
-                }
-
-                Section(stringResource(R.string.face_designer_place))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf(
-                        DesignPlace.Top to R.string.face_designer_place_top,
-                        DesignPlace.Middle to R.string.face_designer_place_middle,
-                        DesignPlace.Bottom to R.string.face_designer_place_bottom,
-                    ).forEach { (place, label) ->
-                        FilterChip(selected = design.place == place, onClick = { design = design.copy(place = place) }, label = { Text(stringResource(label)) })
-                    }
-                }
-
-                Section(stringResource(R.string.face_designer_background))
-                Row(
-                    Modifier.horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    GRADIENTS.forEach { (top, bottom) ->
-                        val chosen = !design.photo && design.top == top && design.bottom == bottom
-                        Box(
-                            Modifier
-                                .size(width = 30.dp, height = 48.dp)
-                                .clip(MaterialTheme.shapes.small)
-                                .background(Brush.verticalGradient(listOf(Color(top), Color(bottom))))
-                                .border(outline(chosen), MaterialTheme.shapes.small)
-                                .clickable { design = design.copy(top = top, bottom = bottom, photo = false) },
+                    if (design.photo) {
+                        Hint(stringResource(R.string.face_designer_photo_hint))
+                        Text(stringResource(R.string.face_designer_zoom), style = MaterialTheme.typography.bodyMedium)
+                        Slider(
+                            value = design.zoom,
+                            onValueChange = { z ->
+                                val image = photo ?: return@Slider
+                                val (_, x, y) = FaceDesigner.photoPlace(image, z, design.panX, design.panY)
+                                design = design.copy(zoom = z, panX = x, panY = y)
+                            },
+                            valueRange = 1f..FaceDesigner.ZOOM_MAX,
                         )
                     }
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 8.dp)) {
-                    OutlinedButton(onClick = {
-                        runCatching { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }
-                    }) { Text(stringResource(R.string.face_designer_photo)) }
-                    if (design.photo) {
-                        TextButton(onClick = { design = design.copy(photo = false) }) { Text(stringResource(R.string.face_designer_photo_remove)) }
+                    Text(stringResource(R.string.face_designer_dim), style = MaterialTheme.typography.bodyMedium)
+                    Slider(value = design.dim.toFloat(), onValueChange = { design = design.copy(dim = it.toInt()) }, valueRange = 0f..80f)
+
+                    Section(stringResource(R.string.face_designer_hour))
+                    Swatches(design.hour) { design = design.copy(hour = it) }
+                    Section(stringResource(R.string.face_designer_minute))
+                    Swatches(design.minute) { design = design.copy(minute = it) }
+                    Section(stringResource(R.string.face_designer_text))
+                    Swatches(design.text) { design = design.copy(text = it) }
+                    Section(stringResource(R.string.face_designer_accent))
+                    Swatches(design.accent) { design = design.copy(accent = it) }
+
+                    Section(stringResource(R.string.face_designer_show))
+                    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(design.showDate, { design = design.copy(showDate = !design.showDate) }, { Text(stringResource(R.string.face_designer_show_date)) })
+                        FilterChip(design.showSteps, { design = design.copy(showSteps = !design.showSteps) }, { Text(stringResource(R.string.face_designer_show_steps)) })
+                        FilterChip(design.showBar, { design = design.copy(showBar = !design.showBar) }, { Text(stringResource(R.string.face_designer_show_bar)) })
+                        FilterChip(design.showHealth, { design = design.copy(showHealth = !design.showHealth) }, { Text(stringResource(R.string.face_designer_show_health)) })
                     }
-                }
-                if (design.photo) {
-                    Hint(stringResource(R.string.face_designer_photo_hint))
-                    Text(stringResource(R.string.face_designer_zoom), style = MaterialTheme.typography.bodyMedium)
-                    Slider(
-                        value = design.zoom,
-                        onValueChange = { z ->
-                            val image = photo ?: return@Slider
-                            val (_, x, y) = FaceDesigner.photoPlace(image, z, design.panX, design.panY)
-                            design = design.copy(zoom = z, panX = x, panY = y)
+
+                    Section(stringResource(R.string.face_designer_bird))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf(
+                            DesignBird.Happy to R.string.face_designer_bird_happy,
+                            DesignBird.Sleepy to R.string.face_designer_bird_sleepy,
+                            DesignBird.None to R.string.face_designer_bird_none,
+                        ).forEach { (bird, label) ->
+                            FilterChip(selected = design.bird == bird, onClick = { design = design.copy(bird = bird) }, label = { Text(stringResource(label)) })
+                        }
+                    }
+                    Button(
+                        onClick = {
+                            FaceDesigner.start(context, design, photo, name, failed)
+                            onDismiss()
                         },
-                        valueRange = 1f..FaceDesigner.ZOOM_MAX,
-                    )
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                    ) { Text(stringResource(R.string.face_designer_upload)) }
                 }
-                Text(stringResource(R.string.face_designer_dim), style = MaterialTheme.typography.bodyMedium)
-                Slider(value = design.dim.toFloat(), onValueChange = { design = design.copy(dim = it.toInt()) }, valueRange = 0f..80f)
-
-                Section(stringResource(R.string.face_designer_hour))
-                Swatches(design.hour) { design = design.copy(hour = it) }
-                Section(stringResource(R.string.face_designer_minute))
-                Swatches(design.minute) { design = design.copy(minute = it) }
-                Section(stringResource(R.string.face_designer_text))
-                Swatches(design.text) { design = design.copy(text = it) }
-                Section(stringResource(R.string.face_designer_accent))
-                Swatches(design.accent) { design = design.copy(accent = it) }
-
-                Section(stringResource(R.string.face_designer_show))
-                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(design.showDate, { design = design.copy(showDate = !design.showDate) }, { Text(stringResource(R.string.face_designer_show_date)) })
-                    FilterChip(design.showSteps, { design = design.copy(showSteps = !design.showSteps) }, { Text(stringResource(R.string.face_designer_show_steps)) })
-                    FilterChip(design.showBar, { design = design.copy(showBar = !design.showBar) }, { Text(stringResource(R.string.face_designer_show_bar)) })
-                    FilterChip(design.showHealth, { design = design.copy(showHealth = !design.showHealth) }, { Text(stringResource(R.string.face_designer_show_health)) })
-                }
-
-                Section(stringResource(R.string.face_designer_bird))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf(
-                        DesignBird.Happy to R.string.face_designer_bird_happy,
-                        DesignBird.Sleepy to R.string.face_designer_bird_sleepy,
-                        DesignBird.None to R.string.face_designer_bird_none,
-                    ).forEach { (bird, label) ->
-                        FilterChip(selected = design.bird == bird, onClick = { design = design.copy(bird = bird) }, label = { Text(stringResource(label)) })
-                    }
-                }
-                Button(
-                    onClick = {
-                        FaceDesigner.start(context, design, photo, name, failed)
-                        onDismiss()
-                    },
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-                ) { Text(stringResource(R.string.face_designer_upload)) }
             }
         }
     }

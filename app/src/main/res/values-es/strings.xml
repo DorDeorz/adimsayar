@@ -316,7 +316,7 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
-    <string-array name="release_notes_0_13_1">
+    <string-array name="release_notes_0_13_2">
         <item>Tienda de esferas: mira las esferas gratuitas de Xiaomi para Mi Band 8 con imágenes, búscalas y envíalas a la pulsera con un toque</item>
         <item>Esferas FitWren: nueve esferas con el pájaro (Noche, Camino, Analógica, Neón, Rama y más) incluidas, se envían a la Mi Band 8 con un toque</item>
         <item>Diseñar esfera (Mi Band 8): elige el fondo (colores listos o tu propia foto), los colores de horas, minutos, texto y barra de objetivo y el pájaro, mira la vista previa y envíala a la pulsera. La esfera se crea en el móvil, sin ordenador</item>

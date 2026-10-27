@@ -316,7 +316,7 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
-    <string-array name="release_notes_0_13_1">
+    <string-array name="release_notes_0_13_2">
         <item>Negozio quadranti: sfoglia i quadranti gratuiti Xiaomi per Mi Band 8 con immagini, cercali e inviali al braccialetto con un tocco</item>
         <item>Quadranti FitWren: nove quadranti con l’uccellino (Notte, Strada, Analogico, Neon, Ramo e altri) inclusi, inviati alla Mi Band 8 con un tocco</item>
         <item>Crea quadrante (Mi Band 8): scegli lo sfondo (colori pronti o una tua foto), i colori di ore, minuti, testo e barra obiettivo e l\'uccellino, guarda l\'anteprima e invialo al braccialetto. Il quadrante si crea sul telefono, senza computer</item>
