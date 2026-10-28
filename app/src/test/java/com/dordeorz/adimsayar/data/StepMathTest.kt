@@ -161,6 +161,16 @@ class StepMathTest {
     }
 
     @Test
+    fun bandDaysSkipDaysWithoutBandSteps() {
+        val band = mapOf(
+            LocalDateTime.parse("2026-10-28T10:00") to 1_000L,
+            LocalDateTime.parse("2026-10-28T11:00") to 500L,
+            LocalDateTime.parse("2026-10-27T10:00") to 0L,
+        )
+        assertEquals(mapOf(LocalDate.parse("2026-10-28") to 1_500L), StepMath.bandDays(band))
+    }
+
+    @Test
     fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
         val day = LocalDate.parse("2026-10-11")
         assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))

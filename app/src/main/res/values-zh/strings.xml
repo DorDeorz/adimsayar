@@ -319,6 +319,7 @@
     <string name="device_other">其他设备</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>设置 → 步数来源 →“使用手环时不计手机”：开启后，有手环数据的日子不再加入手机步数</item>
         <item>手环和手机始终按小时合并：佩戴手环的小时只计手环步数，手机补足其余小时（以前没有 HyperOS 记录时取当天较大的总数）</item>
         <item>支持第三方 ROM（crDroid、LineageOS 等）：在没有 HyperOS 的小米手机上隐藏 HyperOS 步数记录和 MIUI 电池步骤，改用手机传感器</item>
         <item>精确闹钟：在 设置 → 步数来源 中允许后，午夜记录、提醒和表盘切换不再延迟（Android 14 及以上）</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">直接连接（小米、Amazfit）</string>
     <string name="source_connect">通过 Health Connect</string>
     <string name="source_merge_hint">使用手环时，佩戴的时段用手环步数，其他时段用手机步数。</string>
+    <string name="band_only_title">使用手环时不计手机</string>
+    <string name="band_only_text">如果手环当天传过数据，当天步数只取手环。只有手环整天都没连接时才使用手机。关闭时，手机补足未佩戴手环的小时。</string>
     <string name="source_direct_manage">手环设置</string>
     <string name="device_connect_hint">正在从 Health Connect 读取数据</string>
     <string name="band_reconnect">重新连接</string>

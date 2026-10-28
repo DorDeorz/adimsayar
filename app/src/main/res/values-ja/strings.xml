@@ -319,6 +319,7 @@
     <string name="device_other">その他のデバイス</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>設定 → 歩数の取得元 →「バンド使用中はスマホを数えない」：オンにするとバンドのデータがある日はスマホの歩数を加えません</item>
         <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>
         <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
         <item>正確なアラーム：設定 → 歩数のソースで許可すると、深夜の記録、リマインダー、文字盤の切り替えが遅れずに動きます（Android 14 以降）</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">直接接続（Xiaomi、Amazfit）</string>
     <string name="source_connect">Health Connect経由</string>
     <string name="source_merge_hint">バンドを使う場合、着けている時間はバンドの歩数、それ以外はスマートフォンの歩数を使います。</string>
+    <string name="band_only_title">バンド使用中はスマホを数えない</string>
+    <string name="band_only_text">バンドがその日にデータを送った場合、その日の歩数はバンドのみを使います。スマホはバンドが一度も接続しなかった日だけ使います。オフのときはバンドを着けていない時間をスマホが補います。</string>
     <string name="source_direct_manage">バンドの設定</string>
     <string name="device_connect_hint">Health Connectからデータを読み込み中</string>
     <string name="band_reconnect">再接続</string>

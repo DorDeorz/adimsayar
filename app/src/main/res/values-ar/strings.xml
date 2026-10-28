@@ -319,6 +319,7 @@
     <string name="device_other">جهاز آخر</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>الإعدادات ← مصدر الخطوات ← «لا تحتسب الهاتف أثناء استخدام السوار»: عند التشغيل لا تُضاف خطوات الهاتف في الأيام التي فيها بيانات من السوار</item>
         <item>يُدمج السوار والهاتف دائمًا ساعة بساعة: في الساعات التي كان السوار فيها على المعصم يُحتسب السوار فقط، ويكمل الهاتف بقية الساعات (سابقًا بدون سجل HyperOS كان يُؤخذ المجموع اليومي الأكبر)</item>
         <item>دعم الرومات المخصصة (crDroid وLineageOS وغيرها): على هاتف Xiaomi بدون HyperOS تُخفى سجلات خطوات HyperOS وخطوات بطارية MIUI ويُستخدم مستشعر الهاتف</item>
         <item>المنبهات الدقيقة: اسمح بها في الإعدادات ← مصدر الخطوات ليعمل حفظ منتصف الليل والتذكيرات وتغيير الواجهة دون تأخير (Android 14 وأحدث)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">اتصال مباشر (Xiaomi، Amazfit)</string>
     <string name="source_connect">عبر Health Connect</string>
     <string name="source_merge_hint">إذا كنت تستخدم سوارًا، يُستخدم عدّه في الساعات التي ترتديه فيها وعدّ الهاتف في بقية الساعات.</string>
+    <string name="band_only_title">لا تحتسب الهاتف أثناء استخدام السوار</string>
+    <string name="band_only_text">إذا أرسل السوار بيانات في يوم ما، تؤخذ خطوات ذلك اليوم من السوار فقط. يُستخدم الهاتف فقط في الأيام التي لم يتصل فيها السوار. عند الإيقاف يكمل الهاتف الساعات التي لم يكن السوار فيها على المعصم.</string>
     <string name="source_direct_manage">إعدادات السوار</string>
     <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
     <string name="band_reconnect">إعادة الاتصال</string>

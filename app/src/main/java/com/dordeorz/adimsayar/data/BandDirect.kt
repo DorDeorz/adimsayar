@@ -221,7 +221,7 @@ object BandDirect {
         return record(context, source, result, files, summary)
     }
 
-    private suspend fun remerge(context: Context) {
+    suspend fun remerge(context: Context) {
         val from = LocalDate.now().minusDays(MERGE_DAYS)
         val band = StepRepository.get(context).loadBandHours(from)
         if (band.isEmpty()) return

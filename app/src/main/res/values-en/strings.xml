@@ -319,6 +319,7 @@
     <string name="device_other">Other device</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>Settings → Step source → “Don\'t count the phone while using the band”: when on, phone steps are left out on days the band sent data</item>
         <item>Band and phone always merge hour by hour: in hours the band was worn only the band counts, the phone fills the other hours (before, without the HyperOS record, the larger daily total won)</item>
         <item>Custom ROM support (crDroid, LineageOS and others): on a Xiaomi phone without HyperOS, the HyperOS step record and MIUI battery steps are hidden and the phone\'s sensor is used</item>
         <item>Exact alarms: allow them in Settings → Step source and the midnight record, reminders and face changes run without delay (Android 14 and later)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">Direct connection (Xiaomi, Amazfit)</string>
     <string name="source_connect">Via Health Connect</string>
     <string name="source_merge_hint">If you use a band, its count is used in the hours you wear it and the phone\'s count in the other hours.</string>
+    <string name="band_only_title">Don\'t count the phone while using the band</string>
+    <string name="band_only_text">If the band sent data on a day, that day\'s steps come from the band only. The phone is used only on days the band never connected. When off, the phone fills the hours the band was not worn.</string>
     <string name="source_direct_manage">Band settings</string>
     <string name="device_connect_hint">Data is read from Health Connect</string>
     <string name="band_reconnect">Reconnect</string>

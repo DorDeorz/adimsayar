@@ -96,6 +96,7 @@ class MainActivity : ComponentActivity() {
     private var wearableEnabled by mutableStateOf(false)
     private var bandDirectEnabled by mutableStateOf(false)
     private var bandSyncing by mutableStateOf(false)
+    private var bandOnly by mutableStateOf(false)
     private var wearableSync: Job? = null
     private var healthRefresh by mutableIntStateOf(0)
     private var requestedTab by mutableStateOf<Tab?>(null)
@@ -116,6 +117,7 @@ class MainActivity : ComponentActivity() {
         onWearableResync = ::resyncWearable,
         onBandDirectChange = ::changeBandDirect,
         onSyncBand = ::syncBandNow,
+        onBandOnlyChange = ::changeBandOnly,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = {
             settingsStore.setDynamicColor(it)
@@ -346,6 +348,7 @@ class MainActivity : ComponentActivity() {
                             wearableEnabled = wearableEnabled,
                             bandDirectEnabled = bandDirectEnabled,
                             bandSyncing = bandSyncing,
+                            bandOnly = bandOnly,
                             logLines = logLines,
                             version = BuildConfig.VERSION_NAME,
                             weights = weights,
@@ -391,6 +394,7 @@ class MainActivity : ComponentActivity() {
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
         bandDirectEnabled = BandDirect.isEnabled(this)
+        bandOnly = WearableSteps.isBandOnly(this)
         if (bandDirectEnabled) {
             BandLive.refresh(appContext)
             AppScope.launch(Dispatchers.IO) {
@@ -517,6 +521,19 @@ class MainActivity : ComponentActivity() {
                 withContext(Dispatchers.Main) { xiaomiProblem = problem }
                 delay(XIAOMI_SYNC_INTERVAL_MS)
             }
+        }
+    }
+
+    private fun changeBandOnly(enabled: Boolean) {
+        bandOnly = enabled
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) {
+            WearableSteps.setBandOnly(appContext, enabled)
+            when {
+                BandDirect.isEnabled(appContext) -> BandDirect.remerge(appContext)
+                WearableSteps.isEnabled(appContext) -> WearableSteps.resync(appContext)
+            }
+            Widgets.updateAll(appContext)
         }
     }
 

@@ -319,6 +319,7 @@
     <string name="device_other">Altro dispositivo</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>Impostazioni → Fonte passi → «Non contare il telefono se uso il braccialetto»: se attivo, i passi del telefono non vengono aggiunti nei giorni con dati del braccialetto</item>
         <item>Braccialetto e telefono si uniscono sempre ora per ora: nelle ore in cui il braccialetto è indossato conta solo il braccialetto, il telefono completa le altre ore (prima, senza il registro HyperOS, vinceva il totale giornaliero maggiore)</item>
         <item>Supporto ROM personalizzate (crDroid, LineageOS e altre): su uno Xiaomi senza HyperOS il registro passi di HyperOS e i passaggi batteria MIUI sono nascosti e si usa il sensore del telefono</item>
         <item>Sveglie esatte: consentile in Impostazioni → Fonte dei passi e salvataggio di mezzanotte, promemoria e cambio quadrante funzionano senza ritardi (Android 14 e successivi)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">Connessione diretta (Xiaomi, Amazfit)</string>
     <string name="source_connect">Tramite Health Connect</string>
     <string name="source_merge_hint">Se usi un bracciale, nelle ore in cui lo indossi vale il suo conteggio, nelle altre quello del telefono.</string>
+    <string name="band_only_title">Non contare il telefono se uso il braccialetto</string>
+    <string name="band_only_text">Se il braccialetto ha inviato dati in un giorno, i passi di quel giorno vengono solo dal braccialetto. Il telefono si usa solo nei giorni senza connessione del braccialetto. Se disattivato, il telefono completa le ore senza braccialetto.</string>
     <string name="source_direct_manage">Impostazioni bracciale</string>
     <string name="device_connect_hint">I dati vengono letti da Health Connect</string>
     <string name="band_reconnect">Riconnetti</string>

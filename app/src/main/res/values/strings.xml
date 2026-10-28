@@ -319,6 +319,7 @@
     <string name="device_other">Diğer cihaz</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>Ayarlar → Adım kaynağı → “Bileklik varken telefonu sayma”: açıksa bilekliğin veri gönderdiği günlerde telefonun adımları hiç eklenmez</item>
         <item>Bileklik ve telefon her zaman saat saat birleşir: bilekliğin takılı olduğu saatlerde yalnız bileklik sayılır, telefon sadece diğer saatleri doldurur (önceden HyperOS kaydı kapalıyken günün büyük sayısı alınıyordu)</item>
         <item>Özel ROM desteği (crDroid, LineageOS gibi): Xiaomi telefonda HyperOS yoksa HyperOS adım kaydı ve MIUI pil adımları gösterilmez, telefonun sensörü kullanılır</item>
         <item>Tam zamanlı alarmlar: Ayarlar → Adım kaynağı\'nda izin verilirse gece yarısı kaydı, hatırlatmalar ve kadran değişimi gecikmeden çalışır (Android 14 ve sonrası)</item>
@@ -781,6 +782,8 @@
     <string name="source_direct">Doğrudan bağlantı (Xiaomi, Amazfit)</string>
     <string name="source_connect">Health Connect üzerinden</string>
     <string name="source_merge_hint">Bileklik kullanıyorsan, onu taktığın saatlerde bilekliğin sayısı, diğer saatlerde telefonun sayısı kullanılır.</string>
+    <string name="band_only_title">Bileklik varken telefonu sayma</string>
+    <string name="band_only_text">Bileklik bir gün veri gönderdiyse o günün adımları yalnız bileklikten alınır. Telefon sadece bilekliğin hiç bağlanmadığı günlerde kullanılır. Kapalıyken bileklik takılı olmayan saatleri telefon doldurur.</string>
     <string name="source_direct_manage">Bileklik ayarları</string>
     <string name="device_connect_hint">Veriler Health Connect\'ten okunuyor</string>
     <string name="band_reconnect">Yeniden bağlan</string>

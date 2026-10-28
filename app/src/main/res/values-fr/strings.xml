@@ -319,6 +319,7 @@
     <string name="device_other">Autre appareil</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>Paramètres → Source des pas → « Ne pas compter le téléphone avec le bracelet » : activé, les pas du téléphone ne sont pas ajoutés les jours avec données du bracelet</item>
         <item>Bracelet et téléphone sont toujours fusionnés heure par heure : pendant les heures où le bracelet est porté, seul le bracelet compte, le téléphone complète les autres heures (avant, sans le relevé HyperOS, le plus grand total du jour l\'emportait)</item>
         <item>Prise en charge des ROM personnalisées (crDroid, LineageOS, etc.) : sur un Xiaomi sans HyperOS, le relevé de pas HyperOS et les étapes batterie MIUI sont masqués et le capteur du téléphone est utilisé</item>
         <item>Alarmes exactes : autorisez-les dans Paramètres → Source des pas pour que l\'enregistrement de minuit, les rappels et le changement de cadran soient à l\'heure (Android 14 et plus)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">Connexion directe (Xiaomi, Amazfit)</string>
     <string name="source_connect">Via Health Connect</string>
     <string name="source_merge_hint">Si vous utilisez un bracelet, son compte est utilisé aux heures où vous le portez, sinon celui du téléphone.</string>
+    <string name="band_only_title">Ne pas compter le téléphone avec le bracelet</string>
+    <string name="band_only_text">Si le bracelet a envoyé des données un jour, les pas de ce jour viennent uniquement du bracelet. Le téléphone n\'est utilisé que les jours sans connexion du bracelet. Désactivé, le téléphone complète les heures sans bracelet.</string>
     <string name="source_direct_manage">Réglages du bracelet</string>
     <string name="device_connect_hint">Les données sont lues depuis Health Connect</string>
     <string name="band_reconnect">Reconnecter</string>

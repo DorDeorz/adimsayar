@@ -319,6 +319,7 @@
     <string name="device_other">기타 기기</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>설정 → 걸음 수 출처 → “밴드 사용 중에는 휴대폰을 세지 않기”: 켜면 밴드 데이터가 있는 날에는 휴대폰 걸음 수를 더하지 않습니다</item>
         <item>밴드와 휴대폰은 항상 시간별로 합칩니다: 밴드를 착용한 시간에는 밴드만 세고 휴대폰은 나머지 시간을 채웁니다(이전에는 HyperOS 기록이 없으면 하루 합계 중 큰 값을 사용)</item>
         <item>커스텀 ROM 지원(crDroid, LineageOS 등): HyperOS가 없는 Xiaomi에서는 HyperOS 걸음 기록과 MIUI 배터리 단계를 숨기고 휴대폰 센서를 사용합니다</item>
         <item>정확한 알람: 설정 → 걸음 소스에서 허용하면 자정 기록, 알림, 워치페이스 변경이 지연 없이 실행됩니다(Android 14 이상)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">직접 연결(Xiaomi, Amazfit)</string>
     <string name="source_connect">Health Connect 사용</string>
     <string name="source_merge_hint">밴드를 쓰면 착용한 시간에는 밴드 걸음 수, 나머지 시간에는 휴대폰 걸음 수를 씁니다.</string>
+    <string name="band_only_title">밴드 사용 중에는 휴대폰을 세지 않기</string>
+    <string name="band_only_text">밴드가 그날 데이터를 보냈다면 그날 걸음 수는 밴드에서만 가져옵니다. 휴대폰은 밴드가 한 번도 연결되지 않은 날에만 사용합니다. 끄면 밴드를 착용하지 않은 시간을 휴대폰이 채웁니다.</string>
     <string name="source_direct_manage">밴드 설정</string>
     <string name="device_connect_hint">Health Connect에서 데이터를 읽는 중</string>
     <string name="band_reconnect">다시 연결</string>

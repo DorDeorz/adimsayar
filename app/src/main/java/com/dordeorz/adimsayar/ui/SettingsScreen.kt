@@ -271,6 +271,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         if (!state.wearableEnabled) actions.onWearableEnabledChange(true)
                     }
                 }
+                if (state.healthEnabled) {
+                    SwitchRow(
+                        title = stringResource(R.string.band_only_title),
+                        hint = stringResource(R.string.band_only_text),
+                        checked = state.bandOnly,
+                        onCheckedChange = actions.onBandOnlyChange,
+                    )
+                }
                 Text(
                     stringResource(R.string.source_merge_hint),
                     style = MaterialTheme.typography.bodySmall,

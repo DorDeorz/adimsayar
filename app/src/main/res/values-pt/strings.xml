@@ -319,6 +319,7 @@
     <string name="device_other">Outro dispositivo</string>
 
     <string-array name="release_notes_0_15_1">
+        <item>Configurações → Fonte de passos → “Não contar o celular ao usar a pulseira”: ligado, os passos do celular não entram nos dias com dados da pulseira</item>
         <item>Pulseira e celular sempre se combinam hora a hora: nas horas com a pulseira no pulso só a pulseira conta, o celular preenche as outras horas (antes, sem o registro do HyperOS, valia o maior total do dia)</item>
         <item>Suporte a ROMs personalizadas (crDroid, LineageOS e outras): em um Xiaomi sem HyperOS, o registro de passos do HyperOS e os passos de bateria do MIUI ficam ocultos e o sensor do celular é usado</item>
         <item>Alarmes exatos: permita em Configurações → Fonte dos passos e o registro da meia-noite, os lembretes e a troca de mostrador rodam sem atraso (Android 14 ou mais recente)</item>
@@ -780,6 +781,8 @@
     <string name="source_direct">Conexão direta (Xiaomi, Amazfit)</string>
     <string name="source_connect">Pelo Health Connect</string>
     <string name="source_merge_hint">Se você usa uma pulseira, nas horas em que a usa vale a contagem dela e nas outras a do telefone.</string>
+    <string name="band_only_title">Não contar o celular ao usar a pulseira</string>
+    <string name="band_only_text">Se a pulseira enviou dados num dia, os passos desse dia vêm só da pulseira. O celular só é usado nos dias em que a pulseira não se conectou. Desligado, o celular preenche as horas sem a pulseira.</string>
     <string name="source_direct_manage">Configurações da pulseira</string>
     <string name="device_connect_hint">Os dados são lidos do Health Connect</string>
     <string name="band_reconnect">Reconectar</string>
