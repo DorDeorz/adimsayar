@@ -92,6 +92,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
         item { BirdCard(state) }
+        if (state.extra.extras.showQuote) item { QuoteCard(state.today) }
         if (!state.sensorAvailable) {
             item { MessageCard(stringResource(R.string.sensor_missing_title), stringResource(R.string.sensor_missing_text)) }
         } else if (state.permission != PermissionState.Granted) {
@@ -203,6 +204,7 @@ private fun TodayRing(state: MainUiState, steps: Long, goal: Long) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 4.dp),
         )
+        RingExtraLines(state, steps, goal)
     }
 }
 

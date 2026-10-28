@@ -1120,4 +1120,85 @@
         <item>Плитка воды: +1 стакан из шторки уведомлений</item>
         <item>Голосовой ответ на «Сколько шагов сегодня?» (ярлык и Google Ассистент)</item>
     </string-array>
+    <string name="medal_group_distance">Расстояние</string>
+    <string name="medal_group_distance_text">Общее пройденное расстояние за все дни (по твоему росту)</string>
+    <string name="medal_group_water">Серия воды</string>
+    <string name="medal_group_water_text">Дней подряд с выполненной целью по воде</string>
+    <string name="medal_group_sleep">Серия сна</string>
+    <string name="medal_group_sleep_text">Ночей подряд со сном не меньше 7 часов (данные браслета)</string>
+    <string name="medal_group_route">Пройденные маршруты</string>
+    <string name="medal_group_route_text">Сколько разных виртуальных маршрутов ты прошёл</string>
+    <string name="medal_km">%1$d км</string>
+    <string name="routes_count">Маршрутов: %1$d</string>
+    <string name="time_left_minutes">До цели ≈ %1$d мин ходьбы</string>
+    <string name="time_left_hours">До цели ≈ %1$d ч %2$d мин ходьбы</string>
+    <string name="food_line">Сожжено ≈ %1$d × %2$s</string>
+    <string name="food_burger">бургер</string>
+    <string name="food_simit">симит (бублик с кунжутом)</string>
+    <string name="food_chocolate">шоколадка</string>
+    <string name="food_cola">банка колы</string>
+    <string name="food_apple">яблоко</string>
+    <string name="trend_title">Тенденция</string>
+    <string name="trend_month">Этот месяц (первые %1$d дн.)</string>
+    <string name="trend_week">Последние 7 дней</string>
+    <string name="trend_up">На %1$d%% больше, чем раньше</string>
+    <string name="trend_down">На %1$d%% меньше, чем раньше</string>
+    <string name="trend_same">Как и раньше</string>
+    <string name="trend_no_data">Нет шагов за прошлый период для сравнения</string>
+    <string name="active_hours_title">Карта активных часов</string>
+    <string name="active_hours_text">Средние шаги по дням и часам за 8 недель; темнее — больше</string>
+    <string name="active_hours_empty">Почасовых данных пока нет</string>
+    <string name="active_hours_peak">Самый активный час: %1$s %2$s</string>
+    <string name="story_banner_title">Твоя история %1$d года готова</string>
+    <string name="story_banner_text">Листай свой год и делись им</string>
+    <string name="story_open">Открыть историю</string>
+    <string name="story_total_title">Твои шаги за %1$d год</string>
+    <string name="story_total_text">В среднем %1$s шагов в день</string>
+    <string name="story_distance_title">Пройденный путь</string>
+    <string name="story_distance_text">Около %1$d%% длины экватора</string>
+    <string name="story_medals_text">Медали за этот год</string>
+    <string name="story_end_title">Отличный год!</string>
+    <string name="story_end_text">Твоя птичка будет шагать с тобой и в новом году</string>
+    <string name="story_share">FitWren %1$d: %2$s шагов, %3$s км, цель выполнена %4$d дн.! 🐦</string>
+    <string name="fitness_age_title">Фитнес-возраст</string>
+    <string name="fitness_age_value">%1$d лет</string>
+    <string name="fitness_age_younger">На %1$d лет моложе реального возраста</string>
+    <string name="fitness_age_older">На %1$d лет старше реального возраста</string>
+    <string name="fitness_age_same">Как реальный возраст</string>
+    <string name="fitness_age_text">Оценка VO2max %1$d по пульсу покоя %2$d и в среднем %3$s шагам в день. Не медицинское измерение.</string>
+    <string name="recovery_title">Восстановление</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Хорошо восстановился: можно бодро погулять</string>
+    <string name="recovery_mid">Средне: хватит обычной ходьбы</string>
+    <string name="recovery_low">Низко: сегодня полегче и отдохни</string>
+    <string name="recovery_text">Сон прошлой ночи сравнивается с прошлой неделей, пульс покоя — со средним. Не медицинская оценка.</string>
+    <string name="quote_title">Мысль дня</string>
+    <string name="quote_setting">Мысль дня</string>
+    <string name="quote_setting_hint">Показывать новую мысль на «Сегодня» каждый день</string>
+    <string-array name="quotes">
+        <item>Каждый шаг — на шаг впереди вчерашнего тебя.</item>
+        <item>Дорога сегодня — отдых завтра.</item>
+        <item>Маленькие шаги тоже проходят длинный путь.</item>
+        <item>Твоя птичка и сегодня хочет лететь с тобой.</item>
+        <item>Идти медленно лучше, чем не идти совсем.</item>
+        <item>Даже если устал, хватит десяти минут.</item>
+        <item>Серия — это привычка, а привычка — это решение.</item>
+        <item>Лестница — сегодняшняя маленькая гора.</item>
+        <item>Ходи, пока говоришь по телефону: шаги придут сами.</item>
+        <item>Прогулка — самый простой способ собраться с мыслями.</item>
+        <item>Если цель кажется далёкой, целься в половину.</item>
+        <item>Сегодняшние шаги — завтрашняя энергия.</item>
+        <item>Понемногу каждый день — много за месяц.</item>
+        <item>Солнце или дождь — гулять можно в любую погоду.</item>
+        <item>Лучшая прогулка — та, которую начинаешь сейчас.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Сегодня: сколько ходьбы осталось до цели (по твоему темпу) и калории в виде еды</item>
+        <item>Виджет «Сегодня» (широкий): время до цели</item>
+        <item>Карточка «Мысль дня» (отключается в Настройки → Оформление)</item>
+        <item>История: карточка тенденции (этот месяц и 7 дней против прошлого) и карта активных часов (8 недель, день × час)</item>
+        <item>История года: в истории в декабре и январе, а также в карточке года; листаемые страницы и отправка</item>
+        <item>Здоровье: оценка восстановления и фитнес-возраст (по браслету)</item>
+        <item>Новые медали: расстояние, серия воды, серия сна, пройденные маршруты</item>
+    </string-array>
 </resources>

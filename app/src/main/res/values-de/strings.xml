@@ -1120,4 +1120,85 @@
         <item>Wasser-Kachel: +1 Glas aus dem Benachrichtigungsfeld</item>
         <item>Gesprochene Antwort auf „Wie viele Schritte heute?“ (Kurzbefehl und Google Assistant)</item>
     </string-array>
+    <string name="medal_group_distance">Strecke</string>
+    <string name="medal_group_distance_text">Gesamtstrecke über alle Tage (aus deiner Größe berechnet)</string>
+    <string name="medal_group_water">Wasser-Serie</string>
+    <string name="medal_group_water_text">Tage in Folge mit erreichtem Wasserziel</string>
+    <string name="medal_group_sleep">Schlaf-Serie</string>
+    <string name="medal_group_sleep_text">Nächte in Folge mit mindestens 7 Stunden Schlaf (Armbanddaten)</string>
+    <string name="medal_group_route">Routen beendet</string>
+    <string name="medal_group_route_text">Anzahl verschiedener virtueller Routen, die du beendet hast</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d Routen</string>
+    <string name="time_left_minutes">≈ %1$d Min. Gehen bis zum Ziel</string>
+    <string name="time_left_hours">≈ %1$d Std. %2$d Min. Gehen bis zum Ziel</string>
+    <string name="food_line">Verbrannt: ≈ %1$d × %2$s</string>
+    <string name="food_burger">Burger</string>
+    <string name="food_simit">Simit (Sesamkringel)</string>
+    <string name="food_chocolate">Schokoriegel</string>
+    <string name="food_cola">Dose Cola</string>
+    <string name="food_apple">Apfel</string>
+    <string name="trend_title">Trend</string>
+    <string name="trend_month">Dieser Monat (erste %1$d Tage)</string>
+    <string name="trend_week">Letzte 7 Tage</string>
+    <string name="trend_up">%1$d %% mehr als im Zeitraum davor</string>
+    <string name="trend_down">%1$d %% weniger als im Zeitraum davor</string>
+    <string name="trend_same">Gleich wie im Zeitraum davor</string>
+    <string name="trend_no_data">Keine Schritte im Zeitraum davor zum Vergleich</string>
+    <string name="active_hours_title">Karte aktiver Stunden</string>
+    <string name="active_hours_text">Durchschnittliche Schritte je Wochentag und Stunde der letzten 8 Wochen; dunkler heißt mehr</string>
+    <string name="active_hours_empty">Noch keine Stundendaten</string>
+    <string name="active_hours_peak">Deine aktivste Stunde: %1$s %2$s</string>
+    <string name="story_banner_title">Deine Geschichte %1$d ist fertig</string>
+    <string name="story_banner_text">Wische durch dein Jahr und teile es</string>
+    <string name="story_open">Geschichte öffnen</string>
+    <string name="story_total_title">Deine Schritte %1$d</string>
+    <string name="story_total_text">Im Schnitt %1$s Schritte am Tag</string>
+    <string name="story_distance_title">Deine Strecke</string>
+    <string name="story_distance_text">Etwa %1$d %% des Erdumfangs</string>
+    <string name="story_medals_text">Medaillen, die du dieses Jahr verdient hast</string>
+    <string name="story_end_title">Was für ein Jahr!</string>
+    <string name="story_end_text">Dein Vogel läuft auch im neuen Jahr mit</string>
+    <string name="story_share">FitWren %1$d: %2$s Schritte, %3$s km, Ziel an %4$d Tagen erreicht! 🐦</string>
+    <string name="fitness_age_title">Fitnessalter</string>
+    <string name="fitness_age_value">%1$d Jahre</string>
+    <string name="fitness_age_younger">%1$d Jahre jünger als dein echtes Alter</string>
+    <string name="fitness_age_older">%1$d Jahre älter als dein echtes Alter</string>
+    <string name="fitness_age_same">Gleich wie dein echtes Alter</string>
+    <string name="fitness_age_text">Geschätzte VO2max %1$d aus Ruhepuls %2$d und durchschnittlich %3$s Schritten am Tag. Keine medizinische Messung.</string>
+    <string name="recovery_title">Erholung</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Gut erholt: heute passt ein flotter Spaziergang</string>
+    <string name="recovery_mid">Mittel: dein übliches Gehen reicht</string>
+    <string name="recovery_low">Niedrig: heute locker bleiben und ausruhen</string>
+    <string name="recovery_text">Der Schlaf der letzten Nacht wird mit der Woche davor und dein Ruhepuls mit seinem Mittel verglichen. Keine medizinische Bewertung.</string>
+    <string name="quote_title">Spruch des Tages</string>
+    <string name="quote_setting">Spruch des Tages</string>
+    <string name="quote_setting_hint">Jeden Tag einen neuen Spruch auf Heute zeigen</string>
+    <string-array name="quotes">
+        <item>Jeder Schritt bringt dich einen Schritt weiter als gestern.</item>
+        <item>Der Weg von heute ist die Rast von morgen.</item>
+        <item>Auch kleine Schritte schaffen lange Wege.</item>
+        <item>Dein Vogel will auch heute mit dir fliegen.</item>
+        <item>Langsam gehen ist besser als gar nicht gehen.</item>
+        <item>Auch wenn du müde bist, reichen zehn Minuten.</item>
+        <item>Eine Serie ist eine Gewohnheit, und eine Gewohnheit eine Entscheidung.</item>
+        <item>Die Treppe ist der kleine Berg von heute.</item>
+        <item>Geh beim Telefonieren, die Schritte kommen von selbst.</item>
+        <item>Ein Spaziergang ordnet die Gedanken am leichtesten.</item>
+        <item>Wirkt das Ziel weit weg, peil die Hälfte an.</item>
+        <item>Die Schritte von heute sind die Energie von morgen.</item>
+        <item>Jeden Tag ein bisschen, jeden Monat viel.</item>
+        <item>Sonne oder Regen, ein Spaziergang passt zu jedem Wetter.</item>
+        <item>Der beste Spaziergang ist der, den du jetzt beginnst.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Heute: Gehzeit bis zum Ziel (aus deinem Tempo) und verbrannte Kalorien als Essen</item>
+        <item>Heute-Widget (breit): Zeit bis zum Ziel</item>
+        <item>Karte „Spruch des Tages“ (abschaltbar unter Einstellungen → Darstellung)</item>
+        <item>Verlauf: Trendkarte (dieser Monat und letzte 7 Tage gegenüber vorher) und Karte aktiver Stunden (8 Wochen, Tag × Stunde)</item>
+        <item>Jahresgeschichte: im Dezember und Januar im Verlauf sowie auf der Jahreskarte; Wischseiten und Teilen</item>
+        <item>Gesundheit: Erholungswert und Fitnessalter (mit Armbanddaten)</item>
+        <item>Neue Medaillen: Strecke, Wasser-Serie, Schlaf-Serie, Routen beendet</item>
+    </string-array>
 </resources>

@@ -138,6 +138,9 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
             } else {
                 item { SleepCard(data) }
                 if (data.nights.keys.any { it in data.days }) item { SleepInsightCard(data, state) }
+                val hasResting = data.resting.any { it.second != null }
+                if (hasResting || data.nights.isNotEmpty()) item { RecoveryCard(data, state.today) }
+                if (hasResting) item { FitnessAgeCard(data, state) }
                 item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
                 item { RestingCard(data, daysValue) }
                 item { OxygenCard(data) }

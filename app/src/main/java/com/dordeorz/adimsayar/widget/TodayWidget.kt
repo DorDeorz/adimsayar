@@ -45,6 +45,7 @@ import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.ui.Tab
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.Distance
+import com.dordeorz.adimsayar.data.StepPace
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
@@ -204,10 +205,11 @@ private fun SquareContent(context: Context, steps: Long, goal: Long, fraction: F
 
 @Composable
 private fun WideContent(context: Context, steps: Long, fraction: Float, done: Boolean, ring: Dp, settings: AppSettings, updated: Long?) {
+    val goal = settings.goalOn(java.time.LocalDate.now())
     Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
         Ring(context, fraction, ring, accent(done)) {
             Text(
-                text = context.getString(R.string.percent_of_goal, percent(steps, settings.dailyGoal)),
+                text = context.getString(R.string.percent_of_goal, percent(steps, goal)),
                 maxLines = 1,
                 style = TextStyle(
                     color = accent(done),
@@ -224,12 +226,19 @@ private fun WideContent(context: Context, steps: Long, fraction: Float, done: Bo
                 maxLines = 1,
                 style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 30.sp, fontWeight = FontWeight.Bold),
             )
-            GoalLine(context, settings.dailyGoal, done, 12f)
+            GoalLine(context, goal, done, 12f)
             Text(
                 text = distanceText(context, steps, settings),
                 maxLines = 1,
                 style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
             )
+            if (!done) {
+                Text(
+                    text = timeLeftText(context, StepPace.minutesFor(goal - steps, StepPace.cached(context))),
+                    maxLines = 1,
+                    style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
+                )
+            }
             if (ring >= MIN_RING + STAMP_HEIGHT) UpdatedText(context, updated)
         }
     }
@@ -287,6 +296,13 @@ internal fun Ring(context: Context, fraction: Float, ring: Dp, color: ColorProvi
         content()
     }
 }
+
+internal fun timeLeftText(context: Context, minutes: Long): String =
+    if (minutes < 60L) {
+        context.getString(R.string.time_left_minutes, minutes)
+    } else {
+        context.getString(R.string.time_left_hours, minutes / 60, minutes % 60)
+    }
 
 private fun distanceText(context: Context, steps: Long, settings: AppSettings): String {
     val distance = Distance.inUnit(Distance.km(steps, settings.heightCm), settings.distanceUnit)

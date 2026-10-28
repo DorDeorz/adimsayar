@@ -1120,4 +1120,85 @@
         <item>水分タイル：通知パネルから1杯追加</item>
         <item>「今日は何歩？」に音声で回答（ショートカットとGoogleアシスタント）</item>
     </string-array>
+    <string name="medal_group_distance">距離</string>
+    <string name="medal_group_distance_text">全期間の合計歩行距離（身長から計算）</string>
+    <string name="medal_group_water">水分の連続記録</string>
+    <string name="medal_group_water_text">水分目標を連続で達成した日数</string>
+    <string name="medal_group_sleep">睡眠の連続記録</string>
+    <string name="medal_group_sleep_text">7時間以上眠った連続の夜の数（バンドのデータ）</string>
+    <string name="medal_group_route">ルート完走</string>
+    <string name="medal_group_route_text">完走した異なるバーチャルルートの数</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d ルート</string>
+    <string name="time_left_minutes">目標まで歩いて約%1$d分</string>
+    <string name="time_left_hours">目標まで歩いて約%1$d時間%2$d分</string>
+    <string name="food_line">消費カロリー ≈ %2$s × %1$d</string>
+    <string name="food_burger">ハンバーガー</string>
+    <string name="food_simit">シミット（ごまパン）</string>
+    <string name="food_chocolate">チョコバー</string>
+    <string name="food_cola">コーラ缶</string>
+    <string name="food_apple">りんご</string>
+    <string name="trend_title">傾向</string>
+    <string name="trend_month">今月（最初の%1$d日）</string>
+    <string name="trend_week">直近7日</string>
+    <string name="trend_up">前の期間より%1$d%%多い</string>
+    <string name="trend_down">前の期間より%1$d%%少ない</string>
+    <string name="trend_same">前の期間と同じ</string>
+    <string name="trend_no_data">比べる前の期間の歩数がありません</string>
+    <string name="active_hours_title">アクティブ時間マップ</string>
+    <string name="active_hours_text">直近8週間の曜日・時間ごとの平均歩数。濃いほど多い</string>
+    <string name="active_hours_empty">時間ごとの記録はまだありません</string>
+    <string name="active_hours_peak">いちばん歩く時間：%1$s %2$s</string>
+    <string name="story_banner_title">%1$d年のストーリーができました</string>
+    <string name="story_banner_text">1年をスワイプで振り返ってシェア</string>
+    <string name="story_open">ストーリーを開く</string>
+    <string name="story_total_title">%1$d年に歩いた歩数</string>
+    <string name="story_total_text">1日平均%1$s歩</string>
+    <string name="story_distance_title">歩いた距離</string>
+    <string name="story_distance_text">地球一周の約%1$d%%</string>
+    <string name="story_medals_text">今年獲得したメダル</string>
+    <string name="story_end_title">すばらしい1年でした！</string>
+    <string name="story_end_text">来年も鳥がいっしょに歩きます</string>
+    <string name="story_share">FitWren %1$d：%2$s歩、%3$s km、目標達成%4$d日！🐦</string>
+    <string name="fitness_age_title">フィットネス年齢</string>
+    <string name="fitness_age_value">%1$d歳</string>
+    <string name="fitness_age_younger">実年齢より%1$d歳若い</string>
+    <string name="fitness_age_older">実年齢より%1$d歳上</string>
+    <string name="fitness_age_same">実年齢と同じ</string>
+    <string name="fitness_age_text">推定VO2max %1$d（安静時心拍%2$d、1日平均%3$s歩から計算）。医療用の測定ではありません。</string>
+    <string name="recovery_title">回復度</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">よく回復しています。今日は速歩きもOK</string>
+    <string name="recovery_mid">ふつう。いつもの歩き方で十分</string>
+    <string name="recovery_low">低め。今日は軽めにして休もう</string>
+    <string name="recovery_text">昨夜の睡眠をその前の1週間と、安静時心拍を平均と比べます。医療的な評価ではありません。</string>
+    <string name="quote_title">今日のひとこと</string>
+    <string name="quote_setting">今日のひとこと</string>
+    <string name="quote_setting_hint">今日のページに毎日新しいひとことを表示</string>
+    <string-array name="quotes">
+        <item>一歩ごとに、昨日の自分より一歩先へ。</item>
+        <item>今日歩いた道が、明日の休み場所になる。</item>
+        <item>小さな一歩でも長い道を歩き切れる。</item>
+        <item>今日も鳥があなたと飛びたがっています。</item>
+        <item>ゆっくり歩くほうが、歩かないよりずっといい。</item>
+        <item>疲れていても10分で十分。</item>
+        <item>連続記録は習慣、習慣は選択。</item>
+        <item>階段は今日の小さな山。</item>
+        <item>電話しながら歩けば、歩数は自然に増える。</item>
+        <item>散歩は考えを整理するいちばん簡単な方法。</item>
+        <item>目標が遠く見えたら、まず半分を目指そう。</item>
+        <item>今日の歩数が明日の元気になる。</item>
+        <item>毎日少しずつが、毎月たくさんになる。</item>
+        <item>晴れでも雨でも、散歩はどんな天気にも合う。</item>
+        <item>最高の散歩は、今始める散歩。</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>今日：目標まで歩く残り時間（自分のペースから）と消費カロリーの食べ物換算</item>
+        <item>今日ウィジェット（横長）：目標までの残り時間</item>
+        <item>今日のひとことカード（設定→外観でオフ可）</item>
+        <item>履歴：傾向カード（今月と直近7日を前の期間と比較）とアクティブ時間マップ（8週間、曜日×時間）</item>
+        <item>1年のストーリー：12月と1月に履歴、年カードにも。スワイプとシェア</item>
+        <item>健康：回復度とフィットネス年齢（バンドのデータ）</item>
+        <item>新しいメダル：距離、水分連続、睡眠連続、ルート完走</item>
+    </string-array>
 </resources>

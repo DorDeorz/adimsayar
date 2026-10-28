@@ -1120,4 +1120,85 @@
         <item>Mosaico de agua: +1 vaso desde el panel de notificaciones</item>
         <item>Respuesta hablada a “¿Cuántos pasos hoy?” (atajo y Google Assistant)</item>
     </string-array>
+    <string name="medal_group_distance">Distancia</string>
+    <string name="medal_group_distance_text">Distancia total caminada en todos los días (según tu altura)</string>
+    <string name="medal_group_water">Racha de agua</string>
+    <string name="medal_group_water_text">Días seguidos en que alcanzaste tu objetivo de agua</string>
+    <string name="medal_group_sleep">Racha de sueño</string>
+    <string name="medal_group_sleep_text">Noches seguidas con al menos 7 horas de sueño (datos de la pulsera)</string>
+    <string name="medal_group_route">Rutas terminadas</string>
+    <string name="medal_group_route_text">Número de rutas virtuales distintas que terminaste</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d rutas</string>
+    <string name="time_left_minutes">≈ %1$d min caminando hasta el objetivo</string>
+    <string name="time_left_hours">≈ %1$d h %2$d min caminando hasta el objetivo</string>
+    <string name="food_line">Quemaste ≈ %1$d × %2$s</string>
+    <string name="food_burger">hamburguesa</string>
+    <string name="food_simit">simit (rosca de sésamo)</string>
+    <string name="food_chocolate">barra de chocolate</string>
+    <string name="food_cola">lata de refresco</string>
+    <string name="food_apple">manzana</string>
+    <string name="trend_title">Tendencia</string>
+    <string name="trend_month">Este mes (primeros %1$d días)</string>
+    <string name="trend_week">Últimos 7 días</string>
+    <string name="trend_up">%1$d %% más que el periodo anterior</string>
+    <string name="trend_down">%1$d %% menos que el periodo anterior</string>
+    <string name="trend_same">Igual que el periodo anterior</string>
+    <string name="trend_no_data">Sin pasos en el periodo anterior para comparar</string>
+    <string name="active_hours_title">Mapa de horas activas</string>
+    <string name="active_hours_text">Pasos medios por día y hora en las últimas 8 semanas; más oscuro es más</string>
+    <string name="active_hours_empty">Aún no hay registros por hora</string>
+    <string name="active_hours_peak">Tu hora más activa: %1$s %2$s</string>
+    <string name="story_banner_title">Tu historia de %1$d está lista</string>
+    <string name="story_banner_text">Desliza por tu año y compártelo</string>
+    <string name="story_open">Abrir historia</string>
+    <string name="story_total_title">Pasos que diste en %1$d</string>
+    <string name="story_total_text">De media %1$s pasos al día</string>
+    <string name="story_distance_title">Distancia que caminaste</string>
+    <string name="story_distance_text">Cerca del %1$d %% de la vuelta a la Tierra</string>
+    <string name="story_medals_text">Medallas que ganaste este año</string>
+    <string name="story_end_title">¡Qué año!</string>
+    <string name="story_end_text">Tu pájaro seguirá caminando contigo el año que viene</string>
+    <string name="story_share">FitWren %1$d: %2$s pasos, %3$s km, ¡objetivo cumplido %4$d días! 🐦</string>
+    <string name="fitness_age_title">Edad física</string>
+    <string name="fitness_age_value">%1$d años</string>
+    <string name="fitness_age_younger">%1$d años menos que tu edad real</string>
+    <string name="fitness_age_older">%1$d años más que tu edad real</string>
+    <string name="fitness_age_same">Igual que tu edad real</string>
+    <string name="fitness_age_text">VO2max estimado %1$d, a partir del pulso en reposo %2$d y %3$s pasos al día de media. No es una medida médica.</string>
+    <string name="recovery_title">Recuperación</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Bien recuperado: hoy puedes caminar a buen ritmo</string>
+    <string name="recovery_mid">Normal: con tu caminata habitual basta</string>
+    <string name="recovery_low">Baja: hoy tómatelo con calma y descansa</string>
+    <string name="recovery_text">Se compara el sueño de anoche con la semana anterior y el pulso en reposo con su media. No es una evaluación médica.</string>
+    <string name="quote_title">Frase del día</string>
+    <string name="quote_setting">Frase del día</string>
+    <string name="quote_setting_hint">Mostrar una frase nueva cada día en Hoy</string>
+    <string-array name="quotes">
+        <item>Cada paso te deja un paso por delante de ayer.</item>
+        <item>El camino de hoy es el descanso de mañana.</item>
+        <item>Los pasos pequeños también terminan caminos largos.</item>
+        <item>Tu pájaro quiere volar contigo también hoy.</item>
+        <item>Caminar despacio es mejor que no caminar.</item>
+        <item>Aunque estés cansado, diez minutos bastan.</item>
+        <item>Una racha es un hábito, y un hábito es una decisión.</item>
+        <item>La escalera es la pequeña montaña de hoy.</item>
+        <item>Camina mientras hablas por teléfono; los pasos llegan solos.</item>
+        <item>Caminar es la forma más fácil de ordenar las ideas.</item>
+        <item>Si el objetivo parece lejos, apunta a la mitad.</item>
+        <item>Los pasos de hoy son la energía de mañana.</item>
+        <item>Un poco cada día es mucho cada mes.</item>
+        <item>Con sol o lluvia, caminar sienta bien.</item>
+        <item>El mejor paseo es el que empiezas ahora.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Hoy: tiempo caminando que falta para el objetivo (según tu ritmo) y las calorías como comida</item>
+        <item>Widget de Hoy (ancho): tiempo que falta</item>
+        <item>Tarjeta de frase del día (se puede quitar en Ajustes → Apariencia)</item>
+        <item>Historial: tarjeta de tendencia (este mes y últimos 7 días frente al periodo anterior) y mapa de horas activas (8 semanas, día × hora)</item>
+        <item>Historia del año: en Historial en diciembre y enero, y en la tarjeta del año; páginas deslizables y compartir</item>
+        <item>Salud: puntuación de recuperación y edad física (con datos de la pulsera)</item>
+        <item>Nuevas medallas: distancia, racha de agua, racha de sueño, rutas terminadas</item>
+    </string-array>
 </resources>

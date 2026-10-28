@@ -1120,4 +1120,85 @@
         <item>Riquadro acqua: +1 bicchiere dal pannello notifiche</item>
         <item>Risposta vocale a “Quanti passi oggi?” (scorciatoia e Google Assistant)</item>
     </string-array>
+    <string name="medal_group_distance">Distanza</string>
+    <string name="medal_group_distance_text">Distanza totale percorsa in tutti i giorni (dalla tua altezza)</string>
+    <string name="medal_group_water">Serie d\'acqua</string>
+    <string name="medal_group_water_text">Giorni di fila in cui hai raggiunto l\'obiettivo d\'acqua</string>
+    <string name="medal_group_sleep">Serie di sonno</string>
+    <string name="medal_group_sleep_text">Notti di fila con almeno 7 ore di sonno (dati del braccialetto)</string>
+    <string name="medal_group_route">Percorsi completati</string>
+    <string name="medal_group_route_text">Numero di percorsi virtuali diversi completati</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d percorsi</string>
+    <string name="time_left_minutes">≈ %1$d min di camminata all\'obiettivo</string>
+    <string name="time_left_hours">≈ %1$d h %2$d min di camminata all\'obiettivo</string>
+    <string name="food_line">Hai bruciato ≈ %1$d × %2$s</string>
+    <string name="food_burger">hamburger</string>
+    <string name="food_simit">simit (ciambella al sesamo)</string>
+    <string name="food_chocolate">barretta di cioccolato</string>
+    <string name="food_cola">lattina di cola</string>
+    <string name="food_apple">mela</string>
+    <string name="trend_title">Tendenza</string>
+    <string name="trend_month">Questo mese (primi %1$d giorni)</string>
+    <string name="trend_week">Ultimi 7 giorni</string>
+    <string name="trend_up">%1$d%% in più del periodo precedente</string>
+    <string name="trend_down">%1$d%% in meno del periodo precedente</string>
+    <string name="trend_same">Uguale al periodo precedente</string>
+    <string name="trend_no_data">Nessun passo nel periodo precedente per confrontare</string>
+    <string name="active_hours_title">Mappa delle ore attive</string>
+    <string name="active_hours_text">Passi medi per giorno e ora nelle ultime 8 settimane; più scuro è di più</string>
+    <string name="active_hours_empty">Ancora nessun dato orario</string>
+    <string name="active_hours_peak">La tua ora più attiva: %1$s %2$s</string>
+    <string name="story_banner_title">La tua storia del %1$d è pronta</string>
+    <string name="story_banner_text">Scorri il tuo anno e condividilo</string>
+    <string name="story_open">Apri la storia</string>
+    <string name="story_total_title">I passi che hai fatto nel %1$d</string>
+    <string name="story_total_text">In media %1$s passi al giorno</string>
+    <string name="story_distance_title">Distanza percorsa</string>
+    <string name="story_distance_text">Circa il %1$d%% del giro della Terra</string>
+    <string name="story_medals_text">Medaglie vinte quest\'anno</string>
+    <string name="story_end_title">Che anno!</string>
+    <string name="story_end_text">Il tuo uccellino camminerà con te anche l\'anno prossimo</string>
+    <string name="story_share">FitWren %1$d: %2$s passi, %3$s km, obiettivo raggiunto in %4$d giorni! 🐦</string>
+    <string name="fitness_age_title">Età fitness</string>
+    <string name="fitness_age_value">%1$d anni</string>
+    <string name="fitness_age_younger">%1$d anni in meno della tua età reale</string>
+    <string name="fitness_age_older">%1$d anni in più della tua età reale</string>
+    <string name="fitness_age_same">Uguale alla tua età reale</string>
+    <string name="fitness_age_text">VO2max stimato %1$d, da frequenza a riposo %2$d e in media %3$s passi al giorno. Non è una misura medica.</string>
+    <string name="recovery_title">Recupero</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Ben recuperato: oggi va bene una camminata svelta</string>
+    <string name="recovery_mid">Medio: basta la tua solita camminata</string>
+    <string name="recovery_low">Basso: oggi vai piano e riposa</string>
+    <string name="recovery_text">Il sonno della notte è confrontato con la settimana prima e la frequenza a riposo con la sua media. Non è una valutazione medica.</string>
+    <string name="quote_title">Frase del giorno</string>
+    <string name="quote_setting">Frase del giorno</string>
+    <string name="quote_setting_hint">Mostra una frase nuova ogni giorno in Oggi</string>
+    <string-array name="quotes">
+        <item>Ogni passo ti porta un passo avanti rispetto a ieri.</item>
+        <item>La strada di oggi è il riposo di domani.</item>
+        <item>Anche i piccoli passi finiscono le strade lunghe.</item>
+        <item>Il tuo uccellino vuole volare con te anche oggi.</item>
+        <item>Camminare piano è meglio che non camminare.</item>
+        <item>Anche se sei stanco, dieci minuti bastano.</item>
+        <item>Una serie è un\'abitudine, e un\'abitudine è una scelta.</item>
+        <item>Le scale sono la piccola montagna di oggi.</item>
+        <item>Cammina mentre telefoni, i passi arrivano da soli.</item>
+        <item>Camminare è il modo più facile per riordinare i pensieri.</item>
+        <item>Se l\'obiettivo sembra lontano, punta alla metà.</item>
+        <item>I passi di oggi sono l\'energia di domani.</item>
+        <item>Un po\' ogni giorno fa tanto ogni mese.</item>
+        <item>Sole o pioggia, camminare va bene con ogni tempo.</item>
+        <item>La camminata migliore è quella che inizi adesso.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Oggi: tempo di camminata che manca all\'obiettivo (dal tuo ritmo) e calorie come cibo</item>
+        <item>Widget Oggi (largo): tempo che manca</item>
+        <item>Scheda frase del giorno (si può disattivare in Impostazioni → Aspetto)</item>
+        <item>Cronologia: scheda tendenza (questo mese e ultimi 7 giorni rispetto a prima) e mappa delle ore attive (8 settimane, giorno × ora)</item>
+        <item>Storia dell\'anno: in Cronologia a dicembre e gennaio e nella scheda dell\'anno; pagine da scorrere e condivisione</item>
+        <item>Salute: punteggio di recupero ed età fitness (con il braccialetto)</item>
+        <item>Nuove medaglie: distanza, serie d\'acqua, serie di sonno, percorsi completati</item>
+    </string-array>
 </resources>

@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,9 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.LocalContext
 import com.dordeorz.adimsayar.background.ExtraReminders
 import com.dordeorz.adimsayar.data.DayHours
+import com.dordeorz.adimsayar.data.Distance
+import com.dordeorz.adimsayar.data.Foods
+import com.dordeorz.adimsayar.data.StepPace
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -136,6 +140,64 @@ internal fun WalkPlanCard(state: MainUiState) {
                     style = MaterialTheme.typography.bodySmall,
                     color = if (done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+            }
+        }
+    }
+}
+
+/** Under the ring: walking time left to the goal and the calories as food. */
+@Composable
+internal fun RingExtraLines(state: MainUiState, steps: Long, goal: Long) {
+    val context = LocalContext.current
+    val cadence by produceState(StepPace.DEFAULT_CADENCE, state.today) {
+        value = withContext(Dispatchers.IO) { StepPace.cadence(context) }
+    }
+    val small = MaterialTheme.typography.bodySmall
+    val muted = MaterialTheme.colorScheme.onSurfaceVariant
+    if (steps < goal) {
+        val minutes = StepPace.minutesFor(goal - steps, cadence)
+        Text(
+            if (minutes < 60L) {
+                stringResource(R.string.time_left_minutes, minutes)
+            } else {
+                stringResource(R.string.time_left_hours, minutes / 60, minutes % 60)
+            },
+            style = small,
+            color = muted,
+            modifier = Modifier.padding(top = 2.dp),
+        )
+    }
+    val kcal = Distance.kcal(steps, state.settings.heightCm, state.settings.weightKg)
+    Foods.equivalent(kcal)?.let { (food, count) ->
+        Text(
+            stringResource(R.string.food_line, count, stringResource(food.name)),
+            style = small,
+            color = muted,
+            modifier = Modifier.padding(top = 2.dp),
+        )
+    }
+}
+
+@Composable
+internal fun QuoteCard(today: LocalDate) {
+    val quotes = stringArrayResource(R.array.quotes)
+    if (quotes.isEmpty()) return
+    val quote = quotes[Math.floorMod(today.toEpochDay(), quotes.size.toLong()).toInt()]
+    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painterResource(R.drawable.ic_bulb),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier.size(22.dp),
+            )
+            Column(modifier = Modifier.padding(start = 12.dp)) {
+                Text(
+                    stringResource(R.string.quote_title),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                )
+                Text(quote, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
             }
         }
     }

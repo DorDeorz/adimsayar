@@ -65,12 +65,17 @@ fun HistoryScreen(state: MainUiState, actions: MainActions) {
     var selectedText by rememberSaveable { mutableStateOf(state.today.toString()) }
     val month = YearMonth.parse(monthText).coerceIn(firstMonth, currentMonth)
     val selected = LocalDate.parse(selectedText)
+    var storyFor by rememberSaveable { mutableStateOf<Int?>(null) }
+    storyFor?.let { year -> YearStoryDialog(state, year, onDismiss = { storyFor = null }) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        storyYear(state.today)?.takeIf { year -> state.history.any { it.key.year == year && it.value > 0L } }?.let { year ->
+            item { StoryBanner(year, onOpen = { storyFor = year }) }
+        }
         item {
             MonthCard(
                 month = month,
@@ -91,13 +96,15 @@ fun HistoryScreen(state: MainUiState, actions: MainActions) {
             }
         }
         item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, actions) }
+        item { TrendCard(state) }
+        item { ActiveHoursCard(state) }
         item { RecordsCard(state.achievements.records, state.today) }
-        item { YearCard(state) }
+        item { YearCard(state, onStory = { storyFor = it }) }
     }
 }
 
 @Composable
-private fun YearCard(state: MainUiState) {
+private fun YearCard(state: MainUiState, onStory: (Int) -> Unit) {
     val currentYear = state.today.year
     val firstYear = state.history.keys.minOrNull()?.year?.coerceAtMost(currentYear) ?: currentYear
     var yearValue by rememberSaveable { mutableIntStateOf(currentYear) }
@@ -139,6 +146,9 @@ private fun YearCard(state: MainUiState) {
                 summary.bestDay?.let { FULL_DATE_FORMAT.format(it.date) },
             )
             RecordRow(stringResource(R.string.year_medals), summary.medals.toString(), null)
+            if (summary.total > 0L) {
+                TextButton(onClick = { onStory(year) }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.story_open)) }
+            }
         }
     }
 }

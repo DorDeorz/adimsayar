@@ -12,7 +12,14 @@ enum class MedalGroup(val targets: List<Long>) {
     WeeklyGoal(listOf(1L, 4L, 12L, 26L, 52L)),
     Total(listOf(100_000L, 500_000L, 1_000_000L, 2_500_000L, 5_000_000L, 10_000_000L)),
     EarlyBird(listOf(1L, 7L, 30L, 100L, 365L)),
+    Distance(listOf(10L, 42L, 100L, 250L, 500L, 1_000L)),
+    WaterStreak(listOf(3L, 7L, 14L, 30L, 100L)),
+    SleepStreak(listOf(3L, 7L, 14L, 30L)),
+    Route(listOf(1L, 3L, 5L, 7L)),
 }
+
+/** Groups counted from steps alone; the others come from [ExtraMedals]. */
+val STEP_MEDAL_GROUPS = setOf(MedalGroup.DailySteps, MedalGroup.Streak, MedalGroup.WeeklyGoal, MedalGroup.Total, MedalGroup.EarlyBird)
 
 const val EARLY_BIRD_HOUR = 8
 const val EARLY_BIRD_STEPS = 1_000L
@@ -154,7 +161,7 @@ object AchievementMath {
             MedalGroup.Total to total,
             MedalGroup.EarlyBird to earlyDays.toLong(),
         )
-        val groups = MedalGroup.entries.filter { it != MedalGroup.EarlyBird || earlyBirdDays != null }
+        val groups = MedalGroup.entries.filter { it in STEP_MEDAL_GROUPS && (it != MedalGroup.EarlyBird || earlyBirdDays != null) }
         val medals = groups.flatMap { group ->
             group.targets.mapIndexed { tier, target ->
                 val times = when (group) {
@@ -162,7 +169,7 @@ object AchievementMath {
                     MedalGroup.Streak -> streakTimes[tier]
                     MedalGroup.WeeklyGoal -> (metWeeks / target).toInt()
                     MedalGroup.EarlyBird -> (earlyDays / target).toInt()
-                    MedalGroup.Total -> 0
+                    else -> 0
                 }
                 Medal(group, tier, target, progress.getValue(group), earned[group to target], times)
             }

@@ -1121,4 +1121,85 @@
         <item>Su kutucuğu: bildirim panelinden tek dokunuşla +1 bardak</item>
         <item>“Bugün kaç adım attım?” sorusuna sesli cevap (kısayol ve Google Asistan)</item>
     </string-array>
+    <string name="medal_group_distance">Mesafe</string>
+    <string name="medal_group_distance_text">Tüm günlerde yürüdüğün toplam yol (boyuna göre hesaplanır)</string>
+    <string name="medal_group_water">Su serisi</string>
+    <string name="medal_group_water_text">Su hedefine art arda ulaştığın gün sayısı</string>
+    <string name="medal_group_sleep">Uyku serisi</string>
+    <string name="medal_group_sleep_text">Art arda en az 7 saat uyuduğun gece sayısı (bileklik verisi)</string>
+    <string name="medal_group_route">Rota bitirme</string>
+    <string name="medal_group_route_text">Sanal rotalardan bitirdiğin farklı rota sayısı</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d rota</string>
+    <string name="time_left_minutes">Hedefe ≈ %1$d dk yürüyüş kaldı</string>
+    <string name="time_left_hours">Hedefe ≈ %1$d sa %2$d dk yürüyüş kaldı</string>
+    <string name="food_line">≈ %1$d × %2$s kadar kalori yaktın</string>
+    <string name="food_burger">hamburger</string>
+    <string name="food_simit">simit</string>
+    <string name="food_chocolate">çikolata</string>
+    <string name="food_cola">kutu kola</string>
+    <string name="food_apple">elma</string>
+    <string name="trend_title">Eğilim</string>
+    <string name="trend_month">Bu ay (ilk %1$d gün)</string>
+    <string name="trend_week">Son 7 gün</string>
+    <string name="trend_up">Önceki döneme göre %%%1$d fazla</string>
+    <string name="trend_down">Önceki döneme göre %%%1$d az</string>
+    <string name="trend_same">Önceki dönemle aynı</string>
+    <string name="trend_no_data">Karşılaştırmak için önceki dönemde kayıt yok</string>
+    <string name="active_hours_title">Aktif saat haritası</string>
+    <string name="active_hours_text">Son 8 haftada her gün ve saat için ortalama adım; koyu kare daha çok adım demek</string>
+    <string name="active_hours_empty">Henüz saatlik kayıt yok</string>
+    <string name="active_hours_peak">En hareketli saatin: %1$s %2$s</string>
+    <string name="story_banner_title">%1$d yılının hikâyesi hazır</string>
+    <string name="story_banner_text">Yılını sayfa sayfa gez ve paylaş</string>
+    <string name="story_open">Hikâyeyi aç</string>
+    <string name="story_total_title">%1$d yılında attığın adım</string>
+    <string name="story_total_text">Günde ortalama %1$s adım</string>
+    <string name="story_distance_title">Yürüdüğün yol</string>
+    <string name="story_distance_text">Dünya’nın çevresinin %%%1$d kadarı</string>
+    <string name="story_medals_text">Bu yıl kazandığın madalya</string>
+    <string name="story_end_title">Harika bir yıldı!</string>
+    <string name="story_end_text">Yeni yılda da kuşun seninle yürüyecek</string>
+    <string name="story_share">FitWren %1$d: %2$s adım, %3$s km, %4$d gün hedefe ulaştım! 🐦</string>
+    <string name="fitness_age_title">Fitness yaşı</string>
+    <string name="fitness_age_value">%1$d yaş</string>
+    <string name="fitness_age_younger">Gerçek yaşından %1$d yaş genç</string>
+    <string name="fitness_age_older">Gerçek yaşından %1$d yaş büyük</string>
+    <string name="fitness_age_same">Gerçek yaşınla aynı</string>
+    <string name="fitness_age_text">Tahmini VO2max %1$d; dinlenme nabzı %2$d, günde ortalama %3$s adımdan hesaplandı. Tıbbi ölçüm değildir.</string>
+    <string name="recovery_title">Toparlanma</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">İyi toparlanmışsın, bugün tempolu yürüyebilirsin</string>
+    <string name="recovery_mid">Orta düzey; normal günlük yürüyüşün yeterli</string>
+    <string name="recovery_low">Düşük; bugün hafif tut ve dinlen</string>
+    <string name="recovery_text">Dün geceki uykun önceki haftayla, dinlenme nabzın ortalamayla karşılaştırılır. Tıbbi değerlendirme değildir.</string>
+    <string name="quote_title">Günün sözü</string>
+    <string name="quote_setting">Günün sözü</string>
+    <string name="quote_setting_hint">Bugün sayfasında her gün yeni bir söz göster</string>
+    <string-array name="quotes">
+        <item>Her adım, dünkü senden bir adım ileri.</item>
+        <item>Bugün yürüdüğün yol, yarın dinlendiğin yerdir.</item>
+        <item>Küçük adımlar da uzun yolları bitirir.</item>
+        <item>Kuşun bugün de seninle uçmak istiyor.</item>
+        <item>Yavaş yürümek, hiç yürümemekten iyidir.</item>
+        <item>Yorgun hissettiğinde bile on dakika yeter.</item>
+        <item>Seri bir alışkanlıktır; alışkanlık bir karardır.</item>
+        <item>Merdiven, bugünün küçük dağıdır.</item>
+        <item>Telefonla konuşurken yürü, adımlar kendiliğinden gelir.</item>
+        <item>Yürüyüş, düşünceleri toplamanın en kolay yolu.</item>
+        <item>Hedef uzak görünürse yarısına odaklan.</item>
+        <item>Bugünkü adımların yarınki enerjin olur.</item>
+        <item>Her gün biraz, her ay çok.</item>
+        <item>Güneşli ya da yağmurlu, yürüyüş her havaya uyar.</item>
+        <item>En iyi yürüyüş, şimdi başladığın yürüyüştür.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Bugün: hedefe kalan yürüyüş süresi (kendi yürüme hızından) ve yaktığın kalorinin yemek karşılığı</item>
+        <item>Bugün widget\'ı (geniş): hedefe kalan süre</item>
+        <item>Günün sözü kartı (Ayarlar → Görünüm\'den kapatılabilir)</item>
+        <item>Geçmiş: eğilim kartı (bu ay ve son 7 gün, önceki dönemle) ve aktif saat haritası (8 haftalık gün × saat)</item>
+        <item>Yıl sonu hikâyesi: Aralık ve Ocak\'ta Geçmiş\'te, ayrıca yıl kartında; kaydırmalı sayfalar ve paylaşma</item>
+        <item>Sağlık: toparlanma puanı ve fitness yaşı (bileklik verisiyle)</item>
+        <item>Yeni madalyalar: mesafe, su serisi, uyku serisi, rota bitirme</item>
+    </string-array>
 </resources>

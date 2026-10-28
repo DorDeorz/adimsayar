@@ -2,6 +2,18 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.19.0
+
+- Hedefe kalan süre (`data/StepPace.kt`): son 14 günün en hareketli saatlerinden kendi yürüme hızın (dakikada 80–125 adım, veri yoksa 100) bulunur; Bugün'de halkanın altında ve geniş Bugün widget'ında "Hedefe ≈ 25 dk yürüyüş kaldı".
+- Yemek karşılığı (`data/Foods.kt`): yakılan kalori "≈ 2 × simit" gibi gösterilir (hamburger, simit, çikolata, kola, elma).
+- Günün sözü: Bugün'de her gün başka bir söz (12 dilde 15 söz); Ayarlar → Görünüm ve dil'den kapatılabilir.
+- Eğilim kartı (Geçmiş): bu ayın ilk günleri geçen ayın aynı günleriyle, son 7 gün önceki 7 günle yüzde olarak karşılaştırılır.
+- Aktif saat haritası (Geçmiş): son 8 haftada her gün ve saat için ortalama adım, 7 × 24 kare; en hareketli saat yazılır.
+- Yıl sonu hikâyesi: Aralık ve Ocak'ta Geçmiş'in başında, ayrıca her yıl kartında "Hikâyeyi aç"; kaydırmalı sayfalar (toplam adım, yol, en iyi gün ve ay, hedef günleri, madalyalar) ve metin olarak paylaşma.
+- Toparlanma puanı (Sağlık): dün geceki uyku önceki haftayla, dinlenme nabzı ortalamayla karşılaştırılır; 0–100.
+- Fitness yaşı (Sağlık): dinlenme nabzından Uth formülüyle VO2max, son 30 günün günlük adımıyla küçük düzeltme; yaşa göre ortalamayla karşılaştırılır.
+- Yeni madalyalar (`data/ExtraMedals.kt`): mesafe (10–1000 km), su serisi (3–100 gün), uyku serisi (7 saat ve üstü, 3–30 gece), rota bitirme (1–7 rota; bitirilen rotalar artık saklanır).
+
 ## 0.18.0
 
 - Sabah özeti (Ayarlar → Bildirimler, saat 6–10 arası seçilir, `background/ExtraReminders.kt`): dünkü adım, bileklik ya da Health Connect varsa gece uykusu ve bugünün hedefi.

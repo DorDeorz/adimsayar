@@ -162,6 +162,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.19.0", R.array.release_notes_0_19_0),
     ReleaseNote("0.18.0", R.array.release_notes_0_18_0),
     ReleaseNote("0.17.0", R.array.release_notes_0_17_0),
     ReleaseNote("0.16.0", R.array.release_notes_0_16_0),
@@ -443,6 +444,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     label = { stringResource(R.string.percent_of_goal, it) },
                     onSelect = actions.onWidgetOpacityChange,
                 )
+                AppearanceExtras(state, actions)
                 ValueRow(stringResource(R.string.language), languageLabel(settings.language)) {
                     dialog = SettingsDialog.Language
                 }

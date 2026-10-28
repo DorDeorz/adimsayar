@@ -66,6 +66,8 @@ import com.dordeorz.adimsayar.data.DayOverrides
 import com.dordeorz.adimsayar.data.ExtrasStore
 import com.dordeorz.adimsayar.data.Floors
 import com.dordeorz.adimsayar.data.Walks
+import com.dordeorz.adimsayar.data.ExtraMedals
+import com.dordeorz.adimsayar.data.Routes
 import com.dordeorz.adimsayar.ui.MainActions
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
@@ -369,8 +371,34 @@ class MainActivity : ComponentActivity() {
             val water by remember { Water.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
             val freezes by remember { StreakFreezes.observe(applicationContext) }.collectAsStateWithLifecycle(emptySet())
             val kept by remember { KeptMedals.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
-            val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes) {
-                appSettings.achievements(history, currentDay, earlyBirdDays, freezes)
+            val healthOn = wearableEnabled || bandDirectEnabled
+            val nights by produceState<Map<LocalDate, Long>>(emptyMap(), healthOn, healthRefresh, currentDay) {
+                value = if (healthOn) {
+                    withContext(Dispatchers.IO) {
+                        WearableHealth.period(applicationContext, currentDay, MEDAL_SLEEP_DAYS)?.nights?.mapValues { it.value.minutes }.orEmpty()
+                    }
+                } else {
+                    emptyMap()
+                }
+            }
+            val routeProgress = remember(history, appSettings.routeId, appSettings.routeStartDay, appSettings.heightCm, currentDay) {
+                Routes.byId(appSettings.routeId)?.takeIf { appSettings.routeStartDay != NO_ROUTE_START }?.let {
+                    Routes.progress(it, history, LocalDate.ofEpochDay(appSettings.routeStartDay), currentDay, appSettings.heightCm)
+                }
+            }
+            val routesDone by produceState<Map<String, LocalDate>>(emptyMap(), routeProgress?.finishedOn) {
+                value = withContext(Dispatchers.IO) {
+                    routeProgress?.let { progress -> progress.finishedOn?.let { ExtraMedals.rememberRoute(applicationContext, progress.route.id, it) } }
+                    ExtraMedals.routesDone(applicationContext)
+                }
+            }
+            val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes, water, nights, routesDone) {
+                val base = appSettings.achievements(history, currentDay, earlyBirdDays, freezes)
+                base.copy(
+                    medals = base.medals + ExtraMedals.compute(
+                        history, currentDay, appSettings.heightCm, water, appSettings.waterGoalMl, nights, routesDone,
+                    ),
+                )
             }
             LaunchedEffect(computed) {
                 withContext(Dispatchers.IO) { KeptMedals.keep(applicationContext, computed.medals) }
@@ -748,6 +776,7 @@ class MainActivity : ComponentActivity() {
         private const val EXPORT_FILE_NAME = "fitwren-%s.csv"
         private const val REPORT_FILE_NAME = "fitwren-rapor-%s.pdf"
         private const val SOURCE_DAYS = 7L
+        private const val MEDAL_SLEEP_DAYS = 120L
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"
         private const val HEALTH_CONNECT_SETTINGS_14 = "android.health.connect.action.HEALTH_HOME_SETTINGS"

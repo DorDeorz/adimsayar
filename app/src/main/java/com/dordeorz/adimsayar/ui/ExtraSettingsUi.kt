@@ -406,3 +406,14 @@ private fun WalkPlanDialog(plan: Map<DayOfWeek, Int>, weekStart: DayOfWeek, onSa
         )
     }
 }
+
+@Composable
+internal fun AppearanceExtras(state: MainUiState, actions: MainActions) {
+    val extras = state.extra.extras
+    SwitchRow(
+        title = stringResource(R.string.quote_setting),
+        hint = stringResource(R.string.quote_setting_hint),
+        checked = extras.showQuote,
+        onCheckedChange = { on -> actions.extra.update { it.copy(showQuote = on) } },
+    )
+}

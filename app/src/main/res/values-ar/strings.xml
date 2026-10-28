@@ -1120,4 +1120,85 @@
         <item>مربع الماء: +1 كوب من لوحة الإشعارات</item>
         <item>إجابة صوتية على «كم خطوة اليوم؟» (اختصار ومساعد Google)</item>
     </string-array>
+    <string name="medal_group_distance">المسافة</string>
+    <string name="medal_group_distance_text">إجمالي المسافة المقطوعة في كل الأيام (حسب طولك)</string>
+    <string name="medal_group_water">سلسلة الماء</string>
+    <string name="medal_group_water_text">أيام متتالية حققت فيها هدف الماء</string>
+    <string name="medal_group_sleep">سلسلة النوم</string>
+    <string name="medal_group_sleep_text">ليالٍ متتالية بنوم 7 ساعات على الأقل (بيانات السوار)</string>
+    <string name="medal_group_route">إنهاء المسارات</string>
+    <string name="medal_group_route_text">عدد المسارات الافتراضية المختلفة التي أنهيتها</string>
+    <string name="medal_km">%1$d كم</string>
+    <string name="routes_count">%1$d مسارات</string>
+    <string name="time_left_minutes">≈ %1$d دقيقة مشي حتى الهدف</string>
+    <string name="time_left_hours">≈ %1$d س %2$d د مشي حتى الهدف</string>
+    <string name="food_line">أحرقت ≈ %1$d × %2$s</string>
+    <string name="food_burger">برغر</string>
+    <string name="food_simit">سميت (كعك بالسمسم)</string>
+    <string name="food_chocolate">لوح شوكولاتة</string>
+    <string name="food_cola">علبة كولا</string>
+    <string name="food_apple">تفاحة</string>
+    <string name="trend_title">الاتجاه</string>
+    <string name="trend_month">هذا الشهر (أول %1$d يوم)</string>
+    <string name="trend_week">آخر 7 أيام</string>
+    <string name="trend_up">أكثر بنسبة %1$d%% من الفترة السابقة</string>
+    <string name="trend_down">أقل بنسبة %1$d%% من الفترة السابقة</string>
+    <string name="trend_same">مثل الفترة السابقة</string>
+    <string name="trend_no_data">لا خطوات في الفترة السابقة للمقارنة</string>
+    <string name="active_hours_title">خريطة الساعات النشطة</string>
+    <string name="active_hours_text">متوسط الخطوات لكل يوم وساعة في آخر 8 أسابيع؛ الأغمق يعني أكثر</string>
+    <string name="active_hours_empty">لا توجد سجلات بالساعة بعد</string>
+    <string name="active_hours_peak">أنشط ساعة لديك: %1$s %2$s</string>
+    <string name="story_banner_title">قصة عام %1$d جاهزة</string>
+    <string name="story_banner_text">تصفّح سنتك وشاركها</string>
+    <string name="story_open">افتح القصة</string>
+    <string name="story_total_title">خطواتك في %1$d</string>
+    <string name="story_total_text">بمعدل %1$s خطوة يوميًا</string>
+    <string name="story_distance_title">المسافة التي مشيتها</string>
+    <string name="story_distance_text">نحو %1$d%% من محيط الأرض</string>
+    <string name="story_medals_text">الميداليات التي ربحتها هذا العام</string>
+    <string name="story_end_title">يا لها من سنة!</string>
+    <string name="story_end_text">سيواصل طائرك المشي معك في العام الجديد</string>
+    <string name="story_share">FitWren %1$d: %2$s خطوة، %3$s كم، الهدف تحقق في %4$d يومًا! 🐦</string>
+    <string name="fitness_age_title">العمر اللياقي</string>
+    <string name="fitness_age_value">%1$d سنة</string>
+    <string name="fitness_age_younger">أصغر من عمرك الحقيقي بـ %1$d سنة</string>
+    <string name="fitness_age_older">أكبر من عمرك الحقيقي بـ %1$d سنة</string>
+    <string name="fitness_age_same">مثل عمرك الحقيقي</string>
+    <string name="fitness_age_text">VO2max تقديري %1$d من نبض الراحة %2$d ومتوسط %3$s خطوة يوميًا. ليس قياسًا طبيًا.</string>
+    <string name="recovery_title">التعافي</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">تعافيت جيدًا: المشي السريع فكرة جيدة اليوم</string>
+    <string name="recovery_mid">متوسط: يكفي مشيك المعتاد</string>
+    <string name="recovery_low">منخفض: خفف اليوم واسترح</string>
+    <string name="recovery_text">يقارن نوم الليلة الماضية بالأسبوع السابق ونبض الراحة بمتوسطه. ليس تقييمًا طبيًا.</string>
+    <string name="quote_title">عبارة اليوم</string>
+    <string name="quote_setting">عبارة اليوم</string>
+    <string name="quote_setting_hint">اعرض عبارة جديدة كل يوم في صفحة اليوم</string>
+    <string-array name="quotes">
+        <item>كل خطوة تجعلك متقدمًا خطوة على الأمس.</item>
+        <item>الطريق الذي تمشيه اليوم هو راحتك غدًا.</item>
+        <item>الخطوات الصغيرة تنهي الطرق الطويلة أيضًا.</item>
+        <item>طائرك يريد أن يطير معك اليوم أيضًا.</item>
+        <item>المشي ببطء أفضل من عدم المشي.</item>
+        <item>حتى لو كنت متعبًا، تكفي عشر دقائق.</item>
+        <item>السلسلة عادة، والعادة قرار.</item>
+        <item>الدرج هو جبل اليوم الصغير.</item>
+        <item>امشِ أثناء المكالمة، وستأتي الخطوات وحدها.</item>
+        <item>المشي أسهل طريقة لترتيب الأفكار.</item>
+        <item>إذا بدا الهدف بعيدًا فاستهدف نصفه.</item>
+        <item>خطوات اليوم هي طاقة الغد.</item>
+        <item>القليل كل يوم يصبح كثيرًا كل شهر.</item>
+        <item>شمسًا كان أو مطرًا، المشي يناسب كل طقس.</item>
+        <item>أفضل مشي هو الذي تبدؤه الآن.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>اليوم: وقت المشي المتبقي للهدف (حسب سرعتك) والسعرات كطعام</item>
+        <item>أداة اليوم (العريضة): الوقت المتبقي</item>
+        <item>بطاقة عبارة اليوم (يمكن إيقافها من الإعدادات ← المظهر)</item>
+        <item>السجل: بطاقة الاتجاه (هذا الشهر وآخر 7 أيام مقارنة بالسابق) وخريطة الساعات النشطة (8 أسابيع، يوم × ساعة)</item>
+        <item>قصة العام: في السجل في ديسمبر ويناير وفي بطاقة السنة؛ صفحات للتمرير والمشاركة</item>
+        <item>الصحة: درجة التعافي والعمر اللياقي (ببيانات السوار)</item>
+        <item>ميداليات جديدة: المسافة وسلسلة الماء وسلسلة النوم وإنهاء المسارات</item>
+    </string-array>
 </resources>

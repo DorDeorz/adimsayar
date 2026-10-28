@@ -12,8 +12,8 @@ android {
         applicationId = "com.dordeorz.adimsayar"
         minSdk = 23
         targetSdk = 36
-        versionCode = 42
-        versionName = "0.18.0"
+        versionCode = 43
+        versionName = "0.19.0"
     }
 
     val releaseKeystore = System.getenv("ADIMSAYAR_KEYSTORE_FILE")
