@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">数分以内にスマートフォンのセンサーが歩行を検出しましたが、HyperOS の記録が増えていません。数分後にもう一度確認し、回復しない場合は下のスイッチをオフにして「バックグラウンドでカウントを続ける」をオンにしてください。</string>
     <string name="xiaomi_card_title">HyperOS の歩数記録を使用</string>
     <string name="xiaomi_card_text">スマートフォン本体の歩数記録から読み取ります。アプリを閉じていてもすべてカウントされ、通知は不要で、過去の日の歩数も追加されます。</string>
-    <string name="service_card_text">アプリを閉じているときに歩数がカウントされない場合はオンにしてください。カウンターが動作し続け、通知バーにサイレントの常駐通知が表示されます。</string>
+    <string name="service_card_text">アプリを閉じているときに歩数がカウントされない場合はオンにしてください。カウンターが動作し続け、通知バーにサイレントの常駐通知が表示されます。 ほとんどのスマホはなくても数えられるので、まずオフで試してください。</string>
     <string name="service_channel">歩数カウンター</string>
     <string name="service_title">FitWren がカウント中</string>
     <string name="service_text">今日 %1$s 歩</string>
@@ -177,7 +177,7 @@
     <string name="language">アプリの言語</string>
     <string name="language_system">システム</string>
     <string name="medal_group_early">早起き</string>
-    <string name="medal_group_early_text">08:00 までに 1,000 歩以上歩いた日 (HyperOS の記録がオンのとき)</string>
+    <string name="medal_group_early_text">08:00 までに 1,000 歩以上歩いた日</string>
 
     <string name="widget_streak_label">連続記録と今週</string>
     <string name="widget_streak_description">1日の目標の連続記録と今週の進捗</string>
@@ -319,6 +319,8 @@
     <string name="device_other">その他のデバイス</string>
 
     <string-array name="release_notes_0_15_2">
+        <item>早起きメダルは HyperOS の記録がなくても獲得できます：スマホとバンドの1時間ごとの歩数から計算します</item>
+        <item>再起動で失われた歩数：Android 14 以降は、過去の日をスマホの Health Connect 記録で補います</item>
         <item>設定 → 歩数の取得元 →「バンド使用中はスマホを数えない」：オンにするとバンドのデータがある日はスマホの歩数を加えません</item>
         <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>
         <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
@@ -516,6 +518,7 @@
     <string name="log_wearable_denied">Health Connect の読み取り権限がありません</string>
     <string name="log_wearable_error">Health Connect を読み取れませんでした（%1$s）</string>
     <string name="log_wearable_synced">バンド：今日 %1$d 歩、%2$d 日分を更新</string>
+    <string name="log_phone_gaps">Health Connect: スマホが取りこぼした %1$d 歩を追加しました（過去の日）</string>
     <string name="band_exercises">ワークアウト</string>
     <string name="band_active_kcal">アクティブカロリー（バンド）</string>
     <string name="band_kcal_value">%1$s kcal</string>

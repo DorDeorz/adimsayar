@@ -67,6 +67,18 @@ class StepRepository private constructor(private val context: Context) {
         dao.loadHours(from.atStartOfDay().toString(), LocalDate.now().plusDays(1).atStartOfDay().toString())
             .associate { LocalDateTime.parse(it.hour) to it.steps }
 
+    suspend fun addPhoneHours(hours: Map<LocalDateTime, Long>): Long = mutex.withLock {
+        if (hours.isEmpty()) return@withLock 0L
+        dao.addHours(hours.mapKeys { it.key.toString() })
+        val days = HashMap<String, Long>()
+        for ((hour, steps) in hours) days[hour.toLocalDate().toString()] = (days[hour.toLocalDate().toString()] ?: 0L) + steps
+        dao.add(days)
+        hours.values.sum()
+    }
+
+    suspend fun earlyBirdDays(): Set<LocalDate> =
+        StepMath.earlyBirdDays(loadBandHours(LocalDate.of(2000, 1, 1)), loadPhoneHourMap(LocalDate.of(2000, 1, 1)))
+
     suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
     suspend fun saveBandHours(file: Long, hours: Map<LocalDateTime, Long>) =

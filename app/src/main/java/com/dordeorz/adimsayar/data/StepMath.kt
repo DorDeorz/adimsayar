@@ -101,6 +101,39 @@ object StepMath {
         return result
     }
 
+    // Steps another phone record (Health Connect) has beyond ours, per day, spread over the hours where it is ahead.
+    fun phoneGaps(other: Map<LocalDateTime, Long>, own: Map<LocalDateTime, Long>): Map<LocalDateTime, Long> {
+        val result = HashMap<LocalDateTime, Long>()
+        for ((day, hours) in (other.keys + own.keys).groupBy { it.toLocalDate() }) {
+            val missing = hours.sumOf { other[it] ?: 0L } - hours.sumOf { own[it] ?: 0L }
+            if (missing <= 0L) continue
+            val ahead = hours.associateWith { maxOf(0L, (other[it] ?: 0L) - (own[it] ?: 0L)) }.filterValues { it > 0L }
+            val total = ahead.values.sum()
+            var left = missing
+            for ((hour, gap) in ahead.entries.sortedByDescending { it.value }) {
+                val add = minOf(left, gap * missing / total)
+                if (add > 0L) result[hour] = add
+                left -= add
+            }
+            if (left > 0L) {
+                val top = ahead.maxBy { it.value }.key
+                result[top] = (result[top] ?: 0L) + left
+            }
+        }
+        return result
+    }
+
+    // Band hours win over phone hours, as in mergeHourly.
+    fun earlyBirdDays(band: Map<LocalDateTime, Long>, phone: Map<LocalDateTime, Long>): Set<LocalDate> {
+        val mornings = HashMap<LocalDate, Long>()
+        for (hour in band.keys + phone.keys) {
+            if (hour.hour >= EARLY_BIRD_HOUR) continue
+            val steps = band[hour] ?: phone[hour] ?: 0L
+            mornings[hour.toLocalDate()] = (mornings[hour.toLocalDate()] ?: 0L) + steps
+        }
+        return mornings.filterValues { it >= EARLY_BIRD_STEPS }.keys
+    }
+
     fun bandDays(band: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
         val days = HashMap<LocalDate, Long>()
         for ((hour, steps) in band) days[hour.toLocalDate()] = (days[hour.toLocalDate()] ?: 0L) + steps

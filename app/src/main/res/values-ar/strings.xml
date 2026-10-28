@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">رصد مستشعر الهاتف خطوات في الدقائق الأخيرة لكن سجل HyperOS لا يزيد. تحقّق مجددًا بعد بضع دقائق، وإن لم يتحسن فأوقف المفتاح أدناه وشغّل «متابعة العدّ في الخلفية».</string>
     <string name="xiaomi_card_title">استخدام سجل خطوات HyperOS</string>
     <string name="xiaomi_card_text">تُقرأ الخطوات من سجل الخطوات الخاص بالهاتف. تُحسب كاملة حتى والتطبيق مغلق، ولا حاجة إلى إشعار، وتُضاف الأيام السابقة أيضًا.</string>
-    <string name="service_card_text">شغّل هذا الخيار إذا لم تُحسب الخطوات والتطبيق مغلق. يبقى العداد قيد التشغيل، ويظهر إشعار صامت دائم في شريط الإشعارات.</string>
+    <string name="service_card_text">شغّل هذا الخيار إذا لم تُحسب الخطوات والتطبيق مغلق. يبقى العداد قيد التشغيل، ويظهر إشعار صامت دائم في شريط الإشعارات. معظم الهواتف تحسب بدونه، لذا جرّبه مغلقًا أولًا.</string>
     <string name="service_channel">عداد الخطوات</string>
     <string name="service_title">FitWren يعدّ الخطوات</string>
     <string name="service_text">خطوات اليوم: %1$s</string>
@@ -177,7 +177,7 @@
     <string name="language">لغة التطبيق</string>
     <string name="language_system">النظام</string>
     <string name="medal_group_early">الطائر المبكر</string>
-    <string name="medal_group_early_text">أيام فيها 1,000 خطوة على الأقل قبل 08:00 (مع تشغيل سجل HyperOS)</string>
+    <string name="medal_group_early_text">أيام فيها 1,000 خطوة على الأقل قبل 08:00</string>
 
     <string name="widget_streak_label">السلسلة والأسبوع</string>
     <string name="widget_streak_description">سلسلة هدفك اليومي وتقدّم هذا الأسبوع</string>
@@ -319,6 +319,8 @@
     <string name="device_other">جهاز آخر</string>
 
     <string-array name="release_notes_0_15_2">
+        <item>وسام المستيقظ مبكرًا لم يعد يحتاج سجل HyperOS: يُحسب من خطوات الهاتف والسوار لكل ساعة</item>
+        <item>الخطوات المفقودة عند إعادة تشغيل الهاتف: في Android 14 وأحدث تُكمَل الأيام السابقة من سجل Health Connect الخاص بالهاتف</item>
         <item>الإعدادات ← مصدر الخطوات ← «لا تحتسب الهاتف أثناء استخدام السوار»: عند التشغيل لا تُضاف خطوات الهاتف في الأيام التي فيها بيانات من السوار</item>
         <item>يُدمج السوار والهاتف دائمًا ساعة بساعة: في الساعات التي كان السوار فيها على المعصم يُحتسب السوار فقط، ويكمل الهاتف بقية الساعات (سابقًا بدون سجل HyperOS كان يُؤخذ المجموع اليومي الأكبر)</item>
         <item>دعم الرومات المخصصة (crDroid وLineageOS وغيرها): على هاتف Xiaomi بدون HyperOS تُخفى سجلات خطوات HyperOS وخطوات بطارية MIUI ويُستخدم مستشعر الهاتف</item>
@@ -516,6 +518,7 @@
     <string name="log_wearable_denied">لا يوجد إذن قراءة من Health Connect</string>
     <string name="log_wearable_error">تعذّرت قراءة Health Connect (%1$s)</string>
     <string name="log_wearable_synced">السوار: خطوات اليوم %1$d، الأيام المحدّثة %2$d</string>
+    <string name="log_phone_gaps">Health Connect: أُضيفت %1$d خطوة فاتت الهاتف (أيام سابقة)</string>
     <string name="band_exercises">التمارين</string>
     <string name="band_active_kcal">السعرات النشطة (السوار)</string>
     <string name="band_kcal_value">%1$s سعرة</string>

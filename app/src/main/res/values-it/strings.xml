@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">Il sensore del telefono ha rilevato passi negli ultimi minuti, ma il registro di HyperOS non aumenta. Ricontrolla tra qualche minuto; se non si riprende, disattiva l\'opzione qui sotto e attiva «Continua a contare in background».</string>
     <string name="xiaomi_card_title">Usa il registro passi di HyperOS</string>
     <string name="xiaomi_card_text">I passi vengono letti dal registro del telefono. Sono contati tutti anche con l\'app chiusa, senza notifiche, e vengono aggiunti anche i giorni passati.</string>
-    <string name="service_card_text">Attivala se i passi non vengono contati con l\'app chiusa. Il contatore resta attivo; nella barra delle notifiche compare una notifica silenziosa e fissa.</string>
+    <string name="service_card_text">Attivala se i passi non vengono contati con l\'app chiusa. Il contatore resta attivo; nella barra delle notifiche compare una notifica silenziosa e fissa. Quasi tutti i telefoni contano anche senza; prova prima disattivata.</string>
     <string name="service_channel">Contapassi</string>
     <string name="service_title">FitWren sta contando</string>
     <string name="service_text">%1$s passi oggi</string>
@@ -177,7 +177,7 @@
     <string name="language">Lingua dell\'app</string>
     <string name="language_system">Sistema</string>
     <string name="medal_group_early">Mattiniero</string>
-    <string name="medal_group_early_text">Giorni con almeno 1.000 passi prima delle 08:00 (con il registro HyperOS attivo)</string>
+    <string name="medal_group_early_text">Giorni con almeno 1.000 passi prima delle 08:00</string>
 
     <string name="widget_streak_label">Serie e settimana</string>
     <string name="widget_streak_description">La tua serie di obiettivi giornalieri e i progressi della settimana</string>
@@ -319,6 +319,8 @@
     <string name="device_other">Altro dispositivo</string>
 
     <string-array name="release_notes_0_15_2">
+        <item>La medaglia mattiniero non richiede più il registro HyperOS: si calcola dai passi orari di telefono e braccialetto</item>
+        <item>Passi persi al riavvio del telefono: da Android 14 i giorni passati vengono completati dal registro Health Connect del telefono</item>
         <item>Impostazioni → Fonte passi → «Non contare il telefono se uso il braccialetto»: se attivo, i passi del telefono non vengono aggiunti nei giorni con dati del braccialetto</item>
         <item>Braccialetto e telefono si uniscono sempre ora per ora: nelle ore in cui il braccialetto è indossato conta solo il braccialetto, il telefono completa le altre ore (prima, senza il registro HyperOS, vinceva il totale giornaliero maggiore)</item>
         <item>Supporto ROM personalizzate (crDroid, LineageOS e altre): su uno Xiaomi senza HyperOS il registro passi di HyperOS e i passaggi batteria MIUI sono nascosti e si usa il sensore del telefono</item>
@@ -516,6 +518,7 @@
     <string name="log_wearable_denied">Nessun permesso di lettura di Health Connect</string>
     <string name="log_wearable_error">Impossibile leggere Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Bracciale: %1$d passi oggi, %2$d giorni aggiornati</string>
+    <string name="log_phone_gaps">Health Connect: aggiunti %1$d passi persi dal telefono (giorni passati)</string>
     <string name="band_exercises">Allenamenti</string>
     <string name="band_active_kcal">Calorie attive (braccialetto)</string>
     <string name="band_kcal_value">%1$s kcal</string>
