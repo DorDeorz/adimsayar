@@ -160,7 +160,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
-    ReleaseNote("0.15.1", R.array.release_notes_0_15_1),
+    ReleaseNote("0.15.2", R.array.release_notes_0_15_2),
     ReleaseNote("0.14.1", R.array.release_notes_0_14_1),
     ReleaseNote("0.13.3", R.array.release_notes_0_13_3),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
@@ -239,14 +239,6 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         hint = stringResource(R.string.service_card_text),
                         checked = state.serviceEnabled,
                         onCheckedChange = actions.onServiceEnabledChange,
-                    )
-                }
-                state.exactAlarmsAllowed?.let { allowed ->
-                    SwitchRow(
-                        title = stringResource(R.string.exact_alarms_title),
-                        hint = stringResource(R.string.exact_alarms_text),
-                        checked = allowed,
-                        onCheckedChange = { actions.onOpenExactAlarms() },
                     )
                 }
                 HorizontalDivider(Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
@@ -393,6 +385,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     checked = settings.weightReminder,
                     onCheckedChange = actions.onWeightReminderChange,
                 )
+                state.exactAlarmsAllowed?.let { allowed ->
+                    SwitchRow(
+                        title = stringResource(R.string.exact_alarms_title),
+                        hint = stringResource(R.string.exact_alarms_text),
+                        checked = allowed,
+                        onCheckedChange = { actions.onOpenExactAlarms() },
+                    )
+                }
             }
 
             if (current == SettingsPage.Appearance) SettingsCard {

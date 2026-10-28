@@ -318,11 +318,11 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
-    <string-array name="release_notes_0_15_1">
+    <string-array name="release_notes_0_15_2">
         <item>Configurações → Fonte de passos → “Não contar o celular ao usar a pulseira”: ligado, os passos do celular não entram nos dias com dados da pulseira</item>
         <item>Pulseira e celular sempre se combinam hora a hora: nas horas com a pulseira no pulso só a pulseira conta, o celular preenche as outras horas (antes, sem o registro do HyperOS, valia o maior total do dia)</item>
         <item>Suporte a ROMs personalizadas (crDroid, LineageOS e outras): em um Xiaomi sem HyperOS, o registro de passos do HyperOS e os passos de bateria do MIUI ficam ocultos e o sensor do celular é usado</item>
-        <item>Alarmes exatos: permita em Configurações → Fonte dos passos e o registro da meia-noite, os lembretes e a troca de mostrador rodam sem atraso (Android 14 ou mais recente)</item>
+        <item>Alarmes exatos: permita em Configurações → Notificações e o registro da meia-noite, os lembretes e a troca de mostrador rodam sem atraso (Android 14 ou mais recente)</item>
     </string-array>
     <string-array name="release_notes_0_14_1">
         <item>O humor do pássaro: nos mostradores FitWren e nos designs o pássaro muda com a meta de passos</item>
