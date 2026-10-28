@@ -2,6 +2,19 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.17.0
+
+- Güne not (`data/DayData.kt`, tablo `day_notes`): Geçmiş'te seçili günün kartında "Not ekle"; en fazla 120 karakter, takvimde günün altında küçük nokta.
+- Günü elle düzelt (tablo `day_overrides`): yazılan sayı o günün telefon ve bileklik sayımının yerine geçer (`MERGED` sorgusunda önce gelir); "Sayılana dön" ile silinir.
+- Tatil modu (Ayarlar → Hedefler, en fazla 90 gün): seçili günler seri için joker gibi sayılır ama joker harcanmaz (`AppSettings.vacationDays`), seri, yaklaşma, su ve kilo hatırlatmaları susar, Bugün'de tatil kartı görünür.
+- Hafta sonu hedefi (`AppSettings.goalOn`): cumartesi ve pazar için ayrı günlük hedef; seri, madalya, takvim, halka, widget ve hatırlatmalar o günün hedefini kullanır.
+- Aylık ve yıllık hedef (`data/PeriodGoals.kt`): Bugün'de ilerleme çubuğu, bu tempoyla ulaşılacak gün ya da yetişmek için gereken günlük adım.
+- Tam yedek (`data/Backup.kt`, Ayarlar → Veri): bütün tablolar ve uygulama ayarları tek JSON dosyasında; geri yükleme verinin yerine geçer. Bileklik eşleşmesi, adım kaynağı ve kadran ayarları yedeğe girmez.
+- Verileri silme (`DataEraser`): bir tarih aralığı ya da her şey (ayarlar kalır).
+- CSV dışa aktarma `tarih,adim,su_ml,kilo_kg,uyku_dk` sütunlarını yazar; içe aktarma adım sütununu okumaya devam eder.
+- Health Connect'e yazma (`data/HealthWrite.kt`, isteğe bağlı): saatlik adımlar sabit kimlikli `StepsRecord` olarak yazılır, yeniden yazınca üstüne gelir; yarım saatte bir, son 2 gün (ilk açılışta 7 gün). Adımlar Health Connect'ten okunurken çift sayılmasın diye çalışmaz.
+- Veritabanı 7. sürüm: `day_notes`, `day_overrides`, `walks`, `floors` tabloları (göç ile, eski veri korunur).
+
 ## 0.16.0
 
 - Hızlı ayar kutucuğu (`tile/StepTile.kt`, Android 7+): bildirim panelinde bugünün adımı ve hedef yüzdesi (Android 10+ alt satırda), hedefe ulaşınca kutucuk etkin görünür; dokununca Bugün sekmesi açılır. Panel her açıldığında yeniden okunur.

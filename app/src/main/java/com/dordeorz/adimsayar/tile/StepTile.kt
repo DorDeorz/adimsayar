@@ -36,7 +36,7 @@ class StepTile : TileService() {
         job?.cancel()
         job = AppScope.launch(Dispatchers.IO) {
             val steps = StepRepository.get(applicationContext).today()
-            val goal = SettingsStore.get(applicationContext).settings.value.dailyGoal
+            val goal = SettingsStore.get(applicationContext).settings.value.goalOn(java.time.LocalDate.now())
             withContext(Dispatchers.Main) { show(steps, goal) }
         }
     }

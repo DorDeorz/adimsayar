@@ -37,7 +37,6 @@ import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.ui.Tab
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
@@ -62,7 +61,7 @@ class StreakWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             val streak = remember(history, settings, freezes) {
-                AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart, freezes = freezes)
+                settings.achievements(history, today, freezes = freezes)
                     .records.currentStreak
             }
             val weekStart = weekStartOf(today, settings.weekStart)

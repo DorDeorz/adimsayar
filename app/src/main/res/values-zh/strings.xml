@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">夜间表盘</string>
     <string name="face_schedule_night_start">夜间开始</string>
     <string name="face_schedule_none">未选择</string>
+    <string name="goal_off">关闭</string>
+    <string name="goal_turn_off">关闭</string>
+    <string name="weekend_goal">周末目标</string>
+    <string name="weekend_goal_hint">周六和周日单独的每日目标。关闭时每天目标相同。</string>
+    <string name="monthly_goal">月度目标</string>
+    <string name="yearly_goal">年度目标</string>
+    <string name="period_goal_hint">今日页面会显示进度条，以及按当前节奏达成目标的日期。</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">目标达成！</string>
+    <string name="period_no_pace">走一点路才能估算</string>
+    <string name="period_on_track">按这个节奏你将在%1$s达成</string>
+    <string name="period_behind">需要每天%1$s步才能赶上</string>
+    <string name="vacation_mode">假期模式</string>
+    <string name="vacation_hint">所选日期里连续记录不会中断，不消耗保护卡，提醒也会静音。</string>
+    <string name="vacation_off">未安排假期</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">结束假期</string>
+    <string name="vacation_on_title">你正在休假</string>
+    <string name="vacation_on_text">连续记录保留到%1$s，提醒已静音。</string>
+    <string name="backup_group">完整备份</string>
+    <string name="backup_write">备份</string>
+    <string name="backup_write_hint">步数、体重、饮水、奖牌、备注和设置写入一个文件</string>
+    <string name="backup_restore">恢复备份</string>
+    <string name="backup_restore_hint">选择一个 FitWren 备份文件</string>
+    <string name="backup_restore_choose">选择文件</string>
+    <string name="restore_confirm">当前所有数据都会被备份替换。手环连接和步数来源保持不变。</string>
+    <string name="backup_done">备份已保存（%1$d 行）</string>
+    <string name="backup_failed">无法写入文件</string>
+    <string name="restore_done">备份已恢复（%1$d 行）</string>
+    <string name="restore_failed">此文件不是 FitWren 备份</string>
+    <string name="health_write">写入 Health Connect</string>
+    <string name="health_write_hint">FitWren 的每小时步数也会显示在 Google Fit 等其他应用中</string>
+    <string name="health_write_reading">从 Health Connect 读取步数时不会写入，否则会重复计数</string>
+    <string name="health_write_denied">未授予 Health Connect 写入权限</string>
+    <string name="erase_group">删除数据</string>
+    <string name="erase_range">删除日期范围</string>
+    <string name="erase_range_hint">删除所选日期的步数、饮水、体重、睡眠和备注。手机或手环可能会再次写入。</string>
+    <string name="erase_all">删除全部数据</string>
+    <string name="erase_all_hint">删除步数历史、体重、饮水、奖牌和备注。设置保留。</string>
+    <string name="erase_all_confirm">永久删除全部数据？建议先备份。</string>
+    <string name="erase_confirm_button">删除</string>
+    <string name="erase_done">数据已删除</string>
+    <string name="delete">删除</string>
+    <string name="note_title">当天备注</string>
+    <string name="note_placeholder">例如：有比赛、生病了</string>
+    <string name="note_empty">无备注</string>
+    <string name="note_add">添加备注</string>
+    <string name="note_edit">编辑</string>
+    <string name="correct_button">修正</string>
+    <string name="correct_hint">计数不对时可以手动修正这一天</string>
+    <string name="correct_done">这一天已手动修正</string>
+    <string name="correct_title">修正这一天</string>
+    <string name="correct_text">你输入的数字会取代手机和手环统计的步数。</string>
+    <string name="correct_undo">恢复统计值</string>
+    <string-array name="release_notes_0_17_0">
+        <item>当天备注：在历史中给所选日期写一条短备注，日历上会显示小圆点</item>
+        <item>修正某天：自己输入正确步数，或恢复统计值</item>
+        <item>假期模式（设置 → 目标）：所选日期连续记录不中断、不用保护卡、提醒静音</item>
+        <item>周末目标、月度和年度目标：今日页显示进度条和预计达成日</item>
+        <item>完整备份与恢复（设置 → 数据）：步数、体重、饮水、奖牌、备注和设置在一个文件里</item>
+        <item>删除数据：某个日期范围或全部</item>
+        <item>CSV 导出现在包含饮水、体重和睡眠</item>
+        <item>写入 Health Connect（可选）：FitWren 步数也会显示在 Google Fit 等应用中</item>
+    </string-array>
 </resources>

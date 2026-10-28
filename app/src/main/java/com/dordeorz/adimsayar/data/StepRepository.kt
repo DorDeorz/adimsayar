@@ -7,11 +7,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.io.InputStream
 import java.io.OutputStream
+import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.LocalDateTime
@@ -77,17 +79,27 @@ class StepRepository private constructor(private val context: Context) {
 
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
 
+    /** Writes steps with water, weight and band sleep of each day; the import reads the step column. */
     suspend fun exportCsv(output: OutputStream): Int {
-        val rows = dao.loadAll()
+        val database = StepDatabase.get(context)
+        val steps = dao.loadAll().associate { it.date to it.steps }
+        val water = database.water().observeAll().first().associate { it.date to it.ml }
+        val weights = database.weights().observeAll().first().associate { it.date to it.kg }
+        val zone = ZoneId.systemDefault()
+        val sleep = database.bandHealth().sleep(0L, Long.MAX_VALUE)
+            .groupBy { Instant.ofEpochSecond(it.wake).atZone(zone).toLocalDate().toString() }
+            .mapValues { (_, nights) -> nights.sumOf { it.minutes } }
+        val dates = (steps.keys + water.keys + weights.keys + sleep.keys).sorted()
         output.bufferedWriter().use { writer ->
             writer.write(CSV_HEADER)
             writer.newLine()
-            for (row in rows) {
-                writer.write("${row.date},${row.steps}")
+            for (date in dates) {
+                val kg = weights[date]?.let { String.format(java.util.Locale.ROOT, "%.1f", it) }.orEmpty()
+                writer.write("$date,${steps[date] ?: 0L},${water[date]?.toString().orEmpty()},$kg,${sleep[date]?.toString().orEmpty()}")
                 writer.newLine()
             }
         }
-        return rows.size
+        return dates.size
     }
 
     suspend fun importCsv(input: InputStream): Int? = mutex.withLock {
@@ -144,7 +156,7 @@ class StepRepository private constructor(private val context: Context) {
 
     companion object {
         const val COUNTER_PREFS = "counter"
-        private const val CSV_HEADER = "tarih,adim"
+        private const val CSV_HEADER = "tarih,adim,su_ml,kilo_kg,uyku_dk"
         private const val KEY_COUNTER = "counter"
         private const val KEY_ELAPSED = "elapsed_ms"
         private const val KEY_WALL = "wall_ms"

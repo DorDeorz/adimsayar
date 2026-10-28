@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">Nacht-Zifferblatt</string>
     <string name="face_schedule_night_start">Nacht beginnt</string>
     <string name="face_schedule_none">Nicht gewählt</string>
+    <string name="goal_off">Aus</string>
+    <string name="goal_turn_off">Ausschalten</string>
+    <string name="weekend_goal">Wochenendziel</string>
+    <string name="weekend_goal_hint">Ein eigenes Tagesziel für Samstag und Sonntag. Wenn aus, gilt jeden Tag dasselbe Ziel.</string>
+    <string name="monthly_goal">Monatsziel</string>
+    <string name="yearly_goal">Jahresziel</string>
+    <string name="period_goal_hint">Die Seite Heute zeigt einen Fortschrittsbalken und den Tag, an dem du das Ziel bei deinem Tempo erreichst.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Ziel erreicht!</string>
+    <string name="period_no_pace">Geh ein wenig, um eine Schätzung zu bekommen</string>
+    <string name="period_on_track">Bei diesem Tempo erreichst du es am %1$s</string>
+    <string name="period_behind">Du brauchst %1$s Schritte am Tag, um es zu schaffen</string>
+    <string name="vacation_mode">Urlaubsmodus</string>
+    <string name="vacation_hint">An den gewählten Tagen reißt die Serie nicht, kein Joker wird verbraucht und Erinnerungen schweigen.</string>
+    <string name="vacation_off">Kein Urlaub geplant</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Urlaub beenden</string>
+    <string name="vacation_on_title">Du bist im Urlaub</string>
+    <string name="vacation_on_text">Deine Serie bleibt bis %1$s erhalten, Erinnerungen schweigen.</string>
+    <string name="backup_group">Vollständige Sicherung</string>
+    <string name="backup_write">Sichern</string>
+    <string name="backup_write_hint">Schritte, Gewicht, Wasser, Medaillen, Notizen und Einstellungen in einer Datei</string>
+    <string name="backup_restore">Sicherung wiederherstellen</string>
+    <string name="backup_restore_hint">Wähle eine FitWren-Sicherungsdatei</string>
+    <string name="backup_restore_choose">Datei wählen</string>
+    <string name="restore_confirm">Alle aktuellen Daten werden durch die Sicherung ersetzt. Armband-Verbindung und Schrittquelle bleiben gleich.</string>
+    <string name="backup_done">Sicherung gespeichert (%1$d Zeilen)</string>
+    <string name="backup_failed">Datei konnte nicht geschrieben werden</string>
+    <string name="restore_done">Sicherung wiederhergestellt (%1$d Zeilen)</string>
+    <string name="restore_failed">Diese Datei ist keine FitWren-Sicherung</string>
+    <string name="health_write">In Health Connect schreiben</string>
+    <string name="health_write_hint">FitWrens stündliche Schritte erscheinen auch in anderen Apps wie Google Fit</string>
+    <string name="health_write_reading">Schreiben bleibt aus, solange Schritte aus Health Connect gelesen werden, sonst zählen sie doppelt</string>
+    <string name="health_write_denied">Schreibberechtigung für Health Connect nicht erteilt</string>
+    <string name="erase_group">Daten löschen</string>
+    <string name="erase_range">Zeitraum löschen</string>
+    <string name="erase_range_hint">Schritte, Wasser, Gewicht, Schlaf und Notizen der gewählten Tage werden gelöscht. Handy oder Armband können diese Tage neu schreiben.</string>
+    <string name="erase_all">Alle Daten löschen</string>
+    <string name="erase_all_hint">Schrittverlauf, Gewicht, Wasser, Medaillen und Notizen werden gelöscht. Einstellungen bleiben.</string>
+    <string name="erase_all_confirm">Alle Daten endgültig löschen? Am besten vorher eine Sicherung machen.</string>
+    <string name="erase_confirm_button">Löschen</string>
+    <string name="erase_done">Daten gelöscht</string>
+    <string name="delete">Löschen</string>
+    <string name="note_title">Notiz zum Tag</string>
+    <string name="note_placeholder">Zum Beispiel: Spiel gehabt, krank gewesen</string>
+    <string name="note_empty">Keine Notiz</string>
+    <string name="note_add">Notiz hinzufügen</string>
+    <string name="note_edit">Bearbeiten</string>
+    <string name="correct_button">Korrigieren</string>
+    <string name="correct_hint">Wenn die Zählung falsch ist, kannst du den Tag von Hand korrigieren</string>
+    <string name="correct_done">Dieser Tag wurde von Hand korrigiert</string>
+    <string name="correct_title">Tag korrigieren</string>
+    <string name="correct_text">Die Zahl, die du eingibst, ersetzt, was Handy und Armband gezählt haben.</string>
+    <string name="correct_undo">Gezählten Wert nutzen</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Tagesnotizen: kurze Notiz zum gewählten Tag im Verlauf; ein kleiner Punkt erscheint im Kalender</item>
+        <item>Tag korrigieren: richtige Schrittzahl selbst eingeben oder zum gezählten Wert zurück</item>
+        <item>Urlaubsmodus (Einstellungen → Ziele): an den gewählten Tagen reißt die Serie nicht, kein Joker, Erinnerungen schweigen</item>
+        <item>Wochenendziel, Monats- und Jahresziel: Fortschrittsbalken und geschätzter Zieltag auf Heute</item>
+        <item>Vollständige Sicherung und Wiederherstellung (Einstellungen → Daten): Schritte, Gewicht, Wasser, Medaillen, Notizen und Einstellungen in einer Datei</item>
+        <item>Daten löschen: einen Zeitraum oder alles</item>
+        <item>CSV-Export schreibt jetzt auch Wasser, Gewicht und Schlaf</item>
+        <item>In Health Connect schreiben (optional): FitWren-Schritte erscheinen auch in Apps wie Google Fit</item>
+    </string-array>
 </resources>

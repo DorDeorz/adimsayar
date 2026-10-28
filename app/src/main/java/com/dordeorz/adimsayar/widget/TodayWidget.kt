@@ -96,7 +96,7 @@ private const val WIDE_RATIO = 1.6f
 @Composable
 private fun TodayContent(context: Context, steps: Long, settings: AppSettings, updated: Long?) {
     val size = LocalSize.current
-    val goal = settings.dailyGoal
+    val goal = settings.goalOn(java.time.LocalDate.now())
     val fraction = (steps.toFloat() / goal).coerceIn(0f, 1f)
     val done = steps >= goal
     val innerWidth = size.width - PADDING * 2

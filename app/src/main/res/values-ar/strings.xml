@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">واجهة الليل</string>
     <string name="face_schedule_night_start">بداية الليل</string>
     <string name="face_schedule_none">غير محدد</string>
+    <string name="goal_off">متوقف</string>
+    <string name="goal_turn_off">إيقاف</string>
+    <string name="weekend_goal">هدف عطلة نهاية الأسبوع</string>
+    <string name="weekend_goal_hint">هدف يومي منفصل للسبت والأحد. عند الإيقاف يكون الهدف نفسه كل يوم.</string>
+    <string name="monthly_goal">الهدف الشهري</string>
+    <string name="yearly_goal">الهدف السنوي</string>
+    <string name="period_goal_hint">تعرض صفحة اليوم شريط تقدم واليوم الذي تبلغ فيه الهدف بوتيرتك الحالية.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">بلغت الهدف!</string>
+    <string name="period_no_pace">امشِ قليلًا للحصول على تقدير</string>
+    <string name="period_on_track">بهذه الوتيرة تبلغه في %1$s</string>
+    <string name="period_behind">تحتاج %1$s خطوة يوميًا لتلحق</string>
+    <string name="vacation_mode">وضع العطلة</string>
+    <string name="vacation_hint">في الأيام المختارة لا تنقطع السلسلة ولا تُستخدم أي بطاقة حماية وتسكت التذكيرات.</string>
+    <string name="vacation_off">لا توجد عطلة مخططة</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">إنهاء العطلة</string>
+    <string name="vacation_on_title">أنت في عطلة</string>
+    <string name="vacation_on_text">سلسلتك محفوظة حتى %1$s والتذكيرات صامتة.</string>
+    <string name="backup_group">نسخة احتياطية كاملة</string>
+    <string name="backup_write">نسخ احتياطي</string>
+    <string name="backup_write_hint">الخطوات والوزن والماء والميداليات والملاحظات والإعدادات في ملف واحد</string>
+    <string name="backup_restore">استعادة النسخة</string>
+    <string name="backup_restore_hint">اختر ملف نسخة FitWren</string>
+    <string name="backup_restore_choose">اختر ملفًا</string>
+    <string name="restore_confirm">تُستبدل كل البيانات الحالية ببيانات النسخة. يبقى اتصال السوار ومصدر الخطوات كما هما.</string>
+    <string name="backup_done">حُفظت النسخة (%1$d صف)</string>
+    <string name="backup_failed">تعذرت كتابة الملف</string>
+    <string name="restore_done">استُعيدت النسخة (%1$d صف)</string>
+    <string name="restore_failed">هذا الملف ليس نسخة FitWren</string>
+    <string name="health_write">الكتابة في Health Connect</string>
+    <string name="health_write_hint">تظهر خطوات FitWren الساعية في تطبيقات أخرى مثل Google Fit</string>
+    <string name="health_write_reading">تبقى الكتابة متوقفة أثناء قراءة الخطوات من Health Connect وإلا حُسبت مرتين</string>
+    <string name="health_write_denied">لم يُمنح إذن الكتابة في Health Connect</string>
+    <string name="erase_group">حذف البيانات</string>
+    <string name="erase_range">حذف نطاق تاريخ</string>
+    <string name="erase_range_hint">تُحذف الخطوات والماء والوزن والنوم والملاحظات للأيام المختارة. قد يعيد الهاتف أو السوار كتابتها.</string>
+    <string name="erase_all">حذف كل البيانات</string>
+    <string name="erase_all_hint">يُحذف سجل الخطوات والوزن والماء والميداليات والملاحظات. تبقى الإعدادات.</string>
+    <string name="erase_all_confirm">حذف كل البيانات نهائيًا؟ يُستحسن أخذ نسخة احتياطية أولًا.</string>
+    <string name="erase_confirm_button">حذف</string>
+    <string name="erase_done">حُذفت البيانات</string>
+    <string name="delete">حذف</string>
+    <string name="note_title">ملاحظة اليوم</string>
+    <string name="note_placeholder">مثلًا: كانت هناك مباراة، كنت مريضًا</string>
+    <string name="note_empty">لا توجد ملاحظة</string>
+    <string name="note_add">إضافة ملاحظة</string>
+    <string name="note_edit">تعديل</string>
+    <string name="correct_button">تصحيح</string>
+    <string name="correct_hint">إذا كان العد خاطئًا يمكنك تصحيح اليوم يدويًا</string>
+    <string name="correct_done">صُحح هذا اليوم يدويًا</string>
+    <string name="correct_title">تصحيح اليوم</string>
+    <string name="correct_text">يحل الرقم الذي تكتبه محل ما عدّه الهاتف والسوار.</string>
+    <string name="correct_undo">العودة للعدد</string>
+    <string-array name="release_notes_0_17_0">
+        <item>ملاحظات اليوم: اكتب ملاحظة قصيرة لليوم المختار في السجل وتظهر نقطة صغيرة في التقويم</item>
+        <item>تصحيح اليوم: اكتب عدد الخطوات الصحيح بنفسك أو عد إلى العدد المحسوب</item>
+        <item>وضع العطلة (الإعدادات ← الأهداف): في الأيام المختارة لا تنقطع السلسلة ولا تُستخدم بطاقة ولا تذكيرات</item>
+        <item>هدف عطلة نهاية الأسبوع والهدف الشهري والسنوي: شريط تقدم ويوم الإنجاز المتوقع في صفحة اليوم</item>
+        <item>نسخة احتياطية كاملة واستعادة (الإعدادات ← البيانات): الخطوات والوزن والماء والميداليات والملاحظات والإعدادات في ملف واحد</item>
+        <item>حذف البيانات: نطاق تاريخ أو كل شيء</item>
+        <item>تصدير CSV يتضمن الآن الماء والوزن والنوم</item>
+        <item>الكتابة في Health Connect (اختياري): تظهر خطوات FitWren في تطبيقات مثل Google Fit</item>
+    </string-array>
 </resources>

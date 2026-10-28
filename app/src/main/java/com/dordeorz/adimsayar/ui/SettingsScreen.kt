@@ -162,6 +162,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.17.0", R.array.release_notes_0_17_0),
     ReleaseNote("0.16.0", R.array.release_notes_0_16_0),
     ReleaseNote("0.15.2", R.array.release_notes_0_15_2),
     ReleaseNote("0.14.1", R.array.release_notes_0_14_1),
@@ -307,6 +308,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     label = { it.getDisplayName(TextStyle.FULL, appLocale) },
                     onSelect = actions.onWeekStartChange,
                 )
+                GoalsExtras(state, actions)
             }
 
             if (current == SettingsPage.Body) SettingsCard {
@@ -447,6 +449,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             if (current == SettingsPage.Data) SettingsCard {
                 ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
                 ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
+                DataExtras(state, actions)
             }
 
             if (current == SettingsPage.About) SettingsCard {
@@ -620,7 +623,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
 }
 
 @Composable
-private fun GoalDialog(
+internal fun GoalDialog(
     title: String,
     current: Long,
     range: LongRange,
@@ -672,7 +675,7 @@ private fun GoalDialog(
 }
 
 @Composable
-private fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Composable () -> Unit) {
+internal fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Composable () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
@@ -703,7 +706,7 @@ private fun smartGoalHint(state: MainUiState): String {
 }
 
 @Composable
-private fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
+internal fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -722,7 +725,7 @@ private fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
 }
 
 @Composable
-private fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
+internal fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -767,7 +770,7 @@ private fun LanguageDialog(selected: String, onSelect: (String) -> Unit, onDismi
 }
 
 @Composable
-private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
+internal fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
         Text(title, style = MaterialTheme.typography.bodyLarge)
         Row(
@@ -786,7 +789,7 @@ private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @
 }
 
 @Composable
-private fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+internal fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1801,7 +1804,7 @@ private fun PageHeader(title: String, onBack: () -> Unit) {
 
 /** A page's own settings; the page title above already names them. */
 @Composable
-private fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
+internal fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
     Card(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
         Column(modifier = Modifier.padding(vertical = 4.dp), content = content)
     }
@@ -1821,7 +1824,7 @@ private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> 
 }
 
 @Composable
-private fun GroupLabel(text: String) {
+internal fun GroupLabel(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelLarge,

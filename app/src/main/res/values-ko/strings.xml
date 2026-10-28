@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">밤 워치페이스</string>
     <string name="face_schedule_night_start">밤 시작</string>
     <string name="face_schedule_none">선택 안 함</string>
+    <string name="goal_off">끔</string>
+    <string name="goal_turn_off">끄기</string>
+    <string name="weekend_goal">주말 목표</string>
+    <string name="weekend_goal_hint">토요일과 일요일만의 하루 목표입니다. 끄면 매일 같은 목표입니다.</string>
+    <string name="monthly_goal">월간 목표</string>
+    <string name="yearly_goal">연간 목표</string>
+    <string name="period_goal_hint">오늘 페이지에 진행 막대와 지금 속도로 목표에 닿는 날이 표시됩니다.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">목표 달성!</string>
+    <string name="period_no_pace">조금 걸으면 예상이 나옵니다</string>
+    <string name="period_on_track">이 속도면 %1$s에 달성</string>
+    <string name="period_behind">따라잡으려면 하루 %1$s걸음이 필요해요</string>
+    <string name="vacation_mode">휴가 모드</string>
+    <string name="vacation_hint">선택한 날에는 연속 기록이 끊기지 않고, 조커를 쓰지 않으며, 알림도 조용해집니다.</string>
+    <string name="vacation_off">예정된 휴가 없음</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">휴가 끝내기</string>
+    <string name="vacation_on_title">휴가 중이에요</string>
+    <string name="vacation_on_text">%1$s까지 연속 기록이 지켜지고 알림은 조용합니다.</string>
+    <string name="backup_group">전체 백업</string>
+    <string name="backup_write">백업하기</string>
+    <string name="backup_write_hint">걸음, 체중, 물, 메달, 메모, 설정을 파일 하나에 저장</string>
+    <string name="backup_restore">백업 복원</string>
+    <string name="backup_restore_hint">FitWren 백업 파일을 고르세요</string>
+    <string name="backup_restore_choose">파일 선택</string>
+    <string name="restore_confirm">지금의 모든 데이터가 백업으로 바뀝니다. 밴드 연결과 걸음 출처는 그대로입니다.</string>
+    <string name="backup_done">백업 저장됨(%1$d행)</string>
+    <string name="backup_failed">파일을 쓸 수 없습니다</string>
+    <string name="restore_done">백업 복원됨(%1$d행)</string>
+    <string name="restore_failed">이 파일은 FitWren 백업이 아닙니다</string>
+    <string name="health_write">헬스 커넥트에 쓰기</string>
+    <string name="health_write_hint">FitWren의 시간별 걸음이 Google Fit 같은 다른 앱에도 보입니다</string>
+    <string name="health_write_reading">헬스 커넥트에서 걸음을 읽는 동안에는 쓰지 않습니다. 두 번 세지 않도록요</string>
+    <string name="health_write_denied">헬스 커넥트 쓰기 권한이 없습니다</string>
+    <string name="erase_group">데이터 삭제</string>
+    <string name="erase_range">기간 삭제</string>
+    <string name="erase_range_hint">선택한 날의 걸음, 물, 체중, 수면, 메모를 지웁니다. 휴대폰이나 밴드가 다시 기록할 수 있어요.</string>
+    <string name="erase_all">모든 데이터 삭제</string>
+    <string name="erase_all_hint">걸음 기록, 체중, 물, 메달, 메모를 지웁니다. 설정은 남습니다.</string>
+    <string name="erase_all_confirm">모든 데이터를 영구히 지울까요? 먼저 백업하는 걸 권해요.</string>
+    <string name="erase_confirm_button">삭제</string>
+    <string name="erase_done">데이터를 지웠습니다</string>
+    <string name="delete">삭제</string>
+    <string name="note_title">이 날의 메모</string>
+    <string name="note_placeholder">예: 경기가 있었음, 아팠음</string>
+    <string name="note_empty">메모 없음</string>
+    <string name="note_add">메모 추가</string>
+    <string name="note_edit">편집</string>
+    <string name="correct_button">수정</string>
+    <string name="correct_hint">수가 틀렸다면 이 날을 직접 고칠 수 있어요</string>
+    <string name="correct_done">이 날은 직접 고쳤어요</string>
+    <string name="correct_title">이 날 고치기</string>
+    <string name="correct_text">입력한 숫자가 휴대폰과 밴드가 센 걸음을 대신합니다.</string>
+    <string name="correct_undo">센 값으로 되돌리기</string>
+    <string-array name="release_notes_0_17_0">
+        <item>이 날의 메모: 기록에서 고른 날에 짧은 메모, 달력에 작은 점 표시</item>
+        <item>날 고치기: 맞는 걸음 수를 직접 입력하거나 센 값으로 되돌리기</item>
+        <item>휴가 모드(설정 → 목표): 고른 날에는 연속 기록이 끊기지 않고 조커도 안 쓰며 알림도 조용</item>
+        <item>주말 목표, 월간·연간 목표: 오늘 페이지에 진행 막대와 예상 달성일</item>
+        <item>전체 백업과 복원(설정 → 데이터): 걸음, 체중, 물, 메달, 메모, 설정을 한 파일에</item>
+        <item>데이터 삭제: 기간 또는 전체</item>
+        <item>CSV 내보내기에 물, 체중, 수면 열 추가</item>
+        <item>헬스 커넥트에 쓰기(선택): FitWren 걸음이 Google Fit 같은 앱에도 표시</item>
+    </string-array>
 </resources>

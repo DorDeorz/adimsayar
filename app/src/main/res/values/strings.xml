@@ -1003,4 +1003,68 @@
     <string name="face_schedule_night">Gece kadranı</string>
     <string name="face_schedule_night_start">Gece başlangıcı</string>
     <string name="face_schedule_none">Seçilmedi</string>
+    <string name="goal_off">Kapalı</string>
+    <string name="goal_turn_off">Kapat</string>
+    <string name="weekend_goal">Hafta sonu hedefi</string>
+    <string name="weekend_goal_hint">Cumartesi ve pazar için ayrı günlük hedef. Kapalıysa her gün aynı hedef geçerli.</string>
+    <string name="monthly_goal">Aylık hedef</string>
+    <string name="yearly_goal">Yıllık hedef</string>
+    <string name="period_goal_hint">Bugün sayfasında ilerleme çubuğu ve bu tempoyla hedefe ulaşacağın gün görünür.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Hedefe ulaştın!</string>
+    <string name="period_no_pace">Tahmin için biraz yürümen gerekiyor</string>
+    <string name="period_on_track">Bu tempoyla %1$s günü hedefe ulaşırsın</string>
+    <string name="period_behind">Yetişmek için günde %1$s adım gerekiyor</string>
+    <string name="vacation_mode">Tatil modu</string>
+    <string name="vacation_hint">Seçtiğin günlerde seri bozulmaz, joker harcanmaz ve hatırlatmalar susar.</string>
+    <string name="vacation_off">Tatil planı yok</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Tatili bitir</string>
+    <string name="vacation_on_title">Tatildesin</string>
+    <string name="vacation_on_text">Serin %1$s gününe kadar korunuyor, hatırlatmalar susuyor.</string>
+    <string name="backup_group">Tam yedek</string>
+    <string name="backup_write">Yedekle</string>
+    <string name="backup_write_hint">Adım, kilo, su, madalya, notlar ve ayarlar tek bir dosyaya yazılır</string>
+    <string name="backup_restore">Yedeği geri yükle</string>
+    <string name="backup_restore_hint">Bir FitWren yedek dosyası seç</string>
+    <string name="backup_restore_choose">Dosya seç</string>
+    <string name="restore_confirm">Şu anki bütün verinin yerine yedekteki veri gelir. Bileklik bağlantısı ve adım kaynağı aynı kalır.</string>
+    <string name="backup_done">Yedek kaydedildi (%1$d satır)</string>
+    <string name="backup_failed">Dosya yazılamadı</string>
+    <string name="restore_done">Yedek geri yüklendi (%1$d satır)</string>
+    <string name="restore_failed">Bu dosya bir FitWren yedeği değil</string>
+    <string name="health_write">Health Connect\'e yaz</string>
+    <string name="health_write_hint">FitWren\'in saatlik adımları Google Fit gibi başka uygulamalarda da görünür</string>
+    <string name="health_write_reading">Adımları Health Connect\'ten okurken yazma kapalı kalır, yoksa adımlar iki kez sayılır</string>
+    <string name="health_write_denied">Health Connect yazma izni verilmedi</string>
+    <string name="erase_group">Verileri sil</string>
+    <string name="erase_range">Tarih aralığını sil</string>
+    <string name="erase_range_hint">Seçtiğin günlerin adım, su, kilo, uyku ve notları silinir. Telefon ya da bileklik o günleri yeniden yazabilir.</string>
+    <string name="erase_all">Bütün veriyi sil</string>
+    <string name="erase_all_hint">Adım geçmişi, kilo, su, madalyalar ve notlar silinir. Ayarlar kalır.</string>
+    <string name="erase_all_confirm">Bütün veri kalıcı olarak silinsin mi? Önce yedek almanı öneririm.</string>
+    <string name="erase_confirm_button">Sil</string>
+    <string name="erase_done">Veriler silindi</string>
+    <string name="delete">Sil</string>
+    <string name="note_title">Güne not</string>
+    <string name="note_placeholder">Örneğin: maç vardı, hastaydım</string>
+    <string name="note_empty">Not yok</string>
+    <string name="note_add">Not ekle</string>
+    <string name="note_edit">Düzenle</string>
+    <string name="correct_button">Düzelt</string>
+    <string name="correct_hint">Sayım yanlışsa günü elle düzeltebilirsin</string>
+    <string name="correct_done">Bu gün elle düzeltildi</string>
+    <string name="correct_title">Günü elle düzelt</string>
+    <string name="correct_text">Yazdığın sayı, telefonun ve bilekliğin saydığının yerine geçer.</string>
+    <string name="correct_undo">Sayılana dön</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Güne not: Geçmiş\'te seçili güne kısa not yaz, takvimde küçük nokta görünür</item>
+        <item>Günü elle düzelt: sayım yanlışsa günün adımını kendin yaz, istersen sayılana dön</item>
+        <item>Tatil modu (Ayarlar → Hedefler): seçtiğin günlerde seri bozulmaz, joker harcanmaz, hatırlatmalar susar</item>
+        <item>Hafta sonu hedefi, aylık ve yıllık hedef: Bugün\'de ilerleme çubuğu ve tahmini bitiş günü</item>
+        <item>Tam yedek ve geri yükleme (Ayarlar → Veri): adım, kilo, su, madalya, not ve ayarlar tek dosyada</item>
+        <item>Verileri silme: bir tarih aralığını ya da bütün veriyi sil</item>
+        <item>CSV dışa aktarma artık su, kilo ve uyku sütunlarını da yazar</item>
+        <item>Health Connect\'e yazma (isteğe bağlı): FitWren adımları Google Fit gibi uygulamalarda da görünür</item>
+    </string-array>
 </resources>

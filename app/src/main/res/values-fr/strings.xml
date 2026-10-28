@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">Cadran de nuit</string>
     <string name="face_schedule_night_start">Début de la nuit</string>
     <string name="face_schedule_none">Non choisi</string>
+    <string name="goal_off">Désactivé</string>
+    <string name="goal_turn_off">Désactiver</string>
+    <string name="weekend_goal">Objectif du week-end</string>
+    <string name="weekend_goal_hint">Un objectif quotidien à part pour le samedi et le dimanche. Désactivé, chaque jour a le même objectif.</string>
+    <string name="monthly_goal">Objectif mensuel</string>
+    <string name="yearly_goal">Objectif annuel</string>
+    <string name="period_goal_hint">La page Aujourd\'hui affiche une barre de progression et le jour où tu atteindras l\'objectif à ton rythme.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Objectif atteint !</string>
+    <string name="period_no_pace">Marche un peu pour obtenir une estimation</string>
+    <string name="period_on_track">À ce rythme, tu l\'atteins le %1$s</string>
+    <string name="period_behind">Il te faut %1$s pas par jour pour y arriver</string>
+    <string name="vacation_mode">Mode vacances</string>
+    <string name="vacation_hint">Les jours choisis, la série ne se casse pas, aucun joker n\'est utilisé et les rappels se taisent.</string>
+    <string name="vacation_off">Pas de vacances prévues</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Finir les vacances</string>
+    <string name="vacation_on_title">Tu es en vacances</string>
+    <string name="vacation_on_text">Ta série est préservée jusqu\'au %1$s et les rappels se taisent.</string>
+    <string name="backup_group">Sauvegarde complète</string>
+    <string name="backup_write">Sauvegarder</string>
+    <string name="backup_write_hint">Pas, poids, eau, médailles, notes et réglages dans un seul fichier</string>
+    <string name="backup_restore">Restaurer la sauvegarde</string>
+    <string name="backup_restore_hint">Choisis un fichier de sauvegarde FitWren</string>
+    <string name="backup_restore_choose">Choisir un fichier</string>
+    <string name="restore_confirm">Toutes les données actuelles sont remplacées par la sauvegarde. Le bracelet et la source des pas restent inchangés.</string>
+    <string name="backup_done">Sauvegarde enregistrée (%1$d lignes)</string>
+    <string name="backup_failed">Impossible d\'écrire le fichier</string>
+    <string name="restore_done">Sauvegarde restaurée (%1$d lignes)</string>
+    <string name="restore_failed">Ce fichier n\'est pas une sauvegarde FitWren</string>
+    <string name="health_write">Écrire dans Health Connect</string>
+    <string name="health_write_hint">Les pas horaires de FitWren apparaissent aussi dans d\'autres apps comme Google Fit</string>
+    <string name="health_write_reading">L\'écriture reste désactivée tant que les pas sont lus depuis Health Connect, sinon ils compteraient deux fois</string>
+    <string name="health_write_denied">L\'autorisation d\'écriture Health Connect n\'a pas été accordée</string>
+    <string name="erase_group">Supprimer les données</string>
+    <string name="erase_range">Supprimer une période</string>
+    <string name="erase_range_hint">Les pas, l\'eau, le poids, le sommeil et les notes des jours choisis sont supprimés. Le téléphone ou le bracelet peut les réécrire.</string>
+    <string name="erase_all">Supprimer toutes les données</string>
+    <string name="erase_all_hint">L\'historique des pas, le poids, l\'eau, les médailles et les notes sont supprimés. Les réglages restent.</string>
+    <string name="erase_all_confirm">Supprimer définitivement toutes les données ? Mieux vaut faire une sauvegarde avant.</string>
+    <string name="erase_confirm_button">Supprimer</string>
+    <string name="erase_done">Données supprimées</string>
+    <string name="delete">Supprimer</string>
+    <string name="note_title">Note du jour</string>
+    <string name="note_placeholder">Par exemple : match, malade</string>
+    <string name="note_empty">Pas de note</string>
+    <string name="note_add">Ajouter une note</string>
+    <string name="note_edit">Modifier</string>
+    <string name="correct_button">Corriger</string>
+    <string name="correct_hint">Si le compte est faux, tu peux corriger le jour à la main</string>
+    <string name="correct_done">Ce jour a été corrigé à la main</string>
+    <string name="correct_title">Corriger le jour</string>
+    <string name="correct_text">Le nombre saisi remplace ce que le téléphone et le bracelet ont compté.</string>
+    <string name="correct_undo">Revenir au compte</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Notes du jour : écris une courte note sur le jour choisi dans Historique ; un petit point apparaît dans le calendrier</item>
+        <item>Corriger un jour : saisis toi-même le bon nombre de pas ou reviens au compte</item>
+        <item>Mode vacances (Réglages → Objectifs) : les jours choisis, la série ne casse pas, aucun joker, rappels silencieux</item>
+        <item>Objectif du week-end, mensuel et annuel : barre de progression et jour estimé sur Aujourd\'hui</item>
+        <item>Sauvegarde complète et restauration (Réglages → Données) : pas, poids, eau, médailles, notes et réglages dans un fichier</item>
+        <item>Supprimer les données : une période ou tout</item>
+        <item>L\'export CSV inclut maintenant l\'eau, le poids et le sommeil</item>
+        <item>Écrire dans Health Connect (optionnel) : les pas FitWren apparaissent aussi dans des apps comme Google Fit</item>
+    </string-array>
 </resources>

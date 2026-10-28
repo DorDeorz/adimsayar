@@ -39,7 +39,6 @@ import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.ui.Tab
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.Avatar
 import com.dordeorz.adimsayar.data.BirdState
 import com.dordeorz.adimsayar.data.KeptMedals
@@ -70,9 +69,9 @@ class BirdWidget : GlanceAppWidget() {
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
             val bird = remember(history, freezes, kept, settings) {
-                val computed = AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart, freezes = freezes)
+                val computed = settings.achievements(history, today, freezes = freezes)
                 val achievements = computed.copy(medals = KeptMedals.apply(computed.medals, kept))
-                Avatar.state(achievements, history, freezes, today, hour, settings.dailyGoal)
+                Avatar.state(achievements, history, freezes, today, hour, settings.goalOn(today))
             }
             WidgetTheme(settings.dynamicColor) {
                 WidgetSurface(Tab.Today, settings.widgetOpacity) {

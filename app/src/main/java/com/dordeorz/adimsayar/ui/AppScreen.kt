@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dordeorz.adimsayar.ExtraController
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
 import com.dordeorz.adimsayar.data.AppSettings
@@ -97,6 +98,7 @@ data class MainUiState(
     val water: Map<LocalDate, Int>,
     val freezes: Set<LocalDate>,
     val challenges: ChallengeSummary,
+    val extra: ExtraState = ExtraState(),
 ) {
     val healthEnabled: Boolean get() = wearableEnabled || bandDirectEnabled
 }
@@ -151,6 +153,7 @@ class MainActions(
     val onWaterReminderChange: (Boolean) -> Unit,
     val onWaterIntervalChange: (Int) -> Unit,
     val onRouteChange: (String?) -> Unit,
+    val extra: ExtraController,
 )
 
 @Composable

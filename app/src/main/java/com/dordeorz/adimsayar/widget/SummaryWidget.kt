@@ -82,8 +82,8 @@ private fun summaryRows(context: Context, steps: Long, ml: Int, health: HealthSn
     val stepsRow = SummaryRow(
         R.drawable.ic_walk,
         format(steps),
-        context.getString(R.string.percent_of_goal, percent(steps, settings.dailyGoal)) + " · " +
-            context.getString(R.string.goal_short, format(settings.dailyGoal)),
+        context.getString(R.string.percent_of_goal, percent(steps, settings.goalOn(java.time.LocalDate.now()))) + " · " +
+            context.getString(R.string.goal_short, format(settings.goalOn(java.time.LocalDate.now()))),
     )
     val waterRow = SummaryRow(
         R.drawable.ic_water,

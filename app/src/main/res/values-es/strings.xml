@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">Esfera de noche</string>
     <string name="face_schedule_night_start">Inicio de la noche</string>
     <string name="face_schedule_none">Sin elegir</string>
+    <string name="goal_off">Desactivado</string>
+    <string name="goal_turn_off">Desactivar</string>
+    <string name="weekend_goal">Objetivo de fin de semana</string>
+    <string name="weekend_goal_hint">Un objetivo diario aparte para sábado y domingo. Si está desactivado, todos los días tienen el mismo objetivo.</string>
+    <string name="monthly_goal">Objetivo mensual</string>
+    <string name="yearly_goal">Objetivo anual</string>
+    <string name="period_goal_hint">La página Hoy muestra una barra de progreso y el día en que alcanzarás el objetivo a tu ritmo actual.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">¡Objetivo cumplido!</string>
+    <string name="period_no_pace">Camina un poco para obtener una estimación</string>
+    <string name="period_on_track">A este ritmo lo alcanzas el %1$s</string>
+    <string name="period_behind">Necesitas %1$s pasos al día para lograrlo</string>
+    <string name="vacation_mode">Modo vacaciones</string>
+    <string name="vacation_hint">En los días elegidos la racha no se rompe, no se gasta ningún comodín y los recordatorios callan.</string>
+    <string name="vacation_off">No hay vacaciones previstas</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Terminar vacaciones</string>
+    <string name="vacation_on_title">Estás de vacaciones</string>
+    <string name="vacation_on_text">Tu racha se mantiene hasta el %1$s y los recordatorios callan.</string>
+    <string name="backup_group">Copia completa</string>
+    <string name="backup_write">Hacer copia</string>
+    <string name="backup_write_hint">Pasos, peso, agua, medallas, notas y ajustes en un solo archivo</string>
+    <string name="backup_restore">Restaurar copia</string>
+    <string name="backup_restore_hint">Elige un archivo de copia de FitWren</string>
+    <string name="backup_restore_choose">Elegir archivo</string>
+    <string name="restore_confirm">Todos los datos actuales se sustituyen por la copia. La pulsera y la fuente de pasos no cambian.</string>
+    <string name="backup_done">Copia guardada (%1$d filas)</string>
+    <string name="backup_failed">No se pudo escribir el archivo</string>
+    <string name="restore_done">Copia restaurada (%1$d filas)</string>
+    <string name="restore_failed">Este archivo no es una copia de FitWren</string>
+    <string name="health_write">Escribir en Health Connect</string>
+    <string name="health_write_hint">Los pasos por hora de FitWren aparecen también en otras apps como Google Fit</string>
+    <string name="health_write_reading">La escritura queda desactivada mientras se leen pasos de Health Connect; si no, contarían dos veces</string>
+    <string name="health_write_denied">No se concedió el permiso de escritura de Health Connect</string>
+    <string name="erase_group">Borrar datos</string>
+    <string name="erase_range">Borrar un rango de fechas</string>
+    <string name="erase_range_hint">Se borran pasos, agua, peso, sueño y notas de los días elegidos. El teléfono o la pulsera pueden volver a escribirlos.</string>
+    <string name="erase_all">Borrar todos los datos</string>
+    <string name="erase_all_hint">Se borran historial de pasos, peso, agua, medallas y notas. Los ajustes se mantienen.</string>
+    <string name="erase_all_confirm">¿Borrar todos los datos para siempre? Conviene hacer antes una copia.</string>
+    <string name="erase_confirm_button">Borrar</string>
+    <string name="erase_done">Datos borrados</string>
+    <string name="delete">Borrar</string>
+    <string name="note_title">Nota del día</string>
+    <string name="note_placeholder">Por ejemplo: hubo partido, estaba enfermo</string>
+    <string name="note_empty">Sin nota</string>
+    <string name="note_add">Añadir nota</string>
+    <string name="note_edit">Editar</string>
+    <string name="correct_button">Corregir</string>
+    <string name="correct_hint">Si el conteo está mal, puedes corregir el día a mano</string>
+    <string name="correct_done">Este día se corrigió a mano</string>
+    <string name="correct_title">Corregir el día</string>
+    <string name="correct_text">El número que escribas sustituye lo que contaron el teléfono y la pulsera.</string>
+    <string name="correct_undo">Usar el valor contado</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Notas del día: escribe una nota corta en el día elegido en Historial; aparece un punto en el calendario</item>
+        <item>Corregir un día: escribe tú el número de pasos correcto o vuelve al valor contado</item>
+        <item>Modo vacaciones (Ajustes → Objetivos): en los días elegidos la racha no se rompe, no se gasta comodín y los recordatorios callan</item>
+        <item>Objetivo de fin de semana, mensual y anual: barra de progreso y día estimado en Hoy</item>
+        <item>Copia completa y restauración (Ajustes → Datos): pasos, peso, agua, medallas, notas y ajustes en un archivo</item>
+        <item>Borrar datos: un rango de fechas o todo</item>
+        <item>La exportación CSV ahora incluye agua, peso y sueño</item>
+        <item>Escribir en Health Connect (opcional): los pasos de FitWren aparecen también en apps como Google Fit</item>
+    </string-array>
 </resources>

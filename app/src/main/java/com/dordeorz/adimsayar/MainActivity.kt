@@ -34,7 +34,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.ChallengeMath
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.KeptMedals
@@ -61,6 +60,12 @@ import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.ui.AppScreen
+import com.dordeorz.adimsayar.ui.ExtraState
+import com.dordeorz.adimsayar.data.DayNotes
+import com.dordeorz.adimsayar.data.DayOverrides
+import com.dordeorz.adimsayar.data.ExtrasStore
+import com.dordeorz.adimsayar.data.Floors
+import com.dordeorz.adimsayar.data.Walks
 import com.dordeorz.adimsayar.ui.MainActions
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
@@ -109,6 +114,8 @@ class MainActivity : ComponentActivity() {
     private var requestedTab by mutableStateOf<Tab?>(null)
 
     private val settingsStore by lazy { SettingsStore.get(applicationContext) }
+
+    private val extra = ExtraController(this)
 
     private val actions = MainActions(
         onRequestPermission = ::requestPermission,
@@ -245,6 +252,7 @@ class MainActivity : ComponentActivity() {
             if (id == null) settingsStore.setRoute(NO_ROUTE, NO_ROUTE_START) else settingsStore.setRoute(id, LocalDate.now().toEpochDay())
             refreshWidgets()
         },
+        extra = extra,
     )
 
     private fun openOrToast(intent: Intent, silent: Boolean = false): Boolean = try {
@@ -362,15 +370,7 @@ class MainActivity : ComponentActivity() {
             val freezes by remember { StreakFreezes.observe(applicationContext) }.collectAsStateWithLifecycle(emptySet())
             val kept by remember { KeptMedals.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
             val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes) {
-                AchievementMath.compute(
-                    history,
-                    currentDay,
-                    appSettings.dailyGoal,
-                    appSettings.weeklyGoal,
-                    appSettings.weekStart,
-                    earlyBirdDays,
-                    freezes,
-                )
+                appSettings.achievements(history, currentDay, earlyBirdDays, freezes)
             }
             LaunchedEffect(computed) {
                 withContext(Dispatchers.IO) { KeptMedals.keep(applicationContext, computed.medals) }
@@ -378,6 +378,14 @@ class MainActivity : ComponentActivity() {
             val achievements = remember(computed, kept) { computed.copy(medals = KeptMedals.apply(computed.medals, kept)) }
             val challenges = remember(history, currentDay, appSettings.dailyGoal, appSettings.weekStart) {
                 ChallengeMath.summary(history, currentDay, appSettings.dailyGoal, appSettings.weekStart)
+            }
+            val extras by remember { ExtrasStore.get(applicationContext).extras }.collectAsStateWithLifecycle()
+            val notes by remember { DayNotes.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val overrides by remember { DayOverrides.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val walks by remember { Walks.observe(applicationContext) }.collectAsStateWithLifecycle(emptyList())
+            val floors by remember { Floors.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val extraState = remember(extras, notes, overrides, walks, floors) {
+                ExtraState(extras, notes, overrides, walks, floors, Floors.hasSensor(applicationContext))
             }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
@@ -420,6 +428,7 @@ class MainActivity : ComponentActivity() {
                             water = water,
                             freezes = freezes,
                             challenges = challenges,
+                            extra = extraState,
                         ),
                         actions = actions,
                     )

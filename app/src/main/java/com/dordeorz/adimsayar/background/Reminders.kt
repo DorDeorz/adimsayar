@@ -13,7 +13,6 @@ import androidx.core.content.edit
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.HealthMath
@@ -56,7 +55,8 @@ object Reminders {
 
     fun onTodaySteps(context: Context, steps: Long) {
         val settings = SettingsStore.get(context).settings.value
-        val goal = settings.dailyGoal
+        val goal = settings.goalOn(LocalDate.now())
+        if (settings.inVacation(LocalDate.now())) return
         when {
             settings.goalNotification && steps >= goal -> notifyOncePerDay(context, KEY_GOAL_DATE, GOAL_NOTIFICATION_ID) { strings ->
                 strings.getString(R.string.notify_goal_title) to strings.getString(R.string.notify_goal_text, format(steps))
@@ -83,7 +83,7 @@ object Reminders {
 
     fun weightCheck(context: Context) {
         val settings = SettingsStore.get(context).settings.value
-        if (!settings.weightReminder) return
+        if (!settings.weightReminder || settings.inVacation(LocalDate.now())) return
         val strings = Locales.wrap(context)
         notify(
             strings,
@@ -96,7 +96,7 @@ object Reminders {
 
     suspend fun waterCheck(context: Context) {
         val settings = SettingsStore.get(context).settings.value
-        if (!settings.waterReminder) return
+        if (!settings.waterReminder || settings.inVacation(LocalDate.now())) return
         val hour = LocalTime.now().hour
         if (hour < WATER_FIRST_HOUR || hour > WATER_LAST_HOUR) return
         val drunk = Water.today(context)
@@ -211,15 +211,15 @@ object Reminders {
 
     private fun streakCheck(strings: Context, history: Map<LocalDate, Long>, freezes: Set<LocalDate>, today: LocalDate, settings: AppSettings) {
         val steps = history[today] ?: 0L
-        if (steps >= settings.dailyGoal) return
-        val streak = AchievementMath.compute(history, today, settings.dailyGoal, settings.weeklyGoal, settings.weekStart, freezes = freezes)
-            .records.currentStreak
+        val goal = settings.goalOn(today)
+        if (steps >= goal || settings.inVacation(today)) return
+        val streak = settings.achievements(history, today, freezes = freezes).records.currentStreak
         if (streak == 0) return
         notify(
             strings,
             STREAK_NOTIFICATION_ID,
             strings.getString(R.string.notify_streak_title, streak),
-            strings.getString(R.string.notify_streak_text, format(settings.dailyGoal - steps)),
+            strings.getString(R.string.notify_streak_text, format(goal - steps)),
         )
     }
 

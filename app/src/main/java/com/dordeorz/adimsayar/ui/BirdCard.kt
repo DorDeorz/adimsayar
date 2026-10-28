@@ -64,8 +64,8 @@ private const val FLAPS = 3
 internal fun BirdCard(state: MainUiState) {
     var open by rememberSaveable { mutableStateOf(false) }
     val hour = LocalTime.now().hour
-    val bird = remember(state.achievements, state.history, state.freezes, state.today, state.settings.dailyGoal, hour) {
-        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.dailyGoal)
+    val bird = remember(state.achievements, state.history, state.freezes, state.today, state.settings, hour) {
+        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.goalOn(state.today))
     }
     Card(modifier = Modifier.fillMaxWidth().clickable { open = true }) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {

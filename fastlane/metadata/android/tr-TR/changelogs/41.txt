@@ -1,0 +1,4 @@
+Güne not ve günü elle düzeltme (Geçmiş).
+Tatil modu, hafta sonu hedefi, aylık ve yıllık hedef.
+Tam yedek ve geri yükleme, verileri silme, daha geniş CSV.
+Health Connect'e yazma (isteğe bağlı).

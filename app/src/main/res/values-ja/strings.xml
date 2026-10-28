@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">夜の文字盤</string>
     <string name="face_schedule_night_start">夜の開始</string>
     <string name="face_schedule_none">未選択</string>
+    <string name="goal_off">オフ</string>
+    <string name="goal_turn_off">オフにする</string>
+    <string name="weekend_goal">週末の目標</string>
+    <string name="weekend_goal_hint">土曜と日曜だけの1日の目標です。オフのときは毎日同じ目標です。</string>
+    <string name="monthly_goal">月間目標</string>
+    <string name="yearly_goal">年間目標</string>
+    <string name="period_goal_hint">今日のページに進み具合と、今のペースで目標に届く日が表示されます。</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">目標達成！</string>
+    <string name="period_no_pace">少し歩くと予測が表示されます</string>
+    <string name="period_on_track">このペースなら%1$sに達成</string>
+    <string name="period_behind">間に合うには1日%1$s歩が必要</string>
+    <string name="vacation_mode">休暇モード</string>
+    <string name="vacation_hint">選んだ日は連続記録が途切れず、ジョーカーも使わず、リマインダーも止まります。</string>
+    <string name="vacation_off">休暇の予定なし</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">休暇を終える</string>
+    <string name="vacation_on_title">休暇中です</string>
+    <string name="vacation_on_text">%1$sまで連続記録は守られ、リマインダーは止まります。</string>
+    <string name="backup_group">完全バックアップ</string>
+    <string name="backup_write">バックアップする</string>
+    <string name="backup_write_hint">歩数・体重・水分・メダル・メモ・設定を1つのファイルに保存</string>
+    <string name="backup_restore">バックアップを復元</string>
+    <string name="backup_restore_hint">FitWrenのバックアップファイルを選択</string>
+    <string name="backup_restore_choose">ファイルを選択</string>
+    <string name="restore_confirm">今のデータはすべてバックアップの内容に置き換わります。バンドの接続と歩数の取得元はそのままです。</string>
+    <string name="backup_done">バックアップを保存しました（%1$d行）</string>
+    <string name="backup_failed">ファイルを書き込めませんでした</string>
+    <string name="restore_done">バックアップを復元しました（%1$d行）</string>
+    <string name="restore_failed">このファイルはFitWrenのバックアップではありません</string>
+    <string name="health_write">ヘルスコネクトに書き込む</string>
+    <string name="health_write_hint">FitWrenの1時間ごとの歩数がGoogle Fitなど他のアプリにも表示されます</string>
+    <string name="health_write_reading">ヘルスコネクトから歩数を読む間は書き込みはオフです。二重に数えないためです</string>
+    <string name="health_write_denied">ヘルスコネクトの書き込み権限がありません</string>
+    <string name="erase_group">データを削除</string>
+    <string name="erase_range">期間を削除</string>
+    <string name="erase_range_hint">選んだ日の歩数・水分・体重・睡眠・メモを削除します。スマホやバンドが再び書き込むことがあります。</string>
+    <string name="erase_all">すべてのデータを削除</string>
+    <string name="erase_all_hint">歩数の履歴・体重・水分・メダル・メモを削除します。設定は残ります。</string>
+    <string name="erase_all_confirm">すべてのデータを完全に削除しますか？先にバックアップをおすすめします。</string>
+    <string name="erase_confirm_button">削除</string>
+    <string name="erase_done">データを削除しました</string>
+    <string name="delete">削除</string>
+    <string name="note_title">この日のメモ</string>
+    <string name="note_placeholder">例：試合があった、体調不良</string>
+    <string name="note_empty">メモなし</string>
+    <string name="note_add">メモを追加</string>
+    <string name="note_edit">編集</string>
+    <string name="correct_button">修正</string>
+    <string name="correct_hint">数え間違いなら、この日を手で直せます</string>
+    <string name="correct_done">この日は手で修正済み</string>
+    <string name="correct_title">この日を修正</string>
+    <string name="correct_text">入力した数が、スマホとバンドの数えた歩数の代わりになります。</string>
+    <string name="correct_undo">数えた値に戻す</string>
+    <string-array name="release_notes_0_17_0">
+        <item>この日のメモ：履歴で選んだ日に短いメモ。カレンダーに小さな点が付きます</item>
+        <item>日の修正：正しい歩数を自分で入力、または数えた値に戻す</item>
+        <item>休暇モード（設定→目標）：選んだ日は連続記録が途切れず、ジョーカー不要、リマインダーも停止</item>
+        <item>週末の目標、月間・年間目標：今日のページに進み具合と達成予想日</item>
+        <item>完全バックアップと復元（設定→データ）：歩数・体重・水分・メダル・メモ・設定を1ファイルに</item>
+        <item>データの削除：期間指定またはすべて</item>
+        <item>CSVエクスポートに水分・体重・睡眠の列を追加</item>
+        <item>ヘルスコネクトへの書き込み（任意）：FitWrenの歩数がGoogle Fitなどにも表示</item>
+    </string-array>
 </resources>

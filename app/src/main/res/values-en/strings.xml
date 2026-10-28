@@ -1002,4 +1002,68 @@
     <string name="face_schedule_night">Night face</string>
     <string name="face_schedule_night_start">Night starts</string>
     <string name="face_schedule_none">Not chosen</string>
+    <string name="goal_off">Off</string>
+    <string name="goal_turn_off">Turn off</string>
+    <string name="weekend_goal">Weekend goal</string>
+    <string name="weekend_goal_hint">A separate daily goal for Saturday and Sunday. When off, every day has the same goal.</string>
+    <string name="monthly_goal">Monthly goal</string>
+    <string name="yearly_goal">Yearly goal</string>
+    <string name="period_goal_hint">The Today page shows a progress bar and the day you reach the goal at your current pace.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Goal reached!</string>
+    <string name="period_no_pace">Walk a little to get an estimate</string>
+    <string name="period_on_track">At this pace you reach it on %1$s</string>
+    <string name="period_behind">You need %1$s steps a day to make it</string>
+    <string name="vacation_mode">Vacation mode</string>
+    <string name="vacation_hint">On the chosen days the streak does not break, no streak freeze is used and reminders stay quiet.</string>
+    <string name="vacation_off">No vacation planned</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">End vacation</string>
+    <string name="vacation_on_title">You are on vacation</string>
+    <string name="vacation_on_text">Your streak is kept until %1$s and reminders are quiet.</string>
+    <string name="backup_group">Full backup</string>
+    <string name="backup_write">Back up</string>
+    <string name="backup_write_hint">Steps, weight, water, medals, notes and settings go into one file</string>
+    <string name="backup_restore">Restore backup</string>
+    <string name="backup_restore_hint">Choose a FitWren backup file</string>
+    <string name="backup_restore_choose">Choose file</string>
+    <string name="restore_confirm">All current data is replaced by the backup. The band connection and the step source stay as they are.</string>
+    <string name="backup_done">Backup saved (%1$d rows)</string>
+    <string name="backup_failed">Could not write the file</string>
+    <string name="restore_done">Backup restored (%1$d rows)</string>
+    <string name="restore_failed">This file is not a FitWren backup</string>
+    <string name="health_write">Write to Health Connect</string>
+    <string name="health_write_hint">FitWren\'s hourly steps also show up in other apps such as Google Fit</string>
+    <string name="health_write_reading">Writing stays off while steps are read from Health Connect, or they would count twice</string>
+    <string name="health_write_denied">Health Connect write permission was not granted</string>
+    <string name="erase_group">Delete data</string>
+    <string name="erase_range">Delete a date range</string>
+    <string name="erase_range_hint">Steps, water, weight, sleep and notes of the chosen days are deleted. The phone or band may write those days again.</string>
+    <string name="erase_all">Delete all data</string>
+    <string name="erase_all_hint">Step history, weight, water, medals and notes are deleted. Settings stay.</string>
+    <string name="erase_all_confirm">Delete all data for good? Making a backup first is a good idea.</string>
+    <string name="erase_confirm_button">Delete</string>
+    <string name="erase_done">Data deleted</string>
+    <string name="delete">Delete</string>
+    <string name="note_title">Note for the day</string>
+    <string name="note_placeholder">For example: had a match, was ill</string>
+    <string name="note_empty">No note</string>
+    <string name="note_add">Add note</string>
+    <string name="note_edit">Edit</string>
+    <string name="correct_button">Correct</string>
+    <string name="correct_hint">If the count is wrong, you can fix the day by hand</string>
+    <string name="correct_done">This day was corrected by hand</string>
+    <string name="correct_title">Correct the day</string>
+    <string name="correct_text">The number you type replaces what the phone and band counted.</string>
+    <string name="correct_undo">Use counted value</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Day notes: write a short note on the selected day in History; a small dot shows on the calendar</item>
+        <item>Correct a day: type the right step count yourself, or go back to the counted value</item>
+        <item>Vacation mode (Settings → Goals): on the chosen days the streak does not break, no freeze is used, reminders are quiet</item>
+        <item>Weekend goal, monthly and yearly goal: progress bar and estimated finish day on Today</item>
+        <item>Full backup and restore (Settings → Data): steps, weight, water, medals, notes and settings in one file</item>
+        <item>Delete data: a date range or everything</item>
+        <item>CSV export now also writes water, weight and sleep columns</item>
+        <item>Write to Health Connect (optional): FitWren steps also show up in apps such as Google Fit</item>
+    </string-array>
 </resources>

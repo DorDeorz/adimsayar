@@ -4,6 +4,7 @@ import android.content.Context
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.BandLive
+import com.dordeorz.adimsayar.data.HealthWrite
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
@@ -34,6 +35,7 @@ object StepUpdater {
             BandLive.refresh(context)
             BandDirect.sync(context, source)
         }
+        HealthWrite.syncIfDue(context)
         Widgets.updateAll(context)
     }
 }
