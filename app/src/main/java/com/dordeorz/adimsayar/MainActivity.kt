@@ -87,6 +87,7 @@ class MainActivity : ComponentActivity() {
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
     private var serviceEnabled by mutableStateOf(false)
+    private var exactAlarmsAllowed by mutableStateOf<Boolean?>(null)
     private var xiaomiAvailable by mutableStateOf(false)
     private var xiaomiEnabled by mutableStateOf(false)
     private var xiaomiSync: Job? = null
@@ -109,6 +110,7 @@ class MainActivity : ComponentActivity() {
             batteryCardVisible = false
         },
         onServiceEnabledChange = ::changeServiceEnabled,
+        onOpenExactAlarms = ::openExactAlarmSettings,
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
         onWearableResync = ::resyncWearable,
@@ -336,6 +338,7 @@ class MainActivity : ComponentActivity() {
                             frozen = frozen,
                             batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
                             serviceEnabled = serviceEnabled,
+                            exactAlarmsAllowed = exactAlarmsAllowed,
                             xiaomiAvailable = xiaomiAvailable,
                             xiaomiEnabled = xiaomiEnabled,
                             xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
@@ -403,6 +406,23 @@ class MainActivity : ComponentActivity() {
         today = LocalDate.now()
         refreshPermission()
         batteryCardVisible = !settings.getBoolean(KEY_BATTERY_CARD_DISMISSED, false) && !BatteryOptimization.isExempt(this)
+        refreshExactAlarms()
+    }
+
+    private fun refreshExactAlarms() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+        val allowed = Schedules.exactAlarmsAllowed(this)
+        if (allowed && exactAlarmsAllowed == false) Schedules.ensure(applicationContext)
+        exactAlarmsAllowed = allowed
+    }
+
+    private fun openExactAlarmSettings() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+        try {
+            startActivity(Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName")))
+        } catch (e: ActivityNotFoundException) {
+            BatteryOptimization.openAppDetails(this)
+        }
     }
 
     override fun onStop() {

@@ -39,6 +39,7 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_WATER = "com.dordeorz.adimsayar.WATER"
         const val ACTION_WATER_ADD = "com.dordeorz.adimsayar.WATER_ADD"
         const val ACTION_FACE = "com.dordeorz.adimsayar.FACE"
+        private const val ACTION_EXACT_ALARMS = "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"
         private const val READ_TIMEOUT_MS = 5_000L
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
@@ -47,6 +48,7 @@ class SystemEventReceiver : BroadcastReceiver() {
             ACTION_WATER,
             ACTION_WATER_ADD,
             ACTION_FACE,
+            ACTION_EXACT_ALARMS,
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED,

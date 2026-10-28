@@ -23,6 +23,8 @@
     <string name="frozen_text">El teléfono detecta pasos, pero el contador no avanza. El sensor se ha vuelto a conectar; este aviso desaparece solo después de unos pasos.</string>
 
     <string name="service_card_title">Seguir contando en segundo plano</string>
+    <string name="exact_alarms_title">Alarmas exactas</string>
+    <string name="exact_alarms_text">El registro de medianoche, los recordatorios y el cambio de esfera se ejecutan a su hora. Si está desactivado, Android puede retrasarlos hasta una hora. Toca para abrir el permiso.</string>
     <string name="xiaomi_unreadable_title">No se puede leer el registro de pasos de HyperOS</string>
     <string name="xiaomi_unreadable_text">Los pasos no se están actualizando ahora mismo. Puede que una actualización de HyperOS haya cambiado el registro. Puedes desactivar el interruptor de abajo y seguir contando con "Seguir contando en segundo plano".</string>
     <string name="xiaomi_stalled_title">El registro de pasos de HyperOS no avanza</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Compatibilidad con ROM personalizadas (crDroid, LineageOS y otras): en un Xiaomi sin HyperOS se ocultan el registro de pasos de HyperOS y los pasos de batería de MIUI y se usa el sensor del teléfono</item>
+        <item>Alarmas exactas: permítelas en Ajustes → Fuente de pasos y el registro de medianoche, los recordatorios y el cambio de esfera funcionan sin retraso (Android 14 y posterior)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>El humor del pájaro: en las esferas FitWren y los diseños el pájaro cambia con la meta de pasos</item>
         <item>El tiempo en la esfera: icono del tiempo y temperatura</item>

@@ -23,6 +23,8 @@
     <string name="frozen_text">Il telefono rileva i passi ma il contatore non avanza. Il sensore è stato ricollegato; questo avviso sparirà da solo dopo qualche passo.</string>
 
     <string name="service_card_title">Continua a contare in background</string>
+    <string name="exact_alarms_title">Sveglie esatte</string>
+    <string name="exact_alarms_text">Il salvataggio di mezzanotte, i promemoria e il cambio quadrante avvengono in orario. Se disattivato, Android può ritardarli fino a un\'ora. Tocca per aprire il permesso.</string>
     <string name="xiaomi_unreadable_title">Impossibile leggere il registro passi di HyperOS</string>
     <string name="xiaomi_unreadable_text">I passi non si stanno aggiornando. Un aggiornamento di HyperOS potrebbe aver cambiato il registro. Puoi disattivare l\'opzione qui sotto e continuare con «Continua a contare in background».</string>
     <string name="xiaomi_stalled_title">Il registro passi di HyperOS non avanza</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Supporto ROM personalizzate (crDroid, LineageOS e altre): su uno Xiaomi senza HyperOS il registro passi di HyperOS e i passaggi batteria MIUI sono nascosti e si usa il sensore del telefono</item>
+        <item>Sveglie esatte: consentile in Impostazioni → Fonte dei passi e salvataggio di mezzanotte, promemoria e cambio quadrante funzionano senza ritardi (Android 14 e successivi)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>L\'umore dell\'uccellino: sui quadranti FitWren e nei design l\'uccellino cambia con l\'obiettivo di passi</item>
         <item>Meteo sul quadrante: icona meteo e temperatura</item>

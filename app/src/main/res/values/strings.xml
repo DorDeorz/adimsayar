@@ -23,6 +23,8 @@
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
 
     <string name="service_card_title">Arka planda sürekli say</string>
+    <string name="exact_alarms_title">Tam zamanlı alarmlar</string>
+    <string name="exact_alarms_text">Gece yarısı kaydı, hatırlatmalar ve kadran değişimi tam saatinde çalışır. Kapalıysa Android bunları bir saate kadar geciktirebilir. Dokununca izin ekranı açılır.</string>
     <string name="xiaomi_unreadable_title">HyperOS adım kaydı okunamıyor</string>
     <string name="xiaomi_unreadable_text">Adımlar şu an güncellenmiyor. Bir HyperOS güncellemesi kaydı değiştirmiş olabilir. Aşağıdaki anahtarı kapatıp "Arka planda sürekli say" ile saymaya devam edebilirsin.</string>
     <string name="xiaomi_stalled_title">HyperOS adım kaydı ilerlemiyor</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Özel ROM desteği (crDroid, LineageOS gibi): Xiaomi telefonda HyperOS yoksa HyperOS adım kaydı ve MIUI pil adımları gösterilmez, telefonun sensörü kullanılır</item>
+        <item>Tam zamanlı alarmlar: Ayarlar → Adım kaynağı\'nda izin verilirse gece yarısı kaydı, hatırlatmalar ve kadran değişimi gecikmeden çalışır (Android 14 ve sonrası)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>Kuşun ruh hali: FitWren kadranlarındaki ve tasarımdaki kuş adım hedefine göre değişir (uykulu, uyanık, neşeli, kutlama)</item>
         <item>Kadranda hava durumu: FitWren kadranlarında ve tasarımda hava simgesi ve sıcaklık</item>

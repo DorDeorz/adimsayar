@@ -23,6 +23,8 @@
     <string name="frozen_text">Телефон распознаёт шаги, но счётчик не меняется. Датчик переподключён; это предупреждение исчезнет само через несколько шагов.</string>
 
     <string name="service_card_title">Считать шаги в фоне</string>
+    <string name="exact_alarms_title">Точные будильники</string>
+    <string name="exact_alarms_text">Запись в полночь, напоминания и смена циферблата срабатывают вовремя. Без разрешения Android может задержать их до часа. Нажмите, чтобы открыть разрешение.</string>
     <string name="xiaomi_unreadable_title">Не удаётся прочитать запись шагов HyperOS</string>
     <string name="xiaomi_unreadable_text">Шаги сейчас не обновляются. Возможно, обновление HyperOS изменило запись. Можно выключить переключатель ниже и считать шаги через «Считать шаги в фоне».</string>
     <string name="xiaomi_stalled_title">Запись шагов HyperOS не растёт</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Поддержка кастомных прошивок (crDroid, LineageOS и др.): на Xiaomi без HyperOS скрыты журнал шагов HyperOS и шаги батареи MIUI, используется датчик телефона</item>
+        <item>Точные будильники: разрешите в Настройки → Источник шагов, и запись в полночь, напоминания и смена циферблата работают без задержек (Android 14 и новее)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>Настроение птички: на циферблатах FitWren и в дизайнах птичка меняется по цели шагов</item>
         <item>Погода на циферблате: значок погоды и температура</item>

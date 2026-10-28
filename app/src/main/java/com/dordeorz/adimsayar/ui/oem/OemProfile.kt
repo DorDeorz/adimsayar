@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.os.Build
 import androidx.annotation.StringRes
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.RomInfo
 
 enum class OemTarget { Autostart, BatterySettings, AppDetails, Manual }
 
@@ -94,7 +95,7 @@ enum class OemProfile(
 
     companion object {
         fun current(): OemProfile =
-            detect(Build.MANUFACTURER, Build.BRAND, Build.DISPLAY, Build.FINGERPRINT)
+            if (RomInfo.isVendorRom) detect(Build.MANUFACTURER, Build.BRAND, Build.DISPLAY, Build.FINGERPRINT) else Unknown
 
         fun detect(manufacturer: String?, brand: String?, display: String?, fingerprint: String?): OemProfile {
             val maker = listOf(manufacturer, brand).joinToString(" ") { it.orEmpty().lowercase() }

@@ -23,6 +23,8 @@
     <string name="frozen_text">يرصد الهاتف الخطوات لكن العداد لا يتقدم. تمت إعادة الاتصال بالمستشعر، وسيختفي هذا التنبيه تلقائيًا بعد بضع خطوات.</string>
 
     <string name="service_card_title">متابعة العدّ في الخلفية</string>
+    <string name="exact_alarms_title">المنبهات الدقيقة</string>
+    <string name="exact_alarms_text">يعمل حفظ منتصف الليل والتذكيرات وتغيير واجهة الساعة في موعدها. عند الإيقاف قد يؤخرها Android حتى ساعة. اضغط لفتح شاشة الإذن.</string>
     <string name="xiaomi_unreadable_title">تعذّرت قراءة سجل خطوات HyperOS</string>
     <string name="xiaomi_unreadable_text">الخطوات لا تتحدث حاليًا. ربما غيّر تحديث HyperOS السجل. يمكنك إيقاف المفتاح أدناه ومتابعة العدّ عبر «متابعة العدّ في الخلفية».</string>
     <string name="xiaomi_stalled_title">سجل خطوات HyperOS لا يتقدم</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>دعم الرومات المخصصة (crDroid وLineageOS وغيرها): على هاتف Xiaomi بدون HyperOS تُخفى سجلات خطوات HyperOS وخطوات بطارية MIUI ويُستخدم مستشعر الهاتف</item>
+        <item>المنبهات الدقيقة: اسمح بها في الإعدادات ← مصدر الخطوات ليعمل حفظ منتصف الليل والتذكيرات وتغيير الواجهة دون تأخير (Android 14 وأحدث)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>مزاج الطائر: يتغير الطائر في واجهات FitWren والتصاميم حسب هدف الخطوات</item>
         <item>الطقس على الواجهة: رمز الطقس ودرجة الحرارة</item>

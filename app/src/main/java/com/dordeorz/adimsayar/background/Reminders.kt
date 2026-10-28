@@ -188,7 +188,7 @@ object Reminders {
                 date.atTime(hour, 0).atZone(zone).toInstant().toEpochMilli()
             }
         }.first { it > now }
-        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next, pending)
+        Schedules.setAlarm(alarms, next, pending)
     }
 
     private fun healthLines(strings: Context, period: BandPeriod?): List<String> {
@@ -265,7 +265,7 @@ object Reminders {
         val zone = ZoneId.systemDefault()
         val now = LocalDate.now(zone).atTime(EVENING_TIME)
         val next = if (now.atZone(zone).toInstant().toEpochMilli() > System.currentTimeMillis()) now else now.plusDays(1)
-        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next.atZone(zone).toInstant().toEpochMilli(), pending)
+        Schedules.setAlarm(alarms, next.atZone(zone).toInstant().toEpochMilli(), pending)
     }
 
     fun scheduleWeight(context: Context) {
@@ -288,7 +288,7 @@ object Reminders {
             .map { it.atTime(WEIGHT_TIME).atZone(zone).toInstant().toEpochMilli() to it }
             .first { (at, date) -> at > now && date.dayOfWeek == settings.weekStart }
             .first
-        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, next, pending)
+        Schedules.setAlarm(alarms, next, pending)
     }
 
     private fun notify(context: Context, id: Int, title: String, text: String, tab: String? = null) {

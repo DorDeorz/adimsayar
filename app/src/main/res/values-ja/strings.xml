@@ -23,6 +23,8 @@
     <string name="frozen_text">歩行は検出されていますが、カウンターが進んでいません。センサーを再接続しました。数歩歩くとこの警告は自動的に消えます。</string>
 
     <string name="service_card_title">バックグラウンドでカウントを続ける</string>
+    <string name="exact_alarms_title">正確なアラーム</string>
+    <string name="exact_alarms_text">深夜の記録、リマインダー、文字盤の切り替えが時間どおりに動きます。オフの場合、Android が最大1時間遅らせることがあります。タップすると許可画面が開きます。</string>
     <string name="xiaomi_unreadable_title">HyperOS の歩数記録を読み取れません</string>
     <string name="xiaomi_unreadable_text">現在、歩数が更新されていません。HyperOS のアップデートで記録が変わった可能性があります。下のスイッチをオフにして、「バックグラウンドでカウントを続ける」でカウントを続けられます。</string>
     <string name="xiaomi_stalled_title">HyperOS の歩数記録が増えていません</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
+        <item>正確なアラーム：設定 → 歩数のソースで許可すると、深夜の記録、リマインダー、文字盤の切り替えが遅れずに動きます（Android 14 以降）</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>小鳥の気分：FitWrenの文字盤とデザインで、小鳥が歩数目標に応じて変わります</item>
         <item>文字盤に天気：天気アイコンと気温</item>

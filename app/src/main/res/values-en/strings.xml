@@ -23,6 +23,8 @@
     <string name="frozen_text">The phone detects steps but the counter is not moving. The sensor was reconnected; this warning goes away by itself after a few steps.</string>
 
     <string name="service_card_title">Keep counting in the background</string>
+    <string name="exact_alarms_title">Exact alarms</string>
+    <string name="exact_alarms_text">The midnight record, reminders and face changes run on time. When off, Android may delay them by up to an hour. Tap to open the permission screen.</string>
     <string name="xiaomi_unreadable_title">Can\'t read the HyperOS step record</string>
     <string name="xiaomi_unreadable_text">Steps are not updating right now. A HyperOS update may have changed the record. You can turn off the switch below and keep counting with "Keep counting in the background".</string>
     <string name="xiaomi_stalled_title">The HyperOS step record is not moving</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Custom ROM support (crDroid, LineageOS and others): on a Xiaomi phone without HyperOS, the HyperOS step record and MIUI battery steps are hidden and the phone\'s sensor is used</item>
+        <item>Exact alarms: allow them in Settings → Step source and the midnight record, reminders and face changes run without delay (Android 14 and later)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>The bird\'s mood: on FitWren faces and designs the bird changes with the step goal (asleep, awake, happy, celebrating)</item>
         <item>Weather on the face: a weather icon and the temperature on FitWren faces and designs</item>

@@ -23,6 +23,8 @@
     <string name="frozen_text">휴대전화가 걸음을 감지하지만 카운터가 움직이지 않습니다. 센서를 다시 연결했으며, 몇 걸음 걸으면 이 경고는 저절로 사라집니다.</string>
 
     <string name="service_card_title">백그라운드에서 계속 세기</string>
+    <string name="exact_alarms_title">정확한 알람</string>
+    <string name="exact_alarms_text">자정 기록, 알림, 워치페이스 변경이 제시간에 실행됩니다. 꺼져 있으면 Android가 최대 1시간까지 늦출 수 있습니다. 탭하면 권한 화면이 열립니다.</string>
     <string name="xiaomi_unreadable_title">HyperOS 걸음 기록을 읽을 수 없음</string>
     <string name="xiaomi_unreadable_text">지금 걸음 수가 업데이트되지 않습니다. HyperOS 업데이트로 기록이 바뀌었을 수 있습니다. 아래 스위치를 끄고 \'백그라운드에서 계속 세기\'로 계속 셀 수 있습니다.</string>
     <string name="xiaomi_stalled_title">HyperOS 걸음 기록이 움직이지 않음</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>커스텀 ROM 지원(crDroid, LineageOS 등): HyperOS가 없는 Xiaomi에서는 HyperOS 걸음 기록과 MIUI 배터리 단계를 숨기고 휴대폰 센서를 사용합니다</item>
+        <item>정확한 알람: 설정 → 걸음 소스에서 허용하면 자정 기록, 알림, 워치페이스 변경이 지연 없이 실행됩니다(Android 14 이상)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>새의 기분: FitWren 워치페이스와 디자인에서 새가 걸음 목표에 따라 바뀝니다</item>
         <item>워치페이스에 날씨: 날씨 아이콘과 기온</item>

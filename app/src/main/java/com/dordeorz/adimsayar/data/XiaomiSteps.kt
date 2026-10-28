@@ -2,7 +2,6 @@ package com.dordeorz.adimsayar.data
 
 import android.content.Context
 import android.net.Uri
-import android.os.Build
 import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
 import java.time.Instant
@@ -30,7 +29,7 @@ object XiaomiSteps {
     @Volatile
     private var lastLoggedToday: Long? = null
 
-    fun isXiaomi(): Boolean = Build.MANUFACTURER.equals("Xiaomi", ignoreCase = true)
+    fun isXiaomi(): Boolean = RomInfo.isMiui
 
     fun isEnabled(context: Context): Boolean =
         isXiaomi() && context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ENABLED, false)

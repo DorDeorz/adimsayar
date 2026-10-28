@@ -56,7 +56,16 @@ object Schedules {
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-        val exactAllowed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) alarms.canScheduleExactAlarms() else true
+        setAlarm(alarms, at, pending)
+    }
+
+    fun exactAlarmsAllowed(context: Context): Boolean =
+        Build.VERSION.SDK_INT < Build.VERSION_CODES.S ||
+            context.getSystemService(AlarmManager::class.java)?.canScheduleExactAlarms() != false
+
+    // Android 14+ denies exact alarms to new installs; without them the system may fire up to an hour late.
+    fun setAlarm(alarms: AlarmManager, at: Long, pending: PendingIntent) {
+        val exactAllowed = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || alarms.canScheduleExactAlarms()
         try {
             if (exactAllowed) {
                 alarms.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pending)

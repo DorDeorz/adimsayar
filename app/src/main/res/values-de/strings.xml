@@ -23,6 +23,8 @@
     <string name="frozen_text">Das Telefon erkennt Schritte, aber der Zähler bewegt sich nicht. Der Sensor wurde neu verbunden; diese Warnung verschwindet nach ein paar Schritten von selbst.</string>
 
     <string name="service_card_title">Im Hintergrund weiterzählen</string>
+    <string name="exact_alarms_title">Exakte Wecker</string>
+    <string name="exact_alarms_text">Mitternachtsspeicherung, Erinnerungen und Zifferblattwechsel laufen pünktlich. Ohne Erlaubnis kann Android sie bis zu einer Stunde verzögern. Tippen öffnet die Berechtigung.</string>
     <string name="xiaomi_unreadable_title">HyperOS-Schrittaufzeichnung nicht lesbar</string>
     <string name="xiaomi_unreadable_text">Die Schritte werden gerade nicht aktualisiert. Ein HyperOS-Update hat die Aufzeichnung vielleicht geändert. Du kannst den Schalter unten ausschalten und mit "Im Hintergrund weiterzählen" weiterzählen.</string>
     <string name="xiaomi_stalled_title">Die HyperOS-Schrittaufzeichnung bewegt sich nicht</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Custom-ROM-Unterstützung (crDroid, LineageOS u. a.): Auf Xiaomi-Handys ohne HyperOS werden HyperOS-Schrittdaten und MIUI-Akkuschritte ausgeblendet, der Sensor des Handys wird genutzt</item>
+        <item>Exakte Wecker: in Einstellungen → Schrittquelle erlauben, damit Mitternachtsspeicherung, Erinnerungen und Zifferblattwechsel ohne Verzögerung laufen (ab Android 14)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>Laune des Vogels: auf FitWren-Zifferblättern und Entwürfen ändert sich der Vogel mit dem Schrittziel</item>
         <item>Wetter auf dem Zifferblatt: Wettersymbol und Temperatur</item>

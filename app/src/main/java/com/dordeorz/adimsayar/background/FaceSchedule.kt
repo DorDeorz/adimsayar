@@ -103,6 +103,6 @@ object FaceSchedule {
             listOf(plan.dayStart, plan.nightStart).map { date.atTime(it / 60, it % 60).atZone(zone).toInstant().toEpochMilli() }
         }.filter { it > now }.minOrNull() ?: return
         val at = if (retry) minOf(next, now + RETRY_MS) else next
-        alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pending)
+        Schedules.setAlarm(alarms, at, pending)
     }
 }

@@ -23,6 +23,8 @@
     <string name="frozen_text">Le téléphone détecte des pas mais le compteur n\'avance pas. Le capteur a été reconnecté ; cet avertissement disparaîtra de lui-même après quelques pas.</string>
 
     <string name="service_card_title">Continuer à compter en arrière-plan</string>
+    <string name="exact_alarms_title">Alarmes exactes</string>
+    <string name="exact_alarms_text">L\'enregistrement de minuit, les rappels et le changement de cadran s\'exécutent à l\'heure. Sinon, Android peut les retarder jusqu\'à une heure. Touchez pour ouvrir l\'autorisation.</string>
     <string name="xiaomi_unreadable_title">Impossible de lire le relevé de pas HyperOS</string>
     <string name="xiaomi_unreadable_text">Les pas ne se mettent pas à jour pour le moment. Une mise à jour HyperOS a peut-être modifié le relevé. Vous pouvez désactiver l\'option ci-dessous et continuer avec « Continuer à compter en arrière-plan ».</string>
     <string name="xiaomi_stalled_title">Le relevé de pas HyperOS n\'avance pas</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>Prise en charge des ROM personnalisées (crDroid, LineageOS, etc.) : sur un Xiaomi sans HyperOS, le relevé de pas HyperOS et les étapes batterie MIUI sont masqués et le capteur du téléphone est utilisé</item>
+        <item>Alarmes exactes : autorisez-les dans Paramètres → Source des pas pour que l\'enregistrement de minuit, les rappels et le changement de cadran soient à l\'heure (Android 14 et plus)</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>L\'humeur de l\'oiseau : sur les cadrans FitWren et les créations, l\'oiseau change selon l\'objectif de pas</item>
         <item>La météo sur le cadran : icône météo et température</item>

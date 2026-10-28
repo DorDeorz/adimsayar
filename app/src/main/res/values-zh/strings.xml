@@ -23,6 +23,8 @@
     <string name="frozen_text">手机能检测到步伐，但计步器没有变化。传感器已重新连接，走几步后此提示会自动消失。</string>
 
     <string name="service_card_title">在后台继续计步</string>
+    <string name="exact_alarms_title">精确闹钟</string>
+    <string name="exact_alarms_text">午夜记录、提醒和表盘切换会准时运行。关闭时 Android 可能将其延迟最多一小时。点按打开权限页面。</string>
     <string name="xiaomi_unreadable_title">无法读取 HyperOS 步数记录</string>
     <string name="xiaomi_unreadable_text">步数目前没有更新，可能是 HyperOS 更新改变了记录方式。你可以关闭下方开关，改用“在后台继续计步”。</string>
     <string name="xiaomi_stalled_title">HyperOS 步数记录没有变化</string>
@@ -316,6 +318,10 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string-array name="release_notes_0_15_0">
+        <item>支持第三方 ROM（crDroid、LineageOS 等）：在没有 HyperOS 的小米手机上隐藏 HyperOS 步数记录和 MIUI 电池步骤，改用手机传感器</item>
+        <item>精确闹钟：在 设置 → 步数来源 中允许后，午夜记录、提醒和表盘切换不再延迟（Android 14 及以上）</item>
+    </string-array>
     <string-array name="release_notes_0_14_1">
         <item>小鸟心情：FitWren 表盘和设计中的小鸟随步数目标变化</item>
         <item>表盘上的天气：天气图标和温度</item>
