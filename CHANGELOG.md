@@ -11,6 +11,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 - Saate göre kadran (Saat kadranları → "Saate göre kadran"): gündüz ve gece kadranı ile başlangıç saatleri seçilir; FitWren o saatlerde aktif kadranı değiştirir (`background/FaceSchedule.kt`, AlarmManager). Bileklik bağlı değilse 10 dakika sonra yeniden dener.
 - Mi Band 6 kadranı (Ayarlar → Bileklik → Saat kadranları): Mi Band 6 için yapılmış `.bin` kadran dosyası (`UIHH` başlıklı) bilekliğin ürün yazılımı kanalından gönderilir (`band/HuamiFaceUpload.kt`, Gadgetbridge'in UpdateFirmwareOperation2020'sinden): parça boyu istenir, dosya boyu ve CRC32 bildirilir, dosya bilekliğin bildirdiği yerden parça parça gönderilir. Yer yoksa ya da şarj azsa ayrı uyarı gösterilir.
 - Mi Band 5, Mi Band 6 ve Amazfit Band 5'in dakika kayıtları 8 bayt okunur (önceden 4 bayt sayılıyordu, Gadgetbridge ile aynı).
+- Özel ROM'lar (crDroid, LineageOS): Xiaomi telefonda MIUI'nin adım kaynağı (`com.miui.providers.steps`) yoksa "Xiaomi adımları" açık kalmış olsa bile kullanılmaz; adımlar telefonun sayacından okunur. Lineage tabanlı ROM'da pil kartı MIUI'nin otomatik başlatma adımlarını değil, yalnızca pil optimizasyonu muafiyetini gösterir.
 
 ## 0.13.3
 
