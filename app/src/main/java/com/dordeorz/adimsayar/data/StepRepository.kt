@@ -63,6 +63,10 @@ class StepRepository private constructor(private val context: Context) {
         return hours
     }
 
+    suspend fun loadPhoneHourMap(from: LocalDate): Map<LocalDateTime, Long> =
+        dao.loadHours(from.atStartOfDay().toString(), LocalDate.now().plusDays(1).atStartOfDay().toString())
+            .associate { LocalDateTime.parse(it.hour) to it.steps }
+
     suspend fun clearBandDays() = mutex.withLock { dao.clearBand() }
 
     suspend fun saveBandHours(file: Long, hours: Map<LocalDateTime, Long>) =

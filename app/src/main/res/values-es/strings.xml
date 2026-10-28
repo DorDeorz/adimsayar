@@ -318,7 +318,8 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
-    <string-array name="release_notes_0_15_0">
+    <string-array name="release_notes_0_15_1">
+        <item>La pulsera y el teléfono se combinan siempre hora a hora: en las horas con la pulsera puesta solo cuenta la pulsera y el teléfono completa el resto (antes, sin el registro de HyperOS, ganaba el total diario mayor)</item>
         <item>Compatibilidad con ROM personalizadas (crDroid, LineageOS y otras): en un Xiaomi sin HyperOS se ocultan el registro de pasos de HyperOS y los pasos de batería de MIUI y se usa el sensor del teléfono</item>
         <item>Alarmas exactas: permítelas en Ajustes → Fuente de pasos y el registro de medianoche, los recordatorios y el cambio de esfera funcionan sin retraso (Android 14 y posterior)</item>
     </string-array>

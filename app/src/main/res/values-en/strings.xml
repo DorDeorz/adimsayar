@@ -318,7 +318,8 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
-    <string-array name="release_notes_0_15_0">
+    <string-array name="release_notes_0_15_1">
+        <item>Band and phone always merge hour by hour: in hours the band was worn only the band counts, the phone fills the other hours (before, without the HyperOS record, the larger daily total won)</item>
         <item>Custom ROM support (crDroid, LineageOS and others): on a Xiaomi phone without HyperOS, the HyperOS step record and MIUI battery steps are hidden and the phone\'s sensor is used</item>
         <item>Exact alarms: allow them in Settings → Step source and the midnight record, reminders and face changes run without delay (Android 14 and later)</item>
     </string-array>

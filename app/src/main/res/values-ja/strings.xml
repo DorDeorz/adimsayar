@@ -318,7 +318,8 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
-    <string-array name="release_notes_0_15_0">
+    <string-array name="release_notes_0_15_1">
+        <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>
         <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
         <item>正確なアラーム：設定 → 歩数のソースで許可すると、深夜の記録、リマインダー、文字盤の切り替えが遅れずに動きます（Android 14 以降）</item>
     </string-array>

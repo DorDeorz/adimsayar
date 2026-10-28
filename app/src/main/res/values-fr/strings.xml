@@ -318,7 +318,8 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
-    <string-array name="release_notes_0_15_0">
+    <string-array name="release_notes_0_15_1">
+        <item>Bracelet et téléphone sont toujours fusionnés heure par heure : pendant les heures où le bracelet est porté, seul le bracelet compte, le téléphone complète les autres heures (avant, sans le relevé HyperOS, le plus grand total du jour l\'emportait)</item>
         <item>Prise en charge des ROM personnalisées (crDroid, LineageOS, etc.) : sur un Xiaomi sans HyperOS, le relevé de pas HyperOS et les étapes batterie MIUI sont masqués et le capteur du téléphone est utilisé</item>
         <item>Alarmes exactes : autorisez-les dans Paramètres → Source des pas pour que l\'enregistrement de minuit, les rappels et le changement de cadran soient à l\'heure (Android 14 et plus)</item>
     </string-array>

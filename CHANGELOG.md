@@ -2,8 +2,9 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
-## 0.15.0
+## 0.15.1
 
+- Bileklik ve telefon her zaman saat saat birleşir (`StepMath.mergeMixed`): bilekliğin takılı olduğu saatlerde yalnız bileklik, diğer saatlerde telefonun saatlik kaydı. Önceden HyperOS kaydı kapalıyken günün büyük toplamı alınıyordu, telefon fazla sayınca bilekliği eziyordu. Telefonun saatlik kaydı olmayan eski ya da içe aktarılmış günlerde eski kural (günün büyüğü) kalır.
 - Özel ROM'lar (crDroid, LineageOS): Xiaomi telefonda MIUI'nin adım kaynağı (`com.miui.providers.steps`) yoksa "Xiaomi adımları" açık kalmış olsa bile kullanılmaz; adımlar telefonun sayacından okunur. Lineage tabanlı ROM'da pil kartı MIUI'nin otomatik başlatma adımlarını değil, yalnızca pil optimizasyonu muafiyetini gösterir.
 - Tam zamanlı alarmlar (Ayarlar → Adım kaynağı): Android 14 ve sonrasında yeni kurulumda bu izin kapalı gelir ve gece yarısı kaydı, hatırlatmalar ve saate göre kadran bir saate kadar gecikebilir. Satır izin ekranını açar; izin verilince alarmlar yeniden kurulur (`Schedules.setAlarm`, `SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED`).
 
