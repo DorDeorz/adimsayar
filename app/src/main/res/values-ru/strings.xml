@@ -318,6 +318,54 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string name="tile_name">Шаги FitWren</string>
+    <string name="tile_goal_percent">%%%1$d цели</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Сегодня %1$s шагов, %%%2$d цели</string>
+    <string name="smart_goal">Умная цель</string>
+    <string name="smart_goal_hint" formatted="false">В начале каждой недели немного повышает или понижает дневную цель по последним 4 неделям (не более чем на 10 %)</string>
+    <string name="smart_goal_changed">На этой неделе цель изменилась с %1$s на %2$s шагов (по последним 4 неделям)</string>
+    <string name="smart_goal_waiting">Для совета нужны шаги хотя бы за %1$d дней из последних 4 недель</string>
+    <string name="smart_goal_next">Совет на следующую неделю: %1$s шагов</string>
+    <string name="insight_title">Сон и шаги</string>
+    <string name="insight_not_enough">Пока мало данных: нужно хотя бы %1$d длинных и %1$d коротких ночей. Выберите 30 или 90 дней.</string>
+    <string name="insight_steps_more">В дни после сна дольше %1$d часов вы проходите в среднем на %2$s шагов больше</string>
+    <string name="insight_steps_less">В дни после сна дольше %1$d часов вы проходите в среднем на %2$s шагов меньше</string>
+    <string name="insight_steps_same">После длинных и коротких ночей (%1$d часов) вы ходите одинаково</string>
+    <string name="insight_after_long">После сна дольше %1$d часов</string>
+    <string name="insight_after_short">После сна меньше %1$d часов</string>
+    <string name="insight_sleep_active">Ночь после выполненной цели</string>
+    <string name="insight_sleep_rest">Ночь после невыполненной цели</string>
+    <string name="insight_days">Дней: %1$d</string>
+    <string name="insight_hint">Считаются шаги дня, в который вы проснулись, сегодняшний день не считается. Это связь, а не причина.</string>
+    <string name="report_button">Отчёт за %1$s (PDF)</string>
+    <string name="report_title">Отчёт за месяц · %1$s</string>
+    <string name="report_page">Страница %1$d из %2$d</string>
+    <string name="report_goal_days">%1$d из %2$d дней (цель %3$s)</string>
+    <string name="report_active_days">Активные дни</string>
+    <string name="report_distance">Расстояние</string>
+    <string name="report_kcal">Калории</string>
+    <string name="report_kcal_value">%1$s ккал</string>
+    <string name="report_vs_previous">По сравнению с прошлым месяцем</string>
+    <string name="report_water">Вода в среднем за день</string>
+    <string name="report_ml_value">%1$s мл</string>
+    <string name="report_bpm_value">%1$d уд/мин</string>
+    <string name="report_daily_chart">Шаги по дням</string>
+    <string name="report_weeks">Недели</string>
+    <string name="report_goal_line">цель</string>
+    <string name="report_days_title">Дни · %1$s</string>
+    <string name="report_day">День</string>
+    <string name="report_steps">Шаги</string>
+    <string name="report_water_short">Вода</string>
+    <string name="report_done">Отчёт сохранён</string>
+    <string name="report_failed">Не удалось создать отчёт</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Плитка быстрых настроек: шаги за сегодня и процент цели в панели уведомлений, нажатие открывает «Сегодня» (Android 7 и новее)</item>
+        <item>Умная цель (Настройки → Цели, по умолчанию выкл.): если включена, дневная цель в начале каждой недели меняется не более чем на 10% по последним 4 неделям</item>
+        <item>Сон и шаги (Здоровье): шаги после длинных и коротких ночей и сон после дней с выполненной целью</item>
+        <item>Месячный отчёт в PDF (История): сводка за месяц, график по дням, недели и таблица по дням; без интернета</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Настройки → Источник шагов → «Не считать телефон при использовании браслета»: если включено, шаги телефона не добавляются в дни с данными браслета</item>
         <item>Браслет и телефон всегда объединяются по часам: в часы, когда браслет надет, считается только браслет, телефон заполняет остальные часы (раньше без журнала HyperOS брался больший дневной итог)</item>

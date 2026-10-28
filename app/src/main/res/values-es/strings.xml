@@ -318,6 +318,54 @@
     <string name="device_phone">Teléfono</string>
     <string name="device_other">Otro dispositivo</string>
 
+    <string name="tile_name">Pasos FitWren</string>
+    <string name="tile_goal_percent">%%%1$d de la meta</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Hoy %1$s pasos, %%%2$d de la meta</string>
+    <string name="smart_goal">Meta inteligente</string>
+    <string name="smart_goal_hint" formatted="false">Al empezar cada semana sube o baja un poco la meta diaria según tus últimas 4 semanas (como máximo un 10 %)</string>
+    <string name="smart_goal_changed">Esta semana la meta pasó de %1$s a %2$s pasos (según tus últimas 4 semanas)</string>
+    <string name="smart_goal_waiting">Para sugerir hace falta tener pasos en al menos %1$d días de las últimas 4 semanas</string>
+    <string name="smart_goal_next">Sugerencia para la próxima semana: %1$s pasos</string>
+    <string name="insight_title">Sueño y pasos</string>
+    <string name="insight_not_enough">Aún no hay datos suficientes: se necesitan al menos %1$d noches largas y %1$d cortas. Prueba con 30 o 90 días.</string>
+    <string name="insight_steps_more">Los días tras dormir más de %1$d horas caminas de media %2$s pasos más</string>
+    <string name="insight_steps_less">Los días tras dormir más de %1$d horas caminas de media %2$s pasos menos</string>
+    <string name="insight_steps_same">Caminas lo mismo tras noches largas y cortas (%1$d horas)</string>
+    <string name="insight_after_long">Tras dormir más de %1$d horas</string>
+    <string name="insight_after_short">Tras dormir menos de %1$d horas</string>
+    <string name="insight_sleep_active">Noche tras cumplir la meta</string>
+    <string name="insight_sleep_rest">Noche tras no cumplir la meta</string>
+    <string name="insight_days">%1$d días</string>
+    <string name="insight_hint">Cuentan los pasos del día en que despiertas, hoy no. Es una relación, no una causa.</string>
+    <string name="report_button">Informe de %1$s (PDF)</string>
+    <string name="report_title">Informe mensual · %1$s</string>
+    <string name="report_page">Página %1$d de %2$d</string>
+    <string name="report_goal_days">%1$d de %2$d días (meta %3$s)</string>
+    <string name="report_active_days">Días activos</string>
+    <string name="report_distance">Distancia</string>
+    <string name="report_kcal">Calorías</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Frente al mes anterior</string>
+    <string name="report_water">Media diaria de agua</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d lpm</string>
+    <string name="report_daily_chart">Pasos por día</string>
+    <string name="report_weeks">Semanas</string>
+    <string name="report_goal_line">meta</string>
+    <string name="report_days_title">Días · %1$s</string>
+    <string name="report_day">Día</string>
+    <string name="report_steps">Pasos</string>
+    <string name="report_water_short">Agua</string>
+    <string name="report_done">Informe guardado</string>
+    <string name="report_failed">No se pudo crear el informe</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Icono de ajustes rápidos: pasos de hoy y porcentaje de la meta en el panel de notificaciones; al tocarlo se abre Hoy (Android 7 o superior)</item>
+        <item>Meta inteligente (Ajustes → Metas, desactivada de serie): si está activa, la meta diaria cambia como máximo un 10% al empezar cada semana según tus últimas 4 semanas</item>
+        <item>Sueño y pasos (Salud): pasos tras noches largas y cortas, y sueño tras los días en que cumpliste la meta</item>
+        <item>Informe mensual en PDF (Historial): resumen del mes, gráfico diario, semanas y tabla día a día; sin internet</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Ajustes → Fuente de pasos → «No contar el teléfono si uso la pulsera»: activado, los pasos del teléfono no se suman los días con datos de la pulsera</item>
         <item>La pulsera y el teléfono se combinan siempre hora a hora: en las horas con la pulsera puesta solo cuenta la pulsera y el teléfono completa el resto (antes, sin el registro de HyperOS, ganaba el total diario mayor)</item>

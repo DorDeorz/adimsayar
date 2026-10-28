@@ -126,6 +126,8 @@ import com.dordeorz.adimsayar.data.GLASS_OPTIONS
 import com.dordeorz.adimsayar.data.WATER_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WATER_INTERVAL_OPTIONS
 import com.dordeorz.adimsayar.data.Water
+import com.dordeorz.adimsayar.data.NO_SMART_FROM
+import com.dordeorz.adimsayar.data.SmartGoal
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
@@ -160,6 +162,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.16.0", R.array.release_notes_0_16_0),
     ReleaseNote("0.15.2", R.array.release_notes_0_15_2),
     ReleaseNote("0.14.1", R.array.release_notes_0_14_1),
     ReleaseNote("0.13.3", R.array.release_notes_0_13_3),
@@ -288,6 +291,12 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
                     dialog = SettingsDialog.DailyGoal
                 }
+                SwitchRow(
+                    title = stringResource(R.string.smart_goal),
+                    hint = smartGoalHint(state),
+                    checked = settings.smartGoal,
+                    onCheckedChange = actions.onSmartGoalChange,
+                )
                 ValueRow(stringResource(R.string.weekly_goal), stringResource(R.string.steps_value, format(settings.weeklyGoal))) {
                     dialog = SettingsDialog.WeeklyGoal
                 }
@@ -675,6 +684,22 @@ private fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Compo
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
     )
+}
+
+@Composable
+private fun smartGoalHint(state: MainUiState): String {
+    val settings = state.settings
+    if (!settings.smartGoal) return stringResource(R.string.smart_goal_hint)
+    if (settings.smartGoalFrom != NO_SMART_FROM && settings.smartGoalFrom != settings.dailyGoal) {
+        return stringResource(R.string.smart_goal_changed, format(settings.smartGoalFrom), format(settings.dailyGoal))
+    }
+    val nextWeek = SmartGoal.weekOf(state.today, settings.weekStart).plusWeeks(1)
+    val next = SmartGoal.suggest(state.history, nextWeek, settings.dailyGoal)
+    return if (next == null) {
+        stringResource(R.string.smart_goal_waiting, SmartGoal.MIN_DAYS)
+    } else {
+        stringResource(R.string.smart_goal_next, format(next))
+    }
 }
 
 @Composable

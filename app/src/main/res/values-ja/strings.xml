@@ -318,6 +318,54 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string name="tile_name">FitWren 歩数</string>
+    <string name="tile_goal_percent">目標の %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">今日 %1$s 歩、目標の %%%2$d</string>
+    <string name="smart_goal">スマート目標</string>
+    <string name="smart_goal_hint" formatted="false">毎週の始めに、直近4週間の歩数に合わせて1日の目標を少し上げ下げします（最大10%）</string>
+    <string name="smart_goal_changed">今週の目標は %1$s 歩から %2$s 歩になりました（直近4週間に基づく）</string>
+    <string name="smart_goal_waiting">提案には直近4週間のうち %1$d 日以上の歩数が必要です</string>
+    <string name="smart_goal_next">来週の提案: %1$s 歩</string>
+    <string name="insight_title">睡眠と歩数</string>
+    <string name="insight_not_enough">まだデータが足りません。長い夜と短い夜がそれぞれ %1$d 回以上必要です。30日か90日を選んでみてください。</string>
+    <string name="insight_steps_more">%1$d 時間以上眠った日は、平均 %2$s 歩多く歩いています</string>
+    <string name="insight_steps_less">%1$d 時間以上眠った日は、平均 %2$s 歩少なく歩いています</string>
+    <string name="insight_steps_same">長く眠っても短く眠っても（%1$d 時間）歩数は同じです</string>
+    <string name="insight_after_long">%1$d 時間以上眠った後</string>
+    <string name="insight_after_short">%1$d 時間未満眠った後</string>
+    <string name="insight_sleep_active">目標を達成した日の夜</string>
+    <string name="insight_sleep_rest">目標に届かなかった日の夜</string>
+    <string name="insight_days">%1$d 日</string>
+    <string name="insight_hint">起きた日の歩数を数えます。今日は含みません。これは関係であり、原因ではありません。</string>
+    <string name="report_button">%1$s のレポート（PDF）</string>
+    <string name="report_title">月間レポート · %1$s</string>
+    <string name="report_page">%1$d / %2$d ページ</string>
+    <string name="report_goal_days">%2$d 日中 %1$d 日（目標 %3$s）</string>
+    <string name="report_active_days">活動した日</string>
+    <string name="report_distance">距離</string>
+    <string name="report_kcal">カロリー</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">前月との比較</string>
+    <string name="report_water">1日の平均水分</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">1日の歩数</string>
+    <string name="report_weeks">週</string>
+    <string name="report_goal_line">目標</string>
+    <string name="report_days_title">日別 · %1$s</string>
+    <string name="report_day">日</string>
+    <string name="report_steps">歩数</string>
+    <string name="report_water_short">水分</string>
+    <string name="report_done">レポートを保存しました</string>
+    <string name="report_failed">レポートを作成できませんでした</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>クイック設定タイル: 通知パネルに今日の歩数と目標の割合を表示、タップで「今日」を開く（Android 7 以降）</item>
+        <item>スマート目標（設定 → 目標、初期はオフ）: オンにすると毎週の始めに直近4週間に合わせて1日の目標が最大10%変わる</item>
+        <item>睡眠と歩数（健康）: 長い夜と短い夜の後の歩数、目標を達成した日の夜の睡眠</item>
+        <item>月間PDFレポート（履歴）: 月のまとめ、日別グラフ、週、日ごとの表。インターネット不要</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>設定 → 歩数の取得元 →「バンド使用中はスマホを数えない」：オンにするとバンドのデータがある日はスマホの歩数を加えません</item>
         <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>

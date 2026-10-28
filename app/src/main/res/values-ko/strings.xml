@@ -318,6 +318,54 @@
     <string name="device_phone">휴대폰</string>
     <string name="device_other">기타 기기</string>
 
+    <string name="tile_name">FitWren 걸음</string>
+    <string name="tile_goal_percent">목표의 %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">오늘 %1$s걸음, 목표의 %%%2$d</string>
+    <string name="smart_goal">스마트 목표</string>
+    <string name="smart_goal_hint" formatted="false">매주 시작할 때 최근 4주 기록에 맞춰 하루 목표를 조금 올리거나 내립니다(최대 10%)</string>
+    <string name="smart_goal_changed">이번 주 목표가 %1$s걸음에서 %2$s걸음으로 바뀌었습니다(최근 4주 기준)</string>
+    <string name="smart_goal_waiting">제안하려면 최근 4주 중 최소 %1$d일의 걸음 기록이 필요합니다</string>
+    <string name="smart_goal_next">다음 주 제안: %1$s걸음</string>
+    <string name="insight_title">수면과 걸음</string>
+    <string name="insight_not_enough">아직 데이터가 부족합니다. 긴 밤과 짧은 밤이 각각 최소 %1$d번 필요합니다. 30일이나 90일을 선택해 보세요.</string>
+    <string name="insight_steps_more">%1$d시간 넘게 잔 날에는 평균 %2$s걸음 더 걷습니다</string>
+    <string name="insight_steps_less">%1$d시간 넘게 잔 날에는 평균 %2$s걸음 덜 걷습니다</string>
+    <string name="insight_steps_same">오래 자든 짧게 자든(%1$d시간) 걷는 양이 같습니다</string>
+    <string name="insight_after_long">%1$d시간 넘게 잔 후</string>
+    <string name="insight_after_short">%1$d시간 미만 잔 후</string>
+    <string name="insight_sleep_active">목표를 달성한 날의 밤</string>
+    <string name="insight_sleep_rest">목표를 못 채운 날의 밤</string>
+    <string name="insight_days">%1$d일</string>
+    <string name="insight_hint">깨어난 날의 걸음을 세며 오늘은 포함하지 않습니다. 원인이 아니라 관계입니다.</string>
+    <string name="report_button">%1$s 보고서(PDF)</string>
+    <string name="report_title">월간 보고서 · %1$s</string>
+    <string name="report_page">%2$d쪽 중 %1$d쪽</string>
+    <string name="report_goal_days">%2$d일 중 %1$d일(목표 %3$s)</string>
+    <string name="report_active_days">활동한 날</string>
+    <string name="report_distance">거리</string>
+    <string name="report_kcal">칼로리</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">지난달 대비</string>
+    <string name="report_water">하루 평균 물</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">일별 걸음</string>
+    <string name="report_weeks">주</string>
+    <string name="report_goal_line">목표</string>
+    <string name="report_days_title">일별 · %1$s</string>
+    <string name="report_day">날짜</string>
+    <string name="report_steps">걸음</string>
+    <string name="report_water_short">물</string>
+    <string name="report_done">보고서를 저장했습니다</string>
+    <string name="report_failed">보고서를 만들 수 없습니다</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>빠른 설정 타일: 알림 패널에 오늘 걸음과 목표 비율 표시, 누르면 오늘 화면이 열림(Android 7 이상)</item>
+        <item>스마트 목표(설정 → 목표, 기본 꺼짐): 켜면 매주 시작할 때 최근 4주 기준으로 하루 목표가 최대 10% 바뀜</item>
+        <item>수면과 걸음(건강): 긴 밤과 짧은 밤 다음 날의 걸음, 목표를 달성한 날 밤의 수면</item>
+        <item>월간 PDF 보고서(기록): 그 달 요약, 일별 그래프, 주별, 날짜별 표. 인터넷 필요 없음</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>설정 → 걸음 수 출처 → “밴드 사용 중에는 휴대폰을 세지 않기”: 켜면 밴드 데이터가 있는 날에는 휴대폰 걸음 수를 더하지 않습니다</item>
         <item>밴드와 휴대폰은 항상 시간별로 합칩니다: 밴드를 착용한 시간에는 밴드만 세고 휴대폰은 나머지 시간을 채웁니다(이전에는 HyperOS 기록이 없으면 하루 합계 중 큰 값을 사용)</item>

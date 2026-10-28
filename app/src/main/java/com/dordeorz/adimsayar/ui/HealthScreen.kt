@@ -63,6 +63,7 @@ import com.dordeorz.adimsayar.data.HeartZone
 import com.dordeorz.adimsayar.data.RestingCategory
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.SleepStage
+import com.dordeorz.adimsayar.data.SleepInsights
 import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.data.Weights
@@ -136,6 +137,7 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
                 }
             } else {
                 item { SleepCard(data) }
+                if (data.nights.keys.any { it in data.days }) item { SleepInsightCard(data, state) }
                 item { HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) }
                 item { RestingCard(data, daysValue) }
                 item { OxygenCard(data) }
@@ -345,6 +347,66 @@ private fun SleepCard(data: BandPeriod) {
                 .filterValues { it > 0L }
             SleepStages(averages, staged.size)
         }
+    }
+}
+
+@Composable
+private fun SleepInsightCard(data: BandPeriod, state: MainUiState) {
+    val goal = state.settings.dailyGoal
+    val insight = remember(data, state.history, state.today, goal) {
+        SleepInsights.compute(data.nights.filterKeys { it in data.days }, state.history, state.today, goal)
+    }
+    MetricCard(stringResource(R.string.insight_title)) {
+        val steps = insight.steps
+        val sleep = insight.sleep
+        if (steps == null && sleep == null) {
+            Text(
+                stringResource(R.string.insight_not_enough, SleepInsights.MIN_GROUP),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+            return@MetricCard
+        }
+        val hours = SleepInsights.GOOD_NIGHT_MINUTES / 60
+        if (steps != null) {
+            val difference = steps.goodSteps - steps.shortSteps
+            val headline = when {
+                difference > 0L -> stringResource(R.string.insight_steps_more, hours, format(difference))
+                difference < 0L -> stringResource(R.string.insight_steps_less, hours, format(-difference))
+                else -> stringResource(R.string.insight_steps_same, hours)
+            }
+            Text(headline, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+            RecordRow(
+                stringResource(R.string.insight_after_long, hours),
+                stringResource(R.string.steps_value, format(steps.goodSteps)),
+                stringResource(R.string.health_nights, steps.goodNights),
+            )
+            RecordRow(
+                stringResource(R.string.insight_after_short, hours),
+                stringResource(R.string.steps_value, format(steps.shortSteps)),
+                stringResource(R.string.health_nights, steps.shortNights),
+            )
+        }
+        if (steps != null && sleep != null) HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
+        if (sleep != null) {
+            RecordRow(
+                stringResource(R.string.insight_sleep_active),
+                sleepText(sleep.activeSleep),
+                stringResource(R.string.insight_days, sleep.activeDays),
+            )
+            RecordRow(
+                stringResource(R.string.insight_sleep_rest),
+                sleepText(sleep.restSleep),
+                stringResource(R.string.insight_days, sleep.restDays),
+            )
+        }
+        Text(
+            stringResource(R.string.insight_hint),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        )
     }
 }
 

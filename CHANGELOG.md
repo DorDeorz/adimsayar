@@ -2,6 +2,13 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.16.0
+
+- Hızlı ayar kutucuğu (`tile/StepTile.kt`, Android 7+): bildirim panelinde bugünün adımı ve hedef yüzdesi (Android 10+ alt satırda), hedefe ulaşınca kutucuk etkin görünür; dokununca Bugün sekmesi açılır. Panel her açıldığında yeniden okunur.
+- Akıllı hedef (Ayarlar → Hedefler, varsayılan kapalı, `data/SmartGoal.kt`): açıksa haftanın ilk günü (gece yarısı alarmı ya da uygulama açılışı) günlük hedef son 28 tam günün ortancasının %10 fazlasına doğru, en fazla %10 değişir, 500'e yuvarlanır, en az 3.000. En az 14 gün adım gerekir. Açıldığı hafta değiştirmez; elle hedef değiştirilince yeni hedeften devam eder. Ayarlar satırı son değişikliği ya da gelecek haftanın önerisini gösterir.
+- Uyku ve adım (Sağlık, `data/SleepInsights.kt`): seçili dönemde 7 saatten uzun ve kısa uykudan sonraki günlerin ortalama adımı, ve hedefe ulaşılan / ulaşılmayan günlerin gecesindeki ortalama uyku. Her grupta en az 3 gün gerekir; uyku uyanılan güne yazılır, bugün sayılmaz.
+- Aylık PDF raporu (Geçmiş → "<ay> raporu (PDF)", `data/MonthReport.kt`, `data/PdfReport.kt`): Android'in `PdfDocument`'ıyla iki sayfa A4: toplam, ortalama, hedef günleri, en iyi gün, mesafe, kalori, önceki aya göre değişim, su ve kilo (varsa), uyku ve dinlenik nabız ortalaması (bileklik ya da Health Connect açıksa), hedef çizgili günlük grafik, haftalar; ikinci sayfada gün gün adım, mesafe, kalori ve su. Dosya paylaşım/kaydetme ekranıyla kaydedilir, internet kullanılmaz.
+
 ## 0.15.2
 
 - Ayarlar → Adım kaynağı → "Bileklik varken telefonu sayma" (varsayılan kapalı, `WearableSteps.isBandOnly`): açıksa bilekliğin veri gönderdiği günlerde gün toplamı yalnız bileklikten gelir (`StepMath.bandDays`); telefon sadece bilekliğin hiç veri göndermediği günlerde kullanılır.

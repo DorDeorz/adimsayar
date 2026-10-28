@@ -54,6 +54,7 @@ import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.YearMonth
 
 enum class PermissionState { Granted, NeedsRequest, Denied }
 
@@ -116,6 +117,7 @@ class MainActions(
     val onDynamicColorChange: (Boolean) -> Unit,
     val onWidgetOpacityChange: (Int) -> Unit,
     val onDailyGoalChange: (Long) -> Unit,
+    val onSmartGoalChange: (Boolean) -> Unit,
     val onWeeklyGoalChange: (Long) -> Unit,
     val onHeightChange: (Int) -> Unit,
     val onWeightChange: (Int) -> Unit,
@@ -128,6 +130,7 @@ class MainActions(
     val onLanguageChange: (String) -> Unit,
     val onExport: () -> Unit,
     val onImport: () -> Unit,
+    val onMonthReport: (YearMonth) -> Unit,
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,
     val loadBandDay: suspend (LocalDate) -> BandDay?,
     val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,

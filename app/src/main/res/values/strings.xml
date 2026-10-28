@@ -318,6 +318,54 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string name="tile_name">FitWren adım</string>
+    <string name="tile_goal_percent">Hedefin %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Bugün %1$s adım, hedefin %%%2$d</string>
+    <string name="smart_goal">Akıllı hedef</string>
+    <string name="smart_goal_hint" formatted="false">Her hafta başında günlük hedefi son 4 haftana göre biraz yükseltir ya da düşürür (en fazla %10)</string>
+    <string name="smart_goal_changed">Bu hafta hedef %1$s → %2$s adım oldu (son 4 haftana göre)</string>
+    <string name="smart_goal_waiting">Öneri için son 4 haftada en az %1$d gün adım gerekiyor</string>
+    <string name="smart_goal_next">Gelecek hafta için öneri: %1$s adım</string>
+    <string name="insight_title">Uyku ve adım</string>
+    <string name="insight_not_enough">Henüz yeterli veri yok: hem uzun hem kısa uykudan en az %1$d gece gerekiyor. 30 ya da 90 günü seçmeyi dene.</string>
+    <string name="insight_steps_more">%1$d saatten fazla uyuduğun günler ortalama %2$s adım daha fazla yürüyorsun</string>
+    <string name="insight_steps_less">%1$d saatten fazla uyuduğun günler ortalama %2$s adım daha az yürüyorsun</string>
+    <string name="insight_steps_same">%1$d saatten fazla da az da uyusan aynı miktarda yürüyorsun</string>
+    <string name="insight_after_long">%1$d saatten uzun uykudan sonra</string>
+    <string name="insight_after_short">%1$d saatten kısa uykudan sonra</string>
+    <string name="insight_sleep_active">Hedefe ulaştığın günlerin gecesi</string>
+    <string name="insight_sleep_rest">Hedefe ulaşmadığın günlerin gecesi</string>
+    <string name="insight_days">%1$d gün</string>
+    <string name="insight_hint">Uyandığın günün adımı sayılır, bugün sayılmaz. Bu bir ilişki, sebep değil.</string>
+    <string name="report_button">%1$s raporu (PDF)</string>
+    <string name="report_title">Aylık rapor · %1$s</string>
+    <string name="report_page">Sayfa %1$d / %2$d</string>
+    <string name="report_goal_days">%1$d / %2$d gün (hedef %3$s)</string>
+    <string name="report_active_days">Hareketli gün</string>
+    <string name="report_distance">Mesafe</string>
+    <string name="report_kcal">Kalori</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Önceki aya göre</string>
+    <string name="report_water">Günlük su ortalaması</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Günlük adım</string>
+    <string name="report_weeks">Haftalar</string>
+    <string name="report_goal_line">hedef</string>
+    <string name="report_days_title">Günler · %1$s</string>
+    <string name="report_day">Gün</string>
+    <string name="report_steps">Adım</string>
+    <string name="report_water_short">Su</string>
+    <string name="report_done">Rapor kaydedildi</string>
+    <string name="report_failed">Rapor oluşturulamadı</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Hızlı ayar kutucuğu: bildirim panelinde bugünün adımı ve hedef yüzdesi, dokununca Bugün açılır (Android 7 ve sonrası)</item>
+        <item>Akıllı hedef (Ayarlar → Hedefler, varsayılan kapalı): açıksa günlük hedef her hafta başında son 4 haftana göre en fazla %10 değişir</item>
+        <item>Uyku ve adım (Sağlık): uzun ve kısa uykudan sonraki günlerde kaç adım attığını, hedefe ulaştığın günlerin gecesi ne kadar uyuduğunu gösterir</item>
+        <item>Aylık PDF raporu (Geçmiş): seçili ayın özeti, günlük grafik, haftalar ve gün gün tablo; internet kullanmaz</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Ayarlar → Adım kaynağı → “Bileklik varken telefonu sayma”: açıksa bilekliğin veri gönderdiği günlerde telefonun adımları hiç eklenmez</item>
         <item>Bileklik ve telefon her zaman saat saat birleşir: bilekliğin takılı olduğu saatlerde yalnız bileklik sayılır, telefon sadece diğer saatleri doldurur (önceden HyperOS kaydı kapalıyken günün büyük sayısı alınıyordu)</item>

@@ -318,6 +318,54 @@
     <string name="device_phone">Handy</string>
     <string name="device_other">Anderes Gerät</string>
 
+    <string name="tile_name">FitWren-Schritte</string>
+    <string name="tile_goal_percent">%%%1$d des Ziels</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Heute %1$s Schritte, %%%2$d des Ziels</string>
+    <string name="smart_goal">Smartes Ziel</string>
+    <string name="smart_goal_hint" formatted="false">Passt das Tagesziel zu Wochenbeginn anhand deiner letzten 4 Wochen leicht an (höchstens 10 %)</string>
+    <string name="smart_goal_changed">Diese Woche wurde das Ziel von %1$s auf %2$s Schritte geändert (nach deinen letzten 4 Wochen)</string>
+    <string name="smart_goal_waiting">Für einen Vorschlag braucht es Schritte an mindestens %1$d Tagen in den letzten 4 Wochen</string>
+    <string name="smart_goal_next">Vorschlag für nächste Woche: %1$s Schritte</string>
+    <string name="insight_title">Schlaf und Schritte</string>
+    <string name="insight_not_enough">Noch zu wenig Daten: Es braucht mindestens %1$d lange und %1$d kurze Nächte. Wähle 30 oder 90 Tage.</string>
+    <string name="insight_steps_more">Nach mehr als %1$d Stunden Schlaf gehst du im Schnitt %2$s Schritte mehr</string>
+    <string name="insight_steps_less">Nach mehr als %1$d Stunden Schlaf gehst du im Schnitt %2$s Schritte weniger</string>
+    <string name="insight_steps_same">Nach langen und kurzen Nächten (%1$d Stunden) gehst du gleich viel</string>
+    <string name="insight_after_long">Nach mehr als %1$d Stunden Schlaf</string>
+    <string name="insight_after_short">Nach weniger als %1$d Stunden Schlaf</string>
+    <string name="insight_sleep_active">Nacht nach erreichtem Ziel</string>
+    <string name="insight_sleep_rest">Nacht nach verfehltem Ziel</string>
+    <string name="insight_days">%1$d Tage</string>
+    <string name="insight_hint">Es zählen die Schritte des Tages, an dem du aufwachst, heute nicht. Das ist ein Zusammenhang, keine Ursache.</string>
+    <string name="report_button">Bericht %1$s (PDF)</string>
+    <string name="report_title">Monatsbericht · %1$s</string>
+    <string name="report_page">Seite %1$d von %2$d</string>
+    <string name="report_goal_days">%1$d von %2$d Tagen (Ziel %3$s)</string>
+    <string name="report_active_days">Aktive Tage</string>
+    <string name="report_distance">Strecke</string>
+    <string name="report_kcal">Kalorien</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Im Vergleich zum Vormonat</string>
+    <string name="report_water">Wasser pro Tag im Schnitt</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Schritte pro Tag</string>
+    <string name="report_weeks">Wochen</string>
+    <string name="report_goal_line">Ziel</string>
+    <string name="report_days_title">Tage · %1$s</string>
+    <string name="report_day">Tag</string>
+    <string name="report_steps">Schritte</string>
+    <string name="report_water_short">Wasser</string>
+    <string name="report_done">Bericht gespeichert</string>
+    <string name="report_failed">Bericht konnte nicht erstellt werden</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Schnelleinstellungs-Kachel: heutige Schritte und Zielprozent im Benachrichtigungsfeld, Tippen öffnet Heute (ab Android 7)</item>
+        <item>Smartes Ziel (Einstellungen → Ziele, standardmäßig aus): wenn an, ändert sich das Tagesziel zu Wochenbeginn um höchstens 10% nach deinen letzten 4 Wochen</item>
+        <item>Schlaf und Schritte (Gesundheit): Schritte nach langen und kurzen Nächten und Schlaf nach Tagen mit erreichtem Ziel</item>
+        <item>Monatsbericht als PDF (Verlauf): Übersicht, Tagesdiagramm, Wochen und Tabelle pro Tag; ohne Internet</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Einstellungen → Schrittquelle → „Handy nicht zählen, wenn das Armband genutzt wird“: eingeschaltet bleiben Handyschritte an Tagen mit Armbanddaten weg</item>
         <item>Armband und Handy werden immer Stunde für Stunde zusammengeführt: In Stunden mit getragenem Armband zählt nur das Armband, das Handy füllt die übrigen Stunden (bisher gewann ohne HyperOS-Daten die größere Tagessumme)</item>

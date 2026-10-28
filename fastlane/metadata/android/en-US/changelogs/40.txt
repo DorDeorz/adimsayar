@@ -1,0 +1,4 @@
+Quick settings tile: today's steps and goal percent in the notification panel.
+Smart goal (optional): the daily goal adjusts each week to your last 4 weeks.
+Sleep and steps: days after long and short nights compared.
+Monthly PDF report: summary, chart and a day-by-day table.

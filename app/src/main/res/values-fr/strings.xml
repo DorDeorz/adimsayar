@@ -318,6 +318,54 @@
     <string name="device_phone">Téléphone</string>
     <string name="device_other">Autre appareil</string>
 
+    <string name="tile_name">Pas FitWren</string>
+    <string name="tile_goal_percent">%%%1$d de l\'objectif</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Aujourd\'hui %1$s pas, %%%2$d de l\'objectif</string>
+    <string name="smart_goal">Objectif intelligent</string>
+    <string name="smart_goal_hint" formatted="false">Au début de chaque semaine, ajuste un peu l\'objectif quotidien selon tes 4 dernières semaines (10 % au plus)</string>
+    <string name="smart_goal_changed">Cette semaine, l\'objectif est passé de %1$s à %2$s pas (selon tes 4 dernières semaines)</string>
+    <string name="smart_goal_waiting">Une suggestion demande des pas sur au moins %1$d jours des 4 dernières semaines</string>
+    <string name="smart_goal_next">Suggestion pour la semaine prochaine : %1$s pas</string>
+    <string name="insight_title">Sommeil et pas</string>
+    <string name="insight_not_enough">Pas encore assez de données : il faut au moins %1$d nuits longues et %1$d courtes. Essaie 30 ou 90 jours.</string>
+    <string name="insight_steps_more">Les jours après plus de %1$d heures de sommeil, tu marches en moyenne %2$s pas de plus</string>
+    <string name="insight_steps_less">Les jours après plus de %1$d heures de sommeil, tu marches en moyenne %2$s pas de moins</string>
+    <string name="insight_steps_same">Tu marches autant après les nuits longues et courtes (%1$d heures)</string>
+    <string name="insight_after_long">Après plus de %1$d heures de sommeil</string>
+    <string name="insight_after_short">Après moins de %1$d heures de sommeil</string>
+    <string name="insight_sleep_active">Nuit après un objectif atteint</string>
+    <string name="insight_sleep_rest">Nuit après un objectif manqué</string>
+    <string name="insight_days">%1$d jours</string>
+    <string name="insight_hint">Les pas du jour du réveil comptent, pas ceux d\'aujourd\'hui. C\'est un lien, pas une cause.</string>
+    <string name="report_button">Rapport de %1$s (PDF)</string>
+    <string name="report_title">Rapport mensuel · %1$s</string>
+    <string name="report_page">Page %1$d sur %2$d</string>
+    <string name="report_goal_days">%1$d jours sur %2$d (objectif %3$s)</string>
+    <string name="report_active_days">Jours actifs</string>
+    <string name="report_distance">Distance</string>
+    <string name="report_kcal">Calories</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Par rapport au mois précédent</string>
+    <string name="report_water">Eau par jour en moyenne</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Pas par jour</string>
+    <string name="report_weeks">Semaines</string>
+    <string name="report_goal_line">objectif</string>
+    <string name="report_days_title">Jours · %1$s</string>
+    <string name="report_day">Jour</string>
+    <string name="report_steps">Pas</string>
+    <string name="report_water_short">Eau</string>
+    <string name="report_done">Rapport enregistré</string>
+    <string name="report_failed">Impossible de créer le rapport</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Tuile des réglages rapides : pas du jour et pourcentage de l\'objectif dans le volet de notifications, un appui ouvre Aujourd\'hui (Android 7 et plus)</item>
+        <item>Objectif intelligent (Réglages → Objectifs, désactivé par défaut) : s\'il est activé, l\'objectif quotidien change d\'au plus 10% au début de chaque semaine selon tes 4 dernières semaines</item>
+        <item>Sommeil et pas (Santé) : pas après les nuits longues et courtes, et sommeil après les jours où l\'objectif est atteint</item>
+        <item>Rapport mensuel PDF (Historique) : résumé du mois, graphique quotidien, semaines et tableau jour par jour ; sans internet</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Paramètres → Source des pas → « Ne pas compter le téléphone avec le bracelet » : activé, les pas du téléphone ne sont pas ajoutés les jours avec données du bracelet</item>
         <item>Bracelet et téléphone sont toujours fusionnés heure par heure : pendant les heures où le bracelet est porté, seul le bracelet compte, le téléphone complète les autres heures (avant, sans le relevé HyperOS, le plus grand total du jour l\'emportait)</item>

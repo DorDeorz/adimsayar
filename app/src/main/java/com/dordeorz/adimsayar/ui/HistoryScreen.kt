@@ -22,6 +22,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -82,6 +83,11 @@ fun HistoryScreen(state: MainUiState, actions: MainActions) {
                 },
                 onSelect = { selectedText = it.toString() },
             )
+        }
+        item {
+            OutlinedButton(onClick = { actions.onMonthReport(month) }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.report_button, MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(appLocale) }))
+            }
         }
         item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, actions) }
         item { RecordsCard(state.achievements.records, state.today) }

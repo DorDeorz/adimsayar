@@ -318,6 +318,54 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string name="tile_name">خطوات FitWren</string>
+    <string name="tile_goal_percent">%%%1$d من الهدف</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">اليوم %1$s خطوة، %%%2$d من الهدف</string>
+    <string name="smart_goal">هدف ذكي</string>
+    <string name="smart_goal_hint" formatted="false">في بداية كل أسبوع يرفع الهدف اليومي أو يخفضه قليلاً حسب آخر 4 أسابيع (10 % كحد أقصى)</string>
+    <string name="smart_goal_changed">هذا الأسبوع تغيّر الهدف من %1$s إلى %2$s خطوة (حسب آخر 4 أسابيع)</string>
+    <string name="smart_goal_waiting">يحتاج الاقتراح إلى خطوات في %1$d يومًا على الأقل من آخر 4 أسابيع</string>
+    <string name="smart_goal_next">اقتراح الأسبوع القادم: %1$s خطوة</string>
+    <string name="insight_title">النوم والخطوات</string>
+    <string name="insight_not_enough">لا توجد بيانات كافية بعد: يلزم %1$d ليالٍ طويلة و%1$d قصيرة على الأقل. جرّب 30 أو 90 يومًا.</string>
+    <string name="insight_steps_more">في الأيام التي تلي نومًا أطول من %1$d ساعات تمشي في المتوسط %2$s خطوة أكثر</string>
+    <string name="insight_steps_less">في الأيام التي تلي نومًا أطول من %1$d ساعات تمشي في المتوسط %2$s خطوة أقل</string>
+    <string name="insight_steps_same">تمشي القدر نفسه بعد الليالي الطويلة والقصيرة (%1$d ساعات)</string>
+    <string name="insight_after_long">بعد نوم أطول من %1$d ساعات</string>
+    <string name="insight_after_short">بعد نوم أقصر من %1$d ساعات</string>
+    <string name="insight_sleep_active">الليلة بعد بلوغ الهدف</string>
+    <string name="insight_sleep_rest">الليلة بعد عدم بلوغ الهدف</string>
+    <string name="insight_days">%1$d يوم</string>
+    <string name="insight_hint">تُحتسب خطوات اليوم الذي تستيقظ فيه، ولا يُحتسب اليوم. هذه علاقة وليست سببًا.</string>
+    <string name="report_button">تقرير %1$s (PDF)</string>
+    <string name="report_title">التقرير الشهري · %1$s</string>
+    <string name="report_page">الصفحة %1$d من %2$d</string>
+    <string name="report_goal_days">%1$d من %2$d يوم (الهدف %3$s)</string>
+    <string name="report_active_days">أيام نشطة</string>
+    <string name="report_distance">المسافة</string>
+    <string name="report_kcal">السعرات</string>
+    <string name="report_kcal_value">%1$s سعرة</string>
+    <string name="report_vs_previous">مقارنة بالشهر السابق</string>
+    <string name="report_water">متوسط الماء اليومي</string>
+    <string name="report_ml_value">%1$s مل</string>
+    <string name="report_bpm_value">%1$d نبضة/د</string>
+    <string name="report_daily_chart">الخطوات اليومية</string>
+    <string name="report_weeks">الأسابيع</string>
+    <string name="report_goal_line">الهدف</string>
+    <string name="report_days_title">الأيام · %1$s</string>
+    <string name="report_day">اليوم</string>
+    <string name="report_steps">الخطوات</string>
+    <string name="report_water_short">الماء</string>
+    <string name="report_done">تم حفظ التقرير</string>
+    <string name="report_failed">تعذّر إنشاء التقرير</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>مربع الإعدادات السريعة: خطوات اليوم ونسبة الهدف في لوحة الإشعارات، والنقر يفتح «اليوم» (Android 7 وما بعده)</item>
+        <item>هدف ذكي (الإعدادات ← الأهداف، متوقف افتراضيًا): عند تشغيله يتغير الهدف اليومي بداية كل أسبوع بنسبة 10% كحد أقصى حسب آخر 4 أسابيع</item>
+        <item>النوم والخطوات (الصحة): الخطوات بعد الليالي الطويلة والقصيرة، والنوم بعد الأيام التي بلغت فيها الهدف</item>
+        <item>تقرير شهري PDF (السجل): ملخص الشهر ورسم يومي والأسابيع وجدول يومًا بيوم؛ دون إنترنت</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>الإعدادات ← مصدر الخطوات ← «لا تحتسب الهاتف أثناء استخدام السوار»: عند التشغيل لا تُضاف خطوات الهاتف في الأيام التي فيها بيانات من السوار</item>
         <item>يُدمج السوار والهاتف دائمًا ساعة بساعة: في الساعات التي كان السوار فيها على المعصم يُحتسب السوار فقط، ويكمل الهاتف بقية الساعات (سابقًا بدون سجل HyperOS كان يُؤخذ المجموع اليومي الأكبر)</item>

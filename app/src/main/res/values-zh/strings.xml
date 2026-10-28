@@ -318,6 +318,54 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string name="tile_name">FitWren 步数</string>
+    <string name="tile_goal_percent">目标的 %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">今天 %1$s 步，目标的 %%%2$d</string>
+    <string name="smart_goal">智能目标</string>
+    <string name="smart_goal_hint" formatted="false">每周开始时，根据最近 4 周的步数略微调高或调低每日目标（最多 10%）</string>
+    <string name="smart_goal_changed">本周目标从 %1$s 步调整为 %2$s 步（根据最近 4 周）</string>
+    <string name="smart_goal_waiting">需要最近 4 周内至少 %1$d 天有步数才能给出建议</string>
+    <string name="smart_goal_next">下周建议：%1$s 步</string>
+    <string name="insight_title">睡眠与步数</string>
+    <string name="insight_not_enough">数据还不够：长睡眠和短睡眠各需要至少 %1$d 晚。试试选择 30 或 90 天。</string>
+    <string name="insight_steps_more">睡眠超过 %1$d 小时的日子，你平均多走 %2$s 步</string>
+    <string name="insight_steps_less">睡眠超过 %1$d 小时的日子，你平均少走 %2$s 步</string>
+    <string name="insight_steps_same">无论睡得长短（%1$d 小时），你走的步数一样</string>
+    <string name="insight_after_long">睡眠超过 %1$d 小时后</string>
+    <string name="insight_after_short">睡眠不足 %1$d 小时后</string>
+    <string name="insight_sleep_active">达成目标当天的夜晚</string>
+    <string name="insight_sleep_rest">未达成目标当天的夜晚</string>
+    <string name="insight_days">%1$d 天</string>
+    <string name="insight_hint">统计醒来当天的步数，不含今天。这是关联，不是原因。</string>
+    <string name="report_button">%1$s 报告（PDF）</string>
+    <string name="report_title">月度报告 · %1$s</string>
+    <string name="report_page">第 %1$d 页，共 %2$d 页</string>
+    <string name="report_goal_days">%2$d 天中 %1$d 天（目标 %3$s）</string>
+    <string name="report_active_days">活跃天数</string>
+    <string name="report_distance">距离</string>
+    <string name="report_kcal">卡路里</string>
+    <string name="report_kcal_value">%1$s 千卡</string>
+    <string name="report_vs_previous">与上月相比</string>
+    <string name="report_water">每日平均饮水</string>
+    <string name="report_ml_value">%1$s 毫升</string>
+    <string name="report_bpm_value">%1$d 次/分</string>
+    <string name="report_daily_chart">每日步数</string>
+    <string name="report_weeks">周</string>
+    <string name="report_goal_line">目标</string>
+    <string name="report_days_title">每日 · %1$s</string>
+    <string name="report_day">日期</string>
+    <string name="report_steps">步数</string>
+    <string name="report_water_short">饮水</string>
+    <string name="report_done">报告已保存</string>
+    <string name="report_failed">无法创建报告</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>快捷设置图块：在通知面板显示今天的步数和目标百分比，点按打开“今天”（Android 7 及以上）</item>
+        <item>智能目标（设置 → 目标，默认关闭）：开启后每周开始时根据最近 4 周将每日目标调整最多 10%</item>
+        <item>睡眠与步数（健康）：长短睡眠后一天的步数，以及达成目标当天夜里的睡眠</item>
+        <item>月度 PDF 报告（历史）：当月总结、每日图表、每周和逐日表格；无需联网</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>设置 → 步数来源 →“使用手环时不计手机”：开启后，有手环数据的日子不再加入手机步数</item>
         <item>手环和手机始终按小时合并：佩戴手环的小时只计手环步数，手机补足其余小时（以前没有 HyperOS 记录时取当天较大的总数）</item>

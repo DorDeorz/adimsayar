@@ -47,6 +47,11 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
+import com.dordeorz.adimsayar.data.HealthMath
+import com.dordeorz.adimsayar.data.MonthReport
+import com.dordeorz.adimsayar.data.PdfReport
+import com.dordeorz.adimsayar.data.ReportHealth
+import com.dordeorz.adimsayar.data.SmartGoal
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
@@ -74,6 +79,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.time.LocalDate
+import java.time.YearMonth
+import kotlinx.coroutines.flow.first
 
 class MainActivity : ComponentActivity() {
 
@@ -131,6 +138,10 @@ class MainActivity : ComponentActivity() {
             settingsStore.setDailyGoal(goal)
             refreshWidgets()
         },
+        onSmartGoalChange = { enabled ->
+            val week = SmartGoal.weekOf(LocalDate.now(), settingsStore.settings.value.weekStart)
+            settingsStore.setSmartGoal(enabled, week.toEpochDay())
+        },
         onWeeklyGoalChange = { settingsStore.setWeeklyGoal(it) },
         onHeightChange = { settingsStore.setHeight(it) },
         onWeightChange = { settingsStore.setWeight(it) },
@@ -156,6 +167,10 @@ class MainActivity : ComponentActivity() {
             Reminders.scheduleEvening(applicationContext)
         },
         onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
+        onMonthReport = { month ->
+            reportMonth = month
+            reportLauncher.launch(REPORT_FILE_NAME.format(month))
+        },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/zip", "application/octet-stream")) },
         loadDayDetail = { date ->
             if (XiaomiSteps.isEnabled(applicationContext)) {
@@ -242,6 +257,54 @@ class MainActivity : ComponentActivity() {
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         if (uri != null) transferCsv(R.string.export_done) { repository.exportCsv(requireNotNull(contentResolver.openOutputStream(uri))) }
+    }
+
+    private var reportMonth: YearMonth? = null
+
+    private val reportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { uri ->
+        val month = reportMonth ?: return@registerForActivityResult
+        if (uri != null) writeReport(uri, month)
+    }
+
+    private fun writeReport(uri: Uri, month: YearMonth) {
+        val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
+        AppScope.launch(Dispatchers.IO) {
+            val done = try {
+                val settings = settingsStore.settings.value
+                val report = MonthReport.build(
+                    month = month,
+                    today = LocalDate.now(),
+                    history = repository.loadHistory(),
+                    water = Water.observe(appContext).first(),
+                    weights = Weights.observe(appContext).first(),
+                    goal = settings.dailyGoal,
+                )
+                val health = if (WearableHealth.isEnabled(appContext)) reportHealth(appContext, report) else null
+                PdfReport.write(appContext, requireNotNull(contentResolver.openOutputStream(uri)), report, settings, health)
+                true
+            } catch (e: IOException) {
+                false
+            } catch (e: RuntimeException) {
+                false
+            }
+            withContext(Dispatchers.Main) {
+                Toast.makeText(appContext, strings.getString(if (done) R.string.report_done else R.string.report_failed), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private suspend fun reportHealth(context: Context, report: MonthReport): ReportHealth? {
+        val last = report.days.lastOrNull()?.date ?: return null
+        val period = WearableHealth.period(context, last, report.days.size.toLong()) ?: return null
+        val nights = period.nights.filterKeys { YearMonth.from(it) == report.month }
+        val resting = period.resting.mapNotNull { it.second }
+        val health = ReportHealth(
+            sleepMinutes = HealthMath.average(nights.values.map { it.minutes }),
+            nights = nights.size,
+            resting = HealthMath.average(resting),
+        )
+        return health.takeIf { it.sleepMinutes != null || it.resting != null }
     }
 
     private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -390,6 +453,9 @@ class MainActivity : ComponentActivity() {
             withContext(Dispatchers.Main) { xiaomiAvailable = available }
         }
         startXiaomiSync()
+        AppScope.launch(Dispatchers.IO) {
+            if (SmartGoal.applyIfDue(appContext)) Widgets.updateAll(appContext)
+        }
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
@@ -653,6 +719,7 @@ class MainActivity : ComponentActivity() {
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
         private const val EXPORT_FILE_NAME = "fitwren-%s.csv"
+        private const val REPORT_FILE_NAME = "fitwren-rapor-%s.pdf"
         private const val SOURCE_DAYS = 7L
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"

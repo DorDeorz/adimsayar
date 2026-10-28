@@ -318,6 +318,54 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string name="tile_name">FitWren steps</string>
+    <string name="tile_goal_percent">%%%1$d of goal</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">%1$s steps today, %%%2$d of goal</string>
+    <string name="smart_goal">Smart goal</string>
+    <string name="smart_goal_hint" formatted="false">At the start of each week, raises or lowers the daily goal a little based on your last 4 weeks (at most 10%)</string>
+    <string name="smart_goal_changed">This week the goal went from %1$s to %2$s steps (based on your last 4 weeks)</string>
+    <string name="smart_goal_waiting">A suggestion needs steps on at least %1$d days in the last 4 weeks</string>
+    <string name="smart_goal_next">Suggestion for next week: %1$s steps</string>
+    <string name="insight_title">Sleep and steps</string>
+    <string name="insight_not_enough">Not enough data yet: it needs at least %1$d long and %1$d short nights. Try choosing 30 or 90 days.</string>
+    <string name="insight_steps_more">On days after more than %1$d hours of sleep you walk %2$s more steps on average</string>
+    <string name="insight_steps_less">On days after more than %1$d hours of sleep you walk %2$s fewer steps on average</string>
+    <string name="insight_steps_same">You walk the same after long and short nights (%1$d hours)</string>
+    <string name="insight_after_long">After more than %1$d hours of sleep</string>
+    <string name="insight_after_short">After less than %1$d hours of sleep</string>
+    <string name="insight_sleep_active">Night after reaching the goal</string>
+    <string name="insight_sleep_rest">Night after missing the goal</string>
+    <string name="insight_days">%1$d days</string>
+    <string name="insight_hint">Steps of the day you woke up count, today does not. This is a link, not a cause.</string>
+    <string name="report_button">%1$s report (PDF)</string>
+    <string name="report_title">Monthly report · %1$s</string>
+    <string name="report_page">Page %1$d of %2$d</string>
+    <string name="report_goal_days">%1$d of %2$d days (goal %3$s)</string>
+    <string name="report_active_days">Active days</string>
+    <string name="report_distance">Distance</string>
+    <string name="report_kcal">Calories</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Compared to last month</string>
+    <string name="report_water">Daily water average</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Daily steps</string>
+    <string name="report_weeks">Weeks</string>
+    <string name="report_goal_line">goal</string>
+    <string name="report_days_title">Days · %1$s</string>
+    <string name="report_day">Day</string>
+    <string name="report_steps">Steps</string>
+    <string name="report_water_short">Water</string>
+    <string name="report_done">Report saved</string>
+    <string name="report_failed">Could not create the report</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Quick settings tile: today\'s steps and goal percent in the notification panel, a tap opens Today (Android 7 and later)</item>
+        <item>Smart goal (Settings → Goals, off by default): when on, the daily goal changes by at most 10% at the start of each week based on your last 4 weeks</item>
+        <item>Sleep and steps (Health): steps on days after long and short nights, and sleep after days you reached the goal</item>
+        <item>Monthly PDF report (History): summary of the chosen month, daily chart, weeks and a day-by-day table; no internet needed</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Settings → Step source → “Don\'t count the phone while using the band”: when on, phone steps are left out on days the band sent data</item>
         <item>Band and phone always merge hour by hour: in hours the band was worn only the band counts, the phone fills the other hours (before, without the HyperOS record, the larger daily total won)</item>

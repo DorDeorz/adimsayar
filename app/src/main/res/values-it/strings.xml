@@ -318,6 +318,54 @@
     <string name="device_phone">Telefono</string>
     <string name="device_other">Altro dispositivo</string>
 
+    <string name="tile_name">Passi FitWren</string>
+    <string name="tile_goal_percent">%%%1$d dell\'obiettivo</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Oggi %1$s passi, %%%2$d dell\'obiettivo</string>
+    <string name="smart_goal">Obiettivo intelligente</string>
+    <string name="smart_goal_hint" formatted="false">All\'inizio di ogni settimana alza o abbassa un po\' l\'obiettivo giornaliero in base alle ultime 4 settimane (al massimo il 10 %)</string>
+    <string name="smart_goal_changed">Questa settimana l\'obiettivo è passato da %1$s a %2$s passi (in base alle ultime 4 settimane)</string>
+    <string name="smart_goal_waiting">Per un suggerimento servono passi in almeno %1$d giorni delle ultime 4 settimane</string>
+    <string name="smart_goal_next">Suggerimento per la prossima settimana: %1$s passi</string>
+    <string name="insight_title">Sonno e passi</string>
+    <string name="insight_not_enough">Dati ancora insufficienti: servono almeno %1$d notti lunghe e %1$d brevi. Prova 30 o 90 giorni.</string>
+    <string name="insight_steps_more">Nei giorni dopo più di %1$d ore di sonno cammini in media %2$s passi in più</string>
+    <string name="insight_steps_less">Nei giorni dopo più di %1$d ore di sonno cammini in media %2$s passi in meno</string>
+    <string name="insight_steps_same">Cammini lo stesso dopo notti lunghe e brevi (%1$d ore)</string>
+    <string name="insight_after_long">Dopo più di %1$d ore di sonno</string>
+    <string name="insight_after_short">Dopo meno di %1$d ore di sonno</string>
+    <string name="insight_sleep_active">Notte dopo l\'obiettivo raggiunto</string>
+    <string name="insight_sleep_rest">Notte dopo l\'obiettivo mancato</string>
+    <string name="insight_days">%1$d giorni</string>
+    <string name="insight_hint">Contano i passi del giorno del risveglio, oggi no. È un legame, non una causa.</string>
+    <string name="report_button">Report di %1$s (PDF)</string>
+    <string name="report_title">Report mensile · %1$s</string>
+    <string name="report_page">Pagina %1$d di %2$d</string>
+    <string name="report_goal_days">%1$d giorni su %2$d (obiettivo %3$s)</string>
+    <string name="report_active_days">Giorni attivi</string>
+    <string name="report_distance">Distanza</string>
+    <string name="report_kcal">Calorie</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Rispetto al mese precedente</string>
+    <string name="report_water">Acqua media al giorno</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Passi al giorno</string>
+    <string name="report_weeks">Settimane</string>
+    <string name="report_goal_line">obiettivo</string>
+    <string name="report_days_title">Giorni · %1$s</string>
+    <string name="report_day">Giorno</string>
+    <string name="report_steps">Passi</string>
+    <string name="report_water_short">Acqua</string>
+    <string name="report_done">Report salvato</string>
+    <string name="report_failed">Impossibile creare il report</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Riquadro delle impostazioni rapide: passi di oggi e percentuale dell\'obiettivo nel pannello notifiche, un tocco apre Oggi (Android 7 e successivi)</item>
+        <item>Obiettivo intelligente (Impostazioni → Obiettivi, spento di default): se attivo, l\'obiettivo giornaliero cambia al massimo del 10% all\'inizio di ogni settimana in base alle ultime 4 settimane</item>
+        <item>Sonno e passi (Salute): passi dopo notti lunghe e brevi, e sonno dopo i giorni con obiettivo raggiunto</item>
+        <item>Report mensile PDF (Cronologia): riepilogo del mese, grafico giornaliero, settimane e tabella giorno per giorno; senza internet</item>
+    </string-array>
     <string-array name="release_notes_0_15_2">
         <item>Impostazioni → Fonte passi → «Non contare il telefono se uso il braccialetto»: se attivo, i passi del telefono non vengono aggiunti nei giorni con dati del braccialetto</item>
         <item>Braccialetto e telefono si uniscono sempre ora per ora: nelle ore in cui il braccialetto è indossato conta solo il braccialetto, il telefono completa le altre ore (prima, senza il registro HyperOS, vinceva il totale giornaliero maggiore)</item>
