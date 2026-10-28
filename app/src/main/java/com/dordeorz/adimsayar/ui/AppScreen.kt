@@ -220,7 +220,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
                 when (shown) {
                     Tab.History -> HistoryScreen(state, actions)
                     Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
-                    Tab.Today -> TodayScreen(state, actions)
+                    Tab.Today -> if (state.extra.extras.simpleView) SimpleTodayScreen(state, actions) else TodayScreen(state, actions)
                     Tab.Medals -> MedalsScreen(state, actions.onRouteChange)
                     Tab.Settings -> SettingsScreen(state, actions)
                 }

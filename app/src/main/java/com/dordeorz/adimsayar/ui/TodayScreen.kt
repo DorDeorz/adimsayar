@@ -91,7 +91,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         freezeOffer(state)?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
-        item { BirdCard(state) }
+        item { BirdCard(state, actions) }
         if (state.extra.extras.showQuote) item { QuoteCard(state.today) }
         if (!state.sensorAvailable) {
             item { MessageCard(stringResource(R.string.sensor_missing_title), stringResource(R.string.sensor_missing_text)) }
@@ -128,6 +128,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         if (state.settings.monthlyGoal != NO_GOAL || state.settings.yearlyGoal != NO_GOAL) item { PeriodGoalsCard(state) }
         if (state.today.dayOfWeek in state.extra.extras.walkPlan) item { WalkPlanCard(state) }
         item { WaterCard(state, actions.onAddWater) }
+        item { WalkToolsCard(state, actions) }
         item { WeekCard(state.week, goal) }
         item {
             val reading = state.lastReadingWallMs

@@ -167,6 +167,14 @@ internal fun RingExtraLines(state: MainUiState, steps: Long, goal: Long) {
             modifier = Modifier.padding(top = 2.dp),
         )
     }
+    if (state.extra.hasPressure) {
+        Text(
+            stringResource(R.string.floors_today, state.extra.floors[state.today] ?: 0),
+            style = small,
+            color = muted,
+            modifier = Modifier.padding(top = 2.dp),
+        )
+    }
     val kcal = Distance.kcal(steps, state.settings.heightCm, state.settings.weightKg)
     Foods.equivalent(kcal)?.let { (food, count) ->
         Text(

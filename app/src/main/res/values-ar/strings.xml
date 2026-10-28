@@ -1201,4 +1201,106 @@
         <item>الصحة: درجة التعافي والعمر اللياقي (ببيانات السوار)</item>
         <item>ميداليات جديدة: المسافة وسلسلة الماء وسلسلة النوم وإنهاء المسارات</item>
     </string-array>
+    <string name="bird_item_glasses">نظارة</string>
+    <string name="bird_item_flower">زهرة</string>
+    <string name="bird_item_nightcap">قبعة النوم</string>
+    <string name="bird_item_backpack">حقيبة ظهر</string>
+    <string name="bird_unlock_glasses">امشِ 42 كم إجمالًا</string>
+    <string name="bird_unlock_flower">هدف الماء 7 أيام متتالية</string>
+    <string name="bird_unlock_nightcap">7 ليالٍ جيدة متتالية</string>
+    <string name="bird_unlock_backpack">أنهِ مسارًا افتراضيًا</string>
+    <string name="bird_item_wear">مكتسب: اختر إن كان طائرك يرتديه</string>
+    <string name="seeds_count">البذور: %1$d</string>
+    <string name="seeds_hint">بذرة لكل 1000 خطوة لشراء الألوان والأصوات أو لإطعام طائرك</string>
+    <string name="bird_fed">أحب طائرك البذرة!</string>
+    <string name="bird_feed">أطعم</string>
+    <string name="bird_species_title">نوع الطائر</string>
+    <string name="bird_locked_level">%1$s (المستوى %2$d)</string>
+    <string name="bird_color_title">لون الريش</string>
+    <string name="bird_price">%1$s (%2$d بذرة)</string>
+    <string name="bird_sound_title">التغريد</string>
+    <string name="bird_species_sparrow">الصعو</string>
+    <string name="bird_species_owl">بومة</string>
+    <string name="bird_species_parrot">ببغاء</string>
+    <string name="bird_species_eagle">نسر</string>
+    <string name="bird_color_default">طبيعي</string>
+    <string name="bird_color_sky">أزرق سماوي</string>
+    <string name="bird_color_rose">وردي</string>
+    <string name="bird_color_mint">نعناعي</string>
+    <string name="bird_color_plum">بنفسجي</string>
+    <string name="bird_color_night">ليلي</string>
+    <string name="bird_sound_chirp">زقزقة</string>
+    <string name="bird_sound_trill">ترغلة</string>
+    <string name="bird_sound_tweet">صفير</string>
+    <string name="bird_sound_coo">هديل</string>
+    <string name="metronome_channel">المترونوم</string>
+    <string name="metronome_title">مترونوم الإيقاع</string>
+    <string name="metronome_bpm">%1$d خطوة في الدقيقة</string>
+    <string name="walk_stop">إيقاف</string>
+    <string name="walk_start">ابدأ</string>
+    <string name="walk_channel">تسجيل المشي</string>
+    <string name="walk_gps_recording">جارٍ تسجيل مشي بنظام GPS</string>
+    <string name="walk_gps_distance">%1$s كم</string>
+    <string name="walk_gps_denied">لم يُمنح إذن الموقع؛ مشي GPS يحتاجه</string>
+    <string name="walk_tools_title">أدوات المشي</string>
+    <string name="walk_dog_title">تمشية الكلب</string>
+    <string name="walk_dog_hint">ابدأ عند الخروج وأوقف عند العودة؛ تُحفظ الخطوات</string>
+    <string name="walk_running">جارٍ: %1$s</string>
+    <string name="walk_gps_title">مشي بنظام GPS</string>
+    <string name="walk_gps_hint">يُحفظ المسار والمسافة؛ يُستخدم الموقع أثناء التسجيل فقط</string>
+    <string name="walk_gps_running">%1$s كم · %2$s</string>
+    <string name="walk_list_button">المشي المحفوظ (%1$d)</string>
+    <string name="walk_list_title">المشي</string>
+    <string name="walk_delete">حذف</string>
+    <string name="walk_summary_gps">%1$s كم · %2$s · %3$s خطوة</string>
+    <string name="walk_summary_dog">%1$s · %2$s خطوة</string>
+    <string name="floors_today">صعدت %1$d طوابق</string>
+    <string name="walks_on_day">%1$d مشي</string>
+    <string name="wallpaper_name">خلفية حية</string>
+    <string name="wallpaper_description">يطير طائر FitWren من العش إلى الغصن كلما مشيت</string>
+    <string name="wallpaper_set_hint">على الشاشة الرئيسية يطير الطائر من العش إلى الغصن مع خطوات اليوم</string>
+    <string name="lock_title">FitWren مقفل</string>
+    <string name="lock_use_pin">استخدم الرمز</string>
+    <string name="lock_wrong">رمز خاطئ، حاول مجددًا</string>
+    <string name="lock_enter_pin">أدخل رمزك</string>
+    <string name="lock_biometric_again">افتح ببصمة الإصبع أو الوجه</string>
+    <string name="simple_today">اليوم</string>
+    <string name="simple_view_off">العودة إلى العرض العادي</string>
+    <string name="simple_view">عرض بسيط</string>
+    <string name="simple_view_hint">الخطوات والهدف فقط بخط كبير في صفحة اليوم</string>
+    <string name="app_lock">قفل التطبيق</string>
+    <string name="app_lock_hint">يطلب رمزًا عند الفتح</string>
+    <string name="app_lock_biometric">الفتح بالبصمة / الوجه</string>
+    <string name="app_lock_biometric_hint">الفتح البيومتري للهاتف؛ يبقى الرمز احتياطيًا</string>
+    <string name="app_lock_change">تغيير الرمز</string>
+    <string name="app_lock_change_hint">عيّن رمزًا جديدًا</string>
+    <string name="app_lock_set_pin">تعيين الرمز</string>
+    <string name="app_lock_pin_hint">رقم من %1$d إلى %2$d خانات. إن نسيته فلن يفتح التطبيق إلا بعد مسح بياناته.</string>
+    <string name="app_lock_pin">الرمز</string>
+    <string name="app_lock_pin_again">الرمز (مرة أخرى)</string>
+    <string name="onboarding_skip">تخطٍ</string>
+    <string name="onboarding_welcome_title">مرحبًا بك في FitWren</string>
+    <string name="onboarding_welcome_text">يعدّ خطواتك ويكبر طائرك كلما بلغت هدفك. بلا حساب، وتبقى بياناتك على هاتفك.</string>
+    <string name="onboarding_goal_title">هدفك اليومي</string>
+    <string name="onboarding_goal_text">يمكنك تغييره لاحقًا من الإعدادات</string>
+    <string name="onboarding_body_title">الطول والوزن</string>
+    <string name="onboarding_body_text">تُحسب المسافة والسعرات منهما</string>
+    <string name="onboarding_height">%1$d سم</string>
+    <string name="onboarding_weight">%1$d كغ</string>
+    <string name="onboarding_permission_title">إذن الخطوات</string>
+    <string name="onboarding_permission_text">يتطلب عدّ الخطوات إذن النشاط البدني</string>
+    <string name="onboarding_permission_done">تم منح الإذن ✓</string>
+    <string name="onboarding_permission_button">اسمح</string>
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_20_0">
+        <item>أنواع الطيور: الصعو والبومة (المستوى 3) والببغاء (6) والنسر (10)؛ في التطبيق والأداة والخلفية ووجه السوار</item>
+        <item>البذور: بذرة لكل 1000 خطوة؛ أطعم طائرك واشترِ ألوانًا وأصواتًا</item>
+        <item>الإكسسوارات: ارتدِ ما ربحته أو أخفه؛ جديد: نظارة وزهرة وقبعة نوم وحقيبة ظهر</item>
+        <item>خلفية حية: يطير الطائر من العش إلى الغصن مع خطواتك</item>
+        <item>أدوات المشي (اليوم): مترونوم الإيقاع وتمشية الكلب وتسجيل المشي بنظام GPS (مع رسم المسار)</item>
+        <item>عداد الطوابق: في الهواتف التي فيها حساس ضغط</item>
+        <item>قفل التطبيق (رمز أو بصمة أو وجه) والعرض البسيط (الإعدادات ← المظهر واللغة)</item>
+        <item>صفحات ترحيب عند التثبيت الجديد: الهدف والطول والوزن والإذن</item>
+    </string-array>
 </resources>

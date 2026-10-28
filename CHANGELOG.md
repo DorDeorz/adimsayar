@@ -2,6 +2,21 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.0
+
+- Kuş türleri (`BirdSpecies`): çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10). Seçilen tür ve renk uygulamada, Kuş widget'ında, canlı duvar kâğıdında ve kadran tasarımcısının bilekliğe gönderdiği kuş resimlerinde çizilir.
+- Tohumlar ve besleme (`Seeds`): her 1.000 adım bir tohum. Kuşu besle (1 tohum, kuş zıplar ve öter), tüy rengi (30–100 tohum) ve ötüş (20–40 tohum) al. Ötüşler `ui/BirdSong.kt` içinde sesten üretilir, ses dosyası yok.
+- Aksesuarlar: kazanılanlar kuş penceresinden takılıp çıkarılır; yeni gözlük (42 km), çiçek (7 gün su), uyku başlığı (7 gece uyku), sırt çantası (ilk rota).
+- Canlı duvar kâğıdı (`wallpaper/BirdWallpaper.kt`, Ayarlar → Görünüm ve dil): gündüz ve gece göğü; kuş günün adımı hedefe yaklaştıkça yuvadan dala uçar, dakikada bir yenilenir, yalnızca ekrandayken çalışır.
+- Yürüyüş araçları kartı (Bugün):
+  - Tempo metronomu (`walk/MetronomeService.kt`, dakikada 60–180 adım, bildirimle çalışır).
+  - Köpek gezdirme: başlat ve durdur, aradaki adımlar `walks` tablosuna yazılır.
+  - GPS ile yürüyüş (`walk/WalkRecordService.kt`): konum izni yalnızca bu düğmeye basınca istenir ve yalnızca kayıt sırasında kullanılır. Mesafe ve rota kaydedilir, kayıtlı yürüyüşlerde rota çizilir. `ACCESS_FINE_LOCATION` artık Android 12 ve üstünde de isteniyor.
+- Kat sayacı (`sensor/FloorCounter.kt`): basınç sensörü olan telefonlarda, uygulama açıkken, arka planda sürekli sayma açıkken ve GPS yürüyüşünde çalışır. Adım atılırken iki dakika içinde 3 m yükselme bir kat sayılır; asansör ve hava değişimi sayılmaz. Sensör yoksa hiçbir yerde görünmez.
+- Uygulama kilidi: 4–8 haneli PIN (SHA-256 özetiyle saklanır) ve isteğe bağlı parmak izi ya da yüz (Android 9 ve üstü). Uygulama 30 saniyeden uzun arka planda kalınca yeniden kilitlenir.
+- Sade görünüm: Bugün sayfasında yalnızca büyük yazıyla adım, hedef ve ilerleme.
+- İlk açılış rehberi: yalnızca yeni kurulumda (eski kullanıcılar atlar). Hoş geldin, günlük hedef, boy-kilo ve adım izni sayfaları var.
+
 ## 0.19.0
 
 - Hedefe kalan süre (`data/StepPace.kt`): son 14 günün en hareketli saatlerinden kendi yürüme hızın (dakikada 80–125 adım, veri yoksa 100) bulunur; Bugün'de halkanın altında ve geniş Bugün widget'ında "Hedefe ≈ 25 dk yürüyüş kaldı".

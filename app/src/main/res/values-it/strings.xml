@@ -1201,4 +1201,106 @@
         <item>Salute: punteggio di recupero ed età fitness (con il braccialetto)</item>
         <item>Nuove medaglie: distanza, serie d\'acqua, serie di sonno, percorsi completati</item>
     </string-array>
+    <string name="bird_item_glasses">Occhiali</string>
+    <string name="bird_item_flower">Fiore</string>
+    <string name="bird_item_nightcap">Berretto da notte</string>
+    <string name="bird_item_backpack">Zaino</string>
+    <string name="bird_unlock_glasses">Cammina 42 km in totale</string>
+    <string name="bird_unlock_flower">Obiettivo d\'acqua 7 giorni di fila</string>
+    <string name="bird_unlock_nightcap">7 buone notti di fila</string>
+    <string name="bird_unlock_backpack">Completa un percorso virtuale</string>
+    <string name="bird_item_wear">Ottenuto: scegli se il tuo uccellino lo indossa</string>
+    <string name="seeds_count">Semi: %1$d</string>
+    <string name="seeds_hint">Un seme ogni 1.000 passi, per colori, canti o per nutrire l\'uccellino</string>
+    <string name="bird_fed">Al tuo uccellino è piaciuto il seme!</string>
+    <string name="bird_feed">Nutri</string>
+    <string name="bird_species_title">Specie</string>
+    <string name="bird_locked_level">%1$s (livello %2$d)</string>
+    <string name="bird_color_title">Colore delle piume</string>
+    <string name="bird_price">%1$s (%2$d semi)</string>
+    <string name="bird_sound_title">Canto</string>
+    <string name="bird_species_sparrow">Scricciolo</string>
+    <string name="bird_species_owl">Gufo</string>
+    <string name="bird_species_parrot">Pappagallo</string>
+    <string name="bird_species_eagle">Aquila</string>
+    <string name="bird_color_default">Naturale</string>
+    <string name="bird_color_sky">Azzurro</string>
+    <string name="bird_color_rose">Rosa</string>
+    <string name="bird_color_mint">Menta</string>
+    <string name="bird_color_plum">Prugna</string>
+    <string name="bird_color_night">Notte</string>
+    <string name="bird_sound_chirp">Cinguettio</string>
+    <string name="bird_sound_trill">Trillo</string>
+    <string name="bird_sound_tweet">Fischio</string>
+    <string name="bird_sound_coo">Tubare</string>
+    <string name="metronome_channel">Metronomo</string>
+    <string name="metronome_title">Metronomo del passo</string>
+    <string name="metronome_bpm">%1$d passi al minuto</string>
+    <string name="walk_stop">Ferma</string>
+    <string name="walk_start">Avvia</string>
+    <string name="walk_channel">Registrazione camminata</string>
+    <string name="walk_gps_recording">Registrazione camminata GPS</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Permesso di posizione negato; la camminata GPS ne ha bisogno</string>
+    <string name="walk_tools_title">Strumenti per camminare</string>
+    <string name="walk_dog_title">Passeggiata col cane</string>
+    <string name="walk_dog_hint">Avvia uscendo, ferma al rientro; i passi vengono salvati</string>
+    <string name="walk_running">In corso: %1$s</string>
+    <string name="walk_gps_title">Camminata GPS</string>
+    <string name="walk_gps_hint">Percorso e distanza salvati; la posizione si usa solo durante la registrazione</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Camminate salvate (%1$d)</string>
+    <string name="walk_list_title">Camminate</string>
+    <string name="walk_delete">Elimina</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s passi</string>
+    <string name="walk_summary_dog">%1$s · %2$s passi</string>
+    <string name="floors_today">%1$d piani saliti</string>
+    <string name="walks_on_day">%1$d camminate</string>
+    <string name="wallpaper_name">Sfondo animato</string>
+    <string name="wallpaper_description">L\'uccellino di FitWren vola dal nido al ramo mentre cammini</string>
+    <string name="wallpaper_set_hint">Nella schermata home l\'uccellino vola dal nido al ramo con i passi del giorno</string>
+    <string name="lock_title">FitWren è bloccato</string>
+    <string name="lock_use_pin">Usa PIN</string>
+    <string name="lock_wrong">PIN errato, riprova</string>
+    <string name="lock_enter_pin">Inserisci il PIN</string>
+    <string name="lock_biometric_again">Sblocca con impronta o volto</string>
+    <string name="simple_today">Oggi</string>
+    <string name="simple_view_off">Torna alla vista normale</string>
+    <string name="simple_view">Vista semplice</string>
+    <string name="simple_view_hint">Solo passi e obiettivo a caratteri grandi in Oggi</string>
+    <string name="app_lock">Blocco app</string>
+    <string name="app_lock_hint">Chiede un PIN all\'apertura</string>
+    <string name="app_lock_biometric">Sblocca con impronta / volto</string>
+    <string name="app_lock_biometric_hint">Lo sblocco biometrico del telefono; il PIN resta di riserva</string>
+    <string name="app_lock_change">Cambia PIN</string>
+    <string name="app_lock_change_hint">Imposta un nuovo PIN</string>
+    <string name="app_lock_set_pin">Imposta PIN</string>
+    <string name="app_lock_pin_hint">Un numero di %1$d–%2$d cifre. Se lo dimentichi, l\'app si apre solo cancellandone i dati.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (di nuovo)</string>
+    <string name="onboarding_skip">Salta</string>
+    <string name="onboarding_welcome_title">Benvenuto in FitWren</string>
+    <string name="onboarding_welcome_text">Conta i tuoi passi e il tuo uccellino cresce quando raggiungi l\'obiettivo. Nessun account, i dati restano sul telefono.</string>
+    <string name="onboarding_goal_title">Il tuo obiettivo giornaliero</string>
+    <string name="onboarding_goal_text">Puoi cambiarlo poi nelle Impostazioni</string>
+    <string name="onboarding_body_title">Altezza e peso</string>
+    <string name="onboarding_body_text">Distanza e calorie si calcolano da questi</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Permesso passi</string>
+    <string name="onboarding_permission_text">Per contare i passi serve il permesso di attività fisica</string>
+    <string name="onboarding_permission_done">Permesso concesso ✓</string>
+    <string name="onboarding_permission_button">Consenti</string>
+    <string name="onboarding_next">Avanti</string>
+    <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Specie: scricciolo, gufo (livello 3), pappagallo (6), aquila (10); nell\'app, nel widget, nello sfondo e nel quadrante</item>
+        <item>Semi: uno ogni 1.000 passi; nutri l\'uccellino e compra colori e canti</item>
+        <item>Accessori: indossa o nascondi ciò che hai vinto; nuovi occhiali, fiore, berretto da notte e zaino</item>
+        <item>Sfondo animato: l\'uccellino vola dal nido al ramo con i tuoi passi</item>
+        <item>Strumenti (Oggi): metronomo del passo, passeggiata col cane e camminata GPS (con il percorso)</item>
+        <item>Contapiani: sui telefoni con sensore di pressione</item>
+        <item>Blocco app (PIN, impronta o volto) e vista semplice (Impostazioni → Aspetto e lingua)</item>
+        <item>Pagine di benvenuto alla prima installazione: obiettivo, altezza e peso, permesso</item>
+    </string-array>
 </resources>

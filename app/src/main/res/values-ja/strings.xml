@@ -1201,4 +1201,106 @@
         <item>健康：回復度とフィットネス年齢（バンドのデータ）</item>
         <item>新しいメダル：距離、水分連続、睡眠連続、ルート完走</item>
     </string-array>
+    <string name="bird_item_glasses">メガネ</string>
+    <string name="bird_item_flower">花</string>
+    <string name="bird_item_nightcap">ナイトキャップ</string>
+    <string name="bird_item_backpack">リュック</string>
+    <string name="bird_unlock_glasses">合計42km歩く</string>
+    <string name="bird_unlock_flower">水分目標を7日連続</string>
+    <string name="bird_unlock_nightcap">よく眠れた夜が7日連続</string>
+    <string name="bird_unlock_backpack">バーチャルルートを1つ完走</string>
+    <string name="bird_item_wear">獲得済み：鳥が身に着けるか選べます</string>
+    <string name="seeds_count">種：%1$d</string>
+    <string name="seeds_hint">1,000歩ごとに種1つ。色や鳴き声、えさに使えます</string>
+    <string name="bird_fed">鳥は種が大好き！</string>
+    <string name="bird_feed">えさをあげる</string>
+    <string name="bird_species_title">鳥の種類</string>
+    <string name="bird_locked_level">%1$s（レベル%2$d）</string>
+    <string name="bird_color_title">羽の色</string>
+    <string name="bird_price">%1$s（種%2$d）</string>
+    <string name="bird_sound_title">鳴き声</string>
+    <string name="bird_species_sparrow">ミソサザイ</string>
+    <string name="bird_species_owl">フクロウ</string>
+    <string name="bird_species_parrot">オウム</string>
+    <string name="bird_species_eagle">ワシ</string>
+    <string name="bird_color_default">ナチュラル</string>
+    <string name="bird_color_sky">空色</string>
+    <string name="bird_color_rose">ピンク</string>
+    <string name="bird_color_mint">ミント</string>
+    <string name="bird_color_plum">プラム</string>
+    <string name="bird_color_night">夜</string>
+    <string name="bird_sound_chirp">チュンチュン</string>
+    <string name="bird_sound_trill">さえずり</string>
+    <string name="bird_sound_tweet">口笛</string>
+    <string name="bird_sound_coo">クークー</string>
+    <string name="metronome_channel">メトロノーム</string>
+    <string name="metronome_title">ペースメトロノーム</string>
+    <string name="metronome_bpm">1分間に%1$d歩</string>
+    <string name="walk_stop">停止</string>
+    <string name="walk_start">開始</string>
+    <string name="walk_channel">散歩の記録</string>
+    <string name="walk_gps_recording">GPSで散歩を記録中</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">位置情報の許可がありません。GPS散歩に必要です</string>
+    <string name="walk_tools_title">散歩ツール</string>
+    <string name="walk_dog_title">犬の散歩</string>
+    <string name="walk_dog_hint">出かけるときに開始、戻ったら停止。歩数を保存</string>
+    <string name="walk_running">実行中：%1$s</string>
+    <string name="walk_gps_title">GPS散歩</string>
+    <string name="walk_gps_hint">道と距離を保存。位置情報は記録中だけ使います</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">保存した散歩（%1$d）</string>
+    <string name="walk_list_title">散歩</string>
+    <string name="walk_delete">削除</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s歩</string>
+    <string name="walk_summary_dog">%1$s · %2$s歩</string>
+    <string name="floors_today">%1$d階分上った</string>
+    <string name="walks_on_day">散歩%1$d回</string>
+    <string name="wallpaper_name">ライブ壁紙</string>
+    <string name="wallpaper_description">歩くとFitWrenの鳥が巣から枝へ飛びます</string>
+    <string name="wallpaper_set_hint">ホーム画面で、その日の歩数に合わせて鳥が巣から枝へ</string>
+    <string name="lock_title">FitWrenはロック中</string>
+    <string name="lock_use_pin">PINを使う</string>
+    <string name="lock_wrong">PINが違います。もう一度</string>
+    <string name="lock_enter_pin">PINを入力</string>
+    <string name="lock_biometric_again">指紋または顔で解除</string>
+    <string name="simple_today">今日</string>
+    <string name="simple_view_off">通常表示に戻す</string>
+    <string name="simple_view">シンプル表示</string>
+    <string name="simple_view_hint">今日のページは歩数と目標だけを大きな文字で</string>
+    <string name="app_lock">アプリのロック</string>
+    <string name="app_lock_hint">開くときにPINを要求</string>
+    <string name="app_lock_biometric">指紋／顔で解除</string>
+    <string name="app_lock_biometric_hint">スマホの生体認証。PINは予備として残ります</string>
+    <string name="app_lock_change">PINを変更</string>
+    <string name="app_lock_change_hint">新しいPINを設定</string>
+    <string name="app_lock_set_pin">PINを設定</string>
+    <string name="app_lock_pin_hint">%1$d〜%2$d桁の数字。忘れるとアプリのデータを消さないと開けません。</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN（もう一度）</string>
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_welcome_title">FitWrenへようこそ</string>
+    <string name="onboarding_welcome_text">歩数を数え、目標を達成すると鳥が育ちます。アカウント不要、データはスマホの中だけ。</string>
+    <string name="onboarding_goal_title">1日の目標</string>
+    <string name="onboarding_goal_text">あとで設定から変更できます</string>
+    <string name="onboarding_body_title">身長と体重</string>
+    <string name="onboarding_body_text">距離とカロリーの計算に使います</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">歩数の許可</string>
+    <string name="onboarding_permission_text">歩数を数えるには身体活動の許可が必要です</string>
+    <string name="onboarding_permission_done">許可済み ✓</string>
+    <string name="onboarding_permission_button">許可する</string>
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_0">
+        <item>鳥の種類：ミソサザイ、フクロウ（レベル3）、オウム（6）、ワシ（10）。アプリ・ウィジェット・壁紙・バンドの文字盤に</item>
+        <item>種：1,000歩ごとに1つ。えさにしたり、羽の色や鳴き声を買ったり</item>
+        <item>アクセサリー：獲得したものを付け外し。新しくメガネ、花、ナイトキャップ、リュック</item>
+        <item>ライブ壁紙：歩くと鳥が巣から枝へ飛びます</item>
+        <item>散歩ツール（今日）：ペースメトロノーム、犬の散歩、GPS散歩の記録（ルート表示付き）</item>
+        <item>階数カウンター：気圧センサーのあるスマホで</item>
+        <item>アプリのロック（PIN・指紋・顔）とシンプル表示（設定→外観と言語）</item>
+        <item>新規インストール時のようこそ画面：目標、身長と体重、許可</item>
+    </string-array>
 </resources>

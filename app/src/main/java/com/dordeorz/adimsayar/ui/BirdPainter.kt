@@ -4,17 +4,15 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
+import com.dordeorz.adimsayar.data.BirdColor
 import com.dordeorz.adimsayar.data.BirdItem
 import com.dordeorz.adimsayar.data.BirdMood
+import com.dordeorz.adimsayar.data.BirdSpecies
 import com.dordeorz.adimsayar.data.BirdStage
 import com.dordeorz.adimsayar.data.BirdState
 import kotlin.math.abs
 
 private const val UNIT = 100f
-private const val BODY = 0xFFFFC93C.toInt()
-private const val BELLY = 0xFFFFE8A3.toInt()
-private const val WING = 0xFFF4A922.toInt()
-private const val BEAK = 0xFFFF8A3D.toInt()
 private const val EYE = 0xFF3B2A20.toInt()
 private const val WHITE = 0xFFFFFFFF.toInt()
 private const val BLUSH = 0x66FF6F6F
@@ -34,6 +32,38 @@ private const val HOP_HEIGHT = 12f
 private const val WING_LIFT = 75f
 private const val EGG_TILT = 12f
 
+private class Palette(val body: Int, val belly: Int, val wing: Int, val beak: Int)
+
+private fun color(value: Long) = value.toInt()
+
+private val SPECIES_PALETTES = mapOf(
+    BirdSpecies.Sparrow to Palette(color(0xFFFFC93C), color(0xFFFFE8A3), color(0xFFF4A922), color(0xFFFF8A3D)),
+    BirdSpecies.Owl to Palette(color(0xFF8D6E63), color(0xFFD7CCC8), color(0xFF6D4C41), color(0xFFFFB74D)),
+    BirdSpecies.Parrot to Palette(color(0xFF43A047), color(0xFFC5E1A5), color(0xFFE53935), color(0xFF546E7A)),
+    BirdSpecies.Eagle to Palette(color(0xFF5D4037), color(0xFFBCAAA4), color(0xFF3E2723), color(0xFFFFC107)),
+)
+
+private val COLOR_PALETTES = mapOf(
+    BirdColor.Sky to Triple(color(0xFF4FC3F7), color(0xFFB3E5FC), color(0xFF0288D1)),
+    BirdColor.Rose to Triple(color(0xFFF48FB1), color(0xFFFCE4EC), color(0xFFD81B60)),
+    BirdColor.Mint to Triple(color(0xFF80CBC4), color(0xFFE0F2F1), color(0xFF00897B)),
+    BirdColor.Plum to Triple(color(0xFFBA68C8), color(0xFFF3E5F5), color(0xFF7B1FA2)),
+    BirdColor.Night to Triple(color(0xFF455A64), color(0xFF90A4AE), color(0xFF263238)),
+)
+
+private fun paletteOf(bird: BirdState): Palette {
+    val base = SPECIES_PALETTES.getValue(bird.species)
+    val tint = COLOR_PALETTES[bird.color] ?: return base
+    return Palette(tint.first, tint.second, tint.third, base.beak)
+}
+
+private const val OWL_DISC = 0xFFF5F0E6.toInt()
+private const val EAGLE_HEAD = 0xFFFFFFFF.toInt()
+private const val GLASSES = 0xFF263238.toInt()
+private const val FLOWER = 0xFFEC407A.toInt()
+private const val NIGHTCAP = 0xFF3949AB.toInt()
+private const val BACKPACK = 0xFF6D4C41.toInt()
+
 class BirdPose(val hop: Float = 0f, val flap: Float = 0f, val blink: Boolean = false)
 
 object BirdPainter {
@@ -49,8 +79,10 @@ private class BirdDrawer(private val pose: BirdPose) {
         strokeJoin = Paint.Join.ROUND
     }
     private val text = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFakeBoldText = true }
+    private var palette = SPECIES_PALETTES.getValue(BirdSpecies.Sparrow)
 
     fun draw(canvas: Canvas, size: Float, bird: BirdState) {
+        palette = paletteOf(bird)
         canvas.save()
         canvas.scale(size / UNIT, size / UNIT)
         fill.color = SHADOW
@@ -110,7 +142,7 @@ private class BirdDrawer(private val pose: BirdPose) {
         val stage = bird.stage
         val excited = bird.mood == BirdMood.Excited
         if (stage >= BirdStage.Fledgling) tail(canvas, stage)
-        stroke.color = BEAK
+        stroke.color = palette.beak
         stroke.strokeWidth = 3f
         if (stage != BirdStage.Hatchling) {
             canvas.drawLine(-8f, -12f, -8f, 0f, stroke)
@@ -118,16 +150,27 @@ private class BirdDrawer(private val pose: BirdPose) {
             canvas.drawLine(-12f, 0f, -4f, 0f, stroke)
             canvas.drawLine(4f, 0f, 12f, 0f, stroke)
         }
-        fill.color = BODY
+        if (bird.species == BirdSpecies.Owl) tufts(canvas)
+        if (BirdItem.Backpack in bird.items && stage != BirdStage.Hatchling) backpack(canvas)
+        fill.color = palette.body
         canvas.drawCircle(0f, -38f, 28f, fill)
-        fill.color = BELLY
+        fill.color = palette.belly
         canvas.drawOval(RectF(-16f, -46f, 18f, -14f), fill)
+        if (bird.species == BirdSpecies.Eagle) {
+            fill.color = EAGLE_HEAD
+            canvas.drawOval(RectF(-22f, -64f, 22f, -36f), fill)
+        }
+        if (bird.species == BirdSpecies.Owl) {
+            fill.color = OWL_DISC
+            canvas.drawCircle(-9f, -46f, 7.5f, fill)
+            canvas.drawCircle(9f, -46f, 7.5f, fill)
+        }
         val lift = abs(pose.flap) * WING_LIFT
         wing(canvas, -24f, if (excited) -60f else 15f, lift)
         wing(canvas, 24f, if (excited) 60f else -15f, -lift)
-        if (stage >= BirdStage.Bird) crest(canvas, stage == BirdStage.Elder)
+        if (stage >= BirdStage.Bird && bird.species != BirdSpecies.Owl && bird.species != BirdSpecies.Eagle) crest(canvas, stage == BirdStage.Elder)
         eyes(canvas, bird.mood)
-        beak(canvas, bird.mood)
+        beak(canvas, bird.mood, hooked = bird.species == BirdSpecies.Parrot || bird.species == BirdSpecies.Eagle)
         if (bird.mood == BirdMood.Happy || excited) {
             fill.color = BLUSH
             canvas.drawCircle(-17f, -38f, 4.5f, fill)
@@ -143,7 +186,7 @@ private class BirdDrawer(private val pose: BirdPose) {
 
     private fun tail(canvas: Canvas, stage: BirdStage) {
         val length = if (stage >= BirdStage.Bird) 24f else 16f
-        fill.color = WING
+        fill.color = palette.wing
         val path = Path().apply {
             moveTo(20f, -30f)
             lineTo(20f + length, -46f)
@@ -157,13 +200,13 @@ private class BirdDrawer(private val pose: BirdPose) {
         canvas.save()
         canvas.rotate(lift, x * 0.75f, -50f)
         canvas.rotate(angle, x, -38f)
-        fill.color = WING
+        fill.color = palette.wing
         canvas.drawOval(RectF(x - 7f, -52f, x + 7f, -26f), fill)
         canvas.restore()
     }
 
     private fun crest(canvas: Canvas, elder: Boolean) {
-        fill.color = if (elder) GOLD else WING
+        fill.color = if (elder) GOLD else palette.wing
         val lift = if (elder) 6f else 0f
         canvas.drawOval(RectF(-4f, -76f - lift, 4f, -62f), fill)
         canvas.drawOval(RectF(-11f, -71f - lift / 2, -3f, -61f), fill)
@@ -198,9 +241,20 @@ private class BirdDrawer(private val pose: BirdPose) {
         }
     }
 
-    private fun beak(canvas: Canvas, mood: BirdMood) {
-        fill.color = BEAK
+    private fun beak(canvas: Canvas, mood: BirdMood, hooked: Boolean) {
+        fill.color = palette.beak
         val open = mood == BirdMood.Happy || mood == BirdMood.Excited
+        if (hooked) {
+            val hook = Path().apply {
+                moveTo(-6f, -42f)
+                quadTo(6f, -44f, 6f, -34f)
+                lineTo(2f, -31f)
+                quadTo(2f, -38f, -6f, -36f)
+                close()
+            }
+            canvas.drawPath(hook, fill)
+            return
+        }
         val top = Path().apply {
             moveTo(-5f, -41f)
             lineTo(5f, -41f)
@@ -217,6 +271,24 @@ private class BirdDrawer(private val pose: BirdPose) {
             }
             canvas.drawPath(bottom, fill)
         }
+    }
+
+    private fun tufts(canvas: Canvas) {
+        fill.color = palette.wing
+        for (side in floatArrayOf(-1f, 1f)) {
+            val tuft = Path().apply {
+                moveTo(side * 10f, -60f)
+                lineTo(side * 24f, -74f)
+                lineTo(side * 22f, -54f)
+                close()
+            }
+            canvas.drawPath(tuft, fill)
+        }
+    }
+
+    private fun backpack(canvas: Canvas) {
+        fill.color = BACKPACK
+        canvas.drawRoundRect(RectF(16f, -48f, 34f, -22f), 4f, 4f, fill)
     }
 
     private fun shell(canvas: Canvas) {
@@ -241,6 +313,37 @@ private class BirdDrawer(private val pose: BirdPose) {
     }
 
     private fun items(canvas: Canvas, items: Set<BirdItem>) {
+        if (BirdItem.Glasses in items) {
+            stroke.color = GLASSES
+            stroke.strokeWidth = 1.8f
+            canvas.drawCircle(-9f, -46f, 6f, stroke)
+            canvas.drawCircle(9f, -46f, 6f, stroke)
+            canvas.drawLine(-3f, -46f, 3f, -46f, stroke)
+        }
+        if (BirdItem.Flower in items) {
+            fill.color = FLOWER
+            for (i in 0 until 5) {
+                canvas.save()
+                canvas.rotate(i * 72f, -18f, -60f)
+                canvas.drawCircle(-18f, -65f, 3f, fill)
+                canvas.restore()
+            }
+            fill.color = GOLD
+            canvas.drawCircle(-18f, -60f, 2.4f, fill)
+        }
+        if (BirdItem.Nightcap in items && BirdItem.Crown !in items && BirdItem.Cap !in items) {
+            fill.color = NIGHTCAP
+            val cap = Path().apply {
+                moveTo(-14f, -60f)
+                quadTo(0f, -72f, 14f, -60f)
+                quadTo(18f, -76f, 26f, -70f)
+                quadTo(10f, -86f, -14f, -60f)
+                close()
+            }
+            canvas.drawPath(cap, fill)
+            fill.color = WHITE
+            canvas.drawCircle(26f, -70f, 3.5f, fill)
+        }
         if (BirdItem.Scarf in items) {
             fill.color = SCARF
             canvas.drawRoundRect(RectF(-21f, -31f, 21f, -25f), 3f, 3f, fill)

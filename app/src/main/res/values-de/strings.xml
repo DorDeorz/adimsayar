@@ -1201,4 +1201,106 @@
         <item>Gesundheit: Erholungswert und Fitnessalter (mit Armbanddaten)</item>
         <item>Neue Medaillen: Strecke, Wasser-Serie, Schlaf-Serie, Routen beendet</item>
     </string-array>
+    <string name="bird_item_glasses">Brille</string>
+    <string name="bird_item_flower">Blume</string>
+    <string name="bird_item_nightcap">Schlafmütze</string>
+    <string name="bird_item_backpack">Rucksack</string>
+    <string name="bird_unlock_glasses">Insgesamt 42 km gehen</string>
+    <string name="bird_unlock_flower">Wasserziel 7 Tage in Folge</string>
+    <string name="bird_unlock_nightcap">7 gute Nächte in Folge</string>
+    <string name="bird_unlock_backpack">Eine virtuelle Route beenden</string>
+    <string name="bird_item_wear">Verdient: wähle, ob dein Vogel es trägt</string>
+    <string name="seeds_count">Körner: %1$d</string>
+    <string name="seeds_hint">Ein Korn je 1.000 Schritte, für Farben, Lieder oder zum Füttern</string>
+    <string name="bird_fed">Dein Vogel liebt das Korn!</string>
+    <string name="bird_feed">Füttern</string>
+    <string name="bird_species_title">Vogelart</string>
+    <string name="bird_locked_level">%1$s (Stufe %2$d)</string>
+    <string name="bird_color_title">Federfarbe</string>
+    <string name="bird_price">%1$s (%2$d Körner)</string>
+    <string name="bird_sound_title">Gesang</string>
+    <string name="bird_species_sparrow">Zaunkönig</string>
+    <string name="bird_species_owl">Eule</string>
+    <string name="bird_species_parrot">Papagei</string>
+    <string name="bird_species_eagle">Adler</string>
+    <string name="bird_color_default">Natürlich</string>
+    <string name="bird_color_sky">Himmelblau</string>
+    <string name="bird_color_rose">Rosa</string>
+    <string name="bird_color_mint">Mint</string>
+    <string name="bird_color_plum">Pflaume</string>
+    <string name="bird_color_night">Nacht</string>
+    <string name="bird_sound_chirp">Zwitschern</string>
+    <string name="bird_sound_trill">Triller</string>
+    <string name="bird_sound_tweet">Pfiff</string>
+    <string name="bird_sound_coo">Gurren</string>
+    <string name="metronome_channel">Metronom</string>
+    <string name="metronome_title">Tempo-Metronom</string>
+    <string name="metronome_bpm">%1$d Schritte pro Minute</string>
+    <string name="walk_stop">Stopp</string>
+    <string name="walk_start">Start</string>
+    <string name="walk_channel">Spaziergang-Aufzeichnung</string>
+    <string name="walk_gps_recording">GPS-Spaziergang wird aufgezeichnet</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Standortberechtigung fehlt; der GPS-Spaziergang braucht sie</string>
+    <string name="walk_tools_title">Geh-Werkzeuge</string>
+    <string name="walk_dog_title">Gassi gehen</string>
+    <string name="walk_dog_hint">Beim Losgehen starten, zurück stoppen; die Schritte werden gespeichert</string>
+    <string name="walk_running">Läuft: %1$s</string>
+    <string name="walk_gps_title">GPS-Spaziergang</string>
+    <string name="walk_gps_hint">Weg und Strecke werden gespeichert; Standort nur während der Aufnahme</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Gespeicherte Spaziergänge (%1$d)</string>
+    <string name="walk_list_title">Spaziergänge</string>
+    <string name="walk_delete">Löschen</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s Schritte</string>
+    <string name="walk_summary_dog">%1$s · %2$s Schritte</string>
+    <string name="floors_today">%1$d Stockwerke gestiegen</string>
+    <string name="walks_on_day">%1$d Spaziergänge</string>
+    <string name="wallpaper_name">Live-Hintergrund</string>
+    <string name="wallpaper_description">Der FitWren-Vogel fliegt beim Gehen vom Nest zum Ast</string>
+    <string name="wallpaper_set_hint">Auf dem Startbildschirm fliegt der Vogel mit den Tagesschritten vom Nest zum Ast</string>
+    <string name="lock_title">FitWren ist gesperrt</string>
+    <string name="lock_use_pin">PIN verwenden</string>
+    <string name="lock_wrong">Falsche PIN, nochmal</string>
+    <string name="lock_enter_pin">PIN eingeben</string>
+    <string name="lock_biometric_again">Mit Fingerabdruck oder Gesicht entsperren</string>
+    <string name="simple_today">Heute</string>
+    <string name="simple_view_off">Zur normalen Ansicht</string>
+    <string name="simple_view">Einfache Ansicht</string>
+    <string name="simple_view_hint">Nur Schritte und Ziel in großer Schrift auf Heute</string>
+    <string name="app_lock">App-Sperre</string>
+    <string name="app_lock_hint">Fragt beim Öffnen nach einer PIN</string>
+    <string name="app_lock_biometric">Mit Fingerabdruck / Gesicht entsperren</string>
+    <string name="app_lock_biometric_hint">Biometrie des Telefons; die PIN bleibt als Ersatz</string>
+    <string name="app_lock_change">PIN ändern</string>
+    <string name="app_lock_change_hint">Neue PIN festlegen</string>
+    <string name="app_lock_set_pin">PIN festlegen</string>
+    <string name="app_lock_pin_hint">Eine Zahl mit %1$d–%2$d Ziffern. Vergisst du sie, öffnet die App erst nach dem Löschen ihrer Daten.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (wiederholen)</string>
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_welcome_title">Willkommen bei FitWren</string>
+    <string name="onboarding_welcome_text">Zählt deine Schritte, und dein Vogel wächst mit jedem Ziel. Kein Konto, deine Daten bleiben auf dem Telefon.</string>
+    <string name="onboarding_goal_title">Dein Tagesziel</string>
+    <string name="onboarding_goal_text">Du kannst es später in den Einstellungen ändern</string>
+    <string name="onboarding_body_title">Größe und Gewicht</string>
+    <string name="onboarding_body_text">Strecke und Kalorien werden daraus berechnet</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Schrittberechtigung</string>
+    <string name="onboarding_permission_text">Zum Zählen braucht es die Berechtigung für körperliche Aktivität</string>
+    <string name="onboarding_permission_done">Berechtigung erteilt ✓</string>
+    <string name="onboarding_permission_button">Erlauben</string>
+    <string name="onboarding_next">Weiter</string>
+    <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Vogelarten: Zaunkönig, Eule (Stufe 3), Papagei (6), Adler (10); in App, Widget, Hintergrund und Armband-Zifferblatt</item>
+        <item>Körner: eins je 1.000 Schritte; Vogel füttern, Federfarben und Lieder kaufen</item>
+        <item>Zubehör: Verdientes tragen oder ausblenden; neu Brille, Blume, Schlafmütze und Rucksack</item>
+        <item>Live-Hintergrund: der Vogel fliegt mit deinen Schritten vom Nest zum Ast</item>
+        <item>Geh-Werkzeuge (Heute): Tempo-Metronom, Gassi gehen und GPS-Aufzeichnung (mit Wegskizze)</item>
+        <item>Stockwerkzähler: auf Telefonen mit Drucksensor</item>
+        <item>App-Sperre (PIN, Fingerabdruck oder Gesicht) und einfache Ansicht (Einstellungen → Darstellung und Sprache)</item>
+        <item>Willkommensseiten bei Neuinstallation: Ziel, Größe und Gewicht, Berechtigung</item>
+    </string-array>
 </resources>

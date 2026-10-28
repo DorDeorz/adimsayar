@@ -1201,4 +1201,106 @@
         <item>Santé : score de récupération et âge de forme (avec le bracelet)</item>
         <item>Nouvelles médailles : distance, série d\'eau, série de sommeil, parcours terminés</item>
     </string-array>
+    <string name="bird_item_glasses">Lunettes</string>
+    <string name="bird_item_flower">Fleur</string>
+    <string name="bird_item_nightcap">Bonnet de nuit</string>
+    <string name="bird_item_backpack">Sac à dos</string>
+    <string name="bird_unlock_glasses">Marche 42 km au total</string>
+    <string name="bird_unlock_flower">Objectif d\'eau 7 jours d\'affilée</string>
+    <string name="bird_unlock_nightcap">7 bonnes nuits d\'affilée</string>
+    <string name="bird_unlock_backpack">Termine un parcours virtuel</string>
+    <string name="bird_item_wear">Gagné : choisis si ton oiseau le porte</string>
+    <string name="seeds_count">Graines : %1$d</string>
+    <string name="seeds_hint">Une graine par 1 000 pas, pour des couleurs, des chants ou nourrir ton oiseau</string>
+    <string name="bird_fed">Ton oiseau a adoré la graine !</string>
+    <string name="bird_feed">Nourrir</string>
+    <string name="bird_species_title">Espèce</string>
+    <string name="bird_locked_level">%1$s (niveau %2$d)</string>
+    <string name="bird_color_title">Couleur des plumes</string>
+    <string name="bird_price">%1$s (%2$d graines)</string>
+    <string name="bird_sound_title">Chant</string>
+    <string name="bird_species_sparrow">Troglodyte</string>
+    <string name="bird_species_owl">Hibou</string>
+    <string name="bird_species_parrot">Perroquet</string>
+    <string name="bird_species_eagle">Aigle</string>
+    <string name="bird_color_default">Naturel</string>
+    <string name="bird_color_sky">Bleu ciel</string>
+    <string name="bird_color_rose">Rose</string>
+    <string name="bird_color_mint">Menthe</string>
+    <string name="bird_color_plum">Prune</string>
+    <string name="bird_color_night">Nuit</string>
+    <string name="bird_sound_chirp">Pépiement</string>
+    <string name="bird_sound_trill">Trille</string>
+    <string name="bird_sound_tweet">Sifflement</string>
+    <string name="bird_sound_coo">Roucoulement</string>
+    <string name="metronome_channel">Métronome</string>
+    <string name="metronome_title">Métronome de rythme</string>
+    <string name="metronome_bpm">%1$d pas par minute</string>
+    <string name="walk_stop">Arrêter</string>
+    <string name="walk_start">Démarrer</string>
+    <string name="walk_channel">Enregistrement de marche</string>
+    <string name="walk_gps_recording">Marche GPS en cours d\'enregistrement</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Autorisation de localisation refusée ; la marche GPS en a besoin</string>
+    <string name="walk_tools_title">Outils de marche</string>
+    <string name="walk_dog_title">Promenade du chien</string>
+    <string name="walk_dog_hint">Démarre en sortant, arrête au retour ; les pas sont enregistrés</string>
+    <string name="walk_running">En cours : %1$s</string>
+    <string name="walk_gps_title">Marche GPS</string>
+    <string name="walk_gps_hint">Trajet et distance enregistrés ; la position n\'est utilisée que pendant l\'enregistrement</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Marches enregistrées (%1$d)</string>
+    <string name="walk_list_title">Marches</string>
+    <string name="walk_delete">Supprimer</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s pas</string>
+    <string name="walk_summary_dog">%1$s · %2$s pas</string>
+    <string name="floors_today">%1$d étages montés</string>
+    <string name="walks_on_day">%1$d marches</string>
+    <string name="wallpaper_name">Fond d\'écran animé</string>
+    <string name="wallpaper_description">L\'oiseau FitWren vole du nid à la branche quand tu marches</string>
+    <string name="wallpaper_set_hint">Sur l\'écran d\'accueil, l\'oiseau vole du nid à la branche avec les pas du jour</string>
+    <string name="lock_title">FitWren est verrouillé</string>
+    <string name="lock_use_pin">Utiliser le code</string>
+    <string name="lock_wrong">Code erroné, réessaie</string>
+    <string name="lock_enter_pin">Saisis ton code</string>
+    <string name="lock_biometric_again">Déverrouiller par empreinte ou visage</string>
+    <string name="simple_today">Aujourd\'hui</string>
+    <string name="simple_view_off">Revenir à la vue normale</string>
+    <string name="simple_view">Vue simple</string>
+    <string name="simple_view_hint">Seulement les pas et l\'objectif en grand sur Aujourd\'hui</string>
+    <string name="app_lock">Verrouillage de l\'app</string>
+    <string name="app_lock_hint">Demande un code à l\'ouverture</string>
+    <string name="app_lock_biometric">Déverrouiller par empreinte / visage</string>
+    <string name="app_lock_biometric_hint">La biométrie du téléphone ; le code reste en secours</string>
+    <string name="app_lock_change">Changer le code</string>
+    <string name="app_lock_change_hint">Choisis un nouveau code</string>
+    <string name="app_lock_set_pin">Définir le code</string>
+    <string name="app_lock_pin_hint">Un nombre de %1$d à %2$d chiffres. Si tu l\'oublies, l\'app ne s\'ouvre qu\'après effacement de ses données.</string>
+    <string name="app_lock_pin">Code</string>
+    <string name="app_lock_pin_again">Code (encore)</string>
+    <string name="onboarding_skip">Passer</string>
+    <string name="onboarding_welcome_title">Bienvenue dans FitWren</string>
+    <string name="onboarding_welcome_text">Compte tes pas, et ton oiseau grandit quand tu atteins ton objectif. Sans compte ; tes données restent sur ton téléphone.</string>
+    <string name="onboarding_goal_title">Ton objectif quotidien</string>
+    <string name="onboarding_goal_text">Tu pourras le changer dans Réglages</string>
+    <string name="onboarding_body_title">Taille et poids</string>
+    <string name="onboarding_body_text">La distance et les calories en sont déduites</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Autorisation des pas</string>
+    <string name="onboarding_permission_text">Compter les pas demande l\'autorisation d\'activité physique</string>
+    <string name="onboarding_permission_done">Autorisation accordée ✓</string>
+    <string name="onboarding_permission_button">Autoriser</string>
+    <string name="onboarding_next">Suivant</string>
+    <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Espèces : troglodyte, hibou (niveau 3), perroquet (6), aigle (10) ; dans l\'app, le widget, le fond d\'écran et le cadran du bracelet</item>
+        <item>Graines : une par 1 000 pas ; nourris ton oiseau, achète couleurs et chants</item>
+        <item>Accessoires : porte ou masque ce que tu as gagné ; nouveaux lunettes, fleur, bonnet de nuit et sac à dos</item>
+        <item>Fond d\'écran animé : l\'oiseau vole du nid à la branche avec tes pas</item>
+        <item>Outils de marche (Aujourd\'hui) : métronome, promenade du chien et marche GPS (avec le tracé)</item>
+        <item>Compteur d\'étages : sur les téléphones avec capteur de pression</item>
+        <item>Verrouillage (code, empreinte ou visage) et vue simple (Réglages → Apparence et langue)</item>
+        <item>Pages d\'accueil à la première installation : objectif, taille et poids, autorisation</item>
+    </string-array>
 </resources>

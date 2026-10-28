@@ -21,6 +21,11 @@ import com.dordeorz.adimsayar.data.ExtrasStore
 import com.dordeorz.adimsayar.data.HealthWrite
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.WearableSteps
+import com.dordeorz.adimsayar.data.BPM_RANGE
+import com.dordeorz.adimsayar.data.Walks
+import com.dordeorz.adimsayar.walk.DogWalk
+import com.dordeorz.adimsayar.walk.MetronomeService
+import com.dordeorz.adimsayar.walk.WalkRecordService
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,7 +70,10 @@ class ExtraController(private val activity: ComponentActivity) {
 
     fun setVacation(from: LocalDate?, to: LocalDate?) = settingsChanged { settings.setVacation(from, to) }
 
-    fun update(change: (ExtraSettings) -> ExtraSettings) = store.update(change)
+    fun update(change: (ExtraSettings) -> ExtraSettings) {
+        store.update(change)
+        AppScope.launch { Widgets.updateAll(context) }
+    }
 
     /** Changes a reminder setting: asks for the notification permission and sets the alarms again. */
     fun updateReminder(change: (ExtraSettings) -> ExtraSettings) {
@@ -75,6 +83,43 @@ class ExtraController(private val activity: ComponentActivity) {
     }
 
     private val notificationLauncher = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    private var gpsStartSteps = 0L
+
+    private val locationLauncher = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) {
+            requestNotifications()
+            WalkRecordService.start(context, gpsStartSteps)
+        } else {
+            toast(R.string.walk_gps_denied)
+        }
+    }
+
+    fun startMetronome(bpm: Int) {
+        store.update { it.copy(metronomeBpm = bpm.coerceIn(BPM_RANGE)) }
+        requestNotifications()
+        MetronomeService.start(context, bpm.coerceIn(BPM_RANGE))
+    }
+
+    fun stopMetronome() = MetronomeService.stop(context)
+
+    fun startDogWalk(todaySteps: Long) = DogWalk.start(context, todaySteps)
+
+    fun stopDogWalk(todaySteps: Long) = io { DogWalk.stop(context, todaySteps) }
+
+    fun startGpsWalk(todaySteps: Long) {
+        if (WalkRecordService.hasPermission(context)) {
+            requestNotifications()
+            WalkRecordService.start(context, todaySteps)
+        } else {
+            gpsStartSteps = todaySteps
+            locationLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    fun stopGpsWalk() = WalkRecordService.stop(context)
+
+    fun deleteWalk(id: Long) = io { Walks.delete(context, id) }
 
     private fun requestNotifications() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&

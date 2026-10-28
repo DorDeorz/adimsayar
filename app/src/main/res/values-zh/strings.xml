@@ -1201,4 +1201,106 @@
         <item>健康：恢复度和体能年龄（手环数据）</item>
         <item>新奖牌：距离、饮水连续、睡眠连续、完成路线</item>
     </string-array>
+    <string name="bird_item_glasses">眼镜</string>
+    <string name="bird_item_flower">花朵</string>
+    <string name="bird_item_nightcap">睡帽</string>
+    <string name="bird_item_backpack">背包</string>
+    <string name="bird_unlock_glasses">累计步行 42 公里</string>
+    <string name="bird_unlock_flower">连续 7 天达成饮水目标</string>
+    <string name="bird_unlock_nightcap">连续 7 晚好睡眠</string>
+    <string name="bird_unlock_backpack">完成一条虚拟路线</string>
+    <string name="bird_item_wear">已获得：选择小鸟是否佩戴</string>
+    <string name="seeds_count">种子：%1$d</string>
+    <string name="seeds_hint">每 1,000 步一颗种子，可换颜色、叫声或喂小鸟</string>
+    <string name="bird_fed">小鸟很喜欢种子！</string>
+    <string name="bird_feed">喂食</string>
+    <string name="bird_species_title">鸟的种类</string>
+    <string name="bird_locked_level">%1$s（等级 %2$d）</string>
+    <string name="bird_color_title">羽毛颜色</string>
+    <string name="bird_price">%1$s（%2$d 颗种子）</string>
+    <string name="bird_sound_title">叫声</string>
+    <string name="bird_species_sparrow">鹪鹩</string>
+    <string name="bird_species_owl">猫头鹰</string>
+    <string name="bird_species_parrot">鹦鹉</string>
+    <string name="bird_species_eagle">鹰</string>
+    <string name="bird_color_default">自然</string>
+    <string name="bird_color_sky">天蓝</string>
+    <string name="bird_color_rose">粉色</string>
+    <string name="bird_color_mint">薄荷绿</string>
+    <string name="bird_color_plum">紫红</string>
+    <string name="bird_color_night">夜色</string>
+    <string name="bird_sound_chirp">啾啾</string>
+    <string name="bird_sound_trill">颤鸣</string>
+    <string name="bird_sound_tweet">口哨</string>
+    <string name="bird_sound_coo">咕咕</string>
+    <string name="metronome_channel">节拍器</string>
+    <string name="metronome_title">步频节拍器</string>
+    <string name="metronome_bpm">每分钟 %1$d 步</string>
+    <string name="walk_stop">停止</string>
+    <string name="walk_start">开始</string>
+    <string name="walk_channel">步行记录</string>
+    <string name="walk_gps_recording">正在记录 GPS 步行</string>
+    <string name="walk_gps_distance">%1$s 公里</string>
+    <string name="walk_gps_denied">未授予位置权限；GPS 步行需要它</string>
+    <string name="walk_tools_title">步行工具</string>
+    <string name="walk_dog_title">遛狗</string>
+    <string name="walk_dog_hint">出门开始，回家停止；步数会保存</string>
+    <string name="walk_running">进行中：%1$s</string>
+    <string name="walk_gps_title">GPS 步行</string>
+    <string name="walk_gps_hint">保存路线和距离；仅在记录时使用位置</string>
+    <string name="walk_gps_running">%1$s 公里 · %2$s</string>
+    <string name="walk_list_button">已保存的步行（%1$d）</string>
+    <string name="walk_list_title">步行</string>
+    <string name="walk_delete">删除</string>
+    <string name="walk_summary_gps">%1$s 公里 · %2$s · %3$s 步</string>
+    <string name="walk_summary_dog">%1$s · %2$s 步</string>
+    <string name="floors_today">爬了 %1$d 层楼</string>
+    <string name="walks_on_day">%1$d 次步行</string>
+    <string name="wallpaper_name">动态壁纸</string>
+    <string name="wallpaper_description">你走路时 FitWren 小鸟从巢飞向树枝</string>
+    <string name="wallpaper_set_hint">主屏幕上小鸟随当天步数从巢飞向树枝</string>
+    <string name="lock_title">FitWren 已锁定</string>
+    <string name="lock_use_pin">使用 PIN</string>
+    <string name="lock_wrong">PIN 错误，请重试</string>
+    <string name="lock_enter_pin">输入 PIN</string>
+    <string name="lock_biometric_again">用指纹或面容解锁</string>
+    <string name="simple_today">今天</string>
+    <string name="simple_view_off">返回普通视图</string>
+    <string name="simple_view">简洁视图</string>
+    <string name="simple_view_hint">今日页只用大字显示步数和目标</string>
+    <string name="app_lock">应用锁</string>
+    <string name="app_lock_hint">打开时需要 PIN</string>
+    <string name="app_lock_biometric">指纹 / 面容解锁</string>
+    <string name="app_lock_biometric_hint">使用手机生物识别；PIN 作为备用</string>
+    <string name="app_lock_change">更改 PIN</string>
+    <string name="app_lock_change_hint">设置新 PIN</string>
+    <string name="app_lock_set_pin">设置 PIN</string>
+    <string name="app_lock_pin_hint">%1$d–%2$d 位数字。忘记后只能清除应用数据才能打开。</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN（再次）</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_welcome_title">欢迎使用 FitWren</string>
+    <string name="onboarding_welcome_text">记录你的步数，达成目标小鸟就会长大。无需账号，数据只在你的手机上。</string>
+    <string name="onboarding_goal_title">你的每日目标</string>
+    <string name="onboarding_goal_text">之后可在设置中修改</string>
+    <string name="onboarding_body_title">身高和体重</string>
+    <string name="onboarding_body_text">用于计算距离和热量</string>
+    <string name="onboarding_height">%1$d 厘米</string>
+    <string name="onboarding_weight">%1$d 公斤</string>
+    <string name="onboarding_permission_title">步数权限</string>
+    <string name="onboarding_permission_text">计步需要身体活动权限</string>
+    <string name="onboarding_permission_done">已授权 ✓</string>
+    <string name="onboarding_permission_button">允许</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_0">
+        <item>鸟的种类：鹪鹩、猫头鹰（等级 3）、鹦鹉（6）、鹰（10）；显示在应用、小部件、壁纸和手环表盘上</item>
+        <item>种子：每 1,000 步一颗；喂小鸟，购买羽毛颜色和叫声</item>
+        <item>配饰：佩戴或隐藏已获得的；新增眼镜、花朵、睡帽和背包</item>
+        <item>动态壁纸：随着步数小鸟从巢飞向树枝</item>
+        <item>步行工具（今日）：步频节拍器、遛狗和 GPS 步行记录（绘制路线）</item>
+        <item>楼层计数：适用于有气压传感器的手机</item>
+        <item>应用锁（PIN、指纹或面容）和简洁视图（设置 → 外观和语言）</item>
+        <item>新安装时的欢迎页：目标、身高体重、权限</item>
+    </string-array>
 </resources>

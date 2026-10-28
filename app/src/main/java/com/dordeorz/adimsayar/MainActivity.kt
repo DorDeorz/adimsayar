@@ -60,6 +60,8 @@ import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.ui.AppScreen
+import com.dordeorz.adimsayar.ui.LockScreen
+import com.dordeorz.adimsayar.ui.OnboardingScreen
 import com.dordeorz.adimsayar.ui.ExtraState
 import com.dordeorz.adimsayar.data.DayNotes
 import com.dordeorz.adimsayar.data.DayOverrides
@@ -100,6 +102,8 @@ class MainActivity : ComponentActivity() {
     private var permission by mutableStateOf(PermissionState.NeedsRequest)
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
+    private var locked by mutableStateOf(true)
+    private var stoppedAt = 0L
     private var serviceEnabled by mutableStateOf(false)
     private var exactAlarmsAllowed by mutableStateOf<Boolean?>(null)
     private var xiaomiAvailable by mutableStateOf(false)
@@ -355,6 +359,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        val extrasStore = ExtrasStore.get(applicationContext)
+        // People who used the app before 0.20 skip the welcome pages.
+        if (!extrasStore.extras.value.onboardingDone && extrasStore.hasStoredData(applicationContext)) {
+            extrasStore.update { it.copy(onboardingDone = true) }
+        }
         monitor = LiveStepMonitor(applicationContext)
         Schedules.ensure(applicationContext)
         if (savedInstanceState == null) openRequestedTab(intent)
@@ -426,40 +435,44 @@ class MainActivity : ComponentActivity() {
             val direction = if (Locales.isRtl()) LayoutDirection.Rtl else LayoutDirection.Ltr
             AdimSayarTheme(darkTheme = dark, dynamicColor = appSettings.dynamicColor) {
                 CompositionLocalProvider(LocalLayoutDirection provides direction) {
-                    AppScreen(
-                        state = MainUiState(
-                            today = currentDay,
-                            week = week,
-                            history = history,
-                            achievements = achievements,
-                            settings = appSettings,
-                            lastReadingWallMs = lastReading,
-                            permission = permission,
-                            sensorAvailable = sensorAvailable,
-                            frozen = frozen,
-                            batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
-                            serviceEnabled = serviceEnabled,
-                            exactAlarmsAllowed = exactAlarmsAllowed,
-                            xiaomiAvailable = xiaomiAvailable,
-                            xiaomiEnabled = xiaomiEnabled,
-                            xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
-                            wearableAvailable = wearableAvailable,
-                            wearableEnabled = wearableEnabled,
-                            bandDirectEnabled = bandDirectEnabled,
-                            bandSyncing = bandSyncing,
-                            bandOnly = bandOnly,
-                            logLines = logLines,
-                            version = BuildConfig.VERSION_NAME,
-                            weights = weights,
-                            healthRefresh = healthRefresh,
-                            requestedTab = requestedTab,
-                            water = water,
-                            freezes = freezes,
-                            challenges = challenges,
-                            extra = extraState,
-                        ),
-                        actions = actions,
+                    val uiState = MainUiState(
+                        today = currentDay,
+                        week = week,
+                        history = history,
+                        achievements = achievements,
+                        settings = appSettings,
+                        lastReadingWallMs = lastReading,
+                        permission = permission,
+                        sensorAvailable = sensorAvailable,
+                        frozen = frozen,
+                        batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
+                        serviceEnabled = serviceEnabled,
+                        exactAlarmsAllowed = exactAlarmsAllowed,
+                        xiaomiAvailable = xiaomiAvailable,
+                        xiaomiEnabled = xiaomiEnabled,
+                        xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
+                        wearableAvailable = wearableAvailable,
+                        wearableEnabled = wearableEnabled,
+                        bandDirectEnabled = bandDirectEnabled,
+                        bandSyncing = bandSyncing,
+                        bandOnly = bandOnly,
+                        logLines = logLines,
+                        version = BuildConfig.VERSION_NAME,
+                        weights = weights,
+                        healthRefresh = healthRefresh,
+                        requestedTab = requestedTab,
+                        water = water,
+                        freezes = freezes,
+                        challenges = challenges,
+                        extra = extraState,
                     )
+                    if (extras.appLock && extras.pinHash.isNotEmpty() && locked) {
+                        LockScreen(extras, onUnlock = { locked = false })
+                    } else if (!extras.onboardingDone) {
+                        OnboardingScreen(uiState, actions)
+                    } else {
+                        AppScreen(state = uiState, actions = actions)
+                    }
                 }
             }
         }
@@ -491,6 +504,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        if (stoppedAt > 0L && SystemClock.elapsedRealtime() - stoppedAt > LOCK_GRACE_MS) locked = true
         refreshPermission()
         serviceEnabled = StepCounterService.isEnabled(this)
         if (permission == PermissionState.Granted) {
@@ -553,6 +567,7 @@ class MainActivity : ComponentActivity() {
         wearableSync = null
         monitor.stop()
         refreshWidgets()
+        if (!isChangingConfigurations) stoppedAt = SystemClock.elapsedRealtime()
         super.onStop()
     }
 
@@ -777,6 +792,7 @@ class MainActivity : ComponentActivity() {
         private const val REPORT_FILE_NAME = "fitwren-rapor-%s.pdf"
         private const val SOURCE_DAYS = 7L
         private const val MEDAL_SLEEP_DAYS = 120L
+        private const val LOCK_GRACE_MS = 30_000L
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"
         private const val HEALTH_CONNECT_SETTINGS_14 = "android.health.connect.action.HEALTH_HOME_SETTINGS"

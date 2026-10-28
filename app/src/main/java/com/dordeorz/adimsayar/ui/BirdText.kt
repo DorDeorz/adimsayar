@@ -32,6 +32,10 @@ internal fun BirdItem.title(): Int = when (this) {
     BirdItem.Sun -> R.string.bird_item_sun
     BirdItem.Cap -> R.string.bird_item_cap
     BirdItem.Crown -> R.string.bird_item_crown
+    BirdItem.Glasses -> R.string.bird_item_glasses
+    BirdItem.Flower -> R.string.bird_item_flower
+    BirdItem.Nightcap -> R.string.bird_item_nightcap
+    BirdItem.Backpack -> R.string.bird_item_backpack
 }
 
 @StringRes
@@ -41,4 +45,8 @@ internal fun BirdItem.unlock(): Int = when (this) {
     BirdItem.Sun -> R.string.bird_unlock_sun
     BirdItem.Cap -> R.string.bird_unlock_cap
     BirdItem.Crown -> R.string.bird_unlock_crown
+    BirdItem.Glasses -> R.string.bird_unlock_glasses
+    BirdItem.Flower -> R.string.bird_unlock_flower
+    BirdItem.Nightcap -> R.string.bird_unlock_nightcap
+    BirdItem.Backpack -> R.string.bird_unlock_backpack
 }

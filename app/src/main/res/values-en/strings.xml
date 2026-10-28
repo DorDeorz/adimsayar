@@ -1201,4 +1201,106 @@
         <item>Health: recovery score and fitness age (with band data)</item>
         <item>New medals: distance, water streak, sleep streak, route finisher</item>
     </string-array>
+    <string name="bird_item_glasses">Glasses</string>
+    <string name="bird_item_flower">Flower</string>
+    <string name="bird_item_nightcap">Nightcap</string>
+    <string name="bird_item_backpack">Backpack</string>
+    <string name="bird_unlock_glasses">Walk 42 km in total</string>
+    <string name="bird_unlock_flower">Water goal 7 days in a row</string>
+    <string name="bird_unlock_nightcap">7 good nights in a row</string>
+    <string name="bird_unlock_backpack">Finish a virtual route</string>
+    <string name="bird_item_wear">Earned: choose whether your bird wears it</string>
+    <string name="seeds_count">Seeds: %1$d</string>
+    <string name="seeds_hint">One seed per 1,000 steps, for colours, songs or feeding your bird</string>
+    <string name="bird_fed">Your bird loved the seed!</string>
+    <string name="bird_feed">Feed</string>
+    <string name="bird_species_title">Bird kind</string>
+    <string name="bird_locked_level">%1$s (level %2$d)</string>
+    <string name="bird_color_title">Feather colour</string>
+    <string name="bird_price">%1$s (%2$d seeds)</string>
+    <string name="bird_sound_title">Song</string>
+    <string name="bird_species_sparrow">Wren</string>
+    <string name="bird_species_owl">Owl</string>
+    <string name="bird_species_parrot">Parrot</string>
+    <string name="bird_species_eagle">Eagle</string>
+    <string name="bird_color_default">Natural</string>
+    <string name="bird_color_sky">Sky blue</string>
+    <string name="bird_color_rose">Rose</string>
+    <string name="bird_color_mint">Mint</string>
+    <string name="bird_color_plum">Plum</string>
+    <string name="bird_color_night">Night</string>
+    <string name="bird_sound_chirp">Chirp</string>
+    <string name="bird_sound_trill">Trill</string>
+    <string name="bird_sound_tweet">Whistle</string>
+    <string name="bird_sound_coo">Coo</string>
+    <string name="metronome_channel">Metronome</string>
+    <string name="metronome_title">Pace metronome</string>
+    <string name="metronome_bpm">%1$d steps a minute</string>
+    <string name="walk_stop">Stop</string>
+    <string name="walk_start">Start</string>
+    <string name="walk_channel">Walk recording</string>
+    <string name="walk_gps_recording">Recording a GPS walk</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Location permission was not given; the GPS walk needs it</string>
+    <string name="walk_tools_title">Walk tools</string>
+    <string name="walk_dog_title">Dog walk</string>
+    <string name="walk_dog_hint">Start when you leave, stop when back; the steps are saved</string>
+    <string name="walk_running">Running: %1$s</string>
+    <string name="walk_gps_title">GPS walk</string>
+    <string name="walk_gps_hint">Route and distance are saved; location is used only while recording</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Saved walks (%1$d)</string>
+    <string name="walk_list_title">Walks</string>
+    <string name="walk_delete">Delete</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s steps</string>
+    <string name="walk_summary_dog">%1$s · %2$s steps</string>
+    <string name="floors_today">%1$d floors climbed</string>
+    <string name="walks_on_day">%1$d walks</string>
+    <string name="wallpaper_name">Live wallpaper</string>
+    <string name="wallpaper_description">The FitWren bird flies from its nest to the branch as you walk</string>
+    <string name="wallpaper_set_hint">On the home screen the bird flies from nest to branch with the day\'s steps</string>
+    <string name="lock_title">FitWren is locked</string>
+    <string name="lock_use_pin">Use PIN</string>
+    <string name="lock_wrong">Wrong PIN, try again</string>
+    <string name="lock_enter_pin">Enter your PIN</string>
+    <string name="lock_biometric_again">Unlock with fingerprint or face</string>
+    <string name="simple_today">Today</string>
+    <string name="simple_view_off">Back to normal view</string>
+    <string name="simple_view">Simple view</string>
+    <string name="simple_view_hint">Only steps and goal in big type on the Today page</string>
+    <string name="app_lock">App lock</string>
+    <string name="app_lock_hint">Asks for a PIN when opened</string>
+    <string name="app_lock_biometric">Unlock with fingerprint / face</string>
+    <string name="app_lock_biometric_hint">The phone\'s biometric unlock; the PIN stays as a backup</string>
+    <string name="app_lock_change">Change PIN</string>
+    <string name="app_lock_change_hint">Set a new PIN</string>
+    <string name="app_lock_set_pin">Set PIN</string>
+    <string name="app_lock_pin_hint">A number with %1$d–%2$d digits. If you forget it, the app opens only after clearing its data.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (again)</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_welcome_title">Welcome to FitWren</string>
+    <string name="onboarding_welcome_text">It counts your steps, and your bird grows as you reach your goal. No account; your data stays on your phone.</string>
+    <string name="onboarding_goal_title">Your daily goal</string>
+    <string name="onboarding_goal_text">You can change it later in Settings</string>
+    <string name="onboarding_body_title">Height and weight</string>
+    <string name="onboarding_body_text">Distance and calories are worked out from these</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Step permission</string>
+    <string name="onboarding_permission_text">Counting steps needs the physical activity permission</string>
+    <string name="onboarding_permission_done">Permission given ✓</string>
+    <string name="onboarding_permission_button">Allow</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Bird kinds: wren, owl (level 3), parrot (6), eagle (10); in the app, the widget, the wallpaper and the band face</item>
+        <item>Seeds: one per 1,000 steps; feed your bird and buy feather colours and songs</item>
+        <item>Accessories: wear or hide what you earned; new glasses, flower, nightcap and backpack</item>
+        <item>Live wallpaper: the bird flies from its nest to the branch with your steps</item>
+        <item>Walk tools (Today): pace metronome, dog walk and GPS walk recording (with the route drawn)</item>
+        <item>Floor counter: on phones with a pressure sensor</item>
+        <item>App lock (PIN, fingerprint or face) and simple view (Settings → Appearance and language)</item>
+        <item>Welcome pages on a new install: goal, height and weight, permission</item>
+    </string-array>
 </resources>

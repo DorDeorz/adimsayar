@@ -38,6 +38,19 @@ internal fun DayExtraRows(date: LocalDate, steps: Long, state: MainUiState, acti
     val note = state.extra.notes[date]
     val corrected = date in state.extra.overrides
     HorizontalDivider(modifier = Modifier.padding(top = 16.dp))
+    val floors = state.extra.floors[date] ?: 0
+    val walks = state.extra.walks.count { java.time.Instant.ofEpochMilli(it.start).atZone(java.time.ZoneId.systemDefault()).toLocalDate() == date }
+    if (floors > 0 || walks > 0) {
+        Text(
+            listOfNotNull(
+                stringResource(R.string.floors_today, floors).takeIf { floors > 0 },
+                stringResource(R.string.walks_on_day, walks).takeIf { walks > 0 },
+            ).joinToString(" · "),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 12.dp),
+        )
+    }
     Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(
             painterResource(R.drawable.ic_note),

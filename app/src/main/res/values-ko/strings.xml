@@ -1201,4 +1201,106 @@
         <item>건강: 회복도와 피트니스 나이(밴드 데이터)</item>
         <item>새 메달: 거리, 물 연속, 수면 연속, 경로 완주</item>
     </string-array>
+    <string name="bird_item_glasses">안경</string>
+    <string name="bird_item_flower">꽃</string>
+    <string name="bird_item_nightcap">수면 모자</string>
+    <string name="bird_item_backpack">배낭</string>
+    <string name="bird_unlock_glasses">총 42km 걷기</string>
+    <string name="bird_unlock_flower">물 목표 7일 연속</string>
+    <string name="bird_unlock_nightcap">7일 연속 잘 자기</string>
+    <string name="bird_unlock_backpack">가상 경로 하나 완주</string>
+    <string name="bird_item_wear">획득: 새가 착용할지 선택</string>
+    <string name="seeds_count">씨앗: %1$d</string>
+    <string name="seeds_hint">1,000걸음마다 씨앗 1개, 색·소리 구입이나 먹이에 사용</string>
+    <string name="bird_fed">새가 씨앗을 좋아해요!</string>
+    <string name="bird_feed">먹이 주기</string>
+    <string name="bird_species_title">새 종류</string>
+    <string name="bird_locked_level">%1$s(레벨 %2$d)</string>
+    <string name="bird_color_title">깃털 색</string>
+    <string name="bird_price">%1$s(씨앗 %2$d)</string>
+    <string name="bird_sound_title">노래</string>
+    <string name="bird_species_sparrow">굴뚝새</string>
+    <string name="bird_species_owl">부엉이</string>
+    <string name="bird_species_parrot">앵무새</string>
+    <string name="bird_species_eagle">독수리</string>
+    <string name="bird_color_default">기본</string>
+    <string name="bird_color_sky">하늘색</string>
+    <string name="bird_color_rose">분홍</string>
+    <string name="bird_color_mint">민트</string>
+    <string name="bird_color_plum">자두색</string>
+    <string name="bird_color_night">밤</string>
+    <string name="bird_sound_chirp">짹짹</string>
+    <string name="bird_sound_trill">지저귐</string>
+    <string name="bird_sound_tweet">휘파람</string>
+    <string name="bird_sound_coo">구구</string>
+    <string name="metronome_channel">메트로놈</string>
+    <string name="metronome_title">걸음 메트로놈</string>
+    <string name="metronome_bpm">분당 %1$d걸음</string>
+    <string name="walk_stop">중지</string>
+    <string name="walk_start">시작</string>
+    <string name="walk_channel">걷기 기록</string>
+    <string name="walk_gps_recording">GPS 걷기 기록 중</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">위치 권한이 없어요. GPS 걷기에 필요해요</string>
+    <string name="walk_tools_title">걷기 도구</string>
+    <string name="walk_dog_title">강아지 산책</string>
+    <string name="walk_dog_hint">나갈 때 시작, 돌아오면 중지. 걸음이 저장돼요</string>
+    <string name="walk_running">진행 중: %1$s</string>
+    <string name="walk_gps_title">GPS 걷기</string>
+    <string name="walk_gps_hint">경로와 거리를 저장, 위치는 기록 중에만 사용</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">저장된 걷기(%1$d)</string>
+    <string name="walk_list_title">걷기</string>
+    <string name="walk_delete">삭제</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s걸음</string>
+    <string name="walk_summary_dog">%1$s · %2$s걸음</string>
+    <string name="floors_today">%1$d층 올라감</string>
+    <string name="walks_on_day">걷기 %1$d회</string>
+    <string name="wallpaper_name">라이브 배경화면</string>
+    <string name="wallpaper_description">걸을수록 FitWren 새가 둥지에서 가지로 날아가요</string>
+    <string name="wallpaper_set_hint">홈 화면에서 오늘 걸음에 따라 새가 둥지에서 가지로</string>
+    <string name="lock_title">FitWren 잠김</string>
+    <string name="lock_use_pin">PIN 사용</string>
+    <string name="lock_wrong">PIN이 틀렸어요, 다시 시도</string>
+    <string name="lock_enter_pin">PIN 입력</string>
+    <string name="lock_biometric_again">지문이나 얼굴로 열기</string>
+    <string name="simple_today">오늘</string>
+    <string name="simple_view_off">일반 보기로 돌아가기</string>
+    <string name="simple_view">간단 보기</string>
+    <string name="simple_view_hint">오늘 페이지에 걸음과 목표만 큰 글씨로</string>
+    <string name="app_lock">앱 잠금</string>
+    <string name="app_lock_hint">열 때 PIN 요청</string>
+    <string name="app_lock_biometric">지문 / 얼굴로 열기</string>
+    <string name="app_lock_biometric_hint">휴대폰 생체 인증, PIN은 예비로 유지</string>
+    <string name="app_lock_change">PIN 변경</string>
+    <string name="app_lock_change_hint">새 PIN 설정</string>
+    <string name="app_lock_set_pin">PIN 설정</string>
+    <string name="app_lock_pin_hint">%1$d~%2$d자리 숫자. 잊으면 앱 데이터를 지워야 열 수 있어요.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN(다시)</string>
+    <string name="onboarding_skip">건너뛰기</string>
+    <string name="onboarding_welcome_title">FitWren에 오신 걸 환영해요</string>
+    <string name="onboarding_welcome_text">걸음을 세고 목표를 이루면 새가 자라요. 계정 없이, 데이터는 휴대폰에만 있어요.</string>
+    <string name="onboarding_goal_title">하루 목표</string>
+    <string name="onboarding_goal_text">나중에 설정에서 바꿀 수 있어요</string>
+    <string name="onboarding_body_title">키와 체중</string>
+    <string name="onboarding_body_text">거리와 열량 계산에 쓰여요</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">걸음 권한</string>
+    <string name="onboarding_permission_text">걸음을 세려면 신체 활동 권한이 필요해요</string>
+    <string name="onboarding_permission_done">권한 허용됨 ✓</string>
+    <string name="onboarding_permission_button">허용</string>
+    <string name="onboarding_next">다음</string>
+    <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_20_0">
+        <item>새 종류: 굴뚝새, 부엉이(레벨 3), 앵무새(6), 독수리(10). 앱, 위젯, 배경화면, 밴드 화면에</item>
+        <item>씨앗: 1,000걸음마다 1개, 새에게 먹이를 주고 깃털 색과 노래 구입</item>
+        <item>액세서리: 얻은 것을 착용하거나 숨기기, 새로 안경, 꽃, 수면 모자, 배낭</item>
+        <item>라이브 배경화면: 걸을수록 새가 둥지에서 가지로 날아가요</item>
+        <item>걷기 도구(오늘): 걸음 메트로놈, 강아지 산책, GPS 걷기 기록(경로 그림)</item>
+        <item>층수 측정: 기압 센서가 있는 휴대폰에서</item>
+        <item>앱 잠금(PIN, 지문, 얼굴)과 간단 보기(설정 → 화면과 언어)</item>
+        <item>새로 설치하면 환영 페이지: 목표, 키와 체중, 권한</item>
+    </string-array>
 </resources>

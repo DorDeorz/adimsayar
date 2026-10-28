@@ -12,9 +12,22 @@ enum class BirdItem(val group: MedalGroup, val tier: Int) {
     Sun(MedalGroup.EarlyBird, 1),
     Cap(MedalGroup.DailySteps, 3),
     Crown(MedalGroup.Total, 2),
+    Glasses(MedalGroup.Distance, 1),
+    Flower(MedalGroup.WaterStreak, 1),
+    Nightcap(MedalGroup.SleepStreak, 1),
+    Backpack(MedalGroup.Route, 0),
 }
 
-class BirdState(
+/** Bird kinds; each opens at a bird level. */
+enum class BirdSpecies(val minLevel: Int) { Sparrow(0), Owl(3), Parrot(6), Eagle(10) }
+
+/** Feather colours bought with seeds. */
+enum class BirdColor(val cost: Long) { Default(0), Sky(30), Rose(30), Mint(30), Plum(60), Night(100) }
+
+/** Songs bought with seeds. */
+enum class BirdSound(val cost: Long) { Chirp(0), Trill(20), Tweet(20), Coo(40) }
+
+data class BirdState(
     val stage: BirdStage,
     val mood: BirdMood,
     val items: Set<BirdItem>,
@@ -25,7 +38,28 @@ class BirdState(
     val levelFraction: Float = 0f,
     val stepsToNextLevel: Long = 0L,
     val leveledUpToday: Boolean = false,
-)
+    val species: BirdSpecies = BirdSpecies.Sparrow,
+    val color: BirdColor = BirdColor.Default,
+) {
+    /** The look picked in the bird dialog: kind, colour and the accessories not hidden. */
+    fun styled(extras: ExtraSettings): BirdState = copy(
+        species = BirdSpecies.entries.firstOrNull { it.name == extras.birdSpecies && level >= it.minLevel } ?: BirdSpecies.Sparrow,
+        color = BirdColor.entries.firstOrNull { it.name == extras.birdColor && it.name in Seeds.owned(extras) } ?: BirdColor.Default,
+        items = items.filterNot { it.name in extras.hiddenItems }.toSet(),
+    )
+}
+
+/** Seeds: one for every 1,000 steps walked, spent on colours and songs or fed to the bird. */
+object Seeds {
+
+    const val STEPS_PER_SEED = 1_000L
+
+    fun available(totalSteps: Long, extras: ExtraSettings): Long = (totalSteps / STEPS_PER_SEED - extras.seedsSpent).coerceAtLeast(0L)
+
+    /** Looks that need no seeds plus the ones bought. */
+    fun owned(extras: ExtraSettings): Set<String> =
+        extras.unlockedLooks + BirdColor.entries.filter { it.cost == 0L }.map { it.name } + BirdSound.entries.filter { it.cost == 0L }.map { it.name }
+}
 
 object Avatar {
 

@@ -1201,4 +1201,106 @@
         <item>Saúde: pontuação de recuperação e idade fitness (com a pulseira)</item>
         <item>Novas medalhas: distância, sequência de água, sequência de sono, rotas concluídas</item>
     </string-array>
+    <string name="bird_item_glasses">Óculos</string>
+    <string name="bird_item_flower">Flor</string>
+    <string name="bird_item_nightcap">Touca de dormir</string>
+    <string name="bird_item_backpack">Mochila</string>
+    <string name="bird_unlock_glasses">Caminhe 42 km no total</string>
+    <string name="bird_unlock_flower">Meta de água 7 dias seguidos</string>
+    <string name="bird_unlock_nightcap">7 boas noites seguidas</string>
+    <string name="bird_unlock_backpack">Conclua uma rota virtual</string>
+    <string name="bird_item_wear">Ganho: escolha se o passarinho usa</string>
+    <string name="seeds_count">Sementes: %1$d</string>
+    <string name="seeds_hint">Uma semente a cada 1.000 passos, para cores, cantos ou alimentar o passarinho</string>
+    <string name="bird_fed">Seu passarinho adorou a semente!</string>
+    <string name="bird_feed">Alimentar</string>
+    <string name="bird_species_title">Espécie</string>
+    <string name="bird_locked_level">%1$s (nível %2$d)</string>
+    <string name="bird_color_title">Cor das penas</string>
+    <string name="bird_price">%1$s (%2$d sementes)</string>
+    <string name="bird_sound_title">Canto</string>
+    <string name="bird_species_sparrow">Corruíra</string>
+    <string name="bird_species_owl">Coruja</string>
+    <string name="bird_species_parrot">Papagaio</string>
+    <string name="bird_species_eagle">Águia</string>
+    <string name="bird_color_default">Natural</string>
+    <string name="bird_color_sky">Azul-céu</string>
+    <string name="bird_color_rose">Rosa</string>
+    <string name="bird_color_mint">Menta</string>
+    <string name="bird_color_plum">Ameixa</string>
+    <string name="bird_color_night">Noite</string>
+    <string name="bird_sound_chirp">Piu-piu</string>
+    <string name="bird_sound_trill">Trinado</string>
+    <string name="bird_sound_tweet">Assobio</string>
+    <string name="bird_sound_coo">Arrulho</string>
+    <string name="metronome_channel">Metrônomo</string>
+    <string name="metronome_title">Metrônomo de ritmo</string>
+    <string name="metronome_bpm">%1$d passos por minuto</string>
+    <string name="walk_stop">Parar</string>
+    <string name="walk_start">Iniciar</string>
+    <string name="walk_channel">Gravação de caminhada</string>
+    <string name="walk_gps_recording">Gravando caminhada com GPS</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Permissão de localização negada; a caminhada GPS precisa dela</string>
+    <string name="walk_tools_title">Ferramentas de caminhada</string>
+    <string name="walk_dog_title">Passeio com o cachorro</string>
+    <string name="walk_dog_hint">Inicie ao sair, pare ao voltar; os passos são salvos</string>
+    <string name="walk_running">Em andamento: %1$s</string>
+    <string name="walk_gps_title">Caminhada com GPS</string>
+    <string name="walk_gps_hint">Rota e distância salvas; a localização só é usada durante a gravação</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Caminhadas salvas (%1$d)</string>
+    <string name="walk_list_title">Caminhadas</string>
+    <string name="walk_delete">Excluir</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s passos</string>
+    <string name="walk_summary_dog">%1$s · %2$s passos</string>
+    <string name="floors_today">%1$d andares subidos</string>
+    <string name="walks_on_day">%1$d caminhadas</string>
+    <string name="wallpaper_name">Papel de parede animado</string>
+    <string name="wallpaper_description">O passarinho do FitWren voa do ninho ao galho enquanto você caminha</string>
+    <string name="wallpaper_set_hint">Na tela inicial o passarinho voa do ninho ao galho com os passos do dia</string>
+    <string name="lock_title">FitWren está bloqueado</string>
+    <string name="lock_use_pin">Usar PIN</string>
+    <string name="lock_wrong">PIN errado, tente de novo</string>
+    <string name="lock_enter_pin">Digite seu PIN</string>
+    <string name="lock_biometric_again">Desbloquear com digital ou rosto</string>
+    <string name="simple_today">Hoje</string>
+    <string name="simple_view_off">Voltar à visão normal</string>
+    <string name="simple_view">Visão simples</string>
+    <string name="simple_view_hint">Só passos e meta em letras grandes em Hoje</string>
+    <string name="app_lock">Bloqueio do app</string>
+    <string name="app_lock_hint">Pede um PIN ao abrir</string>
+    <string name="app_lock_biometric">Desbloquear com digital / rosto</string>
+    <string name="app_lock_biometric_hint">O desbloqueio biométrico do telefone; o PIN fica de reserva</string>
+    <string name="app_lock_change">Alterar PIN</string>
+    <string name="app_lock_change_hint">Defina um novo PIN</string>
+    <string name="app_lock_set_pin">Definir PIN</string>
+    <string name="app_lock_pin_hint">Um número de %1$d–%2$d dígitos. Se esquecer, o app só abre apagando os dados.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (de novo)</string>
+    <string name="onboarding_skip">Pular</string>
+    <string name="onboarding_welcome_title">Bem-vindo ao FitWren</string>
+    <string name="onboarding_welcome_text">Conta seus passos e seu passarinho cresce quando você bate a meta. Sem conta; seus dados ficam no telefone.</string>
+    <string name="onboarding_goal_title">Sua meta diária</string>
+    <string name="onboarding_goal_text">Você pode mudar depois em Configurações</string>
+    <string name="onboarding_body_title">Altura e peso</string>
+    <string name="onboarding_body_text">Distância e calorias são calculadas com isso</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Permissão de passos</string>
+    <string name="onboarding_permission_text">Contar passos precisa da permissão de atividade física</string>
+    <string name="onboarding_permission_done">Permissão concedida ✓</string>
+    <string name="onboarding_permission_button">Permitir</string>
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Espécies: corruíra, coruja (nível 3), papagaio (6), águia (10); no app, no widget, no papel de parede e no mostrador da pulseira</item>
+        <item>Sementes: uma a cada 1.000 passos; alimente o passarinho e compre cores e cantos</item>
+        <item>Acessórios: use ou esconda o que ganhou; novos óculos, flor, touca e mochila</item>
+        <item>Papel de parede animado: o passarinho voa do ninho ao galho com seus passos</item>
+        <item>Ferramentas (Hoje): metrônomo de ritmo, passeio com o cachorro e caminhada com GPS (com a rota)</item>
+        <item>Contador de andares: em telefones com sensor de pressão</item>
+        <item>Bloqueio do app (PIN, digital ou rosto) e visão simples (Configurações → Aparência e idioma)</item>
+        <item>Páginas de boas-vindas na instalação nova: meta, altura e peso, permissão</item>
+    </string-array>
 </resources>

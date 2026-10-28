@@ -21,6 +21,7 @@ import com.dordeorz.adimsayar.band.WatchfaceUpload
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiFaceFile
 import com.dordeorz.adimsayar.band.XiaomiWatchface
+import com.dordeorz.adimsayar.ui.BirdPainter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -273,6 +274,7 @@ object FaceDesigner {
 
     /** The face as it will look, with sample values. */
     suspend fun picture(context: Context, design: FaceDesign, photo: Bitmap?): Bitmap = withContext(Dispatchers.Default) {
+        lookExtras = ExtrasStore.get(context).extras.value
         val layout = layout(context)
         val out = background(context, layout, design, photo)
         val canvas = Canvas(out)
@@ -284,8 +286,11 @@ object FaceDesigner {
             }
         }
         if (design.bird != DesignBird.None) {
-            asset(context, "bird_${birdMood(design.bird, layout)}.png")?.let {
-                canvas.drawBitmap(it, layout.birdX.toFloat(), (layout.birdY + shift(design.place, "bird")).toFloat(), null)
+            val mood = birdMood(design.bird, layout)
+            asset(context, "bird_$mood.png")?.let { image ->
+                val look = birdLook()
+                val shown = if (look == null) image else birdFrame(image.width, image.height, mood, look)
+                canvas.drawBitmap(shown, layout.birdX.toFloat(), (layout.birdY + shift(design.place, "bird")).toFloat(), null)
             }
         }
         for ((part, block) in listOf("date" to "time", "steps" to "stats", "health" to "stats", "weather" to "stats")) {
@@ -348,7 +353,13 @@ object FaceDesigner {
                         "bar" -> (0 until BAR_STEPS).map { bar(layout, design.accent, it * 10).picture() }
                         "hour" -> digits.map { it.tinted(design.hour) }
                         "minute" -> digits.map { it.tinted(design.minute) }
-                        "bird" -> face.list(index).let { moods ->
+                        "bird" -> face.list(index).let { template ->
+                            val look = birdLook()
+                            val moods = if (look == null) {
+                                template
+                            } else {
+                                template.mapIndexed { i, frame -> birdFrame(frame.width, frame.height, layout.moods.getOrNull(i), look).picture() }
+                            }
                             when (design.bird) {
                                 DesignBird.Mood, DesignBird.None -> moods
                                 else -> moods.map { moods[layout.moods.indexOf(birdMood(design.bird, layout)).coerceAtLeast(0)] }
@@ -367,6 +378,33 @@ object FaceDesigner {
                 XiaomiWatchface.parse(bytes)?.let { WatchfaceFile(it.id, name, it.bytes) }
             }.onFailure { Log.w(XiaomiBand.TAG, "face designer: $it") }.getOrNull()
         }
+
+    /** The bird kind and colour picked in the app, or null for the template's own sparrow pictures. */
+    private fun birdLook(): BirdState? {
+        val extras = lookExtras ?: return null
+        if (extras.birdSpecies == DEFAULT_SPECIES && extras.birdColor == DEFAULT_BIRD_COLOR) return null
+        // The level only gates choosing a kind in the app; here the picked kind is drawn as a grown bird.
+        return BirdState(BirdStage.Bird, BirdMood.Happy, emptySet(), null, 0L, 1f, level = Int.MAX_VALUE).styled(extras)
+    }
+
+    /** The extras of the app, set by [install] and [picture]; null before. */
+    @Volatile
+    private var lookExtras: ExtraSettings? = null
+
+    private fun birdFrame(width: Int, height: Int, mood: String?, look: BirdState): Bitmap {
+        val out = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(out)
+        val size = minOf(width, height).toFloat()
+        canvas.translate((width - size) / 2f, (height - size) / 2f)
+        val birdMood = when (mood) {
+            "sleepy" -> BirdMood.Sleepy
+            "awake" -> BirdMood.Calm
+            "party" -> BirdMood.Excited
+            else -> BirdMood.Happy
+        }
+        BirdPainter.draw(canvas, size, look.copy(mood = birdMood))
+        return out
+    }
 
     /** The picture of the bird the preview shows; with [DesignBird.Mood] the happy one, as at a sample goal. */
     private fun birdMood(bird: DesignBird, layout: Layout): String = when (bird) {

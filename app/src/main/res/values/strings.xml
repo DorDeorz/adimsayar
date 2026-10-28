@@ -1202,4 +1202,106 @@
         <item>Sağlık: toparlanma puanı ve fitness yaşı (bileklik verisiyle)</item>
         <item>Yeni madalyalar: mesafe, su serisi, uyku serisi, rota bitirme</item>
     </string-array>
+    <string name="bird_item_glasses">Gözlük</string>
+    <string name="bird_item_flower">Çiçek</string>
+    <string name="bird_item_nightcap">Uyku başlığı</string>
+    <string name="bird_item_backpack">Sırt çantası</string>
+    <string name="bird_unlock_glasses">Toplam 42 km yürü</string>
+    <string name="bird_unlock_flower">7 gün su hedefi</string>
+    <string name="bird_unlock_nightcap">7 gece iyi uyku</string>
+    <string name="bird_unlock_backpack">Bir sanal rotayı bitir</string>
+    <string name="bird_item_wear">Kazandın; kuşun takıp takmayacağını seç</string>
+    <string name="seeds_count">Tohum: %1$d</string>
+    <string name="seeds_hint">Her 1.000 adım bir tohum; renk ve ötüş almak ya da kuşu beslemek için</string>
+    <string name="bird_fed">Kuşun tohumu çok sevdi!</string>
+    <string name="bird_feed">Besle</string>
+    <string name="bird_species_title">Kuş türü</string>
+    <string name="bird_locked_level">%1$s (seviye %2$d)</string>
+    <string name="bird_color_title">Tüy rengi</string>
+    <string name="bird_price">%1$s (%2$d tohum)</string>
+    <string name="bird_sound_title">Ötüş</string>
+    <string name="bird_species_sparrow">Çalıkuşu</string>
+    <string name="bird_species_owl">Baykuş</string>
+    <string name="bird_species_parrot">Papağan</string>
+    <string name="bird_species_eagle">Kartal</string>
+    <string name="bird_color_default">Doğal</string>
+    <string name="bird_color_sky">Gök mavisi</string>
+    <string name="bird_color_rose">Pembe</string>
+    <string name="bird_color_mint">Nane yeşili</string>
+    <string name="bird_color_plum">Mor</string>
+    <string name="bird_color_night">Gece</string>
+    <string name="bird_sound_chirp">Cik cik</string>
+    <string name="bird_sound_trill">Şakıma</string>
+    <string name="bird_sound_tweet">Islık</string>
+    <string name="bird_sound_coo">Guguk</string>
+    <string name="metronome_channel">Metronom</string>
+    <string name="metronome_title">Tempo metronomu</string>
+    <string name="metronome_bpm">Dakikada %1$d adım</string>
+    <string name="walk_stop">Durdur</string>
+    <string name="walk_start">Başlat</string>
+    <string name="walk_channel">Yürüyüş kaydı</string>
+    <string name="walk_gps_recording">GPS yürüyüşü kaydediliyor</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Konum izni verilmedi; GPS yürüyüşü bu izinle çalışır</string>
+    <string name="walk_tools_title">Yürüyüş araçları</string>
+    <string name="walk_dog_title">Köpek gezdirme</string>
+    <string name="walk_dog_hint">Çıkarken başlat, dönünce durdur; adımlar kaydedilir</string>
+    <string name="walk_running">Sürüyor: %1$s</string>
+    <string name="walk_gps_title">GPS ile yürüyüş</string>
+    <string name="walk_gps_hint">Yol ve mesafe kaydedilir; konum yalnızca kayıt sırasında kullanılır</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Kayıtlı yürüyüşler (%1$d)</string>
+    <string name="walk_list_title">Yürüyüşler</string>
+    <string name="walk_delete">Sil</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s adım</string>
+    <string name="walk_summary_dog">%1$s · %2$s adım</string>
+    <string name="floors_today">%1$d kat çıktın</string>
+    <string name="walks_on_day">%1$d yürüyüş</string>
+    <string name="wallpaper_name">Canlı duvar kâğıdı</string>
+    <string name="wallpaper_description">Adım attıkça FitWren kuşu yuvasından dala uçar</string>
+    <string name="wallpaper_set_hint">Ana ekranda kuş, günün adımlarıyla yuvadan dala uçar</string>
+    <string name="lock_title">FitWren kilitli</string>
+    <string name="lock_use_pin">PIN kullan</string>
+    <string name="lock_wrong">PIN yanlış, tekrar dene</string>
+    <string name="lock_enter_pin">PIN\'ini gir</string>
+    <string name="lock_biometric_again">Parmak izi ya da yüzle aç</string>
+    <string name="simple_today">Bugün</string>
+    <string name="simple_view_off">Normal görünüme dön</string>
+    <string name="simple_view">Sade görünüm</string>
+    <string name="simple_view_hint">Bugün sayfasında yalnızca büyük yazıyla adım ve hedef</string>
+    <string name="app_lock">Uygulama kilidi</string>
+    <string name="app_lock_hint">Açılışta PIN ister</string>
+    <string name="app_lock_biometric">Parmak izi / yüz ile aç</string>
+    <string name="app_lock_biometric_hint">PIN yerine telefonun biyometrik kilidi; PIN yedek olarak kalır</string>
+    <string name="app_lock_change">PIN\'i değiştir</string>
+    <string name="app_lock_change_hint">Yeni bir PIN belirle</string>
+    <string name="app_lock_set_pin">PIN belirle</string>
+    <string name="app_lock_pin_hint">%1$d–%2$d haneli bir sayı. Unutursan uygulama verisini silmeden açamazsın.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (tekrar)</string>
+    <string name="onboarding_skip">Geç</string>
+    <string name="onboarding_welcome_title">FitWren\'e hoş geldin</string>
+    <string name="onboarding_welcome_text">Adımlarını sayar; hedefe ulaştıkça kuşun büyür. Hesap gerekmez, veriler telefonunda kalır.</string>
+    <string name="onboarding_goal_title">Günlük hedefin</string>
+    <string name="onboarding_goal_text">Sonra Ayarlar\'dan değiştirebilirsin</string>
+    <string name="onboarding_body_title">Boy ve kilo</string>
+    <string name="onboarding_body_text">Mesafe ve kalori bunlarla hesaplanır</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Adım izni</string>
+    <string name="onboarding_permission_text">Adımları saymak için fiziksel etkinlik izni gerekir</string>
+    <string name="onboarding_permission_done">İzin verildi ✓</string>
+    <string name="onboarding_permission_button">İzin ver</string>
+    <string name="onboarding_next">İleri</string>
+    <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Kuş türleri: çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10); uygulamada, widget\'ta, duvar kâğıdında ve bileklik kadranında</item>
+        <item>Tohumlar: her 1.000 adım bir tohum; kuşu besle, tüy rengi ve ötüş al</item>
+        <item>Aksesuarlar: kazandıklarını tak ya da çıkar; yeni gözlük, çiçek, uyku başlığı ve sırt çantası</item>
+        <item>Canlı duvar kâğıdı: kuş adımlarınla yuvadan dala uçar</item>
+        <item>Yürüyüş araçları (Bugün): tempo metronomu, köpek gezdirme ve GPS ile yürüyüş kaydı (rota çizimiyle)</item>
+        <item>Kat sayacı: basınç sensörü olan telefonlarda</item>
+        <item>Uygulama kilidi (PIN, parmak izi ya da yüz) ve sade görünüm (Ayarlar → Görünüm ve dil)</item>
+        <item>İlk açılış rehberi: yeni kurulumda hedef, boy-kilo ve izin</item>
+    </string-array>
 </resources>

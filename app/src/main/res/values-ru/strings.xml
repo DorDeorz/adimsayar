@@ -1201,4 +1201,106 @@
         <item>Здоровье: оценка восстановления и фитнес-возраст (по браслету)</item>
         <item>Новые медали: расстояние, серия воды, серия сна, пройденные маршруты</item>
     </string-array>
+    <string name="bird_item_glasses">Очки</string>
+    <string name="bird_item_flower">Цветок</string>
+    <string name="bird_item_nightcap">Ночной колпак</string>
+    <string name="bird_item_backpack">Рюкзак</string>
+    <string name="bird_unlock_glasses">Пройди всего 42 км</string>
+    <string name="bird_unlock_flower">Цель по воде 7 дней подряд</string>
+    <string name="bird_unlock_nightcap">7 хороших ночей подряд</string>
+    <string name="bird_unlock_backpack">Пройди виртуальный маршрут</string>
+    <string name="bird_item_wear">Получено: выбери, носит ли птичка</string>
+    <string name="seeds_count">Семена: %1$d</string>
+    <string name="seeds_hint">Одно семечко за 1000 шагов: на цвета, песни или корм</string>
+    <string name="bird_fed">Птичке понравилось семечко!</string>
+    <string name="bird_feed">Покормить</string>
+    <string name="bird_species_title">Вид птицы</string>
+    <string name="bird_locked_level">%1$s (уровень %2$d)</string>
+    <string name="bird_color_title">Цвет перьев</string>
+    <string name="bird_price">%1$s (%2$d семян)</string>
+    <string name="bird_sound_title">Песня</string>
+    <string name="bird_species_sparrow">Крапивник</string>
+    <string name="bird_species_owl">Сова</string>
+    <string name="bird_species_parrot">Попугай</string>
+    <string name="bird_species_eagle">Орёл</string>
+    <string name="bird_color_default">Природный</string>
+    <string name="bird_color_sky">Небесный</string>
+    <string name="bird_color_rose">Розовый</string>
+    <string name="bird_color_mint">Мятный</string>
+    <string name="bird_color_plum">Сливовый</string>
+    <string name="bird_color_night">Ночной</string>
+    <string name="bird_sound_chirp">Чирик</string>
+    <string name="bird_sound_trill">Трель</string>
+    <string name="bird_sound_tweet">Свист</string>
+    <string name="bird_sound_coo">Воркование</string>
+    <string name="metronome_channel">Метроном</string>
+    <string name="metronome_title">Метроном темпа</string>
+    <string name="metronome_bpm">%1$d шагов в минуту</string>
+    <string name="walk_stop">Стоп</string>
+    <string name="walk_start">Старт</string>
+    <string name="walk_channel">Запись прогулки</string>
+    <string name="walk_gps_recording">Идёт запись прогулки по GPS</string>
+    <string name="walk_gps_distance">%1$s км</string>
+    <string name="walk_gps_denied">Нет доступа к геолокации; он нужен для прогулки по GPS</string>
+    <string name="walk_tools_title">Инструменты прогулки</string>
+    <string name="walk_dog_title">Прогулка с собакой</string>
+    <string name="walk_dog_hint">Старт при выходе, стоп по возвращении; шаги сохранятся</string>
+    <string name="walk_running">Идёт: %1$s</string>
+    <string name="walk_gps_title">Прогулка по GPS</string>
+    <string name="walk_gps_hint">Сохраняются маршрут и расстояние; геолокация только во время записи</string>
+    <string name="walk_gps_running">%1$s км · %2$s</string>
+    <string name="walk_list_button">Сохранённые прогулки (%1$d)</string>
+    <string name="walk_list_title">Прогулки</string>
+    <string name="walk_delete">Удалить</string>
+    <string name="walk_summary_gps">%1$s км · %2$s · %3$s шагов</string>
+    <string name="walk_summary_dog">%1$s · %2$s шагов</string>
+    <string name="floors_today">Подъём: %1$d этажей</string>
+    <string name="walks_on_day">Прогулок: %1$d</string>
+    <string name="wallpaper_name">Живые обои</string>
+    <string name="wallpaper_description">Птичка FitWren летит из гнезда на ветку, пока ты шагаешь</string>
+    <string name="wallpaper_set_hint">На главном экране птичка летит из гнезда на ветку с шагами дня</string>
+    <string name="lock_title">FitWren заблокирован</string>
+    <string name="lock_use_pin">Ввести PIN</string>
+    <string name="lock_wrong">Неверный PIN, попробуй ещё</string>
+    <string name="lock_enter_pin">Введи PIN</string>
+    <string name="lock_biometric_again">Разблокировать отпечатком или лицом</string>
+    <string name="simple_today">Сегодня</string>
+    <string name="simple_view_off">Вернуть обычный вид</string>
+    <string name="simple_view">Простой вид</string>
+    <string name="simple_view_hint">На «Сегодня» только шаги и цель крупным шрифтом</string>
+    <string name="app_lock">Блокировка приложения</string>
+    <string name="app_lock_hint">Запрашивает PIN при открытии</string>
+    <string name="app_lock_biometric">Отпечаток / лицо</string>
+    <string name="app_lock_biometric_hint">Биометрия телефона; PIN остаётся запасным</string>
+    <string name="app_lock_change">Сменить PIN</string>
+    <string name="app_lock_change_hint">Задать новый PIN</string>
+    <string name="app_lock_set_pin">Задать PIN</string>
+    <string name="app_lock_pin_hint">Число из %1$d–%2$d цифр. Если забудешь, приложение откроется только после очистки данных.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (ещё раз)</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_welcome_title">Добро пожаловать в FitWren</string>
+    <string name="onboarding_welcome_text">Считает шаги, а птичка растёт, когда ты выполняешь цель. Без аккаунта, данные остаются на телефоне.</string>
+    <string name="onboarding_goal_title">Твоя дневная цель</string>
+    <string name="onboarding_goal_text">Потом можно изменить в настройках</string>
+    <string name="onboarding_body_title">Рост и вес</string>
+    <string name="onboarding_body_text">По ним считаются расстояние и калории</string>
+    <string name="onboarding_height">%1$d см</string>
+    <string name="onboarding_weight">%1$d кг</string>
+    <string name="onboarding_permission_title">Разрешение на шаги</string>
+    <string name="onboarding_permission_text">Для подсчёта шагов нужно разрешение на физическую активность</string>
+    <string name="onboarding_permission_done">Разрешение дано ✓</string>
+    <string name="onboarding_permission_button">Разрешить</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Виды птиц: крапивник, сова (уровень 3), попугай (6), орёл (10); в приложении, виджете, обоях и циферблате браслета</item>
+        <item>Семена: одно за 1000 шагов; корми птичку, покупай цвета и песни</item>
+        <item>Аксессуары: надевай или скрывай полученные; новые очки, цветок, ночной колпак и рюкзак</item>
+        <item>Живые обои: птичка летит из гнезда на ветку с твоими шагами</item>
+        <item>Инструменты (Сегодня): метроном темпа, прогулка с собакой и запись прогулки по GPS (с маршрутом)</item>
+        <item>Счётчик этажей: на телефонах с датчиком давления</item>
+        <item>Блокировка (PIN, отпечаток или лицо) и простой вид (Настройки → Оформление и язык)</item>
+        <item>Приветствие при новой установке: цель, рост и вес, разрешение</item>
+    </string-array>
 </resources>

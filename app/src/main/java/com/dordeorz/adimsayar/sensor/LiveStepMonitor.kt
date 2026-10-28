@@ -39,6 +39,7 @@ class LiveStepMonitor(context: Context) {
     private val counterListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             val value = event.values[0].toLong()
+            FloorCounter.onStep()
             freezeDetector.onCounter(value, SystemClock.elapsedRealtime())
             val previous = lastCounterValue
             if (previous != null && value > previous) _frozen.value = false
@@ -58,6 +59,7 @@ class LiveStepMonitor(context: Context) {
         override fun onSensorChanged(event: SensorEvent) {
             val now = SystemClock.elapsedRealtime()
             detectorSteps++
+            FloorCounter.onStep()
             freezeDetector.onDetectorStep(now)
             if (freezeDetector.isFrozen(now)) {
                 _frozen.value = true
@@ -75,6 +77,7 @@ class LiveStepMonitor(context: Context) {
         freezeDetector.reset(SystemClock.elapsedRealtime())
         manager.registerListener(counterListener, counter, SensorManager.SENSOR_DELAY_UI)
         if (detector != null) manager.registerListener(detectorListener, detector, SensorManager.SENSOR_DELAY_UI)
+        FloorCounter.start(appContext, OWNER)
     }
 
     fun stop() {
@@ -82,6 +85,11 @@ class LiveStepMonitor(context: Context) {
         running = false
         manager.unregisterListener(counterListener)
         manager.unregisterListener(detectorListener)
+        FloorCounter.stop(appContext, OWNER)
+    }
+
+    private companion object {
+        const val OWNER = "app"
     }
 
     private fun reconnectCounter(now: Long) {
