@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">手机传感器在过去几分钟内检测到步伐，但 HyperOS 记录没有增加。请几分钟后再看；如果仍未恢复，请关闭下方开关并开启“在后台继续计步”。</string>
     <string name="xiaomi_card_title">使用 HyperOS 步数记录</string>
     <string name="xiaomi_card_text">从手机自带的步数记录读取。即使应用关闭也能完整计步，无需通知，还会补充以往的天数。</string>
-    <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。</string>
+    <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。 大多数手机不需要此项，请先在关闭状态下试用。</string>
     <string name="service_channel">计步器</string>
     <string name="service_title">FitWren 正在计步</string>
     <string name="service_text">今天 %1$s 步</string>
@@ -177,7 +177,7 @@
     <string name="language">应用语言</string>
     <string name="language_system">系统</string>
     <string name="medal_group_early">早起鸟</string>
-    <string name="medal_group_early_text">08:00 前至少走 1,000 步的天数（需开启 HyperOS 记录）</string>
+    <string name="medal_group_early_text">08:00 前至少走 1,000 步的天数</string>
 
     <string name="widget_streak_label">连续达标与本周</string>
     <string name="widget_streak_description">每日目标连续达标情况和本周进度</string>
@@ -367,6 +367,8 @@
         <item>月度 PDF 报告（历史）：当月总结、每日图表、每周和逐日表格；无需联网</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
+        <item>早起鸟奖牌不再需要 HyperOS 记录：根据手机和手环的每小时步数计算</item>
+        <item>手机重启时漏记的步数：Android 14 及以上会用手机自身的 Health Connect 记录补齐过去几天</item>
         <item>设置 → 步数来源 →“使用手环时不计手机”：开启后，有手环数据的日子不再加入手机步数</item>
         <item>手环和手机始终按小时合并：佩戴手环的小时只计手环步数，手机补足其余小时（以前没有 HyperOS 记录时取当天较大的总数）</item>
         <item>支持第三方 ROM（crDroid、LineageOS 等）：在没有 HyperOS 的小米手机上隐藏 HyperOS 步数记录和 MIUI 电池步骤，改用手机传感器</item>
@@ -564,6 +566,7 @@
     <string name="log_wearable_denied">没有 Health Connect 读取权限</string>
     <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>
     <string name="log_wearable_synced">手环：今天 %1$d 步，已更新 %2$d 天</string>
+    <string name="log_phone_gaps">Health Connect：已补上手机漏记的 %1$d 步（过去几天）</string>
     <string name="band_exercises">锻炼</string>
     <string name="band_active_kcal">活动卡路里（手环）</string>
     <string name="band_kcal_value">%1$s 千卡</string>

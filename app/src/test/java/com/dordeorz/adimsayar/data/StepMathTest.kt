@@ -161,6 +161,37 @@ class StepMathTest {
     }
 
     @Test
+    fun phoneGapsAddOnlyTheDailyShortfall() {
+        val nine = LocalDateTime.parse("2026-10-27T09:00")
+        val ten = LocalDateTime.parse("2026-10-27T10:00")
+        val eleven = LocalDateTime.parse("2026-10-27T11:00")
+        // Our reads spread steps differently over 9 and 10, and missed 200 steps at 11 (reboot).
+        val own = mapOf(nine to 700L, ten to 300L)
+        val other = mapOf(nine to 500L, ten to 500L, eleven to 200L)
+        val gaps = StepMath.phoneGaps(other, own)
+        assertEquals(200L, gaps.values.sum())
+        assertEquals(null, gaps[nine])
+    }
+
+    @Test
+    fun phoneGapsSkipDaysWhereWeCountedMore() {
+        val hour = LocalDateTime.parse("2026-10-27T09:00")
+        assertEquals(emptyMap<LocalDateTime, Long>(), StepMath.phoneGaps(mapOf(hour to 500L), mapOf(hour to 600L)))
+    }
+
+    @Test
+    fun earlyBirdUsesBandHoursFirstAndOnlyMornings() {
+        val band = mapOf(LocalDateTime.parse("2026-10-28T07:00") to 600L)
+        val phone = mapOf(
+            LocalDateTime.parse("2026-10-28T06:00") to 500L,
+            LocalDateTime.parse("2026-10-28T07:00") to 900L,
+            LocalDateTime.parse("2026-10-27T07:00") to 800L,
+            LocalDateTime.parse("2026-10-27T08:00") to 5_000L,
+        )
+        assertEquals(setOf(LocalDate.parse("2026-10-28")), StepMath.earlyBirdDays(band, phone))
+    }
+
+    @Test
     fun bandDaysSkipDaysWithoutBandSteps() {
         val band = mapOf(
             LocalDateTime.parse("2026-10-28T10:00") to 1_000L,

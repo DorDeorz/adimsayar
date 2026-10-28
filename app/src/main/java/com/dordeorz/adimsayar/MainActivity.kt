@@ -43,6 +43,7 @@ import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.Water
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.BandLive
+import com.dordeorz.adimsayar.data.PhoneHealthSteps
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
@@ -373,9 +374,11 @@ class MainActivity : ComponentActivity() {
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
             val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
             val weights by remember { Weights.observe(applicationContext) }.collectAsStateWithLifecycle(emptyList())
-            val earlyBirdSource = xiaomiEnabled
-            val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdSource, history[currentDay]) {
-                value = if (earlyBirdSource) withContext(Dispatchers.IO) { XiaomiSteps.earlyBirdDays(applicationContext) } else null
+            val earlyBirdFromXiaomi = xiaomiEnabled
+            val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdFromXiaomi, history[currentDay]) {
+                value = withContext(Dispatchers.IO) {
+                    if (earlyBirdFromXiaomi) XiaomiSteps.earlyBirdDays(applicationContext) else repository.earlyBirdDays()
+                }
             }
             val water by remember { Water.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
             val freezes by remember { StreakFreezes.observe(applicationContext) }.collectAsStateWithLifecycle(emptySet())
@@ -524,6 +527,12 @@ class MainActivity : ComponentActivity() {
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
+        AppScope.launch(Dispatchers.IO) {
+            if (PhoneHealthSteps.fillGaps(appContext) > 0L) {
+                if (BandDirect.isEnabled(appContext)) BandDirect.remerge(appContext)
+                Widgets.updateAll(appContext)
+            }
+        }
         bandDirectEnabled = BandDirect.isEnabled(this)
         bandOnly = WearableSteps.isBandOnly(this)
         if (bandDirectEnabled) {

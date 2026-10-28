@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">Le capteur du téléphone a détecté des pas ces dernières minutes, mais le relevé HyperOS n\'augmente pas. Revérifiez dans quelques minutes ; si rien ne change, désactivez l\'option ci-dessous et activez « Continuer à compter en arrière-plan ».</string>
     <string name="xiaomi_card_title">Utiliser le relevé de pas HyperOS</string>
     <string name="xiaomi_card_text">Les pas sont lus depuis le relevé du téléphone. Ils sont tous comptés même quand l\'app est fermée, sans notification, et les jours passés sont aussi ajoutés.</string>
-    <string name="service_card_text">Activez cette option si les pas ne sont pas comptés quand l\'app est fermée. Le compteur reste actif ; une notification silencieuse et permanente s\'affiche dans la barre de notifications.</string>
+    <string name="service_card_text">Activez cette option si les pas ne sont pas comptés quand l\'app est fermée. Le compteur reste actif ; une notification silencieuse et permanente s\'affiche dans la barre de notifications. La plupart des téléphones comptent sans elle ; essayez d\'abord désactivée.</string>
     <string name="service_channel">Compteur de pas</string>
     <string name="service_title">FitWren compte vos pas</string>
     <string name="service_text">%1$s pas aujourd\'hui</string>
@@ -177,7 +177,7 @@
     <string name="language">Langue de l\'app</string>
     <string name="language_system">Système</string>
     <string name="medal_group_early">Lève-tôt</string>
-    <string name="medal_group_early_text">Jours avec au moins 1 000 pas avant 08:00 (relevé HyperOS activé)</string>
+    <string name="medal_group_early_text">Jours avec au moins 1 000 pas avant 08:00</string>
 
     <string name="widget_streak_label">Série et semaine</string>
     <string name="widget_streak_description">Votre série d\'objectifs quotidiens et la progression de la semaine</string>
@@ -367,6 +367,8 @@
         <item>Rapport mensuel PDF (Historique) : résumé du mois, graphique quotidien, semaines et tableau jour par jour ; sans internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
+        <item>La médaille lève-tôt n\'a plus besoin du relevé HyperOS : elle est calculée à partir des pas horaires du téléphone et du bracelet</item>
+        <item>Pas perdus au redémarrage du téléphone : sous Android 14 et plus, les jours passés sont complétés avec le relevé Health Connect du téléphone</item>
         <item>Paramètres → Source des pas → « Ne pas compter le téléphone avec le bracelet » : activé, les pas du téléphone ne sont pas ajoutés les jours avec données du bracelet</item>
         <item>Bracelet et téléphone sont toujours fusionnés heure par heure : pendant les heures où le bracelet est porté, seul le bracelet compte, le téléphone complète les autres heures (avant, sans le relevé HyperOS, le plus grand total du jour l\'emportait)</item>
         <item>Prise en charge des ROM personnalisées (crDroid, LineageOS, etc.) : sur un Xiaomi sans HyperOS, le relevé de pas HyperOS et les étapes batterie MIUI sont masqués et le capteur du téléphone est utilisé</item>
@@ -564,6 +566,7 @@
     <string name="log_wearable_denied">Pas d\'autorisation de lecture Health Connect</string>
     <string name="log_wearable_error">Impossible de lire Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Bracelet : %1$d pas aujourd\'hui, %2$d jours mis à jour</string>
+    <string name="log_phone_gaps">Health Connect : %1$d pas manqués par le téléphone ajoutés (jours passés)</string>
     <string name="band_exercises">Entraînements</string>
     <string name="band_active_kcal">Calories actives (bracelet)</string>
     <string name="band_kcal_value">%1$s kcal</string>

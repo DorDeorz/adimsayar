@@ -63,6 +63,11 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.15.2
 
+- Erken kalkan madalyası HyperOS kaydı olmadan da hesaplanır: telefonun saatlik kaydı ve bilekliğin saatleri (bileklik saati önce), 08:00'den önce en az 1.000 adım (`StepMath.earlyBirdDays`).
+- Geçmiş günlerde eksik telefon adımları (ör. yeniden başlatma öncesi son okumadan sonraki adımlar) Health Connect'teki telefonun kendi kaydından (veri kaynağı `android`) doldurulur. Sadece son 3 gün, bugün hariç; gün toplamındaki eksik, Health Connect'in önde olduğu saatlere dağıtılır (`PhoneHealthSteps`, `StepMath.phoneGaps`). Uygulama açılınca çalışır, READ_STEPS izni gerekir.
+- "Arka planda sürekli say" açıklamasına "çoğu telefonda gerekmez" notu.
+- 15 dk işi geç kalınca hemen ikinci kez çalışabiliyordu; 2 dakika içindeki ikinci çalışma atlanır.
+- Tam zamanlı alarmlar satırı Bildirimler sayfasına taşındı.
 - Ayarlar → Adım kaynağı → "Bileklik varken telefonu sayma" (varsayılan kapalı, `WearableSteps.isBandOnly`): açıksa bilekliğin veri gönderdiği günlerde gün toplamı yalnız bileklikten gelir (`StepMath.bandDays`); telefon sadece bilekliğin hiç veri göndermediği günlerde kullanılır.
 - Bileklik ve telefon her zaman saat saat birleşir (`StepMath.mergeMixed`): bilekliğin takılı olduğu saatlerde yalnız bileklik, diğer saatlerde telefonun saatlik kaydı. Önceden HyperOS kaydı kapalıyken günün büyük toplamı alınıyordu, telefon fazla sayınca bilekliği eziyordu. Telefonun saatlik kaydı olmayan eski ya da içe aktarılmış günlerde eski kural (günün büyüğü) kalır.
 - Özel ROM'lar (crDroid, LineageOS): Xiaomi telefonda MIUI'nin adım kaynağı (`com.miui.providers.steps`) yoksa "Xiaomi adımları" açık kalmış olsa bile kullanılmaz; adımlar telefonun sayacından okunur. Lineage tabanlı ROM'da pil kartı MIUI'nin otomatik başlatma adımlarını değil, yalnızca pil optimizasyonu muafiyetini gösterir.

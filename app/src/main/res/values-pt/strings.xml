@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">O sensor do celular detectou passos nos últimos minutos, mas o registro do HyperOS não aumenta. Verifique de novo em alguns minutos; se não voltar ao normal, desative a chave abaixo e ative “Continuar contando em segundo plano”.</string>
     <string name="xiaomi_card_title">Usar o registro de passos do HyperOS</string>
     <string name="xiaomi_card_text">Os passos são lidos do registro de passos do próprio celular. Eles são contados por completo mesmo com o app fechado, sem precisar de notificação, e os dias anteriores também são adicionados.</string>
-    <string name="service_card_text">Ative se os passos não forem contados com o app fechado. O contador fica ligado; uma notificação silenciosa e fixa aparece na barra de notificações.</string>
+    <string name="service_card_text">Ative se os passos não forem contados com o app fechado. O contador fica ligado; uma notificação silenciosa e fixa aparece na barra de notificações. A maioria dos celulares conta sem isso; teste primeiro desligado.</string>
     <string name="service_channel">Contador de passos</string>
     <string name="service_title">O FitWren está contando</string>
     <string name="service_text">%1$s passos hoje</string>
@@ -177,7 +177,7 @@
     <string name="language">Idioma do app</string>
     <string name="language_system">Sistema</string>
     <string name="medal_group_early">Madrugador</string>
-    <string name="medal_group_early_text">Dias com pelo menos 1.000 passos antes das 08:00 (com o registro do HyperOS ativado)</string>
+    <string name="medal_group_early_text">Dias com pelo menos 1.000 passos antes das 08:00</string>
 
     <string name="widget_streak_label">Sequência e semana</string>
     <string name="widget_streak_description">Sua sequência de metas diárias e o progresso desta semana</string>
@@ -367,6 +367,8 @@
         <item>Relatório mensal em PDF (Histórico): resumo do mês, gráfico diário, semanas e tabela dia a dia; sem internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
+        <item>A medalha de madrugador não precisa mais do registro do HyperOS: é calculada pelos passos por hora do celular e da pulseira</item>
+        <item>Passos perdidos ao reiniciar o celular: no Android 14 ou mais recente, dias anteriores são completados pelo registro do Health Connect do celular</item>
         <item>Configurações → Fonte de passos → “Não contar o celular ao usar a pulseira”: ligado, os passos do celular não entram nos dias com dados da pulseira</item>
         <item>Pulseira e celular sempre se combinam hora a hora: nas horas com a pulseira no pulso só a pulseira conta, o celular preenche as outras horas (antes, sem o registro do HyperOS, valia o maior total do dia)</item>
         <item>Suporte a ROMs personalizadas (crDroid, LineageOS e outras): em um Xiaomi sem HyperOS, o registro de passos do HyperOS e os passos de bateria do MIUI ficam ocultos e o sensor do celular é usado</item>
@@ -564,6 +566,7 @@
     <string name="log_wearable_denied">Sem permissão de leitura do Health Connect</string>
     <string name="log_wearable_error">Não foi possível ler o Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Pulseira: %1$d passos hoje, %2$d dias atualizados</string>
+    <string name="log_phone_gaps">Health Connect: %1$d passos perdidos pelo celular adicionados (dias anteriores)</string>
     <string name="band_exercises">Treinos</string>
     <string name="band_active_kcal">Calorias ativas (pulseira)</string>
     <string name="band_kcal_value">%1$s kcal</string>

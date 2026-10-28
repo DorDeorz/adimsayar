@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">Der Sensor des Telefons hat in den letzten Minuten Schritte erkannt, aber die HyperOS-Aufzeichnung steigt nicht. Schau in ein paar Minuten wieder nach; wenn sie sich nicht erholt, schalte den Schalter unten aus und "Im Hintergrund weiterzählen" ein.</string>
     <string name="xiaomi_card_title">HyperOS-Schrittaufzeichnung verwenden</string>
     <string name="xiaomi_card_text">Die Schritte werden aus der eigenen Schrittaufzeichnung des Telefons gelesen. Sie werden auch bei geschlossener App vollständig gezählt, es ist keine Benachrichtigung nötig, und vergangene Tage werden ebenfalls übernommen.</string>
-    <string name="service_card_text">Schalte das ein, wenn bei geschlossener App keine Schritte gezählt werden. Der Zähler bleibt aktiv; in der Benachrichtigungsleiste erscheint eine stille, dauerhafte Benachrichtigung.</string>
+    <string name="service_card_text">Schalte das ein, wenn bei geschlossener App keine Schritte gezählt werden. Der Zähler bleibt aktiv; in der Benachrichtigungsleiste erscheint eine stille, dauerhafte Benachrichtigung. Die meisten Handys zählen auch ohne; probiere es zuerst ausgeschaltet.</string>
     <string name="service_channel">Schrittzähler</string>
     <string name="service_title">FitWren zählt</string>
     <string name="service_text">Heute %1$s Schritte</string>
@@ -177,7 +177,7 @@
     <string name="language">App-Sprache</string>
     <string name="language_system">System</string>
     <string name="medal_group_early">Frühaufsteher</string>
-    <string name="medal_group_early_text">Tage mit mindestens 1.000 Schritten vor 08:00 (bei aktiver HyperOS-Aufzeichnung)</string>
+    <string name="medal_group_early_text">Tage mit mindestens 1.000 Schritten vor 08:00</string>
 
     <string name="widget_streak_label">Serie und Woche</string>
     <string name="widget_streak_description">Deine Tagesziel-Serie und der Fortschritt dieser Woche</string>
@@ -367,6 +367,8 @@
         <item>Monatsbericht als PDF (Verlauf): Übersicht, Tagesdiagramm, Wochen und Tabelle pro Tag; ohne Internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
+        <item>Die Frühaufsteher-Medaille braucht keine HyperOS-Aufzeichnung mehr: sie wird aus den Stundenwerten von Handy und Armband berechnet</item>
+        <item>Beim Neustart verlorene Schritte: ab Android 14 werden vergangene Tage aus der Health-Connect-Aufzeichnung des Handys ergänzt</item>
         <item>Einstellungen → Schrittquelle → „Handy nicht zählen, wenn das Armband genutzt wird“: eingeschaltet bleiben Handyschritte an Tagen mit Armbanddaten weg</item>
         <item>Armband und Handy werden immer Stunde für Stunde zusammengeführt: In Stunden mit getragenem Armband zählt nur das Armband, das Handy füllt die übrigen Stunden (bisher gewann ohne HyperOS-Daten die größere Tagessumme)</item>
         <item>Custom-ROM-Unterstützung (crDroid, LineageOS u. a.): Auf Xiaomi-Handys ohne HyperOS werden HyperOS-Schrittdaten und MIUI-Akkuschritte ausgeblendet, der Sensor des Handys wird genutzt</item>
@@ -564,6 +566,7 @@
     <string name="log_wearable_denied">Keine Leseberechtigung für Health Connect</string>
     <string name="log_wearable_error">Health Connect konnte nicht gelesen werden (%1$s)</string>
     <string name="log_wearable_synced">Armband: heute %1$d Schritte, %2$d Tage aktualisiert</string>
+    <string name="log_phone_gaps">Health Connect: %1$d vom Handy verpasste Schritte ergänzt (vergangene Tage)</string>
     <string name="band_exercises">Trainings</string>
     <string name="band_active_kcal">Aktive Kalorien (Armband)</string>
     <string name="band_kcal_value">%1$s kcal</string>

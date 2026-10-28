@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">Датчик телефона зафиксировал шаги за последние минуты, но запись HyperOS не увеличивается. Проверьте снова через несколько минут; если не наладится, выключите переключатель ниже и включите «Считать шаги в фоне».</string>
     <string name="xiaomi_card_title">Использовать запись шагов HyperOS</string>
     <string name="xiaomi_card_text">Шаги берутся из собственной записи шагов телефона. Они учитываются полностью даже при закрытом приложении, уведомление не нужно, а прошлые дни тоже добавляются.</string>
-    <string name="service_card_text">Включите, если шаги не считаются при закрытом приложении. Счётчик остаётся включённым; в панели уведомлений появится беззвучное постоянное уведомление.</string>
+    <string name="service_card_text">Включите, если шаги не считаются при закрытом приложении. Счётчик остаётся включённым; в панели уведомлений появится беззвучное постоянное уведомление. Большинство телефонов считают и без этого; сначала попробуйте с выключенным.</string>
     <string name="service_channel">Счётчик шагов</string>
     <string name="service_title">FitWren считает шаги</string>
     <string name="service_text">Шагов сегодня: %1$s</string>
@@ -177,7 +177,7 @@
     <string name="language">Язык приложения</string>
     <string name="language_system">Системный</string>
     <string name="medal_group_early">Ранняя пташка</string>
-    <string name="medal_group_early_text">Дни, когда до 08:00 пройдено не меньше 1 000 шагов (при включённой записи HyperOS)</string>
+    <string name="medal_group_early_text">Дни, когда до 08:00 пройдено не меньше 1 000 шагов</string>
 
     <string name="widget_streak_label">Серия и неделя</string>
     <string name="widget_streak_description">Серия дневных целей и прогресс за эту неделю</string>
@@ -367,6 +367,8 @@
         <item>Месячный отчёт в PDF (История): сводка за месяц, график по дням, недели и таблица по дням; без интернета</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
+        <item>Медаль «Жаворонок» больше не требует журнала HyperOS: она считается по почасовым шагам телефона и браслета</item>
+        <item>Шаги, потерянные при перезагрузке: на Android 14 и новее прошлые дни дополняются из записи Health Connect самого телефона</item>
         <item>Настройки → Источник шагов → «Не считать телефон при использовании браслета»: если включено, шаги телефона не добавляются в дни с данными браслета</item>
         <item>Браслет и телефон всегда объединяются по часам: в часы, когда браслет надет, считается только браслет, телефон заполняет остальные часы (раньше без журнала HyperOS брался больший дневной итог)</item>
         <item>Поддержка кастомных прошивок (crDroid, LineageOS и др.): на Xiaomi без HyperOS скрыты журнал шагов HyperOS и шаги батареи MIUI, используется датчик телефона</item>
@@ -564,6 +566,7 @@
     <string name="log_wearable_denied">Нет разрешения на чтение Health Connect</string>
     <string name="log_wearable_error">Не удалось прочитать Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Браслет: сегодня %1$d шагов, обновлено дней: %2$d</string>
+    <string name="log_phone_gaps">Health Connect: добавлено %1$d шагов, пропущенных телефоном (прошлые дни)</string>
     <string name="band_exercises">Тренировки</string>
     <string name="band_active_kcal">Активные калории (браслет)</string>
     <string name="band_kcal_value">%1$s ккал</string>
