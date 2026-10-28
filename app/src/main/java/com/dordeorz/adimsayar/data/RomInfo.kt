@@ -2,7 +2,6 @@ package com.dordeorz.adimsayar.data
 
 import android.os.Build
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 // Tells the maker's own Android (MIUI/HyperOS and the like) apart from AOSP-based custom ROMs such as
 // crDroid or LineageOS: those keep the maker name in Build.MANUFACTURER but drop its step record and
@@ -35,7 +34,7 @@ object RomInfo {
         try {
             val process = ProcessBuilder("getprop", name).redirectErrorStream(true).start()
             val value = process.inputStream.bufferedReader().use { it.readText() }.trim()
-            if (process.waitFor(1, TimeUnit.SECONDS)) value else null
+            if (process.waitFor() == 0) value else null
         } catch (e: IOException) {
             null
         } catch (e: InterruptedException) {
