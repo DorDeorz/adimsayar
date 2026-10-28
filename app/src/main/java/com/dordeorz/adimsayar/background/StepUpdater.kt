@@ -36,6 +36,7 @@ object StepUpdater {
             BandDirect.sync(context, source)
         }
         HealthWrite.syncIfDue(context)
+        ExtraReminders.recordCheck(context)
         Widgets.updateAll(context)
     }
 }

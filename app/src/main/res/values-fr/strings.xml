@@ -1066,4 +1066,58 @@
         <item>L\'export CSV inclut maintenant l\'eau, le poids et le sommeil</item>
         <item>Écrire dans Health Connect (optionnel) : les pas FitWren apparaissent aussi dans des apps comme Google Fit</item>
     </string-array>
+    <string name="morning_title">Bonjour !</string>
+    <string name="morning_yesterday">Hier, tu as fait %1$s pas</string>
+    <string name="morning_sleep">Tu as dormi %1$d h %2$d min</string>
+    <string name="morning_goal">Ton objectif du jour : %1$s pas</string>
+    <string name="morning_summary">Résumé du matin</string>
+    <string name="morning_summary_hint">Une notification le matin avec les pas d\'hier, le sommeil et l\'objectif du jour</string>
+    <string name="morning_hour">Heure</string>
+    <string name="record_notify">Notification de record</string>
+    <string name="record_notify_hint">Fête le moment où tu bats ton meilleur jour ou ta meilleure semaine</string>
+    <string name="record_day_title">Aujourd\'hui est ton meilleur jour !</string>
+    <string name="record_day_text">%1$s pas, ancien record %2$s</string>
+    <string name="record_week_title">C\'est ta meilleure semaine !</string>
+    <string name="record_week_text">%1$s pas, ancien record %2$s</string>
+    <string name="sedentary">Rappel de bouger</string>
+    <string name="sedentary_hint">Entre 10 h et 20 h, si tu as fait moins de %1$d pas en une heure, il te dit « lève-toi et marche un peu »</string>
+    <string name="sedentary_title">Bouge un peu</string>
+    <string name="sedentary_text">%1$d pas dans la dernière heure. Quelques minutes de marche te feront du bien.</string>
+    <string name="walk_plan">Planning de marche</string>
+    <string name="walk_plan_hint">Fixe des heures de marche par jour et reçois un rappel</string>
+    <string name="walk_plan_dialog_hint">Une notification arrive à l\'heure prévue. Fais 1 500 pas dans l\'heure ou la suivante et c\'est coché sur Aujourd\'hui.</string>
+    <string name="walk_plan_none">Aucun</string>
+    <string name="walk_plan_title">C\'est l\'heure de marcher</string>
+    <string name="walk_plan_text">Ton plan : marche à %1$s. C\'est parti !</string>
+    <string name="walk_plan_today">Marche aujourd\'hui à %1$s</string>
+    <string name="walk_plan_done">Fait, bravo !</string>
+    <string name="walk_plan_waiting">Coché quand tu feras 1 500 pas vers cette heure</string>
+    <string name="month_report_reminder">Rappel du rapport mensuel</string>
+    <string name="month_report_reminder_hint">Le 1er de chaque mois à 10 h, il te rappelle le rapport PDF du mois passé</string>
+    <string name="month_report_title">Ton rapport de %1$s est prêt</string>
+    <string name="month_report_text">Choisis le mois dans Historique et enregistre le rapport PDF</string>
+    <string name="band_celebrate">Fête de l\'objectif sur le bracelet</string>
+    <string name="band_celebrate_hint">À l\'objectif atteint, le bracelet vibre et affiche un message avec l\'oiseau (s\'il est connecté)</string>
+    <string name="band_celebrate_title">🐦 Objectif atteint !</string>
+    <string name="band_celebrate_text">%1$s pas. Ton oiseau est ravi !</string>
+    <string name="shortcut_water">Eau</string>
+    <string name="shortcut_water_long">Ajouter un verre d\'eau</string>
+    <string name="shortcut_today_long">Pas du jour</string>
+    <string name="shortcut_ask">Combien ?</string>
+    <string name="shortcut_ask_long">Combien de pas aujourd\'hui ?</string>
+    <string name="shortcut_water_added">%1$d ml d\'eau ajoutés</string>
+    <string name="water_tile_name">Eau FitWren</string>
+    <string name="answer_steps">Tu as fait %1$s pas aujourd\'hui. Encore %2$s pour l\'objectif.</string>
+    <string name="answer_steps_done">Tu as fait %1$s pas aujourd\'hui. Objectif atteint, bravo !</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Résumé du matin : pas d\'hier, sommeil et objectif du jour</item>
+        <item>Notification de record : fête immédiate quand tu bats ton meilleur jour ou ta meilleure semaine</item>
+        <item>Rappel de bouger : « lève-toi et marche » après une heure avec peu de pas</item>
+        <item>Planning de marche : heures par jour, rappel et coche sur Aujourd\'hui</item>
+        <item>Rappel du rapport mensuel le 1er de chaque mois</item>
+        <item>Fête sur le bracelet : il vibre et affiche un message avec l\'oiseau</item>
+        <item>Raccourcis : appui long sur l\'icône pour Eau, Aujourd\'hui et Combien ?</item>
+        <item>Tuile eau : +1 verre depuis le panneau de notifications</item>
+        <item>Réponse vocale à « Combien de pas aujourd\'hui ? » (raccourci et Google Assistant)</item>
+    </string-array>
 </resources>

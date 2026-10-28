@@ -1066,4 +1066,58 @@
         <item>L\'esportazione CSV ora include acqua, peso e sonno</item>
         <item>Scrivi in Health Connect (facoltativo): i passi di FitWren compaiono anche in app come Google Fit</item>
     </string-array>
+    <string name="morning_title">Buongiorno!</string>
+    <string name="morning_yesterday">Ieri hai fatto %1$s passi</string>
+    <string name="morning_sleep">Hai dormito %1$d h %2$d min</string>
+    <string name="morning_goal">Il tuo obiettivo di oggi: %1$s passi</string>
+    <string name="morning_summary">Riepilogo del mattino</string>
+    <string name="morning_summary_hint">Una notifica al mattino con i passi di ieri, il sonno e l\'obiettivo di oggi</string>
+    <string name="morning_hour">Ora</string>
+    <string name="record_notify">Notifica di record</string>
+    <string name="record_notify_hint">Festeggia quando superi il tuo giorno o la tua settimana migliore</string>
+    <string name="record_day_title">Oggi è il tuo giorno migliore!</string>
+    <string name="record_day_text">%1$s passi, record precedente %2$s</string>
+    <string name="record_week_title">È la tua settimana migliore!</string>
+    <string name="record_week_text">%1$s passi, record precedente %2$s</string>
+    <string name="sedentary">Promemoria movimento</string>
+    <string name="sedentary_hint">Tra le 10 e le 20, se in un\'ora hai fatto meno di %1$d passi, ti dice “alzati e cammina un po\'”</string>
+    <string name="sedentary_title">È ora di muoversi</string>
+    <string name="sedentary_text">%1$d passi nell\'ultima ora. Qualche minuto di camminata ti farà bene.</string>
+    <string name="walk_plan">Piano delle camminate</string>
+    <string name="walk_plan_hint">Imposta orari di camminata per giorno e ricevi un promemoria</string>
+    <string name="walk_plan_dialog_hint">All\'ora prevista arriva una notifica. Fai 1.500 passi in quell\'ora o nella successiva e viene spuntato in Oggi.</string>
+    <string name="walk_plan_none">Nessuno</string>
+    <string name="walk_plan_title">È ora della camminata</string>
+    <string name="walk_plan_text">Il tuo piano: camminata alle %1$s. Andiamo!</string>
+    <string name="walk_plan_today">Camminata oggi alle %1$s</string>
+    <string name="walk_plan_done">Fatto, bravo!</string>
+    <string name="walk_plan_waiting">Viene spuntato quando fai 1.500 passi a quell\'ora</string>
+    <string name="month_report_reminder">Promemoria del report mensile</string>
+    <string name="month_report_reminder_hint">Il 1° di ogni mese alle 10 ti ricorda il report PDF del mese scorso</string>
+    <string name="month_report_title">Il report di %1$s è pronto</string>
+    <string name="month_report_text">Scegli il mese in Cronologia e salva il report PDF</string>
+    <string name="band_celebrate">Festa dell\'obiettivo sul braccialetto</string>
+    <string name="band_celebrate_hint">Al raggiungimento dell\'obiettivo il braccialetto vibra e mostra un messaggio con l\'uccellino (se connesso)</string>
+    <string name="band_celebrate_title">🐦 Obiettivo raggiunto!</string>
+    <string name="band_celebrate_text">%1$s passi. Il tuo uccellino è felicissimo!</string>
+    <string name="shortcut_water">Acqua</string>
+    <string name="shortcut_water_long">Aggiungi un bicchiere d\'acqua</string>
+    <string name="shortcut_today_long">Passi di oggi</string>
+    <string name="shortcut_ask">Quanti?</string>
+    <string name="shortcut_ask_long">Quanti passi oggi?</string>
+    <string name="shortcut_water_added">%1$d ml d\'acqua aggiunti</string>
+    <string name="water_tile_name">Acqua FitWren</string>
+    <string name="answer_steps">Oggi hai fatto %1$s passi. Ne mancano %2$s.</string>
+    <string name="answer_steps_done">Oggi hai fatto %1$s passi. Obiettivo raggiunto, ottimo!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Riepilogo del mattino: passi di ieri, sonno e obiettivo di oggi</item>
+        <item>Notifica di record: festa immediata quando superi il giorno o la settimana migliore</item>
+        <item>Promemoria movimento: “alzati e cammina” dopo un\'ora con pochi passi</item>
+        <item>Piano delle camminate: orari per giorno, promemoria e spunta in Oggi</item>
+        <item>Promemoria del report mensile il 1° del mese</item>
+        <item>Festa sul braccialetto: vibra e mostra un messaggio con l\'uccellino</item>
+        <item>Scorciatoie: tieni premuta l\'icona per Acqua, Oggi e Quanti?</item>
+        <item>Riquadro acqua: +1 bicchiere dal pannello notifiche</item>
+        <item>Risposta vocale a “Quanti passi oggi?” (scorciatoia e Google Assistant)</item>
+    </string-array>
 </resources>

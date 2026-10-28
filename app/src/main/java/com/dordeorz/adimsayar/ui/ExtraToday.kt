@@ -28,6 +28,14 @@ import com.dordeorz.adimsayar.data.NO_GOAL
 import com.dordeorz.adimsayar.data.PeriodGoals
 import com.dordeorz.adimsayar.data.PeriodProgress
 import java.time.LocalDate
+import java.time.LocalTime
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
+import androidx.compose.ui.platform.LocalContext
+import com.dordeorz.adimsayar.background.ExtraReminders
+import com.dordeorz.adimsayar.data.DayHours
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 internal fun VacationCard(state: MainUiState) {
@@ -102,4 +110,33 @@ private fun PeriodRow(title: String, progress: PeriodProgress) {
 private fun perDayNeeded(progress: PeriodProgress): Long {
     val left = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), progress.end).coerceAtLeast(0L) + 1
     return (progress.goal - progress.done + left - 1) / left
+}
+
+@Composable
+internal fun WalkPlanCard(state: MainUiState) {
+    val minute = state.extra.extras.walkPlan[state.today.dayOfWeek] ?: return
+    val context = LocalContext.current
+    val steps = state.week.lastOrNull()?.steps ?: 0L
+    val done by produceState(false, state.today, steps, minute) {
+        value = withContext(Dispatchers.IO) { ExtraReminders.planDone(DayHours.day(context, state.today), minute) }
+    }
+    val time = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+    Card {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painterResource(if (done) R.drawable.ic_check else R.drawable.ic_timer),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(22.dp),
+            )
+            Column(modifier = Modifier.weight(1f).padding(start = 12.dp)) {
+                Text(stringResource(R.string.walk_plan_today, time), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    stringResource(if (done) R.string.walk_plan_done else R.string.walk_plan_waiting),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    }
 }

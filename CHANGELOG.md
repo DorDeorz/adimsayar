@@ -2,6 +2,18 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.18.0
+
+- Sabah özeti (Ayarlar → Bildirimler, saat 6–10 arası seçilir, `background/ExtraReminders.kt`): dünkü adım, bileklik ya da Health Connect varsa gece uykusu ve bugünün hedefi.
+- Rekor bildirimi: bugün önceki en iyi günü ya da bu hafta en iyi haftayı geçince bir kez bildirim (en az 7 günlük geçmiş gerekir). 15 dakikalık okumadan sonra bakılır.
+- Hareketsizlik hatırlatması: 10:00–20:00 arası her saat başı, önceki saatte 250 adımdan az yürünmüşse bildirim (`DayHours`: telefonun saatlik kaydı, bilekliğin saatleri öncelikli). Tatilde susar.
+- Yürüyüş saati planı: haftanın günlerine saat; saatinde bildirim, o saat ya da sonrakinde 1.500 adım varsa Bugün'deki kartta işaretli.
+- Ayın raporu bildirimi: her ayın 1'inde 10:00'da, dokununca Geçmiş açılır.
+- Bileklikte hedef kutlaması (bileklik doğrudan bağlıyken): hedefe ulaşınca günde bir kez bilekliğe kuşlu bildirim gider, bileklik titrer.
+- Uygulama kısayolları (`res/xml/shortcuts.xml`): Su ekle (bir bardak ekler), Bugün, Kaç adım?
+- Su kutucuğu (`tile/WaterTile.kt`): bildirim panelinden bir bardak ekler, bugünkü suyu gösterir.
+- "Bugün kaç adım attım?" (`StepAnswerActivity`): cevabı gösterir ve sesli okur. Kısayoldan her zaman çalışır; Google Asistan'ın `GET_EXERCISE_OBSERVATION` App Action'ı uygulama Play Store'dan kurulunca devreye girer.
+
 ## 0.17.0
 
 - Güne not (`data/DayData.kt`, tablo `day_notes`): Geçmiş'te seçili günün kartında "Not ekle"; en fazla 120 karakter, takvimde günün altında küçük nokta.

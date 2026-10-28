@@ -1,6 +1,11 @@
 package com.dordeorz.adimsayar
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.content.ContextCompat
+import com.dordeorz.adimsayar.background.ExtraReminders
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -61,6 +66,23 @@ class ExtraController(private val activity: ComponentActivity) {
     fun setVacation(from: LocalDate?, to: LocalDate?) = settingsChanged { settings.setVacation(from, to) }
 
     fun update(change: (ExtraSettings) -> ExtraSettings) = store.update(change)
+
+    /** Changes a reminder setting: asks for the notification permission and sets the alarms again. */
+    fun updateReminder(change: (ExtraSettings) -> ExtraSettings) {
+        store.update(change)
+        requestNotifications()
+        ExtraReminders.scheduleAll(context)
+    }
+
+    private val notificationLauncher = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    private fun requestNotifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     fun backup() = backupLauncher.launch(BACKUP_FILE_NAME.format(LocalDate.now()))
 

@@ -17,6 +17,18 @@ import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
+import androidx.compose.material3.rememberTimePickerState
+import androidx.compose.material3.TimePicker
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import com.dordeorz.adimsayar.background.ExtraReminders
+import com.dordeorz.adimsayar.data.DEFAULT_WALK_MINUTE
+import com.dordeorz.adimsayar.data.MORNING_HOURS
+import java.time.DayOfWeek
+import java.time.LocalTime
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -279,3 +291,118 @@ internal fun DateRangeDialog(
 private fun utcMillis(date: LocalDate): Long = date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 
 private fun utcDate(millis: Long): LocalDate = Instant.ofEpochMilli(millis).atZone(ZoneOffset.UTC).toLocalDate()
+
+@Composable
+internal fun NotificationsExtras(state: MainUiState, actions: MainActions) {
+    val extras = state.extra.extras
+    var planOpen by rememberSaveable { mutableStateOf(false) }
+    HorizontalDivider(Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+    SwitchRow(
+        title = stringResource(R.string.morning_summary),
+        hint = stringResource(R.string.morning_summary_hint),
+        checked = extras.morningSummary,
+        onCheckedChange = { on -> actions.extra.updateReminder { it.copy(morningSummary = on) } },
+    )
+    if (extras.morningSummary) {
+        ChoiceRow(
+            title = stringResource(R.string.morning_hour),
+            options = MORNING_HOURS,
+            selected = extras.morningHour,
+            label = { CLOCK_FORMAT.format(LocalTime.of(it, 0)) },
+            onSelect = { hour -> actions.extra.updateReminder { it.copy(morningHour = hour) } },
+        )
+    }
+    SwitchRow(
+        title = stringResource(R.string.record_notify),
+        hint = stringResource(R.string.record_notify_hint),
+        checked = extras.recordNotify,
+        onCheckedChange = { on -> actions.extra.updateReminder { it.copy(recordNotify = on) } },
+    )
+    SwitchRow(
+        title = stringResource(R.string.sedentary),
+        hint = stringResource(R.string.sedentary_hint, ExtraReminders.SEDENTARY_STEPS.toInt()),
+        checked = extras.sedentary,
+        onCheckedChange = { on -> actions.extra.updateReminder { it.copy(sedentary = on) } },
+    )
+    ClickRow(stringResource(R.string.walk_plan), walkPlanSummary(extras.walkPlan)) { planOpen = true }
+    SwitchRow(
+        title = stringResource(R.string.month_report_reminder),
+        hint = stringResource(R.string.month_report_reminder_hint),
+        checked = extras.monthReportReminder,
+        onCheckedChange = { on -> actions.extra.updateReminder { it.copy(monthReportReminder = on) } },
+    )
+    if (state.bandDirectEnabled) {
+        SwitchRow(
+            title = stringResource(R.string.band_celebrate),
+            hint = stringResource(R.string.band_celebrate_hint),
+            checked = extras.bandCelebrate,
+            onCheckedChange = { on -> actions.extra.update { it.copy(bandCelebrate = on) } },
+        )
+    }
+    if (planOpen) {
+        WalkPlanDialog(
+            plan = extras.walkPlan,
+            weekStart = state.settings.weekStart,
+            onSave = { plan -> actions.extra.updateReminder { it.copy(walkPlan = plan) } },
+            onDismiss = { planOpen = false },
+        )
+    }
+}
+
+@Composable
+private fun walkPlanSummary(plan: Map<DayOfWeek, Int>): String {
+    if (plan.isEmpty()) return stringResource(R.string.walk_plan_hint)
+    return plan.entries.sortedBy { it.key }.joinToString(" · ") { (day, minute) ->
+        day.getDisplayName(java.time.format.TextStyle.SHORT, appLocale) + " " + CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun WalkPlanDialog(plan: Map<DayOfWeek, Int>, weekStart: DayOfWeek, onSave: (Map<DayOfWeek, Int>) -> Unit, onDismiss: () -> Unit) {
+    var edited by remember { mutableStateOf(plan) }
+    var picking by remember { mutableStateOf<DayOfWeek?>(null) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.walk_plan)) },
+        text = {
+            Column(modifier = Modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState())) {
+                Text(stringResource(R.string.walk_plan_dialog_hint), style = MaterialTheme.typography.bodyMedium)
+                (0L until 7L).map { weekStart.plus(it) }.forEach { day ->
+                    val minute = edited[day]
+                    Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text(day.getDisplayName(java.time.format.TextStyle.FULL, appLocale), modifier = Modifier.weight(1f))
+                        TextButton(onClick = { picking = day }) {
+                            Text(if (minute == null) stringResource(R.string.walk_plan_none) else CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60)))
+                        }
+                        if (minute != null) {
+                            TextButton(onClick = { edited = edited - day }) { Text("✕") }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onSave(edited)
+                onDismiss()
+            }) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+    picking?.let { day ->
+        val start = edited[day] ?: DEFAULT_WALK_MINUTE
+        val time = rememberTimePickerState(initialHour = start / 60, initialMinute = start % 60, is24Hour = true)
+        AlertDialog(
+            onDismissRequest = { picking = null },
+            text = { TimePicker(state = time) },
+            confirmButton = {
+                TextButton(onClick = {
+                    edited = edited + (day to time.hour * 60 + time.minute)
+                    picking = null
+                }) { Text(stringResource(R.string.save)) }
+            },
+            dismissButton = { TextButton(onClick = { picking = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+}

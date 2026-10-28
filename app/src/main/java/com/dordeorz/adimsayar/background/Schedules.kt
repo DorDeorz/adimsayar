@@ -25,6 +25,7 @@ object Schedules {
         Reminders.scheduleWeight(context)
         Reminders.scheduleWater(context)
         FaceSchedule.schedule(context)
+        ExtraReminders.scheduleAll(context)
     }
 
     fun requestRead(context: Context) {

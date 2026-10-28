@@ -1066,4 +1066,58 @@
         <item>A exportação CSV agora inclui água, peso e sono</item>
         <item>Gravar no Health Connect (opcional): os passos do FitWren aparecem também em apps como o Google Fit</item>
     </string-array>
+    <string name="morning_title">Bom dia!</string>
+    <string name="morning_yesterday">Ontem você deu %1$s passos</string>
+    <string name="morning_sleep">Você dormiu %1$d h %2$d min</string>
+    <string name="morning_goal">Sua meta de hoje: %1$s passos</string>
+    <string name="morning_summary">Resumo da manhã</string>
+    <string name="morning_summary_hint">Uma notificação de manhã com os passos de ontem, o sono e a meta de hoje</string>
+    <string name="morning_hour">Hora</string>
+    <string name="record_notify">Aviso de recorde</string>
+    <string name="record_notify_hint">Comemora quando você supera seu melhor dia ou semana</string>
+    <string name="record_day_title">Hoje é seu melhor dia!</string>
+    <string name="record_day_text">%1$s passos, recorde anterior %2$s</string>
+    <string name="record_week_title">Esta é sua melhor semana!</string>
+    <string name="record_week_text">%1$s passos, recorde anterior %2$s</string>
+    <string name="sedentary">Lembrete de movimento</string>
+    <string name="sedentary_hint">Entre 10h e 20h, se você deu menos de %1$d passos em uma hora, ele diz “levante e caminhe um pouco”</string>
+    <string name="sedentary_title">Hora de se mexer</string>
+    <string name="sedentary_text">Você deu %1$d passos na última hora. Alguns minutos de caminhada fazem bem.</string>
+    <string name="walk_plan">Plano de caminhadas</string>
+    <string name="walk_plan_hint">Defina horários de caminhada por dia e receba um lembrete</string>
+    <string name="walk_plan_dialog_hint">Chega um aviso no horário. Dê 1.500 passos naquela hora ou na seguinte e fica marcado em Hoje.</string>
+    <string name="walk_plan_none">Nenhum</string>
+    <string name="walk_plan_title">Hora da sua caminhada</string>
+    <string name="walk_plan_text">Seu plano: caminhada às %1$s. Vamos!</string>
+    <string name="walk_plan_today">Caminhada hoje às %1$s</string>
+    <string name="walk_plan_done">Feito, muito bem!</string>
+    <string name="walk_plan_waiting">Fica marcado quando você der 1.500 passos nesse horário</string>
+    <string name="month_report_reminder">Lembrete do relatório mensal</string>
+    <string name="month_report_reminder_hint">No dia 1º de cada mês às 10h lembra o relatório PDF do mês passado</string>
+    <string name="month_report_title">Seu relatório de %1$s está pronto</string>
+    <string name="month_report_text">Escolha o mês em Histórico e salve o relatório PDF</string>
+    <string name="band_celebrate">Comemoração da meta na pulseira</string>
+    <string name="band_celebrate_hint">Ao atingir a meta a pulseira vibra e mostra uma mensagem com o passarinho (se conectada)</string>
+    <string name="band_celebrate_title">🐦 Meta atingida!</string>
+    <string name="band_celebrate_text">%1$s passos. Seu passarinho está feliz!</string>
+    <string name="shortcut_water">Água</string>
+    <string name="shortcut_water_long">Adicionar um copo de água</string>
+    <string name="shortcut_today_long">Passos de hoje</string>
+    <string name="shortcut_ask">Quantos?</string>
+    <string name="shortcut_ask_long">Quantos passos hoje?</string>
+    <string name="shortcut_water_added">%1$d ml de água adicionados</string>
+    <string name="water_tile_name">Água FitWren</string>
+    <string name="answer_steps">Hoje você deu %1$s passos. Faltam %2$s.</string>
+    <string name="answer_steps_done">Hoje você deu %1$s passos. Meta atingida, ótimo!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Resumo da manhã: passos de ontem, sono e meta de hoje</item>
+        <item>Aviso de recorde: comemoração ao superar seu melhor dia ou semana</item>
+        <item>Lembrete de movimento: “levante e caminhe” após uma hora com poucos passos</item>
+        <item>Plano de caminhadas: horários por dia, lembrete e marca em Hoje</item>
+        <item>Lembrete do relatório mensal no dia 1º</item>
+        <item>Comemoração na pulseira: vibra e mostra uma mensagem com o passarinho</item>
+        <item>Atalhos: toque longo no ícone para Água, Hoje e Quantos?</item>
+        <item>Bloco de água: +1 copo pelo painel de notificações</item>
+        <item>Resposta falada a “Quantos passos hoje?” (atalho e Google Assistente)</item>
+    </string-array>
 </resources>

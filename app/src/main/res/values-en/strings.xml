@@ -1066,4 +1066,58 @@
         <item>CSV export now also writes water, weight and sleep columns</item>
         <item>Write to Health Connect (optional): FitWren steps also show up in apps such as Google Fit</item>
     </string-array>
+    <string name="morning_title">Good morning!</string>
+    <string name="morning_yesterday">Yesterday you walked %1$s steps</string>
+    <string name="morning_sleep">You slept %1$d h %2$d min</string>
+    <string name="morning_goal">Today\'s goal is %1$s steps</string>
+    <string name="morning_summary">Morning summary</string>
+    <string name="morning_summary_hint">A morning notification with yesterday\'s steps, last night\'s sleep and today\'s goal</string>
+    <string name="morning_hour">Time</string>
+    <string name="record_notify">Record notification</string>
+    <string name="record_notify_hint">Celebrates the moment you beat your best day or week</string>
+    <string name="record_day_title">Today is your best day!</string>
+    <string name="record_day_text">%1$s steps, previous best %2$s</string>
+    <string name="record_week_title">This is your best week!</string>
+    <string name="record_week_text">%1$s steps, previous best %2$s</string>
+    <string name="sedentary">Sitting reminder</string>
+    <string name="sedentary_hint">Between 10:00 and 20:00, if you walked fewer than %1$d steps in an hour, it says “get up and walk a bit”</string>
+    <string name="sedentary_title">Time to move</string>
+    <string name="sedentary_text">You took %1$d steps in the last hour. A few minutes of walking will do you good.</string>
+    <string name="walk_plan">Walk schedule</string>
+    <string name="walk_plan_hint">Set walk times for weekdays and get a reminder</string>
+    <string name="walk_plan_dialog_hint">You get a notification at that time. Walk 1,500 steps in that hour or the next and it is ticked on Today.</string>
+    <string name="walk_plan_none">None</string>
+    <string name="walk_plan_title">Time for your walk</string>
+    <string name="walk_plan_text">Your plan: walk at %1$s. Let\'s go!</string>
+    <string name="walk_plan_today">Walk at %1$s today</string>
+    <string name="walk_plan_done">Done, well walked!</string>
+    <string name="walk_plan_waiting">Ticked once you walk 1,500 steps around then</string>
+    <string name="month_report_reminder">Monthly report reminder</string>
+    <string name="month_report_reminder_hint">On the 1st of each month at 10:00 it reminds you of last month\'s PDF report</string>
+    <string name="month_report_title">Your %1$s report is ready</string>
+    <string name="month_report_text">Pick the month on the History page and save the PDF report</string>
+    <string name="band_celebrate">Goal celebration on the band</string>
+    <string name="band_celebrate_hint">When you reach the goal the band vibrates and shows a bird message (while connected)</string>
+    <string name="band_celebrate_title">🐦 Goal reached!</string>
+    <string name="band_celebrate_text">%1$s steps. Your bird is thrilled!</string>
+    <string name="shortcut_water">Add water</string>
+    <string name="shortcut_water_long">Add a glass of water</string>
+    <string name="shortcut_today_long">Today\'s steps</string>
+    <string name="shortcut_ask">How many?</string>
+    <string name="shortcut_ask_long">How many steps today?</string>
+    <string name="shortcut_water_added">%1$d ml of water added</string>
+    <string name="water_tile_name">FitWren water</string>
+    <string name="answer_steps">You took %1$s steps today. %2$s steps to go.</string>
+    <string name="answer_steps_done">You took %1$s steps today. Goal reached, great!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Morning summary: yesterday\'s steps, last night\'s sleep and today\'s goal</item>
+        <item>Record notification: instant celebration when you beat your best day or week</item>
+        <item>Sitting reminder: “get up and walk a bit” after an hour with very few steps</item>
+        <item>Walk schedule: set times per weekday, get reminded, ticked on Today when walked</item>
+        <item>Monthly report reminder: on the 1st of each month</item>
+        <item>Goal celebration on the band: it vibrates and shows a bird message</item>
+        <item>App shortcuts: long-press the icon for Add water, Today and How many?</item>
+        <item>Water tile: +1 glass from the notification panel</item>
+        <item>Spoken answer to “How many steps today?” (shortcut and Google Assistant)</item>
+    </string-array>
 </resources>

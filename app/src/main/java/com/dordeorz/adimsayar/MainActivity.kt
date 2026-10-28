@@ -443,6 +443,20 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun openRequestedTab(intent: Intent?) {
+        when (intent?.action) {
+            ACTION_ADD_WATER -> {
+                val glass = settingsStore.settings.value.glassMl
+                actions.onAddWater(glass)
+                Toast.makeText(this, getString(R.string.shortcut_water_added, glass), Toast.LENGTH_SHORT).show()
+                requestedTab = Tab.Today
+                setIntent(Intent(this, MainActivity::class.java))
+                return
+            }
+            ACTION_OPEN_TODAY -> {
+                requestedTab = Tab.Today
+                return
+            }
+        }
         val name = intent?.getStringExtra(EXTRA_TAB) ?: return
         Tab.entries.firstOrNull { it.name.lowercase() == name }?.let { requestedTab = it }
     }
@@ -724,6 +738,10 @@ class MainActivity : ComponentActivity() {
     companion object {
         const val EXTRA_TAB = "tab"
         const val TAB_HEALTH = "health"
+        const val TAB_HISTORY = "history"
+        const val TAB_TODAY = "today"
+        const val ACTION_ADD_WATER = "com.dordeorz.adimsayar.ADD_WATER"
+        const val ACTION_OPEN_TODAY = "com.dordeorz.adimsayar.OPEN_TODAY"
         private const val SETTINGS_PREFS = "settings"
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L

@@ -1066,4 +1066,58 @@
         <item>CSV-Export schreibt jetzt auch Wasser, Gewicht und Schlaf</item>
         <item>In Health Connect schreiben (optional): FitWren-Schritte erscheinen auch in Apps wie Google Fit</item>
     </string-array>
+    <string name="morning_title">Guten Morgen!</string>
+    <string name="morning_yesterday">Gestern bist du %1$s Schritte gegangen</string>
+    <string name="morning_sleep">Du hast %1$d Std. %2$d Min. geschlafen</string>
+    <string name="morning_goal">Dein Ziel heute: %1$s Schritte</string>
+    <string name="morning_summary">Morgenübersicht</string>
+    <string name="morning_summary_hint">Morgens eine Mitteilung mit Schritten von gestern, Schlaf und heutigem Ziel</string>
+    <string name="morning_hour">Uhrzeit</string>
+    <string name="record_notify">Rekordmitteilung</string>
+    <string name="record_notify_hint">Feiert, sobald du deinen besten Tag oder deine beste Woche übertriffst</string>
+    <string name="record_day_title">Heute ist dein bester Tag!</string>
+    <string name="record_day_text">%1$s Schritte, bisheriger Rekord %2$s</string>
+    <string name="record_week_title">Das ist deine beste Woche!</string>
+    <string name="record_week_text">%1$s Schritte, bisheriger Rekord %2$s</string>
+    <string name="sedentary">Bewegungserinnerung</string>
+    <string name="sedentary_hint">Zwischen 10 und 20 Uhr meldet es sich, wenn du in einer Stunde weniger als %1$d Schritte gegangen bist</string>
+    <string name="sedentary_title">Zeit für Bewegung</string>
+    <string name="sedentary_text">In der letzten Stunde %1$d Schritte. Ein paar Minuten Gehen tun gut.</string>
+    <string name="walk_plan">Gehplan</string>
+    <string name="walk_plan_hint">Lege Gehzeiten für Wochentage fest und bekomme eine Erinnerung</string>
+    <string name="walk_plan_dialog_hint">Zur Uhrzeit kommt eine Mitteilung. Gehst du in der Stunde oder der nächsten 1.500 Schritte, wird es auf Heute abgehakt.</string>
+    <string name="walk_plan_none">Keine</string>
+    <string name="walk_plan_title">Zeit für deinen Spaziergang</string>
+    <string name="walk_plan_text">Dein Plan: Spaziergang um %1$s. Los geht\'s!</string>
+    <string name="walk_plan_today">Heute Spaziergang um %1$s</string>
+    <string name="walk_plan_done">Erledigt, gut gemacht!</string>
+    <string name="walk_plan_waiting">Wird abgehakt, wenn du um die Zeit 1.500 Schritte gehst</string>
+    <string name="month_report_reminder">Erinnerung an den Monatsbericht</string>
+    <string name="month_report_reminder_hint">Am 1. jedes Monats um 10 Uhr erinnert es an den PDF-Bericht des Vormonats</string>
+    <string name="month_report_title">Dein Bericht für %1$s ist fertig</string>
+    <string name="month_report_text">Wähle den Monat im Verlauf und speichere den PDF-Bericht</string>
+    <string name="band_celebrate">Zielfeier am Armband</string>
+    <string name="band_celebrate_hint">Bei erreichtem Ziel vibriert das Armband und zeigt eine Vogelnachricht (wenn verbunden)</string>
+    <string name="band_celebrate_title">🐦 Ziel erreicht!</string>
+    <string name="band_celebrate_text">%1$s Schritte. Dein Vogel freut sich riesig!</string>
+    <string name="shortcut_water">Wasser</string>
+    <string name="shortcut_water_long">Ein Glas Wasser hinzufügen</string>
+    <string name="shortcut_today_long">Schritte von heute</string>
+    <string name="shortcut_ask">Wie viele?</string>
+    <string name="shortcut_ask_long">Wie viele Schritte heute?</string>
+    <string name="shortcut_water_added">%1$d ml Wasser hinzugefügt</string>
+    <string name="water_tile_name">FitWren Wasser</string>
+    <string name="answer_steps">Du bist heute %1$s Schritte gegangen. Noch %2$s bis zum Ziel.</string>
+    <string name="answer_steps_done">Du bist heute %1$s Schritte gegangen. Ziel erreicht, super!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Morgenübersicht: Schritte von gestern, Schlaf und heutiges Ziel</item>
+        <item>Rekordmitteilung: sofortige Feier, wenn du deinen besten Tag oder deine beste Woche schlägst</item>
+        <item>Bewegungserinnerung: „steh auf und geh ein Stück“ nach einer Stunde mit wenigen Schritten</item>
+        <item>Gehplan: Zeiten pro Wochentag, Erinnerung, Häkchen auf Heute</item>
+        <item>Erinnerung an den Monatsbericht am 1. jedes Monats</item>
+        <item>Zielfeier am Armband: es vibriert und zeigt eine Vogelnachricht</item>
+        <item>App-Kurzbefehle: Symbol lang drücken für Wasser, Heute und Wie viele?</item>
+        <item>Wasser-Kachel: +1 Glas aus dem Benachrichtigungsfeld</item>
+        <item>Gesprochene Antwort auf „Wie viele Schritte heute?“ (Kurzbefehl und Google Assistant)</item>
+    </string-array>
 </resources>

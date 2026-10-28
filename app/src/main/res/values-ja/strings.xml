@@ -1066,4 +1066,58 @@
         <item>CSVエクスポートに水分・体重・睡眠の列を追加</item>
         <item>ヘルスコネクトへの書き込み（任意）：FitWrenの歩数がGoogle Fitなどにも表示</item>
     </string-array>
+    <string name="morning_title">おはようございます！</string>
+    <string name="morning_yesterday">昨日は%1$s歩でした</string>
+    <string name="morning_sleep">睡眠 %1$d時間%2$d分</string>
+    <string name="morning_goal">今日の目標は%1$s歩</string>
+    <string name="morning_summary">朝のまとめ</string>
+    <string name="morning_summary_hint">朝に前日の歩数・睡眠・今日の目標を通知</string>
+    <string name="morning_hour">時刻</string>
+    <string name="record_notify">記録更新の通知</string>
+    <string name="record_notify_hint">最高の日や週を超えた瞬間にお祝い</string>
+    <string name="record_day_title">今日は最高の日！</string>
+    <string name="record_day_text">%1$s歩、これまでの最高は%2$s</string>
+    <string name="record_week_title">今週は最高の週！</string>
+    <string name="record_week_text">%1$s歩、これまでの最高は%2$s</string>
+    <string name="sedentary">座りすぎリマインダー</string>
+    <string name="sedentary_hint">10:00〜20:00に1時間で%1$d歩未満なら「少し歩こう」と通知</string>
+    <string name="sedentary_title">少し歩きましょう</string>
+    <string name="sedentary_text">この1時間は%1$d歩。数分歩くと気分転換に</string>
+    <string name="walk_plan">ウォーキング予定</string>
+    <string name="walk_plan_hint">曜日ごとに時刻を決めると通知します</string>
+    <string name="walk_plan_dialog_hint">その時刻に通知します。その時間か次の時間に1,500歩歩くと今日のページでチェックが付きます。</string>
+    <string name="walk_plan_none">なし</string>
+    <string name="walk_plan_title">ウォーキングの時間です</string>
+    <string name="walk_plan_text">予定：%1$sのウォーキング。行きましょう！</string>
+    <string name="walk_plan_today">今日は%1$sにウォーキング</string>
+    <string name="walk_plan_done">達成、よく歩きました！</string>
+    <string name="walk_plan_waiting">その時間に1,500歩でチェック</string>
+    <string name="month_report_reminder">月間レポートの通知</string>
+    <string name="month_report_reminder_hint">毎月1日10:00に先月のPDFレポートをお知らせ</string>
+    <string name="month_report_title">%1$sのレポートができました</string>
+    <string name="month_report_text">履歴で月を選んでPDFを保存できます</string>
+    <string name="band_celebrate">バンドで目標達成のお祝い</string>
+    <string name="band_celebrate_hint">目標達成でバンドが振動し、鳥のメッセージを表示（接続中）</string>
+    <string name="band_celebrate_title">🐦 目標達成！</string>
+    <string name="band_celebrate_text">%1$s歩。鳥が大喜び！</string>
+    <string name="shortcut_water">水を追加</string>
+    <string name="shortcut_water_long">水を1杯追加</string>
+    <string name="shortcut_today_long">今日の歩数</string>
+    <string name="shortcut_ask">何歩？</string>
+    <string name="shortcut_ask_long">今日は何歩？</string>
+    <string name="shortcut_water_added">水%1$d mlを追加しました</string>
+    <string name="water_tile_name">FitWren 水分</string>
+    <string name="answer_steps">今日は%1$s歩。目標まであと%2$s歩です。</string>
+    <string name="answer_steps_done">今日は%1$s歩。目標達成、すばらしい！</string>
+    <string-array name="release_notes_0_18_0">
+        <item>朝のまとめ：前日の歩数・睡眠・今日の目標</item>
+        <item>記録更新の通知：最高の日や週を超えた瞬間にお祝い</item>
+        <item>座りすぎリマインダー：1時間ほとんど歩かないと「少し歩こう」</item>
+        <item>ウォーキング予定：曜日ごとの時刻、通知、歩けば今日のページでチェック</item>
+        <item>毎月1日に月間レポートを通知</item>
+        <item>バンドでお祝い：振動して鳥のメッセージを表示</item>
+        <item>ショートカット：アイコン長押しで水を追加・今日・何歩？</item>
+        <item>水分タイル：通知パネルから1杯追加</item>
+        <item>「今日は何歩？」に音声で回答（ショートカットとGoogleアシスタント）</item>
+    </string-array>
 </resources>

@@ -1066,4 +1066,58 @@
         <item>Экспорт CSV теперь включает воду, вес и сон</item>
         <item>Запись в Health Connect (по желанию): шаги FitWren видны и в приложениях вроде Google Fit</item>
     </string-array>
+    <string name="morning_title">Доброе утро!</string>
+    <string name="morning_yesterday">Вчера ты прошёл %1$s шагов</string>
+    <string name="morning_sleep">Ты спал %1$d ч %2$d мин</string>
+    <string name="morning_goal">Цель на сегодня: %1$s шагов</string>
+    <string name="morning_summary">Утренняя сводка</string>
+    <string name="morning_summary_hint">Утреннее уведомление: шаги за вчера, сон и цель на сегодня</string>
+    <string name="morning_hour">Время</string>
+    <string name="record_notify">Уведомление о рекорде</string>
+    <string name="record_notify_hint">Поздравит, как только побьёшь лучший день или неделю</string>
+    <string name="record_day_title">Сегодня твой лучший день!</string>
+    <string name="record_day_text">%1$s шагов, прежний рекорд %2$s</string>
+    <string name="record_week_title">Это твоя лучшая неделя!</string>
+    <string name="record_week_text">%1$s шагов, прежний рекорд %2$s</string>
+    <string name="sedentary">Напоминание о движении</string>
+    <string name="sedentary_hint">С 10:00 до 20:00, если за час было меньше %1$d шагов, напомнит «встань и пройдись»</string>
+    <string name="sedentary_title">Пора размяться</string>
+    <string name="sedentary_text">За последний час %1$d шагов. Пара минут ходьбы пойдёт на пользу.</string>
+    <string name="walk_plan">План прогулок</string>
+    <string name="walk_plan_hint">Задай время прогулок по дням и получай напоминание</string>
+    <string name="walk_plan_dialog_hint">В это время придёт уведомление. Пройдёшь 1 500 шагов в этот или следующий час — отметится на «Сегодня».</string>
+    <string name="walk_plan_none">Нет</string>
+    <string name="walk_plan_title">Время прогулки</string>
+    <string name="walk_plan_text">Твой план: прогулка в %1$s. Вперёд!</string>
+    <string name="walk_plan_today">Прогулка сегодня в %1$s</string>
+    <string name="walk_plan_done">Готово, молодец!</string>
+    <string name="walk_plan_waiting">Отметится после 1 500 шагов в это время</string>
+    <string name="month_report_reminder">Напоминание о месячном отчёте</string>
+    <string name="month_report_reminder_hint">1-го числа каждого месяца в 10:00 напомнит о PDF-отчёте за прошлый месяц</string>
+    <string name="month_report_title">Отчёт за %1$s готов</string>
+    <string name="month_report_text">Выбери месяц в истории и сохрани PDF-отчёт</string>
+    <string name="band_celebrate">Поздравление на браслете</string>
+    <string name="band_celebrate_hint">При достижении цели браслет вибрирует и показывает сообщение с птичкой (если подключён)</string>
+    <string name="band_celebrate_title">🐦 Цель достигнута!</string>
+    <string name="band_celebrate_text">%1$s шагов. Твоя птичка в восторге!</string>
+    <string name="shortcut_water">Вода</string>
+    <string name="shortcut_water_long">Добавить стакан воды</string>
+    <string name="shortcut_today_long">Шаги за сегодня</string>
+    <string name="shortcut_ask">Сколько?</string>
+    <string name="shortcut_ask_long">Сколько шагов сегодня?</string>
+    <string name="shortcut_water_added">Добавлено %1$d мл воды</string>
+    <string name="water_tile_name">FitWren вода</string>
+    <string name="answer_steps">Сегодня ты прошёл %1$s шагов. До цели %2$s.</string>
+    <string name="answer_steps_done">Сегодня ты прошёл %1$s шагов. Цель достигнута, отлично!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Утренняя сводка: шаги за вчера, сон и цель на сегодня</item>
+        <item>Уведомление о рекорде: поздравление, как только побьёшь лучший день или неделю</item>
+        <item>Напоминание о движении: «встань и пройдись» после часа с малым числом шагов</item>
+        <item>План прогулок: время по дням, напоминание и отметка на «Сегодня»</item>
+        <item>Напоминание о месячном отчёте 1-го числа</item>
+        <item>Поздравление на браслете: вибрация и сообщение с птичкой</item>
+        <item>Ярлыки: долгое нажатие на значок — Вода, Сегодня и Сколько?</item>
+        <item>Плитка воды: +1 стакан из шторки уведомлений</item>
+        <item>Голосовой ответ на «Сколько шагов сегодня?» (ярлык и Google Ассистент)</item>
+    </string-array>
 </resources>

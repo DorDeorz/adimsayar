@@ -1066,4 +1066,58 @@
         <item>تصدير CSV يتضمن الآن الماء والوزن والنوم</item>
         <item>الكتابة في Health Connect (اختياري): تظهر خطوات FitWren في تطبيقات مثل Google Fit</item>
     </string-array>
+    <string name="morning_title">صباح الخير!</string>
+    <string name="morning_yesterday">مشيت أمس %1$s خطوة</string>
+    <string name="morning_sleep">نمت %1$d س %2$d د</string>
+    <string name="morning_goal">هدف اليوم %1$s خطوة</string>
+    <string name="morning_summary">ملخص الصباح</string>
+    <string name="morning_summary_hint">إشعار صباحي بخطوات الأمس ونوم الليلة وهدف اليوم</string>
+    <string name="morning_hour">الوقت</string>
+    <string name="record_notify">إشعار الرقم القياسي</string>
+    <string name="record_notify_hint">يحتفل لحظة تجاوز أفضل يوم أو أسبوع</string>
+    <string name="record_day_title">اليوم أفضل أيامك!</string>
+    <string name="record_day_text">%1$s خطوة، الرقم السابق %2$s</string>
+    <string name="record_week_title">هذا أفضل أسبوع لك!</string>
+    <string name="record_week_text">%1$s خطوة، الرقم السابق %2$s</string>
+    <string name="sedentary">تذكير بالحركة</string>
+    <string name="sedentary_hint">بين 10:00 و20:00 إذا مشيت أقل من %1$d خطوة في ساعة يقول «قم وامشِ قليلًا»</string>
+    <string name="sedentary_title">حان وقت الحركة</string>
+    <string name="sedentary_text">مشيت %1$d خطوة في الساعة الأخيرة. دقائق من المشي ستفيدك.</string>
+    <string name="walk_plan">جدول المشي</string>
+    <string name="walk_plan_hint">حدد أوقات المشي للأيام واحصل على تذكير</string>
+    <string name="walk_plan_dialog_hint">يصلك إشعار في الموعد. إذا مشيت 1500 خطوة في تلك الساعة أو التالية تُعلَّم في صفحة اليوم.</string>
+    <string name="walk_plan_none">لا شيء</string>
+    <string name="walk_plan_title">حان وقت المشي</string>
+    <string name="walk_plan_text">خطتك: مشي الساعة %1$s. هيا بنا!</string>
+    <string name="walk_plan_today">مشي اليوم الساعة %1$s</string>
+    <string name="walk_plan_done">تم، أحسنت!</string>
+    <string name="walk_plan_waiting">يُعلَّم عندما تمشي 1500 خطوة في ذلك الوقت</string>
+    <string name="month_report_reminder">تذكير التقرير الشهري</string>
+    <string name="month_report_reminder_hint">في اليوم الأول من كل شهر الساعة 10:00 يذكرك بتقرير PDF للشهر الماضي</string>
+    <string name="month_report_title">تقرير %1$s جاهز</string>
+    <string name="month_report_text">اختر الشهر في صفحة السجل واحفظ تقرير PDF</string>
+    <string name="band_celebrate">احتفال الهدف على السوار</string>
+    <string name="band_celebrate_hint">عند بلوغ الهدف يهتز السوار ويعرض رسالة بالطائر (أثناء الاتصال)</string>
+    <string name="band_celebrate_title">🐦 تم الهدف!</string>
+    <string name="band_celebrate_text">%1$s خطوة. طائرك سعيد جدًا!</string>
+    <string name="shortcut_water">ماء</string>
+    <string name="shortcut_water_long">إضافة كوب ماء</string>
+    <string name="shortcut_today_long">خطوات اليوم</string>
+    <string name="shortcut_ask">كم خطوة؟</string>
+    <string name="shortcut_ask_long">كم خطوة اليوم؟</string>
+    <string name="shortcut_water_added">أُضيف %1$d مل ماء</string>
+    <string name="water_tile_name">ماء FitWren</string>
+    <string name="answer_steps">مشيت اليوم %1$s خطوة. بقي %2$s للهدف.</string>
+    <string name="answer_steps_done">مشيت اليوم %1$s خطوة. بلغت الهدف، رائع!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>ملخص الصباح: خطوات الأمس والنوم وهدف اليوم</item>
+        <item>إشعار الرقم القياسي: احتفال فوري عند تجاوز أفضل يوم أو أسبوع</item>
+        <item>تذكير بالحركة: «قم وامشِ» بعد ساعة بخطوات قليلة</item>
+        <item>جدول المشي: أوقات لكل يوم وتذكير وعلامة في صفحة اليوم</item>
+        <item>تذكير التقرير الشهري في أول كل شهر</item>
+        <item>احتفال على السوار: يهتز ويعرض رسالة بالطائر</item>
+        <item>اختصارات: اضغط مطولًا على الأيقونة لإضافة ماء واليوم وكم خطوة؟</item>
+        <item>مربع الماء: +1 كوب من لوحة الإشعارات</item>
+        <item>إجابة صوتية على «كم خطوة اليوم؟» (اختصار ومساعد Google)</item>
+    </string-array>
 </resources>

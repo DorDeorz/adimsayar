@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <capability android:name="actions.intent.GET_EXERCISE_OBSERVATION">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.dordeorz.adimsayar.StepAnswerActivity"
+            android:targetPackage="com.dordeorz.adimsayar" />
+    </capability>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_water"
+        android:shortcutId="add_water"
+        android:shortcutLongLabel="@string/shortcut_water_long"
+        android:shortcutShortLabel="@string/shortcut_water">
+        <intent
+            android:action="com.dordeorz.adimsayar.ADD_WATER"
+            android:targetClass="com.dordeorz.adimsayar.MainActivity"
+            android:targetPackage="com.dordeorz.adimsayar" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_today"
+        android:shortcutId="today"
+        android:shortcutLongLabel="@string/shortcut_today_long"
+        android:shortcutShortLabel="@string/tab_today">
+        <intent
+            android:action="com.dordeorz.adimsayar.OPEN_TODAY"
+            android:targetClass="com.dordeorz.adimsayar.MainActivity"
+            android:targetPackage="com.dordeorz.adimsayar" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_ask"
+        android:shortcutId="ask_steps"
+        android:shortcutLongLabel="@string/shortcut_ask_long"
+        android:shortcutShortLabel="@string/shortcut_ask">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.dordeorz.adimsayar.StepAnswerActivity"
+            android:targetPackage="com.dordeorz.adimsayar" />
+    </shortcut>
+</shortcuts>

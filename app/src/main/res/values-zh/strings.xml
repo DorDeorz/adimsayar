@@ -1066,4 +1066,58 @@
         <item>CSV 导出现在包含饮水、体重和睡眠</item>
         <item>写入 Health Connect（可选）：FitWren 步数也会显示在 Google Fit 等应用中</item>
     </string-array>
+    <string name="morning_title">早上好！</string>
+    <string name="morning_yesterday">昨天你走了%1$s步</string>
+    <string name="morning_sleep">你睡了%1$d小时%2$d分</string>
+    <string name="morning_goal">今天的目标是%1$s步</string>
+    <string name="morning_summary">早间总结</string>
+    <string name="morning_summary_hint">早上通知昨天的步数、昨晚睡眠和今天的目标</string>
+    <string name="morning_hour">时间</string>
+    <string name="record_notify">纪录通知</string>
+    <string name="record_notify_hint">超过最佳日或最佳周时立即庆祝</string>
+    <string name="record_day_title">今天是你的最佳日！</string>
+    <string name="record_day_text">%1$s步，之前纪录%2$s</string>
+    <string name="record_week_title">这是你的最佳一周！</string>
+    <string name="record_week_text">%1$s步，之前纪录%2$s</string>
+    <string name="sedentary">久坐提醒</string>
+    <string name="sedentary_hint">10:00–20:00 之间，一小时少于%1$d步就提醒“起来走走”</string>
+    <string name="sedentary_title">该动一动了</string>
+    <string name="sedentary_text">过去一小时你走了%1$d步，走几分钟会舒服些</string>
+    <string name="walk_plan">散步计划</string>
+    <string name="walk_plan_hint">为每天设定散步时间并收到提醒</string>
+    <string name="walk_plan_dialog_hint">到时会收到通知。在那一小时或下一小时走够1500步，就会在今日页打勾。</string>
+    <string name="walk_plan_none">无</string>
+    <string name="walk_plan_title">该去散步了</string>
+    <string name="walk_plan_text">你的计划：%1$s散步。出发吧！</string>
+    <string name="walk_plan_today">今天%1$s散步</string>
+    <string name="walk_plan_done">完成了，走得好！</string>
+    <string name="walk_plan_waiting">在那时走够1500步即打勾</string>
+    <string name="month_report_reminder">月度报告提醒</string>
+    <string name="month_report_reminder_hint">每月1日10:00提醒上个月的 PDF 报告</string>
+    <string name="month_report_title">%1$s的报告已准备好</string>
+    <string name="month_report_text">在历史页选择月份并保存 PDF 报告</string>
+    <string name="band_celebrate">手环目标庆祝</string>
+    <string name="band_celebrate_hint">达成目标时手环震动并显示小鸟消息（连接时）</string>
+    <string name="band_celebrate_title">🐦 目标达成！</string>
+    <string name="band_celebrate_text">%1$s步。小鸟乐坏了！</string>
+    <string name="shortcut_water">加水</string>
+    <string name="shortcut_water_long">加一杯水</string>
+    <string name="shortcut_today_long">今日步数</string>
+    <string name="shortcut_ask">多少步？</string>
+    <string name="shortcut_ask_long">今天走了多少步？</string>
+    <string name="shortcut_water_added">已加%1$d毫升水</string>
+    <string name="water_tile_name">FitWren 饮水</string>
+    <string name="answer_steps">今天你走了%1$s步，离目标还差%2$s步。</string>
+    <string name="answer_steps_done">今天你走了%1$s步，目标达成，太棒了！</string>
+    <string-array name="release_notes_0_18_0">
+        <item>早间总结：昨天的步数、昨晚睡眠和今天的目标</item>
+        <item>纪录通知：超过最佳日或最佳周时立即庆祝</item>
+        <item>久坐提醒：一小时几乎没走就提醒“起来走走”</item>
+        <item>散步计划：按天设时间，提醒，走了就在今日页打勾</item>
+        <item>每月1日提醒月度报告</item>
+        <item>手环庆祝：震动并显示小鸟消息</item>
+        <item>应用快捷方式：长按图标可加水、今日、多少步？</item>
+        <item>饮水快捷开关：在通知面板一键+1杯</item>
+        <item>语音回答“今天走了多少步？”（快捷方式和 Google 助理）</item>
+    </string-array>
 </resources>

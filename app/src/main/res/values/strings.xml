@@ -1067,4 +1067,58 @@
         <item>CSV dışa aktarma artık su, kilo ve uyku sütunlarını da yazar</item>
         <item>Health Connect\'e yazma (isteğe bağlı): FitWren adımları Google Fit gibi uygulamalarda da görünür</item>
     </string-array>
+    <string name="morning_title">Günaydın!</string>
+    <string name="morning_yesterday">Dün %1$s adım attın</string>
+    <string name="morning_sleep">Gece %1$d sa %2$d dk uyudun</string>
+    <string name="morning_goal">Bugünkü hedefin %1$s adım</string>
+    <string name="morning_summary">Sabah özeti</string>
+    <string name="morning_summary_hint">Sabah dünkü adımın, gece uykun ve bugünkü hedefinle bir bildirim</string>
+    <string name="morning_hour">Saat</string>
+    <string name="record_notify">Rekor bildirimi</string>
+    <string name="record_notify_hint">En iyi gününü ya da haftanı geçtiğin an kutlar</string>
+    <string name="record_day_title">Bugün en iyi günün!</string>
+    <string name="record_day_text">%1$s adım, önceki rekor %2$s</string>
+    <string name="record_week_title">Bu hafta en iyi haftan!</string>
+    <string name="record_week_text">%1$s adım, önceki rekor %2$s</string>
+    <string name="sedentary">Hareketsizlik hatırlatması</string>
+    <string name="sedentary_hint">10:00–20:00 arası, bir saatte %1$d adımdan az yürüdüysen “kalk biraz yürü” der</string>
+    <string name="sedentary_title">Kalk biraz yürü</string>
+    <string name="sedentary_text">Son bir saatte %1$d adım attın. Birkaç dakikalık yürüyüş iyi gelir.</string>
+    <string name="walk_plan">Yürüyüş saati planı</string>
+    <string name="walk_plan_hint">Günlere yürüyüş saati koy, saati gelince hatırlatır</string>
+    <string name="walk_plan_dialog_hint">Saati gelince bildirim gelir. O saatte ya da sonraki saatte 1.500 adım atarsan Bugün\'de işaretlenir.</string>
+    <string name="walk_plan_none">Yok</string>
+    <string name="walk_plan_title">Yürüyüş saati</string>
+    <string name="walk_plan_text">Planın: %1$s yürüyüşü. Hadi çıkalım!</string>
+    <string name="walk_plan_today">Bugün %1$s yürüyüşü</string>
+    <string name="walk_plan_done">Yürüdün, aferin!</string>
+    <string name="walk_plan_waiting">O saatte 1.500 adım atınca işaretlenir</string>
+    <string name="month_report_reminder">Ayın raporu bildirimi</string>
+    <string name="month_report_reminder_hint">Her ayın 1\'inde saat 10:00\'da geçen ayın PDF raporunu hatırlatır</string>
+    <string name="month_report_title">%1$s raporun hazır</string>
+    <string name="month_report_text">Geçmiş sayfasında ayı seçip PDF raporunu kaydedebilirsin</string>
+    <string name="band_celebrate">Bileklikte hedef kutlaması</string>
+    <string name="band_celebrate_hint">Hedefe ulaşınca bileklik titrer ve kuşlu bir mesaj gösterir (bileklik bağlıyken)</string>
+    <string name="band_celebrate_title">🐦 Hedef tamam!</string>
+    <string name="band_celebrate_text">%1$s adım. Kuşun çok mutlu!</string>
+    <string name="shortcut_water">Su ekle</string>
+    <string name="shortcut_water_long">Bir bardak su ekle</string>
+    <string name="shortcut_today_long">Bugünün adımları</string>
+    <string name="shortcut_ask">Kaç adım?</string>
+    <string name="shortcut_ask_long">Bugün kaç adım attım?</string>
+    <string name="shortcut_water_added">%1$d ml su eklendi</string>
+    <string name="water_tile_name">FitWren su</string>
+    <string name="answer_steps">Bugün %1$s adım attın. Hedefe %2$s adım kaldı.</string>
+    <string name="answer_steps_done">Bugün %1$s adım attın. Hedefe ulaştın, harika!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Sabah özeti: sabah dünkü adımın, gece uykun ve bugünkü hedefin</item>
+        <item>Rekor bildirimi: en iyi gününü ya da haftanı geçince anında kutlama</item>
+        <item>Hareketsizlik hatırlatması: gündüz bir saatte çok az yürüdüysen “kalk biraz yürü”</item>
+        <item>Yürüyüş saati planı: günlere saat koy, hatırlatır; yürüdüysen Bugün\'de işaretlenir</item>
+        <item>Ayın raporu bildirimi: her ayın 1\'inde PDF raporu hatırlatır</item>
+        <item>Bileklikte hedef kutlaması: hedefe ulaşınca bileklik titrer, kuşlu mesaj gösterir</item>
+        <item>Uygulama kısayolları: simgeye uzun basınca Su ekle, Bugün ve Kaç adım?</item>
+        <item>Su kutucuğu: bildirim panelinden tek dokunuşla +1 bardak</item>
+        <item>“Bugün kaç adım attım?” sorusuna sesli cevap (kısayol ve Google Asistan)</item>
+    </string-array>
 </resources>

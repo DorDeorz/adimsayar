@@ -97,6 +97,22 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <activity
+            android:name=".StepAnswerActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:label="@string/shortcut_ask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.AdimSayar.Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -148,6 +164,17 @@
             android:exported="true"
             android:icon="@drawable/ic_walk"
             android:label="@string/tile_name"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".tile.WaterTile"
+            android:exported="true"
+            android:icon="@drawable/ic_add_water"
+            android:label="@string/water_tile_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

@@ -56,6 +56,7 @@ object Reminders {
     fun onTodaySteps(context: Context, steps: Long) {
         val settings = SettingsStore.get(context).settings.value
         val goal = settings.goalOn(LocalDate.now())
+        ExtraReminders.onTodaySteps(context, steps, goal)
         if (settings.inVacation(LocalDate.now())) return
         when {
             settings.goalNotification && steps >= goal -> notifyOncePerDay(context, KEY_GOAL_DATE, GOAL_NOTIFICATION_ID) { strings ->
@@ -238,7 +239,7 @@ object Reminders {
 
     private fun percentChange(now: Long, before: Long): Int = (abs(now - before) * 100 / before).toInt()
 
-    private fun notifyOncePerDay(context: Context, key: String, id: Int, content: (Context) -> Pair<String, String>) {
+    internal fun notifyOncePerDay(context: Context, key: String, id: Int, content: (Context) -> Pair<String, String>) {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val today = LocalDate.now().toString()
         if (prefs.getString(key, null) == today) return
@@ -291,7 +292,7 @@ object Reminders {
         Schedules.setAlarm(alarms, next, pending)
     }
 
-    private fun notify(context: Context, id: Int, title: String, text: String, tab: String? = null) {
+    internal fun notify(context: Context, id: Int, title: String, text: String, tab: String? = null) {
         val manager = NotificationManagerCompat.from(context)
         if (!manager.areNotificationsEnabled()) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -319,5 +320,5 @@ object Reminders {
         }
     }
 
-    private fun format(steps: Long): String = NumberFormat.getIntegerInstance(Locales.current).format(steps)
+    internal fun format(steps: Long): String = NumberFormat.getIntegerInstance(Locales.current).format(steps)
 }

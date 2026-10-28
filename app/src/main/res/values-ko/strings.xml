@@ -1066,4 +1066,58 @@
         <item>CSV 내보내기에 물, 체중, 수면 열 추가</item>
         <item>헬스 커넥트에 쓰기(선택): FitWren 걸음이 Google Fit 같은 앱에도 표시</item>
     </string-array>
+    <string name="morning_title">좋은 아침이에요!</string>
+    <string name="morning_yesterday">어제 %1$s걸음 걸었어요</string>
+    <string name="morning_sleep">%1$d시간 %2$d분 잤어요</string>
+    <string name="morning_goal">오늘 목표는 %1$s걸음</string>
+    <string name="morning_summary">아침 요약</string>
+    <string name="morning_summary_hint">아침에 어제 걸음, 수면, 오늘 목표를 알려줘요</string>
+    <string name="morning_hour">시간</string>
+    <string name="record_notify">기록 알림</string>
+    <string name="record_notify_hint">최고의 날이나 주를 넘는 순간 축하해요</string>
+    <string name="record_day_title">오늘이 최고의 날!</string>
+    <string name="record_day_text">%1$s걸음, 이전 기록 %2$s</string>
+    <string name="record_week_title">이번 주가 최고의 주!</string>
+    <string name="record_week_text">%1$s걸음, 이전 기록 %2$s</string>
+    <string name="sedentary">움직임 알림</string>
+    <string name="sedentary_hint">10:00~20:00 사이 한 시간에 %1$d걸음보다 적으면 “조금 걸어요”라고 알려줘요</string>
+    <string name="sedentary_title">조금 걸어요</string>
+    <string name="sedentary_text">지난 한 시간 %1$d걸음. 몇 분 걸으면 좋아요</string>
+    <string name="walk_plan">걷기 일정</string>
+    <string name="walk_plan_hint">요일별 걷기 시간을 정하면 알려줘요</string>
+    <string name="walk_plan_dialog_hint">그 시간에 알림이 와요. 그 시간이나 다음 시간에 1,500걸음 걸으면 오늘 페이지에 체크돼요.</string>
+    <string name="walk_plan_none">없음</string>
+    <string name="walk_plan_title">걷기 시간이에요</string>
+    <string name="walk_plan_text">계획: %1$s 걷기. 가 볼까요!</string>
+    <string name="walk_plan_today">오늘 %1$s 걷기</string>
+    <string name="walk_plan_done">완료, 잘 걸었어요!</string>
+    <string name="walk_plan_waiting">그 무렵 1,500걸음 걸으면 체크돼요</string>
+    <string name="month_report_reminder">월간 보고서 알림</string>
+    <string name="month_report_reminder_hint">매월 1일 10:00에 지난달 PDF 보고서를 알려줘요</string>
+    <string name="month_report_title">%1$s 보고서가 준비됐어요</string>
+    <string name="month_report_text">기록 페이지에서 달을 골라 PDF를 저장하세요</string>
+    <string name="band_celebrate">밴드에서 목표 축하</string>
+    <string name="band_celebrate_hint">목표에 닿으면 밴드가 진동하고 새 메시지를 보여줘요(연결 중)</string>
+    <string name="band_celebrate_title">🐦 목표 달성!</string>
+    <string name="band_celebrate_text">%1$s걸음. 새가 아주 기뻐해요!</string>
+    <string name="shortcut_water">물 추가</string>
+    <string name="shortcut_water_long">물 한 잔 추가</string>
+    <string name="shortcut_today_long">오늘 걸음</string>
+    <string name="shortcut_ask">몇 걸음?</string>
+    <string name="shortcut_ask_long">오늘 몇 걸음?</string>
+    <string name="shortcut_water_added">물 %1$d ml 추가</string>
+    <string name="water_tile_name">FitWren 물</string>
+    <string name="answer_steps">오늘 %1$s걸음 걸었어요. 목표까지 %2$s걸음 남았어요.</string>
+    <string name="answer_steps_done">오늘 %1$s걸음 걸었어요. 목표 달성, 멋져요!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>아침 요약: 어제 걸음, 수면, 오늘 목표</item>
+        <item>기록 알림: 최고의 날이나 주를 넘으면 바로 축하</item>
+        <item>움직임 알림: 한 시간 거의 안 걸으면 “조금 걸어요”</item>
+        <item>걷기 일정: 요일별 시간, 알림, 걸으면 오늘 페이지에 체크</item>
+        <item>매월 1일 월간 보고서 알림</item>
+        <item>밴드 축하: 진동하고 새 메시지 표시</item>
+        <item>앱 바로가기: 아이콘을 길게 눌러 물 추가, 오늘, 몇 걸음?</item>
+        <item>물 타일: 알림 패널에서 한 번에 +1잔</item>
+        <item>“오늘 몇 걸음?”에 음성 답변(바로가기와 Google 어시스턴트)</item>
+    </string-array>
 </resources>

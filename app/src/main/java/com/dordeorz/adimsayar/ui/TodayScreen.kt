@@ -125,6 +125,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         if (state.settings.inVacation(state.today)) item { VacationCard(state) }
         item { SummaryRow(state) }
         if (state.settings.monthlyGoal != NO_GOAL || state.settings.yearlyGoal != NO_GOAL) item { PeriodGoalsCard(state) }
+        if (state.today.dayOfWeek in state.extra.extras.walkPlan) item { WalkPlanCard(state) }
         item { WaterCard(state, actions.onAddWater) }
         item { WeekCard(state.week, goal) }
         item {
