@@ -110,7 +110,8 @@ object StepMath {
     // Days with phone hours merge hour by hour; older days (before phone hours were kept, or imported) by day.
     fun mergeMixed(band: Map<LocalDateTime, Long>, phoneHours: Map<LocalDateTime, Long>, phoneDays: Map<LocalDate, Long>): Map<LocalDate, Long> {
         val hourlyDays = phoneHours.keys.map { it.toLocalDate() }.toSet()
-        return mergeDaily(bandDays(band).filterKeys { it !in hourlyDays }, phoneDays) + mergeHourly(band, phoneHours)
+        val hourlyBand = band.filterKeys { it.toLocalDate() in hourlyDays }
+        return mergeDaily(bandDays(band).filterKeys { it !in hourlyDays }, phoneDays) + mergeHourly(hourlyBand, phoneHours)
     }
 
     fun mergeDaily(band: Map<LocalDate, Long>, phone: Map<LocalDate, Long>): Map<LocalDate, Long> =
