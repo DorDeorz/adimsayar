@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import androidx.core.content.edit
 import com.dordeorz.adimsayar.R
 import java.time.Instant
@@ -14,7 +15,8 @@ class DayDetail(val hours: LongArray, val walking: Long, val running: Long)
 
 object XiaomiSteps {
 
-    private val URI: Uri = Uri.parse("content://com.miui.providers.steps/item")
+    private const val AUTHORITY = "com.miui.providers.steps"
+    private val URI: Uri = Uri.parse("content://$AUTHORITY/item")
     private val PROJECTION = arrayOf(COLUMN_BEGIN, COLUMN_END, COLUMN_STEPS)
     private const val COLUMN_BEGIN = "_begin_time"
     private const val COLUMN_END = "_end_time"
@@ -29,17 +31,24 @@ object XiaomiSteps {
     @Volatile
     private var lastLoggedToday: Long? = null
 
-    fun isXiaomi(): Boolean = RomInfo.isMiui
+    @Volatile
+    private var hasProvider: Boolean? = null
+
+    fun isXiaomi(): Boolean = Build.MANUFACTURER.equals("Xiaomi", ignoreCase = true)
+
+    // Custom ROMs on Xiaomi phones (crDroid, LineageOS) keep the manufacturer but not MIUI's step provider.
+    private fun hasProvider(context: Context): Boolean =
+        hasProvider ?: (isXiaomi() && context.packageManager.resolveContentProvider(AUTHORITY, 0) != null).also { hasProvider = it }
 
     fun isEnabled(context: Context): Boolean =
-        isXiaomi() && context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ENABLED, false)
+        hasProvider(context) && context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE).getBoolean(KEY_ENABLED, false)
 
     fun setEnabled(context: Context, enabled: Boolean) {
         context.getSharedPreferences(SETTINGS_PREFS, Context.MODE_PRIVATE).edit { putBoolean(KEY_ENABLED, enabled) }
     }
 
     fun isAvailable(context: Context): Boolean {
-        if (!isXiaomi()) return false
+        if (!hasProvider(context)) return false
         return try {
             context.contentResolver.query(URI, PROJECTION, null, null, null)?.use { true } ?: false
         } catch (e: RuntimeException) {

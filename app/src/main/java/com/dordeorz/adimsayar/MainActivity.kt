@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
     private val repository by lazy { StepRepository.get(applicationContext) }
     private val settings by lazy { getSharedPreferences(SETTINGS_PREFS, MODE_PRIVATE) }
     private val sensorAvailable by lazy { StepSensors.hasCounter(this) }
-    private val profile = OemProfile.current()
+    private val profile by lazy { OemProfile.current(this) }
     private lateinit var monitor: LiveStepMonitor
 
     private var permission by mutableStateOf(PermissionState.NeedsRequest)
