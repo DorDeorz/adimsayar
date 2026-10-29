@@ -63,7 +63,7 @@ class StepTile : TileService() {
         tile.updateTile()
     }
 
-    // The Intent overload is only used below Android 14, where it still works.
+    // The Intent overload is only reached below Android 14, where it is the only way to collapse the panel.
     @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
