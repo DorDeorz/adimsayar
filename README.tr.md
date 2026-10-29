@@ -49,12 +49,19 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Kilona göre önerilen hedefle su takibi
 - Adımlarınla büyüyen küçük bir kuş ([civcivle tanış](#civcivle-tanış))
 - Günün özetini resim olarak paylaşma
+- Hedefe kalan yürüyüş süresi (kendi hızına göre), kalorinin yemek karşılığı ("≈ 2 × simit"), çıkılan kat (basınç sensörü olan telefonlarda) ve günün sözü
+- Hafta sonu, aylık ve yıllık hedef, tahmini bitiş günüyle; tatil modunda seri bozulmaz
+- Yürüyüş araçları: tempo metronomu, köpek gezdirme sayacı ve rotası çizilen GPS yürüyüş kaydı
+- Sade görünüm: büyük yazıyla yalnızca adım ve hedef
 
 ### Geçmiş
 - Hedefe göre renklenen aylık takvim, her gün için saat saat grafik
 - Rekorlar: en iyi gün, hafta ve ay, en uzun seri
 - Yıllık özet
 - Seri jokeri: ayda iki hak, kaçırdığın bir gün serini bozmaz
+- Her güne not ve sayım yanlışsa günü elle düzeltme
+- Eğilim kartı (bu ay ve son 7 gün, önceki dönemle) ve aktif saat haritası (8 hafta, gün × saat)
+- Aylık PDF raporu ve paylaşılabilen, kaydırmalı yıl sonu hikâyesi
 
 ### Sağlık (isteğe bağlı, bileklik ya da saatle)
 - **Saate doğrudan bağlantı:** FitWren bilekliğe Bluetooth ile kendisi bağlanır, dakikalık adım, nabız, SpO₂, stres ve uykuyu okur. Mi Fitness, Zepp Life ya da Health Connect gerekmez. Xiaomi Smart Band 8 ile denendi; diğer Xiaomi bileklik ve saatleri (Band 8 Pro, Band 9, Redmi Watch, Watch S1…) ve Huami/Amazfit modelleri (Mi Band 2–6, Amazfit Bip, GTS, GTR…) deneysel olarak destekleniyor.
@@ -63,10 +70,13 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Bilekliğin saydığı saatlerde bileklik, diğer saatlerde telefon sayılır. Hiçbir adım iki kez sayılmaz.
 - Ayrı kartlarda, 7/30/90 günlük grafiklerle: evreleriyle uyku, bölgeleriyle nabız, dinlenme nabzı eğilimi, kan oksijeni, egzersizler ve aktif kalori
 - Vücut kitle endeksi ve grafikle kilo kaydı
+- Toparlanma puanı (dün geceki uyku ve dinlenme nabzı) ve fitness yaşı (VO₂max tahmini)
+- Uyku ve adım: kısa ya da uzun gecelerden sonra adımların nasıl değiştiği
+- İsteğe bağlı: FitWren adımlarını Health Connect'e yazma
 - Health Connect'e hangi uygulamaların veri yazdığını gösteren kurulum rehberi
 
 ### Madalyalar ve hedefler
-- Günlük adım, seri, haftalık hedef, toplam yol ve erken yürüyüş madalyaları. Kazandığın madalya kalır.
+- Günlük adım, seri, haftalık hedef, toplam adım, mesafe, su ve uyku serisi, bitirilen rota ve erken yürüyüş madalyaları. Kazandığın madalya kalır.
 - Seviyeler ve geçmişine göre seçilen üç haftalık görev
 - Sanal rotalar: adımlarınla İstanbul'dan Ankara'ya ya da Camino boyunca yürü
 
@@ -82,10 +92,15 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 
 ### Ve ayrıca
 - Günlük hedef, haftalık hedef, haftanın ilk günü, km ya da mil
-- İsteğe bağlı bildirimler: hedefe ulaşınca, hedefe yaklaşınca, akşam seri hatırlatması, haftalık özet, su ve kilo hatırlatmaları
-- Açık, koyu ya da sistem teması
+- İsteğe bağlı bildirimler: hedefe ulaşınca, hedefe yaklaşınca, akşam seri hatırlatması, haftalık özet, su ve kilo hatırlatmaları, sabah özeti, yeni rekor, bir saat hareketsiz kalınca uyarı, yürüyüş saati planı ve ayın raporu
+- Bugünün adımı ve bir bardak su için hızlı ayar kutucukları, uygulama kısayolları ve sesli "Bugün kaç adım attım?"
+- Canlı duvar kâğıdı: adım attıkça çalıkuşu yuvadan dala uçar
+- PIN, parmak izi ya da yüzle uygulama kilidi
+- Tek dosyada tam yedek ve geri yükleme, bir tarih aralığını ya da her şeyi silme
+- Son haftalarına göre kendini ayarlayan isteğe bağlı akıllı hedef
+- Açık, koyu ya da sistem teması, yeni kurulumda karşılama rehberi
 - 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince ve Korece
-- CSV ile dışa ve içe aktarma. İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur.
+- CSV ile dışa ve içe aktarma (su, kilo ve uyku sütunlarıyla). İçe aktarma Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur.
 
 <p align="center">
   <img src="docs/screenshots/today_more.png" width="200" alt="Bugün: seri, su ve son 7 gün">
@@ -95,7 +110,7 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 
 ## Civcivle tanış
 
-Adımların küçük bir kuşu büyütür. Bugün ekranında ve kendi widget'ında yaşar. Hakkında hiçbir şey saklanmaz: görünüşü her seferinde adım geçmişinden hesaplanır.
+Adımların küçük bir kuşu büyütür. Bugün ekranında, kendi widget'ında, canlı duvar kâğıdında ve FitWren bileklik yüzlerinde yaşar. Evresi ve ruh hâli her seferinde adım geçmişinden hesaplanır; yalnızca seçtiğin görünüş saklanır.
 
 ### Toplam adımınla büyür
 
@@ -134,7 +149,16 @@ Kart, sonraki seviyeye ve evreye kaç adım kaldığını gösterir ve seviye at
 | Parti şapkası | Bir günde 20.000 adım |
 | Taç | Toplam 1 milyon adım. Parti şapkasının yerine geçer. |
 
-Madalyalar kalıcı olduğu için kazanılan eşya da kalır. Uygulamada kuşa dokununca zıplar ve kanat çırpar, ara sıra da göz kırpar. Widget aynı kuşu animasyonsuz gösterir.
+| Gözlük | Toplam 42 km yürümek |
+| Çiçek | 7 gün art arda su hedefi |
+| Uyku başlığı | 7 gece art arda iyi uyku (bileklik verisi) |
+| Sırt çantası | Bir sanal rotayı bitirmek |
+
+Madalyalar kalıcı olduğu için kazanılan eşya da kalır; istediğini gizleyebilirsin. Uygulamada kuşa dokununca zıplar ve kanat çırpar, ara sıra da göz kırpar. Widget aynı kuşu animasyonsuz gösterir.
+
+### Türler, renkler ve ötüşler
+
+Her 1.000 adım bir tohum verir. Kuşu besle ya da tohumları tüy renklerine (gök mavisi, pembe, nane, mor, gece) ve ötüşlere (şakıma, ıslık, guguk) harca. Seviyen arttıkça yeni türler açılır: seviye 3'te baykuş, 6'da papağan, 10'da kartal.
 
 ## Kurulum
 
@@ -157,7 +181,9 @@ Bileklik kurulum ekranında "Xiaomi hesabıyla anahtarı al"a dokunursan uygulam
 
 "Zepp Life / Amazfit hesabıyla al"ı kullanırsan e-posta ve şifren yalnızca bilekliğin adresini ve anahtarını okumak için Zepp'in sunucusuna (`api-user.zepp.com`, `api-mifit.zepp.com`) gider. FitWren şifreyi kaydetmez.
 
-Health Connect yalnızca bileklik kaynağı olarak seçilirse ve yalnızca okumak için kullanılır. FitWren Health Connect'e hiçbir şey yazmaz.
+Health Connect yalnızca bileklik kaynağı olarak seçilirse ya da "Adımları Health Connect'e yaz" açılırsa kullanılır. O zaman FitWren yalnızca kendi saatlik adım sayılarını yazar.
+
+Konum yalnızca GPS yürüyüşü kaydederken kullanılır ve rota telefonda kalır. Uygulama kilidinin PIN'i yalnızca özet (hash) olarak saklanır.
 
 <details>
 <summary>İzinler ve neden gerektikleri</summary>
@@ -173,7 +199,10 @@ Health Connect yalnızca bileklik kaynağı olarak seçilirse ve yalnızca okuma
 | `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi, bir de bileklik anahtarı için Xiaomi ya da Zepp girişi |
 | `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | İsteğe bağlı Xiaomi ya da Amazfit bileklik bağlantısı |
 | `REQUEST_INSTALL_PACKAGES` | İndirilen güncelleme için Android'in kurulum ekranını açmak |
-| `health.READ_*` | İsteğe bağlı bileklik verisi, yalnızca okuma |
+| `health.READ_*`, `health.WRITE_STEPS` | İsteğe bağlı bileklik verisi ve istersen FitWren adımlarını yazmak |
+| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | İsteğe bağlı GPS yürüyüş kaydı, yalnızca başlatınca istenir |
+| `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | İsteğe bağlı tempo metronomu |
+| `USE_BIOMETRIC` | Uygulama kilidinde isteğe bağlı parmak izi ya da yüz |
 
 </details>
 
