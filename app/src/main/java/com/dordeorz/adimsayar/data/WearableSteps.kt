@@ -24,6 +24,7 @@ object WearableSteps {
 
     private const val SETTINGS_PREFS = "settings"
     private const val KEY_ENABLED = "wearable_source"
+    private const val KEY_BAND_ONLY = "band_only"
     private const val KEY_BACKFILLED = "wearable_backfilled_hourly"
     private const val BACKFILL_DAYS = 30L
     private const val RECENT_DAYS = 6L
@@ -48,6 +49,12 @@ object WearableSteps {
             HealthConnectClient.getSdkStatus(context) == HealthConnectClient.SDK_AVAILABLE
 
     fun isEnabled(context: Context): Boolean = prefs(context).getBoolean(KEY_ENABLED, false)
+
+    fun isBandOnly(context: Context): Boolean = prefs(context).getBoolean(KEY_BAND_ONLY, false)
+
+    fun setBandOnly(context: Context, bandOnly: Boolean) {
+        prefs(context).edit(commit = true) { putBoolean(KEY_BAND_ONLY, bandOnly) }
+    }
 
     suspend fun setEnabled(context: Context, enabled: Boolean) {
         prefs(context).edit {
@@ -129,11 +136,11 @@ object WearableSteps {
     }
 
     suspend fun merged(context: Context, band: Map<LocalDateTime, Long>, from: LocalDate): Map<LocalDate, Long> {
+        if (isBandOnly(context)) return StepMath.bandDays(band)
         val phoneHours = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.hourlyTotals(context, from) else null
         if (phoneHours != null) return StepMath.mergeHourly(band, phoneHours)
-        val bandDays = HashMap<LocalDate, Long>()
-        for ((hour, steps) in band) bandDays[hour.toLocalDate()] = (bandDays[hour.toLocalDate()] ?: 0L) + steps
-        return StepMath.mergeDaily(bandDays, StepRepository.get(context).loadPhoneDays(from))
+        val repository = StepRepository.get(context)
+        return StepMath.mergeMixed(band, repository.loadPhoneHourMap(from), repository.loadPhoneDays(from))
     }
 
     private suspend fun bandHourly(client: HealthConnectClient, from: LocalDate, to: LocalDate): Map<LocalDateTime, Long> {

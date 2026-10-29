@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.time.DayOfWeek
+import java.time.LocalDate
 
 enum class ThemeMode { System, Light, Dark }
 
@@ -35,7 +36,45 @@ data class AppSettings(
     val routeId: String = NO_ROUTE,
     val routeStartDay: Long = NO_ROUTE_START,
     val widgetOpacity: Int = DEFAULT_WIDGET_OPACITY,
-)
+    val smartGoal: Boolean = false,
+    val smartGoalWeek: Long = NO_SMART_WEEK,
+    val smartGoalFrom: Long = NO_SMART_FROM,
+    val weekendGoal: Long = NO_GOAL,
+    val monthlyGoal: Long = NO_GOAL,
+    val yearlyGoal: Long = NO_GOAL,
+    val vacationFrom: Long = NO_VACATION,
+    val vacationTo: Long = NO_VACATION,
+) {
+    /** The daily goal of [date]: the weekend goal on Saturday and Sunday when one is set. */
+    fun goalOn(date: LocalDate): Long =
+        if (weekendGoal != NO_GOAL && (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY)) weekendGoal else dailyGoal
+
+    fun inVacation(date: LocalDate): Boolean =
+        vacationFrom != NO_VACATION && date.toEpochDay() in vacationFrom..vacationTo
+
+    /** Vacation days up to [today]; the streak skips them like a streak freeze, without using one. */
+    fun vacationDays(today: LocalDate): Set<LocalDate> {
+        if (vacationFrom == NO_VACATION) return emptySet()
+        val last = minOf(vacationTo, today.toEpochDay())
+        return (vacationFrom..last).map(LocalDate::ofEpochDay).toSet()
+    }
+
+    fun achievements(
+        days: Map<LocalDate, Long>,
+        today: LocalDate,
+        earlyBirdDays: Set<LocalDate>? = null,
+        freezes: Set<LocalDate> = emptySet(),
+    ): Achievements = AchievementMath.compute(
+        days,
+        today,
+        dailyGoal,
+        weeklyGoal,
+        weekStart,
+        earlyBirdDays,
+        freezes + vacationDays(today),
+        goalOf = this::goalOn,
+    )
+}
 
 const val DEFAULT_DAILY_GOAL = 10_000L
 const val DEFAULT_WEEKLY_GOAL = 70_000L
@@ -58,6 +97,13 @@ const val NO_ROUTE = ""
 const val NO_ROUTE_START = -1L
 const val DEFAULT_WIDGET_OPACITY = 100
 val WIDGET_OPACITY_OPTIONS = listOf(100, 80, 60, 40)
+const val NO_SMART_WEEK = -1L
+const val NO_SMART_FROM = 0L
+const val NO_GOAL = 0L
+const val NO_VACATION = -1L
+val MONTHLY_GOAL_RANGE = 10_000L..3_000_000L
+val YEARLY_GOAL_RANGE = 100_000L..36_500_000L
+const val MAX_VACATION_DAYS = 90L
 const val SYSTEM_LANGUAGE = ""
 val SUPPORTED_LANGUAGES = listOf("tr", "en", "de", "es", "fr", "it", "pt", "ru", "ar", "ja", "zh", "ko")
 
@@ -79,7 +125,39 @@ class SettingsStore private constructor(context: Context) {
 
     fun setDynamicColor(enabled: Boolean) = update { it.copy(dynamicColor = enabled) }
 
-    fun setDailyGoal(goal: Long) = update { it.copy(dailyGoal = goal.coerceIn(DAILY_GOAL_RANGE)) }
+    fun setDailyGoal(goal: Long) = update { it.copy(dailyGoal = goal.coerceIn(DAILY_GOAL_RANGE), smartGoalFrom = NO_SMART_FROM) }
+
+    // Turning it on starts from this week, so the first change waits for the next week start.
+    fun setSmartGoal(enabled: Boolean, currentWeek: Long) = update {
+        it.copy(smartGoal = enabled, smartGoalWeek = if (enabled) currentWeek else NO_SMART_WEEK, smartGoalFrom = NO_SMART_FROM)
+    }
+
+    fun applySmartGoal(week: Long, goal: Long?) = update {
+        if (goal == null) {
+            it.copy(smartGoalWeek = week, smartGoalFrom = NO_SMART_FROM)
+        } else {
+            it.copy(smartGoalWeek = week, smartGoalFrom = it.dailyGoal, dailyGoal = goal.coerceIn(DAILY_GOAL_RANGE))
+        }
+    }
+
+    fun setWeekendGoal(goal: Long) = update { it.copy(weekendGoal = if (goal == NO_GOAL) NO_GOAL else goal.coerceIn(DAILY_GOAL_RANGE)) }
+
+    fun setMonthlyGoal(goal: Long) = update { it.copy(monthlyGoal = if (goal == NO_GOAL) NO_GOAL else goal.coerceIn(MONTHLY_GOAL_RANGE)) }
+
+    fun setYearlyGoal(goal: Long) = update { it.copy(yearlyGoal = if (goal == NO_GOAL) NO_GOAL else goal.coerceIn(YEARLY_GOAL_RANGE)) }
+
+    fun setVacation(from: LocalDate?, to: LocalDate?) = update {
+        if (from == null || to == null || to < from) {
+            it.copy(vacationFrom = NO_VACATION, vacationTo = NO_VACATION)
+        } else {
+            it.copy(vacationFrom = from.toEpochDay(), vacationTo = minOf(to.toEpochDay(), from.toEpochDay() + MAX_VACATION_DAYS))
+        }
+    }
+
+    /** Reads the stored values again, after a backup was restored. */
+    fun reload() {
+        _settings.value = load()
+    }
 
     fun setWeeklyGoal(goal: Long) = update { it.copy(weeklyGoal = goal.coerceIn(WEEKLY_GOAL_RANGE)) }
 
@@ -146,6 +224,14 @@ class SettingsStore private constructor(context: Context) {
             putString(KEY_ROUTE, next.routeId)
             putLong(KEY_ROUTE_START, next.routeStartDay)
             putInt(KEY_WIDGET_OPACITY, next.widgetOpacity)
+            putBoolean(KEY_SMART_GOAL, next.smartGoal)
+            putLong(KEY_SMART_WEEK, next.smartGoalWeek)
+            putLong(KEY_SMART_FROM, next.smartGoalFrom)
+            putLong(KEY_WEEKEND_GOAL, next.weekendGoal)
+            putLong(KEY_MONTHLY_GOAL, next.monthlyGoal)
+            putLong(KEY_YEARLY_GOAL, next.yearlyGoal)
+            putLong(KEY_VACATION_FROM, next.vacationFrom)
+            putLong(KEY_VACATION_TO, next.vacationTo)
         }
         _settings.value = next
     }
@@ -173,10 +259,18 @@ class SettingsStore private constructor(context: Context) {
         routeId = prefs.getString(KEY_ROUTE, null) ?: NO_ROUTE,
         routeStartDay = prefs.getLong(KEY_ROUTE_START, NO_ROUTE_START),
         widgetOpacity = prefs.getInt(KEY_WIDGET_OPACITY, DEFAULT_WIDGET_OPACITY),
+        smartGoal = prefs.getBoolean(KEY_SMART_GOAL, false),
+        smartGoalWeek = prefs.getLong(KEY_SMART_WEEK, NO_SMART_WEEK),
+        smartGoalFrom = prefs.getLong(KEY_SMART_FROM, NO_SMART_FROM),
+        weekendGoal = prefs.getLong(KEY_WEEKEND_GOAL, NO_GOAL),
+        monthlyGoal = prefs.getLong(KEY_MONTHLY_GOAL, NO_GOAL),
+        yearlyGoal = prefs.getLong(KEY_YEARLY_GOAL, NO_GOAL),
+        vacationFrom = prefs.getLong(KEY_VACATION_FROM, NO_VACATION),
+        vacationTo = prefs.getLong(KEY_VACATION_TO, NO_VACATION),
     )
 
     companion object {
-        private const val PREFS = "settings"
+        const val PREFS = "settings"
         private const val KEY_THEME = "theme"
         private const val KEY_DYNAMIC_COLOR = "dynamic_color"
         private const val KEY_DAILY_GOAL = "daily_goal"
@@ -199,6 +293,14 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_ROUTE = "route"
         private const val KEY_ROUTE_START = "route_start_day"
         private const val KEY_WIDGET_OPACITY = "widget_opacity"
+        private const val KEY_SMART_GOAL = "smart_goal"
+        private const val KEY_SMART_WEEK = "smart_goal_week"
+        private const val KEY_SMART_FROM = "smart_goal_from"
+        private const val KEY_WEEKEND_GOAL = "weekend_goal"
+        private const val KEY_MONTHLY_GOAL = "monthly_goal"
+        private const val KEY_YEARLY_GOAL = "yearly_goal"
+        private const val KEY_VACATION_FROM = "vacation_from"
+        private const val KEY_VACATION_TO = "vacation_to"
 
         @Volatile
         private var instance: SettingsStore? = null

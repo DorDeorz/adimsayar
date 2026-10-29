@@ -17,6 +17,8 @@ class BandModel(
     /** Huami only: authentication crypt flags and bytes per minute in the activity data. */
     val huamiCrypt: Int = 0,
     val huamiSampleSize: Int = 4,
+    /** Huami only: takes watch face files over its firmware characteristics (see HuamiFaceUpload). */
+    val huamiFaces: Boolean = false,
     /** Xiaomi only: the model id of Xiaomi's watch face store, when its faces are known to work. */
     val storeModel: String? = null,
     /** Xiaomi only: the size of the preview inside face files made for this model. */
@@ -38,8 +40,8 @@ object BandModels {
         preview: Pair<Int, Int>? = null,
     ) = BandModel(name, shape, link, tested, Regex(pattern), storeModel = store, facePreview = preview)
 
-    private fun huami(name: String, shape: BandShape, pattern: String, crypt: Int = 0x80, sampleSize: Int = 4) =
-        BandModel(name, shape, BandLink.Ble, false, Regex(pattern, RegexOption.IGNORE_CASE), BandFamily.Huami, crypt, sampleSize)
+    private fun huami(name: String, shape: BandShape, pattern: String, crypt: Int = 0x80, sampleSize: Int = 4, faces: Boolean = false) =
+        BandModel(name, shape, BandLink.Ble, false, Regex(pattern, RegexOption.IGNORE_CASE), BandFamily.Huami, crypt, sampleSize, faces)
 
     private const val SUFFIX = "( ?[0-9A-Za-z]{4})?"
 
@@ -69,9 +71,9 @@ object BandModels {
         huami("Mi Band 2", BandShape.Band, "^MI Band 2$", crypt = 0),
         huami("Mi Band 3", BandShape.Band, "^Mi Band 3$", crypt = 0),
         huami("Mi Smart Band 4", BandShape.Band, "^Mi Smart Band 4$"),
-        huami("Mi Smart Band 5", BandShape.Band, "^Mi Smart Band 5$"),
-        huami("Mi Smart Band 6", BandShape.Band, "^Mi Smart Band 6$"),
-        huami("Amazfit Band 5", BandShape.Band, "^Amazfit Band 5$"),
+        huami("Mi Smart Band 5", BandShape.Band, "^Mi Smart Band 5$", sampleSize = 8),
+        huami("Mi Smart Band 6", BandShape.Band, "^Mi Smart Band 6$", sampleSize = 8, faces = true),
+        huami("Amazfit Band 5", BandShape.Band, "^Amazfit Band 5$", sampleSize = 8),
         huami("Amazfit Band 2", BandShape.Band, "^Amazfit (Band 2|Cor 2)$", crypt = 0),
         huami("Amazfit Band", BandShape.Band, "^Amazfit (Band|Cor)$", crypt = 0),
         huami("Amazfit Neo", BandShape.SquareWatch, "^Amazfit Neo$"),

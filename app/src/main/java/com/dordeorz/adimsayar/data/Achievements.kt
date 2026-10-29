@@ -12,7 +12,14 @@ enum class MedalGroup(val targets: List<Long>) {
     WeeklyGoal(listOf(1L, 4L, 12L, 26L, 52L)),
     Total(listOf(100_000L, 500_000L, 1_000_000L, 2_500_000L, 5_000_000L, 10_000_000L)),
     EarlyBird(listOf(1L, 7L, 30L, 100L, 365L)),
+    Distance(listOf(10L, 42L, 100L, 250L, 500L, 1_000L)),
+    WaterStreak(listOf(3L, 7L, 14L, 30L, 100L)),
+    SleepStreak(listOf(3L, 7L, 14L, 30L)),
+    Route(listOf(1L, 3L, 5L, 7L)),
 }
+
+/** Groups counted from steps alone; the others come from [ExtraMedals]. */
+val STEP_MEDAL_GROUPS = setOf(MedalGroup.DailySteps, MedalGroup.Streak, MedalGroup.WeeklyGoal, MedalGroup.Total, MedalGroup.EarlyBird)
 
 const val EARLY_BIRD_HOUR = 8
 const val EARLY_BIRD_STEPS = 1_000L
@@ -72,6 +79,7 @@ object AchievementMath {
         firstDay: DayOfWeek = DayOfWeek.MONDAY,
         earlyBirdDays: Set<LocalDate>? = null,
         freezes: Set<LocalDate> = emptySet(),
+        goalOf: ((LocalDate) -> Long)? = null,
     ): Achievements {
         val first = days.keys.filter { !it.isAfter(today) }.minOrNull() ?: today
         var total = 0L
@@ -103,6 +111,7 @@ object AchievementMath {
         var date = first
         while (!date.isAfter(today)) {
             val steps = days[date] ?: 0L
+            val dayGoal = goalOf?.invoke(date) ?: dailyGoal
             if (YearMonth.from(date) != month) {
                 month = YearMonth.from(date)
                 monthSum = 0L
@@ -119,7 +128,7 @@ object AchievementMath {
             if (steps > (bestDay?.steps ?: 0L)) bestDay = DaySteps(date, steps)
             if (weekSum > (bestWeek?.steps ?: 0L)) bestWeek = WeekSteps(weekStart, weekSum)
             if (monthSum > (bestMonth?.steps ?: 0L)) bestMonth = MonthSteps(month, monthSum)
-            if (steps >= dailyGoal) {
+            if (steps >= dayGoal) {
                 goalDays++
                 streak++
                 longestStreak = maxOf(longestStreak, streak)
@@ -134,7 +143,7 @@ object AchievementMath {
             earn(MedalGroup.DailySteps, steps, date)
             earn(MedalGroup.Streak, streak.toLong(), date)
             MedalGroup.DailySteps.targets.forEachIndexed { i, target -> if (steps >= target) dailyTimes[i]++ }
-            if (steps >= dailyGoal) {
+            if (steps >= dayGoal) {
                 MedalGroup.Streak.targets.forEachIndexed { i, target -> if (streak.toLong() == target) streakTimes[i]++ }
             }
             earn(MedalGroup.Total, total, date)
@@ -152,7 +161,7 @@ object AchievementMath {
             MedalGroup.Total to total,
             MedalGroup.EarlyBird to earlyDays.toLong(),
         )
-        val groups = MedalGroup.entries.filter { it != MedalGroup.EarlyBird || earlyBirdDays != null }
+        val groups = MedalGroup.entries.filter { it in STEP_MEDAL_GROUPS && (it != MedalGroup.EarlyBird || earlyBirdDays != null) }
         val medals = groups.flatMap { group ->
             group.targets.mapIndexed { tier, target ->
                 val times = when (group) {
@@ -160,7 +169,7 @@ object AchievementMath {
                     MedalGroup.Streak -> streakTimes[tier]
                     MedalGroup.WeeklyGoal -> (metWeeks / target).toInt()
                     MedalGroup.EarlyBird -> (earlyDays / target).toInt()
-                    MedalGroup.Total -> 0
+                    else -> 0
                 }
                 Medal(group, tier, target, progress.getValue(group), earned[group to target], times)
             }

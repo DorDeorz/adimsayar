@@ -24,4 +24,10 @@ class OemProfileTest {
     fun pixelIsUnknown() {
         assertEquals(OemProfile.Unknown, OemProfile.detect("Google", "google", "", ""))
     }
+
+    @Test
+    fun customRomOnRedmiIsUnknown() {
+        val fingerprint = "Redmi/sweet_global2/sweet:13/TKQ1.221114.001/V816.0.13.0.THGMIXM:user/release-keys"
+        assertEquals(OemProfile.Unknown, OemProfile.detect("Xiaomi", "Redmi", "BP4A.251205.006 release-keys", fingerprint, customRom = true))
+    }
 }

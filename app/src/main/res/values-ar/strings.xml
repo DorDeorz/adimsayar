@@ -23,6 +23,8 @@
     <string name="frozen_text">يرصد الهاتف الخطوات لكن العداد لا يتقدم. تمت إعادة الاتصال بالمستشعر، وسيختفي هذا التنبيه تلقائيًا بعد بضع خطوات.</string>
 
     <string name="service_card_title">متابعة العدّ في الخلفية</string>
+    <string name="exact_alarms_title">المنبهات الدقيقة</string>
+    <string name="exact_alarms_text">يعمل حفظ منتصف الليل والتذكيرات وتغيير واجهة الساعة في موعدها. عند الإيقاف قد يؤخرها Android حتى ساعة. اضغط لفتح شاشة الإذن.</string>
     <string name="xiaomi_unreadable_title">تعذّرت قراءة سجل خطوات HyperOS</string>
     <string name="xiaomi_unreadable_text">الخطوات لا تتحدث حاليًا. ربما غيّر تحديث HyperOS السجل. يمكنك إيقاف المفتاح أدناه ومتابعة العدّ عبر «متابعة العدّ في الخلفية».</string>
     <string name="xiaomi_stalled_title">سجل خطوات HyperOS لا يتقدم</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">هاتف</string>
     <string name="device_other">جهاز آخر</string>
 
+    <string name="tile_name">خطوات FitWren</string>
+    <string name="tile_goal_percent">%%%1$d من الهدف</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">اليوم %1$s خطوة، %%%2$d من الهدف</string>
+    <string name="smart_goal">هدف ذكي</string>
+    <string name="smart_goal_hint" formatted="false">في بداية كل أسبوع يرفع الهدف اليومي أو يخفضه قليلاً حسب آخر 4 أسابيع (10 % كحد أقصى)</string>
+    <string name="smart_goal_changed">هذا الأسبوع تغيّر الهدف من %1$s إلى %2$s خطوة (حسب آخر 4 أسابيع)</string>
+    <string name="smart_goal_waiting">يحتاج الاقتراح إلى خطوات في %1$d يومًا على الأقل من آخر 4 أسابيع</string>
+    <string name="smart_goal_next">اقتراح الأسبوع القادم: %1$s خطوة</string>
+    <string name="insight_title">النوم والخطوات</string>
+    <string name="insight_not_enough">لا توجد بيانات كافية بعد: يلزم %1$d ليالٍ طويلة و%1$d قصيرة على الأقل. جرّب 30 أو 90 يومًا.</string>
+    <string name="insight_steps_more">في الأيام التي تلي نومًا أطول من %1$d ساعات تمشي في المتوسط %2$s خطوة أكثر</string>
+    <string name="insight_steps_less">في الأيام التي تلي نومًا أطول من %1$d ساعات تمشي في المتوسط %2$s خطوة أقل</string>
+    <string name="insight_steps_same">تمشي القدر نفسه بعد الليالي الطويلة والقصيرة (%1$d ساعات)</string>
+    <string name="insight_after_long">بعد نوم أطول من %1$d ساعات</string>
+    <string name="insight_after_short">بعد نوم أقصر من %1$d ساعات</string>
+    <string name="insight_sleep_active">الليلة بعد بلوغ الهدف</string>
+    <string name="insight_sleep_rest">الليلة بعد عدم بلوغ الهدف</string>
+    <string name="insight_days">%1$d يوم</string>
+    <string name="insight_hint">تُحتسب خطوات اليوم الذي تستيقظ فيه، ولا يُحتسب اليوم. هذه علاقة وليست سببًا.</string>
+    <string name="report_button">تقرير %1$s (PDF)</string>
+    <string name="report_title">التقرير الشهري · %1$s</string>
+    <string name="report_page">الصفحة %1$d من %2$d</string>
+    <string name="report_goal_days">%1$d من %2$d يوم (الهدف %3$s)</string>
+    <string name="report_active_days">أيام نشطة</string>
+    <string name="report_distance">المسافة</string>
+    <string name="report_kcal">السعرات</string>
+    <string name="report_kcal_value">%1$s سعرة</string>
+    <string name="report_vs_previous">مقارنة بالشهر السابق</string>
+    <string name="report_water">متوسط الماء اليومي</string>
+    <string name="report_ml_value">%1$s مل</string>
+    <string name="report_bpm_value">%1$d نبضة/د</string>
+    <string name="report_daily_chart">الخطوات اليومية</string>
+    <string name="report_weeks">الأسابيع</string>
+    <string name="report_goal_line">الهدف</string>
+    <string name="report_days_title">الأيام · %1$s</string>
+    <string name="report_day">اليوم</string>
+    <string name="report_steps">الخطوات</string>
+    <string name="report_water_short">الماء</string>
+    <string name="report_done">تم حفظ التقرير</string>
+    <string name="report_failed">تعذّر إنشاء التقرير</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>مربع الإعدادات السريعة: خطوات اليوم ونسبة الهدف في لوحة الإشعارات، والنقر يفتح «اليوم» (Android 7 وما بعده)</item>
+        <item>هدف ذكي (الإعدادات ← الأهداف، متوقف افتراضيًا): عند تشغيله يتغير الهدف اليومي بداية كل أسبوع بنسبة 10% كحد أقصى حسب آخر 4 أسابيع</item>
+        <item>النوم والخطوات (الصحة): الخطوات بعد الليالي الطويلة والقصيرة، والنوم بعد الأيام التي بلغت فيها الهدف</item>
+        <item>تقرير شهري PDF (السجل): ملخص الشهر ورسم يومي والأسابيع وجدول يومًا بيوم؛ دون إنترنت</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>الإعدادات ← مصدر الخطوات ← «لا تحتسب الهاتف أثناء استخدام السوار»: عند التشغيل لا تُضاف خطوات الهاتف في الأيام التي فيها بيانات من السوار</item>
+        <item>يُدمج السوار والهاتف دائمًا ساعة بساعة: في الساعات التي كان السوار فيها على المعصم يُحتسب السوار فقط، ويكمل الهاتف بقية الساعات (سابقًا بدون سجل HyperOS كان يُؤخذ المجموع اليومي الأكبر)</item>
+        <item>دعم الرومات المخصصة (crDroid وLineageOS وغيرها): على هاتف Xiaomi بدون HyperOS تُخفى سجلات خطوات HyperOS وخطوات بطارية MIUI ويُستخدم مستشعر الهاتف</item>
+        <item>المنبهات الدقيقة: اسمح بها في الإعدادات ← الإشعارات ليعمل حفظ منتصف الليل والتذكيرات وتغيير الواجهة دون تأخير (Android 14 وأحدث)</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>مزاج الطائر: يتغير الطائر في واجهات FitWren والتصاميم حسب هدف الخطوات</item>
+        <item>الطقس على الواجهة: رمز الطقس ودرجة الحرارة</item>
+        <item>الشاشة الدائمة: لواجهات FitWren مظهر داكن وبسيط</item>
+        <item>مشاركة التصاميم: أرسل التصميم مع صورته كملف واستورد تصميم صديقك</item>
+        <item>واجهة حسب الوقت: يبدّل FitWren بين واجهة النهار والليل في الأوقات المختارة</item>
+        <item>واجهات Mi Band 6: رفع واجهة من ملف ‎.bin‎</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>متجر واجهات الساعة: تصفح واجهات Xiaomi المجانية لـ Mi Band 8 بالصور وابحث فيها وأرسلها إلى السوار بلمسة</item>
         <item>واجهات FitWren: تسع واجهات بالطائر (ليل، طريق، تناظرية، نيون، غصن وغيرها) مضمنة وتُرسل إلى Mi Band 8 بلمسة</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">اتصال مباشر (Xiaomi، Amazfit)</string>
     <string name="source_connect">عبر Health Connect</string>
     <string name="source_merge_hint">إذا كنت تستخدم سوارًا، يُستخدم عدّه في الساعات التي ترتديه فيها وعدّ الهاتف في بقية الساعات.</string>
+    <string name="band_only_title">لا تحتسب الهاتف أثناء استخدام السوار</string>
+    <string name="band_only_text">إذا أرسل السوار بيانات في يوم ما، تؤخذ خطوات ذلك اليوم من السوار فقط. يُستخدم الهاتف فقط في الأيام التي لم يتصل فيها السوار. عند الإيقاف يكمل الهاتف الساعات التي لم يكن السوار فيها على المعصم.</string>
     <string name="source_direct_manage">إعدادات السوار</string>
     <string name="device_connect_hint">تُقرأ البيانات من Health Connect</string>
     <string name="band_reconnect">إعادة الاتصال</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">جارٍ الرفع: %d%%</string>
     <string name="band_faces_done">تم رفع الواجهة واختيارها.</string>
     <string name="band_faces_failed">تعذّر رفع الواجهة. قرّب السوار وحاول مرة أخرى.</string>
+    <string name="huami_faces_hint">اختر ملف واجهة ‎.bin‎ مصنوعًا لـ Mi Band 6. قد يستغرق الرفع بضع دقائق، فأبقِ السوار قرب الهاتف.</string>
+    <string name="huami_faces_invalid">هذا الملف ليس واجهة لـ Mi Band 6.</string>
+    <string name="huami_faces_done">تم رفع الواجهة. إن لم يعرضها السوار فاخترها من قائمة الواجهات في السوار.</string>
+    <string name="huami_faces_no_space">لا توجد مساحة في السوار. احذف واجهة من السوار وحاول مرة أخرى.</string>
+    <string name="huami_faces_low_battery">بطارية السوار منخفضة. اشحنه وحاول مرة أخرى.</string>
+    <string name="huami_faces_refused">لم يقبل السوار هذا الملف.</string>
     <string name="band_faces_delete">حذف</string>
     <string name="band_notify_pick_search">ابحث عن تطبيق</string>
     <string name="band_notify_pick_count">%1$d من %2$d تطبيقًا ترسل إلى السوار</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">العناصر</string>
     <string name="face_designer_undo">تراجع</string>
     <string name="face_designer_reset">إعادة ضبط</string>
+    <string name="face_designer_bird_mood">حسب الهدف</string>
+    <string name="face_designer_show_weather">الطقس</string>
+    <string name="face_designer_share_section">مشاركة</string>
+    <string name="face_designer_share">مشاركة التصميم</string>
+    <string name="face_designer_import">استيراد تصميم</string>
+    <string name="face_designer_share_hint">يُحفظ التصميم مع صورته في ملف. افتحه في FitWren عبر “استيراد تصميم”.</string>
+    <string name="face_designer_import_failed">هذا الملف ليس تصميم واجهة FitWren</string>
+    <string name="face_schedule">واجهة حسب الوقت</string>
+    <string name="face_schedule_hint">يبدّل FitWren بين واجهة النهار وواجهة الليل في الأوقات التي تختارها. يجب أن يكون السوار متصلاً، وإلا يحاول مجددًا بعد قليل.</string>
+    <string name="face_schedule_on">تشغيل</string>
+    <string name="face_schedule_day">واجهة النهار</string>
+    <string name="face_schedule_day_start">بداية النهار</string>
+    <string name="face_schedule_night">واجهة الليل</string>
+    <string name="face_schedule_night_start">بداية الليل</string>
+    <string name="face_schedule_none">غير محدد</string>
+    <string name="goal_off">متوقف</string>
+    <string name="goal_turn_off">إيقاف</string>
+    <string name="weekend_goal">هدف عطلة نهاية الأسبوع</string>
+    <string name="weekend_goal_hint">هدف يومي منفصل للسبت والأحد. عند الإيقاف يكون الهدف نفسه كل يوم.</string>
+    <string name="monthly_goal">الهدف الشهري</string>
+    <string name="yearly_goal">الهدف السنوي</string>
+    <string name="period_goal_hint">تعرض صفحة اليوم شريط تقدم واليوم الذي تبلغ فيه الهدف بوتيرتك الحالية.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">بلغت الهدف!</string>
+    <string name="period_no_pace">امشِ قليلًا للحصول على تقدير</string>
+    <string name="period_on_track">بهذه الوتيرة تبلغه في %1$s</string>
+    <string name="period_behind">تحتاج %1$s خطوة يوميًا لتلحق</string>
+    <string name="vacation_mode">وضع العطلة</string>
+    <string name="vacation_hint">في الأيام المختارة لا تنقطع السلسلة ولا تُستخدم أي بطاقة حماية وتسكت التذكيرات.</string>
+    <string name="vacation_off">لا توجد عطلة مخططة</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">إنهاء العطلة</string>
+    <string name="vacation_on_title">أنت في عطلة</string>
+    <string name="vacation_on_text">سلسلتك محفوظة حتى %1$s والتذكيرات صامتة.</string>
+    <string name="backup_group">نسخة احتياطية كاملة</string>
+    <string name="backup_write">نسخ احتياطي</string>
+    <string name="backup_write_hint">الخطوات والوزن والماء والميداليات والملاحظات والإعدادات في ملف واحد</string>
+    <string name="backup_restore">استعادة النسخة</string>
+    <string name="backup_restore_hint">اختر ملف نسخة FitWren</string>
+    <string name="backup_restore_choose">اختر ملفًا</string>
+    <string name="restore_confirm">تُستبدل كل البيانات الحالية ببيانات النسخة. يبقى اتصال السوار ومصدر الخطوات كما هما.</string>
+    <string name="backup_done">حُفظت النسخة (%1$d صف)</string>
+    <string name="backup_failed">تعذرت كتابة الملف</string>
+    <string name="restore_done">استُعيدت النسخة (%1$d صف)</string>
+    <string name="restore_failed">هذا الملف ليس نسخة FitWren</string>
+    <string name="health_write">الكتابة في Health Connect</string>
+    <string name="health_write_hint">تظهر خطوات FitWren الساعية في تطبيقات أخرى مثل Google Fit</string>
+    <string name="health_write_reading">تبقى الكتابة متوقفة أثناء قراءة الخطوات من Health Connect وإلا حُسبت مرتين</string>
+    <string name="health_write_denied">لم يُمنح إذن الكتابة في Health Connect</string>
+    <string name="erase_group">حذف البيانات</string>
+    <string name="erase_range">حذف نطاق تاريخ</string>
+    <string name="erase_range_hint">تُحذف الخطوات والماء والوزن والنوم والملاحظات للأيام المختارة. قد يعيد الهاتف أو السوار كتابتها.</string>
+    <string name="erase_all">حذف كل البيانات</string>
+    <string name="erase_all_hint">يُحذف سجل الخطوات والوزن والماء والميداليات والملاحظات. تبقى الإعدادات.</string>
+    <string name="erase_all_confirm">حذف كل البيانات نهائيًا؟ يُستحسن أخذ نسخة احتياطية أولًا.</string>
+    <string name="erase_confirm_button">حذف</string>
+    <string name="erase_done">حُذفت البيانات</string>
+    <string name="delete">حذف</string>
+    <string name="note_title">ملاحظة اليوم</string>
+    <string name="note_placeholder">مثلًا: كانت هناك مباراة، كنت مريضًا</string>
+    <string name="note_empty">لا توجد ملاحظة</string>
+    <string name="note_add">إضافة ملاحظة</string>
+    <string name="note_edit">تعديل</string>
+    <string name="correct_button">تصحيح</string>
+    <string name="correct_hint">إذا كان العد خاطئًا يمكنك تصحيح اليوم يدويًا</string>
+    <string name="correct_done">صُحح هذا اليوم يدويًا</string>
+    <string name="correct_title">تصحيح اليوم</string>
+    <string name="correct_text">يحل الرقم الذي تكتبه محل ما عدّه الهاتف والسوار.</string>
+    <string name="correct_undo">العودة للعدد</string>
+    <string-array name="release_notes_0_17_0">
+        <item>ملاحظات اليوم: اكتب ملاحظة قصيرة لليوم المختار في السجل وتظهر نقطة صغيرة في التقويم</item>
+        <item>تصحيح اليوم: اكتب عدد الخطوات الصحيح بنفسك أو عد إلى العدد المحسوب</item>
+        <item>وضع العطلة (الإعدادات ← الأهداف): في الأيام المختارة لا تنقطع السلسلة ولا تُستخدم بطاقة ولا تذكيرات</item>
+        <item>هدف عطلة نهاية الأسبوع والهدف الشهري والسنوي: شريط تقدم ويوم الإنجاز المتوقع في صفحة اليوم</item>
+        <item>نسخة احتياطية كاملة واستعادة (الإعدادات ← البيانات): الخطوات والوزن والماء والميداليات والملاحظات والإعدادات في ملف واحد</item>
+        <item>حذف البيانات: نطاق تاريخ أو كل شيء</item>
+        <item>تصدير CSV يتضمن الآن الماء والوزن والنوم</item>
+        <item>الكتابة في Health Connect (اختياري): تظهر خطوات FitWren في تطبيقات مثل Google Fit</item>
+    </string-array>
+    <string name="morning_title">صباح الخير!</string>
+    <string name="morning_yesterday">مشيت أمس %1$s خطوة</string>
+    <string name="morning_sleep">نمت %1$d س %2$d د</string>
+    <string name="morning_goal">هدف اليوم %1$s خطوة</string>
+    <string name="morning_summary">ملخص الصباح</string>
+    <string name="morning_summary_hint">إشعار صباحي بخطوات الأمس ونوم الليلة وهدف اليوم</string>
+    <string name="morning_hour">الوقت</string>
+    <string name="record_notify">إشعار الرقم القياسي</string>
+    <string name="record_notify_hint">يحتفل لحظة تجاوز أفضل يوم أو أسبوع</string>
+    <string name="record_day_title">اليوم أفضل أيامك!</string>
+    <string name="record_day_text">%1$s خطوة، الرقم السابق %2$s</string>
+    <string name="record_week_title">هذا أفضل أسبوع لك!</string>
+    <string name="record_week_text">%1$s خطوة، الرقم السابق %2$s</string>
+    <string name="sedentary">تذكير بالحركة</string>
+    <string name="sedentary_hint">بين 10:00 و20:00 إذا مشيت أقل من %1$d خطوة في ساعة يقول «قم وامشِ قليلًا»</string>
+    <string name="sedentary_title">حان وقت الحركة</string>
+    <string name="sedentary_text">مشيت %1$d خطوة في الساعة الأخيرة. دقائق من المشي ستفيدك.</string>
+    <string name="walk_plan">جدول المشي</string>
+    <string name="walk_plan_hint">حدد أوقات المشي للأيام واحصل على تذكير</string>
+    <string name="walk_plan_dialog_hint">يصلك إشعار في الموعد. إذا مشيت 1500 خطوة في تلك الساعة أو التالية تُعلَّم في صفحة اليوم.</string>
+    <string name="walk_plan_none">لا شيء</string>
+    <string name="walk_plan_title">حان وقت المشي</string>
+    <string name="walk_plan_text">خطتك: مشي الساعة %1$s. هيا بنا!</string>
+    <string name="walk_plan_today">مشي اليوم الساعة %1$s</string>
+    <string name="walk_plan_done">تم، أحسنت!</string>
+    <string name="walk_plan_waiting">يُعلَّم عندما تمشي 1500 خطوة في ذلك الوقت</string>
+    <string name="month_report_reminder">تذكير التقرير الشهري</string>
+    <string name="month_report_reminder_hint">في اليوم الأول من كل شهر الساعة 10:00 يذكرك بتقرير PDF للشهر الماضي</string>
+    <string name="month_report_title">تقرير %1$s جاهز</string>
+    <string name="month_report_text">اختر الشهر في صفحة السجل واحفظ تقرير PDF</string>
+    <string name="band_celebrate">احتفال الهدف على السوار</string>
+    <string name="band_celebrate_hint">عند بلوغ الهدف يهتز السوار ويعرض رسالة بالطائر (أثناء الاتصال)</string>
+    <string name="band_celebrate_title">🐦 تم الهدف!</string>
+    <string name="band_celebrate_text">%1$s خطوة. طائرك سعيد جدًا!</string>
+    <string name="shortcut_water">ماء</string>
+    <string name="shortcut_water_long">إضافة كوب ماء</string>
+    <string name="shortcut_today_long">خطوات اليوم</string>
+    <string name="shortcut_ask">كم خطوة؟</string>
+    <string name="shortcut_ask_long">كم خطوة اليوم؟</string>
+    <string name="shortcut_water_added">أُضيف %1$d مل ماء</string>
+    <string name="water_tile_name">ماء FitWren</string>
+    <string name="answer_steps">مشيت اليوم %1$s خطوة. بقي %2$s للهدف.</string>
+    <string name="answer_steps_done">مشيت اليوم %1$s خطوة. بلغت الهدف، رائع!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>ملخص الصباح: خطوات الأمس والنوم وهدف اليوم</item>
+        <item>إشعار الرقم القياسي: احتفال فوري عند تجاوز أفضل يوم أو أسبوع</item>
+        <item>تذكير بالحركة: «قم وامشِ» بعد ساعة بخطوات قليلة</item>
+        <item>جدول المشي: أوقات لكل يوم وتذكير وعلامة في صفحة اليوم</item>
+        <item>تذكير التقرير الشهري في أول كل شهر</item>
+        <item>احتفال على السوار: يهتز ويعرض رسالة بالطائر</item>
+        <item>اختصارات: اضغط مطولًا على الأيقونة لإضافة ماء واليوم وكم خطوة؟</item>
+        <item>مربع الماء: +1 كوب من لوحة الإشعارات</item>
+        <item>إجابة صوتية على «كم خطوة اليوم؟» (اختصار ومساعد Google)</item>
+    </string-array>
+    <string name="medal_group_distance">المسافة</string>
+    <string name="medal_group_distance_text">إجمالي المسافة المقطوعة في كل الأيام (حسب طولك)</string>
+    <string name="medal_group_water">سلسلة الماء</string>
+    <string name="medal_group_water_text">أيام متتالية حققت فيها هدف الماء</string>
+    <string name="medal_group_sleep">سلسلة النوم</string>
+    <string name="medal_group_sleep_text">ليالٍ متتالية بنوم 7 ساعات على الأقل (بيانات السوار)</string>
+    <string name="medal_group_route">إنهاء المسارات</string>
+    <string name="medal_group_route_text">عدد المسارات الافتراضية المختلفة التي أنهيتها</string>
+    <string name="medal_km">%1$d كم</string>
+    <string name="routes_count">%1$d مسارات</string>
+    <string name="time_left_minutes">≈ %1$d دقيقة مشي حتى الهدف</string>
+    <string name="time_left_hours">≈ %1$d س %2$d د مشي حتى الهدف</string>
+    <string name="food_line">أحرقت ≈ %1$d × %2$s</string>
+    <string name="food_burger">برغر</string>
+    <string name="food_simit">سميت (كعك بالسمسم)</string>
+    <string name="food_chocolate">لوح شوكولاتة</string>
+    <string name="food_cola">علبة كولا</string>
+    <string name="food_apple">تفاحة</string>
+    <string name="trend_title">الاتجاه</string>
+    <string name="trend_month">هذا الشهر (أول %1$d يوم)</string>
+    <string name="trend_week">آخر 7 أيام</string>
+    <string name="trend_up">أكثر بنسبة %1$d%% من الفترة السابقة</string>
+    <string name="trend_down">أقل بنسبة %1$d%% من الفترة السابقة</string>
+    <string name="trend_same">مثل الفترة السابقة</string>
+    <string name="trend_no_data">لا خطوات في الفترة السابقة للمقارنة</string>
+    <string name="active_hours_title">خريطة الساعات النشطة</string>
+    <string name="active_hours_text">متوسط الخطوات لكل يوم وساعة في آخر 8 أسابيع؛ الأغمق يعني أكثر</string>
+    <string name="active_hours_empty">لا توجد سجلات بالساعة بعد</string>
+    <string name="active_hours_peak">أنشط ساعة لديك: %1$s %2$s</string>
+    <string name="story_banner_title">قصة عام %1$d جاهزة</string>
+    <string name="story_banner_text">تصفّح سنتك وشاركها</string>
+    <string name="story_open">افتح القصة</string>
+    <string name="story_total_title">خطواتك في %1$d</string>
+    <string name="story_total_text">بمعدل %1$s خطوة يوميًا</string>
+    <string name="story_distance_title">المسافة التي مشيتها</string>
+    <string name="story_distance_text">نحو %1$d%% من محيط الأرض</string>
+    <string name="story_medals_text">الميداليات التي ربحتها هذا العام</string>
+    <string name="story_end_title">يا لها من سنة!</string>
+    <string name="story_end_text">سيواصل طائرك المشي معك في العام الجديد</string>
+    <string name="story_share">FitWren %1$d: %2$s خطوة، %3$s كم، الهدف تحقق في %4$d يومًا! 🐦</string>
+    <string name="fitness_age_title">العمر اللياقي</string>
+    <string name="fitness_age_value">%1$d سنة</string>
+    <string name="fitness_age_younger">أصغر من عمرك الحقيقي بـ %1$d سنة</string>
+    <string name="fitness_age_older">أكبر من عمرك الحقيقي بـ %1$d سنة</string>
+    <string name="fitness_age_same">مثل عمرك الحقيقي</string>
+    <string name="fitness_age_text">VO2max تقديري %1$d من نبض الراحة %2$d ومتوسط %3$s خطوة يوميًا. ليس قياسًا طبيًا.</string>
+    <string name="recovery_title">التعافي</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">تعافيت جيدًا: المشي السريع فكرة جيدة اليوم</string>
+    <string name="recovery_mid">متوسط: يكفي مشيك المعتاد</string>
+    <string name="recovery_low">منخفض: خفف اليوم واسترح</string>
+    <string name="recovery_text">يقارن نوم الليلة الماضية بالأسبوع السابق ونبض الراحة بمتوسطه. ليس تقييمًا طبيًا.</string>
+    <string name="quote_title">عبارة اليوم</string>
+    <string name="quote_setting">عبارة اليوم</string>
+    <string name="quote_setting_hint">اعرض عبارة جديدة كل يوم في صفحة اليوم</string>
+    <string-array name="quotes">
+        <item>كل خطوة تجعلك متقدمًا خطوة على الأمس.</item>
+        <item>الطريق الذي تمشيه اليوم هو راحتك غدًا.</item>
+        <item>الخطوات الصغيرة تنهي الطرق الطويلة أيضًا.</item>
+        <item>طائرك يريد أن يطير معك اليوم أيضًا.</item>
+        <item>المشي ببطء أفضل من عدم المشي.</item>
+        <item>حتى لو كنت متعبًا، تكفي عشر دقائق.</item>
+        <item>السلسلة عادة، والعادة قرار.</item>
+        <item>الدرج هو جبل اليوم الصغير.</item>
+        <item>امشِ أثناء المكالمة، وستأتي الخطوات وحدها.</item>
+        <item>المشي أسهل طريقة لترتيب الأفكار.</item>
+        <item>إذا بدا الهدف بعيدًا فاستهدف نصفه.</item>
+        <item>خطوات اليوم هي طاقة الغد.</item>
+        <item>القليل كل يوم يصبح كثيرًا كل شهر.</item>
+        <item>شمسًا كان أو مطرًا، المشي يناسب كل طقس.</item>
+        <item>أفضل مشي هو الذي تبدؤه الآن.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>اليوم: وقت المشي المتبقي للهدف (حسب سرعتك) والسعرات كطعام</item>
+        <item>أداة اليوم (العريضة): الوقت المتبقي</item>
+        <item>بطاقة عبارة اليوم (يمكن إيقافها من الإعدادات ← المظهر)</item>
+        <item>السجل: بطاقة الاتجاه (هذا الشهر وآخر 7 أيام مقارنة بالسابق) وخريطة الساعات النشطة (8 أسابيع، يوم × ساعة)</item>
+        <item>قصة العام: في السجل في ديسمبر ويناير وفي بطاقة السنة؛ صفحات للتمرير والمشاركة</item>
+        <item>الصحة: درجة التعافي والعمر اللياقي (ببيانات السوار)</item>
+        <item>ميداليات جديدة: المسافة وسلسلة الماء وسلسلة النوم وإنهاء المسارات</item>
+    </string-array>
+    <string name="bird_item_glasses">نظارة</string>
+    <string name="bird_item_flower">زهرة</string>
+    <string name="bird_item_nightcap">قبعة النوم</string>
+    <string name="bird_item_backpack">حقيبة ظهر</string>
+    <string name="bird_unlock_glasses">امشِ 42 كم إجمالًا</string>
+    <string name="bird_unlock_flower">هدف الماء 7 أيام متتالية</string>
+    <string name="bird_unlock_nightcap">7 ليالٍ جيدة متتالية</string>
+    <string name="bird_unlock_backpack">أنهِ مسارًا افتراضيًا</string>
+    <string name="bird_item_wear">مكتسب: اختر إن كان طائرك يرتديه</string>
+    <string name="seeds_count">البذور: %1$d</string>
+    <string name="seeds_hint">بذرة لكل 1000 خطوة لشراء الألوان والأصوات أو لإطعام طائرك</string>
+    <string name="bird_fed">أحب طائرك البذرة!</string>
+    <string name="bird_feed">أطعم</string>
+    <string name="bird_species_title">نوع الطائر</string>
+    <string name="bird_locked_level">%1$s (المستوى %2$d)</string>
+    <string name="bird_color_title">لون الريش</string>
+    <string name="bird_price">%1$s (%2$d بذرة)</string>
+    <string name="bird_sound_title">التغريد</string>
+    <string name="bird_species_sparrow">الصعو</string>
+    <string name="bird_species_owl">بومة</string>
+    <string name="bird_species_parrot">ببغاء</string>
+    <string name="bird_species_eagle">نسر</string>
+    <string name="bird_color_default">طبيعي</string>
+    <string name="bird_color_sky">أزرق سماوي</string>
+    <string name="bird_color_rose">وردي</string>
+    <string name="bird_color_mint">نعناعي</string>
+    <string name="bird_color_plum">بنفسجي</string>
+    <string name="bird_color_night">ليلي</string>
+    <string name="bird_sound_chirp">زقزقة</string>
+    <string name="bird_sound_trill">ترغلة</string>
+    <string name="bird_sound_tweet">صفير</string>
+    <string name="bird_sound_coo">هديل</string>
+    <string name="metronome_channel">المترونوم</string>
+    <string name="metronome_title">مترونوم الإيقاع</string>
+    <string name="metronome_bpm">%1$d خطوة في الدقيقة</string>
+    <string name="walk_stop">إيقاف</string>
+    <string name="walk_start">ابدأ</string>
+    <string name="walk_channel">تسجيل المشي</string>
+    <string name="walk_gps_recording">جارٍ تسجيل مشي بنظام GPS</string>
+    <string name="walk_gps_distance">%1$s كم</string>
+    <string name="walk_gps_denied">لم يُمنح إذن الموقع؛ مشي GPS يحتاجه</string>
+    <string name="walk_tools_title">أدوات المشي</string>
+    <string name="walk_dog_title">تمشية الكلب</string>
+    <string name="walk_dog_hint">ابدأ عند الخروج وأوقف عند العودة؛ تُحفظ الخطوات</string>
+    <string name="walk_running">جارٍ: %1$s</string>
+    <string name="walk_gps_title">مشي بنظام GPS</string>
+    <string name="walk_gps_hint">يُحفظ المسار والمسافة؛ يُستخدم الموقع أثناء التسجيل فقط</string>
+    <string name="walk_gps_running">%1$s كم · %2$s</string>
+    <string name="walk_list_button">المشي المحفوظ (%1$d)</string>
+    <string name="walk_list_title">المشي</string>
+    <string name="walk_delete">حذف</string>
+    <string name="walk_summary_gps">%1$s كم · %2$s · %3$s خطوة</string>
+    <string name="walk_summary_dog">%1$s · %2$s خطوة</string>
+    <string name="floors_today">صعدت %1$d طوابق</string>
+    <string name="walks_on_day">%1$d مشي</string>
+    <string name="wallpaper_name">خلفية حية</string>
+    <string name="wallpaper_description">يطير طائر FitWren من العش إلى الغصن كلما مشيت</string>
+    <string name="wallpaper_set_hint">على الشاشة الرئيسية يطير الطائر من العش إلى الغصن مع خطوات اليوم</string>
+    <string name="lock_title">FitWren مقفل</string>
+    <string name="lock_use_pin">استخدم الرمز</string>
+    <string name="lock_wrong">رمز خاطئ، حاول مجددًا</string>
+    <string name="lock_enter_pin">أدخل رمزك</string>
+    <string name="lock_biometric_again">افتح ببصمة الإصبع أو الوجه</string>
+    <string name="simple_today">اليوم</string>
+    <string name="simple_view_off">العودة إلى العرض العادي</string>
+    <string name="simple_view">عرض بسيط</string>
+    <string name="simple_view_hint">الخطوات والهدف فقط بخط كبير في صفحة اليوم</string>
+    <string name="app_lock">قفل التطبيق</string>
+    <string name="app_lock_hint">يطلب رمزًا عند الفتح</string>
+    <string name="app_lock_biometric">الفتح بالبصمة / الوجه</string>
+    <string name="app_lock_biometric_hint">الفتح البيومتري للهاتف؛ يبقى الرمز احتياطيًا</string>
+    <string name="app_lock_change">تغيير الرمز</string>
+    <string name="app_lock_change_hint">عيّن رمزًا جديدًا</string>
+    <string name="app_lock_set_pin">تعيين الرمز</string>
+    <string name="app_lock_pin_hint">رقم من %1$d إلى %2$d خانات. إن نسيته فلن يفتح التطبيق إلا بعد مسح بياناته.</string>
+    <string name="app_lock_pin">الرمز</string>
+    <string name="app_lock_pin_again">الرمز (مرة أخرى)</string>
+    <string name="onboarding_skip">تخطٍ</string>
+    <string name="onboarding_welcome_title">مرحبًا بك في FitWren</string>
+    <string name="onboarding_welcome_text">يعدّ خطواتك ويكبر طائرك كلما بلغت هدفك. بلا حساب، وتبقى بياناتك على هاتفك.</string>
+    <string name="onboarding_goal_title">هدفك اليومي</string>
+    <string name="onboarding_goal_text">يمكنك تغييره لاحقًا من الإعدادات</string>
+    <string name="onboarding_body_title">الطول والوزن</string>
+    <string name="onboarding_body_text">تُحسب المسافة والسعرات منهما</string>
+    <string name="onboarding_height">%1$d سم</string>
+    <string name="onboarding_weight">%1$d كغ</string>
+    <string name="onboarding_permission_title">إذن الخطوات</string>
+    <string name="onboarding_permission_text">يتطلب عدّ الخطوات إذن النشاط البدني</string>
+    <string name="onboarding_permission_done">تم منح الإذن ✓</string>
+    <string name="onboarding_permission_button">اسمح</string>
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_20_0">
+        <item>أنواع الطيور: الصعو والبومة (المستوى 3) والببغاء (6) والنسر (10)؛ في التطبيق والأداة والخلفية ووجه السوار</item>
+        <item>البذور: بذرة لكل 1000 خطوة؛ أطعم طائرك واشترِ ألوانًا وأصواتًا</item>
+        <item>الإكسسوارات: ارتدِ ما ربحته أو أخفه؛ جديد: نظارة وزهرة وقبعة نوم وحقيبة ظهر</item>
+        <item>خلفية حية: يطير الطائر من العش إلى الغصن مع خطواتك</item>
+        <item>أدوات المشي (اليوم): مترونوم الإيقاع وتمشية الكلب وتسجيل المشي بنظام GPS (مع رسم المسار)</item>
+        <item>عداد الطوابق: في الهواتف التي فيها حساس ضغط</item>
+        <item>قفل التطبيق (رمز أو بصمة أو وجه) والعرض البسيط (الإعدادات ← المظهر واللغة)</item>
+        <item>صفحات ترحيب عند التثبيت الجديد: الهدف والطول والوزن والإذن</item>
+    </string-array>
 </resources>

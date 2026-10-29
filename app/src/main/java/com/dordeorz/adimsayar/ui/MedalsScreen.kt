@@ -49,6 +49,10 @@ private fun MedalGroup.title(): Int = when (this) {
     MedalGroup.WeeklyGoal -> R.string.medal_group_weekly
     MedalGroup.Total -> R.string.medal_group_total
     MedalGroup.EarlyBird -> R.string.medal_group_early
+    MedalGroup.Distance -> R.string.medal_group_distance
+    MedalGroup.WaterStreak -> R.string.medal_group_water
+    MedalGroup.SleepStreak -> R.string.medal_group_sleep
+    MedalGroup.Route -> R.string.medal_group_route
 }
 
 @StringRes
@@ -58,6 +62,10 @@ private fun MedalGroup.description(): Int = when (this) {
     MedalGroup.WeeklyGoal -> R.string.medal_group_weekly_text
     MedalGroup.Total -> R.string.medal_group_total_text
     MedalGroup.EarlyBird -> R.string.medal_group_early_text
+    MedalGroup.Distance -> R.string.medal_group_distance_text
+    MedalGroup.WaterStreak -> R.string.medal_group_water_text
+    MedalGroup.SleepStreak -> R.string.medal_group_sleep_text
+    MedalGroup.Route -> R.string.medal_group_route_text
 }
 
 @Composable
@@ -211,7 +219,10 @@ private fun MedalBadge(medal: Medal, modifier: Modifier) {
 @Composable
 private fun targetLabel(medal: Medal): String = when (medal.group) {
     MedalGroup.DailySteps -> stringResource(R.string.steps_value, format(medal.target))
-    MedalGroup.Streak, MedalGroup.EarlyBird -> stringResource(R.string.days_count, medal.target.toInt())
+    MedalGroup.Streak, MedalGroup.EarlyBird, MedalGroup.WaterStreak, MedalGroup.SleepStreak ->
+        stringResource(R.string.days_count, medal.target.toInt())
+    MedalGroup.Distance -> stringResource(R.string.medal_km, medal.target.toInt())
+    MedalGroup.Route -> stringResource(R.string.routes_count, medal.target.toInt())
     MedalGroup.WeeklyGoal -> stringResource(R.string.weeks_count, medal.target.toInt())
     MedalGroup.Total -> if (medal.target >= 1_000_000L) {
         stringResource(R.string.million_steps, formatMillions(medal.target))

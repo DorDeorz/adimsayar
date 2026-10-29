@@ -1,8 +1,13 @@
 package com.dordeorz.adimsayar.ui
 
+import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.SystemClock
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +42,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -77,12 +83,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.core.content.FileProvider
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.DesignBird
 import com.dordeorz.adimsayar.data.DesignPlace
 import com.dordeorz.adimsayar.data.FaceDesign
 import com.dordeorz.adimsayar.data.FaceDesigner
 import kotlinx.coroutines.launch
+import java.io.File
 import kotlin.math.roundToInt
 
 private val GRADIENTS = listOf(
@@ -170,6 +178,21 @@ internal fun FaceDesignerDialog(onDismiss: () -> Unit) {
             }
         }
     }
+    val shareTitle = stringResource(R.string.face_designer_share)
+    val importFailed = stringResource(R.string.face_designer_import_failed)
+    val importer = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) {
+            scope.launch {
+                val read = FaceDesigner.importDesign(context, uri)
+                if (read == null) {
+                    Toast.makeText(context, importFailed, Toast.LENGTH_LONG).show()
+                } else {
+                    if (read.second != null) photo = read.second
+                    change(read.first)
+                }
+            }
+        }
+    }
     val picture by produceState<Bitmap?>(null, design, photo) { value = FaceDesigner.picture(context, design, photo) }
     val current by rememberUpdatedState(design)
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
@@ -236,12 +259,25 @@ internal fun FaceDesignerDialog(onDismiss: () -> Unit) {
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     when (tab) {
-                        DesignTab.Theme -> ThemePage(design) { theme ->
-                            change(
-                                design.copy(
-                                    top = theme.top, bottom = theme.bottom, hour = theme.hour, minute = theme.minute,
-                                    text = theme.text, accent = theme.accent, photo = false,
-                                ),
+                        DesignTab.Theme -> {
+                            ThemePage(design) { theme ->
+                                change(
+                                    design.copy(
+                                        top = theme.top, bottom = theme.bottom, hour = theme.hour, minute = theme.minute,
+                                        text = theme.text, accent = theme.accent, photo = false,
+                                    ),
+                                )
+                            }
+                            SharePage(
+                                onShare = {
+                                    scope.launch {
+                                        val file = FaceDesigner.export(context, design)
+                                        if (file == null || !shareFile(context, file, shareTitle)) {
+                                            Toast.makeText(context, failed, Toast.LENGTH_LONG).show()
+                                        }
+                                    }
+                                },
+                                onImport = { runCatching { importer.launch(arrayOf("application/json", "text/plain", "application/octet-stream", "*/*")) } },
                             )
                         }
                         DesignTab.Time -> TimePage(design, styles) { change(it) }
@@ -284,6 +320,41 @@ private fun ThemePage(design: FaceDesign, onPick: (FaceDesign) -> Unit) {
                 design.hour == theme.hour && design.minute == theme.minute && design.accent == theme.accent
             ThemeTile(theme, chosen) { onPick(theme) }
         }
+    }
+}
+
+/** Sends a design to someone else, or takes one they sent. */
+@Composable
+private fun SharePage(onShare: () -> Unit, onImport: () -> Unit) {
+    Label(stringResource(R.string.face_designer_share_section))
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FilledTonalButton(onClick = onShare) {
+            Icon(painterResource(R.drawable.ic_share), contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(Modifier.width(6.dp))
+            Text(stringResource(R.string.face_designer_share))
+        }
+        OutlinedButton(onClick = onImport) {
+            Icon(painterResource(R.drawable.ic_import_export), contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(Modifier.width(6.dp))
+            Text(stringResource(R.string.face_designer_import))
+        }
+    }
+    Hint(stringResource(R.string.face_designer_share_hint))
+}
+
+private fun shareFile(context: Context, file: File, title: String): Boolean {
+    val uri = FileProvider.getUriForFile(context, "${context.packageName}.updates", file)
+    val send = Intent(Intent.ACTION_SEND).apply {
+        type = "application/json"
+        putExtra(Intent.EXTRA_STREAM, uri)
+        clipData = ClipData.newRawUri(null, uri)
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+    return try {
+        context.startActivity(Intent.createChooser(send, title).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        true
+    } catch (e: ActivityNotFoundException) {
+        false
     }
 }
 
@@ -377,10 +448,12 @@ private fun PartsPage(design: FaceDesign, onChange: (FaceDesign) -> Unit) {
             SwitchRow(R.drawable.ic_walk, R.string.face_designer_show_steps, design.showSteps) { onChange(design.copy(showSteps = it)) }
             SwitchRow(R.drawable.ic_trophy, R.string.face_designer_show_bar, design.showBar) { onChange(design.copy(showBar = it)) }
             SwitchRow(R.drawable.ic_heart, R.string.face_designer_show_health, design.showHealth) { onChange(design.copy(showHealth = it)) }
+            SwitchRow(R.drawable.ic_snow, R.string.face_designer_show_weather, design.showWeather) { onChange(design.copy(showWeather = it)) }
         }
     }
     Label(stringResource(R.string.face_designer_bird))
     val birds = listOf(
+        DesignBird.Mood to R.string.face_designer_bird_mood,
         DesignBird.Happy to R.string.face_designer_bird_happy,
         DesignBird.Sleepy to R.string.face_designer_bird_sleepy,
         DesignBird.None to R.string.face_designer_bird_none,

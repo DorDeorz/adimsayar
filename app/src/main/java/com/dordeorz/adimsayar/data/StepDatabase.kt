@@ -83,6 +83,79 @@ data class KeptMedal(
     val date: String,
 )
 
+@Entity(tableName = "day_notes")
+data class DayNote(
+    @PrimaryKey val date: String,
+    val text: String,
+)
+
+/** A day count the user typed in; it wins over the phone and band counts of that day. */
+@Entity(tableName = "day_overrides")
+data class DayOverride(
+    @PrimaryKey val date: String,
+    val steps: Long,
+)
+
+/** A walk the user started and stopped by hand: a dog walk or a GPS-tracked walk. */
+@Entity(tableName = "walks")
+data class Walk(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    val kind: String,
+    val start: Long,
+    val end: Long,
+    val steps: Long,
+    val meters: Double,
+    val path: String?,
+)
+
+@Entity(tableName = "floors")
+data class FloorDay(
+    @PrimaryKey val date: String,
+    val floors: Int,
+)
+
+@Dao
+interface ExtrasDao {
+    @Query("SELECT * FROM day_notes")
+    fun observeNotes(): Flow<List<DayNote>>
+
+    @Query("SELECT * FROM day_notes")
+    suspend fun loadNotes(): List<DayNote>
+
+    @Upsert
+    suspend fun upsertNote(note: DayNote)
+
+    @Query("DELETE FROM day_notes WHERE date = :date")
+    suspend fun deleteNote(date: String)
+
+    @Query("SELECT * FROM day_overrides")
+    fun observeOverrides(): Flow<List<DayOverride>>
+
+    @Upsert
+    suspend fun upsertOverride(day: DayOverride)
+
+    @Query("DELETE FROM day_overrides WHERE date = :date")
+    suspend fun deleteOverride(date: String)
+
+    @Query("SELECT * FROM walks ORDER BY start DESC")
+    fun observeWalks(): Flow<List<Walk>>
+
+    @Upsert
+    suspend fun upsertWalk(walk: Walk): Long
+
+    @Query("DELETE FROM walks WHERE id = :id")
+    suspend fun deleteWalk(id: Long)
+
+    @Query("SELECT * FROM floors")
+    fun observeFloors(): Flow<List<FloorDay>>
+
+    @Query("SELECT * FROM floors WHERE date = :date")
+    suspend fun floors(date: String): FloorDay?
+
+    @Upsert
+    suspend fun upsertFloors(day: FloorDay)
+}
+
 @Dao
 interface BandHealthDao {
     @Upsert
@@ -155,8 +228,9 @@ interface WeightDao {
     suspend fun delete(date: String)
 }
 
-private const val MERGED = "SELECT date, steps FROM band_steps UNION ALL " +
-    "SELECT date, steps FROM daily_steps WHERE date NOT IN (SELECT date FROM band_steps)"
+private const val MERGED = "SELECT date, steps FROM day_overrides UNION ALL " +
+    "SELECT date, steps FROM band_steps WHERE date NOT IN (SELECT date FROM day_overrides) UNION ALL " +
+    "SELECT date, steps FROM daily_steps WHERE date NOT IN (SELECT date FROM band_steps) AND date NOT IN (SELECT date FROM day_overrides)"
 
 @Dao
 abstract class DailyStepsDao {
@@ -240,8 +314,12 @@ abstract class DailyStepsDao {
         WaterDay::class,
         StreakFreeze::class,
         KeptMedal::class,
+        DayNote::class,
+        DayOverride::class,
+        Walk::class,
+        FloorDay::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = false,
 )
 abstract class StepDatabase : RoomDatabase() {
@@ -254,6 +332,8 @@ abstract class StepDatabase : RoomDatabase() {
     abstract fun keep(): KeepDao
 
     abstract fun bandHealth(): BandHealthDao
+
+    abstract fun extras(): ExtrasDao
 
     companion object {
         @Volatile
@@ -293,9 +373,24 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `day_notes` (`date` TEXT NOT NULL, `text` TEXT NOT NULL, PRIMARY KEY(`date`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `day_overrides` (`date` TEXT NOT NULL, `steps` INTEGER NOT NULL, PRIMARY KEY(`date`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `walks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `kind` TEXT NOT NULL, `start` INTEGER NOT NULL, `end` INTEGER NOT NULL, `steps` INTEGER NOT NULL, `meters` REAL NOT NULL, `path` TEXT)")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `floors` (`date` TEXT NOT NULL, `floors` INTEGER NOT NULL, PRIMARY KEY(`date`))")
+            }
+        }
+
+        /** Every table, for the full backup and for deleting data. */
+        val TABLES = listOf(
+            "daily_steps", "band_steps", "band_hours", "band_samples", "band_sleep", "weights", "hourly_steps",
+            "water", "streak_freezes", "medals", "day_notes", "day_overrides", "walks", "floors",
+        )
+
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                 .build()
                 .also { instance = it }
         }

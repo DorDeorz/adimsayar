@@ -1,0 +1,4 @@
+Day notes and hand corrections of a day (History).
+Vacation mode, weekend goal, monthly and yearly goal.
+Full backup and restore, deleting data, wider CSV.
+Write to Health Connect (optional).

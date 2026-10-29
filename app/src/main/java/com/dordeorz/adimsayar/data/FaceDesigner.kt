@@ -12,6 +12,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
 import android.net.Uri
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.dordeorz.adimsayar.band.FacePicture
@@ -20,6 +21,7 @@ import com.dordeorz.adimsayar.band.WatchfaceUpload
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiFaceFile
 import com.dordeorz.adimsayar.band.XiaomiWatchface
+import com.dordeorz.adimsayar.ui.BirdPainter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -29,7 +31,8 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.File
 
-enum class DesignBird { Happy, Sleepy, None }
+/** The bird on the face; [Mood] changes with the step goal: asleep, awake, happy, celebrating. */
+enum class DesignBird { Mood, Happy, Sleepy, None }
 
 /** Where the time sits; the bird and the stats move around it. */
 enum class DesignPlace { Top, Middle, Bottom }
@@ -52,6 +55,7 @@ data class FaceDesign(
     val showSteps: Boolean = true,
     val showBar: Boolean = true,
     val showHealth: Boolean = true,
+    val showWeather: Boolean = true,
     val dim: Int = 0,
     val photo: Boolean = false,
     val zoom: Float = 1f,
@@ -83,6 +87,10 @@ object FaceDesigner {
     private const val KEY_NEXT = "face_design_next"
     private const val KEY_LAST = "face_design_last"
 
+    private const val SHARE_FORMAT = "fitwren-face-design"
+    private const val SHARE_FILE = "fitwren-kadran.json"
+    private const val SHARE_MAX = 8 * 1024 * 1024
+
     val DEFAULT = FaceDesign(
         top = 0xFF1E172E.toInt(),
         bottom = 0xFF07050D.toInt(),
@@ -90,7 +98,7 @@ object FaceDesigner {
         minute = 0xFFFFB06A.toInt(),
         text = 0xFFF2E6D8.toInt(),
         accent = 0xFF81C784.toInt(),
-        bird = DesignBird.Happy,
+        bird = DesignBird.Mood,
     )
 
     /** Ready colour sets: background top and bottom, hour, minute, text, goal bar. */
@@ -121,6 +129,9 @@ object FaceDesigner {
         val bar: Rect,
         val barSample: Int,
         val styles: List<String>,
+        val birdX: Int,
+        val birdY: Int,
+        val moods: List<String>,
     )
 
     /** True when the saved band can take the designer's face. */
@@ -152,42 +163,74 @@ object FaceDesigner {
         "steps" -> showSteps
         "bar" -> showBar
         "health" -> showHealth
+        "weather" -> showWeather
         "bird" -> bird != DesignBird.None
         else -> true
     }
 
     fun saved(context: Context): FaceDesign {
         val text = prefs(context).getString(KEY_DESIGN, null) ?: return DEFAULT
-        return runCatching {
-            val o = JSONObject(text)
-            FaceDesign(
-                o.getInt("top"), o.getInt("bottom"), o.getInt("hour"), o.getInt("minute"), o.getInt("text"), o.getInt("accent"),
-                DesignBird.valueOf(o.getString("bird")),
-                style = o.optString("style", "bold"),
-                place = runCatching { DesignPlace.valueOf(o.optString("place")) }.getOrDefault(DesignPlace.Top),
-                showDate = o.optBoolean("showDate", true),
-                showSteps = o.optBoolean("showSteps", true),
-                showBar = o.optBoolean("showBar", true),
-                showHealth = o.optBoolean("showHealth", true),
-                dim = o.optInt("dim", 0),
-                photo = o.optBoolean("photo", false) && photoFile(context).exists(),
-                zoom = o.optDouble("zoom", 1.0).toFloat(),
-                panX = o.optDouble("panX", 0.0).toFloat(),
-                panY = o.optDouble("panY", 0.0).toFloat(),
-            )
-        }.getOrDefault(DEFAULT)
+        return runCatching { fromJson(JSONObject(text)) }.getOrNull()
+            ?.let { it.copy(photo = it.photo && photoFile(context).exists()) }
+            ?: DEFAULT
     }
 
     fun save(context: Context, design: FaceDesign) {
-        val o = JSONObject()
-            .put("top", design.top).put("bottom", design.bottom)
-            .put("hour", design.hour).put("minute", design.minute).put("text", design.text).put("accent", design.accent)
-            .put("bird", design.bird.name).put("style", design.style).put("place", design.place.name)
-            .put("showDate", design.showDate).put("showSteps", design.showSteps)
-            .put("showBar", design.showBar).put("showHealth", design.showHealth)
-            .put("dim", design.dim).put("photo", design.photo)
-            .put("zoom", design.zoom.toDouble()).put("panX", design.panX.toDouble()).put("panY", design.panY.toDouble())
-        prefs(context).edit().putString(KEY_DESIGN, o.toString()).apply()
+        prefs(context).edit().putString(KEY_DESIGN, toJson(design).toString()).apply()
+    }
+
+    private fun toJson(design: FaceDesign): JSONObject = JSONObject()
+        .put("top", design.top).put("bottom", design.bottom)
+        .put("hour", design.hour).put("minute", design.minute).put("text", design.text).put("accent", design.accent)
+        .put("bird", design.bird.name).put("style", design.style).put("place", design.place.name)
+        .put("showDate", design.showDate).put("showSteps", design.showSteps)
+        .put("showBar", design.showBar).put("showHealth", design.showHealth).put("showWeather", design.showWeather)
+        .put("dim", design.dim).put("photo", design.photo)
+        .put("zoom", design.zoom.toDouble()).put("panX", design.panX.toDouble()).put("panY", design.panY.toDouble())
+
+    private fun fromJson(o: JSONObject): FaceDesign = FaceDesign(
+        o.getInt("top"), o.getInt("bottom"), o.getInt("hour"), o.getInt("minute"), o.getInt("text"), o.getInt("accent"),
+        runCatching { DesignBird.valueOf(o.getString("bird")) }.getOrDefault(DesignBird.Mood),
+        style = o.optString("style", "bold"),
+        place = runCatching { DesignPlace.valueOf(o.optString("place")) }.getOrDefault(DesignPlace.Top),
+        showDate = o.optBoolean("showDate", true),
+        showSteps = o.optBoolean("showSteps", true),
+        showBar = o.optBoolean("showBar", true),
+        showHealth = o.optBoolean("showHealth", true),
+        showWeather = o.optBoolean("showWeather", true),
+        dim = o.optInt("dim", 0).coerceIn(0, 90),
+        photo = o.optBoolean("photo", false),
+        zoom = o.optDouble("zoom", 1.0).toFloat().coerceIn(1f, ZOOM_MAX),
+        panX = o.optDouble("panX", 0.0).toFloat(),
+        panY = o.optDouble("panY", 0.0).toFloat(),
+    )
+
+    /** Writes [design], with its photo, to a file another FitWren can read with [importDesign]; null when it fails. */
+    suspend fun export(context: Context, design: FaceDesign): File? = withContext(Dispatchers.IO) {
+        runCatching {
+            val o = toJson(design).put("format", SHARE_FORMAT).put("version", 1)
+            val photo = photoFile(context)
+            if (design.photo && photo.exists()) o.put("photoJpeg", Base64.encodeToString(photo.readBytes(), Base64.NO_WRAP))
+            else o.put("photo", false)
+            File(File(context.cacheDir, "shares").apply { mkdirs() }, SHARE_FILE).apply { writeText(o.toString()) }
+        }.onFailure { Log.w(XiaomiBand.TAG, "face designer export: $it") }.getOrNull()
+    }
+
+    /** Reads a design written by [export]; its photo becomes the kept photo. Null when the file is not one. */
+    suspend fun importDesign(context: Context, uri: Uri): Pair<FaceDesign, Bitmap?>? = withContext(Dispatchers.IO) {
+        runCatching {
+            val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: return@runCatching null
+            if (bytes.size > SHARE_MAX) return@runCatching null
+            val o = JSONObject(bytes.toString(Charsets.UTF_8))
+            if (o.optString("format") != SHARE_FORMAT) return@runCatching null
+            val design = fromJson(o)
+            val jpeg = o.optString("photoJpeg").takeIf { it.isNotEmpty() }?.let { Base64.decode(it, Base64.DEFAULT) }
+            val photo = jpeg?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+            if (photo != null) {
+                photoFile(context).apply { parentFile?.mkdirs() }.writeBytes(jpeg)
+            }
+            design.copy(photo = photo != null) to photo
+        }.onFailure { Log.w(XiaomiBand.TAG, "face designer import: $it") }.getOrNull()
     }
 
     /** Reads a photo from the phone, keeps a small copy for later designs and returns it; null when it cannot be read. */
@@ -231,6 +274,7 @@ object FaceDesigner {
 
     /** The face as it will look, with sample values. */
     suspend fun picture(context: Context, design: FaceDesign, photo: Bitmap?): Bitmap = withContext(Dispatchers.Default) {
+        lookExtras = ExtrasStore.get(context).extras.value
         val layout = layout(context)
         val out = background(context, layout, design, photo)
         val canvas = Canvas(out)
@@ -241,7 +285,15 @@ object FaceDesigner {
                 digits.getOrNull(ch - '0')?.let { canvas.drawBitmap(it, (layout.timeX + i * layout.cell.first).toFloat(), (y + dy).toFloat(), tint(color)) }
             }
         }
-        for ((part, block) in listOf("date" to "time", "steps" to "stats", "health" to "stats")) {
+        if (design.bird != DesignBird.None) {
+            val mood = birdMood(design.bird, layout)
+            asset(context, "bird_$mood.png")?.let { image ->
+                val look = birdLook()
+                val shown = if (look == null) image else birdFrame(image.width, image.height, mood, look)
+                canvas.drawBitmap(shown, layout.birdX.toFloat(), (layout.birdY + shift(design.place, "bird")).toFloat(), null)
+            }
+        }
+        for ((part, block) in listOf("date" to "time", "steps" to "stats", "health" to "stats", "weather" to "stats")) {
             if (!design.shows(part)) continue
             asset(context, "sample_$part.png")?.let { canvas.drawBitmap(it, 0f, shift(design.place, block).toFloat(), tint(design.text)) }
         }
@@ -301,6 +353,18 @@ object FaceDesigner {
                         "bar" -> (0 until BAR_STEPS).map { bar(layout, design.accent, it * 10).picture() }
                         "hour" -> digits.map { it.tinted(design.hour) }
                         "minute" -> digits.map { it.tinted(design.minute) }
+                        "bird" -> face.list(index).let { template ->
+                            val look = birdLook()
+                            val moods = if (look == null) {
+                                template
+                            } else {
+                                template.mapIndexed { i, frame -> birdFrame(frame.width, frame.height, layout.moods.getOrNull(i), look).picture() }
+                            }
+                            when (design.bird) {
+                                DesignBird.Mood, DesignBird.None -> moods
+                                else -> moods.map { moods[layout.moods.indexOf(birdMood(design.bird, layout)).coerceAtLeast(0)] }
+                            }
+                        }
                         else -> face.list(index).map { it.tinted(design.text) }
                     }
                     face.setList(index, if (design.shows(part)) frames else frames.map { it.cleared() })
@@ -315,7 +379,40 @@ object FaceDesigner {
             }.onFailure { Log.w(XiaomiBand.TAG, "face designer: $it") }.getOrNull()
         }
 
-    /** The background with the bird, the date dot and the icons drawn on it; plain images keep no transparency. */
+    /** The bird kind and colour picked in the app, or null for the template's own sparrow pictures. */
+    private fun birdLook(): BirdState? {
+        val extras = lookExtras ?: return null
+        if (extras.birdSpecies == DEFAULT_SPECIES && extras.birdColor == DEFAULT_BIRD_COLOR) return null
+        // The level only gates choosing a kind in the app; here the picked kind is drawn as a grown bird.
+        return BirdState(BirdStage.Bird, BirdMood.Happy, emptySet(), null, 0L, 1f, level = Int.MAX_VALUE).styled(extras)
+    }
+
+    /** The extras of the app, set by [install] and [picture]; null before. */
+    @Volatile
+    private var lookExtras: ExtraSettings? = null
+
+    private fun birdFrame(width: Int, height: Int, mood: String?, look: BirdState): Bitmap {
+        val out = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(out)
+        val size = minOf(width, height).toFloat()
+        canvas.translate((width - size) / 2f, (height - size) / 2f)
+        val birdMood = when (mood) {
+            "sleepy" -> BirdMood.Sleepy
+            "awake" -> BirdMood.Calm
+            "party" -> BirdMood.Excited
+            else -> BirdMood.Happy
+        }
+        BirdPainter.draw(canvas, size, look.copy(mood = birdMood))
+        return out
+    }
+
+    /** The picture of the bird the preview shows; with [DesignBird.Mood] the happy one, as at a sample goal. */
+    private fun birdMood(bird: DesignBird, layout: Layout): String = when (bird) {
+        DesignBird.Sleepy -> layout.moods.first()
+        else -> "happy"
+    }
+
+    /** The background with the date dot, the degree sign and the icons drawn on it; plain images keep no transparency. */
     private fun background(context: Context, layout: Layout, design: FaceDesign, photo: Bitmap?): Bitmap {
         val out = Bitmap.createBitmap(W, H, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(out)
@@ -330,9 +427,7 @@ object FaceDesigner {
         for (layer in layout.layers) {
             if (!design.shows(layer.part)) continue
             val paint = when (layer.file) {
-                "bird.png" -> if (design.bird == DesignBird.Happy) null else continue
-                "bird_sleepy.png" -> if (design.bird == DesignBird.Sleepy) null else continue
-                "dot.png" -> tint(design.text)
+                "dot.png", "deg.png" -> tint(design.text)
                 else -> null
             }
             asset(context, layer.file)?.let { canvas.drawBitmap(it, layer.x.toFloat(), (layer.y + shift(design.place, layer.block)).toFloat(), paint) }
@@ -393,6 +488,8 @@ object FaceDesigner {
         val cell = time.getJSONArray("cell")
         val bar = o.getJSONObject("bar")
         val styles = o.getJSONArray("styles")
+        val bird = o.getJSONObject("bird")
+        val moods = bird.getJSONArray("moods")
         val x = bar.getInt("x")
         val y = bar.getInt("y")
         return Layout(
@@ -408,6 +505,9 @@ object FaceDesigner {
             Rect(x, y, x + bar.getInt("width"), y + bar.getInt("height")),
             bar.getInt("sample"),
             (0 until styles.length()).map { styles.getString(it) },
+            bird.getInt("x"),
+            bird.getInt("y"),
+            (0 until moods.length()).map { moods.getString(it) },
         )
     }
 

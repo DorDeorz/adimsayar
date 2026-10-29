@@ -16,12 +16,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -63,12 +65,17 @@ fun HistoryScreen(state: MainUiState, actions: MainActions) {
     var selectedText by rememberSaveable { mutableStateOf(state.today.toString()) }
     val month = YearMonth.parse(monthText).coerceIn(firstMonth, currentMonth)
     val selected = LocalDate.parse(selectedText)
+    var storyFor by rememberSaveable { mutableStateOf<Int?>(null) }
+    storyFor?.let { year -> YearStoryDialog(state, year, onDismiss = { storyFor = null }) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        storyYear(state.today)?.takeIf { year -> state.history.any { it.key.year == year && it.value > 0L } }?.let { year ->
+            item { StoryBanner(year, onOpen = { storyFor = year }) }
+        }
         item {
             MonthCard(
                 month = month,
@@ -83,14 +90,21 @@ fun HistoryScreen(state: MainUiState, actions: MainActions) {
                 onSelect = { selectedText = it.toString() },
             )
         }
+        item {
+            OutlinedButton(onClick = { actions.onMonthReport(month) }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.report_button, MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(appLocale) }))
+            }
+        }
         item { SelectedDayCard(selected, state.history[selected] ?: 0L, state, actions) }
+        item { TrendCard(state) }
+        item { ActiveHoursCard(state) }
         item { RecordsCard(state.achievements.records, state.today) }
-        item { YearCard(state) }
+        item { YearCard(state, onStory = { storyFor = it }) }
     }
 }
 
 @Composable
-private fun YearCard(state: MainUiState) {
+private fun YearCard(state: MainUiState, onStory: (Int) -> Unit) {
     val currentYear = state.today.year
     val firstYear = state.history.keys.minOrNull()?.year?.coerceAtMost(currentYear) ?: currentYear
     var yearValue by rememberSaveable { mutableIntStateOf(currentYear) }
@@ -132,6 +146,9 @@ private fun YearCard(state: MainUiState) {
                 summary.bestDay?.let { FULL_DATE_FORMAT.format(it.date) },
             )
             RecordRow(stringResource(R.string.year_medals), summary.medals.toString(), null)
+            if (summary.total > 0L) {
+                TextButton(onClick = { onStory(year) }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.story_open)) }
+            }
         }
     }
 }
@@ -146,11 +163,10 @@ private fun MonthCard(
     onMonthChange: (YearMonth) -> Unit,
     onSelect: (LocalDate) -> Unit,
 ) {
-    val goal = state.settings.dailyGoal
     val lastDay = if (month == YearMonth.from(state.today)) state.today else month.atEndOfMonth()
     val days = (1..lastDay.dayOfMonth).map { month.atDay(it) }
     val monthTotal = days.sumOf { state.history[it] ?: 0L }
-    val goalDays = days.count { (state.history[it] ?: 0L) >= goal }
+    val goalDays = days.count { (state.history[it] ?: 0L) >= state.settings.goalOn(it) }
     Card {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -193,8 +209,9 @@ private fun MonthCard(
                                 DayCell(
                                     date = date,
                                     steps = state.history[date] ?: 0L,
-                                    goal = goal,
-                                    frozen = date in state.freezes,
+                                    goal = state.settings.goalOn(date),
+                                    frozen = date in state.freezes || state.settings.inVacation(date),
+                                    noted = date in state.extra.notes,
                                     future = date.isAfter(state.today),
                                     selected = date == selected,
                                     onClick = { onSelect(date) },
@@ -218,7 +235,7 @@ private fun MonthStat(label: String, value: String, modifier: Modifier) {
 }
 
 @Composable
-private fun DayCell(date: LocalDate, steps: Long, goal: Long, frozen: Boolean, future: Boolean, selected: Boolean, onClick: () -> Unit) {
+private fun DayCell(date: LocalDate, steps: Long, goal: Long, frozen: Boolean, noted: Boolean, future: Boolean, selected: Boolean, onClick: () -> Unit) {
     val primary = MaterialTheme.colorScheme.primary
     val reached = steps >= goal
     val background = when {
@@ -255,6 +272,15 @@ private fun DayCell(date: LocalDate, steps: Long, goal: Long, frozen: Boolean, f
         } else if (!future && steps > 0L) {
             Text(formatCompact(steps), style = MaterialTheme.typography.labelSmall, color = textColor, maxLines = 1)
         }
+        if (noted) {
+            Box(
+                modifier = Modifier
+                    .padding(top = 1.dp)
+                    .size(4.dp)
+                    .clip(CircleShape)
+                    .background(if (reached) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.secondary),
+            )
+        }
     }
 }
 
@@ -265,7 +291,7 @@ private fun SelectedDayCard(
     state: MainUiState,
     actions: MainActions,
 ) {
-    val goal = state.settings.dailyGoal
+    val goal = state.settings.goalOn(date)
     val hourly = !state.wearableEnabled
     val detail by produceState<DayDetail?>(null, date, steps, hourly, state.xiaomiEnabled) {
         value = if (hourly) withContext(Dispatchers.IO) { actions.loadDayDetail(date) } else null
@@ -296,7 +322,8 @@ private fun SelectedDayCard(
                 if (day.hours.any { it > 0L }) HourlyChart(day.hours)
             }
             band?.let { BandSection(it) }
-            if (date < state.today && steps < goal) FreezeRow(date, state, actions.onFreezeChange)
+            if (date < state.today && steps < goal && !state.settings.inVacation(date)) FreezeRow(date, state, actions.onFreezeChange)
+            DayExtraRows(date, steps, state, actions)
         }
     }
 }

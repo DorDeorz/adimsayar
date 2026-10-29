@@ -23,6 +23,8 @@
     <string name="frozen_text">歩行は検出されていますが、カウンターが進んでいません。センサーを再接続しました。数歩歩くとこの警告は自動的に消えます。</string>
 
     <string name="service_card_title">バックグラウンドでカウントを続ける</string>
+    <string name="exact_alarms_title">正確なアラーム</string>
+    <string name="exact_alarms_text">深夜の記録、リマインダー、文字盤の切り替えが時間どおりに動きます。オフの場合、Android が最大1時間遅らせることがあります。タップすると許可画面が開きます。</string>
     <string name="xiaomi_unreadable_title">HyperOS の歩数記録を読み取れません</string>
     <string name="xiaomi_unreadable_text">現在、歩数が更新されていません。HyperOS のアップデートで記録が変わった可能性があります。下のスイッチをオフにして、「バックグラウンドでカウントを続ける」でカウントを続けられます。</string>
     <string name="xiaomi_stalled_title">HyperOS の歩数記録が増えていません</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">スマホ</string>
     <string name="device_other">その他のデバイス</string>
 
+    <string name="tile_name">FitWren 歩数</string>
+    <string name="tile_goal_percent">目標の %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">今日 %1$s 歩、目標の %%%2$d</string>
+    <string name="smart_goal">スマート目標</string>
+    <string name="smart_goal_hint" formatted="false">毎週の始めに、直近4週間の歩数に合わせて1日の目標を少し上げ下げします（最大10%）</string>
+    <string name="smart_goal_changed">今週の目標は %1$s 歩から %2$s 歩になりました（直近4週間に基づく）</string>
+    <string name="smart_goal_waiting">提案には直近4週間のうち %1$d 日以上の歩数が必要です</string>
+    <string name="smart_goal_next">来週の提案: %1$s 歩</string>
+    <string name="insight_title">睡眠と歩数</string>
+    <string name="insight_not_enough">まだデータが足りません。長い夜と短い夜がそれぞれ %1$d 回以上必要です。30日か90日を選んでみてください。</string>
+    <string name="insight_steps_more">%1$d 時間以上眠った日は、平均 %2$s 歩多く歩いています</string>
+    <string name="insight_steps_less">%1$d 時間以上眠った日は、平均 %2$s 歩少なく歩いています</string>
+    <string name="insight_steps_same">長く眠っても短く眠っても（%1$d 時間）歩数は同じです</string>
+    <string name="insight_after_long">%1$d 時間以上眠った後</string>
+    <string name="insight_after_short">%1$d 時間未満眠った後</string>
+    <string name="insight_sleep_active">目標を達成した日の夜</string>
+    <string name="insight_sleep_rest">目標に届かなかった日の夜</string>
+    <string name="insight_days">%1$d 日</string>
+    <string name="insight_hint">起きた日の歩数を数えます。今日は含みません。これは関係であり、原因ではありません。</string>
+    <string name="report_button">%1$s のレポート（PDF）</string>
+    <string name="report_title">月間レポート · %1$s</string>
+    <string name="report_page">%1$d / %2$d ページ</string>
+    <string name="report_goal_days">%2$d 日中 %1$d 日（目標 %3$s）</string>
+    <string name="report_active_days">活動した日</string>
+    <string name="report_distance">距離</string>
+    <string name="report_kcal">カロリー</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">前月との比較</string>
+    <string name="report_water">1日の平均水分</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">1日の歩数</string>
+    <string name="report_weeks">週</string>
+    <string name="report_goal_line">目標</string>
+    <string name="report_days_title">日別 · %1$s</string>
+    <string name="report_day">日</string>
+    <string name="report_steps">歩数</string>
+    <string name="report_water_short">水分</string>
+    <string name="report_done">レポートを保存しました</string>
+    <string name="report_failed">レポートを作成できませんでした</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>クイック設定タイル: 通知パネルに今日の歩数と目標の割合を表示、タップで「今日」を開く（Android 7 以降）</item>
+        <item>スマート目標（設定 → 目標、初期はオフ）: オンにすると毎週の始めに直近4週間に合わせて1日の目標が最大10%変わる</item>
+        <item>睡眠と歩数（健康）: 長い夜と短い夜の後の歩数、目標を達成した日の夜の睡眠</item>
+        <item>月間PDFレポート（履歴）: 月のまとめ、日別グラフ、週、日ごとの表。インターネット不要</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>設定 → 歩数の取得元 →「バンド使用中はスマホを数えない」：オンにするとバンドのデータがある日はスマホの歩数を加えません</item>
+        <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>
+        <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
+        <item>正確なアラーム：設定 → 通知で許可すると、深夜の記録、リマインダー、文字盤の切り替えが遅れずに動きます（Android 14 以降）</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>小鳥の気分：FitWrenの文字盤とデザインで、小鳥が歩数目標に応じて変わります</item>
+        <item>文字盤に天気：天気アイコンと気温</item>
+        <item>常時表示：FitWrenの文字盤にシンプルで暗い常時表示画面</item>
+        <item>デザインの共有：写真付きのデザインをファイルで送り、友だちのデザインを読み込めます</item>
+        <item>時間帯で文字盤を切り替え：選んだ時刻に昼と夜の文字盤を自動で切り替えます</item>
+        <item>Mi Band 6 の文字盤：.bin ファイルから文字盤をアップロード</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>文字盤ストア: Xiaomi の無料 Mi Band 8 文字盤を画像付きで閲覧・検索し、タップでバンドへ送信</item>
         <item>FitWren 文字盤: 小鳥の文字盤 9 種類 (夜、道、アナログ、ネオン、枝など) を同梱、タップで Mi Band 8 へ</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">直接接続（Xiaomi、Amazfit）</string>
     <string name="source_connect">Health Connect経由</string>
     <string name="source_merge_hint">バンドを使う場合、着けている時間はバンドの歩数、それ以外はスマートフォンの歩数を使います。</string>
+    <string name="band_only_title">バンド使用中はスマホを数えない</string>
+    <string name="band_only_text">バンドがその日にデータを送った場合、その日の歩数はバンドのみを使います。スマホはバンドが一度も接続しなかった日だけ使います。オフのときはバンドを着けていない時間をスマホが補います。</string>
     <string name="source_direct_manage">バンドの設定</string>
     <string name="device_connect_hint">Health Connectからデータを読み込み中</string>
     <string name="band_reconnect">再接続</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">アップロード中: %d%%</string>
     <string name="band_faces_done">文字盤をアップロードして選択しました。</string>
     <string name="band_faces_failed">文字盤をアップロードできませんでした。バンドを近づけてもう一度お試しください。</string>
+    <string name="huami_faces_hint">Mi Band 6 用の .bin 文字盤ファイルを選んでください。アップロードには数分かかることがあります。バンドをスマホの近くに置いてください。</string>
+    <string name="huami_faces_invalid">このファイルは Mi Band 6 の文字盤ではありません。</string>
+    <string name="huami_faces_done">文字盤をアップロードしました。バンドに表示されない場合は、バンドの文字盤一覧から選んでください。</string>
+    <string name="huami_faces_no_space">バンドの空き容量がありません。バンドの文字盤を削除してもう一度お試しください。</string>
+    <string name="huami_faces_low_battery">バンドの電池残量が少なくなっています。充電してもう一度お試しください。</string>
+    <string name="huami_faces_refused">バンドがこのファイルを受け付けませんでした。</string>
     <string name="band_faces_delete">削除</string>
     <string name="band_notify_pick_search">アプリを検索</string>
     <string name="band_notify_pick_count">%2$d 件中 %1$d 件のアプリがバンドに送信</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">表示項目</string>
     <string name="face_designer_undo">元に戻す</string>
     <string name="face_designer_reset">リセット</string>
+    <string name="face_designer_bird_mood">目標に応じて</string>
+    <string name="face_designer_show_weather">天気</string>
+    <string name="face_designer_share_section">共有</string>
+    <string name="face_designer_share">デザインを共有</string>
+    <string name="face_designer_import">デザインを読み込む</string>
+    <string name="face_designer_share_hint">デザインは写真ごとファイルに保存されます。FitWrenの「デザインを読み込む」で開けます。</string>
+    <string name="face_designer_import_failed">このファイルはFitWrenの文字盤デザインではありません</string>
+    <string name="face_schedule">時間帯で文字盤を切り替え</string>
+    <string name="face_schedule_hint">FitWrenが選んだ時刻に昼と夜の文字盤を切り替えます。そのときバンドが接続されている必要があります。未接続なら少し後に再試行します。</string>
+    <string name="face_schedule_on">オン</string>
+    <string name="face_schedule_day">昼の文字盤</string>
+    <string name="face_schedule_day_start">昼の開始</string>
+    <string name="face_schedule_night">夜の文字盤</string>
+    <string name="face_schedule_night_start">夜の開始</string>
+    <string name="face_schedule_none">未選択</string>
+    <string name="goal_off">オフ</string>
+    <string name="goal_turn_off">オフにする</string>
+    <string name="weekend_goal">週末の目標</string>
+    <string name="weekend_goal_hint">土曜と日曜だけの1日の目標です。オフのときは毎日同じ目標です。</string>
+    <string name="monthly_goal">月間目標</string>
+    <string name="yearly_goal">年間目標</string>
+    <string name="period_goal_hint">今日のページに進み具合と、今のペースで目標に届く日が表示されます。</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">目標達成！</string>
+    <string name="period_no_pace">少し歩くと予測が表示されます</string>
+    <string name="period_on_track">このペースなら%1$sに達成</string>
+    <string name="period_behind">間に合うには1日%1$s歩が必要</string>
+    <string name="vacation_mode">休暇モード</string>
+    <string name="vacation_hint">選んだ日は連続記録が途切れず、ジョーカーも使わず、リマインダーも止まります。</string>
+    <string name="vacation_off">休暇の予定なし</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">休暇を終える</string>
+    <string name="vacation_on_title">休暇中です</string>
+    <string name="vacation_on_text">%1$sまで連続記録は守られ、リマインダーは止まります。</string>
+    <string name="backup_group">完全バックアップ</string>
+    <string name="backup_write">バックアップする</string>
+    <string name="backup_write_hint">歩数・体重・水分・メダル・メモ・設定を1つのファイルに保存</string>
+    <string name="backup_restore">バックアップを復元</string>
+    <string name="backup_restore_hint">FitWrenのバックアップファイルを選択</string>
+    <string name="backup_restore_choose">ファイルを選択</string>
+    <string name="restore_confirm">今のデータはすべてバックアップの内容に置き換わります。バンドの接続と歩数の取得元はそのままです。</string>
+    <string name="backup_done">バックアップを保存しました（%1$d行）</string>
+    <string name="backup_failed">ファイルを書き込めませんでした</string>
+    <string name="restore_done">バックアップを復元しました（%1$d行）</string>
+    <string name="restore_failed">このファイルはFitWrenのバックアップではありません</string>
+    <string name="health_write">ヘルスコネクトに書き込む</string>
+    <string name="health_write_hint">FitWrenの1時間ごとの歩数がGoogle Fitなど他のアプリにも表示されます</string>
+    <string name="health_write_reading">ヘルスコネクトから歩数を読む間は書き込みはオフです。二重に数えないためです</string>
+    <string name="health_write_denied">ヘルスコネクトの書き込み権限がありません</string>
+    <string name="erase_group">データを削除</string>
+    <string name="erase_range">期間を削除</string>
+    <string name="erase_range_hint">選んだ日の歩数・水分・体重・睡眠・メモを削除します。スマホやバンドが再び書き込むことがあります。</string>
+    <string name="erase_all">すべてのデータを削除</string>
+    <string name="erase_all_hint">歩数の履歴・体重・水分・メダル・メモを削除します。設定は残ります。</string>
+    <string name="erase_all_confirm">すべてのデータを完全に削除しますか？先にバックアップをおすすめします。</string>
+    <string name="erase_confirm_button">削除</string>
+    <string name="erase_done">データを削除しました</string>
+    <string name="delete">削除</string>
+    <string name="note_title">この日のメモ</string>
+    <string name="note_placeholder">例：試合があった、体調不良</string>
+    <string name="note_empty">メモなし</string>
+    <string name="note_add">メモを追加</string>
+    <string name="note_edit">編集</string>
+    <string name="correct_button">修正</string>
+    <string name="correct_hint">数え間違いなら、この日を手で直せます</string>
+    <string name="correct_done">この日は手で修正済み</string>
+    <string name="correct_title">この日を修正</string>
+    <string name="correct_text">入力した数が、スマホとバンドの数えた歩数の代わりになります。</string>
+    <string name="correct_undo">数えた値に戻す</string>
+    <string-array name="release_notes_0_17_0">
+        <item>この日のメモ：履歴で選んだ日に短いメモ。カレンダーに小さな点が付きます</item>
+        <item>日の修正：正しい歩数を自分で入力、または数えた値に戻す</item>
+        <item>休暇モード（設定→目標）：選んだ日は連続記録が途切れず、ジョーカー不要、リマインダーも停止</item>
+        <item>週末の目標、月間・年間目標：今日のページに進み具合と達成予想日</item>
+        <item>完全バックアップと復元（設定→データ）：歩数・体重・水分・メダル・メモ・設定を1ファイルに</item>
+        <item>データの削除：期間指定またはすべて</item>
+        <item>CSVエクスポートに水分・体重・睡眠の列を追加</item>
+        <item>ヘルスコネクトへの書き込み（任意）：FitWrenの歩数がGoogle Fitなどにも表示</item>
+    </string-array>
+    <string name="morning_title">おはようございます！</string>
+    <string name="morning_yesterday">昨日は%1$s歩でした</string>
+    <string name="morning_sleep">睡眠 %1$d時間%2$d分</string>
+    <string name="morning_goal">今日の目標は%1$s歩</string>
+    <string name="morning_summary">朝のまとめ</string>
+    <string name="morning_summary_hint">朝に前日の歩数・睡眠・今日の目標を通知</string>
+    <string name="morning_hour">時刻</string>
+    <string name="record_notify">記録更新の通知</string>
+    <string name="record_notify_hint">最高の日や週を超えた瞬間にお祝い</string>
+    <string name="record_day_title">今日は最高の日！</string>
+    <string name="record_day_text">%1$s歩、これまでの最高は%2$s</string>
+    <string name="record_week_title">今週は最高の週！</string>
+    <string name="record_week_text">%1$s歩、これまでの最高は%2$s</string>
+    <string name="sedentary">座りすぎリマインダー</string>
+    <string name="sedentary_hint">10:00〜20:00に1時間で%1$d歩未満なら「少し歩こう」と通知</string>
+    <string name="sedentary_title">少し歩きましょう</string>
+    <string name="sedentary_text">この1時間は%1$d歩。数分歩くと気分転換に</string>
+    <string name="walk_plan">ウォーキング予定</string>
+    <string name="walk_plan_hint">曜日ごとに時刻を決めると通知します</string>
+    <string name="walk_plan_dialog_hint">その時刻に通知します。その時間か次の時間に1,500歩歩くと今日のページでチェックが付きます。</string>
+    <string name="walk_plan_none">なし</string>
+    <string name="walk_plan_title">ウォーキングの時間です</string>
+    <string name="walk_plan_text">予定：%1$sのウォーキング。行きましょう！</string>
+    <string name="walk_plan_today">今日は%1$sにウォーキング</string>
+    <string name="walk_plan_done">達成、よく歩きました！</string>
+    <string name="walk_plan_waiting">その時間に1,500歩でチェック</string>
+    <string name="month_report_reminder">月間レポートの通知</string>
+    <string name="month_report_reminder_hint">毎月1日10:00に先月のPDFレポートをお知らせ</string>
+    <string name="month_report_title">%1$sのレポートができました</string>
+    <string name="month_report_text">履歴で月を選んでPDFを保存できます</string>
+    <string name="band_celebrate">バンドで目標達成のお祝い</string>
+    <string name="band_celebrate_hint">目標達成でバンドが振動し、鳥のメッセージを表示（接続中）</string>
+    <string name="band_celebrate_title">🐦 目標達成！</string>
+    <string name="band_celebrate_text">%1$s歩。鳥が大喜び！</string>
+    <string name="shortcut_water">水を追加</string>
+    <string name="shortcut_water_long">水を1杯追加</string>
+    <string name="shortcut_today_long">今日の歩数</string>
+    <string name="shortcut_ask">何歩？</string>
+    <string name="shortcut_ask_long">今日は何歩？</string>
+    <string name="shortcut_water_added">水%1$d mlを追加しました</string>
+    <string name="water_tile_name">FitWren 水分</string>
+    <string name="answer_steps">今日は%1$s歩。目標まであと%2$s歩です。</string>
+    <string name="answer_steps_done">今日は%1$s歩。目標達成、すばらしい！</string>
+    <string-array name="release_notes_0_18_0">
+        <item>朝のまとめ：前日の歩数・睡眠・今日の目標</item>
+        <item>記録更新の通知：最高の日や週を超えた瞬間にお祝い</item>
+        <item>座りすぎリマインダー：1時間ほとんど歩かないと「少し歩こう」</item>
+        <item>ウォーキング予定：曜日ごとの時刻、通知、歩けば今日のページでチェック</item>
+        <item>毎月1日に月間レポートを通知</item>
+        <item>バンドでお祝い：振動して鳥のメッセージを表示</item>
+        <item>ショートカット：アイコン長押しで水を追加・今日・何歩？</item>
+        <item>水分タイル：通知パネルから1杯追加</item>
+        <item>「今日は何歩？」に音声で回答（ショートカットとGoogleアシスタント）</item>
+    </string-array>
+    <string name="medal_group_distance">距離</string>
+    <string name="medal_group_distance_text">全期間の合計歩行距離（身長から計算）</string>
+    <string name="medal_group_water">水分の連続記録</string>
+    <string name="medal_group_water_text">水分目標を連続で達成した日数</string>
+    <string name="medal_group_sleep">睡眠の連続記録</string>
+    <string name="medal_group_sleep_text">7時間以上眠った連続の夜の数（バンドのデータ）</string>
+    <string name="medal_group_route">ルート完走</string>
+    <string name="medal_group_route_text">完走した異なるバーチャルルートの数</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d ルート</string>
+    <string name="time_left_minutes">目標まで歩いて約%1$d分</string>
+    <string name="time_left_hours">目標まで歩いて約%1$d時間%2$d分</string>
+    <string name="food_line">消費カロリー ≈ %2$s × %1$d</string>
+    <string name="food_burger">ハンバーガー</string>
+    <string name="food_simit">シミット（ごまパン）</string>
+    <string name="food_chocolate">チョコバー</string>
+    <string name="food_cola">コーラ缶</string>
+    <string name="food_apple">りんご</string>
+    <string name="trend_title">傾向</string>
+    <string name="trend_month">今月（最初の%1$d日）</string>
+    <string name="trend_week">直近7日</string>
+    <string name="trend_up">前の期間より%1$d%%多い</string>
+    <string name="trend_down">前の期間より%1$d%%少ない</string>
+    <string name="trend_same">前の期間と同じ</string>
+    <string name="trend_no_data">比べる前の期間の歩数がありません</string>
+    <string name="active_hours_title">アクティブ時間マップ</string>
+    <string name="active_hours_text">直近8週間の曜日・時間ごとの平均歩数。濃いほど多い</string>
+    <string name="active_hours_empty">時間ごとの記録はまだありません</string>
+    <string name="active_hours_peak">いちばん歩く時間：%1$s %2$s</string>
+    <string name="story_banner_title">%1$d年のストーリーができました</string>
+    <string name="story_banner_text">1年をスワイプで振り返ってシェア</string>
+    <string name="story_open">ストーリーを開く</string>
+    <string name="story_total_title">%1$d年に歩いた歩数</string>
+    <string name="story_total_text">1日平均%1$s歩</string>
+    <string name="story_distance_title">歩いた距離</string>
+    <string name="story_distance_text">地球一周の約%1$d%%</string>
+    <string name="story_medals_text">今年獲得したメダル</string>
+    <string name="story_end_title">すばらしい1年でした！</string>
+    <string name="story_end_text">来年も鳥がいっしょに歩きます</string>
+    <string name="story_share">FitWren %1$d：%2$s歩、%3$s km、目標達成%4$d日！🐦</string>
+    <string name="fitness_age_title">フィットネス年齢</string>
+    <string name="fitness_age_value">%1$d歳</string>
+    <string name="fitness_age_younger">実年齢より%1$d歳若い</string>
+    <string name="fitness_age_older">実年齢より%1$d歳上</string>
+    <string name="fitness_age_same">実年齢と同じ</string>
+    <string name="fitness_age_text">推定VO2max %1$d（安静時心拍%2$d、1日平均%3$s歩から計算）。医療用の測定ではありません。</string>
+    <string name="recovery_title">回復度</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">よく回復しています。今日は速歩きもOK</string>
+    <string name="recovery_mid">ふつう。いつもの歩き方で十分</string>
+    <string name="recovery_low">低め。今日は軽めにして休もう</string>
+    <string name="recovery_text">昨夜の睡眠をその前の1週間と、安静時心拍を平均と比べます。医療的な評価ではありません。</string>
+    <string name="quote_title">今日のひとこと</string>
+    <string name="quote_setting">今日のひとこと</string>
+    <string name="quote_setting_hint">今日のページに毎日新しいひとことを表示</string>
+    <string-array name="quotes">
+        <item>一歩ごとに、昨日の自分より一歩先へ。</item>
+        <item>今日歩いた道が、明日の休み場所になる。</item>
+        <item>小さな一歩でも長い道を歩き切れる。</item>
+        <item>今日も鳥があなたと飛びたがっています。</item>
+        <item>ゆっくり歩くほうが、歩かないよりずっといい。</item>
+        <item>疲れていても10分で十分。</item>
+        <item>連続記録は習慣、習慣は選択。</item>
+        <item>階段は今日の小さな山。</item>
+        <item>電話しながら歩けば、歩数は自然に増える。</item>
+        <item>散歩は考えを整理するいちばん簡単な方法。</item>
+        <item>目標が遠く見えたら、まず半分を目指そう。</item>
+        <item>今日の歩数が明日の元気になる。</item>
+        <item>毎日少しずつが、毎月たくさんになる。</item>
+        <item>晴れでも雨でも、散歩はどんな天気にも合う。</item>
+        <item>最高の散歩は、今始める散歩。</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>今日：目標まで歩く残り時間（自分のペースから）と消費カロリーの食べ物換算</item>
+        <item>今日ウィジェット（横長）：目標までの残り時間</item>
+        <item>今日のひとことカード（設定→外観でオフ可）</item>
+        <item>履歴：傾向カード（今月と直近7日を前の期間と比較）とアクティブ時間マップ（8週間、曜日×時間）</item>
+        <item>1年のストーリー：12月と1月に履歴、年カードにも。スワイプとシェア</item>
+        <item>健康：回復度とフィットネス年齢（バンドのデータ）</item>
+        <item>新しいメダル：距離、水分連続、睡眠連続、ルート完走</item>
+    </string-array>
+    <string name="bird_item_glasses">メガネ</string>
+    <string name="bird_item_flower">花</string>
+    <string name="bird_item_nightcap">ナイトキャップ</string>
+    <string name="bird_item_backpack">リュック</string>
+    <string name="bird_unlock_glasses">合計42km歩く</string>
+    <string name="bird_unlock_flower">水分目標を7日連続</string>
+    <string name="bird_unlock_nightcap">よく眠れた夜が7日連続</string>
+    <string name="bird_unlock_backpack">バーチャルルートを1つ完走</string>
+    <string name="bird_item_wear">獲得済み：鳥が身に着けるか選べます</string>
+    <string name="seeds_count">種：%1$d</string>
+    <string name="seeds_hint">1,000歩ごとに種1つ。色や鳴き声、えさに使えます</string>
+    <string name="bird_fed">鳥は種が大好き！</string>
+    <string name="bird_feed">えさをあげる</string>
+    <string name="bird_species_title">鳥の種類</string>
+    <string name="bird_locked_level">%1$s（レベル%2$d）</string>
+    <string name="bird_color_title">羽の色</string>
+    <string name="bird_price">%1$s（種%2$d）</string>
+    <string name="bird_sound_title">鳴き声</string>
+    <string name="bird_species_sparrow">ミソサザイ</string>
+    <string name="bird_species_owl">フクロウ</string>
+    <string name="bird_species_parrot">オウム</string>
+    <string name="bird_species_eagle">ワシ</string>
+    <string name="bird_color_default">ナチュラル</string>
+    <string name="bird_color_sky">空色</string>
+    <string name="bird_color_rose">ピンク</string>
+    <string name="bird_color_mint">ミント</string>
+    <string name="bird_color_plum">プラム</string>
+    <string name="bird_color_night">夜</string>
+    <string name="bird_sound_chirp">チュンチュン</string>
+    <string name="bird_sound_trill">さえずり</string>
+    <string name="bird_sound_tweet">口笛</string>
+    <string name="bird_sound_coo">クークー</string>
+    <string name="metronome_channel">メトロノーム</string>
+    <string name="metronome_title">ペースメトロノーム</string>
+    <string name="metronome_bpm">1分間に%1$d歩</string>
+    <string name="walk_stop">停止</string>
+    <string name="walk_start">開始</string>
+    <string name="walk_channel">散歩の記録</string>
+    <string name="walk_gps_recording">GPSで散歩を記録中</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">位置情報の許可がありません。GPS散歩に必要です</string>
+    <string name="walk_tools_title">散歩ツール</string>
+    <string name="walk_dog_title">犬の散歩</string>
+    <string name="walk_dog_hint">出かけるときに開始、戻ったら停止。歩数を保存</string>
+    <string name="walk_running">実行中：%1$s</string>
+    <string name="walk_gps_title">GPS散歩</string>
+    <string name="walk_gps_hint">道と距離を保存。位置情報は記録中だけ使います</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">保存した散歩（%1$d）</string>
+    <string name="walk_list_title">散歩</string>
+    <string name="walk_delete">削除</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s歩</string>
+    <string name="walk_summary_dog">%1$s · %2$s歩</string>
+    <string name="floors_today">%1$d階分上った</string>
+    <string name="walks_on_day">散歩%1$d回</string>
+    <string name="wallpaper_name">ライブ壁紙</string>
+    <string name="wallpaper_description">歩くとFitWrenの鳥が巣から枝へ飛びます</string>
+    <string name="wallpaper_set_hint">ホーム画面で、その日の歩数に合わせて鳥が巣から枝へ</string>
+    <string name="lock_title">FitWrenはロック中</string>
+    <string name="lock_use_pin">PINを使う</string>
+    <string name="lock_wrong">PINが違います。もう一度</string>
+    <string name="lock_enter_pin">PINを入力</string>
+    <string name="lock_biometric_again">指紋または顔で解除</string>
+    <string name="simple_today">今日</string>
+    <string name="simple_view_off">通常表示に戻す</string>
+    <string name="simple_view">シンプル表示</string>
+    <string name="simple_view_hint">今日のページは歩数と目標だけを大きな文字で</string>
+    <string name="app_lock">アプリのロック</string>
+    <string name="app_lock_hint">開くときにPINを要求</string>
+    <string name="app_lock_biometric">指紋／顔で解除</string>
+    <string name="app_lock_biometric_hint">スマホの生体認証。PINは予備として残ります</string>
+    <string name="app_lock_change">PINを変更</string>
+    <string name="app_lock_change_hint">新しいPINを設定</string>
+    <string name="app_lock_set_pin">PINを設定</string>
+    <string name="app_lock_pin_hint">%1$d〜%2$d桁の数字。忘れるとアプリのデータを消さないと開けません。</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN（もう一度）</string>
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_welcome_title">FitWrenへようこそ</string>
+    <string name="onboarding_welcome_text">歩数を数え、目標を達成すると鳥が育ちます。アカウント不要、データはスマホの中だけ。</string>
+    <string name="onboarding_goal_title">1日の目標</string>
+    <string name="onboarding_goal_text">あとで設定から変更できます</string>
+    <string name="onboarding_body_title">身長と体重</string>
+    <string name="onboarding_body_text">距離とカロリーの計算に使います</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">歩数の許可</string>
+    <string name="onboarding_permission_text">歩数を数えるには身体活動の許可が必要です</string>
+    <string name="onboarding_permission_done">許可済み ✓</string>
+    <string name="onboarding_permission_button">許可する</string>
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_0">
+        <item>鳥の種類：ミソサザイ、フクロウ（レベル3）、オウム（6）、ワシ（10）。アプリ・ウィジェット・壁紙・バンドの文字盤に</item>
+        <item>種：1,000歩ごとに1つ。えさにしたり、羽の色や鳴き声を買ったり</item>
+        <item>アクセサリー：獲得したものを付け外し。新しくメガネ、花、ナイトキャップ、リュック</item>
+        <item>ライブ壁紙：歩くと鳥が巣から枝へ飛びます</item>
+        <item>散歩ツール（今日）：ペースメトロノーム、犬の散歩、GPS散歩の記録（ルート表示付き）</item>
+        <item>階数カウンター：気圧センサーのあるスマホで</item>
+        <item>アプリのロック（PIN・指紋・顔）とシンプル表示（設定→外観と言語）</item>
+        <item>新規インストール時のようこそ画面：目標、身長と体重、許可</item>
+    </string-array>
 </resources>

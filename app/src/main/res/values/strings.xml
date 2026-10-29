@@ -23,6 +23,8 @@
     <string name="frozen_text">Telefon adım algılıyor ama sayaç ilerlemiyor. Sensöre yeniden bağlanıldı; birkaç adım sonra bu uyarı kendiliğinden kalkar.</string>
 
     <string name="service_card_title">Arka planda sürekli say</string>
+    <string name="exact_alarms_title">Tam zamanlı alarmlar</string>
+    <string name="exact_alarms_text">Gece yarısı kaydı, hatırlatmalar ve kadran değişimi tam saatinde çalışır. Kapalıysa Android bunları bir saate kadar geciktirebilir. Dokununca izin ekranı açılır.</string>
     <string name="xiaomi_unreadable_title">HyperOS adım kaydı okunamıyor</string>
     <string name="xiaomi_unreadable_text">Adımlar şu an güncellenmiyor. Bir HyperOS güncellemesi kaydı değiştirmiş olabilir. Aşağıdaki anahtarı kapatıp "Arka planda sürekli say" ile saymaya devam edebilirsin.</string>
     <string name="xiaomi_stalled_title">HyperOS adım kaydı ilerlemiyor</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">Telefon</string>
     <string name="device_other">Diğer cihaz</string>
 
+    <string name="tile_name">FitWren adım</string>
+    <string name="tile_goal_percent">Hedefin %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Bugün %1$s adım, hedefin %%%2$d</string>
+    <string name="smart_goal">Akıllı hedef</string>
+    <string name="smart_goal_hint" formatted="false">Her hafta başında günlük hedefi son 4 haftana göre biraz yükseltir ya da düşürür (en fazla %10)</string>
+    <string name="smart_goal_changed">Bu hafta hedef %1$s → %2$s adım oldu (son 4 haftana göre)</string>
+    <string name="smart_goal_waiting">Öneri için son 4 haftada en az %1$d gün adım gerekiyor</string>
+    <string name="smart_goal_next">Gelecek hafta için öneri: %1$s adım</string>
+    <string name="insight_title">Uyku ve adım</string>
+    <string name="insight_not_enough">Henüz yeterli veri yok: hem uzun hem kısa uykudan en az %1$d gece gerekiyor. 30 ya da 90 günü seçmeyi dene.</string>
+    <string name="insight_steps_more">%1$d saatten fazla uyuduğun günler ortalama %2$s adım daha fazla yürüyorsun</string>
+    <string name="insight_steps_less">%1$d saatten fazla uyuduğun günler ortalama %2$s adım daha az yürüyorsun</string>
+    <string name="insight_steps_same">%1$d saatten fazla da az da uyusan aynı miktarda yürüyorsun</string>
+    <string name="insight_after_long">%1$d saatten uzun uykudan sonra</string>
+    <string name="insight_after_short">%1$d saatten kısa uykudan sonra</string>
+    <string name="insight_sleep_active">Hedefe ulaştığın günlerin gecesi</string>
+    <string name="insight_sleep_rest">Hedefe ulaşmadığın günlerin gecesi</string>
+    <string name="insight_days">%1$d gün</string>
+    <string name="insight_hint">Uyandığın günün adımı sayılır, bugün sayılmaz. Bu bir ilişki, sebep değil.</string>
+    <string name="report_button">%1$s raporu (PDF)</string>
+    <string name="report_title">Aylık rapor · %1$s</string>
+    <string name="report_page">Sayfa %1$d / %2$d</string>
+    <string name="report_goal_days">%1$d / %2$d gün (hedef %3$s)</string>
+    <string name="report_active_days">Hareketli gün</string>
+    <string name="report_distance">Mesafe</string>
+    <string name="report_kcal">Kalori</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Önceki aya göre</string>
+    <string name="report_water">Günlük su ortalaması</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Günlük adım</string>
+    <string name="report_weeks">Haftalar</string>
+    <string name="report_goal_line">hedef</string>
+    <string name="report_days_title">Günler · %1$s</string>
+    <string name="report_day">Gün</string>
+    <string name="report_steps">Adım</string>
+    <string name="report_water_short">Su</string>
+    <string name="report_done">Rapor kaydedildi</string>
+    <string name="report_failed">Rapor oluşturulamadı</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Hızlı ayar kutucuğu: bildirim panelinde bugünün adımı ve hedef yüzdesi, dokununca Bugün açılır (Android 7 ve sonrası)</item>
+        <item>Akıllı hedef (Ayarlar → Hedefler, varsayılan kapalı): açıksa günlük hedef her hafta başında son 4 haftana göre en fazla %10 değişir</item>
+        <item>Uyku ve adım (Sağlık): uzun ve kısa uykudan sonraki günlerde kaç adım attığını, hedefe ulaştığın günlerin gecesi ne kadar uyuduğunu gösterir</item>
+        <item>Aylık PDF raporu (Geçmiş): seçili ayın özeti, günlük grafik, haftalar ve gün gün tablo; internet kullanmaz</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>Ayarlar → Adım kaynağı → “Bileklik varken telefonu sayma”: açıksa bilekliğin veri gönderdiği günlerde telefonun adımları hiç eklenmez</item>
+        <item>Bileklik ve telefon her zaman saat saat birleşir: bilekliğin takılı olduğu saatlerde yalnız bileklik sayılır, telefon sadece diğer saatleri doldurur (önceden HyperOS kaydı kapalıyken günün büyük sayısı alınıyordu)</item>
+        <item>Özel ROM desteği (crDroid, LineageOS gibi): Xiaomi telefonda HyperOS yoksa HyperOS adım kaydı ve MIUI pil adımları gösterilmez, telefonun sensörü kullanılır</item>
+        <item>Tam zamanlı alarmlar: Ayarlar → Bildirimler\'de izin verilirse gece yarısı kaydı, hatırlatmalar ve kadran değişimi gecikmeden çalışır (Android 14 ve sonrası)</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>Kuşun ruh hali: FitWren kadranlarındaki ve tasarımdaki kuş adım hedefine göre değişir (uykulu, uyanık, neşeli, kutlama)</item>
+        <item>Kadranda hava durumu: FitWren kadranlarında ve tasarımda hava simgesi ve sıcaklık</item>
+        <item>Ekran kapalıyken görünüm: FitWren kadranlarına her zaman açık ekran için sade, koyu bir görünüm</item>
+        <item>Tasarım paylaşma: kadran tasarımını fotoğrafıyla birlikte dosya olarak gönder, arkadaşının tasarımını içe al</item>
+        <item>Saate göre kadran: FitWren gündüz ve gece kadranını seçtiğin saatlerde kendisi değiştirir</item>
+        <item>Mi Band 6 kadranı: .bin dosyasından kadran yükleme</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Kadran mağazası: Xiaomi\'nin ücretsiz Mi Band 8 kadranlarını FitWren\'de resimleriyle gör, ara ve tek dokunuşla bilekliğe yükle</item>
         <item>FitWren kadranları: kuşlu dokuz kadran (Gece, Yol, Analog, Neon, Dal ve daha fazlası) uygulamayla gelir, tek dokunuşla Mi Band 8\'e yüklenir</item>
@@ -766,6 +830,8 @@
     <string name="source_direct">Doğrudan bağlantı (Xiaomi, Amazfit)</string>
     <string name="source_connect">Health Connect üzerinden</string>
     <string name="source_merge_hint">Bileklik kullanıyorsan, onu taktığın saatlerde bilekliğin sayısı, diğer saatlerde telefonun sayısı kullanılır.</string>
+    <string name="band_only_title">Bileklik varken telefonu sayma</string>
+    <string name="band_only_text">Bileklik bir gün veri gönderdiyse o günün adımları yalnız bileklikten alınır. Telefon sadece bilekliğin hiç bağlanmadığı günlerde kullanılır. Kapalıyken bileklik takılı olmayan saatleri telefon doldurur.</string>
     <string name="source_direct_manage">Bileklik ayarları</string>
     <string name="device_connect_hint">Veriler Health Connect\'ten okunuyor</string>
     <string name="band_reconnect">Yeniden bağlan</string>
@@ -850,6 +916,12 @@
     <string name="band_faces_sending">Yükleniyor: %d%%</string>
     <string name="band_faces_done">Kadran yüklendi ve seçildi.</string>
     <string name="band_faces_failed">Kadran yüklenemedi. Bilekliği yaklaştırıp yeniden dene.</string>
+    <string name="huami_faces_hint">Mi Band 6 için yapılmış bir .bin kadran dosyası seç. Yükleme birkaç dakika sürebilir, bu sırada bileklik telefonun yanında dursun.</string>
+    <string name="huami_faces_invalid">Bu dosya bir Mi Band 6 kadranı değil.</string>
+    <string name="huami_faces_done">Kadran yüklendi. Bileklikte görünmezse bilekliğin kadran listesinden seç.</string>
+    <string name="huami_faces_no_space">Bileklikte yer kalmadı. Bileklikten bir kadran silip yeniden dene.</string>
+    <string name="huami_faces_low_battery">Bilekliğin şarjı az. Şarj edip yeniden dene.</string>
+    <string name="huami_faces_refused">Bileklik bu dosyayı kabul etmedi.</string>
     <string name="band_faces_delete">Sil</string>
     <string name="band_notify_pick_search">Uygulama ara</string>
     <string name="band_notify_pick_count">%1$d / %2$d uygulama bilekliğe gönderiyor</string>
@@ -916,4 +988,320 @@
     <string name="face_designer_tab_parts">Görünüm</string>
     <string name="face_designer_undo">Geri al</string>
     <string name="face_designer_reset">Sıfırla</string>
+    <string name="face_designer_bird_mood">Hedefe göre</string>
+    <string name="face_designer_show_weather">Hava durumu</string>
+    <string name="face_designer_share_section">Paylaş</string>
+    <string name="face_designer_share">Tasarımı paylaş</string>
+    <string name="face_designer_import">Tasarım içe al</string>
+    <string name="face_designer_share_hint">Tasarımın fotoğrafıyla birlikte bir dosyaya yazılır. Arkadaşın FitWren\'de “Tasarım içe al” ile açar.</string>
+    <string name="face_designer_import_failed">Bu dosya bir FitWren kadran tasarımı değil</string>
+    <string name="face_schedule">Saate göre kadran</string>
+    <string name="face_schedule_hint">FitWren seçtiğin saatlerde gündüz ve gece kadranını kendisi değiştirir. O sırada bileklik bağlı olmalı; değilse biraz sonra yeniden dener.</string>
+    <string name="face_schedule_on">Açık</string>
+    <string name="face_schedule_day">Gündüz kadranı</string>
+    <string name="face_schedule_day_start">Gündüz başlangıcı</string>
+    <string name="face_schedule_night">Gece kadranı</string>
+    <string name="face_schedule_night_start">Gece başlangıcı</string>
+    <string name="face_schedule_none">Seçilmedi</string>
+    <string name="goal_off">Kapalı</string>
+    <string name="goal_turn_off">Kapat</string>
+    <string name="weekend_goal">Hafta sonu hedefi</string>
+    <string name="weekend_goal_hint">Cumartesi ve pazar için ayrı günlük hedef. Kapalıysa her gün aynı hedef geçerli.</string>
+    <string name="monthly_goal">Aylık hedef</string>
+    <string name="yearly_goal">Yıllık hedef</string>
+    <string name="period_goal_hint">Bugün sayfasında ilerleme çubuğu ve bu tempoyla hedefe ulaşacağın gün görünür.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Hedefe ulaştın!</string>
+    <string name="period_no_pace">Tahmin için biraz yürümen gerekiyor</string>
+    <string name="period_on_track">Bu tempoyla %1$s günü hedefe ulaşırsın</string>
+    <string name="period_behind">Yetişmek için günde %1$s adım gerekiyor</string>
+    <string name="vacation_mode">Tatil modu</string>
+    <string name="vacation_hint">Seçtiğin günlerde seri bozulmaz, joker harcanmaz ve hatırlatmalar susar.</string>
+    <string name="vacation_off">Tatil planı yok</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Tatili bitir</string>
+    <string name="vacation_on_title">Tatildesin</string>
+    <string name="vacation_on_text">Serin %1$s gününe kadar korunuyor, hatırlatmalar susuyor.</string>
+    <string name="backup_group">Tam yedek</string>
+    <string name="backup_write">Yedekle</string>
+    <string name="backup_write_hint">Adım, kilo, su, madalya, notlar ve ayarlar tek bir dosyaya yazılır</string>
+    <string name="backup_restore">Yedeği geri yükle</string>
+    <string name="backup_restore_hint">Bir FitWren yedek dosyası seç</string>
+    <string name="backup_restore_choose">Dosya seç</string>
+    <string name="restore_confirm">Şu anki bütün verinin yerine yedekteki veri gelir. Bileklik bağlantısı ve adım kaynağı aynı kalır.</string>
+    <string name="backup_done">Yedek kaydedildi (%1$d satır)</string>
+    <string name="backup_failed">Dosya yazılamadı</string>
+    <string name="restore_done">Yedek geri yüklendi (%1$d satır)</string>
+    <string name="restore_failed">Bu dosya bir FitWren yedeği değil</string>
+    <string name="health_write">Health Connect\'e yaz</string>
+    <string name="health_write_hint">FitWren\'in saatlik adımları Google Fit gibi başka uygulamalarda da görünür</string>
+    <string name="health_write_reading">Adımları Health Connect\'ten okurken yazma kapalı kalır, yoksa adımlar iki kez sayılır</string>
+    <string name="health_write_denied">Health Connect yazma izni verilmedi</string>
+    <string name="erase_group">Verileri sil</string>
+    <string name="erase_range">Tarih aralığını sil</string>
+    <string name="erase_range_hint">Seçtiğin günlerin adım, su, kilo, uyku ve notları silinir. Telefon ya da bileklik o günleri yeniden yazabilir.</string>
+    <string name="erase_all">Bütün veriyi sil</string>
+    <string name="erase_all_hint">Adım geçmişi, kilo, su, madalyalar ve notlar silinir. Ayarlar kalır.</string>
+    <string name="erase_all_confirm">Bütün veri kalıcı olarak silinsin mi? Önce yedek almanı öneririm.</string>
+    <string name="erase_confirm_button">Sil</string>
+    <string name="erase_done">Veriler silindi</string>
+    <string name="delete">Sil</string>
+    <string name="note_title">Güne not</string>
+    <string name="note_placeholder">Örneğin: maç vardı, hastaydım</string>
+    <string name="note_empty">Not yok</string>
+    <string name="note_add">Not ekle</string>
+    <string name="note_edit">Düzenle</string>
+    <string name="correct_button">Düzelt</string>
+    <string name="correct_hint">Sayım yanlışsa günü elle düzeltebilirsin</string>
+    <string name="correct_done">Bu gün elle düzeltildi</string>
+    <string name="correct_title">Günü elle düzelt</string>
+    <string name="correct_text">Yazdığın sayı, telefonun ve bilekliğin saydığının yerine geçer.</string>
+    <string name="correct_undo">Sayılana dön</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Güne not: Geçmiş\'te seçili güne kısa not yaz, takvimde küçük nokta görünür</item>
+        <item>Günü elle düzelt: sayım yanlışsa günün adımını kendin yaz, istersen sayılana dön</item>
+        <item>Tatil modu (Ayarlar → Hedefler): seçtiğin günlerde seri bozulmaz, joker harcanmaz, hatırlatmalar susar</item>
+        <item>Hafta sonu hedefi, aylık ve yıllık hedef: Bugün\'de ilerleme çubuğu ve tahmini bitiş günü</item>
+        <item>Tam yedek ve geri yükleme (Ayarlar → Veri): adım, kilo, su, madalya, not ve ayarlar tek dosyada</item>
+        <item>Verileri silme: bir tarih aralığını ya da bütün veriyi sil</item>
+        <item>CSV dışa aktarma artık su, kilo ve uyku sütunlarını da yazar</item>
+        <item>Health Connect\'e yazma (isteğe bağlı): FitWren adımları Google Fit gibi uygulamalarda da görünür</item>
+    </string-array>
+    <string name="morning_title">Günaydın!</string>
+    <string name="morning_yesterday">Dün %1$s adım attın</string>
+    <string name="morning_sleep">Gece %1$d sa %2$d dk uyudun</string>
+    <string name="morning_goal">Bugünkü hedefin %1$s adım</string>
+    <string name="morning_summary">Sabah özeti</string>
+    <string name="morning_summary_hint">Sabah dünkü adımın, gece uykun ve bugünkü hedefinle bir bildirim</string>
+    <string name="morning_hour">Saat</string>
+    <string name="record_notify">Rekor bildirimi</string>
+    <string name="record_notify_hint">En iyi gününü ya da haftanı geçtiğin an kutlar</string>
+    <string name="record_day_title">Bugün en iyi günün!</string>
+    <string name="record_day_text">%1$s adım, önceki rekor %2$s</string>
+    <string name="record_week_title">Bu hafta en iyi haftan!</string>
+    <string name="record_week_text">%1$s adım, önceki rekor %2$s</string>
+    <string name="sedentary">Hareketsizlik hatırlatması</string>
+    <string name="sedentary_hint">10:00–20:00 arası, bir saatte %1$d adımdan az yürüdüysen “kalk biraz yürü” der</string>
+    <string name="sedentary_title">Kalk biraz yürü</string>
+    <string name="sedentary_text">Son bir saatte %1$d adım attın. Birkaç dakikalık yürüyüş iyi gelir.</string>
+    <string name="walk_plan">Yürüyüş saati planı</string>
+    <string name="walk_plan_hint">Günlere yürüyüş saati koy, saati gelince hatırlatır</string>
+    <string name="walk_plan_dialog_hint">Saati gelince bildirim gelir. O saatte ya da sonraki saatte 1.500 adım atarsan Bugün\'de işaretlenir.</string>
+    <string name="walk_plan_none">Yok</string>
+    <string name="walk_plan_title">Yürüyüş saati</string>
+    <string name="walk_plan_text">Planın: %1$s yürüyüşü. Hadi çıkalım!</string>
+    <string name="walk_plan_today">Bugün %1$s yürüyüşü</string>
+    <string name="walk_plan_done">Yürüdün, aferin!</string>
+    <string name="walk_plan_waiting">O saatte 1.500 adım atınca işaretlenir</string>
+    <string name="month_report_reminder">Ayın raporu bildirimi</string>
+    <string name="month_report_reminder_hint">Her ayın 1\'inde saat 10:00\'da geçen ayın PDF raporunu hatırlatır</string>
+    <string name="month_report_title">%1$s raporun hazır</string>
+    <string name="month_report_text">Geçmiş sayfasında ayı seçip PDF raporunu kaydedebilirsin</string>
+    <string name="band_celebrate">Bileklikte hedef kutlaması</string>
+    <string name="band_celebrate_hint">Hedefe ulaşınca bileklik titrer ve kuşlu bir mesaj gösterir (bileklik bağlıyken)</string>
+    <string name="band_celebrate_title">🐦 Hedef tamam!</string>
+    <string name="band_celebrate_text">%1$s adım. Kuşun çok mutlu!</string>
+    <string name="shortcut_water">Su ekle</string>
+    <string name="shortcut_water_long">Bir bardak su ekle</string>
+    <string name="shortcut_today_long">Bugünün adımları</string>
+    <string name="shortcut_ask">Kaç adım?</string>
+    <string name="shortcut_ask_long">Bugün kaç adım attım?</string>
+    <string name="shortcut_water_added">%1$d ml su eklendi</string>
+    <string name="water_tile_name">FitWren su</string>
+    <string name="answer_steps">Bugün %1$s adım attın. Hedefe %2$s adım kaldı.</string>
+    <string name="answer_steps_done">Bugün %1$s adım attın. Hedefe ulaştın, harika!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Sabah özeti: sabah dünkü adımın, gece uykun ve bugünkü hedefin</item>
+        <item>Rekor bildirimi: en iyi gününü ya da haftanı geçince anında kutlama</item>
+        <item>Hareketsizlik hatırlatması: gündüz bir saatte çok az yürüdüysen “kalk biraz yürü”</item>
+        <item>Yürüyüş saati planı: günlere saat koy, hatırlatır; yürüdüysen Bugün\'de işaretlenir</item>
+        <item>Ayın raporu bildirimi: her ayın 1\'inde PDF raporu hatırlatır</item>
+        <item>Bileklikte hedef kutlaması: hedefe ulaşınca bileklik titrer, kuşlu mesaj gösterir</item>
+        <item>Uygulama kısayolları: simgeye uzun basınca Su ekle, Bugün ve Kaç adım?</item>
+        <item>Su kutucuğu: bildirim panelinden tek dokunuşla +1 bardak</item>
+        <item>“Bugün kaç adım attım?” sorusuna sesli cevap (kısayol ve Google Asistan)</item>
+    </string-array>
+    <string name="medal_group_distance">Mesafe</string>
+    <string name="medal_group_distance_text">Tüm günlerde yürüdüğün toplam yol (boyuna göre hesaplanır)</string>
+    <string name="medal_group_water">Su serisi</string>
+    <string name="medal_group_water_text">Su hedefine art arda ulaştığın gün sayısı</string>
+    <string name="medal_group_sleep">Uyku serisi</string>
+    <string name="medal_group_sleep_text">Art arda en az 7 saat uyuduğun gece sayısı (bileklik verisi)</string>
+    <string name="medal_group_route">Rota bitirme</string>
+    <string name="medal_group_route_text">Sanal rotalardan bitirdiğin farklı rota sayısı</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d rota</string>
+    <string name="time_left_minutes">Hedefe ≈ %1$d dk yürüyüş kaldı</string>
+    <string name="time_left_hours">Hedefe ≈ %1$d sa %2$d dk yürüyüş kaldı</string>
+    <string name="food_line">≈ %1$d × %2$s kadar kalori yaktın</string>
+    <string name="food_burger">hamburger</string>
+    <string name="food_simit">simit</string>
+    <string name="food_chocolate">çikolata</string>
+    <string name="food_cola">kutu kola</string>
+    <string name="food_apple">elma</string>
+    <string name="trend_title">Eğilim</string>
+    <string name="trend_month">Bu ay (ilk %1$d gün)</string>
+    <string name="trend_week">Son 7 gün</string>
+    <string name="trend_up">Önceki döneme göre %%%1$d fazla</string>
+    <string name="trend_down">Önceki döneme göre %%%1$d az</string>
+    <string name="trend_same">Önceki dönemle aynı</string>
+    <string name="trend_no_data">Karşılaştırmak için önceki dönemde kayıt yok</string>
+    <string name="active_hours_title">Aktif saat haritası</string>
+    <string name="active_hours_text">Son 8 haftada her gün ve saat için ortalama adım; koyu kare daha çok adım demek</string>
+    <string name="active_hours_empty">Henüz saatlik kayıt yok</string>
+    <string name="active_hours_peak">En hareketli saatin: %1$s %2$s</string>
+    <string name="story_banner_title">%1$d yılının hikâyesi hazır</string>
+    <string name="story_banner_text">Yılını sayfa sayfa gez ve paylaş</string>
+    <string name="story_open">Hikâyeyi aç</string>
+    <string name="story_total_title">%1$d yılında attığın adım</string>
+    <string name="story_total_text">Günde ortalama %1$s adım</string>
+    <string name="story_distance_title">Yürüdüğün yol</string>
+    <string name="story_distance_text">Dünya’nın çevresinin %%%1$d kadarı</string>
+    <string name="story_medals_text">Bu yıl kazandığın madalya</string>
+    <string name="story_end_title">Harika bir yıldı!</string>
+    <string name="story_end_text">Yeni yılda da kuşun seninle yürüyecek</string>
+    <string name="story_share">FitWren %1$d: %2$s adım, %3$s km, %4$d gün hedefe ulaştım! 🐦</string>
+    <string name="fitness_age_title">Fitness yaşı</string>
+    <string name="fitness_age_value">%1$d yaş</string>
+    <string name="fitness_age_younger">Gerçek yaşından %1$d yaş genç</string>
+    <string name="fitness_age_older">Gerçek yaşından %1$d yaş büyük</string>
+    <string name="fitness_age_same">Gerçek yaşınla aynı</string>
+    <string name="fitness_age_text">Tahmini VO2max %1$d; dinlenme nabzı %2$d, günde ortalama %3$s adımdan hesaplandı. Tıbbi ölçüm değildir.</string>
+    <string name="recovery_title">Toparlanma</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">İyi toparlanmışsın, bugün tempolu yürüyebilirsin</string>
+    <string name="recovery_mid">Orta düzey; normal günlük yürüyüşün yeterli</string>
+    <string name="recovery_low">Düşük; bugün hafif tut ve dinlen</string>
+    <string name="recovery_text">Dün geceki uykun önceki haftayla, dinlenme nabzın ortalamayla karşılaştırılır. Tıbbi değerlendirme değildir.</string>
+    <string name="quote_title">Günün sözü</string>
+    <string name="quote_setting">Günün sözü</string>
+    <string name="quote_setting_hint">Bugün sayfasında her gün yeni bir söz göster</string>
+    <string-array name="quotes">
+        <item>Her adım, dünkü senden bir adım ileri.</item>
+        <item>Bugün yürüdüğün yol, yarın dinlendiğin yerdir.</item>
+        <item>Küçük adımlar da uzun yolları bitirir.</item>
+        <item>Kuşun bugün de seninle uçmak istiyor.</item>
+        <item>Yavaş yürümek, hiç yürümemekten iyidir.</item>
+        <item>Yorgun hissettiğinde bile on dakika yeter.</item>
+        <item>Seri bir alışkanlıktır; alışkanlık bir karardır.</item>
+        <item>Merdiven, bugünün küçük dağıdır.</item>
+        <item>Telefonla konuşurken yürü, adımlar kendiliğinden gelir.</item>
+        <item>Yürüyüş, düşünceleri toplamanın en kolay yolu.</item>
+        <item>Hedef uzak görünürse yarısına odaklan.</item>
+        <item>Bugünkü adımların yarınki enerjin olur.</item>
+        <item>Her gün biraz, her ay çok.</item>
+        <item>Güneşli ya da yağmurlu, yürüyüş her havaya uyar.</item>
+        <item>En iyi yürüyüş, şimdi başladığın yürüyüştür.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Bugün: hedefe kalan yürüyüş süresi (kendi yürüme hızından) ve yaktığın kalorinin yemek karşılığı</item>
+        <item>Bugün widget\'ı (geniş): hedefe kalan süre</item>
+        <item>Günün sözü kartı (Ayarlar → Görünüm\'den kapatılabilir)</item>
+        <item>Geçmiş: eğilim kartı (bu ay ve son 7 gün, önceki dönemle) ve aktif saat haritası (8 haftalık gün × saat)</item>
+        <item>Yıl sonu hikâyesi: Aralık ve Ocak\'ta Geçmiş\'te, ayrıca yıl kartında; kaydırmalı sayfalar ve paylaşma</item>
+        <item>Sağlık: toparlanma puanı ve fitness yaşı (bileklik verisiyle)</item>
+        <item>Yeni madalyalar: mesafe, su serisi, uyku serisi, rota bitirme</item>
+    </string-array>
+    <string name="bird_item_glasses">Gözlük</string>
+    <string name="bird_item_flower">Çiçek</string>
+    <string name="bird_item_nightcap">Uyku başlığı</string>
+    <string name="bird_item_backpack">Sırt çantası</string>
+    <string name="bird_unlock_glasses">Toplam 42 km yürü</string>
+    <string name="bird_unlock_flower">7 gün su hedefi</string>
+    <string name="bird_unlock_nightcap">7 gece iyi uyku</string>
+    <string name="bird_unlock_backpack">Bir sanal rotayı bitir</string>
+    <string name="bird_item_wear">Kazandın; kuşun takıp takmayacağını seç</string>
+    <string name="seeds_count">Tohum: %1$d</string>
+    <string name="seeds_hint">Her 1.000 adım bir tohum; renk ve ötüş almak ya da kuşu beslemek için</string>
+    <string name="bird_fed">Kuşun tohumu çok sevdi!</string>
+    <string name="bird_feed">Besle</string>
+    <string name="bird_species_title">Kuş türü</string>
+    <string name="bird_locked_level">%1$s (seviye %2$d)</string>
+    <string name="bird_color_title">Tüy rengi</string>
+    <string name="bird_price">%1$s (%2$d tohum)</string>
+    <string name="bird_sound_title">Ötüş</string>
+    <string name="bird_species_sparrow">Çalıkuşu</string>
+    <string name="bird_species_owl">Baykuş</string>
+    <string name="bird_species_parrot">Papağan</string>
+    <string name="bird_species_eagle">Kartal</string>
+    <string name="bird_color_default">Doğal</string>
+    <string name="bird_color_sky">Gök mavisi</string>
+    <string name="bird_color_rose">Pembe</string>
+    <string name="bird_color_mint">Nane yeşili</string>
+    <string name="bird_color_plum">Mor</string>
+    <string name="bird_color_night">Gece</string>
+    <string name="bird_sound_chirp">Cik cik</string>
+    <string name="bird_sound_trill">Şakıma</string>
+    <string name="bird_sound_tweet">Islık</string>
+    <string name="bird_sound_coo">Guguk</string>
+    <string name="metronome_channel">Metronom</string>
+    <string name="metronome_title">Tempo metronomu</string>
+    <string name="metronome_bpm">Dakikada %1$d adım</string>
+    <string name="walk_stop">Durdur</string>
+    <string name="walk_start">Başlat</string>
+    <string name="walk_channel">Yürüyüş kaydı</string>
+    <string name="walk_gps_recording">GPS yürüyüşü kaydediliyor</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Konum izni verilmedi; GPS yürüyüşü bu izinle çalışır</string>
+    <string name="walk_tools_title">Yürüyüş araçları</string>
+    <string name="walk_dog_title">Köpek gezdirme</string>
+    <string name="walk_dog_hint">Çıkarken başlat, dönünce durdur; adımlar kaydedilir</string>
+    <string name="walk_running">Sürüyor: %1$s</string>
+    <string name="walk_gps_title">GPS ile yürüyüş</string>
+    <string name="walk_gps_hint">Yol ve mesafe kaydedilir; konum yalnızca kayıt sırasında kullanılır</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Kayıtlı yürüyüşler (%1$d)</string>
+    <string name="walk_list_title">Yürüyüşler</string>
+    <string name="walk_delete">Sil</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s adım</string>
+    <string name="walk_summary_dog">%1$s · %2$s adım</string>
+    <string name="floors_today">%1$d kat çıktın</string>
+    <string name="walks_on_day">%1$d yürüyüş</string>
+    <string name="wallpaper_name">Canlı duvar kâğıdı</string>
+    <string name="wallpaper_description">Adım attıkça FitWren kuşu yuvasından dala uçar</string>
+    <string name="wallpaper_set_hint">Ana ekranda kuş, günün adımlarıyla yuvadan dala uçar</string>
+    <string name="lock_title">FitWren kilitli</string>
+    <string name="lock_use_pin">PIN kullan</string>
+    <string name="lock_wrong">PIN yanlış, tekrar dene</string>
+    <string name="lock_enter_pin">PIN\'ini gir</string>
+    <string name="lock_biometric_again">Parmak izi ya da yüzle aç</string>
+    <string name="simple_today">Bugün</string>
+    <string name="simple_view_off">Normal görünüme dön</string>
+    <string name="simple_view">Sade görünüm</string>
+    <string name="simple_view_hint">Bugün sayfasında yalnızca büyük yazıyla adım ve hedef</string>
+    <string name="app_lock">Uygulama kilidi</string>
+    <string name="app_lock_hint">Açılışta PIN ister</string>
+    <string name="app_lock_biometric">Parmak izi / yüz ile aç</string>
+    <string name="app_lock_biometric_hint">PIN yerine telefonun biyometrik kilidi; PIN yedek olarak kalır</string>
+    <string name="app_lock_change">PIN\'i değiştir</string>
+    <string name="app_lock_change_hint">Yeni bir PIN belirle</string>
+    <string name="app_lock_set_pin">PIN belirle</string>
+    <string name="app_lock_pin_hint">%1$d–%2$d haneli bir sayı. Unutursan uygulama verisini silmeden açamazsın.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (tekrar)</string>
+    <string name="onboarding_skip">Geç</string>
+    <string name="onboarding_welcome_title">FitWren\'e hoş geldin</string>
+    <string name="onboarding_welcome_text">Adımlarını sayar; hedefe ulaştıkça kuşun büyür. Hesap gerekmez, veriler telefonunda kalır.</string>
+    <string name="onboarding_goal_title">Günlük hedefin</string>
+    <string name="onboarding_goal_text">Sonra Ayarlar\'dan değiştirebilirsin</string>
+    <string name="onboarding_body_title">Boy ve kilo</string>
+    <string name="onboarding_body_text">Mesafe ve kalori bunlarla hesaplanır</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Adım izni</string>
+    <string name="onboarding_permission_text">Adımları saymak için fiziksel etkinlik izni gerekir</string>
+    <string name="onboarding_permission_done">İzin verildi ✓</string>
+    <string name="onboarding_permission_button">İzin ver</string>
+    <string name="onboarding_next">İleri</string>
+    <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Kuş türleri: çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10); uygulamada, widget\'ta, duvar kâğıdında ve bileklik kadranında</item>
+        <item>Tohumlar: her 1.000 adım bir tohum; kuşu besle, tüy rengi ve ötüş al</item>
+        <item>Aksesuarlar: kazandıklarını tak ya da çıkar; yeni gözlük, çiçek, uyku başlığı ve sırt çantası</item>
+        <item>Canlı duvar kâğıdı: kuş adımlarınla yuvadan dala uçar</item>
+        <item>Yürüyüş araçları (Bugün): tempo metronomu, köpek gezdirme ve GPS ile yürüyüş kaydı (rota çizimiyle)</item>
+        <item>Kat sayacı: basınç sensörü olan telefonlarda</item>
+        <item>Uygulama kilidi (PIN, parmak izi ya da yüz) ve sade görünüm (Ayarlar → Görünüm ve dil)</item>
+        <item>İlk açılış rehberi: yeni kurulumda hedef, boy-kilo ve izin</item>
+    </string-array>
 </resources>

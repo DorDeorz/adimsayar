@@ -34,7 +34,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.ChallengeMath
 import com.dordeorz.adimsayar.data.DayDetail
 import com.dordeorz.adimsayar.data.KeptMedals
@@ -47,6 +46,11 @@ import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.SettingsStore
+import com.dordeorz.adimsayar.data.HealthMath
+import com.dordeorz.adimsayar.data.MonthReport
+import com.dordeorz.adimsayar.data.PdfReport
+import com.dordeorz.adimsayar.data.ReportHealth
+import com.dordeorz.adimsayar.data.SmartGoal
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.WearableSteps
@@ -56,6 +60,16 @@ import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.ui.AppScreen
+import com.dordeorz.adimsayar.ui.LockScreen
+import com.dordeorz.adimsayar.ui.OnboardingScreen
+import com.dordeorz.adimsayar.ui.ExtraState
+import com.dordeorz.adimsayar.data.DayNotes
+import com.dordeorz.adimsayar.data.DayOverrides
+import com.dordeorz.adimsayar.data.ExtrasStore
+import com.dordeorz.adimsayar.data.Floors
+import com.dordeorz.adimsayar.data.Walks
+import com.dordeorz.adimsayar.data.ExtraMedals
+import com.dordeorz.adimsayar.data.Routes
 import com.dordeorz.adimsayar.ui.MainActions
 import com.dordeorz.adimsayar.ui.MainUiState
 import com.dordeorz.adimsayar.ui.PermissionState
@@ -74,19 +88,24 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.time.LocalDate
+import java.time.YearMonth
+import kotlinx.coroutines.flow.first
 
 class MainActivity : ComponentActivity() {
 
     private val repository by lazy { StepRepository.get(applicationContext) }
     private val settings by lazy { getSharedPreferences(SETTINGS_PREFS, MODE_PRIVATE) }
     private val sensorAvailable by lazy { StepSensors.hasCounter(this) }
-    private val profile = OemProfile.current()
+    private val profile by lazy { OemProfile.current(this) }
     private lateinit var monitor: LiveStepMonitor
 
     private var permission by mutableStateOf(PermissionState.NeedsRequest)
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
+    private var locked by mutableStateOf(true)
+    private var stoppedAt = 0L
     private var serviceEnabled by mutableStateOf(false)
+    private var exactAlarmsAllowed by mutableStateOf<Boolean?>(null)
     private var xiaomiAvailable by mutableStateOf(false)
     private var xiaomiEnabled by mutableStateOf(false)
     private var xiaomiSync: Job? = null
@@ -95,11 +114,14 @@ class MainActivity : ComponentActivity() {
     private var wearableEnabled by mutableStateOf(false)
     private var bandDirectEnabled by mutableStateOf(false)
     private var bandSyncing by mutableStateOf(false)
+    private var bandOnly by mutableStateOf(false)
     private var wearableSync: Job? = null
     private var healthRefresh by mutableIntStateOf(0)
     private var requestedTab by mutableStateOf<Tab?>(null)
 
     private val settingsStore by lazy { SettingsStore.get(applicationContext) }
+
+    private val extra = ExtraController(this)
 
     private val actions = MainActions(
         onRequestPermission = ::requestPermission,
@@ -109,11 +131,13 @@ class MainActivity : ComponentActivity() {
             batteryCardVisible = false
         },
         onServiceEnabledChange = ::changeServiceEnabled,
+        onOpenExactAlarms = ::openExactAlarmSettings,
         onXiaomiEnabledChange = ::changeXiaomiEnabled,
         onWearableEnabledChange = ::changeWearableEnabled,
         onWearableResync = ::resyncWearable,
         onBandDirectChange = ::changeBandDirect,
         onSyncBand = ::syncBandNow,
+        onBandOnlyChange = ::changeBandOnly,
         onThemeModeChange = { settingsStore.setThemeMode(it) },
         onDynamicColorChange = {
             settingsStore.setDynamicColor(it)
@@ -126,6 +150,10 @@ class MainActivity : ComponentActivity() {
         onDailyGoalChange = { goal ->
             settingsStore.setDailyGoal(goal)
             refreshWidgets()
+        },
+        onSmartGoalChange = { enabled ->
+            val week = SmartGoal.weekOf(LocalDate.now(), settingsStore.settings.value.weekStart)
+            settingsStore.setSmartGoal(enabled, week.toEpochDay())
         },
         onWeeklyGoalChange = { settingsStore.setWeeklyGoal(it) },
         onHeightChange = { settingsStore.setHeight(it) },
@@ -152,6 +180,10 @@ class MainActivity : ComponentActivity() {
             Reminders.scheduleEvening(applicationContext)
         },
         onExport = { exportLauncher.launch(EXPORT_FILE_NAME.format(LocalDate.now())) },
+        onMonthReport = { month ->
+            reportMonth = month
+            reportLauncher.launch(REPORT_FILE_NAME.format(month))
+        },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/zip", "application/octet-stream")) },
         loadDayDetail = { date ->
             if (XiaomiSteps.isEnabled(applicationContext)) {
@@ -226,6 +258,7 @@ class MainActivity : ComponentActivity() {
             if (id == null) settingsStore.setRoute(NO_ROUTE, NO_ROUTE_START) else settingsStore.setRoute(id, LocalDate.now().toEpochDay())
             refreshWidgets()
         },
+        extra = extra,
     )
 
     private fun openOrToast(intent: Intent, silent: Boolean = false): Boolean = try {
@@ -238,6 +271,54 @@ class MainActivity : ComponentActivity() {
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         if (uri != null) transferCsv(R.string.export_done) { repository.exportCsv(requireNotNull(contentResolver.openOutputStream(uri))) }
+    }
+
+    private var reportMonth: YearMonth? = null
+
+    private val reportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { uri ->
+        val month = reportMonth ?: return@registerForActivityResult
+        if (uri != null) writeReport(uri, month)
+    }
+
+    private fun writeReport(uri: Uri, month: YearMonth) {
+        val appContext = applicationContext
+        val strings = Locales.wrap(appContext)
+        AppScope.launch(Dispatchers.IO) {
+            val done = try {
+                val settings = settingsStore.settings.value
+                val report = MonthReport.build(
+                    month = month,
+                    today = LocalDate.now(),
+                    history = repository.loadHistory(),
+                    water = Water.observe(appContext).first(),
+                    weights = Weights.observe(appContext).first(),
+                    goal = settings.dailyGoal,
+                )
+                val health = if (WearableHealth.isEnabled(appContext)) reportHealth(appContext, report) else null
+                PdfReport.write(appContext, requireNotNull(contentResolver.openOutputStream(uri)), report, settings, health)
+                true
+            } catch (e: IOException) {
+                false
+            } catch (e: RuntimeException) {
+                false
+            }
+            withContext(Dispatchers.Main) {
+                Toast.makeText(appContext, strings.getString(if (done) R.string.report_done else R.string.report_failed), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private suspend fun reportHealth(context: Context, report: MonthReport): ReportHealth? {
+        val last = report.days.lastOrNull()?.date ?: return null
+        val period = WearableHealth.period(context, last, report.days.size.toLong()) ?: return null
+        val nights = period.nights.filterKeys { YearMonth.from(it) == report.month }
+        val resting = period.resting.mapNotNull { it.second }
+        val health = ReportHealth(
+            sleepMinutes = HealthMath.average(nights.values.map { it.minutes }),
+            nights = nights.size,
+            resting = HealthMath.average(resting),
+        )
+        return health.takeIf { it.sleepMinutes != null || it.resting != null }
     }
 
     private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -278,6 +359,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        val extrasStore = ExtrasStore.get(applicationContext)
+        // People who used the app before 0.20 skip the welcome pages.
+        if (!extrasStore.extras.value.onboardingDone && extrasStore.hasStoredData(applicationContext)) {
+            extrasStore.update { it.copy(onboardingDone = true) }
+        }
         monitor = LiveStepMonitor(applicationContext)
         Schedules.ensure(applicationContext)
         if (savedInstanceState == null) openRequestedTab(intent)
@@ -294,15 +380,33 @@ class MainActivity : ComponentActivity() {
             val water by remember { Water.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
             val freezes by remember { StreakFreezes.observe(applicationContext) }.collectAsStateWithLifecycle(emptySet())
             val kept by remember { KeptMedals.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
-            val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes) {
-                AchievementMath.compute(
-                    history,
-                    currentDay,
-                    appSettings.dailyGoal,
-                    appSettings.weeklyGoal,
-                    appSettings.weekStart,
-                    earlyBirdDays,
-                    freezes,
+            val healthOn = wearableEnabled || bandDirectEnabled
+            val nights by produceState<Map<LocalDate, Long>>(emptyMap(), healthOn, healthRefresh, currentDay) {
+                value = if (healthOn) {
+                    withContext(Dispatchers.IO) {
+                        WearableHealth.period(applicationContext, currentDay, MEDAL_SLEEP_DAYS)?.nights?.mapValues { it.value.minutes }.orEmpty()
+                    }
+                } else {
+                    emptyMap()
+                }
+            }
+            val routeProgress = remember(history, appSettings.routeId, appSettings.routeStartDay, appSettings.heightCm, currentDay) {
+                Routes.byId(appSettings.routeId)?.takeIf { appSettings.routeStartDay != NO_ROUTE_START }?.let {
+                    Routes.progress(it, history, LocalDate.ofEpochDay(appSettings.routeStartDay), currentDay, appSettings.heightCm)
+                }
+            }
+            val routesDone by produceState<Map<String, LocalDate>>(emptyMap(), routeProgress?.finishedOn) {
+                value = withContext(Dispatchers.IO) {
+                    routeProgress?.let { progress -> progress.finishedOn?.let { ExtraMedals.rememberRoute(applicationContext, progress.route.id, it) } }
+                    ExtraMedals.routesDone(applicationContext)
+                }
+            }
+            val computed = remember(history, currentDay, appSettings, earlyBirdDays, freezes, water, nights, routesDone) {
+                val base = appSettings.achievements(history, currentDay, earlyBirdDays, freezes)
+                base.copy(
+                    medals = base.medals + ExtraMedals.compute(
+                        history, currentDay, appSettings.heightCm, water, appSettings.waterGoalMl, nights, routesDone,
+                    ),
                 )
             }
             LaunchedEffect(computed) {
@@ -311,6 +415,14 @@ class MainActivity : ComponentActivity() {
             val achievements = remember(computed, kept) { computed.copy(medals = KeptMedals.apply(computed.medals, kept)) }
             val challenges = remember(history, currentDay, appSettings.dailyGoal, appSettings.weekStart) {
                 ChallengeMath.summary(history, currentDay, appSettings.dailyGoal, appSettings.weekStart)
+            }
+            val extras by remember { ExtrasStore.get(applicationContext).extras }.collectAsStateWithLifecycle()
+            val notes by remember { DayNotes.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val overrides by remember { DayOverrides.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val walks by remember { Walks.observe(applicationContext) }.collectAsStateWithLifecycle(emptyList())
+            val floors by remember { Floors.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
+            val extraState = remember(extras, notes, overrides, walks, floors) {
+                ExtraState(extras, notes, overrides, walks, floors, Floors.hasSensor(applicationContext))
             }
             val lastReading by repository.lastReadingWallMs.collectAsStateWithLifecycle()
             val frozen by monitor.frozen.collectAsStateWithLifecycle()
@@ -323,37 +435,44 @@ class MainActivity : ComponentActivity() {
             val direction = if (Locales.isRtl()) LayoutDirection.Rtl else LayoutDirection.Ltr
             AdimSayarTheme(darkTheme = dark, dynamicColor = appSettings.dynamicColor) {
                 CompositionLocalProvider(LocalLayoutDirection provides direction) {
-                    AppScreen(
-                        state = MainUiState(
-                            today = currentDay,
-                            week = week,
-                            history = history,
-                            achievements = achievements,
-                            settings = appSettings,
-                            lastReadingWallMs = lastReading,
-                            permission = permission,
-                            sensorAvailable = sensorAvailable,
-                            frozen = frozen,
-                            batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
-                            serviceEnabled = serviceEnabled,
-                            xiaomiAvailable = xiaomiAvailable,
-                            xiaomiEnabled = xiaomiEnabled,
-                            xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
-                            wearableAvailable = wearableAvailable,
-                            wearableEnabled = wearableEnabled,
-                            bandDirectEnabled = bandDirectEnabled,
-                            bandSyncing = bandSyncing,
-                            logLines = logLines,
-                            version = BuildConfig.VERSION_NAME,
-                            weights = weights,
-                            healthRefresh = healthRefresh,
-                            requestedTab = requestedTab,
-                            water = water,
-                            freezes = freezes,
-                            challenges = challenges,
-                        ),
-                        actions = actions,
+                    val uiState = MainUiState(
+                        today = currentDay,
+                        week = week,
+                        history = history,
+                        achievements = achievements,
+                        settings = appSettings,
+                        lastReadingWallMs = lastReading,
+                        permission = permission,
+                        sensorAvailable = sensorAvailable,
+                        frozen = frozen,
+                        batteryProfile = profile.takeIf { batteryCardVisible && sensorAvailable },
+                        serviceEnabled = serviceEnabled,
+                        exactAlarmsAllowed = exactAlarmsAllowed,
+                        xiaomiAvailable = xiaomiAvailable,
+                        xiaomiEnabled = xiaomiEnabled,
+                        xiaomiProblem = xiaomiProblem.takeIf { xiaomiEnabled },
+                        wearableAvailable = wearableAvailable,
+                        wearableEnabled = wearableEnabled,
+                        bandDirectEnabled = bandDirectEnabled,
+                        bandSyncing = bandSyncing,
+                        bandOnly = bandOnly,
+                        logLines = logLines,
+                        version = BuildConfig.VERSION_NAME,
+                        weights = weights,
+                        healthRefresh = healthRefresh,
+                        requestedTab = requestedTab,
+                        water = water,
+                        freezes = freezes,
+                        challenges = challenges,
+                        extra = extraState,
                     )
+                    if (extras.appLock && extras.pinHash.isNotEmpty() && locked) {
+                        LockScreen(extras, onUnlock = { locked = false })
+                    } else if (!extras.onboardingDone) {
+                        OnboardingScreen(uiState, actions)
+                    } else {
+                        AppScreen(state = uiState, actions = actions)
+                    }
                 }
             }
         }
@@ -365,12 +484,27 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun openRequestedTab(intent: Intent?) {
+        when (intent?.action) {
+            ACTION_ADD_WATER -> {
+                val glass = settingsStore.settings.value.glassMl
+                actions.onAddWater(glass)
+                Toast.makeText(this, getString(R.string.shortcut_water_added, glass), Toast.LENGTH_SHORT).show()
+                requestedTab = Tab.Today
+                setIntent(Intent(this, MainActivity::class.java))
+                return
+            }
+            ACTION_OPEN_TODAY -> {
+                requestedTab = Tab.Today
+                return
+            }
+        }
         val name = intent?.getStringExtra(EXTRA_TAB) ?: return
         Tab.entries.firstOrNull { it.name.lowercase() == name }?.let { requestedTab = it }
     }
 
     override fun onStart() {
         super.onStart()
+        if (stoppedAt > 0L && SystemClock.elapsedRealtime() - stoppedAt > LOCK_GRACE_MS) locked = true
         refreshPermission()
         serviceEnabled = StepCounterService.isEnabled(this)
         if (permission == PermissionState.Granted) {
@@ -384,10 +518,14 @@ class MainActivity : ComponentActivity() {
             withContext(Dispatchers.Main) { xiaomiAvailable = available }
         }
         startXiaomiSync()
+        AppScope.launch(Dispatchers.IO) {
+            if (SmartGoal.applyIfDue(appContext)) Widgets.updateAll(appContext)
+        }
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()
         bandDirectEnabled = BandDirect.isEnabled(this)
+        bandOnly = WearableSteps.isBandOnly(this)
         if (bandDirectEnabled) {
             BandLive.refresh(appContext)
             AppScope.launch(Dispatchers.IO) {
@@ -403,6 +541,23 @@ class MainActivity : ComponentActivity() {
         today = LocalDate.now()
         refreshPermission()
         batteryCardVisible = !settings.getBoolean(KEY_BATTERY_CARD_DISMISSED, false) && !BatteryOptimization.isExempt(this)
+        refreshExactAlarms()
+    }
+
+    private fun refreshExactAlarms() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+        val allowed = Schedules.exactAlarmsAllowed(this)
+        if (allowed && exactAlarmsAllowed == false) Schedules.ensure(applicationContext)
+        exactAlarmsAllowed = allowed
+    }
+
+    private fun openExactAlarmSettings() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+        try {
+            startActivity(Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName")))
+        } catch (e: ActivityNotFoundException) {
+            BatteryOptimization.openAppDetails(this)
+        }
     }
 
     override fun onStop() {
@@ -412,6 +567,7 @@ class MainActivity : ComponentActivity() {
         wearableSync = null
         monitor.stop()
         refreshWidgets()
+        if (!isChangingConfigurations) stoppedAt = SystemClock.elapsedRealtime()
         super.onStop()
     }
 
@@ -497,6 +653,19 @@ class MainActivity : ComponentActivity() {
                 withContext(Dispatchers.Main) { xiaomiProblem = problem }
                 delay(XIAOMI_SYNC_INTERVAL_MS)
             }
+        }
+    }
+
+    private fun changeBandOnly(enabled: Boolean) {
+        bandOnly = enabled
+        val appContext = applicationContext
+        AppScope.launch(Dispatchers.IO) {
+            WearableSteps.setBandOnly(appContext, enabled)
+            when {
+                BandDirect.isEnabled(appContext) -> BandDirect.remerge(appContext)
+                WearableSteps.isEnabled(appContext) -> WearableSteps.resync(appContext)
+            }
+            Widgets.updateAll(appContext)
         }
     }
 
@@ -612,11 +781,18 @@ class MainActivity : ComponentActivity() {
     companion object {
         const val EXTRA_TAB = "tab"
         const val TAB_HEALTH = "health"
+        const val TAB_HISTORY = "history"
+        const val TAB_TODAY = "today"
+        const val ACTION_ADD_WATER = "com.dordeorz.adimsayar.ADD_WATER"
+        const val ACTION_OPEN_TODAY = "com.dordeorz.adimsayar.OPEN_TODAY"
         private const val SETTINGS_PREFS = "settings"
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
         private const val EXPORT_FILE_NAME = "fitwren-%s.csv"
+        private const val REPORT_FILE_NAME = "fitwren-rapor-%s.pdf"
         private const val SOURCE_DAYS = 7L
+        private const val MEDAL_SLEEP_DAYS = 120L
+        private const val LOCK_GRACE_MS = 30_000L
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"
         private const val HEALTH_CONNECT_SETTINGS_14 = "android.health.connect.action.HEALTH_HOME_SETTINGS"

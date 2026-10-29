@@ -12,10 +12,12 @@ import com.dordeorz.adimsayar.band.BandFile
 import com.dordeorz.adimsayar.band.BandModel
 import com.dordeorz.adimsayar.band.BandModels
 import com.dordeorz.adimsayar.band.HuamiBand
+import com.dordeorz.adimsayar.band.HuamiFaceUpload
 import com.dordeorz.adimsayar.band.BandResult
 import com.dordeorz.adimsayar.band.XiaomiBand
 import com.dordeorz.adimsayar.band.XiaomiCrypto
 import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -152,6 +154,27 @@ object BandDirect {
         }
     }
 
+    /** True when the saved band takes watch faces over the older Huami protocol (Mi Band 6). */
+    fun takesHuamiFaces(context: Context): Boolean = model(context)?.huamiFaces == true
+
+    /** Sends a watch face file to the saved Mi Band 6; a running sync finishes first. */
+    suspend fun uploadHuamiFace(context: Context, bytes: ByteArray, onProgress: (Int) -> Unit): HuamiFaceUpload.Outcome {
+        val (address, _, secret) = device(context) ?: return HuamiFaceUpload.Outcome.NotReached
+        val model = model(context)?.takeIf { it.huamiFaces } ?: return HuamiFaceUpload.Outcome.NotReached
+        if (!granted(context, CONNECT_PERMISSIONS)) return HuamiFaceUpload.Outcome.NotReached
+        return running.withLock {
+            val band = HuamiBand(context, address, model, secret, 0L)
+            val result = band.uploadFace(bytes, onProgress)
+            when {
+                result == BandResult.Ok -> HuamiFaceUpload.Outcome.Done
+                band.faceFailure == HuamiFaceUpload.Failure.NoSpace -> HuamiFaceUpload.Outcome.NoSpace
+                band.faceFailure == HuamiFaceUpload.Failure.LowBattery -> HuamiFaceUpload.Outcome.LowBattery
+                band.faceFailure != null -> HuamiFaceUpload.Outcome.Refused
+                else -> HuamiFaceUpload.Outcome.NotReached
+            }
+        }
+    }
+
     /** The saved band's model; null for an unknown Xiaomi name. */
     fun model(context: Context): BandModel? {
         val p = prefs(context)
@@ -198,7 +221,7 @@ object BandDirect {
         return record(context, source, result, files, summary)
     }
 
-    private suspend fun remerge(context: Context) {
+    suspend fun remerge(context: Context) {
         val from = LocalDate.now().minusDays(MERGE_DAYS)
         val band = StepRepository.get(context).loadBandHours(from)
         if (band.isEmpty()) return

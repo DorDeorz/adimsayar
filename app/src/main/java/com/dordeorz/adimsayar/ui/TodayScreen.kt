@@ -60,10 +60,10 @@ import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.coerceAtMost
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
-import com.dordeorz.adimsayar.data.AchievementMath
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.Distance
 import com.dordeorz.adimsayar.data.DistanceUnit
+import com.dordeorz.adimsayar.data.NO_GOAL
 import com.dordeorz.adimsayar.data.StreakFreezes
 import com.dordeorz.adimsayar.data.weekStartOf
 import com.dordeorz.adimsayar.ui.oem.BatteryHelpCard
@@ -80,7 +80,7 @@ private const val RING_ANIMATION_MS = 700
 @Composable
 fun TodayScreen(state: MainUiState, actions: MainActions) {
     val steps = state.week.lastOrNull()?.steps ?: 0L
-    val goal = state.settings.dailyGoal
+    val goal = state.settings.goalOn(state.today)
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -91,7 +91,8 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         freezeOffer(state)?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
-        item { BirdCard(state) }
+        item { BirdCard(state, actions) }
+        if (state.extra.extras.showQuote) item { QuoteCard(state.today) }
         if (!state.sensorAvailable) {
             item { MessageCard(stringResource(R.string.sensor_missing_title), stringResource(R.string.sensor_missing_text)) }
         } else if (state.permission != PermissionState.Granted) {
@@ -122,8 +123,12 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         state.batteryProfile?.let { profile ->
             item { BatteryHelpCard(profile = profile, onDismiss = actions.onDismissBatteryCard) }
         }
+        if (state.settings.inVacation(state.today)) item { VacationCard(state) }
         item { SummaryRow(state) }
+        if (state.settings.monthlyGoal != NO_GOAL || state.settings.yearlyGoal != NO_GOAL) item { PeriodGoalsCard(state) }
+        if (state.today.dayOfWeek in state.extra.extras.walkPlan) item { WalkPlanCard(state) }
         item { WaterCard(state, actions.onAddWater) }
+        item { WalkToolsCard(state, actions) }
         item { WeekCard(state.week, goal) }
         item {
             val reading = state.lastReadingWallMs
@@ -200,6 +205,7 @@ private fun TodayRing(state: MainUiState, steps: Long, goal: Long) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 4.dp),
         )
+        RingExtraLines(state, steps, goal)
     }
 }
 
@@ -384,17 +390,10 @@ private fun MessageCard(title: String, text: String) {
 
 private fun freezeOffer(state: MainUiState): Int? {
     val yesterday = state.today.minusDays(1)
-    val goal = state.settings.dailyGoal
-    if ((state.history[yesterday] ?: 0L) >= goal || yesterday in state.freezes) return null
+    val goal = state.settings.goalOn(yesterday)
+    if ((state.history[yesterday] ?: 0L) >= goal || yesterday in state.freezes || state.settings.inVacation(yesterday)) return null
     if (StreakFreezes.left(state.freezes, YearMonth.from(yesterday)) == 0) return null
-    val saved = AchievementMath.compute(
-        state.history,
-        state.today,
-        goal,
-        state.settings.weeklyGoal,
-        state.settings.weekStart,
-        freezes = state.freezes + yesterday,
-    ).records.currentStreak
+    val saved = state.settings.achievements(state.history, state.today, freezes = state.freezes + yesterday).records.currentStreak
     return saved.takeIf { it > state.achievements.records.currentStreak }
 }
 

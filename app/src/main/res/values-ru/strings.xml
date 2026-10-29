@@ -23,6 +23,8 @@
     <string name="frozen_text">Телефон распознаёт шаги, но счётчик не меняется. Датчик переподключён; это предупреждение исчезнет само через несколько шагов.</string>
 
     <string name="service_card_title">Считать шаги в фоне</string>
+    <string name="exact_alarms_title">Точные будильники</string>
+    <string name="exact_alarms_text">Запись в полночь, напоминания и смена циферблата срабатывают вовремя. Без разрешения Android может задержать их до часа. Нажмите, чтобы открыть разрешение.</string>
     <string name="xiaomi_unreadable_title">Не удаётся прочитать запись шагов HyperOS</string>
     <string name="xiaomi_unreadable_text">Шаги сейчас не обновляются. Возможно, обновление HyperOS изменило запись. Можно выключить переключатель ниже и считать шаги через «Считать шаги в фоне».</string>
     <string name="xiaomi_stalled_title">Запись шагов HyperOS не растёт</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">Телефон</string>
     <string name="device_other">Другое устройство</string>
 
+    <string name="tile_name">Шаги FitWren</string>
+    <string name="tile_goal_percent">%%%1$d цели</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Сегодня %1$s шагов, %%%2$d цели</string>
+    <string name="smart_goal">Умная цель</string>
+    <string name="smart_goal_hint" formatted="false">В начале каждой недели немного повышает или понижает дневную цель по последним 4 неделям (не более чем на 10 %)</string>
+    <string name="smart_goal_changed">На этой неделе цель изменилась с %1$s на %2$s шагов (по последним 4 неделям)</string>
+    <string name="smart_goal_waiting">Для совета нужны шаги хотя бы за %1$d дней из последних 4 недель</string>
+    <string name="smart_goal_next">Совет на следующую неделю: %1$s шагов</string>
+    <string name="insight_title">Сон и шаги</string>
+    <string name="insight_not_enough">Пока мало данных: нужно хотя бы %1$d длинных и %1$d коротких ночей. Выберите 30 или 90 дней.</string>
+    <string name="insight_steps_more">В дни после сна дольше %1$d часов вы проходите в среднем на %2$s шагов больше</string>
+    <string name="insight_steps_less">В дни после сна дольше %1$d часов вы проходите в среднем на %2$s шагов меньше</string>
+    <string name="insight_steps_same">После длинных и коротких ночей (%1$d часов) вы ходите одинаково</string>
+    <string name="insight_after_long">После сна дольше %1$d часов</string>
+    <string name="insight_after_short">После сна меньше %1$d часов</string>
+    <string name="insight_sleep_active">Ночь после выполненной цели</string>
+    <string name="insight_sleep_rest">Ночь после невыполненной цели</string>
+    <string name="insight_days">Дней: %1$d</string>
+    <string name="insight_hint">Считаются шаги дня, в который вы проснулись, сегодняшний день не считается. Это связь, а не причина.</string>
+    <string name="report_button">Отчёт за %1$s (PDF)</string>
+    <string name="report_title">Отчёт за месяц · %1$s</string>
+    <string name="report_page">Страница %1$d из %2$d</string>
+    <string name="report_goal_days">%1$d из %2$d дней (цель %3$s)</string>
+    <string name="report_active_days">Активные дни</string>
+    <string name="report_distance">Расстояние</string>
+    <string name="report_kcal">Калории</string>
+    <string name="report_kcal_value">%1$s ккал</string>
+    <string name="report_vs_previous">По сравнению с прошлым месяцем</string>
+    <string name="report_water">Вода в среднем за день</string>
+    <string name="report_ml_value">%1$s мл</string>
+    <string name="report_bpm_value">%1$d уд/мин</string>
+    <string name="report_daily_chart">Шаги по дням</string>
+    <string name="report_weeks">Недели</string>
+    <string name="report_goal_line">цель</string>
+    <string name="report_days_title">Дни · %1$s</string>
+    <string name="report_day">День</string>
+    <string name="report_steps">Шаги</string>
+    <string name="report_water_short">Вода</string>
+    <string name="report_done">Отчёт сохранён</string>
+    <string name="report_failed">Не удалось создать отчёт</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Плитка быстрых настроек: шаги за сегодня и процент цели в панели уведомлений, нажатие открывает «Сегодня» (Android 7 и новее)</item>
+        <item>Умная цель (Настройки → Цели, по умолчанию выкл.): если включена, дневная цель в начале каждой недели меняется не более чем на 10% по последним 4 неделям</item>
+        <item>Сон и шаги (Здоровье): шаги после длинных и коротких ночей и сон после дней с выполненной целью</item>
+        <item>Месячный отчёт в PDF (История): сводка за месяц, график по дням, недели и таблица по дням; без интернета</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>Настройки → Источник шагов → «Не считать телефон при использовании браслета»: если включено, шаги телефона не добавляются в дни с данными браслета</item>
+        <item>Браслет и телефон всегда объединяются по часам: в часы, когда браслет надет, считается только браслет, телефон заполняет остальные часы (раньше без журнала HyperOS брался больший дневной итог)</item>
+        <item>Поддержка кастомных прошивок (crDroid, LineageOS и др.): на Xiaomi без HyperOS скрыты журнал шагов HyperOS и шаги батареи MIUI, используется датчик телефона</item>
+        <item>Точные будильники: разрешите в Настройки → Уведомления, и запись в полночь, напоминания и смена циферблата работают без задержек (Android 14 и новее)</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>Настроение птички: на циферблатах FitWren и в дизайнах птичка меняется по цели шагов</item>
+        <item>Погода на циферблате: значок погоды и температура</item>
+        <item>Always-on: у циферблатов FitWren есть простой тёмный вид для постоянного экрана</item>
+        <item>Обмен дизайнами: отправьте дизайн с фото файлом, импортируйте дизайн друга</item>
+        <item>Циферблат по времени суток: FitWren сам меняет дневной и ночной циферблат</item>
+        <item>Циферблаты Mi Band 6: загрузка циферблата из файла .bin</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Магазин циферблатов: бесплатные циферблаты Xiaomi для Mi Band 8 с картинками, поиск и установка на браслет одним нажатием</item>
         <item>Циферблаты FitWren: девять циферблатов с птичкой (Ночь, Дорога, Аналог, Неон, Ветка и другие) встроены и ставятся на Mi Band 8 одним нажатием</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">Прямое подключение (Xiaomi, Amazfit)</string>
     <string name="source_connect">Через Health Connect</string>
     <string name="source_merge_hint">Если вы носите браслет, в эти часы используется его счёт, в остальные часы — счёт телефона.</string>
+    <string name="band_only_title">Не считать телефон при использовании браслета</string>
+    <string name="band_only_text">Если браслет в этот день передал данные, шаги за день берутся только с браслета. Телефон используется только в дни, когда браслет не подключался. Если выключено, телефон заполняет часы без браслета.</string>
     <string name="source_direct_manage">Настройки браслета</string>
     <string name="device_connect_hint">Данные читаются из Health Connect</string>
     <string name="band_reconnect">Переподключить</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">Загрузка: %d%%</string>
     <string name="band_faces_done">Циферблат загружен и выбран.</string>
     <string name="band_faces_failed">Не удалось загрузить циферблат. Поднесите браслет ближе и повторите.</string>
+    <string name="huami_faces_hint">Выберите файл циферблата .bin для Mi Band 6. Загрузка может занять несколько минут; держите браслет рядом с телефоном.</string>
+    <string name="huami_faces_invalid">Этот файл не является циферблатом Mi Band 6.</string>
+    <string name="huami_faces_done">Циферблат загружен. Если браслет его не показывает, выберите его в списке циферблатов браслета.</string>
+    <string name="huami_faces_no_space">На браслете нет места. Удалите циферблат на браслете и повторите.</string>
+    <string name="huami_faces_low_battery">Батарея браслета разряжена. Зарядите его и повторите.</string>
+    <string name="huami_faces_refused">Браслет не принял этот файл.</string>
     <string name="band_faces_delete">Удалить</string>
     <string name="band_notify_pick_search">Поиск приложений</string>
     <string name="band_notify_pick_count">%1$d из %2$d приложений отправляют на браслет</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">Элементы</string>
     <string name="face_designer_undo">Отменить</string>
     <string name="face_designer_reset">Сбросить</string>
+    <string name="face_designer_bird_mood">По цели</string>
+    <string name="face_designer_show_weather">Погода</string>
+    <string name="face_designer_share_section">Поделиться</string>
+    <string name="face_designer_share">Поделиться дизайном</string>
+    <string name="face_designer_import">Импорт дизайна</string>
+    <string name="face_designer_share_hint">Дизайн сохраняется в файл вместе с фото. Откройте его в FitWren через “Импорт дизайна”.</string>
+    <string name="face_designer_import_failed">Этот файл не является дизайном циферблата FitWren</string>
+    <string name="face_schedule">Циферблат по времени суток</string>
+    <string name="face_schedule_hint">FitWren сам меняет дневной и ночной циферблат в выбранное время. Браслет должен быть подключён; если нет, попробует чуть позже.</string>
+    <string name="face_schedule_on">Вкл.</string>
+    <string name="face_schedule_day">Дневной циферблат</string>
+    <string name="face_schedule_day_start">Начало дня</string>
+    <string name="face_schedule_night">Ночной циферблат</string>
+    <string name="face_schedule_night_start">Начало ночи</string>
+    <string name="face_schedule_none">Не выбран</string>
+    <string name="goal_off">Выкл.</string>
+    <string name="goal_turn_off">Выключить</string>
+    <string name="weekend_goal">Цель на выходные</string>
+    <string name="weekend_goal_hint">Отдельная дневная цель на субботу и воскресенье. Если выключено, цель каждый день одна.</string>
+    <string name="monthly_goal">Цель на месяц</string>
+    <string name="yearly_goal">Цель на год</string>
+    <string name="period_goal_hint">На странице «Сегодня» видны полоса прогресса и день, когда ты достигнешь цели в нынешнем темпе.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Цель достигнута!</string>
+    <string name="period_no_pace">Пройдись немного, чтобы появился прогноз</string>
+    <string name="period_on_track">В таком темпе ты достигнешь её %1$s</string>
+    <string name="period_behind">Чтобы успеть, нужно %1$s шагов в день</string>
+    <string name="vacation_mode">Режим отпуска</string>
+    <string name="vacation_hint">В выбранные дни серия не прерывается, джокеры не тратятся, напоминания молчат.</string>
+    <string name="vacation_off">Отпуск не запланирован</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Завершить отпуск</string>
+    <string name="vacation_on_title">Ты в отпуске</string>
+    <string name="vacation_on_text">Серия сохраняется до %1$s, напоминания молчат.</string>
+    <string name="backup_group">Полная резервная копия</string>
+    <string name="backup_write">Создать копию</string>
+    <string name="backup_write_hint">Шаги, вес, вода, медали, заметки и настройки в одном файле</string>
+    <string name="backup_restore">Восстановить копию</string>
+    <string name="backup_restore_hint">Выбери файл резервной копии FitWren</string>
+    <string name="backup_restore_choose">Выбрать файл</string>
+    <string name="restore_confirm">Все текущие данные заменятся данными из копии. Подключение браслета и источник шагов не изменятся.</string>
+    <string name="backup_done">Копия сохранена (%1$d строк)</string>
+    <string name="backup_failed">Не удалось записать файл</string>
+    <string name="restore_done">Копия восстановлена (%1$d строк)</string>
+    <string name="restore_failed">Этот файл не является копией FitWren</string>
+    <string name="health_write">Записывать в Health Connect</string>
+    <string name="health_write_hint">Почасовые шаги FitWren появятся и в других приложениях, например Google Fit</string>
+    <string name="health_write_reading">Запись выключена, пока шаги читаются из Health Connect, иначе они посчитаются дважды</string>
+    <string name="health_write_denied">Разрешение на запись в Health Connect не выдано</string>
+    <string name="erase_group">Удаление данных</string>
+    <string name="erase_range">Удалить период</string>
+    <string name="erase_range_hint">Удаляются шаги, вода, вес, сон и заметки выбранных дней. Телефон или браслет могут записать их снова.</string>
+    <string name="erase_all">Удалить все данные</string>
+    <string name="erase_all_hint">Удаляются история шагов, вес, вода, медали и заметки. Настройки остаются.</string>
+    <string name="erase_all_confirm">Удалить все данные навсегда? Лучше сначала сделать копию.</string>
+    <string name="erase_confirm_button">Удалить</string>
+    <string name="erase_done">Данные удалены</string>
+    <string name="delete">Удалить</string>
+    <string name="note_title">Заметка к дню</string>
+    <string name="note_placeholder">Например: был матч, болел</string>
+    <string name="note_empty">Нет заметки</string>
+    <string name="note_add">Добавить заметку</string>
+    <string name="note_edit">Изменить</string>
+    <string name="correct_button">Исправить</string>
+    <string name="correct_hint">Если подсчёт неверен, день можно исправить вручную</string>
+    <string name="correct_done">Этот день исправлен вручную</string>
+    <string name="correct_title">Исправить день</string>
+    <string name="correct_text">Введённое число заменит то, что насчитали телефон и браслет.</string>
+    <string name="correct_undo">Вернуть подсчёт</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Заметки к дню: короткая заметка к выбранному дню в истории; в календаре появится точка</item>
+        <item>Исправление дня: введи правильное число шагов или верни подсчитанное</item>
+        <item>Режим отпуска (Настройки → Цели): в выбранные дни серия не прерывается, джокеры не тратятся, напоминания молчат</item>
+        <item>Цель на выходные, на месяц и на год: полоса прогресса и примерный день достижения на «Сегодня»</item>
+        <item>Полная резервная копия и восстановление (Настройки → Данные): шаги, вес, вода, медали, заметки и настройки в одном файле</item>
+        <item>Удаление данных: за период или всё</item>
+        <item>Экспорт CSV теперь включает воду, вес и сон</item>
+        <item>Запись в Health Connect (по желанию): шаги FitWren видны и в приложениях вроде Google Fit</item>
+    </string-array>
+    <string name="morning_title">Доброе утро!</string>
+    <string name="morning_yesterday">Вчера ты прошёл %1$s шагов</string>
+    <string name="morning_sleep">Ты спал %1$d ч %2$d мин</string>
+    <string name="morning_goal">Цель на сегодня: %1$s шагов</string>
+    <string name="morning_summary">Утренняя сводка</string>
+    <string name="morning_summary_hint">Утреннее уведомление: шаги за вчера, сон и цель на сегодня</string>
+    <string name="morning_hour">Время</string>
+    <string name="record_notify">Уведомление о рекорде</string>
+    <string name="record_notify_hint">Поздравит, как только побьёшь лучший день или неделю</string>
+    <string name="record_day_title">Сегодня твой лучший день!</string>
+    <string name="record_day_text">%1$s шагов, прежний рекорд %2$s</string>
+    <string name="record_week_title">Это твоя лучшая неделя!</string>
+    <string name="record_week_text">%1$s шагов, прежний рекорд %2$s</string>
+    <string name="sedentary">Напоминание о движении</string>
+    <string name="sedentary_hint">С 10:00 до 20:00, если за час было меньше %1$d шагов, напомнит «встань и пройдись»</string>
+    <string name="sedentary_title">Пора размяться</string>
+    <string name="sedentary_text">За последний час %1$d шагов. Пара минут ходьбы пойдёт на пользу.</string>
+    <string name="walk_plan">План прогулок</string>
+    <string name="walk_plan_hint">Задай время прогулок по дням и получай напоминание</string>
+    <string name="walk_plan_dialog_hint">В это время придёт уведомление. Пройдёшь 1 500 шагов в этот или следующий час — отметится на «Сегодня».</string>
+    <string name="walk_plan_none">Нет</string>
+    <string name="walk_plan_title">Время прогулки</string>
+    <string name="walk_plan_text">Твой план: прогулка в %1$s. Вперёд!</string>
+    <string name="walk_plan_today">Прогулка сегодня в %1$s</string>
+    <string name="walk_plan_done">Готово, молодец!</string>
+    <string name="walk_plan_waiting">Отметится после 1 500 шагов в это время</string>
+    <string name="month_report_reminder">Напоминание о месячном отчёте</string>
+    <string name="month_report_reminder_hint">1-го числа каждого месяца в 10:00 напомнит о PDF-отчёте за прошлый месяц</string>
+    <string name="month_report_title">Отчёт за %1$s готов</string>
+    <string name="month_report_text">Выбери месяц в истории и сохрани PDF-отчёт</string>
+    <string name="band_celebrate">Поздравление на браслете</string>
+    <string name="band_celebrate_hint">При достижении цели браслет вибрирует и показывает сообщение с птичкой (если подключён)</string>
+    <string name="band_celebrate_title">🐦 Цель достигнута!</string>
+    <string name="band_celebrate_text">%1$s шагов. Твоя птичка в восторге!</string>
+    <string name="shortcut_water">Вода</string>
+    <string name="shortcut_water_long">Добавить стакан воды</string>
+    <string name="shortcut_today_long">Шаги за сегодня</string>
+    <string name="shortcut_ask">Сколько?</string>
+    <string name="shortcut_ask_long">Сколько шагов сегодня?</string>
+    <string name="shortcut_water_added">Добавлено %1$d мл воды</string>
+    <string name="water_tile_name">FitWren вода</string>
+    <string name="answer_steps">Сегодня ты прошёл %1$s шагов. До цели %2$s.</string>
+    <string name="answer_steps_done">Сегодня ты прошёл %1$s шагов. Цель достигнута, отлично!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Утренняя сводка: шаги за вчера, сон и цель на сегодня</item>
+        <item>Уведомление о рекорде: поздравление, как только побьёшь лучший день или неделю</item>
+        <item>Напоминание о движении: «встань и пройдись» после часа с малым числом шагов</item>
+        <item>План прогулок: время по дням, напоминание и отметка на «Сегодня»</item>
+        <item>Напоминание о месячном отчёте 1-го числа</item>
+        <item>Поздравление на браслете: вибрация и сообщение с птичкой</item>
+        <item>Ярлыки: долгое нажатие на значок — Вода, Сегодня и Сколько?</item>
+        <item>Плитка воды: +1 стакан из шторки уведомлений</item>
+        <item>Голосовой ответ на «Сколько шагов сегодня?» (ярлык и Google Ассистент)</item>
+    </string-array>
+    <string name="medal_group_distance">Расстояние</string>
+    <string name="medal_group_distance_text">Общее пройденное расстояние за все дни (по твоему росту)</string>
+    <string name="medal_group_water">Серия воды</string>
+    <string name="medal_group_water_text">Дней подряд с выполненной целью по воде</string>
+    <string name="medal_group_sleep">Серия сна</string>
+    <string name="medal_group_sleep_text">Ночей подряд со сном не меньше 7 часов (данные браслета)</string>
+    <string name="medal_group_route">Пройденные маршруты</string>
+    <string name="medal_group_route_text">Сколько разных виртуальных маршрутов ты прошёл</string>
+    <string name="medal_km">%1$d км</string>
+    <string name="routes_count">Маршрутов: %1$d</string>
+    <string name="time_left_minutes">До цели ≈ %1$d мин ходьбы</string>
+    <string name="time_left_hours">До цели ≈ %1$d ч %2$d мин ходьбы</string>
+    <string name="food_line">Сожжено ≈ %1$d × %2$s</string>
+    <string name="food_burger">бургер</string>
+    <string name="food_simit">симит (бублик с кунжутом)</string>
+    <string name="food_chocolate">шоколадка</string>
+    <string name="food_cola">банка колы</string>
+    <string name="food_apple">яблоко</string>
+    <string name="trend_title">Тенденция</string>
+    <string name="trend_month">Этот месяц (первые %1$d дн.)</string>
+    <string name="trend_week">Последние 7 дней</string>
+    <string name="trend_up">На %1$d%% больше, чем раньше</string>
+    <string name="trend_down">На %1$d%% меньше, чем раньше</string>
+    <string name="trend_same">Как и раньше</string>
+    <string name="trend_no_data">Нет шагов за прошлый период для сравнения</string>
+    <string name="active_hours_title">Карта активных часов</string>
+    <string name="active_hours_text">Средние шаги по дням и часам за 8 недель; темнее — больше</string>
+    <string name="active_hours_empty">Почасовых данных пока нет</string>
+    <string name="active_hours_peak">Самый активный час: %1$s %2$s</string>
+    <string name="story_banner_title">Твоя история %1$d года готова</string>
+    <string name="story_banner_text">Листай свой год и делись им</string>
+    <string name="story_open">Открыть историю</string>
+    <string name="story_total_title">Твои шаги за %1$d год</string>
+    <string name="story_total_text">В среднем %1$s шагов в день</string>
+    <string name="story_distance_title">Пройденный путь</string>
+    <string name="story_distance_text">Около %1$d%% длины экватора</string>
+    <string name="story_medals_text">Медали за этот год</string>
+    <string name="story_end_title">Отличный год!</string>
+    <string name="story_end_text">Твоя птичка будет шагать с тобой и в новом году</string>
+    <string name="story_share">FitWren %1$d: %2$s шагов, %3$s км, цель выполнена %4$d дн.! 🐦</string>
+    <string name="fitness_age_title">Фитнес-возраст</string>
+    <string name="fitness_age_value">%1$d лет</string>
+    <string name="fitness_age_younger">На %1$d лет моложе реального возраста</string>
+    <string name="fitness_age_older">На %1$d лет старше реального возраста</string>
+    <string name="fitness_age_same">Как реальный возраст</string>
+    <string name="fitness_age_text">Оценка VO2max %1$d по пульсу покоя %2$d и в среднем %3$s шагам в день. Не медицинское измерение.</string>
+    <string name="recovery_title">Восстановление</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Хорошо восстановился: можно бодро погулять</string>
+    <string name="recovery_mid">Средне: хватит обычной ходьбы</string>
+    <string name="recovery_low">Низко: сегодня полегче и отдохни</string>
+    <string name="recovery_text">Сон прошлой ночи сравнивается с прошлой неделей, пульс покоя — со средним. Не медицинская оценка.</string>
+    <string name="quote_title">Мысль дня</string>
+    <string name="quote_setting">Мысль дня</string>
+    <string name="quote_setting_hint">Показывать новую мысль на «Сегодня» каждый день</string>
+    <string-array name="quotes">
+        <item>Каждый шаг — на шаг впереди вчерашнего тебя.</item>
+        <item>Дорога сегодня — отдых завтра.</item>
+        <item>Маленькие шаги тоже проходят длинный путь.</item>
+        <item>Твоя птичка и сегодня хочет лететь с тобой.</item>
+        <item>Идти медленно лучше, чем не идти совсем.</item>
+        <item>Даже если устал, хватит десяти минут.</item>
+        <item>Серия — это привычка, а привычка — это решение.</item>
+        <item>Лестница — сегодняшняя маленькая гора.</item>
+        <item>Ходи, пока говоришь по телефону: шаги придут сами.</item>
+        <item>Прогулка — самый простой способ собраться с мыслями.</item>
+        <item>Если цель кажется далёкой, целься в половину.</item>
+        <item>Сегодняшние шаги — завтрашняя энергия.</item>
+        <item>Понемногу каждый день — много за месяц.</item>
+        <item>Солнце или дождь — гулять можно в любую погоду.</item>
+        <item>Лучшая прогулка — та, которую начинаешь сейчас.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Сегодня: сколько ходьбы осталось до цели (по твоему темпу) и калории в виде еды</item>
+        <item>Виджет «Сегодня» (широкий): время до цели</item>
+        <item>Карточка «Мысль дня» (отключается в Настройки → Оформление)</item>
+        <item>История: карточка тенденции (этот месяц и 7 дней против прошлого) и карта активных часов (8 недель, день × час)</item>
+        <item>История года: в истории в декабре и январе, а также в карточке года; листаемые страницы и отправка</item>
+        <item>Здоровье: оценка восстановления и фитнес-возраст (по браслету)</item>
+        <item>Новые медали: расстояние, серия воды, серия сна, пройденные маршруты</item>
+    </string-array>
+    <string name="bird_item_glasses">Очки</string>
+    <string name="bird_item_flower">Цветок</string>
+    <string name="bird_item_nightcap">Ночной колпак</string>
+    <string name="bird_item_backpack">Рюкзак</string>
+    <string name="bird_unlock_glasses">Пройди всего 42 км</string>
+    <string name="bird_unlock_flower">Цель по воде 7 дней подряд</string>
+    <string name="bird_unlock_nightcap">7 хороших ночей подряд</string>
+    <string name="bird_unlock_backpack">Пройди виртуальный маршрут</string>
+    <string name="bird_item_wear">Получено: выбери, носит ли птичка</string>
+    <string name="seeds_count">Семена: %1$d</string>
+    <string name="seeds_hint">Одно семечко за 1000 шагов: на цвета, песни или корм</string>
+    <string name="bird_fed">Птичке понравилось семечко!</string>
+    <string name="bird_feed">Покормить</string>
+    <string name="bird_species_title">Вид птицы</string>
+    <string name="bird_locked_level">%1$s (уровень %2$d)</string>
+    <string name="bird_color_title">Цвет перьев</string>
+    <string name="bird_price">%1$s (%2$d семян)</string>
+    <string name="bird_sound_title">Песня</string>
+    <string name="bird_species_sparrow">Крапивник</string>
+    <string name="bird_species_owl">Сова</string>
+    <string name="bird_species_parrot">Попугай</string>
+    <string name="bird_species_eagle">Орёл</string>
+    <string name="bird_color_default">Природный</string>
+    <string name="bird_color_sky">Небесный</string>
+    <string name="bird_color_rose">Розовый</string>
+    <string name="bird_color_mint">Мятный</string>
+    <string name="bird_color_plum">Сливовый</string>
+    <string name="bird_color_night">Ночной</string>
+    <string name="bird_sound_chirp">Чирик</string>
+    <string name="bird_sound_trill">Трель</string>
+    <string name="bird_sound_tweet">Свист</string>
+    <string name="bird_sound_coo">Воркование</string>
+    <string name="metronome_channel">Метроном</string>
+    <string name="metronome_title">Метроном темпа</string>
+    <string name="metronome_bpm">%1$d шагов в минуту</string>
+    <string name="walk_stop">Стоп</string>
+    <string name="walk_start">Старт</string>
+    <string name="walk_channel">Запись прогулки</string>
+    <string name="walk_gps_recording">Идёт запись прогулки по GPS</string>
+    <string name="walk_gps_distance">%1$s км</string>
+    <string name="walk_gps_denied">Нет доступа к геолокации; он нужен для прогулки по GPS</string>
+    <string name="walk_tools_title">Инструменты прогулки</string>
+    <string name="walk_dog_title">Прогулка с собакой</string>
+    <string name="walk_dog_hint">Старт при выходе, стоп по возвращении; шаги сохранятся</string>
+    <string name="walk_running">Идёт: %1$s</string>
+    <string name="walk_gps_title">Прогулка по GPS</string>
+    <string name="walk_gps_hint">Сохраняются маршрут и расстояние; геолокация только во время записи</string>
+    <string name="walk_gps_running">%1$s км · %2$s</string>
+    <string name="walk_list_button">Сохранённые прогулки (%1$d)</string>
+    <string name="walk_list_title">Прогулки</string>
+    <string name="walk_delete">Удалить</string>
+    <string name="walk_summary_gps">%1$s км · %2$s · %3$s шагов</string>
+    <string name="walk_summary_dog">%1$s · %2$s шагов</string>
+    <string name="floors_today">Подъём: %1$d этажей</string>
+    <string name="walks_on_day">Прогулок: %1$d</string>
+    <string name="wallpaper_name">Живые обои</string>
+    <string name="wallpaper_description">Птичка FitWren летит из гнезда на ветку, пока ты шагаешь</string>
+    <string name="wallpaper_set_hint">На главном экране птичка летит из гнезда на ветку с шагами дня</string>
+    <string name="lock_title">FitWren заблокирован</string>
+    <string name="lock_use_pin">Ввести PIN</string>
+    <string name="lock_wrong">Неверный PIN, попробуй ещё</string>
+    <string name="lock_enter_pin">Введи PIN</string>
+    <string name="lock_biometric_again">Разблокировать отпечатком или лицом</string>
+    <string name="simple_today">Сегодня</string>
+    <string name="simple_view_off">Вернуть обычный вид</string>
+    <string name="simple_view">Простой вид</string>
+    <string name="simple_view_hint">На «Сегодня» только шаги и цель крупным шрифтом</string>
+    <string name="app_lock">Блокировка приложения</string>
+    <string name="app_lock_hint">Запрашивает PIN при открытии</string>
+    <string name="app_lock_biometric">Отпечаток / лицо</string>
+    <string name="app_lock_biometric_hint">Биометрия телефона; PIN остаётся запасным</string>
+    <string name="app_lock_change">Сменить PIN</string>
+    <string name="app_lock_change_hint">Задать новый PIN</string>
+    <string name="app_lock_set_pin">Задать PIN</string>
+    <string name="app_lock_pin_hint">Число из %1$d–%2$d цифр. Если забудешь, приложение откроется только после очистки данных.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (ещё раз)</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_welcome_title">Добро пожаловать в FitWren</string>
+    <string name="onboarding_welcome_text">Считает шаги, а птичка растёт, когда ты выполняешь цель. Без аккаунта, данные остаются на телефоне.</string>
+    <string name="onboarding_goal_title">Твоя дневная цель</string>
+    <string name="onboarding_goal_text">Потом можно изменить в настройках</string>
+    <string name="onboarding_body_title">Рост и вес</string>
+    <string name="onboarding_body_text">По ним считаются расстояние и калории</string>
+    <string name="onboarding_height">%1$d см</string>
+    <string name="onboarding_weight">%1$d кг</string>
+    <string name="onboarding_permission_title">Разрешение на шаги</string>
+    <string name="onboarding_permission_text">Для подсчёта шагов нужно разрешение на физическую активность</string>
+    <string name="onboarding_permission_done">Разрешение дано ✓</string>
+    <string name="onboarding_permission_button">Разрешить</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Виды птиц: крапивник, сова (уровень 3), попугай (6), орёл (10); в приложении, виджете, обоях и циферблате браслета</item>
+        <item>Семена: одно за 1000 шагов; корми птичку, покупай цвета и песни</item>
+        <item>Аксессуары: надевай или скрывай полученные; новые очки, цветок, ночной колпак и рюкзак</item>
+        <item>Живые обои: птичка летит из гнезда на ветку с твоими шагами</item>
+        <item>Инструменты (Сегодня): метроном темпа, прогулка с собакой и запись прогулки по GPS (с маршрутом)</item>
+        <item>Счётчик этажей: на телефонах с датчиком давления</item>
+        <item>Блокировка (PIN, отпечаток или лицо) и простой вид (Настройки → Оформление и язык)</item>
+        <item>Приветствие при новой установке: цель, рост и вес, разрешение</item>
+    </string-array>
 </resources>

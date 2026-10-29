@@ -23,6 +23,8 @@
     <string name="frozen_text">O celular detecta passos, mas o contador não avança. O sensor foi reconectado; este aviso some sozinho depois de alguns passos.</string>
 
     <string name="service_card_title">Continuar contando em segundo plano</string>
+    <string name="exact_alarms_title">Alarmes exatos</string>
+    <string name="exact_alarms_text">O registro da meia-noite, os lembretes e a troca de mostrador rodam na hora certa. Se desligado, o Android pode atrasá-los em até uma hora. Toque para abrir a permissão.</string>
     <string name="xiaomi_unreadable_title">Não foi possível ler o registro de passos do HyperOS</string>
     <string name="xiaomi_unreadable_text">Os passos não estão sendo atualizados agora. Uma atualização do HyperOS pode ter mudado o registro. Você pode desativar a chave abaixo e continuar contando com “Continuar contando em segundo plano”.</string>
     <string name="xiaomi_stalled_title">O registro de passos do HyperOS não avança</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">Telefone</string>
     <string name="device_other">Outro dispositivo</string>
 
+    <string name="tile_name">Passos FitWren</string>
+    <string name="tile_goal_percent">%%%1$d da meta</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">Hoje %1$s passos, %%%2$d da meta</string>
+    <string name="smart_goal">Meta inteligente</string>
+    <string name="smart_goal_hint" formatted="false">No início de cada semana sobe ou desce um pouco a meta diária com base nas últimas 4 semanas (no máximo 10 %)</string>
+    <string name="smart_goal_changed">Esta semana a meta passou de %1$s para %2$s passos (com base nas últimas 4 semanas)</string>
+    <string name="smart_goal_waiting">Uma sugestão precisa de passos em pelo menos %1$d dias das últimas 4 semanas</string>
+    <string name="smart_goal_next">Sugestão para a próxima semana: %1$s passos</string>
+    <string name="insight_title">Sono e passos</string>
+    <string name="insight_not_enough">Ainda não há dados suficientes: são precisas pelo menos %1$d noites longas e %1$d curtas. Experimente 30 ou 90 dias.</string>
+    <string name="insight_steps_more">Nos dias após dormir mais de %1$d horas você anda em média %2$s passos a mais</string>
+    <string name="insight_steps_less">Nos dias após dormir mais de %1$d horas você anda em média %2$s passos a menos</string>
+    <string name="insight_steps_same">Você anda o mesmo após noites longas e curtas (%1$d horas)</string>
+    <string name="insight_after_long">Após mais de %1$d horas de sono</string>
+    <string name="insight_after_short">Após menos de %1$d horas de sono</string>
+    <string name="insight_sleep_active">Noite após atingir a meta</string>
+    <string name="insight_sleep_rest">Noite após não atingir a meta</string>
+    <string name="insight_days">%1$d dias</string>
+    <string name="insight_hint">Contam os passos do dia em que você acorda, hoje não. É uma relação, não uma causa.</string>
+    <string name="report_button">Relatório de %1$s (PDF)</string>
+    <string name="report_title">Relatório mensal · %1$s</string>
+    <string name="report_page">Página %1$d de %2$d</string>
+    <string name="report_goal_days">%1$d de %2$d dias (meta %3$s)</string>
+    <string name="report_active_days">Dias ativos</string>
+    <string name="report_distance">Distância</string>
+    <string name="report_kcal">Calorias</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Em relação ao mês anterior</string>
+    <string name="report_water">Média diária de água</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Passos por dia</string>
+    <string name="report_weeks">Semanas</string>
+    <string name="report_goal_line">meta</string>
+    <string name="report_days_title">Dias · %1$s</string>
+    <string name="report_day">Dia</string>
+    <string name="report_steps">Passos</string>
+    <string name="report_water_short">Água</string>
+    <string name="report_done">Relatório salvo</string>
+    <string name="report_failed">Não foi possível criar o relatório</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Bloco de definições rápidas: passos de hoje e percentagem da meta no painel de notificações; um toque abre Hoje (Android 7 ou posterior)</item>
+        <item>Meta inteligente (Configurações → Metas, desligada por padrão): se ligada, a meta diária muda no máximo 10% no início de cada semana com base nas últimas 4 semanas</item>
+        <item>Sono e passos (Saúde): passos após noites longas e curtas, e sono após os dias em que atingiu a meta</item>
+        <item>Relatório mensal em PDF (Histórico): resumo do mês, gráfico diário, semanas e tabela dia a dia; sem internet</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>Configurações → Fonte de passos → “Não contar o celular ao usar a pulseira”: ligado, os passos do celular não entram nos dias com dados da pulseira</item>
+        <item>Pulseira e celular sempre se combinam hora a hora: nas horas com a pulseira no pulso só a pulseira conta, o celular preenche as outras horas (antes, sem o registro do HyperOS, valia o maior total do dia)</item>
+        <item>Suporte a ROMs personalizadas (crDroid, LineageOS e outras): em um Xiaomi sem HyperOS, o registro de passos do HyperOS e os passos de bateria do MIUI ficam ocultos e o sensor do celular é usado</item>
+        <item>Alarmes exatos: permita em Configurações → Notificações e o registro da meia-noite, os lembretes e a troca de mostrador rodam sem atraso (Android 14 ou mais recente)</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>O humor do pássaro: nos mostradores FitWren e nos designs o pássaro muda com a meta de passos</item>
+        <item>Clima no mostrador: ícone do clima e temperatura</item>
+        <item>Tela sempre ligada: os mostradores FitWren ganham uma vista escura e simples</item>
+        <item>Compartilhar designs: envie um design com a foto como arquivo e importe o de um amigo</item>
+        <item>Mostrador por horário: o FitWren troca entre mostrador de dia e de noite nos horários escolhidos</item>
+        <item>Mostradores da Mi Band 6: envie um mostrador de um arquivo .bin</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Loja de mostradores: veja os mostradores gratuitos da Xiaomi para Mi Band 8 com imagens, pesquise e envie para a pulseira com um toque</item>
         <item>Mostradores FitWren: nove mostradores com o pássaro (Noite, Estrada, Analógico, Neon, Galho e mais) incluídos, enviados à Mi Band 8 com um toque</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">Conexão direta (Xiaomi, Amazfit)</string>
     <string name="source_connect">Pelo Health Connect</string>
     <string name="source_merge_hint">Se você usa uma pulseira, nas horas em que a usa vale a contagem dela e nas outras a do telefone.</string>
+    <string name="band_only_title">Não contar o celular ao usar a pulseira</string>
+    <string name="band_only_text">Se a pulseira enviou dados num dia, os passos desse dia vêm só da pulseira. O celular só é usado nos dias em que a pulseira não se conectou. Desligado, o celular preenche as horas sem a pulseira.</string>
     <string name="source_direct_manage">Configurações da pulseira</string>
     <string name="device_connect_hint">Os dados são lidos do Health Connect</string>
     <string name="band_reconnect">Reconectar</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">Enviando: %d%%</string>
     <string name="band_faces_done">Mostrador enviado e selecionado.</string>
     <string name="band_faces_failed">Não foi possível enviar o mostrador. Aproxime a pulseira e tente de novo.</string>
+    <string name="huami_faces_hint">Escolha um mostrador .bin feito para a Mi Band 6. O envio pode levar alguns minutos; deixe a pulseira perto do telefone.</string>
+    <string name="huami_faces_invalid">Este arquivo não é um mostrador da Mi Band 6.</string>
+    <string name="huami_faces_done">O mostrador foi enviado. Se a pulseira não o mostrar, escolha-o na lista de mostradores da pulseira.</string>
+    <string name="huami_faces_no_space">A pulseira está cheia. Apague um mostrador na pulseira e tente de novo.</string>
+    <string name="huami_faces_low_battery">A bateria da pulseira está fraca. Carregue-a e tente de novo.</string>
+    <string name="huami_faces_refused">A pulseira não aceitou este arquivo.</string>
     <string name="band_faces_delete">Apagar</string>
     <string name="band_notify_pick_search">Buscar apps</string>
     <string name="band_notify_pick_count">%1$d de %2$d apps enviam à pulseira</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">Elementos</string>
     <string name="face_designer_undo">Desfazer</string>
     <string name="face_designer_reset">Redefinir</string>
+    <string name="face_designer_bird_mood">Pela meta</string>
+    <string name="face_designer_show_weather">Clima</string>
+    <string name="face_designer_share_section">Compartilhar</string>
+    <string name="face_designer_share">Compartilhar design</string>
+    <string name="face_designer_import">Importar design</string>
+    <string name="face_designer_share_hint">O design é salvo em um arquivo com a foto. Abra no FitWren com “Importar design”.</string>
+    <string name="face_designer_import_failed">Este arquivo não é um design de mostrador FitWren</string>
+    <string name="face_schedule">Mostrador por horário</string>
+    <string name="face_schedule_hint">O FitWren troca entre o mostrador de dia e o de noite nos horários escolhidos. A pulseira precisa estar conectada; se não, tenta de novo um pouco depois.</string>
+    <string name="face_schedule_on">Ligado</string>
+    <string name="face_schedule_day">Mostrador de dia</string>
+    <string name="face_schedule_day_start">Início do dia</string>
+    <string name="face_schedule_night">Mostrador de noite</string>
+    <string name="face_schedule_night_start">Início da noite</string>
+    <string name="face_schedule_none">Não escolhido</string>
+    <string name="goal_off">Desativado</string>
+    <string name="goal_turn_off">Desativar</string>
+    <string name="weekend_goal">Meta de fim de semana</string>
+    <string name="weekend_goal_hint">Uma meta diária separada para sábado e domingo. Desativada, todos os dias têm a mesma meta.</string>
+    <string name="monthly_goal">Meta mensal</string>
+    <string name="yearly_goal">Meta anual</string>
+    <string name="period_goal_hint">A página Hoje mostra uma barra de progresso e o dia em que você atinge a meta no ritmo atual.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Meta atingida!</string>
+    <string name="period_no_pace">Caminhe um pouco para ter uma estimativa</string>
+    <string name="period_on_track">Neste ritmo você chega lá em %1$s</string>
+    <string name="period_behind">Você precisa de %1$s passos por dia para conseguir</string>
+    <string name="vacation_mode">Modo férias</string>
+    <string name="vacation_hint">Nos dias escolhidos a sequência não quebra, nenhum coringa é gasto e os lembretes ficam em silêncio.</string>
+    <string name="vacation_off">Nenhuma férias planejada</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">Encerrar férias</string>
+    <string name="vacation_on_title">Você está de férias</string>
+    <string name="vacation_on_text">Sua sequência fica protegida até %1$s e os lembretes estão em silêncio.</string>
+    <string name="backup_group">Backup completo</string>
+    <string name="backup_write">Fazer backup</string>
+    <string name="backup_write_hint">Passos, peso, água, medalhas, notas e configurações em um só arquivo</string>
+    <string name="backup_restore">Restaurar backup</string>
+    <string name="backup_restore_hint">Escolha um arquivo de backup do FitWren</string>
+    <string name="backup_restore_choose">Escolher arquivo</string>
+    <string name="restore_confirm">Todos os dados atuais são substituídos pelo backup. A pulseira e a fonte de passos continuam iguais.</string>
+    <string name="backup_done">Backup salvo (%1$d linhas)</string>
+    <string name="backup_failed">Não foi possível gravar o arquivo</string>
+    <string name="restore_done">Backup restaurado (%1$d linhas)</string>
+    <string name="restore_failed">Este arquivo não é um backup do FitWren</string>
+    <string name="health_write">Gravar no Health Connect</string>
+    <string name="health_write_hint">Os passos por hora do FitWren aparecem também em outros apps como o Google Fit</string>
+    <string name="health_write_reading">A gravação fica desligada enquanto os passos são lidos do Health Connect, senão contariam duas vezes</string>
+    <string name="health_write_denied">A permissão de gravação do Health Connect não foi concedida</string>
+    <string name="erase_group">Apagar dados</string>
+    <string name="erase_range">Apagar um período</string>
+    <string name="erase_range_hint">Passos, água, peso, sono e notas dos dias escolhidos são apagados. O telefone ou a pulseira podem gravá-los de novo.</string>
+    <string name="erase_all">Apagar todos os dados</string>
+    <string name="erase_all_hint">Histórico de passos, peso, água, medalhas e notas são apagados. As configurações ficam.</string>
+    <string name="erase_all_confirm">Apagar todos os dados de vez? É bom fazer um backup antes.</string>
+    <string name="erase_confirm_button">Apagar</string>
+    <string name="erase_done">Dados apagados</string>
+    <string name="delete">Apagar</string>
+    <string name="note_title">Nota do dia</string>
+    <string name="note_placeholder">Por exemplo: teve jogo, estava doente</string>
+    <string name="note_empty">Sem nota</string>
+    <string name="note_add">Adicionar nota</string>
+    <string name="note_edit">Editar</string>
+    <string name="correct_button">Corrigir</string>
+    <string name="correct_hint">Se a contagem estiver errada, você pode corrigir o dia à mão</string>
+    <string name="correct_done">Este dia foi corrigido à mão</string>
+    <string name="correct_title">Corrigir o dia</string>
+    <string name="correct_text">O número digitado substitui o que o telefone e a pulseira contaram.</string>
+    <string name="correct_undo">Voltar ao contado</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Notas do dia: escreva uma nota curta no dia escolhido em Histórico; um pontinho aparece no calendário</item>
+        <item>Corrigir um dia: digite você mesmo o número certo de passos ou volte ao valor contado</item>
+        <item>Modo férias (Configurações → Metas): nos dias escolhidos a sequência não quebra, nenhum coringa é gasto, lembretes em silêncio</item>
+        <item>Meta de fim de semana, mensal e anual: barra de progresso e dia estimado em Hoje</item>
+        <item>Backup completo e restauração (Configurações → Dados): passos, peso, água, medalhas, notas e configurações em um arquivo</item>
+        <item>Apagar dados: um período ou tudo</item>
+        <item>A exportação CSV agora inclui água, peso e sono</item>
+        <item>Gravar no Health Connect (opcional): os passos do FitWren aparecem também em apps como o Google Fit</item>
+    </string-array>
+    <string name="morning_title">Bom dia!</string>
+    <string name="morning_yesterday">Ontem você deu %1$s passos</string>
+    <string name="morning_sleep">Você dormiu %1$d h %2$d min</string>
+    <string name="morning_goal">Sua meta de hoje: %1$s passos</string>
+    <string name="morning_summary">Resumo da manhã</string>
+    <string name="morning_summary_hint">Uma notificação de manhã com os passos de ontem, o sono e a meta de hoje</string>
+    <string name="morning_hour">Hora</string>
+    <string name="record_notify">Aviso de recorde</string>
+    <string name="record_notify_hint">Comemora quando você supera seu melhor dia ou semana</string>
+    <string name="record_day_title">Hoje é seu melhor dia!</string>
+    <string name="record_day_text">%1$s passos, recorde anterior %2$s</string>
+    <string name="record_week_title">Esta é sua melhor semana!</string>
+    <string name="record_week_text">%1$s passos, recorde anterior %2$s</string>
+    <string name="sedentary">Lembrete de movimento</string>
+    <string name="sedentary_hint">Entre 10h e 20h, se você deu menos de %1$d passos em uma hora, ele diz “levante e caminhe um pouco”</string>
+    <string name="sedentary_title">Hora de se mexer</string>
+    <string name="sedentary_text">Você deu %1$d passos na última hora. Alguns minutos de caminhada fazem bem.</string>
+    <string name="walk_plan">Plano de caminhadas</string>
+    <string name="walk_plan_hint">Defina horários de caminhada por dia e receba um lembrete</string>
+    <string name="walk_plan_dialog_hint">Chega um aviso no horário. Dê 1.500 passos naquela hora ou na seguinte e fica marcado em Hoje.</string>
+    <string name="walk_plan_none">Nenhum</string>
+    <string name="walk_plan_title">Hora da sua caminhada</string>
+    <string name="walk_plan_text">Seu plano: caminhada às %1$s. Vamos!</string>
+    <string name="walk_plan_today">Caminhada hoje às %1$s</string>
+    <string name="walk_plan_done">Feito, muito bem!</string>
+    <string name="walk_plan_waiting">Fica marcado quando você der 1.500 passos nesse horário</string>
+    <string name="month_report_reminder">Lembrete do relatório mensal</string>
+    <string name="month_report_reminder_hint">No dia 1º de cada mês às 10h lembra o relatório PDF do mês passado</string>
+    <string name="month_report_title">Seu relatório de %1$s está pronto</string>
+    <string name="month_report_text">Escolha o mês em Histórico e salve o relatório PDF</string>
+    <string name="band_celebrate">Comemoração da meta na pulseira</string>
+    <string name="band_celebrate_hint">Ao atingir a meta a pulseira vibra e mostra uma mensagem com o passarinho (se conectada)</string>
+    <string name="band_celebrate_title">🐦 Meta atingida!</string>
+    <string name="band_celebrate_text">%1$s passos. Seu passarinho está feliz!</string>
+    <string name="shortcut_water">Água</string>
+    <string name="shortcut_water_long">Adicionar um copo de água</string>
+    <string name="shortcut_today_long">Passos de hoje</string>
+    <string name="shortcut_ask">Quantos?</string>
+    <string name="shortcut_ask_long">Quantos passos hoje?</string>
+    <string name="shortcut_water_added">%1$d ml de água adicionados</string>
+    <string name="water_tile_name">Água FitWren</string>
+    <string name="answer_steps">Hoje você deu %1$s passos. Faltam %2$s.</string>
+    <string name="answer_steps_done">Hoje você deu %1$s passos. Meta atingida, ótimo!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Resumo da manhã: passos de ontem, sono e meta de hoje</item>
+        <item>Aviso de recorde: comemoração ao superar seu melhor dia ou semana</item>
+        <item>Lembrete de movimento: “levante e caminhe” após uma hora com poucos passos</item>
+        <item>Plano de caminhadas: horários por dia, lembrete e marca em Hoje</item>
+        <item>Lembrete do relatório mensal no dia 1º</item>
+        <item>Comemoração na pulseira: vibra e mostra uma mensagem com o passarinho</item>
+        <item>Atalhos: toque longo no ícone para Água, Hoje e Quantos?</item>
+        <item>Bloco de água: +1 copo pelo painel de notificações</item>
+        <item>Resposta falada a “Quantos passos hoje?” (atalho e Google Assistente)</item>
+    </string-array>
+    <string name="medal_group_distance">Distância</string>
+    <string name="medal_group_distance_text">Distância total caminhada em todos os dias (pela sua altura)</string>
+    <string name="medal_group_water">Sequência de água</string>
+    <string name="medal_group_water_text">Dias seguidos em que você bateu a meta de água</string>
+    <string name="medal_group_sleep">Sequência de sono</string>
+    <string name="medal_group_sleep_text">Noites seguidas com pelo menos 7 horas de sono (dados da pulseira)</string>
+    <string name="medal_group_route">Rotas concluídas</string>
+    <string name="medal_group_route_text">Número de rotas virtuais diferentes que você concluiu</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d rotas</string>
+    <string name="time_left_minutes">≈ %1$d min de caminhada até a meta</string>
+    <string name="time_left_hours">≈ %1$d h %2$d min de caminhada até a meta</string>
+    <string name="food_line">Você queimou ≈ %1$d × %2$s</string>
+    <string name="food_burger">hambúrguer</string>
+    <string name="food_simit">simit (rosca de gergelim)</string>
+    <string name="food_chocolate">barra de chocolate</string>
+    <string name="food_cola">lata de refrigerante</string>
+    <string name="food_apple">maçã</string>
+    <string name="trend_title">Tendência</string>
+    <string name="trend_month">Este mês (primeiros %1$d dias)</string>
+    <string name="trend_week">Últimos 7 dias</string>
+    <string name="trend_up">%1$d%% a mais que o período anterior</string>
+    <string name="trend_down">%1$d%% a menos que o período anterior</string>
+    <string name="trend_same">Igual ao período anterior</string>
+    <string name="trend_no_data">Sem passos no período anterior para comparar</string>
+    <string name="active_hours_title">Mapa de horas ativas</string>
+    <string name="active_hours_text">Passos médios por dia e hora nas últimas 8 semanas; mais escuro é mais</string>
+    <string name="active_hours_empty">Ainda sem registros por hora</string>
+    <string name="active_hours_peak">Sua hora mais ativa: %1$s %2$s</string>
+    <string name="story_banner_title">Sua história de %1$d está pronta</string>
+    <string name="story_banner_text">Deslize pelo seu ano e compartilhe</string>
+    <string name="story_open">Abrir história</string>
+    <string name="story_total_title">Passos que você deu em %1$d</string>
+    <string name="story_total_text">Em média %1$s passos por dia</string>
+    <string name="story_distance_title">Distância que você caminhou</string>
+    <string name="story_distance_text">Cerca de %1$d%% da volta ao mundo</string>
+    <string name="story_medals_text">Medalhas que você ganhou este ano</string>
+    <string name="story_end_title">Que ano!</string>
+    <string name="story_end_text">Seu passarinho vai continuar caminhando com você</string>
+    <string name="story_share">FitWren %1$d: %2$s passos, %3$s km, meta batida em %4$d dias! 🐦</string>
+    <string name="fitness_age_title">Idade fitness</string>
+    <string name="fitness_age_value">%1$d anos</string>
+    <string name="fitness_age_younger">%1$d anos a menos que sua idade real</string>
+    <string name="fitness_age_older">%1$d anos a mais que sua idade real</string>
+    <string name="fitness_age_same">Igual à sua idade real</string>
+    <string name="fitness_age_text">VO2max estimado %1$d, a partir da frequência em repouso %2$d e média de %3$s passos por dia. Não é medição médica.</string>
+    <string name="recovery_title">Recuperação</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Bem recuperado: hoje dá para caminhar em ritmo forte</string>
+    <string name="recovery_mid">Médio: sua caminhada de sempre basta</string>
+    <string name="recovery_low">Baixa: hoje vá com calma e descanse</string>
+    <string name="recovery_text">O sono da última noite é comparado com a semana anterior e a frequência em repouso com a média. Não é avaliação médica.</string>
+    <string name="quote_title">Frase do dia</string>
+    <string name="quote_setting">Frase do dia</string>
+    <string name="quote_setting_hint">Mostrar uma frase nova todo dia em Hoje</string>
+    <string-array name="quotes">
+        <item>Cada passo te deixa um passo à frente de ontem.</item>
+        <item>O caminho de hoje é o descanso de amanhã.</item>
+        <item>Passos pequenos também terminam caminhos longos.</item>
+        <item>Seu passarinho quer voar com você hoje também.</item>
+        <item>Caminhar devagar é melhor do que não caminhar.</item>
+        <item>Mesmo cansado, dez minutos bastam.</item>
+        <item>Uma sequência é um hábito, e um hábito é uma escolha.</item>
+        <item>A escada é a pequena montanha de hoje.</item>
+        <item>Caminhe enquanto fala ao telefone; os passos vêm sozinhos.</item>
+        <item>Caminhar é o jeito mais fácil de organizar as ideias.</item>
+        <item>Se a meta parece longe, mire na metade.</item>
+        <item>Os passos de hoje são a energia de amanhã.</item>
+        <item>Um pouco todo dia vira muito todo mês.</item>
+        <item>Sol ou chuva, caminhar combina com qualquer tempo.</item>
+        <item>A melhor caminhada é a que você começa agora.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Hoje: tempo de caminhada que falta para a meta (pelo seu ritmo) e calorias em comida</item>
+        <item>Widget Hoje (largo): tempo que falta</item>
+        <item>Cartão frase do dia (pode desligar em Configurações → Aparência)</item>
+        <item>Histórico: cartão de tendência (este mês e últimos 7 dias vs antes) e mapa de horas ativas (8 semanas, dia × hora)</item>
+        <item>História do ano: no Histórico em dezembro e janeiro e no cartão do ano; páginas deslizáveis e compartilhamento</item>
+        <item>Saúde: pontuação de recuperação e idade fitness (com a pulseira)</item>
+        <item>Novas medalhas: distância, sequência de água, sequência de sono, rotas concluídas</item>
+    </string-array>
+    <string name="bird_item_glasses">Óculos</string>
+    <string name="bird_item_flower">Flor</string>
+    <string name="bird_item_nightcap">Touca de dormir</string>
+    <string name="bird_item_backpack">Mochila</string>
+    <string name="bird_unlock_glasses">Caminhe 42 km no total</string>
+    <string name="bird_unlock_flower">Meta de água 7 dias seguidos</string>
+    <string name="bird_unlock_nightcap">7 boas noites seguidas</string>
+    <string name="bird_unlock_backpack">Conclua uma rota virtual</string>
+    <string name="bird_item_wear">Ganho: escolha se o passarinho usa</string>
+    <string name="seeds_count">Sementes: %1$d</string>
+    <string name="seeds_hint">Uma semente a cada 1.000 passos, para cores, cantos ou alimentar o passarinho</string>
+    <string name="bird_fed">Seu passarinho adorou a semente!</string>
+    <string name="bird_feed">Alimentar</string>
+    <string name="bird_species_title">Espécie</string>
+    <string name="bird_locked_level">%1$s (nível %2$d)</string>
+    <string name="bird_color_title">Cor das penas</string>
+    <string name="bird_price">%1$s (%2$d sementes)</string>
+    <string name="bird_sound_title">Canto</string>
+    <string name="bird_species_sparrow">Corruíra</string>
+    <string name="bird_species_owl">Coruja</string>
+    <string name="bird_species_parrot">Papagaio</string>
+    <string name="bird_species_eagle">Águia</string>
+    <string name="bird_color_default">Natural</string>
+    <string name="bird_color_sky">Azul-céu</string>
+    <string name="bird_color_rose">Rosa</string>
+    <string name="bird_color_mint">Menta</string>
+    <string name="bird_color_plum">Ameixa</string>
+    <string name="bird_color_night">Noite</string>
+    <string name="bird_sound_chirp">Piu-piu</string>
+    <string name="bird_sound_trill">Trinado</string>
+    <string name="bird_sound_tweet">Assobio</string>
+    <string name="bird_sound_coo">Arrulho</string>
+    <string name="metronome_channel">Metrônomo</string>
+    <string name="metronome_title">Metrônomo de ritmo</string>
+    <string name="metronome_bpm">%1$d passos por minuto</string>
+    <string name="walk_stop">Parar</string>
+    <string name="walk_start">Iniciar</string>
+    <string name="walk_channel">Gravação de caminhada</string>
+    <string name="walk_gps_recording">Gravando caminhada com GPS</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Permissão de localização negada; a caminhada GPS precisa dela</string>
+    <string name="walk_tools_title">Ferramentas de caminhada</string>
+    <string name="walk_dog_title">Passeio com o cachorro</string>
+    <string name="walk_dog_hint">Inicie ao sair, pare ao voltar; os passos são salvos</string>
+    <string name="walk_running">Em andamento: %1$s</string>
+    <string name="walk_gps_title">Caminhada com GPS</string>
+    <string name="walk_gps_hint">Rota e distância salvas; a localização só é usada durante a gravação</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Caminhadas salvas (%1$d)</string>
+    <string name="walk_list_title">Caminhadas</string>
+    <string name="walk_delete">Excluir</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s passos</string>
+    <string name="walk_summary_dog">%1$s · %2$s passos</string>
+    <string name="floors_today">%1$d andares subidos</string>
+    <string name="walks_on_day">%1$d caminhadas</string>
+    <string name="wallpaper_name">Papel de parede animado</string>
+    <string name="wallpaper_description">O passarinho do FitWren voa do ninho ao galho enquanto você caminha</string>
+    <string name="wallpaper_set_hint">Na tela inicial o passarinho voa do ninho ao galho com os passos do dia</string>
+    <string name="lock_title">FitWren está bloqueado</string>
+    <string name="lock_use_pin">Usar PIN</string>
+    <string name="lock_wrong">PIN errado, tente de novo</string>
+    <string name="lock_enter_pin">Digite seu PIN</string>
+    <string name="lock_biometric_again">Desbloquear com digital ou rosto</string>
+    <string name="simple_today">Hoje</string>
+    <string name="simple_view_off">Voltar à visão normal</string>
+    <string name="simple_view">Visão simples</string>
+    <string name="simple_view_hint">Só passos e meta em letras grandes em Hoje</string>
+    <string name="app_lock">Bloqueio do app</string>
+    <string name="app_lock_hint">Pede um PIN ao abrir</string>
+    <string name="app_lock_biometric">Desbloquear com digital / rosto</string>
+    <string name="app_lock_biometric_hint">O desbloqueio biométrico do telefone; o PIN fica de reserva</string>
+    <string name="app_lock_change">Alterar PIN</string>
+    <string name="app_lock_change_hint">Defina um novo PIN</string>
+    <string name="app_lock_set_pin">Definir PIN</string>
+    <string name="app_lock_pin_hint">Um número de %1$d–%2$d dígitos. Se esquecer, o app só abre apagando os dados.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (de novo)</string>
+    <string name="onboarding_skip">Pular</string>
+    <string name="onboarding_welcome_title">Bem-vindo ao FitWren</string>
+    <string name="onboarding_welcome_text">Conta seus passos e seu passarinho cresce quando você bate a meta. Sem conta; seus dados ficam no telefone.</string>
+    <string name="onboarding_goal_title">Sua meta diária</string>
+    <string name="onboarding_goal_text">Você pode mudar depois em Configurações</string>
+    <string name="onboarding_body_title">Altura e peso</string>
+    <string name="onboarding_body_text">Distância e calorias são calculadas com isso</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Permissão de passos</string>
+    <string name="onboarding_permission_text">Contar passos precisa da permissão de atividade física</string>
+    <string name="onboarding_permission_done">Permissão concedida ✓</string>
+    <string name="onboarding_permission_button">Permitir</string>
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Espécies: corruíra, coruja (nível 3), papagaio (6), águia (10); no app, no widget, no papel de parede e no mostrador da pulseira</item>
+        <item>Sementes: uma a cada 1.000 passos; alimente o passarinho e compre cores e cantos</item>
+        <item>Acessórios: use ou esconda o que ganhou; novos óculos, flor, touca e mochila</item>
+        <item>Papel de parede animado: o passarinho voa do ninho ao galho com seus passos</item>
+        <item>Ferramentas (Hoje): metrônomo de ritmo, passeio com o cachorro e caminhada com GPS (com a rota)</item>
+        <item>Contador de andares: em telefones com sensor de pressão</item>
+        <item>Bloqueio do app (PIN, digital ou rosto) e visão simples (Configurações → Aparência e idioma)</item>
+        <item>Páginas de boas-vindas na instalação nova: meta, altura e peso, permissão</item>
+    </string-array>
 </resources>

@@ -26,6 +26,9 @@ class HuamiSession(
     var writeAuth: (ByteArray) -> Unit = {}
     var writeFetch: (ByteArray) -> Unit = {}
 
+    /** Called once authenticated instead of reading activity, for a connection made for something else. */
+    var onAuthenticated: (() -> Unit)? = null
+
     var authenticated = false
         private set
     var answered = false
@@ -60,7 +63,7 @@ class HuamiSession(
             }
             AUTH_ENCRYPTED -> if (ok) {
                 authenticated = true
-                fetch(since)
+                onAuthenticated?.invoke() ?: fetch(since)
             } else {
                 result = BandResult.AuthFailed
             }

@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dordeorz.adimsayar.ExtraController
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.Achievements
 import com.dordeorz.adimsayar.data.AppSettings
@@ -54,6 +55,7 @@ import com.dordeorz.adimsayar.data.Weight
 import com.dordeorz.adimsayar.ui.oem.OemProfile
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.YearMonth
 
 enum class PermissionState { Granted, NeedsRequest, Denied }
 
@@ -79,12 +81,14 @@ data class MainUiState(
     val frozen: Boolean,
     val batteryProfile: OemProfile?,
     val serviceEnabled: Boolean,
+    val exactAlarmsAllowed: Boolean?,
     val xiaomiAvailable: Boolean,
     val xiaomiEnabled: Boolean,
     val xiaomiProblem: XiaomiProblem?,
     val wearableAvailable: Boolean,
     val wearableEnabled: Boolean,
     val bandDirectEnabled: Boolean,
+    val bandOnly: Boolean,
     val bandSyncing: Boolean,
     val logLines: List<String>,
     val version: String,
@@ -94,6 +98,7 @@ data class MainUiState(
     val water: Map<LocalDate, Int>,
     val freezes: Set<LocalDate>,
     val challenges: ChallengeSummary,
+    val extra: ExtraState = ExtraState(),
 ) {
     val healthEnabled: Boolean get() = wearableEnabled || bandDirectEnabled
 }
@@ -103,15 +108,18 @@ class MainActions(
     val onOpenAppSettings: () -> Unit,
     val onDismissBatteryCard: () -> Unit,
     val onServiceEnabledChange: (Boolean) -> Unit,
+    val onOpenExactAlarms: () -> Unit,
     val onXiaomiEnabledChange: (Boolean) -> Unit,
     val onWearableEnabledChange: (Boolean) -> Unit,
     val onWearableResync: () -> Unit,
     val onBandDirectChange: suspend (Boolean) -> Unit,
     val onSyncBand: () -> Unit,
+    val onBandOnlyChange: (Boolean) -> Unit,
     val onThemeModeChange: (ThemeMode) -> Unit,
     val onDynamicColorChange: (Boolean) -> Unit,
     val onWidgetOpacityChange: (Int) -> Unit,
     val onDailyGoalChange: (Long) -> Unit,
+    val onSmartGoalChange: (Boolean) -> Unit,
     val onWeeklyGoalChange: (Long) -> Unit,
     val onHeightChange: (Int) -> Unit,
     val onWeightChange: (Int) -> Unit,
@@ -124,6 +132,7 @@ class MainActions(
     val onLanguageChange: (String) -> Unit,
     val onExport: () -> Unit,
     val onImport: () -> Unit,
+    val onMonthReport: (YearMonth) -> Unit,
     val loadDayDetail: suspend (LocalDate) -> DayDetail?,
     val loadBandDay: suspend (LocalDate) -> BandDay?,
     val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
@@ -144,6 +153,7 @@ class MainActions(
     val onWaterReminderChange: (Boolean) -> Unit,
     val onWaterIntervalChange: (Int) -> Unit,
     val onRouteChange: (String?) -> Unit,
+    val extra: ExtraController,
 )
 
 @Composable
@@ -210,7 +220,7 @@ fun AppScreen(state: MainUiState, actions: MainActions) {
                 when (shown) {
                     Tab.History -> HistoryScreen(state, actions)
                     Tab.Health -> HealthScreen(state, actions, onOpenSettings = { tab = Tab.Settings })
-                    Tab.Today -> TodayScreen(state, actions)
+                    Tab.Today -> if (state.extra.extras.simpleView) SimpleTodayScreen(state, actions) else TodayScreen(state, actions)
                     Tab.Medals -> MedalsScreen(state, actions.onRouteChange)
                     Tab.Settings -> SettingsScreen(state, actions)
                 }

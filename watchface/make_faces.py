@@ -44,6 +44,11 @@ SRC_HEART = "0822"
 SRC_BATTERY = "0841"
 SRC_KCAL = "0823"
 SRC_KCAL_PERCENT = "1023"
+SRC_WEATHER = "3031"  # the band's condition code, see band/XiaomiWeather.kt
+SRC_TEMP = "2031"  # °C
+
+# The bird's mood by step goal percent: asleep, awake, happy, celebrating.
+MOODS = ((0, "sleepy"), (25, "awake"), (60, "happy"), (100, "party"))
 
 
 def canvas(w, h):
@@ -75,6 +80,16 @@ def digits(prefix, height, color):
     return names, width, height
 
 
+def light_digits(prefix, height, color):
+    """Like digits(), in Inter Light."""
+    global FONT
+    bold, FONT = FONT, "/usr/share/fonts/opentype/inter/Inter-Light.otf"
+    try:
+        return digits(prefix, height, color)
+    finally:
+        FONT = bold
+
+
 def glyph(name, text, height, color):
     font = ImageFont.truetype(FONT, int(height * 1.32) * SS)
     box = font.getbbox(text)
@@ -90,8 +105,10 @@ def ellipse(draw, cx, cy, rx, ry, color, s, ox, oy):
     draw.ellipse([(ox + (cx - rx) * s), (oy + (cy - ry) * s), (ox + (cx + rx) * s), (oy + (cy + ry) * s)], fill=color)
 
 
-def bird(size, sleepy=False):
-    """The grown bird of BirdPainter (unit square 100 x 100), happy or sleepy."""
+def bird(size, sleepy=False, mood=None):
+    """The grown bird of BirdPainter (unit square 100 x 100) in one of MOODS."""
+    mood = mood or ("sleepy" if sleepy else "happy")
+    sleepy = mood == "sleepy"
     img = canvas(size, size)
     layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(layer)
@@ -135,6 +152,21 @@ def bird(size, sleepy=False):
         d.text((72 * u, 22 * u), "z", font=ImageFont.truetype(FONT, int(10 * u)), fill=(0x90, 0xA4, 0xAE))
         d.text((80 * u, 6 * u), "z", font=zz, fill=(0x90, 0xA4, 0xAE))
         return finish(img, size, size)
+    if mood == "awake":
+        draw.polygon([pt(-5, -41), pt(5, -41), pt(0, -33)], fill=BEAK)
+        img.alpha_composite(layer)
+        return finish(img, size, size)
+    if mood == "party":
+        # confetti around the bird
+        for i, (x, y) in enumerate(((8, 10), (90, 12), (14, 36), (92, 40), (6, 64), (94, 68), (30, 4), (70, 6))):
+            color = ((0xEF, 0x53, 0x50), (0x29, 0xB6, 0xF6), (0x9C, 0xE6, 0x5A), (0xFF, 0x4F, 0xC3))[i % 4]
+            if i % 2:
+                draw.ellipse([x * u - 2.6 * u, y * u - 2.6 * u, x * u + 2.6 * u, y * u + 2.6 * u], fill=color)
+            else:
+                piece = Image.new("RGBA", layer.size, (0, 0, 0, 0))
+                ImageDraw.Draw(piece).rectangle([x * u - 1.6 * u, y * u - 3.4 * u, x * u + 1.6 * u, y * u + 3.4 * u], fill=color)
+                layer.alpha_composite(piece.rotate(30 * i, center=(x * u, y * u), resample=Image.BICUBIC))
+        draw = ImageDraw.Draw(layer)
     # open beak
     draw.polygon([pt(-5, -41), pt(5, -41), pt(0, -36)], fill=BEAK)
     draw.polygon([pt(-4, -35), pt(4, -35), pt(0, -30)], fill=BEAK)
@@ -207,6 +239,55 @@ def icon_moon(size, color=(0xB3, 0xC7, 0xFF)):
     mask = Image.new("L", img.size, 0)
     ImageDraw.Draw(mask).ellipse([0.32 * k, -0.02 * k, 1.06 * k, 0.72 * k], fill=255)
     img.putalpha(Image.composite(Image.new("L", img.size, 0), img.getchannel("A"), mask))
+    return finish(img, size, size)
+
+
+# Weather condition codes of the band (band/XiaomiWeather.kt) and the picture each one gets.
+WEATHER_KINDS = {0: "sun", 1: "partly", 2: "cloud", 3: "rain", 4: "storm", 5: "storm", 6: "sleet", 7: "rain", 8: "rain",
+                 9: "rain", 10: "rain", 11: "rain", 12: "rain", 13: "snow", 14: "snow", 15: "snow", 16: "snow",
+                 17: "snow", 18: "fog", 19: "sleet"}
+SUN = (0xFF, 0xC9, 0x3C)
+CLOUD = (0xE0, 0xE6, 0xEE)
+RAIN = (0x4F, 0xC3, 0xF7)
+
+
+def icon_weather(kind, size, white=False):
+    """A small weather picture; with [white] everything is white so the app can tint it."""
+    img = canvas(size, size)
+    d = ImageDraw.Draw(img)
+    k = size * SS
+    sun, cloud, rain = (WHITE, WHITE, WHITE) if white else (SUN, CLOUD, RAIN)
+
+    def cloud_at(dx, dy, scale=1.0):
+        for box in ((0.12, 0.42, 0.52, 0.82), (0.3, 0.26, 0.74, 0.7), (0.5, 0.42, 0.9, 0.82)):
+            d.ellipse([(dx + box[0] * scale) * k, (dy + box[1] * scale) * k, (dx + box[2] * scale) * k, (dy + box[3] * scale) * k], fill=cloud)
+        d.rectangle([(dx + 0.32 * scale) * k, (dy + 0.6 * scale) * k, (dx + 0.7 * scale) * k, (dy + 0.82 * scale) * k], fill=cloud)
+
+    if kind in ("sun", "partly"):
+        c, r = (0.5, 0.5) if kind == "sun" else (0.36, 0.34), (0.2 if kind == "sun" else 0.16)
+        for i in range(8):
+            a = math.radians(i * 45)
+            d.line([((c[0] + math.cos(a) * (r + 0.07)) * k, (c[1] + math.sin(a) * (r + 0.07)) * k),
+                    ((c[0] + math.cos(a) * (r + 0.17)) * k, (c[1] + math.sin(a) * (r + 0.17)) * k)], fill=sun, width=int(0.07 * k))
+        d.ellipse([(c[0] - r) * k, (c[1] - r) * k, (c[0] + r) * k, (c[1] + r) * k], fill=sun)
+        if kind == "partly":
+            cloud_at(0.08, 0.12, 0.92)
+    elif kind == "fog":
+        for y in (0.3, 0.5, 0.7):
+            d.line([(0.12 * k, y * k), (0.88 * k, y * k)], fill=cloud, width=int(0.09 * k))
+    else:
+        cloud_at(0, -0.14)
+        if kind == "rain":
+            for x in (0.32, 0.52, 0.72):
+                d.line([(x * k, 0.76 * k), ((x - 0.06) * k, 0.94 * k)], fill=rain, width=int(0.07 * k))
+        elif kind == "snow":
+            for x in (0.3, 0.5, 0.7):
+                d.ellipse([(x - 0.05) * k, 0.8 * k, (x + 0.05) * k, 0.9 * k], fill=cloud if white else WHITE)
+        elif kind == "sleet":
+            d.line([(0.34 * k, 0.76 * k), (0.28 * k, 0.94 * k)], fill=rain, width=int(0.07 * k))
+            d.ellipse([0.5 * k, 0.8 * k, 0.6 * k, 0.9 * k], fill=cloud if white else WHITE)
+        elif kind == "storm":
+            d.polygon([(0.52 * k, 0.62 * k), (0.36 * k, 0.84 * k), (0.5 * k, 0.84 * k), (0.42 * k, 1.0 * k), (0.66 * k, 0.74 * k), (0.52 * k, 0.74 * k)], fill=sun)
     return finish(img, size, size)
 
 
@@ -295,7 +376,33 @@ class Face:
             "Spacing": 0, "Blanking": 0, "Visible_Src": 0,
         }, ("list", files, sample)))
 
-    def date_row(self, y, height, day_color, num_color, gap=6):
+    def mood_bird(self, size, x, y, sample):
+        """The bird as a list that changes with the step goal: asleep, awake, happy, celebrating."""
+        files = [(p, self.file(bird(size, mood=m), f"bird_{m}.png")) for p, m in MOODS]
+        self.image_list("bird", x, y, files, SRC_STEP_PERCENT, sample)
+
+    def weather(self, x, y, icon, digit_set, white=False):
+        """The weather picture and the temperature with a degree sign; returns the sign's place."""
+        names = {}
+        for kind in sorted(set(WEATHER_KINDS.values())):
+            names[kind] = self.file(icon_weather(kind, icon, white), f"weather_{kind}.png")
+        self.image_list("weather", x, y + (digit_set[2] - icon) // 2, [(c, names[k]) for c, k in sorted(WEATHER_KINDS.items())], SRC_WEATHER, 1)
+        nx = x + icon + 2
+        self.number("temp", nx, y, digit_set, 2, SRC_TEMP, "18", align=0, blanking=1)
+        return nx + 2 * digit_set[1], y
+
+    def weather_badge(self, cx, y, height, color, prefix="temp", white=False):
+        """The weather picture and the temperature, centred on cx; returns the degree sign's place."""
+        temp = digits(prefix, height, color)
+        deg = degree(temp, f"{prefix}_deg.png")
+        x = cx - (height + 2 + 2 * temp[1] + deg[1]) // 2
+        at = self.weather(x, y, height, temp, white)
+        if not white:
+            self.image("degree", *at, deg[0])
+        return at, deg
+
+    def date_row(self, y, height, day_color, num_color, gap=6, weather=False):
+        """Weekday and date, with [weather] also the weather picture and the temperature after them."""
         date = digits(f"date", height, num_color)
         day_files = [glyph(f"weekday_{i}.png", n, height, day_color) for i, n in enumerate(WEEKDAYS)]
         wd_w = max(f[1] for f in day_files)
@@ -307,12 +414,20 @@ class Face:
             padded.save(os.path.join(IMAGES, f[0]))
         dot = glyph("dot.png", ".", height, num_color)
         total = wd_w + gap + date[1] * 4 + dot[1]
+        icon = height
+        if weather:
+            deg = degree(date)
+            total += gap + 4 + icon + 2 + 2 * date[1] + deg[1]
         x = (W - total) // 2
         self.image_list("weekday", x, y, [(i, f[0]) for i, f in enumerate(day_files)], SRC_WEEKDAY, 1)
         x += wd_w + gap
         self.number("day", x, y, date, 2, SRC_DAY, "26")
         self.image("date_dot", x + 2 * date[1], y, dot[0])
         self.number("month", x + 2 * date[1] + dot[1], y, date, 2, SRC_MONTH, "10")
+        if weather:
+            x += 4 * date[1] + dot[1] + gap + 4
+            dx, dy = self.weather(x, y, icon, date)
+            self.image("degree", dx, dy, deg[0])
 
     def flatten(self):
         """The Band 8 compiler stores plain images without transparency, so their clear pixels show
@@ -392,6 +507,49 @@ class Face:
             for w in self.widgets:
                 f.write(w.xml() + "\n")
             f.write("  </Screen>\n</FaceProject>\n")
+        if shelf == "faces":
+            self.write_aod()
+
+    def write_aod(self, color=(0xC8, 0xC8, 0xC8)):
+        """The always-on screen: a dim one-line time and the date on black. Mi Create's compiler
+        takes it from the AOD/ project inside the face's folder."""
+        global IMAGES
+        main_images = IMAGES
+        folder = os.path.join(self.dir, "AOD")
+        IMAGES = os.path.join(folder, "images")
+        if os.path.isdir(IMAGES):
+            for f in os.listdir(IMAGES):
+                os.remove(os.path.join(IMAGES, f))
+        os.makedirs(IMAGES, exist_ok=True)
+        os.makedirs(os.path.join(folder, "output"), exist_ok=True)
+        aod = Face.__new__(Face)
+        aod.name, aod.title, aod.face_id, aod.dir = "AOD", "", "", folder
+        aod.widgets, aod.sizes = [], {}
+        time = light_digits("aod", 44, color)
+        colon = glyph("aod_colon.png", ":", 44, (0x80, 0x80, 0x80))
+        tx = (W - 4 * time[1] - colon[1]) // 2
+        aod.number("hour", tx, 150, time, 2, SRC_HOUR, "09")
+        aod.image("colon", tx + 2 * time[1], 150, colon[0])
+        aod.number("minute", tx + 2 * time[1] + colon[1], 150, time, 2, SRC_MINUTE, "41")
+        aod.date_row(214, 16, (0x80, 0x80, 0x80), (0xA0, 0xA0, 0xA0))
+        aod.mood_bird(40, (W - 40) // 2, 270, 65)
+        # plain images keep no transparency: give them the black under them
+        for w in aod.widgets:
+            if w.attrs["Shape"] == 30:
+                path = os.path.join(IMAGES, w.attrs["Bitmap"])
+                img = Image.open(path).convert("RGBA")
+                flat = Image.new("RGBA", img.size, (0, 0, 0, 255))
+                flat.alpha_composite(img)
+                flat.save(path)
+        aod.draw(aod.widgets, Image.new("RGBA", (W, H), (0, 0, 0, 255))).save(os.path.join(folder, "preview.png"))
+        with open(os.path.join(folder, "AOD.fprj"), "w", encoding="utf-8") as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n')
+            f.write('<FaceProject DeviceType="9" Id="">\n')
+            f.write('  <Screen Title="" Bitmap="">\n')
+            for w in aod.widgets:
+                f.write(w.xml() + "\n")
+            f.write("  </Screen>\n</FaceProject>\n")
+        IMAGES = main_images
 
 
 def overlaps(widget, img, x, y):
@@ -414,8 +572,20 @@ def rings(face, size, width, **colors):
     return [(p, face.file(ring(size, width, p, **colors), f"ring_{p}.png")) for p in range(0, 101, 10)]
 
 
-def health_row(face, y, digit_set):
+def degree(digit_set, name="deg.png"):
+    """A degree sign cut from the digit set's zero, so it has the digits' colour."""
+    zero = Image.open(os.path.join(IMAGES, digit_set[0][0])).convert("RGBA")
+    h = digit_set[2]
+    ring_ = zero.resize((max(4, int(digit_set[1] * 0.45)), max(4, int(h * 0.42))), Image.LANCZOS)
+    img = Image.new("RGBA", (ring_.width + 2, h), (0, 0, 0, 0))
+    img.alpha_composite(ring_, (1, 0))
+    img.save(os.path.join(IMAGES, name))
+    return name, img.width, h
+
+
+def health_row(face, y, color, height=18):
     icon = 18
+    digit_set = digits("small", height, color)
     face.file(icon_heart(icon), "icon_heart.png")
     face.file(icon_battery(icon), "icon_battery.png")
     face.image("heart_icon", 30, y, "icon_heart.png")
@@ -435,13 +605,11 @@ def classic():
     f.date_row(168, 20, BODY, WHITE)
     size = 156
     f.image_list("goal", (W - size) // 2, 196, rings(f, size, 10), SRC_STEP_PERCENT, 80)
-    f.file(bird(104), "bird.png")
-    f.image("bird", (W - 104) // 2, 196 + (size - 104) // 2 - 4, "bird.png")
-    f.file(icon_steps(22), "icon_steps.png")
-    f.image("steps_icon", (W - 22) // 2, 360, "icon_steps.png")
+    f.mood_bird(104, (W - 104) // 2, 196 + (size - 104) // 2 - 4, 80)
+    f.weather_badge(W // 2, 360, 18, GREY)
     mid = digits("mid", 26, WHITE)
     f.number("steps", (W - mid[1] * 5) // 2, 386, mid, 5, SRC_STEPS, "8421", blanking=1)
-    health_row(f, 438, digits("small", 18, GREY))
+    health_row(f, 438, GREY)
     f.write()
 
 
@@ -459,13 +627,13 @@ def night():
     f.number("hour", hx, 60, hour, 2, SRC_HOUR, "22")
     f.number("minute", hx, 124, minute, 2, SRC_MINUTE, "47")
     f.date_row(192, 18, sky, WHITE)
+    f.weather_badge(W // 2, 26, 16, sky)
     size = 140
     f.image_list("goal", (W - size) // 2, 228, rings(f, size, 6, color=sky, done=(0xFF, 0xD5, 0x4F), track=(0x1E, 0x24, 0x44)), SRC_STEP_PERCENT, 60)
-    f.file(bird(96, sleepy=True), "bird.png")
-    f.image("bird", (W - 96) // 2, 228 + (size - 96) // 2 - 2, "bird.png")
+    f.mood_bird(96, (W - 96) // 2, 228 + (size - 96) // 2 - 2, 10)
     mid = digits("mid", 24, WHITE)
     f.number("steps", (W - mid[1] * 5) // 2, 384, mid, 5, SRC_STEPS, "6230", blanking=1)
-    health_row(f, 432, digits("small", 18, (0x8E, 0x9A, 0xC4)))
+    health_row(f, 432, (0x8E, 0x9A, 0xC4))
     f.write()
 
 
@@ -482,8 +650,8 @@ def simple():
     f.image_list("goal", (W - 132) // 2, 300, lines, SRC_STEP_PERCENT, 70)
     small = digits("small", 18, GREY)
     f.number("steps", (W - small[1] * 5) // 2, 316, small, 5, SRC_STEPS, "7000", blanking=1)
-    f.file(bird(80), "bird.png")
-    f.image("bird", (W - 80) // 2, 372, "bird.png")
+    f.weather_badge(W // 2, 346, 16, GREY)
+    f.mood_bird(80, (W - 80) // 2, 372, 70)
     f.write()
 
 
@@ -566,10 +734,9 @@ def road():
         walkers.append((p, f.file(img, f"walk_{p}.png")))
     f.image_list("walker", 0, span[0], walkers, SRC_STEP_PERCENT, 60)
     mid = digits("mid", 28, WHITE)
-    f.file(icon_steps(22), "icon_steps.png")
-    f.image("steps_icon", (W - 22) // 2, 388, "icon_steps.png")
+    f.weather_badge(W // 2, 386, 16, GREY)
     f.number("steps", (W - mid[1] * 5) // 2, 412, mid, 5, SRC_STEPS, "6480", blanking=1)
-    health_row(f, 452, digits("small", 16, GREY))
+    health_row(f, 452, GREY, 16)
     f.write()
 
 
@@ -601,8 +768,7 @@ def analog():
     f.file(finish(dial, size, size), "dial.png")
     dx = (W - size) // 2
     f.image("dial", dx, cy - size // 2, "dial.png")
-    f.file(bird(70), "bird.png")
-    f.image("bird", (W - 70) // 2, cy - 30, "bird.png")
+    f.mood_bird(70, (W - 70) // 2, cy - 30, 70)
     hour_img, hour_pivot = hand(46, 7, WHITE)
     min_img, min_pivot = hand(70, 5, WHITE, tip=BODY)
     sec_img, sec_pivot = hand(78, 2, (0xE5, 0x39, 0x35), tail=18)
@@ -618,13 +784,14 @@ def analog():
         "SecondHand_Image": "hand_second.png", "SecondImage_rotate_xc": sec_pivot[0], "SecondImage_rotate_yc": sec_pivot[1],
     }, ("analog", [("hand_hour.png", hour_pivot, 10 * 30 + 9), ("hand_minute.png", min_pivot, 18 * 6), ("hand_second.png", sec_pivot, 36 * 6)])))
     f.date_row(256, 20, BODY, WHITE)
+    f.weather_badge(W // 2, 26, 16, GREY)
     size2 = 92
     f.image_list("goal", (W - size2) // 2, 296, rings(f, size2, 7), SRC_STEP_PERCENT, 70)
     f.file(icon_steps(26), "icon_steps.png")
     f.image("steps_icon", (W - 26) // 2, 296 + (size2 - 26) // 2, "icon_steps.png")
     mid = digits("mid", 26, WHITE)
     f.number("steps", (W - mid[1] * 5) // 2, 400, mid, 5, SRC_STEPS, "7012", blanking=1)
-    health_row(f, 444, digits("small", 18, GREY))
+    health_row(f, 444, GREY)
     f.write()
 
 
@@ -641,11 +808,11 @@ def neon():
     f.date_row(184, 18, pink, cyan)
     size = 150
     f.image_list("goal", (W - size) // 2, 218, rings(f, size, 6, color=pink, done=cyan, track=(0x24, 0x10, 0x2A)), SRC_STEP_PERCENT, 55)
-    f.file(bird(90), "bird.png")
-    f.image("bird", (W - 90) // 2, 218 + (size - 90) // 2 - 4, "bird.png")
+    f.mood_bird(90, (W - 90) // 2, 218 + (size - 90) // 2 - 4, 55)
     mid = glow_digits("mid", 24, cyan, blur=3)
     f.number("steps", (W - mid[1] * 5 + 40) // 2, 374, mid, 5, SRC_STEPS, "5502", blanking=1, spacing=-10)
-    health_row(f, 438, digits("small", 18, (0xB0, 0x9C, 0xC8)))
+    f.weather_badge(W // 2, 412, 16, (0xB0, 0x9C, 0xC8))
+    health_row(f, 438, (0xB0, 0x9C, 0xC8))
     f.write()
 
 
@@ -679,15 +846,15 @@ def branch(dark=False):
         lf = lf.rotate(a, expand=True)
         art.alpha_composite(lf, (int((x - 15) * SS), int((y - 8) * SS)))
     art = finish(art, W, 150)
-    b = bird(96, sleepy=dark)
-    art.alpha_composite(b, ((W - 96) // 2, 112 - 92))
     f.file(art, "branch.png")
     f.image("branch", 0, 220, "branch.png")
+    f.mood_bird(96, (W - 96) // 2, 220 + 112 - 92, 20 if dark else 65)
+    f.weather_badge(162, 222, 16, soft)
     lines = [(p, f.file(hbar(140, 8, p, color=accent, done=done, track=track), f"line_{p}.png")) for p in range(0, 101, 10)]
     f.image_list("goal", (W - 140) // 2, 388, lines, SRC_STEP_PERCENT, 65)
     mid = digits("mid", 24, ink)
     f.number("steps", (W - mid[1] * 5) // 2, 404, mid, 5, SRC_STEPS, "5890", blanking=1)
-    health_row(f, 446, digits("small", 16, soft))
+    health_row(f, 446, soft, 16)
     f.write()
 
 
@@ -711,8 +878,7 @@ def rings_face():
     f.image_list("kcal_ring", (W - inner) // 2, y0 + (outer - inner) // 2,
                  [(p, f.file(ring(inner, 12, p, color=red, done=red, track=(0x3A, 0x12, 0x1A)), f"inner_{p}.png")) for p in range(0, 101, 10)],
                  SRC_KCAL_PERCENT, 45)
-    f.file(bird(78), "bird.png")
-    f.image("bird", (W - 78) // 2, y0 + (outer - 78) // 2 - 4, "bird.png")
+    f.mood_bird(78, (W - 78) // 2, y0 + (outer - 78) // 2 - 4, 75)
     g = digits("green", 24, green)
     r = digits("red", 24, red)
     f.file(icon_steps(20), "icon_steps.png")
@@ -721,7 +887,8 @@ def rings_face():
     kcal = glyph("kcal.png", "kcal", 14, red)
     f.number("kcal", 52, 346, r, 4, SRC_KCAL, "245", align=0, blanking=1)
     f.image("kcal_label", 52 + r[1] * 4 + 2, 354, kcal[0])
-    health_row(f, 400, digits("small", 18, GREY))
+    f.weather_badge(W // 2, 374, 16, GREY)
+    health_row(f, 400, GREY)
     f.write()
 
 
@@ -821,30 +988,40 @@ def designer():
     f.image_list("goal", (W - bar_w) // 2, bar_y, lines, SRC_STEP_PERCENT, 65)
     mid = digits("mid", 26, WHITE)
     f.number("steps", (W - mid[1] * 5) // 2, 372, mid, 5, SRC_STEPS, "5890", blanking=1)
+    # the weather gets digits of its own, so it can be hidden apart from the health row
+    deg_at, deg = f.weather_badge(W // 2, 404, 16, WHITE, white=True)
     small = digits("small", 18, WHITE)
     f.number("heart", 30 + 18 + 3, 428, small, 3, SRC_HEART, "72", align=0, blanking=1)
     f.number("battery", 104 + 18 + 3, 428, small, 3, SRC_BATTERY, "85", align=0, blanking=1)
+    bird_at = ((W - 96) // 2, 250)
+    f.mood_bird(96, *bird_at, 65)
     f.write(shelf="designer")
     # the layers the app draws onto the background, with their transparency; each belongs to a
     # part the user can hide and to a block the user can move
     shelf = os.path.join(HERE, "..", "app", "src", "main", "assets", "designer")
     layers = [
-        ("bird.png", bird(96), (W - 96) // 2, 250, "bird", "bird"),
-        ("bird_sleepy.png", bird(96, sleepy=True), (W - 96) // 2, 250, "bird", "bird"),
         ("dot.png", Image.open(os.path.join(IMAGES, dot[0])), *dot_at, "date", "time"),
+        ("deg.png", Image.open(os.path.join(IMAGES, deg[0])), *deg_at, "weather", "stats"),
         ("icon_heart.png", icon_heart(18), 30, 428, "health", "stats"),
         ("icon_battery.png", icon_battery(18), 104, 428, "health", "stats"),
     ]
+    for _, m in MOODS:
+        bird(96, mood=m).save(os.path.join(shelf, f"bird_{m}.png"))
+    for old in ("bird.png", "bird_sleepy.png"):
+        if os.path.exists(os.path.join(shelf, old)):
+            os.remove(os.path.join(shelf, old))
     for name, img, *_ in layers:
         img.save(os.path.join(shelf, name))
     for style in DIGIT_STYLES:
         style_strip(style).save(os.path.join(shelf, f"digits_{style}.png"))
     # each widget's part (what its digits are coloured and hidden by) and block
     parts = {"hour": "hour", "minute": "minute", "weekday": "date", "day": "date", "month": "date",
-             "goal": "bar", "steps": "steps", "heart": "health", "battery": "health"}
-    blocks = {"hour": "time", "minute": "time", "weekday": "time", "day": "time", "month": "time"}
+             "goal": "bar", "steps": "steps", "heart": "health", "battery": "health",
+             "weather": "weather", "temp": "weather", "bird": "bird"}
+    blocks = {"hour": "time", "minute": "time", "weekday": "time", "day": "time", "month": "time",
+              "bird": "bird"}
     # sample text of each part, for the app's preview
-    for part in ("date", "steps", "health"):
+    for part in ("date", "steps", "health", "weather"):
         chosen = [w for w in f.widgets if parts.get(w.attrs["Name"]) == part]
         f.draw(chosen, Image.new("RGBA", (W, H), (0, 0, 0, 0))).save(os.path.join(shelf, f"sample_{part}.png"))
     for old in ("sample_hour.png", "sample_minute.png", "sample_text.png"):
@@ -863,6 +1040,7 @@ def designer():
             "widgets": [{"name": w.attrs["Name"], "block": blocks.get(w.attrs["Name"], "stats" if w.attrs["Name"] in parts else "")} for w in f.widgets],
             "time": {"x": hx, "hour": 34, "minute": 112, "cell": list(DIGIT_CELL)},
             "bar": {"x": (W - bar_w) // 2, "y": bar_y, "width": bar_w, "height": bar_h, "sample": 60},
+            "bird": {"x": bird_at[0], "y": bird_at[1], "moods": [m for _, m in MOODS]},
             "styles": list(DIGIT_STYLES),
         }, out, indent=1)
 

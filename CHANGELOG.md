@@ -2,6 +2,82 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.0
+
+- Kuş türleri (`BirdSpecies`): çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10). Seçilen tür ve renk uygulamada, Kuş widget'ında, canlı duvar kâğıdında ve kadran tasarımcısının bilekliğe gönderdiği kuş resimlerinde çizilir.
+- Tohumlar ve besleme (`Seeds`): her 1.000 adım bir tohum. Kuşu besle (1 tohum, kuş zıplar ve öter), tüy rengi (30–100 tohum) ve ötüş (20–40 tohum) al. Ötüşler `ui/BirdSong.kt` içinde sesten üretilir, ses dosyası yok.
+- Aksesuarlar: kazanılanlar kuş penceresinden takılıp çıkarılır; yeni gözlük (42 km), çiçek (7 gün su), uyku başlığı (7 gece uyku), sırt çantası (ilk rota).
+- Canlı duvar kâğıdı (`wallpaper/BirdWallpaper.kt`, Ayarlar → Görünüm ve dil): gündüz ve gece göğü; kuş günün adımı hedefe yaklaştıkça yuvadan dala uçar, dakikada bir yenilenir, yalnızca ekrandayken çalışır.
+- Yürüyüş araçları kartı (Bugün):
+  - Tempo metronomu (`walk/MetronomeService.kt`, dakikada 60–180 adım, bildirimle çalışır).
+  - Köpek gezdirme: başlat ve durdur, aradaki adımlar `walks` tablosuna yazılır.
+  - GPS ile yürüyüş (`walk/WalkRecordService.kt`): konum izni yalnızca bu düğmeye basınca istenir ve yalnızca kayıt sırasında kullanılır. Mesafe ve rota kaydedilir, kayıtlı yürüyüşlerde rota çizilir. `ACCESS_FINE_LOCATION` artık Android 12 ve üstünde de isteniyor.
+- Kat sayacı (`sensor/FloorCounter.kt`): basınç sensörü olan telefonlarda, uygulama açıkken, arka planda sürekli sayma açıkken ve GPS yürüyüşünde çalışır. Adım atılırken iki dakika içinde 3 m yükselme bir kat sayılır; asansör ve hava değişimi sayılmaz. Sensör yoksa hiçbir yerde görünmez.
+- Uygulama kilidi: 4–8 haneli PIN (SHA-256 özetiyle saklanır) ve isteğe bağlı parmak izi ya da yüz (Android 9 ve üstü). Uygulama 30 saniyeden uzun arka planda kalınca yeniden kilitlenir.
+- Sade görünüm: Bugün sayfasında yalnızca büyük yazıyla adım, hedef ve ilerleme.
+- İlk açılış rehberi: yalnızca yeni kurulumda (eski kullanıcılar atlar). Hoş geldin, günlük hedef, boy-kilo ve adım izni sayfaları var.
+
+## 0.19.0
+
+- Hedefe kalan süre (`data/StepPace.kt`): son 14 günün en hareketli saatlerinden kendi yürüme hızın (dakikada 80–125 adım, veri yoksa 100) bulunur; Bugün'de halkanın altında ve geniş Bugün widget'ında "Hedefe ≈ 25 dk yürüyüş kaldı".
+- Yemek karşılığı (`data/Foods.kt`): yakılan kalori "≈ 2 × simit" gibi gösterilir (hamburger, simit, çikolata, kola, elma).
+- Günün sözü: Bugün'de her gün başka bir söz (12 dilde 15 söz); Ayarlar → Görünüm ve dil'den kapatılabilir.
+- Eğilim kartı (Geçmiş): bu ayın ilk günleri geçen ayın aynı günleriyle, son 7 gün önceki 7 günle yüzde olarak karşılaştırılır.
+- Aktif saat haritası (Geçmiş): son 8 haftada her gün ve saat için ortalama adım, 7 × 24 kare; en hareketli saat yazılır.
+- Yıl sonu hikâyesi: Aralık ve Ocak'ta Geçmiş'in başında, ayrıca her yıl kartında "Hikâyeyi aç"; kaydırmalı sayfalar (toplam adım, yol, en iyi gün ve ay, hedef günleri, madalyalar) ve metin olarak paylaşma.
+- Toparlanma puanı (Sağlık): dün geceki uyku önceki haftayla, dinlenme nabzı ortalamayla karşılaştırılır; 0–100.
+- Fitness yaşı (Sağlık): dinlenme nabzından Uth formülüyle VO2max, son 30 günün günlük adımıyla küçük düzeltme; yaşa göre ortalamayla karşılaştırılır.
+- Yeni madalyalar (`data/ExtraMedals.kt`): mesafe (10–1000 km), su serisi (3–100 gün), uyku serisi (7 saat ve üstü, 3–30 gece), rota bitirme (1–7 rota; bitirilen rotalar artık saklanır).
+
+## 0.18.0
+
+- Sabah özeti (Ayarlar → Bildirimler, saat 6–10 arası seçilir, `background/ExtraReminders.kt`): dünkü adım, bileklik ya da Health Connect varsa gece uykusu ve bugünün hedefi.
+- Rekor bildirimi: bugün önceki en iyi günü ya da bu hafta en iyi haftayı geçince bir kez bildirim (en az 7 günlük geçmiş gerekir). 15 dakikalık okumadan sonra bakılır.
+- Hareketsizlik hatırlatması: 10:00–20:00 arası her saat başı, önceki saatte 250 adımdan az yürünmüşse bildirim (`DayHours`: telefonun saatlik kaydı, bilekliğin saatleri öncelikli). Tatilde susar.
+- Yürüyüş saati planı: haftanın günlerine saat; saatinde bildirim, o saat ya da sonrakinde 1.500 adım varsa Bugün'deki kartta işaretli.
+- Ayın raporu bildirimi: her ayın 1'inde 10:00'da, dokununca Geçmiş açılır.
+- Bileklikte hedef kutlaması (bileklik doğrudan bağlıyken): hedefe ulaşınca günde bir kez bilekliğe kuşlu bildirim gider, bileklik titrer.
+- Uygulama kısayolları (`res/xml/shortcuts.xml`): Su ekle (bir bardak ekler), Bugün, Kaç adım?
+- Su kutucuğu (`tile/WaterTile.kt`): bildirim panelinden bir bardak ekler, bugünkü suyu gösterir.
+- "Bugün kaç adım attım?" (`StepAnswerActivity`): cevabı gösterir ve sesli okur. Kısayoldan her zaman çalışır; Google Asistan'ın `GET_EXERCISE_OBSERVATION` App Action'ı uygulama Play Store'dan kurulunca devreye girer.
+
+## 0.17.0
+
+- Güne not (`data/DayData.kt`, tablo `day_notes`): Geçmiş'te seçili günün kartında "Not ekle"; en fazla 120 karakter, takvimde günün altında küçük nokta.
+- Günü elle düzelt (tablo `day_overrides`): yazılan sayı o günün telefon ve bileklik sayımının yerine geçer (`MERGED` sorgusunda önce gelir); "Sayılana dön" ile silinir.
+- Tatil modu (Ayarlar → Hedefler, en fazla 90 gün): seçili günler seri için joker gibi sayılır ama joker harcanmaz (`AppSettings.vacationDays`), seri, yaklaşma, su ve kilo hatırlatmaları susar, Bugün'de tatil kartı görünür.
+- Hafta sonu hedefi (`AppSettings.goalOn`): cumartesi ve pazar için ayrı günlük hedef; seri, madalya, takvim, halka, widget ve hatırlatmalar o günün hedefini kullanır.
+- Aylık ve yıllık hedef (`data/PeriodGoals.kt`): Bugün'de ilerleme çubuğu, bu tempoyla ulaşılacak gün ya da yetişmek için gereken günlük adım.
+- Tam yedek (`data/Backup.kt`, Ayarlar → Veri): bütün tablolar ve uygulama ayarları tek JSON dosyasında; geri yükleme verinin yerine geçer. Bileklik eşleşmesi, adım kaynağı ve kadran ayarları yedeğe girmez.
+- Verileri silme (`DataEraser`): bir tarih aralığı ya da her şey (ayarlar kalır).
+- CSV dışa aktarma `tarih,adim,su_ml,kilo_kg,uyku_dk` sütunlarını yazar; içe aktarma adım sütununu okumaya devam eder.
+- Health Connect'e yazma (`data/HealthWrite.kt`, isteğe bağlı): saatlik adımlar sabit kimlikli `StepsRecord` olarak yazılır, yeniden yazınca üstüne gelir; yarım saatte bir, son 2 gün (ilk açılışta 7 gün). Adımlar Health Connect'ten okunurken çift sayılmasın diye çalışmaz.
+- Veritabanı 7. sürüm: `day_notes`, `day_overrides`, `walks`, `floors` tabloları (göç ile, eski veri korunur).
+
+## 0.16.0
+
+- Hızlı ayar kutucuğu (`tile/StepTile.kt`, Android 7+): bildirim panelinde bugünün adımı ve hedef yüzdesi (Android 10+ alt satırda), hedefe ulaşınca kutucuk etkin görünür; dokununca Bugün sekmesi açılır. Panel her açıldığında yeniden okunur.
+- Akıllı hedef (Ayarlar → Hedefler, varsayılan kapalı, `data/SmartGoal.kt`): açıksa haftanın ilk günü (gece yarısı alarmı ya da uygulama açılışı) günlük hedef son 28 tam günün ortancasının %10 fazlasına doğru, en fazla %10 değişir, 500'e yuvarlanır, en az 3.000. En az 14 gün adım gerekir. Açıldığı hafta değiştirmez; elle hedef değiştirilince yeni hedeften devam eder. Ayarlar satırı son değişikliği ya da gelecek haftanın önerisini gösterir.
+- Uyku ve adım (Sağlık, `data/SleepInsights.kt`): seçili dönemde 7 saatten uzun ve kısa uykudan sonraki günlerin ortalama adımı, ve hedefe ulaşılan / ulaşılmayan günlerin gecesindeki ortalama uyku. Her grupta en az 3 gün gerekir; uyku uyanılan güne yazılır, bugün sayılmaz.
+- Aylık PDF raporu (Geçmiş → "<ay> raporu (PDF)", `data/MonthReport.kt`, `data/PdfReport.kt`): Android'in `PdfDocument`'ıyla iki sayfa A4: toplam, ortalama, hedef günleri, en iyi gün, mesafe, kalori, önceki aya göre değişim, su ve kilo (varsa), uyku ve dinlenik nabız ortalaması (bileklik ya da Health Connect açıksa), hedef çizgili günlük grafik, haftalar; ikinci sayfada gün gün adım, mesafe, kalori ve su. Dosya paylaşım/kaydetme ekranıyla kaydedilir, internet kullanılmaz.
+
+## 0.15.2
+
+- Ayarlar → Adım kaynağı → "Bileklik varken telefonu sayma" (varsayılan kapalı, `WearableSteps.isBandOnly`): açıksa bilekliğin veri gönderdiği günlerde gün toplamı yalnız bileklikten gelir (`StepMath.bandDays`); telefon sadece bilekliğin hiç veri göndermediği günlerde kullanılır.
+- Bileklik ve telefon her zaman saat saat birleşir (`StepMath.mergeMixed`): bilekliğin takılı olduğu saatlerde yalnız bileklik, diğer saatlerde telefonun saatlik kaydı. Önceden HyperOS kaydı kapalıyken günün büyük toplamı alınıyordu, telefon fazla sayınca bilekliği eziyordu. Telefonun saatlik kaydı olmayan eski ya da içe aktarılmış günlerde eski kural (günün büyüğü) kalır.
+- Özel ROM'lar (crDroid, LineageOS): Xiaomi telefonda MIUI'nin adım kaynağı (`com.miui.providers.steps`) yoksa "Xiaomi adımları" açık kalmış olsa bile kullanılmaz; adımlar telefonun sayacından okunur. Lineage tabanlı ROM'da pil kartı MIUI'nin otomatik başlatma adımlarını değil, yalnızca pil optimizasyonu muafiyetini gösterir.
+- Tam zamanlı alarmlar (Ayarlar → Bildirimler): Android 14 ve sonrasında yeni kurulumda bu izin kapalı gelir ve gece yarısı kaydı, hatırlatmalar ve saate göre kadran bir saate kadar gecikebilir. Satır izin ekranını açar; izin verilince alarmlar yeniden kurulur (`Schedules.setAlarm`, `SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED`).
+
+## 0.14.1
+
+- Kuşun ruh hali: FitWren kadranlarında ve kadran tasarımında kuş artık adım hedefi yüzdesine bağlı bir resim listesi (`watchface/make_faces.py`, `MOODS`): %0 uykulu, %25 uyanık, %60 neşeli, %100 kutlama (konfeti). Tasarımda "Kuş" seçeneklerine "Hedefe göre" eklendi; "Neşeli" ve "Uykulu" kuşu sabit tutar.
+- Kadranda hava durumu: FitWren kadranlarında (Yol hariç) ve tasarımda hava simgesi (bilekliğin hava kodu, kaynak 3031) ve sıcaklık (°C, kaynak 2031). Bileklik hava durumunu FitWren'in gönderdiği bilgiden alır. Tasarımda "Görünüm" sekmesinden gizlenebilir.
+- Ekran kapalıyken görünüm: her FitWren kadranının içinde Mi Create'in AOD projesi (`<kadran>/AOD/AOD.fprj`): siyah üstünde sönük saat, tarih ve küçük kuş.
+- Tasarım paylaşma: kadran tasarımının "Tema" sekmesinde "Tasarımı paylaş" tasarımı (fotoğrafı JPEG olarak içinde) `fitwren-kadran.json` dosyasına yazar ve paylaşım menüsünü açar; "Tasarım içe al" böyle bir dosyayı açar (`FaceDesigner.export` / `importDesign`).
+- Saate göre kadran (Saat kadranları → "Saate göre kadran"): gündüz ve gece kadranı ile başlangıç saatleri seçilir; FitWren o saatlerde aktif kadranı değiştirir (`background/FaceSchedule.kt`, AlarmManager). Bileklik bağlı değilse 10 dakika sonra yeniden dener.
+- Mi Band 6 kadranı (Ayarlar → Bileklik → Saat kadranları): Mi Band 6 için yapılmış `.bin` kadran dosyası (`UIHH` başlıklı) bilekliğin ürün yazılımı kanalından gönderilir (`band/HuamiFaceUpload.kt`, Gadgetbridge'in UpdateFirmwareOperation2020'sinden): parça boyu istenir, dosya boyu ve CRC32 bildirilir, dosya bilekliğin bildirdiği yerden parça parça gönderilir. Yer yoksa ya da şarj azsa ayrı uyarı gösterilir.
+- Mi Band 5, Mi Band 6 ve Amazfit Band 5'in dakika kayıtları 8 bayt okunur (önceden 4 bayt sayılıyordu, Gadgetbridge ile aynı).
+
 ## 0.13.3
 
 - Kadran tasarla (Saat kadranları → "Kadran tasarla", Mi Band 8): hazır renk geçişleri ya da kendi fotoğrafın arka plan olur; saat, dakika, yazı ve hedef çubuğu renkleri ile kuş (neşeli, uykulu, yok) seçilir, önizleme anında güncellenir. Kadran telefonda üretilir: FitWren'in beyaz-siyah şablon kadranı (`assets/designer/template.bin`) açılır, resimleri değiştirilir ve dosya yeniden yazılır (`band/XiaomiFaceFile.kt`; dosya yapısı `watchface/facebin.py` ile derlenmiş kadranlarda doğrulandı). Saat ve dakika için 7 rakam stili (kalın, ince, eğik, tırnaklı, daktilo, içi boş, LCD), saatin yeri (üstte, ortada, altta; şablondaki parçaların y konumu dosyada kaydırılır), 8 hazır tema, arka planı karartma, tarih / adım / hedef çubuğu / nabız ve pil ayrı ayrı gizlenebilir (gizlenen parçanın resimleri saydam yapılır). Tasarım ekranında önizleme üstte sabit durur; seçenekler altında Tema, Saat, Arka plan, Renkler ve Görünüm sekmelerindedir, "Bilekliğe yükle" en altta sabittir, "Geri al" ve "Sıfırla" üstte. Fotoğraf önizlemede parmakla kaydırılır ve iki parmakla büyütülür; tasarım ayarları saklanır. Her tasarım yeni bir kadran numarası alır; yenisi yüklenince bir önceki tasarım bileklikten silinir.

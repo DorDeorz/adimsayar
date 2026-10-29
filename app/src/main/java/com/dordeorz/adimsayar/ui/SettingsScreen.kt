@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Color
 import android.graphics.Bitmap
 import com.dordeorz.adimsayar.band.BandWatchface
+import com.dordeorz.adimsayar.band.HuamiFaceUpload
 import com.dordeorz.adimsayar.band.WatchfaceFile
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.graphics.drawable.toBitmap
@@ -23,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import com.dordeorz.adimsayar.background.BandNotificationListener
+import com.dordeorz.adimsayar.background.FaceSchedule
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.BandNotify
 import com.dordeorz.adimsayar.data.BandBattery
@@ -124,6 +126,8 @@ import com.dordeorz.adimsayar.data.GLASS_OPTIONS
 import com.dordeorz.adimsayar.data.WATER_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WATER_INTERVAL_OPTIONS
 import com.dordeorz.adimsayar.data.Water
+import com.dordeorz.adimsayar.data.NO_SMART_FROM
+import com.dordeorz.adimsayar.data.SmartGoal
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
@@ -158,6 +162,13 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.20.0", R.array.release_notes_0_20_0),
+    ReleaseNote("0.19.0", R.array.release_notes_0_19_0),
+    ReleaseNote("0.18.0", R.array.release_notes_0_18_0),
+    ReleaseNote("0.17.0", R.array.release_notes_0_17_0),
+    ReleaseNote("0.16.0", R.array.release_notes_0_16_0),
+    ReleaseNote("0.15.2", R.array.release_notes_0_15_2),
+    ReleaseNote("0.14.1", R.array.release_notes_0_14_1),
     ReleaseNote("0.13.3", R.array.release_notes_0_13_3),
     ReleaseNote("0.12.7", R.array.release_notes_0_12_7),
     ReleaseNote("0.12.6", R.array.release_notes_0_12_0),
@@ -259,6 +270,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                         if (!state.wearableEnabled) actions.onWearableEnabledChange(true)
                     }
                 }
+                if (state.healthEnabled) {
+                    SwitchRow(
+                        title = stringResource(R.string.band_only_title),
+                        hint = stringResource(R.string.band_only_text),
+                        checked = state.bandOnly,
+                        onCheckedChange = actions.onBandOnlyChange,
+                    )
+                }
                 Text(
                     stringResource(R.string.source_merge_hint),
                     style = MaterialTheme.typography.bodySmall,
@@ -276,6 +295,12 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 ValueRow(stringResource(R.string.daily_goal), stringResource(R.string.steps_value, format(settings.dailyGoal))) {
                     dialog = SettingsDialog.DailyGoal
                 }
+                SwitchRow(
+                    title = stringResource(R.string.smart_goal),
+                    hint = smartGoalHint(state),
+                    checked = settings.smartGoal,
+                    onCheckedChange = actions.onSmartGoalChange,
+                )
                 ValueRow(stringResource(R.string.weekly_goal), stringResource(R.string.steps_value, format(settings.weeklyGoal))) {
                     dialog = SettingsDialog.WeeklyGoal
                 }
@@ -286,6 +311,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     label = { it.getDisplayName(TextStyle.FULL, appLocale) },
                     onSelect = actions.onWeekStartChange,
                 )
+                GoalsExtras(state, actions)
             }
 
             if (current == SettingsPage.Body) SettingsCard {
@@ -373,6 +399,15 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     checked = settings.weightReminder,
                     onCheckedChange = actions.onWeightReminderChange,
                 )
+                NotificationsExtras(state, actions)
+                state.exactAlarmsAllowed?.let { allowed ->
+                    SwitchRow(
+                        title = stringResource(R.string.exact_alarms_title),
+                        hint = stringResource(R.string.exact_alarms_text),
+                        checked = allowed,
+                        onCheckedChange = { actions.onOpenExactAlarms() },
+                    )
+                }
             }
 
             if (current == SettingsPage.Appearance) SettingsCard {
@@ -410,6 +445,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     label = { stringResource(R.string.percent_of_goal, it) },
                     onSelect = actions.onWidgetOpacityChange,
                 )
+                AppearanceExtras(state, actions)
                 ValueRow(stringResource(R.string.language), languageLabel(settings.language)) {
                     dialog = SettingsDialog.Language
                 }
@@ -418,6 +454,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             if (current == SettingsPage.Data) SettingsCard {
                 ClickRow(stringResource(R.string.export_csv), stringResource(R.string.export_csv_hint), actions.onExport)
                 ClickRow(stringResource(R.string.import_csv), stringResource(R.string.import_csv_hint), actions.onImport)
+                DataExtras(state, actions)
             }
 
             if (current == SettingsPage.About) SettingsCard {
@@ -591,7 +628,7 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
 }
 
 @Composable
-private fun GoalDialog(
+internal fun GoalDialog(
     title: String,
     current: Long,
     range: LongRange,
@@ -643,7 +680,7 @@ private fun GoalDialog(
 }
 
 @Composable
-private fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Composable () -> Unit) {
+internal fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Composable () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
@@ -658,7 +695,23 @@ private fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Compo
 }
 
 @Composable
-private fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
+private fun smartGoalHint(state: MainUiState): String {
+    val settings = state.settings
+    if (!settings.smartGoal) return stringResource(R.string.smart_goal_hint)
+    if (settings.smartGoalFrom != NO_SMART_FROM && settings.smartGoalFrom != settings.dailyGoal) {
+        return stringResource(R.string.smart_goal_changed, format(settings.smartGoalFrom), format(settings.dailyGoal))
+    }
+    val nextWeek = SmartGoal.weekOf(state.today, settings.weekStart).plusWeeks(1)
+    val next = SmartGoal.suggest(state.history, nextWeek, settings.dailyGoal)
+    return if (next == null) {
+        stringResource(R.string.smart_goal_waiting, SmartGoal.MIN_DAYS)
+    } else {
+        stringResource(R.string.smart_goal_next, format(next))
+    }
+}
+
+@Composable
+internal fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -677,7 +730,7 @@ private fun ValueRow(title: String, value: String, onClick: (() -> Unit)?) {
 }
 
 @Composable
-private fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
+internal fun ClickRow(title: String, hint: String, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -722,7 +775,7 @@ private fun LanguageDialog(selected: String, onSelect: (String) -> Unit, onDismi
 }
 
 @Composable
-private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
+internal fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @Composable (T) -> String, onSelect: (T) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
         Text(title, style = MaterialTheme.typography.bodyLarge)
         Row(
@@ -741,7 +794,7 @@ private fun <T> ChoiceRow(title: String, options: List<T>, selected: T, label: @
 }
 
 @Composable
-private fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+internal fun SwitchRow(title: String, hint: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -790,6 +843,8 @@ private fun BandNotifyGroup() {
     var pickPlace by remember { mutableStateOf(false) }
     var showAlarms by remember { mutableStateOf(false) }
     var showFaces by remember { mutableStateOf(false) }
+    var showHuamiFaces by remember { mutableStateOf(false) }
+    val huamiFaces = remember { BandDirect.takesHuamiFaces(context) }
     val calendar = remember(tick) { BandSchedule.calendarOn(context) }
     val calendarPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
         BandSchedule.setCalendar(context, ok)
@@ -921,7 +976,13 @@ private fun BandNotifyGroup() {
     }
     if (editReplies) RepliesDialog(onDismiss = { editReplies = false })
     if (showAlarms) AlarmsDialog(onDismiss = { showAlarms = false })
+    if (!supported && huamiFaces) {
+        SettingsGroup(stringResource(R.string.band_group_features)) {
+            ClickRow(stringResource(R.string.band_faces), stringResource(R.string.band_faces_install)) { showHuamiFaces = true }
+        }
+    }
     if (showFaces) WatchfacesDialog(onDismiss = { showFaces = false })
+    if (showHuamiFaces) HuamiFacesDialog(onDismiss = { showHuamiFaces = false })
     if (pickPlace) {
         WeatherPlaceDialog(onDismiss = {
             pickPlace = false
@@ -1103,6 +1164,7 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     val own = remember { OwnFaces.available(context) }
     var designing by remember { mutableStateOf(false) }
     val designer = remember { FaceDesigner.available(context) }
+    var scheduling by remember { mutableStateOf(false) }
     val invalid = stringResource(R.string.band_faces_invalid)
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -1153,6 +1215,11 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                     ) { Text(stringResource(R.string.face_store)) }
                 }
+                OutlinedButton(
+                    enabled = !list.isNullOrEmpty(),
+                    onClick = { scheduling = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text(stringResource(R.string.face_schedule)) }
                 when (val state = upload) {
                     is WatchfaceUpload.Sending -> {
                         Text(stringResource(R.string.band_faces_sending, state.percent), style = MaterialTheme.typography.bodyMedium)
@@ -1230,6 +1297,9 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
     if (designing) {
         FaceDesignerDialog(onDismiss = { designing = false })
     }
+    if (scheduling) {
+        FaceScheduleDialog(faces.orEmpty(), onDismiss = { scheduling = false })
+    }
     deleting?.let { face ->
         AlertDialog(
             onDismissRequest = { deleting = null },
@@ -1242,6 +1312,146 @@ private fun WatchfacesDialog(onDismiss: () -> Unit) {
                 }) { Text(stringResource(R.string.band_faces_delete)) }
             },
             dismissButton = { TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.cancel)) } },
+        )
+    }
+}
+
+/** Mi Band 6: only a .bin upload, the older protocol has no face list to show. */
+@Composable
+private fun HuamiFacesDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var percent by remember { mutableStateOf<Int?>(null) }
+    var outcome by remember { mutableStateOf<HuamiFaceUpload.Outcome?>(null) }
+    var invalid by remember { mutableStateOf(false) }
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val bytes = withContext(Dispatchers.IO) {
+                runCatching { context.contentResolver.openInputStream(uri)?.use { it.readBytes() } }.getOrNull()
+            }
+            invalid = bytes == null || !HuamiFaceUpload.isFace(bytes)
+            outcome = null
+            if (bytes == null || invalid) return@launch
+            percent = 0
+            outcome = BandDirect.uploadHuamiFace(context, bytes) { percent = it }
+            percent = null
+        }
+    }
+    val sending = percent != null
+    AlertDialog(
+        onDismissRequest = { if (!sending) onDismiss() },
+        title = { Text(stringResource(R.string.band_faces)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.string.huami_faces_hint), style = MaterialTheme.typography.bodyMedium)
+                percent?.let {
+                    Text(stringResource(R.string.band_faces_sending, it), style = MaterialTheme.typography.bodyMedium)
+                    LinearProgressIndicator(progress = { it / 100f }, modifier = Modifier.fillMaxWidth())
+                }
+                val message = when {
+                    invalid -> R.string.huami_faces_invalid
+                    else -> when (outcome) {
+                        HuamiFaceUpload.Outcome.Done -> R.string.huami_faces_done
+                        HuamiFaceUpload.Outcome.NoSpace -> R.string.huami_faces_no_space
+                        HuamiFaceUpload.Outcome.LowBattery -> R.string.huami_faces_low_battery
+                        HuamiFaceUpload.Outcome.Refused -> R.string.huami_faces_refused
+                        HuamiFaceUpload.Outcome.NotReached -> R.string.band_faces_failed
+                        null -> null
+                    }
+                }
+                if (message != null) {
+                    Text(
+                        stringResource(message),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (outcome == HuamiFaceUpload.Outcome.Done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    )
+                }
+            }
+        },
+        confirmButton = { TextButton(enabled = !sending, onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = {
+            TextButton(
+                enabled = !sending,
+                onClick = { runCatching { picker.launch(arrayOf("application/octet-stream", "*/*")) } },
+            ) { Text(stringResource(R.string.band_faces_install)) }
+        },
+    )
+}
+
+/** Day and night faces, each from its own time; FitWren changes the band's face at those times. */
+@Composable
+private fun FaceScheduleDialog(faces: List<BandWatchface>, onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    var plan by remember { mutableStateOf(FaceSchedule.plan(context)) }
+    var picking by remember { mutableStateOf<Boolean?>(null) } // true: day face, false: night face
+    val names by produceState(emptyMap<String, String>(), faces) {
+        value = faces.associate { it.id to (BandFaces.savedName(context, it.id) ?: it.name) }
+    }
+    fun pickTime(current: Int, onPicked: (Int) -> Unit) {
+        TimePickerDialog(
+            context,
+            { _, hour, minute -> onPicked(hour * 60 + minute) },
+            current / 60,
+            current % 60,
+            android.text.format.DateFormat.is24HourFormat(context),
+        ).show()
+    }
+    val none = stringResource(R.string.face_schedule_none)
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.face_schedule)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(
+                    stringResource(R.string.face_schedule_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                SwitchRow(stringResource(R.string.face_schedule_on), "", plan.on) { plan = plan.copy(on = it) }
+                ValueRow(stringResource(R.string.face_schedule_day), plan.dayId?.let { names[it] ?: it } ?: none) { picking = true }
+                ValueRow(stringResource(R.string.face_schedule_day_start), minuteLabel(plan.dayStart)) {
+                    pickTime(plan.dayStart) { plan = plan.copy(dayStart = it) }
+                }
+                ValueRow(stringResource(R.string.face_schedule_night), plan.nightId?.let { names[it] ?: it } ?: none) { picking = false }
+                ValueRow(stringResource(R.string.face_schedule_night_start), minuteLabel(plan.nightStart)) {
+                    pickTime(plan.nightStart) { plan = plan.copy(nightStart = it) }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                FaceSchedule.save(context, plan)
+                onDismiss()
+            }) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+    picking?.let { day ->
+        AlertDialog(
+            onDismissRequest = { picking = null },
+            title = { Text(stringResource(if (day) R.string.face_schedule_day else R.string.face_schedule_night)) },
+            text = {
+                LazyColumn(Modifier.heightIn(max = 380.dp)) {
+                    items(faces, key = { it.id }) { face ->
+                        val chosen = (if (day) plan.dayId else plan.nightId) == face.id
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    plan = if (day) plan.copy(dayId = face.id) else plan.copy(nightId = face.id)
+                                    picking = null
+                                }
+                                .padding(vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(selected = chosen, onClick = null)
+                            Text(names[face.id] ?: face.name, modifier = Modifier.padding(start = 12.dp))
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { picking = null }) { Text(stringResource(R.string.cancel)) } },
         )
     }
 }
@@ -1599,7 +1809,7 @@ private fun PageHeader(title: String, onBack: () -> Unit) {
 
 /** A page's own settings; the page title above already names them. */
 @Composable
-private fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
+internal fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
     Card(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
         Column(modifier = Modifier.padding(vertical = 4.dp), content = content)
     }
@@ -1619,7 +1829,7 @@ private fun SettingsGroup(title: String, content: @Composable ColumnScope.() -> 
 }
 
 @Composable
-private fun GroupLabel(text: String) {
+internal fun GroupLabel(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelLarge,

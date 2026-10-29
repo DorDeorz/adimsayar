@@ -145,6 +145,32 @@ class StepMathTest {
     }
 
     @Test
+    fun mergeMixedUsesHoursWherePhoneHoursExist() {
+        val today = LocalDate.parse("2026-10-28")
+        val older = LocalDate.parse("2026-10-20")
+        val band = mapOf(
+            LocalDateTime.parse("2026-10-28T10:00") to 1_000L,
+            LocalDateTime.parse("2026-10-20T10:00") to 2_000L,
+        )
+        val phoneHours = mapOf(
+            LocalDateTime.parse("2026-10-28T10:00") to 1_400L,
+            LocalDateTime.parse("2026-10-28T18:00") to 300L,
+        )
+        val phoneDays = mapOf(today to 1_700L, older to 2_500L)
+        assertEquals(mapOf(today to 1_300L, older to 2_500L), StepMath.mergeMixed(band, phoneHours, phoneDays))
+    }
+
+    @Test
+    fun bandDaysSkipDaysWithoutBandSteps() {
+        val band = mapOf(
+            LocalDateTime.parse("2026-10-28T10:00") to 1_000L,
+            LocalDateTime.parse("2026-10-28T11:00") to 500L,
+            LocalDateTime.parse("2026-10-27T10:00") to 0L,
+        )
+        assertEquals(mapOf(LocalDate.parse("2026-10-28") to 1_500L), StepMath.bandDays(band))
+    }
+
+    @Test
     fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
         val day = LocalDate.parse("2026-10-11")
         assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))

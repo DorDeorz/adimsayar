@@ -21,14 +21,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,7 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
@@ -61,11 +61,12 @@ private const val FLAP_MS = 70
 private const val FLAPS = 3
 
 @Composable
-internal fun BirdCard(state: MainUiState) {
+internal fun BirdCard(state: MainUiState, actions: MainActions) {
     var open by rememberSaveable { mutableStateOf(false) }
     val hour = LocalTime.now().hour
-    val bird = remember(state.achievements, state.history, state.freezes, state.today, state.settings.dailyGoal, hour) {
-        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.dailyGoal)
+    val bird = remember(state.achievements, state.history, state.freezes, state.today, state.settings, hour, state.extra.extras) {
+        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.goalOn(state.today))
+            .styled(state.extra.extras)
     }
     Card(modifier = Modifier.fillMaxWidth().clickable { open = true }) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -83,11 +84,11 @@ internal fun BirdCard(state: MainUiState) {
             }
         }
     }
-    if (open) BirdDialog(bird) { open = false }
+    if (open) BirdDialog(bird, state, actions) { open = false }
 }
 
 @Composable
-internal fun BirdImage(bird: BirdState, modifier: Modifier) {
+internal fun BirdImage(bird: BirdState, modifier: Modifier, poke: Int = 0) {
     val hop = remember { Animatable(0f) }
     val flap = remember { Animatable(0f) }
     var blink by remember { mutableStateOf(false) }
@@ -101,20 +102,22 @@ internal fun BirdImage(bird: BirdState, modifier: Modifier) {
         }
     }
     val interaction = remember { MutableInteractionSource() }
+    val jump = {
+        scope.launch {
+            hop.animateTo(1f, tween(HOP_UP_MS, easing = FastOutSlowInEasing))
+            hop.animateTo(0f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow))
+        }
+        scope.launch {
+            repeat(FLAPS) {
+                flap.animateTo(1f, tween(FLAP_MS, easing = FastOutSlowInEasing))
+                flap.animateTo(-1f, tween(FLAP_MS * 2, easing = FastOutSlowInEasing))
+            }
+            flap.animateTo(0f, tween(FLAP_MS, easing = FastOutSlowInEasing))
+        }
+    }
+    LaunchedEffect(poke) { if (poke > 0) jump() }
     Canvas(
-        modifier = modifier.clickable(interactionSource = interaction, indication = null) {
-            scope.launch {
-                hop.animateTo(1f, tween(HOP_UP_MS, easing = FastOutSlowInEasing))
-                hop.animateTo(0f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow))
-            }
-            scope.launch {
-                repeat(FLAPS) {
-                    flap.animateTo(1f, tween(FLAP_MS, easing = FastOutSlowInEasing))
-                    flap.animateTo(-1f, tween(FLAP_MS * 2, easing = FastOutSlowInEasing))
-                }
-                flap.animateTo(0f, tween(FLAP_MS, easing = FastOutSlowInEasing))
-            }
-        },
+        modifier = modifier.clickable(interactionSource = interaction, indication = null) { jump() },
     ) {
         val pose = BirdPose(hop.value, flap.value, blink)
         drawIntoCanvas { BirdPainter.draw(it.nativeCanvas, size.minDimension, bird, pose) }
@@ -149,7 +152,8 @@ private fun StageProgress(bird: BirdState) {
 }
 
 @Composable
-private fun BirdDialog(bird: BirdState, onDismiss: () -> Unit) {
+private fun BirdDialog(bird: BirdState, state: MainUiState, actions: MainActions, onDismiss: () -> Unit) {
+    var poke by remember { mutableIntStateOf(0) }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(bird.stage.title())) },
@@ -158,7 +162,8 @@ private fun BirdDialog(bird: BirdState, onDismiss: () -> Unit) {
                 modifier = Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                BirdImage(bird, Modifier.size(BIG_BIRD_SIZE).align(Alignment.CenterHorizontally))
+                BirdImage(bird, Modifier.size(BIG_BIRD_SIZE).align(Alignment.CenterHorizontally), poke)
+                FeedRow(state, actions, onFed = { poke++ })
                 LevelLine(bird)
                 Text(stringResource(bird.mood.text()), style = MaterialTheme.typography.bodyLarge)
                 LinearProgressIndicator(
@@ -171,9 +176,10 @@ private fun BirdDialog(bird: BirdState, onDismiss: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 StageProgress(bird)
+                BirdLooks(bird, state, actions)
                 Text(stringResource(R.string.bird_items_title), style = MaterialTheme.typography.titleSmall)
                 BirdItem.entries.forEach { item ->
-                    val owned = item in bird.items
+                    val owned = state.achievements.medals.any { it.group == item.group && it.tier == item.tier && it.earned }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
@@ -182,17 +188,19 @@ private fun BirdDialog(bird: BirdState, onDismiss: () -> Unit) {
                                 color = if (owned) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                             Text(
-                                stringResource(item.unlock()),
+                                stringResource(if (owned) R.string.bird_item_wear else item.unlock()),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
                         if (owned) {
-                            Icon(
-                                painterResource(R.drawable.ic_check),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp),
+                            Switch(
+                                checked = item.name !in state.extra.extras.hiddenItems,
+                                onCheckedChange = { wear ->
+                                    actions.extra.update {
+                                        it.copy(hiddenItems = if (wear) it.hiddenItems - item.name else it.hiddenItems + item.name)
+                                    }
+                                },
                             )
                         }
                     }

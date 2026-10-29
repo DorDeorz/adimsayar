@@ -26,6 +26,7 @@ import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.isNotable
+import com.dordeorz.adimsayar.sensor.FloorCounter
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.launch
@@ -55,6 +56,7 @@ class StepCounterService : Service(), SensorEventListener {
     }
 
     override fun onDestroy() {
+        FloorCounter.stop(this, FLOOR_OWNER)
         StepSensors.sensorManager(this)?.unregisterListener(this)
         registered = false
         super.onDestroy()
@@ -62,6 +64,7 @@ class StepCounterService : Service(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val now = SystemClock.elapsedRealtime()
+        FloorCounter.onStep()
         val appContext = applicationContext
         val reading = StepSensors.reading(appContext, event)
         AppScope.launch {
@@ -90,6 +93,7 @@ class StepCounterService : Service(), SensorEventListener {
         val manager = StepSensors.sensorManager(this) ?: return
         val counter = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) ?: return
         registered = manager.registerListener(this, counter, SensorManager.SENSOR_DELAY_NORMAL, MAX_REPORT_LATENCY_US)
+        if (registered) FloorCounter.start(this, FLOOR_OWNER)
         if (!registered) ReadingLog.get(this).failure(ReadSource.Service, R.string.log_register_failed)
     }
 
@@ -136,6 +140,7 @@ class StepCounterService : Service(), SensorEventListener {
 
     companion object {
         const val CHANNEL_ID = "sayac"
+        private const val FLOOR_OWNER = "service"
         private const val NOTIFICATION_ID = 1
         private const val MAX_REPORT_LATENCY_US = 60_000_000
         private const val LOG_INTERVAL_MS = 15 * 60 * 1000L

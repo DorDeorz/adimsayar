@@ -1,25 +1,18 @@
 {
  "layers": [
   {
-   "file": "bird.png",
-   "x": 48,
-   "y": 250,
-   "part": "bird",
-   "block": "bird"
-  },
-  {
-   "file": "bird_sleepy.png",
-   "x": 48,
-   "y": 250,
-   "part": "bird",
-   "block": "bird"
-  },
-  {
    "file": "dot.png",
    "x": 121,
    "y": 194,
    "part": "date",
    "block": "time"
+  },
+  {
+   "file": "deg.png",
+   "x": 117,
+   "y": 404,
+   "part": "weather",
+   "block": "stats"
   },
   {
    "file": "icon_heart.png",
@@ -43,7 +36,10 @@
   "date",
   "bar",
   "steps",
-  "health"
+  "weather",
+  "weather",
+  "health",
+  "bird"
  ],
  "widgets": [
   {
@@ -79,12 +75,24 @@
    "block": "stats"
   },
   {
+   "name": "weather",
+   "block": "stats"
+  },
+  {
+   "name": "temp",
+   "block": "stats"
+  },
+  {
    "name": "heart",
    "block": "stats"
   },
   {
    "name": "battery",
    "block": "stats"
+  },
+  {
+   "name": "bird",
+   "block": "bird"
   }
  ],
  "time": {
@@ -102,6 +110,16 @@
   "width": 140,
   "height": 8,
   "sample": 60
+ },
+ "bird": {
+  "x": 48,
+  "y": 250,
+  "moods": [
+   "sleepy",
+   "awake",
+   "happy",
+   "party"
+  ]
  },
  "styles": [
   "bold",

@@ -49,12 +49,19 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Water tracking with a goal suggested from your weight
 - A little wren that grows with your steps ([meet the wren](#meet-the-wren))
 - Share your day as an image
+- Walking time left to the goal (from your own pace), calories as food ("≈ 2 × apple"), floors climbed (phones with a pressure sensor) and a quote of the day
+- Weekend, monthly and yearly goals with an estimated finish day; vacation mode keeps your streak while you are away
+- Walk tools: a pace metronome, a dog walk timer and GPS walk recording with the route drawn
+- Simple view: only steps and goal in big type
 
 ### History
 - Monthly calendar colored by goal, hour-by-hour chart for any day
 - Records: best day, week and month, longest streak
 - Yearly summary
 - Streak freeze: two per month, so one missed day doesn't break your streak
+- A note for any day, and a manual correction when the count was wrong
+- Trend card (this month and the last 7 days against the period before) and an active hours map (8 weeks, day × hour)
+- Monthly PDF report and a swipeable year-end story to share
 
 ### Health (optional, with a fitness band or watch)
 - **Direct band connection:** FitWren talks to the band over Bluetooth itself and reads minute-by-minute steps, heart rate, SpO₂, stress and sleep. No Mi Fitness, Zepp Life or Health Connect needed. Tested on the Xiaomi Smart Band 8; other Xiaomi bands and watches (Band 8 Pro, Band 9, Redmi Watch, Watch S1…) and Huami/Amazfit models (Mi Band 2–6, Amazfit Bip, GTS, GTR…) are supported experimentally.
@@ -63,10 +70,13 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Hours the band counted use the band, other hours use the phone, so no step is counted twice.
 - Separate cards with 7/30/90-day charts: sleep with stages, heart rate with zones, resting heart rate trend, SpO₂, workouts and active calories
 - Weight log with BMI and a chart
+- Recovery score (last night's sleep and resting heart rate) and fitness age (VO₂max estimate)
+- Sleep and steps: how your steps change after short or long nights
+- Optional: write FitWren's steps to Health Connect
 - A setup guide that shows which apps write to Health Connect
 
 ### Medals and goals
-- Medals for daily steps, streaks, weekly goals, total distance and early walks. Once earned, a medal stays.
+- Medals for daily steps, streaks, weekly goals, total steps, distance, water and sleep streaks, finished routes and early walks. Once earned, a medal stays.
 - Levels, three weekly challenges picked from your own history
 - Virtual routes: walk from Istanbul to Ankara or along the Camino with your steps
 
@@ -82,10 +92,15 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 
 ### And also
 - Daily goal, weekly goal, first day of week, km or miles
-- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders
-- Light, dark or system theme
+- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders, morning summary, new records, a nudge after an hour of sitting, a walk schedule and the monthly report
+- Quick settings tiles for today's steps and adding a glass of water, app shortcuts, and "How many steps today?" read aloud
+- Live wallpaper: the wren flies from its nest to a branch as you walk
+- App lock with a PIN, fingerprint or face
+- Full backup and restore in one file, and deleting a date range or everything
+- Optional smart goal that follows your recent weeks
+- Light, dark or system theme, and a welcome guide on a new install
 - 12 languages: English, Turkish, German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese and Korean
-- Export and import as CSV. Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
+- Export and import as CSV (with water, weight and sleep columns). Import also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports.
 
 <p align="center">
   <img src="docs/screenshots/en/today_more.png" width="200" alt="Today: streak, water and last 7 days">
@@ -95,7 +110,7 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 
 ## Meet the wren
 
-Your steps raise a little bird. It lives on the Today screen and in its own widget. Nothing about it is stored: its look is worked out from your step history every time.
+Your steps raise a little bird. It lives on the Today screen, in its own widget, on the live wallpaper and on FitWren band faces. Its stage and mood are worked out from your step history every time; only the look you pick is stored.
 
 ### It grows with your total steps
 
@@ -134,7 +149,16 @@ The card shows how many steps are left to the next level and stage, and celebrat
 | Party hat | 20,000 steps in one day |
 | Crown | 1 million steps in total. It replaces the party hat. |
 
-Medals are permanent, so items stay once earned. Tap the bird in the app and it hops and flaps its wings; now and then it blinks. The widget shows the same bird without animation.
+| Glasses | Walk 42 km in total |
+| Flower | Reach your water goal 7 days in a row |
+| Nightcap | 7 good nights in a row (band data) |
+| Backpack | Finish a virtual route |
+
+Medals are permanent, so items stay once earned, and you can hide any of them. Tap the bird in the app and it hops and flaps its wings; now and then it blinks. The widget shows the same bird without animation.
+
+### Kinds, colours and songs
+
+Every 1,000 steps gives you a seed. Feed the bird, or spend seeds on feather colours (sky, rose, mint, plum, night) and songs (trill, whistle, coo). New kinds open with your level: owl at level 3, parrot at 6, eagle at 10.
 
 ## Install
 
@@ -157,7 +181,9 @@ If you tap "Get the key with your Xiaomi account" on the band setup screen, the 
 
 If you use "Get it with a Zepp Life / Amazfit account", your e-mail and password are sent only to Zepp's server (`api-user.zepp.com`, `api-mifit.zepp.com`) to read the band's address and key. FitWren does not store the password.
 
-Health Connect is used only if you choose it as the band source, and only for reading. FitWren never writes to Health Connect.
+Health Connect is used only if you choose it as the band source, or turn on "Write steps to Health Connect". Then FitWren writes only its own hourly step counts.
+
+Location is used only while you record a GPS walk, and the route stays on the phone. The app lock PIN is stored only as a hash.
 
 <details>
 <summary>Permissions and why they are needed</summary>
@@ -173,7 +199,10 @@ Health Connect is used only if you choose it as the band source, and only for re
 | `INTERNET` | Only the update check and download, and the Xiaomi or Zepp sign-in for the band key, all started by you |
 | `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | Optional direct connection to a Xiaomi or Amazfit band |
 | `REQUEST_INSTALL_PACKAGES` | Open Android's installer for a downloaded update |
-| `health.READ_*` | Optional band data from Health Connect, read only |
+| `health.READ_*`, `health.WRITE_STEPS` | Optional band data from Health Connect, and optionally writing FitWren's steps |
+| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | Optional GPS walk recording, asked only when you start one |
+| `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | The optional pace metronome |
+| `USE_BIOMETRIC` | Optional fingerprint or face unlock for the app lock |
 
 </details>
 

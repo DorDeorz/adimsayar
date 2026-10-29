@@ -1,6 +1,7 @@
 package com.dordeorz.adimsayar.ui.oem
 
 import android.content.ComponentName
+import android.content.Context
 import android.os.Build
 import androidx.annotation.StringRes
 import com.dordeorz.adimsayar.R
@@ -93,10 +94,21 @@ enum class OemProfile(
     );
 
     companion object {
-        fun current(): OemProfile =
-            detect(Build.MANUFACTURER, Build.BRAND, Build.DISPLAY, Build.FINGERPRINT)
+        // LineageOS and the ROMs built on it (crDroid and others) declare this feature.
+        private const val LINEAGE_FEATURE = "org.lineageos.android"
 
-        fun detect(manufacturer: String?, brand: String?, display: String?, fingerprint: String?): OemProfile {
+        fun current(context: Context): OemProfile =
+            detect(
+                Build.MANUFACTURER,
+                Build.BRAND,
+                Build.DISPLAY,
+                Build.FINGERPRINT,
+                customRom = context.packageManager.hasSystemFeature(LINEAGE_FEATURE),
+            )
+
+        /** A custom ROM keeps the maker's name but drops the maker's skin and its autostart and battery screens. */
+        fun detect(manufacturer: String?, brand: String?, display: String?, fingerprint: String?, customRom: Boolean = false): OemProfile {
+            if (customRom) return Unknown
             val maker = listOf(manufacturer, brand).joinToString(" ") { it.orEmpty().lowercase() }
             val rom = listOf(display, fingerprint).joinToString(" ") { it.orEmpty().lowercase() }
             return entries.firstOrNull { profile -> profile.manufacturerKeys.any { maker.contains(it) } }

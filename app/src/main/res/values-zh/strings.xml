@@ -23,6 +23,8 @@
     <string name="frozen_text">手机能检测到步伐，但计步器没有变化。传感器已重新连接，走几步后此提示会自动消失。</string>
 
     <string name="service_card_title">在后台继续计步</string>
+    <string name="exact_alarms_title">精确闹钟</string>
+    <string name="exact_alarms_text">午夜记录、提醒和表盘切换会准时运行。关闭时 Android 可能将其延迟最多一小时。点按打开权限页面。</string>
     <string name="xiaomi_unreadable_title">无法读取 HyperOS 步数记录</string>
     <string name="xiaomi_unreadable_text">步数目前没有更新，可能是 HyperOS 更新改变了记录方式。你可以关闭下方开关，改用“在后台继续计步”。</string>
     <string name="xiaomi_stalled_title">HyperOS 步数记录没有变化</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">手机</string>
     <string name="device_other">其他设备</string>
 
+    <string name="tile_name">FitWren 步数</string>
+    <string name="tile_goal_percent">目标的 %%%1$d</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">今天 %1$s 步，目标的 %%%2$d</string>
+    <string name="smart_goal">智能目标</string>
+    <string name="smart_goal_hint" formatted="false">每周开始时，根据最近 4 周的步数略微调高或调低每日目标（最多 10%）</string>
+    <string name="smart_goal_changed">本周目标从 %1$s 步调整为 %2$s 步（根据最近 4 周）</string>
+    <string name="smart_goal_waiting">需要最近 4 周内至少 %1$d 天有步数才能给出建议</string>
+    <string name="smart_goal_next">下周建议：%1$s 步</string>
+    <string name="insight_title">睡眠与步数</string>
+    <string name="insight_not_enough">数据还不够：长睡眠和短睡眠各需要至少 %1$d 晚。试试选择 30 或 90 天。</string>
+    <string name="insight_steps_more">睡眠超过 %1$d 小时的日子，你平均多走 %2$s 步</string>
+    <string name="insight_steps_less">睡眠超过 %1$d 小时的日子，你平均少走 %2$s 步</string>
+    <string name="insight_steps_same">无论睡得长短（%1$d 小时），你走的步数一样</string>
+    <string name="insight_after_long">睡眠超过 %1$d 小时后</string>
+    <string name="insight_after_short">睡眠不足 %1$d 小时后</string>
+    <string name="insight_sleep_active">达成目标当天的夜晚</string>
+    <string name="insight_sleep_rest">未达成目标当天的夜晚</string>
+    <string name="insight_days">%1$d 天</string>
+    <string name="insight_hint">统计醒来当天的步数，不含今天。这是关联，不是原因。</string>
+    <string name="report_button">%1$s 报告（PDF）</string>
+    <string name="report_title">月度报告 · %1$s</string>
+    <string name="report_page">第 %1$d 页，共 %2$d 页</string>
+    <string name="report_goal_days">%2$d 天中 %1$d 天（目标 %3$s）</string>
+    <string name="report_active_days">活跃天数</string>
+    <string name="report_distance">距离</string>
+    <string name="report_kcal">卡路里</string>
+    <string name="report_kcal_value">%1$s 千卡</string>
+    <string name="report_vs_previous">与上月相比</string>
+    <string name="report_water">每日平均饮水</string>
+    <string name="report_ml_value">%1$s 毫升</string>
+    <string name="report_bpm_value">%1$d 次/分</string>
+    <string name="report_daily_chart">每日步数</string>
+    <string name="report_weeks">周</string>
+    <string name="report_goal_line">目标</string>
+    <string name="report_days_title">每日 · %1$s</string>
+    <string name="report_day">日期</string>
+    <string name="report_steps">步数</string>
+    <string name="report_water_short">饮水</string>
+    <string name="report_done">报告已保存</string>
+    <string name="report_failed">无法创建报告</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>快捷设置图块：在通知面板显示今天的步数和目标百分比，点按打开“今天”（Android 7 及以上）</item>
+        <item>智能目标（设置 → 目标，默认关闭）：开启后每周开始时根据最近 4 周将每日目标调整最多 10%</item>
+        <item>睡眠与步数（健康）：长短睡眠后一天的步数，以及达成目标当天夜里的睡眠</item>
+        <item>月度 PDF 报告（历史）：当月总结、每日图表、每周和逐日表格；无需联网</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>设置 → 步数来源 →“使用手环时不计手机”：开启后，有手环数据的日子不再加入手机步数</item>
+        <item>手环和手机始终按小时合并：佩戴手环的小时只计手环步数，手机补足其余小时（以前没有 HyperOS 记录时取当天较大的总数）</item>
+        <item>支持第三方 ROM（crDroid、LineageOS 等）：在没有 HyperOS 的小米手机上隐藏 HyperOS 步数记录和 MIUI 电池步骤，改用手机传感器</item>
+        <item>精确闹钟：在 设置 → 通知 中允许后，午夜记录、提醒和表盘切换不再延迟（Android 14 及以上）</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>小鸟心情：FitWren 表盘和设计中的小鸟随步数目标变化</item>
+        <item>表盘上的天气：天气图标和温度</item>
+        <item>息屏显示：FitWren 表盘有简洁的暗色息屏界面</item>
+        <item>分享设计：将带照片的设计作为文件发送，导入朋友的设计</item>
+        <item>按时间切换表盘：FitWren 在你选择的时间切换白天和夜间表盘</item>
+        <item>Mi Band 6 表盘：从 .bin 文件上传表盘</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>表盘商店：在 FitWren 中浏览、搜索小米免费的手环 8 表盘，一键安装到手环</item>
         <item>FitWren 表盘：应用自带九款小鸟表盘（夜晚、小路、指针、霓虹、树枝等），一键安装到小米手环 8</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">直接连接（小米、Amazfit）</string>
     <string name="source_connect">通过 Health Connect</string>
     <string name="source_merge_hint">使用手环时，佩戴的时段用手环步数，其他时段用手机步数。</string>
+    <string name="band_only_title">使用手环时不计手机</string>
+    <string name="band_only_text">如果手环当天传过数据，当天步数只取手环。只有手环整天都没连接时才使用手机。关闭时，手机补足未佩戴手环的小时。</string>
     <string name="source_direct_manage">手环设置</string>
     <string name="device_connect_hint">正在从 Health Connect 读取数据</string>
     <string name="band_reconnect">重新连接</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">正在上传：%d%%</string>
     <string name="band_faces_done">表盘已上传并选用。</string>
     <string name="band_faces_failed">表盘上传失败。请让手环靠近后重试。</string>
+    <string name="huami_faces_hint">请选择为 Mi Band 6 制作的 .bin 表盘文件。上传可能需要几分钟，请让手环放在手机旁边。</string>
+    <string name="huami_faces_invalid">此文件不是 Mi Band 6 表盘。</string>
+    <string name="huami_faces_done">表盘已上传。如果手环没有显示，请在手环的表盘列表中选择。</string>
+    <string name="huami_faces_no_space">手环空间不足。请在手环上删除一个表盘后重试。</string>
+    <string name="huami_faces_low_battery">手环电量低。请充电后重试。</string>
+    <string name="huami_faces_refused">手环不接受此文件。</string>
     <string name="band_faces_delete">删除</string>
     <string name="band_notify_pick_search">搜索应用</string>
     <string name="band_notify_pick_count">%2$d 个应用中有 %1$d 个发送到手环</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">显示内容</string>
     <string name="face_designer_undo">撤销</string>
     <string name="face_designer_reset">重置</string>
+    <string name="face_designer_bird_mood">随目标变化</string>
+    <string name="face_designer_show_weather">天气</string>
+    <string name="face_designer_share_section">分享</string>
+    <string name="face_designer_share">分享设计</string>
+    <string name="face_designer_import">导入设计</string>
+    <string name="face_designer_share_hint">设计会连同照片写入一个文件。在 FitWren 中用“导入设计”打开。</string>
+    <string name="face_designer_import_failed">此文件不是 FitWren 表盘设计</string>
+    <string name="face_schedule">按时间切换表盘</string>
+    <string name="face_schedule_hint">FitWren 会在你选择的时间切换白天和夜间表盘。届时手环需已连接，否则稍后重试。</string>
+    <string name="face_schedule_on">开启</string>
+    <string name="face_schedule_day">白天表盘</string>
+    <string name="face_schedule_day_start">白天开始</string>
+    <string name="face_schedule_night">夜间表盘</string>
+    <string name="face_schedule_night_start">夜间开始</string>
+    <string name="face_schedule_none">未选择</string>
+    <string name="goal_off">关闭</string>
+    <string name="goal_turn_off">关闭</string>
+    <string name="weekend_goal">周末目标</string>
+    <string name="weekend_goal_hint">周六和周日单独的每日目标。关闭时每天目标相同。</string>
+    <string name="monthly_goal">月度目标</string>
+    <string name="yearly_goal">年度目标</string>
+    <string name="period_goal_hint">今日页面会显示进度条，以及按当前节奏达成目标的日期。</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">目标达成！</string>
+    <string name="period_no_pace">走一点路才能估算</string>
+    <string name="period_on_track">按这个节奏你将在%1$s达成</string>
+    <string name="period_behind">需要每天%1$s步才能赶上</string>
+    <string name="vacation_mode">假期模式</string>
+    <string name="vacation_hint">所选日期里连续记录不会中断，不消耗保护卡，提醒也会静音。</string>
+    <string name="vacation_off">未安排假期</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">结束假期</string>
+    <string name="vacation_on_title">你正在休假</string>
+    <string name="vacation_on_text">连续记录保留到%1$s，提醒已静音。</string>
+    <string name="backup_group">完整备份</string>
+    <string name="backup_write">备份</string>
+    <string name="backup_write_hint">步数、体重、饮水、奖牌、备注和设置写入一个文件</string>
+    <string name="backup_restore">恢复备份</string>
+    <string name="backup_restore_hint">选择一个 FitWren 备份文件</string>
+    <string name="backup_restore_choose">选择文件</string>
+    <string name="restore_confirm">当前所有数据都会被备份替换。手环连接和步数来源保持不变。</string>
+    <string name="backup_done">备份已保存（%1$d 行）</string>
+    <string name="backup_failed">无法写入文件</string>
+    <string name="restore_done">备份已恢复（%1$d 行）</string>
+    <string name="restore_failed">此文件不是 FitWren 备份</string>
+    <string name="health_write">写入 Health Connect</string>
+    <string name="health_write_hint">FitWren 的每小时步数也会显示在 Google Fit 等其他应用中</string>
+    <string name="health_write_reading">从 Health Connect 读取步数时不会写入，否则会重复计数</string>
+    <string name="health_write_denied">未授予 Health Connect 写入权限</string>
+    <string name="erase_group">删除数据</string>
+    <string name="erase_range">删除日期范围</string>
+    <string name="erase_range_hint">删除所选日期的步数、饮水、体重、睡眠和备注。手机或手环可能会再次写入。</string>
+    <string name="erase_all">删除全部数据</string>
+    <string name="erase_all_hint">删除步数历史、体重、饮水、奖牌和备注。设置保留。</string>
+    <string name="erase_all_confirm">永久删除全部数据？建议先备份。</string>
+    <string name="erase_confirm_button">删除</string>
+    <string name="erase_done">数据已删除</string>
+    <string name="delete">删除</string>
+    <string name="note_title">当天备注</string>
+    <string name="note_placeholder">例如：有比赛、生病了</string>
+    <string name="note_empty">无备注</string>
+    <string name="note_add">添加备注</string>
+    <string name="note_edit">编辑</string>
+    <string name="correct_button">修正</string>
+    <string name="correct_hint">计数不对时可以手动修正这一天</string>
+    <string name="correct_done">这一天已手动修正</string>
+    <string name="correct_title">修正这一天</string>
+    <string name="correct_text">你输入的数字会取代手机和手环统计的步数。</string>
+    <string name="correct_undo">恢复统计值</string>
+    <string-array name="release_notes_0_17_0">
+        <item>当天备注：在历史中给所选日期写一条短备注，日历上会显示小圆点</item>
+        <item>修正某天：自己输入正确步数，或恢复统计值</item>
+        <item>假期模式（设置 → 目标）：所选日期连续记录不中断、不用保护卡、提醒静音</item>
+        <item>周末目标、月度和年度目标：今日页显示进度条和预计达成日</item>
+        <item>完整备份与恢复（设置 → 数据）：步数、体重、饮水、奖牌、备注和设置在一个文件里</item>
+        <item>删除数据：某个日期范围或全部</item>
+        <item>CSV 导出现在包含饮水、体重和睡眠</item>
+        <item>写入 Health Connect（可选）：FitWren 步数也会显示在 Google Fit 等应用中</item>
+    </string-array>
+    <string name="morning_title">早上好！</string>
+    <string name="morning_yesterday">昨天你走了%1$s步</string>
+    <string name="morning_sleep">你睡了%1$d小时%2$d分</string>
+    <string name="morning_goal">今天的目标是%1$s步</string>
+    <string name="morning_summary">早间总结</string>
+    <string name="morning_summary_hint">早上通知昨天的步数、昨晚睡眠和今天的目标</string>
+    <string name="morning_hour">时间</string>
+    <string name="record_notify">纪录通知</string>
+    <string name="record_notify_hint">超过最佳日或最佳周时立即庆祝</string>
+    <string name="record_day_title">今天是你的最佳日！</string>
+    <string name="record_day_text">%1$s步，之前纪录%2$s</string>
+    <string name="record_week_title">这是你的最佳一周！</string>
+    <string name="record_week_text">%1$s步，之前纪录%2$s</string>
+    <string name="sedentary">久坐提醒</string>
+    <string name="sedentary_hint">10:00–20:00 之间，一小时少于%1$d步就提醒“起来走走”</string>
+    <string name="sedentary_title">该动一动了</string>
+    <string name="sedentary_text">过去一小时你走了%1$d步，走几分钟会舒服些</string>
+    <string name="walk_plan">散步计划</string>
+    <string name="walk_plan_hint">为每天设定散步时间并收到提醒</string>
+    <string name="walk_plan_dialog_hint">到时会收到通知。在那一小时或下一小时走够1500步，就会在今日页打勾。</string>
+    <string name="walk_plan_none">无</string>
+    <string name="walk_plan_title">该去散步了</string>
+    <string name="walk_plan_text">你的计划：%1$s散步。出发吧！</string>
+    <string name="walk_plan_today">今天%1$s散步</string>
+    <string name="walk_plan_done">完成了，走得好！</string>
+    <string name="walk_plan_waiting">在那时走够1500步即打勾</string>
+    <string name="month_report_reminder">月度报告提醒</string>
+    <string name="month_report_reminder_hint">每月1日10:00提醒上个月的 PDF 报告</string>
+    <string name="month_report_title">%1$s的报告已准备好</string>
+    <string name="month_report_text">在历史页选择月份并保存 PDF 报告</string>
+    <string name="band_celebrate">手环目标庆祝</string>
+    <string name="band_celebrate_hint">达成目标时手环震动并显示小鸟消息（连接时）</string>
+    <string name="band_celebrate_title">🐦 目标达成！</string>
+    <string name="band_celebrate_text">%1$s步。小鸟乐坏了！</string>
+    <string name="shortcut_water">加水</string>
+    <string name="shortcut_water_long">加一杯水</string>
+    <string name="shortcut_today_long">今日步数</string>
+    <string name="shortcut_ask">多少步？</string>
+    <string name="shortcut_ask_long">今天走了多少步？</string>
+    <string name="shortcut_water_added">已加%1$d毫升水</string>
+    <string name="water_tile_name">FitWren 饮水</string>
+    <string name="answer_steps">今天你走了%1$s步，离目标还差%2$s步。</string>
+    <string name="answer_steps_done">今天你走了%1$s步，目标达成，太棒了！</string>
+    <string-array name="release_notes_0_18_0">
+        <item>早间总结：昨天的步数、昨晚睡眠和今天的目标</item>
+        <item>纪录通知：超过最佳日或最佳周时立即庆祝</item>
+        <item>久坐提醒：一小时几乎没走就提醒“起来走走”</item>
+        <item>散步计划：按天设时间，提醒，走了就在今日页打勾</item>
+        <item>每月1日提醒月度报告</item>
+        <item>手环庆祝：震动并显示小鸟消息</item>
+        <item>应用快捷方式：长按图标可加水、今日、多少步？</item>
+        <item>饮水快捷开关：在通知面板一键+1杯</item>
+        <item>语音回答“今天走了多少步？”（快捷方式和 Google 助理）</item>
+    </string-array>
+    <string name="medal_group_distance">距离</string>
+    <string name="medal_group_distance_text">所有日子的总步行距离（按身高计算）</string>
+    <string name="medal_group_water">饮水连续</string>
+    <string name="medal_group_water_text">连续达成饮水目标的天数</string>
+    <string name="medal_group_sleep">睡眠连续</string>
+    <string name="medal_group_sleep_text">连续睡满 7 小时的夜晚数（手环数据）</string>
+    <string name="medal_group_route">完成路线</string>
+    <string name="medal_group_route_text">完成的不同虚拟路线数</string>
+    <string name="medal_km">%1$d 公里</string>
+    <string name="routes_count">%1$d 条路线</string>
+    <string name="time_left_minutes">距目标约步行 %1$d 分钟</string>
+    <string name="time_left_hours">距目标约步行 %1$d 小时 %2$d 分钟</string>
+    <string name="food_line">已消耗 ≈ %1$d × %2$s</string>
+    <string name="food_burger">汉堡</string>
+    <string name="food_simit">芝麻圈</string>
+    <string name="food_chocolate">巧克力棒</string>
+    <string name="food_cola">罐可乐</string>
+    <string name="food_apple">苹果</string>
+    <string name="trend_title">趋势</string>
+    <string name="trend_month">本月（前 %1$d 天）</string>
+    <string name="trend_week">最近 7 天</string>
+    <string name="trend_up">比上一段多 %1$d%%</string>
+    <string name="trend_down">比上一段少 %1$d%%</string>
+    <string name="trend_same">与上一段相同</string>
+    <string name="trend_no_data">上一段没有步数可比较</string>
+    <string name="active_hours_title">活跃时段图</string>
+    <string name="active_hours_text">最近 8 周每天每小时的平均步数，颜色越深越多</string>
+    <string name="active_hours_empty">还没有按小时的记录</string>
+    <string name="active_hours_peak">最活跃时段：%1$s %2$s</string>
+    <string name="story_banner_title">你的 %1$d 年故事已就绪</string>
+    <string name="story_banner_text">滑动回顾一年并分享</string>
+    <string name="story_open">打开故事</string>
+    <string name="story_total_title">你在 %1$d 年走的步数</string>
+    <string name="story_total_text">平均每天 %1$s 步</string>
+    <string name="story_distance_title">你走过的路</string>
+    <string name="story_distance_text">约为地球一圈的 %1$d%%</string>
+    <string name="story_medals_text">今年获得的奖牌</string>
+    <string name="story_end_title">多么精彩的一年！</string>
+    <string name="story_end_text">新的一年小鸟也会陪你走</string>
+    <string name="story_share">FitWren %1$d：%2$s 步，%3$s 公里，%4$d 天达成目标！🐦</string>
+    <string name="fitness_age_title">体能年龄</string>
+    <string name="fitness_age_value">%1$d 岁</string>
+    <string name="fitness_age_younger">比实际年龄年轻 %1$d 岁</string>
+    <string name="fitness_age_older">比实际年龄大 %1$d 岁</string>
+    <string name="fitness_age_same">与实际年龄相同</string>
+    <string name="fitness_age_text">估算 VO2max %1$d，依据静息心率 %2$d 和日均 %3$s 步。并非医学测量。</string>
+    <string name="recovery_title">恢复度</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">恢复良好，今天可以快走</string>
+    <string name="recovery_mid">一般，日常步行就够</string>
+    <string name="recovery_low">偏低，今天放轻松多休息</string>
+    <string name="recovery_text">将昨晚睡眠与前一周比较，静息心率与平均值比较。并非医学评估。</string>
+    <string name="quote_title">每日一句</string>
+    <string name="quote_setting">每日一句</string>
+    <string name="quote_setting_hint">每天在今日页显示一句新话</string>
+    <string-array name="quotes">
+        <item>每一步都让你比昨天前进一步。</item>
+        <item>今天走过的路，是明天休息的地方。</item>
+        <item>小步子也能走完长路。</item>
+        <item>小鸟今天也想和你一起飞。</item>
+        <item>慢慢走也比不走好。</item>
+        <item>即使累了，十分钟也足够。</item>
+        <item>连续是习惯，习惯是选择。</item>
+        <item>楼梯是今天的小山。</item>
+        <item>打电话时走一走，步数自然来。</item>
+        <item>散步是整理思绪最简单的方法。</item>
+        <item>目标看起来远，就先瞄准一半。</item>
+        <item>今天的步数是明天的能量。</item>
+        <item>每天一点点，每月很多。</item>
+        <item>晴天或雨天，散步都合适。</item>
+        <item>最好的散步，就是现在开始的那一次。</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>今日：距目标还需步行的时间（按你的步速）和消耗热量换算成食物</item>
+        <item>今日小部件（宽）：距目标的时间</item>
+        <item>每日一句卡片（可在设置 → 外观中关闭）</item>
+        <item>历史：趋势卡（本月和最近 7 天与上一段比较）和活跃时段图（8 周，星期 × 小时）</item>
+        <item>年度故事：12 月和 1 月出现在历史页，年度卡中也有；可滑动并分享</item>
+        <item>健康：恢复度和体能年龄（手环数据）</item>
+        <item>新奖牌：距离、饮水连续、睡眠连续、完成路线</item>
+    </string-array>
+    <string name="bird_item_glasses">眼镜</string>
+    <string name="bird_item_flower">花朵</string>
+    <string name="bird_item_nightcap">睡帽</string>
+    <string name="bird_item_backpack">背包</string>
+    <string name="bird_unlock_glasses">累计步行 42 公里</string>
+    <string name="bird_unlock_flower">连续 7 天达成饮水目标</string>
+    <string name="bird_unlock_nightcap">连续 7 晚好睡眠</string>
+    <string name="bird_unlock_backpack">完成一条虚拟路线</string>
+    <string name="bird_item_wear">已获得：选择小鸟是否佩戴</string>
+    <string name="seeds_count">种子：%1$d</string>
+    <string name="seeds_hint">每 1,000 步一颗种子，可换颜色、叫声或喂小鸟</string>
+    <string name="bird_fed">小鸟很喜欢种子！</string>
+    <string name="bird_feed">喂食</string>
+    <string name="bird_species_title">鸟的种类</string>
+    <string name="bird_locked_level">%1$s（等级 %2$d）</string>
+    <string name="bird_color_title">羽毛颜色</string>
+    <string name="bird_price">%1$s（%2$d 颗种子）</string>
+    <string name="bird_sound_title">叫声</string>
+    <string name="bird_species_sparrow">鹪鹩</string>
+    <string name="bird_species_owl">猫头鹰</string>
+    <string name="bird_species_parrot">鹦鹉</string>
+    <string name="bird_species_eagle">鹰</string>
+    <string name="bird_color_default">自然</string>
+    <string name="bird_color_sky">天蓝</string>
+    <string name="bird_color_rose">粉色</string>
+    <string name="bird_color_mint">薄荷绿</string>
+    <string name="bird_color_plum">紫红</string>
+    <string name="bird_color_night">夜色</string>
+    <string name="bird_sound_chirp">啾啾</string>
+    <string name="bird_sound_trill">颤鸣</string>
+    <string name="bird_sound_tweet">口哨</string>
+    <string name="bird_sound_coo">咕咕</string>
+    <string name="metronome_channel">节拍器</string>
+    <string name="metronome_title">步频节拍器</string>
+    <string name="metronome_bpm">每分钟 %1$d 步</string>
+    <string name="walk_stop">停止</string>
+    <string name="walk_start">开始</string>
+    <string name="walk_channel">步行记录</string>
+    <string name="walk_gps_recording">正在记录 GPS 步行</string>
+    <string name="walk_gps_distance">%1$s 公里</string>
+    <string name="walk_gps_denied">未授予位置权限；GPS 步行需要它</string>
+    <string name="walk_tools_title">步行工具</string>
+    <string name="walk_dog_title">遛狗</string>
+    <string name="walk_dog_hint">出门开始，回家停止；步数会保存</string>
+    <string name="walk_running">进行中：%1$s</string>
+    <string name="walk_gps_title">GPS 步行</string>
+    <string name="walk_gps_hint">保存路线和距离；仅在记录时使用位置</string>
+    <string name="walk_gps_running">%1$s 公里 · %2$s</string>
+    <string name="walk_list_button">已保存的步行（%1$d）</string>
+    <string name="walk_list_title">步行</string>
+    <string name="walk_delete">删除</string>
+    <string name="walk_summary_gps">%1$s 公里 · %2$s · %3$s 步</string>
+    <string name="walk_summary_dog">%1$s · %2$s 步</string>
+    <string name="floors_today">爬了 %1$d 层楼</string>
+    <string name="walks_on_day">%1$d 次步行</string>
+    <string name="wallpaper_name">动态壁纸</string>
+    <string name="wallpaper_description">你走路时 FitWren 小鸟从巢飞向树枝</string>
+    <string name="wallpaper_set_hint">主屏幕上小鸟随当天步数从巢飞向树枝</string>
+    <string name="lock_title">FitWren 已锁定</string>
+    <string name="lock_use_pin">使用 PIN</string>
+    <string name="lock_wrong">PIN 错误，请重试</string>
+    <string name="lock_enter_pin">输入 PIN</string>
+    <string name="lock_biometric_again">用指纹或面容解锁</string>
+    <string name="simple_today">今天</string>
+    <string name="simple_view_off">返回普通视图</string>
+    <string name="simple_view">简洁视图</string>
+    <string name="simple_view_hint">今日页只用大字显示步数和目标</string>
+    <string name="app_lock">应用锁</string>
+    <string name="app_lock_hint">打开时需要 PIN</string>
+    <string name="app_lock_biometric">指纹 / 面容解锁</string>
+    <string name="app_lock_biometric_hint">使用手机生物识别；PIN 作为备用</string>
+    <string name="app_lock_change">更改 PIN</string>
+    <string name="app_lock_change_hint">设置新 PIN</string>
+    <string name="app_lock_set_pin">设置 PIN</string>
+    <string name="app_lock_pin_hint">%1$d–%2$d 位数字。忘记后只能清除应用数据才能打开。</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN（再次）</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_welcome_title">欢迎使用 FitWren</string>
+    <string name="onboarding_welcome_text">记录你的步数，达成目标小鸟就会长大。无需账号，数据只在你的手机上。</string>
+    <string name="onboarding_goal_title">你的每日目标</string>
+    <string name="onboarding_goal_text">之后可在设置中修改</string>
+    <string name="onboarding_body_title">身高和体重</string>
+    <string name="onboarding_body_text">用于计算距离和热量</string>
+    <string name="onboarding_height">%1$d 厘米</string>
+    <string name="onboarding_weight">%1$d 公斤</string>
+    <string name="onboarding_permission_title">步数权限</string>
+    <string name="onboarding_permission_text">计步需要身体活动权限</string>
+    <string name="onboarding_permission_done">已授权 ✓</string>
+    <string name="onboarding_permission_button">允许</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_0">
+        <item>鸟的种类：鹪鹩、猫头鹰（等级 3）、鹦鹉（6）、鹰（10）；显示在应用、小部件、壁纸和手环表盘上</item>
+        <item>种子：每 1,000 步一颗；喂小鸟，购买羽毛颜色和叫声</item>
+        <item>配饰：佩戴或隐藏已获得的；新增眼镜、花朵、睡帽和背包</item>
+        <item>动态壁纸：随着步数小鸟从巢飞向树枝</item>
+        <item>步行工具（今日）：步频节拍器、遛狗和 GPS 步行记录（绘制路线）</item>
+        <item>楼层计数：适用于有气压传感器的手机</item>
+        <item>应用锁（PIN、指纹或面容）和简洁视图（设置 → 外观和语言）</item>
+        <item>新安装时的欢迎页：目标、身高体重、权限</item>
+    </string-array>
 </resources>

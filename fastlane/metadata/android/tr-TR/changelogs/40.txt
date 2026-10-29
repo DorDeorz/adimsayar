@@ -1,0 +1,4 @@
+Hızlı ayar kutucuğu: bildirim panelinde bugünün adımı ve hedef yüzdesi.
+Akıllı hedef (isteğe bağlı): günlük hedef her hafta son 4 haftana göre ayarlanır.
+Uyku ve adım: uzun ve kısa uykudan sonraki günlerin karşılaştırması.
+Aylık PDF raporu: özet, grafik ve gün gün tablo.

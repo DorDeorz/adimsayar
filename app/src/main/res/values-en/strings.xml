@@ -23,6 +23,8 @@
     <string name="frozen_text">The phone detects steps but the counter is not moving. The sensor was reconnected; this warning goes away by itself after a few steps.</string>
 
     <string name="service_card_title">Keep counting in the background</string>
+    <string name="exact_alarms_title">Exact alarms</string>
+    <string name="exact_alarms_text">The midnight record, reminders and face changes run on time. When off, Android may delay them by up to an hour. Tap to open the permission screen.</string>
     <string name="xiaomi_unreadable_title">Can\'t read the HyperOS step record</string>
     <string name="xiaomi_unreadable_text">Steps are not updating right now. A HyperOS update may have changed the record. You can turn off the switch below and keep counting with "Keep counting in the background".</string>
     <string name="xiaomi_stalled_title">The HyperOS step record is not moving</string>
@@ -316,6 +318,68 @@
     <string name="device_phone">Phone</string>
     <string name="device_other">Other device</string>
 
+    <string name="tile_name">FitWren steps</string>
+    <string name="tile_goal_percent">%%%1$d of goal</string>
+    <string name="tile_label_short">%1$s · %%%2$d</string>
+    <string name="tile_description">%1$s steps today, %%%2$d of goal</string>
+    <string name="smart_goal">Smart goal</string>
+    <string name="smart_goal_hint" formatted="false">At the start of each week, raises or lowers the daily goal a little based on your last 4 weeks (at most 10%)</string>
+    <string name="smart_goal_changed">This week the goal went from %1$s to %2$s steps (based on your last 4 weeks)</string>
+    <string name="smart_goal_waiting">A suggestion needs steps on at least %1$d days in the last 4 weeks</string>
+    <string name="smart_goal_next">Suggestion for next week: %1$s steps</string>
+    <string name="insight_title">Sleep and steps</string>
+    <string name="insight_not_enough">Not enough data yet: it needs at least %1$d long and %1$d short nights. Try choosing 30 or 90 days.</string>
+    <string name="insight_steps_more">On days after more than %1$d hours of sleep you walk %2$s more steps on average</string>
+    <string name="insight_steps_less">On days after more than %1$d hours of sleep you walk %2$s fewer steps on average</string>
+    <string name="insight_steps_same">You walk the same after long and short nights (%1$d hours)</string>
+    <string name="insight_after_long">After more than %1$d hours of sleep</string>
+    <string name="insight_after_short">After less than %1$d hours of sleep</string>
+    <string name="insight_sleep_active">Night after reaching the goal</string>
+    <string name="insight_sleep_rest">Night after missing the goal</string>
+    <string name="insight_days">%1$d days</string>
+    <string name="insight_hint">Steps of the day you woke up count, today does not. This is a link, not a cause.</string>
+    <string name="report_button">%1$s report (PDF)</string>
+    <string name="report_title">Monthly report · %1$s</string>
+    <string name="report_page">Page %1$d of %2$d</string>
+    <string name="report_goal_days">%1$d of %2$d days (goal %3$s)</string>
+    <string name="report_active_days">Active days</string>
+    <string name="report_distance">Distance</string>
+    <string name="report_kcal">Calories</string>
+    <string name="report_kcal_value">%1$s kcal</string>
+    <string name="report_vs_previous">Compared to last month</string>
+    <string name="report_water">Daily water average</string>
+    <string name="report_ml_value">%1$s ml</string>
+    <string name="report_bpm_value">%1$d bpm</string>
+    <string name="report_daily_chart">Daily steps</string>
+    <string name="report_weeks">Weeks</string>
+    <string name="report_goal_line">goal</string>
+    <string name="report_days_title">Days · %1$s</string>
+    <string name="report_day">Day</string>
+    <string name="report_steps">Steps</string>
+    <string name="report_water_short">Water</string>
+    <string name="report_done">Report saved</string>
+    <string name="report_failed">Could not create the report</string>
+
+    <string-array name="release_notes_0_16_0">
+        <item>Quick settings tile: today\'s steps and goal percent in the notification panel, a tap opens Today (Android 7 and later)</item>
+        <item>Smart goal (Settings → Goals, off by default): when on, the daily goal changes by at most 10% at the start of each week based on your last 4 weeks</item>
+        <item>Sleep and steps (Health): steps on days after long and short nights, and sleep after days you reached the goal</item>
+        <item>Monthly PDF report (History): summary of the chosen month, daily chart, weeks and a day-by-day table; no internet needed</item>
+    </string-array>
+    <string-array name="release_notes_0_15_2">
+        <item>Settings → Step source → “Don\'t count the phone while using the band”: when on, phone steps are left out on days the band sent data</item>
+        <item>Band and phone always merge hour by hour: in hours the band was worn only the band counts, the phone fills the other hours (before, without the HyperOS record, the larger daily total won)</item>
+        <item>Custom ROM support (crDroid, LineageOS and others): on a Xiaomi phone without HyperOS, the HyperOS step record and MIUI battery steps are hidden and the phone\'s sensor is used</item>
+        <item>Exact alarms: allow them in Settings → Notifications and the midnight record, reminders and face changes run without delay (Android 14 and later)</item>
+    </string-array>
+    <string-array name="release_notes_0_14_1">
+        <item>The bird\'s mood: on FitWren faces and designs the bird changes with the step goal (asleep, awake, happy, celebrating)</item>
+        <item>Weather on the face: a weather icon and the temperature on FitWren faces and designs</item>
+        <item>Always-on display: FitWren faces get a plain dark always-on look</item>
+        <item>Share designs: send a face design with its photo as a file, import a friend\'s design</item>
+        <item>Face by time of day: FitWren switches between a day and a night face at the times you pick</item>
+        <item>Mi Band 6 faces: upload a watch face from a .bin file</item>
+    </string-array>
     <string-array name="release_notes_0_13_3">
         <item>Watch face store: browse Xiaomi\'s free Mi Band 8 faces with pictures, search them and send one to the band with a tap</item>
         <item>FitWren faces: nine faces with the bird (Night, Road, Analog, Neon, Branch and more) come with the app and go to the Mi Band 8 with a tap</item>
@@ -765,6 +829,8 @@
     <string name="source_direct">Direct connection (Xiaomi, Amazfit)</string>
     <string name="source_connect">Via Health Connect</string>
     <string name="source_merge_hint">If you use a band, its count is used in the hours you wear it and the phone\'s count in the other hours.</string>
+    <string name="band_only_title">Don\'t count the phone while using the band</string>
+    <string name="band_only_text">If the band sent data on a day, that day\'s steps come from the band only. The phone is used only on days the band never connected. When off, the phone fills the hours the band was not worn.</string>
     <string name="source_direct_manage">Band settings</string>
     <string name="device_connect_hint">Data is read from Health Connect</string>
     <string name="band_reconnect">Reconnect</string>
@@ -849,6 +915,12 @@
     <string name="band_faces_sending">Uploading: %d%%</string>
     <string name="band_faces_done">Watch face uploaded and selected.</string>
     <string name="band_faces_failed">The watch face could not be uploaded. Bring the band closer and try again.</string>
+    <string name="huami_faces_hint">Pick a .bin watch face made for the Mi Band 6. The upload can take a few minutes; keep the band next to the phone.</string>
+    <string name="huami_faces_invalid">This file is not a Mi Band 6 watch face.</string>
+    <string name="huami_faces_done">The watch face was uploaded. If the band does not show it, pick it from the band\'s face list.</string>
+    <string name="huami_faces_no_space">The band is full. Delete a face on the band and try again.</string>
+    <string name="huami_faces_low_battery">The band\'s battery is low. Charge it and try again.</string>
+    <string name="huami_faces_refused">The band did not accept this file.</string>
     <string name="band_faces_delete">Delete</string>
     <string name="band_notify_pick_search">Search apps</string>
     <string name="band_notify_pick_count">%1$d of %2$d apps send to the band</string>
@@ -915,4 +987,320 @@
     <string name="face_designer_tab_parts">Parts</string>
     <string name="face_designer_undo">Undo</string>
     <string name="face_designer_reset">Reset</string>
+    <string name="face_designer_bird_mood">By goal</string>
+    <string name="face_designer_show_weather">Weather</string>
+    <string name="face_designer_share_section">Share</string>
+    <string name="face_designer_share">Share design</string>
+    <string name="face_designer_import">Import design</string>
+    <string name="face_designer_share_hint">The design is written to a file with its photo. Your friend opens it in FitWren with “Import design”.</string>
+    <string name="face_designer_import_failed">This file is not a FitWren face design</string>
+    <string name="face_schedule">Face by time of day</string>
+    <string name="face_schedule_hint">FitWren switches between the day and night face at the times you pick. The band has to be connected then; if not, it tries again a bit later.</string>
+    <string name="face_schedule_on">On</string>
+    <string name="face_schedule_day">Day face</string>
+    <string name="face_schedule_day_start">Day starts</string>
+    <string name="face_schedule_night">Night face</string>
+    <string name="face_schedule_night_start">Night starts</string>
+    <string name="face_schedule_none">Not chosen</string>
+    <string name="goal_off">Off</string>
+    <string name="goal_turn_off">Turn off</string>
+    <string name="weekend_goal">Weekend goal</string>
+    <string name="weekend_goal_hint">A separate daily goal for Saturday and Sunday. When off, every day has the same goal.</string>
+    <string name="monthly_goal">Monthly goal</string>
+    <string name="yearly_goal">Yearly goal</string>
+    <string name="period_goal_hint">The Today page shows a progress bar and the day you reach the goal at your current pace.</string>
+    <string name="period_value">%1$s / %2$s</string>
+    <string name="period_reached">Goal reached!</string>
+    <string name="period_no_pace">Walk a little to get an estimate</string>
+    <string name="period_on_track">At this pace you reach it on %1$s</string>
+    <string name="period_behind">You need %1$s steps a day to make it</string>
+    <string name="vacation_mode">Vacation mode</string>
+    <string name="vacation_hint">On the chosen days the streak does not break, no streak freeze is used and reminders stay quiet.</string>
+    <string name="vacation_off">No vacation planned</string>
+    <string name="vacation_range">%1$s – %2$s</string>
+    <string name="vacation_end">End vacation</string>
+    <string name="vacation_on_title">You are on vacation</string>
+    <string name="vacation_on_text">Your streak is kept until %1$s and reminders are quiet.</string>
+    <string name="backup_group">Full backup</string>
+    <string name="backup_write">Back up</string>
+    <string name="backup_write_hint">Steps, weight, water, medals, notes and settings go into one file</string>
+    <string name="backup_restore">Restore backup</string>
+    <string name="backup_restore_hint">Choose a FitWren backup file</string>
+    <string name="backup_restore_choose">Choose file</string>
+    <string name="restore_confirm">All current data is replaced by the backup. The band connection and the step source stay as they are.</string>
+    <string name="backup_done">Backup saved (%1$d rows)</string>
+    <string name="backup_failed">Could not write the file</string>
+    <string name="restore_done">Backup restored (%1$d rows)</string>
+    <string name="restore_failed">This file is not a FitWren backup</string>
+    <string name="health_write">Write to Health Connect</string>
+    <string name="health_write_hint">FitWren\'s hourly steps also show up in other apps such as Google Fit</string>
+    <string name="health_write_reading">Writing stays off while steps are read from Health Connect, or they would count twice</string>
+    <string name="health_write_denied">Health Connect write permission was not granted</string>
+    <string name="erase_group">Delete data</string>
+    <string name="erase_range">Delete a date range</string>
+    <string name="erase_range_hint">Steps, water, weight, sleep and notes of the chosen days are deleted. The phone or band may write those days again.</string>
+    <string name="erase_all">Delete all data</string>
+    <string name="erase_all_hint">Step history, weight, water, medals and notes are deleted. Settings stay.</string>
+    <string name="erase_all_confirm">Delete all data for good? Making a backup first is a good idea.</string>
+    <string name="erase_confirm_button">Delete</string>
+    <string name="erase_done">Data deleted</string>
+    <string name="delete">Delete</string>
+    <string name="note_title">Note for the day</string>
+    <string name="note_placeholder">For example: had a match, was ill</string>
+    <string name="note_empty">No note</string>
+    <string name="note_add">Add note</string>
+    <string name="note_edit">Edit</string>
+    <string name="correct_button">Correct</string>
+    <string name="correct_hint">If the count is wrong, you can fix the day by hand</string>
+    <string name="correct_done">This day was corrected by hand</string>
+    <string name="correct_title">Correct the day</string>
+    <string name="correct_text">The number you type replaces what the phone and band counted.</string>
+    <string name="correct_undo">Use counted value</string>
+    <string-array name="release_notes_0_17_0">
+        <item>Day notes: write a short note on the selected day in History; a small dot shows on the calendar</item>
+        <item>Correct a day: type the right step count yourself, or go back to the counted value</item>
+        <item>Vacation mode (Settings → Goals): on the chosen days the streak does not break, no freeze is used, reminders are quiet</item>
+        <item>Weekend goal, monthly and yearly goal: progress bar and estimated finish day on Today</item>
+        <item>Full backup and restore (Settings → Data): steps, weight, water, medals, notes and settings in one file</item>
+        <item>Delete data: a date range or everything</item>
+        <item>CSV export now also writes water, weight and sleep columns</item>
+        <item>Write to Health Connect (optional): FitWren steps also show up in apps such as Google Fit</item>
+    </string-array>
+    <string name="morning_title">Good morning!</string>
+    <string name="morning_yesterday">Yesterday you walked %1$s steps</string>
+    <string name="morning_sleep">You slept %1$d h %2$d min</string>
+    <string name="morning_goal">Today\'s goal is %1$s steps</string>
+    <string name="morning_summary">Morning summary</string>
+    <string name="morning_summary_hint">A morning notification with yesterday\'s steps, last night\'s sleep and today\'s goal</string>
+    <string name="morning_hour">Time</string>
+    <string name="record_notify">Record notification</string>
+    <string name="record_notify_hint">Celebrates the moment you beat your best day or week</string>
+    <string name="record_day_title">Today is your best day!</string>
+    <string name="record_day_text">%1$s steps, previous best %2$s</string>
+    <string name="record_week_title">This is your best week!</string>
+    <string name="record_week_text">%1$s steps, previous best %2$s</string>
+    <string name="sedentary">Sitting reminder</string>
+    <string name="sedentary_hint">Between 10:00 and 20:00, if you walked fewer than %1$d steps in an hour, it says “get up and walk a bit”</string>
+    <string name="sedentary_title">Time to move</string>
+    <string name="sedentary_text">You took %1$d steps in the last hour. A few minutes of walking will do you good.</string>
+    <string name="walk_plan">Walk schedule</string>
+    <string name="walk_plan_hint">Set walk times for weekdays and get a reminder</string>
+    <string name="walk_plan_dialog_hint">You get a notification at that time. Walk 1,500 steps in that hour or the next and it is ticked on Today.</string>
+    <string name="walk_plan_none">None</string>
+    <string name="walk_plan_title">Time for your walk</string>
+    <string name="walk_plan_text">Your plan: walk at %1$s. Let\'s go!</string>
+    <string name="walk_plan_today">Walk at %1$s today</string>
+    <string name="walk_plan_done">Done, well walked!</string>
+    <string name="walk_plan_waiting">Ticked once you walk 1,500 steps around then</string>
+    <string name="month_report_reminder">Monthly report reminder</string>
+    <string name="month_report_reminder_hint">On the 1st of each month at 10:00 it reminds you of last month\'s PDF report</string>
+    <string name="month_report_title">Your %1$s report is ready</string>
+    <string name="month_report_text">Pick the month on the History page and save the PDF report</string>
+    <string name="band_celebrate">Goal celebration on the band</string>
+    <string name="band_celebrate_hint">When you reach the goal the band vibrates and shows a bird message (while connected)</string>
+    <string name="band_celebrate_title">🐦 Goal reached!</string>
+    <string name="band_celebrate_text">%1$s steps. Your bird is thrilled!</string>
+    <string name="shortcut_water">Add water</string>
+    <string name="shortcut_water_long">Add a glass of water</string>
+    <string name="shortcut_today_long">Today\'s steps</string>
+    <string name="shortcut_ask">How many?</string>
+    <string name="shortcut_ask_long">How many steps today?</string>
+    <string name="shortcut_water_added">%1$d ml of water added</string>
+    <string name="water_tile_name">FitWren water</string>
+    <string name="answer_steps">You took %1$s steps today. %2$s steps to go.</string>
+    <string name="answer_steps_done">You took %1$s steps today. Goal reached, great!</string>
+    <string-array name="release_notes_0_18_0">
+        <item>Morning summary: yesterday\'s steps, last night\'s sleep and today\'s goal</item>
+        <item>Record notification: instant celebration when you beat your best day or week</item>
+        <item>Sitting reminder: “get up and walk a bit” after an hour with very few steps</item>
+        <item>Walk schedule: set times per weekday, get reminded, ticked on Today when walked</item>
+        <item>Monthly report reminder: on the 1st of each month</item>
+        <item>Goal celebration on the band: it vibrates and shows a bird message</item>
+        <item>App shortcuts: long-press the icon for Add water, Today and How many?</item>
+        <item>Water tile: +1 glass from the notification panel</item>
+        <item>Spoken answer to “How many steps today?” (shortcut and Google Assistant)</item>
+    </string-array>
+    <string name="medal_group_distance">Distance</string>
+    <string name="medal_group_distance_text">Total distance walked over all days (from your height)</string>
+    <string name="medal_group_water">Water streak</string>
+    <string name="medal_group_water_text">Days in a row you reached your water goal</string>
+    <string name="medal_group_sleep">Sleep streak</string>
+    <string name="medal_group_sleep_text">Nights in a row with at least 7 hours of sleep (band data)</string>
+    <string name="medal_group_route">Route finisher</string>
+    <string name="medal_group_route_text">Number of different virtual routes you finished</string>
+    <string name="medal_km">%1$d km</string>
+    <string name="routes_count">%1$d routes</string>
+    <string name="time_left_minutes">≈ %1$d min of walking to the goal</string>
+    <string name="time_left_hours">≈ %1$d h %2$d min of walking to the goal</string>
+    <string name="food_line">You burned ≈ %1$d × %2$s</string>
+    <string name="food_burger">burger</string>
+    <string name="food_simit">simit (sesame bagel)</string>
+    <string name="food_chocolate">chocolate bar</string>
+    <string name="food_cola">can of cola</string>
+    <string name="food_apple">apple</string>
+    <string name="trend_title">Trend</string>
+    <string name="trend_month">This month (first %1$d days)</string>
+    <string name="trend_week">Last 7 days</string>
+    <string name="trend_up">%1$d%% more than the period before</string>
+    <string name="trend_down">%1$d%% less than the period before</string>
+    <string name="trend_same">Same as the period before</string>
+    <string name="trend_no_data">No steps in the period before to compare</string>
+    <string name="active_hours_title">Active hours map</string>
+    <string name="active_hours_text">Average steps per weekday and hour over the last 8 weeks; darker means more</string>
+    <string name="active_hours_empty">No hourly records yet</string>
+    <string name="active_hours_peak">Your busiest hour: %1$s %2$s</string>
+    <string name="story_banner_title">Your %1$d story is ready</string>
+    <string name="story_banner_text">Swipe through your year and share it</string>
+    <string name="story_open">Open story</string>
+    <string name="story_total_title">Steps you took in %1$d</string>
+    <string name="story_total_text">On average %1$s steps a day</string>
+    <string name="story_distance_title">Distance you walked</string>
+    <string name="story_distance_text">About %1$d%% of the way around the Earth</string>
+    <string name="story_medals_text">Medals you earned this year</string>
+    <string name="story_end_title">What a year!</string>
+    <string name="story_end_text">Your bird will keep walking with you next year</string>
+    <string name="story_share">FitWren %1$d: %2$s steps, %3$s km, goal reached on %4$d days! 🐦</string>
+    <string name="fitness_age_title">Fitness age</string>
+    <string name="fitness_age_value">%1$d years</string>
+    <string name="fitness_age_younger">%1$d years younger than your real age</string>
+    <string name="fitness_age_older">%1$d years older than your real age</string>
+    <string name="fitness_age_same">Same as your real age</string>
+    <string name="fitness_age_text">Estimated VO2max %1$d, from resting heart rate %2$d and %3$s steps a day on average. Not a medical measurement.</string>
+    <string name="recovery_title">Recovery</string>
+    <string name="recovery_value">%1$d/100</string>
+    <string name="recovery_good">Well recovered: a brisk walk is a good idea today</string>
+    <string name="recovery_mid">Fair: your usual walking is enough</string>
+    <string name="recovery_low">Low: keep it light and rest today</string>
+    <string name="recovery_text">Last night\'s sleep is compared with the week before and your resting heart rate with its average. Not a medical assessment.</string>
+    <string name="quote_title">Quote of the day</string>
+    <string name="quote_setting">Quote of the day</string>
+    <string name="quote_setting_hint">Show a new line on the Today page every day</string>
+    <string-array name="quotes">
+        <item>Every step puts you one step ahead of yesterday.</item>
+        <item>The road you walk today is where you rest tomorrow.</item>
+        <item>Small steps finish long roads too.</item>
+        <item>Your bird wants to fly with you again today.</item>
+        <item>Walking slowly beats not walking at all.</item>
+        <item>Even when you feel tired, ten minutes is enough.</item>
+        <item>A streak is a habit, and a habit is a choice.</item>
+        <item>The stairs are today\'s little mountain.</item>
+        <item>Walk while you talk on the phone; the steps come by themselves.</item>
+        <item>A walk is the easiest way to sort your thoughts.</item>
+        <item>If the goal looks far, aim for half of it.</item>
+        <item>Today\'s steps become tomorrow\'s energy.</item>
+        <item>A little every day adds up to a lot every month.</item>
+        <item>Sun or rain, a walk suits any weather.</item>
+        <item>The best walk is the one you start now.</item>
+    </string-array>
+    <string-array name="release_notes_0_19_0">
+        <item>Today: walking time left to the goal (from your own pace) and the calories you burned as food</item>
+        <item>Today widget (wide): time left to the goal</item>
+        <item>Quote of the day card (can be turned off in Settings → Appearance)</item>
+        <item>History: trend card (this month and last 7 days vs the period before) and active hours map (8 weeks, day × hour)</item>
+        <item>Year-end story: in History in December and January, and on the year card; swipeable pages and sharing</item>
+        <item>Health: recovery score and fitness age (with band data)</item>
+        <item>New medals: distance, water streak, sleep streak, route finisher</item>
+    </string-array>
+    <string name="bird_item_glasses">Glasses</string>
+    <string name="bird_item_flower">Flower</string>
+    <string name="bird_item_nightcap">Nightcap</string>
+    <string name="bird_item_backpack">Backpack</string>
+    <string name="bird_unlock_glasses">Walk 42 km in total</string>
+    <string name="bird_unlock_flower">Water goal 7 days in a row</string>
+    <string name="bird_unlock_nightcap">7 good nights in a row</string>
+    <string name="bird_unlock_backpack">Finish a virtual route</string>
+    <string name="bird_item_wear">Earned: choose whether your bird wears it</string>
+    <string name="seeds_count">Seeds: %1$d</string>
+    <string name="seeds_hint">One seed per 1,000 steps, for colours, songs or feeding your bird</string>
+    <string name="bird_fed">Your bird loved the seed!</string>
+    <string name="bird_feed">Feed</string>
+    <string name="bird_species_title">Bird kind</string>
+    <string name="bird_locked_level">%1$s (level %2$d)</string>
+    <string name="bird_color_title">Feather colour</string>
+    <string name="bird_price">%1$s (%2$d seeds)</string>
+    <string name="bird_sound_title">Song</string>
+    <string name="bird_species_sparrow">Wren</string>
+    <string name="bird_species_owl">Owl</string>
+    <string name="bird_species_parrot">Parrot</string>
+    <string name="bird_species_eagle">Eagle</string>
+    <string name="bird_color_default">Natural</string>
+    <string name="bird_color_sky">Sky blue</string>
+    <string name="bird_color_rose">Rose</string>
+    <string name="bird_color_mint">Mint</string>
+    <string name="bird_color_plum">Plum</string>
+    <string name="bird_color_night">Night</string>
+    <string name="bird_sound_chirp">Chirp</string>
+    <string name="bird_sound_trill">Trill</string>
+    <string name="bird_sound_tweet">Whistle</string>
+    <string name="bird_sound_coo">Coo</string>
+    <string name="metronome_channel">Metronome</string>
+    <string name="metronome_title">Pace metronome</string>
+    <string name="metronome_bpm">%1$d steps a minute</string>
+    <string name="walk_stop">Stop</string>
+    <string name="walk_start">Start</string>
+    <string name="walk_channel">Walk recording</string>
+    <string name="walk_gps_recording">Recording a GPS walk</string>
+    <string name="walk_gps_distance">%1$s km</string>
+    <string name="walk_gps_denied">Location permission was not given; the GPS walk needs it</string>
+    <string name="walk_tools_title">Walk tools</string>
+    <string name="walk_dog_title">Dog walk</string>
+    <string name="walk_dog_hint">Start when you leave, stop when back; the steps are saved</string>
+    <string name="walk_running">Running: %1$s</string>
+    <string name="walk_gps_title">GPS walk</string>
+    <string name="walk_gps_hint">Route and distance are saved; location is used only while recording</string>
+    <string name="walk_gps_running">%1$s km · %2$s</string>
+    <string name="walk_list_button">Saved walks (%1$d)</string>
+    <string name="walk_list_title">Walks</string>
+    <string name="walk_delete">Delete</string>
+    <string name="walk_summary_gps">%1$s km · %2$s · %3$s steps</string>
+    <string name="walk_summary_dog">%1$s · %2$s steps</string>
+    <string name="floors_today">%1$d floors climbed</string>
+    <string name="walks_on_day">%1$d walks</string>
+    <string name="wallpaper_name">Live wallpaper</string>
+    <string name="wallpaper_description">The FitWren bird flies from its nest to the branch as you walk</string>
+    <string name="wallpaper_set_hint">On the home screen the bird flies from nest to branch with the day\'s steps</string>
+    <string name="lock_title">FitWren is locked</string>
+    <string name="lock_use_pin">Use PIN</string>
+    <string name="lock_wrong">Wrong PIN, try again</string>
+    <string name="lock_enter_pin">Enter your PIN</string>
+    <string name="lock_biometric_again">Unlock with fingerprint or face</string>
+    <string name="simple_today">Today</string>
+    <string name="simple_view_off">Back to normal view</string>
+    <string name="simple_view">Simple view</string>
+    <string name="simple_view_hint">Only steps and goal in big type on the Today page</string>
+    <string name="app_lock">App lock</string>
+    <string name="app_lock_hint">Asks for a PIN when opened</string>
+    <string name="app_lock_biometric">Unlock with fingerprint / face</string>
+    <string name="app_lock_biometric_hint">The phone\'s biometric unlock; the PIN stays as a backup</string>
+    <string name="app_lock_change">Change PIN</string>
+    <string name="app_lock_change_hint">Set a new PIN</string>
+    <string name="app_lock_set_pin">Set PIN</string>
+    <string name="app_lock_pin_hint">A number with %1$d–%2$d digits. If you forget it, the app opens only after clearing its data.</string>
+    <string name="app_lock_pin">PIN</string>
+    <string name="app_lock_pin_again">PIN (again)</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_welcome_title">Welcome to FitWren</string>
+    <string name="onboarding_welcome_text">It counts your steps, and your bird grows as you reach your goal. No account; your data stays on your phone.</string>
+    <string name="onboarding_goal_title">Your daily goal</string>
+    <string name="onboarding_goal_text">You can change it later in Settings</string>
+    <string name="onboarding_body_title">Height and weight</string>
+    <string name="onboarding_body_text">Distance and calories are worked out from these</string>
+    <string name="onboarding_height">%1$d cm</string>
+    <string name="onboarding_weight">%1$d kg</string>
+    <string name="onboarding_permission_title">Step permission</string>
+    <string name="onboarding_permission_text">Counting steps needs the physical activity permission</string>
+    <string name="onboarding_permission_done">Permission given ✓</string>
+    <string name="onboarding_permission_button">Allow</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_0">
+        <item>Bird kinds: wren, owl (level 3), parrot (6), eagle (10); in the app, the widget, the wallpaper and the band face</item>
+        <item>Seeds: one per 1,000 steps; feed your bird and buy feather colours and songs</item>
+        <item>Accessories: wear or hide what you earned; new glasses, flower, nightcap and backpack</item>
+        <item>Live wallpaper: the bird flies from its nest to the branch with your steps</item>
+        <item>Walk tools (Today): pace metronome, dog walk and GPS walk recording (with the route drawn)</item>
+        <item>Floor counter: on phones with a pressure sensor</item>
+        <item>App lock (PIN, fingerprint or face) and simple view (Settings → Appearance and language)</item>
+        <item>Welcome pages on a new install: goal, height and weight, permission</item>
+    </string-array>
 </resources>
