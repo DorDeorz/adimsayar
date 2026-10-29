@@ -367,8 +367,6 @@
         <item>Rapport mensuel PDF (Historique) : résumé du mois, graphique quotidien, semaines et tableau jour par jour ; sans internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>La médaille lève-tôt n\'a plus besoin du relevé HyperOS : elle est calculée à partir des pas horaires du téléphone et du bracelet</item>
-        <item>Pas perdus au redémarrage du téléphone : sous Android 14 et plus, les jours passés sont complétés avec le relevé Health Connect du téléphone</item>
         <item>Paramètres → Source des pas → « Ne pas compter le téléphone avec le bracelet » : activé, les pas du téléphone ne sont pas ajoutés les jours avec données du bracelet</item>
         <item>Bracelet et téléphone sont toujours fusionnés heure par heure : pendant les heures où le bracelet est porté, seul le bracelet compte, le téléphone complète les autres heures (avant, sans le relevé HyperOS, le plus grand total du jour l\'emportait)</item>
         <item>Prise en charge des ROM personnalisées (crDroid, LineageOS, etc.) : sur un Xiaomi sans HyperOS, le relevé de pas HyperOS et les étapes batterie MIUI sont masqués et le capteur du téléphone est utilisé</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_1">
+        <item>La médaille lève-tôt n\'a plus besoin du relevé HyperOS : elle est calculée à partir des pas horaires du téléphone et du bracelet</item>
+        <item>Pas perdus au redémarrage du téléphone : sous Android 14 et plus, les jours passés sont complétés avec le relevé Health Connect du téléphone</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Espèces : troglodyte, hibou (niveau 3), perroquet (6), aigle (10) ; dans l\'app, le widget, le fond d\'écran et le cadran du bracelet</item>
         <item>Graines : une par 1 000 pas ; nourris ton oiseau, achète couleurs et chants</item>

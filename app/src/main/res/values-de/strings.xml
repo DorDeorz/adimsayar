@@ -367,8 +367,6 @@
         <item>Monatsbericht als PDF (Verlauf): Übersicht, Tagesdiagramm, Wochen und Tabelle pro Tag; ohne Internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>Die Frühaufsteher-Medaille braucht keine HyperOS-Aufzeichnung mehr: sie wird aus den Stundenwerten von Handy und Armband berechnet</item>
-        <item>Beim Neustart verlorene Schritte: ab Android 14 werden vergangene Tage aus der Health-Connect-Aufzeichnung des Handys ergänzt</item>
         <item>Einstellungen → Schrittquelle → „Handy nicht zählen, wenn das Armband genutzt wird“: eingeschaltet bleiben Handyschritte an Tagen mit Armbanddaten weg</item>
         <item>Armband und Handy werden immer Stunde für Stunde zusammengeführt: In Stunden mit getragenem Armband zählt nur das Armband, das Handy füllt die übrigen Stunden (bisher gewann ohne HyperOS-Daten die größere Tagessumme)</item>
         <item>Custom-ROM-Unterstützung (crDroid, LineageOS u. a.): Auf Xiaomi-Handys ohne HyperOS werden HyperOS-Schrittdaten und MIUI-Akkuschritte ausgeblendet, der Sensor des Handys wird genutzt</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_20_1">
+        <item>Die Frühaufsteher-Medaille braucht keine HyperOS-Aufzeichnung mehr: sie wird aus den Stundenwerten von Handy und Armband berechnet</item>
+        <item>Beim Neustart verlorene Schritte: ab Android 14 werden vergangene Tage aus der Health-Connect-Aufzeichnung des Handys ergänzt</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Vogelarten: Zaunkönig, Eule (Stufe 3), Papagei (6), Adler (10); in App, Widget, Hintergrund und Armband-Zifferblatt</item>
         <item>Körner: eins je 1.000 Schritte; Vogel füttern, Federfarben und Lieder kaufen</item>

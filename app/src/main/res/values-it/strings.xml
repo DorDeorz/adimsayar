@@ -367,8 +367,6 @@
         <item>Report mensile PDF (Cronologia): riepilogo del mese, grafico giornaliero, settimane e tabella giorno per giorno; senza internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>La medaglia mattiniero non richiede più il registro HyperOS: si calcola dai passi orari di telefono e braccialetto</item>
-        <item>Passi persi al riavvio del telefono: da Android 14 i giorni passati vengono completati dal registro Health Connect del telefono</item>
         <item>Impostazioni → Fonte passi → «Non contare il telefono se uso il braccialetto»: se attivo, i passi del telefono non vengono aggiunti nei giorni con dati del braccialetto</item>
         <item>Braccialetto e telefono si uniscono sempre ora per ora: nelle ore in cui il braccialetto è indossato conta solo il braccialetto, il telefono completa le altre ore (prima, senza il registro HyperOS, vinceva il totale giornaliero maggiore)</item>
         <item>Supporto ROM personalizzate (crDroid, LineageOS e altre): su uno Xiaomi senza HyperOS il registro passi di HyperOS e i passaggi batteria MIUI sono nascosti e si usa il sensore del telefono</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_20_1">
+        <item>La medaglia mattiniero non richiede più il registro HyperOS: si calcola dai passi orari di telefono e braccialetto</item>
+        <item>Passi persi al riavvio del telefono: da Android 14 i giorni passati vengono completati dal registro Health Connect del telefono</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Specie: scricciolo, gufo (livello 3), pappagallo (6), aquila (10); nell\'app, nel widget, nello sfondo e nel quadrante</item>
         <item>Semi: uno ogni 1.000 passi; nutri l\'uccellino e compra colori e canti</item>

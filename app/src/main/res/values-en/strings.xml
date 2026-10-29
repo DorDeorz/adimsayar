@@ -367,8 +367,6 @@
         <item>Monthly PDF report (History): summary of the chosen month, daily chart, weeks and a day-by-day table; no internet needed</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>The early riser medal no longer needs the HyperOS record: it is worked out from the phone\'s and the band\'s hourly steps</item>
-        <item>Steps lost while the phone restarted: on Android 14 and later, past days are topped up from the phone\'s own Health Connect record</item>
         <item>Settings → Step source → “Don\'t count the phone while using the band”: when on, phone steps are left out on days the band sent data</item>
         <item>Band and phone always merge hour by hour: in hours the band was worn only the band counts, the phone fills the other hours (before, without the HyperOS record, the larger daily total won)</item>
         <item>Custom ROM support (crDroid, LineageOS and others): on a Xiaomi phone without HyperOS, the HyperOS step record and MIUI battery steps are hidden and the phone\'s sensor is used</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_1">
+        <item>The early riser medal no longer needs the HyperOS record: it is worked out from the phone\'s and the band\'s hourly steps</item>
+        <item>Steps lost while the phone restarted: on Android 14 and later, past days are topped up from the phone\'s own Health Connect record</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Bird kinds: wren, owl (level 3), parrot (6), eagle (10); in the app, the widget, the wallpaper and the band face</item>
         <item>Seeds: one per 1,000 steps; feed your bird and buy feather colours and songs</item>

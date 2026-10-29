@@ -2,6 +2,15 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.1
+
+(0.15.2 için yazılmış ama 0.20.0 birleştirmesine girmemiş eklemeler.)
+
+- Erken kalkan madalyası HyperOS kaydı olmadan da hesaplanır: telefonun saatlik kaydı ve bilekliğin saatleri (bileklik saati önce), 08:00'den önce en az 1.000 adım (`StepMath.earlyBirdDays`).
+- Geçmiş günlerde eksik telefon adımları (ör. yeniden başlatma öncesi son okumadan sonraki adımlar) Health Connect'teki telefonun kendi kaydından (veri kaynağı `android`) doldurulur. Sadece son 3 gün, bugün hariç; gün toplamındaki eksik, Health Connect'in önde olduğu saatlere dağıtılır (`PhoneHealthSteps`, `StepMath.phoneGaps`). Uygulama açılınca çalışır, READ_STEPS izni gerekir.
+- "Arka planda sürekli say" açıklamasına "çoğu telefonda gerekmez" notu.
+- 15 dk işi geç kalınca hemen ikinci kez çalışabiliyordu; 2 dakika içindeki ikinci çalışma atlanır.
+
 ## 0.20.0
 
 - Kuş türleri (`BirdSpecies`): çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10). Seçilen tür ve renk uygulamada, Kuş widget'ında, canlı duvar kâğıdında ve kadran tasarımcısının bilekliğe gönderdiği kuş resimlerinde çizilir.
@@ -63,10 +72,6 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.15.2
 
-- Erken kalkan madalyası HyperOS kaydı olmadan da hesaplanır: telefonun saatlik kaydı ve bilekliğin saatleri (bileklik saati önce), 08:00'den önce en az 1.000 adım (`StepMath.earlyBirdDays`).
-- Geçmiş günlerde eksik telefon adımları (ör. yeniden başlatma öncesi son okumadan sonraki adımlar) Health Connect'teki telefonun kendi kaydından (veri kaynağı `android`) doldurulur. Sadece son 3 gün, bugün hariç; gün toplamındaki eksik, Health Connect'in önde olduğu saatlere dağıtılır (`PhoneHealthSteps`, `StepMath.phoneGaps`). Uygulama açılınca çalışır, READ_STEPS izni gerekir.
-- "Arka planda sürekli say" açıklamasına "çoğu telefonda gerekmez" notu.
-- 15 dk işi geç kalınca hemen ikinci kez çalışabiliyordu; 2 dakika içindeki ikinci çalışma atlanır.
 - Tam zamanlı alarmlar satırı Bildirimler sayfasına taşındı.
 - Ayarlar → Adım kaynağı → "Bileklik varken telefonu sayma" (varsayılan kapalı, `WearableSteps.isBandOnly`): açıksa bilekliğin veri gönderdiği günlerde gün toplamı yalnız bileklikten gelir (`StepMath.bandDays`); telefon sadece bilekliğin hiç veri göndermediği günlerde kullanılır.
 - Bileklik ve telefon her zaman saat saat birleşir (`StepMath.mergeMixed`): bilekliğin takılı olduğu saatlerde yalnız bileklik, diğer saatlerde telefonun saatlik kaydı. Önceden HyperOS kaydı kapalıyken günün büyük toplamı alınıyordu, telefon fazla sayınca bilekliği eziyordu. Telefonun saatlik kaydı olmayan eski ya da içe aktarılmış günlerde eski kural (günün büyüğü) kalır.

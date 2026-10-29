@@ -367,8 +367,6 @@
         <item>Aylık PDF raporu (Geçmiş): seçili ayın özeti, günlük grafik, haftalar ve gün gün tablo; internet kullanmaz</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>Erken kalkan madalyası artık HyperOS kaydı olmadan da kazanılır: telefonun ve bilekliğin saatlik kayıtlarından hesaplanır</item>
-        <item>Telefon yeniden başlarken kaçan adımlar: Android 14 ve sonrasında Health Connect\'in telefon kaydından geçmiş günlerin eksiği doldurulur</item>
         <item>Ayarlar → Adım kaynağı → “Bileklik varken telefonu sayma”: açıksa bilekliğin veri gönderdiği günlerde telefonun adımları hiç eklenmez</item>
         <item>Bileklik ve telefon her zaman saat saat birleşir: bilekliğin takılı olduğu saatlerde yalnız bileklik sayılır, telefon sadece diğer saatleri doldurur (önceden HyperOS kaydı kapalıyken günün büyük sayısı alınıyordu)</item>
         <item>Özel ROM desteği (crDroid, LineageOS gibi): Xiaomi telefonda HyperOS yoksa HyperOS adım kaydı ve MIUI pil adımları gösterilmez, telefonun sensörü kullanılır</item>
@@ -1297,6 +1295,10 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_20_1">
+        <item>Erken kalkan madalyası artık HyperOS kaydı olmadan da kazanılır: telefonun ve bilekliğin saatlik kayıtlarından hesaplanır</item>
+        <item>Telefon yeniden başlarken kaçan adımlar: Android 14 ve sonrasında Health Connect\'in telefon kaydından geçmiş günlerin eksiği doldurulur</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Kuş türleri: çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10); uygulamada, widget\'ta, duvar kâğıdında ve bileklik kadranında</item>
         <item>Tohumlar: her 1.000 adım bir tohum; kuşu besle, tüy rengi ve ötüş al</item>

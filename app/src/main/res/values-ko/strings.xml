@@ -367,8 +367,6 @@
         <item>월간 PDF 보고서(기록): 그 달 요약, 일별 그래프, 주별, 날짜별 표. 인터넷 필요 없음</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>일찍 일어나는 새 메달은 이제 HyperOS 기록 없이도 받을 수 있습니다: 휴대폰과 밴드의 시간별 걸음 수로 계산합니다</item>
-        <item>휴대폰 재시작 중 놓친 걸음: Android 14 이상에서는 지난 날을 휴대폰의 Health Connect 기록으로 채웁니다</item>
         <item>설정 → 걸음 수 출처 → “밴드 사용 중에는 휴대폰을 세지 않기”: 켜면 밴드 데이터가 있는 날에는 휴대폰 걸음 수를 더하지 않습니다</item>
         <item>밴드와 휴대폰은 항상 시간별로 합칩니다: 밴드를 착용한 시간에는 밴드만 세고 휴대폰은 나머지 시간을 채웁니다(이전에는 HyperOS 기록이 없으면 하루 합계 중 큰 값을 사용)</item>
         <item>커스텀 ROM 지원(crDroid, LineageOS 등): HyperOS가 없는 Xiaomi에서는 HyperOS 걸음 기록과 MIUI 배터리 단계를 숨기고 휴대폰 센서를 사용합니다</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_20_1">
+        <item>일찍 일어나는 새 메달은 이제 HyperOS 기록 없이도 받을 수 있습니다: 휴대폰과 밴드의 시간별 걸음 수로 계산합니다</item>
+        <item>휴대폰 재시작 중 놓친 걸음: Android 14 이상에서는 지난 날을 휴대폰의 Health Connect 기록으로 채웁니다</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>새 종류: 굴뚝새, 부엉이(레벨 3), 앵무새(6), 독수리(10). 앱, 위젯, 배경화면, 밴드 화면에</item>
         <item>씨앗: 1,000걸음마다 1개, 새에게 먹이를 주고 깃털 색과 노래 구입</item>

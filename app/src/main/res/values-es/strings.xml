@@ -367,8 +367,6 @@
         <item>Informe mensual en PDF (Historial): resumen del mes, gráfico diario, semanas y tabla día a día; sin internet</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>La medalla de madrugador ya no necesita el registro de HyperOS: se calcula con los pasos por hora del teléfono y de la pulsera</item>
-        <item>Pasos perdidos al reiniciar el teléfono: en Android 14 y posterior, los días pasados se completan con el registro de Health Connect del teléfono</item>
         <item>Ajustes → Fuente de pasos → «No contar el teléfono si uso la pulsera»: activado, los pasos del teléfono no se suman los días con datos de la pulsera</item>
         <item>La pulsera y el teléfono se combinan siempre hora a hora: en las horas con la pulsera puesta solo cuenta la pulsera y el teléfono completa el resto (antes, sin el registro de HyperOS, ganaba el total diario mayor)</item>
         <item>Compatibilidad con ROM personalizadas (crDroid, LineageOS y otras): en un Xiaomi sin HyperOS se ocultan el registro de pasos de HyperOS y los pasos de batería de MIUI y se usa el sensor del teléfono</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_20_1">
+        <item>La medalla de madrugador ya no necesita el registro de HyperOS: se calcula con los pasos por hora del teléfono y de la pulsera</item>
+        <item>Pasos perdidos al reiniciar el teléfono: en Android 14 y posterior, los días pasados se completan con el registro de Health Connect del teléfono</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Tipos de pájaro: chochín, búho (nivel 3), loro (6), águila (10); en la app, el widget, el fondo y la esfera de la pulsera</item>
         <item>Semillas: una cada 1.000 pasos; alimenta a tu pájaro y compra colores y cantos</item>

@@ -367,8 +367,6 @@
         <item>月間PDFレポート（履歴）: 月のまとめ、日別グラフ、週、日ごとの表。インターネット不要</item>
     </string-array>
     <string-array name="release_notes_0_15_2">
-        <item>早起きメダルは HyperOS の記録がなくても獲得できます：スマホとバンドの1時間ごとの歩数から計算します</item>
-        <item>再起動で失われた歩数：Android 14 以降は、過去の日をスマホの Health Connect 記録で補います</item>
         <item>設定 → 歩数の取得元 →「バンド使用中はスマホを数えない」：オンにするとバンドのデータがある日はスマホの歩数を加えません</item>
         <item>バンドとスマホは常に1時間ごとに合算：バンドを着けていた時間はバンドだけを数え、スマホは残りの時間を補います（以前は HyperOS 記録がないと1日の大きい方の合計を採用）</item>
         <item>カスタムROM対応（crDroid、LineageOS など）：HyperOS のない Xiaomi では HyperOS の歩数記録と MIUI の電池設定を隠し、スマホのセンサーを使います</item>
@@ -1296,6 +1294,10 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_1">
+        <item>早起きメダルは HyperOS の記録がなくても獲得できます：スマホとバンドの1時間ごとの歩数から計算します</item>
+        <item>再起動で失われた歩数：Android 14 以降は、過去の日をスマホの Health Connect 記録で補います</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>鳥の種類：ミソサザイ、フクロウ（レベル3）、オウム（6）、ワシ（10）。アプリ・ウィジェット・壁紙・バンドの文字盤に</item>
         <item>種：1,000歩ごとに1つ。えさにしたり、羽の色や鳴き声を買ったり</item>
