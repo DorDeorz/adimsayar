@@ -1,5 +1,6 @@
 package com.dordeorz.adimsayar.tile
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -62,6 +63,8 @@ class StepTile : TileService() {
         tile.updateTile()
     }
 
+    // The Intent overload is only used below Android 14, where it still works.
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
         val intent = Intent(this, MainActivity::class.java)
