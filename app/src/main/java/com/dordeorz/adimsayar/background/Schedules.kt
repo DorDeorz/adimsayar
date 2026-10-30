@@ -15,6 +15,7 @@ object Schedules {
 
     private const val PERIODIC_JOB_ID = 0x5A_D1_00_01
     const val READ_NOW_JOB_ID = 0x5A_D1_00_02
+    const val READ_SYSTEM_JOB_ID = 0x5A_D1_00_03
     private const val PERIODIC_MS = 15 * 60 * 1000L
     private const val MIDNIGHT_DELAY_MS = 5_000L
 
@@ -28,8 +29,9 @@ object Schedules {
         ExtraReminders.scheduleAll(context)
     }
 
-    fun requestRead(context: Context) {
-        val job = JobInfo.Builder(READ_NOW_JOB_ID, ComponentName(context, StepJobService::class.java))
+    /** Runs a full read in a job soon; [system] marks reads asked for by a system event or alarm. */
+    fun requestRead(context: Context, system: Boolean = false) {
+        val job = JobInfo.Builder(if (system) READ_SYSTEM_JOB_ID else READ_NOW_JOB_ID, ComponentName(context, StepJobService::class.java))
             .setOverrideDeadline(0L)
             .build()
         context.getSystemService(JobScheduler::class.java)?.schedule(job)

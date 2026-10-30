@@ -123,7 +123,7 @@ object BandDirect {
         val now = System.currentTimeMillis()
         if (!force && now < p.getLong(if (foreground) KEY_NEXT_APP else KEY_NEXT_JOB, 0L)) return null
         if (!granted(context, CONNECT_PERMISSIONS)) return record(context, source, BandResult.NoPermission)
-        if (BandLive.isRunning) return BandLive.syncNow()
+        if (BandLive.isRunning) return BandLive.syncNow(foreground)
         if (!running.tryLock()) return null
         return try {
             p.edit(commit = true) {

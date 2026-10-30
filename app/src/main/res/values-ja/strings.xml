@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_2">
+        <item>バンドが離れているときの再起動・更新後のフリーズ（アプリが応答しない）を修正</item>
+        <item>リマインダーとウィジェットはバンドの同期を待たなくなりました</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>早起きメダルは HyperOS の記録がなくても獲得できます：スマホとバンドの1時間ごとの歩数から計算します</item>
         <item>再起動で失われた歩数：Android 14 以降は、過去の日をスマホの Health Connect 記録で補います</item>

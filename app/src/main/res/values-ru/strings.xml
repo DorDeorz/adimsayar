@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Исправлено зависание (приложение не отвечает) после перезагрузки или обновления, когда браслет далеко</item>
+        <item>Напоминания и виджеты больше не ждут синхронизации браслета</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>Медаль «Жаворонок» больше не требует журнала HyperOS: она считается по почасовым шагам телефона и браслета</item>
         <item>Шаги, потерянные при перезагрузке: на Android 14 и новее прошлые дни дополняются из записи Health Connect самого телефона</item>
