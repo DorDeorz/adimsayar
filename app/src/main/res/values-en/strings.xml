@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">The phone\'s sensor has seen steps in the last few minutes but the HyperOS record is not increasing. Check again in a few minutes; if it doesn\'t recover, turn off the switch below and turn on "Keep counting in the background".</string>
     <string name="xiaomi_card_title">Use the HyperOS step record</string>
     <string name="xiaomi_card_text">Steps are read from the phone\'s own step record. They are counted fully even while the app is closed, no notification is needed, and past days are added too.</string>
-    <string name="service_card_text">Turn this on if steps aren\'t counted while the app is closed. The counter is kept on; a silent, persistent notification appears in the notification bar.</string>
+    <string name="service_card_text">Turn this on if steps aren\'t counted while the app is closed. The counter is kept on; a silent, persistent notification appears in the notification bar. Most phones count without it, so try it off first.</string>
     <string name="service_channel">Step counter</string>
     <string name="service_title">FitWren is counting</string>
     <string name="service_text">%1$s steps today</string>
@@ -177,7 +177,7 @@
     <string name="language">App language</string>
     <string name="language_system">System</string>
     <string name="medal_group_early">Early bird</string>
-    <string name="medal_group_early_text">Days with at least 1,000 steps before 08:00 (with the HyperOS record on)</string>
+    <string name="medal_group_early_text">Days with at least 1,000 steps before 08:00</string>
 
     <string name="widget_streak_label">Streak and week</string>
     <string name="widget_streak_description">Your daily goal streak and this week\'s progress</string>
@@ -564,6 +564,7 @@
     <string name="log_wearable_denied">No Health Connect read permission</string>
     <string name="log_wearable_error">Health Connect could not be read (%1$s)</string>
     <string name="log_wearable_synced">Band: %1$d steps today, %2$d days updated</string>
+    <string name="log_phone_gaps">Health Connect: added %1$d steps the phone missed (past days)</string>
     <string name="band_exercises">Workouts</string>
     <string name="band_active_kcal">Active calories (band)</string>
     <string name="band_kcal_value">%1$s kcal</string>
@@ -1293,6 +1294,10 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_1">
+        <item>The early riser medal no longer needs the HyperOS record: it is worked out from the phone\'s and the band\'s hourly steps</item>
+        <item>Steps lost while the phone restarted: on Android 14 and later, past days are topped up from the phone\'s own Health Connect record</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Bird kinds: wren, owl (level 3), parrot (6), eagle (10); in the app, the widget, the wallpaper and the band face</item>
         <item>Seeds: one per 1,000 steps; feed your bird and buy feather colours and songs</item>

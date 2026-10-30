@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">El sensor del teléfono ha detectado pasos en los últimos minutos, pero el registro de HyperOS no aumenta. Vuelve a comprobarlo en unos minutos; si no se recupera, desactiva el interruptor de abajo y activa "Seguir contando en segundo plano".</string>
     <string name="xiaomi_card_title">Usar el registro de pasos de HyperOS</string>
     <string name="xiaomi_card_text">Los pasos se leen del propio registro de pasos del teléfono. Se cuentan por completo aunque la app esté cerrada, no hace falta ninguna notificación y también se añaden los días anteriores.</string>
-    <string name="service_card_text">Actívalo si no se cuentan pasos con la app cerrada. El contador se mantiene activo; aparece una notificación silenciosa y permanente en la barra de notificaciones.</string>
+    <string name="service_card_text">Actívalo si no se cuentan pasos con la app cerrada. El contador se mantiene activo; aparece una notificación silenciosa y permanente en la barra de notificaciones. La mayoría de los teléfonos cuentan sin esto; pruébalo primero desactivado.</string>
     <string name="service_channel">Contador de pasos</string>
     <string name="service_title">FitWren está contando</string>
     <string name="service_text">%1$s pasos hoy</string>
@@ -177,7 +177,7 @@
     <string name="language">Idioma de la app</string>
     <string name="language_system">Sistema</string>
     <string name="medal_group_early">Madrugador</string>
-    <string name="medal_group_early_text">Días con al menos 1000 pasos antes de las 08:00 (con el registro de HyperOS activado)</string>
+    <string name="medal_group_early_text">Días con al menos 1000 pasos antes de las 08:00</string>
 
     <string name="widget_streak_label">Racha y semana</string>
     <string name="widget_streak_description">Tu racha de meta diaria y el progreso de esta semana</string>
@@ -564,6 +564,7 @@
     <string name="log_wearable_denied">Sin permiso de lectura de Health Connect</string>
     <string name="log_wearable_error">No se pudo leer Health Connect (%1$s)</string>
     <string name="log_wearable_synced">Pulsera: %1$d pasos hoy, %2$d días actualizados</string>
+    <string name="log_phone_gaps">Health Connect: se añadieron %1$d pasos que el teléfono perdió (días anteriores)</string>
     <string name="band_exercises">Entrenamientos</string>
     <string name="band_active_kcal">Calorías activas (pulsera)</string>
     <string name="band_kcal_value">%1$s kcal</string>
@@ -1293,6 +1294,10 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_20_1">
+        <item>La medalla de madrugador ya no necesita el registro de HyperOS: se calcula con los pasos por hora del teléfono y de la pulsera</item>
+        <item>Pasos perdidos al reiniciar el teléfono: en Android 14 y posterior, los días pasados se completan con el registro de Health Connect del teléfono</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Tipos de pájaro: chochín, búho (nivel 3), loro (6), águila (10); en la app, el widget, el fondo y la esfera de la pulsera</item>
         <item>Semillas: una cada 1.000 pasos; alimenta a tu pájaro y compra colores y cantos</item>

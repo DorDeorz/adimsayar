@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">手机传感器在过去几分钟内检测到步伐，但 HyperOS 记录没有增加。请几分钟后再看；如果仍未恢复，请关闭下方开关并开启“在后台继续计步”。</string>
     <string name="xiaomi_card_title">使用 HyperOS 步数记录</string>
     <string name="xiaomi_card_text">从手机自带的步数记录读取。即使应用关闭也能完整计步，无需通知，还会补充以往的天数。</string>
-    <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。</string>
+    <string name="service_card_text">如果应用关闭时不计步，请开启此项。计步器将保持运行，通知栏中会显示一条静默的常驻通知。 大多数手机不需要此项，请先在关闭状态下试用。</string>
     <string name="service_channel">计步器</string>
     <string name="service_title">FitWren 正在计步</string>
     <string name="service_text">今天 %1$s 步</string>
@@ -177,7 +177,7 @@
     <string name="language">应用语言</string>
     <string name="language_system">系统</string>
     <string name="medal_group_early">早起鸟</string>
-    <string name="medal_group_early_text">08:00 前至少走 1,000 步的天数（需开启 HyperOS 记录）</string>
+    <string name="medal_group_early_text">08:00 前至少走 1,000 步的天数</string>
 
     <string name="widget_streak_label">连续达标与本周</string>
     <string name="widget_streak_description">每日目标连续达标情况和本周进度</string>
@@ -564,6 +564,7 @@
     <string name="log_wearable_denied">没有 Health Connect 读取权限</string>
     <string name="log_wearable_error">无法读取 Health Connect（%1$s）</string>
     <string name="log_wearable_synced">手环：今天 %1$d 步，已更新 %2$d 天</string>
+    <string name="log_phone_gaps">Health Connect：已补上手机漏记的 %1$d 步（过去几天）</string>
     <string name="band_exercises">锻炼</string>
     <string name="band_active_kcal">活动卡路里（手环）</string>
     <string name="band_kcal_value">%1$s 千卡</string>
@@ -1293,6 +1294,10 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_1">
+        <item>早起鸟奖牌不再需要 HyperOS 记录：根据手机和手环的每小时步数计算</item>
+        <item>手机重启时漏记的步数：Android 14 及以上会用手机自身的 Health Connect 记录补齐过去几天</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>鸟的种类：鹪鹩、猫头鹰（等级 3）、鹦鹉（6）、鹰（10）；显示在应用、小部件、壁纸和手环表盘上</item>
         <item>种子：每 1,000 步一颗；喂小鸟，购买羽毛颜色和叫声</item>

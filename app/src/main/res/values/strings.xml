@@ -31,7 +31,7 @@
     <string name="xiaomi_stalled_text">Telefonun sensörü son dakikalarda adım görüyor ama HyperOS kaydı artmıyor. Birkaç dakika sonra tekrar bak; düzelmezse aşağıdaki anahtarı kapatıp "Arka planda sürekli say"ı açabilirsin.</string>
     <string name="xiaomi_card_title">HyperOS adım kaydını kullan</string>
     <string name="xiaomi_card_text">Adımlar telefonun kendi adım kaydından okunur. Uygulama kapalıyken de eksiksiz sayılır, bildirim gerekmez ve geçmiş günler de eklenir.</string>
-    <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür.</string>
+    <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür. Çoğu telefonda gerekmez, önce kapalıyken dene.</string>
     <string name="service_channel">Adım sayacı</string>
     <string name="service_title">FitWren sayıyor</string>
     <string name="service_text">Bugün %1$s adım</string>
@@ -177,7 +177,7 @@
     <string name="language">Uygulama dili</string>
     <string name="language_system">Sistem</string>
     <string name="medal_group_early">Erken kalkan</string>
-    <string name="medal_group_early_text">Saat 08:00\'den önce en az 1.000 adım attığın gün sayısı (HyperOS kaydı açıkken)</string>
+    <string name="medal_group_early_text">Saat 08:00\'den önce en az 1.000 adım attığın gün sayısı</string>
 
     <string name="widget_streak_label">Seri ve hafta</string>
     <string name="widget_streak_description">Günlük hedef serin ve bu haftanın ilerlemesi</string>
@@ -565,6 +565,7 @@
     <string name="log_wearable_denied">Health Connect okuma izni yok</string>
     <string name="log_wearable_error">Health Connect okunamadı (%1$s)</string>
     <string name="log_wearable_synced">Bileklik: bugün %1$d adım, %2$d gün güncellendi</string>
+    <string name="log_phone_gaps">Health Connect: telefonun kaçırdığı %1$d adım eklendi (geçmiş günler)</string>
     <string name="band_exercises">Egzersizler</string>
     <string name="band_active_kcal">Aktif kalori (bileklik)</string>
     <string name="band_kcal_value">%1$s kcal</string>
@@ -1294,6 +1295,10 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_20_1">
+        <item>Erken kalkan madalyası artık HyperOS kaydı olmadan da kazanılır: telefonun ve bilekliğin saatlik kayıtlarından hesaplanır</item>
+        <item>Telefon yeniden başlarken kaçan adımlar: Android 14 ve sonrasında Health Connect\'in telefon kaydından geçmiş günlerin eksiği doldurulur</item>
+    </string-array>
     <string-array name="release_notes_0_20_0">
         <item>Kuş türleri: çalıkuşu, baykuş (seviye 3), papağan (6), kartal (10); uygulamada, widget\'ta, duvar kâğıdında ve bileklik kadranında</item>
         <item>Tohumlar: her 1.000 adım bir tohum; kuşu besle, tüy rengi ve ötüş al</item>
