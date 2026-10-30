@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Fixed the freeze (app not responding) after a restart or update while the band was away</item>
+        <item>Reminders and widgets no longer wait for the band sync</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>The early riser medal no longer needs the HyperOS record: it is worked out from the phone\'s and the band\'s hourly steps</item>
         <item>Steps lost while the phone restarted: on Android 14 and later, past days are topped up from the phone\'s own Health Connect record</item>

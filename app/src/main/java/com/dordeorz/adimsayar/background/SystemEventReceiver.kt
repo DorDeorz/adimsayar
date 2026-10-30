@@ -8,6 +8,7 @@ import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.SmartGoal
 import com.dordeorz.adimsayar.widget.Widgets
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 class SystemEventReceiver : BroadcastReceiver() {
 
@@ -23,7 +24,13 @@ class SystemEventReceiver : BroadcastReceiver() {
                 }
                 Schedules.ensure(appContext)
                 StepCounterService.startIfEnabled(appContext)
-                StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System)
+                // A background broadcast gets about 60 s. Reminders want the band's steps too, so they
+                // sync within a limit; system events read only the phone. What does not fit runs in a job.
+                val full = intent.action in REMINDERS
+                val done = withTimeoutOrNull(if (full) FULL_READ_LIMIT_MS else PHONE_READ_LIMIT_MS) {
+                    StepUpdater.refresh(appContext, READ_TIMEOUT_MS, ReadSource.System, phoneOnly = !full)
+                }
+                if (done == null || !full) Schedules.requestRead(appContext, system = true)
                 if (intent.action == ACTION_MIDNIGHT && SmartGoal.applyIfDue(appContext)) Widgets.updateAll(appContext)
                 if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
                 if (intent.action == ACTION_WEIGHT) Reminders.weightCheck(appContext)
@@ -52,6 +59,19 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_MONTH_REPORT = "com.dordeorz.adimsayar.MONTH_REPORT"
         private const val ACTION_EXACT_ALARMS = "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"
         private const val READ_TIMEOUT_MS = 5_000L
+        private const val PHONE_READ_LIMIT_MS = 15_000L
+        private const val FULL_READ_LIMIT_MS = 35_000L
+        private val REMINDERS = setOf(
+            ACTION_MIDNIGHT,
+            ACTION_EVENING,
+            ACTION_WEIGHT,
+            ACTION_WATER,
+            ACTION_FACE,
+            ACTION_MORNING,
+            ACTION_SEDENTARY,
+            ACTION_WALK_PLAN,
+            ACTION_MONTH_REPORT,
+        )
         private val HANDLED = setOf(
             ACTION_MIDNIGHT,
             ACTION_EVENING,

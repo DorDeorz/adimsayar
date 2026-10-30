@@ -16,6 +16,7 @@ import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.sensor.StepSensors
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 class ReadOnceService : Service() {
 
@@ -28,10 +29,11 @@ class ReadOnceService : Service() {
         }
         val source = intent?.getStringExtra(EXTRA_SOURCE)?.let { name -> ReadSource.entries.firstOrNull { it.name == name } } ?: ReadSource.Job
         val wakeLock = getSystemService(PowerManager::class.java)?.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKE_LOCK_TAG)
-        wakeLock?.acquire(READ_TIMEOUT_MS + WAKE_LOCK_MARGIN_MS)
+        wakeLock?.acquire(WORK_LIMIT_MS + WAKE_LOCK_MARGIN_MS)
         AppScope.launch {
             try {
-                StepUpdater.refresh(applicationContext, READ_TIMEOUT_MS, source)
+                // A direct band sync without the live connection can take up to two minutes.
+                withTimeoutOrNull(WORK_LIMIT_MS) { StepUpdater.refresh(applicationContext, READ_TIMEOUT_MS, source) }
             } finally {
                 if (wakeLock?.isHeld == true) wakeLock.release()
                 stopSelf(startId)
@@ -67,6 +69,7 @@ class ReadOnceService : Service() {
     companion object {
         private const val NOTIFICATION_ID = 2
         private const val READ_TIMEOUT_MS = 10_000L
+        private const val WORK_LIMIT_MS = 150_000L
         private const val WAKE_LOCK_MARGIN_MS = 5_000L
         private const val WAKE_LOCK_TAG = "adimsayar:read"
         private const val EXTRA_SOURCE = "source"

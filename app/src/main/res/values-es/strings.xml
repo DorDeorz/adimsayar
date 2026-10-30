@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Corregido el bloqueo (la app no responde) tras reiniciar o actualizar con la pulsera lejos</item>
+        <item>Los recordatorios y widgets ya no esperan la sincronización de la pulsera</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>La medalla de madrugador ya no necesita el registro de HyperOS: se calcula con los pasos por hora del teléfono y de la pulsera</item>
         <item>Pasos perdidos al reiniciar el teléfono: en Android 14 y posterior, los días pasados se completan con el registro de Health Connect del teléfono</item>

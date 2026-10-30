@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_20_2">
+        <item>밴드가 멀리 있을 때 재시작이나 업데이트 후 멈춤(앱 응답 없음) 수정</item>
+        <item>알림과 위젯이 더 이상 밴드 동기화를 기다리지 않음</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>일찍 일어나는 새 메달은 이제 HyperOS 기록 없이도 받을 수 있습니다: 휴대폰과 밴드의 시간별 걸음 수로 계산합니다</item>
         <item>휴대폰 재시작 중 놓친 걸음: Android 14 이상에서는 지난 날을 휴대폰의 Health Connect 기록으로 채웁니다</item>

@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Einfrieren (App reagiert nicht) nach Neustart oder Update bei entferntem Armband behoben</item>
+        <item>Erinnerungen und Widgets warten nicht mehr auf die Armband-Synchronisierung</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>Die Frühaufsteher-Medaille braucht keine HyperOS-Aufzeichnung mehr: sie wird aus den Stundenwerten von Handy und Armband berechnet</item>
         <item>Beim Neustart verlorene Schritte: ab Android 14 werden vergangene Tage aus der Health-Connect-Aufzeichnung des Handys ergänzt</item>

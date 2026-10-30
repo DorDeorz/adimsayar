@@ -13,7 +13,11 @@ class StepJobService : JobService() {
     private var running: Job? = null
 
     override fun onStartJob(params: JobParameters): Boolean {
-        val source = if (params.jobId == Schedules.READ_NOW_JOB_ID) ReadSource.Widget else ReadSource.Job
+        val source = when (params.jobId) {
+            Schedules.READ_NOW_JOB_ID -> ReadSource.Widget
+            Schedules.READ_SYSTEM_JOB_ID -> ReadSource.System
+            else -> ReadSource.Job
+        }
         if (source == ReadSource.Job && ranJustNow()) return false
         if (ReadOnceService.start(applicationContext, source)) return false
         running = AppScope.launch {

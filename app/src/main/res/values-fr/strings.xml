@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Correction du blocage (l\'appli ne répond pas) après un redémarrage ou une mise à jour quand le bracelet était loin</item>
+        <item>Les rappels et widgets n\'attendent plus la synchronisation du bracelet</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>La médaille lève-tôt n\'a plus besoin du relevé HyperOS : elle est calculée à partir des pas horaires du téléphone et du bracelet</item>
         <item>Pas perdus au redémarrage du téléphone : sous Android 14 et plus, les jours passés sont complétés avec le relevé Health Connect du téléphone</item>

@@ -40,6 +40,7 @@ object BandLive {
 
     private const val SYNC_INTERVAL_MS = 15 * 60 * 1000L
     private const val SYNC_WAIT_MS = 60_000L
+    private const val BACKGROUND_SYNC_WAIT_MS = 20_000L
     private const val RETRY_MIN_MS = 30_000L
     private const val RETRY_MAX_MS = 10 * 60 * 1000L
     private const val LOST_AFTER_MS = 60_000L
@@ -116,15 +117,20 @@ object BandLive {
         post = null
     }
 
-    /** Asks the open connection for a sync. Null when the band is not connected right now. */
-    suspend fun syncNow(): BandResult? {
+    /**
+     * Asks the open connection for a sync. Null when the band is not connected right now. A
+     * background caller does not wait for a band that is still connecting or away: the connection
+     * syncs by itself once the band is back.
+     */
+    suspend fun syncNow(foreground: Boolean): BandResult? {
         val send = post ?: return null
+        if (!foreground && !connected) return null
         val done = CompletableDeferred<BandResult>()
         send {
             synchronized(waiters) { waiters += done }
             session?.requestSync()
         }
-        return withTimeoutOrNull(SYNC_WAIT_MS) { done.await() }
+        return withTimeoutOrNull(if (foreground) SYNC_WAIT_MS else BACKGROUND_SYNC_WAIT_MS) { done.await() }
     }
 
     fun notify(notice: BandNotice) {

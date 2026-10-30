@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_2">
+        <item>修复手环不在附近时重启或更新后的卡死（应用无响应）</item>
+        <item>提醒和小部件不再等待手环同步</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>早起鸟奖牌不再需要 HyperOS 记录：根据手机和手环的每小时步数计算</item>
         <item>手机重启时漏记的步数：Android 14 及以上会用手机自身的 Health Connect 记录补齐过去几天</item>

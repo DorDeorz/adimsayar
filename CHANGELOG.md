@@ -2,6 +2,15 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.2
+
+- Açılışta ve güncellemeden sonra görülen ANR (uygulama yanıt vermiyor) giderildi. Sebep: `SystemEventReceiver` canlı bileklik bağlantısından eşitleme sonucunu 60 s bekliyordu; bileklik uzaktayken bu, arka plan yayın sınırını (~60 s) aşıyordu.
+- `BandLive.syncNow(foreground)`: arka plan çağrısı bileklik bağlı değilken hiç beklemez, bağlıyken en fazla 20 s bekler. Elle "Eşitle" eskisi gibi 60 s bekler.
+- `SystemEventReceiver`: açılış, güncelleme ve saat olaylarında yalnızca telefon sayacı okunur (en fazla 15 s), bileklik ve Health Connect ayrı bir işte (`READ_SYSTEM_JOB_ID`, kaynak "Sistem") eşitlenir. Hatırlatma alarmlarında tam okuma en fazla 35 s sürer, sığmazsa yine işe devredilir; hatırlatma kontrolleri her durumda çalışır.
+- `StepUpdater.refresh`: telefon sayacı kaydedilip widget'lar bileklikten önce güncellenir, eşitlemeden sonra bir kez daha güncellenir. Parametre adı `sensorTimeoutMs`.
+- `ReadOnceService`: işe toplam 150 s sınır, WakeLock bu sınırla uyumlu.
+- `SystemEventReceiver` artık dışa kapalı (`exported="false"`): başka uygulamalar su ekleyemez veya hatırlatma tetikleyemez. Sistem yayınları ve uygulamanın kendi alarmları gelmeye devam eder.
+
 ## 0.20.1
 
 (0.15.2 için yazılmış ama 0.20.0 birleştirmesine girmemiş eklemeler.)

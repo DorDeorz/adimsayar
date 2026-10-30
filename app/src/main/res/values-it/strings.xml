@@ -1294,6 +1294,10 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_20_2">
+        <item>Risolto il blocco (l\'app non risponde) dopo un riavvio o un aggiornamento con il braccialetto lontano</item>
+        <item>Promemoria e widget non aspettano più la sincronizzazione del braccialetto</item>
+    </string-array>
     <string-array name="release_notes_0_20_1">
         <item>La medaglia mattiniero non richiede più il registro HyperOS: si calcola dai passi orari di telefono e braccialetto</item>
         <item>Passi persi al riavvio del telefono: da Android 14 i giorni passati vengono completati dal registro Health Connect del telefono</item>
