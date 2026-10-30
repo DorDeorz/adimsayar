@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -241,8 +242,9 @@ private fun SummaryRow(state: MainUiState) {
     val weekStart = weekStartOf(state.today, state.settings.weekStart)
     val weekSteps = state.history.filterKeys { !it.isBefore(weekStart) && !it.isAfter(state.today) }.values.sum()
     val weeklyGoal = state.settings.weeklyGoal
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Card(modifier = Modifier.weight(1f)) {
+    // Both cards take the taller card's height so the pair stays even.
+    Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Card(modifier = Modifier.weight(1f).fillMaxHeight()) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Icon(
@@ -265,7 +267,7 @@ private fun SummaryRow(state: MainUiState) {
                 )
             }
         }
-        Card(modifier = Modifier.weight(1f)) {
+        Card(modifier = Modifier.weight(1f).fillMaxHeight()) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(stringResource(R.string.this_week), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(format(weekSteps), style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 4.dp))
@@ -287,7 +289,7 @@ private fun SummaryRow(state: MainUiState) {
 private fun WeekCard(week: List<DaySteps>, goal: Long) {
     val scale = maxOf(week.maxOfOrNull { it.steps } ?: 0L, goal).coerceAtLeast(1L)
     val goalLine = (CHART_HEIGHT * (goal.toFloat() / scale)).coerceAtMost(CHART_HEIGHT - 1.dp)
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(stringResource(R.string.last_7_days), style = MaterialTheme.typography.titleMedium)
             Box(modifier = Modifier.fillMaxWidth().padding(top = 20.dp).height(CHART_HEIGHT)) {
@@ -350,7 +352,7 @@ private fun Bar(steps: Long, scale: Long, goal: Long, isToday: Boolean) {
 
 @Composable
 private fun SwitchCard(title: String, text: String, enabled: Boolean, onChange: (Boolean) -> Unit) {
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(title, style = MaterialTheme.typography.titleMedium)
@@ -364,7 +366,7 @@ private fun SwitchCard(title: String, text: String, enabled: Boolean, onChange: 
 @Composable
 private fun PermissionCard(permission: PermissionState, onRequest: () -> Unit, onOpenSettings: () -> Unit) {
     val denied = permission == PermissionState.Denied
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
+    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(stringResource(R.string.permission_title), style = MaterialTheme.typography.titleMedium)
             Text(
@@ -380,7 +382,7 @@ private fun PermissionCard(permission: PermissionState, onRequest: () -> Unit, o
 
 @Composable
 private fun MessageCard(title: String, text: String) {
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)) {
+    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onErrorContainer)
             Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onErrorContainer)
@@ -402,7 +404,7 @@ private fun FreezeOfferCard(state: MainUiState, saved: Int, onFreeze: (LocalDate
     val yesterday = state.today.minusDays(1)
     var hidden by rememberSaveable(state.today.toString()) { mutableStateOf(false) }
     if (hidden) return
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
+    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Icon(
@@ -435,7 +437,7 @@ private fun WaterCard(state: MainUiState, onAddWater: (Int) -> Unit) {
     val drunk = state.water[state.today] ?: 0
     val goal = state.settings.waterGoalMl
     val glass = state.settings.glassMl
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(

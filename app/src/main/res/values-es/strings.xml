@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_20_3">
+        <item>Tarjetas de Hoy alineadas: la frase del día ocupa todo el ancho y Racha y Esta semana tienen la misma altura</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>Corregido el bloqueo (la app no responde) tras reiniciar o actualizar con la pulsera lejos</item>
         <item>Los recordatorios y widgets ya no esperan la sincronización de la pulsera</item>

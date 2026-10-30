@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_20_3">
+        <item>Schede della pagina Oggi allineate: citazione del giorno a tutta larghezza, Serie e Questa settimana della stessa altezza</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>Risolto il blocco (l\'app non risponde) dopo un riavvio o un aggiornamento con il braccialetto lontano</item>
         <item>Promemoria e widget non aspettano più la sincronizzazione del braccialetto</item>

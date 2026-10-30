@@ -44,7 +44,7 @@ import kotlinx.coroutines.withContext
 @Composable
 internal fun VacationCard(state: MainUiState) {
     if (!state.settings.inVacation(state.today)) return
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
+    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painterResource(R.drawable.ic_flight),
@@ -74,7 +74,7 @@ internal fun PeriodGoalsCard(state: MainUiState) {
     val year = remember(state.history, state.today, settings.yearlyGoal) {
         settings.yearlyGoal.takeIf { it != NO_GOAL }?.let { PeriodGoals.year(state.history, state.today, it) }
     }
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             month?.let { PeriodRow(stringResource(R.string.monthly_goal), it) }
             year?.let { PeriodRow(stringResource(R.string.yearly_goal), it) }
@@ -125,7 +125,7 @@ internal fun WalkPlanCard(state: MainUiState) {
         value = withContext(Dispatchers.IO) { ExtraReminders.planDone(DayHours.day(context, state.today), minute) }
     }
     val time = CLOCK_FORMAT.format(LocalTime.of(minute / 60, minute % 60))
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painterResource(if (done) R.drawable.ic_check else R.drawable.ic_timer),
@@ -191,7 +191,10 @@ internal fun QuoteCard(today: LocalDate) {
     val quotes = stringArrayResource(R.array.quotes)
     if (quotes.isEmpty()) return
     val quote = quotes[Math.floorMod(today.toEpochDay(), quotes.size.toLong()).toInt()]
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+    ) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painterResource(R.drawable.ic_bulb),

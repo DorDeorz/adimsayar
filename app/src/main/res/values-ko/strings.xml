@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_20_3">
+        <item>오늘 페이지 카드 정렬: 오늘의 한마디는 전체 너비, 연속 기록과 이번 주 카드는 같은 높이</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>밴드가 멀리 있을 때 재시작이나 업데이트 후 멈춤(앱 응답 없음) 수정</item>
         <item>알림과 위젯이 더 이상 밴드 동기화를 기다리지 않음</item>
