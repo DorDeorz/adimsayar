@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_20_3">
+        <item>محاذاة بطاقات صفحة اليوم: اقتباس اليوم بعرض كامل، وبطاقتا السلسلة وهذا الأسبوع بنفس الارتفاع</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>إصلاح التجمد (التطبيق لا يستجيب) بعد إعادة التشغيل أو التحديث عندما يكون السوار بعيدًا</item>
         <item>لم تعد التذكيرات والأدوات تنتظر مزامنة السوار</item>

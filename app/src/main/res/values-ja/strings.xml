@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_3">
+        <item>今日ページのカードを整列: 今日の言葉を全幅に、連続記録と今週のカードを同じ高さに</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>バンドが離れているときの再起動・更新後のフリーズ（アプリが応答しない）を修正</item>
         <item>リマインダーとウィジェットはバンドの同期を待たなくなりました</item>

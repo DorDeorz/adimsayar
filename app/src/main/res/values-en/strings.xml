@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_3">
+        <item>Today page cards aligned: Quote of the day is full width, Streak and This week cards are the same height</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>Fixed the freeze (app not responding) after a restart or update while the band was away</item>
         <item>Reminders and widgets no longer wait for the band sync</item>

@@ -2,6 +2,10 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.3
+
+- Bugün sayfası kartları hizalandı: "Günün sözü" ve içeriği kısa kalan diğer kartlar (tatil, izin, uyarı, yürüyüş planı vb.) artık tam genişlikte. "Seri" ve "Bu hafta" kartları yan yana aynı yükseklikte (`IntrinsicSize.Min` + `fillMaxHeight`).
+
 ## 0.20.2
 
 - Açılışta ve güncellemeden sonra görülen ANR (uygulama yanıt vermiyor) giderildi. Sebep: `SystemEventReceiver` canlı bileklik bağlantısından eşitleme sonucunu 60 s bekliyordu; bileklik uzaktayken bu, arka plan yayın sınırını (~60 s) aşıyordu.

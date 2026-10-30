@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_3">
+        <item>Cartes de la page Aujourd\'hui alignées : citation du jour en pleine largeur, Série et Cette semaine à la même hauteur</item>
+    </string-array>
     <string-array name="release_notes_0_20_2">
         <item>Correction du blocage (l\'appli ne répond pas) après un redémarrage ou une mise à jour quand le bracelet était loin</item>
         <item>Les rappels et widgets n\'attendent plus la synchronisation du bracelet</item>
