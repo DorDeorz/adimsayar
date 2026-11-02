@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_20_4">
+        <item>Tela do pássaro: o pássaro fica fixo no topo e as opções rolam abaixo, então as mudanças aparecem na hora</item>
+    </string-array>
     <string-array name="release_notes_0_20_3">
         <item>Cartões da página Hoje alinhados: frase do dia em largura total, Sequência e Esta semana com a mesma altura</item>
     </string-array>

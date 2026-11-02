@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_4">
+        <item>小鸟界面：小鸟固定在顶部，选项在下方滚动，修改立即可见</item>
+    </string-array>
     <string-array name="release_notes_0_20_3">
         <item>今日页面卡片已对齐：每日一句占满宽度，连续天数和本周卡片高度一致</item>
     </string-array>

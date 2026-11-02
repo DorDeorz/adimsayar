@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_4">
+        <item>Écran de l’oiseau : l’oiseau reste fixé en haut et les options défilent en dessous, les changements sont visibles tout de suite</item>
+    </string-array>
     <string-array name="release_notes_0_20_3">
         <item>Cartes de la page Aujourd\'hui alignées : citation du jour en pleine largeur, Série et Cette semaine à la même hauteur</item>
     </string-array>
