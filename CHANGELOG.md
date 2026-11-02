@@ -2,6 +2,10 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.4
+
+- Kuş ekranı (`BirdDialog`): kuş resmi üstte sabit, besleme, renk, tür, ötüş ve aksesuar seçenekleri altında ayrı kayıyor. Değişiklik yapınca kuşu görmek için yukarı kaydırmak gerekmiyor.
+
 ## 0.20.3
 
 - Bugün sayfası kartları hizalandı: "Günün sözü" ve içeriği kısa kalan diğer kartlar (tatil, izin, uyarı, yürüyüş planı vb.) artık tam genişlikte. "Seri" ve "Bu hafta" kartları yan yana aynı yükseklikte (`IntrinsicSize.Min` + `fillMaxHeight`).
