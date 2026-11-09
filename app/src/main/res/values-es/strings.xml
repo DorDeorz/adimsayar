@@ -1294,6 +1294,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_20_4">
+        <item>Pantalla del pájaro: el pájaro queda fijo arriba y las opciones se desplazan debajo, así ves los cambios al instante</item>
+    </string-array>
     <string-array name="release_notes_0_20_3">
         <item>Tarjetas de Hoy alineadas: la frase del día ocupa todo el ancho y Racha y Esta semana tienen la misma altura</item>
     </string-array>

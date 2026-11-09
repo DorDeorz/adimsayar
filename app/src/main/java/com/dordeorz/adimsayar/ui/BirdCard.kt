@@ -158,58 +158,64 @@ private fun BirdDialog(bird: BirdState, state: MainUiState, actions: MainActions
         onDismissRequest = onDismiss,
         title = { Text(stringResource(bird.stage.title())) },
         text = {
+            // Kuş üstte sabit kalır; seçenekler altında kayar, böylece değişiklik hemen görünür.
             Column(
-                modifier = Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()),
+                modifier = Modifier.heightIn(max = 480.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 BirdImage(bird, Modifier.size(BIG_BIRD_SIZE).align(Alignment.CenterHorizontally), poke)
-                FeedRow(state, actions, onFed = { poke++ })
-                LevelLine(bird)
-                Text(stringResource(bird.mood.text()), style = MaterialTheme.typography.bodyLarge)
-                LinearProgressIndicator(
-                    progress = { bird.levelFraction },
-                    modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
-                )
-                Text(
-                    stringResource(R.string.bird_level_next, bird.level + 1, format(bird.stepsToNextLevel)),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                StageProgress(bird)
-                BirdLooks(bird, state, actions)
-                Text(stringResource(R.string.bird_items_title), style = MaterialTheme.typography.titleSmall)
-                BirdItem.entries.forEach { item ->
-                    val owned = state.achievements.medals.any { it.group == item.group && it.tier == item.tier && it.earned }
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                stringResource(item.title()),
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = if (owned) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                            Text(
-                                stringResource(if (owned) R.string.bird_item_wear else item.unlock()),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                        }
-                        if (owned) {
-                            Switch(
-                                checked = item.name !in state.extra.extras.hiddenItems,
-                                onCheckedChange = { wear ->
-                                    actions.extra.update {
-                                        it.copy(hiddenItems = if (wear) it.hiddenItems - item.name else it.hiddenItems + item.name)
-                                    }
-                                },
-                            )
+                Column(
+                    modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    FeedRow(state, actions, onFed = { poke++ })
+                    LevelLine(bird)
+                    Text(stringResource(bird.mood.text()), style = MaterialTheme.typography.bodyLarge)
+                    LinearProgressIndicator(
+                        progress = { bird.levelFraction },
+                        modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                    )
+                    Text(
+                        stringResource(R.string.bird_level_next, bird.level + 1, format(bird.stepsToNextLevel)),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    StageProgress(bird)
+                    BirdLooks(bird, state, actions)
+                    Text(stringResource(R.string.bird_items_title), style = MaterialTheme.typography.titleSmall)
+                    BirdItem.entries.forEach { item ->
+                        val owned = state.achievements.medals.any { it.group == item.group && it.tier == item.tier && it.earned }
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    stringResource(item.title()),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = if (owned) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                                Text(
+                                    stringResource(if (owned) R.string.bird_item_wear else item.unlock()),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
+                            if (owned) {
+                                Switch(
+                                    checked = item.name !in state.extra.extras.hiddenItems,
+                                    onCheckedChange = { wear ->
+                                        actions.extra.update {
+                                            it.copy(hiddenItems = if (wear) it.hiddenItems - item.name else it.hiddenItems + item.name)
+                                        }
+                                    },
+                                )
+                            }
                         }
                     }
+                    Text(
+                        stringResource(R.string.bird_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                 }
-                Text(
-                    stringResource(R.string.bird_hint),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
