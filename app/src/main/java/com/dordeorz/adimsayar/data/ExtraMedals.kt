@@ -7,8 +7,6 @@ import java.time.LocalDate
 /** Medals added in 0.17: distance, water streak, sleep streak and finished virtual routes. */
 object ExtraMedals {
 
-    const val GOOD_NIGHT_MINUTES = 7 * 60L
-
     fun compute(
         days: Map<LocalDate, Long>,
         today: LocalDate,
@@ -29,7 +27,7 @@ object ExtraMedals {
         result += medals(MedalGroup.Distance, km.toLong(), distanceEarned, IntArray(MedalGroup.Distance.targets.size))
 
         result += streakMedals(MedalGroup.WaterStreak, water.filterValues { it >= waterGoal }.keys, today)
-        result += streakMedals(MedalGroup.SleepStreak, nights.filterValues { it >= GOOD_NIGHT_MINUTES }.keys, today)
+        result += streakMedals(MedalGroup.SleepStreak, nights.filterValues { it >= SleepInsights.GOOD_NIGHT_MINUTES }.keys, today)
 
         val finished = routesDone.values.sorted()
         val routeEarned = HashMap<Long, LocalDate>()

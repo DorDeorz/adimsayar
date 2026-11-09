@@ -22,6 +22,7 @@ import com.dordeorz.adimsayar.AppScope
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.CounterReading
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
@@ -29,6 +30,7 @@ import com.dordeorz.adimsayar.data.isNotable
 import com.dordeorz.adimsayar.sensor.FloorCounter
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.widget.Widgets
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 
@@ -43,6 +45,16 @@ class StepCounterService : Service(), SensorEventListener {
 
     @Volatile
     private var shownSteps = -1L
+
+    // Batched events arrive together; only the newest of them is stored, since it holds the whole total.
+    private val readings = Channel<CounterReading>(Channel.CONFLATED)
+
+    override fun onCreate() {
+        super.onCreate()
+        AppScope.launch {
+            for (reading in readings) store(reading)
+        }
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -59,30 +71,32 @@ class StepCounterService : Service(), SensorEventListener {
         FloorCounter.stop(this, FLOOR_OWNER)
         StepSensors.sensorManager(this)?.unregisterListener(this)
         registered = false
+        readings.close()
         super.onDestroy()
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        val now = SystemClock.elapsedRealtime()
         FloorCounter.onStep()
+        readings.trySend(StepSensors.reading(applicationContext, event))
+    }
+
+    private suspend fun store(reading: CounterReading) {
+        val now = SystemClock.elapsedRealtime()
         val appContext = applicationContext
-        val reading = StepSensors.reading(appContext, event)
-        AppScope.launch {
-            val repository = StepRepository.get(appContext)
-            val interval = repository.record(reading)
-            val today = repository.today()
-            if (today != shownSteps) {
-                shownSteps = today
-                showNotification(today)
-            }
-            if (lastLogMs == 0L || now - lastLogMs >= LOG_INTERVAL_MS || interval.kind.isNotable()) {
-                lastLogMs = now
-                ReadingLog.get(appContext).reading(ReadSource.Service, reading, interval)
-            }
-            if (now - lastWidgetMs >= WIDGET_INTERVAL_MS) {
-                lastWidgetMs = now
-                Widgets.updateAll(appContext)
-            }
+        val repository = StepRepository.get(appContext)
+        val interval = repository.record(reading)
+        val today = repository.today()
+        if (today != shownSteps) {
+            shownSteps = today
+            showNotification(today)
+        }
+        if (lastLogMs == 0L || now - lastLogMs >= LOG_INTERVAL_MS || interval.kind.isNotable()) {
+            lastLogMs = now
+            ReadingLog.get(appContext).reading(ReadSource.Service, reading, interval)
+        }
+        if (now - lastWidgetMs >= WIDGET_INTERVAL_MS) {
+            lastWidgetMs = now
+            Widgets.updateAll(appContext)
         }
     }
 

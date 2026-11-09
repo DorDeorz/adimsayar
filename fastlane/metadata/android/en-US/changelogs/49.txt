@@ -1,0 +1,5 @@
+The bird on the Bird widget and the live wallpaper wears all the items it has in the app.
+Health Connect as the band source no longer counts the phone's own steps as band steps.
+The weekend goal also applies to the widgets, the year summary and the bird's mood.
+If the app stays open past midnight, Today moves to the new day; band alerts open Settings.
+Less work while walking; the weather location is rounded to about 1 km.

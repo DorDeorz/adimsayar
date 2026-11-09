@@ -59,7 +59,7 @@ class WeekWidget : GlanceAppWidget() {
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
                 WidgetSurface(Tab.History, settings.widgetOpacity) {
-                    WeekContent(localized, week, settings.dailyGoal)
+                    WeekContent(localized, week, settings::goalOn)
                 }
             }
         }
@@ -85,14 +85,14 @@ private val VALUES_MIN_HEIGHT = 120.dp
 private val VALUES_MIN_COLUMN = 30.dp
 
 @Composable
-private fun WeekContent(context: Context, week: List<DaySteps>, goal: Long) {
+private fun WeekContent(context: Context, week: List<DaySteps>, goalOn: (LocalDate) -> Long) {
     val size = LocalSize.current
     val column = (size.width - PADDING * 2) / week.size.coerceAtLeast(1)
     val showValues = size.height >= VALUES_MIN_HEIGHT && column >= VALUES_MIN_COLUMN
     val valueHeight = if (showValues) VALUE_HEIGHT else 0.dp
     val maxBar = (size.height - PADDING * 2 - TITLE_HEIGHT - valueHeight - LABEL_HEIGHT).coerceAtLeast(MIN_BAR)
     val barWidth = (column * 0.55f).coerceIn(MIN_BAR, MAX_BAR_WIDTH)
-    val maxSteps = maxOf(week.maxOfOrNull { it.steps } ?: 0L, goal).coerceAtLeast(1L)
+    val maxSteps = maxOf(week.maxOfOrNull { it.steps } ?: 0L, week.maxOfOrNull { goalOn(it.date) } ?: 0L).coerceAtLeast(1L)
     Column(modifier = GlanceModifier.fillMaxSize()) {
         Text(
             text = context.getString(R.string.last_7_days),
@@ -106,7 +106,7 @@ private fun WeekContent(context: Context, week: List<DaySteps>, goal: Long) {
                     barHeight = barHeight(day.steps, maxSteps, maxBar),
                     barWidth = barWidth,
                     showValue = showValues,
-                    goalMet = day.steps >= goal,
+                    goalMet = day.steps >= goalOn(day.date),
                     isToday = index == week.lastIndex,
                 )
             }

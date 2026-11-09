@@ -152,6 +152,16 @@ class AchievementMathTest {
     }
 
     @Test
+    fun yearSummaryUsesEachDaysGoal() {
+        val saturday = LocalDate.of(2026, 1, 3)
+        val history = mapOf(saturday to 6_000L, saturday.plusDays(2) to 6_000L)
+        val today = saturday.plusDays(2)
+        val weekend = { date: LocalDate -> if (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY) 5_000L else 10_000L }
+        assertEquals(0, AchievementMath.year(history, 2026, today, 10_000, emptyList()).goalDays)
+        assertEquals(1, AchievementMath.year(history, 2026, today, 10_000, emptyList(), weekend).goalDays)
+    }
+
+    @Test
     fun freezeKeepsStreakWithoutCountingTheDay() {
         val history = days(12_000, 3_000, 11_000, 10_500)
         val today = monday.plusDays(3)

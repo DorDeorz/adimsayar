@@ -38,12 +38,24 @@ object StepSensors {
         )
     }
 
-    private fun bootCount(context: Context): Int? =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    // A reboot also restarts the app, so the boot count is read once per process, not on every event.
+    @Volatile
+    private var bootCountRead = false
+
+    @Volatile
+    private var cachedBootCount: Int? = null
+
+    private fun bootCount(context: Context): Int? {
+        if (bootCountRead) return cachedBootCount
+        val count = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Settings.Global.getInt(context.contentResolver, Settings.Global.BOOT_COUNT, -1).takeIf { it >= 0 }
         } else {
             null
         }
+        cachedBootCount = count
+        bootCountRead = true
+        return count
+    }
 
     suspend fun readCounterOnce(context: Context, timeoutMs: Long): CounterReading? {
         if (!hasPermission(context)) return null

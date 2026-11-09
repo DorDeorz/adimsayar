@@ -1,0 +1,5 @@
+Kuş widget'ı ve canlı duvar kâğıdındaki kuş, uygulamadaki tüm eşyaları takar.
+Health Connect bileklik kaynağı telefonun kendi adımlarını bileklik adımı saymaz.
+Hafta sonu hedefi widget'larda, yıl özetinde ve kuşun ruh halinde de geçerli.
+Gece yarısı açık kalan uygulama yeni güne geçer; bileklik uyarıları Ayarlar'ı açar.
+Yürürken daha az işlem; hava durumu için konum yaklaşık 1 km'ye yuvarlanır.

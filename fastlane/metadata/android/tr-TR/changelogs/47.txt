@@ -1,0 +1,1 @@
+Bugün sayfasındaki kartlar hizalandı: Günün sözü tam genişlikte, Seri ve Bu hafta kartları aynı yükseklikte.

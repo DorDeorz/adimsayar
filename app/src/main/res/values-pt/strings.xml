@@ -105,7 +105,6 @@
     <string name="daily_goal">Meta diária</string>
     <string name="weekly_goal">Meta semanal</string>
     <string name="goal_range">Entre %1$s e %2$s</string>
-    <string name="settings_theme">Tema</string>
     <string name="theme_system">Padrão do sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d dias exportados</string>
     <string name="import_done">%1$d dias atualizados</string>
     <string name="csv_failed">Não foi possível ler ou gravar o arquivo</string>
-    <string name="settings_language">Idioma</string>
     <string name="language">Idioma do app</string>
     <string name="language_system">Sistema</string>
     <string name="medal_group_early">Madrugador</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">%1$d dias com meta</string>
 
     <string name="near_goal_notification">Avisar quando estiver perto da meta</string>
-    <string name="near_goal_notification_hint">Você recebe uma notificação no dia em que atingir 80% da meta diária.</string>
+    <string name="near_goal_notification_hint" formatted="false">Você recebe uma notificação no dia em que atingir 80% da meta diária.</string>
     <string name="weekly_summary">Resumo semanal</string>
     <string name="weekly_summary_hint">No último dia da semana, por volta das 20:00, mostra o total da semana e a mudança em relação à semana anterior.</string>
     <string name="notify_near_title">Quase lá!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">A pulseira está desativada</string>
     <string name="health_off_text">Ative os passos da pulseira nas configurações para ver sono, batimentos e exercícios.</string>
-    <string name="health_title">Resumo de saúde (pulseira)</string>
     <string name="health_last_days">Últimos %1$d dias</string>
     <string name="health_loading">Lendo do Health Connect…</string>
-    <string name="health_empty">Sem dados da pulseira neste período</string>
     <string name="health_sleep_average">Sono médio</string>
     <string name="health_nights">%1$d noites</string>
     <string name="health_sleep_longest">Sono mais longo</string>
     <string name="health_resting_average">Batimento em repouso médio</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">Exercício total</string>
     <string name="health_exercise_count">%1$d exercícios</string>
-    <string name="health_exercise_longest">Exercício mais longo</string>
     <string name="health_distance">Distância da pulseira</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">A pulseira não gravou registros neste período</string>
     <string name="health_no_permission">Sem permissão do Health Connect</string>
     <string name="health_resting_chart">Batimento em repouso</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">Algumas permissões de saúde não foram concedidas</string>
     <string name="health_grant">Conceder</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">Gerenciamento automático → selecione FitWren na lista de apps e ative as três permissões</string>
     <string name="wearable_card_title">Usar passos da pulseira</string>
-    <string name="wearable_resync">Ressincronizar a pulseira</string>
-    <string name="wearable_resync_hint">Lê de novo no Health Connect os dados da pulseira dos últimos 30 dias, incluindo horas que o app dela gravou com atraso.</string>
     <string name="wearable_resync_started">Lendo de novo os dados da pulseira…</string>
     <string name="wearable_resync_done">Dados da pulseira lidos de novo</string>
     <string name="wearable_resync_failed">Não foi possível ler os dados da pulseira, tente de novo daqui a pouco</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">Arraste a foto com um dedo, belisque para ampliar</string>
     <string name="face_designer_zoom">Zoom</string>
     <string name="face_designer_dim">Escurecer fundo</string>
-    <string name="face_designer_show">Mostrar</string>
     <string name="face_designer_show_date">Data</string>
     <string name="face_designer_show_steps">Passos</string>
     <string name="face_designer_show_bar">Barra de meta</string>
@@ -1294,6 +1284,13 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_20_5">
+        <item>O pássaro do widget Pássaro e do papel de parede animado usa todos os itens que tem no app: sol, óculos, flor, touca de dormir, mochila</item>
+        <item>O Health Connect como fonte da pulseira não conta mais os passos do próprio celular como passos da pulseira; “Não contar o celular ao usar a pulseira” funciona como deveria</item>
+        <item>A meta de fim de semana agora vale também nos widgets Semana, Mês e Ano, no resumo do ano e no humor do pássaro</item>
+        <item>Se o app estiver aberto à meia-noite, a página Hoje passa para o novo dia; os alertas da pulseira abrem as Configurações</item>
+        <item>Menos processamento enquanto você caminha com o app aberto; para o clima na pulseira, a localização é arredondada para cerca de 1 km</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Tela do pássaro: o pássaro fica fixo no topo e as opções rolam abaixo, então as mudanças aparecem na hora</item>
     </string-array>

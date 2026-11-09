@@ -38,7 +38,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 
 - **Accurate.** Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.
 - **Battery friendly.** No always-on service by default. The counter is read now and then and the difference is saved.
-- **Private.** No account, no server, no analytics, no ads. The internet is used only when you tap "Check for updates" or sign in to Xiaomi to get your band's key.
+- **Private.** No account, no server, no analytics, no ads. The internet is used only for things you start or turn on: the update check, the Xiaomi or Zepp sign-in for your band's key, the band's weather and the band face store.
 - **Works on every Android phone.** Tested on Xiaomi (HyperOS) and Samsung (One UI), the two brands that are hardest on background apps.
 
 ## Features
@@ -80,9 +80,9 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Levels, three weekly challenges picked from your own history
 - Virtual routes: walk from Istanbul to Ankara or along the Camino with your steps
 
-### 13 home-screen widgets
+### 14 home-screen widgets
 
-Today's steps, 7-day chart, streak and week, monthly calendar, today by hour, heatmap, sleep and heart, the wren, water (add a glass with one tap), virtual route, weekly challenges, weight and daily summary.
+Today's steps, 7-day chart, streak and week, monthly calendar, today by hour, heatmap, sleep and heart, the wren, water (add a glass with one tap), virtual route, weekly challenges, weight, daily summary and band battery.
 
 Every widget resizes to fit, follows your wallpaper colors (Material You) or the app theme, and has adjustable background transparency. Tapping a widget opens the matching page.
 
@@ -145,10 +145,9 @@ The card shows how many steps are left to the next level and stage, and celebrat
 |---|---|
 | Scarf | A 7-day streak |
 | Medal | Reach your weekly goal 4 times |
-| Sun | Early walks on 7 days (with the HyperOS record on) |
+| Sun | Early walks on 7 days (1,000 steps before 08:00) |
 | Party hat | 20,000 steps in one day |
 | Crown | 1 million steps in total. It replaces the party hat. |
-
 | Glasses | Walk 42 km in total |
 | Flower | Reach your water goal 7 days in a row |
 | Nightcap | 7 good nights in a row (band data) |
@@ -171,9 +170,13 @@ Updates: Settings → About → "Check for updates" asks you to confirm, then do
 
 ## Privacy
 
-FitWren stores daily step totals, water, weight and your settings on the phone. Nothing is sent anywhere.
+FitWren stores daily step totals, water, weight and your settings on the phone. Your steps and health data are never sent anywhere.
 
-The only network request is made when you tap "Check for updates": the app reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, it downloads the APK from GitHub Releases. Nothing about you or your steps is sent with it.
+The app goes online only for the things below, each started or turned on by you. Nothing about you or your steps is sent with any of them.
+
+- **Check for updates:** reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, downloads the APK from GitHub Releases.
+- **Weather on the band** (off by default): the place name you search for goes to `geocoding-api.open-meteo.com`. Then, at most once an hour while the band is connected, the chosen place's coordinates, rounded to about 1 km, go to `api.open-meteo.com` for the forecast. "Use current location" reads the phone's last known position once, on the phone.
+- **Band face store:** when you open it, the band model and face numbers go to Xiaomi's store (`watch-appstore.iot.mi.com`) to get the names, pictures and files of the faces.
 
 The direct band connection uses Bluetooth only; your band data never leaves the phone.
 
@@ -196,11 +199,18 @@ Location is used only while you record a GPS walk, and the route stays on the ph
 | `POST_NOTIFICATIONS` | Optional reminders and goal notifications |
 | `RECEIVE_BOOT_COMPLETED` | Restore schedules after a reboot |
 | `SCHEDULE_EXACT_ALARM` | Switch to the new day at midnight |
-| `INTERNET` | Only the update check and download, and the Xiaomi or Zepp sign-in for the band key, all started by you |
-| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | Optional direct connection to a Xiaomi or Amazfit band |
+| `INTERNET` | Only what you start: the update check and download, the Xiaomi or Zepp sign-in for the band key, the band's weather and the band face store |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` (`BLUETOOTH`, `BLUETOOTH_ADMIN` up to Android 11) | Optional direct connection to a Xiaomi or Amazfit band |
+| `READ_PHONE_STATE`, `READ_CALL_LOG` | Optional: show the caller's number on the band |
+| `ANSWER_PHONE_CALLS` | Optional: reject a call from the band |
+| `SEND_SMS` | Optional: send a quick reply from the band as an SMS |
+| `READ_CALENDAR` | Optional: send upcoming events to the band |
+| `WAKE_LOCK` | Keep the phone awake for the few seconds of a background read |
+| `VIBRATE` | Vibrate when the band asks to find the phone |
 | `REQUEST_INSTALL_PACKAGES` | Open Android's installer for a downloaded update |
 | `health.READ_*`, `health.WRITE_STEPS` | Optional band data from Health Connect, and optionally writing FitWren's steps |
-| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | Optional GPS walk recording, asked only when you start one |
+| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | Optional GPS walk recording, asked only when you start one; on Android 11 and older also the band search |
+| `ACCESS_COARSE_LOCATION` | Optional "Use current location" for the band's weather |
 | `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | The optional pace metronome |
 | `USE_BIOMETRIC` | Optional fingerprint or face unlock for the app lock |
 
@@ -246,7 +256,7 @@ app/src/main/java/com/dordeorz/adimsayar/
 ├── band/         direct Bluetooth connection to Xiaomi and Huami/Amazfit bands (based on Gadgetbridge)
 ├── data/         Room database, step math, HyperOS and Health Connect sources, medals, routes
 ├── background/   periodic reading, midnight alarm, services, reminders
-├── widget/       13 Glance widgets
+├── widget/       14 Glance widgets
 └── ui/           Compose screens, theme, battery help
 ```
 

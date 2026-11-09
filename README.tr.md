@@ -38,7 +38,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 
 - **Doğru sayar.** Donanım adım sayacını okur ve adım dedektörüyle karşılaştırır. Sensör donarsa bunu fark eder ve telefonu yeniden başlatmana gerek kalmadan düzeltir.
 - **Pili yormaz.** Varsayılan olarak sürekli çalışan bir servis yoktur. Sayaç ara ara okunur ve fark kaydedilir.
-- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca "Güncellemeleri kontrol et"e dokunduğunda ya da bilekliğin anahtarı için Xiaomi'ye giriş yaptığında kullanılır.
+- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca senin başlattığın ya da açtığın işler için kullanılır: güncelleme kontrolü, bilekliğin anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası.
 - **Her Android telefonda çalışır.** Arka plan uygulamalarına en sert davranan iki markada, Xiaomi (HyperOS) ve Samsung'da (One UI) test edildi.
 
 ## Özellikler
@@ -80,9 +80,9 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Seviyeler ve geçmişine göre seçilen üç haftalık görev
 - Sanal rotalar: adımlarınla İstanbul'dan Ankara'ya ya da Camino boyunca yürü
 
-### 13 ana ekran widget'ı
+### 14 ana ekran widget'ı
 
-Bugünün adımı, 7 günlük tablo, seri ve hafta, aylık takvim, saat saat bugün, ısı haritası, uyku ve nabız, çalıkuşu, su (tek dokunuşla bardak ekler), sanal rota, haftalık görevler, kilo ve günün özeti.
+Bugünün adımı, 7 günlük tablo, seri ve hafta, aylık takvim, saat saat bugün, ısı haritası, uyku ve nabız, çalıkuşu, su (tek dokunuşla bardak ekler), sanal rota, haftalık görevler, kilo, günün özeti ve bileklik pili.
 
 Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini (Material You) ya da uygulamanın temasını kullanır ve arka plan saydamlığı ayarlanabilir. Widget'a dokununca ilgili sayfa açılır.
 
@@ -145,10 +145,9 @@ Kart, sonraki seviyeye ve evreye kaç adım kaldığını gösterir ve seviye at
 |---|---|
 | Atkı | 7 günlük seri |
 | Madalya | Haftalık hedefe 4 kez ulaşmak |
-| Güneş | 7 gün erken yürüyüş (HyperOS kaydı açıkken) |
+| Güneş | 7 gün erken yürüyüş (08:00'den önce 1.000 adım) |
 | Parti şapkası | Bir günde 20.000 adım |
 | Taç | Toplam 1 milyon adım. Parti şapkasının yerine geçer. |
-
 | Gözlük | Toplam 42 km yürümek |
 | Çiçek | 7 gün art arda su hedefi |
 | Uyku başlığı | 7 gece art arda iyi uyku (bileklik verisi) |
@@ -171,9 +170,13 @@ Güncellemeler: Ayarlar → Hakkında → "Güncellemeleri kontrol et" önce ona
 
 ## Gizlilik
 
-FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda saklar. Hiçbir şey bir yere gönderilmez.
+FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda saklar. Adımların ve sağlık verilerin hiçbir yere gönderilmez.
 
-Tek ağ isteği "Güncellemeleri kontrol et"e dokunduğunda yapılır: uygulama son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir. Bu isteklerle senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.
+Uygulama yalnızca aşağıdaki işler için internete çıkar ve her birini sen başlatır ya da açarsın. Hiçbirinde senin ya da adımlarınla ilgili bilgi gönderilmez.
+
+- **Güncellemeleri kontrol et:** son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir.
+- **Bilekliğe hava durumu** (varsayılan kapalı): aradığın yer adı `geocoding-api.open-meteo.com` adresine gider. Sonra bileklik bağlıyken en fazla saatte bir, seçtiğin yerin yaklaşık 1 km'ye yuvarlanmış koordinatları tahmin için `api.open-meteo.com` adresine gider. "Şu anki konumu kullan" telefonun son bilinen konumunu bir kez, telefonda okur.
+- **Kadran mağazası:** açtığında bileklik modeli ve kadran numaraları, kadranların adını, resmini ve dosyasını almak için Xiaomi'nin mağazasına (`watch-appstore.iot.mi.com`) gider.
 
 Saate doğrudan bağlantı yalnızca Bluetooth kullanır; bileklik verilerin telefondan çıkmaz.
 
@@ -196,11 +199,18 @@ Konum yalnızca GPS yürüyüşü kaydederken kullanılır ve rota telefonda kal
 | `POST_NOTIFICATIONS` | İsteğe bağlı hatırlatmalar ve hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
 | `SCHEDULE_EXACT_ALARM` | Gece yarısı yeni güne geçmek |
-| `INTERNET` | Yalnızca senin başlattığın güncelleme kontrolü ve indirmesi, bir de bileklik anahtarı için Xiaomi ya da Zepp girişi |
-| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` | İsteğe bağlı Xiaomi ya da Amazfit bileklik bağlantısı |
+| `INTERNET` | Yalnızca senin başlattıkların: güncelleme kontrolü ve indirmesi, bileklik anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası |
+| `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` (Android 11 ve öncesinde `BLUETOOTH`, `BLUETOOTH_ADMIN`) | İsteğe bağlı Xiaomi ya da Amazfit bileklik bağlantısı |
+| `READ_PHONE_STATE`, `READ_CALL_LOG` | İsteğe bağlı: arayanın numarasını bileklikte göstermek |
+| `ANSWER_PHONE_CALLS` | İsteğe bağlı: aramayı bileklikten reddetmek |
+| `SEND_SMS` | İsteğe bağlı: bileklikten hızlı yanıtı SMS olarak göndermek |
+| `READ_CALENDAR` | İsteğe bağlı: yaklaşan etkinlikleri bilekliğe göndermek |
+| `WAKE_LOCK` | Arka plan okuması sürerken birkaç saniye telefonu uyanık tutmak |
+| `VIBRATE` | Bileklik telefonu bulmak istediğinde titretmek |
 | `REQUEST_INSTALL_PACKAGES` | İndirilen güncelleme için Android'in kurulum ekranını açmak |
 | `health.READ_*`, `health.WRITE_STEPS` | İsteğe bağlı bileklik verisi ve istersen FitWren adımlarını yazmak |
-| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | İsteğe bağlı GPS yürüyüş kaydı, yalnızca başlatınca istenir |
+| `ACCESS_FINE_LOCATION`, `FOREGROUND_SERVICE_LOCATION` | İsteğe bağlı GPS yürüyüş kaydı, yalnızca başlatınca istenir; Android 11 ve öncesinde bileklik araması da |
+| `ACCESS_COARSE_LOCATION` | Bilekliğin hava durumu için isteğe bağlı "Şu anki konumu kullan" |
 | `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | İsteğe bağlı tempo metronomu |
 | `USE_BIOMETRIC` | Uygulama kilidinde isteğe bağlı parmak izi ya da yüz |
 
@@ -246,7 +256,7 @@ app/src/main/java/com/dordeorz/adimsayar/
 ├── band/         Xiaomi ve Huami/Amazfit bilekliklere doğrudan Bluetooth bağlantısı (Gadgetbridge tabanlı)
 ├── data/         Room veritabanı, adım hesabı, HyperOS ve Health Connect kaynakları, madalyalar, rotalar
 ├── background/   periyodik okuma, gece yarısı alarmı, servisler, hatırlatmalar
-├── widget/       13 Glance widget'ı
+├── widget/       14 Glance widget'ı
 └── ui/           Compose ekranları, tema, pil yardımı
 ```
 

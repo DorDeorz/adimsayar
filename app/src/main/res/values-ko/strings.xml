@@ -105,7 +105,6 @@
     <string name="daily_goal">일일 목표</string>
     <string name="weekly_goal">주간 목표</string>
     <string name="goal_range">%1$s~%2$s 사이</string>
-    <string name="settings_theme">테마</string>
     <string name="theme_system">시스템 기본값</string>
     <string name="theme_light">라이트</string>
     <string name="theme_dark">다크</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d일 내보냄</string>
     <string name="import_done">%1$d일 업데이트됨</string>
     <string name="csv_failed">파일을 읽거나 쓸 수 없습니다</string>
-    <string name="settings_language">언어</string>
     <string name="language">앱 언어</string>
     <string name="language_system">시스템</string>
     <string name="medal_group_early">아침형 인간</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">목표 달성 %1$d일</string>
 
     <string name="near_goal_notification">목표에 가까워지면 알림</string>
-    <string name="near_goal_notification_hint">일일 목표의 80%에 도달한 날 알림을 한 번 받습니다.</string>
+    <string name="near_goal_notification_hint" formatted="false">일일 목표의 80%에 도달한 날 알림을 한 번 받습니다.</string>
     <string name="weekly_summary">주간 요약</string>
     <string name="weekly_summary_hint">한 주의 마지막 날 20:00쯤 주간 합계와 지난주 대비 변화를 보여줍니다.</string>
     <string name="notify_near_title">목표까지 거의 다 왔어요!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">밴드가 꺼져 있습니다</string>
     <string name="health_off_text">설정에서 밴드 걸음 수를 켜면 수면, 심박수, 운동 요약을 볼 수 있습니다.</string>
-    <string name="health_title">건강 요약 (밴드)</string>
     <string name="health_last_days">최근 %1$d일</string>
     <string name="health_loading">Health Connect에서 읽는 중…</string>
-    <string name="health_empty">이 기간에 밴드 데이터가 없습니다</string>
     <string name="health_sleep_average">평균 수면</string>
     <string name="health_nights">%1$d일 밤</string>
     <string name="health_sleep_longest">가장 긴 수면</string>
     <string name="health_resting_average">평균 안정 시 심박수</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">총 운동</string>
     <string name="health_exercise_count">운동 %1$d회</string>
-    <string name="health_exercise_longest">가장 긴 운동</string>
     <string name="health_distance">밴드 거리</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">이 기간에 밴드 기록이 없습니다</string>
     <string name="health_no_permission">Health Connect 권한이 없습니다</string>
     <string name="health_resting_chart">안정 시 심박수</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">일부 건강 권한이 허용되지 않았습니다</string>
     <string name="health_grant">허용</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">자동 관리 → 앱 목록에서 FitWren 선택 후 세 가지 권한 모두 켜기</string>
     <string name="wearable_card_title">밴드 걸음 수 사용</string>
-    <string name="wearable_resync">밴드 데이터 다시 동기화</string>
-    <string name="wearable_resync_hint">Health Connect에서 최근 30일의 밴드 데이터를 다시 읽습니다. 밴드 앱이 늦게 기록한 시간도 가져옵니다.</string>
     <string name="wearable_resync_started">밴드 데이터를 다시 읽는 중…</string>
     <string name="wearable_resync_done">밴드 데이터를 다시 읽었습니다</string>
     <string name="wearable_resync_failed">밴드 데이터를 읽지 못했습니다. 잠시 후 다시 시도하세요</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">손가락으로 사진을 옮기고 두 손가락으로 확대</string>
     <string name="face_designer_zoom">확대</string>
     <string name="face_designer_dim">배경 어둡게</string>
-    <string name="face_designer_show">표시</string>
     <string name="face_designer_show_date">날짜</string>
     <string name="face_designer_show_steps">걸음</string>
     <string name="face_designer_show_bar">목표 막대</string>
@@ -1294,6 +1284,13 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_20_5">
+        <item>새 위젯과 라이브 배경화면의 새도 앱에서처럼 모든 아이템을 착용합니다: 해, 안경, 꽃, 수면 모자, 배낭</item>
+        <item>밴드 소스인 Health Connect가 더 이상 휴대폰 자체 걸음을 밴드 걸음으로 세지 않습니다. “밴드 사용 중에는 휴대폰을 세지 않기”가 제대로 작동합니다</item>
+        <item>주말 목표가 주·월·연 위젯, 연간 요약, 새의 기분에도 적용됩니다</item>
+        <item>자정에 앱이 열려 있으면 오늘 페이지가 새 날로 넘어갑니다. 밴드 알림은 설정을 엽니다</item>
+        <item>앱을 열고 걸을 때 처리량을 줄였습니다. 밴드 날씨용 위치는 약 1km로 반올림됩니다</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>새 화면: 새가 위에 고정되고 옵션은 아래에서 스크롤되어 변경 사항이 바로 보입니다</item>
     </string-array>

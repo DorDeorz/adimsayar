@@ -82,6 +82,8 @@ private const val RING_ANIMATION_MS = 700
 fun TodayScreen(state: MainUiState, actions: MainActions) {
     val steps = state.week.lastOrNull()?.steps ?: 0L
     val goal = state.settings.goalOn(state.today)
+    // Works out the medals again when yesterday was missed, so it runs only when the data changes.
+    val freezeSaved = remember(state.history, state.freezes, state.today, state.settings, state.achievements) { freezeOffer(state) }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -89,7 +91,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
     ) {
         item { TodayRing(state, steps, goal) }
         item { ShareButton(state, actions, steps, goal) }
-        freezeOffer(state)?.let { saved ->
+        freezeSaved?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
         item { BirdCard(state, actions) }

@@ -65,6 +65,23 @@ object Avatar {
 
     const val WAKE_HOUR = 7
 
+    /**
+     * Medals for the bird on the widget and the live wallpaper. Medals that need data only the app
+     * loads (early walks, water, sleep, routes) come from the medals the app kept, so the bird wears
+     * the same items there as in the app.
+     */
+    fun keptAchievements(
+        settings: AppSettings,
+        history: Map<LocalDate, Long>,
+        today: LocalDate,
+        freezes: Set<LocalDate>,
+        kept: Map<String, LocalDate>,
+    ): Achievements {
+        val base = settings.achievements(history, today, earlyBirdDays = emptySet(), freezes = freezes)
+        val extra = ExtraMedals.compute(history, today, settings.heightCm, emptyMap(), settings.waterGoalMl, emptyMap(), emptyMap())
+        return base.copy(medals = KeptMedals.apply(base.medals + extra, kept))
+    }
+
     fun state(
         achievements: Achievements,
         days: Map<LocalDate, Long>,
@@ -72,6 +89,7 @@ object Avatar {
         today: LocalDate,
         hour: Int,
         dailyGoal: Long,
+        goalOf: ((LocalDate) -> Long)? = null,
     ): BirdState {
         val total = achievements.records.total
         val level = achievements.level
@@ -84,7 +102,7 @@ object Avatar {
         }.toSet()
         return BirdState(
             stage = stage,
-            mood = mood(days, freezes, today, hour, dailyGoal, achievements.records.longestStreak),
+            mood = mood(days, freezes, today, hour, dailyGoal, achievements.records.longestStreak, goalOf?.invoke(today.minusDays(1)) ?: dailyGoal),
             items = items,
             nextStage = next,
             stepsToNext = if (to == null) 0L else (to - total).coerceAtLeast(0L),
@@ -96,10 +114,19 @@ object Avatar {
         )
     }
 
-    fun mood(days: Map<LocalDate, Long>, freezes: Set<LocalDate>, today: LocalDate, hour: Int, dailyGoal: Long, longestStreak: Int): BirdMood {
+    /** [yesterdayGoal] differs from [dailyGoal] when only one of the two days is on the weekend goal. */
+    fun mood(
+        days: Map<LocalDate, Long>,
+        freezes: Set<LocalDate>,
+        today: LocalDate,
+        hour: Int,
+        dailyGoal: Long,
+        longestStreak: Int,
+        yesterdayGoal: Long = dailyGoal,
+    ): BirdMood {
         val steps = days[today] ?: 0L
         val yesterday = today.minusDays(1)
-        val missedYesterday = (days[yesterday] ?: 0L) < dailyGoal && yesterday !in freezes
+        val missedYesterday = (days[yesterday] ?: 0L) < yesterdayGoal && yesterday !in freezes
         return when {
             steps >= dailyGoal -> BirdMood.Excited
             missedYesterday && longestStreak > 0 && steps * 2 < dailyGoal && hour >= WAKE_HOUR -> BirdMood.Sad

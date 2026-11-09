@@ -1,0 +1,2 @@
+The early riser medal no longer needs the HyperOS record: it is worked out from the phone's and the band's hourly steps.
+On Android 14 and later, steps lost while the phone restarted are topped up from the phone's own Health Connect record.

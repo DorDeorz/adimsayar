@@ -188,7 +188,14 @@ object AchievementMath {
         return Achievements(records, medals, level(total))
     }
 
-    fun year(days: Map<LocalDate, Long>, year: Int, today: LocalDate, dailyGoal: Long, medals: List<Medal>): YearSummary {
+    fun year(
+        days: Map<LocalDate, Long>,
+        year: Int,
+        today: LocalDate,
+        dailyGoal: Long,
+        medals: List<Medal>,
+        goalOf: ((LocalDate) -> Long)? = null,
+    ): YearSummary {
         val inYear = days.filter { (date, _) -> date.year == year && !date.isAfter(today) }
         val first = inYear.keys.minOrNull()
         val last = if (today.year == year) today else LocalDate.of(year, 12, 31)
@@ -205,7 +212,7 @@ object AchievementMath {
             total = total,
             dailyAverage = if (span == 0L) 0L else total / span,
             activeDays = inYear.values.count { it > 0L },
-            goalDays = inYear.values.count { it >= dailyGoal },
+            goalDays = inYear.count { (date, steps) -> steps >= (goalOf?.invoke(date) ?: dailyGoal) },
             bestDay = bestDay,
             bestMonth = bestMonth,
             medals = medals.count { it.earnedOn?.year == year },

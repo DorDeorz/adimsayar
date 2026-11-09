@@ -51,7 +51,7 @@ class SmartGoalTest {
     @Test
     fun weekStartsOnSettingDay() {
         val wednesday = LocalDate.of(2026, 10, 28)
-        assertEquals(LocalDate.of(2026, 10, 26), SmartGoal.weekOf(wednesday, DayOfWeek.MONDAY))
-        assertEquals(LocalDate.of(2026, 10, 25), SmartGoal.weekOf(wednesday, DayOfWeek.SUNDAY))
+        assertEquals(LocalDate.of(2026, 10, 26), weekStartOf(wednesday, DayOfWeek.MONDAY))
+        assertEquals(LocalDate.of(2026, 10, 25), weekStartOf(wednesday, DayOfWeek.SUNDAY))
     }
 }

@@ -105,7 +105,6 @@
     <string name="daily_goal">1日の目標</string>
     <string name="weekly_goal">週間目標</string>
     <string name="goal_range">%1$s〜%2$s</string>
-    <string name="settings_theme">テーマ</string>
     <string name="theme_system">システムのデフォルト</string>
     <string name="theme_light">ライト</string>
     <string name="theme_dark">ダーク</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d 日分をエクスポートしました</string>
     <string name="import_done">%1$d 日分を更新しました</string>
     <string name="csv_failed">ファイルを読み書きできませんでした</string>
-    <string name="settings_language">言語</string>
     <string name="language">アプリの言語</string>
     <string name="language_system">システム</string>
     <string name="medal_group_early">早起き</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">目標達成 %1$d 日</string>
 
     <string name="near_goal_notification">目標が近づいたら通知</string>
-    <string name="near_goal_notification_hint">1日の目標の80%に達した日に、通知が1回届きます。</string>
+    <string name="near_goal_notification_hint" formatted="false">1日の目標の80%に達した日に、通知が1回届きます。</string>
     <string name="weekly_summary">週間サマリー</string>
     <string name="weekly_summary_hint">週の最終日の20:00ごろに、週の合計と前週からの変化を表示します。</string>
     <string name="notify_near_title">もう少しで目標達成！</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">バンドはオフです</string>
     <string name="health_off_text">設定でバンドの歩数をオンにすると、睡眠・心拍数・ワークアウトのサマリーが表示されます。</string>
-    <string name="health_title">健康サマリー（バンド）</string>
     <string name="health_last_days">過去 %1$d 日</string>
     <string name="health_loading">Health Connect から読み込み中…</string>
-    <string name="health_empty">この期間のバンドデータはありません</string>
     <string name="health_sleep_average">平均睡眠</string>
     <string name="health_nights">%1$d 夜</string>
     <string name="health_sleep_longest">最長睡眠</string>
     <string name="health_resting_average">平均安静時心拍数</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">ワークアウト合計</string>
     <string name="health_exercise_count">%1$d 回</string>
-    <string name="health_exercise_longest">最長ワークアウト</string>
     <string name="health_distance">バンドの距離</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">この期間、バンドの記録はありません</string>
     <string name="health_no_permission">Health Connect の権限がありません</string>
     <string name="health_resting_chart">安静時心拍数</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">一部のヘルスケア権限が許可されていません</string>
     <string name="health_grant">許可</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">自動管理 → アプリ一覧で FitWren を選択し、3つの権限をすべてオン</string>
     <string name="wearable_card_title">バンドの歩数を使う</string>
-    <string name="wearable_resync">バンドのデータを再同期</string>
-    <string name="wearable_resync_hint">Health Connect から過去30日間のバンドのデータを読み直します。バンドのアプリが遅れて書き込んだ時間も取り込みます。</string>
     <string name="wearable_resync_started">バンドのデータを読み直しています…</string>
     <string name="wearable_resync_done">バンドのデータを読み直しました</string>
     <string name="wearable_resync_failed">バンドのデータを読み取れませんでした。少ししてからもう一度お試しください</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">指で写真を動かし、ピンチで拡大</string>
     <string name="face_designer_zoom">ズーム</string>
     <string name="face_designer_dim">背景を暗く</string>
-    <string name="face_designer_show">表示</string>
     <string name="face_designer_show_date">日付</string>
     <string name="face_designer_show_steps">歩数</string>
     <string name="face_designer_show_bar">目標バー</string>
@@ -1294,6 +1284,13 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_20_5">
+        <item>鳥ウィジェットとライブ壁紙の鳥も、アプリと同じアイテムをすべて身につけます（太陽、メガネ、花、ナイトキャップ、リュック）</item>
+        <item>バンドのソースとしての Health Connect が、スマホ自体の歩数をバンドの歩数として数えなくなりました。「バンド使用中はスマホを数えない」が正しく動きます</item>
+        <item>週末の目標が、週・月・年のウィジェット、年間まとめ、鳥の気分にも反映されます</item>
+        <item>0時にアプリを開いていると、今日のページが新しい日に切り替わります。バンドの通知は設定を開きます</item>
+        <item>アプリを開いて歩いているときの処理を減らしました。バンドの天気用の位置は約1kmに丸めて送ります</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>鳥の画面: 鳥が上部に固定され、オプションはその下でスクロールするので、変更がすぐに見えます</item>
     </string-array>

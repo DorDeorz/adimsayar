@@ -150,7 +150,7 @@ object BandAlerts {
         val open = PendingIntent.getActivity(
             context,
             id,
-            Intent(context, MainActivity::class.java).putExtra(MainActivity.EXTRA_TAB, Tab.Settings.name),
+            Intent(context, MainActivity::class.java).putExtra(MainActivity.EXTRA_TAB, Tab.Settings.name.lowercase()),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)

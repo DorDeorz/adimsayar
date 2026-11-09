@@ -65,7 +65,7 @@ internal fun BirdCard(state: MainUiState, actions: MainActions) {
     var open by rememberSaveable { mutableStateOf(false) }
     val hour = LocalTime.now().hour
     val bird = remember(state.achievements, state.history, state.freezes, state.today, state.settings, hour, state.extra.extras) {
-        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.goalOn(state.today))
+        Avatar.state(state.achievements, state.history, state.freezes, state.today, hour, state.settings.goalOn(state.today), state.settings::goalOn)
             .styled(state.extra.extras)
     }
     Card(modifier = Modifier.fillMaxWidth().clickable { open = true }) {

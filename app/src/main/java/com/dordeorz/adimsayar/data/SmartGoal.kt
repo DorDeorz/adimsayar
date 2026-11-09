@@ -1,9 +1,7 @@
 package com.dordeorz.adimsayar.data
 
 import android.content.Context
-import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.temporal.TemporalAdjusters
 import kotlin.math.roundToLong
 
 /**
@@ -36,14 +34,12 @@ object SmartGoal {
         return rounded.takeIf { it != current }
     }
 
-    fun weekOf(date: LocalDate, weekStart: DayOfWeek): LocalDate = date.with(TemporalAdjusters.previousOrSame(weekStart))
-
     /** Applies this week's goal once; returns true when the goal changed. */
     suspend fun applyIfDue(context: Context, today: LocalDate = LocalDate.now()): Boolean {
         val store = SettingsStore.get(context)
         val settings = store.settings.value
         if (!settings.smartGoal) return false
-        val week = weekOf(today, settings.weekStart)
+        val week = weekStartOf(today, settings.weekStart)
         if (settings.smartGoalWeek >= week.toEpochDay()) return false
         val history = StepRepository.get(context).loadHistory()
         val next = suggest(history, week, settings.dailyGoal)

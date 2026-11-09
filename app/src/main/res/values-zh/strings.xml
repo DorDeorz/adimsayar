@@ -105,7 +105,6 @@
     <string name="daily_goal">每日目标</string>
     <string name="weekly_goal">每周目标</string>
     <string name="goal_range">%1$s 到 %2$s 之间</string>
-    <string name="settings_theme">主题</string>
     <string name="theme_system">跟随系统</string>
     <string name="theme_light">浅色</string>
     <string name="theme_dark">深色</string>
@@ -173,7 +172,6 @@
     <string name="export_done">已导出 %1$d 天</string>
     <string name="import_done">已更新 %1$d 天</string>
     <string name="csv_failed">无法读取或写入文件</string>
-    <string name="settings_language">语言</string>
     <string name="language">应用语言</string>
     <string name="language_system">系统</string>
     <string name="medal_group_early">早起鸟</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">%1$d 天达标</string>
 
     <string name="near_goal_notification">接近目标时通知</string>
-    <string name="near_goal_notification_hint">在达到每日目标 80% 的当天，你会收到一条通知。</string>
+    <string name="near_goal_notification_hint" formatted="false">在达到每日目标 80% 的当天，你会收到一条通知。</string>
     <string name="weekly_summary">每周总结</string>
     <string name="weekly_summary_hint">在每周最后一天 20:00 左右，显示本周总步数及与上周相比的变化。</string>
     <string name="notify_near_title">即将达成目标！</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">手环已关闭</string>
     <string name="health_off_text">在设置中开启手环步数，即可查看睡眠、心率和锻炼摘要。</string>
-    <string name="health_title">健康摘要（手环）</string>
     <string name="health_last_days">最近 %1$d 天</string>
     <string name="health_loading">正在从 Health Connect 读取…</string>
-    <string name="health_empty">此期间没有手环数据</string>
     <string name="health_sleep_average">平均睡眠</string>
     <string name="health_nights">%1$d 晚</string>
     <string name="health_sleep_longest">最长睡眠</string>
     <string name="health_resting_average">平均静息心率</string>
     <string name="health_bpm">%1$d 次/分</string>
-    <string name="health_exercise_total">锻炼总计</string>
     <string name="health_exercise_count">%1$d 次锻炼</string>
-    <string name="health_exercise_longest">最长锻炼</string>
     <string name="health_distance">手环距离</string>
     <string name="health_km">%1$s 公里</string>
     <string name="health_no_records">此期间手环没有记录</string>
     <string name="health_no_permission">未授予 Health Connect 权限</string>
     <string name="health_resting_chart">静息心率</string>
-    <string name="health_min_max">%1$d–%2$d 次/分</string>
 
     <string name="health_permissions_missing">部分健康权限未授予</string>
     <string name="health_grant">授权</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">自动管理 → 在应用列表中选择 FitWren，开启全部三项权限</string>
     <string name="wearable_card_title">使用手环步数</string>
-    <string name="wearable_resync">重新同步手环数据</string>
-    <string name="wearable_resync_hint">从 Health Connect 重新读取最近 30 天的手环数据，包括手环应用延迟写入的时段。</string>
     <string name="wearable_resync_started">正在重新读取手环数据…</string>
     <string name="wearable_resync_done">已重新读取手环数据</string>
     <string name="wearable_resync_failed">无法读取手环数据，请稍后再试</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">单指拖动照片，双指缩放</string>
     <string name="face_designer_zoom">缩放</string>
     <string name="face_designer_dim">背景变暗</string>
-    <string name="face_designer_show">显示</string>
     <string name="face_designer_show_date">日期</string>
     <string name="face_designer_show_steps">步数</string>
     <string name="face_designer_show_bar">目标条</string>
@@ -1294,6 +1284,13 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_20_5">
+        <item>小鸟小组件和动态壁纸中的小鸟也会戴上应用里的所有物品：太阳、眼镜、花、睡帽、背包</item>
+        <item>作为手环来源的 Health Connect 不再把手机自身的步数算作手环步数，“使用手环时不计手机”可正常工作</item>
+        <item>周末目标现在也用于周、月、年小组件、年度总结和小鸟的心情</item>
+        <item>午夜时应用若开着，今天页面会切换到新的一天；手环提醒通知会打开设置</item>
+        <item>开着应用走路时计算更少；手环天气使用的位置约取整到 1 公里</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>小鸟界面：小鸟固定在顶部，选项在下方滚动，修改立即可见</item>
     </string-array>

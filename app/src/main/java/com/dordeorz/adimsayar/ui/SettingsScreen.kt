@@ -40,6 +40,7 @@ import com.dordeorz.adimsayar.data.BandSchedule
 import com.dordeorz.adimsayar.band.BandAlarm
 import java.time.DayOfWeek
 import com.dordeorz.adimsayar.data.WeatherPlace
+import com.dordeorz.adimsayar.data.weekStartOf
 import android.Manifest
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
@@ -162,6 +163,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.20.5", R.array.release_notes_0_20_5),
     ReleaseNote("0.20.4", R.array.release_notes_0_20_4),
     ReleaseNote("0.20.3", R.array.release_notes_0_20_3),
     ReleaseNote("0.20.2", R.array.release_notes_0_20_2),
@@ -705,7 +707,7 @@ private fun smartGoalHint(state: MainUiState): String {
     if (settings.smartGoalFrom != NO_SMART_FROM && settings.smartGoalFrom != settings.dailyGoal) {
         return stringResource(R.string.smart_goal_changed, format(settings.smartGoalFrom), format(settings.dailyGoal))
     }
-    val nextWeek = SmartGoal.weekOf(state.today, settings.weekStart).plusWeeks(1)
+    val nextWeek = weekStartOf(state.today, settings.weekStart).plusWeeks(1)
     val next = SmartGoal.suggest(state.history, nextWeek, settings.dailyGoal)
     return if (next == null) {
         stringResource(R.string.smart_goal_waiting, SmartGoal.MIN_DAYS)

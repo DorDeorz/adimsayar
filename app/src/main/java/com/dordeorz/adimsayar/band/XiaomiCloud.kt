@@ -120,7 +120,9 @@ class XiaomiCloud {
             ?.optJSONObject("result")?.optJSONObject("share")?.optJSONArray("share_family")?.let { list ->
                 for (i in 0 until list.length()) {
                     val home = list.optJSONObject(i) ?: continue
-                    homes.add(home.opt("home_id").toString() to home.opt("home_owner").toString())
+                    val id = home.optString("home_id").takeIf { it.isNotEmpty() } ?: continue
+                    val homeOwner = home.optString("home_owner").takeIf { it.isNotEmpty() } ?: continue
+                    homes.add(id to homeOwner)
                 }
             }
         return homes.distinct()

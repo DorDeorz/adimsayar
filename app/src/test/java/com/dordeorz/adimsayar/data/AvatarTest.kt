@@ -31,6 +31,32 @@ class AvatarTest {
     }
 
     @Test
+    fun yesterdayIsMeasuredByItsOwnGoal() {
+        assertEquals(BirdMood.Sad, mood(2_000, 6_000))
+        val weekendYesterday = Avatar.mood(
+            mapOf(today to 2_000L, yesterday to 6_000L),
+            emptySet(),
+            today,
+            12,
+            goal,
+            longestStreak = 3,
+            yesterdayGoal = 5_000L,
+        )
+        assertEquals(BirdMood.Calm, weekendYesterday)
+    }
+
+    @Test
+    fun keptMedalsGiveItemsOutsideTheApp() {
+        val days = mapOf(today to 1_000L)
+        val glasses = Medal(MedalGroup.Distance, 1, MedalGroup.Distance.targets[1], 0L, null)
+        val sun = Medal(MedalGroup.EarlyBird, 1, MedalGroup.EarlyBird.targets[1], 0L, null)
+        val kept = mapOf(KeptMedals.key(glasses) to today.minusDays(30), KeptMedals.key(sun) to today.minusDays(20))
+        val achievements = Avatar.keptAchievements(AppSettings(), days, today, emptySet(), kept)
+        val bird = Avatar.state(achievements, days, emptySet(), today, 12, goal)
+        assertEquals(setOf(BirdItem.Glasses, BirdItem.Sun), bird.items)
+    }
+
+    @Test
     fun frozenYesterdayIsNotSad() {
         assertEquals(BirdMood.Calm, mood(2_000, 3_000, frozen = true))
     }

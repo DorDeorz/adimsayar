@@ -119,9 +119,6 @@ interface ExtrasDao {
     @Query("SELECT * FROM day_notes")
     fun observeNotes(): Flow<List<DayNote>>
 
-    @Query("SELECT * FROM day_notes")
-    suspend fun loadNotes(): List<DayNote>
-
     @Upsert
     suspend fun upsertNote(note: DayNote)
 

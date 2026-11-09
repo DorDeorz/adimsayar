@@ -139,8 +139,11 @@ object BandWeather {
     }
 
     private fun fetch(place: WeatherPlace): String? {
+        // About 1 km is plenty for a forecast; the exact position does not leave the phone.
+        val latitude = String.format(java.util.Locale.ROOT, "%.2f", place.latitude)
+        val longitude = String.format(java.util.Locale.ROOT, "%.2f", place.longitude)
         val url = FORECAST_URL +
-            "?latitude=${place.latitude}&longitude=${place.longitude}" +
+            "?latitude=$latitude&longitude=$longitude" +
             "&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure" +
             "&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m" +
             "&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max" +

@@ -105,7 +105,6 @@
     <string name="daily_goal">Objectif quotidien</string>
     <string name="weekly_goal">Objectif hebdomadaire</string>
     <string name="goal_range">Entre %1$s et %2$s</string>
-    <string name="settings_theme">Thème</string>
     <string name="theme_system">Par défaut du système</string>
     <string name="theme_light">Clair</string>
     <string name="theme_dark">Sombre</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d jours exportés</string>
     <string name="import_done">%1$d jours mis à jour</string>
     <string name="csv_failed">Impossible de lire ou d\'écrire le fichier</string>
-    <string name="settings_language">Langue</string>
     <string name="language">Langue de l\'app</string>
     <string name="language_system">Système</string>
     <string name="medal_group_early">Lève-tôt</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">%1$d jours objectif</string>
 
     <string name="near_goal_notification">Me prévenir près de l\'objectif</string>
-    <string name="near_goal_notification_hint">Vous recevez une notification le jour où vous atteignez 80 % de votre objectif quotidien.</string>
+    <string name="near_goal_notification_hint" formatted="false">Vous recevez une notification le jour où vous atteignez 80 % de votre objectif quotidien.</string>
     <string name="weekly_summary">Résumé hebdomadaire</string>
     <string name="weekly_summary_hint">Le dernier jour de la semaine vers 20:00, affiche le total de la semaine et l\'évolution par rapport à la semaine précédente.</string>
     <string name="notify_near_title">Objectif presque atteint !</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">Le bracelet est désactivé</string>
     <string name="health_off_text">Activez les pas du bracelet dans les réglages pour voir le sommeil, la fréquence cardiaque et les exercices.</string>
-    <string name="health_title">Résumé santé (bracelet)</string>
     <string name="health_last_days">%1$d derniers jours</string>
     <string name="health_loading">Lecture depuis Health Connect…</string>
-    <string name="health_empty">Aucune donnée du bracelet sur cette période</string>
     <string name="health_sleep_average">Sommeil moyen</string>
     <string name="health_nights">%1$d nuits</string>
     <string name="health_sleep_longest">Sommeil le plus long</string>
     <string name="health_resting_average">Fréquence cardiaque au repos moyenne</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">Exercice total</string>
     <string name="health_exercise_count">%1$d exercices</string>
-    <string name="health_exercise_longest">Exercice le plus long</string>
     <string name="health_distance">Distance du bracelet</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">Le bracelet n\'a rien enregistré sur cette période</string>
     <string name="health_no_permission">Autorisation Health Connect non accordée</string>
     <string name="health_resting_chart">Fréquence cardiaque au repos</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">Certaines autorisations de santé manquent</string>
     <string name="health_grant">Autoriser</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">Gestion automatique → sélectionnez FitWren dans la liste des applications, activez les trois autorisations</string>
     <string name="wearable_card_title">Utiliser les pas du bracelet</string>
-    <string name="wearable_resync">Resynchroniser le bracelet</string>
-    <string name="wearable_resync_hint">Relit depuis Health Connect les données du bracelet des 30 derniers jours, y compris les heures écrites en retard par son application.</string>
     <string name="wearable_resync_started">Relecture des données du bracelet…</string>
     <string name="wearable_resync_done">Données du bracelet relues</string>
     <string name="wearable_resync_failed">Impossible de lire les données du bracelet, réessayez dans un instant</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">Faites glisser la photo avec un doigt, pincez pour zoomer</string>
     <string name="face_designer_zoom">Zoom</string>
     <string name="face_designer_dim">Assombrir le fond</string>
-    <string name="face_designer_show">Afficher</string>
     <string name="face_designer_show_date">Date</string>
     <string name="face_designer_show_steps">Pas</string>
     <string name="face_designer_show_bar">Barre d\'objectif</string>
@@ -1294,6 +1284,13 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_20_5">
+        <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>
+        <item>Health Connect comme source du bracelet ne compte plus les pas du téléphone comme pas du bracelet ; « Ne pas compter le téléphone avec le bracelet » fonctionne correctement</item>
+        <item>L’objectif du week-end s’applique aussi aux widgets Semaine, Mois et Année, au bilan annuel et à l’humeur de l’oiseau</item>
+        <item>Si l’app est ouverte à minuit, la page Aujourd’hui passe au nouveau jour ; les alertes du bracelet ouvrent les Réglages</item>
+        <item>Moins de calculs quand vous marchez avec l’app ouverte ; pour la météo du bracelet, la position est arrondie à environ 1 km</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Écran de l’oiseau : l’oiseau reste fixé en haut et les options défilent en dessous, les changements sont visibles tout de suite</item>
     </string-array>

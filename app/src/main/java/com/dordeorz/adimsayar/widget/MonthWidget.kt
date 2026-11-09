@@ -59,7 +59,7 @@ class MonthWidget : GlanceAppWidget() {
             val localized = remember(settings.language) { Locales.wrap(context) }
             WidgetTheme(settings.dynamicColor) {
                 WidgetSurface(Tab.History, settings.widgetOpacity) {
-                    MonthContent(localized, history, today, settings.dailyGoal, settings.weekStart)
+                    MonthContent(localized, history, today, settings::goalOn, settings.weekStart)
                 }
             }
         }
@@ -84,7 +84,7 @@ private val MIN_HEADER_CELL = 22.dp
 private const val DAYS_IN_WEEK = 7
 
 @Composable
-private fun MonthContent(context: Context, history: Map<LocalDate, Long>, today: LocalDate, goal: Long, weekStart: DayOfWeek) {
+private fun MonthContent(context: Context, history: Map<LocalDate, Long>, today: LocalDate, goalOn: (LocalDate) -> Long, weekStart: DayOfWeek) {
     val size = LocalSize.current
     val month = YearMonth.from(today)
     val leading = (month.atDay(1).dayOfWeek.value - weekStart.value + DAYS_IN_WEEK) % DAYS_IN_WEEK
@@ -94,7 +94,7 @@ private fun MonthContent(context: Context, history: Map<LocalDate, Long>, today:
     val headerHeight = if (withHeader) HEADER_HEIGHT else 0.dp
     val height = (size.height - PADDING * 2 - TITLE_HEIGHT - headerHeight) / rows
     val cell = minOf(width, height)
-    val goalDays = (1..today.dayOfMonth).count { (history[month.atDay(it)] ?: 0L) >= goal }
+    val goalDays = (1..today.dayOfMonth).count { (history[month.atDay(it)] ?: 0L) >= goalOn(month.atDay(it)) }
     Column(modifier = GlanceModifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = MONTH_FORMAT.format(month).replaceFirstChar { it.titlecase(Locales.current) } + " · " +
@@ -122,7 +122,7 @@ private fun MonthContent(context: Context, history: Map<LocalDate, Long>, today:
                         Box(modifier = GlanceModifier.size(cell)) {}
                     } else {
                         val date = month.atDay(day)
-                        DayCell(day, history[date] ?: 0L, goal, cell, isFuture = date.isAfter(today), isToday = date == today)
+                        DayCell(day, history[date] ?: 0L, goalOn(date), cell, isFuture = date.isAfter(today), isToday = date == today)
                     }
                 }
             }

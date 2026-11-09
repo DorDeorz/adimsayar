@@ -7,11 +7,15 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.SystemClock
 import com.dordeorz.adimsayar.AppScope
+import com.dordeorz.adimsayar.data.CounterReading
 import com.dordeorz.adimsayar.data.ReadSource
 import com.dordeorz.adimsayar.data.ReadingLog
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.XiaomiSteps
 import com.dordeorz.adimsayar.data.isNotable
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,6 +34,10 @@ class LiveStepMonitor(context: Context) {
     private var running = false
     private var lastCounterValue: Long? = null
 
+    // The counter can report several times a second while walking. Readings are stored at most once
+    // per STORE_INTERVAL_MS; a reading holds the whole total, so skipping the ones in between loses no steps.
+    private var readings: Channel<CounterReading>? = null
+
     val frozen: StateFlow<Boolean> = _frozen.asStateFlow()
 
     @Volatile
@@ -44,12 +52,7 @@ class LiveStepMonitor(context: Context) {
             val previous = lastCounterValue
             if (previous != null && value > previous) _frozen.value = false
             lastCounterValue = value
-            val first = previous == null
-            val reading = StepSensors.reading(appContext, event)
-            AppScope.launch {
-                val interval = repository.record(reading)
-                if ((first || interval.kind.isNotable()) && !XiaomiSteps.isEnabled(appContext)) log.reading(ReadSource.App, reading, interval)
-            }
+            readings?.trySend(StepSensors.reading(appContext, event))
         }
 
         override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
@@ -75,6 +78,9 @@ class LiveStepMonitor(context: Context) {
         running = true
         lastCounterValue = null
         freezeDetector.reset(SystemClock.elapsedRealtime())
+        val channel = Channel<CounterReading>(Channel.CONFLATED)
+        readings = channel
+        AppScope.launch { store(channel) }
         manager.registerListener(counterListener, counter, SensorManager.SENSOR_DELAY_UI)
         if (detector != null) manager.registerListener(detectorListener, detector, SensorManager.SENSOR_DELAY_UI)
         FloorCounter.start(appContext, OWNER)
@@ -86,10 +92,24 @@ class LiveStepMonitor(context: Context) {
         manager.unregisterListener(counterListener)
         manager.unregisterListener(detectorListener)
         FloorCounter.stop(appContext, OWNER)
+        // Closing still stores the last reading that is waiting.
+        readings?.close()
+        readings = null
+    }
+
+    private suspend fun store(channel: ReceiveChannel<CounterReading>) {
+        var first = true
+        for (reading in channel) {
+            val interval = repository.record(reading)
+            if ((first || interval.kind.isNotable()) && !XiaomiSteps.isEnabled(appContext)) log.reading(ReadSource.App, reading, interval)
+            first = false
+            delay(STORE_INTERVAL_MS)
+        }
     }
 
     private companion object {
         const val OWNER = "app"
+        const val STORE_INTERVAL_MS = 1_000L
     }
 
     private fun reconnectCounter(now: Long) {

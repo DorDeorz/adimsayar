@@ -71,9 +71,8 @@ class BirdWidget : GlanceAppWidget() {
             val localized = remember(settings.language) { Locales.wrap(context) }
             val extras by ExtrasStore.get(context).extras.collectAsState()
             val bird = remember(history, freezes, kept, settings, extras) {
-                val computed = settings.achievements(history, today, freezes = freezes)
-                val achievements = computed.copy(medals = KeptMedals.apply(computed.medals, kept))
-                Avatar.state(achievements, history, freezes, today, hour, settings.goalOn(today)).styled(extras)
+                val achievements = Avatar.keptAchievements(settings, history, today, freezes, kept)
+                Avatar.state(achievements, history, freezes, today, hour, settings.goalOn(today), settings::goalOn).styled(extras)
             }
             WidgetTheme(settings.dynamicColor) {
                 WidgetSurface(Tab.Today, settings.widgetOpacity) {
