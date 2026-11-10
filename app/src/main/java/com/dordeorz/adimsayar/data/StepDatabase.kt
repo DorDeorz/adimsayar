@@ -169,6 +169,9 @@ interface BandHealthDao {
 
     @Query("SELECT * FROM band_sleep WHERE wake >= :from AND wake < :to ORDER BY wake")
     suspend fun sleep(from: Long, to: Long): List<BandSleep>
+
+    @Query("SELECT * FROM band_sleep WHERE bedtime = :bedtime")
+    suspend fun sleepAt(bedtime: Long): BandSleep?
 }
 
 @Dao

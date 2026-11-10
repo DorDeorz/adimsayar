@@ -194,6 +194,41 @@ class XiaomiBandTest {
         assertEquals(listOf(400, 80, 250, 70, 20), listOf(sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
     }
 
+    private fun sleepBlock(type: Int, data: ByteArray, length: Int = data.size): ByteArray =
+        ByteBuffer.allocate(17).order(ByteOrder.LITTLE_ENDIAN)
+            .putInt(0xfffcfafb.toInt()).put(17).putLong(0).put(1).put(type.toByte()).put((length shr 8).toByte()).put(length.toByte()).array() + data
+
+    private fun sleepSummary(total: Int, awake: Int, light: Int, rem: Int, deep: Int): ByteArray =
+        ByteBuffer.allocate(13).order(ByteOrder.BIG_ENDIAN)
+            .put(0x11).putShort(total.toShort()).putShort(awake.toShort()).putShort(light.toShort()).putShort(rem.toShort()).putShort(deep.toShort())
+            .put(0x10).put(0).array()
+
+    @Test
+    fun brokenNightAddsUpEveryPart() {
+        val bed = 1_762_645_380L
+        val wake = bed + 186 * 60
+        val id = XiaomiFileId(bed, 12, 4, 8 shl 2)
+        val head = ByteBuffer.allocate(11).order(ByteOrder.LITTLE_ENDIAN).put(0).put(0).putInt(bed.toInt()).putInt(wake.toInt()).put(0).array()
+        val body = id.toBytes() + byteArrayOf(0) + head +
+            sleepBlock(17, ByteArray(6) { 0x21.toByte() }) +
+            sleepBlock(16, sleepSummary(160, 8, 100, 30, 30)) +
+            sleepBlock(0x12, ByteArray(0), length = 900) +
+            sleepBlock(16, sleepSummary(18, 0, 18, 0, 0))
+        val sleep = XiaomiSleepDetails.parse(id, body + ByteArray(4))!!
+        assertEquals(2, sleep.parts)
+        assertEquals(listOf(178, 30, 118, 30, 8), listOf(sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
+    }
+
+    @Test
+    fun sleepNeverLongerThanTheNight() {
+        val bed = 1_762_645_380L
+        val wake = bed + 60 * 60
+        val id = XiaomiFileId(bed, 12, 2, 8 shl 2)
+        val head = ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN).put(0).put(0).putInt(bed.toInt()).putInt(wake.toInt()).array()
+        val body = id.toBytes() + byteArrayOf(0) + head + sleepBlock(16, sleepSummary(50, 0, 50, 0, 0)) + sleepBlock(16, sleepSummary(50, 0, 50, 0, 0))
+        assertEquals(60, XiaomiSleepDetails.parse(id, body + ByteArray(4))!!.minutes)
+    }
+
     @Test
     fun sleepOxygenSamples() {
         val bed = 1_761_350_400L

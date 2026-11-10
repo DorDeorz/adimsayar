@@ -1290,6 +1290,7 @@
         <item>L’obiettivo del fine settimana vale anche nei widget Settimana, Mese e Anno, nel riepilogo annuale e nell’umore dell’uccellino</item>
         <item>Se l’app è aperta a mezzanotte, la pagina Oggi passa al nuovo giorno; gli avvisi del braccialetto aprono le Impostazioni</item>
         <item>Meno calcoli mentre cammini con l’app aperta; per il meteo del braccialetto la posizione è arrotondata a circa 1 km</item>
+        <item>Il sonno corrisponde al braccialetto: se ti svegli di notte il braccialetto divide la notte in parti e l’app ora le somma tutte</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Schermata dell’uccellino: l’uccellino resta fisso in alto e le opzioni scorrono sotto, così vedi subito le modifiche</item>

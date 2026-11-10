@@ -39,7 +39,12 @@ object BandHealth {
         }.sortedBy { it.minute }
 
     suspend fun saveSleep(context: Context, sleep: BandSleepRecord) {
-        dao(context).upsertSleep(BandSleep(sleep.bedtime, sleep.wake, sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
+        val dao = dao(context)
+        // The band can send a night more than once. A copy made before the night ended has an earlier
+        // wake time or fewer minutes, and must not replace the whole night.
+        val kept = dao.sleepAt(sleep.bedtime)
+        if (kept != null && (kept.wake > sleep.wake || (kept.wake == sleep.wake && kept.minutes > sleep.minutes))) return
+        dao.upsertSleep(BandSleep(sleep.bedtime, sleep.wake, sleep.minutes, sleep.deep, sleep.light, sleep.rem, sleep.awake))
     }
 
     suspend fun day(context: Context, date: LocalDate): BandDay {

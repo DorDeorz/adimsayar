@@ -1,3 +1,4 @@
+Uyku, bileklikteki gibi gecenin tüm parçalarını toplar.
 Kuş widget'ı ve canlı duvar kâğıdındaki kuş, uygulamadaki tüm eşyaları takar.
 Health Connect bileklik kaynağı telefonun kendi adımlarını bileklik adımı saymaz.
 Hafta sonu hedefi widget'larda, yıl özetinde ve kuşun ruh halinde de geçerli.

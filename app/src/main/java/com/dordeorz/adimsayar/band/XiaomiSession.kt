@@ -563,7 +563,10 @@ class XiaomiSession(
         }
         val file = when {
             id == null -> null
-            id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
+            id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { sleep ->
+                log("sleep ${sleep.bedtime}-${sleep.wake}: ${sleep.minutes} min in ${sleep.parts} parts, deep ${sleep.deep} light ${sleep.light} rem ${sleep.rem} awake ${sleep.awake}")
+                BandFile(requested, emptyList(), sleep)
+            }
             id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(id, data), samplesOnly = true)
             else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
         }

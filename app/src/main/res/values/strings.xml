@@ -1291,6 +1291,7 @@
         <item>Hafta sonu hedefi Hafta, Ay ve Yıl widget\'larında, yıl özetinde ve kuşun ruh halinde de geçerli</item>
         <item>Uygulama gece yarısı açıksa Bugün sayfası yeni güne geçer; bileklik uyarı bildirimleri Ayarlar sekmesini açar</item>
         <item>Uygulama açıkken yürürken daha az işlem yapılır; bilekliğe hava durumu için konum yaklaşık 1 km\'ye yuvarlanır</item>
+        <item>Uyku bileklikteki gibi görünür: gece arada uyanınca bileklik uykuyu parçalara böler, uygulama artık bütün parçaları toplar</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Kuş ekranında kuş üstte sabit kalıyor, seçenekler altında kayıyor; yaptığın değişikliği hemen görürsün</item>

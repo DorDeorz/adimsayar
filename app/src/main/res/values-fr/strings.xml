@@ -1290,6 +1290,7 @@
         <item>L’objectif du week-end s’applique aussi aux widgets Semaine, Mois et Année, au bilan annuel et à l’humeur de l’oiseau</item>
         <item>Si l’app est ouverte à minuit, la page Aujourd’hui passe au nouveau jour ; les alertes du bracelet ouvrent les Réglages</item>
         <item>Moins de calculs quand vous marchez avec l’app ouverte ; pour la météo du bracelet, la position est arrondie à environ 1 km</item>
+        <item>Le sommeil correspond au bracelet : si vous vous réveillez la nuit, le bracelet découpe la nuit en parties et l’app les additionne toutes</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Écran de l’oiseau : l’oiseau reste fixé en haut et les options défilent en dessous, les changements sont visibles tout de suite</item>

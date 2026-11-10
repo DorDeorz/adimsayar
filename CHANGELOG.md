@@ -11,6 +11,9 @@ Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (
 - Hafta sonu hedefi Hafta, Ay ve Yıl widget'larında, Geçmiş'teki yıl özetinde (`AchievementMath.year`) ve kuşun "dün hedefi kaçırdın" hâlinde (`Avatar.mood`, dünün hedefi) de kullanılır.
 - Uygulama gece yarısı açık kalırsa tarih kendiliğinden yenilenir; önceden yalnızca `onResume`'da yenileniyordu.
 - Bileklik uyarı bildirimleri (pil azaldı, bağlantı koptu) Ayarlar sekmesini açar: sekme adı büyük-küçük harf ayırmadan eşleşir.
+- Uyku: gece arada uyanınca bileklik uyku dosyasına her parça için ayrı bir özet yazar. Uygulama yalnızca son özeti alıyordu, gece birkaç dakika görünüyordu (bileklikte 3 saat, uygulamada 18 dk). Artık bütün parçalar toplanır (`XiaomiSleepDetails`); toplam, yatış ile kalkış arasından uzun olamaz. Veri bloğu olmayan bilinmeyen türler uzunluğuna bakılmadan atlanır, sonraki özetler kaybolmaz. Aynı gece bileklikten iki kez gelirse, gece bitmeden alınmış kısa kopya tam gecenin üstüne yazılmaz (`BandHealth.saveSleep`). Her uyku dosyası log'a yazılır. Önceden kaydedilmiş geceler değişmez, çünkü bileklik dosyaları gönderdikten sonra siler.
+- Sağlık sayfasındaki 7 günlük grafiklerde gün adları kısaltmayla yazılır (Pzt, Sal…); tek harf Türkçede iki kez P ve iki kez C veriyordu.
+- Geçmiş'teki gün ayrıntısında ve Saat saat widget'ında, bilekliğin veri gönderdiği saatlerde bileklik sayısı kullanılır (`DayHours`), gün toplamıyla aynı kural. Bilekliğin veri gönderdiği günlerde yürüyüş/koşu satırı gösterilmez, çünkü bileklik adımlarında bu ayrım yoktur ve sayılar toplamı tutmuyordu.
 - Xiaomi bulutunda eksik bilgili paylaşılan ev atlanır; önceden sunucuya "null" adlı ev soruluyordu.
 - Bilekliğin hava durumu için Open-Meteo'ya giden koordinatlar iki ondalığa (yaklaşık 1 km) yuvarlanır.
 - Performans:

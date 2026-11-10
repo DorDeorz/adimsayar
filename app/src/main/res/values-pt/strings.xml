@@ -1290,6 +1290,7 @@
         <item>A meta de fim de semana agora vale também nos widgets Semana, Mês e Ano, no resumo do ano e no humor do pássaro</item>
         <item>Se o app estiver aberto à meia-noite, a página Hoje passa para o novo dia; os alertas da pulseira abrem as Configurações</item>
         <item>Menos processamento enquanto você caminha com o app aberto; para o clima na pulseira, a localização é arredondada para cerca de 1 km</item>
+        <item>O sono agora bate com a pulseira: se você acorda à noite, a pulseira divide a noite em partes e o app agora soma todas</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Tela do pássaro: o pássaro fica fixo no topo e as opções rolam abaixo, então as mudanças aparecem na hora</item>

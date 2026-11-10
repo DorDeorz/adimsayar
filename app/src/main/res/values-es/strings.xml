@@ -1290,6 +1290,7 @@
         <item>La meta del fin de semana también se aplica en los widgets Semana, Mes y Año, en el resumen anual y en el ánimo del pájaro</item>
         <item>Si la app está abierta a medianoche, la página Hoy pasa al nuevo día; los avisos de la pulsera abren Ajustes</item>
         <item>Menos trabajo mientras caminas con la app abierta; para el tiempo en la pulsera, la ubicación se redondea a unos 1 km</item>
+        <item>El sueño coincide con la pulsera: si te despiertas de noche, la pulsera divide la noche en partes y la app ahora las suma todas</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Pantalla del pájaro: el pájaro queda fijo arriba y las opciones se desplazan debajo, así ves los cambios al instante</item>

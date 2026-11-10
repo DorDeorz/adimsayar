@@ -1290,6 +1290,7 @@
         <item>The weekend goal now also applies to the Week, Month and Year widgets, the year summary and the bird\'s mood</item>
         <item>If the app is open at midnight, the Today page moves to the new day; band alert notifications open Settings</item>
         <item>Less work while you walk with the app open; for the band\'s weather the location is rounded to about 1 km</item>
+        <item>Sleep matches the band: when you wake up during the night the band splits the night into parts, and the app now adds up every part</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Bird screen: the bird stays pinned at the top while the options scroll below, so changes show right away</item>

@@ -1290,6 +1290,7 @@
         <item>Das Wochenendziel gilt jetzt auch in den Widgets Woche, Monat und Jahr, in der Jahresübersicht und für die Stimmung des Vogels</item>
         <item>Ist die App um Mitternacht offen, wechselt die Seite Heute zum neuen Tag; Armband-Hinweise öffnen die Einstellungen</item>
         <item>Weniger Rechenarbeit beim Gehen mit offener App; für das Wetter am Armband wird der Standort auf etwa 1 km gerundet</item>
+        <item>Schlaf wie am Armband: Teilen Wachphasen die Nacht in Abschnitte, zählt die App jetzt alle Abschnitte zusammen</item>
     </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Vogel-Bildschirm: Der Vogel bleibt oben fixiert, die Optionen scrollen darunter, Änderungen sind sofort sichtbar</item>
