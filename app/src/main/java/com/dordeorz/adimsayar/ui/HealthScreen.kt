@@ -72,7 +72,6 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
-import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
@@ -263,7 +262,8 @@ private fun DailyBars(
             Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(spacing)) {
                 days.forEach { date ->
                     Text(
-                        date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                        shortDayName(date),
+                        maxLines = 1,
                         style = MaterialTheme.typography.labelSmall,
                         color = if (date == selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
@@ -662,7 +662,8 @@ private fun ExerciseDays(days: List<LocalDate>, active: Set<LocalDate>) {
                     )
                     if (wide) {
                         Text(
-                            date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                            shortDayName(date),
+                            maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -963,7 +964,8 @@ private fun WaterWeekCard(state: MainUiState) {
             Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 days.forEach { date ->
                     Text(
-                        date.dayOfWeek.getDisplayName(TextStyle.NARROW, appLocale),
+                        shortDayName(date),
+                        maxLines = 1,
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,

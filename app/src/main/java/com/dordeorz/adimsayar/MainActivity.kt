@@ -35,7 +35,7 @@ import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.ChallengeMath
-import com.dordeorz.adimsayar.data.DayDetail
+import com.dordeorz.adimsayar.data.DayHours
 import com.dordeorz.adimsayar.data.KeptMedals
 import com.dordeorz.adimsayar.data.NO_ROUTE
 import com.dordeorz.adimsayar.data.NO_ROUTE_START
@@ -189,13 +189,7 @@ class MainActivity : ComponentActivity() {
             reportLauncher.launch(REPORT_FILE_NAME.format(month))
         },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/zip", "application/octet-stream")) },
-        loadDayDetail = { date ->
-            if (XiaomiSteps.isEnabled(applicationContext)) {
-                XiaomiSteps.dayDetail(applicationContext, date)
-            } else {
-                repository.loadPhoneHours(date)?.let { DayDetail(it, 0L, 0L) }
-            }
-        },
+        loadDayDetail = { date -> DayHours.detail(applicationContext, date) },
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
         loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
         loadHeartDay = { date -> WearableHealth.heartDay(applicationContext, date) },

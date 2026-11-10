@@ -37,9 +37,9 @@ import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.ui.Tab
+import com.dordeorz.adimsayar.data.DayHours
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
-import com.dordeorz.adimsayar.data.XiaomiSteps
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -66,8 +66,7 @@ class HourlyWidget : GlanceAppWidget() {
         }
     }
 
-    private suspend fun loadHours(context: Context, date: LocalDate): LongArray? =
-        if (XiaomiSteps.isEnabled(context)) XiaomiSteps.dayDetail(context, date)?.hours else StepRepository.get(context).loadPhoneHours(date)
+    private suspend fun loadHours(context: Context, date: LocalDate): LongArray = DayHours.day(context, date)
 }
 
 class HourlyWidgetReceiver : GlanceAppWidgetReceiver() {
