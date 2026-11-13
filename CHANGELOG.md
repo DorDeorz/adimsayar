@@ -15,6 +15,7 @@ Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (
 - Sağlık sayfasındaki 7 günlük grafiklerde gün adları kısaltmayla yazılır (Pzt, Sal…); tek harf Türkçede iki kez P ve iki kez C veriyordu.
 - Geçmiş'teki gün ayrıntısında ve Saat saat widget'ında, bilekliğin veri gönderdiği saatlerde bileklik sayısı kullanılır (`DayHours`), gün toplamıyla aynı kural. Bilekliğin veri gönderdiği günlerde yürüyüş/koşu satırı gösterilmez, çünkü bileklik adımlarında bu ayrım yoktur ve sayılar toplamı tutmuyordu.
 - Tam yedek, bitirilen sanal rotaları da (`routes_done`) taşır. Başlatılan rota ve başlangıç günü zaten yedekteydi, ilerleme de adımlardan hesaplanıyor. Önceden geri yüklemeden sonra bitmiş rota sayısı sıfırdan başlıyordu.
+- Bilekliğe hava durumu en fazla dakikada bir gönderilir. Uygulama açılınca eşitleme, yeniden bağlanma ve bilekliğin kendi isteği birkaç saniye içinde üç kez gönderiyordu.
 - Xiaomi bulutunda eksik bilgili paylaşılan ev atlanır; önceden sunucuya "null" adlı ev soruluyordu.
 - Bilekliğin hava durumu için Open-Meteo'ya giden koordinatlar iki ondalığa (yaklaşık 1 km) yuvarlanır.
 - Performans:
