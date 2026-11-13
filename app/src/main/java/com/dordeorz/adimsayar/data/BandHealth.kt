@@ -76,7 +76,9 @@ object BandHealth {
         val dates = generateSequence(from) { it.plusDays(1) }.takeWhile { !it.isAfter(to) }.toList()
         val (start, end) = bounds(before, to, zone)
         val byDay = dao(context).samples(start, end).groupBy { Instant.ofEpochSecond(it.minute).atZone(zone).toLocalDate() }
-        val restingByDay = byDay.mapValues { resting(it.value) }
+        val allNights = nights(context, before, to, zone)
+        val restingDays = HealthMath.restingDays(byDay.keys, allNights.keys)
+        val restingByDay = byDay.filterKeys { it in restingDays }.mapValues { resting(it.value) }
         val restingBefore = HealthMath.average(restingByDay.filterKeys { it < from }.values.filterNotNull())
         val current = byDay.filterKeys { it >= from }
         val oxygen = current.values.flatten().map { it.spo2.toDouble() }.filter { it > 0.0 }
@@ -90,7 +92,7 @@ object BandHealth {
             .mapValues { HealthMath.average(it.value) ?: 0L }
         return BandPeriod(
             days = dates,
-            nights = nights(context, from, to, zone),
+            nights = allNights.filterKeys { it >= from },
             resting = dates.map { it to restingByDay[it] },
             restingBefore = restingBefore,
             exercises = emptyList(),

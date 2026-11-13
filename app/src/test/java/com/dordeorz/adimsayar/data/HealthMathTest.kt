@@ -3,6 +3,7 @@ package com.dordeorz.adimsayar.data
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneOffset
@@ -91,6 +92,14 @@ class HealthMathTest {
         assertEquals(HeartZone.FatBurn, HealthMath.zoneOf(120L, max))
         assertEquals(HeartZone.Max, HealthMath.zoneOf(185L, max))
         assertEquals(mapOf(HeartZone.Rest to 10L, HeartZone.Cardio to 5L), HealthMath.zoneMinutes(listOf(70L, 75L, 140L), max, 5L))
+    }
+
+    @Test
+    fun restingSkipsDaysWithoutTheBandAtNight() {
+        val days = (7..13).map { LocalDate.of(2026, 11, it) }.toSet()
+        val nights = (7..10).map { LocalDate.of(2026, 11, it) }.toSet()
+        assertEquals(nights, HealthMath.restingDays(days, nights))
+        assertEquals(days, HealthMath.restingDays(days, emptySet()))
     }
 
     @Test
