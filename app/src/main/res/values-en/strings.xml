@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_21_0">
+        <item>The bird\'s song (when you feed it or pick a song) is quieter and softer; the phone\'s volume keys set it, and it stays quiet when the phone is on silent</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>The bird on the Bird widget and the live wallpaper wears all the items it has in the app: sun, glasses, flower, nightcap, backpack</item>
         <item>Health Connect as the band source no longer counts the phone\'s own steps as band steps, so “Don\'t count the phone while using the band” works as meant</item>
