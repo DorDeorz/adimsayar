@@ -69,6 +69,30 @@ object BandHealth {
         return HeartDay(slots, HealthMath.restingEstimate(slots.map { it.avg }))
     }
 
+    suspend fun sleepDay(context: Context, date: LocalDate): SleepDay? {
+        val (from, to) = bounds(date, date, ZoneId.systemDefault())
+        val rows = dao(context).sleep(from, to).sortedBy { it.bedtime }
+        val night = nightOf(rows) ?: return null
+        val samples = dao(context).samples(rows.first().bedtime, rows.maxOf { it.wake } + 60L)
+            .filter { sample -> rows.any { sample.minute >= it.bedtime && sample.minute <= it.wake } }
+        return SleepDay(
+            night = night,
+            parts = rows.map { SleepPart(Instant.ofEpochSecond(it.bedtime), Instant.ofEpochSecond(it.wake), sleptMinutes(it)) },
+            stages = emptyList(),
+            heart = slots(samples).mapNotNull { (start, values) -> HealthMath.average(values)?.let { Instant.ofEpochSecond(start) to it } },
+            oxygen = samples.filter { it.spo2 > 0 }.map { Instant.ofEpochSecond(it.minute) to it.spo2.toDouble() },
+        )
+    }
+
+    suspend fun readings(context: Context, date: LocalDate): DayReadings {
+        val (from, to) = bounds(date, date, ZoneId.systemDefault())
+        val samples = dao(context).samples(from, to)
+        return DayReadings(
+            oxygen = samples.filter { it.spo2 > 0 }.map { Instant.ofEpochSecond(it.minute) to it.spo2.toDouble() },
+            stress = samples.filter { it.stress > 0 }.map { Instant.ofEpochSecond(it.minute) to it.stress.toLong() },
+        )
+    }
+
     suspend fun period(context: Context, to: LocalDate, days: Long): BandPeriod {
         val zone = ZoneId.systemDefault()
         val from = to.minusDays(days - 1)
@@ -90,6 +114,10 @@ object BandHealth {
         val stressDaily = current.mapValues { (_, rows) -> rows.map { it.stress.toLong() }.filter { it > 0L } }
             .filterValues { it.isNotEmpty() }
             .mapValues { HealthMath.average(it.value) ?: 0L }
+        val heartDaily = current.mapNotNull { (date, rows) ->
+            val hearts = rows.map { it.heart.toLong() }.filter { it > 0L }
+            if (hearts.isEmpty()) null else date to HeartSummary(restingByDay[date], hearts.min(), HealthMath.average(hearts) ?: 0L, hearts.max())
+        }.toMap()
         return BandPeriod(
             days = dates,
             nights = allNights.filterKeys { it >= from },
@@ -105,6 +133,7 @@ object BandHealth {
             exerciseAllowed = true,
             oxygenAllowed = true,
             missingPermissions = false,
+            heartDaily = heartDaily,
         )
     }
 
@@ -125,18 +154,25 @@ object BandHealth {
         val (start, end) = bounds(from, to, zone)
         return dao(context).sleep(start, end)
             .groupBy { Instant.ofEpochSecond(it.wake).atZone(zone).toLocalDate() }
-            .mapValues { (_, rows) ->
-                val stages = mapOf(
-                    SleepStage.Deep to rows.sumOf { it.deep }.toLong(),
-                    SleepStage.Light to rows.sumOf { it.light }.toLong(),
-                    SleepStage.Rem to rows.sumOf { it.rem }.toLong(),
-                    SleepStage.Awake to rows.sumOf { it.awake }.toLong(),
-                ).filterValues { it > 0L }
-                val minutes = rows.sumOf { row -> row.minutes.takeIf { it > 0 }?.toLong() ?: ((row.wake - row.bedtime) / 60L) }
-                SleepNight(minutes, stages, Instant.ofEpochSecond(rows.minOf { it.bedtime }), Instant.ofEpochSecond(rows.maxOf { it.wake }))
-            }
-            .filterValues { it.minutes > 0L }
+            .mapNotNull { (date, rows) -> nightOf(rows)?.let { date to it } }
+            .toMap()
     }
+
+    /** The sleeps that ended on one day, added up; null when they hold no sleep. */
+    private fun nightOf(rows: List<BandSleep>): SleepNight? {
+        if (rows.isEmpty()) return null
+        val stages = mapOf(
+            SleepStage.Deep to rows.sumOf { it.deep }.toLong(),
+            SleepStage.Light to rows.sumOf { it.light }.toLong(),
+            SleepStage.Rem to rows.sumOf { it.rem }.toLong(),
+            SleepStage.Awake to rows.sumOf { it.awake }.toLong(),
+        ).filterValues { it > 0L }
+        val total = rows.sumOf { sleptMinutes(it) }
+        if (total <= 0L) return null
+        return SleepNight(total, stages, Instant.ofEpochSecond(rows.minOf { it.bedtime }), Instant.ofEpochSecond(rows.maxOf { it.wake }))
+    }
+
+    private fun sleptMinutes(row: BandSleep): Long = row.minutes.takeIf { it > 0 }?.toLong() ?: ((row.wake - row.bedtime) / 60L)
 
     private fun slots(samples: List<BandSample>): List<Pair<Long, List<Long>>> =
         samples.filter { it.heart > 0 }

@@ -805,7 +805,7 @@
     <string name="health_sleep_title">睡眠</string>
     <string name="health_last_night">昨晚</string>
     <string name="health_sleep_shortest">最短睡眠</string>
-    <string name="health_tap_hint">点按柱条即可在上方查看当天数值</string>
+    <string name="health_tap_hint">点按柱条即可在上方查看当天数值。点按卡片其他位置可查看日历和详情。</string>
     <string name="health_oxygen_average">平均血氧</string>
     <string name="health_stress_title">压力</string>
     <string name="health_stress_average">平均压力</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">运动</string>
     <string name="health_exercise_recent">最近锻炼</string>
     <string name="health_activity_title">活动</string>
+    <string name="health_details">详情</string>
+    <string name="health_open_hint">点按卡片可查看日历和每日详情</string>
+    <string name="detail_legend_sleep">日历显示每晚的睡眠时长（小时）。点按某天查看详情。</string>
+    <string name="detail_legend_heart">日历显示每日平均心率（次/分）。点按某天查看详情。</string>
+    <string name="detail_legend_resting">日历显示静息心率（次/分）。点按某天查看详情。</string>
+    <string name="detail_legend_oxygen">日历显示每日平均血氧（百分比）。点按某天查看详情。</string>
+    <string name="detail_legend_stress">日历显示每日平均压力（1–100）。点按某天查看详情。</string>
+    <string name="detail_legend_recovery">日历显示恢复度分数（满分 100）。点按某天查看详情。</string>
+    <string name="detail_legend_exercise">日历显示运动时长（分钟）。点按某天查看详情。</string>
+    <string name="detail_legend_activity">日历显示活动卡路里（kcal）。点按某天查看详情。</string>
+    <string name="detail_legend_water">日历显示饮水量（升），填满的日子表示达到目标。点按某天查看详情。</string>
+    <string name="detail_legend_weight">日历显示有记录那天的体重（kg）。点按某天查看详情。</string>
+    <string name="detail_heart_average">平均心率</string>
+    <string name="detail_days_recorded">有记录的天数</string>
+    <string name="detail_best">最佳</string>
+    <string name="detail_last_entry">最近记录</string>
+    <string name="detail_change">变化</string>
+    <string name="detail_no_data">这一天没有记录</string>
+    <string name="detail_bed_wake">入睡 %1$s · 起床 %2$s</string>
+    <string name="detail_sleep_hours">睡眠时间段</string>
+    <string name="detail_in_bed">在床时间</string>
+    <string name="detail_sleep_parts">睡眠分段</string>
+    <string name="detail_sleep_part">第 %1$d 段</string>
+    <string name="detail_no_stages">这次睡眠没有阶段数据。短时间睡眠时手环通常不发送阶段。</string>
+    <string name="detail_sleep_heart">睡眠时心率</string>
+    <string name="detail_heart_range">最低 %1$d · 平均 %2$d · 最高 %3$d 次/分</string>
+    <string name="detail_sleep_oxygen">睡眠时血氧</string>
+    <string name="detail_oxygen_range">平均 %1$s · 最低 %2$s · %3$d 次测量</string>
+    <string name="detail_readings">%1$d 次测量</string>
+    <string name="detail_oxygen_hint" formatted="false">健康人的血氧通常在 95–100% 之间，睡眠时可能略有下降。这不是医疗测量。</string>
+    <string name="detail_stress_levels">压力水平</string>
+    <string name="detail_week_average">前 7 天平均：%1$s</string>
+    <string name="detail_recovery_text">将当晚的睡眠和当天的静息心率与前 7 天比较。这不是医学评估。</string>
+    <string name="detail_steps">步数</string>
+    <string name="detail_water_reached">已达到饮水目标</string>
+    <string name="detail_glass_count">杯数</string>
+    <string name="detail_weight_previous">与上次记录相比</string>
+    <string name="detail_weight_edit">编辑</string>
     <string name="settings_phone_source">手机</string>
     <string name="settings_wearable_source">手环或手表</string>
     <string name="settings_appearance">外观和语言</string>
@@ -1296,6 +1334,8 @@
         <item>生日当天 09:00 左右会收到祝福通知（设置 → 通知 → 生日祝福）</item>
         <item>小鸟的叫声（喂食和选择叫声时）更轻更柔和；可用手机音量键调节，手机静音时不会响</item>
         <item>有新版本时提醒你：开启后每天查看一次 GitHub，发送通知，并在今天页面显示更新卡片（设置 → 关于）</item>
+        <item>点按健康页面的卡片即可打开日历：按天查看睡眠、心率、SpO2、压力、恢复度、运动、活动、饮水和体重</item>
+        <item>点按某天可查看睡了多久、在哪些时段入睡、睡眠阶段，以及睡眠时的心率和 SpO2；其他卡片显示当天的详情</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>小鸟小组件和动态壁纸中的小鸟也会戴上应用里的所有物品：太阳、眼镜、花、睡帽、背包</item>

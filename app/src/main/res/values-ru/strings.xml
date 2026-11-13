@@ -805,7 +805,7 @@
     <string name="health_sleep_title">Сон</string>
     <string name="health_last_night">Прошлая ночь</string>
     <string name="health_sleep_shortest">Самый короткий сон</string>
-    <string name="health_tap_hint">Нажмите на столбец, чтобы увидеть значение за этот день</string>
+    <string name="health_tap_hint">Нажмите на столбец, чтобы увидеть значение за этот день. Нажмите на другое место карточки, чтобы открыть календарь и подробности.</string>
     <string name="health_oxygen_average">Средний SpO₂</string>
     <string name="health_stress_title">Стресс</string>
     <string name="health_stress_average">Средний стресс</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">Тренировки</string>
     <string name="health_exercise_recent">Последние тренировки</string>
     <string name="health_activity_title">Активность</string>
+    <string name="health_details">Подробнее</string>
+    <string name="health_open_hint">Нажмите на карточку, чтобы открыть календарь и данные по дням</string>
+    <string name="detail_legend_sleep">В календаре указан сон каждой ночи в часах. Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_heart">В календаре указан средний пульс за день (уд/мин). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_resting">В календаре указан пульс в покое (уд/мин). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_oxygen">В календаре указан средний уровень кислорода в крови за день (в процентах). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_stress">В календаре указан средний стресс за день (1–100). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_recovery">В календаре указана оценка восстановления (из 100). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_exercise">В календаре указано время тренировок в минутах. Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_activity">В календаре указаны активные калории (ккал). Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_water">В календаре указана выпитая вода в литрах; закрашенные дни — цель достигнута. Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_legend_weight">В календаре указан ваш вес (кг) в дни, когда вы его записали. Нажмите на день, чтобы увидеть подробности.</string>
+    <string name="detail_heart_average">Средний пульс</string>
+    <string name="detail_days_recorded">Дней с данными</string>
+    <string name="detail_best">Лучший</string>
+    <string name="detail_last_entry">Последняя запись</string>
+    <string name="detail_change">Изменение</string>
+    <string name="detail_no_data">За этот день нет данных</string>
+    <string name="detail_bed_wake">Отбой %1$s · Подъём %2$s</string>
+    <string name="detail_sleep_hours">Время сна</string>
+    <string name="detail_in_bed">Время в постели</string>
+    <string name="detail_sleep_parts">Части сна</string>
+    <string name="detail_sleep_part">Часть %1$d</string>
+    <string name="detail_no_stages">Для этого сна нет фаз. При коротком сне браслет обычно не передаёт фазы.</string>
+    <string name="detail_sleep_heart">Пульс во сне</string>
+    <string name="detail_heart_range">Минимум %1$d · среднее %2$d · максимум %3$d уд/мин</string>
+    <string name="detail_sleep_oxygen">Кислород в крови во сне</string>
+    <string name="detail_oxygen_range">Среднее %1$s · минимум %2$s · измерений: %3$d</string>
+    <string name="detail_readings">Измерений: %1$d</string>
+    <string name="detail_oxygen_hint" formatted="false">У здоровых людей уровень кислорода в крови обычно 95–100%, во сне он может немного снижаться. Это не медицинское измерение.</string>
+    <string name="detail_stress_levels">Уровни стресса</string>
+    <string name="detail_week_average">Среднее за предыдущие 7 дней: %1$s</string>
+    <string name="detail_recovery_text">Сон этой ночи и пульс в покое этого дня сравниваются с предыдущими 7 днями. Это не медицинская оценка.</string>
+    <string name="detail_steps">Шаги</string>
+    <string name="detail_water_reached">Цель по воде достигнута</string>
+    <string name="detail_glass_count">Стаканов</string>
+    <string name="detail_weight_previous">С прошлого измерения</string>
+    <string name="detail_weight_edit">Изменить</string>
     <string name="settings_phone_source">Телефон</string>
     <string name="settings_wearable_source">Браслет или часы</string>
     <string name="settings_appearance">Оформление и язык</string>
@@ -1296,6 +1334,8 @@
         <item>В день рождения около 09:00 приходит поздравление (Настройки → Уведомления → Поздравление с днём рождения)</item>
         <item>Песня птицы (при кормлении и выборе песни) стала тише и мягче; её громкость меняется кнопками громкости, а в беззвучном режиме она не звучит</item>
         <item>Сообщает о новой версии: если включить, раз в день проверяет GitHub, присылает уведомление и показывает карточку «Обновить» на экране «Сегодня» (Настройки → О приложении)</item>
+        <item>Нажмите на карточку на странице «Здоровье», чтобы открыть календарь: сон, пульс, SpO2, стресс, восстановление, тренировки, активность, вода и вес по дням</item>
+        <item>Нажмите на день: сколько и в какие часы вы спали, фазы сна, пульс и SpO2 во сне; остальные карточки показывают этот день подробно</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>Птица в виджете «Птица» и на живых обоях носит все предметы, как в приложении: солнце, очки, цветок, ночной колпак, рюкзак</item>

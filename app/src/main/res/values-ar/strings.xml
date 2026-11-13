@@ -805,7 +805,7 @@
     <string name="health_sleep_title">النوم</string>
     <string name="health_last_night">الليلة الماضية</string>
     <string name="health_sleep_shortest">أقصر نوم</string>
-    <string name="health_tap_hint">اضغط على عمود لترى قيمة ذلك اليوم في الأعلى</string>
+    <string name="health_tap_hint">اضغط على عمود لترى قيمة ذلك اليوم في الأعلى. اضغط في مكان آخر من البطاقة لترى التقويم والتفاصيل.</string>
     <string name="health_oxygen_average">متوسط SpO₂</string>
     <string name="health_stress_title">التوتر</string>
     <string name="health_stress_average">متوسط التوتر</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">التمارين</string>
     <string name="health_exercise_recent">آخر التمارين</string>
     <string name="health_activity_title">النشاط</string>
+    <string name="health_details">التفاصيل</string>
+    <string name="health_open_hint">اضغط على البطاقة لترى التقويم وتفاصيل كل يوم</string>
+    <string name="detail_legend_sleep">يعرض التقويم نوم كل ليلة بالساعات. اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_heart">يعرض التقويم متوسط نبض القلب اليومي (نبضة/د). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_resting">يعرض التقويم نبض الراحة (نبضة/د). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_oxygen">يعرض التقويم متوسط أكسجين الدم اليومي (نسبة مئوية). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_stress">يعرض التقويم متوسط التوتر اليومي (1–100). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_recovery">يعرض التقويم درجة التعافي (من 100). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_exercise">يعرض التقويم مدة التمرين بالدقائق. اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_activity">يعرض التقويم السعرات الحرارية النشطة (kcal). اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_water">يعرض التقويم الماء الذي شربته باللتر؛ الأيام الممتلئة بلغت الهدف. اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_legend_weight">يعرض التقويم وزنك (كغ) في الأيام التي سجلته فيها. اضغط على يوم لترى التفاصيل.</string>
+    <string name="detail_heart_average">متوسط النبض</string>
+    <string name="detail_days_recorded">أيام مسجلة</string>
+    <string name="detail_best">الأفضل</string>
+    <string name="detail_last_entry">آخر تسجيل</string>
+    <string name="detail_change">التغير</string>
+    <string name="detail_no_data">لا توجد سجلات لهذا اليوم</string>
+    <string name="detail_bed_wake">النوم %1$s · الاستيقاظ %2$s</string>
+    <string name="detail_sleep_hours">أوقات النوم</string>
+    <string name="detail_in_bed">الوقت في السرير</string>
+    <string name="detail_sleep_parts">أجزاء النوم</string>
+    <string name="detail_sleep_part">الجزء %1$d</string>
+    <string name="detail_no_stages">لا توجد مراحل لهذا النوم. السوار لا يرسل المراحل عادة للنوم القصير.</string>
+    <string name="detail_sleep_heart">النبض أثناء النوم</string>
+    <string name="detail_heart_range">الأدنى %1$d · المتوسط %2$d · الأعلى %3$d نبضة/د</string>
+    <string name="detail_sleep_oxygen">أكسجين الدم أثناء النوم</string>
+    <string name="detail_oxygen_range">المتوسط %1$s · الأدنى %2$s · %3$d قياس</string>
+    <string name="detail_readings">%1$d قياس</string>
+    <string name="detail_oxygen_hint" formatted="false">لدى الأشخاص الأصحاء يكون أكسجين الدم عادة بين 95 و100%، وقد ينخفض قليلًا أثناء النوم. هذا ليس قياسًا طبيًا.</string>
+    <string name="detail_stress_levels">مستويات التوتر</string>
+    <string name="detail_week_average">متوسط الأيام السبعة السابقة: %1$s</string>
+    <string name="detail_recovery_text">يُقارَن نوم تلك الليلة ونبض الراحة في ذلك اليوم بالأيام السبعة السابقة. هذا ليس تقييمًا طبيًا.</string>
+    <string name="detail_steps">الخطوات</string>
+    <string name="detail_water_reached">تم بلوغ هدف الماء</string>
+    <string name="detail_glass_count">عدد الأكواب</string>
+    <string name="detail_weight_previous">مقارنة بالقياس السابق</string>
+    <string name="detail_weight_edit">تعديل</string>
     <string name="settings_phone_source">الهاتف</string>
     <string name="settings_wearable_source">سوار أو ساعة</string>
     <string name="settings_appearance">المظهر واللغة</string>
@@ -1296,6 +1334,8 @@
         <item>تصلك تهنئة نحو الساعة 09:00 في يوم عيد ميلادك (الإعدادات ← الإشعارات ← تهنئة عيد الميلاد)</item>
         <item>صار تغريد الطائر (عند إطعامه أو اختيار التغريد) أهدأ وأنعم؛ يُضبط بأزرار الصوت في الهاتف، ولا يُسمع عندما يكون الهاتف على الوضع الصامت</item>
         <item>يخبرك عند صدور إصدار جديد: إذا فعّلته، يتحقق من GitHub مرة في اليوم ويرسل إشعارًا ويعرض بطاقة تحديث في صفحة اليوم (الإعدادات ← حول)</item>
+        <item>اضغط على بطاقة في صفحة الصحة لفتح تقويم: النوم والنبض وSpO2 والتوتر والتعافي والتمرين والنشاط والماء والوزن يومًا بيوم</item>
+        <item>اضغط على يوم لترى كم نمت وفي أي ساعات، ومراحل النوم، والنبض وSpO2 أثناء النوم؛ وتعرض البطاقات الأخرى تفاصيل ذلك اليوم</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>الطائر في أداة الطائر وفي الخلفية الحية يرتدي كل الأغراض التي يرتديها في التطبيق: الشمس والنظارة والزهرة وقبعة النوم وحقيبة الظهر</item>

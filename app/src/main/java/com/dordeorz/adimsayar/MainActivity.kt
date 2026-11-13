@@ -194,6 +194,8 @@ class MainActivity : ComponentActivity() {
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
         loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
         loadHeartDay = { date -> WearableHealth.heartDay(applicationContext, date) },
+        loadSleepDay = { date -> WearableHealth.sleepDay(applicationContext, date) },
+        loadReadings = { date -> WearableHealth.readings(applicationContext, date) },
         onGrantHealthPermissions = { runCatching { healthPermissionLauncher.launch(WearableSteps.PERMISSIONS) } },
         onAddWeight = { date, kg ->
             val appContext = applicationContext

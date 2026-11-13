@@ -46,9 +46,11 @@ import com.dordeorz.adimsayar.data.BandDay
 import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.ChallengeSummary
 import com.dordeorz.adimsayar.data.DayDetail
+import com.dordeorz.adimsayar.data.DayReadings
 import com.dordeorz.adimsayar.data.DaySteps
 import com.dordeorz.adimsayar.data.DistanceUnit
 import com.dordeorz.adimsayar.data.HeartDay
+import com.dordeorz.adimsayar.data.SleepDay
 import com.dordeorz.adimsayar.data.SourceReport
 import com.dordeorz.adimsayar.data.ThemeMode
 import com.dordeorz.adimsayar.data.Weight
@@ -137,6 +139,8 @@ class MainActions(
     val loadBandDay: suspend (LocalDate) -> BandDay?,
     val loadBandPeriod: suspend (LocalDate, Long) -> BandPeriod?,
     val loadHeartDay: suspend (LocalDate) -> HeartDay?,
+    val loadSleepDay: suspend (LocalDate) -> SleepDay?,
+    val loadReadings: suspend (LocalDate) -> DayReadings,
     val onGrantHealthPermissions: () -> Unit,
     val onAddWeight: (LocalDate, Double) -> Unit,
     val onDeleteWeight: (LocalDate) -> Unit,

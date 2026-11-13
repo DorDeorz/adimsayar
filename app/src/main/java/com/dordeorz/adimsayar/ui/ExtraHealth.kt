@@ -1,5 +1,6 @@
 package com.dordeorz.adimsayar.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -63,6 +65,21 @@ object Recovery {
         }
         return (BASE + sleep + heart).roundToInt().coerceIn(0, 100)
     }
+
+    /** Days compared with: the week before. */
+    const val WINDOW_DAYS = 7L
+
+    /** Score of each day from that night's sleep and resting heart rate against the week before it. */
+    fun days(dates: Collection<LocalDate>, nights: Map<LocalDate, Long>, resting: Map<LocalDate, Long>): Map<LocalDate, Int> =
+        dates.mapNotNull { date ->
+            val window = (1L..WINDOW_DAYS).map { date.minusDays(it) }
+            score(
+                nights[date],
+                HealthMath.average(window.mapNotNull { nights[it] }),
+                resting[date],
+                HealthMath.average(window.mapNotNull { resting[it] }),
+            )?.let { date to it }
+        }.toMap()
 }
 
 @Composable
@@ -102,7 +119,7 @@ internal fun FitnessAgeCard(data: BandPeriod, state: MainUiState) {
 }
 
 @Composable
-internal fun RecoveryCard(data: BandPeriod, today: LocalDate) {
+internal fun RecoveryCard(data: BandPeriod, today: LocalDate, onOpen: () -> Unit) {
     val lastNightDate = listOf(today, today.minusDays(1)).firstOrNull { it in data.nights }
     val lastSleep = lastNightDate?.let { data.nights[it]?.minutes }
     val averageSleep = HealthMath.average(
@@ -112,9 +129,9 @@ internal fun RecoveryCard(data: BandPeriod, today: LocalDate) {
     val lastResting = restingDays.lastOrNull()?.takeIf { !it.first.isBefore(today.minusDays(1)) }
     val averageResting = HealthMath.average(restingDays.filter { it != lastResting }.map { it.second })
     val score = Recovery.score(lastSleep, averageSleep, lastResting?.second, averageResting) ?: return
-    Card {
+    Card(modifier = Modifier.clip(CardDefaults.shape).clickable(onClick = onOpen)) {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(stringResource(R.string.recovery_title), style = MaterialTheme.typography.titleMedium)
+            OpenTitle(stringResource(R.string.recovery_title))
             Text(
                 stringResource(R.string.recovery_value, score),
                 style = MaterialTheme.typography.headlineMedium,

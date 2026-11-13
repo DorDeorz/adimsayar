@@ -805,7 +805,7 @@
     <string name="health_sleep_title">Sommeil</string>
     <string name="health_last_night">Nuit dernière</string>
     <string name="health_sleep_shortest">Sommeil le plus court</string>
-    <string name="health_tap_hint">Touchez une barre pour voir la valeur du jour en haut</string>
+    <string name="health_tap_hint">Touchez une barre pour voir la valeur du jour en haut. Touchez ailleurs sur la carte pour le calendrier et les détails.</string>
     <string name="health_oxygen_average">SpO₂ moyenne</string>
     <string name="health_stress_title">Stress</string>
     <string name="health_stress_average">Stress moyen</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">Exercice</string>
     <string name="health_exercise_recent">Derniers entraînements</string>
     <string name="health_activity_title">Activité</string>
+    <string name="health_details">Détails</string>
+    <string name="health_open_hint">Touchez la carte pour le calendrier et le détail jour par jour</string>
+    <string name="detail_legend_sleep">Le calendrier indique le sommeil de chaque nuit en heures. Touchez un jour pour le détail.</string>
+    <string name="detail_legend_heart">Le calendrier indique la fréquence cardiaque moyenne du jour (bpm). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_resting">Le calendrier indique la fréquence cardiaque au repos (bpm). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_oxygen">Le calendrier indique l\'oxygène sanguin moyen du jour (pourcentage). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_stress">Le calendrier indique le stress moyen du jour (1–100). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_recovery">Le calendrier indique le score de récupération (sur 100). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_exercise">Le calendrier indique la durée d\'exercice en minutes. Touchez un jour pour le détail.</string>
+    <string name="detail_legend_activity">Le calendrier indique les calories actives (kcal). Touchez un jour pour le détail.</string>
+    <string name="detail_legend_water">Le calendrier indique l\'eau bue en litres ; les jours pleins ont atteint l\'objectif. Touchez un jour pour le détail.</string>
+    <string name="detail_legend_weight">Le calendrier indique votre poids (kg) les jours où vous l\'avez noté. Touchez un jour pour le détail.</string>
+    <string name="detail_heart_average">Fréquence moyenne</string>
+    <string name="detail_days_recorded">Jours enregistrés</string>
+    <string name="detail_best">Meilleur</string>
+    <string name="detail_last_entry">Dernière mesure</string>
+    <string name="detail_change">Variation</string>
+    <string name="detail_no_data">Aucune donnée pour ce jour</string>
+    <string name="detail_bed_wake">Coucher %1$s · Lever %2$s</string>
+    <string name="detail_sleep_hours">Heures de sommeil</string>
+    <string name="detail_in_bed">Temps au lit</string>
+    <string name="detail_sleep_parts">Parties du sommeil</string>
+    <string name="detail_sleep_part">Partie %1$d</string>
+    <string name="detail_no_stages">Pas de phases pour ce sommeil. Le bracelet n\'en envoie généralement pas pour un sommeil court.</string>
+    <string name="detail_sleep_heart">Fréquence cardiaque pendant le sommeil</string>
+    <string name="detail_heart_range">Minimum %1$d · moyenne %2$d · maximum %3$d bpm</string>
+    <string name="detail_sleep_oxygen">Oxygène sanguin pendant le sommeil</string>
+    <string name="detail_oxygen_range">Moyenne %1$s · minimum %2$s · %3$d mesures</string>
+    <string name="detail_readings">%1$d mesures</string>
+    <string name="detail_oxygen_hint" formatted="false">Chez une personne en bonne santé, l\'oxygène sanguin est généralement de 95 à 100 % et peut baisser un peu pendant le sommeil. Ce n\'est pas une mesure médicale.</string>
+    <string name="detail_stress_levels">Niveaux de stress</string>
+    <string name="detail_week_average">Moyenne des 7 jours précédents : %1$s</string>
+    <string name="detail_recovery_text">Le sommeil de cette nuit et la fréquence cardiaque au repos de ce jour sont comparés aux 7 jours précédents. Ce n\'est pas une évaluation médicale.</string>
+    <string name="detail_steps">Pas</string>
+    <string name="detail_water_reached">Objectif d\'eau atteint</string>
+    <string name="detail_glass_count">Verres</string>
+    <string name="detail_weight_previous">Depuis la mesure précédente</string>
+    <string name="detail_weight_edit">Modifier</string>
     <string name="settings_phone_source">Téléphone</string>
     <string name="settings_wearable_source">Bracelet ou montre</string>
     <string name="settings_appearance">Apparence et langue</string>
@@ -1296,6 +1334,8 @@
         <item>Un message d\'anniversaire arrive vers 09:00 le jour de votre anniversaire (Paramètres → Notifications → Message d\'anniversaire)</item>
         <item>Le chant de l’oiseau (quand vous le nourrissez ou choisissez un chant) est plus doux et moins fort ; les touches de volume le règlent, et il se tait quand le téléphone est en silencieux</item>
         <item>Prévient à la sortie d’une nouvelle version : si tu l’actives, consulte GitHub une fois par jour, envoie une notification et affiche une carte Mettre à jour sur Aujourd’hui (Paramètres → À propos)</item>
+        <item>Touchez une carte de la page Santé pour ouvrir un calendrier : sommeil, fréquence cardiaque, SpO2, stress, récupération, exercice, activité, eau et poids jour par jour</item>
+        <item>Touchez un jour pour voir combien de temps et à quelles heures vous avez dormi, les phases de sommeil, la fréquence cardiaque et la SpO2 pendant le sommeil ; les autres cartes montrent ce jour en détail</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>

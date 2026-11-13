@@ -69,6 +69,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 - Ya da diğer bileklik ve saatler için (Samsung vb.) Health Connect üzerinden.
 - Bilekliğin saydığı saatlerde bileklik, diğer saatlerde telefon sayılır. Hiçbir adım iki kez sayılmaz.
 - Ayrı kartlarda, 7/30/90 günlük grafiklerle: evreleriyle uyku, bölgeleriyle nabız, dinlenme nabzı eğilimi, kan oksijeni, egzersizler ve aktif kalori
+- Her karta dokununca ay takvimi ve gün gün ayrıntı: uykunun süresi, saatleri ve evreleri, uykuda nabız ve SpO₂, günün nabız grafiği, SpO₂ ve stres ölçümleri, egzersizler, su ve kilo
 - Vücut kitle endeksi ve grafikle kilo kaydı
 - Toparlanma puanı (dün geceki uyku ve dinlenme nabzı) ve fitness yaşı (VO₂max tahmini)
 - Uyku ve adım: kısa ya da uzun gecelerden sonra adımların nasıl değiştiği

@@ -57,6 +57,8 @@ class BandPeriod(
     val exerciseAllowed: Boolean,
     val oxygenAllowed: Boolean,
     val missingPermissions: Boolean,
+    /** Lowest, average and highest heart rate of each day; resting as in [resting]. */
+    val heartDaily: Map<LocalDate, HeartSummary> = emptyMap(),
 )
 
 class OxygenSummary(val average: Double, val min: Double, val count: Int)
@@ -138,7 +140,92 @@ object WearableHealth {
             exerciseAllowed = true,
             oxygenAllowed = true,
             missingPermissions = false,
+            heartDaily = old.heartDaily + band.heartDaily,
         )
+    }
+
+    /** One night in detail: the band's record first, Health Connect for nights the band did not send. */
+    suspend fun sleepDay(context: Context, date: LocalDate): SleepDay? {
+        if (BandDirect.isEnabled(context)) BandHealth.sleepDay(context, date)?.let { return it }
+        return connectSleepDay(context, date)
+    }
+
+    /** SpO2 and stress readings of one day. Health Connect fills SpO2 when the band has none that day. */
+    suspend fun readings(context: Context, date: LocalDate): DayReadings {
+        val band = if (BandDirect.isEnabled(context)) BandHealth.readings(context, date) else DayReadings(emptyList(), emptyList())
+        if (band.oxygen.isNotEmpty()) return band
+        return DayReadings(connectOxygen(context, date), band.stress)
+    }
+
+    private suspend fun connectSleepDay(context: Context, date: LocalDate): SleepDay? {
+        if (!WearableSteps.isAvailable(context)) return null
+        return try {
+            val client = HealthConnectClient.getOrCreate(context)
+            val granted = client.permissionController.getGrantedPermissions()
+            fun allowed(type: KClass<out Record>) = HealthPermission.getReadPermission(type) in granted
+            if (!allowed(SleepSessionRecord::class)) return null
+            val zone = ZoneId.systemDefault()
+            val from = date.atStartOfDay(zone).toInstant()
+            val to = date.plusDays(1).atStartOfDay(zone).toInstant()
+            val (night, sessions) = readAll(client, SleepSessionRecord::class, from.minus(Duration.ofHours(12)), to)
+                .filter { it.endTime >= from && it.endTime < to }
+                .groupBy { it.metadata.dataOrigin.packageName }
+                .values
+                .mapNotNull { origin -> HealthMath.night(origin.map(::span))?.let { it to origin } }
+                .maxByOrNull { it.first.minutes }
+                ?: return null
+            val parts = sessions.sortedBy { it.startTime }.map { session ->
+                SleepPart(session.startTime, session.endTime, HealthMath.night(listOf(span(session)))?.minutes ?: 0L)
+            }
+            val heart = if (allowed(HeartRateRecord::class)) {
+                client.aggregateGroupByDuration(
+                    AggregateGroupByDurationRequest(
+                        setOf(HeartRateRecord.BPM_AVG),
+                        TimeRangeFilter.between(night.bedtime, night.wake),
+                        Duration.ofMinutes(HEART_SLOT_MINUTES),
+                    ),
+                ).mapNotNull { group -> group.result[HeartRateRecord.BPM_AVG]?.let { group.startTime to it } }
+            } else {
+                emptyList()
+            }
+            val oxygen = if (allowed(OxygenSaturationRecord::class)) {
+                readAll(client, OxygenSaturationRecord::class, night.bedtime, night.wake)
+                    .filter { it.percentage.value > 0.0 }
+                    .map { it.time to it.percentage.value }
+            } else {
+                emptyList()
+            }
+            SleepDay(
+                night = night,
+                parts = parts,
+                stages = sessions.flatMap { span(it).stages }.sortedBy { it.second },
+                heart = heart.filter { (time, _) -> parts.any { time >= it.start && time < it.end } },
+                oxygen = oxygen.filter { (time, _) -> parts.any { time >= it.start && time <= it.end } }.sortedBy { it.first },
+            )
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private suspend fun connectOxygen(context: Context, date: LocalDate): List<Pair<Instant, Double>> {
+        if (!WearableSteps.isAvailable(context)) return emptyList()
+        return try {
+            val client = HealthConnectClient.getOrCreate(context)
+            if (HealthPermission.getReadPermission(OxygenSaturationRecord::class) !in client.permissionController.getGrantedPermissions()) {
+                return emptyList()
+            }
+            val zone = ZoneId.systemDefault()
+            readAll(client, OxygenSaturationRecord::class, date.atStartOfDay(zone).toInstant(), date.plusDays(1).atStartOfDay(zone).toInstant())
+                .filter { it.percentage.value > 0.0 }
+                .map { it.time to it.percentage.value }
+                .sortedBy { it.first }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 
     private suspend fun connectPeriod(context: Context, to: LocalDate, days: Long): BandPeriod? {
@@ -344,6 +431,19 @@ object WearableHealth {
             emptyMap()
         }
         val restingBefore = HealthMath.average(restingByDay.filterKeys { it < from && !it.isBefore(before) }.values.filterNotNull())
+        val heartDaily = if (allowed(HeartRateRecord::class)) {
+            client.aggregateGroupByPeriod(
+                AggregateGroupByPeriodRequest(setOf(HeartRateRecord.BPM_MIN, HeartRateRecord.BPM_AVG, HeartRateRecord.BPM_MAX), localRange, Period.ofDays(1)),
+            ).mapNotNull { group ->
+                val date = group.startTime.toLocalDate()
+                val min = group.result[HeartRateRecord.BPM_MIN]
+                val avg = group.result[HeartRateRecord.BPM_AVG]
+                val max = group.result[HeartRateRecord.BPM_MAX]
+                if (min != null && avg != null && max != null) date to HeartSummary(restingByDay[date], min, avg, max) else null
+            }.toMap()
+        } else {
+            emptyMap()
+        }
 
         val distance = if (allowed(DistanceRecord::class)) {
             client.aggregate(AggregateRequest(setOf(DistanceRecord.DISTANCE_TOTAL), localRange)).dataOrigins
@@ -394,6 +494,7 @@ object WearableHealth {
             exerciseAllowed = allowed(ExerciseSessionRecord::class),
             oxygenAllowed = allowed(OxygenSaturationRecord::class),
             missingPermissions = !granted.containsAll(PERMISSIONS),
+            heartDaily = heartDaily,
         )
     }
 

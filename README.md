@@ -69,6 +69,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 - Or through Health Connect, for other bands and watches (Samsung and others).
 - Hours the band counted use the band, other hours use the phone, so no step is counted twice.
 - Separate cards with 7/30/90-day charts: sleep with stages, heart rate with zones, resting heart rate trend, SpO₂, workouts and active calories
+- Tap any card for a month calendar and day-by-day details: how long and when you slept with stages, heart rate and SpO₂ while asleep, the day's heart rate chart, SpO₂ and stress readings, workouts, water and weight
 - Weight log with BMI and a chart
 - Recovery score (last night's sleep and resting heart rate) and fitness age (VO₂max estimate)
 - Sleep and steps: how your steps change after short or long nights

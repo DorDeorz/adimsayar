@@ -805,7 +805,7 @@
     <string name="health_sleep_title">睡眠</string>
     <string name="health_last_night">昨夜</string>
     <string name="health_sleep_shortest">最短の睡眠</string>
-    <string name="health_tap_hint">バーをタップするとその日の値が上に表示されます</string>
+    <string name="health_tap_hint">バーをタップするとその日の値が上に表示されます。カードのほかの場所をタップするとカレンダーと詳細が開きます。</string>
     <string name="health_oxygen_average">平均SpO₂</string>
     <string name="health_stress_title">ストレス</string>
     <string name="health_stress_average">平均ストレス</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">運動</string>
     <string name="health_exercise_recent">最近のワークアウト</string>
     <string name="health_activity_title">アクティビティ</string>
+    <string name="health_details">詳細</string>
+    <string name="health_open_hint">カードをタップするとカレンダーと日ごとの詳細が開きます</string>
+    <string name="detail_legend_sleep">カレンダーには毎晩の睡眠時間（時間）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_heart">カレンダーには1日の平均心拍数（bpm）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_resting">カレンダーには安静時心拍数（bpm）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_oxygen">カレンダーには1日の平均血中酸素（パーセント）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_stress">カレンダーには1日の平均ストレス（1〜100）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_recovery">カレンダーには回復度スコア（100点満点）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_exercise">カレンダーには運動時間（分）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_activity">カレンダーにはアクティブカロリー（kcal）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_water">カレンダーには飲んだ水の量（リットル）が表示されます。塗りつぶされた日は目標達成です。日付をタップすると詳細が見られます。</string>
+    <string name="detail_legend_weight">カレンダーには記録した日の体重（kg）が表示されます。日付をタップすると詳細が見られます。</string>
+    <string name="detail_heart_average">平均心拍数</string>
+    <string name="detail_days_recorded">記録日数</string>
+    <string name="detail_best">最高</string>
+    <string name="detail_last_entry">最新の記録</string>
+    <string name="detail_change">変化</string>
+    <string name="detail_no_data">この日の記録はありません</string>
+    <string name="detail_bed_wake">就寝 %1$s · 起床 %2$s</string>
+    <string name="detail_sleep_hours">睡眠時間帯</string>
+    <string name="detail_in_bed">ベッドにいた時間</string>
+    <string name="detail_sleep_parts">睡眠の区間</string>
+    <string name="detail_sleep_part">区間 %1$d</string>
+    <string name="detail_no_stages">この睡眠には段階のデータがありません。短い睡眠ではバンドは通常、段階を送りません。</string>
+    <string name="detail_sleep_heart">睡眠中の心拍数</string>
+    <string name="detail_heart_range">最低 %1$d · 平均 %2$d · 最高 %3$d bpm</string>
+    <string name="detail_sleep_oxygen">睡眠中の血中酸素</string>
+    <string name="detail_oxygen_range">平均 %1$s · 最低 %2$s · %3$d 回測定</string>
+    <string name="detail_readings">%1$d 回測定</string>
+    <string name="detail_oxygen_hint" formatted="false">健康な人の血中酸素は通常95〜100%で、睡眠中は少し下がることがあります。医療用の測定ではありません。</string>
+    <string name="detail_stress_levels">ストレスレベル</string>
+    <string name="detail_week_average">前の7日間の平均: %1$s</string>
+    <string name="detail_recovery_text">その夜の睡眠とその日の安静時心拍数を前の7日間と比べます。医学的な評価ではありません。</string>
+    <string name="detail_steps">歩数</string>
+    <string name="detail_water_reached">水分目標を達成</string>
+    <string name="detail_glass_count">コップの数</string>
+    <string name="detail_weight_previous">前回の記録から</string>
+    <string name="detail_weight_edit">編集</string>
     <string name="settings_phone_source">スマートフォン</string>
     <string name="settings_wearable_source">バンドまたはウォッチ</string>
     <string name="settings_appearance">表示と言語</string>
@@ -1296,6 +1334,8 @@
         <item>誕生日の 09:00 ごろにお祝いの通知が届きます（設定 → 通知 → 誕生日のお祝い）</item>
         <item>鳥の鳴き声（えさをあげたときと鳴き声を選んだとき）が小さく柔らかくなりました。音量ボタンで調整でき、マナーモード中は鳴りません</item>
         <item>新しいバージョンをお知らせ：オンにすると1日に1回 GitHub を確認して通知し、今日の画面にアップデートカードを表示します（設定 → アプリについて）</item>
+        <item>健康ページのカードをタップするとカレンダーが開きます: 睡眠、心拍数、SpO2、ストレス、回復度、運動、アクティビティ、水分、体重を日ごとに</item>
+        <item>日付をタップすると、睡眠時間と眠っていた時間帯、睡眠段階、睡眠中の心拍数とSpO2が見られます。ほかのカードではその日の詳細が見られます</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>鳥ウィジェットとライブ壁紙の鳥も、アプリと同じアイテムをすべて身につけます（太陽、メガネ、花、ナイトキャップ、リュック）</item>

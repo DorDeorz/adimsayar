@@ -805,7 +805,7 @@
     <string name="health_sleep_title">Sleep</string>
     <string name="health_last_night">Last night</string>
     <string name="health_sleep_shortest">Shortest sleep</string>
-    <string name="health_tap_hint">Tap a bar to see that day\'s value above</string>
+    <string name="health_tap_hint">Tap a bar to see that day\'s value above. Tap elsewhere on the card for a calendar and details.</string>
     <string name="health_oxygen_average">Average SpO₂</string>
     <string name="health_stress_title">Stress</string>
     <string name="health_stress_average">Average stress</string>
@@ -817,6 +817,44 @@
     <string name="health_exercise_title">Exercise</string>
     <string name="health_exercise_recent">Recent workouts</string>
     <string name="health_activity_title">Activity</string>
+    <string name="health_details">Details</string>
+    <string name="health_open_hint">Tap the card for a calendar and day-by-day details</string>
+    <string name="detail_legend_sleep">The calendar shows each night\'s sleep in hours. Tap a day for details.</string>
+    <string name="detail_legend_heart">The calendar shows the daily average heart rate (bpm). Tap a day for details.</string>
+    <string name="detail_legend_resting">The calendar shows the resting heart rate (bpm). Tap a day for details.</string>
+    <string name="detail_legend_oxygen">The calendar shows the daily average blood oxygen (percent). Tap a day for details.</string>
+    <string name="detail_legend_stress">The calendar shows the daily average stress (1–100). Tap a day for details.</string>
+    <string name="detail_legend_recovery">The calendar shows the recovery score (out of 100). Tap a day for details.</string>
+    <string name="detail_legend_exercise">The calendar shows exercise time in minutes. Tap a day for details.</string>
+    <string name="detail_legend_activity">The calendar shows active calories (kcal). Tap a day for details.</string>
+    <string name="detail_legend_water">The calendar shows the water you drank in litres; filled days reached the goal. Tap a day for details.</string>
+    <string name="detail_legend_weight">The calendar shows your weight (kg) on days you logged it. Tap a day for details.</string>
+    <string name="detail_heart_average">Average heart rate</string>
+    <string name="detail_days_recorded">Days logged</string>
+    <string name="detail_best">Best</string>
+    <string name="detail_last_entry">Last entry</string>
+    <string name="detail_change">Change</string>
+    <string name="detail_no_data">No records for this day</string>
+    <string name="detail_bed_wake">Bedtime %1$s · Wake-up %2$s</string>
+    <string name="detail_sleep_hours">Sleep times</string>
+    <string name="detail_in_bed">Time in bed</string>
+    <string name="detail_sleep_parts">Sleep parts</string>
+    <string name="detail_sleep_part">Part %1$d</string>
+    <string name="detail_no_stages">No stage data for this sleep. The band usually sends no stages for short sleeps.</string>
+    <string name="detail_sleep_heart">Heart rate while asleep</string>
+    <string name="detail_heart_range">Lowest %1$d · average %2$d · highest %3$d bpm</string>
+    <string name="detail_sleep_oxygen">Blood oxygen while asleep</string>
+    <string name="detail_oxygen_range">Average %1$s · lowest %2$s · %3$d readings</string>
+    <string name="detail_readings">%1$d readings</string>
+    <string name="detail_oxygen_hint" formatted="false">In healthy people blood oxygen is usually 95–100%, and it can drop a little during sleep. This is not a medical measurement.</string>
+    <string name="detail_stress_levels">Stress levels</string>
+    <string name="detail_week_average">Average of the previous 7 days: %1$s</string>
+    <string name="detail_recovery_text">That night\'s sleep and that day\'s resting heart rate are compared with the previous 7 days. This is not a medical assessment.</string>
+    <string name="detail_steps">Steps</string>
+    <string name="detail_water_reached">Water goal reached</string>
+    <string name="detail_glass_count">Glasses</string>
+    <string name="detail_weight_previous">Since the previous entry</string>
+    <string name="detail_weight_edit">Edit</string>
     <string name="settings_phone_source">Phone</string>
     <string name="settings_wearable_source">Band or watch</string>
     <string name="settings_appearance">Appearance and language</string>
@@ -1296,6 +1334,8 @@
         <item>A birthday greeting arrives around 09:00 on your birthday (Settings → Notifications → Birthday greeting)</item>
         <item>The bird\'s song (when you feed it or pick a song) is quieter and softer; the phone\'s volume keys set it, and it stays quiet when the phone is on silent</item>
         <item>Tells you when a new version is out: if you turn it on, it looks at GitHub once a day, sends a notification and shows an Update card on Today (Settings → About)</item>
+        <item>Tap a card on the Health page to open a calendar: sleep, heart rate, SpO2, stress, recovery, exercise, activity, water and weight day by day</item>
+        <item>Tap a day to see how long and at what times you slept, the sleep stages, and heart rate and SpO2 while asleep; the other cards show that day in detail</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>The bird on the Bird widget and the live wallpaper wears all the items it has in the app: sun, glasses, flower, nightcap, backpack</item>

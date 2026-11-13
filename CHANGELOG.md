@@ -4,7 +4,7 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.21.0
 
-Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü, yeni sürümü haber verme. Veritabanı sürümü değişmedi (v7).
+Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü, yeni sürümü haber verme, Sağlık kartlarına detay sayfaları. Veritabanı sürümü değişmedi (v7).
 
 - Ayarlar → Vücut ve mesafe'de yaş yerine doğum tarihi sorulur (`BirthDateDialog`). Tarih yazarak girilir, takvim bir dokunuş uzakta; 10–100 yaş arası seçilebilir. Yaş her gün doğum tarihinden hesaplanır (`AppSettings.ageOn`), nabız bölgeleri ve fitness yaşı bunu kullanır.
 - Geçiş: önceden girilen yaş (`age` ayarı) doğum tarihi girilene kadar kullanılmaya devam eder; satırda "Girilmedi · şimdilik N yaş sayılıyor" yazar ve takvim o yaşın yılında açılır. Doğum tarihi girilince `age` da güncellenir.
@@ -22,6 +22,16 @@ Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü, yeni sü
   - Bulunan sürüm, bildirilen ve gizlenen sürüm kendi `update_watch` tercihlerinde durur (`UpdateWatch`), yedeğe girmez; aç/kapa ayarı `extras` içinde olduğu için yedekle taşınır.
 - Ayarlar'daki "Güncellemeleri kontrol et" satırı ile Bugün kartı aynı indirme ve kurulum adımlarını kullanır (`UpdateFlow`). Satır, arka planda bulunmuş yeni sürümü dokunmadan önce gösterir.
 - Yeni izin: `ACCESS_NETWORK_STATE` (Android 14+ ağ koşullu işler için istiyor; normal izin, sorulmaz).
+- Sağlık sayfasındaki her karta (uyku, nabız, dinlenme nabzı, SpO₂, stres, toparlanma, egzersiz, aktivite, su, kilo) dokununca ayrı bir sayfa açılır. Sayfada ay takvimi var: her günün değeri günün kutusunda yazar, ay için üç özet sayı (ortalama, kayıtlı gün, en iyi gibi) üstte görünür. Önceki aylara oklarla geçilir. Kartın başlığında ok işareti var; kartın içindeki çubuklar, oklar ve nabız grafiği eskisi gibi kendi işini yapar.
+- Takvimde bir güne dokununca altında o günün ayrıntısı açılır:
+  - Uyku: toplam süre, yatış ve kalkış saati, uyku saatleri çizelgesi (gecenin her parçası; Health Connect evre saatlerini veriyorsa evreler satır satır), yatakta geçen süre, parçaların saatleri, uyku evreleri, uykuda nabız (grafikle) ve SpO₂ (`WearableHealth.sleepDay`, `BandHealth.sleepDay`).
+  - Nabız ve dinlenme nabzı tek sayfada, iki seçenekle: günün en düşük, ortalama, en yüksek nabzı, saatlik grafik ve nabız bölgeleri. Takvim günlük ortalamayı ya da dinlenme nabzını gösterir (`BandPeriod.heartDaily`).
+  - SpO₂ ve stres: ortalama, en düşük ve en yüksek değer saatiyle, 24 saatlik grafik, stres düzeylerinin payı (`WearableHealth.readings`).
+  - Toparlanma: o günün puanı, o gecenin uykusu ve dinlenme nabzı önceki 7 günün ortalamasıyla (`Recovery.days`).
+  - Egzersiz: o günkü her egzersiz başlangıç ve bitiş saatiyle. Aktivite: aktif kalori, adım, mesafe.
+  - Su: içilen miktar, hedef, bardak sayısı. Kilo: o günün kaydı, önceki ölçüme göre değişim, VKİ; o gün için kilo ekleme ya da düzenleme.
+- Bileklik verisi önce, yoksa Health Connect okunur. Bileklik uyku evrelerinin saatini göndermediği için bileklikten gelen gecelerde çizelge uykuda geçen parçaları gösterir.
+- Yeni metinler 12 dilde; çubuk ipucu karta dokunmayı da anlatır.
 
 ## 0.20.5
 
