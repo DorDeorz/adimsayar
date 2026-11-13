@@ -1295,6 +1295,7 @@
         <item>Chiede la data di nascita invece dell\'età; l\'età viene calcolata ogni giorno. L\'età inserita prima resta in uso finché non imposti una data di nascita</item>
         <item>Il giorno del compleanno arrivano gli auguri verso le 09:00 (Impostazioni → Notifiche → Auguri di compleanno)</item>
         <item>Il canto dell’uccellino (quando lo nutri o scegli un canto) è più basso e morbido; si regola con i tasti del volume e tace quando il telefono è in silenzioso</item>
+        <item>Avvisa quando esce una nuova versione: se lo attivi, controlla GitHub una volta al giorno, invia una notifica e mostra una scheda Aggiorna in Oggi (Impostazioni → Info)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’uccellino del widget Uccello e dello sfondo animato indossa tutti gli oggetti che ha nell’app: sole, occhiali, fiore, berretto da notte, zaino</item>

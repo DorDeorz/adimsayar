@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_watch">Yeni sürümü haber ver</string>
+    <string name="update_watch_hint">Günde bir kez GitHub\'a bakar, yeni sürüm çıkınca bildirim gönderir</string>
+    <string name="update_channel">Güncellemeler</string>
+    <string name="update_new_title">FitWren %1$s çıktı</string>
+    <string name="update_notify_text">Şu an %1$s kullanıyorsun. Güncellemek için dokun.</string>
+    <string name="update_ask_title">Yeni sürümleri haber vereyim mi?</string>
+    <string name="update_ask_text">FitWren günde bir kez GitHub\'daki son sürüm numarasına bakar, yeni sürüm çıkınca bildirim gönderir. Verilerinden hiçbir şey gönderilmez. Sonra Ayarlar → Hakkında\'dan değiştirebilirsin.</string>
+    <string name="update_ask_no">Hayır</string>
+    <string name="update_ask_yes">Evet, haber ver</string>
+    <string name="update_card_text">Şu an %1$s kullanıyorsun. Güncelleme GitHub\'dan iner, verilerin yerinde kalır.</string>
+    <string name="update_card_later">Sonra</string>
+    <string name="update_card_update">Güncelle</string>
+    <string name="update_card_install">Kur</string>
+</resources>

@@ -1295,6 +1295,7 @@
         <item>Fragt nach dem Geburtsdatum statt nach dem Alter; das Alter wird täglich berechnet. Das bisher eingegebene Alter gilt, bis ein Geburtsdatum gesetzt ist</item>
         <item>An deinem Geburtstag kommt gegen 09:00 ein Glückwunsch (Einstellungen → Benachrichtigungen → Geburtstagsgruß)</item>
         <item>Der Gesang des Vogels (beim Füttern und bei der Auswahl) ist leiser und sanfter; die Lautstärketasten regeln ihn, im Lautlos-Modus bleibt er stumm</item>
+        <item>Meldet neue Versionen: Wenn du es einschaltest, schaut es einmal am Tag auf GitHub nach, sendet eine Benachrichtigung und zeigt auf Heute eine Update-Karte (Einstellungen → Info)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>Der Vogel im Vogel-Widget und im Live-Hintergrund trägt alle Gegenstände wie in der App: Sonne, Brille, Blume, Schlafmütze, Rucksack</item>

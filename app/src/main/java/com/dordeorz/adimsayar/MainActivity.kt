@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
+import com.dordeorz.adimsayar.background.UpdateChecks
 import com.dordeorz.adimsayar.data.ChallengeMath
 import com.dordeorz.adimsayar.data.DayHours
 import com.dordeorz.adimsayar.data.KeptMedals
@@ -541,6 +542,7 @@ class MainActivity : ComponentActivity() {
         AppScope.launch(Dispatchers.IO) {
             if (SmartGoal.applyIfDue(appContext)) Widgets.updateAll(appContext)
         }
+        AppScope.launch(Dispatchers.IO) { UpdateChecks.run(appContext, UpdateChecks.OPEN_GAP_MS, notify = false) }
         wearableAvailable = WearableSteps.isAvailable(this)
         wearableEnabled = WearableSteps.isEnabled(this)
         startWearableSync()

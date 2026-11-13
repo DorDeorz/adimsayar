@@ -2,3 +2,4 @@ Asks for your date of birth instead of your age; the age is worked out every day
 The age typed before stays in use until a date of birth is set.
 A birthday greeting arrives around 09:00 on your birthday.
 The bird's song is quieter and softer; the phone's volume keys set it, and it stays quiet when the phone is on silent.
+Optional: tells you when a new version is out. It checks GitHub once a day, sends a notification and shows an Update card on Today.

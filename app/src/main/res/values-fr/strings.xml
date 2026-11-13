@@ -1295,6 +1295,7 @@
         <item>Demande la date de naissance au lieu de l\'âge ; l\'âge est calculé chaque jour. L\'âge saisi avant reste utilisé tant qu\'aucune date de naissance n\'est indiquée</item>
         <item>Un message d\'anniversaire arrive vers 09:00 le jour de votre anniversaire (Paramètres → Notifications → Message d\'anniversaire)</item>
         <item>Le chant de l’oiseau (quand vous le nourrissez ou choisissez un chant) est plus doux et moins fort ; les touches de volume le règlent, et il se tait quand le téléphone est en silencieux</item>
+        <item>Prévient à la sortie d’une nouvelle version : si tu l’actives, consulte GitHub une fois par jour, envoie une notification et affiche une carte Mettre à jour sur Aujourd’hui (Paramètres → À propos)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>

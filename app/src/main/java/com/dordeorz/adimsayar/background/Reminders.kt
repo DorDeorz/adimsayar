@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.edit
@@ -339,11 +340,19 @@ object Reminders {
         Schedules.setAlarm(alarms, next, pending)
     }
 
-    internal fun notify(context: Context, id: Int, title: String, text: String, tab: String? = null) {
+    internal fun notify(
+        context: Context,
+        id: Int,
+        title: String,
+        text: String,
+        tab: String? = null,
+        channelId: String = CHANNEL_ID,
+        @StringRes channelName: Int = R.string.notify_channel,
+    ) {
         val manager = NotificationManagerCompat.from(context)
         if (!manager.areNotificationsEnabled()) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, context.getString(R.string.notify_channel), NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(channelId, context.getString(channelName), NotificationManager.IMPORTANCE_DEFAULT)
             context.getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
         }
         val open = PendingIntent.getActivity(
@@ -352,7 +361,7 @@ object Reminders {
             Intent(context, MainActivity::class.java).apply { if (tab != null) putExtra(MainActivity.EXTRA_TAB, tab) },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(text)

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.security.MessageDigest
 import java.time.DayOfWeek
 
-/** Settings of the extras added in 0.17: reminders, the bird's looks, app lock, simple view. */
+/** Settings of the extras added in 0.17: reminders, the bird's looks, app lock, simple view; 0.21: the update check. */
 data class ExtraSettings(
     val morningSummary: Boolean = false,
     val morningHour: Int = DEFAULT_MORNING_HOUR,
@@ -32,6 +32,8 @@ data class ExtraSettings(
     val unlockedLooks: Set<String> = emptySet(),
     val seedsSpent: Long = 0L,
     val fedOn: Long = -1L,
+    val updateWatch: Boolean = false,
+    val updateAsked: Boolean = false,
 )
 
 const val DEFAULT_MORNING_HOUR = 8
@@ -75,6 +77,8 @@ class ExtrasStore private constructor(context: Context) {
             putStringSet(KEY_UNLOCKED, HashSet(next.unlockedLooks))
             putLong(KEY_SEEDS_SPENT, next.seedsSpent)
             putLong(KEY_FED_ON, next.fedOn)
+            putBoolean(KEY_UPDATE_WATCH, next.updateWatch)
+            putBoolean(KEY_UPDATE_ASKED, next.updateAsked)
         }
         _extras.value = next
     }
@@ -110,6 +114,8 @@ class ExtrasStore private constructor(context: Context) {
         unlockedLooks = prefs.getStringSet(KEY_UNLOCKED, null).orEmpty().toSet(),
         seedsSpent = prefs.getLong(KEY_SEEDS_SPENT, 0L),
         fedOn = prefs.getLong(KEY_FED_ON, -1L),
+        updateWatch = prefs.getBoolean(KEY_UPDATE_WATCH, false),
+        updateAsked = prefs.getBoolean(KEY_UPDATE_ASKED, false),
     )
 
     companion object {
@@ -136,6 +142,8 @@ class ExtrasStore private constructor(context: Context) {
         private const val KEY_UNLOCKED = "bird_unlocked"
         private const val KEY_SEEDS_SPENT = "seeds_spent"
         private const val KEY_FED_ON = "bird_fed_on"
+        private const val KEY_UPDATE_WATCH = "update_watch"
+        private const val KEY_UPDATE_ASKED = "update_asked"
 
         fun parsePlan(text: String?): Map<DayOfWeek, Int> = text.orEmpty().split(',').mapNotNull { part ->
             val day = part.substringBefore(':').toIntOrNull()?.takeIf { it in 1..7 } ?: return@mapNotNull null

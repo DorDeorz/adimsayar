@@ -103,6 +103,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -133,14 +134,11 @@ import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
-import com.dordeorz.adimsayar.data.InstallStart
 import com.dordeorz.adimsayar.data.UpdateChecker
-import com.dordeorz.adimsayar.data.UpdateInstaller
-import com.dordeorz.adimsayar.data.UpdateResult
+import com.dordeorz.adimsayar.data.UpdateWatch
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
 import com.dordeorz.adimsayar.data.WEIGHT_RANGE
-import java.io.File
 import java.time.format.TextStyle
 import kotlinx.coroutines.launch
 
@@ -486,81 +484,18 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     dialog = SettingsDialog.Log
                 }
                 val uriHandler = LocalUriHandler.current
-                var checking by remember { mutableStateOf(false) }
-                var update by remember { mutableStateOf<UpdateResult?>(null) }
-                var progress by remember { mutableStateOf<Int?>(null) }
-                var apk by remember { mutableStateOf<File?>(null) }
-                var downloadFailed by remember { mutableStateOf(false) }
-                var needsPermission by remember { mutableStateOf(false) }
-                var confirmDownload by remember { mutableStateOf(false) }
-                val available = update as? UpdateResult.Available
-                val download: (UpdateResult.Available, String) -> Unit = { release, url ->
-                    scope.launch {
-                        progress = 0
-                        val downloaded = UpdateInstaller.download(context, url, release.version) { percent ->
-                            scope.launch { progress = percent }
-                        }
-                        progress = null
-                        apk = downloaded
-                        downloadFailed = downloaded == null
-                        if (downloaded != null) {
-                            val start = UpdateInstaller.install(context, downloaded)
-                            needsPermission = start == InstallStart.NeedsPermission
-                        }
-                    }
+                SwitchRow(
+                    title = stringResource(R.string.update_watch),
+                    hint = stringResource(R.string.update_watch_hint),
+                    checked = state.extra.extras.updateWatch,
+                    onCheckedChange = actions.extra::setUpdateWatch,
+                )
+                val known by UpdateWatch.get(context).latest.collectAsStateWithLifecycle()
+                val update = rememberUpdateFlow(UpdateWatch.pending(known, null, state.version))
+                ClickRow(stringResource(R.string.check_updates), update.statusText()) {
+                    update.tap(state.version) { uriHandler.openUri(it) }
                 }
-                ClickRow(
-                    stringResource(R.string.check_updates),
-                    when {
-                        checking -> stringResource(R.string.update_checking)
-                        progress != null -> stringResource(R.string.update_downloading, progress ?: 0)
-                        needsPermission -> stringResource(R.string.update_install_permission)
-                        apk != null -> stringResource(R.string.update_ready)
-                        downloadFailed -> stringResource(R.string.update_download_failed)
-                        available != null -> stringResource(R.string.update_available, available.version)
-                        update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
-                        update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
-                        update == UpdateResult.Failed -> stringResource(R.string.update_failed)
-                        else -> stringResource(R.string.check_updates_hint)
-                    },
-                ) {
-                    val file = apk
-                    when {
-                        checking || progress != null -> Unit
-                        file != null -> {
-                            val start = UpdateInstaller.install(context, file)
-                            needsPermission = start == InstallStart.NeedsPermission
-                            if (start == InstallStart.Failed) {
-                                apk = null
-                                downloadFailed = true
-                            }
-                        }
-                        available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
-                        available?.apkUrl != null -> confirmDownload = true
-                        else -> scope.launch {
-                            checking = true
-                            update = UpdateChecker.check(state.version)
-                            checking = false
-                        }
-                    }
-                }
-                val url = available?.apkUrl
-                if (confirmDownload && available != null && url != null) {
-                    AlertDialog(
-                        onDismissRequest = { confirmDownload = false },
-                        title = { Text(stringResource(R.string.update_consent_title)) },
-                        text = { Text(stringResource(R.string.update_consent_text)) },
-                        confirmButton = {
-                            TextButton(onClick = {
-                                confirmDownload = false
-                                download(available, url)
-                            }) { Text(stringResource(R.string.update_consent_download)) }
-                        },
-                        dismissButton = {
-                            TextButton(onClick = { confirmDownload = false }) { Text(stringResource(R.string.cancel)) }
-                        },
-                    )
-                }
+                UpdateConsentDialog(update)
                 ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
                     runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }
                 }

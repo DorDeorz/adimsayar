@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_watch">새 버전 알림</string>
+    <string name="update_watch_hint">하루에 한 번 GitHub를 확인하고 새 버전이 나오면 알림을 보냅니다</string>
+    <string name="update_channel">업데이트</string>
+    <string name="update_new_title">FitWren %1$s 출시</string>
+    <string name="update_notify_text">현재 %1$s 버전을 사용 중입니다. 눌러서 업데이트하세요.</string>
+    <string name="update_ask_title">새 버전이 나오면 알려 드릴까요?</string>
+    <string name="update_ask_text">FitWren은 하루에 한 번 GitHub에서 최신 버전 번호를 확인하고 새 버전이 나오면 알림을 보냅니다. 사용자 데이터는 전혀 전송되지 않습니다. 나중에 설정 → 정보에서 바꿀 수 있습니다.</string>
+    <string name="update_ask_no">아니요</string>
+    <string name="update_ask_yes">네, 알려 주세요</string>
+    <string name="update_card_text">현재 %1$s 버전을 사용 중입니다. 업데이트는 GitHub에서 받으며 데이터는 그대로 유지됩니다.</string>
+    <string name="update_card_later">나중에</string>
+    <string name="update_card_update">업데이트</string>
+    <string name="update_card_install">설치</string>
+</resources>
