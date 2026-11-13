@@ -92,7 +92,7 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 
 ### Ve ayrıca
 - Günlük hedef, haftalık hedef, haftanın ilk günü, km ya da mil
-- İsteğe bağlı bildirimler: hedefe ulaşınca, hedefe yaklaşınca, akşam seri hatırlatması, haftalık özet, su ve kilo hatırlatmaları, sabah özeti, yeni rekor, bir saat hareketsiz kalınca uyarı, yürüyüş saati planı ve ayın raporu
+- İsteğe bağlı bildirimler: hedefe ulaşınca, hedefe yaklaşınca, akşam seri hatırlatması, haftalık özet, su ve kilo hatırlatmaları, doğum günü kutlaması, sabah özeti, yeni rekor, bir saat hareketsiz kalınca uyarı, yürüyüş saati planı ve ayın raporu
 - Bugünün adımı ve bir bardak su için hızlı ayar kutucukları, uygulama kısayolları ve sesli "Bugün kaç adım attım?"
 - Canlı duvar kâğıdı: adım attıkça çalıkuşu yuvadan dala uçar
 - PIN, parmak izi ya da yüzle uygulama kilidi

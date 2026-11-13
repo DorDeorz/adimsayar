@@ -2,6 +2,15 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.21.0
+
+Yaş yerine doğum tarihi ve doğum günü kutlaması. Veritabanı sürümü değişmedi (v7).
+
+- Ayarlar → Vücut ve mesafe'de yaş yerine doğum tarihi sorulur (`BirthDateDialog`). Tarih yazarak girilir, takvim bir dokunuş uzakta; 10–100 yaş arası seçilebilir. Yaş her gün doğum tarihinden hesaplanır (`AppSettings.ageOn`), nabız bölgeleri ve fitness yaşı bunu kullanır.
+- Geçiş: önceden girilen yaş (`age` ayarı) doğum tarihi girilene kadar kullanılmaya devam eder; satırda "Girilmedi · şimdilik N yaş sayılıyor" yazar ve takvim o yaşın yılında açılır. Doğum tarihi girilince `age` da güncellenir.
+- Doğum günü kutlaması: doğum gününde saat 09:00 civarı "İyi ki doğdun!" bildirimi gelir (`Reminders.birthdayCheck`, yılda bir kez). Telefon 09:00'da kapalıysa ya da doğum tarihi o gün girildiyse bildirim hemen gelir. 29 Şubat doğumlular, Şubat'ın 28 çektiği yıllarda 28 Şubat'ta kutlanır. Ayarlar → Bildirimler → "Doğum günü kutlaması" ile kapatılabilir; varsayılan açık, ama doğum tarihi girilmeden bir şey göndermez.
+- Doğum tarihi ayarlarla birlikte tam yedeğe girer (`birth_date`, `birthday_notification`).
+
 ## 0.20.5
 
 Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (v7).

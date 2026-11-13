@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Vous rappelle de vous peser vers 09:00 le premier jour de la semaine.</string>
     <string name="notify_weight_title">C\'est l\'heure de la pesée</string>
     <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans FitWren.</string>
+    <string name="birthday_notification">Message d\'anniversaire</string>
+    <string name="birthday_notification_hint">Vous envoie un message vers 09:00 le jour de votre anniversaire.</string>
+    <string name="birthday_notification_needs_date">Vous souhaite votre anniversaire. Saisissez d\'abord votre date de naissance dans « Corps et distance ».</string>
+    <string name="notify_birthday_title">Joyeux anniversaire ! 🎂</string>
+    <string name="notify_birthday_text">Vous avez %1$d ans aujourd\'hui. À de nombreuses années en bonne santé, riches en pas !</string>
     <string name="notify_health_resting">Fréquence cardiaque au repos moyenne : %1$d bpm</string>
     <string name="notify_health_resting_down">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de moins que la semaine dernière</string>
     <string name="notify_health_resting_up">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de plus que la semaine dernière</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Musculation</string>
     <string name="exercise_other">Entraînement</string>
-    <string name="age">Âge</string>
+    <string name="birth_date">Date de naissance</string>
+    <string name="birth_date_missing">Non renseignée · %1$d ans retenus pour le moment</string>
+    <string name="birth_date_hint">Votre âge est calculé chaque jour à partir de la date de naissance ; il sert aux zones cardiaques et à l\'âge de forme.</string>
+    <string name="birth_date_pick">Saisissez votre date de naissance</string>
     <string name="age_value">%1$d ans</string>
-    <string name="age_unit">ans</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Eau</string>
@@ -1284,6 +1291,10 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Demande la date de naissance au lieu de l\'âge ; l\'âge est calculé chaque jour. L\'âge saisi avant reste utilisé tant qu\'aucune date de naissance n\'est indiquée</item>
+        <item>Un message d\'anniversaire arrive vers 09:00 le jour de votre anniversaire (Paramètres → Notifications → Message d\'anniversaire)</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>
         <item>Health Connect comme source du bracelet ne compte plus les pas du téléphone comme pas du bracelet ; « Ne pas compter le téléphone avec le bracelet » fonctionne correctement</item>

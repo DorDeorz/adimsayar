@@ -121,7 +121,6 @@ import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.WIDGET_OPACITY_OPTIONS
-import com.dordeorz.adimsayar.data.AGE_RANGE
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.GLASS_OPTIONS
 import com.dordeorz.adimsayar.data.WATER_GOAL_RANGE
@@ -158,11 +157,12 @@ private enum class SettingsPage(@param:StringRes val title: Int, @param:Drawable
     About(R.string.settings_about, R.drawable.ic_info),
 }
 
-private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, WaterGoal, Log, ReleaseNotes, Language }
+private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, BirthDate, WaterGoal, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.21.0", R.array.release_notes_0_21_0),
     ReleaseNote("0.20.5", R.array.release_notes_0_20_5),
     ReleaseNote("0.20.4", R.array.release_notes_0_20_4),
     ReleaseNote("0.20.3", R.array.release_notes_0_20_3),
@@ -327,8 +327,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
                     dialog = SettingsDialog.Weight
                 }
-                ValueRow(stringResource(R.string.age), stringResource(R.string.age_value, settings.age)) {
-                    dialog = SettingsDialog.Age
+                val birthDate = settings.birthDate
+                val birthValue = if (birthDate == null) {
+                    stringResource(R.string.birth_date_missing, settings.age)
+                } else {
+                    FULL_DATE_FORMAT.format(birthDate) + " · " + stringResource(R.string.age_value, settings.ageOn(state.today))
+                }
+                ClickRow(stringResource(R.string.birth_date), birthValue + "\n" + stringResource(R.string.birth_date_hint)) {
+                    dialog = SettingsDialog.BirthDate
                 }
                 ChoiceRow(
                     title = stringResource(R.string.distance_unit),
@@ -404,6 +410,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     hint = stringResource(R.string.weight_reminder_hint),
                     checked = settings.weightReminder,
                     onCheckedChange = actions.onWeightReminderChange,
+                )
+                SwitchRow(
+                    title = stringResource(R.string.birthday_notification),
+                    hint = stringResource(
+                        if (settings.birthDate == null) R.string.birthday_notification_needs_date else R.string.birthday_notification_hint,
+                    ),
+                    checked = settings.birthdayNotification,
+                    onCheckedChange = actions.onBirthdayNotificationChange,
                 )
                 NotificationsExtras(state, actions)
                 state.exactAlarmsAllowed?.let { allowed ->
@@ -573,13 +587,10 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             onSave = { actions.onWeightChange(it.toInt()) },
             onDismiss = { dialog = null },
         )
-        SettingsDialog.Age -> GoalDialog(
-            title = stringResource(R.string.age),
-            current = settings.age.toLong(),
-            range = AGE_RANGE.first.toLong()..AGE_RANGE.last.toLong(),
-            presets = emptyList(),
-            unit = stringResource(R.string.age_unit),
-            onSave = { actions.onAgeChange(it.toInt()) },
+        SettingsDialog.BirthDate -> BirthDateDialog(
+            current = settings.birthDate,
+            typedAge = settings.age,
+            onSave = actions.onBirthDateChange,
             onDismiss = { dialog = null },
         )
         SettingsDialog.WaterGoal -> GoalDialog(
@@ -1715,7 +1726,14 @@ private fun AppPickerDialog(onDismiss: () -> Unit) {
 @Composable
 private fun SettingsMenu(state: MainUiState, onOpen: (SettingsPage) -> Unit) {
     val settings = state.settings
-    val on = listOf(settings.goalNotification, settings.streakReminder, settings.nearGoalNotification, settings.weeklySummary, settings.weightReminder)
+    val on = listOf(
+        settings.goalNotification,
+        settings.streakReminder,
+        settings.nearGoalNotification,
+        settings.weeklySummary,
+        settings.weightReminder,
+        settings.birthdayNotification && settings.birthDate != null,
+    )
     val phone = stringResource(if (state.xiaomiEnabled) R.string.xiaomi_card_title else R.string.source_sensor)
     val wearable = when {
         state.bandDirectEnabled -> stringResource(R.string.source_direct)

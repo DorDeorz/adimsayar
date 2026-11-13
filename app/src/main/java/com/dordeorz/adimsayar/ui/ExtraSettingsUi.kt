@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DisplayMode
+import androidx.compose.material3.SelectableDates
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -39,6 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.Birthday
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.HealthWrite
 import com.dordeorz.adimsayar.data.MONTHLY_GOAL_RANGE
@@ -285,6 +290,54 @@ internal fun DateRangeDialog(
         },
     ) {
         DateRangePicker(state = picker, modifier = Modifier.weight(1f))
+    }
+}
+
+/** Asks for the birth date; it opens on typing the date, the calendar is one tap away. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun BirthDateDialog(current: LocalDate?, typedAge: Int, onSave: (LocalDate) -> Unit, onDismiss: () -> Unit) {
+    val today = remember { LocalDate.now() }
+    val years = Birthday.earliest(today).year..Birthday.latest(today).year
+    val allowed = remember(today) {
+        object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean = Birthday.allowed(utcDate(utcTimeMillis), today)
+
+            override fun isSelectableYear(year: Int): Boolean = year in years
+        }
+    }
+    // Without a birth date yet, the calendar opens in the year the typed age points to.
+    val shown = Birthday.clamp(current ?: today.minusYears(typedAge.toLong()), today).withDayOfMonth(1)
+    val picker = rememberDatePickerState(
+        initialSelectedDateMillis = current?.let(::utcMillis),
+        initialDisplayedMonthMillis = utcMillis(shown),
+        yearRange = years,
+        initialDisplayMode = DisplayMode.Input,
+        selectableDates = allowed,
+    )
+    val picked = picker.selectedDateMillis?.let(::utcDate)?.takeIf { Birthday.allowed(it, today) }
+    DatePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    if (picked != null) onSave(picked)
+                    onDismiss()
+                },
+                enabled = picked != null,
+            ) { Text(stringResource(R.string.save)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    ) {
+        DatePicker(
+            state = picker,
+            title = {
+                Text(
+                    stringResource(R.string.birth_date_pick),
+                    modifier = Modifier.padding(start = 24.dp, end = 12.dp, top = 16.dp),
+                )
+            },
+        )
     }
 }
 

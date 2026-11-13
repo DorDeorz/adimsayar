@@ -34,6 +34,7 @@ class SystemEventReceiver : BroadcastReceiver() {
                 if (intent.action == ACTION_MIDNIGHT && SmartGoal.applyIfDue(appContext)) Widgets.updateAll(appContext)
                 if (intent.action == ACTION_EVENING) Reminders.eveningCheck(appContext)
                 if (intent.action == ACTION_WEIGHT) Reminders.weightCheck(appContext)
+                if (intent.action == ACTION_BIRTHDAY) Reminders.birthdayCheck(appContext)
                 if (intent.action == ACTION_WATER) Reminders.waterCheck(appContext)
                 if (intent.action == ACTION_FACE) FaceSchedule.apply(appContext)
                 if (intent.action == ACTION_MORNING) ExtraReminders.morning(appContext)
@@ -50,6 +51,7 @@ class SystemEventReceiver : BroadcastReceiver() {
         const val ACTION_MIDNIGHT = "com.dordeorz.adimsayar.MIDNIGHT"
         const val ACTION_EVENING = "com.dordeorz.adimsayar.EVENING"
         const val ACTION_WEIGHT = "com.dordeorz.adimsayar.WEIGHT"
+        const val ACTION_BIRTHDAY = "com.dordeorz.adimsayar.BIRTHDAY"
         const val ACTION_WATER = "com.dordeorz.adimsayar.WATER"
         const val ACTION_WATER_ADD = "com.dordeorz.adimsayar.WATER_ADD"
         const val ACTION_FACE = "com.dordeorz.adimsayar.FACE"
@@ -65,6 +67,7 @@ class SystemEventReceiver : BroadcastReceiver() {
             ACTION_MIDNIGHT,
             ACTION_EVENING,
             ACTION_WEIGHT,
+            ACTION_BIRTHDAY,
             ACTION_WATER,
             ACTION_FACE,
             ACTION_MORNING,
@@ -76,6 +79,7 @@ class SystemEventReceiver : BroadcastReceiver() {
             ACTION_MIDNIGHT,
             ACTION_EVENING,
             ACTION_WEIGHT,
+            ACTION_BIRTHDAY,
             ACTION_WATER,
             ACTION_WATER_ADD,
             ACTION_FACE,

@@ -92,7 +92,7 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 
 ### And also
 - Daily goal, weekly goal, first day of week, km or miles
-- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders, morning summary, new records, a nudge after an hour of sitting, a walk schedule and the monthly report
+- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders, a birthday greeting, morning summary, new records, a nudge after an hour of sitting, a walk schedule and the monthly report
 - Quick settings tiles for today's steps and adding a glass of water, app shortcuts, and "How many steps today?" read aloud
 - Live wallpaper: the wren flies from its nest to a branch as you walk
 - App lock with a PIN, fingerprint or face

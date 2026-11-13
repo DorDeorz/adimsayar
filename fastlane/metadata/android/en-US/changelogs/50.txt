@@ -1,0 +1,3 @@
+Asks for your date of birth instead of your age; the age is worked out every day.
+The age typed before stays in use until a date of birth is set.
+A birthday greeting arrives around 09:00 on your birthday.
