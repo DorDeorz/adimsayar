@@ -641,6 +641,7 @@
     <string name="heart_resting_low">안정 시 심박수는 %1$d bpm으로 보통보다 낮아요. 규칙적으로 운동하는 사람에게 흔하며 어지럼이나 피로가 없다면 대개 괜찮아요.</string>
     <string name="heart_resting_normal">안정 시 심박수는 %1$d bpm으로 정상 범위(60–100)예요. 시간이 지나며 낮아지면 보통 체력이 좋아졌다는 뜻이에요.</string>
     <string name="heart_resting_high">안정 시 심박수는 %1$d bpm으로 정상보다 높아요(100 초과). 계속 높다면 의사와 상담하세요.</string>
+    <string name="heart_resting_missing">이 날은 안정 시 심박수가 없습니다: 밤에 밴드를 착용하지 않았습니다. 낮 측정값으로는 안정 시 값이 실제보다 높게 나옵니다.</string>
     <string name="heart_tap_hint">그래프에서 시간을 누르면 자세히 볼 수 있어요</string>
     <string name="heart_hour_detail">%1$s–%2$s · 최저 %3$d · 평균 %4$d · 최고 %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · 이 시간 측정 없음</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">파일을 쓸 수 없습니다</string>
     <string name="restore_done">백업 복원됨(%1$d행)</string>
     <string name="restore_failed">이 파일은 FitWren 백업이 아닙니다</string>
+    <string name="auto_backup">자동 백업</string>
+    <string name="auto_backup_hint">고른 폴더에 하루에 한 번 전체 백업을 쓰고 최근 %1$d일치를 보관합니다. SD 카드나 클라우드와 동기화되는 폴더를 고르면 휴대폰을 초기화해도 백업이 남습니다.</string>
+    <string name="auto_backup_folder">폴더: %1$s</string>
+    <string name="auto_backup_last">마지막 백업: %1$s</string>
+    <string name="auto_backup_failed">폴더에 쓸 수 없습니다. 껐다가 다시 켜서 폴더를 다시 고르세요.</string>
     <string name="health_write">헬스 커넥트에 쓰기</string>
     <string name="health_write_hint">FitWren의 시간별 걸음이 Google Fit 같은 다른 앱에도 보입니다</string>
     <string name="health_write_reading">헬스 커넥트에서 걸음을 읽는 동안에는 쓰지 않습니다. 두 번 세지 않도록요</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_22_0">
+        <item>자동 백업: 고른 폴더에 하루에 한 번 전체 백업을 쓰고 최근 7일치를 보관합니다(설정 → 데이터 → 자동 백업)</item>
+        <item>읽기 기록이 이제 약 하루 반을 보관하며 “공유”로 보낼 수 있습니다(설정 → 정보 → 읽기 기록)</item>
+        <item>안정 시 심박수가 없는 날에는 심박수 카드에 이유가 표시됩니다</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>주말 목표가 이제 이번 주 도전 과제, 월간 보고서, 오늘 페이지의 주간 막대, 수면 비교에도 적용됩니다</item>
         <item>HyperOS 걸음 기록을 켰을 때 비어 있던 활동 시간 지도, 목표까지 남은 시간, Health Connect에 쓰기가 이제 작동합니다</item>

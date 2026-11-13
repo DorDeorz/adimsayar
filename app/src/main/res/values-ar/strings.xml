@@ -641,6 +641,7 @@
     <string name="heart_resting_low">نبضك أثناء الراحة %1$d نبضة/د: أقل من المعتاد. يشيع لدى من يمارسون الرياضة بانتظام، وغالبًا لا مشكلة إن لم يصاحبه دوار أو تعب.</string>
     <string name="heart_resting_normal">نبضك أثناء الراحة %1$d نبضة/د: ضمن المعدل الطبيعي (60–100). انخفاضه مع الوقت يدل غالبًا على تحسن لياقتك.</string>
     <string name="heart_resting_high">نبضك أثناء الراحة %1$d نبضة/د: أعلى من الطبيعي (أكثر من 100). إن استمر كذلك فاستشر طبيبًا.</string>
+    <string name="heart_resting_missing">لا يوجد نبض راحة لهذا اليوم: لم يُلبس السوار ليلًا. قياسات النهار تجعل نبض الراحة يبدو أعلى من حقيقته.</string>
     <string name="heart_tap_hint">المس ساعة في الرسم لعرض التفاصيل</string>
     <string name="heart_hour_detail">%1$s–%2$s · الأدنى %3$d · المتوسط %4$d · الأعلى %5$d نبضة/د</string>
     <string name="heart_hour_empty">%1$s–%2$s · لا قياسات في هذه الساعة</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">تعذرت كتابة الملف</string>
     <string name="restore_done">استُعيدت النسخة (%1$d صف)</string>
     <string name="restore_failed">هذا الملف ليس نسخة FitWren</string>
+    <string name="auto_backup">نسخ احتياطي تلقائي</string>
+    <string name="auto_backup_hint">يكتب نسخة احتياطية كاملة مرة في اليوم في المجلد الذي تختاره ويحتفظ بآخر %1$d أيام. إذا اخترت مجلدًا على بطاقة SD أو مجلدًا يُزامَن مع السحابة فستبقى النسخة حتى لو أُعيد ضبط الهاتف.</string>
+    <string name="auto_backup_folder">المجلد: %1$s</string>
+    <string name="auto_backup_last">آخر نسخة: %1$s</string>
+    <string name="auto_backup_failed">تعذرت الكتابة في المجلد. أوقف هذا الخيار ثم شغّله لاختيار المجلد من جديد.</string>
     <string name="health_write">الكتابة في Health Connect</string>
     <string name="health_write_hint">تظهر خطوات FitWren الساعية في تطبيقات أخرى مثل Google Fit</string>
     <string name="health_write_reading">تبقى الكتابة متوقفة أثناء قراءة الخطوات من Health Connect وإلا حُسبت مرتين</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_22_0">
+        <item>نسخ احتياطي تلقائي: يكتب نسخة احتياطية كاملة مرة في اليوم في المجلد الذي تختاره ويحتفظ بآخر 7 أيام (الإعدادات → البيانات → نسخ احتياطي تلقائي)</item>
+        <item>سجل القراءات يحتفظ الآن بنحو يوم ونصف ويمكن إرساله بزر «مشاركة» (الإعدادات → حول → سجل القراءات)</item>
+        <item>بطاقة النبض توضّح السبب عندما لا يكون لليوم نبض راحة</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>هدف عطلة نهاية الأسبوع يُحتسب الآن أيضًا في تحديات هذا الأسبوع والتقرير الشهري وأعمدة الأسبوع في صفحة «اليوم» ومقارنة النوم</item>
         <item>عند تشغيل سجل خطوات HyperOS كانت خريطة الساعات النشطة والوقت المتبقي حتى الهدف والكتابة في Health Connect تبقى فارغة؛ وهي تعمل الآن</item>

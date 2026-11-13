@@ -22,31 +22,34 @@ object Backup {
     // Device pairing, sources and sync state stay with this phone.
     private val DEVICE_KEYS = listOf("band_", "wearable_", "xiaomi_", "background_service", "face_design", "battery_card")
 
-    /** Writes the backup; returns the number of rows written. */
+    /**
+     * Writes the backup; returns the number of rows written. The rows go out one by one, so months of
+     * heart rate samples are never held in memory as one text.
+     */
     fun write(context: Context, output: OutputStream): Int {
         val database = StepDatabase.get(context)
         val db = database.openHelper.readableDatabase
-        val tables = JSONObject()
-        var rows = 0
-        for (table in StepDatabase.TABLES) {
-            val array = JSONArray()
-            db.query("SELECT * FROM `$table`").use { cursor ->
-                while (cursor.moveToNext()) {
-                    array.put(row(cursor))
-                    rows++
-                }
-            }
-            tables.put(table, array)
-        }
         val prefs = JSONObject()
         for (name in PREFS) prefs.put(name, prefsJson(context, name))
-        val root = JSONObject()
-            .put("format", FORMAT)
-            .put("version", VERSION)
-            .put("created", System.currentTimeMillis())
-            .put("tables", tables)
-            .put("prefs", prefs)
-        output.bufferedWriter().use { it.write(root.toString()) }
+        var rows = 0
+        output.bufferedWriter().use { out ->
+            out.write("{\"format\":${JSONObject.quote(FORMAT)},\"version\":$VERSION,\"created\":${System.currentTimeMillis()},\"tables\":{")
+            StepDatabase.TABLES.forEachIndexed { index, table ->
+                if (index > 0) out.write(",")
+                out.write(JSONObject.quote(table) + ":[")
+                var first = true
+                db.query("SELECT * FROM `$table`").use { cursor ->
+                    while (cursor.moveToNext()) {
+                        if (!first) out.write(",")
+                        first = false
+                        out.write(row(cursor).toString())
+                        rows++
+                    }
+                }
+                out.write("]")
+            }
+            out.write("},\"prefs\":$prefs}")
+        }
         return rows
     }
 

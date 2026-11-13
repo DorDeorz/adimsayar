@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Votre fréquence au repos est de %1$d bpm : sous la plage habituelle. Fréquent chez les sportifs, généralement sans gravité sans vertiges ni fatigue.</string>
     <string name="heart_resting_normal">Votre fréquence au repos est de %1$d bpm : dans la norme (60–100). Une baisse au fil du temps indique souvent une meilleure forme.</string>
     <string name="heart_resting_high">Votre fréquence au repos est de %1$d bpm : au-dessus de la norme (plus de 100). Si cela persiste, consultez un médecin.</string>
+    <string name="heart_resting_missing">Pas de fréquence cardiaque au repos pour ce jour : le bracelet n\'a pas été porté la nuit. Les mesures de jour feraient paraître la valeur au repos plus élevée qu\'elle ne l\'est.</string>
     <string name="heart_tap_hint">Touchez une heure du graphique pour les détails</string>
     <string name="heart_hour_detail">%1$s–%2$s · min %3$d · moyenne %4$d · max %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · aucune mesure à cette heure</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Impossible d\'écrire le fichier</string>
     <string name="restore_done">Sauvegarde restaurée (%1$d lignes)</string>
     <string name="restore_failed">Ce fichier n\'est pas une sauvegarde FitWren</string>
+    <string name="auto_backup">Sauvegarde automatique</string>
+    <string name="auto_backup_hint">Écrit une sauvegarde complète une fois par jour dans le dossier de ton choix et garde les %1$d derniers jours. Avec un dossier sur la carte SD ou synchronisé avec le cloud, la sauvegarde reste même si le téléphone est réinitialisé.</string>
+    <string name="auto_backup_folder">Dossier : %1$s</string>
+    <string name="auto_backup_last">Dernière sauvegarde : %1$s</string>
+    <string name="auto_backup_failed">Impossible d\'écrire dans le dossier. Désactive puis réactive cette option pour choisir à nouveau le dossier.</string>
     <string name="health_write">Écrire dans Health Connect</string>
     <string name="health_write_hint">Les pas horaires de FitWren apparaissent aussi dans d\'autres apps comme Google Fit</string>
     <string name="health_write_reading">L\'écriture reste désactivée tant que les pas sont lus depuis Health Connect, sinon ils compteraient deux fois</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Sauvegarde automatique : écrit une sauvegarde complète une fois par jour dans le dossier de ton choix et garde les 7 derniers jours (Paramètres → Données → Sauvegarde automatique)</item>
+        <item>Le journal des lectures garde maintenant environ un jour et demi et s\'envoie avec « Partager » (Paramètres → À propos → Journal des lectures)</item>
+        <item>La carte de fréquence cardiaque explique pourquoi un jour n\'a pas de valeur au repos</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>L\'objectif du week-end compte maintenant aussi dans les défis de la semaine, le rapport mensuel, les barres de la semaine sur Aujourd\'hui et la comparaison du sommeil</item>
         <item>Avec le relevé de pas HyperOS activé, la carte des heures actives, le temps restant jusqu\'à l\'objectif et l\'écriture dans Health Connect restaient vides ; ils fonctionnent maintenant</item>

@@ -13,6 +13,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.health.connect.client.PermissionController
+import com.dordeorz.adimsayar.data.AutoBackup
 import com.dordeorz.adimsayar.data.Backup
 import com.dordeorz.adimsayar.data.DataEraser
 import com.dordeorz.adimsayar.data.DayNotes
@@ -47,6 +48,19 @@ class ExtraController(private val activity: ComponentActivity) {
 
     private val restoreLauncher = activity.registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) restoreFrom(uri)
+    }
+
+    private val autoBackupLauncher = activity.registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { folder ->
+        if (folder != null) {
+            AutoBackup.setFolder(context, folder)
+            // The first backup right away, so a folder that cannot be written shows at once.
+            io {
+                val rows = AutoBackup.run(context)
+                withContext(Dispatchers.Main) {
+                    if (rows == null) toast(R.string.backup_failed) else toast(Locales.wrap(context).getString(R.string.backup_done, rows))
+                }
+            }
+        }
     }
 
     private val healthWriteLauncher =
@@ -143,6 +157,12 @@ class ExtraController(private val activity: ComponentActivity) {
     fun backup() = backupLauncher.launch(BACKUP_FILE_NAME.format(LocalDate.now()))
 
     fun restore() = restoreLauncher.launch(arrayOf("application/json", "application/octet-stream", "text/*"))
+
+    /** Turning it on asks for the folder; the backup is on once a folder is chosen. */
+    fun setAutoBackup(on: Boolean) {
+        if (!on) return AutoBackup.setFolder(context, null)
+        runCatching { autoBackupLauncher.launch(null) }.onFailure { toast(R.string.backup_failed) }
+    }
 
     fun eraseAll() = io {
         DataEraser.eraseAll(context)

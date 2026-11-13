@@ -2,6 +2,21 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.22.0
+
+Otomatik yedek, okuma kaydını paylaşma, dinlenme nabzı açıklaması. Veritabanı sürümü değişmedi (v7).
+
+- Otomatik yedek (isteğe bağlı, Ayarlar → Veri → "Otomatik yedek"). Açınca Android'in klasör seçicisi açılır; seçilen klasöre hemen bir yedek yazılır, sonra günde bir kez (gece yarısından sonraki ilk 15 dakikalık işte) yenisi yazılır (`AutoBackup`, `StepUpdater.refresh` içinden).
+  - Dosya adı `fitwren-otomatik-yedek-YYYY-AA-GG.json`; elle alınan yedekle aynı biçimde, "Yedeği geri yükle" ile açılır.
+  - Son 7 günün dosyası tutulur, daha eskiler ve aynı günün eski kopyaları silinir (`AutoBackup.outdated`). Klasördeki başka dosyalara, elle alınan yedeklere de, dokunulmaz.
+  - Yazılamazsa (klasör silinmiş, kart çıkarılmış, yer kalmamış) yarım dosya silinir, satırda "Klasöre yazılamadı" yazar ve en erken bir saat sonra yeniden denenir.
+  - Klasör seçimi `auto_backup` tercihlerinde durur, yedeğe girmez. Yeni izin yok; klasöre erişim Android'in dosya seçicisiyle verilir.
+  - SD karttaki ya da bulutla eşitlenen bir klasör seçilirse yedek, telefon sıfırlansa da kalır.
+- Yedek yazılırken satırlar tek tek dosyaya gider (`Backup.write`). Önceden bütün veritabanı bellekte tek bir metin olarak kuruluyordu; aylarca dakikalık nabız verisi birikince bellek yetmeyebilirdi. Dosya biçimi aynı. Geri yükleme hâlâ dosyayı bütün olarak okur.
+- Okuma kaydı 60 yerine 400 satır tutar (arka planda yaklaşık bir buçuk gün), böylece sabahki bileklik eşitlemesi akşam hâlâ görülür. Pencerede son 120 satır görünür; yeni "Paylaş" tuşu bütün kaydı, ilk satırında sürüm ve telefon modeliyle, metin olarak gönderir. Her satırda bütün dosya yeniden yazılmaz: satır dosyanın sonuna eklenir, dosya arada bir kısaltılır (`okuma-kaydi.txt`; eski `okumalar.txt` ilk açılışta taşınır).
+- Nabız kartı ve nabız detay sayfası, dinlenme nabzı gösterilmeyen günde nedenini yazar: bileklik gece takılı değildi (`heart_resting_missing`; yalnız doğrudan bileklik bağlantısında).
+- Yeni testler: `AutoBackupTest` (günde bir kez, başarısız denemeden sonra bekleme, hangi dosyalar silinir).
+
 ## 0.21.1
 
 Projenin baştan sona taranmasında bulunan hataların düzeltmeleri. Yeni özellik yok. Veritabanı sürümü değişmedi (v7).

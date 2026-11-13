@@ -48,6 +48,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.drawText
@@ -56,6 +57,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.BandPeriod
 import com.dordeorz.adimsayar.data.BmiCategory
 import com.dordeorz.adimsayar.data.HealthMath
@@ -783,6 +785,15 @@ internal fun HeartDayBody(data: HeartDay?, age: Int, date: LocalDate) {
                 },
                 resting,
             ),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 8.dp),
+        )
+    }
+    // With the band connected directly, a day has no resting value only when the band was not worn the night before.
+    if (data.resting == null && BandDirect.isEnabled(LocalContext.current)) {
+        Text(
+            stringResource(R.string.heart_resting_missing),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 8.dp),

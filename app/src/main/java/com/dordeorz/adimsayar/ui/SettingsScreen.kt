@@ -1,6 +1,8 @@
 package com.dordeorz.adimsayar.ui
 
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
@@ -160,6 +162,7 @@ private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Birth
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
 private val RELEASE_NOTES = listOf(
+    ReleaseNote("0.22.0", R.array.release_notes_0_22_0),
     ReleaseNote("0.21.1", R.array.release_notes_0_21_1),
     ReleaseNote("0.21.0", R.array.release_notes_0_21_0),
     ReleaseNote("0.20.5", R.array.release_notes_0_20_5),
@@ -197,6 +200,7 @@ private val RELEASE_NOTES = listOf(
     ReleaseNote("0.1.0", R.array.release_notes_0_1_0),
 )
 
+private const val LOG_LINES_SHOWN = 120
 private val DAILY_PRESETS = listOf(6_000L, 8_000L, 10_000L, 12_000L, 15_000L)
 private val WEEKLY_PRESETS = listOf(42_000L, 56_000L, 70_000L, 84_000L, 105_000L)
 private val WATER_PRESETS = listOf(1_500, 2_000, 2_500, 3_000)
@@ -555,12 +559,25 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             onSave = actions.onWeeklyGoalChange,
             onDismiss = { dialog = null },
         )
-        SettingsDialog.Log -> TextListDialog(stringResource(R.string.log_title), onDismiss = { dialog = null }) {
-            if (state.logLines.isEmpty()) {
-                Text(stringResource(R.string.log_empty), style = MaterialTheme.typography.bodySmall)
-            }
-            state.logLines.take(50).forEach { line ->
-                Text(line, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        SettingsDialog.Log -> {
+            val context = LocalContext.current
+            val shareLabel = stringResource(R.string.share_button)
+            TextListDialog(
+                stringResource(R.string.log_title),
+                onDismiss = { dialog = null },
+                action = {
+                    // The dialog shows the newest lines; sharing sends the whole log.
+                    TextButton(onClick = { shareLog(context, shareLabel, state.version, state.logLines) }, enabled = state.logLines.isNotEmpty()) {
+                        Text(shareLabel)
+                    }
+                },
+            ) {
+                if (state.logLines.isEmpty()) {
+                    Text(stringResource(R.string.log_empty), style = MaterialTheme.typography.bodySmall)
+                }
+                state.logLines.take(LOG_LINES_SHOWN).forEach { line ->
+                    Text(line, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
         }
         SettingsDialog.ReleaseNotes -> TextListDialog(stringResource(R.string.release_notes), onDismiss = { dialog = null }) {
@@ -633,7 +650,7 @@ internal fun GoalDialog(
 }
 
 @Composable
-internal fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Composable () -> Unit) {
+internal fun TextListDialog(title: String, onDismiss: () -> Unit, action: (@Composable () -> Unit)? = null, content: @Composable () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
@@ -644,7 +661,22 @@ internal fun TextListDialog(title: String, onDismiss: () -> Unit, content: @Comp
             ) { content() }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) } },
+        dismissButton = action,
     )
+}
+
+/** Hands the whole reading log to another app as text, with the version and phone on its first line. */
+private fun shareLog(context: Context, title: String, version: String, lines: List<String>) {
+    val head = "FitWren $version · Android ${Build.VERSION.RELEASE} · ${Build.MANUFACTURER} ${Build.MODEL}"
+    val send = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, (listOf(head) + lines).joinToString("\n"))
+    }
+    try {
+        context.startActivity(Intent.createChooser(send, title).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    } catch (e: ActivityNotFoundException) {
+        // Nothing can take text; the log stays on screen.
+    }
 }
 
 @Composable

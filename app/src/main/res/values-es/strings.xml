@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Tu frecuencia en reposo es %1$d lpm: por debajo de lo habitual. Es común en quienes hacen ejercicio y suele estar bien si no hay mareos ni cansancio.</string>
     <string name="heart_resting_normal">Tu frecuencia en reposo es %1$d lpm: en el rango normal (60–100). Si baja con el tiempo, suele indicar mejor forma física.</string>
     <string name="heart_resting_high">Tu frecuencia en reposo es %1$d lpm: por encima de lo normal (más de 100). Si se mantiene, consulta a un médico.</string>
+    <string name="heart_resting_missing">Sin pulso en reposo este día: no llevaste la pulsera por la noche. Las mediciones diurnas harían que el valor en reposo pareciera más alto de lo que es.</string>
     <string name="heart_tap_hint">Toca una hora del gráfico para ver detalles</string>
     <string name="heart_hour_detail">%1$s–%2$s · mínima %3$d · media %4$d · máxima %5$d lpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · sin mediciones en esta hora</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">No se pudo escribir el archivo</string>
     <string name="restore_done">Copia restaurada (%1$d filas)</string>
     <string name="restore_failed">Este archivo no es una copia de FitWren</string>
+    <string name="auto_backup">Copia automática</string>
+    <string name="auto_backup_hint">Escribe una copia completa una vez al día en la carpeta que elijas y conserva los últimos %1$d días. Si eliges una carpeta de la tarjeta SD o una que se sincronice con la nube, la copia sigue ahí aunque se restablezca el teléfono.</string>
+    <string name="auto_backup_folder">Carpeta: %1$s</string>
+    <string name="auto_backup_last">Última copia: %1$s</string>
+    <string name="auto_backup_failed">No se pudo escribir en la carpeta. Desactiva y vuelve a activar esta opción para elegir la carpeta otra vez.</string>
     <string name="health_write">Escribir en Health Connect</string>
     <string name="health_write_hint">Los pasos por hora de FitWren aparecen también en otras apps como Google Fit</string>
     <string name="health_write_reading">La escritura queda desactivada mientras se leen pasos de Health Connect; si no, contarían dos veces</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Copia automática: escribe una copia completa una vez al día en la carpeta que elijas y conserva los últimos 7 días (Ajustes → Datos → Copia automática)</item>
+        <item>El registro de lecturas ahora guarda cerca de un día y medio y se puede enviar con «Compartir» (Ajustes → Acerca de → Registro de lecturas)</item>
+        <item>La tarjeta del pulso explica por qué un día no tiene pulso en reposo</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>El objetivo de fin de semana ahora también cuenta en los retos de esta semana, el informe mensual, las barras de la semana en Hoy y la comparación del sueño</item>
         <item>Con el registro de pasos de HyperOS activado, el mapa de horas activas, el tiempo que falta hasta el objetivo y la escritura en Health Connect quedaban vacíos; ya funcionan</item>

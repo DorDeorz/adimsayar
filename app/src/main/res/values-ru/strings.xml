@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Пульс в покое %1$d уд/мин: ниже обычного. Часто бывает у тех, кто регулярно тренируется, и без головокружения и слабости обычно нормален.</string>
     <string name="heart_resting_normal">Пульс в покое %1$d уд/мин: в норме (60–100). Снижение со временем обычно означает лучшую форму.</string>
     <string name="heart_resting_high">Пульс в покое %1$d уд/мин: выше нормы (больше 100). Если так остаётся долго, обратитесь к врачу.</string>
+    <string name="heart_resting_missing">За этот день нет пульса в покое: браслет не носили ночью. По дневным измерениям пульс в покое получился бы выше, чем на самом деле.</string>
     <string name="heart_tap_hint">Нажмите на час на графике, чтобы увидеть подробности</string>
     <string name="heart_hour_detail">%1$s–%2$s · мин. %3$d · сред. %4$d · макс. %5$d уд/мин</string>
     <string name="heart_hour_empty">%1$s–%2$s · в этот час нет измерений</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Не удалось записать файл</string>
     <string name="restore_done">Копия восстановлена (%1$d строк)</string>
     <string name="restore_failed">Этот файл не является копией FitWren</string>
+    <string name="auto_backup">Автоматическая резервная копия</string>
+    <string name="auto_backup_hint">Раз в день записывает полную резервную копию в выбранную папку и хранит последние %1$d дн. Если выбрать папку на SD-карте или папку, которая синхронизируется с облаком, копия сохранится и после сброса телефона.</string>
+    <string name="auto_backup_folder">Папка: %1$s</string>
+    <string name="auto_backup_last">Последняя копия: %1$s</string>
+    <string name="auto_backup_failed">Не удалось записать в папку. Выключи и снова включи эту настройку, чтобы выбрать папку заново.</string>
     <string name="health_write">Записывать в Health Connect</string>
     <string name="health_write_hint">Почасовые шаги FitWren появятся и в других приложениях, например Google Fit</string>
     <string name="health_write_reading">Запись выключена, пока шаги читаются из Health Connect, иначе они посчитаются дважды</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Автоматическая резервная копия: раз в день записывает полную копию в выбранную папку и хранит последние 7 дней (Настройки → Данные → Автоматическая резервная копия)</item>
+        <item>Журнал чтений теперь хранит около полутора суток, и его можно отправить кнопкой «Поделиться» (Настройки → О приложении → Журнал чтений)</item>
+        <item>Карточка пульса объясняет, почему за день нет пульса в покое</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>Цель на выходные теперь учитывается и в заданиях недели, отчёте за месяц, недельных столбцах на странице «Сегодня» и сравнении сна</item>
         <item>При включённой записи шагов HyperOS карта активных часов, время до цели и запись в Health Connect оставались пустыми; теперь они работают</item>

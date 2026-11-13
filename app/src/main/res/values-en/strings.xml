@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Your resting heart rate is %1$d bpm: below the usual range. This is common in people who exercise regularly and is usually fine without dizziness or fatigue.</string>
     <string name="heart_resting_normal">Your resting heart rate is %1$d bpm: in the normal range (60–100). A drop over time usually means better fitness.</string>
     <string name="heart_resting_high">Your resting heart rate is %1$d bpm: above the normal range (over 100). If it stays this high, talk to a doctor.</string>
+    <string name="heart_resting_missing">No resting heart rate for this day: the band was not worn at night. Daytime readings would make the resting value look higher than it is.</string>
     <string name="heart_tap_hint">Tap an hour on the chart for details</string>
     <string name="heart_hour_detail">%1$s–%2$s · lowest %3$d · average %4$d · highest %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · no readings this hour</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Could not write the file</string>
     <string name="restore_done">Backup restored (%1$d rows)</string>
     <string name="restore_failed">This file is not a FitWren backup</string>
+    <string name="auto_backup">Automatic backup</string>
+    <string name="auto_backup_hint">Writes a full backup into a folder you choose once a day and keeps the last %1$d days. Pick a folder on the SD card or one that syncs to the cloud and the backup survives a phone reset.</string>
+    <string name="auto_backup_folder">Folder: %1$s</string>
+    <string name="auto_backup_last">Last backup: %1$s</string>
+    <string name="auto_backup_failed">Could not write to the folder. Turn this off and on to choose the folder again.</string>
     <string name="health_write">Write to Health Connect</string>
     <string name="health_write_hint">FitWren\'s hourly steps also show up in other apps such as Google Fit</string>
     <string name="health_write_reading">Writing stays off while steps are read from Health Connect, or they would count twice</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Automatic backup: writes a full backup into a folder you choose once a day and keeps the last 7 days (Settings → Data → Automatic backup)</item>
+        <item>The reading log now keeps about a day and a half and can be sent with “Share” (Settings → About → Reading log)</item>
+        <item>The heart rate card says why when a day has no resting heart rate</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>The weekend goal now also counts in this week\'s challenges, the monthly report, the week bars on Today and the sleep comparison</item>
         <item>With the HyperOS step record on, the active hours map, the time left to the goal and writing to Health Connect stayed empty; they work now</item>

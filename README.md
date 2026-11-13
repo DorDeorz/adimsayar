@@ -98,6 +98,7 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 - Live wallpaper: the wren flies from its nest to a branch as you walk
 - App lock with a PIN, fingerprint or face
 - Full backup and restore in one file, and deleting a date range or everything
+- Optional automatic backup: written once a day into a folder you choose, the last 7 days are kept
 - Optional smart goal that follows your recent weeks
 - Light, dark or system theme, and a welcome guide on a new install
 - 12 languages: English, Turkish, German, Spanish, French, Italian, Portuguese, Russian, Arabic, Japanese, Chinese and Korean

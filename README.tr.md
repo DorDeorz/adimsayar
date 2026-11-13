@@ -98,6 +98,7 @@ Her widget boyutuna göre düzenini değiştirir, duvar kağıdının renklerini
 - Canlı duvar kâğıdı: adım attıkça çalıkuşu yuvadan dala uçar
 - PIN, parmak izi ya da yüzle uygulama kilidi
 - Tek dosyada tam yedek ve geri yükleme, bir tarih aralığını ya da her şeyi silme
+- İsteğe bağlı otomatik yedek: seçtiğin klasöre günde bir kez yazılır, son 7 gün tutulur
 - Son haftalarına göre kendini ayarlayan isteğe bağlı akıllı hedef
 - Açık, koyu ya da sistem teması, yeni kurulumda karşılama rehberi
 - 12 dil: Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Rusça, Arapça, Japonca, Çince ve Korece

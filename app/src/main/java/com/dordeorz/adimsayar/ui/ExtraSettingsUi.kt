@@ -42,7 +42,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AutoBackup
+import com.dordeorz.adimsayar.data.AutoBackupState
 import com.dordeorz.adimsayar.data.Birthday
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.HealthWrite
@@ -53,6 +56,7 @@ import com.dordeorz.adimsayar.data.YEARLY_GOAL_RANGE
 import androidx.compose.ui.platform.LocalContext
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZoneOffset
 
 private enum class ExtraDialog { Weekend, Monthly, Yearly, Vacation, EraseRange, EraseAll, Restore }
@@ -140,6 +144,13 @@ internal fun DataExtras(state: MainUiState, actions: MainActions) {
     GroupLabel(stringResource(R.string.backup_group))
     ClickRow(stringResource(R.string.backup_write), stringResource(R.string.backup_write_hint), actions.extra::backup)
     ClickRow(stringResource(R.string.backup_restore), stringResource(R.string.backup_restore_hint)) { dialog = ExtraDialog.Restore }
+    val autoBackup by remember { AutoBackup.state(context) }.collectAsStateWithLifecycle()
+    SwitchRow(
+        title = stringResource(R.string.auto_backup),
+        hint = autoBackupHint(autoBackup),
+        checked = autoBackup.folder != null,
+        onCheckedChange = actions.extra::setAutoBackup,
+    )
     if (state.wearableAvailable) {
         HorizontalDivider(Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
         SwitchRow(
@@ -196,6 +207,18 @@ internal fun DataExtras(state: MainUiState, actions: MainActions) {
             onDismiss = { eraseDays = null },
         )
     }
+}
+
+/** Off: what it does. On: the folder, and when the last backup was written or that it could not be. */
+@Composable
+private fun autoBackupHint(state: AutoBackupState): String {
+    val folder = state.folder ?: return stringResource(R.string.auto_backup_hint, AutoBackup.KEEP)
+    val status = when {
+        state.failed -> stringResource(R.string.auto_backup_failed)
+        state.lastMs > 0L -> stringResource(R.string.auto_backup_last, TIME_FORMAT.format(Instant.ofEpochMilli(state.lastMs).atZone(ZoneId.systemDefault())))
+        else -> null
+    }
+    return listOfNotNull(stringResource(R.string.auto_backup_folder, folder), status).joinToString("\n")
 }
 
 @Composable

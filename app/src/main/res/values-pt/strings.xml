@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Sua frequência em repouso é %1$d bpm: abaixo do comum. É frequente em quem se exercita e costuma ser normal sem tontura ou cansaço.</string>
     <string name="heart_resting_normal">Sua frequência em repouso é %1$d bpm: na faixa normal (60–100). Se cair com o tempo, geralmente indica melhor condicionamento.</string>
     <string name="heart_resting_high">Sua frequência em repouso é %1$d bpm: acima do normal (mais de 100). Se continuar assim, procure um médico.</string>
+    <string name="heart_resting_missing">Sem batimento em repouso neste dia: a pulseira não foi usada à noite. As medições diurnas fariam o valor em repouso parecer mais alto do que é.</string>
     <string name="heart_tap_hint">Toque em uma hora no gráfico para ver detalhes</string>
     <string name="heart_hour_detail">%1$s–%2$s · mínima %3$d · média %4$d · máxima %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · sem medições nesta hora</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Não foi possível gravar o arquivo</string>
     <string name="restore_done">Backup restaurado (%1$d linhas)</string>
     <string name="restore_failed">Este arquivo não é um backup do FitWren</string>
+    <string name="auto_backup">Backup automático</string>
+    <string name="auto_backup_hint">Grava um backup completo uma vez por dia na pasta que você escolher e mantém os últimos %1$d dias. Com uma pasta no cartão SD ou sincronizada com a nuvem, o backup continua lá mesmo se o celular for restaurado.</string>
+    <string name="auto_backup_folder">Pasta: %1$s</string>
+    <string name="auto_backup_last">Último backup: %1$s</string>
+    <string name="auto_backup_failed">Não foi possível gravar na pasta. Desative e ative de novo esta opção para escolher a pasta outra vez.</string>
     <string name="health_write">Gravar no Health Connect</string>
     <string name="health_write_hint">Os passos por hora do FitWren aparecem também em outros apps como o Google Fit</string>
     <string name="health_write_reading">A gravação fica desligada enquanto os passos são lidos do Health Connect, senão contariam duas vezes</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Backup automático: grava um backup completo uma vez por dia na pasta que você escolher e mantém os últimos 7 dias (Configurações → Dados → Backup automático)</item>
+        <item>O registro de leituras agora guarda cerca de um dia e meio e pode ser enviado com “Compartilhar” (Configurações → Sobre → Registro de leituras)</item>
+        <item>O cartão de batimentos explica por que um dia não tem batimento em repouso</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>A meta de fim de semana agora também vale para os desafios da semana, o relatório mensal, as barras da semana em Hoje e a comparação do sono</item>
         <item>Com o registro de passos do HyperOS ativado, o mapa de horas ativas, o tempo que falta até a meta e a gravação no Health Connect ficavam vazios; agora funcionam</item>

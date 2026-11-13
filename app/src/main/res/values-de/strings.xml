@@ -641,6 +641,7 @@
     <string name="heart_resting_low">Dein Ruhepuls ist %1$d bpm: unter dem üblichen Bereich. Bei regelmäßig Sporttreibenden häufig und ohne Schwindel oder Müdigkeit meist unbedenklich.</string>
     <string name="heart_resting_normal">Dein Ruhepuls ist %1$d bpm: im normalen Bereich (60–100). Sinkt er mit der Zeit, steigt meist die Fitness.</string>
     <string name="heart_resting_high">Dein Ruhepuls ist %1$d bpm: über dem Normalbereich (über 100). Bleibt er so hoch, sprich mit einer Ärztin oder einem Arzt.</string>
+    <string name="heart_resting_missing">Kein Ruhepuls für diesen Tag: Das Armband wurde nachts nicht getragen. Tageswerte würden den Ruhepuls höher erscheinen lassen, als er ist.</string>
     <string name="heart_tap_hint">Tippe für Details auf eine Stunde im Diagramm</string>
     <string name="heart_hour_detail">%1$s–%2$s · niedrigster %3$d · Durchschnitt %4$d · höchster %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · keine Messung in dieser Stunde</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Datei konnte nicht geschrieben werden</string>
     <string name="restore_done">Sicherung wiederhergestellt (%1$d Zeilen)</string>
     <string name="restore_failed">Diese Datei ist keine FitWren-Sicherung</string>
+    <string name="auto_backup">Automatische Sicherung</string>
+    <string name="auto_backup_hint">Schreibt einmal am Tag eine vollständige Sicherung in einen Ordner deiner Wahl und behält die letzten %1$d Tage. Mit einem Ordner auf der SD-Karte oder einem, der mit der Cloud synchronisiert wird, bleibt die Sicherung auch nach dem Zurücksetzen des Handys erhalten.</string>
+    <string name="auto_backup_folder">Ordner: %1$s</string>
+    <string name="auto_backup_last">Letzte Sicherung: %1$s</string>
+    <string name="auto_backup_failed">In den Ordner konnte nicht geschrieben werden. Schalte dies aus und wieder ein, um den Ordner neu zu wählen.</string>
     <string name="health_write">In Health Connect schreiben</string>
     <string name="health_write_hint">FitWrens stündliche Schritte erscheinen auch in anderen Apps wie Google Fit</string>
     <string name="health_write_reading">Schreiben bleibt aus, solange Schritte aus Health Connect gelesen werden, sonst zählen sie doppelt</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Automatische Sicherung: schreibt einmal am Tag eine vollständige Sicherung in einen Ordner deiner Wahl und behält die letzten 7 Tage (Einstellungen → Daten → Automatische Sicherung)</item>
+        <item>Das Ableseprotokoll behält jetzt etwa anderthalb Tage und lässt sich mit „Teilen“ verschicken (Einstellungen → Info → Ableseprotokoll)</item>
+        <item>Die Pulskarte sagt, warum ein Tag keinen Ruhepuls hat</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>Das Wochenendziel gilt jetzt auch für die Aufgaben dieser Woche, den Monatsbericht, die Wochenbalken auf Heute und den Schlafvergleich</item>
         <item>Mit eingeschalteter HyperOS-Schrittaufzeichnung blieben die Karte aktiver Stunden, die Restzeit bis zum Ziel und das Schreiben in Health Connect leer; jetzt funktionieren sie</item>

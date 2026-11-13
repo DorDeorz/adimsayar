@@ -641,6 +641,7 @@
     <string name="heart_resting_low">La tua frequenza a riposo è %1$d bpm: sotto la norma. È comune in chi fa sport e di solito va bene se non ci sono vertigini o stanchezza.</string>
     <string name="heart_resting_normal">La tua frequenza a riposo è %1$d bpm: nella norma (60–100). Se cala nel tempo, di solito la forma migliora.</string>
     <string name="heart_resting_high">La tua frequenza a riposo è %1$d bpm: sopra la norma (oltre 100). Se resta così, consulta un medico.</string>
+    <string name="heart_resting_missing">Nessun battito a riposo per questo giorno: il braccialetto non è stato indossato di notte. Le misure diurne farebbero sembrare il valore a riposo più alto di quello che è.</string>
     <string name="heart_tap_hint">Tocca un’ora nel grafico per i dettagli</string>
     <string name="heart_hour_detail">%1$s–%2$s · minima %3$d · media %4$d · massima %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · nessuna misura in quest’ora</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">Impossibile scrivere il file</string>
     <string name="restore_done">Backup ripristinato (%1$d righe)</string>
     <string name="restore_failed">Questo file non è un backup di FitWren</string>
+    <string name="auto_backup">Backup automatico</string>
+    <string name="auto_backup_hint">Scrive un backup completo una volta al giorno nella cartella che scegli e conserva gli ultimi %1$d giorni. Con una cartella sulla scheda SD o sincronizzata con il cloud, il backup resta anche se il telefono viene ripristinato.</string>
+    <string name="auto_backup_folder">Cartella: %1$s</string>
+    <string name="auto_backup_last">Ultimo backup: %1$s</string>
+    <string name="auto_backup_failed">Impossibile scrivere nella cartella. Disattiva e riattiva questa opzione per scegliere di nuovo la cartella.</string>
     <string name="health_write">Scrivi in Health Connect</string>
     <string name="health_write_hint">I passi orari di FitWren compaiono anche in altre app come Google Fit</string>
     <string name="health_write_reading">La scrittura resta disattivata mentre i passi vengono letti da Health Connect, altrimenti conterebbero due volte</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_22_0">
+        <item>Backup automatico: scrive un backup completo una volta al giorno nella cartella che scegli e conserva gli ultimi 7 giorni (Impostazioni → Dati → Backup automatico)</item>
+        <item>Il registro letture ora conserva circa un giorno e mezzo e si può inviare con «Condividi» (Impostazioni → Info → Registro letture)</item>
+        <item>La scheda del battito spiega perché un giorno non ha il battito a riposo</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>L\'obiettivo del weekend ora vale anche per le sfide della settimana, il report mensile, le barre della settimana in Oggi e il confronto del sonno</item>
         <item>Con il registro passi di HyperOS attivo, la mappa delle ore attive, il tempo che manca all\'obiettivo e la scrittura in Health Connect restavano vuoti; ora funzionano</item>

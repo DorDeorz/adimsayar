@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.background
 
 import android.content.Context
 import com.dordeorz.adimsayar.R
+import com.dordeorz.adimsayar.data.AutoBackup
 import com.dordeorz.adimsayar.data.BandDirect
 import com.dordeorz.adimsayar.data.BandLive
 import com.dordeorz.adimsayar.data.HealthWrite
@@ -47,5 +48,6 @@ object StepUpdater {
         ExtraReminders.recordCheck(context)
         StepPace.cadence(context)
         Widgets.updateAll(context)
+        AutoBackup.runIfDue(context)
     }
 }

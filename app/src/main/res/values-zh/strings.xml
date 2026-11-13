@@ -641,6 +641,7 @@
     <string name="heart_resting_low">你的静息心率为 %1$d 次/分，低于常见范围。经常运动的人较常见，如无头晕或乏力通常无碍。</string>
     <string name="heart_resting_normal">你的静息心率为 %1$d 次/分，处于正常范围（60–100）。随时间下降通常意味着体能提升。</string>
     <string name="heart_resting_high">你的静息心率为 %1$d 次/分，高于正常范围（超过 100）。如持续偏高，请咨询医生。</string>
+    <string name="heart_resting_missing">这一天没有静息心率：夜间没有佩戴手环。用白天的测量来算，静息值会比实际偏高。</string>
     <string name="heart_tap_hint">点击图表中的某个小时查看详情</string>
     <string name="heart_hour_detail">%1$s–%2$s · 最低 %3$d · 平均 %4$d · 最高 %5$d 次/分</string>
     <string name="heart_hour_empty">%1$s–%2$s · 该小时无测量</string>
@@ -1068,6 +1069,11 @@
     <string name="backup_failed">无法写入文件</string>
     <string name="restore_done">备份已恢复（%1$d 行）</string>
     <string name="restore_failed">此文件不是 FitWren 备份</string>
+    <string name="auto_backup">自动备份</string>
+    <string name="auto_backup_hint">每天向你选择的文件夹写入一次完整备份，并保留最近 %1$d 天。选择 SD 卡上的文件夹或与云端同步的文件夹，即使手机被重置，备份也还在。</string>
+    <string name="auto_backup_folder">文件夹：%1$s</string>
+    <string name="auto_backup_last">上次备份：%1$s</string>
+    <string name="auto_backup_failed">无法写入该文件夹。请关闭后重新打开此选项，重新选择文件夹。</string>
     <string name="health_write">写入 Health Connect</string>
     <string name="health_write_hint">FitWren 的每小时步数也会显示在 Google Fit 等其他应用中</string>
     <string name="health_write_reading">从 Health Connect 读取步数时不会写入，否则会重复计数</string>
@@ -1329,6 +1335,11 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_22_0">
+        <item>自动备份：每天向你选择的文件夹写入一次完整备份，并保留最近 7 天（设置 → 数据 → 自动备份）</item>
+        <item>读取记录现在保留约一天半，并可通过“分享”发送（设置 → 关于 → 读取记录）</item>
+        <item>某天没有静息心率时，心率卡片会说明原因</item>
+    </string-array>
     <string-array name="release_notes_0_21_1">
         <item>周末目标现在也用于本周挑战、月度报告、“今天”页面的周柱状图和睡眠对比</item>
         <item>开启 HyperOS 步数记录时，活跃时段图、距目标的剩余时间和写入 Health Connect 一直是空的，现在可以正常工作</item>

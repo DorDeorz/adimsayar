@@ -1,0 +1,3 @@
+New: automatic backup. Turn it on in Settings, Data and choose a folder; a full backup is written there once a day and the last 7 days are kept.
+The reading log keeps about a day and a half and can be shared.
+The heart rate card says why a day has no resting heart rate.

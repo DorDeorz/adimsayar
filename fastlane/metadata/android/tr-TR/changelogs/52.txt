@@ -1,0 +1,3 @@
+Yeni: otomatik yedek. Ayarlar, Veri altında aç ve bir klasör seç; oraya günde bir kez tam yedek yazılır, son 7 gün tutulur.
+Okuma kaydı yaklaşık bir buçuk günü tutar ve paylaşılabilir.
+Nabız kartı, dinlenme nabzı olmayan günde nedenini yazar.
