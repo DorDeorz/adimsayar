@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Tocca una scheda nella pagina Salute per aprire un calendario: sonno, frequenza cardiaca, SpO2, stress, recupero, esercizio, attività, acqua e peso giorno per giorno</item>
+        <item>Tocca un giorno per vedere quanto e a che ore hai dormito, le fasi del sonno, la frequenza cardiaca e la SpO2 nel sonno; le altre schede mostrano quel giorno nel dettaglio</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’uccellino del widget Uccello e dello sfondo animato indossa tutti gli oggetti che ha nell’app: sole, occhiali, fiore, berretto da notte, zaino</item>
         <item>Health Connect come fonte del braccialetto non conta più i passi del telefono come passi del braccialetto; «Non contare il telefono se uso il braccialetto» funziona come previsto</item>

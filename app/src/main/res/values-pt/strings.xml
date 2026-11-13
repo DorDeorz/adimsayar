@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Toque num cartão na página Saúde para abrir um calendário: sono, frequência cardíaca, SpO2, estresse, recuperação, exercício, atividade, água e peso dia a dia</item>
+        <item>Toque num dia para ver quanto e em que horários você dormiu, as fases do sono, a frequência cardíaca e o SpO2 durante o sono; os outros cartões mostram esse dia em detalhe</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>O pássaro do widget Pássaro e do papel de parede animado usa todos os itens que tem no app: sol, óculos, flor, touca de dormir, mochila</item>
         <item>O Health Connect como fonte da pulseira não conta mais os passos do próprio celular como passos da pulseira; “Não contar o celular ao usar a pulseira” funciona como deveria</item>

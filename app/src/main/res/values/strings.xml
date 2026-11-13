@@ -1323,6 +1323,10 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Sağlık kartlarına dokununca takvim açılır: uyku, nabız, SpO2, stres, toparlanma, egzersiz, aktivite, su ve kilo gün gün</item>
+        <item>Takvimde bir güne dokun: ne kadar ve hangi saatlerde uyuduğun, uyku evreleri, uykudaki nabız ve SpO2; diğer kartlarda o günün ayrıntısı</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>Kuş widget\'ı ve canlı duvar kâğıdındaki kuş, uygulamada taktığı tüm eşyaları takar: güneş, gözlük, çiçek, uyku başlığı, sırt çantası</item>
         <item>Health Connect bileklik kaynağı telefonun kendi adımlarını bileklik adımı saymaz; “Bileklik varken telefonu sayma” doğru çalışır</item>

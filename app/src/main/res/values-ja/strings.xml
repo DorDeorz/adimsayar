@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_21_0">
+        <item>健康ページのカードをタップするとカレンダーが開きます: 睡眠、心拍数、SpO2、ストレス、回復度、運動、アクティビティ、水分、体重を日ごとに</item>
+        <item>日付をタップすると、睡眠時間と眠っていた時間帯、睡眠段階、睡眠中の心拍数とSpO2が見られます。ほかのカードではその日の詳細が見られます</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>鳥ウィジェットとライブ壁紙の鳥も、アプリと同じアイテムをすべて身につけます（太陽、メガネ、花、ナイトキャップ、リュック）</item>
         <item>バンドのソースとしての Health Connect が、スマホ自体の歩数をバンドの歩数として数えなくなりました。「バンド使用中はスマホを数えない」が正しく動きます</item>

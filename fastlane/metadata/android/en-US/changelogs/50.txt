@@ -1,0 +1,2 @@
+Tap a Health card to open a calendar: sleep, heart rate, SpO2, stress, recovery, exercise, activity, water and weight day by day.
+Tap a day for its details: sleep times, stages, heart rate and SpO2 while asleep.

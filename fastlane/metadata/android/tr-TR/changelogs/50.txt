@@ -1,0 +1,2 @@
+Sağlık kartlarına dokununca takvim açılır: uyku, nabız, SpO2, stres, toparlanma, egzersiz, aktivite, su ve kilo gün gün.
+Takvimde bir güne dokununca o günün ayrıntısı görünür: uyku saatleri, evreler, uykuda nabız ve SpO2.

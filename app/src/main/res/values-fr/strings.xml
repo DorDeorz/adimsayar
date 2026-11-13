@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Touchez une carte de la page Santé pour ouvrir un calendrier : sommeil, fréquence cardiaque, SpO2, stress, récupération, exercice, activité, eau et poids jour par jour</item>
+        <item>Touchez un jour pour voir combien de temps et à quelles heures vous avez dormi, les phases de sommeil, la fréquence cardiaque et la SpO2 pendant le sommeil ; les autres cartes montrent ce jour en détail</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>
         <item>Health Connect comme source du bracelet ne compte plus les pas du téléphone comme pas du bracelet ; « Ne pas compter le téléphone avec le bracelet » fonctionne correctement</item>

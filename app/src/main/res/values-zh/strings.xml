@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_21_0">
+        <item>点按健康页面的卡片即可打开日历：按天查看睡眠、心率、SpO2、压力、恢复度、运动、活动、饮水和体重</item>
+        <item>点按某天可查看睡了多久、在哪些时段入睡、睡眠阶段，以及睡眠时的心率和 SpO2；其他卡片显示当天的详情</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>小鸟小组件和动态壁纸中的小鸟也会戴上应用里的所有物品：太阳、眼镜、花、睡帽、背包</item>
         <item>作为手环来源的 Health Connect 不再把手机自身的步数算作手环步数，“使用手环时不计手机”可正常工作</item>

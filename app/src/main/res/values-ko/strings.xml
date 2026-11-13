@@ -1322,6 +1322,10 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_21_0">
+        <item>건강 페이지의 카드를 누르면 달력이 열립니다: 수면, 심박수, SpO2, 스트레스, 회복도, 운동, 활동, 물, 체중을 날짜별로</item>
+        <item>날짜를 누르면 얼마나, 어느 시간대에 잤는지, 수면 단계, 수면 중 심박수와 SpO2를 볼 수 있습니다. 다른 카드는 그날을 자세히 보여 줍니다</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>새 위젯과 라이브 배경화면의 새도 앱에서처럼 모든 아이템을 착용합니다: 해, 안경, 꽃, 수면 모자, 배낭</item>
         <item>밴드 소스인 Health Connect가 더 이상 휴대폰 자체 걸음을 밴드 걸음으로 세지 않습니다. “밴드 사용 중에는 휴대폰을 세지 않기”가 제대로 작동합니다</item>
