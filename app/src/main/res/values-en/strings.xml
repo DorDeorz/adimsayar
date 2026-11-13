@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Tells you when a new version is out: if you turn it on, it looks at GitHub once a day, sends a notification and shows an Update card on Today (Settings → About)</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>The bird on the Bird widget and the live wallpaper wears all the items it has in the app: sun, glasses, flower, nightcap, backpack</item>
         <item>Health Connect as the band source no longer counts the phone\'s own steps as band steps, so “Don\'t count the phone while using the band” works as meant</item>

@@ -38,7 +38,7 @@ Birçok telefonda adım sayar uygulaması yok, olanlar da çoğu zaman hesap ist
 
 - **Doğru sayar.** Donanım adım sayacını okur ve adım dedektörüyle karşılaştırır. Sensör donarsa bunu fark eder ve telefonu yeniden başlatmana gerek kalmadan düzeltir.
 - **Pili yormaz.** Varsayılan olarak sürekli çalışan bir servis yoktur. Sayaç ara ara okunur ve fark kaydedilir.
-- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca senin başlattığın ya da açtığın işler için kullanılır: güncelleme kontrolü, bilekliğin anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası.
+- **Gizlidir.** Hesap, sunucu, analitik ve reklam yoktur. İnternet yalnızca senin başlattığın ya da açtığın işler için kullanılır: güncelleme kontrolü (elle ya da açarsan günde bir kez), bilekliğin anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası.
 - **Her Android telefonda çalışır.** Arka plan uygulamalarına en sert davranan iki markada, Xiaomi (HyperOS) ve Samsung'da (One UI) test edildi.
 
 ## Özellikler
@@ -166,7 +166,7 @@ Her 1.000 adım bir tohum verir. Kuşu besle ya da tohumları tüy renklerine (g
 3. İlk açılışta "Fiziksel etkinlik" iznini ver.
 4. Xiaomi telefonlarda bildirimsiz sayım için Ayarlar → Adım kaynağı → "HyperOS adım kaydını kullan"ı aç.
 
-Güncellemeler: Ayarlar → Hakkında → "Güncellemeleri kontrol et" önce onay ister, sonra yeni APK'yı GitHub'dan indirir ve Android'in kurulum ekranını açar. FitWren'i Obtainium ya da başka bir mağazadan kurduysan oradan güncelle. Sürümleri [Obtainium](https://github.com/ImranR98/Obtainium) ile de takip edebilirsin.
+Güncellemeler: Ayarlar → Hakkında → "Güncellemeleri kontrol et" önce onay ister, sonra yeni APK'yı GitHub'dan indirir ve Android'in kurulum ekranını açar. "Yeni sürümü haber ver" açıksa (uygulama Bugün sayfasında bir kez sorar) FitWren günde bir kez bakar, yeni sürüm çıkınca bildirim gönderir; Bugün sayfasındaki Güncelle kartı, kurana ya da "Sonra" diyene kadar kalır. FitWren'i Obtainium ya da başka bir mağazadan kurduysan oradan güncelle. Sürümleri [Obtainium](https://github.com/ImranR98/Obtainium) ile de takip edebilirsin.
 
 ## Gizlilik
 
@@ -174,7 +174,7 @@ FitWren günlük adım toplamlarını, suyu, kiloyu ve ayarlarını telefonda sa
 
 Uygulama yalnızca aşağıdaki işler için internete çıkar ve her birini sen başlatır ya da açarsın. Hiçbirinde senin ya da adımlarınla ilgili bilgi gönderilmez.
 
-- **Güncellemeleri kontrol et:** son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir.
+- **Güncellemeleri kontrol et:** son sürüm numarasını `api.github.com/repos/DorDeorz/adimsayar/releases/latest` adresinden okur, tekrar dokunup onaylarsan APK'yı GitHub Releases'tan indirir. "Yeni sürümü haber ver" açıksa (sen evet diyene kadar kapalı) aynı adres telefon internete bağlıyken günde bir kez, uygulamayı açınca da en fazla 6 saatte bir okunur. Yalnızca sürüm numarası okunur; indirme yine senin dokunmanı bekler.
 - **Bilekliğe hava durumu** (varsayılan kapalı): aradığın yer adı `geocoding-api.open-meteo.com` adresine gider. Sonra bileklik bağlıyken en fazla saatte bir, seçtiğin yerin yaklaşık 1 km'ye yuvarlanmış koordinatları tahmin için `api.open-meteo.com` adresine gider. "Şu anki konumu kullan" telefonun son bilinen konumunu bir kez, telefonda okur.
 - **Kadran mağazası:** açtığında bileklik modeli ve kadran numaraları, kadranların adını, resmini ve dosyasını almak için Xiaomi'nin mağazasına (`watch-appstore.iot.mi.com`) gider.
 
@@ -198,8 +198,9 @@ Konum yalnızca GPS yürüyüşü kaydederken kullanılır ve rota telefonda kal
 | `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_HEALTH` | Sayacı arka planda birkaç saniyede okumak ve isteğe bağlı "Arka planda sürekli say" |
 | `POST_NOTIFICATIONS` | İsteğe bağlı hatırlatmalar ve hedef bildirimleri |
 | `RECEIVE_BOOT_COMPLETED` | Telefon açılınca zamanlamaları yeniden kurmak |
+| `ACCESS_NETWORK_STATE` | İsteğe bağlı günlük güncelleme kontrolünü yalnızca telefon internete bağlıyken yapmak |
 | `SCHEDULE_EXACT_ALARM` | Gece yarısı yeni güne geçmek |
-| `INTERNET` | Yalnızca senin başlattıkların: güncelleme kontrolü ve indirmesi, bileklik anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası |
+| `INTERNET` | Yalnızca senin başlattıkların ya da açtıkların: güncelleme kontrolü (elle ya da günlük) ve indirmesi, bileklik anahtarı için Xiaomi ya da Zepp girişi, bilekliğe hava durumu ve kadran mağazası |
 | `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` (Android 11 ve öncesinde `BLUETOOTH`, `BLUETOOTH_ADMIN`) | İsteğe bağlı Xiaomi ya da Amazfit bileklik bağlantısı |
 | `READ_PHONE_STATE`, `READ_CALL_LOG` | İsteğe bağlı: arayanın numarasını bileklikte göstermek |
 | `ANSWER_PHONE_CALLS` | İsteğe bağlı: aramayı bileklikten reddetmek |

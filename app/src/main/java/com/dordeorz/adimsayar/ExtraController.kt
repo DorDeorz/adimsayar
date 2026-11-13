@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
 import com.dordeorz.adimsayar.background.ExtraReminders
+import com.dordeorz.adimsayar.background.UpdateChecks
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -99,6 +100,16 @@ class ExtraController(private val activity: ComponentActivity) {
         store.update { it.copy(metronomeBpm = bpm.coerceIn(BPM_RANGE)) }
         requestNotifications()
         MetronomeService.start(context, bpm.coerceIn(BPM_RANGE))
+    }
+
+    /** Turns the daily update check on or off; turning it on asks for notifications and looks right away. */
+    fun setUpdateWatch(on: Boolean) {
+        store.update { it.copy(updateWatch = on, updateAsked = true) }
+        UpdateChecks.schedule(context)
+        if (on) {
+            requestNotifications()
+            io { UpdateChecks.run(context, UpdateChecks.OPEN_GAP_MS, notify = false) }
+        }
     }
 
     fun stopMetronome() = MetronomeService.stop(context)

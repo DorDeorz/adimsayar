@@ -21,4 +21,4 @@
 
 <p>Ayrıca: günlük ve haftalık hedef, isteğe bağlı hatırlatmalar, açık ve koyu tema, 12 dil, CSV dışa ve içe aktarma (Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur).</p>
 
-<p><b>İnternet</b>: internet yalnızca senin başlattığın ya da açtığın işler için kullanılır: "Güncellemeleri kontrol et" (GitHub'dan son sürümü okur, sen onaylarsan APK'yı indirir), bilekliğin anahtarını alan Xiaomi ya da Zepp girişi, bilekliğe isteğe bağlı hava durumu (Open-Meteo, seçilen yer yaklaşık 1 km'ye yuvarlanır) ve kadran mağazası (Xiaomi). Adımların ve sağlık verilerin hiçbir yere gönderilmez.</p>
+<p><b>İnternet</b>: internet yalnızca senin başlattığın ya da açtığın işler için kullanılır: "Güncellemeleri kontrol et" (GitHub'dan son sürümü okur; elle ya da "Yeni sürümü haber ver" açıksa günde bir kez; sen onaylarsan APK'yı indirir), bilekliğin anahtarını alan Xiaomi ya da Zepp girişi, bilekliğe isteğe bağlı hava durumu (Open-Meteo, seçilen yer yaklaşık 1 km'ye yuvarlanır) ve kadran mağazası (Xiaomi). Adımların ve sağlık verilerin hiçbir yere gönderilmez.</p>

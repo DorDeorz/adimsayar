@@ -1,0 +1,1 @@
+Optional: tells you when a new version is out. It checks GitHub once a day, sends a notification and shows an Update card on Today.

@@ -1,0 +1,1 @@
+İsteğe bağlı: yeni sürüm çıkınca haber verir. Günde bir kez GitHub'a bakar, bildirim gönderir ve Bugün sayfasında Güncelle kartı gösterir.

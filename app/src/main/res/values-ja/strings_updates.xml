@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_watch">新しいバージョンを知らせる</string>
+    <string name="update_watch_hint">1日に1回 GitHub を確認し、新しいバージョンが出たら通知します</string>
+    <string name="update_channel">アップデート</string>
+    <string name="update_new_title">FitWren %1$s が出ました</string>
+    <string name="update_notify_text">現在のバージョンは %1$s です。タップしてアップデート。</string>
+    <string name="update_ask_title">新しいバージョンをお知らせしますか？</string>
+    <string name="update_ask_text">FitWren は1日に1回 GitHub で最新のバージョン番号を確認し、新しいバージョンが出たら通知します。あなたのデータは何も送信されません。あとで 設定 → アプリについて で変更できます。</string>
+    <string name="update_ask_no">いいえ</string>
+    <string name="update_ask_yes">はい、知らせて</string>
+    <string name="update_card_text">現在のバージョンは %1$s です。アップデートは GitHub からダウンロードされ、データはそのまま残ります。</string>
+    <string name="update_card_later">あとで</string>
+    <string name="update_card_update">アップデート</string>
+    <string name="update_card_install">インストール</string>
+</resources>

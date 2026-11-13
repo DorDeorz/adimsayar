@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_21_0">
+        <item>有新版本时提醒你：开启后每天查看一次 GitHub，发送通知，并在今天页面显示更新卡片（设置 → 关于）</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>小鸟小组件和动态壁纸中的小鸟也会戴上应用里的所有物品：太阳、眼镜、花、睡帽、背包</item>
         <item>作为手环来源的 Health Connect 不再把手机自身的步数算作手环步数，“使用手环时不计手机”可正常工作</item>

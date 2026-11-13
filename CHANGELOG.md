@@ -2,6 +2,16 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.21.0
+
+- Yeni sürüm çıkınca haber verme (isteğe bağlı, Ayarlar → Hakkında → "Yeni sürümü haber ver"). Kapalı başlar; Bugün sayfası bir kez "Yeni sürümleri haber vereyim mi?" diye sorar. Açıksa:
+  - Günde bir kez, telefon internete bağlıyken bir `JobScheduler` işi (`UpdateJobService`, ağ koşullu, 24 saatlik) GitHub'daki son sürüm numarasını okur (`UpdateChecks`). Yeni sürüm her sürüm için bir kez "Güncellemeler" kanalında bildirilir; bildirime dokununca Bugün sayfası açılır.
+  - Uygulama açılınca son yanıt 6 saatten eskiyse yine bakılır; bu durumda bildirim gönderilmez, kart yeter.
+  - Bugün sayfasında "FitWren X çıktı" kartı çıkar: "Güncelle" mevcut onay penceresiyle APK'yı GitHub'dan indirip kurulum ekranını açar, "Sonra" o sürümün kartını gizler (daha yeni bir sürüm çıkınca kart yine gelir). Kart, sürüm kurulunca kendiliğinden kalkar.
+  - Bulunan sürüm, bildirilen ve gizlenen sürüm kendi `update_watch` tercihlerinde durur (`UpdateWatch`), yedeğe girmez; aç/kapa ayarı `extras` içinde olduğu için yedekle taşınır.
+- Ayarlar'daki "Güncellemeleri kontrol et" satırı ile Bugün kartı aynı indirme ve kurulum adımlarını kullanır (`UpdateFlow`). Satır, arka planda bulunmuş yeni sürümü dokunmadan önce gösterir.
+- Yeni izin: `ACCESS_NETWORK_STATE` (Android 14+ ağ koşullu işler için istiyor; normal izin, sorulmaz).
+
 ## 0.20.5
 
 Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (v7).

@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Prévient à la sortie d’une nouvelle version : si tu l’actives, consulte GitHub une fois par jour, envoie une notification et affiche une carte Mettre à jour sur Aujourd’hui (Paramètres → À propos)</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’oiseau du widget Oiseau et du fond d’écran animé porte tous les objets qu’il a dans l’app : soleil, lunettes, fleur, bonnet de nuit, sac à dos</item>
         <item>Health Connect comme source du bracelet ne compte plus les pas du téléphone comme pas du bracelet ; « Ne pas compter le téléphone avec le bracelet » fonctionne correctement</item>

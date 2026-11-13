@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Avisa quando sai uma versão nova: se você ativar, consulta o GitHub uma vez por dia, envia uma notificação e mostra um cartão Atualizar em Hoje (Configurações → Sobre)</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>O pássaro do widget Pássaro e do papel de parede animado usa todos os itens que tem no app: sol, óculos, flor, touca de dormir, mochila</item>
         <item>O Health Connect como fonte da pulseira não conta mais os passos do próprio celular como passos da pulseira; “Não contar o celular ao usar a pulseira” funciona como deveria</item>

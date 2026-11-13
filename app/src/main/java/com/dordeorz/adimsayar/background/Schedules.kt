@@ -27,6 +27,7 @@ object Schedules {
         Reminders.scheduleWater(context)
         FaceSchedule.schedule(context)
         ExtraReminders.scheduleAll(context)
+        UpdateChecks.schedule(context)
     }
 
     /** Runs a full read in a job soon; [system] marks reads asked for by a system event or alarm. */
