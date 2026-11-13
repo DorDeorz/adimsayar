@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">在每周第一天 09:00 左右提醒你称体重。</string>
     <string name="notify_weight_title">该称体重了</string>
     <string name="notify_weight_text">新的一周开始了：称一下体重并记录到 FitWren。</string>
+    <string name="birthday_notification">生日祝福</string>
+    <string name="birthday_notification_hint">在你生日当天 09:00 左右发送祝福通知。</string>
+    <string name="birthday_notification_needs_date">在你生日时送上祝福。请先在“身体与距离”中输入出生日期。</string>
+    <string name="notify_birthday_title">生日快乐！🎂</string>
+    <string name="notify_birthday_text">今天你满 %1$d 岁了。愿你健康长寿、步履不停！</string>
     <string name="notify_health_resting">平均静息心率：%1$d bpm</string>
     <string name="notify_health_resting_down">平均静息心率：%1$d bpm，比上周低 %2$d</string>
     <string name="notify_health_resting_up">平均静息心率：%1$d bpm，比上周高 %2$d</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">瑜伽</string>
     <string name="exercise_strength">力量训练</string>
     <string name="exercise_other">锻炼</string>
-    <string name="age">年龄</string>
+    <string name="birth_date">出生日期</string>
+    <string name="birth_date_missing">未设置 · 暂按 %1$d 岁计算</string>
+    <string name="birth_date_hint">年龄每天根据出生日期自动计算，用于心率区间和体能年龄。</string>
+    <string name="birth_date_pick">输入出生日期</string>
     <string name="age_value">%1$d 岁</string>
-    <string name="age_unit">岁</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">饮水</string>
@@ -1285,6 +1292,8 @@
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
     <string-array name="release_notes_0_21_0">
+        <item>改为填写出生日期而不是年龄；年龄每天自动计算。在填写出生日期之前，仍使用之前输入的年龄</item>
+        <item>生日当天 09:00 左右会收到祝福通知（设置 → 通知 → 生日祝福）</item>
         <item>小鸟的叫声（喂食和选择叫声时）更轻更柔和；可用手机音量键调节，手机静音时不会响</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

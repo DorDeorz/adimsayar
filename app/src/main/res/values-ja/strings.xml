@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">週の初日の 09:00 ごろに体重を量るよう通知します。</string>
     <string name="notify_weight_title">体重を量る時間です</string>
     <string name="notify_weight_text">新しい週の始まりです。体重を量って FitWren に記録しましょう。</string>
+    <string name="birthday_notification">誕生日のお祝い</string>
+    <string name="birthday_notification_hint">誕生日の 09:00 ごろにお祝いの通知を送ります。</string>
+    <string name="birthday_notification_needs_date">誕生日にお祝いします。先に「身体と距離」で生年月日を入力してください。</string>
+    <string name="notify_birthday_title">お誕生日おめでとう！🎂</string>
+    <string name="notify_birthday_text">今日で %1$d 歳ですね。健康でたくさん歩ける一年になりますように！</string>
     <string name="notify_health_resting">平均安静時心拍数: %1$d bpm</string>
     <string name="notify_health_resting_down">平均安静時心拍数: %1$d bpm、先週より %2$d 低下</string>
     <string name="notify_health_resting_up">平均安静時心拍数: %1$d bpm、先週より %2$d 上昇</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">ヨガ</string>
     <string name="exercise_strength">筋トレ</string>
     <string name="exercise_other">ワークアウト</string>
-    <string name="age">年齢</string>
+    <string name="birth_date">生年月日</string>
+    <string name="birth_date_missing">未設定 · 現在は %1$d 歳として計算</string>
+    <string name="birth_date_hint">年齢は生年月日から毎日自動で計算され、心拍ゾーンとフィットネス年齢に使われます。</string>
+    <string name="birth_date_pick">生年月日を入力</string>
     <string name="age_value">%1$d 歳</string>
-    <string name="age_unit">歳</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">水分</string>
@@ -1285,6 +1292,8 @@
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
     <string-array name="release_notes_0_21_0">
+        <item>年齢の代わりに生年月日を入力します。年齢は毎日自動で計算されます。生年月日を入力するまでは、以前の年齢がそのまま使われます</item>
+        <item>誕生日の 09:00 ごろにお祝いの通知が届きます（設定 → 通知 → 誕生日のお祝い）</item>
         <item>鳥の鳴き声（えさをあげたときと鳴き声を選んだとき）が小さく柔らかくなりました。音量ボタンで調整でき、マナーモード中は鳴りません</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

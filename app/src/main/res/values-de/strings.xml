@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Erinnert dich am ersten Tag der Woche gegen 09:00 ans Wiegen.</string>
     <string name="notify_weight_title">Zeit zum Wiegen</string>
     <string name="notify_weight_text">Eine neue Woche beginnt: Wiege dich und trage es in FitWren ein.</string>
+    <string name="birthday_notification">Geburtstagsgruß</string>
+    <string name="birthday_notification_hint">Schickt dir an deinem Geburtstag gegen 09:00 einen Glückwunsch.</string>
+    <string name="birthday_notification_needs_date">Gratuliert dir zum Geburtstag. Trage zuerst unter „Körper und Strecke“ dein Geburtsdatum ein.</string>
+    <string name="notify_birthday_title">Alles Gute zum Geburtstag! 🎂</string>
+    <string name="notify_birthday_text">Heute wirst du %1$d. Auf viele gesunde Jahre voller Schritte!</string>
     <string name="notify_health_resting">Durchschnittlicher Ruhepuls: %1$d bpm</string>
     <string name="notify_health_resting_down">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d niedriger als letzte Woche</string>
     <string name="notify_health_resting_up">Durchschnittlicher Ruhepuls: %1$d bpm, %2$d höher als letzte Woche</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Krafttraining</string>
     <string name="exercise_other">Training</string>
-    <string name="age">Alter</string>
+    <string name="birth_date">Geburtsdatum</string>
+    <string name="birth_date_missing">Nicht gesetzt · vorerst %1$d Jahre angenommen</string>
+    <string name="birth_date_hint">Dein Alter wird täglich aus dem Geburtsdatum berechnet; es dient für Pulszonen und Fitnessalter.</string>
+    <string name="birth_date_pick">Geburtsdatum eingeben</string>
     <string name="age_value">%1$d Jahre</string>
-    <string name="age_unit">Jahre</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Wasser</string>
@@ -1285,6 +1292,8 @@
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
     <string-array name="release_notes_0_21_0">
+        <item>Fragt nach dem Geburtsdatum statt nach dem Alter; das Alter wird täglich berechnet. Das bisher eingegebene Alter gilt, bis ein Geburtsdatum gesetzt ist</item>
+        <item>An deinem Geburtstag kommt gegen 09:00 ein Glückwunsch (Einstellungen → Benachrichtigungen → Geburtstagsgruß)</item>
         <item>Der Gesang des Vogels (beim Füttern und bei der Auswahl) ist leiser und sanfter; die Lautstärketasten regeln ihn, im Lautlos-Modus bleibt er stumm</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

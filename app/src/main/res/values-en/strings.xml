@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Reminds you to weigh yourself around 09:00 on the first day of the week.</string>
     <string name="notify_weight_title">Time to weigh in</string>
     <string name="notify_weight_text">Starting a new week: weigh yourself and add it to FitWren.</string>
+    <string name="birthday_notification">Birthday greeting</string>
+    <string name="birthday_notification_hint">Sends you a greeting around 09:00 on your birthday.</string>
+    <string name="birthday_notification_needs_date">Greets you on your birthday. First enter your date of birth under “Body and distance”.</string>
+    <string name="notify_birthday_title">Happy birthday! 🎂</string>
+    <string name="notify_birthday_text">You turn %1$d today. Here is to many healthy years full of steps!</string>
     <string name="notify_health_resting">Average resting heart rate: %1$d bpm</string>
     <string name="notify_health_resting_down">Average resting heart rate: %1$d bpm, %2$d lower than last week</string>
     <string name="notify_health_resting_up">Average resting heart rate: %1$d bpm, %2$d higher than last week</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Strength training</string>
     <string name="exercise_other">Workout</string>
-    <string name="age">Age</string>
+    <string name="birth_date">Date of birth</string>
+    <string name="birth_date_missing">Not set · counting %1$d years for now</string>
+    <string name="birth_date_hint">Your age is worked out from your date of birth every day; it is used for heart rate zones and fitness age.</string>
+    <string name="birth_date_pick">Enter your date of birth</string>
     <string name="age_value">%1$d years</string>
-    <string name="age_unit">years</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Water</string>
@@ -1285,6 +1292,8 @@
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
     <string-array name="release_notes_0_21_0">
+        <item>Asks for your date of birth instead of your age; the age is worked out every day. The age typed before stays in use until a date of birth is set</item>
+        <item>A birthday greeting arrives around 09:00 on your birthday (Settings → Notifications → Birthday greeting)</item>
         <item>The bird\'s song (when you feed it or pick a song) is quieter and softer; the phone\'s volume keys set it, and it stays quiet when the phone is on silent</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

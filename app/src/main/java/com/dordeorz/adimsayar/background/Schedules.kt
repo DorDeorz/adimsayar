@@ -24,6 +24,7 @@ object Schedules {
         scheduleMidnight(context)
         Reminders.scheduleEvening(context)
         Reminders.scheduleWeight(context)
+        Reminders.scheduleBirthday(context)
         Reminders.scheduleWater(context)
         FaceSchedule.schedule(context)
         ExtraReminders.scheduleAll(context)

@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Haftanın ilk günü saat 09:00 civarı kilonu ölçmeni hatırlatır.</string>
     <string name="notify_weight_title">Kilo ölçme zamanı</string>
     <string name="notify_weight_text">Yeni haftaya başlarken kilonu ölç ve FitWren’e ekle.</string>
+    <string name="birthday_notification">Doğum günü kutlaması</string>
+    <string name="birthday_notification_hint">Doğum gününde saat 09:00 civarı seni kutlayan bir bildirim gönderir.</string>
+    <string name="birthday_notification_needs_date">Doğum gününde seni kutlar. Önce “Vücut ve mesafe” bölümünden doğum tarihini gir.</string>
+    <string name="notify_birthday_title">İyi ki doğdun! 🎂</string>
+    <string name="notify_birthday_text">Bugün %1$d yaşına giriyorsun. Nice sağlıklı ve bol adımlı yıllara!</string>
     <string name="notify_health_resting">Ortalama dinlenme nabzı: %1$d bpm</string>
     <string name="notify_health_resting_down">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d düşük</string>
     <string name="notify_health_resting_up">Ortalama dinlenme nabzı: %1$d bpm, geçen haftadan %2$d yüksek</string>
@@ -573,9 +578,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Kuvvet antrenmanı</string>
     <string name="exercise_other">Egzersiz</string>
-    <string name="age">Yaş</string>
+    <string name="birth_date">Doğum tarihi</string>
+    <string name="birth_date_missing">Girilmedi · şimdilik %1$d yaş sayılıyor</string>
+    <string name="birth_date_hint">Yaşın her gün doğum tarihinden kendiliğinden hesaplanır; nabız bölgeleri ve fitness yaşı için kullanılır.</string>
+    <string name="birth_date_pick">Doğum tarihini gir</string>
     <string name="age_value">%1$d yaş</string>
-    <string name="age_unit">yaş</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Su</string>
@@ -1286,6 +1293,8 @@
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
     <string-array name="release_notes_0_21_0">
+        <item>Yaş yerine doğum tarihi sorulur; yaş her gün kendiliğinden hesaplanır. Önceden girilen yaş, doğum tarihi girilene kadar kullanılmaya devam eder</item>
+        <item>Doğum gününde saat 09:00 civarı kutlama bildirimi gelir (Ayarlar → Bildirimler → Doğum günü kutlaması)</item>
         <item>Kuşun ötüşü (besleyince ve ötüş seçince) daha kısık ve yumuşak; telefonun ses tuşlarıyla ayarlanır, telefon sessizdeyken çalmaz</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

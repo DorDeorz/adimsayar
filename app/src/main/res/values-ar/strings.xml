@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">يذكّرك بوزن نفسك قرابة الساعة 09:00 في أول يوم من الأسبوع.</string>
     <string name="notify_weight_title">حان وقت الوزن</string>
     <string name="notify_weight_text">أسبوع جديد يبدأ: زن نفسك وأضف وزنك إلى FitWren.</string>
+    <string name="birthday_notification">تهنئة عيد الميلاد</string>
+    <string name="birthday_notification_hint">يرسل إليك تهنئة نحو الساعة 09:00 في يوم عيد ميلادك.</string>
+    <string name="birthday_notification_needs_date">يهنئك في عيد ميلادك. أدخل أولًا تاريخ ميلادك في «الجسم والمسافة».</string>
+    <string name="notify_birthday_title">عيد ميلاد سعيد! 🎂</string>
+    <string name="notify_birthday_text">تبلغ اليوم %1$d عامًا. نتمنى لك سنوات كثيرة مليئة بالصحة والخطوات!</string>
     <string name="notify_health_resting">متوسط نبض الراحة: %1$d نبضة/دقيقة</string>
     <string name="notify_health_resting_down">متوسط نبض الراحة: %1$d نبضة/دقيقة، أقل بـ %2$d من الأسبوع الماضي</string>
     <string name="notify_health_resting_up">متوسط نبض الراحة: %1$d نبضة/دقيقة، أعلى بـ %2$d من الأسبوع الماضي</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">اليوغا</string>
     <string name="exercise_strength">تمارين القوة</string>
     <string name="exercise_other">تمرين</string>
-    <string name="age">العمر</string>
+    <string name="birth_date">تاريخ الميلاد</string>
+    <string name="birth_date_missing">غير محدد · يُحتسب العمر %1$d مؤقتًا</string>
+    <string name="birth_date_hint">يُحسب عمرك يوميًا من تاريخ الميلاد، ويُستخدم لمناطق النبض والعمر اللياقي.</string>
+    <string name="birth_date_pick">أدخل تاريخ ميلادك</string>
     <string name="age_value">%1$d سنة</string>
-    <string name="age_unit">سنة</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">الماء</string>
@@ -1285,6 +1292,8 @@
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
     <string-array name="release_notes_0_21_0">
+        <item>يُطلب تاريخ الميلاد بدلًا من العمر، ويُحسب العمر يوميًا. يبقى العمر المُدخل سابقًا مستخدمًا حتى تُدخل تاريخ الميلاد</item>
+        <item>تصلك تهنئة نحو الساعة 09:00 في يوم عيد ميلادك (الإعدادات ← الإشعارات ← تهنئة عيد الميلاد)</item>
         <item>صار تغريد الطائر (عند إطعامه أو اختيار التغريد) أهدأ وأنعم؛ يُضبط بأزرار الصوت في الهاتف، ولا يُسمع عندما يكون الهاتف على الوضع الصامت</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
