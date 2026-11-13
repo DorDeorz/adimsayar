@@ -35,7 +35,7 @@ import com.dordeorz.adimsayar.background.Reminders
 import com.dordeorz.adimsayar.background.Schedules
 import com.dordeorz.adimsayar.background.StepCounterService
 import com.dordeorz.adimsayar.data.ChallengeMath
-import com.dordeorz.adimsayar.data.DayDetail
+import com.dordeorz.adimsayar.data.DayHours
 import com.dordeorz.adimsayar.data.KeptMedals
 import com.dordeorz.adimsayar.data.NO_ROUTE
 import com.dordeorz.adimsayar.data.NO_ROUTE_START
@@ -58,6 +58,7 @@ import com.dordeorz.adimsayar.data.WearableSteps
 import com.dordeorz.adimsayar.data.Weights
 import com.dordeorz.adimsayar.data.XiaomiStallDetector
 import com.dordeorz.adimsayar.data.XiaomiSteps
+import com.dordeorz.adimsayar.data.weekStartOf
 import com.dordeorz.adimsayar.sensor.LiveStepMonitor
 import com.dordeorz.adimsayar.sensor.StepSensors
 import com.dordeorz.adimsayar.ui.AppScreen
@@ -88,7 +89,9 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.YearMonth
 import kotlinx.coroutines.flow.first
 
@@ -153,7 +156,7 @@ class MainActivity : ComponentActivity() {
             refreshWidgets()
         },
         onSmartGoalChange = { enabled ->
-            val week = SmartGoal.weekOf(LocalDate.now(), settingsStore.settings.value.weekStart)
+            val week = weekStartOf(LocalDate.now(), settingsStore.settings.value.weekStart)
             settingsStore.setSmartGoal(enabled, week.toEpochDay())
         },
         onWeeklyGoalChange = { settingsStore.setWeeklyGoal(it) },
@@ -186,13 +189,7 @@ class MainActivity : ComponentActivity() {
             reportLauncher.launch(REPORT_FILE_NAME.format(month))
         },
         onImport = { importLauncher.launch(arrayOf("text/*", "application/zip", "application/octet-stream")) },
-        loadDayDetail = { date ->
-            if (XiaomiSteps.isEnabled(applicationContext)) {
-                XiaomiSteps.dayDetail(applicationContext, date)
-            } else {
-                repository.loadPhoneHours(date)?.let { DayDetail(it, 0L, 0L) }
-            }
-        },
+        loadDayDetail = { date -> DayHours.detail(applicationContext, date) },
         loadBandDay = { date -> WearableHealth.day(applicationContext, date) },
         loadBandPeriod = { to, days -> WearableHealth.period(applicationContext, to, days) },
         loadHeartDay = { date -> WearableHealth.heartDay(applicationContext, date) },
@@ -370,12 +367,23 @@ class MainActivity : ComponentActivity() {
         if (savedInstanceState == null) openRequestedTab(intent)
         setContent {
             val currentDay = today
+            // The app can stay open past midnight; move to the new day then, not only on resume.
+            LaunchedEffect(Unit) {
+                while (isActive) {
+                    val next = LocalDate.now().plusDays(1).atStartOfDay()
+                    delay(Duration.between(LocalDateTime.now(), next).toMillis().coerceAtLeast(0L) + MIDNIGHT_SLACK_MS)
+                    today = LocalDate.now()
+                }
+            }
             val appSettings by settingsStore.settings.collectAsStateWithLifecycle()
             val week by remember(currentDay) { repository.observeWeek(currentDay) }.collectAsStateWithLifecycle(emptyList())
             val history by remember { repository.observeHistory() }.collectAsStateWithLifecycle(emptyMap())
             val weights by remember { Weights.observe(applicationContext) }.collectAsStateWithLifecycle(emptyList())
             val earlyBirdFromXiaomi = xiaomiEnabled
-            val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdFromXiaomi, history[currentDay]) {
+            // Counted again when today's steps grow by EARLY_BIRD_RECOUNT_STEPS or a band sync brings new hours,
+            // not on every step: it reads every stored hour.
+            val earlyBirdKey = (history[currentDay] ?: 0L) / EARLY_BIRD_RECOUNT_STEPS
+            val earlyBirdDays by produceState<Set<LocalDate>?>(null, earlyBirdFromXiaomi, currentDay, earlyBirdKey, healthRefresh) {
                 value = withContext(Dispatchers.IO) {
                     if (earlyBirdFromXiaomi) XiaomiSteps.earlyBirdDays(applicationContext) else repository.earlyBirdDays()
                 }
@@ -502,7 +510,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         val name = intent?.getStringExtra(EXTRA_TAB) ?: return
-        Tab.entries.firstOrNull { it.name.lowercase() == name }?.let { requestedTab = it }
+        Tab.entries.firstOrNull { it.name.equals(name, ignoreCase = true) }?.let { requestedTab = it }
     }
 
     override fun onStart() {
@@ -791,12 +799,13 @@ class MainActivity : ComponentActivity() {
         const val EXTRA_TAB = "tab"
         const val TAB_HEALTH = "health"
         const val TAB_HISTORY = "history"
-        const val TAB_TODAY = "today"
         const val ACTION_ADD_WATER = "com.dordeorz.adimsayar.ADD_WATER"
         const val ACTION_OPEN_TODAY = "com.dordeorz.adimsayar.OPEN_TODAY"
         private const val SETTINGS_PREFS = "settings"
         private const val KEY_BATTERY_CARD_DISMISSED = "battery_card_dismissed"
         private const val XIAOMI_SYNC_INTERVAL_MS = 60_000L
+        private const val MIDNIGHT_SLACK_MS = 1_000L
+        private const val EARLY_BIRD_RECOUNT_STEPS = 250L
         private const val EXPORT_FILE_NAME = "fitwren-%s.csv"
         private const val REPORT_FILE_NAME = "fitwren-rapor-%s.pdf"
         private const val SOURCE_DAYS = 7L

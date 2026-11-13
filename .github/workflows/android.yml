@@ -20,20 +20,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Gradle projesi var mı
-        id: proje
-        run: |
-          if [ -f gradlew ]; then echo "var=true" >> "$GITHUB_OUTPUT"; else echo "var=false" >> "$GITHUB_OUTPUT"; echo "gradlew yok, derleme atlandı" >> "$GITHUB_STEP_SUMMARY"; fi
-      - uses: actions/setup-java@v4
-        if: steps.proje.outputs.var == 'true'
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
-      - uses: gradle/actions/setup-gradle@v4
-        if: steps.proje.outputs.var == 'true'
+      - uses: gradle/actions/setup-gradle@v5
       - name: İmza anahtarı
-        if: steps.proje.outputs.var == 'true'
         env:
           KEYSTORE_BASE64: ${{ secrets.ADIMSAYAR_KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
@@ -49,18 +42,16 @@ jobs:
             echo "İmza anahtarı yok: release APK geçici debug anahtarıyla imzalandı, telefona kurma" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Build, lint, test
-        if: steps.proje.outputs.var == 'true'
         env:
           ADIMSAYAR_KEYSTORE_PASSWORD: ${{ secrets.ADIMSAYAR_KEYSTORE_PASSWORD }}
         run: ./gradlew --stacktrace assembleDebug assembleRelease lint testDebugUnitTest
       - name: Lint raporu
-        if: always() && steps.proje.outputs.var == 'true'
+        if: always()
         run: cat app/build/intermediates/lint_intermediate_text_report/debug/lintReportDebug/lint-results-debug.txt || true
       - name: APK boyutu
-        if: steps.proje.outputs.var == 'true'
         run: ls -l app/build/outputs/apk/release/*.apk | tee -a "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
-        if: always() && steps.proje.outputs.var == 'true'
+      - uses: actions/upload-artifact@v5
+        if: always()
         with:
           name: adimsayar-apk-ve-raporlar
           path: |
@@ -68,7 +59,7 @@ jobs:
             app/build/reports/
           if-no-files-found: ignore
       - name: GitHub Release
-        if: (startsWith(github.ref, 'refs/tags/v') || inputs.yayinla) && steps.proje.outputs.var == 'true'
+        if: startsWith(github.ref, 'refs/tags/v') || inputs.yayinla
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

@@ -109,8 +109,8 @@ private fun YearCard(state: MainUiState, onStory: (Int) -> Unit) {
     val firstYear = state.history.keys.minOrNull()?.year?.coerceAtMost(currentYear) ?: currentYear
     var yearValue by rememberSaveable { mutableIntStateOf(currentYear) }
     val year = yearValue.coerceIn(firstYear, currentYear)
-    val summary = remember(state.history, state.achievements, state.settings.dailyGoal, year, state.today) {
-        AchievementMath.year(state.history, year, state.today, state.settings.dailyGoal, state.achievements.medals)
+    val summary = remember(state.history, state.achievements, state.settings, year, state.today) {
+        AchievementMath.year(state.history, year, state.today, state.settings.dailyGoal, state.achievements.medals, state.settings::goalOn)
     }
     Card {
         Column(modifier = Modifier.padding(vertical = 8.dp)) {

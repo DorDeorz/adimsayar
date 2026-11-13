@@ -398,7 +398,7 @@ class XiaomiSession(
             type == TYPE_SYSTEM && subtype == SYSTEM_DEVICE_STATE_GET -> {
                 val state = cmd.message(4)?.message(48)
                 val level = state?.uint(2)?.toInt()
-                if (level != null) onBattery(level.coerceIn(0, 100), state?.uint(1) == 1L) else requestBattery()
+                if (level != null) onBattery(level.coerceIn(0, 100), state.uint(1) == 1L) else requestBattery()
             }
             type == TYPE_SYSTEM && subtype == SYSTEM_DEVICE_STATE -> requestBattery()
             type == TYPE_SYSTEM && subtype == SYSTEM_FIND_PHONE -> cmd.message(4)?.uint(5)?.let { onEvent(BandEvent.FindPhone(it == 0L)) }
@@ -563,7 +563,10 @@ class XiaomiSession(
         }
         val file = when {
             id == null -> null
-            id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { BandFile(requested, emptyList(), it) }
+            id.isSleep -> XiaomiSleepDetails.parse(id, data)?.let { sleep ->
+                log("sleep ${sleep.bedtime}-${sleep.wake}: ${sleep.minutes} min in ${sleep.parts} parts, deep ${sleep.deep} light ${sleep.light} rem ${sleep.rem} awake ${sleep.awake}")
+                BandFile(requested, emptyList(), sleep)
+            }
             id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(id, data), samplesOnly = true)
             else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
         }

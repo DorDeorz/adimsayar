@@ -18,7 +18,8 @@ import java.time.temporal.ChronoUnit
 object PhoneHealthSteps {
 
     private const val DAYS = 3L
-    private const val PLATFORM_PACKAGE = "android"
+    /** The data origin Android uses for the phone's own step count. */
+    const val PLATFORM_PACKAGE = "android"
 
     suspend fun fillGaps(context: Context): Long {
         if (XiaomiSteps.isEnabled(context) || !WearableSteps.hasPermission(context)) return 0L

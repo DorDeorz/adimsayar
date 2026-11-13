@@ -7,18 +7,28 @@ import java.time.LocalDateTime
 /** Steps hour by hour: the phone's record, with the band's count in the hours the band sent data. */
 object DayHours {
 
-    suspend fun day(context: Context, date: LocalDate): LongArray {
-        val hours = if (XiaomiSteps.isEnabled(context)) {
-            XiaomiSteps.dayDetail(context, date)?.hours ?: LongArray(HOURS)
-        } else {
-            StepRepository.get(context).loadPhoneHours(date) ?: LongArray(HOURS)
+    suspend fun day(context: Context, date: LocalDate): LongArray = detail(context, date).hours
+
+    /**
+     * The hours of [day] with the phone's walk and run split. The split is left out on a day the band sent
+     * hours, because the band's steps have no split and the two numbers would not add up to the day.
+     */
+    suspend fun detail(context: Context, date: LocalDate): DayDetail {
+        val phone = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.dayDetail(context, date) else null
+        val hours = when {
+            phone != null -> phone.hours
+            XiaomiSteps.isEnabled(context) -> LongArray(HOURS)
+            else -> StepRepository.get(context).loadPhoneHours(date) ?: LongArray(HOURS)
         }
+        var bandDay = false
         if (BandDirect.isEnabled(context)) {
             for ((hour, steps) in StepRepository.get(context).loadBandHours(date)) {
-                if (hour.toLocalDate() == date) hours[hour.hour] = steps
+                if (hour.toLocalDate() != date) continue
+                hours[hour.hour] = steps
+                bandDay = true
             }
         }
-        return hours
+        return if (phone == null || bandDay) DayDetail(hours, 0L, 0L) else DayDetail(hours, phone.walking, phone.running)
     }
 
     /** Every hour from [from] on, for the active hours map and the walking pace. */

@@ -176,6 +176,8 @@ class BandSleepRecord(
     val rem: Int,
     val awake: Int,
     val samples: List<BandMinute> = emptyList(),
+    /** Summary blocks the night was added up from; the band writes one for each part of a broken night. */
+    val parts: Int = 0,
 )
 
 object XiaomiManualSamples {
@@ -220,7 +222,7 @@ object XiaomiSleepDetails {
 
     private const val STAGE_MAGIC = 0xfffcfafb.toInt()
     private const val TYPE_SUMMARY = 16
-    private val EMPTY_TYPES = setOf(0x2, 0x3, 0x9, 0xc, 0xd, 0xe, 0xf)
+    private const val SUMMARY_SIZE = 11
 
     fun parse(fileId: XiaomiFileId, data: ByteArray): BandSleepRecord? {
         val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
@@ -245,7 +247,15 @@ object XiaomiSleepDetails {
                 readSamples(buf, fileId.version, bed).forEach { (time, value) -> samples.add(BandMinute(time, 0, 0, spo2 = value)) }
             }
             if (fileId.version >= 3 && header and (1 shl (3 - shift)) != 0) skipSamples(buf, fileId.version, 4)
-            var summary: BandSleepRecord? = null
+            // A night the sleeper woke up in has one summary block for each part. All parts are added up;
+            // keeping only the last one showed a few minutes for a whole night. Other blocks (stages and
+            // types with no data, whose length can't be trusted) are passed by looking for the next block.
+            var parts = 0
+            var total = 0
+            var awake = 0
+            var light = 0
+            var rem = 0
+            var deep = 0
             while (buf.remaining() >= 17) {
                 if (!seekStage(buf)) break
                 buf.get()
@@ -253,21 +263,19 @@ object XiaomiSleepDetails {
                 buf.get()
                 val type = buf.get().toInt() and 0xff
                 val length = ((buf.get().toInt() and 0xff) shl 8) or (buf.get().toInt() and 0xff)
-                if (type in EMPTY_TYPES) continue
-                if (length > buf.remaining()) break
-                val block = ByteArray(length).also { buf.get(it) }
-                if (type == TYPE_SUMMARY && length >= 11) {
-                    val b = ByteBuffer.wrap(block).order(ByteOrder.BIG_ENDIAN)
-                    b.get()
-                    val total = b.short.toInt() and 0xffff
-                    val awake = b.short.toInt() and 0xffff
-                    val light = b.short.toInt() and 0xffff
-                    val rem = b.short.toInt() and 0xffff
-                    val deep = b.short.toInt() and 0xffff
-                    summary = BandSleepRecord(bed, wake, total, deep, light, rem, awake, samples)
-                }
+                if (type != TYPE_SUMMARY || length < SUMMARY_SIZE || length > buf.remaining()) continue
+                val b = ByteBuffer.wrap(ByteArray(length).also { buf.get(it) }).order(ByteOrder.BIG_ENDIAN)
+                b.get()
+                total += b.short.toInt() and 0xffff
+                awake += b.short.toInt() and 0xffff
+                light += b.short.toInt() and 0xffff
+                rem += b.short.toInt() and 0xffff
+                deep += b.short.toInt() and 0xffff
+                parts++
             }
-            return summary ?: BandSleepRecord(bed, wake, ((wake - bed) / 60).toInt(), 0, 0, 0, 0, samples)
+            val window = ((wake - bed) / 60).toInt()
+            if (parts == 0) return BandSleepRecord(bed, wake, window, 0, 0, 0, 0, samples)
+            return BandSleepRecord(bed, wake, total.coerceAtMost(window), deep, light, rem, awake, samples, parts)
         } catch (e: java.nio.BufferUnderflowException) {
             return null
         } catch (e: IllegalArgumentException) {

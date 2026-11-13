@@ -1,0 +1,2 @@
+Fixed the freeze (app not responding) after a restart or update while the band was away.
+Reminders and widgets no longer wait for the band sync.

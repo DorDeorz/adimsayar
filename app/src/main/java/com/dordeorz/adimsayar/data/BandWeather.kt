@@ -17,6 +17,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -44,12 +46,19 @@ object BandWeather {
     private const val KEY_JSON = "band_weather_json"
     private const val KEY_FETCHED = "band_weather_fetched"
     private const val REFRESH_MS = 60 * 60 * 1000L
+
+    // A sync, a reconnect and the band's own request often come within seconds of each other.
+    private const val RESEND_MS = 60_000L
     private const val TIMEOUT_MS = 15_000
     private const val SEARCH_RESULTS = 8
     private const val FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
     private const val SEARCH_URL = "https://geocoding-api.open-meteo.com/v1/search"
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val sending = Mutex()
+
+    @Volatile
+    private var lastSent = 0L
 
     fun isOn(context: Context): Boolean = prefs(context).getBoolean(KEY_ON, false)
 
@@ -80,25 +89,31 @@ object BandWeather {
         val app = context.applicationContext
         if (!isOn(app) || !BandLive.connected) return
         scope.launch {
-            val p = prefs(app)
-            val place = place(app) ?: return@launch
-            val stale = System.currentTimeMillis() - p.getLong(KEY_FETCHED, 0L) > REFRESH_MS
-            val json = if (force || stale || p.getString(KEY_JSON, null) == null) {
-                fetch(place)?.also { text ->
-                    p.edit {
-                        putString(KEY_JSON, text)
-                        putLong(KEY_FETCHED, System.currentTimeMillis())
-                    }
-                }
-            } else {
-                null
-            } ?: p.getString(KEY_JSON, null) ?: return@launch
-            val report = runCatching { parse(place.name, JSONObject(json)) }
-                .onFailure { Log.w(XiaomiBand.TAG, "weather parse: $it") }
-                .getOrNull() ?: return@launch
-            Log.i(XiaomiBand.TAG, "weather ${report.place} ${report.temperature}° code ${report.condition}")
-            BandLive.weather(report)
+            sending.withLock { send(app, force) }
         }
+    }
+
+    private fun send(app: Context, force: Boolean) {
+        if (!force && System.currentTimeMillis() - lastSent < RESEND_MS) return
+        val p = prefs(app)
+        val place = place(app) ?: return
+        val stale = System.currentTimeMillis() - p.getLong(KEY_FETCHED, 0L) > REFRESH_MS
+        val json = if (force || stale || p.getString(KEY_JSON, null) == null) {
+            fetch(place)?.also { text ->
+                p.edit {
+                    putString(KEY_JSON, text)
+                    putLong(KEY_FETCHED, System.currentTimeMillis())
+                }
+            }
+        } else {
+            null
+        } ?: p.getString(KEY_JSON, null) ?: return
+        val report = runCatching { parse(place.name, JSONObject(json)) }
+            .onFailure { Log.w(XiaomiBand.TAG, "weather parse: $it") }
+            .getOrNull() ?: return
+        Log.i(XiaomiBand.TAG, "weather ${report.place} ${report.temperature}° code ${report.condition}")
+        BandLive.weather(report)
+        lastSent = System.currentTimeMillis()
     }
 
     suspend fun search(query: String): List<WeatherPlace> = withContext(Dispatchers.IO) {
@@ -139,8 +154,11 @@ object BandWeather {
     }
 
     private fun fetch(place: WeatherPlace): String? {
+        // About 1 km is plenty for a forecast; the exact position does not leave the phone.
+        val latitude = String.format(java.util.Locale.ROOT, "%.2f", place.latitude)
+        val longitude = String.format(java.util.Locale.ROOT, "%.2f", place.longitude)
         val url = FORECAST_URL +
-            "?latitude=${place.latitude}&longitude=${place.longitude}" +
+            "?latitude=$latitude&longitude=$longitude" +
             "&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure" +
             "&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m" +
             "&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max" +

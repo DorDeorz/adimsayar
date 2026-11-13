@@ -89,12 +89,11 @@ private fun YearContent(context: Context, history: Map<LocalDate, Long>, today: 
     val cell = height / DAYS.toFloat()
     val weeks = (width / cell).toInt().coerceIn(1, MAX_WEEKS)
     val firstWeek = weekStartOf(today, settings.weekStart).minusWeeks(weeks - 1L)
-    val goal = settings.dailyGoal
-    val goalDays = history.count { (date, steps) -> !date.isBefore(firstWeek) && !date.isAfter(today) && steps >= goal }
+    val goalDays = history.count { (date, steps) -> !date.isBefore(firstWeek) && !date.isAfter(today) && steps >= settings.goalOn(date) }
     val levels = Array(weeks) { week ->
         IntArray(DAYS) { day ->
             val date = firstWeek.plusDays(week * 7L + day)
-            if (date.isAfter(today)) -1 else level(history[date] ?: 0L, goal)
+            if (date.isAfter(today)) -1 else level(history[date] ?: 0L, settings.goalOn(date))
         }
     }
     Column(modifier = GlanceModifier.fillMaxSize()) {

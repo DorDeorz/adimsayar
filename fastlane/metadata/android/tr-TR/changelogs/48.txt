@@ -1,0 +1,1 @@
+Kuş ekranında kuş üstte sabit kalıyor, seçenekler altında kayıyor; yaptığın değişikliği hemen görürsün.

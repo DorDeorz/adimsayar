@@ -99,7 +99,7 @@ class XiaomiWatchfaceTest {
         )
         s.onCommand(ProtoWriter().uint(1, 4).uint(2, 0).message(6, list).toByteArray())
         assertEquals(listOf("1", "366001"), faces!!.map { it.id })
-        val second = faces!![1]
+        val second = faces[1]
         assertTrue(second.active && second.canDelete)
     }
 

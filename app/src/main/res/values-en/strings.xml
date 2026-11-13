@@ -105,7 +105,6 @@
     <string name="daily_goal">Daily goal</string>
     <string name="weekly_goal">Weekly goal</string>
     <string name="goal_range">Between %1$s and %2$s</string>
-    <string name="settings_theme">Theme</string>
     <string name="theme_system">System default</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d days exported</string>
     <string name="import_done">%1$d days updated</string>
     <string name="csv_failed">Couldn\'t read or write the file</string>
-    <string name="settings_language">Language</string>
     <string name="language">App language</string>
     <string name="language_system">System</string>
     <string name="medal_group_early">Early bird</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">%1$d goal days</string>
 
     <string name="near_goal_notification">Notify when close to goal</string>
-    <string name="near_goal_notification_hint">You get one notification on the day you reach 80% of your daily goal.</string>
+    <string name="near_goal_notification_hint" formatted="false">You get one notification on the day you reach 80% of your daily goal.</string>
     <string name="weekly_summary">Weekly summary</string>
     <string name="weekly_summary_hint">On the last day of the week around 20:00, shows the week\'s total and the change from last week.</string>
     <string name="notify_near_title">Almost at your goal!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">Band is off</string>
     <string name="health_off_text">Pick a band or watch in Settings → Step source to see your sleep, heart rate and workout summary.</string>
-    <string name="health_title">Health summary (band)</string>
     <string name="health_last_days">Last %1$d days</string>
     <string name="health_loading">Reading from Health Connect…</string>
-    <string name="health_empty">No band data in this period</string>
     <string name="health_sleep_average">Average sleep</string>
     <string name="health_nights">%1$d nights</string>
     <string name="health_sleep_longest">Longest sleep</string>
     <string name="health_resting_average">Average resting heart rate</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">Total workouts</string>
     <string name="health_exercise_count">%1$d workouts</string>
-    <string name="health_exercise_longest">Longest workout</string>
     <string name="health_distance">Band distance</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">The band wrote no records in this period</string>
     <string name="health_no_permission">Health Connect permission not granted</string>
     <string name="health_resting_chart">Resting heart rate</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">Some health permissions are not granted</string>
     <string name="health_grant">Grant</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">Auto management → select FitWren in the app list, turn on all three permissions</string>
     <string name="wearable_card_title">Use band steps</string>
-    <string name="wearable_resync">Resync band data</string>
-    <string name="wearable_resync_hint">Reads the last 30 days of band data from Health Connect again, including hours the band app wrote late.</string>
     <string name="wearable_resync_started">Re-reading band data…</string>
     <string name="wearable_resync_done">Band data re-read</string>
     <string name="wearable_resync_failed">Couldn\'t read band data, try again shortly</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">Drag the photo with a finger, pinch to zoom</string>
     <string name="face_designer_zoom">Zoom</string>
     <string name="face_designer_dim">Dim background</string>
-    <string name="face_designer_show">Show</string>
     <string name="face_designer_show_date">Date</string>
     <string name="face_designer_show_steps">Steps</string>
     <string name="face_designer_show_bar">Goal bar</string>
@@ -1294,6 +1284,14 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_20_5">
+        <item>The bird on the Bird widget and the live wallpaper wears all the items it has in the app: sun, glasses, flower, nightcap, backpack</item>
+        <item>Health Connect as the band source no longer counts the phone\'s own steps as band steps, so “Don\'t count the phone while using the band” works as meant</item>
+        <item>The weekend goal now also applies to the Week, Month and Year widgets, the year summary and the bird\'s mood</item>
+        <item>If the app is open at midnight, the Today page moves to the new day; band alert notifications open Settings</item>
+        <item>Less work while you walk with the app open; for the band\'s weather the location is rounded to about 1 km</item>
+        <item>Sleep matches the band: when you wake up during the night the band splits the night into parts, and the app now adds up every part</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Bird screen: the bird stays pinned at the top while the options scroll below, so changes show right away</item>
     </string-array>

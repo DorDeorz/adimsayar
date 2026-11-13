@@ -11,14 +11,14 @@
 
 <p><b>Geçmiş</b>: aylık takvim, saat saat grafik, rekorlar, yıllık özet ve seri jokeri.</p>
 
-<p><b>Sağlık (isteğe bağlı)</b>: Xiaomi ve Amazfit bilekliklere Bluetooth ile doğrudan bağlanır ya da Mi Band gibi bilekliklerin Health Connect'e yazdığı adımları, uyku evrelerini, nabzı, kan oksijenini, egzersizleri ve aktif kaloriyi okur. Yalnızca okur, hiçbir şey yazmaz. Vücut kitle endeksiyle kilo kaydı.</p>
+<p><b>Sağlık (isteğe bağlı)</b>: Xiaomi ve Amazfit bilekliklere Bluetooth ile doğrudan bağlanır ya da Mi Band gibi bilekliklerin Health Connect'e yazdığı adımları, uyku evrelerini, nabzı, kan oksijenini, egzersizleri ve aktif kaloriyi okur. FitWren'in kendi adımlarını Health Connect'e yazmak isteğe bağlıdır. Vücut kitle endeksiyle kilo kaydı.</p>
 
 <p><b>Madalyalar ve hedefler</b>: kalıcı madalyalar, seviyeler, haftalık görevler ve İstanbul'dan Ankara'ya gibi sanal rotalar.</p>
 
 <p><b>Küçük bir kuş</b> toplam adımınla yumurtadan bilge kuşa büyür, ruh hali gününe göre değişir ve madalyalarla kazandığın eşyaları takar.</p>
 
-<p><b>13 widget</b>: bugün, 7 gün, seri, takvim, saat saat, ısı haritası, uyku ve nabız, kuş, su, rota, görevler, kilo ve günün özeti. Material You renkleri ve ayarlanabilir saydamlık.</p>
+<p><b>14 widget</b>: bugün, 7 gün, seri, takvim, saat saat, ısı haritası, uyku ve nabız, kuş, su, rota, görevler, kilo, günün özeti ve bileklik pili. Material You renkleri ve ayarlanabilir saydamlık.</p>
 
 <p>Ayrıca: günlük ve haftalık hedef, isteğe bağlı hatırlatmalar, açık ve koyu tema, 12 dil, CSV dışa ve içe aktarma (Samsung Health, Mi Fitness, Mi Fit ve Google Fit dışa aktarımlarını da okur).</p>
 
-<p><b>İnternet</b>: internet izni yalnızca Ayarlar'da "Güncellemeleri kontrol et"e dokunduğunda kullanılır. GitHub'dan son sürümü okur ve sen onaylarsan APK'yı indirir. Senin ya da adımlarınla ilgili hiçbir bilgi gönderilmez.</p>
+<p><b>İnternet</b>: internet yalnızca senin başlattığın ya da açtığın işler için kullanılır: "Güncellemeleri kontrol et" (GitHub'dan son sürümü okur, sen onaylarsan APK'yı indirir), bilekliğin anahtarını alan Xiaomi ya da Zepp girişi, bilekliğe isteğe bağlı hava durumu (Open-Meteo, seçilen yer yaklaşık 1 km'ye yuvarlanır) ve kadran mağazası (Xiaomi). Adımların ve sağlık verilerin hiçbir yere gönderilmez.</p>

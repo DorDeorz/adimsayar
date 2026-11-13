@@ -105,7 +105,6 @@
     <string name="daily_goal">Obiettivo giornaliero</string>
     <string name="weekly_goal">Obiettivo settimanale</string>
     <string name="goal_range">Tra %1$s e %2$s</string>
-    <string name="settings_theme">Tema</string>
     <string name="theme_system">Predefinito di sistema</string>
     <string name="theme_light">Chiaro</string>
     <string name="theme_dark">Scuro</string>
@@ -173,7 +172,6 @@
     <string name="export_done">%1$d giorni esportati</string>
     <string name="import_done">%1$d giorni aggiornati</string>
     <string name="csv_failed">Impossibile leggere o scrivere il file</string>
-    <string name="settings_language">Lingua</string>
     <string name="language">Lingua dell\'app</string>
     <string name="language_system">Sistema</string>
     <string name="medal_group_early">Mattiniero</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">%1$d giorni obiettivo</string>
 
     <string name="near_goal_notification">Avvisa quando sei vicino all\'obiettivo</string>
-    <string name="near_goal_notification_hint">Ricevi una notifica il giorno in cui raggiungi l\'80% dell\'obiettivo giornaliero.</string>
+    <string name="near_goal_notification_hint" formatted="false">Ricevi una notifica il giorno in cui raggiungi l\'80% dell\'obiettivo giornaliero.</string>
     <string name="weekly_summary">Riepilogo settimanale</string>
     <string name="weekly_summary_hint">L\'ultimo giorno della settimana verso le 20:00 mostra il totale della settimana e la variazione rispetto alla settimana precedente.</string>
     <string name="notify_near_title">Obiettivo quasi raggiunto!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">Il braccialetto è disattivato</string>
     <string name="health_off_text">Attiva i passi del braccialetto nelle impostazioni per vedere sonno, battito e allenamenti.</string>
-    <string name="health_title">Riepilogo salute (braccialetto)</string>
     <string name="health_last_days">Ultimi %1$d giorni</string>
     <string name="health_loading">Lettura da Health Connect…</string>
-    <string name="health_empty">Nessun dato del braccialetto in questo periodo</string>
     <string name="health_sleep_average">Sonno medio</string>
     <string name="health_nights">%1$d notti</string>
     <string name="health_sleep_longest">Sonno più lungo</string>
     <string name="health_resting_average">Battito a riposo medio</string>
     <string name="health_bpm">%1$d bpm</string>
-    <string name="health_exercise_total">Allenamento totale</string>
     <string name="health_exercise_count">%1$d allenamenti</string>
-    <string name="health_exercise_longest">Allenamento più lungo</string>
     <string name="health_distance">Distanza del braccialetto</string>
     <string name="health_km">%1$s km</string>
     <string name="health_no_records">Il braccialetto non ha registrato dati in questo periodo</string>
     <string name="health_no_permission">Autorizzazione Health Connect non concessa</string>
     <string name="health_resting_chart">Battito a riposo</string>
-    <string name="health_min_max">%1$d–%2$d bpm</string>
 
     <string name="health_permissions_missing">Mancano alcune autorizzazioni per la salute</string>
     <string name="health_grant">Concedi</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">Gestione automatica → seleziona FitWren nell\'elenco app, attiva tutte e tre le autorizzazioni</string>
     <string name="wearable_card_title">Usa i passi del bracciale</string>
-    <string name="wearable_resync">Risincronizza il braccialetto</string>
-    <string name="wearable_resync_hint">Rilegge da Health Connect i dati del braccialetto degli ultimi 30 giorni, comprese le ore scritte in ritardo dalla sua app.</string>
     <string name="wearable_resync_started">Rilettura dei dati del braccialetto…</string>
     <string name="wearable_resync_done">Dati del braccialetto riletti</string>
     <string name="wearable_resync_failed">Impossibile leggere i dati del braccialetto, riprova tra poco</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">Trascina la foto con un dito, pizzica per ingrandire</string>
     <string name="face_designer_zoom">Zoom</string>
     <string name="face_designer_dim">Scurisci sfondo</string>
-    <string name="face_designer_show">Mostra</string>
     <string name="face_designer_show_date">Data</string>
     <string name="face_designer_show_steps">Passi</string>
     <string name="face_designer_show_bar">Barra obiettivo</string>
@@ -1294,6 +1284,14 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_20_5">
+        <item>L’uccellino del widget Uccello e dello sfondo animato indossa tutti gli oggetti che ha nell’app: sole, occhiali, fiore, berretto da notte, zaino</item>
+        <item>Health Connect come fonte del braccialetto non conta più i passi del telefono come passi del braccialetto; «Non contare il telefono se uso il braccialetto» funziona come previsto</item>
+        <item>L’obiettivo del fine settimana vale anche nei widget Settimana, Mese e Anno, nel riepilogo annuale e nell’umore dell’uccellino</item>
+        <item>Se l’app è aperta a mezzanotte, la pagina Oggi passa al nuovo giorno; gli avvisi del braccialetto aprono le Impostazioni</item>
+        <item>Meno calcoli mentre cammini con l’app aperta; per il meteo del braccialetto la posizione è arrotondata a circa 1 km</item>
+        <item>Il sonno corrisponde al braccialetto: se ti svegli di notte il braccialetto divide la notte in parti e l’app ora le somma tutte</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Schermata dell’uccellino: l’uccellino resta fisso in alto e le opzioni scorrono sotto, così vedi subito le modifiche</item>
     </string-array>

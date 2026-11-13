@@ -2,6 +2,7 @@ package com.dordeorz.adimsayar.data
 
 import java.time.Duration
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import kotlin.math.roundToInt
@@ -101,6 +102,14 @@ object HealthMath {
         val sorted = averages.sorted()
         return sorted[(sorted.size - 1) / 10]
     }
+
+    /**
+     * Days whose heart rate gives a resting value. Without the band at night the lowest readings are daytime
+     * ones, 10 to 15 bpm above rest, and they pushed up the trend, recovery and fitness age. So when the band
+     * was worn on some nights, only the days after such a night are used; when never, every day is.
+     */
+    fun restingDays(days: Set<LocalDate>, nights: Set<LocalDate>): Set<LocalDate> =
+        if (nights.isEmpty()) days else days intersect nights
 
     fun restingCategory(bpm: Long): RestingCategory = when {
         bpm < 60L -> RestingCategory.Low

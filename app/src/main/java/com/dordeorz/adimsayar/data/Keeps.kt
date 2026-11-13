@@ -29,6 +29,9 @@ object KeptMedals {
     fun observe(context: Context): Flow<Map<String, LocalDate>> =
         StepDatabase.get(context).keep().observeMedals().map { rows -> rows.associate { it.id to LocalDate.parse(it.date) } }
 
+    suspend fun load(context: Context): Map<String, LocalDate> =
+        StepDatabase.get(context).keep().loadMedals().associate { it.id to LocalDate.parse(it.date) }
+
     fun key(medal: Medal): String = "${medal.group.name}:${medal.target}"
 
     fun apply(medals: List<Medal>, kept: Map<String, LocalDate>): List<Medal> = medals.map { medal ->

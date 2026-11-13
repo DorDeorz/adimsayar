@@ -1,0 +1,2 @@
+Erken kalkan madalyası artık HyperOS kaydı olmadan da kazanılır: telefonun ve bilekliğin saatlik kayıtlarından hesaplanır.
+Android 14 ve sonrasında telefon yeniden başlarken kaçan adımlar Health Connect'teki telefon kaydından doldurulur.

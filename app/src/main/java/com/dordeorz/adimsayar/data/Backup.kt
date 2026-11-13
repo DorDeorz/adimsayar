@@ -17,7 +17,7 @@ object Backup {
 
     private const val FORMAT = "fitwren-backup"
     private const val VERSION = 1
-    private val PREFS = listOf(SettingsStore.PREFS, ExtrasStore.PREFS)
+    private val PREFS = listOf(SettingsStore.PREFS, ExtrasStore.PREFS, ExtraMedals.ROUTES_PREFS)
 
     // Device pairing, sources and sync state stay with this phone.
     private val DEVICE_KEYS = listOf("band_", "wearable_", "xiaomi_", "background_service", "face_design", "battery_card")

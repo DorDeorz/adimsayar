@@ -10,6 +10,7 @@ import android.view.SurfaceHolder
 import com.dordeorz.adimsayar.data.Avatar
 import com.dordeorz.adimsayar.data.BirdState
 import com.dordeorz.adimsayar.data.ExtrasStore
+import com.dordeorz.adimsayar.data.KeptMedals
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.data.StreakFreezes
@@ -71,8 +72,8 @@ class BirdWallpaper : WallpaperService() {
             val history = StepRepository.get(context).loadHistory()
             val freezes = StreakFreezes.load(context)
             val goal = settings.goalOn(today)
-            val achievements = settings.achievements(history, today, freezes = freezes)
-            bird = Avatar.state(achievements, history, freezes, today, LocalTime.now().hour, goal)
+            val achievements = Avatar.keptAchievements(settings, history, today, freezes, KeptMedals.load(context))
+            bird = Avatar.state(achievements, history, freezes, today, LocalTime.now().hour, goal, settings::goalOn)
                 .styled(ExtrasStore.get(context).extras.value)
             progress = ((history[today] ?: 0L).toFloat() / goal).coerceIn(0f, 1f)
         }

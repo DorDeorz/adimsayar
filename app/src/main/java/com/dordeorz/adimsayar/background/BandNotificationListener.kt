@@ -156,8 +156,8 @@ class BandNotificationListener : NotificationListenerService() {
             }
             BandEvent.IgnoreCall -> callKey = null
             is BandEvent.CallReply -> {
-                val sent = BandReplies.send(this, event.number, event.message)
-                BandLive.replySent(sent)
+                val replied = BandReplies.send(this, event.number, event.message)
+                BandLive.replySent(replied)
                 callKey = null
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && BandNotify.canRejectCalls(this)) {
                     @Suppress("DEPRECATION")

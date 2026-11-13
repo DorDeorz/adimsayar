@@ -235,8 +235,8 @@ private class StoryPage(val title: String, val value: String, val text: String?)
 @Composable
 internal fun YearStoryDialog(state: MainUiState, year: Int, onDismiss: () -> Unit) {
     val context = LocalContext.current
-    val summary = remember(state.history, state.achievements, year, state.today) {
-        AchievementMath.year(state.history, year, state.today, state.settings.dailyGoal, state.achievements.medals)
+    val summary = remember(state.history, state.achievements, state.settings, year, state.today) {
+        AchievementMath.year(state.history, year, state.today, state.settings.dailyGoal, state.achievements.medals, state.settings::goalOn)
     }
     val km = Distance.km(summary.total, state.settings.heightCm)
     val unit = stringResource(if (state.settings.distanceUnit == DistanceUnit.Mile) R.string.unit_mile else R.string.unit_km)

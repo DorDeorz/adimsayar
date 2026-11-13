@@ -11,14 +11,14 @@
 
 <p><b>History</b>: monthly calendar, hour-by-hour chart, records, yearly summary and streak freezes.</p>
 
-<p><b>Health (optional)</b>: connects to Xiaomi and Amazfit bands directly over Bluetooth, or reads steps, sleep stages, heart rate, SpO2, workouts and active calories that bands such as the Mi Band write to Health Connect. Read only, never written. Weight log with BMI.</p>
+<p><b>Health (optional)</b>: connects to Xiaomi and Amazfit bands directly over Bluetooth, or reads steps, sleep stages, heart rate, SpO2, workouts and active calories that bands such as the Mi Band write to Health Connect. Writing FitWren's own steps to Health Connect is optional. Weight log with BMI.</p>
 
 <p><b>Medals and goals</b>: permanent medals, levels, weekly challenges and virtual routes such as Istanbul to Ankara.</p>
 
 <p><b>A little wren</b> grows from an egg to a wise bird with your total steps, changes its mood with your day and wears items you earn with medals.</p>
 
-<p><b>13 widgets</b>: today, 7 days, streak, calendar, by hour, heatmap, sleep and heart, the wren, water, route, challenges, weight and daily summary. Material You colors and adjustable transparency.</p>
+<p><b>14 widgets</b>: today, 7 days, streak, calendar, by hour, heatmap, sleep and heart, the wren, water, route, challenges, weight, daily summary and band battery. Material You colors and adjustable transparency.</p>
 
 <p>Also: daily and weekly goals, optional reminders, light and dark theme, 12 languages, CSV export and import (also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports).</p>
 
-<p><b>Network</b>: the internet permission is used only when you tap "Check for updates" in Settings. It reads the latest version from GitHub and, after you confirm, downloads the APK. Nothing about you or your steps is sent.</p>
+<p><b>Network</b>: the internet is used only for things you start or turn on: "Check for updates" (reads the latest version from GitHub and, after you confirm, downloads the APK), the Xiaomi or Zepp sign-in that fetches your band's key, the optional weather on the band (Open-Meteo, the chosen place rounded to about 1 km) and the band face store (Xiaomi). Your steps and health data are never sent.</p>

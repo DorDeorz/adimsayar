@@ -2,6 +2,32 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.20.5
+
+Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (v7).
+
+- Kuş widget'ı ve canlı duvar kâğıdı kuşu madalyaların tamamıyla çizer (`Avatar.keptAchievements`): erken kalkan grubu ve 0.17'de gelen madalyalar (mesafe, su, uyku, rota) uygulamanın sakladığı madalyalardan (`KeptMedals`) gelir. Önceden güneş, gözlük, çiçek, uyku başlığı ve sırt çantası widget'ta ve duvar kâğıdında hiç görünmüyordu; duvar kâğıdı saklanan madalyaları da okumuyordu.
+- Health Connect bileklik kaynağı (`WearableSteps.bandHourly`) FitWren'in kendi yazdığı kayıtları ve telefonun kendi kaydını (`android` kaynağı) bileklik saymaz. "Bileklik varken telefonu sayma" açıkken telefon adımları artık eklenmez.
+- Hafta sonu hedefi Hafta, Ay ve Yıl widget'larında, Geçmiş'teki yıl özetinde (`AchievementMath.year`) ve kuşun "dün hedefi kaçırdın" hâlinde (`Avatar.mood`, dünün hedefi) de kullanılır.
+- Uygulama gece yarısı açık kalırsa tarih kendiliğinden yenilenir; önceden yalnızca `onResume`'da yenileniyordu.
+- Bileklik uyarı bildirimleri (pil azaldı, bağlantı koptu) Ayarlar sekmesini açar: sekme adı büyük-küçük harf ayırmadan eşleşir.
+- Uyku: gece arada uyanınca bileklik uyku dosyasına her parça için ayrı bir özet yazar. Uygulama yalnızca son özeti alıyordu, gece birkaç dakika görünüyordu (bileklikte 3 saat, uygulamada 18 dk). Artık bütün parçalar toplanır (`XiaomiSleepDetails`); toplam, yatış ile kalkış arasından uzun olamaz. Veri bloğu olmayan bilinmeyen türler uzunluğuna bakılmadan atlanır, sonraki özetler kaybolmaz. Aynı gece bileklikten iki kez gelirse, gece bitmeden alınmış kısa kopya tam gecenin üstüne yazılmaz (`BandHealth.saveSleep`). Her uyku dosyası log'a yazılır. Önceden kaydedilmiş geceler değişmez, çünkü bileklik dosyaları gönderdikten sonra siler.
+- Sağlık sayfasındaki 7 günlük grafiklerde gün adları kısaltmayla yazılır (Pzt, Sal…); tek harf Türkçede iki kez P ve iki kez C veriyordu.
+- Geçmiş'teki gün ayrıntısında ve Saat saat widget'ında, bilekliğin veri gönderdiği saatlerde bileklik sayısı kullanılır (`DayHours`), gün toplamıyla aynı kural. Bilekliğin veri gönderdiği günlerde yürüyüş/koşu satırı gösterilmez, çünkü bileklik adımlarında bu ayrım yoktur ve sayılar toplamı tutmuyordu.
+- Tam yedek, bitirilen sanal rotaları da (`routes_done`) taşır. Başlatılan rota ve başlangıç günü zaten yedekteydi, ilerleme de adımlardan hesaplanıyor. Önceden geri yüklemeden sonra bitmiş rota sayısı sıfırdan başlıyordu.
+- Dinlenme nabzı, toparlanma ve fitness yaşı yalnızca bilekliğin gece takıldığı günlerden hesaplanır (`HealthMath.restingDays`). Gece takılmayan günlerde en düşük nabız gündüzden geliyor, 10–15 atım yüksek çıkıyordu (11–13 Kasım: 77–81, önceki günler 64–67; fitness yaşı 27'den 40'a çıkmıştı). Bileklik hiç gece takılmadıysa bütün günler kullanılır.
+- Bilekliğe hava durumu en fazla dakikada bir gönderilir. Uygulama açılınca eşitleme, yeniden bağlanma ve bilekliğin kendi isteği birkaç saniye içinde üç kez gönderiyordu.
+- Xiaomi bulutunda eksik bilgili paylaşılan ev atlanır; önceden sunucuya "null" adlı ev soruluyordu.
+- Bilekliğin hava durumu için Open-Meteo'ya giden koordinatlar iki ondalığa (yaklaşık 1 km) yuvarlanır.
+- Performans:
+  - `LiveStepMonitor` okumaları en fazla saniyede bir kaydeder (`Channel.CONFLATED`), `StepCounterService` toplu gelen olaylardan yalnızca sonuncusunu işler. Okuma sayaç toplamını taşıdığı için adım kaybı olmaz.
+  - Erken kalkan günleri her adımda değil, bugünün adımı 250 artınca, gün değişince ya da bileklik eşitlenince yeniden hesaplanır.
+  - Açılış sayısı (`Settings.Global.BOOT_COUNT`) süreç başına bir kez okunur.
+  - `StepRepository.today()` tek gün sorgusu kullanır; Bugün sayfasındaki seri koruma önerisi `remember` ile saklanır.
+- Temizlik: kullanılmayan 10 metin (12 dilde), `ic_food` ve `ic_stairs` simgeleri, `ExtrasDao.loadNotes`, `MainActivity.TAB_TODAY` silindi. `SmartGoal.weekOf` yerine `weekStartOf`, iyi gece sınırı tek yerde (`SleepInsights.GOOD_NIGHT_MINUTES`). "Hedefe yaklaşınca" açıklaması `formatted="false"`.
+- CI: `checkout`, `setup-java`, `setup-gradle`, `upload-artifact` v5'e geçti (Node.js 20 uyarısı); işe yaramayan "Gradle projesi var mı" adımı kaldırıldı.
+- Belgeler: README ve mağaza metninde internet kullanımı (hava durumu, kadran mağazası), 14 widget, eksik izinler, Güneş eşyasının koşulu ve kırık eşya tablosu düzeltildi. F-Droid sürüm notları 45–49 eklendi.
+
 ## 0.20.4
 
 - Kuş ekranı (`BirdDialog`): kuş resmi üstte sabit, besleme, renk, tür, ötüş ve aksesuar seçenekleri altında ayrı kayıyor. Değişiklik yapınca kuşu görmek için yukarı kaydırmak gerekmiyor.

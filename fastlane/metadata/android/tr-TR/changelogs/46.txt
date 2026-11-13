@@ -1,0 +1,2 @@
+Bileklik uzaktayken açılışta ve güncellemeden sonra görülen donma (uygulama yanıt vermiyor) giderildi.
+Hatırlatmalar ve widget'lar bileklik eşitlemesini beklemeden güncellenir.

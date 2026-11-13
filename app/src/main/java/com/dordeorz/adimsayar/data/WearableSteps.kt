@@ -114,8 +114,9 @@ object WearableSteps {
         val backfilled = prefs(context).getBoolean(KEY_BACKFILLED, false)
         val today = LocalDate.now()
         val from = today.minusDays(if (backfilled) RECENT_DAYS else BACKFILL_DAYS)
+        val notBand = setOf(context.packageName, PhoneHealthSteps.PLATFORM_PACKAGE)
         val days = try {
-            merged(context, bandHourly(HealthConnectClient.getOrCreate(context), from, today), from)
+            merged(context, bandHourly(HealthConnectClient.getOrCreate(context), from, today, notBand), from)
         } catch (e: CancellationException) {
             throw e
         } catch (e: SecurityException) {
@@ -143,12 +144,16 @@ object WearableSteps {
         return StepMath.mergeMixed(band, repository.loadPhoneHourMap(from), repository.loadPhoneDays(from))
     }
 
-    private suspend fun bandHourly(client: HealthConnectClient, from: LocalDate, to: LocalDate): Map<LocalDateTime, Long> {
+    /**
+     * The largest source per hour. [exclude] leaves out sources that are not a band: FitWren's own
+     * written steps and the phone's own count, which would otherwise pass for band hours.
+     */
+    private suspend fun bandHourly(client: HealthConnectClient, from: LocalDate, to: LocalDate, exclude: Set<String>): Map<LocalDateTime, Long> {
         val zone = ZoneId.systemDefault()
         val days = TimeRangeFilter.between(from.atStartOfDay(), to.plusDays(1).atStartOfDay())
         val origins = client.aggregateGroupByPeriod(
             AggregateGroupByPeriodRequest(setOf(StepsRecord.COUNT_TOTAL), days, Period.ofDays(1)),
-        ).flatMap { it.result.dataOrigins }.toSet()
+        ).flatMap { it.result.dataOrigins }.filter { it.packageName !in exclude }.toSet()
         val hours = TimeRangeFilter.between(from.atStartOfDay(zone).toInstant(), to.plusDays(1).atStartOfDay(zone).toInstant())
         val perOrigin = origins.map { origin ->
             client.aggregateGroupByDuration(

@@ -105,7 +105,6 @@
     <string name="daily_goal">Дневная цель</string>
     <string name="weekly_goal">Недельная цель</string>
     <string name="goal_range">От %1$s до %2$s</string>
-    <string name="settings_theme">Тема</string>
     <string name="theme_system">Как в системе</string>
     <string name="theme_light">Светлая</string>
     <string name="theme_dark">Тёмная</string>
@@ -173,7 +172,6 @@
     <string name="export_done">Экспортировано дней: %1$d</string>
     <string name="import_done">Обновлено дней: %1$d</string>
     <string name="csv_failed">Не удалось прочитать или записать файл</string>
-    <string name="settings_language">Язык</string>
     <string name="language">Язык приложения</string>
     <string name="language_system">Системный</string>
     <string name="medal_group_early">Ранняя пташка</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">Дней с целью: %1$d</string>
 
     <string name="near_goal_notification">Уведомлять о близости к цели</string>
-    <string name="near_goal_notification_hint">Вы получите одно уведомление в день, когда достигнете 80% дневной цели.</string>
+    <string name="near_goal_notification_hint" formatted="false">Вы получите одно уведомление в день, когда достигнете 80% дневной цели.</string>
     <string name="weekly_summary">Итоги недели</string>
     <string name="weekly_summary_hint">В последний день недели около 20:00 показывает сумму за неделю и изменение по сравнению с прошлой неделей.</string>
     <string name="notify_near_title">Цель почти достигнута!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">Браслет выключен</string>
     <string name="health_off_text">Включите шаги браслета в настройках, чтобы видеть сон, пульс и тренировки.</string>
-    <string name="health_title">Здоровье (браслет)</string>
     <string name="health_last_days">Последние %1$d дн.</string>
     <string name="health_loading">Чтение из Health Connect…</string>
-    <string name="health_empty">Нет данных браслета за этот период</string>
     <string name="health_sleep_average">Средний сон</string>
     <string name="health_nights">Ночей: %1$d</string>
     <string name="health_sleep_longest">Самый долгий сон</string>
     <string name="health_resting_average">Средний пульс в покое</string>
     <string name="health_bpm">%1$d уд/мин</string>
-    <string name="health_exercise_total">Всего тренировок</string>
     <string name="health_exercise_count">Тренировок: %1$d</string>
-    <string name="health_exercise_longest">Самая долгая тренировка</string>
     <string name="health_distance">Расстояние браслета</string>
     <string name="health_km">%1$s км</string>
     <string name="health_no_records">Браслет не записал данных за этот период</string>
     <string name="health_no_permission">Нет разрешения Health Connect</string>
     <string name="health_resting_chart">Пульс в покое</string>
-    <string name="health_min_max">%1$d–%2$d уд/мин</string>
 
     <string name="health_permissions_missing">Некоторые разрешения на данные о здоровье не выданы</string>
     <string name="health_grant">Разрешить</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">Автоуправление → выберите FitWren в списке приложений и включите все три разрешения</string>
     <string name="wearable_card_title">Использовать шаги браслета</string>
-    <string name="wearable_resync">Пересинхронизировать браслет</string>
-    <string name="wearable_resync_hint">Заново читает из Health Connect данные браслета за последние 30 дней, включая часы, которые его приложение записало с опозданием.</string>
     <string name="wearable_resync_started">Данные браслета читаются заново…</string>
     <string name="wearable_resync_done">Данные браслета прочитаны заново</string>
     <string name="wearable_resync_failed">Не удалось прочитать данные браслета, попробуйте чуть позже</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">Двигайте фото пальцем, масштабируйте двумя</string>
     <string name="face_designer_zoom">Масштаб</string>
     <string name="face_designer_dim">Затемнить фон</string>
-    <string name="face_designer_show">Показывать</string>
     <string name="face_designer_show_date">Дата</string>
     <string name="face_designer_show_steps">Шаги</string>
     <string name="face_designer_show_bar">Полоса цели</string>
@@ -1294,6 +1284,14 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_20_5">
+        <item>Птица в виджете «Птица» и на живых обоях носит все предметы, как в приложении: солнце, очки, цветок, ночной колпак, рюкзак</item>
+        <item>Health Connect как источник браслета больше не считает собственные шаги телефона шагами браслета; «Не считать телефон при использовании браслета» работает правильно</item>
+        <item>Цель на выходные теперь учитывается и в виджетах «Неделя», «Месяц» и «Год», в итогах года и в настроении птицы</item>
+        <item>Если приложение открыто в полночь, страница «Сегодня» переходит на новый день; уведомления браслета открывают настройки</item>
+        <item>Меньше вычислений при ходьбе с открытым приложением; для погоды на браслете местоположение округляется примерно до 1 км</item>
+        <item>Сон совпадает с браслетом: если вы просыпаетесь ночью, браслет делит ночь на части, и приложение теперь складывает их все</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>Экран птицы: птица закреплена сверху, а настройки прокручиваются под ней, изменения видны сразу</item>
     </string-array>

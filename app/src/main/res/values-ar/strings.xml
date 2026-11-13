@@ -105,7 +105,6 @@
     <string name="daily_goal">الهدف اليومي</string>
     <string name="weekly_goal">الهدف الأسبوعي</string>
     <string name="goal_range">بين %1$s و%2$s</string>
-    <string name="settings_theme">المظهر</string>
     <string name="theme_system">حسب النظام</string>
     <string name="theme_light">فاتح</string>
     <string name="theme_dark">داكن</string>
@@ -173,7 +172,6 @@
     <string name="export_done">تم تصدير الأيام: %1$d</string>
     <string name="import_done">تم تحديث الأيام: %1$d</string>
     <string name="csv_failed">تعذّرت قراءة الملف أو كتابته</string>
-    <string name="settings_language">اللغة</string>
     <string name="language">لغة التطبيق</string>
     <string name="language_system">النظام</string>
     <string name="medal_group_early">الطائر المبكر</string>
@@ -186,7 +184,7 @@
     <string name="month_goal_days">أيام الهدف: %1$d</string>
 
     <string name="near_goal_notification">إشعار عند الاقتراب من الهدف</string>
-    <string name="near_goal_notification_hint">ستتلقى إشعارًا واحدًا في اليوم الذي تبلغ فيه 80% من هدفك اليومي.</string>
+    <string name="near_goal_notification_hint" formatted="false">ستتلقى إشعارًا واحدًا في اليوم الذي تبلغ فيه 80% من هدفك اليومي.</string>
     <string name="weekly_summary">الملخص الأسبوعي</string>
     <string name="weekly_summary_hint">في آخر يوم من الأسبوع نحو الساعة 20:00، يعرض إجمالي الأسبوع والتغير مقارنة بالأسبوع الماضي.</string>
     <string name="notify_near_title">اقتربت من هدفك!</string>
@@ -202,24 +200,19 @@
 
     <string name="health_off_title">السوار غير مفعّل</string>
     <string name="health_off_text">فعّل خطوات السوار في الإعدادات لرؤية ملخص النوم ونبض القلب والتمارين.</string>
-    <string name="health_title">ملخص الصحة (السوار)</string>
     <string name="health_last_days">آخر %1$d يومًا</string>
     <string name="health_loading">جارٍ القراءة من Health Connect…</string>
-    <string name="health_empty">لا توجد بيانات من السوار في هذه الفترة</string>
     <string name="health_sleep_average">متوسط النوم</string>
     <string name="health_nights">%1$d ليالٍ</string>
     <string name="health_sleep_longest">أطول نوم</string>
     <string name="health_resting_average">متوسط نبض الراحة</string>
     <string name="health_bpm">%1$d نبضة/د</string>
-    <string name="health_exercise_total">إجمالي التمارين</string>
     <string name="health_exercise_count">%1$d تمارين</string>
-    <string name="health_exercise_longest">أطول تمرين</string>
     <string name="health_distance">مسافة السوار</string>
     <string name="health_km">%1$s كم</string>
     <string name="health_no_records">لم يسجّل السوار بيانات في هذه الفترة</string>
     <string name="health_no_permission">لم يُمنح إذن Health Connect</string>
     <string name="health_resting_chart">نبض الراحة</string>
-    <string name="health_min_max">%1$d–%2$d نبضة/د</string>
 
     <string name="health_permissions_missing">لم تُمنح بعض أذونات الصحة</string>
     <string name="health_grant">منح الإذن</string>
@@ -550,8 +543,6 @@
 
     <string name="oem_transsion_1">الإدارة التلقائية ← اختر FitWren من قائمة التطبيقات، وشغّل الأذونات الثلاثة كلها</string>
     <string name="wearable_card_title">استخدام خطوات السوار</string>
-    <string name="wearable_resync">إعادة مزامنة السوار</string>
-    <string name="wearable_resync_hint">يعيد قراءة بيانات السوار لآخر 30 يومًا من Health Connect، بما فيها الساعات التي كتبها تطبيقه متأخرًا.</string>
     <string name="wearable_resync_started">جارٍ إعادة قراءة بيانات السوار…</string>
     <string name="wearable_resync_done">أُعيدت قراءة بيانات السوار</string>
     <string name="wearable_resync_failed">تعذّرت قراءة بيانات السوار، حاول مجددًا بعد قليل</string>
@@ -977,7 +968,6 @@
     <string name="face_designer_photo_hint">اسحب الصورة بإصبع وقرّب بإصبعين</string>
     <string name="face_designer_zoom">تكبير</string>
     <string name="face_designer_dim">تعتيم الخلفية</string>
-    <string name="face_designer_show">إظهار</string>
     <string name="face_designer_show_date">التاريخ</string>
     <string name="face_designer_show_steps">الخطوات</string>
     <string name="face_designer_show_bar">شريط الهدف</string>
@@ -1294,6 +1284,14 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_20_5">
+        <item>الطائر في أداة الطائر وفي الخلفية الحية يرتدي كل الأغراض التي يرتديها في التطبيق: الشمس والنظارة والزهرة وقبعة النوم وحقيبة الظهر</item>
+        <item>لم يعد Health Connect كمصدر للسوار يحتسب خطوات الهاتف نفسه كخطوات للسوار، فيعمل خيار «لا تحتسب الهاتف أثناء استخدام السوار» كما ينبغي</item>
+        <item>هدف عطلة نهاية الأسبوع يُطبَّق الآن أيضًا في أدوات الأسبوع والشهر والسنة وفي ملخص السنة ومزاج الطائر</item>
+        <item>إذا كان التطبيق مفتوحًا عند منتصف الليل تنتقل صفحة اليوم إلى اليوم الجديد، وتنبيهات السوار تفتح الإعدادات</item>
+        <item>عمل أقل أثناء المشي والتطبيق مفتوح، ويُقرَّب الموقع إلى نحو 1 كم لطقس السوار</item>
+        <item>النوم يطابق السوار: إذا استيقظت أثناء الليل يقسم السوار الليلة إلى أجزاء، ويجمع التطبيق الآن كل الأجزاء</item>
+    </string-array>
     <string-array name="release_notes_0_20_4">
         <item>شاشة الطائر: يبقى الطائر مثبتًا في الأعلى وتتمرر الخيارات أسفله، فتظهر التغييرات فورًا</item>
     </string-array>

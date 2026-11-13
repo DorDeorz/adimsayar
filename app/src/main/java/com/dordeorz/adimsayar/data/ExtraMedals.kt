@@ -7,8 +7,6 @@ import java.time.LocalDate
 /** Medals added in 0.17: distance, water streak, sleep streak and finished virtual routes. */
 object ExtraMedals {
 
-    const val GOOD_NIGHT_MINUTES = 7 * 60L
-
     fun compute(
         days: Map<LocalDate, Long>,
         today: LocalDate,
@@ -29,7 +27,7 @@ object ExtraMedals {
         result += medals(MedalGroup.Distance, km.toLong(), distanceEarned, IntArray(MedalGroup.Distance.targets.size))
 
         result += streakMedals(MedalGroup.WaterStreak, water.filterValues { it >= waterGoal }.keys, today)
-        result += streakMedals(MedalGroup.SleepStreak, nights.filterValues { it >= GOOD_NIGHT_MINUTES }.keys, today)
+        result += streakMedals(MedalGroup.SleepStreak, nights.filterValues { it >= SleepInsights.GOOD_NIGHT_MINUTES }.keys, today)
 
         val finished = routesDone.values.sorted()
         val routeEarned = HashMap<Long, LocalDate>()
@@ -66,15 +64,16 @@ object ExtraMedals {
 
     /** Remembers the routes walked to the end, since only the current route is in the settings. */
     fun rememberRoute(context: Context, id: String, finishedOn: LocalDate) {
-        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(ROUTES_PREFS, Context.MODE_PRIVATE)
         if (prefs.contains(id)) return
         prefs.edit { putString(id, finishedOn.toString()) }
     }
 
     fun routesDone(context: Context): Map<String, LocalDate> =
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).all.mapNotNull { (id, value) ->
+        context.getSharedPreferences(ROUTES_PREFS, Context.MODE_PRIVATE).all.mapNotNull { (id, value) ->
             (value as? String)?.let { runCatching { id to LocalDate.parse(it) }.getOrNull() }
         }.toMap()
 
-    private const val PREFS = "routes_done"
+    /** Finished routes; the backup carries them with the settings. */
+    const val ROUTES_PREFS = "routes_done"
 }

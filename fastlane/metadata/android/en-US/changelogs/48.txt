@@ -1,0 +1,1 @@
+Bird screen: the bird stays pinned at the top while the options scroll below, so changes show right away.
