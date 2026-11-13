@@ -16,6 +16,7 @@ import com.dordeorz.adimsayar.MainActivity
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.AppSettings
 import com.dordeorz.adimsayar.data.BandPeriod
+import com.dordeorz.adimsayar.data.Birthday
 import com.dordeorz.adimsayar.data.HealthMath
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
@@ -26,6 +27,7 @@ import com.dordeorz.adimsayar.data.WearableHealth
 import com.dordeorz.adimsayar.data.weekStartOf
 import java.text.NumberFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import kotlin.math.abs
@@ -44,12 +46,15 @@ object Reminders {
     private const val NEAR_NOTIFICATION_ID = 12
     private const val WEEK_NOTIFICATION_ID = 13
     private const val WEIGHT_NOTIFICATION_ID = 14
+    private const val BIRTHDAY_NOTIFICATION_ID = 16
     private const val NEAR_GOAL_PERCENT = 80
     private const val PREFS = "reminders"
     private const val KEY_GOAL_DATE = "goal_notified_date"
     private const val KEY_NEAR_DATE = "near_notified_date"
+    private const val KEY_BIRTHDAY_YEAR = "birthday_notified_year"
     private const val EVENING_REQUEST = 1
     private const val WEIGHT_REQUEST = 2
+    private const val BIRTHDAY_REQUEST = 5
     private const val HEALTH_DAYS = 7L
     private val EVENING_TIME: LocalTime = LocalTime.of(20, 0)
     private val WEIGHT_TIME: LocalTime = LocalTime.of(9, 0)
@@ -94,6 +99,48 @@ object Reminders {
             strings.getString(R.string.notify_weight_text),
             MainActivity.TAB_HEALTH,
         )
+    }
+
+    /** Sends the birthday greeting once a year, on the birthday, and sets the alarm for the next one. */
+    fun birthdayCheck(context: Context) {
+        val settings = SettingsStore.get(context).settings.value
+        val birth = settings.birthDate
+        val today = LocalDate.now()
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        if (settings.birthdayNotification && birth != null && Birthday.isBirthday(birth, today) &&
+            prefs.getInt(KEY_BIRTHDAY_YEAR, 0) != today.year
+        ) {
+            prefs.edit { putInt(KEY_BIRTHDAY_YEAR, today.year) }
+            val strings = Locales.wrap(context)
+            notify(
+                strings,
+                BIRTHDAY_NOTIFICATION_ID,
+                strings.getString(R.string.notify_birthday_title),
+                strings.getString(R.string.notify_birthday_text, Birthday.turning(birth, today.year)),
+            )
+        }
+        scheduleBirthday(context)
+    }
+
+    fun scheduleBirthday(context: Context) {
+        val alarms = context.getSystemService(AlarmManager::class.java) ?: return
+        val intent = Intent(context, SystemEventReceiver::class.java).setAction(SystemEventReceiver.ACTION_BIRTHDAY)
+        val pending = PendingIntent.getBroadcast(
+            context,
+            BIRTHDAY_REQUEST,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val settings = SettingsStore.get(context).settings.value
+        val birth = settings.birthDate
+        if (!settings.birthdayNotification || birth == null) {
+            alarms.cancel(pending)
+            return
+        }
+        val zone = ZoneId.systemDefault()
+        val notified = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getInt(KEY_BIRTHDAY_YEAR, 0)
+        val next = Birthday.nextNotify(birth, LocalDateTime.now(zone), notified)
+        Schedules.setAlarm(alarms, next.atZone(zone).toInstant().toEpochMilli(), pending)
     }
 
     suspend fun waterCheck(context: Context) {

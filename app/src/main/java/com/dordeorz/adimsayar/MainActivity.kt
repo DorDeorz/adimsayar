@@ -241,7 +241,16 @@ class MainActivity : ComponentActivity() {
                 Widgets.updateAll(appContext)
             }
         },
-        onAgeChange = { settingsStore.setAge(it) },
+        onBirthDateChange = { date ->
+            settingsStore.setBirthDate(date)
+            if (settingsStore.settings.value.birthdayNotification) requestNotificationPermission()
+            Reminders.scheduleBirthday(applicationContext)
+        },
+        onBirthdayNotificationChange = { enabled ->
+            settingsStore.setBirthdayNotification(enabled)
+            if (enabled && settingsStore.settings.value.birthDate != null) requestNotificationPermission()
+            Reminders.scheduleBirthday(applicationContext)
+        },
         onWaterGoalChange = { settingsStore.setWaterGoal(it) },
         onGlassChange = { settingsStore.setGlass(it) },
         onWaterReminderChange = { enabled ->

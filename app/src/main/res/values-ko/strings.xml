@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">한 주의 첫날 09:00쯤 체중을 재도록 알려 줍니다.</string>
     <string name="notify_weight_title">체중을 잴 시간입니다</string>
     <string name="notify_weight_text">새로운 한 주가 시작됩니다. 체중을 재고 FitWren에 기록하세요.</string>
+    <string name="birthday_notification">생일 축하</string>
+    <string name="birthday_notification_hint">생일 당일 09:00쯤 축하 알림을 보냅니다.</string>
+    <string name="birthday_notification_needs_date">생일에 축하해 드립니다. 먼저 “신체 및 거리”에서 생년월일을 입력하세요.</string>
+    <string name="notify_birthday_title">생일 축하합니다! 🎂</string>
+    <string name="notify_birthday_text">오늘 %1$d세가 되었어요. 건강하고 많이 걷는 한 해 되세요!</string>
     <string name="notify_health_resting">평균 안정 시 심박수: %1$d bpm</string>
     <string name="notify_health_resting_down">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 낮음</string>
     <string name="notify_health_resting_up">평균 안정 시 심박수: %1$d bpm, 지난주보다 %2$d 높음</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">요가</string>
     <string name="exercise_strength">근력 운동</string>
     <string name="exercise_other">운동</string>
-    <string name="age">나이</string>
+    <string name="birth_date">생년월일</string>
+    <string name="birth_date_missing">미설정 · 지금은 %1$d세로 계산</string>
+    <string name="birth_date_hint">나이는 생년월일로 매일 자동 계산되며 심박 구간과 피트니스 나이에 사용됩니다.</string>
+    <string name="birth_date_pick">생년월일 입력</string>
     <string name="age_value">%1$d세</string>
-    <string name="age_unit">세</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">물</string>
@@ -1285,6 +1292,9 @@
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
     <string-array name="release_notes_0_21_0">
+        <item>나이 대신 생년월일을 입력합니다. 나이는 매일 자동으로 계산됩니다. 생년월일을 입력하기 전까지는 이전에 입력한 나이를 그대로 사용합니다</item>
+        <item>생일 당일 09:00쯤 축하 알림이 옵니다(설정 → 알림 → 생일 축하)</item>
+        <item>새 노래(먹이를 줄 때와 노래를 고를 때)가 더 작고 부드러워졌습니다. 휴대폰 볼륨 버튼으로 조절되고, 무음 모드에서는 울리지 않습니다</item>
         <item>새 버전이 나오면 알려 줍니다: 켜 두면 하루에 한 번 GitHub를 확인해 알림을 보내고 오늘 화면에 업데이트 카드를 보여 줍니다 (설정 → 정보)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

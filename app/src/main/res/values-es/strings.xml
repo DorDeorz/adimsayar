@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Te recuerda pesarte hacia las 09:00 del primer día de la semana.</string>
     <string name="notify_weight_title">Hora de pesarse</string>
     <string name="notify_weight_text">Empieza una nueva semana: pésate y añádelo a FitWren.</string>
+    <string name="birthday_notification">Felicitación de cumpleaños</string>
+    <string name="birthday_notification_hint">Te envía una felicitación hacia las 09:00 el día de tu cumpleaños.</string>
+    <string name="birthday_notification_needs_date">Te felicita en tu cumpleaños. Primero introduce tu fecha de nacimiento en «Cuerpo y distancia».</string>
+    <string name="notify_birthday_title">¡Feliz cumpleaños! 🎂</string>
+    <string name="notify_birthday_text">Hoy cumples %1$d años. ¡Por muchos años sanos y llenos de pasos!</string>
     <string name="notify_health_resting">Frecuencia cardiaca en reposo media: %1$d lpm</string>
     <string name="notify_health_resting_down">Frecuencia cardiaca en reposo media: %1$d lpm, %2$d menos que la semana pasada</string>
     <string name="notify_health_resting_up">Frecuencia cardiaca en reposo media: %1$d lpm, %2$d más que la semana pasada</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Fuerza</string>
     <string name="exercise_other">Entrenamiento</string>
-    <string name="age">Edad</string>
+    <string name="birth_date">Fecha de nacimiento</string>
+    <string name="birth_date_missing">Sin indicar · por ahora se cuentan %1$d años</string>
+    <string name="birth_date_hint">Tu edad se calcula cada día a partir de la fecha de nacimiento; se usa para las zonas de frecuencia y la edad física.</string>
+    <string name="birth_date_pick">Introduce tu fecha de nacimiento</string>
     <string name="age_value">%1$d años</string>
-    <string name="age_unit">años</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Agua</string>
@@ -1285,6 +1292,9 @@
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
     <string-array name="release_notes_0_21_0">
+        <item>Pide la fecha de nacimiento en lugar de la edad; la edad se calcula cada día. La edad indicada antes se sigue usando hasta que pongas una fecha de nacimiento</item>
+        <item>El día de tu cumpleaños llega una felicitación hacia las 09:00 (Ajustes → Notificaciones → Felicitación de cumpleaños)</item>
+        <item>El canto del pájaro (al alimentarlo o elegir un canto) es más bajo y suave; se ajusta con los botones de volumen y no suena con el teléfono en silencio</item>
         <item>Avisa cuando sale una versión nueva: si lo activas, consulta GitHub una vez al día, envía una notificación y muestra una tarjeta Actualizar en Hoy (Ajustes → Acerca de)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">

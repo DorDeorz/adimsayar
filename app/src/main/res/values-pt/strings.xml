@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Lembra você de se pesar por volta das 09:00 no primeiro dia da semana.</string>
     <string name="notify_weight_title">Hora de se pesar</string>
     <string name="notify_weight_text">Começando uma nova semana: pese-se e adicione no FitWren.</string>
+    <string name="birthday_notification">Parabéns de aniversário</string>
+    <string name="birthday_notification_hint">Envia uma mensagem de parabéns por volta das 09:00 no dia do seu aniversário.</string>
+    <string name="birthday_notification_needs_date">Dá os parabéns no seu aniversário. Primeiro informe sua data de nascimento em “Corpo e distância”.</string>
+    <string name="notify_birthday_title">Feliz aniversário! 🎂</string>
+    <string name="notify_birthday_text">Hoje você faz %1$d anos. Que venham muitos anos saudáveis e cheios de passos!</string>
     <string name="notify_health_resting">Frequência cardíaca em repouso média: %1$d bpm</string>
     <string name="notify_health_resting_down">Frequência cardíaca em repouso média: %1$d bpm, %2$d a menos que na semana passada</string>
     <string name="notify_health_resting_up">Frequência cardíaca em repouso média: %1$d bpm, %2$d a mais que na semana passada</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Ioga</string>
     <string name="exercise_strength">Musculação</string>
     <string name="exercise_other">Treino</string>
-    <string name="age">Idade</string>
+    <string name="birth_date">Data de nascimento</string>
+    <string name="birth_date_missing">Não definida · por enquanto contamos %1$d anos</string>
+    <string name="birth_date_hint">Sua idade é calculada todo dia a partir da data de nascimento; ela é usada nas zonas de frequência e na idade fitness.</string>
+    <string name="birth_date_pick">Digite sua data de nascimento</string>
     <string name="age_value">%1$d anos</string>
-    <string name="age_unit">anos</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Água</string>
@@ -1285,6 +1292,9 @@
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
     <string-array name="release_notes_0_21_0">
+        <item>Pede a data de nascimento em vez da idade; a idade é calculada todo dia. A idade informada antes continua valendo até você definir a data de nascimento</item>
+        <item>No seu aniversário chega uma mensagem de parabéns por volta das 09:00 (Configurações → Notificações → Parabéns de aniversário)</item>
+        <item>O canto do pássaro (ao alimentá-lo ou escolher um canto) está mais baixo e suave; os botões de volume o ajustam, e ele fica mudo com o telefone no silencioso</item>
         <item>Avisa quando sai uma versão nova: se você ativar, consulta o GitHub uma vez por dia, envia uma notificação e mostra um cartão Atualizar em Hoje (Configurações → Sobre)</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
