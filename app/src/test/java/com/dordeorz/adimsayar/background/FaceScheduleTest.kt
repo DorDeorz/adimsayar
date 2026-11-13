@@ -21,4 +21,20 @@ class FaceScheduleTest {
         assertEquals("day", FaceSchedule.faceAt(plan, 60))
         assertEquals("night", FaceSchedule.faceAt(plan, 12 * 60))
     }
+
+    @Test
+    fun alarmWaitsForTheNextChangeWhenNothingIsWaiting() {
+        assertEquals(50_000_000L, FaceSchedule.alarmAt(next = 50_000_000L, retryAt = 0L, now = 1_000_000L))
+    }
+
+    @Test
+    fun alarmKeepsTheWaitingTryWhenAlarmsAreSetAgain() {
+        // A change did not reach the band: the try in 10 minutes stays, however often the alarms are set again.
+        assertEquals(1_600_000L, FaceSchedule.alarmAt(next = 50_000_000L, retryAt = 1_600_000L, now = 1_000_000L))
+        assertEquals(1_600_000L, FaceSchedule.alarmAt(next = 50_000_000L, retryAt = 1_600_000L, now = 1_300_000L))
+        // A try that is overdue runs in a few seconds, not in the past.
+        assertEquals(2_005_000L, FaceSchedule.alarmAt(next = 50_000_000L, retryAt = 1_600_000L, now = 2_000_000L))
+        // The next change of face comes first when it is sooner.
+        assertEquals(1_200_000L, FaceSchedule.alarmAt(next = 1_200_000L, retryAt = 1_600_000L, now = 1_000_000L))
+    }
 }

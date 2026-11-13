@@ -107,8 +107,7 @@ class MainActivity : ComponentActivity() {
     private var permission by mutableStateOf(PermissionState.NeedsRequest)
     private var batteryCardVisible by mutableStateOf(false)
     private var today by mutableStateOf(LocalDate.now())
-    private var locked by mutableStateOf(true)
-    private var stoppedAt = 0L
+    private var locked by mutableStateOf(false)
     private var serviceEnabled by mutableStateOf(false)
     private var exactAlarmsAllowed by mutableStateOf<Boolean?>(null)
     private var xiaomiAvailable by mutableStateOf(false)
@@ -303,6 +302,7 @@ class MainActivity : ComponentActivity() {
                     water = Water.observe(appContext).first(),
                     weights = Weights.observe(appContext).first(),
                     goal = settings.dailyGoal,
+                    goalOf = settings::goalOn,
                 )
                 val health = if (WearableHealth.isEnabled(appContext)) reportHealth(appContext, report) else null
                 PdfReport.write(appContext, requireNotNull(contentResolver.openOutputStream(uri)), report, settings, health)
@@ -374,6 +374,9 @@ class MainActivity : ComponentActivity() {
         if (!extrasStore.extras.value.onboardingDone && extrasStore.hasStoredData(applicationContext)) {
             extrasStore.update { it.copy(onboardingDone = true) }
         }
+        // Without a lock there is nothing to unlock; turning it on later must not lock the open app at once.
+        if (!lockEnabled()) unlocked = true
+        locked = !unlocked
         monitor = LiveStepMonitor(applicationContext)
         Schedules.ensure(applicationContext)
         if (savedInstanceState == null) openRequestedTab(intent)
@@ -436,8 +439,8 @@ class MainActivity : ComponentActivity() {
                 withContext(Dispatchers.IO) { KeptMedals.keep(applicationContext, computed.medals) }
             }
             val achievements = remember(computed, kept) { computed.copy(medals = KeptMedals.apply(computed.medals, kept)) }
-            val challenges = remember(history, currentDay, appSettings.dailyGoal, appSettings.weekStart) {
-                ChallengeMath.summary(history, currentDay, appSettings.dailyGoal, appSettings.weekStart)
+            val challenges = remember(history, currentDay, appSettings) {
+                ChallengeMath.summary(history, currentDay, appSettings.dailyGoal, appSettings.weekStart, appSettings::goalOn)
             }
             val extras by remember { ExtrasStore.get(applicationContext).extras }.collectAsStateWithLifecycle()
             val notes by remember { DayNotes.observe(applicationContext) }.collectAsStateWithLifecycle(emptyMap())
@@ -490,7 +493,13 @@ class MainActivity : ComponentActivity() {
                         extra = extraState,
                     )
                     if (extras.appLock && extras.pinHash.isNotEmpty() && locked) {
-                        LockScreen(extras, onUnlock = { locked = false })
+                        LockScreen(
+                            extras,
+                            onUnlock = {
+                                unlocked = true
+                                locked = false
+                            },
+                        )
                     } else if (!extras.onboardingDone) {
                         OnboardingScreen(uiState, actions)
                     } else {
@@ -509,9 +518,13 @@ class MainActivity : ComponentActivity() {
     private fun openRequestedTab(intent: Intent?) {
         when (intent?.action) {
             ACTION_ADD_WATER -> {
-                val glass = settingsStore.settings.value.glassMl
-                actions.onAddWater(glass)
-                Toast.makeText(this, getString(R.string.shortcut_water_added, glass), Toast.LENGTH_SHORT).show()
+                // Coming back from the recent apps list hands over the shortcut's intent again; that is not a new glass.
+                val replayed = (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0
+                if (!replayed) {
+                    val glass = settingsStore.settings.value.glassMl
+                    actions.onAddWater(glass)
+                    Toast.makeText(this, getString(R.string.shortcut_water_added, glass), Toast.LENGTH_SHORT).show()
+                }
                 requestedTab = Tab.Today
                 setIntent(Intent(this, MainActivity::class.java))
                 return
@@ -527,7 +540,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (stoppedAt > 0L && SystemClock.elapsedRealtime() - stoppedAt > LOCK_GRACE_MS) locked = true
+        val away = stoppedAt.takeIf { it > 0L }?.let { SystemClock.elapsedRealtime() - it }
+        stoppedAt = 0L
+        if (away != null && away > LOCK_GRACE_MS) {
+            unlocked = !lockEnabled()
+            locked = !unlocked
+        }
         refreshPermission()
         serviceEnabled = StepCounterService.isEnabled(this)
         if (permission == PermissionState.Granted) {
@@ -600,6 +618,9 @@ class MainActivity : ComponentActivity() {
         if (!isChangingConfigurations) stoppedAt = SystemClock.elapsedRealtime()
         super.onStop()
     }
+
+    private fun lockEnabled(): Boolean =
+        ExtrasStore.get(applicationContext).extras.value.let { it.appLock && it.pinHash.isNotEmpty() }
 
     private fun refreshWidgets() {
         val appContext = applicationContext
@@ -827,5 +848,10 @@ class MainActivity : ComponentActivity() {
         private const val HEALTH_CONNECT_PACKAGE = "com.google.android.apps.healthdata"
         private const val HEALTH_CONNECT_SETTINGS = "androidx.health.ACTION_HEALTH_CONNECT_SETTINGS"
         private const val HEALTH_CONNECT_SETTINGS_14 = "android.health.connect.action.HEALTH_HOME_SETTINGS"
+
+        // Kept for the whole process, not the page: turning the phone or changing the language builds the
+        // page again, and that must not ask for the PIN a second time.
+        private var unlocked = false
+        private var stoppedAt = 0L
     }
 }

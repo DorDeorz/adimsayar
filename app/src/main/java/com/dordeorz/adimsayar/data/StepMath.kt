@@ -134,6 +134,17 @@ object StepMath {
         return mornings.filterValues { it >= EARLY_BIRD_STEPS }.keys
     }
 
+    /**
+     * The hours behind the day totals, for the hour charts: on a day the band sent steps its count stands in
+     * the hours it sent and the phone's in the others, as in [mergeHourly]. With [bandOnly] such a day shows
+     * the band's hours alone, so the hours add up to that day's total.
+     */
+    fun shownHours(band: Map<LocalDateTime, Long>, phone: Map<LocalDateTime, Long>, bandOnly: Boolean): Map<LocalDateTime, Long> {
+        val days = bandDays(band).keys
+        val fromBand = band.filterKeys { it.toLocalDate() in days }
+        return (if (bandOnly) phone.filterKeys { it.toLocalDate() !in days } else phone) + fromBand
+    }
+
     fun bandDays(band: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
         val days = HashMap<LocalDate, Long>()
         for ((hour, steps) in band) days[hour.toLocalDate()] = (days[hour.toLocalDate()] ?: 0L) + steps

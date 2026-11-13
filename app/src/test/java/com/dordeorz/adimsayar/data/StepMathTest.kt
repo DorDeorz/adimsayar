@@ -202,6 +202,39 @@ class StepMathTest {
     }
 
     @Test
+    fun shownHoursUseBandHoursOnBandDaysAndPhoneForTheRest() {
+        val nine = LocalDateTime.parse("2026-10-11T09:00")
+        val ten = LocalDateTime.parse("2026-10-11T10:00")
+        val eleven = LocalDateTime.parse("2026-10-11T11:00")
+        val otherDay = LocalDateTime.parse("2026-10-12T09:00")
+        val band = mapOf(ten to 500L, eleven to 0L)
+        val phone = mapOf(nine to 200L, ten to 300L, eleven to 40L, otherDay to 400L)
+        val hours = StepMath.shownHours(band, phone, bandOnly = false)
+        assertEquals(mapOf(nine to 200L, ten to 500L, eleven to 0L, otherDay to 400L), hours)
+        // The hours add up to the day totals the app shows.
+        assertEquals(StepMath.mergeHourly(band, phone)[nine.toLocalDate()], hours.filterKeys { it.toLocalDate() == nine.toLocalDate() }.values.sum())
+    }
+
+    @Test
+    fun shownHoursOfBandOnlyLeaveOutPhoneHoursOnBandDays() {
+        val nine = LocalDateTime.parse("2026-10-11T09:00")
+        val ten = LocalDateTime.parse("2026-10-11T10:00")
+        val otherDay = LocalDateTime.parse("2026-10-12T09:00")
+        val band = mapOf(ten to 500L)
+        val phone = mapOf(nine to 200L, ten to 300L, otherDay to 400L)
+        assertEquals(mapOf(ten to 500L, otherDay to 400L), StepMath.shownHours(band, phone, bandOnly = true))
+    }
+
+    @Test
+    fun shownHoursIgnoreBandDaysWithoutSteps() {
+        val nine = LocalDateTime.parse("2026-10-11T09:00")
+        val band = mapOf(nine to 0L)
+        val phone = mapOf(nine to 200L)
+        assertEquals(phone, StepMath.shownHours(band, phone, bandOnly = true))
+        assertEquals(phone, StepMath.shownHours(band, phone, bandOnly = false))
+    }
+
+    @Test
     fun mergeDailyKeepsPhoneTotalWhenBandWasWornBriefly() {
         val day = LocalDate.parse("2026-10-11")
         assertEquals(mapOf(day to 1_561L), StepMath.mergeDaily(mapOf(day to 17L), mapOf(day to 1_561L)))

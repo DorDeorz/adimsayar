@@ -26,9 +26,9 @@
     <string name="exact_alarms_title">Exact alarms</string>
     <string name="exact_alarms_text">The midnight record, reminders and face changes run on time. When off, Android may delay them by up to an hour. Tap to open the permission screen.</string>
     <string name="xiaomi_unreadable_title">Can\'t read the HyperOS step record</string>
-    <string name="xiaomi_unreadable_text">Steps are not updating right now. A HyperOS update may have changed the record. You can turn off the switch below and keep counting with "Keep counting in the background".</string>
+    <string name="xiaomi_unreadable_text">Steps are not updating right now. A HyperOS update may have changed the record. You can turn off the switch below and keep counting with \"Keep counting in the background\".</string>
     <string name="xiaomi_stalled_title">The HyperOS step record is not moving</string>
-    <string name="xiaomi_stalled_text">The phone\'s sensor has seen steps in the last few minutes but the HyperOS record is not increasing. Check again in a few minutes; if it doesn\'t recover, turn off the switch below and turn on "Keep counting in the background".</string>
+    <string name="xiaomi_stalled_text">The phone\'s sensor has seen steps in the last few minutes but the HyperOS record is not increasing. Check again in a few minutes; if it doesn\'t recover, turn off the switch below and turn on \"Keep counting in the background\".</string>
     <string name="xiaomi_card_title">Use the HyperOS step record</string>
     <string name="xiaomi_card_text">Steps are read from the phone\'s own step record. They are counted fully even while the app is closed, no notification is needed, and past days are added too.</string>
     <string name="service_card_text">Turn this on if steps aren\'t counted while the app is closed. The counter is kept on; a silent, persistent notification appears in the notification bar. Most phones count without it, so try it off first.</string>
@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_21_1">
+        <item>The weekend goal now also counts in this week\'s challenges, the monthly report, the week bars on Today and the sleep comparison</item>
+        <item>With the HyperOS step record on, the active hours map, the time left to the goal and writing to Health Connect stayed empty; they work now</item>
+        <item>No resting heart rate is shown for a day the band was not worn at night (it came from daytime readings and was too high)</item>
+        <item>App lock: the PIN is not asked a second time after you turn the phone or change the language</item>
+        <item>“Add water” shortcut: coming back from recent apps no longer adds a second glass</item>
+        <item>Face by time of day: a change the band missed is made as soon as the band reconnects</item>
+        <item>A walk recorded over midnight counts the steps of both days; “Delete a date range” asks once more before deleting</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Asks for your date of birth instead of your age; the age is worked out every day. The age typed before stays in use until a date of birth is set</item>
         <item>A birthday greeting arrives around 09:00 on your birthday (Settings → Notifications → Birthday greeting)</item>

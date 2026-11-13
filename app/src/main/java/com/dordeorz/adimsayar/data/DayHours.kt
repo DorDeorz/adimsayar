@@ -10,34 +10,36 @@ object DayHours {
     suspend fun day(context: Context, date: LocalDate): LongArray = detail(context, date).hours
 
     /**
-     * The hours of [day] with the phone's walk and run split. The split is left out on a day the band sent
+     * The hours of [date] with the phone's walk and run split. The split is left out on a day the band sent
      * hours, because the band's steps have no split and the two numbers would not add up to the day.
      */
     suspend fun detail(context: Context, date: LocalDate): DayDetail {
-        val phone = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.dayDetail(context, date) else null
-        val hours = when {
+        val xiaomi = XiaomiSteps.isEnabled(context)
+        val phone = if (xiaomi) XiaomiSteps.dayDetail(context, date) else null
+        val phoneHours = when {
             phone != null -> phone.hours
-            XiaomiSteps.isEnabled(context) -> LongArray(HOURS)
+            xiaomi -> LongArray(HOURS)
             else -> StepRepository.get(context).loadPhoneHours(date) ?: LongArray(HOURS)
         }
-        var bandDay = false
-        if (BandDirect.isEnabled(context)) {
-            for ((hour, steps) in StepRepository.get(context).loadBandHours(date)) {
-                if (hour.toLocalDate() != date) continue
-                hours[hour.hour] = steps
-                bandDay = true
-            }
-        }
+        val phoneMap = HashMap<LocalDateTime, Long>()
+        for (hour in 0 until HOURS) if (phoneHours[hour] > 0L) phoneMap[date.atTime(hour, 0)] = phoneHours[hour]
+        val band = bandHours(context, date).filterKeys { it.toLocalDate() == date }
+        val hours = LongArray(HOURS)
+        for ((hour, steps) in StepMath.shownHours(band, phoneMap, WearableSteps.isBandOnly(context))) hours[hour.hour] = steps
+        val bandDay = StepMath.bandDays(band).isNotEmpty()
         return if (phone == null || bandDay) DayDetail(hours, 0L, 0L) else DayDetail(hours, phone.walking, phone.running)
     }
 
-    /** Every hour from [from] on, for the active hours map and the walking pace. */
+    /** Every hour from [from] on, for the active hours map, the walking pace and the steps written to Health Connect. */
     suspend fun since(context: Context, from: LocalDate): Map<LocalDateTime, Long> {
-        val repository = StepRepository.get(context)
-        val result = HashMap(repository.loadPhoneHourMap(from))
-        if (BandDirect.isEnabled(context)) result.putAll(repository.loadBandHours(from))
-        return result
+        // The phone's own record keeps its hours itself; they are not in our table.
+        val recorded = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.hourlyTotals(context, from) else null
+        val phone = recorded ?: StepRepository.get(context).loadPhoneHourMap(from)
+        return StepMath.shownHours(bandHours(context, from), phone, WearableSteps.isBandOnly(context))
     }
+
+    private suspend fun bandHours(context: Context, from: LocalDate): Map<LocalDateTime, Long> =
+        if (BandDirect.isEnabled(context)) StepRepository.get(context).loadBandHours(from) else emptyMap()
 
     const val HOURS = 24
 }

@@ -30,6 +30,22 @@ class ChallengeMathTest {
     }
 
     @Test
+    fun goalDaysUseEachDaysOwnGoal() {
+        // 7,000 steps every day: below the 10,000 goal, above a weekend goal of 6,000.
+        val history = (-28L..140L).associate { monday.plusDays(it) to 7_000L }
+        val weekendGoal = { date: LocalDate -> if (date.dayOfWeek >= DayOfWeek.SATURDAY) 6_000L else 10_000L }
+        val start = (0L..19L).map { monday.plusWeeks(it) }
+            .first { week -> ChallengeMath.week(history, week, week.plusDays(6), 10_000).any { it.kind == ChallengeKind.GoalDays } }
+        val plain = ChallengeMath.week(history, start, start.plusDays(6), 10_000).first { it.kind == ChallengeKind.GoalDays }
+        val weekend = ChallengeMath.week(history, start, start.plusDays(6), 10_000, weekendGoal).first { it.kind == ChallengeKind.GoalDays }
+        assertEquals(0L, plain.progress)
+        assertEquals(2L, weekend.progress)
+        // Only Saturday has passed: one goal day so far.
+        val saturday = ChallengeMath.week(history, start, start.plusDays(5), 10_000, weekendGoal).first { it.kind == ChallengeKind.GoalDays }
+        assertEquals(1L, saturday.progress)
+    }
+
+    @Test
     fun summaryCountsCompletedAcrossWeeks() {
         val history = (0L..20L).associate { monday.plusDays(it) to 30_000L }
         val summary = ChallengeMath.summary(history, monday.plusDays(20), 10_000, DayOfWeek.MONDAY)

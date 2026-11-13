@@ -56,8 +56,8 @@ class ChallengeWidget : GlanceAppWidget() {
             val history by remember { repository.observeHistory() }.collectAsState(initial)
             val settings by SettingsStore.get(context).settings.collectAsState()
             val localized = remember(settings.language) { Locales.wrap(context) }
-            val challenges = remember(history, settings.dailyGoal, settings.weekStart) {
-                ChallengeMath.summary(history, today, settings.dailyGoal, settings.weekStart).current
+            val challenges = remember(history, settings.dailyGoal, settings.weekendGoal, settings.weekStart) {
+                ChallengeMath.summary(history, today, settings.dailyGoal, settings.weekStart, settings::goalOn).current
             }
             WidgetTheme(settings.dynamicColor) {
                 WidgetSurface(Tab.Medals, settings.widgetOpacity) {

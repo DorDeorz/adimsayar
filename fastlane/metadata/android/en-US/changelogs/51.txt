@@ -1,0 +1,6 @@
+Fixes found in a full review of the app.
+The weekend goal now also counts in weekly challenges, the monthly report and the week bars on Today.
+With the HyperOS step record on, the active hours map, time left to the goal and writing to Health Connect work.
+No resting heart rate for a day the band was not worn at night.
+App lock no longer asks for the PIN again after turning the phone.
+Other fixes: water shortcut, band face schedule, walks over midnight, delete a date range.

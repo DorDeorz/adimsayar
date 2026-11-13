@@ -390,9 +390,9 @@ private fun SleepCard(data: BandPeriod, onOpen: (LocalDate) -> Unit) {
 
 @Composable
 private fun SleepInsightCard(data: BandPeriod, state: MainUiState) {
-    val goal = state.settings.goalOn(state.today)
-    val insight = remember(data, state.history, state.today, goal) {
-        SleepInsights.compute(data.nights.filterKeys { it in data.days }, state.history, state.today, goal)
+    val settings = state.settings
+    val insight = remember(data, state.history, state.today, settings) {
+        SleepInsights.compute(data.nights.filterKeys { it in data.days }, state.history, state.today, settings.dailyGoal, settings::goalOn)
     }
     MetricCard(stringResource(R.string.insight_title)) {
         val steps = insight.steps

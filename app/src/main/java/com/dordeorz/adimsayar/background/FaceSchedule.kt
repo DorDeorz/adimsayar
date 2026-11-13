@@ -33,8 +33,12 @@ object FaceSchedule {
     private const val KEY_NIGHT = "face_schedule_night"
     private const val KEY_DAY_START = "face_schedule_day_start"
     private const val KEY_NIGHT_START = "face_schedule_night_start"
+    // When the next try is due after a change that did not reach the band; 0 when none is waiting. It is
+    // kept because every other alarm sets all alarms again, which used to drop the try.
+    private const val KEY_RETRY_AT = "band_face_retry_at"
     private const val REQUEST = 0x5A_D1_0F_01
     private const val RETRY_MS = 10 * 60 * 1000L
+    private const val RETRY_SOON_MS = 5_000L
 
     fun plan(context: Context): Plan {
         val p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -70,7 +74,7 @@ object FaceSchedule {
         return if (day) plan.dayId else plan.nightId
     }
 
-    /** Sets the face for now; when the band is not connected, tries again later. */
+    /** Sets the face for now; when the band is not connected, tries again later and when the band is back. */
     fun apply(context: Context) {
         val plan = plan(context)
         if (!plan.on) return schedule(context)
@@ -78,11 +82,27 @@ object FaceSchedule {
         val id = faceAt(plan, now.hour * 60 + now.minute)
         val done = id == null || BandLive.setWatchface(id)
         Log.i(XiaomiBand.TAG, "face schedule: $id ${if (done) "set" else "band not connected"}")
-        schedule(context, retry = !done)
+        setRetryAt(context, if (done) 0L else System.currentTimeMillis() + RETRY_MS)
+        schedule(context)
     }
 
-    /** Waits for the next change of face, or [RETRY_MS] when the last one did not reach the band. */
-    fun schedule(context: Context, retry: Boolean = false) {
+    /** The band is connected again: sets the face a change it missed left waiting. */
+    fun onBandBack(context: Context) {
+        if (retryAt(context) > 0L) apply(context)
+    }
+
+    /** When the alarm should fire: the [next] change of face, or the waiting try at [retryAt] when that is sooner. */
+    fun alarmAt(next: Long, retryAt: Long, now: Long): Long =
+        if (retryAt > 0L) minOf(next, maxOf(retryAt, now + RETRY_SOON_MS)) else next
+
+    private fun retryAt(context: Context): Long = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getLong(KEY_RETRY_AT, 0L)
+
+    private fun setRetryAt(context: Context, at: Long) {
+        if (retryAt(context) != at) context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit { putLong(KEY_RETRY_AT, at) }
+    }
+
+    /** Waits for the next change of face, or for the next try when the last change did not reach the band. */
+    fun schedule(context: Context) {
         val alarms = context.getSystemService(AlarmManager::class.java) ?: return
         val intent = Intent(context, SystemEventReceiver::class.java).setAction(SystemEventReceiver.ACTION_FACE)
         val pending = PendingIntent.getBroadcast(
@@ -94,6 +114,7 @@ object FaceSchedule {
         val plan = plan(context)
         if (!plan.on || (plan.dayId == null && plan.nightId == null)) {
             alarms.cancel(pending)
+            setRetryAt(context, 0L)
             return
         }
         val zone = ZoneId.systemDefault()
@@ -102,7 +123,6 @@ object FaceSchedule {
         val next = listOf(today, today.plusDays(1)).flatMap { date ->
             listOf(plan.dayStart, plan.nightStart).map { date.atTime(it / 60, it % 60).atZone(zone).toInstant().toEpochMilli() }
         }.filter { it > now }.minOrNull() ?: return
-        val at = if (retry) minOf(next, now + RETRY_MS) else next
-        Schedules.setAlarm(alarms, at, pending)
+        Schedules.setAlarm(alarms, alarmAt(next, retryAt(context), now), pending)
     }
 }

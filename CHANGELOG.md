@@ -2,6 +2,25 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.21.1
+
+Projenin baştan sona taranmasında bulunan hataların düzeltmeleri. Yeni özellik yok. Veritabanı sürümü değişmedi (v7).
+
+- Hafta sonu hedefi (`AppSettings.goalOn`) daha önce widget'larda, takvimde ve seride sayılıyordu; şimdi kalan yerlerde de sayılır: bu haftanın görevleri (uygulama ve widget, `ChallengeMath` içinde `goalOf`), aylık PDF raporundaki hedef günleri ve çubuk renkleri (`ReportDay.reached`), Bugün sayfasındaki hafta çubukları ve paylaşım kartı, uyku karşılaştırmasındaki "hedefe ulaşılan gün" ayrımı (`SleepInsights`).
+- HyperOS adım kaydı açıkken saatler bizim tabloda değil, telefonun kendi kaydında durur. Aktif saat haritası, hedefe kalan süre için yürüyüş temposu (`StepPace`) ve Health Connect'e yazma (`HealthWrite`) yalnız bizim tabloya baktığı için boş kalıyordu. Üçü de artık `DayHours.since` üzerinden telefonun kaydını okur.
+- "Bileklik varken telefonu sayma" açıkken saatlik grafikler bilekliğin gün toplamıyla aynı sayıyı verir: bileklik günlerinde telefonun saatleri eklenmez (`StepMath.shownHours`).
+- Dinlenme nabzı: bilekliğin gece takılmadığı günde Nabız kartı, Geçmiş'teki gün ayrıntısı ve Sağlık widget'ı gündüz ölçümlerinden hesaplanan yüksek bir değer gösteriyordu (örneğin 64 yerine 77). 7 günlük eğilimde kullanılan kural (`HealthMath.restingDays`) artık tek gün için de geçerli; öyle bir günde değer yerine "-" yazar (`BandHealth.restingDay`).
+- Uygulama kilidi: telefonu çevirince ya da dili değiştirince sayfa yeniden kurulduğu için PIN ikinci kez soruluyordu. Kilit durumu artık sayfada değil süreçte tutulur. Ayarlar'da kilidi açınca uygulama o anda kilitlenmez; uygulamadan çıkıp bir süre sonra dönünce kilitlenir.
+- "Su ekle" kısayolu: uygulamaya son uygulamalar listesinden dönünce Android kısayolun isteğini yeniden veriyor, bu da ikinci bir bardak ekliyordu (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY` kontrolü).
+- Su ve kat sayısı eklemeleri sıraya alınır (`Mutex`); aynı anda gelen iki ekleme (widget ve bildirim gibi) artık birbirini ezmez.
+- Saate göre kadran: değişim bilekliğe ulaşmayınca 10 dakika sonra yeniden deneniyordu, ama araya giren herhangi bir alarm bütün alarmları yeniden kurduğu için bu deneme siliniyordu ve kadran bir sonraki değişim saatine kadar eski kalıyordu. Deneme zamanı artık saklanır (`band_face_retry_at`), ayrıca bileklik yeniden bağlanınca bekleyen kadran hemen ayarlanır (`FaceSchedule.onBandBack`).
+- Gece yarısını geçen yürüyüş kayıtları: GPS yürüyüşü 0 adım kaydediyordu, köpek yürüyüşü yalnız gece yarısından sonraki adımları sayıyordu. İkisi de artık ilk günün kalan adımlarıyla yeni günün adımlarını toplar (`Walks.stepsSince`).
+- "Tarih aralığını sil": tarih seçicideki tuşta "Kaydet" yazıyordu ve dokununca sormadan siliyordu. Tuş artık "Sil" der ve seçilen günleri gösteren bir onay penceresi açılır.
+- "Bütün veriyi sil" biten sanal rotaları da siler (`routes_done`); önceden rota madalyaları kalıyordu.
+- "Bugün kaç adım attım?" yanıtı (`StepAnswerActivity`): pencere kapatıldıktan ya da telefon çevrildikten sonra sesli okuma başlamaz ve arkada açık kalmaz.
+- HyperOS uyarı kartlarındaki "Arka planda sürekli say" yazısının tırnak işaretleri ekranda görünmüyordu (TR, EN, DE, ES); düzeltildi.
+- Yeni testler: `StepMath.shownHours`, hafta sonu hedefiyle görevler, aylık rapor ve uyku karşılaştırması, `FaceSchedule.alarmAt`, `Walks.stepsDuring`.
+
 ## 0.21.0
 
 Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü, yeni sürümü haber verme, Sağlık kartlarına detay sayfaları. Veritabanı sürümü değişmedi (v7).

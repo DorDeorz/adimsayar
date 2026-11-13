@@ -1,0 +1,5 @@
+Uygulamanın baştan sona taranmasında bulunan hataların düzeltmeleri.
+Hafta sonu hedefi haftalık görevlerde, aylık raporda ve Bugün'deki hafta çubuklarında da sayılır.
+HyperOS adım kaydı açıkken aktif saat haritası, hedefe kalan süre ve Health Connect'e yazma çalışır.
+Bileklik gece takılmadıysa o gün dinlenme nabzı gösterilmez.
+Uygulama kilidi telefonu çevirince PIN'i yeniden sormaz.

@@ -1,6 +1,7 @@
 package com.dordeorz.adimsayar.data
 
 import android.content.Context
+import androidx.core.content.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
@@ -47,6 +48,8 @@ object DataEraser {
             val db = database.openHelper.writableDatabase
             for (table in StepDatabase.TABLES) db.execSQL("DELETE FROM `$table`")
         }
+        // Finished routes are medals too, kept outside the database.
+        context.getSharedPreferences(ExtraMedals.ROUTES_PREFS, Context.MODE_PRIVATE).edit { clear() }
         StepRepository.get(context).resetReading()
     }
 

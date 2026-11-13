@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_21_1">
+        <item>週末の目標が、今週のチャレンジ、月間レポート、「今日」の週間バー、睡眠の比較にも反映されます</item>
+        <item>HyperOS の歩数記録がオンのとき空のままだったアクティブ時間マップ、目標までの残り時間、Health Connect への書き込みが動くようになりました</item>
+        <item>夜にバンドを着けていなかった日は安静時心拍数を表示しません（日中の測定から計算され、高く出ていました）</item>
+        <item>アプリのロック: スマホを回転したり言語を変えたりしても、PIN をもう一度聞かれません</item>
+        <item>「水を追加」ショートカット: 最近使ったアプリから戻っても2杯目が追加されません</item>
+        <item>時間帯で文字盤を切り替え: バンドが受け取れなかった切り替えは、再接続するとすぐに行われます</item>
+        <item>日付をまたいで記録した散歩は両方の日の歩数を数えます。「期間を削除」は削除の前にもう一度確認します</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>年齢の代わりに生年月日を入力します。年齢は毎日自動で計算されます。生年月日を入力するまでは、以前の年齢がそのまま使われます</item>
         <item>誕生日の 09:00 ごろにお祝いの通知が届きます（設定 → 通知 → 誕生日のお祝い）</item>

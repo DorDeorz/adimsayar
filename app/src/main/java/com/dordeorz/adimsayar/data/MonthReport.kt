@@ -3,7 +3,8 @@ package com.dordeorz.adimsayar.data
 import java.time.LocalDate
 import java.time.YearMonth
 
-class ReportDay(val date: LocalDate, val steps: Long, val waterMl: Int?)
+/** One day of the report; [reached] by that day's own goal, which differs on a weekend with its own goal. */
+class ReportDay(val date: LocalDate, val steps: Long, val waterMl: Int?, val reached: Boolean)
 
 /** Numbers behind the monthly PDF report (idea 16); days after [today] are left out. */
 class MonthReport(
@@ -29,10 +30,14 @@ class MonthReport(
             water: Map<LocalDate, Int>,
             weights: List<Weight>,
             goal: Long,
+            goalOf: (LocalDate) -> Long = { goal },
         ): MonthReport {
             val last = if (YearMonth.from(today) == month) today else month.atEndOfMonth()
             val dates = (1..last.dayOfMonth).map { month.atDay(it) }
-            val days = dates.map { ReportDay(it, history[it] ?: 0L, water[it]?.takeIf { ml -> ml > 0 }) }
+            val days = dates.map { date ->
+                val steps = history[date] ?: 0L
+                ReportDay(date, steps, water[date]?.takeIf { ml -> ml > 0 }, steps >= goalOf(date))
+            }
             val total = days.sumOf { it.steps }
             val previous = month.minusMonths(1)
             val previousTotal = (1..previous.lengthOfMonth()).sumOf { history[previous.atDay(it)] ?: 0L }.takeIf { it > 0L }
@@ -46,7 +51,7 @@ class MonthReport(
                 goal = goal,
                 total = total,
                 average = if (days.isEmpty()) 0L else total / days.size,
-                goalDays = days.count { it.steps >= goal },
+                goalDays = days.count { it.reached },
                 activeDays = days.count { it.steps > 0L },
                 best = days.filter { it.steps > 0L }.maxByOrNull { it.steps },
                 previousTotal = previousTotal,

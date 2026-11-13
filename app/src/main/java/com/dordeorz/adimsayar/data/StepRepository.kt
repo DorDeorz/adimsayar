@@ -126,7 +126,9 @@ class StepRepository private constructor(private val context: Context) {
         counterPrefs.edit(commit = true) { clear() }
     }
 
-    suspend fun today(): Long = dao.getMerged(LocalDate.now().toString())?.steps ?: 0L
+    suspend fun today(): Long = day(LocalDate.now()) ?: 0L
+
+    suspend fun day(date: LocalDate): Long? = dao.getMerged(date.toString())?.steps
 
     fun observeWeek(today: LocalDate): Flow<List<DaySteps>> =
         dao.observeFrom(weekStart(today).toString()).map { fillWeek(it, today) }

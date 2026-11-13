@@ -26,9 +26,9 @@
     <string name="exact_alarms_title">Tam zamanlı alarmlar</string>
     <string name="exact_alarms_text">Gece yarısı kaydı, hatırlatmalar ve kadran değişimi tam saatinde çalışır. Kapalıysa Android bunları bir saate kadar geciktirebilir. Dokununca izin ekranı açılır.</string>
     <string name="xiaomi_unreadable_title">HyperOS adım kaydı okunamıyor</string>
-    <string name="xiaomi_unreadable_text">Adımlar şu an güncellenmiyor. Bir HyperOS güncellemesi kaydı değiştirmiş olabilir. Aşağıdaki anahtarı kapatıp "Arka planda sürekli say" ile saymaya devam edebilirsin.</string>
+    <string name="xiaomi_unreadable_text">Adımlar şu an güncellenmiyor. Bir HyperOS güncellemesi kaydı değiştirmiş olabilir. Aşağıdaki anahtarı kapatıp \"Arka planda sürekli say\" ile saymaya devam edebilirsin.</string>
     <string name="xiaomi_stalled_title">HyperOS adım kaydı ilerlemiyor</string>
-    <string name="xiaomi_stalled_text">Telefonun sensörü son dakikalarda adım görüyor ama HyperOS kaydı artmıyor. Birkaç dakika sonra tekrar bak; düzelmezse aşağıdaki anahtarı kapatıp "Arka planda sürekli say"ı açabilirsin.</string>
+    <string name="xiaomi_stalled_text">Telefonun sensörü son dakikalarda adım görüyor ama HyperOS kaydı artmıyor. Birkaç dakika sonra tekrar bak; düzelmezse aşağıdaki anahtarı kapatıp \"Arka planda sürekli say\"ı açabilirsin.</string>
     <string name="xiaomi_card_title">HyperOS adım kaydını kullan</string>
     <string name="xiaomi_card_text">Adımlar telefonun kendi adım kaydından okunur. Uygulama kapalıyken de eksiksiz sayılır, bildirim gerekmez ve geçmiş günler de eklenir.</string>
     <string name="service_card_text">Uygulama kapalıyken adımlar sayılmıyorsa bunu aç. Sayaç açık tutulur; bildirim çubuğunda sessiz, kalıcı bir bildirim görünür. Çoğu telefonda gerekmez, önce kapalıyken dene.</string>
@@ -1330,6 +1330,15 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_21_1">
+        <item>Hafta sonu hedefi artık bu haftanın görevlerinde, aylık raporda, Bugün sayfasındaki hafta çubuklarında ve uyku karşılaştırmasında da geçerli</item>
+        <item>HyperOS adım kaydı açıkken boş kalan aktif saat haritası, hedefe kalan süre ve Health Connect\'e yazma artık çalışıyor</item>
+        <item>Bileklik gece takılmadıysa o gün için dinlenme nabzı gösterilmez (gündüz ölçümlerinden hesaplanıp yüksek çıkıyordu)</item>
+        <item>Uygulama kilidi: telefonu çevirince ya da dili değiştirince PIN ikinci kez sorulmaz</item>
+        <item>\"Su ekle\" kısayolu: uygulamaya son uygulamalardan dönünce ikinci bardak eklenmez</item>
+        <item>Saate göre kadran: bileklik bağlı değilken kaçan değişim, bileklik bağlanır bağlanmaz yapılır</item>
+        <item>Gece yarısını geçen yürüyüş kaydı iki günün adımlarını da sayar; \"Tarih aralığını sil\" silmeden önce bir kez daha sorar</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Yaş yerine doğum tarihi sorulur; yaş her gün kendiliğinden hesaplanır. Önceden girilen yaş, doğum tarihi girilene kadar kullanılmaya devam eder</item>
         <item>Doğum gününde saat 09:00 civarı kutlama bildirimi gelir (Ayarlar → Bildirimler → Doğum günü kutlaması)</item>

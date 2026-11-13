@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_21_1">
+        <item>L\'obiettivo del weekend ora vale anche per le sfide della settimana, il report mensile, le barre della settimana in Oggi e il confronto del sonno</item>
+        <item>Con il registro passi di HyperOS attivo, la mappa delle ore attive, il tempo che manca all\'obiettivo e la scrittura in Health Connect restavano vuoti; ora funzionano</item>
+        <item>Il battito a riposo non viene mostrato per un giorno in cui il braccialetto non è stato indossato di notte (veniva da misure diurne ed era troppo alto)</item>
+        <item>Blocco app: il PIN non viene chiesto di nuovo dopo aver ruotato il telefono o cambiato lingua</item>
+        <item>Scorciatoia «Acqua»: tornando dalle app recenti non viene più aggiunto un secondo bicchiere</item>
+        <item>Quadrante in base all\'ora: un cambio che il braccialetto ha perso viene fatto appena si ricollega</item>
+        <item>Una camminata registrata a cavallo della mezzanotte conta i passi di entrambi i giorni; «Elimina un intervallo di date» chiede ancora una volta prima di eliminare</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Chiede la data di nascita invece dell\'età; l\'età viene calcolata ogni giorno. L\'età inserita prima resta in uso finché non imposti una data di nascita</item>
         <item>Il giorno del compleanno arrivano gli auguri verso le 09:00 (Impostazioni → Notifiche → Auguri di compleanno)</item>

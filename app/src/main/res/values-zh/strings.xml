@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_21_1">
+        <item>周末目标现在也用于本周挑战、月度报告、“今天”页面的周柱状图和睡眠对比</item>
+        <item>开启 HyperOS 步数记录时，活跃时段图、距目标的剩余时间和写入 Health Connect 一直是空的，现在可以正常工作</item>
+        <item>夜间没有佩戴手环的那一天不再显示静息心率（之前由白天的测量算出，数值偏高）</item>
+        <item>应用锁：旋转手机或切换语言后不会再次要求输入 PIN</item>
+        <item>“加水”快捷方式：从最近任务返回时不会再多加一杯</item>
+        <item>按时间切换表盘：手环错过的切换会在重新连接后立即执行</item>
+        <item>跨过午夜记录的步行会计入两天的步数；“删除日期范围”在删除前会再确认一次</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>改为填写出生日期而不是年龄；年龄每天自动计算。在填写出生日期之前，仍使用之前输入的年龄</item>
         <item>生日当天 09:00 左右会收到祝福通知（设置 → 通知 → 生日祝福）</item>

@@ -158,7 +158,7 @@ object PdfReport {
             if (day.steps <= 0L) return@forEachIndexed
             val x = left + index * slot
             val barTop = bottom - height * (day.steps / max)
-            canvas.drawRoundRect(RectF(x + slot * 0.15f, barTop, x + slot * 0.85f, bottom), 2f, 2f, if (day.steps >= report.goal) reached else missed)
+            canvas.drawRoundRect(RectF(x + slot * 0.15f, barTop, x + slot * 0.85f, bottom), 2f, 2f, if (day.reached) reached else missed)
         }
         val goalY = bottom - height * (report.goal / max)
         val dash = paint(1f, Color.DKGRAY).apply {
@@ -204,7 +204,7 @@ object PdfReport {
             val name = day.date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale)
             canvas.drawText("${day.date.dayOfMonth} $name", MARGIN, y, text)
             val km = Distance.inUnit(Distance.km(day.steps, settings.heightCm), settings.distanceUnit)
-            canvas.drawText(numbers.format(day.steps), columns[0], y, if (day.steps >= report.goal) goalNumber else number)
+            canvas.drawText(numbers.format(day.steps), columns[0], y, if (day.reached) goalNumber else number)
             canvas.drawText(String.format(locale, "%.1f", km), columns[1], y, number)
             canvas.drawText(numbers.format(Distance.kcal(day.steps, settings.heightCm, settings.weightKg)), columns[2], y, number)
             if (water) canvas.drawText(day.waterMl?.let { numbers.format(it.toLong()) } ?: "–", columns[3], y, number)

@@ -16,7 +16,14 @@ object SleepInsights {
     const val GOOD_NIGHT_MINUTES = 7 * 60L
     const val MIN_GROUP = 3
 
-    fun compute(nights: Map<LocalDate, SleepNight>, history: Map<LocalDate, Long>, today: LocalDate, goal: Long): SleepInsight {
+    /** [goalOf] is the goal of one day: it differs from [goal] on a weekend with its own goal. */
+    fun compute(
+        nights: Map<LocalDate, SleepNight>,
+        history: Map<LocalDate, Long>,
+        today: LocalDate,
+        goal: Long,
+        goalOf: (LocalDate) -> Long = { goal },
+    ): SleepInsight {
         // Today's steps are not finished yet, so only full days count.
         val after = nights.mapNotNull { (date, night) ->
             val steps = history[date]?.takeIf { it > 0L && date.isBefore(today) } ?: return@mapNotNull null
@@ -32,9 +39,9 @@ object SleepInsights {
         val before = history.mapNotNull { (date, steps) ->
             if (steps <= 0L || !date.isBefore(today)) return@mapNotNull null
             val night = nights[date.plusDays(1)] ?: return@mapNotNull null
-            steps to night.minutes
+            (steps >= goalOf(date)) to night.minutes
         }
-        val (active, rest) = before.partition { it.first >= goal }
+        val (active, rest) = before.partition { it.first }
         val sleep = if (active.size >= MIN_GROUP && rest.size >= MIN_GROUP) {
             ActiveSleepSplit(active.size, rest.size, average(active.map { it.second }), average(rest.map { it.second }))
         } else {

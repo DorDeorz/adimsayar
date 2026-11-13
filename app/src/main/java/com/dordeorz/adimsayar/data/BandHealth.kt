@@ -55,7 +55,8 @@ object BandHealth {
         val heart = if (hearts.isEmpty()) {
             null
         } else {
-            HeartSummary(resting(samples) ?: hearts.min(), hearts.min(), HealthMath.average(hearts) ?: 0L, hearts.max())
+            val rest = if (restingDay(context, date, zone)) resting(samples) ?: hearts.min() else null
+            HeartSummary(rest, hearts.min(), HealthMath.average(hearts) ?: 0L, hearts.max())
         }
         return BandDay(null, null, emptyList(), heart, nights(context, date, date, zone)[date]?.minutes)
     }
@@ -66,7 +67,7 @@ object BandHealth {
         val slots = slots(dao(context).samples(from, to)).map { (start, values) ->
             HeartSlot(Instant.ofEpochSecond(start).atZone(zone).toLocalTime(), values.min(), HealthMath.average(values) ?: 0L, values.max())
         }
-        return HeartDay(slots, HealthMath.restingEstimate(slots.map { it.avg }))
+        return HeartDay(slots, if (restingDay(context, date, zone)) HealthMath.restingEstimate(slots.map { it.avg }) else null)
     }
 
     suspend fun sleepDay(context: Context, date: LocalDate): SleepDay? {
@@ -144,10 +145,16 @@ object BandHealth {
         val latest = dao(context).latestHeart()
         return HealthSnapshot(
             nights(context, today, today, zone)[today]?.minutes,
-            resting(dao(context).samples(from, to)),
+            if (restingDay(context, today, zone)) resting(dao(context).samples(from, to)) else null,
             latest?.heart?.toLong(),
             latest?.let { Instant.ofEpochSecond(it.minute) },
         )
+    }
+
+    /** Whether [date]'s heart rate gives a resting value, by the rule of [HealthMath.restingDays] the trend uses. */
+    private suspend fun restingDay(context: Context, date: LocalDate, zone: ZoneId): Boolean {
+        val nights = nights(context, date.minusDays(MAX_BEFORE_DAYS), date, zone).keys
+        return date in HealthMath.restingDays(setOf(date), nights)
     }
 
     private suspend fun nights(context: Context, from: LocalDate, to: LocalDate, zone: ZoneId): Map<LocalDate, SleepNight> {

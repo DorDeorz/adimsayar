@@ -26,9 +26,9 @@
     <string name="exact_alarms_title">Exakte Wecker</string>
     <string name="exact_alarms_text">Mitternachtsspeicherung, Erinnerungen und Zifferblattwechsel laufen pünktlich. Ohne Erlaubnis kann Android sie bis zu einer Stunde verzögern. Tippen öffnet die Berechtigung.</string>
     <string name="xiaomi_unreadable_title">HyperOS-Schrittaufzeichnung nicht lesbar</string>
-    <string name="xiaomi_unreadable_text">Die Schritte werden gerade nicht aktualisiert. Ein HyperOS-Update hat die Aufzeichnung vielleicht geändert. Du kannst den Schalter unten ausschalten und mit "Im Hintergrund weiterzählen" weiterzählen.</string>
+    <string name="xiaomi_unreadable_text">Die Schritte werden gerade nicht aktualisiert. Ein HyperOS-Update hat die Aufzeichnung vielleicht geändert. Du kannst den Schalter unten ausschalten und mit \"Im Hintergrund weiterzählen\" weiterzählen.</string>
     <string name="xiaomi_stalled_title">Die HyperOS-Schrittaufzeichnung bewegt sich nicht</string>
-    <string name="xiaomi_stalled_text">Der Sensor des Telefons hat in den letzten Minuten Schritte erkannt, aber die HyperOS-Aufzeichnung steigt nicht. Schau in ein paar Minuten wieder nach; wenn sie sich nicht erholt, schalte den Schalter unten aus und "Im Hintergrund weiterzählen" ein.</string>
+    <string name="xiaomi_stalled_text">Der Sensor des Telefons hat in den letzten Minuten Schritte erkannt, aber die HyperOS-Aufzeichnung steigt nicht. Schau in ein paar Minuten wieder nach; wenn sie sich nicht erholt, schalte den Schalter unten aus und \"Im Hintergrund weiterzählen\" ein.</string>
     <string name="xiaomi_card_title">HyperOS-Schrittaufzeichnung verwenden</string>
     <string name="xiaomi_card_text">Die Schritte werden aus der eigenen Schrittaufzeichnung des Telefons gelesen. Sie werden auch bei geschlossener App vollständig gezählt, es ist keine Benachrichtigung nötig, und vergangene Tage werden ebenfalls übernommen.</string>
     <string name="service_card_text">Schalte das ein, wenn bei geschlossener App keine Schritte gezählt werden. Der Zähler bleibt aktiv; in der Benachrichtigungsleiste erscheint eine stille, dauerhafte Benachrichtigung. Die meisten Handys zählen auch ohne; probiere es zuerst ausgeschaltet.</string>
@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_21_1">
+        <item>Das Wochenendziel gilt jetzt auch für die Aufgaben dieser Woche, den Monatsbericht, die Wochenbalken auf Heute und den Schlafvergleich</item>
+        <item>Mit eingeschalteter HyperOS-Schrittaufzeichnung blieben die Karte aktiver Stunden, die Restzeit bis zum Ziel und das Schreiben in Health Connect leer; jetzt funktionieren sie</item>
+        <item>Für einen Tag, an dem das Armband nachts nicht getragen wurde, wird kein Ruhepuls angezeigt (er stammte aus Tageswerten und war zu hoch)</item>
+        <item>App-Sperre: Nach dem Drehen des Handys oder einem Sprachwechsel wird die PIN nicht noch einmal abgefragt</item>
+        <item>Verknüpfung „Wasser“: Beim Zurückkehren über die letzten Apps wird kein zweites Glas mehr hinzugefügt</item>
+        <item>Zifferblatt nach Tageszeit: Ein Wechsel, den das Armband verpasst hat, wird nachgeholt, sobald es wieder verbunden ist</item>
+        <item>Ein über Mitternacht aufgezeichneter Spaziergang zählt die Schritte beider Tage; „Zeitraum löschen“ fragt vor dem Löschen noch einmal nach</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Fragt nach dem Geburtsdatum statt nach dem Alter; das Alter wird täglich berechnet. Das bisher eingegebene Alter gilt, bis ein Geburtsdatum gesetzt ist</item>
         <item>An deinem Geburtstag kommt gegen 09:00 ein Glückwunsch (Einstellungen → Benachrichtigungen → Geburtstagsgruß)</item>

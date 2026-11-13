@@ -136,7 +136,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
         if (state.today.dayOfWeek in state.extra.extras.walkPlan) item { WalkPlanCard(state) }
         item { WaterCard(state, actions.onAddWater) }
         item { WalkToolsCard(state, actions) }
-        item { WeekCard(state.week, goal) }
+        item { WeekCard(state.week, goal, state.settings::goalOn) }
         item {
             val reading = state.lastReadingWallMs
             Text(
@@ -292,7 +292,7 @@ private fun SummaryRow(state: MainUiState) {
 }
 
 @Composable
-private fun WeekCard(week: List<DaySteps>, goal: Long) {
+private fun WeekCard(week: List<DaySteps>, goal: Long, goalOn: (LocalDate) -> Long) {
     val scale = maxOf(week.maxOfOrNull { it.steps } ?: 0L, goal).coerceAtLeast(1L)
     val goalLine = (CHART_HEIGHT * (goal.toFloat() / scale)).coerceAtMost(CHART_HEIGHT - 1.dp)
     Card(modifier = Modifier.fillMaxWidth()) {
@@ -310,7 +310,7 @@ private fun WeekCard(week: List<DaySteps>, goal: Long) {
                 Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.Bottom) {
                     week.forEachIndexed { index, day ->
                         Box(modifier = Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.BottomCenter) {
-                            Bar(day.steps, scale, goal, isToday = index == week.lastIndex)
+                            Bar(day.steps, scale, goalOn(day.date), isToday = index == week.lastIndex)
                         }
                     }
                 }
@@ -319,7 +319,7 @@ private fun WeekCard(week: List<DaySteps>, goal: Long) {
                 week.forEachIndexed { index, day ->
                     val isToday = index == week.lastIndex
                     Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                        val reached = day.steps >= goal
+                        val reached = day.steps >= goalOn(day.date)
                         Text(
                             if (reached) "✓ ${formatCompact(day.steps)}" else formatCompact(day.steps),
                             style = MaterialTheme.typography.labelSmall,
@@ -527,7 +527,7 @@ private fun ShareButton(state: MainUiState, actions: MainActions, steps: Long, g
                     ShareStat(format(kcal), kcalLabel),
                     ShareStat(streakValue, streakLabel),
                 ),
-                week = state.week.map { ShareBar(shortDayName(it.date), it.steps.toFloat() / scale, it.steps >= goal) },
+                week = state.week.map { ShareBar(shortDayName(it.date), it.steps.toFloat() / scale, it.steps >= state.settings.goalOn(it.date)) },
                 goalLine = goal.toFloat() / scale,
             )
             val palette = ShareColors(

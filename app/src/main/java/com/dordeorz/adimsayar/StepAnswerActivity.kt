@@ -11,6 +11,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.lifecycleScope
 import com.dordeorz.adimsayar.data.SettingsStore
 import com.dordeorz.adimsayar.data.StepRepository
 import com.dordeorz.adimsayar.ui.theme.AdimSayarTheme
@@ -49,9 +50,9 @@ class StepAnswerActivity : ComponentActivity() {
                 }
             }
         }
-        AppScope.launch(Dispatchers.Main) {
+        // Ends with the activity, so a closed or rotated answer does not start speaking later.
+        lifecycleScope.launch {
             val steps = withContext(Dispatchers.IO) { StepRepository.get(applicationContext).today() }
-            if (isFinishing) return@launch
             val goal = settings.goalOn(LocalDate.now())
             val format = NumberFormat.getIntegerInstance(Locales.current)
             val text = if (steps >= goal) {

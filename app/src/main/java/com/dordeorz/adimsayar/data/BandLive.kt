@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.dordeorz.adimsayar.background.BandAlerts
+import com.dordeorz.adimsayar.background.FaceSchedule
 import com.dordeorz.adimsayar.band.WatchfaceFile
 import com.dordeorz.adimsayar.band.WatchfaceUpload
 import com.dordeorz.adimsayar.band.BandEvent
@@ -273,8 +274,10 @@ object BandLive {
                         shouldSync = { System.currentTimeMillis() >= nextSync },
                         onSynced = { result ->
                             nextSync = System.currentTimeMillis() + SYNC_INTERVAL_MS
-                            if (!connected) onBack(context)
+                            val back = !connected
+                            if (back) onBack(context)
                             connected = true
+                            if (back) FaceSchedule.onBandBack(context)
                             BandDirect.finish(context, ReadSource.Service, result, saver.files, session?.fileSummary.orEmpty())
                             saver.reset()
                             complete(result)

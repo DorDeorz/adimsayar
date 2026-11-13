@@ -51,9 +51,8 @@ object HealthWrite {
     }
 
     private suspend fun write(context: Context, from: LocalDate): Boolean {
-        val repository = StepRepository.get(context)
-        val hours = HashMap(repository.loadPhoneHourMap(from))
-        if (BandDirect.isEnabled(context)) hours.putAll(repository.loadBandHours(from))
+        // The same hours the app shows: the phone's own record or our count, with the band's hours over them.
+        val hours = DayHours.since(context, from)
         val zone = ZoneId.systemDefault()
         val now = LocalDateTime.now()
         val records = hours.filter { (hour, steps) -> steps > 0L && hour <= now }.map { (hour, steps) ->

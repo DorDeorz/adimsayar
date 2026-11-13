@@ -41,8 +41,7 @@ object DogWalk {
         prefs.edit { clear() }
         _started.value = null
         if (start <= 0L) return
-        // A walk over midnight keeps today's steps only, since the day's count started again.
-        val steps = if (todaySteps >= startSteps) todaySteps - startSteps else todaySteps
+        val steps = Walks.stepsSince(context, start, startSteps, todaySteps)
         Walks.save(context, Walk(kind = Walks.KIND_DOG, start = start, end = System.currentTimeMillis(), steps = steps, meters = 0.0, path = null))
     }
 }

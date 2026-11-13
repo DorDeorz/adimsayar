@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_21_1">
+        <item>L\'objectif du week-end compte maintenant aussi dans les défis de la semaine, le rapport mensuel, les barres de la semaine sur Aujourd\'hui et la comparaison du sommeil</item>
+        <item>Avec le relevé de pas HyperOS activé, la carte des heures actives, le temps restant jusqu\'à l\'objectif et l\'écriture dans Health Connect restaient vides ; ils fonctionnent maintenant</item>
+        <item>La fréquence cardiaque au repos n\'est plus affichée pour un jour où le bracelet n\'a pas été porté la nuit (elle venait de mesures de jour et était trop élevée)</item>
+        <item>Verrouillage de l\'app : le code PIN n\'est plus redemandé après avoir tourné le téléphone ou changé de langue</item>
+        <item>Raccourci « Eau » : revenir depuis les applis récentes n\'ajoute plus un deuxième verre</item>
+        <item>Cadran selon l\'heure : un changement que le bracelet a manqué est fait dès qu\'il se reconnecte</item>
+        <item>Une marche enregistrée après minuit compte les pas des deux jours ; « Supprimer une période » redemande avant de supprimer</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Demande la date de naissance au lieu de l\'âge ; l\'âge est calculé chaque jour. L\'âge saisi avant reste utilisé tant qu\'aucune date de naissance n\'est indiquée</item>
         <item>Un message d\'anniversaire arrive vers 09:00 le jour de votre anniversaire (Paramètres → Notifications → Message d\'anniversaire)</item>

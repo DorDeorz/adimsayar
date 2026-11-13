@@ -5,10 +5,14 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.time.LocalDate
 
 /** Floors climbed, from the air pressure sensor. Phones without one never show floors. */
 object Floors {
+
+    private val lock = Mutex()
 
     fun hasSensor(context: Context): Boolean =
         context.getSystemService(SensorManager::class.java)?.getDefaultSensor(Sensor.TYPE_PRESSURE) != null
@@ -18,8 +22,10 @@ object Floors {
 
     suspend fun add(context: Context, date: LocalDate, floors: Int) {
         if (floors <= 0) return
-        val dao = StepDatabase.get(context).extras()
-        val current = dao.floors(date.toString())?.floors ?: 0
-        dao.upsertFloors(FloorDay(date.toString(), current + floors))
+        lock.withLock {
+            val dao = StepDatabase.get(context).extras()
+            val current = dao.floors(date.toString())?.floors ?: 0
+            dao.upsertFloors(FloorDay(date.toString(), current + floors))
+        }
     }
 }

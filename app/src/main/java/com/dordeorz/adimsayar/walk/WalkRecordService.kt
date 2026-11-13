@@ -108,7 +108,7 @@ class WalkRecordService : Service(), LocationListener {
             val app = applicationContext
             val route = path.toString().ifEmpty { null }
             AppScope.launch {
-                val steps = (StepRepository.get(app).today() - current.startSteps).coerceAtLeast(0L)
+                val steps = Walks.stepsSince(app, current.start, current.startSteps, StepRepository.get(app).today())
                 Walks.save(app, Walk(kind = Walks.KIND_GPS, start = current.start, end = System.currentTimeMillis(), steps = steps, meters = current.meters, path = route))
             }
         }

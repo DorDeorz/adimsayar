@@ -133,6 +133,8 @@ internal fun GoalsExtras(state: MainUiState, actions: MainActions) {
 @Composable
 internal fun DataExtras(state: MainUiState, actions: MainActions) {
     var dialog by rememberSaveable { mutableStateOf<ExtraDialog?>(null) }
+    // The chosen days as epoch days, kept while the app asks once more before it deletes them.
+    var eraseDays by rememberSaveable { mutableStateOf<Pair<Long, Long>?>(null) }
     val context = LocalContext.current
     HorizontalDivider(Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
     GroupLabel(stringResource(R.string.backup_group))
@@ -164,7 +166,8 @@ internal fun DataExtras(state: MainUiState, actions: MainActions) {
             from = null,
             to = null,
             clearLabel = null,
-            onSave = { from, to -> actions.extra.eraseRange(from, to) },
+            confirmLabel = stringResource(R.string.erase_confirm_button),
+            onSave = { from, to -> eraseDays = from.toEpochDay() to to.toEpochDay() },
             onClear = {},
             onDismiss = { dialog = null },
         )
@@ -176,6 +179,22 @@ internal fun DataExtras(state: MainUiState, actions: MainActions) {
             onDismiss = { dialog = null },
         )
         else -> Unit
+    }
+    eraseDays?.let { (from, to) ->
+        val first = LocalDate.ofEpochDay(from)
+        val last = LocalDate.ofEpochDay(to)
+        val days = if (first == last) {
+            SHORT_DATE_FORMAT.format(first)
+        } else {
+            stringResource(R.string.vacation_range, SHORT_DATE_FORMAT.format(first), SHORT_DATE_FORMAT.format(last))
+        }
+        ConfirmDialog(
+            title = stringResource(R.string.erase_range),
+            text = days + "\n\n" + stringResource(R.string.erase_range_hint),
+            confirm = stringResource(R.string.erase_confirm_button),
+            onConfirm = { actions.extra.eraseRange(first, last) },
+            onDismiss = { eraseDays = null },
+        )
     }
 }
 
@@ -259,6 +278,7 @@ internal fun DateRangeDialog(
     onSave: (LocalDate, LocalDate) -> Unit,
     onClear: () -> Unit,
     onDismiss: () -> Unit,
+    confirmLabel: String = stringResource(R.string.save),
 ) {
     val picker = rememberDateRangePickerState(
         initialSelectedStartDateMillis = from?.let(::utcMillis),
@@ -275,7 +295,7 @@ internal fun DateRangeDialog(
                     onDismiss()
                 },
                 enabled = start != null,
-            ) { Text(stringResource(R.string.save)) }
+            ) { Text(confirmLabel) }
         },
         dismissButton = {
             Row {

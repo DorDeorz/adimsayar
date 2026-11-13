@@ -26,9 +26,9 @@
     <string name="exact_alarms_title">Alarmas exactas</string>
     <string name="exact_alarms_text">El registro de medianoche, los recordatorios y el cambio de esfera se ejecutan a su hora. Si está desactivado, Android puede retrasarlos hasta una hora. Toca para abrir el permiso.</string>
     <string name="xiaomi_unreadable_title">No se puede leer el registro de pasos de HyperOS</string>
-    <string name="xiaomi_unreadable_text">Los pasos no se están actualizando ahora mismo. Puede que una actualización de HyperOS haya cambiado el registro. Puedes desactivar el interruptor de abajo y seguir contando con "Seguir contando en segundo plano".</string>
+    <string name="xiaomi_unreadable_text">Los pasos no se están actualizando ahora mismo. Puede que una actualización de HyperOS haya cambiado el registro. Puedes desactivar el interruptor de abajo y seguir contando con \"Seguir contando en segundo plano\".</string>
     <string name="xiaomi_stalled_title">El registro de pasos de HyperOS no avanza</string>
-    <string name="xiaomi_stalled_text">El sensor del teléfono ha detectado pasos en los últimos minutos, pero el registro de HyperOS no aumenta. Vuelve a comprobarlo en unos minutos; si no se recupera, desactiva el interruptor de abajo y activa "Seguir contando en segundo plano".</string>
+    <string name="xiaomi_stalled_text">El sensor del teléfono ha detectado pasos en los últimos minutos, pero el registro de HyperOS no aumenta. Vuelve a comprobarlo en unos minutos; si no se recupera, desactiva el interruptor de abajo y activa \"Seguir contando en segundo plano\".</string>
     <string name="xiaomi_card_title">Usar el registro de pasos de HyperOS</string>
     <string name="xiaomi_card_text">Los pasos se leen del propio registro de pasos del teléfono. Se cuentan por completo aunque la app esté cerrada, no hace falta ninguna notificación y también se añaden los días anteriores.</string>
     <string name="service_card_text">Actívalo si no se cuentan pasos con la app cerrada. El contador se mantiene activo; aparece una notificación silenciosa y permanente en la barra de notificaciones. La mayoría de los teléfonos cuentan sin esto; pruébalo primero desactivado.</string>
@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_21_1">
+        <item>El objetivo de fin de semana ahora también cuenta en los retos de esta semana, el informe mensual, las barras de la semana en Hoy y la comparación del sueño</item>
+        <item>Con el registro de pasos de HyperOS activado, el mapa de horas activas, el tiempo que falta hasta el objetivo y la escritura en Health Connect quedaban vacíos; ya funcionan</item>
+        <item>No se muestra el pulso en reposo de un día en que no llevaste la pulsera por la noche (salía de mediciones diurnas y era demasiado alto)</item>
+        <item>Bloqueo de la app: no se pide el PIN otra vez al girar el teléfono o cambiar el idioma</item>
+        <item>Acceso directo «Agua»: al volver desde las apps recientes ya no se añade un segundo vaso</item>
+        <item>Esfera según la hora: un cambio que la pulsera no recibió se hace en cuanto vuelve a conectarse</item>
+        <item>Un paseo grabado pasada la medianoche cuenta los pasos de los dos días; «Borrar un rango de fechas» pregunta otra vez antes de borrar</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Pide la fecha de nacimiento en lugar de la edad; la edad se calcula cada día. La edad indicada antes se sigue usando hasta que pongas una fecha de nacimiento</item>
         <item>El día de tu cumpleaños llega una felicitación hacia las 09:00 (Ajustes → Notificaciones → Felicitación de cumpleaños)</item>

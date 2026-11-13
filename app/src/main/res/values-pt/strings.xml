@@ -1329,6 +1329,15 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_21_1">
+        <item>A meta de fim de semana agora também vale para os desafios da semana, o relatório mensal, as barras da semana em Hoje e a comparação do sono</item>
+        <item>Com o registro de passos do HyperOS ativado, o mapa de horas ativas, o tempo que falta até a meta e a gravação no Health Connect ficavam vazios; agora funcionam</item>
+        <item>O batimento em repouso não aparece em um dia em que a pulseira não foi usada à noite (vinha de medições diurnas e ficava alto demais)</item>
+        <item>Bloqueio do app: o PIN não é pedido de novo depois de girar o celular ou trocar o idioma</item>
+        <item>Atalho “Água”: voltar pelos apps recentes não adiciona mais um segundo copo</item>
+        <item>Mostrador por horário: uma troca que a pulseira perdeu é feita assim que ela se reconecta</item>
+        <item>Uma caminhada gravada passando da meia-noite conta os passos dos dois dias; “Apagar um período” pergunta mais uma vez antes de apagar</item>
+    </string-array>
     <string-array name="release_notes_0_21_0">
         <item>Pede a data de nascimento em vez da idade; a idade é calculada todo dia. A idade informada antes continua valendo até você definir a data de nascimento</item>
         <item>No seu aniversário chega uma mensagem de parabéns por volta das 09:00 (Configurações → Notificações → Parabéns de aniversário)</item>
