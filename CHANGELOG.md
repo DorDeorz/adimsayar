@@ -4,8 +4,24 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.21.0
 
-Sağlık kartlarına detay sayfaları. Veritabanı sürümü değişmedi (v7).
+Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü, yeni sürümü haber verme, Sağlık kartlarına detay sayfaları. Veritabanı sürümü değişmedi (v7).
 
+- Ayarlar → Vücut ve mesafe'de yaş yerine doğum tarihi sorulur (`BirthDateDialog`). Tarih yazarak girilir, takvim bir dokunuş uzakta; 10–100 yaş arası seçilebilir. Yaş her gün doğum tarihinden hesaplanır (`AppSettings.ageOn`), nabız bölgeleri ve fitness yaşı bunu kullanır.
+- Geçiş: önceden girilen yaş (`age` ayarı) doğum tarihi girilene kadar kullanılmaya devam eder; satırda "Girilmedi · şimdilik N yaş sayılıyor" yazar ve takvim o yaşın yılında açılır. Doğum tarihi girilince `age` da güncellenir.
+- Doğum günü kutlaması: doğum gününde saat 09:00 civarı "İyi ki doğdun!" bildirimi gelir (`Reminders.birthdayCheck`, yılda bir kez). Telefon 09:00'da kapalıysa ya da doğum tarihi o gün girildiyse bildirim hemen gelir. 29 Şubat doğumlular, Şubat'ın 28 çektiği yıllarda 28 Şubat'ta kutlanır. Ayarlar → Bildirimler → "Doğum günü kutlaması" ile kapatılabilir; varsayılan açık, ama doğum tarihi girilmeden bir şey göndermez.
+- Doğum tarihi ayarlarla birlikte tam yedeğe girer (`birth_date`, `birthday_notification`).
+- Kuşun ötüşü (`BirdSong`: besleyince ve ötüş seçince) daha kısık ve yumuşak. Kullanıcı sesi çok yüksek ve kulak tırmalayıcı buldu.
+  - Ses düzeyi 0,4'ten 0,12'ye indi (yaklaşık 10 dB, kulağa yarı yarıya daha sessiz).
+  - Cıvıltı, Tril ve Ötüş 3–4 kHz yerine en çok 2,6 kHz'de çalar; kulak ve telefon hoparlörü en çok 3–4 kHz'de sert duyuyordu. Kumru zaten pesti, değişmedi.
+  - Notalar karesi alınmış sinüsle yumuşak başlar ve biter; Tril 6 yerine 5 daha uzun notadan oluşur.
+  - Ses artık medya sesinden çalar (`USAGE_MEDIA`), uygulama açıkken telefonun ses tuşlarıyla kısılır. Önceden sistem sesinden çalıyordu, o da çoğu telefonda zil sesine bağlı ve yüksek. Telefon sessiz ya da titreşimdeyken hiç çalmaz.
+- Yeni sürüm çıkınca haber verme (isteğe bağlı, Ayarlar → Hakkında → "Yeni sürümü haber ver"). Kapalı başlar; Bugün sayfası bir kez "Yeni sürümleri haber vereyim mi?" diye sorar. Açıksa:
+  - Günde bir kez, telefon internete bağlıyken bir `JobScheduler` işi (`UpdateJobService`, ağ koşullu, 24 saatlik) GitHub'daki son sürüm numarasını okur (`UpdateChecks`). Yeni sürüm her sürüm için bir kez "Güncellemeler" kanalında bildirilir; bildirime dokununca Bugün sayfası açılır.
+  - Uygulama açılınca son yanıt 6 saatten eskiyse yine bakılır; bu durumda bildirim gönderilmez, kart yeter.
+  - Bugün sayfasında "FitWren X çıktı" kartı çıkar: "Güncelle" mevcut onay penceresiyle APK'yı GitHub'dan indirip kurulum ekranını açar, "Sonra" o sürümün kartını gizler (daha yeni bir sürüm çıkınca kart yine gelir). Kart, sürüm kurulunca kendiliğinden kalkar.
+  - Bulunan sürüm, bildirilen ve gizlenen sürüm kendi `update_watch` tercihlerinde durur (`UpdateWatch`), yedeğe girmez; aç/kapa ayarı `extras` içinde olduğu için yedekle taşınır.
+- Ayarlar'daki "Güncellemeleri kontrol et" satırı ile Bugün kartı aynı indirme ve kurulum adımlarını kullanır (`UpdateFlow`). Satır, arka planda bulunmuş yeni sürümü dokunmadan önce gösterir.
+- Yeni izin: `ACCESS_NETWORK_STATE` (Android 14+ ağ koşullu işler için istiyor; normal izin, sorulmaz).
 - Sağlık sayfasındaki her karta (uyku, nabız, dinlenme nabzı, SpO₂, stres, toparlanma, egzersiz, aktivite, su, kilo) dokununca ayrı bir sayfa açılır. Sayfada ay takvimi var: her günün değeri günün kutusunda yazar, ay için üç özet sayı (ortalama, kayıtlı gün, en iyi gibi) üstte görünür. Önceki aylara oklarla geçilir. Kartın başlığında ok işareti var; kartın içindeki çubuklar, oklar ve nabız grafiği eskisi gibi kendi işini yapar.
 - Takvimde bir güne dokununca altında o günün ayrıntısı açılır:
   - Uyku: toplam süre, yatış ve kalkış saati, uyku saatleri çizelgesi (gecenin her parçası; Health Connect evre saatlerini veriyorsa evreler satır satır), yatakta geçen süre, parçaların saatleri, uyku evreleri, uykuda nabız (grafikle) ve SpO₂ (`WearableHealth.sleepDay`, `BandHealth.sleepDay`).

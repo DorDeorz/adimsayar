@@ -634,7 +634,7 @@ private fun TimeChart(
 private fun HeartDayDetail(date: LocalDate, state: MainUiState, load: suspend (LocalDate) -> HeartDay?) {
     val loaded = rememberLoaded(date, state.healthRefresh) { load(date) ?: HeartDay(emptyList(), null) }
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-        HeartDayBody(loaded?.value, state.settings.age, date)
+        HeartDayBody(loaded?.value, state.settings.ageOn(date), date)
     }
 }
 

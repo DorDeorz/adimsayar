@@ -85,7 +85,7 @@ object Recovery {
 @Composable
 internal fun FitnessAgeCard(data: BandPeriod, state: MainUiState) {
     val resting = HealthMath.average(data.resting.mapNotNull { it.second }) ?: return
-    val age = state.settings.age
+    val age = state.settings.ageOn(state.today)
     val averageSteps = remember(state.history, state.today) {
         val from = state.today.minusDays(30)
         val days = state.history.filter { (date, steps) -> date.isAfter(from) && date.isBefore(state.today) && steps > 0L }

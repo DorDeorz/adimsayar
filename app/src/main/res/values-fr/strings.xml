@@ -255,6 +255,11 @@
     <string name="weight_reminder_hint">Vous rappelle de vous peser vers 09:00 le premier jour de la semaine.</string>
     <string name="notify_weight_title">C\'est l\'heure de la pesée</string>
     <string name="notify_weight_text">Nouvelle semaine : pesez-vous et ajoutez-le dans FitWren.</string>
+    <string name="birthday_notification">Message d\'anniversaire</string>
+    <string name="birthday_notification_hint">Vous envoie un message vers 09:00 le jour de votre anniversaire.</string>
+    <string name="birthday_notification_needs_date">Vous souhaite votre anniversaire. Saisissez d\'abord votre date de naissance dans « Corps et distance ».</string>
+    <string name="notify_birthday_title">Joyeux anniversaire ! 🎂</string>
+    <string name="notify_birthday_text">Vous avez %1$d ans aujourd\'hui. À de nombreuses années en bonne santé, riches en pas !</string>
     <string name="notify_health_resting">Fréquence cardiaque au repos moyenne : %1$d bpm</string>
     <string name="notify_health_resting_down">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de moins que la semaine dernière</string>
     <string name="notify_health_resting_up">Fréquence cardiaque au repos moyenne : %1$d bpm, %2$d de plus que la semaine dernière</string>
@@ -572,9 +577,11 @@
     <string name="exercise_yoga">Yoga</string>
     <string name="exercise_strength">Musculation</string>
     <string name="exercise_other">Entraînement</string>
-    <string name="age">Âge</string>
+    <string name="birth_date">Date de naissance</string>
+    <string name="birth_date_missing">Non renseignée · %1$d ans retenus pour le moment</string>
+    <string name="birth_date_hint">Votre âge est calculé chaque jour à partir de la date de naissance ; il sert aux zones cardiaques et à l\'âge de forme.</string>
+    <string name="birth_date_pick">Saisissez votre date de naissance</string>
     <string name="age_value">%1$d ans</string>
-    <string name="age_unit">ans</string>
     <string name="unit_ml">ml</string>
     <string name="water_ml">%1$s ml</string>
     <string name="water_title">Eau</string>
@@ -1323,6 +1330,10 @@
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
     <string-array name="release_notes_0_21_0">
+        <item>Demande la date de naissance au lieu de l\'âge ; l\'âge est calculé chaque jour. L\'âge saisi avant reste utilisé tant qu\'aucune date de naissance n\'est indiquée</item>
+        <item>Un message d\'anniversaire arrive vers 09:00 le jour de votre anniversaire (Paramètres → Notifications → Message d\'anniversaire)</item>
+        <item>Le chant de l’oiseau (quand vous le nourrissez ou choisissez un chant) est plus doux et moins fort ; les touches de volume le règlent, et il se tait quand le téléphone est en silencieux</item>
+        <item>Prévient à la sortie d’une nouvelle version : si tu l’actives, consulte GitHub une fois par jour, envoie une notification et affiche une carte Mettre à jour sur Aujourd’hui (Paramètres → À propos)</item>
         <item>Touchez une carte de la page Santé pour ouvrir un calendrier : sommeil, fréquence cardiaque, SpO2, stress, récupération, exercice, activité, eau et poids jour par jour</item>
         <item>Touchez un jour pour voir combien de temps et à quelles heures vous avez dormi, les phases de sommeil, la fréquence cardiaque et la SpO2 pendant le sommeil ; les autres cartes montrent ce jour en détail</item>
     </string-array>

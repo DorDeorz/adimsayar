@@ -1,2 +1,4 @@
-Tap a Health card to open a calendar: sleep, heart rate, SpO2, stress, recovery, exercise, activity, water and weight day by day.
-Tap a day for its details: sleep times, stages, heart rate and SpO2 while asleep.
+Asks for your date of birth instead of your age; a birthday greeting arrives around 09:00 on your birthday.
+The bird's song is quieter and softer; the volume keys set it, and it stays quiet on silent.
+Optional: tells you when a new version is out (checks GitHub once a day).
+Tap a Health card to open a calendar with each day's details: sleep times and stages, heart rate, SpO2, stress, recovery, exercise, activity, water and weight.

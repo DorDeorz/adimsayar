@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_watch">新版本提醒</string>
+    <string name="update_watch_hint">每天查看一次 GitHub，有新版本时发送通知</string>
+    <string name="update_channel">更新</string>
+    <string name="update_new_title">FitWren %1$s 已发布</string>
+    <string name="update_notify_text">你正在使用 %1$s。点按即可更新。</string>
+    <string name="update_ask_title">有新版本时要提醒你吗？</string>
+    <string name="update_ask_text">FitWren 每天在 GitHub 上查看一次最新版本号，有新版本时发送通知。不会发送你的任何数据。之后可以在 设置 → 关于 中更改。</string>
+    <string name="update_ask_no">不用</string>
+    <string name="update_ask_yes">好，提醒我</string>
+    <string name="update_card_text">你正在使用 %1$s。更新从 GitHub 下载，你的数据会保留。</string>
+    <string name="update_card_later">以后再说</string>
+    <string name="update_card_update">更新</string>
+    <string name="update_card_install">安装</string>
+</resources>

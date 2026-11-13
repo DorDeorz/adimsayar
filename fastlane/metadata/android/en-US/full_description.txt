@@ -21,4 +21,4 @@
 
 <p>Also: daily and weekly goals, optional reminders, light and dark theme, 12 languages, CSV export and import (also reads Samsung Health, Mi Fitness, Mi Fit and Google Fit exports).</p>
 
-<p><b>Network</b>: the internet is used only for things you start or turn on: "Check for updates" (reads the latest version from GitHub and, after you confirm, downloads the APK), the Xiaomi or Zepp sign-in that fetches your band's key, the optional weather on the band (Open-Meteo, the chosen place rounded to about 1 km) and the band face store (Xiaomi). Your steps and health data are never sent.</p>
+<p><b>Network</b>: the internet is used only for things you start or turn on: "Check for updates" (reads the latest version from GitHub, by hand or once a day if you turn on "Tell me about new versions", and after you confirm downloads the APK), the Xiaomi or Zepp sign-in that fetches your band's key, the optional weather on the band (Open-Meteo, the chosen place rounded to about 1 km) and the band face store (Xiaomi). Your steps and health data are never sent.</p>

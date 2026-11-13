@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_watch">Avisarme de nuevas versiones</string>
+    <string name="update_watch_hint">Consulta GitHub una vez al día y envía una notificación cuando sale una versión nueva</string>
+    <string name="update_channel">Actualizaciones</string>
+    <string name="update_new_title">Ya está aquí FitWren %1$s</string>
+    <string name="update_notify_text">Usas la %1$s. Toca para actualizar.</string>
+    <string name="update_ask_title">¿Te aviso cuando haya versiones nuevas?</string>
+    <string name="update_ask_text">Una vez al día FitWren consulta en GitHub el número de la última versión y te avisa con una notificación cuando sale una nueva. No se envía ninguno de tus datos. Puedes cambiarlo luego en Ajustes → Acerca de.</string>
+    <string name="update_ask_no">No</string>
+    <string name="update_ask_yes">Sí, avísame</string>
+    <string name="update_card_text">Usas la %1$s. La actualización llega desde GitHub y tus datos se quedan como están.</string>
+    <string name="update_card_later">Más tarde</string>
+    <string name="update_card_update">Actualizar</string>
+    <string name="update_card_install">Instalar</string>
+</resources>

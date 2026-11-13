@@ -103,6 +103,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -121,7 +122,6 @@ import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.Locales
 import com.dordeorz.adimsayar.R
 import com.dordeorz.adimsayar.data.WIDGET_OPACITY_OPTIONS
-import com.dordeorz.adimsayar.data.AGE_RANGE
 import com.dordeorz.adimsayar.data.DAILY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.GLASS_OPTIONS
 import com.dordeorz.adimsayar.data.WATER_GOAL_RANGE
@@ -134,14 +134,11 @@ import com.dordeorz.adimsayar.data.SUPPORTED_LANGUAGES
 import com.dordeorz.adimsayar.data.SYSTEM_LANGUAGE
 import com.dordeorz.adimsayar.data.HEIGHT_RANGE
 import com.dordeorz.adimsayar.data.ThemeMode
-import com.dordeorz.adimsayar.data.InstallStart
 import com.dordeorz.adimsayar.data.UpdateChecker
-import com.dordeorz.adimsayar.data.UpdateInstaller
-import com.dordeorz.adimsayar.data.UpdateResult
+import com.dordeorz.adimsayar.data.UpdateWatch
 import com.dordeorz.adimsayar.data.WEEKLY_GOAL_RANGE
 import com.dordeorz.adimsayar.data.WEEK_START_OPTIONS
 import com.dordeorz.adimsayar.data.WEIGHT_RANGE
-import java.io.File
 import java.time.format.TextStyle
 import kotlinx.coroutines.launch
 
@@ -158,7 +155,7 @@ private enum class SettingsPage(@param:StringRes val title: Int, @param:Drawable
     About(R.string.settings_about, R.drawable.ic_info),
 }
 
-private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, Age, WaterGoal, Log, ReleaseNotes, Language }
+private enum class SettingsDialog { DailyGoal, WeeklyGoal, Height, Weight, BirthDate, WaterGoal, Log, ReleaseNotes, Language }
 
 private class ReleaseNote(val version: String, @param:ArrayRes val lines: Int)
 
@@ -328,8 +325,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                 ValueRow(stringResource(R.string.weight), stringResource(R.string.weight_value, settings.weightKg)) {
                     dialog = SettingsDialog.Weight
                 }
-                ValueRow(stringResource(R.string.age), stringResource(R.string.age_value, settings.age)) {
-                    dialog = SettingsDialog.Age
+                val birthDate = settings.birthDate
+                val birthValue = if (birthDate == null) {
+                    stringResource(R.string.birth_date_missing, settings.age)
+                } else {
+                    FULL_DATE_FORMAT.format(birthDate) + " · " + stringResource(R.string.age_value, settings.ageOn(state.today))
+                }
+                ClickRow(stringResource(R.string.birth_date), birthValue + "\n" + stringResource(R.string.birth_date_hint)) {
+                    dialog = SettingsDialog.BirthDate
                 }
                 ChoiceRow(
                     title = stringResource(R.string.distance_unit),
@@ -406,6 +409,14 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     checked = settings.weightReminder,
                     onCheckedChange = actions.onWeightReminderChange,
                 )
+                SwitchRow(
+                    title = stringResource(R.string.birthday_notification),
+                    hint = stringResource(
+                        if (settings.birthDate == null) R.string.birthday_notification_needs_date else R.string.birthday_notification_hint,
+                    ),
+                    checked = settings.birthdayNotification,
+                    onCheckedChange = actions.onBirthdayNotificationChange,
+                )
                 NotificationsExtras(state, actions)
                 state.exactAlarmsAllowed?.let { allowed ->
                     SwitchRow(
@@ -473,81 +484,18 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
                     dialog = SettingsDialog.Log
                 }
                 val uriHandler = LocalUriHandler.current
-                var checking by remember { mutableStateOf(false) }
-                var update by remember { mutableStateOf<UpdateResult?>(null) }
-                var progress by remember { mutableStateOf<Int?>(null) }
-                var apk by remember { mutableStateOf<File?>(null) }
-                var downloadFailed by remember { mutableStateOf(false) }
-                var needsPermission by remember { mutableStateOf(false) }
-                var confirmDownload by remember { mutableStateOf(false) }
-                val available = update as? UpdateResult.Available
-                val download: (UpdateResult.Available, String) -> Unit = { release, url ->
-                    scope.launch {
-                        progress = 0
-                        val downloaded = UpdateInstaller.download(context, url, release.version) { percent ->
-                            scope.launch { progress = percent }
-                        }
-                        progress = null
-                        apk = downloaded
-                        downloadFailed = downloaded == null
-                        if (downloaded != null) {
-                            val start = UpdateInstaller.install(context, downloaded)
-                            needsPermission = start == InstallStart.NeedsPermission
-                        }
-                    }
+                SwitchRow(
+                    title = stringResource(R.string.update_watch),
+                    hint = stringResource(R.string.update_watch_hint),
+                    checked = state.extra.extras.updateWatch,
+                    onCheckedChange = actions.extra::setUpdateWatch,
+                )
+                val known by UpdateWatch.get(context).latest.collectAsStateWithLifecycle()
+                val update = rememberUpdateFlow(UpdateWatch.pending(known, null, state.version))
+                ClickRow(stringResource(R.string.check_updates), update.statusText()) {
+                    update.tap(state.version) { uriHandler.openUri(it) }
                 }
-                ClickRow(
-                    stringResource(R.string.check_updates),
-                    when {
-                        checking -> stringResource(R.string.update_checking)
-                        progress != null -> stringResource(R.string.update_downloading, progress ?: 0)
-                        needsPermission -> stringResource(R.string.update_install_permission)
-                        apk != null -> stringResource(R.string.update_ready)
-                        downloadFailed -> stringResource(R.string.update_download_failed)
-                        available != null -> stringResource(R.string.update_available, available.version)
-                        update == UpdateResult.UpToDate -> stringResource(R.string.update_up_to_date)
-                        update == UpdateResult.NoRelease -> stringResource(R.string.update_no_release)
-                        update == UpdateResult.Failed -> stringResource(R.string.update_failed)
-                        else -> stringResource(R.string.check_updates_hint)
-                    },
-                ) {
-                    val file = apk
-                    when {
-                        checking || progress != null -> Unit
-                        file != null -> {
-                            val start = UpdateInstaller.install(context, file)
-                            needsPermission = start == InstallStart.NeedsPermission
-                            if (start == InstallStart.Failed) {
-                                apk = null
-                                downloadFailed = true
-                            }
-                        }
-                        available != null && (downloadFailed || available.apkUrl == null) -> runCatching { uriHandler.openUri(available.url) }
-                        available?.apkUrl != null -> confirmDownload = true
-                        else -> scope.launch {
-                            checking = true
-                            update = UpdateChecker.check(state.version)
-                            checking = false
-                        }
-                    }
-                }
-                val url = available?.apkUrl
-                if (confirmDownload && available != null && url != null) {
-                    AlertDialog(
-                        onDismissRequest = { confirmDownload = false },
-                        title = { Text(stringResource(R.string.update_consent_title)) },
-                        text = { Text(stringResource(R.string.update_consent_text)) },
-                        confirmButton = {
-                            TextButton(onClick = {
-                                confirmDownload = false
-                                download(available, url)
-                            }) { Text(stringResource(R.string.update_consent_download)) }
-                        },
-                        dismissButton = {
-                            TextButton(onClick = { confirmDownload = false }) { Text(stringResource(R.string.cancel)) }
-                        },
-                    )
-                }
+                UpdateConsentDialog(update)
                 ClickRow(stringResource(R.string.github_page), stringResource(R.string.github_page_hint)) {
                     runCatching { uriHandler.openUri(UpdateChecker.GITHUB_URL) }
                 }
@@ -574,13 +522,10 @@ fun SettingsScreen(state: MainUiState, actions: MainActions) {
             onSave = { actions.onWeightChange(it.toInt()) },
             onDismiss = { dialog = null },
         )
-        SettingsDialog.Age -> GoalDialog(
-            title = stringResource(R.string.age),
-            current = settings.age.toLong(),
-            range = AGE_RANGE.first.toLong()..AGE_RANGE.last.toLong(),
-            presets = emptyList(),
-            unit = stringResource(R.string.age_unit),
-            onSave = { actions.onAgeChange(it.toInt()) },
+        SettingsDialog.BirthDate -> BirthDateDialog(
+            current = settings.birthDate,
+            typedAge = settings.age,
+            onSave = actions.onBirthDateChange,
             onDismiss = { dialog = null },
         )
         SettingsDialog.WaterGoal -> GoalDialog(
@@ -1716,7 +1661,14 @@ private fun AppPickerDialog(onDismiss: () -> Unit) {
 @Composable
 private fun SettingsMenu(state: MainUiState, onOpen: (SettingsPage) -> Unit) {
     val settings = state.settings
-    val on = listOf(settings.goalNotification, settings.streakReminder, settings.nearGoalNotification, settings.weeklySummary, settings.weightReminder)
+    val on = listOf(
+        settings.goalNotification,
+        settings.streakReminder,
+        settings.nearGoalNotification,
+        settings.weeklySummary,
+        settings.weightReminder,
+        settings.birthdayNotification && settings.birthDate != null,
+    )
     val phone = stringResource(if (state.xiaomiEnabled) R.string.xiaomi_card_title else R.string.source_sensor)
     val wearable = when {
         state.bandDirectEnabled -> stringResource(R.string.source_direct)

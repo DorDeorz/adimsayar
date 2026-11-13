@@ -155,7 +155,7 @@ fun HealthScreen(state: MainUiState, actions: MainActions, onOpenSettings: () ->
                 if (hasResting || data.nights.isNotEmpty()) item { RecoveryCard(data, state.today) { open(HealthMetric.Recovery, state.today) } }
                 if (hasResting) item { FitnessAgeCard(data, state) }
                 item {
-                    HeartDetailCard(state.today, state.healthRefresh, state.settings.age, actions.loadHeartDay) { open(HealthMetric.Heart, it) }
+                    HeartDetailCard(state.today, state.healthRefresh, state.settings.ageOn(state.today), actions.loadHeartDay) { open(HealthMetric.Heart, it) }
                 }
                 item { RestingCard(data, daysValue) { open(HealthMetric.Resting, it) } }
                 item { OxygenCard(data) { open(HealthMetric.Oxygen, it) } }

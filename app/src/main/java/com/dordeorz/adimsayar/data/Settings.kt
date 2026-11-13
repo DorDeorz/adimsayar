@@ -28,7 +28,10 @@ data class AppSettings(
     val weeklySummary: Boolean = false,
     val weightReminder: Boolean = false,
     val language: String = SYSTEM_LANGUAGE,
+    /** The age typed before 0.21; used only until a birth date is set. */
     val age: Int = DEFAULT_AGE,
+    val birthDate: LocalDate? = null,
+    val birthdayNotification: Boolean = true,
     val waterGoalMl: Int = DEFAULT_WATER_GOAL_ML,
     val glassMl: Int = DEFAULT_GLASS_ML,
     val waterReminder: Boolean = false,
@@ -48,6 +51,9 @@ data class AppSettings(
     /** The daily goal of [date]: the weekend goal on Saturday and Sunday when one is set. */
     fun goalOn(date: LocalDate): Long =
         if (weekendGoal != NO_GOAL && (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY)) weekendGoal else dailyGoal
+
+    /** The age on [date]: from the birth date when one is set, otherwise the age typed before 0.21. */
+    fun ageOn(date: LocalDate): Int = birthDate?.let { Birthday.age(it, date).coerceIn(AGE_RANGE) } ?: age
 
     fun inVacation(date: LocalDate): Boolean =
         vacationFrom != NO_VACATION && date.toEpochDay() in vacationFrom..vacationTo
@@ -181,7 +187,14 @@ class SettingsStore private constructor(context: Context) {
 
     fun setLanguage(language: String) = update { it.copy(language = language) }
 
-    fun setAge(age: Int) = update { it.copy(age = age.coerceIn(AGE_RANGE)) }
+    /** Sets the birth date; the stored age follows it so older readers of the settings still see the right age. */
+    fun setBirthDate(date: LocalDate) = update {
+        val today = LocalDate.now()
+        val birth = Birthday.clamp(date, today)
+        it.copy(birthDate = birth, age = Birthday.age(birth, today).coerceIn(AGE_RANGE))
+    }
+
+    fun setBirthdayNotification(enabled: Boolean) = update { it.copy(birthdayNotification = enabled) }
 
     fun setWaterGoal(ml: Int) = update { it.copy(waterGoalMl = ml.coerceIn(WATER_GOAL_RANGE)) }
 
@@ -217,6 +230,8 @@ class SettingsStore private constructor(context: Context) {
             putBoolean(KEY_WEIGHT_REMINDER, next.weightReminder)
             putString(KEY_LANGUAGE, next.language)
             putInt(KEY_AGE, next.age)
+            putString(KEY_BIRTH_DATE, next.birthDate?.toString())
+            putBoolean(KEY_BIRTHDAY_NOTIFICATION, next.birthdayNotification)
             putInt(KEY_WATER_GOAL, next.waterGoalMl)
             putInt(KEY_GLASS, next.glassMl)
             putBoolean(KEY_WATER_REMINDER, next.waterReminder)
@@ -252,6 +267,8 @@ class SettingsStore private constructor(context: Context) {
         weightReminder = prefs.getBoolean(KEY_WEIGHT_REMINDER, false),
         language = languageTag(prefs.getString(KEY_LANGUAGE, null)),
         age = prefs.getInt(KEY_AGE, DEFAULT_AGE),
+        birthDate = prefs.getString(KEY_BIRTH_DATE, null)?.let { runCatching { LocalDate.parse(it) }.getOrNull() },
+        birthdayNotification = prefs.getBoolean(KEY_BIRTHDAY_NOTIFICATION, true),
         waterGoalMl = prefs.getInt(KEY_WATER_GOAL, DEFAULT_WATER_GOAL_ML),
         glassMl = prefs.getInt(KEY_GLASS, DEFAULT_GLASS_ML),
         waterReminder = prefs.getBoolean(KEY_WATER_REMINDER, false),
@@ -286,6 +303,8 @@ class SettingsStore private constructor(context: Context) {
         private const val KEY_WEIGHT_REMINDER = "weight_reminder"
         private const val KEY_LANGUAGE = "language"
         private const val KEY_AGE = "age"
+        private const val KEY_BIRTH_DATE = "birth_date"
+        private const val KEY_BIRTHDAY_NOTIFICATION = "birthday_notification"
         private const val KEY_WATER_GOAL = "water_goal_ml"
         private const val KEY_GLASS = "glass_ml"
         private const val KEY_WATER_REMINDER = "water_reminder"

@@ -38,7 +38,7 @@ Many phones ship without a step counter app, or with one that wants an account a
 
 - **Accurate.** Reads the hardware step counter and checks it against the step detector, so a frozen sensor is noticed and fixed without a reboot.
 - **Battery friendly.** No always-on service by default. The counter is read now and then and the difference is saved.
-- **Private.** No account, no server, no analytics, no ads. The internet is used only for things you start or turn on: the update check, the Xiaomi or Zepp sign-in for your band's key, the band's weather and the band face store.
+- **Private.** No account, no server, no analytics, no ads. The internet is used only for things you start or turn on: the update check (by hand, or once a day if you turn it on), the Xiaomi or Zepp sign-in for your band's key, the band's weather and the band face store.
 - **Works on every Android phone.** Tested on Xiaomi (HyperOS) and Samsung (One UI), the two brands that are hardest on background apps.
 
 ## Features
@@ -93,7 +93,7 @@ Every widget resizes to fit, follows your wallpaper colors (Material You) or the
 
 ### And also
 - Daily goal, weekly goal, first day of week, km or miles
-- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders, morning summary, new records, a nudge after an hour of sitting, a walk schedule and the monthly report
+- Optional notifications: goal reached, goal almost reached, evening streak reminder, weekly summary, water and weight reminders, a birthday greeting, morning summary, new records, a nudge after an hour of sitting, a walk schedule and the monthly report
 - Quick settings tiles for today's steps and adding a glass of water, app shortcuts, and "How many steps today?" read aloud
 - Live wallpaper: the wren flies from its nest to a branch as you walk
 - App lock with a PIN, fingerprint or face
@@ -167,7 +167,7 @@ Every 1,000 steps gives you a seed. Feed the bird, or spend seeds on feather col
 3. On first launch, allow "Physical activity".
 4. On Xiaomi phones, turn on Settings → Step source → "Use the HyperOS step record" for counting without a notification.
 
-Updates: Settings → About → "Check for updates" asks you to confirm, then downloads the new APK from GitHub and opens Android's installer. If you installed FitWren from Obtainium or another store, update it there. You can also track releases with [Obtainium](https://github.com/ImranR98/Obtainium).
+Updates: Settings → About → "Check for updates" asks you to confirm, then downloads the new APK from GitHub and opens Android's installer. With "Tell me about new versions" on (the app asks once, on the Today page), FitWren checks once a day and sends a notification when a new version is out, and an Update card shows on Today until you install it or tap "Later". If you installed FitWren from Obtainium or another store, update it there. You can also track releases with [Obtainium](https://github.com/ImranR98/Obtainium).
 
 ## Privacy
 
@@ -175,7 +175,7 @@ FitWren stores daily step totals, water, weight and your settings on the phone. 
 
 The app goes online only for the things below, each started or turned on by you. Nothing about you or your steps is sent with any of them.
 
-- **Check for updates:** reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, downloads the APK from GitHub Releases.
+- **Check for updates:** reads the latest version number from `api.github.com/repos/DorDeorz/adimsayar/releases/latest`, and if you tap again and confirm, downloads the APK from GitHub Releases. With "Tell me about new versions" on (off until you say yes), the same address is read once a day when the phone is online, and at most every 6 hours when you open the app. Only the version number is read; the download still waits for your tap.
 - **Weather on the band** (off by default): the place name you search for goes to `geocoding-api.open-meteo.com`. Then, at most once an hour while the band is connected, the chosen place's coordinates, rounded to about 1 km, go to `api.open-meteo.com` for the forecast. "Use current location" reads the phone's last known position once, on the phone.
 - **Band face store:** when you open it, the band model and face numbers go to Xiaomi's store (`watch-appstore.iot.mi.com`) to get the names, pictures and files of the faces.
 
@@ -199,8 +199,9 @@ Location is used only while you record a GPS walk, and the route stays on the ph
 | `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_HEALTH` | Read the counter for a few seconds in the background, and the optional "Keep counting in the background" mode |
 | `POST_NOTIFICATIONS` | Optional reminders and goal notifications |
 | `RECEIVE_BOOT_COMPLETED` | Restore schedules after a reboot |
+| `ACCESS_NETWORK_STATE` | Run the optional daily update check only when the phone is online |
 | `SCHEDULE_EXACT_ALARM` | Switch to the new day at midnight |
-| `INTERNET` | Only what you start: the update check and download, the Xiaomi or Zepp sign-in for the band key, the band's weather and the band face store |
+| `INTERNET` | Only what you start or turn on: the update check (by hand or daily) and download, the Xiaomi or Zepp sign-in for the band key, the band's weather and the band face store |
 | `BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT` (`BLUETOOTH`, `BLUETOOTH_ADMIN` up to Android 11) | Optional direct connection to a Xiaomi or Amazfit band |
 | `READ_PHONE_STATE`, `READ_CALL_LOG` | Optional: show the caller's number on the band |
 | `ANSWER_PHONE_CALLS` | Optional: reject a call from the band |

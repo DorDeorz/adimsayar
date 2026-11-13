@@ -1,2 +1,4 @@
-Sağlık kartlarına dokununca takvim açılır: uyku, nabız, SpO2, stres, toparlanma, egzersiz, aktivite, su ve kilo gün gün.
-Takvimde bir güne dokununca o günün ayrıntısı görünür: uyku saatleri, evreler, uykuda nabız ve SpO2.
+Yaş yerine doğum tarihi sorulur; doğum gününde saat 09:00 civarı kutlama bildirimi gelir.
+Kuşun ötüşü daha kısık ve yumuşak; ses tuşlarıyla ayarlanır, telefon sessizdeyken çalmaz.
+İsteğe bağlı: yeni sürüm çıkınca haber verir (günde bir kez GitHub'a bakar).
+Sağlık kartlarına dokununca takvim açılır, her günün ayrıntısıyla: uyku saatleri ve evreleri, nabız, SpO2, stres, toparlanma, egzersiz, aktivite, su ve kilo.

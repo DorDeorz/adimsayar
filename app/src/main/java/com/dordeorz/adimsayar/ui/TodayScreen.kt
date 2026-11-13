@@ -84,6 +84,7 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
     val goal = state.settings.goalOn(state.today)
     // Works out the medals again when yesterday was missed, so it runs only when the data changes.
     val freezeSaved = remember(state.history, state.freezes, state.today, state.settings, state.achievements) { freezeOffer(state) }
+    val updateNotice = rememberUpdateNotice(state)
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -91,6 +92,9 @@ fun TodayScreen(state: MainUiState, actions: MainActions) {
     ) {
         item { TodayRing(state, steps, goal) }
         item { ShareButton(state, actions, steps, goal) }
+        updateNotice?.let { notice ->
+            item { UpdateNoticeCard(notice, state, actions) }
+        }
         freezeSaved?.let { saved ->
             item { FreezeOfferCard(state, saved, actions.onFreezeChange) }
         }
