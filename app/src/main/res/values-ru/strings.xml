@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Песня птицы (при кормлении и выборе песни) стала тише и мягче; её громкость меняется кнопками громкости, а в беззвучном режиме она не звучит</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>Птица в виджете «Птица» и на живых обоях носит все предметы, как в приложении: солнце, очки, цветок, ночной колпак, рюкзак</item>
         <item>Health Connect как источник браслета больше не считает собственные шаги телефона шагами браслета; «Не считать телефон при использовании браслета» работает правильно</item>

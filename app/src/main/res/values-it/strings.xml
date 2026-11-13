@@ -1284,6 +1284,9 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_21_0">
+        <item>Il canto dell’uccellino (quando lo nutri o scegli un canto) è più basso e morbido; si regola con i tasti del volume e tace quando il telefono è in silenzioso</item>
+    </string-array>
     <string-array name="release_notes_0_20_5">
         <item>L’uccellino del widget Uccello e dello sfondo animato indossa tutti gli oggetti che ha nell’app: sole, occhiali, fiore, berretto da notte, zaino</item>
         <item>Health Connect come fonte del braccialetto non conta più i passi del telefono come passi del braccialetto; «Non contare il telefono se uso il braccialetto» funziona come previsto</item>

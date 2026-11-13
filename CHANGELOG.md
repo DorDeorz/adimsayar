@@ -2,6 +2,14 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.21.0
+
+- Kuşun ötüşü (`BirdSong`: besleyince ve ötüş seçince) daha kısık ve yumuşak. Kullanıcı sesi çok yüksek ve kulak tırmalayıcı buldu.
+  - Ses düzeyi 0,4'ten 0,12'ye indi (yaklaşık 10 dB, kulağa yarı yarıya daha sessiz).
+  - Cıvıltı, Tril ve Ötüş 3–4 kHz yerine en çok 2,6 kHz'de çalar; kulak ve telefon hoparlörü en çok 3–4 kHz'de sert duyuyordu. Kumru zaten pesti, değişmedi.
+  - Notalar karesi alınmış sinüsle yumuşak başlar ve biter; Tril 6 yerine 5 daha uzun notadan oluşur.
+  - Ses artık medya sesinden çalar (`USAGE_MEDIA`), uygulama açıkken telefonun ses tuşlarıyla kısılır. Önceden sistem sesinden çalıyordu, o da çoğu telefonda zil sesine bağlı ve yüksek. Telefon sessiz ya da titreşimdeyken hiç çalmaz.
+
 ## 0.20.5
 
 Baştan sona inceleme sonrası düzeltmeler. Veritabanı sürümü değişmedi (v7).
