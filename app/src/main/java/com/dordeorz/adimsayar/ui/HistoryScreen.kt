@@ -227,7 +227,7 @@ private fun MonthCard(
 }
 
 @Composable
-private fun MonthStat(label: String, value: String, modifier: Modifier) {
+internal fun MonthStat(label: String, value: String, modifier: Modifier) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
         Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -484,7 +484,7 @@ internal fun exerciseLabel(kind: ExerciseKind): Int = when (kind) {
 
 private val HOURLY_HEIGHT = 72.dp
 
-private fun weekDays(first: DayOfWeek): List<DayOfWeek> = (0L until 7L).map { first.plus(it) }
+internal fun weekDays(first: DayOfWeek): List<DayOfWeek> = (0L until 7L).map { first.plus(it) }
 
 @Composable
 private fun RecordsCard(records: Records, today: LocalDate) {
