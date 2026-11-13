@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dordeorz.adimsayar.R
@@ -34,6 +35,7 @@ internal fun FeedRow(state: MainUiState, actions: MainActions, onFed: () -> Unit
     val extras = state.extra.extras
     val seeds = Seeds.available(state.achievements.records.total, extras)
     var fedNow by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.weight(1f)) {
             Text(stringResource(R.string.seeds_count, seeds), style = MaterialTheme.typography.titleSmall)
@@ -46,7 +48,7 @@ internal fun FeedRow(state: MainUiState, actions: MainActions, onFed: () -> Unit
         FilledTonalButton(
             onClick = {
                 actions.extra.update { it.copy(seedsSpent = it.seedsSpent + FEED_COST, fedOn = state.today.toEpochDay()) }
-                BirdSong.play(BirdSound.entries.firstOrNull { it.name == extras.birdSound } ?: BirdSound.Chirp)
+                BirdSong.play(context, BirdSound.entries.firstOrNull { it.name == extras.birdSound } ?: BirdSound.Chirp)
                 fedNow = true
                 onFed()
             },
@@ -62,6 +64,7 @@ internal fun BirdLooks(bird: BirdState, state: MainUiState, actions: MainActions
     val extras = state.extra.extras
     val seeds = Seeds.available(state.achievements.records.total, extras)
     val owned = Seeds.owned(extras)
+    val context = LocalContext.current
     Text(stringResource(R.string.bird_species_title), style = MaterialTheme.typography.titleSmall)
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         BirdSpecies.entries.forEach { species ->
@@ -117,7 +120,7 @@ internal fun BirdLooks(bird: BirdState, state: MainUiState, actions: MainActions
                                 it.copy(birdSound = sound.name, unlockedLooks = it.unlockedLooks + sound.name, seedsSpent = it.seedsSpent + sound.cost)
                             }
                         }
-                        BirdSong.play(sound)
+                        BirdSong.play(context, sound)
                     }
                 },
                 enabled = have || seeds >= sound.cost,

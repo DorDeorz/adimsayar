@@ -1294,6 +1294,7 @@
     <string-array name="release_notes_0_21_0">
         <item>Pede a data de nascimento em vez da idade; a idade é calculada todo dia. A idade informada antes continua valendo até você definir a data de nascimento</item>
         <item>No seu aniversário chega uma mensagem de parabéns por volta das 09:00 (Configurações → Notificações → Parabéns de aniversário)</item>
+        <item>O canto do pássaro (ao alimentá-lo ou escolher um canto) está mais baixo e suave; os botões de volume o ajustam, e ele fica mudo com o telefone no silencioso</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>O pássaro do widget Pássaro e do papel de parede animado usa todos os itens que tem no app: sol, óculos, flor, touca de dormir, mochila</item>

@@ -1,3 +1,4 @@
 Yaş yerine doğum tarihi sorulur; yaş her gün kendiliğinden hesaplanır.
 Önceden girilen yaş, doğum tarihi girilene kadar kullanılır.
 Doğum gününde saat 09:00 civarı kutlama bildirimi gelir.
+Kuşun ötüşü daha kısık ve yumuşak; telefonun ses tuşlarıyla ayarlanır, telefon sessizdeyken çalmaz.

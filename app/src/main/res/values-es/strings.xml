@@ -1294,6 +1294,7 @@
     <string-array name="release_notes_0_21_0">
         <item>Pide la fecha de nacimiento en lugar de la edad; la edad se calcula cada día. La edad indicada antes se sigue usando hasta que pongas una fecha de nacimiento</item>
         <item>El día de tu cumpleaños llega una felicitación hacia las 09:00 (Ajustes → Notificaciones → Felicitación de cumpleaños)</item>
+        <item>El canto del pájaro (al alimentarlo o elegir un canto) es más bajo y suave; se ajusta con los botones de volumen y no suena con el teléfono en silencio</item>
     </string-array>
     <string-array name="release_notes_0_20_5">
         <item>El pájaro del widget Pájaro y del fondo animado lleva todos los objetos que tiene en la app: sol, gafas, flor, gorro de dormir, mochila</item>

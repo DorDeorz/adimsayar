@@ -4,12 +4,17 @@ Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygu
 
 ## 0.21.0
 
-Yaş yerine doğum tarihi ve doğum günü kutlaması. Veritabanı sürümü değişmedi (v7).
+Doğum tarihi ve doğum günü kutlaması, daha kısık kuş ötüşü. Veritabanı sürümü değişmedi (v7).
 
 - Ayarlar → Vücut ve mesafe'de yaş yerine doğum tarihi sorulur (`BirthDateDialog`). Tarih yazarak girilir, takvim bir dokunuş uzakta; 10–100 yaş arası seçilebilir. Yaş her gün doğum tarihinden hesaplanır (`AppSettings.ageOn`), nabız bölgeleri ve fitness yaşı bunu kullanır.
 - Geçiş: önceden girilen yaş (`age` ayarı) doğum tarihi girilene kadar kullanılmaya devam eder; satırda "Girilmedi · şimdilik N yaş sayılıyor" yazar ve takvim o yaşın yılında açılır. Doğum tarihi girilince `age` da güncellenir.
 - Doğum günü kutlaması: doğum gününde saat 09:00 civarı "İyi ki doğdun!" bildirimi gelir (`Reminders.birthdayCheck`, yılda bir kez). Telefon 09:00'da kapalıysa ya da doğum tarihi o gün girildiyse bildirim hemen gelir. 29 Şubat doğumlular, Şubat'ın 28 çektiği yıllarda 28 Şubat'ta kutlanır. Ayarlar → Bildirimler → "Doğum günü kutlaması" ile kapatılabilir; varsayılan açık, ama doğum tarihi girilmeden bir şey göndermez.
 - Doğum tarihi ayarlarla birlikte tam yedeğe girer (`birth_date`, `birthday_notification`).
+- Kuşun ötüşü (`BirdSong`: besleyince ve ötüş seçince) daha kısık ve yumuşak. Kullanıcı sesi çok yüksek ve kulak tırmalayıcı buldu.
+  - Ses düzeyi 0,4'ten 0,12'ye indi (yaklaşık 10 dB, kulağa yarı yarıya daha sessiz).
+  - Cıvıltı, Tril ve Ötüş 3–4 kHz yerine en çok 2,6 kHz'de çalar; kulak ve telefon hoparlörü en çok 3–4 kHz'de sert duyuyordu. Kumru zaten pesti, değişmedi.
+  - Notalar karesi alınmış sinüsle yumuşak başlar ve biter; Tril 6 yerine 5 daha uzun notadan oluşur.
+  - Ses artık medya sesinden çalar (`USAGE_MEDIA`), uygulama açıkken telefonun ses tuşlarıyla kısılır. Önceden sistem sesinden çalıyordu, o da çoğu telefonda zil sesine bağlı ve yüksek. Telefon sessiz ya da titreşimdeyken hiç çalmaz.
 
 ## 0.20.5
 
