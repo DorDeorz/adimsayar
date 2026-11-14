@@ -641,7 +641,7 @@
     <string name="heart_resting_low">你的静息心率为 %1$d 次/分，低于常见范围。经常运动的人较常见，如无头晕或乏力通常无碍。</string>
     <string name="heart_resting_normal">你的静息心率为 %1$d 次/分，处于正常范围（60–100）。随时间下降通常意味着体能提升。</string>
     <string name="heart_resting_high">你的静息心率为 %1$d 次/分，高于正常范围（超过 100）。如持续偏高，请咨询医生。</string>
-    <string name="heart_resting_missing">这一天没有静息心率：夜间没有佩戴手环。用白天的测量来算，静息值会比实际偏高。</string>
+    <string name="heart_resting_missing">这一天没有静息心率：前一晚没有睡眠记录（没有睡觉或没有佩戴手环）。用白天的测量来算，静息值会比实际偏高。</string>
     <string name="heart_tap_hint">点击图表中的某个小时查看详情</string>
     <string name="heart_hour_detail">%1$s–%2$s · 最低 %3$d · 平均 %4$d · 最高 %5$d 次/分</string>
     <string name="heart_hour_empty">%1$s–%2$s · 该小时无测量</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_22_1">
+        <item>没有静息心率的日子，心率卡片现在显示前一晚没有睡眠记录；以前即使戴着手环也会误显示为没有佩戴</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>自动备份：每天向你选择的文件夹写入一次完整备份，并保留最近 7 天（设置 → 数据 → 自动备份）</item>
         <item>读取记录现在保留约一天半，并可通过“分享”发送（设置 → 关于 → 读取记录）</item>

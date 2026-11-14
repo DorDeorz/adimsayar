@@ -641,7 +641,7 @@
     <string name="heart_resting_low">Votre fréquence au repos est de %1$d bpm : sous la plage habituelle. Fréquent chez les sportifs, généralement sans gravité sans vertiges ni fatigue.</string>
     <string name="heart_resting_normal">Votre fréquence au repos est de %1$d bpm : dans la norme (60–100). Une baisse au fil du temps indique souvent une meilleure forme.</string>
     <string name="heart_resting_high">Votre fréquence au repos est de %1$d bpm : au-dessus de la norme (plus de 100). Si cela persiste, consultez un médecin.</string>
-    <string name="heart_resting_missing">Pas de fréquence cardiaque au repos pour ce jour : le bracelet n\'a pas été porté la nuit. Les mesures de jour feraient paraître la valeur au repos plus élevée qu\'elle ne l\'est.</string>
+    <string name="heart_resting_missing">Pas de fréquence cardiaque au repos pour ce jour : aucun sommeil n\'a été enregistré la nuit précédente (pas de sommeil ou bracelet non porté). Les mesures de jour feraient paraître la valeur au repos plus élevée qu\'elle ne l\'est.</string>
     <string name="heart_tap_hint">Touchez une heure du graphique pour les détails</string>
     <string name="heart_hour_detail">%1$s–%2$s · min %3$d · moyenne %4$d · max %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · aucune mesure à cette heure</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Un jour sans fréquence au repos, la carte du pouls indique maintenant qu\'aucun sommeil n\'a été enregistré la nuit précédente ; elle disait à tort que le bracelet n\'était pas porté</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Sauvegarde automatique : écrit une sauvegarde complète une fois par jour dans le dossier de ton choix et garde les 7 derniers jours (Paramètres → Données → Sauvegarde automatique)</item>
         <item>Le journal des lectures garde maintenant environ un jour et demi et s\'envoie avec « Partager » (Paramètres → À propos → Journal des lectures)</item>
