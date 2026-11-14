@@ -641,7 +641,7 @@
     <string name="heart_resting_low">안정 시 심박수는 %1$d bpm으로 보통보다 낮아요. 규칙적으로 운동하는 사람에게 흔하며 어지럼이나 피로가 없다면 대개 괜찮아요.</string>
     <string name="heart_resting_normal">안정 시 심박수는 %1$d bpm으로 정상 범위(60–100)예요. 시간이 지나며 낮아지면 보통 체력이 좋아졌다는 뜻이에요.</string>
     <string name="heart_resting_high">안정 시 심박수는 %1$d bpm으로 정상보다 높아요(100 초과). 계속 높다면 의사와 상담하세요.</string>
-    <string name="heart_resting_missing">이 날은 안정 시 심박수가 없습니다: 밤에 밴드를 착용하지 않았습니다. 낮 측정값으로는 안정 시 값이 실제보다 높게 나옵니다.</string>
+    <string name="heart_resting_missing">이 날은 안정 시 심박수가 없습니다: 전날 밤 수면이 기록되지 않았습니다(잠을 자지 않았거나 밴드를 착용하지 않음). 낮 측정값으로는 안정 시 값이 실제보다 높게 나옵니다.</string>
     <string name="heart_tap_hint">그래프에서 시간을 누르면 자세히 볼 수 있어요</string>
     <string name="heart_hour_detail">%1$s–%2$s · 최저 %3$d · 평균 %4$d · 최고 %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · 이 시간 측정 없음</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_22_1">
+        <item>안정 시 심박수가 없는 날 심박 카드가 이제 전날 밤 수면이 기록되지 않았다고 알려 줍니다. 이전에는 착용했어도 밴드를 착용하지 않았다고 잘못 표시했습니다</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>자동 백업: 고른 폴더에 하루에 한 번 전체 백업을 쓰고 최근 7일치를 보관합니다(설정 → 데이터 → 자동 백업)</item>
         <item>읽기 기록이 이제 약 하루 반을 보관하며 “공유”로 보낼 수 있습니다(설정 → 정보 → 읽기 기록)</item>

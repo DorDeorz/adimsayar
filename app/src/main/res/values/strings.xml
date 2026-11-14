@@ -642,7 +642,7 @@
     <string name="heart_resting_low">Dinlenme nabzın %1$d bpm: normalin altında. Düzenli spor yapanlarda sık görülür; baş dönmesi ya da halsizlik yoksa genelde sorun değildir.</string>
     <string name="heart_resting_normal">Dinlenme nabzın %1$d bpm: normal aralıkta (60–100). Zamanla düşmesi genelde kondisyonun arttığını gösterir.</string>
     <string name="heart_resting_high">Dinlenme nabzın %1$d bpm: normalin üstünde (100’den yüksek). Uzun süre böyle kalırsa bir doktora danış.</string>
-    <string name="heart_resting_missing">Bu gün için dinlenme nabzı yok: bileklik gece takılı değildi. Gündüz ölçümleri dinlenme değerini olduğundan yüksek gösterir.</string>
+    <string name="heart_resting_missing">Bu gün için dinlenme nabzı yok: önceki gece uyku kaydı yok (uyunmadı ya da bileklik takılı değildi). Gündüz ölçümleri dinlenme değerini olduğundan yüksek gösterir.</string>
     <string name="heart_tap_hint">Ayrıntı için grafikte bir saate dokun</string>
     <string name="heart_hour_detail">%1$s–%2$s · en düşük %3$d · ortalama %4$d · en yüksek %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · bu saatte ölçüm yok</string>
@@ -1336,6 +1336,9 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Dinlenme nabzı olmayan günde Nabız kartı artık \"önceki gece uyku kaydı yok\" yazar; bileklik takılıyken uyunmayan gecede yanlışlıkla \"takılı değildi\" diyordu</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Otomatik yedek: seçtiğin klasöre günde bir kez tam yedek yazar ve son 7 günü tutar (Ayarlar → Veri → Otomatik yedek)</item>
         <item>Okuma kaydı artık yaklaşık bir buçuk günü tutar ve \"Paylaş\" tuşuyla gönderilebilir (Ayarlar → Hakkında → Okuma kaydı)</item>

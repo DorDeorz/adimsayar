@@ -2,6 +2,12 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.22.1
+
+Tek metin düzeltmesi. Veritabanı sürümü değişmedi (v7).
+
+- Dinlenme nabzı gösterilmeyen günde Nabız kartı "bileklik gece takılı değildi" diyordu. Oysa kural (`HealthMath.restingDays`) bilekliğe değil, önceki gecenin uyku kaydına bakar: bileklik takılıyken uyunmayan gecede de değer çıkmaz. Metin artık "önceki gece uyku kaydı yok (uyunmadı ya da bileklik takılı değildi)" der (`heart_resting_missing`, 12 dil). Telefonda 0.22.0 denenirken görüldü: gece 04:05'te ölçüm olan günde "takılı değildi" yazıyordu.
+
 ## 0.22.0
 
 Otomatik yedek, okuma kaydını paylaşma, dinlenme nabzı açıklaması. Veritabanı sürümü değişmedi (v7).

@@ -641,7 +641,7 @@
     <string name="heart_resting_low">Your resting heart rate is %1$d bpm: below the usual range. This is common in people who exercise regularly and is usually fine without dizziness or fatigue.</string>
     <string name="heart_resting_normal">Your resting heart rate is %1$d bpm: in the normal range (60–100). A drop over time usually means better fitness.</string>
     <string name="heart_resting_high">Your resting heart rate is %1$d bpm: above the normal range (over 100). If it stays this high, talk to a doctor.</string>
-    <string name="heart_resting_missing">No resting heart rate for this day: the band was not worn at night. Daytime readings would make the resting value look higher than it is.</string>
+    <string name="heart_resting_missing">No resting heart rate for this day: no sleep was recorded the night before (no sleep, or the band was not worn). Daytime readings would make the resting value look higher than it is.</string>
     <string name="heart_tap_hint">Tap an hour on the chart for details</string>
     <string name="heart_hour_detail">%1$s–%2$s · lowest %3$d · average %4$d · highest %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · no readings this hour</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_22_1">
+        <item>On a day with no resting heart rate, the heart rate card now says no sleep was recorded the night before; it wrongly said the band was not worn even when it was</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Automatic backup: writes a full backup into a folder you choose once a day and keeps the last 7 days (Settings → Data → Automatic backup)</item>
         <item>The reading log now keeps about a day and a half and can be sent with “Share” (Settings → About → Reading log)</item>

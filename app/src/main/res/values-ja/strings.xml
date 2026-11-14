@@ -641,7 +641,7 @@
     <string name="heart_resting_low">安静時心拍数は %1$d bpm で、通常より低めです。運動習慣のある人によく見られ、めまいやだるさがなければ通常は問題ありません。</string>
     <string name="heart_resting_normal">安静時心拍数は %1$d bpm で、正常範囲（60〜100）です。時間とともに下がるのは体力向上のサインです。</string>
     <string name="heart_resting_high">安静時心拍数は %1$d bpm で、正常範囲より高め（100 超）です。続く場合は医師に相談してください。</string>
-    <string name="heart_resting_missing">この日の安静時心拍数はありません: 夜にバンドを着けていませんでした。日中の測定では安静時の値が実際より高く出ます。</string>
+    <string name="heart_resting_missing">この日の安静時心拍数はありません: 前夜の睡眠が記録されていません(眠っていないか、バンドを着けていませんでした)。日中の測定では安静時の値が実際より高く出ます。</string>
     <string name="heart_tap_hint">グラフの時間帯をタップすると詳細が表示されます</string>
     <string name="heart_hour_detail">%1$s–%2$s · 最低 %3$d · 平均 %4$d · 最高 %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · この時間の測定なし</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_22_1">
+        <item>安静時心拍数がない日、心拍カードは「前夜の睡眠が記録されていません」と表示するようになりました。以前は着けていてもバンドを着けていなかったと誤って表示していました</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>自動バックアップ: 選んだフォルダに1日1回、完全バックアップを書き込み、直近7日分を残します（設定 → データ → 自動バックアップ）</item>
         <item>読み取りログが約1日半分を残すようになり、「共有」で送れます（設定 → アプリについて → 読み取りログ）</item>

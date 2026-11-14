@@ -641,7 +641,7 @@
     <string name="heart_resting_low">نبضك أثناء الراحة %1$d نبضة/د: أقل من المعتاد. يشيع لدى من يمارسون الرياضة بانتظام، وغالبًا لا مشكلة إن لم يصاحبه دوار أو تعب.</string>
     <string name="heart_resting_normal">نبضك أثناء الراحة %1$d نبضة/د: ضمن المعدل الطبيعي (60–100). انخفاضه مع الوقت يدل غالبًا على تحسن لياقتك.</string>
     <string name="heart_resting_high">نبضك أثناء الراحة %1$d نبضة/د: أعلى من الطبيعي (أكثر من 100). إن استمر كذلك فاستشر طبيبًا.</string>
-    <string name="heart_resting_missing">لا يوجد نبض راحة لهذا اليوم: لم يُلبس السوار ليلًا. قياسات النهار تجعل نبض الراحة يبدو أعلى من حقيقته.</string>
+    <string name="heart_resting_missing">لا يوجد نبض راحة لهذا اليوم: لم يُسجَّل نوم في الليلة السابقة (لم تنم أو لم يكن السوار ملبوسًا). قياسات النهار تجعل نبض الراحة يبدو أعلى من حقيقته.</string>
     <string name="heart_tap_hint">المس ساعة في الرسم لعرض التفاصيل</string>
     <string name="heart_hour_detail">%1$s–%2$s · الأدنى %3$d · المتوسط %4$d · الأعلى %5$d نبضة/د</string>
     <string name="heart_hour_empty">%1$s–%2$s · لا قياسات في هذه الساعة</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_22_1">
+        <item>في يوم بلا نبض راحة، تقول بطاقة النبض الآن إنه لم يُسجَّل نوم في الليلة السابقة؛ كانت تقول خطأً إن السوار لم يُلبس</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>نسخ احتياطي تلقائي: يكتب نسخة احتياطية كاملة مرة في اليوم في المجلد الذي تختاره ويحتفظ بآخر 7 أيام (الإعدادات → البيانات → نسخ احتياطي تلقائي)</item>
         <item>سجل القراءات يحتفظ الآن بنحو يوم ونصف ويمكن إرساله بزر «مشاركة» (الإعدادات → حول → سجل القراءات)</item>

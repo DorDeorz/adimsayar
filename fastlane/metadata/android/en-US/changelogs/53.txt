@@ -1,0 +1,1 @@
+On a day with no resting heart rate, the heart rate card now says no sleep was recorded the night before. It wrongly said the band was not worn, even when it was.

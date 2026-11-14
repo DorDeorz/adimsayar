@@ -641,7 +641,7 @@
     <string name="heart_resting_low">Sua frequência em repouso é %1$d bpm: abaixo do comum. É frequente em quem se exercita e costuma ser normal sem tontura ou cansaço.</string>
     <string name="heart_resting_normal">Sua frequência em repouso é %1$d bpm: na faixa normal (60–100). Se cair com o tempo, geralmente indica melhor condicionamento.</string>
     <string name="heart_resting_high">Sua frequência em repouso é %1$d bpm: acima do normal (mais de 100). Se continuar assim, procure um médico.</string>
-    <string name="heart_resting_missing">Sem batimento em repouso neste dia: a pulseira não foi usada à noite. As medições diurnas fariam o valor em repouso parecer mais alto do que é.</string>
+    <string name="heart_resting_missing">Sem batimento em repouso neste dia: nenhum sono foi registrado na noite anterior (não dormiu ou a pulseira não estava no pulso). As medições diurnas fariam o valor em repouso parecer mais alto do que é.</string>
     <string name="heart_tap_hint">Toque em uma hora no gráfico para ver detalhes</string>
     <string name="heart_hour_detail">%1$s–%2$s · mínima %3$d · média %4$d · máxima %5$d bpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · sem medições nesta hora</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Num dia sem batimento em repouso, o cartão de batimentos agora diz que nenhum sono foi registrado na noite anterior; antes dizia por engano que a pulseira não foi usada</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Backup automático: grava um backup completo uma vez por dia na pasta que você escolher e mantém os últimos 7 dias (Configurações → Dados → Backup automático)</item>
         <item>O registro de leituras agora guarda cerca de um dia e meio e pode ser enviado com “Compartilhar” (Configurações → Sobre → Registro de leituras)</item>

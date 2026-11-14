@@ -641,7 +641,7 @@
     <string name="heart_resting_low">Tu frecuencia en reposo es %1$d lpm: por debajo de lo habitual. Es común en quienes hacen ejercicio y suele estar bien si no hay mareos ni cansancio.</string>
     <string name="heart_resting_normal">Tu frecuencia en reposo es %1$d lpm: en el rango normal (60–100). Si baja con el tiempo, suele indicar mejor forma física.</string>
     <string name="heart_resting_high">Tu frecuencia en reposo es %1$d lpm: por encima de lo normal (más de 100). Si se mantiene, consulta a un médico.</string>
-    <string name="heart_resting_missing">Sin pulso en reposo este día: no llevaste la pulsera por la noche. Las mediciones diurnas harían que el valor en reposo pareciera más alto de lo que es.</string>
+    <string name="heart_resting_missing">Sin pulso en reposo este día: no se registró sueño la noche anterior (no dormiste o no llevabas la pulsera). Las mediciones diurnas harían que el valor en reposo pareciera más alto de lo que es.</string>
     <string name="heart_tap_hint">Toca una hora del gráfico para ver detalles</string>
     <string name="heart_hour_detail">%1$s–%2$s · mínima %3$d · media %4$d · máxima %5$d lpm</string>
     <string name="heart_hour_empty">%1$s–%2$s · sin mediciones en esta hora</string>
@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_22_1">
+        <item>En un día sin pulso en reposo, la tarjeta de pulso ahora dice que no se registró sueño la noche anterior; antes decía por error que no llevabas la pulsera</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Copia automática: escribe una copia completa una vez al día en la carpeta que elijas y conserva los últimos 7 días (Ajustes → Datos → Copia automática)</item>
         <item>El registro de lecturas ahora guarda cerca de un día y medio y se puede enviar con «Compartir» (Ajustes → Acerca de → Registro de lecturas)</item>
