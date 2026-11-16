@@ -8,6 +8,7 @@ Bileklik adımlarının fazla sayılması düzeltildi. Veritabanı sürümü de�
 
 - Bileklik bazı isteklere aynı gün dosyasıyla cevap veriyor. Saatler istenen dosyanın kimliğiyle kaydedildiği için aynı saat `band_hours` içinde birkaç kez (bazen 16 kez) duruyordu ve `loadBandHours` bunları `SUM` ile topluyordu. Gece saatleri en çok etkileniyordu; 2–15 Kasım'da gerçek 66.126 adım 79.331 görünüyordu.
   - Saatler artık dosyanın kendi içindeki kimlikle kaydedilir (`BandFile.source`); onay (`HEALTH_ACK`) yine istenen kimlikle gider.
+  - Bileklik istenenden farklı bir dosyayla cevap verirse logcat'e `file <istenen> answered with <gelen>` yazılır; testler: `XiaomiFileFetchTest`.
   - `loadBandHours` her saat için `MAX` alır, böylece eski çift kayıtlar da tek sayılır. Son 30 günün bileklik günlükleri bir sonraki eşitlemede (`remerge`) yeniden hesaplanır.
 
 ## 0.22.0
