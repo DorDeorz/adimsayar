@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Os passos da pulseira eram contados a mais em alguns dias (a mesma hora era somada várias vezes); corrigido, os últimos 30 dias se corrigem sozinhos na próxima sincronização</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Backup automático: grava um backup completo uma vez por dia na pasta que você escolher e mantém os últimos 7 dias (Configurações → Dados → Backup automático)</item>
         <item>O registro de leituras agora guarda cerca de um dia e meio e pode ser enviado com “Compartilhar” (Configurações → Sobre → Registro de leituras)</item>

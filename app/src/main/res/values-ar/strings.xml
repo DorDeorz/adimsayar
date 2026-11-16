@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_22_1">
+        <item>كانت خطوات السوار تُحسب أكثر من الحقيقة في بعض الأيام (كانت الساعة نفسها تُجمع عدة مرات)؛ تم الإصلاح، وتُصحَّح آخر 30 يومًا تلقائيًا عند المزامنة التالية</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>نسخ احتياطي تلقائي: يكتب نسخة احتياطية كاملة مرة في اليوم في المجلد الذي تختاره ويحتفظ بآخر 7 أيام (الإعدادات → البيانات → نسخ احتياطي تلقائي)</item>
         <item>سجل القراءات يحتفظ الآن بنحو يوم ونصف ويمكن إرساله بزر «مشاركة» (الإعدادات → حول → سجل القراءات)</item>

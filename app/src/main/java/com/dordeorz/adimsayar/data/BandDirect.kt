@@ -203,7 +203,7 @@ object BandDirect {
             } else if (file.samplesOnly) {
                 BandHealth.saveMinutes(context, file.minutes)
             } else {
-                StepRepository.get(context).saveBandHours(file.id.epochSeconds, hourly(file))
+                StepRepository.get(context).saveBandHours(file.source.epochSeconds, hourly(file))
                 BandHealth.saveMinutes(context, file.minutes)
             }
             files++

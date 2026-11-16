@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_22_1">
+        <item>某些日子手环步数被多算了（同一小时被重复相加）；已修复，最近 30 天会在下次同步时自动更正</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>自动备份：每天向你选择的文件夹写入一次完整备份，并保留最近 7 天（设置 → 数据 → 自动备份）</item>
         <item>读取记录现在保留约一天半，并可通过“分享”发送（设置 → 关于 → 读取记录）</item>

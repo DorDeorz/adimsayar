@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_22_1">
+        <item>一部の日にバンドの歩数が多く数えられていました（同じ時間が何度も足されていました）。修正済みで、直近30日分は次の同期で自動的に直ります</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>自動バックアップ: 選んだフォルダに1日1回、完全バックアップを書き込み、直近7日分を残します（設定 → データ → 自動バックアップ）</item>
         <item>読み取りログが約1日半分を残すようになり、「共有」で送れます（設定 → アプリについて → 読み取りログ）</item>

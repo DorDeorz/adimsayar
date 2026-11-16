@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Bandschritte wurden an manchen Tagen zu hoch gezählt (dieselbe Stunde wurde mehrmals addiert); behoben, die letzten 30 Tage korrigieren sich bei der nächsten Synchronisierung</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Automatische Sicherung: schreibt einmal am Tag eine vollständige Sicherung in einen Ordner deiner Wahl und behält die letzten 7 Tage (Einstellungen → Daten → Automatische Sicherung)</item>
         <item>Das Ableseprotokoll behält jetzt etwa anderthalb Tage und lässt sich mit „Teilen“ verschicken (Einstellungen → Info → Ableseprotokoll)</item>

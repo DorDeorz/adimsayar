@@ -1336,6 +1336,9 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Bileklik adımları bazı günlerde fazla sayılıyordu (aynı saat birkaç kez toplanıyordu); düzeltildi, son 30 gün bir sonraki eşitlemede kendiliğinden düzelir</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Otomatik yedek: seçtiğin klasöre günde bir kez tam yedek yazar ve son 7 günü tutar (Ayarlar → Veri → Otomatik yedek)</item>
         <item>Okuma kaydı artık yaklaşık bir buçuk günü tutar ve \"Paylaş\" tuşuyla gönderilebilir (Ayarlar → Hakkında → Okuma kaydı)</item>

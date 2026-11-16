@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_22_1">
+        <item>I passi della fascia erano contati troppo alti in alcuni giorni (la stessa ora veniva sommata più volte); corretto, gli ultimi 30 giorni si sistemano alla prossima sincronizzazione</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Backup automatico: scrive un backup completo una volta al giorno nella cartella che scegli e conserva gli ultimi 7 giorni (Impostazioni → Dati → Backup automatico)</item>
         <item>Il registro letture ora conserva circa un giorno e mezzo e si può inviare con «Condividi» (Impostazioni → Info → Registro letture)</item>

@@ -298,7 +298,9 @@ abstract class DailyStepsDao {
     @Upsert
     abstract suspend fun upsertBandHours(hours: List<BandHour>)
 
-    @Query("SELECT hour, SUM(steps) AS steps FROM band_hours WHERE hour >= :from GROUP BY hour")
+    // MAX, not SUM: older versions stored the same hour under several file ids (one per request
+    // the band answered with the same day file), and summing them counted those steps many times.
+    @Query("SELECT hour, MAX(steps) AS steps FROM band_hours WHERE hour >= :from GROUP BY hour")
     abstract suspend fun loadBandHours(from: String): List<HourTotal>
 }
 

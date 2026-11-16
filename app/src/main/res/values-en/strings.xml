@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Band steps were counted too high on some days (the same hour was added up several times); fixed, the last 30 days correct themselves at the next sync</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Automatic backup: writes a full backup into a folder you choose once a day and keeps the last 7 days (Settings → Data → Automatic backup)</item>
         <item>The reading log now keeps about a day and a half and can be sent with “Share” (Settings → About → Reading log)</item>
