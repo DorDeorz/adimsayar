@@ -585,7 +585,7 @@ class XiaomiSession(
             fetchNext()
             return
         }
-        if (id != requested) log("file ${requested.epochSeconds} answered with ${id.epochSeconds}")
+        if (id != requested) log("file ${requested.epochSeconds} answered with ${id?.epochSeconds}")
         fetching = null
         pendingStore.addLast(file)
     }
