@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_23_0">
+        <item>Les pas du bracelet sont désormais enregistrés minute par minute : même si le bracelet renvoie les mêmes données, chaque minute ne compte qu’une fois</item>
+    </string-array>
     <string-array name="release_notes_0_22_1">
         <item>Les pas du bracelet étaient comptés en trop certains jours (la même heure était additionnée plusieurs fois) ; corrigé, les 30 derniers jours se corrigent à la prochaine synchronisation</item>
     </string-array>

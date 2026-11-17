@@ -1,0 +1,1 @@
+Bileklik adımları artık dakika dakika saklanıyor. Saatten aynı veri tekrar gelse bile her dakika yalnızca bir kez sayılır.

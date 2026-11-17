@@ -251,4 +251,25 @@ class StepMathTest {
         val hours = StepMath.splitByHour(StepInterval(5L, at("2026-10-01T09:10"), at("2026-10-01T09:10")), zone)
         assertEquals(mapOf(LocalDateTime.parse("2026-10-01T09:00") to 5L), hours)
     }
+
+    private fun sec(text: String): Long = at(text) / 1_000L
+
+    @Test
+    fun minuteHoursSumEachLocalHour() {
+        val minutes = listOf(sec("2026-11-03T01:05") to 100, sec("2026-11-03T01:59") to 61, sec("2026-11-03T02:00") to 0)
+        val hours = StepMath.minuteHours(minutes, zone)
+        assertEquals(161L, hours[LocalDateTime.parse("2026-11-03T01:00")])
+        // A worn minute without steps keeps its hour as a real zero, so the phone does not fill it.
+        assertEquals(0L, hours[LocalDateTime.parse("2026-11-03T02:00")])
+        assertEquals(2, hours.size)
+    }
+
+    @Test
+    fun minuteHoursReplaceHourlyRowsOnlyWhereTheyExist() {
+        val hourly = mapOf(LocalDateTime.parse("2026-11-03T01:00") to 1_610L, LocalDateTime.parse("2026-11-02T09:00") to 500L)
+        val fromMinutes = mapOf(LocalDateTime.parse("2026-11-03T01:00") to 161L)
+        val merged = StepMath.withMinuteHours(hourly, fromMinutes)
+        assertEquals(161L, merged[LocalDateTime.parse("2026-11-03T01:00")])
+        assertEquals(500L, merged[LocalDateTime.parse("2026-11-02T09:00")])
+    }
 }

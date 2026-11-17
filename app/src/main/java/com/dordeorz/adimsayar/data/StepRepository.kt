@@ -86,8 +86,24 @@ class StepRepository private constructor(private val context: Context) {
     suspend fun saveBandHours(file: Long, hours: Map<LocalDateTime, Long>) =
         dao.upsertBandHours(hours.map { (hour, steps) -> BandHour(hour.toString(), file, steps) })
 
-    suspend fun loadBandHours(from: LocalDate): Map<LocalDateTime, Long> =
-        dao.loadBandHours(from.atStartOfDay().toString()).associate { LocalDateTime.parse(it.hour) to it.steps }
+    /**
+     * Band steps per hour. Hours with minute rows are counted from them, minute by minute; older
+     * hours (before 0.23.0, or past [MINUTE_DAYS]) come from the hourly table.
+     */
+    suspend fun loadBandHours(from: LocalDate): Map<LocalDateTime, Long> {
+        val zone = ZoneId.systemDefault()
+        val hourly = dao.loadBandHours(from.atStartOfDay().toString()).associate { LocalDateTime.parse(it.hour) to it.steps }
+        val minutes = dao.loadBandMinutes(from.atStartOfDay(zone).toEpochSecond()).map { it.minute to it.steps }
+        return StepMath.withMinuteHours(hourly, StepMath.minuteHours(minutes, zone))
+    }
+
+    /** Keeps the steps of each worn minute; minutes past [MINUTE_DAYS] are dropped, their hours stay. */
+    suspend fun saveBandMinutes(minutes: List<Pair<Long, Int>>) {
+        if (minutes.isEmpty()) return
+        dao.upsertBandMinutes(minutes.map { (minute, steps) -> BandStepMinute(minute - minute % 60L, steps) })
+        val zone = ZoneId.systemDefault()
+        dao.deleteBandMinutesBefore(LocalDate.now().minusDays(MINUTE_DAYS).atStartOfDay(zone).toEpochSecond())
+    }
 
     suspend fun loadHistory(): Map<LocalDate, Long> = dao.loadAll().associate { LocalDate.parse(it.date) to it.steps }
 
@@ -170,6 +186,7 @@ class StepRepository private constructor(private val context: Context) {
 
     companion object {
         const val COUNTER_PREFS = "counter"
+        const val MINUTE_DAYS = 90L
         private const val CSV_HEADER = "tarih,adim,su_ml,kilo_kg,uyku_dk"
         private const val KEY_COUNTER = "counter"
         private const val KEY_ELAPSED = "elapsed_ms"

@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_23_0">
+        <item>I passi della fascia ora sono salvati minuto per minuto: anche se la fascia invia di nuovo gli stessi dati, ogni minuto conta una sola volta</item>
+    </string-array>
     <string-array name="release_notes_0_22_1">
         <item>I passi della fascia erano contati troppo alti in alcuni giorni (la stessa ora veniva sommata più volte); corretto, gli ultimi 30 giorni si sistemano alla prossima sincronizzazione</item>
     </string-array>

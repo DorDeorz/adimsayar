@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_23_0">
+        <item>バンドの歩数を1分ごとに保存するようになりました。同じデータが再送されても、各分は1回だけ数えられます</item>
+    </string-array>
     <string-array name="release_notes_0_22_1">
         <item>一部の日にバンドの歩数が多く数えられていました（同じ時間が何度も足されていました）。修正済みで、直近30日分は次の同期で自動的に直ります</item>
     </string-array>
