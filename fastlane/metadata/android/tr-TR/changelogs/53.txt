@@ -1,0 +1,1 @@
+Düzeltme: bileklik adımları bazı günlerde fazla sayılıyordu, aynı saat birkaç kez toplanıyordu. Son 30 gün bir sonraki eşitlemede kendiliğinden düzelir.

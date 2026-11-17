@@ -6,7 +6,18 @@ import java.util.TimeZone
 
 enum class BandResult { Ok, BluetoothOff, NoPermission, ConnectFailed, Unsupported, AuthFailed, Timeout }
 
-class BandFile(val id: XiaomiFileId, val minutes: List<BandMinute>, val sleep: BandSleepRecord? = null, val samplesOnly: Boolean = false)
+/**
+ * One file read from the band. [id] is the file that was asked for (used to ack it); [source] is
+ * the id written inside the file's own data. The band can answer several requests with the same
+ * day file, so hours are stored under [source] to keep one copy of each hour.
+ */
+class BandFile(
+    val id: XiaomiFileId,
+    val minutes: List<BandMinute>,
+    val sleep: BandSleepRecord? = null,
+    val samplesOnly: Boolean = false,
+    val source: XiaomiFileId = id,
+)
 
 class XiaomiPhoneInfo(val apiLevel: Int, val model: String, val region: String, val use12Hour: Boolean)
 
@@ -568,12 +579,13 @@ class XiaomiSession(
                 BandFile(requested, emptyList(), sleep)
             }
             id.isManualSamples -> BandFile(requested, XiaomiManualSamples.parse(id, data), samplesOnly = true)
-            else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it) }
+            else -> XiaomiDailyDetails.minutes(id, data)?.let { BandFile(requested, it, source = id) }
         }
         if (file == null) {
             fetchNext()
             return
         }
+        if (id != requested) log("file ${requested.epochSeconds} answered with ${id?.epochSeconds}")
         fetching = null
         pendingStore.addLast(file)
     }

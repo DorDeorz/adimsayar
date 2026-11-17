@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_22_1">
+        <item>Los pasos de la pulsera se contaban de más algunos días (la misma hora se sumaba varias veces); corregido, los últimos 30 días se arreglan solos en la próxima sincronización</item>
+    </string-array>
     <string-array name="release_notes_0_22_0">
         <item>Copia automática: escribe una copia completa una vez al día en la carpeta que elijas y conserva los últimos 7 días (Ajustes → Datos → Copia automática)</item>
         <item>El registro de lecturas ahora guarda cerca de un día y medio y se puede enviar con «Compartir» (Ajustes → Acerca de → Registro de lecturas)</item>

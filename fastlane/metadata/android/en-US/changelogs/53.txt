@@ -1,0 +1,1 @@
+Fix: band steps were counted too high on some days because the same hour was added up several times. The last 30 days correct themselves at the next sync.
