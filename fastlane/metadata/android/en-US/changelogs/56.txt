@@ -1,0 +1,2 @@
+Phone and band steps merge minute by minute: the band's count while it is worn, the phone's when it is off.
+The day view shows hour by hour which steps came from the band and which from the phone, and how long the band was worn.

@@ -144,6 +144,9 @@
     <string name="hourly">По часам</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Ходьба: %1$s</string>
+    <string name="source_band_steps">Браслет %1$s</string>
+    <string name="source_phone_steps">Телефон %1$s</string>
+    <string name="band_worn_time">Браслет надет: %1$d ч %2$d мин</string>
     <string name="running_steps">Бег: %1$s</string>
     <string name="record_best_month">Лучший месяц</string>
     <string name="week_start">Первый день недели</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Шаги телефона и браслета теперь объединяются поминутно: пока браслет надет, считаются его шаги, когда снят — шаги телефона. На экране дня по часам видно, какие шаги пришли с браслета, а какие с телефона, и сколько времени браслет был надет</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Когда браслет повторно присылал часть прошлого дня, за этот день могло показываться меньше шагов; исправлено</item>
     </string-array>

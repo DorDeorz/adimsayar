@@ -1,0 +1,2 @@
+Telefon ve bileklik adımları dakika dakika birleşiyor: bileklik takılıyken bilekliğin, çıkarınca telefonun adımları sayılır.
+Gün ekranında saat saat adımların bileklikten mi telefondan mı geldiği ve bilekliğin ne kadar takılı kaldığı görünür.

@@ -144,6 +144,9 @@
     <string name="hourly">Heure par heure</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Marche %1$s</string>
+    <string name="source_band_steps">Bracelet %1$s</string>
+    <string name="source_phone_steps">Téléphone %1$s</string>
+    <string name="band_worn_time">Bracelet porté : %1$d h %2$d min</string>
     <string name="running_steps">Course %1$s</string>
     <string name="record_best_month">Meilleur mois</string>
     <string name="week_start">Premier jour de la semaine</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Autoriser</string>
     <string name="onboarding_next">Suivant</string>
     <string name="onboarding_start">Commencer</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Les pas du téléphone et du bracelet sont désormais fusionnés minute par minute : quand le bracelet est porté ses pas comptent, sinon ceux du téléphone. La vue du jour montre heure par heure quels pas viennent du bracelet et lesquels du téléphone, et combien de temps le bracelet a été porté</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Quand le bracelet renvoyait une partie d’un jour précédent, ce jour pouvait afficher trop peu de pas ; corrigé</item>
     </string-array>

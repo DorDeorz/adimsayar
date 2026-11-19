@@ -144,6 +144,9 @@
     <string name="hourly">Hour by hour</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Walking %1$s</string>
+    <string name="source_band_steps">Band %1$s</string>
+    <string name="source_phone_steps">Phone %1$s</string>
+    <string name="band_worn_time">Band worn: %1$d h %2$d min</string>
     <string name="running_steps">Running %1$s</string>
     <string name="record_best_month">Best month</string>
     <string name="week_start">First day of week</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Phone and band steps now merge minute by minute: while the band is worn its steps count, when it is off the phone’s do. The day view shows hour by hour which steps came from the band and which from the phone, and how long the band was worn</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>When the band sent part of an older day again, that day could show too few steps; fixed</item>
     </string-array>

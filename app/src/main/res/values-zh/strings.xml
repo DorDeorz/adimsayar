@@ -144,6 +144,9 @@
     <string name="hourly">按小时</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">步行 %1$s</string>
+    <string name="source_band_steps">手环 %1$s</string>
+    <string name="source_phone_steps">手机 %1$s</string>
+    <string name="band_worn_time">佩戴手环：%1$d 小时 %2$d 分钟</string>
     <string name="running_steps">跑步 %1$s</string>
     <string name="record_best_month">最佳单月</string>
     <string name="week_start">每周第一天</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_24_0">
+        <item>手机和手环的步数现在按分钟合并：佩戴手环时计手环步数，摘下时计手机步数。日视图按小时显示哪些步数来自手环、哪些来自手机，以及手环佩戴了多久</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>手环重新发送之前某天的一部分数据时，那天的步数可能显示偏少；已修复</item>
     </string-array>

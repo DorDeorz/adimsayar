@@ -2,6 +2,18 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.24.0
+
+Telefon ve bileklik adımları dakika dakika birleşiyor; gün ekranı kaynağı gösteriyor. Veritabanı sürümü değişmedi (v8).
+
+- Önceden bir saatte bilekliğin tek bir takılı dakikası bile varsa o saatin tamamı bileklikten sayılıyordu; bileklik çıkarıldıktan sonra telefonla atılan adımlar kayboluyordu.
+- `StepMath.splitHours`: bilekliğin takılı olduğu dakikalarda (`band_minutes`) bileklik, diğer dakikalarda telefon sayılır. Telefonun kayıtları (Xiaomi sağlayıcısında her kaydın başı ve sonu, telefon sayacında saat dilimi) kendi süresine eşit yayılır ve yalnızca takılı olmayan dakikalara düşen kısmı eklenir.
+  - Dakika satırı olmayan ya da eksik olan saatler (0.23.0 öncesi, saatin yeniden gönderdiği parça) eskisi gibi bütünüyle bileklikten sayılır.
+  - Takılı ama adımsız dakika gerçek sıfırdır, telefonla doldurulmaz.
+- `StepSources`: gün toplamları (`BandDirect.remerge`) ve saatlik grafik (`DayHours`) aynı hesabı kullanır, böylece grafik toplamı gün toplamına eşittir.
+- Gün ekranında saatlik çubuklar iki renkli: alt kısım bileklik, üst kısım telefon. Altında "Bileklik / Telefon" toplamları ve bilekliğin takılı kaldığı süre.
+- Health Connect üzerinden gelen bileklik verisi eskisi gibi saat saat birleşir.
+
 ## 0.23.1
 
 0.23.0'daki dakika birleştirmesi düzeltildi. Veritabanı sürümü değişmedi (v8).

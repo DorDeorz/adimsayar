@@ -144,6 +144,9 @@
     <string name="hourly">Ora per ora</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Camminata %1$s</string>
+    <string name="source_band_steps">Fascia %1$s</string>
+    <string name="source_phone_steps">Telefono %1$s</string>
+    <string name="band_worn_time">Fascia indossata: %1$d h %2$d min</string>
     <string name="running_steps">Corsa %1$s</string>
     <string name="record_best_month">Mese migliore</string>
     <string name="week_start">Primo giorno della settimana</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Consenti</string>
     <string name="onboarding_next">Avanti</string>
     <string name="onboarding_start">Inizia</string>
+    <string-array name="release_notes_0_24_0">
+        <item>I passi del telefono e della fascia ora si uniscono minuto per minuto: mentre indossi la fascia contano i suoi passi, quando la togli quelli del telefono. La vista del giorno mostra ora per ora quali passi vengono dalla fascia e quali dal telefono, e per quanto tempo hai indossato la fascia</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Quando la fascia inviava di nuovo una parte di un giorno precedente, quel giorno poteva mostrare meno passi; corretto</item>
     </string-array>

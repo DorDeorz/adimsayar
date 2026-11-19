@@ -97,6 +97,14 @@ class StepRepository private constructor(private val context: Context) {
         return StepMath.withMinuteHours(hourly, StepMath.minuteHours(minutes, zone))
     }
 
+    /** Worn band minutes from [from] on: UTC epoch seconds to steps. */
+    suspend fun loadBandMinuteMap(from: LocalDate): Map<Long, Int> =
+        dao.loadBandMinutes(from.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()).associate { it.minute to it.steps }
+
+    /** The hourly band table alone (the largest copy of each hour). */
+    suspend fun loadBandHourly(from: LocalDate): Map<LocalDateTime, Long> =
+        dao.loadBandHours(from.atStartOfDay().toString()).associate { LocalDateTime.parse(it.hour) to it.steps }
+
     /** Keeps the steps of each worn minute; minutes past [MINUTE_DAYS] are dropped, their hours stay. */
     suspend fun saveBandMinutes(minutes: List<Pair<Long, Int>>) {
         if (minutes.isEmpty()) return
