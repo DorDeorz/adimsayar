@@ -319,7 +319,8 @@ private fun SelectedDayCard(
             }
             detail?.let { day ->
                 if (day.walking > 0L || day.running > 0L) WalkRunRow(day)
-                if (day.hours.any { it > 0L }) HourlyChart(day.hours)
+                if (day.hours.any { it > 0L }) HourlyChart(day.hours, day.band)
+                if (day.band != null && day.phone != null) SourceRow(day.band.sum(), day.phone.sum(), day.wornMinutes)
             }
             band?.let { BandSection(it) }
             if (date < state.today && steps < goal && !state.settings.inVacation(date)) FreezeRow(date, state, actions.onFreezeChange)
@@ -379,9 +380,36 @@ private fun WalkRunRow(day: DayDetail) {
 }
 
 @Composable
-private fun HourlyChart(hours: LongArray) {
+private fun SourceRow(band: Long, phone: Long, wornMinutes: Int) {
+    val primary = MaterialTheme.colorScheme.primary
+    val tertiary = MaterialTheme.colorScheme.tertiary
+    Column(modifier = Modifier.padding(top = 8.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                stringResource(R.string.source_band_steps, format(band)),
+                style = MaterialTheme.typography.labelMedium,
+                color = primary,
+                modifier = Modifier.weight(1f),
+            )
+            Text(stringResource(R.string.source_phone_steps, format(phone)), style = MaterialTheme.typography.labelMedium, color = tertiary)
+        }
+        if (wornMinutes > 0) {
+            Text(
+                stringResource(R.string.band_worn_time, wornMinutes / 60, wornMinutes % 60),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 2.dp),
+            )
+        }
+    }
+}
+
+/** Bars per hour; with [band] each bar is the band's part (primary) under the phone's part (tertiary). */
+@Composable
+private fun HourlyChart(hours: LongArray, band: LongArray? = null) {
     val max = hours.max().coerceAtLeast(1L)
     val primary = MaterialTheme.colorScheme.primary
+    val tertiary = MaterialTheme.colorScheme.tertiary
     Column(modifier = Modifier.padding(top = 16.dp)) {
         Text(stringResource(R.string.hourly), style = MaterialTheme.typography.labelLarge)
         Row(
@@ -389,14 +417,18 @@ private fun HourlyChart(hours: LongArray) {
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            hours.forEach { steps ->
-                Box(
+            hours.forEachIndexed { hour, steps ->
+                val fromBand = band?.get(hour) ?: steps
+                val fromPhone = (steps - fromBand).coerceAtLeast(0L)
+                Column(
                     modifier = Modifier
                         .weight(1f)
                         .height((HOURLY_HEIGHT - 8.dp) * (steps.toFloat() / max))
-                        .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                        .background(primary),
-                )
+                        .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp)),
+                ) {
+                    if (fromPhone > 0L) Box(modifier = Modifier.fillMaxWidth().weight(fromPhone.toFloat()).background(tertiary))
+                    if (fromBand > 0L) Box(modifier = Modifier.fillMaxWidth().weight(fromBand.toFloat()).background(primary))
+                }
             }
         }
         Row(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {

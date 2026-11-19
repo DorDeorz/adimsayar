@@ -12,6 +12,11 @@ enum class ReadingKind { Baseline, Steps, Reboot, Reset, Stale }
 
 fun ReadingKind.isNotable() = this == ReadingKind.Reboot || this == ReadingKind.Reset
 
+/** One hour's steps by source: the band's, and the phone's in the minutes the band was not worn. */
+data class HourSplit(val band: Long, val phone: Long) {
+    val total: Long get() = band + phone
+}
+
 data class StepInterval(
     val steps: Long,
     val fromWallMs: Long,
@@ -21,6 +26,8 @@ data class StepInterval(
 
 object StepMath {
 
+    private const val MINUTE_MS = 60_000L
+    private const val MINUTE_S = 60L
     const val STALE_TOLERANCE_MS = 10 * 60 * 1000L
 
     fun interval(previous: CounterReading?, current: CounterReading): StepInterval {
@@ -163,6 +170,50 @@ object StepMath {
     fun withMinuteHours(hourly: Map<LocalDateTime, Long>, fromMinutes: Map<LocalDateTime, Long>): Map<LocalDateTime, Long> {
         val result = HashMap(hourly)
         for ((hour, steps) in fromMinutes) result[hour] = maxOf(steps, hourly[hour] ?: 0L)
+        return result
+    }
+
+    /**
+     * Each hour's steps by source, minute by minute. [bandMinutes] holds the minutes the band was worn (UTC epoch
+     * seconds to steps): there the band counts and the phone does not. The phone's [phone] intervals (wall clock ms)
+     * are spread evenly over their time and count only in the minutes the band was not worn. An hour the band has
+     * only in [bandHourly] (before 0.23.0, or a piece of an older day sent again) stays the band's alone, as before.
+     */
+    fun splitHours(
+        bandMinutes: Map<Long, Int>,
+        bandHourly: Map<LocalDateTime, Long>,
+        phone: List<StepInterval>,
+        zone: ZoneId,
+    ): Map<LocalDateTime, HourSplit> {
+        val fromMinutes = minuteHours(bandMinutes.map { it.key to it.value }, zone)
+        val wholeHour = bandHourly.filter { (hour, steps) -> steps > (fromMinutes[hour] ?: 0L) || hour !in fromMinutes }
+        val band = HashMap<LocalDateTime, Long>(fromMinutes)
+        band.putAll(wholeHour)
+        val phoneShare = HashMap<LocalDateTime, Double>()
+        for (interval in phone) {
+            if (interval.steps <= 0L) continue
+            if (interval.toWallMs <= interval.fromWallMs) {
+                val hour = hourOf(interval.toWallMs, zone)
+                val minute = interval.toWallMs / MINUTE_MS * MINUTE_S
+                if (hour !in wholeHour && minute !in bandMinutes) phoneShare[hour] = (phoneShare[hour] ?: 0.0) + interval.steps
+                continue
+            }
+            val length = (interval.toWallMs - interval.fromWallMs).toDouble()
+            var start = interval.fromWallMs
+            while (start < interval.toWallMs) {
+                val minuteStart = start / MINUTE_MS * MINUTE_MS
+                val end = minOf(interval.toWallMs, minuteStart + MINUTE_MS)
+                val hour = hourOf(start, zone)
+                if (hour !in wholeHour && minuteStart / 1_000L !in bandMinutes) {
+                    phoneShare[hour] = (phoneShare[hour] ?: 0.0) + interval.steps * ((end - start) / length)
+                }
+                start = end
+            }
+        }
+        val result = HashMap<LocalDateTime, HourSplit>()
+        for (hour in band.keys + phoneShare.keys) {
+            result[hour] = HourSplit(band[hour] ?: 0L, Math.round(phoneShare[hour] ?: 0.0))
+        }
         return result
     }
 

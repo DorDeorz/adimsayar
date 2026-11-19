@@ -144,6 +144,9 @@
     <string name="hourly">حسب الساعة</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">مشي %1$s</string>
+    <string name="source_band_steps">السوار %1$s</string>
+    <string name="source_phone_steps">الهاتف %1$s</string>
+    <string name="band_worn_time">السوار مُرتدى: %1$d س %2$d د</string>
     <string name="running_steps">جري %1$s</string>
     <string name="record_best_month">أفضل شهر</string>
     <string name="week_start">أول يوم في الأسبوع</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_24_0">
+        <item>تُدمج خطوات الهاتف والسوار الآن دقيقة بدقيقة: أثناء ارتداء السوار تُحسب خطواته، وعند خلعه تُحسب خطوات الهاتف. تعرض شاشة اليوم ساعة بساعة أي الخطوات جاءت من السوار وأيها من الهاتف، وكم من الوقت ارتديت السوار</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>عندما كان السوار يعيد إرسال جزء من يوم سابق، كان ذلك اليوم قد يعرض خطوات أقل؛ تم الإصلاح</item>
     </string-array>

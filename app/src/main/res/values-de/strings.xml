@@ -144,6 +144,9 @@
     <string name="hourly">Stunde für Stunde</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Gehen %1$s</string>
+    <string name="source_band_steps">Band %1$s</string>
+    <string name="source_phone_steps">Telefon %1$s</string>
+    <string name="band_worn_time">Band getragen: %1$d Std. %2$d Min.</string>
     <string name="running_steps">Laufen %1$s</string>
     <string name="record_best_month">Bester Monat</string>
     <string name="week_start">Erster Wochentag</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Telefon- und Bandschritte werden jetzt Minute für Minute zusammengeführt: Solange das Band getragen wird, zählen seine Schritte, sonst die des Telefons. Die Tagesansicht zeigt Stunde für Stunde, welche Schritte vom Band und welche vom Telefon kamen und wie lange das Band getragen wurde</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Wenn das Band einen Teil eines älteren Tages erneut sendete, konnte dieser Tag zu wenige Schritte zeigen; behoben</item>
     </string-array>

@@ -14,6 +14,19 @@ object DayHours {
      * hours, because the band's steps have no split and the two numbers would not add up to the day.
      */
     suspend fun detail(context: Context, date: LocalDate): DayDetail {
+        if (BandDirect.isEnabled(context)) {
+            val split = StepSources.hours(context, date).filterKeys { it.toLocalDate() == date }
+            if (split.values.any { it.band > 0L }) {
+                val band = LongArray(HOURS)
+                val phone = LongArray(HOURS)
+                for ((hour, s) in split) {
+                    band[hour.hour] += s.band
+                    phone[hour.hour] += s.phone
+                }
+                val hours = LongArray(HOURS) { band[it] + phone[it] }
+                return DayDetail(hours, 0L, 0L, band, phone, StepSources.wornMinutes(context, date))
+            }
+        }
         val xiaomi = XiaomiSteps.isEnabled(context)
         val phone = if (xiaomi) XiaomiSteps.dayDetail(context, date) else null
         val phoneHours = when {
@@ -32,6 +45,7 @@ object DayHours {
 
     /** Every hour from [from] on, for the active hours map, the walking pace and the steps written to Health Connect. */
     suspend fun since(context: Context, from: LocalDate): Map<LocalDateTime, Long> {
+        if (BandDirect.isEnabled(context)) return StepSources.hours(context, from).mapValues { it.value.total }.filterValues { it > 0L }
         // The phone's own record keeps its hours itself; they are not in our table.
         val recorded = if (XiaomiSteps.isEnabled(context)) XiaomiSteps.hourlyTotals(context, from) else null
         val phone = recorded ?: StepRepository.get(context).loadPhoneHourMap(from)

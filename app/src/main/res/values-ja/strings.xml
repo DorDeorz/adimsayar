@@ -144,6 +144,9 @@
     <string name="hourly">時間ごと</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">ウォーキング %1$s</string>
+    <string name="source_band_steps">バンド %1$s</string>
+    <string name="source_phone_steps">スマホ %1$s</string>
+    <string name="band_worn_time">バンド装着: %1$d時間%2$d分</string>
     <string name="running_steps">ランニング %1$s</string>
     <string name="record_best_month">最高の月</string>
     <string name="week_start">週の始まり</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_24_0">
+        <item>スマホとバンドの歩数を1分ごとに統合するようになりました。バンド装着中はバンドの歩数、外している間はスマホの歩数を数えます。日の画面で、1時間ごとにどの歩数がバンドとスマホから来たか、バンドを着けていた時間が表示されます</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>バンドが過去の日の一部を再送したとき、その日の歩数が少なく表示されることがありました。修正済みです</item>
     </string-array>

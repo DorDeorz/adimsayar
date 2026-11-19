@@ -11,7 +11,18 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import java.time.ZoneId
 
-class DayDetail(val hours: LongArray, val walking: Long, val running: Long)
+/**
+ * One day hour by hour. [band] and [phone] split [hours] by source on a day the band (over Bluetooth) sent steps;
+ * null otherwise. [wornMinutes] = minutes the band was worn that day.
+ */
+class DayDetail(
+    val hours: LongArray,
+    val walking: Long,
+    val running: Long,
+    val band: LongArray? = null,
+    val phone: LongArray? = null,
+    val wornMinutes: Int = 0,
+)
 
 object XiaomiSteps {
 
@@ -103,6 +114,27 @@ object XiaomiSteps {
                     }
                 }
                 DayDetail(hours, walking, running)
+            }
+        } catch (e: RuntimeException) {
+            null
+        }
+    }
+
+    /** The provider's records from [from] on, each with its own start and end. */
+    fun intervals(context: Context, from: LocalDate): List<StepInterval>? {
+        val fromMs = from.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        return try {
+            context.contentResolver.query(URI, PROJECTION, null, null, null)?.use {
+                val begin = it.getColumnIndexOrThrow(COLUMN_BEGIN)
+                val end = it.getColumnIndexOrThrow(COLUMN_END)
+                val steps = it.getColumnIndexOrThrow(COLUMN_STEPS)
+                val result = ArrayList<StepInterval>()
+                while (it.moveToNext()) {
+                    val start = it.getLong(begin)
+                    if (start < fromMs) continue
+                    result += StepInterval(it.getLong(steps), start, maxOf(start, it.getLong(end)))
+                }
+                result
             }
         } catch (e: RuntimeException) {
             null

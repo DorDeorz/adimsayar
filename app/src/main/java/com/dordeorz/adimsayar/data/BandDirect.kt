@@ -224,9 +224,9 @@ object BandDirect {
 
     suspend fun remerge(context: Context) {
         val from = LocalDate.now().minusDays(MERGE_DAYS)
-        val band = StepRepository.get(context).loadBandHours(from)
-        if (band.isEmpty()) return
-        StepRepository.get(context).replaceBandDays(WearableSteps.merged(context, band, from))
+        val days = StepSources.bandDays(context, from)
+        if (days.isEmpty()) return
+        StepRepository.get(context).replaceBandDays(days)
     }
 
     private fun hourly(file: BandFile): Map<LocalDateTime, Long> {

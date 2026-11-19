@@ -144,6 +144,9 @@
     <string name="hourly">Saat saat</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Yürüyüş %1$s</string>
+    <string name="source_band_steps">Bileklik %1$s</string>
+    <string name="source_phone_steps">Telefon %1$s</string>
+    <string name="band_worn_time">Bileklik takılı: %1$d sa %2$d dk</string>
     <string name="running_steps">Koşu %1$s</string>
     <string name="record_best_month">En iyi ay</string>
     <string name="week_start">Hafta başlangıcı</string>
@@ -1336,6 +1339,9 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Telefon ve bileklik adımları artık dakika dakika birleşiyor: bileklik takılıyken bilekliğin, çıkarınca telefonun adımları sayılır. Gün ekranında saat saat hangi adımın bileklikten, hangisinin telefondan geldiği ve bilekliğin ne kadar takılı kaldığı görünür</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Saat eski bir günün bir parçasını yeniden gönderdiğinde o günün adımları eksik görünebiliyordu; düzeltildi</item>
     </string-array>

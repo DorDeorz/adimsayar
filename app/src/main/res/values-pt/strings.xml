@@ -144,6 +144,9 @@
     <string name="hourly">Hora a hora</string>
     <string name="hour_label">%1$02d:00</string>
     <string name="walking_steps">Caminhada %1$s</string>
+    <string name="source_band_steps">Pulseira %1$s</string>
+    <string name="source_phone_steps">Telefone %1$s</string>
+    <string name="band_worn_time">Pulseira usada: %1$d h %2$d min</string>
     <string name="running_steps">Corrida %1$s</string>
     <string name="record_best_month">Melhor mês</string>
     <string name="week_start">Primeiro dia da semana</string>
@@ -1335,6 +1338,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_24_0">
+        <item>Os passos do telefone e da pulseira agora se juntam minuto a minuto: enquanto a pulseira está no pulso contam os passos dela, quando é tirada contam os do telefone. A tela do dia mostra hora a hora quais passos vieram da pulseira e quais do telefone, e quanto tempo a pulseira foi usada</item>
+    </string-array>
     <string-array name="release_notes_0_23_1">
         <item>Quando a pulseira reenviava parte de um dia anterior, esse dia podia mostrar passos a menos; corrigido</item>
     </string-array>

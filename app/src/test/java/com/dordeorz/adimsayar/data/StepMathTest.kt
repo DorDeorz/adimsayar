@@ -287,4 +287,49 @@ class StepMathTest {
         val fromMinutes = mapOf(LocalDateTime.parse("2026-11-20T10:00") to 650L)
         assertEquals(650L, StepMath.withMinuteHours(hourly, fromMinutes)[LocalDateTime.parse("2026-11-20T10:00")])
     }
+
+    private fun worn(from: String, to: String, steps: Int): Map<Long, Int> {
+        val result = HashMap<Long, Int>()
+        var minute = sec(from)
+        while (minute < sec(to)) {
+            result[minute] = steps
+            minute += 60L
+        }
+        return result
+    }
+
+    @Test
+    fun phoneCountsOnlyWhereTheBandWasOff() {
+        // Band worn 14:00–14:20 (10 steps a minute), then off; the phone walked 14:00–15:00 (1 200 steps evenly).
+        val band = worn("2026-11-20T14:00", "2026-11-20T14:20", 10)
+        val phone = listOf(StepInterval(1_200L, at("2026-11-20T14:00"), at("2026-11-20T15:00")))
+        val split = StepMath.splitHours(band, emptyMap(), phone, zone)[LocalDateTime.parse("2026-11-20T14:00")]!!
+        assertEquals(200L, split.band)
+        assertEquals(800L, split.phone)
+    }
+
+    @Test
+    fun wornHourWithoutStepsStaysZero() {
+        val band = worn("2026-11-20T03:00", "2026-11-20T04:00", 0)
+        val phone = listOf(StepInterval(90L, at("2026-11-20T03:10"), at("2026-11-20T03:20")))
+        val split = StepMath.splitHours(band, emptyMap(), phone, zone)[LocalDateTime.parse("2026-11-20T03:00")]!!
+        assertEquals(0L, split.total)
+    }
+
+    @Test
+    fun hourOnlyInHourlyTableStaysTheBands() {
+        val hourly = mapOf(LocalDateTime.parse("2026-11-13T14:00") to 1_200L)
+        val band = worn("2026-11-13T14:00", "2026-11-13T14:10", 30)
+        val phone = listOf(StepInterval(500L, at("2026-11-13T14:00"), at("2026-11-13T15:00")))
+        val split = StepMath.splitHours(band, hourly, phone, zone)[LocalDateTime.parse("2026-11-13T14:00")]!!
+        assertEquals(HourSplit(1_200L, 0L), split)
+    }
+
+    @Test
+    fun phoneIntervalAcrossHoursSplitsByTime() {
+        val phone = listOf(StepInterval(600L, at("2026-11-20T09:50"), at("2026-11-20T10:20")))
+        val split = StepMath.splitHours(emptyMap(), emptyMap(), phone, zone)
+        assertEquals(200L, split[LocalDateTime.parse("2026-11-20T09:00")]!!.phone)
+        assertEquals(400L, split[LocalDateTime.parse("2026-11-20T10:00")]!!.phone)
+    }
 }
