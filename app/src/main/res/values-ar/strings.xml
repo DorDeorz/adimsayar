@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">اسمح</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_start">ابدأ</string>
+    <string-array name="release_notes_0_23_1">
+        <item>عندما كان السوار يعيد إرسال جزء من يوم سابق، كان ذلك اليوم قد يعرض خطوات أقل؛ تم الإصلاح</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>تُحفظ خطوات السوار الآن دقيقة بدقيقة: حتى لو أرسل السوار البيانات نفسها مرة أخرى، تُحسب كل دقيقة مرة واحدة فقط</item>
     </string-array>

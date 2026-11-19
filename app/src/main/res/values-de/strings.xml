@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Erlauben</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_start">Los geht\'s</string>
+    <string-array name="release_notes_0_23_1">
+        <item>Wenn das Band einen Teil eines älteren Tages erneut sendete, konnte dieser Tag zu wenige Schritte zeigen; behoben</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>Bandschritte werden jetzt Minute für Minute gespeichert: auch wenn das Band dieselben Daten erneut sendet, zählt jede Minute nur einmal</item>
     </string-array>

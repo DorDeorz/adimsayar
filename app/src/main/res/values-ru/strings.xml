@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Разрешить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding_start">Начать</string>
+    <string-array name="release_notes_0_23_1">
+        <item>Когда браслет повторно присылал часть прошлого дня, за этот день могло показываться меньше шагов; исправлено</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>Шаги браслета теперь сохраняются поминутно: даже если браслет снова пришлёт те же данные, каждая минута учитывается один раз</item>
     </string-array>

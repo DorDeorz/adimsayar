@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Allow</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_start">Start</string>
+    <string-array name="release_notes_0_23_1">
+        <item>When the band sent part of an older day again, that day could show too few steps; fixed</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>Band steps are now kept minute by minute: even when the band sends the same data again, each minute counts only once</item>
     </string-array>

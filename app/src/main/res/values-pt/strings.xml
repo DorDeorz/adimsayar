@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Próximo</string>
     <string name="onboarding_start">Começar</string>
+    <string-array name="release_notes_0_23_1">
+        <item>Quando a pulseira reenviava parte de um dia anterior, esse dia podia mostrar passos a menos; corrigido</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>Os passos da pulseira agora são salvos minuto a minuto: mesmo que a pulseira envie os mesmos dados de novo, cada minuto conta só uma vez</item>
     </string-array>

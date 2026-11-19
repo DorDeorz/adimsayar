@@ -1,0 +1,1 @@
+Fix: when the band sent part of an older day again, that day could show too few steps.

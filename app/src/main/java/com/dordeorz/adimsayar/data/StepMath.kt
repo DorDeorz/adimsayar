@@ -155,9 +155,16 @@ object StepMath {
         return hours
     }
 
-    /** The hourly table, with every hour that has minute rows counted from those minutes instead. */
-    fun withMinuteHours(hourly: Map<LocalDateTime, Long>, fromMinutes: Map<LocalDateTime, Long>): Map<LocalDateTime, Long> =
-        hourly + fromMinutes
+    /**
+     * Per hour, the larger of the hourly table and the minute rows. Minutes never count a step twice, but the band
+     * can send a part of an older day again, which leaves only some minutes of an hour; the hourly table still holds
+     * the whole hour then. The hourly table no longer keeps copies (0.22.1), so the larger value is not inflated.
+     */
+    fun withMinuteHours(hourly: Map<LocalDateTime, Long>, fromMinutes: Map<LocalDateTime, Long>): Map<LocalDateTime, Long> {
+        val result = HashMap(hourly)
+        for ((hour, steps) in fromMinutes) result[hour] = maxOf(steps, hourly[hour] ?: 0L)
+        return result
+    }
 
     fun bandDays(band: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
         val days = HashMap<LocalDate, Long>()
