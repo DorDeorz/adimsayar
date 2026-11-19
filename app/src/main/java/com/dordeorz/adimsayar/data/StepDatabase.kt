@@ -35,6 +35,16 @@ data class BandHour(
 
 data class HourTotal(val hour: String, val steps: Long)
 
+/**
+ * Band steps of one worn minute ([minute] = UTC epoch seconds at the minute's start). One row per
+ * minute, so a file the band sends again writes over itself instead of adding its steps twice.
+ */
+@Entity(tableName = "band_minutes")
+data class BandStepMinute(
+    @PrimaryKey val minute: Long,
+    val steps: Int,
+)
+
 @Entity(tableName = "band_samples")
 data class BandSample(
     @PrimaryKey val minute: Long,
@@ -302,6 +312,15 @@ abstract class DailyStepsDao {
     // the band answered with the same day file), and summing them counted those steps many times.
     @Query("SELECT hour, MAX(steps) AS steps FROM band_hours WHERE hour >= :from GROUP BY hour")
     abstract suspend fun loadBandHours(from: String): List<HourTotal>
+
+    @Upsert
+    abstract suspend fun upsertBandMinutes(minutes: List<BandStepMinute>)
+
+    @Query("SELECT * FROM band_minutes WHERE minute >= :from ORDER BY minute")
+    abstract suspend fun loadBandMinutes(from: Long): List<BandStepMinute>
+
+    @Query("DELETE FROM band_minutes WHERE minute < :before")
+    abstract suspend fun deleteBandMinutesBefore(before: Long)
 }
 
 @Database(
@@ -320,8 +339,9 @@ abstract class DailyStepsDao {
         DayOverride::class,
         Walk::class,
         FloorDay::class,
+        BandStepMinute::class,
     ],
-    version = 7,
+    version = 8,
     exportSchema = false,
 )
 abstract class StepDatabase : RoomDatabase() {
@@ -384,15 +404,21 @@ abstract class StepDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `band_minutes` (`minute` INTEGER NOT NULL, `steps` INTEGER NOT NULL, PRIMARY KEY(`minute`))")
+            }
+        }
+
         /** Every table, for the full backup and for deleting data. */
         val TABLES = listOf(
             "daily_steps", "band_steps", "band_hours", "band_samples", "band_sleep", "weights", "hourly_steps",
-            "water", "streak_freezes", "medals", "day_notes", "day_overrides", "walks", "floors",
+            "water", "streak_freezes", "medals", "day_notes", "day_overrides", "walks", "floors", "band_minutes",
         )
 
         fun get(context: Context): StepDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, StepDatabase::class.java, "adimsayar.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
                 .build()
                 .also { instance = it }
         }

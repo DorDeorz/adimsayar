@@ -1,0 +1,1 @@
+Band steps are now kept minute by minute. Even when the band sends the same data again, each minute counts only once.

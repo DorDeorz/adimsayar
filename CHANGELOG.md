@@ -2,6 +2,17 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.23.0
+
+Bileklik adımları dakika dakika saklanıyor. Veritabanı sürümü 7'den 8'e çıktı.
+
+- Yeni tablo `band_minutes` (`minute` = dakikanın başı, UTC saniye; `steps`). Bileklikten gelen her takılı dakika buraya yazılır (`StepRepository.saveBandMinutes`). Anahtar dakika olduğu için aynı dosya tekrar gelse de, iki dosya aynı saati paylaşsa da her dakika bir kez sayılır.
+  - Takılı ama adımsız dakika 0 olarak yazılır, yani o saat gerçek sıfırdır ve telefon adımıyla doldurulmaz. Takılmayan dakika yazılmaz.
+  - `loadBandHours` dakika satırı olan saatleri dakikalardan toplar, diğer saatler (0.23.0 öncesi ya da 90 günden eski) `band_hours` tablosundan `MAX` ile gelir (`StepMath.withMinuteHours`).
+  - Dakikalar 90 gün tutulur (`MINUTE_DAYS`), daha eskisi silinir; o günlerin saatlik toplamları `band_hours` içinde kalır. 90 günlük dakika verisi yedeğe yaklaşık 2–3 MB ekler.
+- Geçiş 7 → 8 yalnızca yeni tabloyu oluşturur, var olan veriye dokunmaz. Eski yedekler geri yüklenebilir (tabloyu içermiyorlarsa atlanır).
+- Tarih aralığı silme `band_minutes` satırlarını da siler.
+
 ## 0.22.1
 
 Bileklik adımlarının fazla sayılması düzeltildi. Veritabanı sürümü değişmedi (v7).

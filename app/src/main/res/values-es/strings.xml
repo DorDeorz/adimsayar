@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">Permitir</string>
     <string name="onboarding_next">Siguiente</string>
     <string name="onboarding_start">Empezar</string>
+    <string-array name="release_notes_0_23_0">
+        <item>Los pasos de la pulsera ahora se guardan minuto a minuto: aunque la pulsera vuelva a enviar los mismos datos, cada minuto cuenta solo una vez</item>
+    </string-array>
     <string-array name="release_notes_0_22_1">
         <item>Los pasos de la pulsera se contaban de más algunos días (la misma hora se sumaba varias veces); corregido, los últimos 30 días se arreglan solos en la próxima sincronización</item>
     </string-array>

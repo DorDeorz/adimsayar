@@ -69,6 +69,7 @@ object DataEraser {
             for (table in DATE_TABLES) db.execSQL("DELETE FROM `$table` WHERE date >= ? AND date <= ?", arrayOf(first, last))
             for (table in HOUR_TABLES) db.execSQL("DELETE FROM `$table` WHERE hour >= ? AND hour < ?", arrayOf(hourFrom, hourTo))
             db.execSQL("DELETE FROM band_samples WHERE minute >= ? AND minute < ?", arrayOf(startMs / SECOND_MS, endMs / SECOND_MS))
+            db.execSQL("DELETE FROM band_minutes WHERE minute >= ? AND minute < ?", arrayOf(startMs / SECOND_MS, endMs / SECOND_MS))
             db.execSQL("DELETE FROM band_sleep WHERE wake >= ? AND wake < ?", arrayOf(startMs / SECOND_MS, endMs / SECOND_MS))
             db.execSQL("DELETE FROM walks WHERE start >= ? AND start < ?", arrayOf(startMs, endMs))
         }

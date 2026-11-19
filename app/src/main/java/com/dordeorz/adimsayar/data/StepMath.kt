@@ -145,6 +145,20 @@ object StepMath {
         return (if (bandOnly) phone.filterKeys { it.toLocalDate() !in days } else phone) + fromBand
     }
 
+    /** Worn band minutes ([minute] = UTC epoch seconds, steps) summed into local hours. */
+    fun minuteHours(minutes: List<Pair<Long, Int>>, zone: ZoneId): Map<LocalDateTime, Long> {
+        val hours = HashMap<LocalDateTime, Long>()
+        for ((minute, steps) in minutes) {
+            val hour = Instant.ofEpochSecond(minute).atZone(zone).toLocalDateTime().truncatedTo(ChronoUnit.HOURS)
+            hours[hour] = (hours[hour] ?: 0L) + steps
+        }
+        return hours
+    }
+
+    /** The hourly table, with every hour that has minute rows counted from those minutes instead. */
+    fun withMinuteHours(hourly: Map<LocalDateTime, Long>, fromMinutes: Map<LocalDateTime, Long>): Map<LocalDateTime, Long> =
+        hourly + fromMinutes
+
     fun bandDays(band: Map<LocalDateTime, Long>): Map<LocalDate, Long> {
         val days = HashMap<LocalDate, Long>()
         for ((hour, steps) in band) days[hour.toLocalDate()] = (days[hour.toLocalDate()] ?: 0L) + steps

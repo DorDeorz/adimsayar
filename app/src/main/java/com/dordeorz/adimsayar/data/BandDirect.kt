@@ -204,6 +204,7 @@ object BandDirect {
                 BandHealth.saveMinutes(context, file.minutes)
             } else {
                 StepRepository.get(context).saveBandHours(file.source.epochSeconds, hourly(file))
+                StepRepository.get(context).saveBandMinutes(file.minutes.filter { it.worn }.map { it.epochSeconds to it.steps })
                 BandHealth.saveMinutes(context, file.minutes)
             }
             files++
