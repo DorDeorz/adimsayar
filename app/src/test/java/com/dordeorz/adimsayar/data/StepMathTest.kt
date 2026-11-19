@@ -265,11 +265,26 @@ class StepMathTest {
     }
 
     @Test
-    fun minuteHoursReplaceHourlyRowsOnlyWhereTheyExist() {
-        val hourly = mapOf(LocalDateTime.parse("2026-11-03T01:00") to 1_610L, LocalDateTime.parse("2026-11-02T09:00") to 500L)
+    fun minuteHoursAddHoursTheHourlyTableLacks() {
+        val hourly = mapOf(LocalDateTime.parse("2026-11-02T09:00") to 500L)
         val fromMinutes = mapOf(LocalDateTime.parse("2026-11-03T01:00") to 161L)
         val merged = StepMath.withMinuteHours(hourly, fromMinutes)
         assertEquals(161L, merged[LocalDateTime.parse("2026-11-03T01:00")])
         assertEquals(500L, merged[LocalDateTime.parse("2026-11-02T09:00")])
+    }
+
+    @Test
+    fun partOfAnHourInMinutesDoesNotLowerTheHour() {
+        // The band sent a piece of an older day again: only 20 minutes of 14:00 are in the minute rows.
+        val hourly = mapOf(LocalDateTime.parse("2026-11-13T14:00") to 1_200L)
+        val fromMinutes = mapOf(LocalDateTime.parse("2026-11-13T14:00") to 300L)
+        assertEquals(1_200L, StepMath.withMinuteHours(hourly, fromMinutes)[LocalDateTime.parse("2026-11-13T14:00")])
+    }
+
+    @Test
+    fun minuteHoursWinWhenTheyHoldMore() {
+        val hourly = mapOf(LocalDateTime.parse("2026-11-20T10:00") to 400L)
+        val fromMinutes = mapOf(LocalDateTime.parse("2026-11-20T10:00") to 650L)
+        assertEquals(650L, StepMath.withMinuteHours(hourly, fromMinutes)[LocalDateTime.parse("2026-11-20T10:00")])
     }
 }

@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">허용</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_start">시작</string>
+    <string-array name="release_notes_0_23_1">
+        <item>밴드가 이전 날의 일부를 다시 보내면 그날 걸음 수가 적게 표시될 수 있었습니다. 수정되었습니다</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>이제 밴드 걸음 수가 분 단위로 저장됩니다. 밴드가 같은 데이터를 다시 보내도 각 분은 한 번만 계산됩니다</item>
     </string-array>

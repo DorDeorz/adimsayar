@@ -1336,6 +1336,9 @@
     <string name="onboarding_permission_button">İzin ver</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_start">Başla</string>
+    <string-array name="release_notes_0_23_1">
+        <item>Saat eski bir günün bir parçasını yeniden gönderdiğinde o günün adımları eksik görünebiliyordu; düzeltildi</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>Bileklik adımları artık dakika dakika saklanıyor: saatten aynı veri tekrar gelse bile her dakika yalnızca bir kez sayılır</item>
     </string-array>

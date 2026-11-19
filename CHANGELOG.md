@@ -2,6 +2,13 @@
 
 Her sürümde nelerin eklendiği ve nelerin düzeltildiği, yeniden eskiye. Uygulamada da Ayarlar → Sürüm notları altında, seçilen dilde görülebilir. APK'lar: [Releases](https://github.com/DorDeorz/adimsayar/releases).
 
+## 0.23.1
+
+0.23.0'daki dakika birleştirmesi düzeltildi. Veritabanı sürümü değişmedi (v8).
+
+- 0.23.0'da bir saatin dakika satırları varsa saatlik tablo tamamen yok sayılıyordu. Saat eski bir günün yalnızca bir parçasını yeniden gönderdiğinde o saatin dakikaları eksik kalıyor, gün düşük görünüyordu (telefonda 13 Kasım 6.167 yerine 5.531).
+- `StepMath.withMinuteHours` artık her saat için dakika toplamı ile saatlik tablonun büyüğünü alır. 0.22.1'den beri saatlik tabloda kopya oluşmadığı için büyük değer şişmez.
+
 ## 0.23.0
 
 Bileklik adımları dakika dakika saklanıyor. Veritabanı sürümü 7'den 8'e çıktı.

@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">允许</string>
     <string name="onboarding_next">下一步</string>
     <string name="onboarding_start">开始</string>
+    <string-array name="release_notes_0_23_1">
+        <item>手环重新发送之前某天的一部分数据时，那天的步数可能显示偏少；已修复</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>手环步数现在按分钟保存：即使手环再次发送相同数据，每分钟也只计算一次</item>
     </string-array>

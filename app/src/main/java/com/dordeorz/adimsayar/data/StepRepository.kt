@@ -87,8 +87,8 @@ class StepRepository private constructor(private val context: Context) {
         dao.upsertBandHours(hours.map { (hour, steps) -> BandHour(hour.toString(), file, steps) })
 
     /**
-     * Band steps per hour. Hours with minute rows are counted from them, minute by minute; older
-     * hours (before 0.23.0, or past [MINUTE_DAYS]) come from the hourly table.
+     * Band steps per hour: the minute rows and the hourly table, the larger per hour (see
+     * [StepMath.withMinuteHours]); older hours (before 0.23.0, or past [MINUTE_DAYS]) have only the hourly table.
      */
     suspend fun loadBandHours(from: LocalDate): Map<LocalDateTime, Long> {
         val zone = ZoneId.systemDefault()

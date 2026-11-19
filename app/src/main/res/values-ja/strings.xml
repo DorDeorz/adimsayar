@@ -1335,6 +1335,9 @@
     <string name="onboarding_permission_button">許可する</string>
     <string name="onboarding_next">次へ</string>
     <string name="onboarding_start">はじめる</string>
+    <string-array name="release_notes_0_23_1">
+        <item>バンドが過去の日の一部を再送したとき、その日の歩数が少なく表示されることがありました。修正済みです</item>
+    </string-array>
     <string-array name="release_notes_0_23_0">
         <item>バンドの歩数を1分ごとに保存するようになりました。同じデータが再送されても、各分は1回だけ数えられます</item>
     </string-array>
